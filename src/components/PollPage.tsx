@@ -1,6 +1,7 @@
 import React, { useState } from 'react';
 import { signIn, signOut, useSession } from 'next-auth/react';
 import LoginModal from './LoginModal'; // Import the LoginModal component
+import { useRouter } from 'next/router'; // Import useRouter for redirection
 
 interface PollPageProps {
     question: string;
@@ -11,11 +12,12 @@ interface PollPageProps {
     redirectPath: string; // Add this line
 }
 
-const PollPage: React.FC<PollPageProps> = ({ question, option1, option2, option1Color, option2Color }) => {
+const PollPage: React.FC<PollPageProps> = ({ question, option1, option2, option1Color, option2Color, redirectPath }) => {
     const [allocation, setAllocation] = useState(50);
     const { data: session } = useSession();
     const isLoggedIn = !!session;
     const [showLoginModal, setShowLoginModal] = useState(false); // State to control login modal visibility
+    const router = useRouter(); // Use useRouter hook for redirection
 
     const handleSliderChange = (event: React.ChangeEvent<HTMLInputElement>) => {
         setAllocation(Number(event.target.value));
@@ -26,8 +28,7 @@ const PollPage: React.FC<PollPageProps> = ({ question, option1, option2, option1
             setShowLoginModal(true); // Show login modal instead of alert
         } else {
             // Save response to database logic here
-            alert(`You allocated ${allocation}% to ${option2} and ${100 - allocation}% to ${option1}.`);
-            // Assuming a function to save the response in the database
+            router.push(redirectPath); // Redirect to redirectPath instead of showing an alert
         }
     };
 
@@ -39,8 +40,8 @@ const PollPage: React.FC<PollPageProps> = ({ question, option1, option2, option1
     return (
         <div className="flex flex-col h-screen" id="poll-page-container">
             {isLoggedIn && (
-                <div className="absolute top-0 right-0 p-4">
-                    <button onClick={() => signOut()} className="bg-red-500 text-white px-4 py-2 rounded">
+                <div className="absolute bottom-0 right-0 p-4">
+                    <button onClick={() => signOut()} className="bg-white text-black px-4 py-2 rounded">
                         Logout
                     </button>
                 </div>
