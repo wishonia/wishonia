@@ -71,3 +71,23 @@ model VerificationToken {
 
     @@unique([identifier, token])
 }
+model Response {
+    id          Int      @id @default(autoincrement())
+    userId      String
+    questionId  Int
+    allocatedAmountA Float
+    allocatedAmountB Float
+    user        User    @relation(fields: [userId], references: [id])
+    question    Question @relation(fields: [questionId], references: [id])
+
+    @@index([userId, questionId])
+}
+
+model Question {
+    id                Int     @id @default(autoincrement())
+    questionText      String
+    optionA           String
+    optionB           String
+    actualAmountA     Float
+    actualAmountB     Float
+}
