@@ -68,6 +68,7 @@ model User {
   state         String
   zip           String
   signedPetition Boolean   @default(false)
+  language      String
 }
 
 model VerificationToken {
@@ -116,14 +117,6 @@ model Referral {
   createdAt   DateTime @default(now())
   referrer    User     @relation(name: "Referrer", fields: [referrerId], references: [id])
   referred    User     @relation(name: "Referred", fields: [referredId], references: [id])
-}
-
-model Localization {
-  id          Int      @id @default(autoincrement())
-  userId      String
-  language    String
-  updatedAt   DateTime @default(now())
-  user        User     @relation(fields: [userId], references: [id])
 }
 
 model Gamification {
