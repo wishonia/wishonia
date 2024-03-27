@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Profile</title>
+    <link rel="stylesheet" href="styles/main.css">
+</head>
+<body>
+    <header>
+        <h1>Your Profile</h1>h1>
+    </header>
+    <main>
+        <section class="profile-info">
+            <h2>Referral Link</h2>
+            <p>Share this link to invite friends:</p>
+            <input type="text" id="referralLink" readonly>
+            <button onclick="navigator.clipboard.writeText(document.getElementById('referralLink').value)">Copy Link</button>
+        </section>
+        <section class="referral-status">
+            <h2>Referrals</h2>
+            <ul id="referralList">
+                <!-- Dynamically populated list of referrals -->
+            </ul>
+        </section>
+        <section class="actions">
+            <button onclick="window.location.href='desired_allocation_poll.html';">Participate in Another Poll</button>
+            <button onclick="window.location.href='petition.html';">Sign Another Petition</button>
+        </section>
+    </main>
+    <footer>
+        <p>&copy; 2023 Allocation Poll. All rights reserved.</p>
+    </footer>
+    <script src="scripts/profile.js"></script>
+</body>
+</html>

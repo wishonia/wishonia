@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Results</title>
+    <link rel="stylesheet" href="styles/main.css">
+    <link rel="stylesheet" href="styles/results.css">
+</head>
+<body>
+    <header>
+        <h1>Results</h1>
+    </header>
+    <main>
+        <section class="user-results">
+            <h2>Your Allocation</h2>
+            <div class="results-bars">
+                <div id="userDesiredWar" class="result-bar war"></div>
+                <div id="userDesiredResearch" class="result-bar research"></div>
+            </div>
+            <p>Your desired allocation: <span id="userDesiredPercentage"></span>% War, <span id="userDesiredResearchPercentage"></span>% Clinical Research</p>
+            <p>Your perceived actual allocation: <span id="userActualPercentage"></span>% War, <span id="userActualResearchPercentage"></span>% Clinical Research</p>
+        </section>
+        <section class="average-results">
+            <h2>Average Allocation</h2>
+            <div class="results-bars">
+                <div id="averageDesiredWar" class="result-bar war"></div>
+                <div id="averageDesiredResearch" class="result-bar research"></div>
+            </div>
+            <p>Average desired allocation: <span id="averageDesiredPercentage"></span>% War, <span id="averageDesiredResearchPercentage"></span>% Clinical Research</p>
+            <p>Average perceived actual allocation: <span id="averageActualPercentage"></span>% War, <span id="averageActualResearchPercentage"></span>% Clinical Research</p>
+        </section>
+        <a href="petition.html" class="petition-link">Sign the Petition</a>a>
+    </main>main>
+    <footer>
+        <p>&copy; 2023 Allocation Poll. All rights reserved.</p>
+    </footer>
+    <script src="scripts/results.js"></script>
+</body>body>
+</html>

@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Login/Register</title>
+    <link rel="stylesheet" href="styles/main.css">
+</head>
+<body>
+    <header>
+        <h1>Login/Register</h1>
+    </header>
+    <main>
+        <section class="auth-section">
+            <div class="auth-container">
+                <div class="login-form">
+                    <h2>Login</h2>
+                    <form id="loginForm">
+                        <div class="form-group">
+                            <label for="loginEmail">Email:</label>
+                            <input type="email" id="loginEmail" required>
+                        </div>
+                        <div class="form-group">
+                            <label for="loginPassword">Password:</label>
+                            <input type="password" id="loginPassword" required>
+                        </div>div>
+                        <button type="submit">Login</button>
+                    </form>
+                </div>
+                <div class="divider">
+                    <hr>
+                    <span>OR</span>
+                    <hr>
+                </div>
+                <div class="register-form">
+                    <h2>Register</h2>
+                    <form id="registerForm">
+                        <div class="form-group">
+                            <label for="registerEmail">Email:</label>
+                            <input type="email" id="registerEmail" required>
+                        </div>
+                        <div class="form-group">
+                            <label for="registerPassword">Password:</label>
+                            <input type="password" id="registerPassword" required>
+                        </div>div>
+                        <button type="submit">Register</button>
+                    </form>
+                </div>
+                <div class="oauth-login">
+                    <button onclick="window.location.href='auth/google_oauth.js';">Login with Google</button>
+                </div>
+            </div>
+        </section>section>
+    </main>
+    <footer>
+        <p>&copy; 2023 Allocation Poll. All rights reserved.</p>
+    </footer>
+    <script src="scripts/auth.js"></script>
+</body>
+</html>

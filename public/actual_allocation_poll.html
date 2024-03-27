@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>What do you think we actually spend?</title>
+    <link rel="stylesheet" href="styles/main.css">
+    <link rel="stylesheet" href="styles/poll.css">
+</head>
+<body>
+    <header>
+        <h1>What do you think we actually spend?</h1>
+    </header>
+    <main>
+        <section class="poll-description">
+            <p>How do you think funds are actually allocated between war (Option A) and clinical research (Option B)? Adjust the slider to reflect your perceived actual allocation.</p>p>
+        </section>section>
+        <section class="allocation-slider">
+            <div class="allocation-bars">
+                <div id="actualWarAllocationBar" class="allocation-bar war"></div>
+                <div id="actualResearchAllocationBar" class="allocation-bar research"></div>
+            </div>
+            <input type="range" id="actualAllocationSlider" min="0" max="100" value="50" class="slider">
+            <div class="allocation-labels">
+                <span class="war-label">War</span>
+                <span class="research-label">Clinical Research</span>
+            </div>
+        </section>
+        <button id="submitActualAllocation" onclick="submitActualAllocation()">Submit</button>
+    </main>
+    <footer>
+        <p>&copy; 2023 Allocation Poll. All rights reserved.</p>
+    </footer>
+    <script src="scripts/slider.js"></script>
+</body>
+</html>
