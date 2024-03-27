@@ -42,39 +42,23 @@ model Session {
 }
 
 model User {
-  id            String     @id @default(cuid())
-  name          String?
-  email         String?    @unique
-  emailVerified DateTime?
-  image         String?
-  accounts      Account[]
-  sessions      Session[]
-  PollResponse      PollResponse[]
-  address       String
-  city          String
-  state         String
-  zip           String
-  signedPetition Boolean   @default(false)
-  language      String
-}
-
-
-// Models based on schema.prisma
-model PollResponse {
-  id                Int      @id @default(autoincrement())
-  userId            String
+  id                String     @id @default(cuid())
+  name              String?
+  email             String?    @unique
+  emailVerified     DateTime?
+  image             String?
+  accounts          Account[]
+  sessions          Session[]
+  address           String
+  city              String
+  state             String
+  zip               String
+  signedPetition    Boolean    @default(false)
+  language          String
   desiredAllocation Float
   actualAllocation  Float
-  user              User     @relation(fields: [userId], references: [id])
-}
-
-model Referral {
-  id          Int      @id @default(autoincrement())
-  referrerId  String
-  referredId  String
-  createdAt   DateTime @default(now())
-  referrer    User     @relation(name: "Referrer", fields: [referrerId], references: [id])
-  referred    User     @relation(name: "Referred", fields: [referredId], references: [id])
+  referrerId        String?
+  createdAt         DateTime   @default(now())
 }
 
 model Gamification {
