@@ -1,6 +1,7 @@
 const express = require('express');
 const router = express.Router();
-const db = require('../db/queries');
+const { PrismaClient } = require('@prisma/client');
+const prisma = new PrismaClient();
 
 // Middleware to check if the user is authenticated
 function isAuthenticated(req, res, next) {
@@ -20,7 +21,13 @@ router.post('/submit', isAuthenticated, async (req, res) => {
     }
 
     try {
-        await db.savePollResponse(userId, desiredAllocation, actualAllocation);
+        await prisma.poll_Response.create({
+            data: {
+                userId: userId,
+                desiredAllocation: desiredAllocation,
+                actualAllocation: actualAllocation
+            }
+        });
         res.status(200).json({ message: 'Poll response saved successfully' });
     } catch (error) {
         console.error('Error saving poll response:', error);
@@ -31,7 +38,12 @@ router.post('/submit', isAuthenticated, async (req, res) => {
 // Route to get average poll responses
 router.get('/average', async (req, res) => {
     try {
-        const averageResponses = await db.getAveragePollResponses();
+        const averageResponses = await prisma.poll_Response.aggregate({
+            _avg: {
+                desiredAllocation: true,
+                actualAllocation: true
+            }
+        });
         res.status(200).json(averageResponses);
     } catch (error) {
         console.error('Error fetching average poll responses:', error);

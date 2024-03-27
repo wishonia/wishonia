@@ -63,6 +63,11 @@ model User {
   sessions      Session[]
   posts         Post[]
   Response      Response[]
+  address       String
+  city          String
+  state         String
+  zip           String
+  signedPetition Boolean   @default(false)
 }
 
 model VerificationToken {
@@ -93,4 +98,39 @@ model Question {
   actualAmountA Float
   actualAmountB Float
   Response      Response[]
+}
+
+// Models based on schema.prisma
+model Poll_Response {
+  id                Int      @id @default(autoincrement())
+  userId            String
+  desiredAllocation Float
+  actualAllocation  Float
+  user              User     @relation(fields: [userId], references: [id])
+}
+
+model Referral {
+  id          Int      @id @default(autoincrement())
+  referrerId  String
+  referredId  String
+  createdAt   DateTime @default(now())
+  referrer    User     @relation(name: "Referrer", fields: [referrerId], references: [id])
+  referred    User     @relation(name: "Referred", fields: [referredId], references: [id])
+}
+
+model Localization {
+  id          Int      @id @default(autoincrement())
+  userId      String
+  language    String
+  updatedAt   DateTime @default(now())
+  user        User     @relation(fields: [userId], references: [id])
+}
+
+model Gamification {
+  id          Int      @id @default(autoincrement())
+  userId      String
+  points      Int
+  badges      Json
+  updatedAt   DateTime @default(now())
+  user        User     @relation(fields: [userId], references: [id])
 }

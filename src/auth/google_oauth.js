@@ -1,5 +1,6 @@
 const GoogleStrategy = require('passport-google-oauth20').Strategy;
-const db = require('../db/queries');
+const { PrismaClient } = require('@prisma/client');
+const prisma = new PrismaClient();
 
 module.exports = function(passport) {
     passport.use(new GoogleStrategy({
@@ -10,16 +11,22 @@ module.exports = function(passport) {
     async (accessToken, refreshToken, profile, done) => {
         // Check if user already exists in our database
         try {
-            const existingUser = await db.findUserByEmail(profile.emails[0].value);
+            const existingUser = await prisma.user.findUnique({
+                where: {
+                    email: profile.emails[0].value,
+                },
+            });
             if (existingUser) {
                 // User exists, proceed to log them in
                 return done(null, existingUser);
             } else {
                 // User doesn't exist, create a new user
-                const newUser = await db.createUser({
-                    email: profile.emails[0].value,
-                    name: profile.displayName,
-                    googleId: profile.id // Storing Google ID for future logins
+                const newUser = await prisma.user.create({
+                    data: {
+                        email: profile.emails[0].value,
+                        name: profile.displayName,
+                        googleId: profile.id // Storing Google ID for future logins
+                    }
                 });
                 return done(null, newUser);
             }
@@ -37,7 +44,11 @@ module.exports = function(passport) {
     // Deserialize user from the sessions
     passport.deserializeUser(async (id, done) => {
         try {
-            const user = await db.findUserById(id);
+            const user = await prisma.user.findUnique({
+                where: {
+                    id: id,
+                },
+            });
             done(null, user);
         } catch (error) {
             console.error('Error deserializing user:', error);

@@ -16,8 +16,8 @@ document.addEventListener('DOMContentLoaded', function() {
 
         // Validate form data here if necessary
 
-        // Assuming an API endpoint /api/petition for submitting the petition form
-        fetch('/api/petition', {
+        // Update the endpoint and data structure for submitting the petition form
+        fetch('/api/users/updatePetitionInfo', {
             method: 'POST',
             headers: {
                 'Content-Type': 'application/json',
@@ -29,6 +29,7 @@ document.addEventListener('DOMContentLoaded', function() {
                 city,
                 state,
                 zip,
+                signedPetition: true,
             }),
         })
         .then(response => response.json())
