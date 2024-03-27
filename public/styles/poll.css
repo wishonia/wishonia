@@ -104,7 +104,7 @@
     text-align: right;
 }
 
-button#submitDesiredAllocation, button#submitActualAllocation {
+button#submitWarPercentageDesired, button#submitWarPercentageGuessed {
     display: block;
     margin: 10px auto;
     padding: 10px 20px;
@@ -117,7 +117,7 @@ button#submitDesiredAllocation, button#submitActualAllocation {
     z-index: 2;
 }
 
-button#submitDesiredAllocation:hover, button#submitActualAllocation:hover {
+button#submitWarPercentageDesired:hover, button#submitWarPercentageGuessed:hover {
     background-color: #45a049;
 }
 

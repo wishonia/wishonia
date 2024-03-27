@@ -14,9 +14,9 @@ function isAuthenticated(req, res, next) {
 // Route to submit poll responses
 router.post('/submit', isAuthenticated, async (req, res) => {
     const userId = req.user.id; // Assuming req.user is populated by the authentication middleware
-    const { desiredAllocation, actualAllocation } = req.body;
+    const { WarPercentageDesired, warPercentageGuessed } = req.body;
 
-    if (desiredAllocation == null || actualAllocation == null) {
+    if (WarPercentageDesired == null || warPercentageGuessed == null) {
         return res.status(400).json({ message: 'Missing required poll response fields' });
     }
 
@@ -26,8 +26,8 @@ router.post('/submit', isAuthenticated, async (req, res) => {
                 id: userId,
             },
             data: {
-                desiredAllocation: desiredAllocation,
-                actualAllocation: actualAllocation
+                WarPercentageDesired: WarPercentageDesired,
+                warPercentageGuessed: warPercentageGuessed
             }
         });
         res.status(200).json({ message: 'Poll response saved successfully' });
@@ -42,8 +42,8 @@ router.get('/average', async (req, res) => {
     try {
         const averageResponses = await prisma.user.aggregate({
             _avg: {
-                desiredAllocation: true,
-                actualAllocation: true
+                WarPercentageDesired: true,
+                warPercentageGuessed: true
             }
         });
         res.status(200).json(averageResponses);

@@ -5,12 +5,12 @@ document.addEventListener('DOMContentLoaded', function() {
 });
 
 function personalizeContent() {
-    const userDesiredAllocation = JSON.parse(localStorage.getItem('userDesiredAllocation'));
-    const userActualAllocation = JSON.parse(localStorage.getItem('userActualAllocation'));
+    const userWarPercentageDesired = JSON.parse(localStorage.getItem('userWarPercentageDesired'));
+    const userWarPercentageGuessed = JSON.parse(localStorage.getItem('userWarPercentageGuessed'));
 
     // Example of personalization based on user's previous interactions
-    if (userDesiredAllocation !== null && userActualAllocation !== null) {
-        const difference = Math.abs(userDesiredAllocation - userActualAllocation);
+    if (userWarPercentageDesired !== null && userWarPercentageGuessed !== null) {
+        const difference = Math.abs(userWarPercentageDesired - userWarPercentageGuessed);
         const personalizationMessageElement = document.getElementById('personalizationMessage');
 
         if (difference <= 10) {
@@ -28,14 +28,14 @@ function personalizeContent() {
 
 function suggestRelatedInitiatives() {
     const suggestionsElement = document.getElementById('suggestions');
-    const userDesiredAllocation = JSON.parse(localStorage.getItem('userDesiredAllocation'));
+    const userWarPercentageDesired = JSON.parse(localStorage.getItem('userWarPercentageDesired'));
 
     // Placeholder suggestions based on user's desired allocation
     let suggestions = [];
 
-    if (userDesiredAllocation <= 25) {
+    if (userWarPercentageDesired <= 25) {
         suggestions = ["Support initiatives for peace and conflict resolution.", "Learn about non-violent conflict management."];
-    } else if (userDesiredAllocation > 25 && userDesiredAllocation <= 75) {
+    } else if (userWarPercentageDesired > 25 && userWarPercentageDesired <= 75) {
         suggestions = ["Join campaigns for balanced funding in public health and defense.", "Educate yourself on the benefits of clinical research."];
     } else {
         suggestions = ["Advocate for increased funding in clinical research.", "Participate in public health improvement programs."];
