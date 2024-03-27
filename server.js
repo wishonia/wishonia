@@ -3,10 +3,13 @@ const bodyParser = require('body-parser');
 const path = require('path');
 const session = require('express-session');
 const passport = require('passport');
-require('./auth/google_oauth')(passport); // Importing Google OAuth setup
-const db = require('./db/queries');
-const pollsApi = require('./api/polls');
-const usersApi = require('./api/users');
+require('./src/auth/google_oauth')(passport); // Importing Google OAuth setup
+const db = require('./src/db/queries');
+const pollsApi = require('./src/api/polls');
+const usersApi = require('./src/api/users');
+
+require('dotenv').config();
+
 
 const app = express();
 const PORT = process.env.PORT || 3000;
