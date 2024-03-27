@@ -104,3 +104,10 @@ button#submitDesiredAllocation, button#submitActualAllocation {
 button#submitDesiredAllocation:hover, button#submitActualAllocation:hover {
     background-color: #45a049;
 }
+
+.percentage-display {
+    text-align: center;
+    padding: 5px;
+    font-weight: bold;
+    color: white;
+}

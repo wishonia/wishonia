@@ -11,7 +11,9 @@ function updateAllocationBars(sliderValue, warBarId, researchBarId) {
     desiredWarAllocationBar.style.height = warAllocationPercentage + '%';
     desiredResearchAllocationBar.style.height = researchAllocationPercentage + '%';
 
-    // Optionally, update the text content or any other attributes of the bars
+    // Update the text content to reflect the new percentages
+    desiredWarAllocationBar.querySelector('.war-percentage').textContent = warAllocationPercentage + '%';
+    desiredResearchAllocationBar.querySelector('.research-percentage').textContent = researchAllocationPercentage + '%';
 }
 
 // Function to handle the submission of the allocation
