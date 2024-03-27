@@ -21,9 +21,11 @@ router.post('/submit', isAuthenticated, async (req, res) => {
     }
 
     try {
-        await prisma.poll_Response.create({
+        await prisma.user.update({
+            where: {
+                id: userId,
+            },
             data: {
-                userId: userId,
                 desiredAllocation: desiredAllocation,
                 actualAllocation: actualAllocation
             }
@@ -38,7 +40,7 @@ router.post('/submit', isAuthenticated, async (req, res) => {
 // Route to get average poll responses
 router.get('/average', async (req, res) => {
     try {
-        const averageResponses = await prisma.poll_Response.aggregate({
+        const averageResponses = await prisma.user.aggregate({
             _avg: {
                 desiredAllocation: true,
                 actualAllocation: true
