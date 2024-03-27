@@ -1,6 +1,4 @@
 import React, { useState } from 'react';
-import { signIn, signOut, useSession } from 'next-auth/react';
-import LoginModal from './LoginModal'; // Import the LoginModal component
 import { useRouter } from 'next/router'; // Import useRouter for redirection
 
 interface PollPageProps {
@@ -14,9 +12,6 @@ interface PollPageProps {
 
 const PollPage: React.FC<PollPageProps> = ({ question, option1, option2, option1Color, option2Color, redirectPath }) => {
     const [allocation, setAllocation] = useState(50);
-    const { data: session } = useSession();
-    const isLoggedIn = !!session;
-    const [showLoginModal, setShowLoginModal] = useState(false); // State to control login modal visibility
     const router = useRouter(); // Use useRouter hook for redirection
 
     const handleSliderChange = (event: React.ChangeEvent<HTMLInputElement>) => {
@@ -24,28 +19,22 @@ const PollPage: React.FC<PollPageProps> = ({ question, option1, option2, option1
     };
 
     const handleSubmit = () => {
-        if (!isLoggedIn) {
-            setShowLoginModal(true); // Show login modal instead of alert
-        } else {
-            // Save response to database logic here
-            router.push(redirectPath); // Redirect to redirectPath instead of showing an alert
-        }
-    };
-
-    const handleLogin = (method: string) => {
-        signIn(method); // Use NextAuth signIn method for login
-        setShowLoginModal(false); // Hide login modal after attempting to log in
+        // Save response to localStorage in an array
+        const existingResponses = JSON.parse(localStorage.getItem('pollResponses') || '[]');
+        const response = {
+            questionText: question,
+            optionA: option1,
+            optionB: option2,
+            allocatedAmountA: 100 - allocation,
+            allocatedAmountB: allocation
+        };
+        existingResponses.push(response);
+        localStorage.setItem('pollResponses', JSON.stringify(existingResponses));
+        router.push(redirectPath); // Redirect to redirectPath
     };
 
     return (
         <div className="flex flex-col h-screen" id="poll-page-container">
-            {isLoggedIn && (
-                <div className="absolute bottom-0 right-0 p-4">
-                    <button onClick={() => signOut()} className="bg-white text-black px-4 py-2 rounded">
-                        Logout
-                    </button>
-                </div>
-            )}
             <h2 className="text-lg font-semibold text-center p-4" id="poll-question" dangerouslySetInnerHTML={{ __html: question }}>
             </h2>
 
@@ -95,7 +84,6 @@ const PollPage: React.FC<PollPageProps> = ({ question, option1, option2, option1
                     </button>
                 </div>
             </div>
-            <LoginModal show={showLoginModal} onLogin={handleLogin} />
         </div>
     );
 };
