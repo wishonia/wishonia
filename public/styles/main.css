@@ -15,7 +15,7 @@ header {
 }
 
 main {
-    margin: 20px;
+    margin: 10px;
 }
 
 footer {
@@ -26,6 +26,8 @@ footer {
     position: fixed;
     bottom: 0;
     width: 100%;
+    padding-top: 1px;
+    padding-bottom: 1px;
 }
 
 button {
@@ -99,3 +101,55 @@ button:hover {
     justify-content: space-between;
 }
 
+.auth-section {
+    margin: auto;
+    text-align: center;
+}
+
+/* Google Login Button Styles */
+.oauth-login button {
+    background-color: #fff; /* Google's brand blue */
+    color: #357bed;
+    border: none;
+    padding: 10px 15px;
+    border-radius: 2px;
+    font-size: 16px;
+    cursor: pointer;
+    box-shadow: 0 2px 4px rgba(0,0,0,0.2);
+    transition: background-color 0.3s, box-shadow 0.3s;
+}
+
+.oauth-login button:hover {
+    background-color: #357ae8; /* A slightly darker blue */
+    box-shadow: 0 4px 8px rgba(0,0,0,0.3);
+}
+
+.oauth-login button:focus {
+    outline: none;
+    box-shadow: 0 0 0 2px #fff, 0 0 0 4px #4285F4;
+}
+
+/* Style for the email input field */
+#loginEmail {
+    width: 80%; /* Makes the input field larger */
+    padding: 10px; /* Adds some padding inside the input field for better readability */
+    border-radius: 20px; /* Makes the corners rounded */
+    text-align: center; /* Centers the placeholder text */
+    border: black;
+}
+
+/* Style for the login button */
+button[type="submit"] {
+    padding: 10px 20px; /* Adds padding to make the button larger */
+    border-radius: 20px; /* Makes the corners rounded */
+    background-color: #007bff; /* Example background color */
+    color: white; /* Text color */
+    border: none; /* Removes the default border */
+    cursor: pointer; /* Changes the cursor to a pointer on hover */
+    font-size: 16px; /* Increases the font size */
+}
+
+/* Add a hover effect for the button */
+button[type="submit"]:hover {
+    background-color: #45a049; /* Darkens the button a bit when hovered */
+}
