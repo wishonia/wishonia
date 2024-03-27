@@ -1,13 +1,24 @@
 /* Poll Page Styles */
 .poll-description {
-    margin-bottom: 20px;
+    margin-bottom: 10px;
     text-align: center;
+    padding: 10px;
+    padding-bottom: 5px;
+    padding-top: 5px;
+}
+
+.poll-header {
+    margin-bottom: 10px;
+    margin-top: 10px;
 }
 
 .allocation-slider {
     margin: 30px auto;
     width: 80%;
     max-width: 600px;
+    margin-top: 10px;
+    margin-bottom: 5px;
+    height: 100%;
 }
 
 .allocation-bars {
@@ -30,14 +41,18 @@
     width: 100%; /* Ensure full width for vertical layout */
     height: auto; /* Adjust height based on slider */
     min-height: 1px; /* Set initial height for allocation bars */
+    text-align: center;
+    padding: 5px;
 }
 
 .war {
-    background-color: #ff6666; /* Red for war */
+    background-color: #bd1010; /* Red for war */
+    margin-right: 10px;
 }
 
 .research {
-    background-color: #66cc66; /* Green for clinical research */
+    background-color: #275ac7; /* Green for clinical research */
+    margin-left: 10px;
 }
 
 .slider {
@@ -91,7 +106,7 @@
 
 button#submitDesiredAllocation, button#submitActualAllocation {
     display: block;
-    margin: 20px auto;
+    margin: 10px auto;
     padding: 10px 20px;
     font-size: 16px;
     color: white;
@@ -99,6 +114,7 @@ button#submitDesiredAllocation, button#submitActualAllocation {
     border: none;
     border-radius: 5px;
     cursor: pointer;
+    z-index: 2;
 }
 
 button#submitDesiredAllocation:hover, button#submitActualAllocation:hover {
@@ -107,7 +123,7 @@ button#submitDesiredAllocation:hover, button#submitActualAllocation:hover {
 
 .percentage-display {
     text-align: center;
-    padding: 5px;
+    /* padding: 5px; */
     font-weight: bold;
     color: white;
 }

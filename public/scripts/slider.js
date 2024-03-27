@@ -4,8 +4,8 @@ function updateAllocationBars(sliderValue, warBarId, researchBarId) {
     const desiredResearchAllocationBar = document.getElementById(researchBarId);
 
     // Calculate the percentage allocation for war and research
-    const warAllocationPercentage = sliderValue;
-    const researchAllocationPercentage = 100 - sliderValue;
+    const researchAllocationPercentage = sliderValue;
+    const warAllocationPercentage = 100 - sliderValue;
 
     // Update the height style to adjust the bar heights
     desiredWarAllocationBar.style.height = warAllocationPercentage + '%';
@@ -27,6 +27,8 @@ function submitDesiredAllocation() {
     // Redirect to the next page or show a confirmation message
     // For demonstration, we'll just log the value
     console.log('Desired Allocation Submitted:', sliderValue);
+
+    window.location.href = 'actual_allocation_poll.html'
 }
 
 // Function to handle the submission of the actual allocation
@@ -40,6 +42,7 @@ function submitActualAllocation() {
     // Redirect to the next page or show a confirmation message
     // For demonstration, we'll just log the value
     console.log('Actual Allocation Submitted:', sliderValue);
+    window.location.href = 'login_register.html'
 }
 
 // Event listeners for the sliders

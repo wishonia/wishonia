@@ -9,19 +9,24 @@
 </head>
 <body>
     <header>
-        <h1>How much should we allocate?</h1>
+        <h1 id="poll-header" class="poll-header">How much should we allocate?</h1>
     </header>
     <main>
         <section class="poll-description">
-            <p>How do you think funds should be allocated between war and clinical research? Adjust the slider to reflect your desired allocation.</p>
+            <p id="poll-instructions">
+                Adjust the slider to express how much of the world's resources you think
+                the governments of the world should spend on militarism relative to curing diseases.
+            </p>
         </section>
         <section class="allocation-slider">
             <div class="allocation-bars">
                 <div id="desiredWarAllocationBar" class="allocation-bar war">
-                    <div class="percentage-display war-percentage">50%</div>
+                    <span class="percentage-display war-percentage">50%</span>
+                    <span class="percentage-display">on Nuclear Bombs, Autonomous Weapons Systems, etc.</span>
                 </div>
                 <div id="desiredResearchAllocationBar" class="allocation-bar research">
-                    <div class="percentage-display research-percentage">50%</div>
+                    <span class="percentage-display research-percentage">50%</span>
+                    <span class="percentage-display">on Medical Research</span>
                 </div>
             </div>
             <input type="range" id="desiredAllocationSlider" min="0" max="100" value="50" class="slider">
@@ -29,8 +34,8 @@
                 <span class="war-label">👈 More War</span>
                 <span class="research-label">More Cures 👉</span>
             </div>
+            <button id="submitDesiredAllocation" onclick="submitDesiredAllocation()">Submit</button>
         </section>
-        <button id="submitDesiredAllocation" onclick="submitDesiredAllocation()">Submit</button>
     </main>
     <footer>
         <p>&copy; 2023 Allocation Poll. All rights reserved.</p>
