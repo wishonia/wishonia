@@ -19,21 +19,21 @@
         </section>
         <section class="allocation-slider">
             <div class="allocation-bars">
-                <div id="actualWarAllocationBar" class="allocation-bar war">
+                <div id="warPercentageGuessedBar" class="allocation-bar war">
                     <span class="percentage-display war-percentage">50%</span>
                     <span class="percentage-display">on Nuclear Bombs, Autonomous Weapons Systems, etc.</span>
                 </div>
-                <div id="actualResearchAllocationBar" class="allocation-bar research">
+                <div id="researchPercentageGuessedBar" class="allocation-bar research">
                     <span class="percentage-display research-percentage">50%</span>
                     <span class="percentage-display">on Medical Research</span>
                 </div>
             </div>
-            <input type="range" id="actualAllocationSlider" min="0" max="100" value="50" class="slider">
+            <input type="range" id="warPercentageGuessedSlider" min="0" max="100" value="50" class="slider">
             <div class="allocation-labels">
                 <span class="war-label">👈 More War</span>
                 <span class="research-label">More Cures 👉</span>
             </div>
-            <button id="submitActualAllocation" onclick="submitActualAllocation()">Submit</button>
+            <button id="submitWarPercentageGuessed" onclick="submitWarPercentageGuessed()">Submit</button>
         </section>
     </main>
     <footer>

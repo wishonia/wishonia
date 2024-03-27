@@ -4,6 +4,8 @@
   "description": "A polling application with OAuth authentication and data visualization.",
   "main": "server.js",
   "scripts": {
+    "prisma:generate": "prisma generate",
+    "pretest": "npm run prisma:generate",
     "start": "node server.js",
     "test": "jest"
   },
