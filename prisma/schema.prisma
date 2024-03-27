@@ -59,13 +59,6 @@ model User {
   actualAllocation  Float
   referrerId        String?
   createdAt         DateTime   @default(now())
-}
-
-model Gamification {
-  id          Int      @id @default(autoincrement())
-  userId      String
-  points      Int
-  badges      Json
-  updatedAt   DateTime @default(now())
-  user        User     @relation(fields: [userId], references: [id])
+  points            Int
+  badges            Json
 }
