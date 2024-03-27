@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Your Desired Allocation</title>
+    <link rel="stylesheet" href="styles/main.css">
+    <link rel="stylesheet" href="styles/poll.css">
+</head>
+<body>
+    <header>
+        <h1>How much should we allocate?</h1>
+    </header>
+    <main>
+        <section class="poll-description">
+            <p>How do you think funds should be allocated between war and clinical research? Adjust the slider to reflect your desired allocation.</p>
+        </section>
+        <section class="allocation-slider">
+            <div class="allocation-bars">
+                <div id="desiredWarAllocationBar" class="allocation-bar war">
+                    <div class="percentage-display war-percentage">50%</div>
+                </div>
+                <div id="desiredResearchAllocationBar" class="allocation-bar research">
+                    <div class="percentage-display research-percentage">50%</div>
+                </div>
+            </div>
+            <input type="range" id="desiredAllocationSlider" min="0" max="100" value="50" class="slider">
+            <div class="allocation-labels">
+                <span class="war-label">👈 More War</span>
+                <span class="research-label">More Cures 👉</span>
+            </div>
+        </section>
+        <button id="submitDesiredAllocation" onclick="submitDesiredAllocation()">Submit</button>
+    </main>
+    <footer>
+        <p>&copy; 2023 Allocation Poll. All rights reserved.</p>
+    </footer>
+    <script src="scripts/slider.js"></script>
+</body>
+</html>
