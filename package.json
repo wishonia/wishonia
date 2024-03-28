@@ -5,7 +5,7 @@
   "main": "server.js",
   "scripts": {
     "prisma:generate": "prisma generate",
-    "pretest": "npm run prisma:generate",
+    "pretest": "npm run prisma:generate && npx prisma migrate dev",
     "start": "node server.js",
     "test": "jest"
   },

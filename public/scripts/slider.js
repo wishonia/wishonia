@@ -42,7 +42,7 @@ function submitWarPercentageGuessed() {
     // Redirect to the next page or show a confirmation message
     // For demonstration, we'll just log the value
     console.log('Guessed Percentage Submitted:', sliderValue);
-    window.location.href = 'login_register.html'
+    window.location.href = 'login.html'
 }
 
 // Event listeners for the sliders
