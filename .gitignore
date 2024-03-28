@@ -43,3 +43,4 @@ yarn-error.log*
 *.tsbuildinfo
 /.idea
 /next/
+/data/
