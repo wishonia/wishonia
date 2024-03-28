@@ -5,7 +5,7 @@ const {describe, expect, it} = require("@jest/globals"); // Assuming this is the
 describe('User Registration and Login', () => {
   it('registers a new user', async () => {
     const res = await request(app)
-      .post('/api/users/register')
+      .post('/auth/register')
       .send({
         email: 'testuser@example.com',
         name: 'Test User'
@@ -17,7 +17,7 @@ describe('User Registration and Login', () => {
 
   it('logs in the registered user', async () => {
     const res = await request(app)
-      .post('/api/users/login')
+      .post('/auth/login')
       .send({
         email: 'testuser@example.com',
       });
