@@ -2,7 +2,6 @@
 
 document.addEventListener('DOMContentLoaded', function() {
     const loginForm = document.getElementById('loginForm');
-    const registerForm = document.getElementById('registerForm');
 
     loginForm.addEventListener('submit', function(e) {
         e.preventDefault();
@@ -11,12 +10,6 @@ document.addEventListener('DOMContentLoaded', function() {
         loginUser(email, password);
     });
 
-    registerForm.addEventListener('submit', function(e) {
-        e.preventDefault();
-        const email = document.getElementById('registerEmail').value;
-        const password = document.getElementById('registerPassword').value;
-        registerUser(email, password);
-    });
 });
 
 function loginUser(email, password) {

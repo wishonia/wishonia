@@ -33,7 +33,7 @@ app.get('/', (req, res) => {
 // Google OAuth routes
 app.get('/auth/google', passport.authenticate('google', { scope: ['profile', 'email'] }));
 app.get('/auth/google/callback', 
-    passport.authenticate('google', { failureRedirect: '/login_register.html' }),
+    passport.authenticate('google', { failureRedirect: '/login.html' }),
     (req, res) => {
         // Successful authentication, redirect to results.
         res.redirect('/results.html');
