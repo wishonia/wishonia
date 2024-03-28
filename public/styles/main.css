@@ -132,10 +132,21 @@ button:hover {
 /* Style for the email input field */
 #loginEmail {
     width: 80%; /* Makes the input field larger */
-    padding: 10px; /* Adds some padding inside the input field for better readability */
-    border-radius: 20px; /* Makes the corners rounded */
+    padding: 2px; /* Adds some padding inside the input field for better readability */
+    height: 45px; /* Adjusts the height for better alignment and usability */
+    border-radius: 54px; /* Makes the corners rounded */
     text-align: center; /* Centers the placeholder text */
-    border: black;
+    border: 1px solid #d3d3d3; /* Refines the border to a light gray color */
+    box-shadow: 0 1px 3px rgba(0,0,0,0.1) inset; /* Adds a subtle shadow on focus */
+    outline: none; /* Removes the default outline */
+}
+
+#loginEmail::placeholder {
+    color: #d3d3d3; /* Lightens the color of the placeholder text */
+}
+
+#loginEmail:focus {
+    box-shadow: 0 2px 4px rgba(0,0,0,0.2) inset; /* Enhances the shadow when focused */
 }
 
 /* Style for the login button */
@@ -152,4 +163,11 @@ button[type="submit"] {
 /* Add a hover effect for the button */
 button[type="submit"]:hover {
     background-color: #45a049; /* Darkens the button a bit when hovered */
+}
+
+.divider {
+    margin: 20px 0;
+    text-align: center;
+    /* make it bold  */
+    font-weight: bold;
 }
