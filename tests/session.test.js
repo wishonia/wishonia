@@ -17,6 +17,7 @@ describe('Session management unit tests', () => {
       data: {
         userId: user.id,
         expires: new Date(Date.now() + 1000 * 60 * 60 * 24),
+        sessionToken: 'randomSessionTokenString', // Added as per instruction
       },
     });
 
