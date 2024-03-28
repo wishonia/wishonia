@@ -13,19 +13,41 @@ document.addEventListener('DOMContentLoaded', function() {
 });
 
 function loginUser(email, password) {
-    // Placeholder for login functionality
-    // In a real application, you would send a request to your server here
-    console.log('Logging in user:', email);
-    // Redirect to results page after login
-    window.location.href = 'results.html';
+    // Sending login request to the server
+    fetch('/api/users/login', {
+        method: 'POST',
+        headers: {
+            'Content-Type': 'application/json',
+        },
+        body: JSON.stringify({email, password}),
+    })
+    .then(response => response.json())
+    .then(data => {
+        console.log('Success:', data);
+        window.location.href = 'results.html';
+    })
+    .catch((error) => {
+        console.error('Error:', error);
+    });
 }
 
 function registerUser(email, password) {
-    // Placeholder for registration functionality
-    // In a real application, you would send a request to your server here
-    console.log('Registering user:', email);
-    // Redirect to results page after registration
-    window.location.href = 'results.html';
+    // Sending registration request to the server
+    fetch('/api/users/register', {
+        method: 'POST',
+        headers: {
+            'Content-Type': 'application/json',
+        },
+        body: JSON.stringify({email, password}),
+    })
+    .then(response => response.json())
+    .then(data => {
+        console.log('Success:', data);
+        window.location.href = 'results.html';
+    })
+    .catch((error) => {
+        console.error('Error:', error);
+    });
 }
 
 // Note: The actual implementation for user authentication would involve more

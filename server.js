@@ -43,6 +43,51 @@ app.get('/auth/google/callback',
 app.use('/api/polls', pollsApi);
 app.use('/api/users', usersApi);
 
+// User registration and login routes
+app.post('/api/users/register', async (req, res) => {
+    // Here you would typically validate the data, hash the password, and then save the user to your database
+    const { email, password } = req.body;
+    // Hash the password
+    const hashedPassword = await bcrypt.hash(password, 10);
+    // Save the user to the database
+    try {
+        const user = await prisma.user.create({
+            data: {
+                email,
+                password: hashedPassword,
+            },
+        });
+        console.log('User registered:', user);
+        res.status(201).send({ message: 'User registered successfully' });
+    } catch (error) {
+        console.error('Registration error:', error);
+        res.status(500).send({ message: 'Error registering user' });
+    }
+});
+
+app.post('/api/users/login', async (req, res) => {
+    // Here you would typically validate the login credentials
+    const { email, password } = req.body;
+    try {
+        const user = await prisma.user.findUnique({
+            where: {
+                email,
+            },
+        });
+        if (user && await bcrypt.compare(password, user.password)) {
+            // Assuming the existence of a method to authenticate the user
+            // Authenticate the user and create a session or token
+            console.log('User logged in successfully:', user);
+            res.send({ message: 'User logged in successfully' });
+        } else {
+            res.status(401).send({ message: 'Invalid credentials' });
+        }
+    } catch (error) {
+        console.error('Login error:', error);
+        res.status(500).send({ message: 'Error logging in user' });
+    }
+});
+
 // Handling submissions from the petition form
 app.post('/submit-petition', (req, res) => {
     const { name, email, address, city, state, zip } = req.body;
