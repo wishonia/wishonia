@@ -6,12 +6,12 @@ document.addEventListener('DOMContentLoaded', function() {
     const userWarPercentageGuessed = JSON.parse(localStorage.getItem('userWarPercentageGuessed'));
 
     // Update the user's allocation bars and percentages
-    updateAllocationBars(userWarPercentageDesired, 'userDesiredWar', 'userResearchPercentageDesired');
-    document.getElementById('userDesiredPercentage').textContent = userWarPercentageDesired;
-    document.getElementById('userResearchPercentageDesiredPercentage').textContent = 100 - userWarPercentageDesired;
+    updateAllocationBars(userWarPercentageDesired, 'userWarPercentageDesired', 'userResearchPercentageDesired');
+    document.getElementById('userWarPercentageDesired').textContent = userWarPercentageDesired;
+    document.getElementById('userResearchPercentageDesired').textContent = 100 - userWarPercentageDesired;
 
     updateAllocationBars(userWarPercentageGuessed, 'userActualWar', 'userActualResearch');
-    document.getElementById('userActualPercentage').textContent = userWarPercentageGuessed;
+    document.getElementById('userWarPercentageGuessed').textContent = userWarPercentageGuessed;
     document.getElementById('userActualResearchPercentage').textContent = 100 - userWarPercentageGuessed;
 
     // Fetch average allocations from the server
@@ -21,12 +21,12 @@ document.addEventListener('DOMContentLoaded', function() {
             const { averageWarPercentageDesired, averageWarPercentageGuessed } = data;
 
             // Update the average allocation bars and percentages
-            updateAllocationBars(averageWarPercentageDesired, 'averageDesiredWar', 'averageResearchPercentageDesired');
-            document.getElementById('averageDesiredPercentage').textContent = averageWarPercentageDesired;
-            document.getElementById('averageResearchPercentageDesiredPercentage').textContent = 100 - averageWarPercentageDesired;
+            updateAllocationBars(averageWarPercentageDesired, 'averageWarPercentageDesired', 'averageResearchPercentageDesired');
+            document.getElementById('averageWarPercentageDesired').textContent = averageWarPercentageDesired;
+            document.getElementById('averageResearchPercentageDesired').textContent = 100 - averageWarPercentageDesired;
 
             updateAllocationBars(averageWarPercentageGuessed, 'averageActualWar', 'averageActualResearch');
-            document.getElementById('averageActualPercentage').textContent = averageWarPercentageGuessed;
+            document.getElementById('averageWarPercentageGuessed').textContent = averageWarPercentageGuessed;
             document.getElementById('averageActualResearchPercentage').textContent = 100 - averageWarPercentageGuessed;
         })
         .catch(error => console.error('Error fetching average allocations:', error));

@@ -57,11 +57,11 @@ model User {
   sessions             Session[]
   address              String?
   city                 String?
-  state                String?
-  zip                  String?
+  stateProvince        String?
+  postalCode           String?
   signedPetition       Boolean   @default(false)
   language             String?
-  WarPercentageDesired Float?
+  warPercentageDesired Float?
   warPercentageGuessed Float?
   referrerId           String?
   createdAt            DateTime  @default(now())
@@ -69,4 +69,7 @@ model User {
   deletedAt            DateTime?
   points               Int?
   badges               Json?
+  countryCode          String?
+  phoneNumber          String?
+  newsletterSubscribed Boolean   @default(false)
 }

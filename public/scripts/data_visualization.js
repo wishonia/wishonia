@@ -9,12 +9,12 @@ function updateResultsVisualization() {
             const { averageWarPercentageDesired, averageWarPercentageGuessed } = data;
 
             // Update the average allocation bars and percentages
-            updateAllocationBars(averageWarPercentageDesired, 'averageDesiredWar', 'averageResearchPercentageDesired');
-            document.getElementById('averageDesiredPercentage').textContent = averageWarPercentageDesired;
-            document.getElementById('averageResearchPercentageDesiredPercentage').textContent = 100 - averageWarPercentageDesired;
+            updateAllocationBars(averageWarPercentageDesired, 'averageWarPercentageDesired', 'averageResearchPercentageDesired');
+            document.getElementById('averageWarPercentageDesired').textContent = averageWarPercentageDesired;
+            document.getElementById('averageResearchPercentageDesired').textContent = 100 - averageWarPercentageDesired;
 
             updateAllocationBars(averageWarPercentageGuessed, 'averageActualWar', 'averageActualResearch');
-            document.getElementById('averageActualPercentage').textContent = averageWarPercentageGuessed;
+            document.getElementById('averageWarPercentageGuessed').textContent = averageWarPercentageGuessed;
             document.getElementById('averageActualResearchPercentage').textContent = 100 - averageWarPercentageGuessed;
         })
         .catch(error => console.error('Error fetching average allocations:', error));

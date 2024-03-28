@@ -39,7 +39,7 @@ p {
 }
 
 /* Enhancing the visual contrast for the results */
-#userDesiredWar, #averageDesiredWar {
+#userWarPercentageDesired, #averageWarPercentageDesired {
     border-right: 2px solid #fff; /* Adding a white border to visually separate the bars */
 }
 
