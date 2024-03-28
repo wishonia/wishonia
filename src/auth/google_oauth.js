@@ -13,7 +13,7 @@ module.exports = function(passport) {
         try {
             const existingAccount = await prisma.account.findUnique({
                 where: {
-                    googleId: profile.id,
+                    providerAccountId: profile.id,
                 },
                 include: {
                     user: true, // Include the user linked to this account

@@ -33,7 +33,7 @@ model Account {
   updatedAt         DateTime  @updatedAt
   deletedAt         DateTime?
 
-  @@unique([provider, providerAccountId])
+  @@unique([provider, providerAccountId], name: "provider_providerAccountId")
 }
 
 model Session {

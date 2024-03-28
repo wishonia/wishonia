@@ -4,6 +4,7 @@
   "description": "A polling application with OAuth authentication and data visualization.",
   "main": "server.js",
   "scripts": {
+    "dev": "nodemon",
     "prisma:generate": "prisma generate",
     "pretest": "npm run prisma:generate && npx prisma migrate dev",
     "start": "node server.js",
@@ -26,6 +27,13 @@
   "devDependencies": {
     "@jest/globals": "^29.7.0",
     "jest": "^29.7.0",
+    "nodemon": "^3.1.0",
     "supertest": "^6.3.4"
+  },
+  "nodemonConfig": {
+    "watch": ["src", "server.js"],
+    "ext": "js,json",
+    "ignore": ["src/tests/*"],
+    "exec": "node server.js"
   }
 }
