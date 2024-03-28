@@ -11,21 +11,36 @@ module.exports = function(passport) {
     async (accessToken, refreshToken, profile, done) => {
         // Check if user already exists in our database
         try {
-            const existingUser = await prisma.user.findUnique({
+            const existingAccount = await prisma.account.findUnique({
                 where: {
-                    email: profile.emails[0].value,
+                    googleId: profile.id,
                 },
+                include: {
+                    user: true, // Include the user linked to this account
+                }
             });
-            if (existingUser) {
-                // User exists, proceed to log them in
-                return done(null, existingUser);
+            if (existingAccount) {
+                // Account exists, proceed to log the user in
+                return done(null, existingAccount.user);
             } else {
-                // User doesn't exist, create a new user
+                // Account doesn't exist, create a new user and account
                 const newUser = await prisma.user.create({
                     data: {
                         email: profile.emails[0].value,
                         name: profile.displayName,
-                        googleId: profile.id // Storing Google ID for future logins
+                        image: profile.photos[0].value,
+                        // Additional fields can be added here
+                    }
+                });
+                const newAccount = await prisma.account.create({
+                    data: {
+                        googleId: profile.id,
+                        userId: newUser.id, // Linking the new account to the new user
+                        provider: 'google',
+                        providerAccountId: profile.id,
+                        accessToken: accessToken,
+                        refreshToken: refreshToken,
+                        // Additional fields can be added here
                     }
                 });
                 return done(null, newUser);

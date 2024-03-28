@@ -5,17 +5,19 @@ const session = require('express-session');
 const passport = require('passport');
 require('./src/auth/google_oauth')(passport);
 const pollsApi = require('./src/api/polls');
-const usersApi = require('./src/api/users');
 
 require('dotenv').config();
 
 const formData = require('form-data');
 const Mailgun = require('mailgun.js');
+const {PrismaClient} = require("@prisma/client");
+const prisma = new PrismaClient();
 const mailgun = new Mailgun(formData);
 const mg = mailgun.client({username: 'api', key: process.env.MAILGUN_API_KEY, url: 'https://api.eu.mailgun.net'});
 
 const app = express();
 const PORT = process.env.PORT || 3000;
+const BASE_URL = process.env.BASE_URL || `http://localhost:${PORT}`;
 
 // Middleware
 app.use(bodyParser.json());
@@ -34,44 +36,38 @@ app.get('/', (req, res) => {
     res.sendFile(path.join(__dirname, 'public', 'index.html'));
 });
 
-// Google OAuth routes
-app.get('/auth/google', passport.authenticate('google', { scope: ['profile', 'email'] }));
-app.get('/auth/google/callback', 
-    passport.authenticate('google', { failureRedirect: '/login.html' }),
-    (req, res) => {
-        // Successful authentication, redirect to results.
-        res.redirect('/results.html');
-    });
-
-// API routes
-app.use('/api/polls', pollsApi);
-app.use('/api/users', usersApi);
-
-// User registration and login routes
-app.post('/api/users/register', async (req, res) => {
-    const { email } = req.body;
-    // Generate a unique login token and its expiration time
-    const loginToken = generateLoginToken(); // Placeholder for token generation logic
-    const tokenExpires = new Date(Date.now() + 24 * 60 * 60 * 1000); // 24 hours from now
-
-    // Store the login token and its expiration in the user's record
+// Register a new user
+app.post('/auth/register', async (req, res) => {
+    const { email, gdprConsent } = req.body;
+    const ipAddress = req.ip; // Capture the user's IP address
     try {
-        await prisma.user.create({
-            data: {
-                email,
-                loginToken,
-                tokenExpires,
+        // Check if user already exists
+        const existingUser = await prisma.user.findUnique({
+            where: {
+                email: email,
             },
         });
-        console.log('User registered:', email);
-        res.status(201).send({ message: 'User registered successfully' });
+        if (existingUser) {
+            return res.status(409).json({ message: 'User already exists' });
+        }
+
+        // Create user
+        const newUser = await prisma.user.create({
+            data: {
+                email: email,
+                gdprConsent: gdprConsent, // Record GDPR consent
+                ipAddress: ipAddress, // Store the user's IP address
+            },
+        });
+        res.status(201).json({ user: newUser, message: 'User created successfully' });
     } catch (error) {
-        console.error('Registration error:', error);
-        res.status(500).send({ message: 'Error registering user' });
+        console.error('Error registering user:', error);
+        res.status(500).json({ message: 'Error registering user' });
     }
 });
 
-app.post('/api/users/login', async (req, res) => {
+// Login a user
+app.post('/auth/login', async (req, res) => {
     const { email } = req.body;
     try {
         // Generate a unique login token and its expiration time
@@ -90,9 +86,21 @@ app.post('/api/users/login', async (req, res) => {
         res.send({ message: 'Magic link sent to your email.' });
     } catch (error) {
         console.error('Login error:', error);
-        res.status(500).send({ message: 'Error logging in user' });
+        res.status(500).json({ message: 'Error logging in user' });
     }
 });
+
+// Google OAuth routes
+app.get('/auth/google', passport.authenticate('google', { scope: ['profile', 'email'] }));
+app.get('/auth/google/callback', 
+    passport.authenticate('google', { failureRedirect: '/login.html' }),
+    (req, res) => {
+        // Successful authentication, redirect to results.
+        res.redirect('/results.html');
+    });
+
+// API routes
+app.use('/api/polls', pollsApi);
 
 // Endpoint to verify the login token from the magic link and authenticate the user
 app.get('/auth/verify-token', async (req, res) => {
@@ -134,7 +142,7 @@ app.post('/submit-petition', (req, res) => {
 
 // Start server
 app.listen(PORT, () => {
-    console.log(`Server running on ${process.env.BASE_URL}:${PORT}`);
+    console.log(`Server running on ${BASE_URL}`);
 });
 module.exports = app; // Export the Express app instance
 function generateLoginToken() {
@@ -142,7 +150,7 @@ function generateLoginToken() {
 }
 
 function sendMagicLinkEmail(email, loginToken) {
-  const magicLink = `${process.env.BASE_URL}/auth/verify-token?token=${loginToken}`;
+  const magicLink = `${BASE_URL}/auth/verify-token?token=${loginToken}`;
   const message = {
     from: 'Your Name <mailgun@YOUR_DOMAIN.com>',
     to: email,
@@ -154,3 +162,5 @@ function sendMagicLinkEmail(email, loginToken) {
     .then(msg => console.log(msg)) // Logs success message
     .catch(err => console.error(err)); // Logs any errors
 }
+
+
