@@ -37,3 +37,16 @@ describe('POST /auth/register', () => {
     expect(res.body).toEqual(JSON.parse('{"message": "Magic link sent to your email."}'));
   });
 });
+describe('POST /api/poll/submit', () => {
+  it('should process submission correctly', async () => {
+    let submissionData = {
+      userId: 1, // Assuming a valid user ID for the test
+      content: 'Test submission content'
+    };
+    let res = await request(app)
+      .post('/api/poll/submit')
+      .send(submissionData);
+    expect(res.statusCode).toEqual(200);
+    expect(res.body).toHaveProperty('message', 'Submission processed successfully');
+  });
+});

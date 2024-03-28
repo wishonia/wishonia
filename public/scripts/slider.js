@@ -22,7 +22,7 @@ function submitWarPercentageDesired() {
     const sliderValue = warPercentageDesiredSlider.value;
 
     // Save the slider value to local storage
-    localStorage.setItem('WarPercentageDesired', sliderValue);
+    localStorage.setItem('warPercentageDesired', sliderValue);
 
     // Redirect to the next page or show a confirmation message
     // For demonstration, we'll just log the value

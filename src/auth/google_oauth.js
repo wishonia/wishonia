@@ -13,7 +13,10 @@ module.exports = function(passport) {
         try {
             const existingAccount = await prisma.account.findUnique({
                 where: {
-                    providerAccountId: profile.id,
+                    provider_providerAccountId: {
+                        provider: 'google',
+                        providerAccountId: profile.id,
+                    },
                 },
                 include: {
                     user: true, // Include the user linked to this account
@@ -23,23 +26,35 @@ module.exports = function(passport) {
                 // Account exists, proceed to log the user in
                 return done(null, existingAccount.user);
             } else {
-                // Account doesn't exist, create a new user and account
-                const newUser = await prisma.user.create({
-                    data: {
+                // Check if a user with the given email already exists
+                const existingUser = await prisma.user.findUnique({
+                    where: {
                         email: profile.emails[0].value,
-                        name: profile.displayName,
-                        image: profile.photos[0].value,
-                        // Additional fields can be added here
-                    }
+                    },
                 });
+                let newUser;
+                if (!existingUser) {
+                    // User doesn't exist, create a new user
+                    newUser = await prisma.user.create({
+                        data: {
+                            email: profile.emails[0].value,
+                            name: profile.displayName,
+                            image: profile.photos[0].value,
+                            // Additional fields can be added here
+                        }
+                    });
+                } else {
+                    // User exists, use the existing user
+                    newUser = existingUser;
+                }
                 const newAccount = await prisma.account.create({
                     data: {
-                        googleId: profile.id,
-                        userId: newUser.id, // Linking the new account to the new user
                         provider: 'google',
                         providerAccountId: profile.id,
-                        accessToken: accessToken,
-                        refreshToken: refreshToken,
+                        userId: newUser.id, // Linking the new account to the new user
+                        access_token: accessToken,
+                        refresh_token: refreshToken,
+                        type: 'oauth', // Added the missing type field
                         // Additional fields can be added here
                     }
                 });
