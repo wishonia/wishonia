@@ -1,4 +1,5 @@
 const { PrismaClient } = require('@prisma/client');
+const {describe, test} = require("@jest/globals");
 const prisma = new PrismaClient();
 
 describe('Session management unit tests', () => {

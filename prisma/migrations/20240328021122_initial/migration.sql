@@ -56,6 +56,10 @@ CREATE TABLE "User" (
     "countryCode" TEXT,
     "phoneNumber" TEXT,
     "newsletterSubscribed" BOOLEAN NOT NULL DEFAULT false,
+    "signatureTimestamp" TIMESTAMP(3) NOT NULL DEFAULT CURRENT_TIMESTAMP,
+    "ipAddress" VARCHAR(45),
+    "emailValidated" BOOLEAN NOT NULL DEFAULT false,
+    "gdprConsent" BOOLEAN NOT NULL DEFAULT false,
 
     CONSTRAINT "User_pkey" PRIMARY KEY ("id")
 );

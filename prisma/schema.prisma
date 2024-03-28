@@ -72,4 +72,8 @@ model User {
   countryCode          String?
   phoneNumber          String?
   newsletterSubscribed Boolean   @default(false)
+  signatureTimestamp   DateTime  @default(now())
+  ipAddress            String?   @db.VarChar(45)
+  emailValidated       Boolean   @default(false)
+  gdprConsent          Boolean   @default(false)
 }
