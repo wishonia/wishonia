@@ -17,16 +17,28 @@ document.addEventListener('DOMContentLoaded', function() {
     // Event listeners for various actions that trigger email notifications
     document.getElementById('submitPoll').addEventListener('click', function() {
         const userEmail = getUserEmail(); // Assuming a function to get the user's email
+        if (!userEmailValidated()) {
+            console.log('Email not validated. Cannot send notification.');
+            return;
+        }
         sendEmailNotification('poll completion', userEmail);
     });
 
     document.getElementById('signPetition').addEventListener('click', function() {
         const userEmail = getUserEmail(); // Assuming a function to get the user's email
+        if (!userEmailValidated()) {
+            console.log('Email not validated. Cannot send notification.');
+            return;
+        }
         sendEmailNotification('petition signature', userEmail);
     });
 
     document.getElementById('referFriend').addEventListener('click', function() {
         const userEmail = getUserEmail(); // Assuming a function to get the user's email
+        if (!userEmailValidated()) {
+            console.log('Email not validated. Cannot send notification.');
+            return;
+        }
         sendEmailNotification('referral', userEmail);
     });
 
@@ -42,5 +54,12 @@ document.addEventListener('DOMContentLoaded', function() {
         // Placeholder for getting user's email
         // In a real application, you would retrieve the user's email from the session or database
         return 'user@example.com'; // Returning a placeholder email
+    }
+
+    // Function to check if the user's email has been validated
+    function userEmailValidated() {
+        // Placeholder for email validation check
+        // In a real application, you would check the user's email validation status in the database
+        return true; // Assuming for this placeholder that the email is validated
     }
 });

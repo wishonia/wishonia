@@ -6,7 +6,8 @@ const bcrypt = require('bcryptjs');
 
 // Register a new user
 router.post('/register', async (req, res) => {
-    const { email, password } = req.body;
+    const { email, password, gdprConsent } = req.body;
+    const ipAddress = req.ip; // Capture the user's IP address
     try {
         // Check if user already exists
         const existingUser = await prisma.user.findUnique({
@@ -27,6 +28,8 @@ router.post('/register', async (req, res) => {
             data: {
                 email: email,
                 password: hashedPassword,
+                gdprConsent: gdprConsent, // Record GDPR consent
+                ipAddress: ipAddress, // Store the user's IP address
             },
         });
         res.status(201).json({ user: newUser, message: 'User created successfully' });
