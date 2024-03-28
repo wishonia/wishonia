@@ -41,11 +41,11 @@ CREATE TABLE "User" (
     "image" TEXT,
     "address" TEXT,
     "city" TEXT,
-    "state" TEXT,
-    "zip" TEXT,
+    "stateProvince" TEXT,
+    "postalCode" TEXT,
     "signedPetition" BOOLEAN NOT NULL DEFAULT false,
     "language" TEXT,
-    "WarPercentageDesired" DOUBLE PRECISION,
+    "warPercentageDesired" DOUBLE PRECISION,
     "warPercentageGuessed" DOUBLE PRECISION,
     "referrerId" TEXT,
     "createdAt" TIMESTAMP(3) NOT NULL DEFAULT CURRENT_TIMESTAMP,
@@ -53,6 +53,9 @@ CREATE TABLE "User" (
     "deletedAt" TIMESTAMP(3),
     "points" INTEGER,
     "badges" JSONB,
+    "countryCode" TEXT,
+    "phoneNumber" TEXT,
+    "newsletterSubscribed" BOOLEAN NOT NULL DEFAULT false,
 
     CONSTRAINT "User_pkey" PRIMARY KEY ("id")
 );

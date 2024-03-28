@@ -11,8 +11,11 @@ document.addEventListener('DOMContentLoaded', function() {
         const email = document.getElementById('email').value;
         const address = document.getElementById('address').value;
         const city = document.getElementById('city').value;
-        const state = document.getElementById('state').value;
-        const zip = document.getElementById('zip').value;
+        const stateProvince = document.getElementById('stateProvince').value;
+        const postalCode = document.getElementById('postalCode').value;
+        const countryCode = document.getElementById('countryCode').value;
+        const phoneNumber = document.getElementById('phoneNumber').value;
+        const newsletterSubscribed = document.getElementById('newsletterSubscribed').checked;
 
         // Validate form data here if necessary
 
@@ -27,8 +30,11 @@ document.addEventListener('DOMContentLoaded', function() {
                 email,
                 address,
                 city,
-                state,
-                zip,
+                stateProvince,
+                postalCode,
+                countryCode,
+                phoneNumber,
+                newsletterSubscribed,
                 signedPetition: true,
             }),
         })
