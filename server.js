@@ -4,7 +4,6 @@ const path = require('path');
 const session = require('express-session');
 const passport = require('passport');
 require('./src/auth/google_oauth')(passport);
-const pollsApi = require('./src/api/polls');
 
 require('dotenv').config();
 
@@ -71,7 +70,7 @@ app.post('/auth/login', async (req, res) => {
     const { email } = req.body;
     try {
         // Generate a unique login token and its expiration time
-        const loginToken = generateLoginToken(); // Placeholder for token generation logic
+        const loginToken = require('crypto').randomBytes(20).toString('hex');
         const tokenExpires = new Date(Date.now() + 24 * 60 * 60 * 1000); // 24 hours from now
 
         // Store the login token and its expiration in the user's record
@@ -80,8 +79,22 @@ app.post('/auth/login', async (req, res) => {
             data: { loginToken, tokenExpires },
         });
 
+        function sendMagicLinkEmail(email, loginToken) {
+            const magicLink = `${BASE_URL}/auth/verify-token?token=${loginToken}`;
+            const message = {
+                from: 'Wishonia <hello@wishonia.love>',
+                to: email,
+                subject: 'Your Magic Login Link',
+                text: `Click here to log in: ${magicLink}`
+            };
+
+            mg.messages.create(process.env.MAILGUN_DOMAIN, message)
+                .then(msg => console.log(msg)) // Logs success message
+                .catch(err => console.error(err)); // Logs any errors
+        }
+
         // Send an email with a magic link containing the token
-        sendMagicLinkEmail(email, loginToken); // Placeholder for email sending logic
+        sendMagicLinkEmail(email, loginToken);
 
         res.send({ message: 'Magic link sent to your email.' });
     } catch (error) {
@@ -98,9 +111,6 @@ app.get('/auth/google/callback',
         // Successful authentication, redirect to results.
         res.redirect('/results.html');
     });
-
-// API routes
-app.use('/api/polls', pollsApi);
 
 // Endpoint to verify the login token from the magic link and authenticate the user
 app.get('/auth/verify-token', async (req, res) => {
@@ -129,8 +139,61 @@ app.get('/auth/verify-token', async (req, res) => {
     }
 });
 
+
+// Middleware to check if the user is authenticated
+function isAuthenticated(req, res, next) {
+    if (req.isAuthenticated()) {
+        return next();
+    }
+    res.status(401).json({ message: 'User not authenticated' });
+}
+
+// API routes
+// Route to submit poll responses
+app.post('/api/submit', isAuthenticated, async (req, res) => {
+    const userId = req.user.id; // Assuming req.user is populated by the authentication middleware
+    const { warPercentageDesired, warPercentageGuessed } = req.body;
+
+    if (warPercentageDesired == null || warPercentageGuessed == null) {
+        return res.status(400).json({ message: 'Missing required poll response fields' });
+    }
+
+    try {
+        await prisma.user.update({
+            where: {
+                id: userId,
+            },
+            data: {
+                warPercentageDesired: warPercentageDesired,
+                warPercentageGuessed: warPercentageGuessed
+            }
+        });
+        res.status(200).json({ message: 'Poll response saved successfully' });
+    } catch (error) {
+        console.error('Error saving poll response:', error);
+        res.status(500).json({ message: 'Internal server error' });
+    }
+});
+
+// Route to get average poll responses
+app.get('/api/average', isAuthenticated, async (req, res) => {
+    try {
+        const averageResponses = await prisma.user.aggregate({
+            _avg: {
+                warPercentageDesired: true,
+                warPercentageGuessed: true
+            }
+        });
+        res.status(200).json(averageResponses);
+    } catch (error) {
+        console.error('Error fetching average poll responses:', error);
+        res.status(500).json({ message: 'Internal server error' });
+    }
+});
+
+
 // Handling submissions from the petition form
-app.post('/submit-petition', (req, res) => {
+app.post('/api/submit-petition', isAuthenticated, (req, res) => {
     const { name, email, address, city, state, zip } = req.body;
     // Here you would typically validate the data and then save it to your database
     console.log('Petition submitted with the following data:', req.body);
@@ -140,27 +203,10 @@ app.post('/submit-petition', (req, res) => {
     res.redirect('/thank_you.html');
 });
 
-// Start server
-app.listen(PORT, () => {
-    console.log(`Server running on ${BASE_URL}`);
-});
+// We do this in start.js so we can run tests without starting the server
+// app.listen(PORT, () => {
+//     console.log(`Server running on ${BASE_URL}`);
+// });
 module.exports = app; // Export the Express app instance
-function generateLoginToken() {
-  return require('crypto').randomBytes(20).toString('hex');
-}
-
-function sendMagicLinkEmail(email, loginToken) {
-  const magicLink = `${BASE_URL}/auth/verify-token?token=${loginToken}`;
-  const message = {
-    from: 'Your Name <mailgun@YOUR_DOMAIN.com>',
-    to: email,
-    subject: 'Login Magic Link',
-    text: `Click here to log in: ${magicLink}`
-  };
-
-  mg.messages.create(process.env.MAILGUN_DOMAIN, message)
-    .then(msg => console.log(msg)) // Logs success message
-    .catch(err => console.error(err)); // Logs any errors
-}
 
 

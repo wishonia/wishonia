@@ -3,40 +3,30 @@ const {expect, describe, test} = require("@jest/globals");
 const prisma = new PrismaClient();
 
 describe('User functionality', () => {
-  test('Create a new user', async () => {
-    const user = await prisma.user.create({
+  let email = 'test@example.com';
+  test('Create, retrieve, update, and delete a user', async () => {
+    let user = await prisma.user.create({
       data: {
-        email: 'test@example.com',
+        email: email,
         name: 'Test User',
         // Add other required fields based on your schema
       },
     });
-    expect(user.email).toBe('test@example.com');
-    // Clean up if necessary
-    await prisma.user.delete({ where: { email: 'test@example.com' } });
-  });
-
-  test('Retrieve a user', async () => {
-    const user = await prisma.user.findUnique({
+    expect(user.email).toBe(email);
+    user = await prisma.user.findUnique({
       where: {
-        email: 'test@example.com',
+        email: email,
       },
     });
-    expect(user.email).toBe('test@example.com');
-  });
-
-  test('Update a user', async () => {
+    expect(user.email).toBe(email);
     const updatedUser = await prisma.user.update({
-      where: { email: 'test@example.com' },
+      where: { email: email },
       data: { name: 'Updated Test User' },
     });
     expect(updatedUser.name).toBe('Updated Test User');
-  });
-
-  test('Delete a user', async () => {
-    await prisma.user.delete({ where: { email: 'test@example.com' } });
-    const user = await prisma.user.findUnique({
-      where: { email: 'test@example.com' },
+    await prisma.user.delete({ where: { email: email } });
+    user = await prisma.user.findUnique({
+      where: { email: email },
     });
     expect(user).toBeNull();
   });

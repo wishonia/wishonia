@@ -48,4 +48,14 @@ module.exports = {
         pointsPerPoll: parseInt(process.env.POINTS_PER_POLL, 10) || 10,
         pointsPerReferral: parseInt(process.env.POINTS_PER_REFERRAL, 10) || 5,
     },
+
+    // Mailgun Configuration
+    mailgun: {
+        username: process.env.MAILGUN_USERNAME,
+        key: process.env.MAILGUN_API_KEY,
+        url: process.env.MAILGUN_URL,
+    },
+
+    // Base URL Configuration
+    baseURL: process.env.BASE_URL,
 };
