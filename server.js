@@ -134,7 +134,7 @@ app.post('/submit-petition', (req, res) => {
 
 // Start server
 app.listen(PORT, () => {
-    console.log(`Server running on http://localhost:${PORT}`);
+    console.log(`Server running on ${process.env.BASE_URL}:${PORT}`);
 });
 module.exports = app; // Export the Express app instance
 function generateLoginToken() {
@@ -142,7 +142,7 @@ function generateLoginToken() {
 }
 
 function sendMagicLinkEmail(email, loginToken) {
-  const magicLink = `http://localhost:3000/auth/verify-token?token=${loginToken}`;
+  const magicLink = `${process.env.BASE_URL}/auth/verify-token?token=${loginToken}`;
   const message = {
     from: 'Your Name <mailgun@YOUR_DOMAIN.com>',
     to: email,
@@ -150,7 +150,7 @@ function sendMagicLinkEmail(email, loginToken) {
     text: `Click here to log in: ${magicLink}`
   };
 
-  mg.messages.create('YOUR_DOMAIN.com', message)
+  mg.messages.create(process.env.MAILGUN_DOMAIN, message)
     .then(msg => console.log(msg)) // Logs success message
     .catch(err => console.error(err)); // Logs any errors
 }
