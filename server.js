@@ -9,6 +9,10 @@ const usersApi = require('./src/api/users');
 
 require('dotenv').config();
 
+const formData = require('form-data');
+const Mailgun = require('mailgun.js');
+const mailgun = new Mailgun(formData);
+const mg = mailgun.client({username: 'api', key: process.env.MAILGUN_API_KEY, url: 'https://api.eu.mailgun.net'});
 
 const app = express();
 const PORT = process.env.PORT || 3000;
@@ -18,7 +22,7 @@ app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: true }));
 app.use(express.static(path.join(__dirname, 'public')));
 app.use(session({
-    secret: 'secret',
+    secret: process.env.SESSION_SECRET || 'default_secret',
     resave: false,
     saveUninitialized: true,
 }));
@@ -45,7 +49,6 @@ app.use('/api/users', usersApi);
 
 // User registration and login routes
 app.post('/api/users/register', async (req, res) => {
-    // Here you would typically validate the data, hash the password, and then save the user to your database
     const { email } = req.body;
     // Generate a unique login token and its expiration time
     const loginToken = generateLoginToken(); // Placeholder for token generation logic
@@ -69,7 +72,6 @@ app.post('/api/users/register', async (req, res) => {
 });
 
 app.post('/api/users/login', async (req, res) => {
-    // Here you would typically validate the login credentials
     const { email } = req.body;
     try {
         // Generate a unique login token and its expiration time
@@ -141,7 +143,14 @@ function generateLoginToken() {
 
 function sendMagicLinkEmail(email, loginToken) {
   const magicLink = `http://localhost:3000/auth/verify-token?token=${loginToken}`;
-  console.log(`Sending magic link to ${email}: ${magicLink}`);
-  // Placeholder for email sending logic
-  // In a real application, integrate with an email service API to send the email
+  const message = {
+    from: 'Your Name <mailgun@YOUR_DOMAIN.com>',
+    to: email,
+    subject: 'Login Magic Link',
+    text: `Click here to log in: ${magicLink}`
+  };
+
+  mg.messages.create('YOUR_DOMAIN.com', message)
+    .then(msg => console.log(msg)) // Logs success message
+    .catch(err => console.error(err)); // Logs any errors
 }
