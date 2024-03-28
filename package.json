@@ -7,7 +7,7 @@
     "dev": "nodemon",
     "prisma:generate": "prisma generate",
     "pretest": "npm run prisma:generate && npx prisma migrate dev",
-    "start": "node server.js",
+    "start": "node start.js",
     "test": "jest"
   },
   "dependencies": {
@@ -31,9 +31,9 @@
     "supertest": "^6.3.4"
   },
   "nodemonConfig": {
-    "watch": ["src", "server.js"],
+    "watch": ["src", "start.js", "server.js", "prisma/schema.prisma"],
     "ext": "js,json",
     "ignore": ["src/tests/*"],
-    "exec": "node server.js"
+    "exec": "node start.js"
   }
 }

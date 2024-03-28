@@ -150,7 +150,7 @@ function isAuthenticated(req, res, next) {
 
 // API routes
 // Route to submit poll responses
-app.post('/api/submit', isAuthenticated, async (req, res) => {
+app.post('/api/poll/submit', isAuthenticated, async (req, res) => {
     const userId = req.user.id; // Assuming req.user is populated by the authentication middleware
     const { warPercentageDesired, warPercentageGuessed } = req.body;
 
@@ -176,7 +176,7 @@ app.post('/api/submit', isAuthenticated, async (req, res) => {
 });
 
 // Route to get average poll responses
-app.get('/api/average', isAuthenticated, async (req, res) => {
+app.get('/api/poll/average', isAuthenticated, async (req, res) => {
     try {
         const averageResponses = await prisma.user.aggregate({
             _avg: {

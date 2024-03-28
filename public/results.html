@@ -13,28 +13,38 @@
     </header>
     <main>
         <section class="user-results">
-            <h2>Your Allocation</h2>
+            <h2>You</h2>
             <div class="results-bars">
                 <div id="userWarPercentageDesiredBar" class="result-bar war"></div>
                 <div id="userResearchPercentageDesiredBar" class="result-bar research"></div>
             </div>
             <p>Your desired allocation: <span id="userWarPercentageDesired"></span>% War, <span id="userResearchPercentageDesired"></span>% Clinical Research</p>
-            <p>Your perceived actual allocation: <span id="userWarPercentageGuessed"></span>% War, <span id="userActualResearchPercentage"></span>% Clinical Research</p>
+            <p>Your perceived actual allocation: <span id="userWarPercentageGuessed"></span>% War, <span id="userResearchPercentageGuessed"></span>% Clinical Research</p>
         </section>
         <section class="average-results">
-            <h2>Average Allocation</h2>
-            <div class="results-bars">
-                <div id="averageWarPercentageDesiredBar" class="result-bar war"></div>
+            <h2>Everyone</h2>
+            <div class="average-desired-results-bars">
+                <div id="averageWarPercentageDesiredBar" class="result-bar war">
+
+                </div>
                 <div id="averageResearchPercentageDesiredBar" class="result-bar research"></div>
             </div>
             <p>Average desired allocation: <span id="averageWarPercentageDesired"></span>% War, <span id="averageResearchPercentageDesired"></span>% Clinical Research</p>
-            <p>Average perceived actual allocation: <span id="averageWarPercentageGuessed"></span>% War, <span id="averageActualResearchPercentage"></span>% Clinical Research</p>
+            <div class="average-guessed-results-bars">
+                <div id="averageWarPercentageGuessedBar" class="result-bar war">
+                    <span id="averageWarPercentageGuessed"></span>% War
+                </div>
+                <div id="averageResearchPercentageGuessedBar" class="result-bar research">
+                    <span id="averageResearchPercentageGuessed"></span>% Clinical Research
+                </div>
+            </div>
+            <p>Average Guessed Allocation</p>
         </section>
-        <a href="petition.html" class="petition-link">Sign the Petition</a>a>
-    </main>main>
+        <a href="petition.html" class="petition-link">Sign the Petition</a>
+    </main>
     <footer>
         <p>Wishocracy</p>
     </footer>
     <script src="scripts/results.js"></script>
-</body>body>
+</body>
 </html>

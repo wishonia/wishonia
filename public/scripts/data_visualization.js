@@ -3,7 +3,7 @@
 // Function to dynamically update the results bars based on the allocation percentages
 function updateResultsVisualization() {
     // Fetch average allocations from the server
-    fetch('/api/polls/average')
+    fetch('/api/poll/average')
         .then(response => response.json())
         .then(data => {
             const { averageWarPercentageDesired, averageWarPercentageGuessed } = data;
@@ -13,9 +13,9 @@ function updateResultsVisualization() {
             document.getElementById('averageWarPercentageDesired').textContent = averageWarPercentageDesired;
             document.getElementById('averageResearchPercentageDesired').textContent = 100 - averageWarPercentageDesired;
 
-            updateAllocationBars(averageWarPercentageGuessed, 'averageActualWar', 'averageActualResearch');
+            updateAllocationBars(averageWarPercentageGuessed, 'averageWarPercentageGuessed', 'averageResearchPercentageGuessed');
             document.getElementById('averageWarPercentageGuessed').textContent = averageWarPercentageGuessed;
-            document.getElementById('averageActualResearchPercentage').textContent = 100 - averageWarPercentageGuessed;
+            document.getElementById('averageResearchPercentageGuessed').textContent = 100 - averageWarPercentageGuessed;
         })
         .catch(error => console.error('Error fetching average allocations:', error));
 }
