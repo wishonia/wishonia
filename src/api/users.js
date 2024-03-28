@@ -6,7 +6,7 @@ const bcrypt = require('bcryptjs');
 
 // Register a new user
 router.post('/register', async (req, res) => {
-    const { email, password, gdprConsent } = req.body;
+    const { email, gdprConsent } = req.body;
     const ipAddress = req.ip; // Capture the user's IP address
     try {
         // Check if user already exists
@@ -19,15 +19,10 @@ router.post('/register', async (req, res) => {
             return res.status(409).json({ message: 'User already exists' });
         }
 
-        // Hash password
-        const salt = await bcrypt.genSalt(10);
-        const hashedPassword = await bcrypt.hash(password, salt);
-
         // Create user
         const newUser = await prisma.user.create({
             data: {
                 email: email,
-                password: hashedPassword,
                 gdprConsent: gdprConsent, // Record GDPR consent
                 ipAddress: ipAddress, // Store the user's IP address
             },
@@ -41,28 +36,24 @@ router.post('/register', async (req, res) => {
 
 // Login a user
 router.post('/login', async (req, res) => {
-    const { email, password } = req.body;
+    const { email } = req.body;
     try {
-        // Find user by email
-        const user = await prisma.user.findUnique({
-            where: {
-                email: email,
-            },
+        // Generate a unique login token and its expiration time
+        const loginToken = generateLoginToken(); // Placeholder for token generation logic
+        const tokenExpires = new Date(Date.now() + 24 * 60 * 60 * 1000); // 24 hours from now
+
+        // Store the login token and its expiration in the user's record
+        await prisma.user.update({
+            where: { email },
+            data: { loginToken, tokenExpires },
         });
-        if (!user) {
-            return res.status(404).json({ message: 'User not found' });
-        }
 
-        // Check password
-        const isMatch = await bcrypt.compare(password, user.password);
-        if (!isMatch) {
-            return res.status(401).json({ message: 'Invalid credentials' });
-        }
+        // Send an email with a magic link containing the token
+        sendMagicLinkEmail(email, loginToken); // Placeholder for email sending logic
 
-        // Login successful
-        res.json({ user: { id: user.id, email: user.email }, message: 'Logged in successfully' });
+        res.send({ message: 'Magic link sent to your email.' });
     } catch (error) {
-        console.error('Error logging in user:', error);
+        console.error('Login error:', error);
         res.status(500).json({ message: 'Error logging in user' });
     }
 });
