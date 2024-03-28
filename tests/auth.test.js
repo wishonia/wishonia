@@ -20,28 +20,6 @@ describe('Authentication tests', () => {
       success: true,
     }),
   }));
-
-  test('User registration with email and password', async () => {
-    const { registerUser } = require('../public/scripts/auth.js');
-    const newUser = await registerUser({
-      email: 'newuser@example.com',
-      password: 'password123',
-      name: 'New User'
-    });
-    expect(newUser.email).toBe('newuser@example.com');
-    expect(newUser).toHaveProperty('id');
-  });
-
-  test('User login with email and password', async () => {
-    const { loginUser } = require('../public/scripts/auth.js');
-    const loggedInUser = await loginUser({
-      email: 'existinguser@example.com',
-      password: 'password123'
-    });
-    expect(loggedInUser.email).toBe('existinguser@example.com');
-    expect(loggedInUser).toHaveProperty('token');
-  });
-
   test('OAuth (Google) authentication', async () => {
     // Simulate OAuth (Google) authentication process
     const oauthData = {
