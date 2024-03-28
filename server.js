@@ -67,24 +67,52 @@ app.post('/api/users/register', async (req, res) => {
 
 app.post('/api/users/login', async (req, res) => {
     // Here you would typically validate the login credentials
-    const { email, password } = req.body;
+    const { email } = req.body;
     try {
-        const user = await prisma.user.findUnique({
-            where: {
-                email,
-            },
+        // Generate a unique login token and its expiration time
+        const loginToken = generateLoginToken(); // Placeholder for token generation logic
+        const tokenExpires = new Date(Date.now() + 24 * 60 * 60 * 1000); // 24 hours from now
+
+        // Store the login token and its expiration in the user's record
+        await prisma.user.update({
+            where: { email },
+            data: { loginToken, tokenExpires },
         });
-        if (user && await bcrypt.compare(password, user.password)) {
-            // Assuming the existence of a method to authenticate the user
-            // Authenticate the user and create a session or token
-            console.log('User logged in successfully:', user);
-            res.send({ message: 'User logged in successfully' });
-        } else {
-            res.status(401).send({ message: 'Invalid credentials' });
-        }
+
+        // Send an email with a magic link containing the token
+        sendMagicLinkEmail(email, loginToken); // Placeholder for email sending logic
+
+        res.send({ message: 'Magic link sent to your email.' });
     } catch (error) {
         console.error('Login error:', error);
         res.status(500).send({ message: 'Error logging in user' });
+    }
+});
+
+// Endpoint to verify the login token from the magic link and authenticate the user
+app.get('/auth/verify-token', async (req, res) => {
+    const { token } = req.query;
+    try {
+        const user = await prisma.user.findUnique({
+            where: {
+                loginToken: token,
+                // Ensure the token hasn't expired
+                tokenExpires: {
+                    gt: new Date(),
+                },
+            },
+        });
+        if (user) {
+            // Authenticate the user
+            // This would typically involve creating a session or similar
+            console.log('User authenticated successfully:', user);
+            res.send({ message: 'User authenticated successfully' });
+        } else {
+            res.status(401).send({ message: 'Invalid or expired token' });
+        }
+    } catch (error) {
+        console.error('Token verification error:', error);
+        res.status(500).send({ message: 'Error verifying token' });
     }
 });
 
@@ -103,3 +131,4 @@ app.post('/submit-petition', (req, res) => {
 app.listen(PORT, () => {
     console.log(`Server running on http://localhost:${PORT}`);
 });
+module.exports = app; // Export the Express app instance
