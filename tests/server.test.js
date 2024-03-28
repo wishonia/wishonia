@@ -8,7 +8,6 @@ describe('User Registration and Login', () => {
       .post('/api/users/register')
       .send({
         email: 'testuser@example.com',
-        password: 'password123',
         name: 'Test User'
       });
     expect(res.statusCode).toEqual(200);
@@ -21,7 +20,6 @@ describe('User Registration and Login', () => {
       .post('/api/users/login')
       .send({
         email: 'testuser@example.com',
-        password: 'password123'
       });
     expect(res.statusCode).toEqual(200);
     expect(res.body).toHaveProperty('token');
