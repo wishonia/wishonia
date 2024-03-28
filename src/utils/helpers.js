@@ -6,12 +6,6 @@ function isValidEmail(email) {
     return regex.test(email);
 }
 
-// Function to validate password strength
-function isValidPassword(password) {
-    // Example: Validate password length for simplicity
-    return password.length >= 8;
-}
-
 // Function to format the allocation percentage for display
 function formatAllocationPercentage(percentage) {
     return `${percentage}%`;
@@ -54,7 +48,6 @@ function clearAllLocalStorage() {
 // Exporting functions for use in other scripts
 export {
     isValidEmail,
-    isValidPassword,
     formatAllocationPercentage,
     updateTextContent,
     redirectToPage,
