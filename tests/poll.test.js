@@ -1,5 +1,20 @@
 const { PrismaClient } = require('@prisma/client');
+const {describe, test, expect} = require("@jest/globals");
 const prisma = new PrismaClient();
+const { registerUser, loginUser } = require('../public/scripts/auth.js');
+
+jest.mock('../public/scripts/auth.js', () => ({
+  registerUser: jest.fn().mockResolvedValue({
+    id: 'new-user-id',
+    email: 'newuser@example.com',
+    name: 'New User'
+  }),
+  loginUser: jest.fn().mockResolvedValue({
+    email: 'existinguser@example.com',
+    token: 'auth-token'
+  }), // Mocking loginUser to return an object with email property
+  oauthLogin: jest.fn(), // Assuming oauthLogin needs to be mocked as well
+}));
 
 describe('User model tests', () => {
   test('Create a new user', async () => {

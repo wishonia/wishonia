@@ -50,6 +50,8 @@ function registerUser(email, password) {
     });
 }
 
+export { loginUser, registerUser };
+
 // Note: The actual implementation for user authentication would involve more
 // complex logic including communication with the server and handling of
 // responses. This is a simplified version for demonstration purposes.
