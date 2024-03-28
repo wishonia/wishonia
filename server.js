@@ -46,18 +46,21 @@ app.use('/api/users', usersApi);
 // User registration and login routes
 app.post('/api/users/register', async (req, res) => {
     // Here you would typically validate the data, hash the password, and then save the user to your database
-    const { email, password } = req.body;
-    // Hash the password
-    const hashedPassword = await bcrypt.hash(password, 10);
-    // Save the user to the database
+    const { email } = req.body;
+    // Generate a unique login token and its expiration time
+    const loginToken = generateLoginToken(); // Placeholder for token generation logic
+    const tokenExpires = new Date(Date.now() + 24 * 60 * 60 * 1000); // 24 hours from now
+
+    // Store the login token and its expiration in the user's record
     try {
-        const user = await prisma.user.create({
+        await prisma.user.create({
             data: {
                 email,
-                password: hashedPassword,
+                loginToken,
+                tokenExpires,
             },
         });
-        console.log('User registered:', user);
+        console.log('User registered:', email);
         res.status(201).send({ message: 'User registered successfully' });
     } catch (error) {
         console.error('Registration error:', error);
@@ -132,3 +135,13 @@ app.listen(PORT, () => {
     console.log(`Server running on http://localhost:${PORT}`);
 });
 module.exports = app; // Export the Express app instance
+function generateLoginToken() {
+  return require('crypto').randomBytes(20).toString('hex');
+}
+
+function sendMagicLinkEmail(email, loginToken) {
+  const magicLink = `http://localhost:3000/auth/verify-token?token=${loginToken}`;
+  console.log(`Sending magic link to ${email}: ${magicLink}`);
+  // Placeholder for email sending logic
+  // In a real application, integrate with an email service API to send the email
+}
