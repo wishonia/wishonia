@@ -120,7 +120,7 @@ button:hover {
 }
 
 .oauth-login button:hover {
-    background-color: #357ae8; /* A slightly darker blue */
+    background-color: #dfdfdf; /* A slightly darker blue */
     box-shadow: 0 4px 8px rgba(0,0,0,0.3);
 }
 
@@ -139,6 +139,7 @@ button:hover {
     border: 1px solid #d3d3d3; /* Refines the border to a light gray color */
     box-shadow: 0 1px 3px rgba(0,0,0,0.1) inset; /* Adds a subtle shadow on focus */
     outline: none; /* Removes the default outline */
+    max-width: 200px;
 }
 
 #loginEmail::placeholder {
