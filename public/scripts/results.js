@@ -1,3 +1,52 @@
+function generateChart(war, research, id, title) {
+
+    const ctx = document.getElementById(id).getContext('2d');
+    const chart = new Chart(ctx, {
+        type: 'bar',
+        data: {
+            labels: ['War and Military', 'Medical Research'],
+            datasets: [{
+                label: 'Allocation',
+                data: [war, research],
+                backgroundColor: [
+                    '#000000',
+                    '#275ac7'
+                ],
+                borderColor: [
+                    '#0a0a0a',
+                    '#275ac7'
+                ],
+                borderWidth: 1
+            }]
+        },
+        options: {
+            scales: {
+                y: {
+                    beginAtZero: true,
+                    max: 100,
+                    grid: {
+                        display: false // This will hide the grid lines for the y-axis
+                    }
+                },
+                x: {
+                    grid: {
+                        display: false // This will hide the grid lines for the x-axis
+                    }
+                }
+            },
+            plugins: {
+                legend: {
+                    display: false,
+                },
+                title: {
+                    display: true,
+                    text: title
+                },
+            }
+        }
+    });
+}
+
 document.addEventListener('DOMContentLoaded', function() {
     // Retrieve user's poll responses from local storage
     const userWarPercentageDesired = JSON.parse(localStorage.getItem('warPercentageDesired'));
@@ -19,49 +68,22 @@ document.addEventListener('DOMContentLoaded', function() {
     .catch((error) => {
       console.error('Error:', error);
     });
-
-    // Update the user's allocation bars and percentages
-    updateAllocationBars(userWarPercentageDesired, 'userWarPercentageDesired', 'userResearchPercentageDesired');
-    document.getElementById('userWarPercentageDesired').textContent = userWarPercentageDesired;
-    document.getElementById('userResearchPercentageDesired').textContent = 100 - userWarPercentageDesired;
-
-    updateAllocationBars(userWarPercentageGuessed, 'userWarPercentageGuessed', 'userResearchPercentageGuessed');
-    document.getElementById('userWarPercentageGuessed').textContent = userWarPercentageGuessed;
-    document.getElementById('userResearchPercentageGuessed').textContent = 100 - userWarPercentageGuessed;
-
     // Fetch average allocations from the server
     fetch('/api/poll/average')
         .then(response => response.json())
         .then(data => {
-            const { averageWarPercentageDesired, averageWarPercentageGuessed } = data;
 
-            // Update the average allocation bars and percentages
-            updateAllocationBars(averageWarPercentageDesired, 'averageWarPercentageDesiredBar', 'averageResearchPercentageDesiredBar');
-            document.getElementById('averageWarPercentageDesired').textContent = averageWarPercentageDesired;
-            document.getElementById('averageResearchPercentageDesired').textContent = 100 - averageWarPercentageDesired;
+            const avgWarPercentageDesired = data._avg.warPercentageDesired;
+            const avgWarPercentageGuessed = data._avg.warPercentageGuessed;
+            const averageResearchPercentageDesired = 100 - avgWarPercentageDesired;
+            const userResearchPercentageDesired = 100 - userWarPercentageDesired;
+            const userResearchPercentageGuessed = 100 - userWarPercentageGuessed;
 
-            updateAllocationBars(averageWarPercentageGuessed, 'averageWarPercentageGuessedBar', 'averageResearchPercentageGuessedBar');
-            document.getElementById('averageWarPercentageGuessed').textContent = averageWarPercentageGuessed;
-            document.getElementById('averageResearchPercentageGuessed').textContent = 100 - averageWarPercentageGuessed;
+            // Create Bar Chart Comparing Average and User Allocation
+            generateChart(avgWarPercentageDesired, averageResearchPercentageDesired, 'average-desired-allocation',
+                'Average Desired Allocation');
+            generateChart(95, 5, 'actual-allocation', 'Actual Spending');
         })
         .catch(error => console.error('Error fetching average allocations:', error));
 
-    // Reuse the slider.js function to update allocation bars
-    function updateAllocationBars(sliderValue, warBarId, researchBarId) {
-        const warPercentageDesiredBar = document.getElementById(warBarId);
-        if(!warPercentageDesiredBar) {
-            throw new Error(`Element with ID ${warBarId} not found`);
-        }
-        const researchPercentageDesiredBar = document.getElementById(researchBarId);
-
-        // Calculate the percentage allocation for war and research
-        const warAllocationPercentage = sliderValue;
-        const researchAllocationPercentage = 100 - sliderValue;
-
-        // Update the flex-grow style to adjust the bar widths
-        warPercentageDesiredBar.style.flexGrow = warAllocationPercentage;
-        researchPercentageDesiredBar.style.flexGrow = researchAllocationPercentage;
-
-        // Optionally, update the text content or any other attributes of the bars
-    }
 });

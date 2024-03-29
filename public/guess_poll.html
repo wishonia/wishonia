@@ -5,7 +5,6 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>What do you think we actually spend?</title>
     <link rel="stylesheet" href="styles/main.css">
-    <link rel="stylesheet" href="styles/poll.css">
 </head>
 <body>
     <header>
@@ -17,28 +16,22 @@
                 Adjust the slider to indicate how you think they're currently ACTUALLY allocated.
             </p>
         </section>
-        <section class="allocation-slider">
-            <div class="allocation-bars">
-                <div id="warPercentageGuessedBar" class="allocation-bar war">
-                    <span class="percentage-display war-percentage">50%</span>
-                    <span class="percentage-display">on Nuclear Bombs, Autonomous Weapons Systems, etc.</span>
-                </div>
-                <div id="researchPercentageGuessedBar" class="allocation-bar research">
-                    <span class="percentage-display research-percentage">50%</span>
-                    <span class="percentage-display">on Medical Research</span>
-                </div>
-            </div>
-            <input type="range" id="warPercentageGuessedSlider" min="0" max="100" value="50" class="slider">
-            <div class="allocation-labels">
-                <span class="war-label">👈 More War</span>
-                <span class="research-label">More Cures 👉</span>
-            </div>
+        <section class="chart-container">
+            <canvas id="bar-chart"></canvas>
+            <div id="slider-container"></div>
             <button id="submitWarPercentageGuessed" onclick="submitWarPercentageGuessed()">Submit</button>
         </section>
     </main>
     <footer>
         <p>Wishocracy</p>
     </footer>
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
     <script src="scripts/slider.js"></script>
+    <script>
+        window.onload = function() {
+            renderAllocationBars(50);
+            addSliderListener('warPercentageGuessed');
+        };
+    </script>
 </body>
 </html>

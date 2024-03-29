@@ -5,46 +5,22 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Results</title>
     <link rel="stylesheet" href="styles/main.css">
-    <link rel="stylesheet" href="styles/results.css">
 </head>
 <body>
     <header>
-        <h1>Results</h1>
+        <h1>Global Average</h1>
     </header>
     <main>
-        <section class="user-results">
-            <h2>You</h2>
-            <div class="results-bars">
-                <div id="userWarPercentageDesiredBar" class="result-bar war"></div>
-                <div id="userResearchPercentageDesiredBar" class="result-bar research"></div>
-            </div>
-            <p>Your desired allocation: <span id="userWarPercentageDesired"></span>% War, <span id="userResearchPercentageDesired"></span>% Clinical Research</p>
-            <p>Your perceived actual allocation: <span id="userWarPercentageGuessed"></span>% War, <span id="userResearchPercentageGuessed"></span>% Clinical Research</p>
-        </section>
-        <section class="average-results">
-            <h2>Everyone</h2>
-            <div class="average-desired-results-bars">
-                <div id="averageWarPercentageDesiredBar" class="result-bar war">
-
-                </div>
-                <div id="averageResearchPercentageDesiredBar" class="result-bar research"></div>
-            </div>
-            <p>Average desired allocation: <span id="averageWarPercentageDesired"></span>% War, <span id="averageResearchPercentageDesired"></span>% Clinical Research</p>
-            <div class="average-guessed-results-bars">
-                <div id="averageWarPercentageGuessedBar" class="result-bar war">
-                    <span id="averageWarPercentageGuessed"></span>% War
-                </div>
-                <div id="averageResearchPercentageGuessedBar" class="result-bar research">
-                    <span id="averageResearchPercentageGuessed"></span>% Clinical Research
-                </div>
-            </div>
-            <p>Average Guessed Allocation</p>
-        </section>
-        <a href="petition.html" class="petition-link">Sign the Petition</a>
+        <canvas id="average-desired-allocation"></canvas>
+        <canvas id="actual-allocation"></canvas>
+        <a href="petition.html" class="button petition-link">
+            <button>Sign the Petition</button>
+        </a>
     </main>
     <footer>
         <p>Wishocracy</p>
     </footer>
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
     <script src="scripts/results.js"></script>
 </body>
 </html>
