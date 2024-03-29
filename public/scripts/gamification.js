@@ -1,5 +1,3 @@
-// scripts/gamification.js
-
 document.addEventListener('DOMContentLoaded', function() {
     // Initialize user points and badges
     let userPoints = 0;

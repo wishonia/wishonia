@@ -1,5 +1,3 @@
-// scripts/social_sharing.js
-
 document.addEventListener('DOMContentLoaded', function() {
     const shareButtons = document.querySelectorAll('.social-share-button');
 
@@ -8,7 +6,7 @@ document.addEventListener('DOMContentLoaded', function() {
             event.preventDefault();
             const platform = this.getAttribute('data-platform');
             const url = encodeURIComponent(window.location.href);
-            const text = encodeURIComponent("I just participated in the Allocation Poll! Check it out and let your voice be heard on how funds should be allocated between war and clinical research.");
+            const text = encodeURIComponent("Participate in the Global Referendum!");
             const hashtags = encodeURIComponent("AllocationPoll,MakeADifference");
 
             let shareUrl = "";

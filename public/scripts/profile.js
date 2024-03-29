@@ -1,5 +1,3 @@
-// scripts/profile.js
-
 document.addEventListener('DOMContentLoaded', function() {
     // Assuming the user's unique referral link and referral list are fetched from the server
     // For demonstration, using placeholders
