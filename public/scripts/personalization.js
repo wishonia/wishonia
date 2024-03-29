@@ -1,5 +1,3 @@
-// scripts/personalization.js
-
 document.addEventListener('DOMContentLoaded', function() {
     personalizeContent();
 });

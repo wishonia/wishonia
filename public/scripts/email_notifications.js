@@ -1,5 +1,3 @@
-// scripts/email_notifications.js
-
 document.addEventListener('DOMContentLoaded', function() {
     // Assuming the existence of a function to check if the user has opted out of email notifications
     if (userHasOptedOut()) {

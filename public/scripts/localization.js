@@ -1,5 +1,3 @@
-// scripts/localization.js
-
 // Object containing translations for different languages
 const translations = {
     "en": {

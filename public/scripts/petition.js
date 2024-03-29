@@ -1,5 +1,3 @@
-// scripts/petition.js
-
 document.addEventListener('DOMContentLoaded', function() {
     const petitionForm = document.getElementById('petitionForm');
 
