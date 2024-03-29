@@ -3,12 +3,12 @@ body {
     font-family: Arial, sans-serif;
     margin: 0;
     padding: 0;
-    background-color: #f4f4f4;
-    color: #333;
+    /* background-color: #f4f4f4; */
+    color: #272727;
 }
 
 header {
-    background-color: #007bff;
+    background-color: #222223;
     color: #ffffff;
     padding: 5px;
     text-align: center;
@@ -31,7 +31,7 @@ footer {
 }
 
 button {
-    background-color: #28a745;
+    background-color: #2d2d2f;
     color: #ffffff;
     border: none;
     padding: 10px 20px;
@@ -286,7 +286,7 @@ button#submitWarPercentageDesired, button#submitWarPercentageGuessed {
     padding: 10px 20px;
     font-size: 16px;
     color: white;
-    background-color: #4CAF50;
+    background-color: #333;
     border: none;
     border-radius: 5px;
     cursor: pointer;

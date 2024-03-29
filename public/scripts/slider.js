@@ -45,7 +45,7 @@ function renderAllocationBars(warPercentage) {
     barChart = new Chart(ctx, {
         type: 'bar',
         data: {
-            labels: ['War', 'Medical Research'],
+            labels: ['Weapons and Military', 'Medical Research'],
             datasets: [{
                 label: 'Allocation',
                 data: [warPercentage, researchPercentage],
