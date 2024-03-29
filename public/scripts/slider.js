@@ -1,69 +1,91 @@
-// Function to update the allocation bars based on the slider value
-function updateAllocationBars(sliderValue, warBarId, researchBarId) {
-    const warPercentageDesiredBar = document.getElementById(warBarId);
-    const researchPercentageDesiredBar = document.getElementById(researchBarId);
-
-    // Calculate the percentage allocation for war and research
-    const researchAllocationPercentage = sliderValue;
-    const warAllocationPercentage = 100 - sliderValue;
-
-    // Update the height style to adjust the bar heights
-    warPercentageDesiredBar.style.height = warAllocationPercentage + '%';
-    researchPercentageDesiredBar.style.height = researchAllocationPercentage + '%';
-
-    // Update the text content to reflect the new percentages
-    warPercentageDesiredBar.querySelector('.war-percentage').textContent = warAllocationPercentage + '%';
-    researchPercentageDesiredBar.querySelector('.research-percentage').textContent = researchAllocationPercentage + '%';
-}
-
-// Function to handle the submission of the allocation
 function submitWarPercentageDesired() {
-    const warPercentageDesiredSlider = document.getElementById('warPercentageDesiredSlider');
-    const sliderValue = warPercentageDesiredSlider.value;
-
-    // Save the slider value to local storage
-    localStorage.setItem('warPercentageDesired', sliderValue);
-
-    // Redirect to the next page or show a confirmation message
-    // For demonstration, we'll just log the value
-    console.log('Desired Allocation Submitted:', sliderValue);
-
+    const slider = document.getElementById('slider');
+    localStorage.setItem('warPercentageDesired', slider.value);
     window.location.href = 'guess_poll.html'
 }
 
-// Function to handle the submission of the actual allocation
 function submitWarPercentageGuessed() {
-    const warPercentageGuessedSlider = document.getElementById('warPercentageGuessedSlider');
-    const sliderValue = warPercentageGuessedSlider.value;
-
-    // Save the slider value to local storage
-    localStorage.setItem('warPercentageGuessed', sliderValue);
-
-    // Redirect to the next page or show a confirmation message
-    // For demonstration, we'll just log the value
-    console.log('Guessed Percentage Submitted:', sliderValue);
+    const warPercentageGuessedSlider = document.getElementById('slider');
+    localStorage.setItem('warPercentageGuessed', warPercentageGuessedSlider.value);
     window.location.href = 'login.html'
 }
 
-// Event listeners for the sliders
-document.addEventListener('DOMContentLoaded', () => {
-    const warPercentageDesiredSlider = document.getElementById('warPercentageDesiredSlider');
-    const warPercentageGuessedSlider = document.getElementById('warPercentageGuessedSlider');
+function renderSliderElement(targetDivId) {
+    const targetDiv = document.getElementById(targetDivId);
+    if (targetDiv) {
+        targetDiv.innerHTML = `
+            <input type="range" id="slider" min="0" max="100" value="50" class="slider">
+            <div class="allocation-labels">
+                <span class="war-label">👈 More War</span>
+                <span class="research-label">More Cures 👉</span>
+            </div>
+        `;
+    }
+}
 
-    if(warPercentageDesiredSlider){
+function addSliderListener(localStorageKey) {
+    renderSliderElement('slider-container');
+    const slider = document.getElementById('slider');
+    if (slider) {
         // Update the allocation bars when the slider value changes
-        warPercentageDesiredSlider.addEventListener('input', () => {
-            updateAllocationBars(warPercentageDesiredSlider.value, 'warPercentageDesiredBar', 'researchPercentageDesiredBar');
+        slider.addEventListener('input', () => {
+            updateAllocationBars(slider.value);
+
+            localStorage.setItem(localStorageKey, 100 - slider.value);
         });
         // Initialize the bars based on the current slider values
-        updateAllocationBars(warPercentageDesiredSlider.value, 'warPercentageDesiredBar', 'researchPercentageDesiredBar');
+        updateAllocationBars(slider.value);
     }
-    if(warPercentageGuessedSlider){
-        // Update the allocation bars when the slider value changes
-        warPercentageGuessedSlider.addEventListener('input', () => {
-            updateAllocationBars(warPercentageGuessedSlider.value, 'warPercentageGuessedBar', 'researchPercentageGuessedBar');
-        });
-        // Initialize the bars based on the current slider values
-        updateAllocationBars(warPercentageGuessedSlider.value, 'warPercentageGuessedBar', 'researchPercentageGuessedBar');
-    }
-});
+}
+
+let barChart;
+function renderAllocationBars(warPercentage) {
+    const researchPercentage = 100 - warPercentage;
+    const ctx = document.getElementById('bar-chart').getContext('2d');
+    barChart = new Chart(ctx, {
+        type: 'bar',
+        data: {
+            labels: ['War', 'Medical Research'],
+            datasets: [{
+                label: 'Allocation',
+                data: [warPercentage, researchPercentage],
+                backgroundColor: [
+                    '#bd1010',
+                    '#275ac7'
+                ],
+                borderColor: [
+                    '#bd1010',
+                    '#275ac7'
+                ],
+                borderWidth: 1
+            }]
+        },
+        options: {
+            plugins: {
+                legend: {
+                    display: false
+                }
+            },
+            scales: {
+                y: {
+                    beginAtZero: true,
+                    max: 100,
+                    grid: {
+                        display: false // This will hide the grid lines for the y-axis
+                    }
+                },
+                x: {
+                    grid: {
+                        display: false // This will hide the grid lines for the x-axis
+                    }
+                }
+            }
+        }
+    });
+}
+
+function updateAllocationBars(researchPercentage) {
+    const warPercentage = 100 - researchPercentage;
+    barChart.data.datasets[0].data = [warPercentage, researchPercentage];
+    barChart.update();
+}
