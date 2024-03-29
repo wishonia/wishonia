@@ -51,7 +51,9 @@ document.addEventListener('DOMContentLoaded', function() {
     // Retrieve user's poll responses from local storage
     const userWarPercentageDesired = JSON.parse(localStorage.getItem('warPercentageDesired'));
     const userWarPercentageGuessed = JSON.parse(localStorage.getItem('warPercentageGuessed'));
+    const referrerHandle = localStorage.getItem('referrerHandle'); // Retrieve the referrer's handle from localStorage
 
+    // Submit user's poll responses and referrer handle to the server
     fetch('/api/poll/submit', {
       method: 'POST', // Specify the method
       headers: {
@@ -60,7 +62,8 @@ document.addEventListener('DOMContentLoaded', function() {
       },
       body: JSON.stringify({
         warPercentageGuessed: userWarPercentageGuessed,
-        warPercentageDesired: userWarPercentageDesired
+        warPercentageDesired: userWarPercentageDesired,
+        referrerHandle: referrerHandle // Include the referrer's handle in the submission
       }) // Convert the data to a JSON string
     })
     .then(response => response.json()) // Parse the JSON response
@@ -68,6 +71,7 @@ document.addEventListener('DOMContentLoaded', function() {
     .catch((error) => {
       console.error('Error:', error);
     });
+
     // Fetch average allocations from the server
     fetch('/api/poll/average')
         .then(response => response.json())

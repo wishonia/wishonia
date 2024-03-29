@@ -24,4 +24,31 @@ document.addEventListener('DOMContentLoaded', function() {
             });
         })
         .catch(error => console.error('Error fetching referrals:', error));
+
+    document.getElementById('changeHandleButton').addEventListener('click', function() {
+        const newHandle = document.getElementById('newHandle').value;
+        if (newHandle) {
+            fetch('/api/user/change-handle', {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json',
+                },
+                body: JSON.stringify({ handle: newHandle })
+            })
+            .then(response => response.json())
+            .then(data => {
+                document.getElementById('handleChangeFeedback').textContent = data.message;
+                if (data.success) {
+                    // Update the current handle display
+                    document.getElementById('currentHandle').textContent = newHandle;
+                }
+            })
+            .catch(error => {
+                console.error('Error:', error);
+                document.getElementById('handleChangeFeedback').textContent = 'Error changing handle.';
+            });
+        } else {
+            document.getElementById('handleChangeFeedback').textContent = 'Please enter a new handle.';
+        }
+    });
 });

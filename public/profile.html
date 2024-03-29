@@ -8,7 +8,7 @@
 </head>
 <body>
     <header>
-        <h1>Your Profile</h1>h1>
+        <h1>Your Profile</h1>
     </header>
     <main>
         <section class="profile-info">
@@ -26,6 +26,13 @@
         <section class="actions">
             <button onclick="window.location.href='desired_poll.html';">Participate in Another Poll</button>
             <button onclick="window.location.href='petition.html';">Sign Another Petition</button>
+        </section>
+        <section class="handle-change">
+            <h2>Change Your Handle</h2>
+            <p>Current Handle: <span id="currentHandle"></span></p>
+            <input type="text" id="newHandle" placeholder="Enter new handle">
+            <button id="changeHandleButton">Change Handle</button>
+            <p id="handleChangeFeedback"></p>
         </section>
     </main>
     <footer>

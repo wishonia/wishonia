@@ -37,7 +37,7 @@ app.get('/', (req, res) => {
 
 // Register a new user
 app.post('/auth/register', async (req, res) => {
-    const { email, gdprConsent, handle } = req.body;
+    const { email, gdprConsent } = req.body;
     const ipAddress = req.ip; // Capture the user's IP address
     try {
         // Check if user already exists
@@ -50,25 +50,25 @@ app.post('/auth/register', async (req, res) => {
             return res.status(409).json({ message: 'User already exists' });
         }
 
-        // Check if handle already exists
-        const existingHandle = await prisma.user.findUnique({
-            where: {
-                handle: handle,
-            },
-        });
-        if (existingHandle) {
-            return res.status(409).json({ message: 'Handle already exists' });
-        }
-
         // Create user
         const newUser = await prisma.user.create({
             data: {
                 email: email,
                 gdprConsent: gdprConsent, // Record GDPR consent
                 ipAddress: ipAddress, // Store the user's IP address
-                handle: handle, // Store the user's handle
             },
         });
+
+        // Set the user's handle to their auto-generated ID initially
+        await prisma.user.update({
+            where: {
+                email: email,
+            },
+            data: {
+                handle: newUser.id, // Use the auto-generated ID as the handle
+            },
+        });
+
         res.status(201).json({ user: newUser, message: 'User created successfully' });
     } catch (error) {
         console.error('Error registering user:', error);
@@ -163,7 +163,7 @@ function isAuthenticated(req, res, next) {
 // Route to submit poll responses
 app.post('/api/poll/submit', isAuthenticated, async (req, res) => {
     const userId = req.user.id; // Assuming req.user is populated by the authentication middleware
-    const { warPercentageDesired, warPercentageGuessed } = req.body;
+    const { warPercentageDesired, warPercentageGuessed, referrerHandle } = req.body;
 
     if (warPercentageDesired == null || warPercentageGuessed == null) {
         return res.status(400).json({ message: 'Missing required poll response fields' });
@@ -176,7 +176,9 @@ app.post('/api/poll/submit', isAuthenticated, async (req, res) => {
             },
             data: {
                 warPercentageDesired: warPercentageDesired,
-                warPercentageGuessed: warPercentageGuessed
+                warPercentageGuessed: warPercentageGuessed,
+                // Assuming the existence of a method to update the user with the referrer's handle
+                referrerHandle: referrerHandle // Store the referrer's handle
             }
         });
         res.status(200).json({ message: 'Poll response saved successfully' });
@@ -214,7 +216,35 @@ app.post('/api/submit-petition', isAuthenticated, (req, res) => {
     res.redirect('/thank_you.html');
 });
 
-// We do this in start.js so we can run tests without starting the server
+// Endpoint to change the user's handle
+app.post('/api/user/change-handle', async (req, res) => {
+    const { handle } = req.body;
+    const userId = req.session.userId; // Assuming the user's ID is stored in the session
+
+    try {
+        // Check if the new handle is already taken
+        const existingHandle = await prisma.user.findUnique({
+            where: { handle },
+        });
+
+        if (existingHandle) {
+            return res.status(409).json({ message: 'This handle is already taken.', success: false });
+        }
+
+        // Update the user's handle
+        await prisma.user.update({
+            where: { id: userId },
+            data: { handle },
+        });
+
+        res.json({ message: 'Your handle has been updated successfully.', success: true });
+    } catch (error) {
+        console.error('Error changing handle:', error);
+        res.status(500).json({ message: 'Error changing handle.', success: false });
+    }
+});
+
+// We do this in start.js, so we can run tests without starting the server
 // app.listen(PORT, () => {
 //     console.log(`Server running on ${BASE_URL}`);
 // });
