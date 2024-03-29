@@ -53,6 +53,7 @@ model User {
   email                String?   @unique
   emailVerified        DateTime?
   image                String?
+  handle               String    @unique
   loginToken           String?   // Unique token for passwordless login
   tokenExpires         DateTime? // Expiration time for the login token
   accounts             Account[]

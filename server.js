@@ -37,7 +37,7 @@ app.get('/', (req, res) => {
 
 // Register a new user
 app.post('/auth/register', async (req, res) => {
-    const { email, gdprConsent } = req.body;
+    const { email, gdprConsent, handle } = req.body;
     const ipAddress = req.ip; // Capture the user's IP address
     try {
         // Check if user already exists
@@ -50,12 +50,23 @@ app.post('/auth/register', async (req, res) => {
             return res.status(409).json({ message: 'User already exists' });
         }
 
+        // Check if handle already exists
+        const existingHandle = await prisma.user.findUnique({
+            where: {
+                handle: handle,
+            },
+        });
+        if (existingHandle) {
+            return res.status(409).json({ message: 'Handle already exists' });
+        }
+
         // Create user
         const newUser = await prisma.user.create({
             data: {
                 email: email,
                 gdprConsent: gdprConsent, // Record GDPR consent
                 ipAddress: ipAddress, // Store the user's IP address
+                handle: handle, // Store the user's handle
             },
         });
         res.status(201).json({ user: newUser, message: 'User created successfully' });
@@ -208,5 +219,3 @@ app.post('/api/submit-petition', isAuthenticated, (req, res) => {
 //     console.log(`Server running on ${BASE_URL}`);
 // });
 module.exports = app; // Export the Express app instance
-
-
