@@ -67,7 +67,7 @@ app.post('/auth/login', async (req, res) => {
         // Send an email with a magic link containing the token
         sendMagicLinkEmail(email, loginToken, BASE_URL, process.env.MAILGUN_DOMAIN, process.env.MAILGUN_API_KEY);
 
-        res.send({ message: 'Magic link sent to your email.' });
+        res.status(201).send({ message: 'Magic link sent to your email.' });
     } catch (error) {
         console.error('Login error:', error);
         res.status(500).json({ message: 'Error logging in user' });
@@ -141,7 +141,7 @@ app.post('/api/poll/submit', isAuthenticated, async (req, res) => {
                 referrerHandle: referrerHandle // Store the referrer's handle
             }
         });
-        res.status(200).json({ message: 'Poll response saved successfully' });
+        res.status(201).json({ message: 'Poll response saved successfully' });
     } catch (error) {
         console.error('Error saving poll response:', error);
         res.status(500).json({ message: 'Internal server error' });
@@ -173,7 +173,7 @@ app.post('/api/submit-petition', isAuthenticated, (req, res) => {
     // Assuming the existence of a method to update the user with petition information
     // Update the user model with petition-related fields and set signedPetition to true
     // Redirect or send a response indicating success
-    res.redirect('/thank_you.html');
+    res.status(201).redirect('/thank_you.html');
 });
 
 // Endpoint to change the user's handle
@@ -197,7 +197,7 @@ app.post('/api/user/change-handle', async (req, res) => {
             data: { handle },
         });
 
-        res.json({ message: 'Your handle has been updated successfully.', success: true });
+        res.status(201).json({ message: 'Your handle has been updated successfully.', success: true });
     } catch (error) {
         console.error('Error changing handle:', error);
         res.status(500).json({ message: 'Error changing handle.', success: false });
