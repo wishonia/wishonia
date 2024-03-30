@@ -40,7 +40,11 @@ function generateChart(war, research, id, title) {
                 },
                 title: {
                     display: true,
-                    text: title
+                    text: title,
+                    font: {
+                        size: 24
+                    },
+                    color: '#000000'
                 },
             }
         }
@@ -85,8 +89,8 @@ document.addEventListener('DOMContentLoaded', function() {
 
             // Create Bar Chart Comparing Average and User Allocation
             generateChart(avgWarPercentageDesired, averageResearchPercentageDesired, 'average-desired-allocation',
-                'Average Desired Allocation');
-            generateChart(95, 5, 'actual-allocation', 'Actual Spending');
+                'What People Want');
+            generateChart(95, 5, 'actual-allocation', 'What Governments Do');
         })
         .catch(error => console.error('Error fetching average allocations:', error));
 
