@@ -16,11 +16,21 @@ document.addEventListener('DOMContentLoaded', function() {
     if (loginToken) {
         verifyLoginToken(loginToken);
     }
+
+    const loginEmail = document.getElementById('loginEmail');
+    let placeholderText;
+    loginEmail.addEventListener('focus', function() {
+        placeholderText = loginEmail.placeholder;
+        loginEmail.placeholder = '';
+    });
+    loginEmail.addEventListener('blur', function() {
+        loginEmail.placeholder = placeholderText;
+    });
 });
 
 // Added function to handle sending the magic link
 function sendMagicLink(email) {
-    fetch('/api/users/send-magic-link', {
+    fetch('/auth/login', {
         method: 'POST',
         headers: {
             'Content-Type': 'application/json',

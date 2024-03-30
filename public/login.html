@@ -14,27 +14,25 @@
         <section class="auth-section">
             <div class="auth-container">
                 <div class="login-form">
-                    <section class="poll-description">
-                        <p id="poll-instructions">
-                            Please verify your identity to submit your response and see the results.
-                        </p>
-                        <form id="loginForm">
-                            <div class="form-group">
-                                <label for="loginEmail"></label>
-                                <input type="email" id="loginEmail" placeholder="Enter your email here" required>
-                                <button type="submit">Submit</button>
-                            </div>
-                        </form>
-                        <div class="divider">
-                            <span>- OR -</span>
+                    <p id="poll-instructions">
+                        Please verify your identity to submit your response and see the results.
+                    </p>
+                    <form id="loginForm">
+                        <div class="form-group">
+                            <label for="loginEmail"></label>
+                            <input type="email" id="loginEmail" placeholder="Enter your email here" required>
+                            <button type="submit">Submit</button>
                         </div>
-                        <div class="oauth-login">
-                            <button onclick="window.location.href='/auth/google';">
-                                <img src="img/google.png" alt="Google logo" style="vertical-align: middle; height: 20px; margin-right: 10px;">
-                                <strong>Login with Google</strong>
-                            </button>
-                        </div>
-                    </section>
+                    </form>
+                    <div class="divider">
+                        <span>- OR -</span>
+                    </div>
+                    <div class="oauth-login">
+                        <button onclick="window.location.href='/auth/google';">
+                            <img src="img/google.png" alt="Google logo" style="vertical-align: middle; height: 20px; margin-right: 10px;">
+                            <strong>Login with Google</strong>
+                        </button>
+                    </div>
 
                 </div>
 
@@ -45,6 +43,6 @@
         <p>Wishocracy</p>
     </footer>
     <script src="scripts/userAvatar.js"></script>
-    <script src="scripts/auth.js"></script>
+    <script type="module" src="scripts/auth.js"></script>
 </body>
 </html>
