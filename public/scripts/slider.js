@@ -1,7 +1,8 @@
 function submitWarPercentageDesired() {
     const slider = document.getElementById('slider');
     localStorage.setItem('warPercentageDesired', slider.value);
-    window.location.href = 'guess_poll.html'
+    //window.location.href = 'guess_poll.html'
+    window.location.href = 'login.html'
 }
 
 function submitWarPercentageGuessed() {

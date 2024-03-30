@@ -310,3 +310,14 @@ button#submitWarPercentageDesired:hover, button#submitWarPercentageGuessed:hover
     color: black;
     width: 50%;
 }
+
+#loginEmail::placeholder {
+    color: black;
+    opacity: 1;
+}
+#loginEmail:-ms-input-placeholder {
+    color: black;
+}
+#loginEmail::-ms-input-placeholder {
+    color: black;
+}
