@@ -1,0 +1,7 @@
+<% if (user.isLoggedIn) { %>
+  <a href="/profile">
+    <img src="<%= user.avatar %>" alt="User Avatar">
+  </a>
+<% } else { %>
+  <button onclick="location.href='/login'">Login</button>
+<% } %>

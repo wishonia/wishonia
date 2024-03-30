@@ -15,10 +15,12 @@
     "bcryptjs": "^2.4.3",
     "body-parser": "^1.19.0",
     "dotenv": "^8.2.0",
-    "express": "^4.17.1",
+    "ejs": "^3.1.9",
+    "express": "^4.19.2",
     "express-session": "^1.17.1",
     "form-data": "^4.0.0",
     "mailgun.js": "^10.2.1",
+    "marked": "^12.0.1",
     "passport": "^0.7.0",
     "passport-google-oauth20": "^2.0.0"
   },
