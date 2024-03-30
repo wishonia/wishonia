@@ -3,6 +3,9 @@ const bodyParser = require('body-parser');
 const path = require('path');
 const session = require('express-session');
 const passport = require('passport');
+const ejs = require('ejs');
+const fs = require('fs');
+const marked = require('marked');
 require('./src/auth/google_oauth')(passport);
 
 require('dotenv').config();
@@ -27,9 +30,24 @@ app.use(session({
 app.use(passport.initialize());
 app.use(passport.session());
 
+// Set view engine to EJS
+app.set('view engine', 'ejs');
+
 // Routes
 app.get('/', (req, res) => {
-    res.sendFile(path.join(__dirname, 'public', 'index.html'));
+    res.render('index');
+});
+
+// Middleware to serve markdown files as HTML
+app.use((req, res, next) => {
+    const filePath = path.join(__dirname, 'public', `${req.path}.md`);
+    if (fs.existsSync(filePath)) {
+        const markdown = fs.readFileSync(filePath, 'utf8');
+        const html = marked(markdown);
+        res.send(html);
+    } else {
+        next();
+    }
 });
 
 // Login a user or register if they don't exist
