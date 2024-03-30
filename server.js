@@ -7,12 +7,9 @@ require('./src/auth/google_oauth')(passport);
 
 require('dotenv').config();
 
-const formData = require('form-data');
-const Mailgun = require('mailgun.js');
 const {PrismaClient} = require("@prisma/client");
 const prisma = new PrismaClient();
-const mailgun = new Mailgun(formData);
-const mg = mailgun.client({username: 'api', key: process.env.MAILGUN_API_KEY, url: 'https://api.eu.mailgun.net'});
+const { sendMagicLinkEmail } = require('./src/utilities/emailUtils');
 
 const app = express();
 const PORT = process.env.PORT || 3000;
@@ -35,51 +32,28 @@ app.get('/', (req, res) => {
     res.sendFile(path.join(__dirname, 'public', 'index.html'));
 });
 
-// Register a new user
-app.post('/auth/register', async (req, res) => {
-    const { email, gdprConsent } = req.body;
-    const ipAddress = req.ip; // Capture the user's IP address
-    try {
-        // Check if user already exists
-        const existingUser = await prisma.user.findUnique({
-            where: {
-                email: email,
-            },
-        });
-        if (existingUser) {
-            return res.status(409).json({ message: 'User already exists' });
-        }
-
-        // Create user
-        const newUser = await prisma.user.create({
-            data: {
-                email: email,
-                gdprConsent: gdprConsent, // Record GDPR consent
-                ipAddress: ipAddress, // Store the user's IP address
-            },
-        });
-
-        // Set the user's handle to their auto-generated ID initially
-        await prisma.user.update({
-            where: {
-                email: email,
-            },
-            data: {
-                handle: newUser.id, // Use the auto-generated ID as the handle
-            },
-        });
-
-        res.status(201).json({ user: newUser, message: 'User created successfully' });
-    } catch (error) {
-        console.error('Error registering user:', error);
-        res.status(500).json({ message: 'Error registering user' });
-    }
-});
-
-// Login a user
+// Login a user or register if they don't exist
 app.post('/auth/login', async (req, res) => {
     const { email } = req.body;
     try {
+        // Check if user already exists
+        let user = await prisma.user.findUnique({
+            where: {
+                email: email,
+            },
+        });
+
+        // If user doesn't exist, create a new user
+        if (!user) {
+            user = await prisma.user.create({
+                data: {
+                    email: email,
+                    gdprConsent: false, // Default to false, or handle appropriately
+                    ipAddress: req.ip, // Capture the user's IP address
+                },
+            });
+        }
+
         // Generate a unique login token and its expiration time
         const loginToken = require('crypto').randomBytes(20).toString('hex');
         const tokenExpires = new Date(Date.now() + 24 * 60 * 60 * 1000); // 24 hours from now
@@ -90,22 +64,8 @@ app.post('/auth/login', async (req, res) => {
             data: { loginToken, tokenExpires },
         });
 
-        function sendMagicLinkEmail(email, loginToken) {
-            const magicLink = `${BASE_URL}/auth/verify-token?token=${loginToken}`;
-            const message = {
-                from: 'Wishonia <hello@wishonia.love>',
-                to: email,
-                subject: 'Your Magic Login Link',
-                text: `Click here to log in: ${magicLink}`
-            };
-
-            mg.messages.create(process.env.MAILGUN_DOMAIN, message)
-                .then(msg => console.log(msg)) // Logs success message
-                .catch(err => console.error(err)); // Logs any errors
-        }
-
         // Send an email with a magic link containing the token
-        sendMagicLinkEmail(email, loginToken);
+        sendMagicLinkEmail(email, loginToken, BASE_URL, process.env.MAILGUN_DOMAIN, process.env.MAILGUN_API_KEY);
 
         res.send({ message: 'Magic link sent to your email.' });
     } catch (error) {
