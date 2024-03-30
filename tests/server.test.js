@@ -4,12 +4,12 @@ const {describe, expect, it} = require("@jest/globals");
 const {PrismaClient} = require("@prisma/client"); // Assuming this is the correct path to your Express app
 const prisma = new PrismaClient();
 
-describe('POST /auth/register', () => {
+describe('POST /auth/login', () => {
   it('should register a new user only once', async () => {
     await prisma.user.deleteMany();
     let email = 'testuser2@example.com';
     let res = await request(app)
-      .post('/auth/register')
+      .post('/auth/login')
       .send({
         email: email,
         gdprConsent: true
@@ -21,7 +21,7 @@ describe('POST /auth/register', () => {
     expect(res.body).toHaveProperty('user');
     expect(res.body.user).toHaveProperty('email', email);
     res = await request(app)
-      .post('/auth/register')
+      .post('/auth/login')
       .send({
         email: email,
         gdprConsent: true
