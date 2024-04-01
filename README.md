@@ -1,38 +1,92 @@
-# Military vs Medical Research Spending Poll
+# Build a SaaS AI Platform with Next.js 13, React, Tailwind, Prisma, Stripe | Full Tutorial 2023
 
-## Overview
-This project aims to analyze public opinion on research spending. It seeks to understand the general sentiment towards funding research projects across various fields.
+![Copy of Copy of Copy of Fullstack Twitter Clone](https://github.com/AntonioErdeljac/next13-ai-saas/assets/23248726/c47e604a-b50b-4eb0-b420-fda20908f522)
 
-## Installation
-To set up this project locally, follow these steps:
-1. Clone the repository to your local machine.
-2. Navigate to the project directory.
-3. Install the required dependencies using `npm install`.
 
-## Features
 
-1. Desired Allocation Poll: presents the user with a question asking how much they think should be spent on war (Option A) relative to clinical research (Option B). It includes a single slider input to allocate the percentage between the two options, along with two bars above the slider that dynamically visualize the allocation as the user adjusts the slider. The user submits their desired allocation by clicking the "Submit" button, and their response is saved in the browser's local storage.
+This is a repository for Build a SaaS AI Platform with Next.js 13, React, Tailwind, Prisma, Stripe | Full Tutorial 2023.
 
-2. Actual Allocation Poll: asking the user how much they think is actually spent on war (Option A) relative to clinical research (Option B). It includes the same slider input and dynamic bars for visualizing the allocation. The user submits their perceived actual allocation by clicking the "Submit" button, and their response is saved in the browser's local storage.
+[VIDEO TUTORIAL](https://www.youtube.com/watch?v=ffJ38dBzrlY)
 
-3. User Authentication: After completing both polls, the user is prompted to log in or register to view the results. They can log in using their email and password or through OAuth with Google. Upon successful login or registration, a new user record is created in the database, and their poll responses are retrieved from local storage and saved in the database.
+Features:
 
-4. Results Page: After logging in, the user is directed to the Results page, which displays their desired and perceived actual allocation percentages between "War" and "Clinical Research" using bar visualizations. The page also shows the average desired and perceived actual allocation percentages from all users using bar visualizations, allowing the user to compare their responses to the average person. The page includes a link to the petition page.
+- Tailwind design
+- Tailwind animations and effects
+- Full responsiveness
+- Clerk Authentication (Email, Google, 9+ Social Logins)
+- Client form validation and handling using react-hook-form
+- Server error handling using react-toast
+- Image Generation Tool (Open AI)
+- Video Generation Tool (Replicate AI)
+- Conversation Generation Tool (Open AI)
+- Music Generation Tool (Replicate AI)
+- Page loading state
+- Stripe monthly subscription
+- Free tier with API limiting
+- How to write POST, DELETE, and GET routes in route handlers (app/api)
+- How to fetch data in server react components by directly accessing database (WITHOUT API! like Magic!)
+- How to handle relations between Server and Child components!
+- How to reuse layouts
+- Folder structure in Next 13 App Router
 
-5. Petition Page: presents information about the petition to shift 1% of military spending to clinical research. It includes a form for users to sign the petition by providing their name, email, address, city, state, and zip code. Upon successful submission, the user is redirected to a thank you page.
+### Prerequisites
 
-6. Thank You Page: displays a message thanking the user for signing the petition and provides information about the next steps or updates related to the petition.
+**Node version 18.x.x**
 
-7. Profile Page: displays the user's unique referral link, which they can share with others to invite them to participate in the polls. It also shows a list of users who have signed up using the referral link, indicating whether they have completed the polls and signed the petition.
+### Cloning the repository
 
-8. Social Sharing: allows users to easily share their participation in the polls and petition on social media platforms, with pre-populated posts and relevant hashtags.
+```shell
+git clone https://github.com/AntonioErdeljac/next13-ai-saas.git
+```
 
-9. Email Notifications: sends email notifications to users after they complete the polls, sign the petition, or refer someone to the app. Users can opt-out of email notifications if desired.
+### Install packages
 
-10. Localization: allows the app to support multiple languages based on the user's browser settings or a language selector, ensuring that the app's content, including questions and instructions, can be easily translated.
+```shell
+npm i
+```
 
-11. Gamification: introduces gamification elements to encourage user participation and engagement, such as a points or badge system for completing polls, signing the petition, or referring others. It may also include leaderboards to showcase top referrers or most active participants.
+### Setup .env file
 
-12. Personalized Experience: tailors the app's content and recommendations based on the user's previous interactions and preferences, providing personalized insights or comparisons based on their poll responses and suggesting related petitions or initiatives that align with their interests.
 
-13. Data Visualization: enhances the Results page with interactive data visualizations, such as dynamic charts or graphs, allowing users to explore and compare the poll results based on different criteria, such as demographics or location. It may also provide downloadable reports or infographics for users to share or use in their advocacy efforts.
+```js
+NEXT_PUBLIC_CLERK_PUBLISHABLE_KEY=
+CLERK_SECRET_KEY=
+
+NEXT_PUBLIC_CLERK_SIGN_IN_URL=/sign-in
+NEXT_PUBLIC_CLERK_SIGN_UP_URL=/sign-up
+NEXT_PUBLIC_CLERK_AFTER_SIGN_IN_URL=/dashboard
+NEXT_PUBLIC_CLERK_AFTER_SIGN_UP_URL=/dashboard
+
+OPENAI_API_KEY=
+REPLICATE_API_TOKEN=
+
+DATABASE_URL=
+
+STRIPE_API_KEY=
+STRIPE_WEBHOOK_SECRET=
+
+NEXT_PUBLIC_APP_URL="http://localhost:3000"
+```
+
+### Setup Prisma
+
+Add MySQL Database (I used PlanetScale)
+
+```shell
+npx prisma db push
+
+```
+
+### Start the app
+
+```shell
+npm run dev
+```
+
+## Available commands
+
+Running commands with npm `npm run [command]`
+
+| command         | description                              |
+| :-------------- | :--------------------------------------- |
+| `dev`           | Starts a development instance of the app |
