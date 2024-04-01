@@ -30,7 +30,7 @@ export const DonorButton = ({
 
   return (
     <Button variant={isDonor ? "default" : "premium"} disabled={loading} onClick={onClick} >
-      {isDonor ? "Manage Subscription" : "Upgrade"}
+      {isDonor ? "Manage Citizenship" : "Donate"}
       {!isDonor && <Zap className="w-4 h-4 ml-2 fill-white" />}
     </Button>
   )

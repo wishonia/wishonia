@@ -41,7 +41,7 @@ export const SignatureCounter = ({
             <Progress className="h-3" value={(voteCount / MAX_FREE_COUNTS) * 100} />
           </div>
           <Button onClick={proModal.onOpen} variant="premium" className="w-full">
-            Upgrade
+            Donate
             <Zap className="w-4 h-4 ml-2 fill-white" />
           </Button>
         </CardContent>
