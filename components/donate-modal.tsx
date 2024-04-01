@@ -43,7 +43,7 @@ export const DonateModal = () => {
         <DialogHeader>
           <DialogTitle className="flex justify-center items-center flex-col gap-y-4 pb-2">
             <div className="flex items-center gap-x-2 font-bold text-xl">
-              Upgrade to Wishonia
+              Donate to Wishonia
               <Badge variant="premium" className="uppercase text-sm py-1">
                 pro
               </Badge>
@@ -66,7 +66,8 @@ export const DonateModal = () => {
           </DialogDescription>
         </DialogHeader>
         <DialogFooter>
-          <Button disabled={loading} onClick={onSubscribe} size="lg" variant="premium" className="w-full">
+          <Button disabled={loading} onClick={onSubscribe} size="lg" 
+          variant="premium" className="w-full">
             Upgrade
             <Zap className="w-4 h-4 ml-2 fill-white" />
           </Button>

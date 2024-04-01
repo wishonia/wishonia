@@ -1,6 +1,6 @@
 "use client";
 import Link from "next/link";
-import { useAuth } from "@clerk/nextjs";
+import {SignInButton, useAuth} from "@clerk/nextjs";
 
 import { Button } from "@/components/ui/button";
 import {Input} from "@/components/ui/input";
@@ -12,6 +12,13 @@ export const Poll = () => {
   const { isSignedIn } = useAuth();
   const [researchPercentageDesired, setResearchPercentageDesired] = useState(50); // Define allocation state
   const [warPercentageDesired, setWarPercentageDesired] = useState(50); // Define allocation state
+    const [showSignInButton, setShowSignInButton] = useState(false);
+
+    const handleClick = () => {
+        if (!isSignedIn) {
+            setShowSignInButton(true);
+        }
+    };
 
   const handleSliderChange = (event: React.ChangeEvent<HTMLInputElement>) => {
       const researchPercentageDesired = parseInt(event.target.value, 10);
@@ -28,30 +35,51 @@ return (
         </div>
         <div id="poll-description">
             <div className="text-sm md:text-xl px-4 pb-2">
-            Humanity has a finite amount of brains and resources.
+                Humanity has a finite amount of brains and resources.
             </div>
             <div className="text-sm md:text-xl px-4 pb-4">
                 Please adjust the slider to indicate how much governments globally should allocate to war and
-             the military vs helping the 2 billion people suffering from chronic diseases (like my Grandma Kay).
+                the military vs helping the 2 billion people suffering from chronic diseases (like my Grandma Kay).
             </div>
         </div>
         <div id="chart-and-slider-container" className="px-4 lg:px-8">
-            <ChartContainer warPercentageDesired={warPercentageDesired} />
+            <ChartContainer warPercentageDesired={warPercentageDesired}/>
             <Input type="range" min="0" max="100" value={researchPercentageDesired.toString()}
-                   onChange={handleSliderChange}/> 
+                   onChange={handleSliderChange}/>
             <div>
                 <span style={{float: 'left'}}>👈 More War</span>
                 <span style={{float: 'right'}}>More Cures 👉</span>
             </div>
         </div>
-          <div>
-              <Link href={isSignedIn ? "/dashboard" : "/sign-up"}>
-                  <Button className="text-xl p-6 md:p-8 rounded-full font-semibold bg-black text-white hover:bg-white hover:text-black hover:border hover:border-black mt-8">
-                      Submit
-                  </Button>
-              </Link>
-          </div>
+
+        <div>
+            {!showSignInButton && (
+                <Link href={isSignedIn ? "/dashboard" : "/sign-up"}>
+                    <Button
+                        onClick={() => handleClick()}
+                        className="text-xl p-6 md:p-8 rounded-full font-semibold bg-black text-white hover:bg-white hover:text-black hover:border hover:border-black mt-8"
+                    >
+                        Vote Now
+                    </Button>
+                </Link>
+            )}
+            {showSignInButton && (
+                <>
+                    <div className="text-sm md:text-xl px-4 pb-2">
+                        You will be required to sign in to submit your vote and see the
+                        results. Robots don't get to vote!
+                    </div>
+                    <SignInButton>
+                        <Button
+                            className="text-xl p-6 md:p-8 rounded-full font-semibold bg-black text-white hover:bg-white hover:text-black hover:border hover:border-black mt-8"
+                        >
+                            Authenticate and Vote
+                        </Button>
+                    </SignInButton>
+                </>
+            )}
+        </div>
     </div>
-  );
+);
 };
 
