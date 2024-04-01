@@ -43,7 +43,8 @@ const ChartContainer: React.FC<ChartContainerProps> = ({ warPercentageDesired })
                             display: 'flex',
                             flexDirection: 'column',
                             alignItems: 'center',
-                            justifyContent: 'flex-end'
+                            justifyContent: 'flex-end',
+                            maxWidth: '200px'
                         }}>
                           <span id="warPercentageDesired"
                           className="text-sm">
@@ -65,7 +66,8 @@ const ChartContainer: React.FC<ChartContainerProps> = ({ warPercentageDesired })
                             display: 'flex',
                             flexDirection: 'column',
                             alignItems: 'center',
-                            justifyContent: 'flex-end'
+                            justifyContent: 'flex-end',
+                            maxWidth: '200px'
                         }}>
                         <span
                           className="text-sm">
