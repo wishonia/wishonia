@@ -8,7 +8,7 @@ import { UserAuthForm } from "@/components/user/user-auth-form"
 
 export const metadata: Metadata = {
   title: "Sign in",
-  description: "Sign in to your account",
+  description: "Sign in to Wishonia",
 }
 
 export default function Signin() {
@@ -30,17 +30,17 @@ export default function Signin() {
         <div className="flex flex-col space-y-2 text-center">
           <h1 className="text-2xl font-semibold tracking-tight">Sign in</h1>
           <p className="text-sm text-muted-foreground">
-            Sign in to your account
+            Enter Wishonia
           </p>
         </div>
         <UserAuthForm />
         <p className="px-8 text-center text-sm text-muted-foreground">
-          Don&apos;t have an account?{" "}
+          Not a citizen yet?{" "}
           <Link
             href="/signup"
             className="hover:text-brand underline underline-offset-4"
           >
-            Sign up
+            Become a citizen
           </Link>
         </p>
       </div>

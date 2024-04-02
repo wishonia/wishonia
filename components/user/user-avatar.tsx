@@ -5,15 +5,15 @@ import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar"
 import { Icons } from "@/components/icons"
 
 interface UserAvatarProps extends AvatarProps {
-  user: Pick<User, "imageUrl" | "name">
+  user: Pick<User, "image" | "name">
 }
 
 export function UserAvatar({ user, ...props }: UserAvatarProps) {
   return (
     <div className="flex items-center">
       <Avatar {...props}>
-        {user.imageUrl ? (
-          <AvatarImage alt="Picture" src={user.imageUrl} />
+        {user.image ? (
+          <AvatarImage alt="Picture" src={user.image} />
         ) : (
           <AvatarFallback>
             <span className="sr-only">{user.name}</span>

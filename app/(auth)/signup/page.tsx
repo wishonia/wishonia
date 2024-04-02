@@ -29,15 +29,15 @@ export default function Signup() {
       <div className="mx-auto flex w-full flex-col justify-center space-y-6 sm:w-[350px]">
         <div className="flex flex-col space-y-2 text-center">
           <h1 className="text-2xl font-semibold tracking-tight">
-            Create an account
+            Become a Citizen of Wishonia
           </h1>
           <p className="text-sm text-muted-foreground">
-            Select a provider to create your account
+            Select a provider to verify your identity
           </p>
         </div>
         <UserAuthForm />
         <p className="px-8 text-center text-sm text-muted-foreground">
-          Already have an account?{" "}
+          Already a citizen?{" "}
           <Link
             href="/signin"
             className="hover:text-brand underline underline-offset-4"

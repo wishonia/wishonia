@@ -43,7 +43,7 @@ return (
                 <span style={{float: 'right'}}>More Cures 👉</span>
             </div>
         </div>
-        <Link href={"/sign-up"}>
+        <Link href={"/signup"}>
             <Button
                 //onClick={() => handleClick()}
                 className="text-xl p-6 md:p-8 rounded-full font-semibold bg-black text-white hover:bg-white
