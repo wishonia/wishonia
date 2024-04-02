@@ -1,26 +1,16 @@
-import React, { useState } from 'react';
+import React from 'react';
 import ChartContainer from './chart-container';
 import axios from 'axios';
-import Cookies from "js-cookie";
+import {getCurrentUser} from "@/lib/session";
 
-const PollResults = () => {
+const PollResults = async () => {
 
-  // Retrieve warPercentageDesired from localStorage
-  const storedPercentage = Cookies.get('warPercentageDesired');
-  if (storedPercentage) {
-
-    // Provide warPercentageDesired to the ChartContainer component
-    // This part is assumed to be handled within the JSX below by passing warPercentageDesired as a prop
-
-    // Post warPercentageDesired to the vote API route
-    axios.post('/vote', {warPercentageDesired: storedPercentage})
-        .then(response => console.log(response))
-        .catch(error => console.error(error));
-  }
+  const user = await getCurrentUser()
+    const storedPercentage = await axios.get(`/api/users/${user.id}/poll-results`)
   return (
-    <div>
-      {storedPercentage && <ChartContainer warPercentageDesired={parseFloat(storedPercentage)} />}
-    </div>
+      <div>
+        {storedPercentage && <ChartContainer warPercentageDesired={parseFloat(storedPercentage)}/>}
+      </div>
   );
 };
 

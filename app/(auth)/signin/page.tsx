@@ -7,7 +7,7 @@ import { Icons } from "@/components/icons"
 import { UserAuthForm } from "@/components/user/user-auth-form"
 
 export const metadata: Metadata = {
-  title: "Sign in",
+  title: "Enter Wishonia",
   description: "Sign in to Wishonia",
 }
 
@@ -28,9 +28,9 @@ export default function Signin() {
       </Link>
       <div className="mx-auto flex w-full flex-col justify-center space-y-6 sm:w-[350px]">
         <div className="flex flex-col space-y-2 text-center">
-          <h1 className="text-2xl font-semibold tracking-tight">Sign in</h1>
+          <h1 className="text-2xl font-semibold tracking-tight">Enter Wishonia</h1>
           <p className="text-sm text-muted-foreground">
-            Enter Wishonia
+            Please confirm your identity
           </p>
         </div>
         <UserAuthForm />

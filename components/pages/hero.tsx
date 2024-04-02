@@ -7,12 +7,12 @@ import { buttonVariants } from "@/components/ui/button"
 import { Icons } from "@/components/icons"
 import { ImageFrame } from "@/components/image-frame"
 
-export default function HeroHeader(props) {
+export default function HeroHeader() {
   return (
     <>
       <section className="space-y-8 pb-12 pt-4 md:space-y-16 md:pt-10 lg:py-32">
         <div className="container flex max-w-[64rem] flex-col items-center gap-4 text-center">
-          <p className="rounded-2xl bg-muted px-4 py-1.5 text-sm font-medium font-semibold">
+          <p className="rounded-2xl bg-muted px-4 py-1.5 text-sm font-medium">
             Global Priorities Referendum on
           </p>
           <h1 className="text-4xl font-semibold sm:text-5xl md:text-6xl lg:text-7xl">
