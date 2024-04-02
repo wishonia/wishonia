@@ -26,6 +26,7 @@ model Account {
   user User @relation(fields: [userId], references: [id], onDelete: Cascade)
 
   @@unique([provider, providerAccountId])
+  @@map(name: "accounts")
 }
 
 model Session {
@@ -34,6 +35,8 @@ model Session {
   userId       String   @map(name: "user_id")
   expires      DateTime
   user         User     @relation(fields: [userId], references: [id], onDelete: Cascade)
+
+  @@map(name: "sessions")
 }
 
 model User {
@@ -47,6 +50,7 @@ model User {
   createdAt                DateTime  @default(now())
   deletedAt                DateTime?
   email                    String?   @unique
+  emailVerified            DateTime?
   emailValidated           Boolean   @default(false)
   firstName                String?
   gdprConsent              Boolean   @default(false)
@@ -76,9 +80,9 @@ model User {
   publicMetadata           Json?
   privateMetadata          Json?
 
-  accounts Account[]
-  sessions Session[]
-  Activity Activity[]
+  accounts   Account[]
+  sessions   Session[]
+  activities Activity[]
 }
 
 model VerificationToken {
@@ -91,23 +95,27 @@ model VerificationToken {
 
 model Activity {
   id          String   @id @default(cuid())
-  userId      String
+  userId      String   @map(name: "user_id")
   name        String
   description String?
-  colorCode   String
-  createdAt   DateTime @default(now())
-  updatedAt   DateTime @updatedAt
+  colorCode   String   @map(name: "color_code")
+  createdAt   DateTime @default(now()) @map(name: "created_at")
+  updatedAt   DateTime @updatedAt @map(name: "updated_at")
 
   user User @relation(fields: [userId], references: [id])
 
   activityLogs ActivityLog[]
+
+  @@map(name: "activities")
 }
 
 model ActivityLog {
   id         String   @id @default(cuid())
-  activityId String
+  activityId String   @map(name: "activity_id")
   date       DateTime @default(now())
   count      Int      @default(1)
 
   activity Activity @relation(fields: [activityId], references: [id])
+
+  @@map(name: "activity_log")
 }
