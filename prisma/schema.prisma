@@ -51,7 +51,7 @@ model User {
   firstName                String?
   gdprConsent              Boolean   @default(false)
   gender                   String?
-  imageUrl                 String?
+  image                    String?
   ipAddress                String?   @db.VarChar(45)
   language                 String?
   lastName                 String?
