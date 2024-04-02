@@ -31,7 +31,7 @@ export function UserAuthForm({ className, ...props }: UserAuthFormProps) {
         ) : (
           <Icons.google className="mr-2 h-4 w-4" />
         )}{" "}
-        Continue with Google
+        Verify with Google
       </button>
       <button
         type="button"
@@ -48,7 +48,7 @@ export function UserAuthForm({ className, ...props }: UserAuthFormProps) {
         ) : (
           <Icons.github className="mr-2 h-4 w-4" />
         )}{" "}
-        Continue with Github
+          Verify with Github
       </button>
     </div>
   )

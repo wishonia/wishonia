@@ -62,3 +62,12 @@ export async function verifyActivity(activityId: string) {
 
   return count > 0
 }
+// Calculate the average warPercentageDesired
+export async function getAverageWarPercentageDesired(): Promise<number> {
+  const result = await db.user.aggregate({
+    _avg: {
+      warPercentageDesired: true,
+    },
+  });
+  return result._avg.warPercentageDesired ?? 0;
+}
