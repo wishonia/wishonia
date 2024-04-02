@@ -2,6 +2,7 @@ import Navbar from "@/components/navbar";
 import { Sidebar } from "@/components/sidebar";
 import { checkSubscription } from "@/lib/subscription";
 import { getApiLimitCount } from "@/lib/api-limit";
+import ChartContainer from "@/components/ui/chart-container";
 
 const DashboardLayout = async ({
   children,
@@ -10,6 +11,8 @@ const DashboardLayout = async ({
 }) => {
   const apiLimitCount = await getApiLimitCount();
   const isDonor = await checkSubscription();
+  //const warPercentageDesired = localStorage.getItem("warPercentageDesired");
+  
 
   return ( 
     <div className="h-full relative">
