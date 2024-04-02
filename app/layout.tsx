@@ -4,9 +4,11 @@ import { ClerkProvider } from '@clerk/nextjs'
 
 import { ToasterProvider } from '@/components/toaster-provider'
 import { ModalProvider } from '@/components/modal-provider'
-import { CrispProvider } from '@/components/crisp-provider'
+//import { CrispProvider } from '@/components/crisp-provider'
 
 import './globals.css'
+import {neobrutalism} from "@clerk/themes";
+import React from "react";
 
 const font = Inter({ subsets: ['latin'] });
 
@@ -21,7 +23,11 @@ export default async function RootLayout({
   children: React.ReactNode
 }) {
   return (
-    <ClerkProvider>
+    <ClerkProvider
+        appearance={{
+          baseTheme: neobrutalism
+        }}
+    >
       <html lang="en" suppressHydrationWarning>
         {/* <CrispProvider /> */}
         <body className={font.className}>
