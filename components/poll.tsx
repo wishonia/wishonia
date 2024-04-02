@@ -12,13 +12,6 @@ export const Poll = () => {
   const { isSignedIn } = useAuth();
   const [researchPercentageDesired, setResearchPercentageDesired] = useState(50); // Define allocation state
   const [warPercentageDesired, setWarPercentageDesired] = useState(50); // Define allocation state
-    const [showSignInButton, setShowSignInButton] = useState(false);
-
-    const handleClick = () => {
-        if (!isSignedIn) {
-            setShowSignInButton(true);
-        }
-    };
 
   const handleSliderChange = (event: React.ChangeEvent<HTMLInputElement>) => {
       const researchPercentageDesired = parseInt(event.target.value, 10);
@@ -53,31 +46,24 @@ return (
         </div>
 
         <div>
-            {!showSignInButton && (
-                <Link href={isSignedIn ? "/dashboard" : "/sign-up"}>
-                    <Button
-                        onClick={() => handleClick()}
-                        className="text-xl p-6 md:p-8 rounded-full font-semibold bg-black text-white hover:bg-white hover:text-black hover:border hover:border-black mt-8"
-                    >
-                        Vote Now
-                    </Button>
-                </Link>
-            )}
-            {showSignInButton && (
+            <Link href={isSignedIn ? "/dashboard" : "/sign-up"}>
+                <Button
+                    //onClick={() => handleClick()}
+                    className="text-xl p-6 md:p-8 rounded-full font-semibold bg-black text-white hover:bg-white hover:text-black hover:border hover:border-black mt-8"
+                >
+                    Vote to See Results
+                </Button>
+            </Link>
+            {!isSignedIn && (
                 <>
-                    <div className="text-sm md:text-xl px-4 pb-2">
-                        You will be required to sign in to submit your vote and see the
-                        results. Robots don't get to vote!
+                    <div className="text-xs px-4 pt-4">
+                        It&apos;s necessary to sign in to ensure electoral integrity.
                     </div>
-                    <SignInButton>
-                        <Button
-                            className="text-xl p-6 md:p-8 rounded-full font-semibold bg-black text-white hover:bg-white hover:text-black hover:border hover:border-black mt-8"
-                        >
-                            Authenticate and Vote
-                        </Button>
-                    </SignInButton>
-                </>
-            )}
+                    <div className="text-xs px-4 py-0">
+                        Robots don&apos;t get to vote!
+                    </div>
+                </>)
+            }
         </div>
     </div>
 );
