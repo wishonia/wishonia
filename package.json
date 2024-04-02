@@ -11,7 +11,7 @@
     "migrate": "prisma migrate dev --preview-feature"
   },
   "dependencies": {
-    "@clerk/nextjs": "^4.21.15",
+    "@clerk/nextjs": "^4.29.3",
     "@clerk/themes": "^1.7.11",
     "@hookform/resolvers": "^3.1.1",
     "@prisma/client": "^5.0.0",
