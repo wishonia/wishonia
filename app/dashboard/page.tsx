@@ -36,46 +36,42 @@ export default async function Dashboard({ searchParams }: DashboardProps) {
   const dateRange = dateRangeParams(searchParams)
   const dashboardData = await getDashboardData(user.id, dateRange)
 
-  const activityData =
-    dashboardData.activityCountByDate.length > 0 &&
-    dashboardData.topActivities.length > 0
-
-  const layout = activityData
-    ? "grid grid-cols-1 gap-4 md:grid-cols-2"
-    : "grid grid-cols-1"
-  const scrollClass = activityData
-    ? "h-[17rem] rounded-lg border"
-    : "h-[25.1rem] rounded-lg border"
 
   return (
     <Shell>
-      <DashboardHeader heading="Current Results"
-                       text="Here's how the average person would balance resources">
-      </DashboardHeader>
-        <div style={{ display: 'flex', justifyContent: 'space-between' }}>
-          <BarChart warPercentageDesired={dashboardData.averageWarPercentageDesired} labelsPosition={"bottom"} />
-          <div className="rounded-lg shadow-lg p-4">
-            <BarChart warPercentageDesired={95} labelsPosition={"bottom"}/>
-            <p className="text-center text-sm text-muted-foreground">Average Vote</p>
-          </div>
+        <div>
+            <div className="flex flex-col items-center justify-between gap-4 px-2 pb-4 text-center md:flex-row">
+                <div className="grid gap-1">
+                    <h1 className="text-2xl font-bold md:text-3xl">
+                        Current Results
+                    </h1>
+                    <p className="text-m text-muted-foreground">
+                        {`The average person would prefer
+                     ${100 - dashboardData.averageWarPercentageDesired}% of our resources be devoted to medical research.`}
+                    </p>
+                    <p className="text-m text-muted-foreground">
+                        {`However, governments currently only allocate 5%.`}
+                    </p>
+                </div>
+            </div>
+            <div style={{display: 'flex', justifyContent: 'center'}}>
+                <div style={{width: "50%",  maxWidth: '200px'}}>
+                    <div className="text-center text-sm font-bold">What People Want</div>
+                </div>
+                <div style={{width: "48%", maxWidth: '200px'}}>
+                    <p className="text-center text-sm font-bold">Current Allocation</p>
+                </div>
+            </div>
+            <div style={{display: 'flex', justifyContent: 'center'}}>
+                <div className="p-2 border-2 border-black mr-1">
+                    <BarChart warPercentageDesired={dashboardData.averageWarPercentageDesired}
+                              labelsPosition={"bottom"}/>
+                </div>
+                <div className="p-2 border-2 border-black ml-1">
+                    <BarChart warPercentageDesired={95} labelsPosition={"bottom"}/>
+                </div>
+            </div>
         </div>
-      <div className={layout}>
-        <ScrollArea className={scrollClass}>
-          <div className="divide-y divide-border">
-            <ActivityList activities={dashboardData.userActivities} />
-          </div>
-        </ScrollArea>
-        {activityData && (
-          <>
-            <DashboardCards data={dashboardData} searchParams={searchParams} />
-            <LineChartComponent data={dashboardData.activityCountByDate} />
-            <PieChartComponent data={dashboardData.topActivities} />
-          </>
-        )}
-      </div>
-      <DataTable columns={logColumns} data={dashboardData.logs}>
-        Log History
-      </DataTable>
     </Shell>
   )
 }
