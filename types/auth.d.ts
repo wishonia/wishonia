@@ -6,6 +6,7 @@ type UserId = string
 type NavUser = {
   user?: User & {
     id: UserId
+    username?: string
   }
 }
 
@@ -19,6 +20,7 @@ declare module "next-auth" {
   interface Session {
     user: User & {
       id: UserId
+      username: string
     }
   }
 }
