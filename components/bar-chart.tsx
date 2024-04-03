@@ -49,8 +49,7 @@ const BarChart: React.FC<ChartContainerProps> = ({ warPercentageDesired, labelsP
                         maxWidth: '200px'
                     }}>
                         {labelsPosition === 'top' && (
-                            <span id="warPercentageDesiredLabel"
-                                  className="text-sm text-center">
+                            <span id="warPercentageDesiredLabel" className="text-sm text-center">
                   {warPercentageDesired}% War / Military
                 </span>
                         )}
@@ -63,12 +62,6 @@ const BarChart: React.FC<ChartContainerProps> = ({ warPercentageDesired, labelsP
                                  backgroundSize: 'cover'
                              }}>
                         </div>
-                        {labelsPosition === 'bottom' && (
-                            <span id="warPercentageDesiredLabel"
-                                  className="text-sm text-center">
-                  {warPercentageDesired}% War and Military
-                </span>
-                        )}
                     </div>
                     <div style={{
                         width: '48%',
@@ -79,10 +72,9 @@ const BarChart: React.FC<ChartContainerProps> = ({ warPercentageDesired, labelsP
                         maxWidth: '200px'
                     }}>
                         {labelsPosition === 'top' && (
-                            <span id="researchPercentageDesiredLabel"
-                                  className="text-sm text-center px-2">
-                            {researchPercentageDesired}% Medical Research
-                            </span>
+                            <span id="researchPercentageDesiredLabel" className="text-sm text-center px-2">
+                  {researchPercentageDesired}% Medical Research
+                </span>
                         )}
                         <div id="researchBar"
                              style={{
@@ -93,14 +85,20 @@ const BarChart: React.FC<ChartContainerProps> = ({ warPercentageDesired, labelsP
                                  backgroundSize: 'cover'
                              }}>
                         </div>
-                        {labelsPosition === 'bottom' && (
-                            <span id="researchPercentageDesiredLabel"
-                                        className="text-sm text-center px-2">
-                            {researchPercentageDesired}% Medical Research
-                            </span>
-                        )}
                     </div>
                 </div>
+                {labelsPosition === 'bottom' && (
+                    <div style={{display: 'flex', width: '100%', justifyContent: 'space-between', marginTop: '8px'}}>
+                      <span id="warPercentageDesiredLabel" className="text-xs text-center"
+                            style={{width: '48%'}}>
+                        {warPercentageDesired}% War / Military
+                      </span>
+                        <span id="researchPercentageDesiredLabel" className="text-xs text-center px-2"
+                              style={{width: '48%'}}>
+                            {researchPercentageDesired}% Medical Research
+                      </span>
+                    </div>
+                )}
             </div>
         </div>
     );
