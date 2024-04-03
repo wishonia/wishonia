@@ -39,48 +39,46 @@ model Session {
 }
 
 model User {
-  id                       String     @id @default(cuid())
-  address                  String?
-  badges                   Json?
-  banned                   Boolean?
-  birthday                 DateTime?
-  city                     String?
-  countryCode              String?    @map("country_code")
-  createdAt                DateTime   @default(now()) @map("created_at")
-  deletedAt                DateTime?  @map("deleted_at")
-  email                    String?    @unique
-  emailVerified            DateTime?  @map("email_verified")
-  emailValidated           Boolean    @default(false) @map("email_validated")
-  firstName                String?    @map("first_name")
-  gdprConsent              Boolean    @default(false) @map("gdpr_consent")
-  gender                   String?
-  image                    String?
-  ipAddress                String?    @map("ip_address") @db.VarChar(45)
-  language                 String?
-  lastName                 String?    @map("last_name")
-  lastSignInAt             BigInt?    @map("last_sign_in_at")
-  name                     String?
-  newsletterSubscribed     Boolean    @default(false) @map("newsletter_subscribed")
-  phoneNumber              String?    @map("phone_number")
-  points                   Int?
-  postalCode               String?    @map("postal_code")
-  primaryWeb3WalletAddress String?    @map("primary_web3_wallet_address")
-  profileImageUrl          String?    @map("profile_image_url")
-  referrerUserId           String?    @map("referrer_user_id")
-  signatureTimestamp       DateTime   @default(now()) @map("signature_timestamp")
-  signedPetition           Boolean    @default(false) @map("signed_petition")
-  stateProvince            String?    @map("state_province")
-  updatedAt                DateTime   @updatedAt @map("updated_at")
-  username                 String     @unique @default(uuid())
-  warPercentageDesired     Float?     @map("war_percentage_desired")
-  warPercentageGuessed     Float?     @map("war_percentage_guessed")
-  web3Wallet               String?    @map("web3_wallet")
-  unsafeMetadata           Json?      @map("unsafe_metadata")
-  publicMetadata           Json?      @map("public_metadata")
-  privateMetadata          Json?      @map("private_metadata")
-  accounts                 Account[]
-  sessions                 Session[]
-  activities               Activity[]
+  id                   String     @id @default(cuid())
+  address              String?
+  badges               Json?
+  banned               Boolean?
+  birthday             DateTime?
+  city                 String?
+  countryCode          String?    @map("country_code")
+  createdAt            DateTime   @default(now()) @map("created_at")
+  deletedAt            DateTime?  @map("deleted_at")
+  email                String?    @unique
+  emailVerified        DateTime?  @map("email_verified")
+  emailValidated       Boolean    @default(false) @map("email_validated")
+  firstName            String?    @map("first_name")
+  gdprConsent          Boolean    @default(false) @map("gdpr_consent")
+  gender               String?
+  image                String?
+  ipAddress            String?    @map("ip_address") @db.VarChar(45)
+  language             String?
+  lastName             String?    @map("last_name")
+  lastSignInAt         BigInt?    @map("last_sign_in_at")
+  name                 String?
+  newsletterSubscribed Boolean    @default(false) @map("newsletter_subscribed")
+  phoneNumber          String?    @map("phone_number")
+  points               Int?
+  postalCode           String?    @map("postal_code")
+  referrerUserId       String?    @map("referrer_user_id")
+  signatureTimestamp   DateTime   @default(now()) @map("signature_timestamp")
+  signedPetition       Boolean    @default(false) @map("signed_petition")
+  stateProvince        String?    @map("state_province")
+  updatedAt            DateTime   @updatedAt @map("updated_at")
+  username             String     @unique @default(uuid())
+  warPercentageDesired Float?     @map("war_percentage_desired")
+  warPercentageGuessed Float?     @map("war_percentage_guessed")
+  web3Wallet           String?    @map("web3_wallet")
+  unsafeMetadata       Json?      @map("unsafe_metadata")
+  publicMetadata       Json?      @map("public_metadata")
+  privateMetadata      Json?      @map("private_metadata")
+  accounts             Account[]
+  sessions             Session[]
+  activities           Activity[]
 
   @@map("users")
 }

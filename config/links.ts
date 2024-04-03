@@ -24,17 +24,17 @@ export const navLinks: Navigation = {
 export const dashboardLinks: Navigation = {
   data: [
     {
-      title: "Dashboard",
+      title: "Results",
       href: "/dashboard",
       icon: "dashboard",
     },
     {
-      title: "Activities",
+      title: "Signatures",
       href: "/dashboard/activities",
       icon: "activity",
     },
     {
-      title: "Settings",
+      title: "Profile",
       href: "/dashboard/settings",
       icon: "settings",
     },

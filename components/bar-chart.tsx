@@ -91,7 +91,7 @@ const BarChart: React.FC<ChartContainerProps> = ({ warPercentageDesired, labelsP
                     <div style={{display: 'flex', width: '100%', justifyContent: 'space-between', marginTop: '8px'}}>
                       <span id="warPercentageDesiredLabel" className="text-xs text-center"
                             style={{width: '48%'}}>
-                        {warPercentageDesired}% War / Military
+                        {warPercentageDesired}% War & Military
                       </span>
                         <span id="researchPercentageDesiredLabel" className="text-xs text-center px-2"
                               style={{width: '48%'}}>
