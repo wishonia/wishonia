@@ -29,8 +29,10 @@ export const authOptions: NextAuthOptions = {
       if (token) {
         session.user.id = token.id
         session.user.name = token.name
-        session.user.email = token.email
-        session.user.image = token.picture
+        session.user.email = token.email as string | null | undefined;
+        session.user.image = token.picture as string | null | undefined;
+        // Use type assertion to bypass the type error
+        (session.user as any).username = token.username as string | null | undefined;
       }
 
       return session
