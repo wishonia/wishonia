@@ -53,8 +53,11 @@ export default async function Dashboard({ searchParams }: DashboardProps) {
                        text="Here's how the average person would balance resources">
       </DashboardHeader>
         <div style={{ display: 'flex', justifyContent: 'space-between' }}>
-          <BarChart warPercentageDesired={dashboardData.averageWarPercentageDesired} />
-          <BarChart warPercentageDesired={dashboardData.averageWarPercentageDesired} />
+          <BarChart warPercentageDesired={dashboardData.averageWarPercentageDesired} labelsPosition={"bottom"} />
+          <div className="rounded-lg shadow-lg p-4">
+            <BarChart warPercentageDesired={95} labelsPosition={"bottom"}/>
+            <p className="text-center text-sm text-muted-foreground">Average Vote</p>
+          </div>
         </div>
       <div className={layout}>
         <ScrollArea className={scrollClass}>
