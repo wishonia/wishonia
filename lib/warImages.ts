@@ -1,0 +1,15 @@
+import path from "path";
+import fs from "fs";
+
+export async function getWarImages() {
+    const directoryPath = path.join(process.cwd(), 'public/img/war');
+    try {
+        const files = await fs.promises.readdir(directoryPath);
+        const filePaths = files.map(file => "/img/war/" + file);
+        return Response.json(filePaths)
+    } catch (err) {
+        return Response.json({message: "Unable to scan directory: " + err}, {
+            status: 500
+        });
+    }
+}

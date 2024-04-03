@@ -1,4 +1,4 @@
-import { getUserActivities } from "@/lib/api/activities"
+import {getUserActivities} from "@/lib/api/activities"
 import {
   getActivityCountByDate,
   getDailyAverage,
@@ -8,6 +8,7 @@ import {
   getTopActivities,
   getTotalLogs,
 } from "@/lib/api/logs"
+import {getAverageWarPercentageDesired} from "@/lib/api/poll";
 
 type DateRangeType = {
   from: Date
@@ -26,6 +27,7 @@ export async function getDashboardData(
     activityCountByDate,
     topActivities,
     userActivities,
+    averageWarPercentageDesired
   ] = await Promise.all([
     getLogs(userId, dateRange, "user"),
     getStreak(userId, "user"),
@@ -34,6 +36,7 @@ export async function getDashboardData(
     getActivityCountByDate(userId, dateRange),
     getTopActivities(userId, dateRange),
     getUserActivities(userId),
+    getAverageWarPercentageDesired()
   ])
 
   return {
@@ -44,6 +47,7 @@ export async function getDashboardData(
     activityCountByDate,
     topActivities,
     userActivities,
+    averageWarPercentageDesired
   }
 }
 

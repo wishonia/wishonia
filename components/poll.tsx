@@ -4,7 +4,7 @@ import Link from "next/link";
 import { Button } from "@/components/ui/button";
 import {Input} from "@/components/ui/input";
 import React, { useState } from "react";
-import ChartContainer from "@/components/chart-container";
+import BarChart from "@/components/bar-chart";
 
 export const Poll = () => {
   const [researchPercentageDesired, setResearchPercentageDesired] = useState(50); // Define allocation state
@@ -35,7 +35,7 @@ return (
             </div>
         </div>
         <div id="chart-and-slider-container" className="px-4 lg:px-8">
-            <ChartContainer warPercentageDesired={warPercentageDesired}/>
+            <BarChart warPercentageDesired={warPercentageDesired}/>
             <Input type="range" min="0" max="100" value={researchPercentageDesired.toString()}
                    onChange={handleSliderChange}/>
             <div>

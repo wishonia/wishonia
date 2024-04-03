@@ -1,11 +1,12 @@
+"use client";
 import React, {useEffect, useState} from 'react';
 
 interface ChartContainerProps {
   warPercentageDesired: number;
 }
 
-// New ChartContainer component
-const ChartContainer: React.FC<ChartContainerProps> = ({ warPercentageDesired }) => {
+// New BarChart component
+const BarChart: React.FC<ChartContainerProps> = ({ warPercentageDesired }) => {
   const researchPercentageDesired = 100 - warPercentageDesired;
   const [warImages, setWarImages] = useState([]);
   const [currentImageIndex, setCurrentImageIndex] = useState(0);
@@ -27,7 +28,7 @@ const ChartContainer: React.FC<ChartContainerProps> = ({ warPercentageDesired })
 
   return (
         <div id="chart-container"
-            style={{display: 'flex', justifyContent: 'center', marginBottom: '20px'}}>
+            style={{display: 'flex', justifyContent: 'center', marginBottom: '5px'}}>
                 <div style={{
                     display: 'flex',
                     flexDirection: 'column',
@@ -46,9 +47,9 @@ const ChartContainer: React.FC<ChartContainerProps> = ({ warPercentageDesired })
                             justifyContent: 'flex-end',
                             maxWidth: '200px'
                         }}>
-                          <span id="warPercentageDesired"
-                          className="text-sm">
-                            {warPercentageDesired}% Military/War
+                          <span id="warPercentageDesiredLabel"
+                          className="text-sm text-center">
+                            {warPercentageDesired}% War / Military
                             </span>
                             <div id="warBar"
                             style={{
@@ -69,11 +70,12 @@ const ChartContainer: React.FC<ChartContainerProps> = ({ warPercentageDesired })
                             justifyContent: 'flex-end',
                             maxWidth: '200px'
                         }}>
-                        <span
-                          className="text-sm">
-                            {researchPercentageDesired}% Medial Research
+                        <span id="researchPercentageDesiredLabel"
+                          className="text-sm text-center px-2">
+                            {researchPercentageDesired}% Medical Research
                         </span>
-                            <div style={{
+                            <div id="researchBar"
+                                style={{
                                 height: `${researchPercentageDesired}%`,
                                 backgroundColor: '#0075ff',
                                 width: '100%',
@@ -87,4 +89,4 @@ const ChartContainer: React.FC<ChartContainerProps> = ({ warPercentageDesired })
   );
 };
 
-export default ChartContainer;
+export default BarChart;
