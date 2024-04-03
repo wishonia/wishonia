@@ -52,8 +52,14 @@ export const authOptions: NextAuthOptions = {
       return {
         id: dbUser.id,
         name: dbUser.name,
+        username: dbUser.username,
         email: dbUser.email,
         picture: dbUser.image,
+        firstName: dbUser.firstName,
+        lastName: dbUser.lastName,
+        createdAt: dbUser.createdAt,
+        updatedAt: dbUser.updatedAt,
+        web3Wallet: dbUser.web3Wallet,
       }
     },
   },

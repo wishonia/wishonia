@@ -4,6 +4,7 @@ import { z } from "zod"
 import { authOptions } from "@/lib/auth"
 import { db } from "@/lib/db"
 import { userNameSchema } from "@/lib/validations/user"
+import {handleError} from "@/lib/errorHandler";
 
 const routeContextSchema = z.object({
   params: z.object({
@@ -32,17 +33,13 @@ export async function PATCH(
         id: session.user.id,
       },
       data: {
-        name: payload.name,
+        username: payload.username,
         updatedAt: new Date(),
       },
     })
 
     return new Response(null, { status: 200 })
   } catch (error) {
-    if (error instanceof z.ZodError) {
-      return new Response(JSON.stringify(error.issues), { status: 422 })
-    }
-
-    return new Response(null, { status: 500 })
+    return handleError(error)
   }
 }

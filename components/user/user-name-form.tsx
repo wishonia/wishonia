@@ -24,7 +24,7 @@ import { toast } from "@/components/ui/use-toast"
 import { Icons } from "@/components/icons"
 
 interface UserNameFormProps extends React.HTMLAttributes<HTMLFormElement> {
-  user: Pick<User, "id" | "name">
+  user: Pick<User, "id" | "username">
 }
 
 type FormData = z.infer<typeof userNameSchema>
@@ -38,7 +38,7 @@ export function UserNameForm({ user, className, ...props }: UserNameFormProps) {
   } = useForm<FormData>({
     resolver: zodResolver(userNameSchema),
     defaultValues: {
-      name: user?.name || "",
+      username: user?.username || "",
     },
   })
   async function onSubmit(data: FormData) {
@@ -48,7 +48,7 @@ export function UserNameForm({ user, className, ...props }: UserNameFormProps) {
         "Content-Type": "application/json",
       },
       body: JSON.stringify({
-        name: data.name,
+        username: data.username,
       }),
     })
 
@@ -87,10 +87,10 @@ export function UserNameForm({ user, className, ...props }: UserNameFormProps) {
               id="name"
               className="w-full lg:w-[400px]"
               size={32}
-              {...register("name")}
+              {...register("username")}
             />
-            {errors?.name && (
-              <p className="px-1 text-xs text-red-600">{errors.name.message}</p>
+            {errors?.username && (
+              <p className="px-1 text-xs text-red-600">{errors.username.message}</p>
             )}
           </div>
         </CardContent>

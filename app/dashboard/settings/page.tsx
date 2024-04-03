@@ -27,7 +27,7 @@ export default async function SettingsPage() {
         text="Manage account and app settings."
       />
       <div className="grid grid-cols-1 gap-6">
-        <UserNameForm user={{ id: user.id, name: user.name || "" }} />
+        <UserNameForm user={{ id: user.id, username: user.username || "" }} />
         <AppearanceForm />
       </div>
     </Shell>
