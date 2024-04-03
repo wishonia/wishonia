@@ -4,10 +4,10 @@ services:
     image: postgres:13
     restart: always
     environment:
-      POSTGRES_USER: test_user
-      POSTGRES_PASSWORD: test_password
-      POSTGRES_DB: test_db
+      POSTGRES_USER: user
+      POSTGRES_PASSWORD: pass
+      POSTGRES_DB: wishonia_test
     ports:
-      - 5432:5432
+      - "5432:5432"
     volumes:
       - ./data:/var/lib/postgresql/data

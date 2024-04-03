@@ -9,10 +9,10 @@ datasource db {
 
 model Account {
   id                String   @id @default(cuid())
-  userId            String   @map(name: "user_id")
+  userId            String   @map("user_id")
   type              String
   provider          String
-  providerAccountId String   @map(name: "provider_account_id")
+  providerAccountId String   @map("provider_account_id")
   refresh_token     String?  @db.Text
   access_token      String?  @db.Text
   expires_at        Int?
@@ -20,69 +20,69 @@ model Account {
   scope             String?
   id_token          String?  @db.Text
   session_state     String?
-  createdAt         DateTime @default(now()) @map(name: "created_at")
-  updatedAt         DateTime @updatedAt @map(name: "updated_at")
-
-  user User @relation(fields: [userId], references: [id], onDelete: Cascade)
+  createdAt         DateTime @default(now()) @map("created_at")
+  updatedAt         DateTime @updatedAt @map("updated_at")
+  user              User     @relation(fields: [userId], references: [id], onDelete: Cascade)
 
   @@unique([provider, providerAccountId])
-  @@map(name: "accounts")
+  @@map("accounts")
 }
 
 model Session {
   id           String   @id @default(cuid())
-  sessionToken String   @unique @map(name: "session_token")
-  userId       String   @map(name: "user_id")
+  sessionToken String   @unique @map("session_token")
+  userId       String   @map("user_id")
   expires      DateTime
   user         User     @relation(fields: [userId], references: [id], onDelete: Cascade)
 
-  @@map(name: "sessions")
+  @@map("sessions")
 }
 
 model User {
-  id                       String    @id @default(cuid())
+  id                       String     @id @default(cuid())
   address                  String?
   badges                   Json?
   banned                   Boolean?
   birthday                 DateTime?
   city                     String?
-  countryCode              String?
-  createdAt                DateTime  @default(now())
-  deletedAt                DateTime?
-  email                    String?   @unique
-  emailVerified            DateTime?
-  emailValidated           Boolean   @default(false)
-  firstName                String?
-  gdprConsent              Boolean   @default(false)
+  countryCode              String?    @map("country_code")
+  createdAt                DateTime   @default(now()) @map("created_at")
+  deletedAt                DateTime?  @map("deleted_at")
+  email                    String?    @unique
+  emailVerified            DateTime?  @map("email_verified")
+  emailValidated           Boolean    @default(false) @map("email_validated")
+  firstName                String?    @map("first_name")
+  gdprConsent              Boolean    @default(false) @map("gdpr_consent")
   gender                   String?
   image                    String?
-  ipAddress                String?   @db.VarChar(45)
+  ipAddress                String?    @map("ip_address") @db.VarChar(45)
   language                 String?
-  lastName                 String?
-  lastSignInAt             BigInt?
+  lastName                 String?    @map("last_name")
+  lastSignInAt             BigInt?    @map("last_sign_in_at")
   name                     String?
-  newsletterSubscribed     Boolean   @default(false)
-  phoneNumber              String?
+  newsletterSubscribed     Boolean    @default(false) @map("newsletter_subscribed")
+  phoneNumber              String?    @map("phone_number")
   points                   Int?
-  postalCode               String?
-  primaryWeb3WalletAddress String?
-  profileImageUrl          String?
-  referrerUserId           String?
-  signatureTimestamp       DateTime  @default(now())
-  signedPetition           Boolean   @default(false)
-  stateProvince            String?
-  updatedAt                DateTime  @updatedAt
-  username                 String    @unique @default(uuid())
-  warPercentageDesired     Float?
-  warPercentageGuessed     Float?
-  web3Wallet               String?
-  unsafeMetadata           Json?
-  publicMetadata           Json?
-  privateMetadata          Json?
+  postalCode               String?    @map("postal_code")
+  primaryWeb3WalletAddress String?    @map("primary_web3_wallet_address")
+  profileImageUrl          String?    @map("profile_image_url")
+  referrerUserId           String?    @map("referrer_user_id")
+  signatureTimestamp       DateTime   @default(now()) @map("signature_timestamp")
+  signedPetition           Boolean    @default(false) @map("signed_petition")
+  stateProvince            String?    @map("state_province")
+  updatedAt                DateTime   @updatedAt @map("updated_at")
+  username                 String     @unique @default(uuid())
+  warPercentageDesired     Float?     @map("war_percentage_desired")
+  warPercentageGuessed     Float?     @map("war_percentage_guessed")
+  web3Wallet               String?    @map("web3_wallet")
+  unsafeMetadata           Json?      @map("unsafe_metadata")
+  publicMetadata           Json?      @map("public_metadata")
+  privateMetadata          Json?      @map("private_metadata")
+  accounts                 Account[]
+  sessions                 Session[]
+  activities               Activity[]
 
-  accounts   Account[]
-  sessions   Session[]
-  activities Activity[]
+  @@map("users")
 }
 
 model VerificationToken {
@@ -91,31 +91,29 @@ model VerificationToken {
   expires    DateTime
 
   @@unique([identifier, token])
+  @@map("verification_tokens")
 }
 
 model Activity {
-  id          String   @id @default(cuid())
-  userId      String   @map(name: "user_id")
-  name        String
-  description String?
-  colorCode   String   @map(name: "color_code")
-  createdAt   DateTime @default(now()) @map(name: "created_at")
-  updatedAt   DateTime @updatedAt @map(name: "updated_at")
-
-  user User @relation(fields: [userId], references: [id])
-
+  id           String        @id @default(cuid())
+  userId       String        @map("user_id")
+  name         String
+  description  String?
+  colorCode    String        @map("color_code")
+  createdAt    DateTime      @default(now()) @map("created_at")
+  updatedAt    DateTime      @updatedAt @map("updated_at")
+  user         User          @relation(fields: [userId], references: [id])
   activityLogs ActivityLog[]
 
-  @@map(name: "activities")
+  @@map("activities")
 }
 
 model ActivityLog {
   id         String   @id @default(cuid())
-  activityId String   @map(name: "activity_id")
+  activityId String   @map("activity_id")
   date       DateTime @default(now())
   count      Int      @default(1)
+  activity   Activity @relation(fields: [activityId], references: [id])
 
-  activity Activity @relation(fields: [activityId], references: [id])
-
-  @@map(name: "activity_log")
+  @@map("activity_log")
 }
