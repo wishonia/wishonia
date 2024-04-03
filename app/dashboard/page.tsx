@@ -15,6 +15,7 @@ import { DateRangePicker } from "@/components/date-range-picker"
 import { Shell } from "@/components/layout/shell"
 import { DashboardCards } from "@/components/pages/dashboard/dashboard-cards"
 import { DashboardHeader } from "@/components/pages/dashboard/dashboard-header"
+import BarChart from "@/components/bar-chart";
 
 export const metadata: Metadata = {
   title: "Dashboard",
@@ -48,9 +49,13 @@ export default async function Dashboard({ searchParams }: DashboardProps) {
 
   return (
     <Shell>
-      <DashboardHeader heading="Dashboard" text="Monitor your progress.">
-        <DateRangePicker />
+      <DashboardHeader heading="Current Results"
+                       text="Here's how the average person would balance resources">
       </DashboardHeader>
+        <div style={{ display: 'flex', justifyContent: 'space-between' }}>
+          <BarChart warPercentageDesired={dashboardData.averageWarPercentageDesired} />
+          <BarChart warPercentageDesired={dashboardData.averageWarPercentageDesired} />
+        </div>
       <div className={layout}>
         <ScrollArea className={scrollClass}>
           <div className="divide-y divide-border">

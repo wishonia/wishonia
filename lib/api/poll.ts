@@ -1,3 +1,5 @@
+import { db } from "@/lib/db"
+
 // Calculate the average warPercentageDesired
 export async function getAverageWarPercentageDesired(): Promise<number> {
   const result = await db.user.aggregate({
