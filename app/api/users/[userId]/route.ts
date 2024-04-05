@@ -12,6 +12,13 @@ const routeContextSchema = z.object({
   }),
 })
 
+interface DatabaseError extends Error {
+  code: string;
+  meta?: {
+    target?: string[];
+  };
+}
+
 export async function PATCH(
   req: Request,
   context: z.infer<typeof routeContextSchema>
@@ -28,15 +35,23 @@ export async function PATCH(
     const body = await req.json()
     const payload = userNameSchema.parse(body)
 
-    await db.user.update({
-      where: {
-        id: session.user.id,
-      },
-      data: {
-        username: payload.username,
-        updatedAt: new Date(),
-      },
-    })
+    try {
+      await db.user.update({
+        where: {
+          id: session.user.id,
+        },
+        data: {
+          username: payload.username,
+          updatedAt: new Date(),
+        },
+      })
+    } catch (error) {
+      const dbError = error as DatabaseError;
+      if (dbError.code === 'P2002' && dbError.meta?.target?.includes('username')) {
+        return new Response(JSON.stringify({ message: "Username is already taken" }), { status: 409, headers: { 'Content-Type': 'application/json' } })
+      }
+      throw error;
+    }
 
     return new Response(null, { status: 200 })
   } catch (error) {

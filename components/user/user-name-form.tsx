@@ -35,6 +35,7 @@ export function UserNameForm({ user, className, ...props }: UserNameFormProps) {
     handleSubmit,
     register,
     formState: { errors, isSubmitting },
+    setError,
   } = useForm<FormData>({
     resolver: zodResolver(userNameSchema),
     defaultValues: {
@@ -52,10 +53,15 @@ export function UserNameForm({ user, className, ...props }: UserNameFormProps) {
       }),
     })
 
-    if (!response?.ok) {
+    if (!response.ok) {
+      const errorData = await response.json();
+      setError("username", {
+        type: "server",
+        message: errorData.message || "An error occurred. Please try again.",
+      });
       return toast({
-        title: "Something went wrong.",
-        description: "Your name was not updated. Please try again.",
+        title: "Error updating username.",
+        description: errorData.message || "Your name was not updated. Please try again.", // Use the message from the response
         variant: "destructive",
       })
     }
@@ -80,11 +86,11 @@ export function UserNameForm({ user, className, ...props }: UserNameFormProps) {
         </CardHeader>
         <CardContent>
           <div className="grid gap-1">
-            <Label className="sr-only" htmlFor="name">
-              Name
+            <Label className="sr-only" htmlFor="username">
+            Username
             </Label>
             <Input
-              id="name"
+              id="username"
               className="w-full lg:w-[400px]"
               size={32}
               {...register("username")}
