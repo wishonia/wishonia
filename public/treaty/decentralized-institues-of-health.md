@@ -1,3 +1,6 @@
+
+
+
 # Decentralized Institutes of Health
 
 By harnessing decentralized science (DeSci), artificial intelligence (AI), and leveraging the Gitcoin Grants Stack, the Decentralized Institutes of Health (DIH) aims to facilitate a significant reallocation of resources and human capital from defense to the development of medical breakthroughs. This initiative is uniquely funded through an innovative model, redirecting 1% of every country's military budget towards transformative health advancements, signifying a collective commitment to fostering a healthier future.
