@@ -15,12 +15,6 @@ export default async function Post({ params }: Params) {
   if (!post) {
     return notFound();
   }
-  const updatedMarkdown = post.content.replace(/!\[(.*?)\]\((.*?)\)/g, (match, altText, url) => {
-    if (!url.startsWith('/') && !url.startsWith('http')) {
-      url = '/' + url;
-    }
-    return `![${altText}](${url})`;
-  });
 
   const content = await markdownToHtml(updatedMarkdown || "");
 
