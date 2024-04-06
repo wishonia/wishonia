@@ -1,6 +1,16 @@
-# Global Cost Of Disease
+---
+title: "Global Cost Of Disease"
+excerpt: "The **$244 trillion** annual total global cost of disease encompasses direct healthcare costs, indirect economic losses, and the $100k valuation of a Year of Life Lost (YLL) and a $100k valuation Disability-Adjusted Life Year (DALYs). "
+coverImage: "/treaty/cost-of-disease.png"
+date: "2024-03-16T05:35:07.322Z"
+author:
+  name: Mike P. Sinn
+  picture: "/assets/blog/authors/mike.png"
+ogImage:
+  url: "/treaty/cost-of-disease.png"
+---
 
-The **$244 trillion** annual total global cost of disease is a comprehensive measure that encompasses direct healthcare costs, indirect economic losses, and the $100k valuation of a Year of Life Lost (YLL) and a $100k valuation Disability-Adjusted Life Year (DALYs). 
+The **$244 trillion** annual total global cost of disease encompasses direct healthcare costs, indirect economic losses, and the $100k valuation of a Year of Life Lost (YLL) and a $100k valuation Disability-Adjusted Life Year (DALYs). 
 
 ## Direct Healthcare Costs
 
