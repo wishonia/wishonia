@@ -15,8 +15,15 @@ export default async function Post({ params }: Params) {
   if (!post) {
     return notFound();
   }
+  const updatedMarkdown = post.content.replace(/!\[(.*?)\]\((.*?)\)/g, (match, altText, url) => {
+    if (!url.startsWith('/') && !url.startsWith('http')) {
+      url = '/' + url;
+    }
+    return `![${altText}](${url})`;
+  });
 
-  const content = await markdownToHtml(post.content || "");
+  const content = await markdownToHtml(updatedMarkdown || "");
+
 
   return (
     <main>
@@ -50,7 +57,7 @@ export function generateMetadata({ params }: Params): Metadata {
     return notFound();
   }
 
-  const title = `${post.title} | Next.js Blog Example with ${CMS_NAME}`;
+  const title = `${post.title}`;
 
   return {
     title,
