@@ -1,4 +1,14 @@
-# Cost to Create a Decentralized Institute of Health DAO
+---
+title: "Cost to Create a Decentralized Institute of Health DAO"
+excerpt: "Global military spending nearly doubled from $1.1 trillion in 2000 to $1.9 trillion in 2020 (in 2020 inflation-adjusted dollars). This is an average increase of $3.9% or $42 billion a year."
+coverImage: "/treaty/military-spending-scenarios-chart.png"
+date: "2024-03-16T05:35:07.322Z"
+author:
+name: Mike P. Sinn
+picture: "/assets/blog/authors/mike.png"
+ogImage:
+url: "/treaty/military-spending-scenarios-chart.png"
+---
 
 To estimate the cost of creating a DAO like ConstitutionDAO to get initial funding, we need to consider the various expenses involved in setting up and running the DAO. Let's break it down:
 

@@ -4,7 +4,7 @@ import matter from "gray-matter";
 import { join } from "path";
 
 //const postsDirectory = join(process.cwd(), "_posts");
-const postsDirectory = join(process.cwd(), "public/treaty");
+const postsDirectory = join(process.cwd(), "public");
 
 export function getPostSlugs() {
   return fs.readdirSync(postsDirectory).filter(file => file.endsWith('.md'));
