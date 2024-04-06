@@ -24,6 +24,10 @@ export function DateRangePicker({
   const pathname = usePathname()
   const searchParams = useSearchParams()
 
+    if(!searchParams) {
+        throw new Error("searchParams is not defined")
+    }
+
   const from = searchParams.get("from")
   const to = searchParams.get("to")
 

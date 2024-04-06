@@ -6,6 +6,7 @@ import { zodResolver } from "@hookform/resolvers/zod"
 import { User } from "@prisma/client"
 import { useForm } from "react-hook-form"
 import * as z from "zod"
+import { useEffect, useState } from "react"
 
 import { cn } from "@/lib/utils"
 import { userNameSchema } from "@/lib/validations/user"
@@ -36,12 +37,22 @@ export function UserNameForm({ user, className, ...props }: UserNameFormProps) {
     register,
     formState: { errors, isSubmitting },
     setError,
+    watch,
   } = useForm<FormData>({
     resolver: zodResolver(userNameSchema),
     defaultValues: {
       username: user?.username || "",
     },
   })
+
+  const username = watch("username");
+  const [shareLink, setShareLink] = useState('');
+
+  useEffect(() => {
+    // This will only be executed on the client side where `window` is defined
+    setShareLink(`${window.location.origin}/${username}`);
+  }, [username]); // Update the share link whenever the username changes
+
   async function onSubmit(data: FormData) {
     const response = await fetch(`/api/users/${user.id}`, {
       method: "PATCH",
@@ -73,6 +84,13 @@ export function UserNameForm({ user, className, ...props }: UserNameFormProps) {
     router.refresh()
   }
 
+  async function copyToClipboard() {
+    await navigator.clipboard.writeText(shareLink);
+    toast({
+      description: "Link copied to clipboard!",
+    });
+  }
+
   return (
     <form
       className={cn(className)}
@@ -98,6 +116,27 @@ export function UserNameForm({ user, className, ...props }: UserNameFormProps) {
             {errors?.username && (
               <p className="px-1 text-xs text-red-600">{errors.username.message}</p>
             )}
+            {/* Sharing Link Box */}
+            <div className="mt-4">
+              <Label htmlFor="shareLink">Your Share Link</Label>
+              <div className="flex items-center space-x-2">
+                <Input
+                  id="shareLink"
+                  className="w-full lg:w-[400px]"
+                  size={32}
+                  value={shareLink}
+                  readOnly
+                />
+                <button
+                  type="button"
+                  onClick={copyToClipboard}
+                  className="p-2 text-white bg-blue-500 rounded hover:bg-blue-600"
+                >
+                  Copy
+                </button>
+              </div>
+              <p className="mt-2 text-sm text-gray-600">Earn a $WISH for each person you persuade to vote in the poll with your URL.</p>
+            </div>
           </div>
         </CardContent>
         <CardFooter>

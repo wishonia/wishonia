@@ -7,7 +7,6 @@ import { LayoutDashboard, MessageSquare, Settings } from "lucide-react";
 import { usePathname } from "next/navigation";
 
 import { cn } from "@/lib/utils";
-import { SignatureCounter } from "@/components/signature-counter";
 
 const poppins = Montserrat ({ weight: '600', subsets: ['latin'] });
 
@@ -69,10 +68,6 @@ export const Sidebar = ({
           ))}
         </div>
       </div>
-      <SignatureCounter 
-        voteCount={signatureCount} 
-        isDonor={isDonor}
-      />
     </div>
   );
 };
