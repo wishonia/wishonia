@@ -1,7 +1,6 @@
 import { Metadata } from "next";
 import { notFound } from "next/navigation";
 import { getAllPosts, getPostBySlug } from "@/lib/api";
-import { CMS_NAME } from "@/lib/constants";
 import markdownToHtml from "@/lib/markdownToHtml";
 import Alert from "@/app/_components/alert";
 import Container from "@/app/_components/container";
@@ -16,12 +15,11 @@ export default async function Post({ params }: Params) {
     return notFound();
   }
 
-  const content = await markdownToHtml(updatedMarkdown || "");
+  const content = await markdownToHtml(post.content || "");
 
 
   return (
-    <main>
-      <Alert preview={post.preview} />
+    <div>
       <Container>
         <Header />
         <article className="mb-32">
@@ -34,7 +32,7 @@ export default async function Post({ params }: Params) {
           <PostBody content={content} />
         </article>
       </Container>
-    </main>
+    </div>
   );
 }
 
