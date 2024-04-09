@@ -5,17 +5,9 @@ import { getDashboardData } from "@/lib/api/dashboard"
 import { authOptions } from "@/lib/auth"
 import { getCurrentUser } from "@/lib/session"
 import { dateRangeParams } from "@/lib/utils"
-import { ScrollArea } from "@/components/ui/scroll-area"
-import { ActivityList } from "@/components/activity/activity-list"
-import { logColumns } from "@/components/activity/logs/logs-columns"
-import { LineChartComponent } from "@/components/charts/linechart"
-import { PieChartComponent } from "@/components/charts/piechart"
-import { DataTable } from "@/components/data-table"
-import { DateRangePicker } from "@/components/date-range-picker"
 import { Shell } from "@/components/layout/shell"
-import { DashboardCards } from "@/components/pages/dashboard/dashboard-cards"
-import { DashboardHeader } from "@/components/pages/dashboard/dashboard-header"
 import BarChart from "@/components/bar-chart";
+import SpendingOnDiseasesVsMilitary from "@/components/charts/spending-on-diseases-vs-military";
 
 export const metadata: Metadata = {
   title: "Dashboard",
@@ -71,6 +63,7 @@ export default async function Dashboard({ searchParams }: DashboardProps) {
                     <BarChart warPercentageDesired={95} labelsPosition={"bottom"}/>
                 </div>
             </div>
+            <SpendingOnDiseasesVsMilitary></SpendingOnDiseasesVsMilitary>
         </div>
     </Shell>
   )

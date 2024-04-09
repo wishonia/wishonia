@@ -46,6 +46,7 @@
     "autoprefixer": "10.4.17",
     "axios": "^1.6.8",
     "chart.js": "^4.4.2",
+    "chartjs-plugin-datalabels": "^2.2.0",
     "class-variance-authority": "^0.7.0",
     "classnames": "^2.5.1",
     "clsx": "^2.1.0",
