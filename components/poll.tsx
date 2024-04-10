@@ -19,7 +19,7 @@ export const Poll = () => {
   };
 
 return (
-    <div className="text-black font-bold py-4 text-center container flex flex-col px-2">
+    <div className="font-bold py-4 text-center container flex flex-col px-2">
         <p className="text-sm md:text-xl px-4 pb-1">
             Global Referendum on
         </p>
@@ -46,8 +46,8 @@ return (
         <Link href={"/signup"}>
             <Button
                 //onClick={() => handleClick()}
-                className="text-xl p-6 md:p-8 rounded-full font-semibold bg-black text-white hover:bg-white
-                hover:text-black hover:border hover:border-black mt-2"
+                className="text-xl p-6 md:p-8 rounded-full font-semibold
+                 hover:border hover:border-black mt-2"
             >
                 Vote to See Results
             </Button>
