@@ -55,15 +55,17 @@ export default async function Dashboard({ searchParams }: DashboardProps) {
                 </div>
             </div>
             <div style={{display: 'flex', justifyContent: 'center'}}>
-                <div className="p-2 border-2 border-black mr-1">
+                <div className="p-2 border-2 border-black mr-1 bg-white text-black">
                     <BarChart warPercentageDesired={dashboardData.averageWarPercentageDesired}
                               labelsPosition={"bottom"}/>
                 </div>
-                <div className="p-2 border-2 border-black ml-1">
+                <div className="p-2 border-2 border-black ml-1 bg-white text-black">
                     <BarChart warPercentageDesired={95} labelsPosition={"bottom"}/>
                 </div>
             </div>
-            <SpendingOnDiseasesVsMilitary></SpendingOnDiseasesVsMilitary>
+            <div className={"bg-white text-black p-5"}>
+                <SpendingOnDiseasesVsMilitary></SpendingOnDiseasesVsMilitary>
+            </div>
         </div>
     </Shell>
   )

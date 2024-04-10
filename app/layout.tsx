@@ -73,7 +73,7 @@ export default async function RootLayout({ children }: RootLayoutProps) {
   return (
     <html lang="en" suppressHydrationWarning>
       <body className={cn("antialiased", inter.className)}>
-        <ThemeProvider attribute="class" defaultTheme="dark" enableSystem>
+        <ThemeProvider attribute="class" defaultTheme="light" enableSystem>
           <NextTopLoader color="#DC2645" height={2.5} showSpinner={false} />
           <div
             vaul-drawer-wrapper=""
