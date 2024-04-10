@@ -55,8 +55,8 @@ const options = {
       display: false // Set false to hide the legend
     },
     datalabels: {
-      align: 'end',
-      anchor: 'end',
+      align: 'end' as const,
+      anchor: 'end' as const, // Explicitly type as 'end'
       formatter: (value: any, context: any) => {
         return '$' + value + 'B';
       },
