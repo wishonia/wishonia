@@ -3,6 +3,7 @@ import "./globals.css"
 import { Metadata, Viewport } from "next"
 import { Inter } from "next/font/google"
 import NextTopLoader from "nextjs-toploader"
+import { Analytics } from "@vercel/analytics/react"
 
 import { siteConfig } from "@/config/site"
 import { cn } from "@/lib/utils"
@@ -82,6 +83,7 @@ export default async function RootLayout({ children }: RootLayoutProps) {
           </div>
           <Toaster />
         </ThemeProvider>
+        <Analytics />
       </body>
     </html>
   )
