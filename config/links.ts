@@ -3,19 +3,19 @@ import { Navigation } from "@/types"
 export const navLinks: Navigation = {
   data: [
     {
-      title: "Home",
+      title: "Referendum",
       href: "/",
     },
+    // {
+    //   title: "Features",
+    //   href: "/#features",
+    // },
+    // {
+    //   title: "Overview",
+    //   href: "/#overview",
+    // },
     {
-      title: "Features",
-      href: "/#features",
-    },
-    {
-      title: "Overview",
-      href: "/#overview",
-    },
-    {
-      title: "Dashboard",
+      title: "Results",
       href: "/dashboard",
     },
   ],

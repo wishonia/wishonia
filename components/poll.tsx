@@ -34,11 +34,13 @@ return (
                 Adjust how much governments globally should allocate to war/military vs helping the 2 billion people suffering from chronic diseases (like Grandma Kay).
             </div>
         </div>
-        <div style={{display: 'flex', justifyContent: 'center', alignItems: 'center', marginBottom: '15px'}}>
-            <div id="chart-and-slider-container" className="px-4 lg:px-8" style={{maxWidth: '600px'}}>
+        <div style={{display: 'flex', justifyContent: 'center', alignItems: 'center'}}>
+            <div id="chart-and-slider-container"
+                className="px-4 lg:px-8"
+                style={{maxWidth: '300px'}}>
                 <BarChart warPercentageDesired={warPercentageDesired}/>
                 <Input type="range" min="0" max="100" value={researchPercentageDesired.toString()}
-                       onChange={handleSliderChange}/>
+                    onChange={handleSliderChange}/>
                 <div>
                     <span style={{float: 'left'}}>👈 More War</span>
                     <span style={{float: 'right'}}>More Cures 👉</span>
