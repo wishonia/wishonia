@@ -9,14 +9,11 @@ interface ChartContainerProps {
 // New BarChart component
 const BarChart: React.FC<ChartContainerProps> = ({ warPercentageDesired, labelsPosition = 'top' }) => {
   const researchPercentageDesired = 100 - warPercentageDesired;
-  const [warImages, setWarImages] = useState([]);
+  let [warImages, setWarImages] = useState<string[]>([]);
   const [currentImageIndex, setCurrentImageIndex] = useState(0);
   // Extract backgroundImage to a variable, initially set to an empty string
-  let backgroundImage = warImages.length > 0 ? `url(${warImages[currentImageIndex]})` : '';
-  if(!backgroundImage){
-      backgroundImage = '';
-      console.error('No background image found. warImages: ' + JSON.stringify(warImages));
-  }
+    const img =  warImages.length > 0 ? warImages[currentImageIndex] : '/img/war/vietnam.jpg';
+  const backgroundImage = warImages.length > 0 ? `url(${img})` : '';
 
   useEffect(() => {
     fetch('/api/warImages')
@@ -33,11 +30,15 @@ const BarChart: React.FC<ChartContainerProps> = ({ warPercentageDesired, labelsP
 
     return (
         <div id="chart-container"
-             style={{ marginBottom: '5px'}}>
+             style={{display: 'flex', justifyContent: 'center', marginBottom: '5px'}}>
             <div style={{
+                display: 'flex',
+                flexDirection: 'column',
+                alignItems: 'center',
+                width: '100%',
                 maxWidth: '600px',
-                minWidth: '300px',
                 height: '200px',
+                justifyContent: 'flex-end'
             }}>
                 <div style={{display: 'flex', width: '100%', justifyContent: 'space-between', height: '100%'}}>
                     <div style={{
@@ -59,7 +60,8 @@ const BarChart: React.FC<ChartContainerProps> = ({ warPercentageDesired, labelsP
                                  backgroundColor: 'black',
                                  width: '100%',
                                  backgroundImage: backgroundImage,
-                                 backgroundSize: 'cover'
+                                 backgroundSize: 'cover',
+                                 backgroundPosition: 'center' // Adjusts the background image to be centered
                              }}>
                         </div>
                     </div>

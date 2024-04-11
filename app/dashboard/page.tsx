@@ -7,7 +7,7 @@ import { getCurrentUser } from "@/lib/session"
 import { dateRangeParams } from "@/lib/utils"
 import { Shell } from "@/components/layout/shell"
 import BarChart from "@/components/bar-chart";
-import SpendingOnDiseasesVsMilitary from "@/components/charts/spending-on-diseases-vs-military";
+import SpendingOnDiseasesVsMilitary from "@/components/charts/spending-on-diseases-vs-military-chartsjs";
 
 export const metadata: Metadata = {
   title: "Dashboard",

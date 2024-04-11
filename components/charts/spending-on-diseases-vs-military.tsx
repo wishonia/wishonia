@@ -1,133 +1,83 @@
 "use client";
 
-import React, {useEffect, useState} from 'react';
-import { Bar } from 'react-chartjs-2';
-import ChartDataLabels from 'chartjs-plugin-datalabels';
-import { Chart, CategoryScale, LinearScale, BarElement, Title, Tooltip, Legend } from 'chart.js';
-
-Chart.register(CategoryScale, LinearScale, BarElement, Title, Tooltip, Legend, ChartDataLabels);
-const blue = 'rgb(0,0,243)';
-const data = {
-  labels: [
-    'Military Spending',
-    'Cardiovascular diseases',
-    'Neoplasms (Cancers)',
-    'Mental disorders',
-    'Chronic respiratory diseases',
-    'Neurological disorders',
-    //'Diabetes/Urogenital/Blood/Endocrine diseases',
-    'Musculoskeletal disorders',
-    //'Communicable, maternal, neonatal, and nutritional diseases',
-  ],
-  datasets: [
-    // {
-    //   label: 'Global Burden (DALYs in millions)',
-    //   data: [369.4, 233.1, 163.8, 103.1, 276.6, 205.0, 135.6, 251.0, 55.9, 513.5],
-    //   backgroundColor: 'rgba(75, 192, 192, 0.6)',
-    // },
-    {
-      label: 'Research Funding (in billions USD)',
-      data: [
-          2100, // 2021 Global Military Spending
-        2.4, 6.9, 1.0, 0.7, 3.0,
-        //1.2,
-        0.5,
-        //3.5,
-      ],
-      backgroundColor: [
-        'rgba(0, 0, 0, 1)', // color for 'Military Spending'
-        blue, // color for 'Cardiovascular diseases'
-        blue, // color for 'Neoplasms (Cancers)'
-        blue, // color for 'Mental disorders'
-        blue, // color for 'Chronic respiratory diseases'
-        blue, // color for 'Neurological disorders'
-        blue, // color for 'Diabetes/Urogenital/Blood/Endocrine diseases'
-        blue, // color for 'Musculoskeletal disorders'
-        blue, // color for 'Communicable, maternal, neonatal, and nutritional diseases'
-      ],
-    },
-  ],
-};
-
-const options = {
-  plugins: {
-    legend: {
-      display: false // Set false to hide the legend
-    },
-    datalabels: {
-      align: 'end' as const,
-      anchor: 'end' as const, // Explicitly type as 'end'
-      formatter: (value: any, context: any) => {
-        return '$' + value + 'B';
-      },
-      color: '#000',
-      font: {
-        size: 10,
-      }
-    },
-    hooks: {
-      // Doesn't work as expected
-      afterDraw: (chart: { chartArea: any; config: { options: { scales: { y: { ticks: { sourcePixelSize: number; }; }; }; }; }; ctx: { drawImage: (arg0: HTMLImageElement, arg1: any, arg2: number, arg3: number, arg4: number) => void; }; }, args: { datasets: any[]; }) => {
-        debugger
-        const svgCode = ''; // Replace with your SVG code
-        const image = new Image();
-        image.src = 'data:image/svg+xml;base64,' + btoa(svgCode); // Convert SVG to base64
-
-        const chartArea = chart.chartArea;
-        const barWidth = chartArea.width / args.datasets.length;
-        let xOffset = chartArea.left;
-
-        args.datasets.forEach((dataset, index) => {
-          const x = xOffset + (barWidth * index) + (barWidth / 2); // Adjust position as needed
-          const y = chartArea.bottom - dataset.data[index] * chart.config.options.scales.y.ticks.sourcePixelSize; // Calculate Y based on data
-
-          const width = 20; // Adjust as needed
-            const height = 20; // Adjust as needed
-          chart.ctx.drawImage(image, x, y, width, height); // Adjust width and height for SVG size
-          xOffset += barWidth;
-        });
-      }
-    }
-  },
-  scales: {
-    x: {
-      grid: {
-        display: false, // This will remove the grid lines from the x-axis
-      },
-    },
-    y: {
-      beginAtZero: true,
-      grid: {
-        display: false, // This will remove the grid lines from the y-axis
-      },
-      max: 2150,
-    },
-  },
-  maintainAspectRatio: false, // Add this line
-};
-
+import React, { useEffect, useRef } from 'react';
 
 const SpendingOnDiseasesVsMilitary = () => {
-  const [height, setHeight] = useState('0px');
+  const chartContainerRef = useRef<HTMLDivElement>(null);
 
   useEffect(() => {
-    const headerHeight = document.querySelector('h2')?.clientHeight || 0;
-    const screenHeight = window.innerHeight;
-    const minHeight = 600;
-    const chartHeight = Math.max(screenHeight - headerHeight, minHeight);
-    setHeight(`${chartHeight}px`);
-  }, []);
+    if (chartContainerRef.current) {
+      const chartHeight = chartContainerRef.current.offsetHeight;
+      if (chartHeight > 0) {
+        drawChart(chartHeight);
+      }
+    }
+  }, [chartContainerRef.current]); // Depend on the ref's current value
+
+  const drawChart = (chartHeight: number) => {
+    const data = [
+      { label: 'Military Spending', value: 2100, color: 'rgba(0, 0, 0, 1)' },
+      { label: 'Cardiovascular diseases', value: 2.4, color: 'rgb(0, 0, 243)' },
+      { label: 'Neoplasms (Cancers)', value: 6.9, color: 'rgb(0, 0, 243)' },
+      { label: 'Mental disorders', value: 1.0, color: 'rgb(0, 0, 243)' },
+      { label: 'Chronic respiratory diseases', value: 0.7, color: 'rgb(0, 0, 243)' },
+      { label: 'Neurological disorders', value: 3.0, color: 'rgb(0, 0, 243)' },
+      { label: 'Musculoskeletal disorders', value: 0.5, color: 'rgb(0, 0, 243)' },
+    ];
+
+    const chartContainer = chartContainerRef.current;
+    if(!chartContainer){
+      throw new Error('Could not find spending-on-diseases-vs-military-chart-container element');
+    }
+    const barWidth = 50;
+    const barGap = 20;
+    const maxValue = 2150;
+    const chartWidth = data.length * (barWidth + barGap);
+
+    chartContainer.style.width = `${chartWidth}px`;
+
+    data.forEach((item, index) => {
+      const barHeight = (item.value / maxValue) * chartHeight;
+      const bar = document.createElement('div');
+      bar.className = 'bar';
+      bar.style.width = `${barWidth}px`;
+      bar.style.height = `${barHeight}px`;
+      bar.style.backgroundColor = item.color;
+      bar.style.position = 'absolute';
+      bar.style.bottom = '0';
+      bar.style.left = `${index * (barWidth + barGap)}px`;
+
+      const label = document.createElement('div');
+      label.className = 'label';
+      label.textContent = item.label;
+      label.style.position = 'absolute';
+      label.style.bottom = '-20px';
+      label.style.left = '50%';
+      label.style.transform = 'translateX(-50%)';
+      label.style.fontSize = '12px';
+      label.style.textAlign = 'center';
+      label.style.width = `${barWidth}px`;
+
+      const value = document.createElement('div');
+      value.className = 'value';
+      value.textContent = `$${item.value}B`;
+      value.style.position = 'absolute';
+      value.style.top = '-20px';
+      value.style.left = '50%';
+      value.style.transform = 'translateX(-50%)';
+      value.style.fontSize = '12px';
+
+      bar.appendChild(label);
+      bar.appendChild(value);
+      chartContainer.appendChild(bar);
+    });
+  };
 
   return (
-    <>
-      <h2>Military Spending Compared to Spending on Research for Diseases</h2>
-      <div style={{ height: height, width: '100%'  }}>
-        <Bar
-            data={data}
-            options={options}
-        />
-      </div>
-    </>
+      <>
+        <h2>Military Spending Compared to Spending on Research for Diseases</h2>
+        <div ref={chartContainerRef} id="spending-on-diseases-vs-military-chart-container" style={{ height: 'auto', position: 'relative' }}></div>
+      </>
   );
 };
 
