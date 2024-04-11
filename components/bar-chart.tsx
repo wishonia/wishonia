@@ -12,7 +12,11 @@ const BarChart: React.FC<ChartContainerProps> = ({ warPercentageDesired, labelsP
   const [warImages, setWarImages] = useState([]);
   const [currentImageIndex, setCurrentImageIndex] = useState(0);
   // Extract backgroundImage to a variable, initially set to an empty string
-  const backgroundImage = warImages.length > 0 ? `url(${warImages[currentImageIndex]})` : '';
+  let backgroundImage = warImages.length > 0 ? `url(${warImages[currentImageIndex]})` : '';
+  if(!backgroundImage){
+      backgroundImage = '';
+      console.error('No background image found. warImages: ' + JSON.stringify(warImages));
+  }
 
   useEffect(() => {
     fetch('/api/warImages')
@@ -29,15 +33,11 @@ const BarChart: React.FC<ChartContainerProps> = ({ warPercentageDesired, labelsP
 
     return (
         <div id="chart-container"
-             style={{display: 'flex', justifyContent: 'center', marginBottom: '5px'}}>
+             style={{ marginBottom: '5px'}}>
             <div style={{
-                display: 'flex',
-                flexDirection: 'column',
-                alignItems: 'center',
-                width: '100%',
                 maxWidth: '600px',
+                minWidth: '300px',
                 height: '200px',
-                justifyContent: 'flex-end'
             }}>
                 <div style={{display: 'flex', width: '100%', justifyContent: 'space-between', height: '100%'}}>
                     <div style={{
