@@ -66,7 +66,7 @@ export async function VotersList() {
                       {user.name}
                     </p>
                     <p className="block w-full overflow-hidden text-sm text-muted-foreground whitespace-nowrap text-ellipsis">
-                      {/*{user.jobTitle ? user.jobTitle : "Firestarta"}*/}
+                      {/*{user.jobTitle ? user.jobTitle : "Wishonian Citizen"}*/}
                       {"Got "+user.referralCount+" votes"}
                     </p>
                   </div>

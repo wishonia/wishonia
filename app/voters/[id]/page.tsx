@@ -1,7 +1,6 @@
 import { getUserById } from "@/lib/prisma/users";
-import Hero from "@/components/core/hero/Hero";
-import { Section } from "@/components/core/section/Section";
-import { Card, CardContent, CardHeader } from "@/components/ui/card";
+import {Card, CardContent, CardDescription, CardHeader, CardTitle} from "@/components/ui/card";
+import { env } from "@/env.mjs"
 
 interface PageProps {
   params: {
@@ -18,7 +17,7 @@ export async function generateMetadata({ params }: PageProps) {
     };
   }
   return {
-    metadataBase: new URL(process.env.NEXT_PUBLIC_SITE_URL),
+    metadataBase: new URL(env.NEXT_PUBLIC_APP_URL),
     title: `${user.name}'s profile`,
     description: `Welcome to ${user.name}'s profile page.`,
   };
@@ -38,28 +37,18 @@ const User = async ({ params }: PageProps) => {
 
   return (
     <>
-      <Hero
-        size="sm"
-        title={user.name as string}
-        description={user?.jobTitle || "Firestarta"}
-      />
       <div className="container max-w-lg pb-20">
-        <Section>
-          <Card>
-            <CardHeader>
-              <h2 className="text-2xl font-bold">{user.name}&apos;s profile</h2>
-              <p className="text-gray-500">User details and settings.</p>
-            </CardHeader>
-            <CardContent>
-              <p>
-                Lorem ipsum dolor sit amet consectetur adipisicing elit.
-                Laudantium quam aliquam, sit veritatis sint sed corrupti ullam
-                aperiam enim quia blanditiis incidunt ex sapiente nulla velit
-                iste atque explicabo animi?
-              </p>
-            </CardContent>
-          </Card>
-        </Section>
+        <Card>
+          <CardHeader>
+            <CardTitle>{user.name as string}</CardTitle>
+            <CardDescription>{user?.jobTitle || "Wishonian Citizen"}</CardDescription>
+          </CardHeader>
+          <CardContent>
+            <p>
+              TODO: List signed wishes, referrer count, and other user details
+            </p>
+          </CardContent>
+        </Card>
       </div>
     </>
   );
