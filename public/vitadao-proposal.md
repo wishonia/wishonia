@@ -1,3 +1,19 @@
+---
+title: >-
+  A Proposal for VitaDAO to Launch the Decentralized Institutes of Health (DIH)
+  DAO
+excerpt: >-
+  Proposing the creation of the Decentralized Institutes of Health (DIH) DAO by
+  VitaDAO to redirect global military spending towards medical research through
+  decentralized collaboration.
+coverImage: vitadao-proposal.png
+#  date: ''
+author:
+  name: 'The Office of the President'
+#  picture: ''
+ogImage:
+  url: 'vitadao-proposal.png'
+---
 # A Proposal for VitaDAO to Launch the Decentralized Institutes of Health (DIH) DAO
 
 I propose that VitaDAO create the Decentralized Institutes of Health (DIH) DAO.

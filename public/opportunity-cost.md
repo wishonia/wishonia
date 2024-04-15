@@ -1,3 +1,19 @@
+---
+title: >-
+  Opportunity Cost of Military Spending: Redirecting $2 Trillion towards Health
+  Research
+excerpt: >-
+  Exploring the implications of reallocating $2 trillion from global militarism
+  to health research and treatment, potentially employing 25 million individuals
+  and transforming public health outcomes worldwide.
+coverImage: opportunity-cost.png
+#  date: 'August 25, 2021'
+author:
+  name: The Office of the President
+  # picture: author-image.jpg
+ogImage:
+  url: opportunity-cost.png
+---
 ### Opportunity Cost of Military Spending
 
 Humanity currently spends $2 trillion on militarism annually. Reallocating this $2 trillion to health research and treatment could employ approximately 25 million individuals at an average salary of $80,000. This workforce could comprise researchers, physicians, nurses, and support staff, dramatically expanding global capacity to address health crises, develop treatments, and improve public health outcomes.

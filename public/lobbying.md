@@ -1,3 +1,17 @@
+---
+title: Understanding the Return on Investment in Lobbying within the Defense Sector
+excerpt: >-
+  Explore the significant expenditures and considerable gains of defense
+  companies in lobbying efforts to influence government policies and secure
+  contracts.
+coverImage: lobbying.png
+#  date: 'December 15, 2021'
+author:
+  name: The Office of the President
+  #picture: author_image_link
+ogImage:
+  url: lobbying.png
+---
 # Return on Investment in Lobbying
 
 Defense companies globally are estimated to spend between $200 million and $300 million annually on lobbying efforts. These investments are directed towards influencing defense policy, securing contracts, and shaping military spending priorities.

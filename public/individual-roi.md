@@ -1,3 +1,16 @@
+---
+title: Individual ROI on Getting Friends to Sign the Treaty
+excerpt: >-
+  Discover how investing just 5 hours of your time can lead to significant
+  impact in garnering support for global initiatives through your friends.
+coverImage: individual-roi.png
+#  date: 'June 14, 2023'
+author:
+  name: The Office of the President
+#  picture: ''
+ogImage:
+  url: 'individual-roi.png'
+---
 # Individual ROI on Getting Friends to Sign the Treaty
 
 $1,258,412 for 5 Hours of Your Time

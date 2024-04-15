@@ -1,3 +1,16 @@
+---
+title: 'Military Spending vs. Health Research: A Brain Drain'
+excerpt: >-
+  Exploring the implications of allocating funds from military spending to
+  health research and the impact on our collective well-being.
+coverImage: why-reallocation-is-necessary.png
+#  date: '2022-11-15'
+author:
+  name: The Office of the President
+  # picture: author-image.jpg
+ogImage:
+  url: why-reallocation-is-necessary.png
+---
 ### Military Spending vs. Health Research: A Brain Drain
 
 When we talk about where our money goes, especially the big budgets like what's spent on the military, it's like choosing between two futures. One future focuses on weapons and wars, which can lead to destruction and loss of lives. The other invests in health research, aiming to cure diseases and help us live longer, healthier lives.

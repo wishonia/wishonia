@@ -1,3 +1,19 @@
+---
+title: >-
+  Optimizing Costs: Strategies to Gather 80 Million Signatures for a Global
+  Initiative
+excerpt: >-
+  Analyzing the potential cost range per signature and total estimated costs for
+  different strategies to achieve a goal of 80 million signatures for the
+  LOGICAL Treaty.
+coverImage: how-much-it-will-cost-to-make-it-happen.png
+#  date: '2023-09-15'
+author:
+  name: The Office of the President
+  #picture: your-profile-picture-url.jpg
+ogImage:
+  url: how-much-it-will-cost-to-make-it-happen.png
+---
 # How Much Will It Cost to Make It Happen?
 
 Here's the potential range of cost per signature for various strategies to gather 80 million signatures for a global initiative like the LOGICAL Treaty. Then, we'll calculate the total estimated cost for achieving this goal through each method.

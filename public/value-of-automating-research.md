@@ -1,3 +1,17 @@
+---
+title: Using AI to Automate Clinical Research and Drug Development
+excerpt: >-
+  Explore the transformative potential of Artificial General Intelligence (AGI)
+  and Artificial Superintelligence (ASI) in healthcare, projecting significant
+  cost reductions and improved treatment outcomes.
+coverImage: value-of-automating-research.png
+#  date: '2022-10-25'
+author:
+  name: The Office of the President
+#  picture: ''
+ogImage:
+  url: 'value-of-automating-research.png'
+---
 # The Using AI to Automate Clinical Research and Drug Development
 
 By redirecting 1% of military spending to automating clinical research with AI, we could enjoy a future where diseases are not just managed but potentially eradicated. 
