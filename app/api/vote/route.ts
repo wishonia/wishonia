@@ -8,7 +8,7 @@ export async function POST(
     try {
         const currentUser = await getCurrentUser();
         const body = await req.json();
-        let { warPercentageDesired  } = body;
+        let { warPercentageDesired, referrerUserId  } = body;
         // Convert string to float
         warPercentageDesired = parseFloat(warPercentageDesired);
 
@@ -16,16 +16,33 @@ export async function POST(
             return new NextResponse("Unauthorized", { status: 401 });
         }
 
+        if(referrerUserId) {
+            const referrerUser = await db.user.findFirst({
+                where: {
+                  OR: [
+                    { id: referrerUserId },
+                    { username: referrerUserId },
+                    { referrerUserId: referrerUserId }
+                  ],
+                },
+              });
+            if(referrerUser) {
+                referrerUserId = referrerUser.id
+            }
+        }
+
+        const data = {
+            warPercentageDesired: warPercentageDesired,
+            referrerUserId: referrerUserId,
+        };
         const user = await db.user.update({
             where: {
                 id: currentUser.id,
             },
-            data: {
-                warPercentageDesired: warPercentageDesired,
-            },
+            data: data,
         });
 
-        return NextResponse.json(user);
+        return NextResponse.json("stored vote "+warPercentageDesired, { status: 201 });
     } catch (error) {
         console.log('[CONVERSATION_ERROR]', error);
         return new NextResponse("Internal Error", { status: 500 });
