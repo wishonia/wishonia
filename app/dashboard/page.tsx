@@ -47,7 +47,7 @@ export default async function Dashboard({ searchParams }: DashboardProps) {
                 </div>
             </div>
             <div style={{display: 'flex', justifyContent: 'center'}}>
-                <div style={{width: "50%",  maxWidth: '200px'}}>
+                <div style={{width: "50%", maxWidth: '200px'}}>
                     <div className="text-center text-sm font-bold">What People Want</div>
                 </div>
                 <div style={{width: "48%", maxWidth: '200px'}}>

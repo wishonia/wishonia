@@ -12,9 +12,9 @@ interface NavbarProps extends React.HTMLAttributes<HTMLDivElement> {
 }
 
 export default function Navbar({ user }: NavbarProps) {
-  if(!user?.image){
-    return null
-  }
+  // if(!user?.image){
+  //   return null
+  // }
   return (
     <header className="select-none">
       <nav className="mx-auto flex items-center justify-between px-4 md:px-8 lg:max-w-7xl">
