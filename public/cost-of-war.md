@@ -1,10 +1,10 @@
 ---
 title: "The Annual Cost of War"
 excerpt: "Global military spending nearly doubled from $1.1 trillion in 2000 to $1.9 trillion in 2020 (in 2020 inflation-adjusted dollars). This is an average increase of $3.9% or $42 billion a year."
-coverImage: "/military-spending-scenarios-chart.png"
-date: "2024-03-16T05:35:07.322Z"
+# coverImage: "/military-spending-scenarios-chart.png"
+# date: "2024-03-16T05:35:07.322Z"
 author:
-    name: Mike P. Sinn
+    name: The Wishonian Bureau of Economic Research
     picture: "/assets/blog/authors/mike.png"
 ogImage:
     url: "/military-spending-scenarios-chart.png"
@@ -58,5 +58,5 @@ The comprehensive annual cost of war, factoring in both direct and indirect cost
 
 # References
 
-https://watson.brown.edu/costsofwar/costs
-https://www.carnegie.org/our-work/article/costs-war/
+1. [https://watson.brown.edu/costsofwar/costs](https://watson.brown.edu/costsofwar/costs)
+2. [https://www.carnegie.org/our-work/article/costs-war/](https://www.carnegie.org/our-work/article/costs-war/)
