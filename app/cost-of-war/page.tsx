@@ -9,8 +9,6 @@ export const metadata: Metadata = {
 
 export default async function Dashboard() {
   return (
-      <Shell>
-          <MarkdownRenderer url="/cost-of-war.md"/>
-      </Shell>
+    <MarkdownRenderer url="/cost-of-war.md"/>
   )
 }

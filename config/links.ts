@@ -38,5 +38,10 @@ export const dashboardLinks: Navigation = {
       href: "/dashboard/settings",
       icon: "settings",
     },
+    {
+      title: "Cost of War",
+      href: "/cost-of-war",
+      icon: "skull",
+    },
   ],
 }
