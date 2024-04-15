@@ -33,7 +33,17 @@ const MarkdownRenderer: FC<MarkdownRendererProps> = ({ url }) => {
                 // Use gray-matter to parse the markdown content and extract metadata
                 const { data, content: markdownContent } = matter(response.data);
                 setMetadata(data);
-                setContent(markdownContent);
+                const siteRoot = process.env.NEXT_PUBLIC_APP_URL || '';
+                        // Replace image links with absolute paths
+        const updatedMarkdownContent = markdownContent.replace(/!\[(.*?)\]\((.*?)\)/g, (match, altText, url) => {
+            // Check if the URL is already an absolute path
+            if (url.startsWith('http://') || url.startsWith('https://')) {
+                return match; // Return the original string if it's an absolute URL
+            }
+            // Return the modified string with the site root prefixed
+            return `![${altText}](${siteRoot}${url.startsWith('/') ? '' : '/'}${url})`;
+        });
+                setContent(updatedMarkdownContent);
                 setIsLoading(false);
             } catch (error) {
                 console.error('Error fetching Markdown:', error);

@@ -28,15 +28,20 @@ export const dashboardLinks: Navigation = {
       href: "/dashboard",
       icon: "dashboard",
     },
+    // {
+    //   title: "Signatures",
+    //   href: "/dashboard/activities",
+    //   icon: "activity",
+    // },
     {
-      title: "Signatures",
-      href: "/dashboard/activities",
-      icon: "activity",
-    },
-    {
-      title: "Profile",
+      title: "Profile Settings",
       href: "/dashboard/settings",
       icon: "settings",
+    },
+    {
+      title: "Voter Leaderboard",
+      href: "/voters",
+      icon: "vote",
     },
     {
       title: "Cost of War",

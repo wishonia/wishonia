@@ -8,7 +8,7 @@ import { Icons } from "@/components/icons"
 
 export default async function OpenSource() {
   const { stargazers_count: stars } = await fetch(
-    "https://api.github.com/repos/redpangilinan/Wishonia",
+    "https://api.github.com/repos/wishonia/wishonia",
     {
       next: { revalidate: 60 },
     }
