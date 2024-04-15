@@ -1,3 +1,19 @@
+---
+title: >-
+  The Decentralized Institutes of Health: Revolutionizing Healthcare Through
+  Decentralized Science and AI
+excerpt: >-
+  Exploring the transformative potential of Decentralized Institutes of Health
+  (DIH) in reallocating resources from war to medical breakthroughs using
+  blockchain, AI, and decentralized tools.
+coverImage: decentralized-institutes-of-health.png
+#  date: '2022-10-18'
+author:
+  name: Anonymous
+#  picture: ''
+ogImage:
+  url: ''
+---
 # The Decentralized Institutes of Health
 
 Through decentralized science (DeSci), artificial intelligence (AI),
@@ -120,6 +136,84 @@ Decentralized Institutes of Health (DIH) Platform
     - A comprehensive monitoring and evaluation framework assesses the impact and effectiveness of funded projects
     - Key performance indicators (KPIs) are defined and tracked to measure progress towards the platform's goals
     - Regular reporting and auditing processes ensure transparency and accountability
+
+## How the National Institutes of Health  Works
+
+```mermaid
+graph TD;
+    Congress[U.S. Congress] -->|Allocates Funds| NIH[NIH Administration];
+    NIH -->|Distributes Funds| Institutes[Various NIH Institutes];
+    NIH -->|Distributes Funds| Centers[NIH Research Centers];
+    Institutes --> Grants[Grant Programs];
+    Centers --> Contracts[Contracts];
+    Grants -->|Application Process| Review[Peer Review Process];
+    Contracts -->|Bid/Proposal Review| Review;
+    Review -->|Fund Allocation| Recipients[Grant Recipients];
+    Recipients -->|Conducts Research| Universities[Universities];
+    Recipients -->|Conducts Research| Hospitals[Hospitals];
+    Recipients -->|Conducts Research| Industries[Private Industries];
+    Universities -->|Research Outcomes| Publications[Publications];
+    Hospitals -->|Health Improvements| HealthOut[Improved Health Outcomes];
+    Industries -->|Develops Technologies| Tech[New Technologies];
+    Publications -->|Feedback| NIH;
+    HealthOut -->|Feedback| NIH;
+    Tech -->|Feedback| NIH;
+    NIH -->|Policy and Funding Decisions| Congress;
+    Recipients -->|Direct Benefits| Patients[Patients];
+    Patients -->|Feedback| Public[General Public];
+    Public -->|Support and Interest| Congress;
+
+```
+
+## How the Decentralized Institutes of Health Would Work
+
+```mermaid
+graph TD;
+    Congress -->|Allocates Funds| DIH[DIH Administration];
+    DIH -->|Distributes Funds| DAOs[Research DAOs];
+    DIH -->|Distributes Funds| TechDAOs[Technology DAOs];
+    DIH -->|Distributes Funds| PatientDAOs[Patient Advocacy DAOs];
+    DIH -->|Distributes Funds| FDAi[FDAi];
+    DAOs -->|Funds Projects| Researchers[Researchers];
+    TechDAOs -->|Funds Projects| AIProjects[AI Projects];
+    PatientDAOs -->|Funds Projects| AdvocacyProjects[Advocacy Projects];
+    FDAi -->|Funds Projects| ClinicalTrials[Clinical Trials];
+    Researchers -->|Conducts Research| Universities;
+    Researchers -->|Conducts Research| Hospitals;
+    Researchers -->|Conducts Research| Industries;
+    AIProjects -->|Develops AI Solutions| Tech;
+    AdvocacyProjects -->|Advocates for Patients| Patients;
+    ClinicalTrials -->|Facilitates Trials| Patients;
+    Universities -->|Research Outcomes| Publications;
+    Hospitals -->|Health Improvements| HealthOut;
+    Industries -->|Develops Technologies| Tech;
+    Publications -->|Feedback| DIH;
+    HealthOut -->|Feedback| DIH;
+    Tech -->|Feedback| DIH;
+    DIH -->|Policy and Funding Decisions| Congress;
+    Researchers -->|Direct Benefits| Patients;
+    Patients -->|Feedback| Public;
+    Public -->|Support and Interest| Congress;
+```
+
+## Decentralized Institutes of Health: Key Components
+
+```mermaid
+graph TD
+    A[Decentralized Institute of Health] --> B(Gitcoin Grants Stack)
+    A --> C(Quadratic Funding Rounds)
+    B --> D{Open Source Projects}
+    C --> D
+    D --> E(Project Submissions)
+    E --> |Linked to GitHub Issues| F(Developer Compensation)
+    F --> |Upon Completion and Merge| D
+    
+    G(Nonprofits) --> |Pool Funds| A
+    H(Government Agencies) --> |Pool Funds| A
+    I(DAOs) --> |Pool Funds| A
+    
+```
+
 
 3. Non-Functional Requirements
    3.1 Security

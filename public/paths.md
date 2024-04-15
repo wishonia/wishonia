@@ -1,3 +1,16 @@
+---
+title: 'Choosing Between Paths: The Urgency of the PATH Treaty'
+excerpt: >-
+  Exploring the critical juncture humanity faces in deciding between AI-driven
+  warfare or a path towards health, longevity, and global well-being.
+coverImage: paths.png
+#  date: ''
+author:
+  name: ''
+#  picture: ''
+ogImage:
+  url: 'paths.png'
+---
 # Choose Your Path
 
 The PATH Treaty stands at a critical juncture in human history, offering a stark choice between two futures: one path veers towards a precipice of destruction, fueled by an arms race of increasingly powerful artificial intelligence (AI) systems designed for warfare; the other leads to a horizon bright with the promise of health, longevity, and global well-being. The former is not just a continuation of the status quo—it's an acceleration towards potential human extinction.

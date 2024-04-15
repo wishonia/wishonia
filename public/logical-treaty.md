@@ -1,3 +1,18 @@
+---
+title: >-
+  A Logical Approach to Healthcare Innovation: The Treaty for AI-Driven Clinical
+  Research
+excerpt: >-
+  Exploring the potential for AI to revolutionize medical research and alleviate
+  global suffering from chronic diseases through a collaborative treaty.
+coverImage: logical-treaty.png
+#  date: 'October 1, 2021'
+author:
+  name: Healthcare Innovator
+  # picture: author-image.jpg
+ogImage:
+  url: logical-treaty.png
+---
 # LOGICAL Treaty
 
 ## Facts:
@@ -22,10 +37,10 @@ Here is the logical proof that signing this accord is the most rational thing yo
 
 ## How it Works:
 
-1. Every participating nation will pledge **1% of its annual military budget** to the [Decentralized Institutes of Health (DIH)](decentralized-institues-of-health.md). For example, if global military spending is $2 trillion per year, this would create a $20 billion annual fund. Participation from all nations is essential to maintain geopolitical stability.
+1. Every participating nation will pledge **1% of its annual military budget** to the [Decentralized Institutes of Health (DIH)](decentralized-institutes-of-health.md). For example, if global military spending is $2 trillion per year, this would create a $20 billion annual fund. Participation from all nations is essential to maintain geopolitical stability.
 2. The **fund will support AI-driven research projects** aimed at discovering new treatments, cures, and early-detection methods for cancer, heart disease, diabetes, Alzheimer’s, and other chronic diseases that take the heaviest toll on human health worldwide.
 3. Research institutions, medical centers, and AI labs around the world will be invited to **submit project proposals** to the fund. These proposals will be reviewed and ranked by a global panel of experts based on their scientific merit, feasibility, and potential impact.
-4. However, the final decision on which projects receive funding will be [**made democratically**](decentralized-institues-of-health.md) by the global public. Using a [crowdfunding platform](decentralized-institues-of-health.md), anyone in the world will be able to vote on the proposals they believe hold the most promise. This crowdsourced approach ensures that the fund remains accountable to the people and focused on the projects that matter most to them.
+4. However, the final decision on which projects receive funding will be [**made democratically**](decentralized-institutes-of-health.md) by the global public. Using a [crowdfunding platform](decentralized-institutes-of-health.md), anyone in the world will be able to vote on the proposals they believe hold the most promise. This crowdsourced approach ensures that the fund remains accountable to the people and focused on the projects that matter most to them.
 5. All research findings and data generated through the fund will be made openly available in real-time to the global scientific community, **accelerating progress** and enabling rapid translation of discoveries into new medicines and improved clinical practices worldwide.
 6. Participating nations and research institutions will collaborate continuously through a state-of-the-art online platform, sharing knowledge, best practices, and resources to **maximize the impact of every research dollar** and speed the deployment of new health solutions to patients everywhere.
 

@@ -1,3 +1,16 @@
+---
+title: Frequently Asked Questions
+excerpt: >-
+  Discover how a small reduction in military budgets can lead to significant
+  advancements in health research, global cooperation, and security.
+coverImage: faq.png
+#  date: 'September 15, 2022'
+author:
+  name: The Office of the President
+  #picture: author_image_url_here
+ogImage:
+  url:  faq.png
+---
 # FAQ
 
 ## Q: Why focus on reducing military spending? Shouldn't we just increase health research funding directly?

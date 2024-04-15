@@ -1,3 +1,16 @@
+---
+title: The Dangers of Excessive Military Spending and the AI Arms Race
+excerpt: >-
+  Exploring the implications of current military expenditures on global security
+  and the looming threats posed by the AI arms race.
+coverImage: existential-risk.png
+# #  date: '2022-09-15'
+author:
+  name: Wishonian Department of Defense
+  picture: false
+ogImage:
+  url: military-spending-scenarios-chart.png
+---
 # Why Current Military Spending is Excessive
 
 If you simply consider one part of military spending, nuclear weapons, we already have 13,000 nuclear weapons. This is enough to cause between 13 and 130 "extinction-level events" if you account for the effects of nuclear winter.  

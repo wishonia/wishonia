@@ -1,3 +1,16 @@
+---
+title: Roadmap for Creating a Decentralized Autonomous Organization (DAO)
+excerpt: >-
+  Explore the detailed roadmap for establishing a DAO, including crowdfunding
+  strategies, lobbying efforts, and post-launch activities.
+coverImage: strategy.png
+#  date: '2023-09-15'
+author:
+  name: The Office of the President
+#  picture: ''
+ogImage:
+  url: 'strategy.png'
+---
 # Roadmap
 
 So, roughly the process would be: 

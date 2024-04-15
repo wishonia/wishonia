@@ -1,3 +1,16 @@
+---
+title: Increased Efficiency of Automating Clinical Discovery
+excerpt: >-
+  Exploring the potential productivity gains of Artificial General Intelligence
+  (AGI) in scientific research and drug discovery compared to human scientists.
+coverImage: rate-of-medical-progress-with-ai-scientists.png
+#  date: '2023-09-15'
+author:
+  name: AI Research Insights
+#  picture: ''
+ogImage:
+  url: robot-lab-scientist.png
+---
 # Increased Efficiency of Automating Clinical Discovery
 
 ![](robot-lab-scientist.png)
