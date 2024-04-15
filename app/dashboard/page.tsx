@@ -8,6 +8,7 @@ import { dateRangeParams } from "@/lib/utils"
 import { Shell } from "@/components/layout/shell"
 import BarChart from "@/components/bar-chart";
 import SpendingOnDiseasesVsMilitary from "@/components/charts/spending-on-diseases-vs-military-chartsjs";
+import AfterLoginHandler from "@/components/AfterLoginHandler"
 
 export const metadata: Metadata = {
   title: "Dashboard",
@@ -31,6 +32,7 @@ export default async function Dashboard({ searchParams }: DashboardProps) {
 
   return (
     <Shell>
+        <AfterLoginHandler></AfterLoginHandler>
         <div className="flex flex-col items-center justify-between gap-4 px-2 pb-4 text-center">
             <div className="flex flex-col items-center justify-between gap-4 px-2 pb-4 text-center md:flex-row">
                 <div className="grid gap-1">
