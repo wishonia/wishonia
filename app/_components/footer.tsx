@@ -14,7 +14,7 @@ export function Footer() {
               Vote for Peace
             </a>
             <a
-              href={`https://github.com/wishocracy`}
+              href={`https://github.com/wishonia/wishonia`}
               className="mx-3 font-bold hover:underline"
             >
               Edit on GitHub
