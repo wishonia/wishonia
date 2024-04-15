@@ -75,6 +75,12 @@ const MarkdownRenderer: FC<MarkdownRendererProps> = ({ url }) => {
                       h1: ({node, ...props}) => <h1 className="text-3xl mb-4 mt-4 font-bold" {...props} />,
                       h2: ({node, ...props}) => <h2 className="text-2xl mb-4 mt-4 font-bold" {...props} />,
                       h3: ({node, ...props}) => <h3 className="text-xl mb-4 mt-4 font-bold" {...props} />,
+                      // Add custom rendering for lists
+                      ul: ({node, ...props}) => <ul className="list-disc pl-5 mb-4" {...props} />,
+                      ol: ({node, ...props}) => <ol className="list-decimal pl-5 mb-4" {...props} />,
+                      li: ({node, ...props}) => <li className="mb-2" {...props} />,
+                      // Ensure links are underlined
+                      a: ({node, ...props}) => <a className="underline text-blue-600 hover:text-blue-800" {...props} />,
                     }}
                   >
                       {content}
