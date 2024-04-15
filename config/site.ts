@@ -6,15 +6,15 @@ export const siteConfig: SiteConfig = {
   name: "Wishonia",
   author: "mikepsinn",
   description:
-    "Track daily habits and monitor your progress with little effort.",
+    "A kingdom where all wishes can be granted through the magic of intelligent voluntary cooperation",
   keywords: [
   ],
   url: {
     base: env.NEXT_PUBLIC_APP_URL,
-    author: "https://redpangilinan.live",
+    author: "https://wishonia.love",
   },
   links: {
-    github: "https://github.com/redpangilinan/Wishonia",
+    github: "https://github.com/wishonia",
   },
   ogImage: `${env.NEXT_PUBLIC_APP_URL}/og.png`,
 }

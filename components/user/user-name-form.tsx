@@ -23,6 +23,7 @@ import { Input } from "@/components/ui/input"
 import { Label } from "@/components/ui/label"
 import { toast } from "@/components/ui/use-toast"
 import { Icons } from "@/components/icons"
+import {FaRegClipboard} from "react-icons/fa";
 
 interface UserNameFormProps extends React.HTMLAttributes<HTMLFormElement> {
   user: Pick<User, "id" | "username">
@@ -100,7 +101,7 @@ export function UserNameForm({ user, className, ...props }: UserNameFormProps) {
       <Card>
         <CardHeader>
           <CardTitle>Username</CardTitle>
-          <CardDescription>Enter your display name.</CardDescription>
+          <CardDescription>Enter your publicly display name.</CardDescription>
         </CardHeader>
         <CardContent>
           <div className="grid gap-1">
@@ -130,8 +131,9 @@ export function UserNameForm({ user, className, ...props }: UserNameFormProps) {
                 <button
                   type="button"
                   onClick={copyToClipboard}
-                  className="p-2 text-white bg-blue-500 rounded hover:bg-blue-600"
+                  className={cn(buttonVariants(), className)}
                 >
+                  <FaRegClipboard className="mr-2" />
                   Copy
                 </button>
               </div>

@@ -39,7 +39,7 @@ export default function Footer() {
             © {new Date().getFullYear()}{" "}
             <a
               target="_blank"
-              href="https://github.com/redpangilinan/Wishonia"
+              href="https://github.com/Wishonia"
               className="hover:underline"
             >
               Wishonia App

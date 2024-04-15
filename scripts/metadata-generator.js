@@ -15,7 +15,7 @@ async function generateMetadata(content) {
   );
 }
 
-let folder = "../public/treaty";
+let folder = "../public";
 const postsDirectory = path.join(process.cwd(), folder);
 
 function getPostPaths() {
