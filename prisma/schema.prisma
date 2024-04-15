@@ -39,48 +39,188 @@ model Session {
 }
 
 model User {
-  id                   String     @id @default(cuid())
+  id                   String    @id @default(cuid())
   address              String?
   badges               Json?
   banned               Boolean?
+  bio                  String?   @db.Text // User's bio or description
   birthday             DateTime?
+  blog                 String?   @map("blog")
   city                 String?
-  countryCode          String?    @map("country_code")
-  createdAt            DateTime   @default(now()) @map("created_at")
-  deletedAt            DateTime?  @map("deleted_at")
-  email                String?    @unique
-  emailVerified        DateTime?  @map("email_verified")
-  emailValidated       Boolean    @default(false) @map("email_validated")
-  firstName            String?    @map("first_name")
-  gdprConsent          Boolean    @default(false) @map("gdpr_consent")
+  company              String?   @map("company")
+  contributorsEnabled  Boolean?  @map("contributors_enabled")
+  countryCode          String?   @map("country_code")
+  createdAt            DateTime  @default(now()) @map("created_at")
+  createdAtTwitter     DateTime? @map("created_at_twitter")
+  deletedAt            DateTime? @map("deleted_at")
+  email                String?   @unique
+  emailVerified        DateTime? @map("email_verified")
+  favouritesCount      Int?      @map("favourites_count")
+  firstName            String?   @map("first_name")
+  followersCount       Int?      @map("followers_count") // Number of followers
+  followingCount       Int?      @map("following_count") // Number of accounts the user is following
+  gdprConsent          Boolean   @default(false) @map("gdpr_consent")
   gender               String?
+  geoEnabled           Boolean?  @map("geo_enabled")
+  githubUsername       String?   @map("github_username")
+  hireable             Boolean?  @map("hireable")
   image                String?
-  ipAddress            String?    @map("ip_address") @db.VarChar(45)
+  ipAddress            String?   @map("ip_address") @db.VarChar(45)
   language             String?
-  lastName             String?    @map("last_name")
-  lastSignInAt         BigInt?    @map("last_sign_in_at")
+  lastName             String?   @map("last_name")
+  lastSignInAt         BigInt?   @map("last_sign_in_at")
+  likeCount            Int?      @map("like_count") // Number of likes
+  listedCount          Int?      @map("listed_count")
+  location             String? // User's location as per their Twitter profile
   name                 String?
-  newsletterSubscribed Boolean    @default(false) @map("newsletter_subscribed")
-  phoneNumber          String?    @map("phone_number")
+  newsletterSubscribed Boolean   @default(false) @map("newsletter_subscribed")
+  phoneNumber          String?   @map("phone_number")
   points               Int?
-  postalCode           String?    @map("postal_code")
-  referrerUserId       String?    @map("referrer_user_id")
-  signatureTimestamp   DateTime   @default(now()) @map("signature_timestamp")
-  signedPetition       Boolean    @default(false) @map("signed_petition")
-  stateProvince        String?    @map("state_province")
-  updatedAt            DateTime   @updatedAt @map("updated_at")
-  username             String     @unique @default(uuid())
-  warPercentageDesired Float?     @map("war_percentage_desired")
-  warPercentageGuessed Float?     @map("war_percentage_guessed")
-  web3Wallet           String?    @map("web3_wallet")
-  unsafeMetadata       Json?      @map("unsafe_metadata")
-  publicMetadata       Json?      @map("public_metadata")
-  privateMetadata      Json?      @map("private_metadata")
-  accounts             Account[]
-  sessions             Session[]
-  activities           Activity[]
+  postalCode           String?   @map("postal_code")
+  privateMetadata      Json?     @map("private_metadata")
+  profileBannerUrl     String?   @map("profile_banner_url")
+  protected            Boolean?  @map("protected")
+  publicMetadata       Json?     @map("public_metadata")
+  referrerUserId       String?   @map("referrer_user_id")
+  signatureTimestamp   DateTime  @default(now()) @map("signature_timestamp")
+  signedPetition       Boolean   @default(false) @map("signed_petition")
+  stateProvince        String?   @map("state_province")
+  statusesCount        Int?      @map("statuses_count")
+  timeZone             String?   @map("time_zone")
+  tweetCount           Int?      @map("tweet_count") // Number of tweets (including retweets)
+  twitterHandle        String?   @map("twitter_handle") // Twitter username/handle
+  type                 String?   @map("type")
+  unsafeMetadata       Json?     @map("unsafe_metadata")
+  updatedAt            DateTime  @updatedAt @map("updated_at")
+  username             String    @unique @default(uuid())
+  verified             Boolean?  @map("verified")
+  warPercentageDesired Float?    @map("war_percentage_desired")
+  warPercentageGuessed Float?    @map("war_percentage_guessed")
+  web3Wallet           String?   @map("web3_wallet")
+  website              String?   @map("website")
+
+  accounts                   Account[]
+  sessions                   Session[]
+  activities                 Activity[]
+  educations                 Education[]
+  positions                  Position[]
+  skills                     Skill[]
+  endorsements               Endorsement[]
+  userRecommendations        Recommendation[] @relation("UserRecommendations")
+  recommenderRecommendations Recommendation[] @relation("RecommenderRecommendations")
+  posts                      Post[]
+  likes                      Like[]
+  comments                   Comment[]
+  initiatedFriendships       Friendship[]     @relation(name: "InitiatorFriendships")
+  receivedFriendships        Friendship[]     @relation(name: "ReceiverFriendships")
 
   @@map("users")
+}
+
+model Education {
+  id           String    @id @default(cuid())
+  user         User      @relation(fields: [userId], references: [id])
+  userId       String
+  school       String
+  degree       String?
+  fieldOfStudy String?
+  startDate    DateTime
+  endDate      DateTime?
+
+  @@map("educations")
+}
+
+model Position {
+  id        String    @id @default(cuid())
+  user      User      @relation(fields: [userId], references: [id])
+  userId    String
+  title     String
+  company   String
+  startDate DateTime
+  endDate   DateTime?
+  isCurrent Boolean
+
+  @@map("positions")
+}
+
+model Skill {
+  id           String        @id @default(cuid())
+  user         User          @relation(fields: [userId], references: [id])
+  userId       String
+  name         String
+  endorsements Endorsement[]
+
+  @@map("skills")
+}
+
+model Endorsement {
+  id      String @id @default(cuid())
+  skill   Skill  @relation(fields: [skillId], references: [id])
+  skillId String
+  user    User   @relation(fields: [userId], references: [id])
+  userId  String
+
+  @@map("endorsements")
+}
+
+model Recommendation {
+  id            String @id @default(cuid())
+  user          User   @relation(name: "UserRecommendations", fields: [userId], references: [id])
+  userId        String
+  recommenderId String
+  recommender   User   @relation(name: "RecommenderRecommendations", fields: [recommenderId], references: [id])
+  text          String
+
+  @@map("recommendations")
+}
+
+model Post {
+  id        String    @id @default(cuid())
+  user      User      @relation(fields: [userId], references: [id])
+  userId    String
+  content   String
+  createdAt DateTime  @default(now())
+  updatedAt DateTime  @updatedAt
+  likes     Like[]
+  comments  Comment[]
+
+  @@map("posts")
+}
+
+model Like {
+  id     String @id @default(cuid())
+  user   User   @relation(fields: [userId], references: [id])
+  userId String
+  post   Post   @relation(fields: [postId], references: [id])
+  postId String
+
+  @@map("likes")
+}
+
+model Comment {
+  id        String   @id @default(cuid())
+  user      User     @relation(fields: [userId], references: [id])
+  userId    String
+  post      Post     @relation(fields: [postId], references: [id])
+  postId    String
+  content   String
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+
+  @@map("comments")
+}
+
+model Friendship {
+  id        String   @id @default(cuid())
+  user      User     @relation(name: "InitiatorFriendships", fields: [userId], references: [id])
+  userId    String
+  friendId  String
+  friend    User     @relation(name: "ReceiverFriendships", fields: [friendId], references: [id])
+  status    String   @default("pending")
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+
+  @@map("friendships")
 }
 
 model VerificationToken {
