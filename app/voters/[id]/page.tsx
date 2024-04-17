@@ -41,7 +41,7 @@ const User = async ({ params }: PageProps) => {
         <Card>
           <CardHeader>
             <CardTitle>{user.name as string}</CardTitle>
-            <CardDescription>{user?.jobTitle || "Wishonian Citizen"}</CardDescription>
+            <CardDescription>{user?.bio || "Wishonian Citizen"}</CardDescription>
           </CardHeader>
           <CardContent>
             <p>
