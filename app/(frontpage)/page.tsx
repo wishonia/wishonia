@@ -9,11 +9,11 @@ export default function Home() {
   return (
     <main>
       <Poll />
-      {/* <Hero />
+{/*       <Hero />
       <FeatureCards />
       <Overview />
-      <OpenSource />
-      <PWARedirect /> */}
+      <OpenSource />*/}
+      <PWARedirect />
     </main>
   )
 }
