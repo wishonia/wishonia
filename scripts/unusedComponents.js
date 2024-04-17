@@ -42,8 +42,6 @@ function cleanupUnusedComponents() {
 
     componentFiles.forEach(component => {
         if (!isComponentUsed(component, allFiles)) {
-            console.log(`Component marked for deletion: ${component}`);
-
                 //fs.unlinkSync(component);
                 console.log(`Deleted unused component: ${component}`);
         }

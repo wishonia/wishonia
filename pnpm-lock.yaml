@@ -62,6 +62,9 @@ dependencies:
   '@radix-ui/react-toast':
     specifier: ^1.1.5
     version: 1.1.5(@types/react-dom@18.2.19)(@types/react@18.2.55)(react-dom@18.2.0)(react@18.2.0)
+  '@react-buddy/ide-toolbox-next':
+    specifier: ^2.4.1
+    version: 2.4.1(next@14.1.0)(react@18.2.0)
   '@t3-oss/env-nextjs':
     specifier: ^0.9.2
     version: 0.9.2(typescript@5.3.3)(zod@3.22.4)
@@ -174,8 +177,8 @@ dependencies:
     specifier: ^5.0.1
     version: 5.0.1(react@18.2.0)
   react-markdown:
-    specifier: ^8.0.7
-    version: 8.0.7(@types/react@18.2.55)(react@18.2.0)
+    specifier: 9.0.1
+    version: 9.0.1(@types/react@18.2.55)(react@18.2.0)
   recharts:
     specifier: ^2.12.0
     version: 2.12.0(react-dom@18.2.0)(react@18.2.0)
@@ -2424,6 +2427,25 @@ packages:
     resolution: {integrity: sha512-fyrgCaedtvMg9NK3en0pnOYJdtfwxUcNolezkNPUsoX57X8oQk+NkqcvzHXD2uKNij6GXmWU9NDru2IWjrO4BQ==}
     dependencies:
       '@babel/runtime': 7.23.9
+    dev: false
+
+  /@react-buddy/ide-toolbox-next@2.4.1(next@14.1.0)(react@18.2.0):
+    resolution: {integrity: sha512-WiCO0Zzl9CflBtTF0uht1rbdI83NrUl0qKN5HKAy5oXVr9+qB495E6Y1+qng5ZrQONM9VcF5DF5mf12SQcSG8A==}
+    peerDependencies:
+      next: ^10.0.0 || ^11.0.0 || ^12.0.0 || ^13.0.0
+      react: ^17.0.0 || ^18.0.0
+    dependencies:
+      '@react-buddy/ide-toolbox': 2.4.0(react@18.2.0)
+      next: 14.1.0(@babel/core@7.23.9)(react-dom@18.2.0)(react@18.2.0)
+      react: 18.2.0
+    dev: false
+
+  /@react-buddy/ide-toolbox@2.4.0(react@18.2.0):
+    resolution: {integrity: sha512-TWHX6gwa0Gop7215uHhjFMbYLLdjM/b9rr0wYE3E0m7GNJ56gbPpbZiq86w9uI8zksl827acqGeT437MkuO64w==}
+    peerDependencies:
+      react: ^17.0.0 || ^18.0.0
+    dependencies:
+      react: 18.2.0
     dev: false
 
   /@rushstack/eslint-patch@1.7.2:
@@ -5216,6 +5238,10 @@ packages:
     resolution: {integrity: sha512-H2iMtd0I4Mt5eYiapRdIDjp+XzelXQ0tFE4JS7YFwFevXXMmOp9myNrUvCg0D6ws8iqkRPBfKHgbwig1SmlLfg==}
     dev: true
 
+  /html-url-attributes@3.0.0:
+    resolution: {integrity: sha512-/sXbVCWayk6GDVg3ctOX6nxaVj7So40FcFAnWlWGNAB1LpYKcV5Cd10APjPjW80O7zYW2MsjBV4zZ7IZO5fVow==}
+    dev: false
+
   /html-void-elements@3.0.0:
     resolution: {integrity: sha512-bEqo66MRXsUGxWHV5IP0PUiAWwoEjba4VCzg0LjFJBpchPaTfyfCKTG6bc5F8ucKec3q5y6qOdGyYTSBEvhCrg==}
     dev: false
@@ -7980,30 +8006,26 @@ packages:
 
   /react-is@18.2.0:
     resolution: {integrity: sha512-xWGDIW6x921xtzPkhiULtthJHoJvBbF3q26fzloPCK0hsvxtPVelvftw3zjbHWSkR2km9Z+4uxbDDK/6Zw9B8w==}
+    dev: true
 
-  /react-markdown@8.0.7(@types/react@18.2.55)(react@18.2.0):
-    resolution: {integrity: sha512-bvWbzG4MtOU62XqBx3Xx+zB2raaFFsq4mYiAzfjXJMEz2sixgeAfraA3tvzULF02ZdOMUOKTBFFaZJDDrq+BJQ==}
+  /react-markdown@9.0.1(@types/react@18.2.55)(react@18.2.0):
+    resolution: {integrity: sha512-186Gw/vF1uRkydbsOIkcGXw7aHq0sZOCRFFjGrr7b9+nVZg4UfA4enXCaxm4fUzecU38sWfrNDitGhshuU7rdg==}
     peerDependencies:
-      '@types/react': '>=16'
-      react: '>=16'
+      '@types/react': '>=18'
+      react: '>=18'
     dependencies:
-      '@types/hast': 2.3.10
-      '@types/prop-types': 15.7.11
+      '@types/hast': 3.0.4
       '@types/react': 18.2.55
-      '@types/unist': 2.0.10
-      comma-separated-tokens: 2.0.3
-      hast-util-whitespace: 2.0.1
-      prop-types: 15.8.1
-      property-information: 6.4.1
+      devlop: 1.1.0
+      hast-util-to-jsx-runtime: 2.3.0
+      html-url-attributes: 3.0.0
+      mdast-util-to-hast: 13.1.0
       react: 18.2.0
-      react-is: 18.2.0
-      remark-parse: 10.0.2
-      remark-rehype: 10.1.0
-      space-separated-tokens: 2.0.2
-      style-to-object: 0.4.4
-      unified: 10.1.2
-      unist-util-visit: 4.1.2
-      vfile: 5.3.7
+      remark-parse: 11.0.0
+      remark-rehype: 11.1.0
+      unified: 11.0.4
+      unist-util-visit: 5.0.0
+      vfile: 6.0.1
     transitivePeerDependencies:
       - supports-color
     dev: false

@@ -16,6 +16,9 @@ module.exports = {
       },
     },
     extend: {
+      fontFamily: {
+        'sans': ['"IM Fell English"', 'serif'],
+      },
       colors: {
         border: "hsl(var(--border))",
         input: "hsl(var(--input))",
