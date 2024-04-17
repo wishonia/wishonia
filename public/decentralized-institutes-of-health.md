@@ -12,7 +12,7 @@ author:
   name: Anonymous
 #  picture: ''
 ogImage:
-  url: ''
+  url: 'decentralized-institutes-of-health.png'
 ---
 # The Decentralized Institutes of Health
 
@@ -25,7 +25,7 @@ could facilitate a significant reallocation of resources and human capital from 
 
 DIH operates through a network of Decentralized Autonomous Organizations (DAOs) dedicated to fostering innovation within specific areas of health and medical research:
 
-- **Research DAOs**: Groups such as VitaDAO and AthenaDAO would focus on specialized research, employing tokenized models to ensure that public goods and stakeholder-driven development are at the forefront.
+- **Research DAOs**: Groups such as VitaDAO and CerebrumDAO would focus on specialized research, employing tokenized models to ensure that public goods and stakeholder-driven development are at the forefront.
 - **Technology DAOs & Projects**: With initiatives like Inference Labs and The Bittensor Hub decentralizing the AI stack, DIH could use these tailored AI solutions to propel medical research forward.
 - **Patient Advocacy DAOs**: These entities align research and healthcare priorities with patient needs and perspectives.
 - **FDAi**: An AI agent designed for everyone that automates, aggregates, and analyzes data, publishes results, offers real-time decision support, and facilitates clinical trial participation across therapeutic areas.
@@ -37,9 +37,6 @@ DIH approach to healthcare research and development:
 - **Democratic Funding via Gitcoin Grants Stack**: This model dramatically shifts funding allocation towards projects with strong community backing.
 - **FDAi Integration**: By automating clinical research processes, the FDAi significantly enhances personalized healthcare, making cutting-edge research and treatment options more accessible.
 
-### Funding Mechanism
-
-- **Redistribution of War Budgets**: DIH's funding model focused on reallocating war expenditures to health research, embodying a democratic ethos that prioritizes life and well-being.
 
 ### Technology
 
@@ -112,32 +109,28 @@ Decentralized Institutes of Health (DIH) Platform
     - Expert committees oversee specific research areas and provide guidance on funding priorities
     - Collaboration with established scientific institutions and journals helps validate and disseminate research findings
 
-   2.9 Regulatory Compliance
-    - The platform complies with relevant healthcare regulations (e.g., HIPAA, GDPR, FDA) and ensures funded projects adhere to ethical standards
-    - Mechanisms are in place for decentralized clinical trials and drug approval processes
-
-   2.10 Funding Diversification
+   2.9 Funding Diversification
     - The platform seeks partnerships with governments, foundations, and corporations to diversify its funding sources
     - Innovative funding models, such as impact investing and outcome-based financing, are explored
 
-   2.11 Collaboration and Partnerships
+   2.10 Collaboration and Partnerships
     - The platform fosters collaboration among researchers, institutions, and stakeholders to maximize impact
     - Partnerships with healthcare organizations, NGOs, and patient advocacy groups help identify research priorities and disseminate findings
 
-   2.12 Data Management and Sharing
+   2.11 Data Management and Sharing
     - Robust data management and sharing protocols ensure the security, privacy, and interoperability of research data
     - Decentralized storage solutions and privacy-preserving technologies are leveraged
 
-   2.13 Education and Outreach
+   2.12 Education and Outreach
     - The platform invests in education and outreach initiatives to raise awareness about decentralized healthcare research
     - Partnerships with universities and educational institutions help train the next generation of decentralized healthcare researchers
 
-   2.14 Monitoring and Evaluation
+   2.13 Monitoring and Evaluation
     - A comprehensive monitoring and evaluation framework assesses the impact and effectiveness of funded projects
     - Key performance indicators (KPIs) are defined and tracked to measure progress towards the platform's goals
     - Regular reporting and auditing processes ensure transparency and accountability
 
-## How the National Institutes of Health  Works
+## How the National Institutes of Health Works
 
 ```mermaid
 graph TD;
