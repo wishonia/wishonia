@@ -13,7 +13,7 @@ export default function NotFound() {
         </div>
         <EmptyPlaceholder.Title>Not Found</EmptyPlaceholder.Title>
         <EmptyPlaceholder.Description>
-          This activity cound not be found. Please try again.
+          This wishingWell cound not be found. Please try again.
         </EmptyPlaceholder.Description>
         <Link
           href="/dashboard"

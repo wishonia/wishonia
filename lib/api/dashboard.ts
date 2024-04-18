@@ -1,13 +1,13 @@
-import {getUserActivities} from "@/lib/api/activities"
+import {getUserWishingWells} from "@/lib/api/wishingWells"
 import {
-  getActivityCountByDate,
+  getWishingWellCountByDate,
   getDailyAverage,
-  getLogs,
-  getMostLoggedActivity,
+  getWishingWellContributions,
+  getMostContributedWishingWell,
   getStreak,
-  getTopActivities,
-  getTotalLogs,
-} from "@/lib/api/logs"
+  getTopWishingWells,
+  getTotalWishingWellContributions,
+} from "@/lib/api/wishingWellContributions"
 import {getAverageWarPercentageDesired} from "@/lib/api/poll";
 
 type DateRangeType = {
@@ -20,52 +20,52 @@ export async function getDashboardData(
   dateRange: DateRangeType
 ) {
   const [
-    logs,
+    wishingWellContributions,
     streak,
-    totalLogs,
-    mostLoggedActivity,
-    activityCountByDate,
-    topActivities,
-    userActivities,
+    totalWishingWellContributions,
+    mostContributedWishingWell,
+    wishingWellCountByDate,
+    topWishingWells,
+    userWishingWells,
     averageWarPercentageDesired
   ] = await Promise.all([
-    getLogs(userId, dateRange, "user"),
+    getWishingWellContributions(userId, dateRange, "user"),
     getStreak(userId, "user"),
-    getTotalLogs(userId, dateRange, "user"),
-    getMostLoggedActivity(userId, dateRange),
-    getActivityCountByDate(userId, dateRange),
-    getTopActivities(userId, dateRange),
-    getUserActivities(userId),
+    getTotalWishingWellContributions(userId, dateRange, "user"),
+    getMostContributedWishingWell(userId, dateRange),
+    getWishingWellCountByDate(userId, dateRange),
+    getTopWishingWells(userId, dateRange),
+    getUserWishingWells(userId),
     getAverageWarPercentageDesired()
   ])
 
   return {
-    logs,
+    wishingWellContributions,
     streak,
-    totalLogs,
-    mostLoggedActivity,
-    activityCountByDate,
-    topActivities,
-    userActivities,
+    totalWishingWellContributions,
+    mostContributedWishingWell,
+    wishingWellCountByDate,
+    topWishingWells,
+    userWishingWells,
     averageWarPercentageDesired
   }
 }
 
 export async function getStatsDashboardData(
-  activityId: string,
+  wishingWellId: string,
   dateRange: DateRangeType
 ) {
-  const [logs, streak, totalLogs, dailyAverage] = await Promise.all([
-    getLogs(activityId, dateRange, "activity"),
-    getStreak(activityId, "activity"),
-    getTotalLogs(activityId, dateRange, "activity"),
-    getDailyAverage(activityId, dateRange),
+  const [wishingWellContributions, streak, totalWishingWellContributions, dailyAverage] = await Promise.all([
+    getWishingWellContributions(wishingWellId, dateRange, "wishingWell"),
+    getStreak(wishingWellId, "wishingWell"),
+    getTotalWishingWellContributions(wishingWellId, dateRange, "wishingWell"),
+    getDailyAverage(wishingWellId, dateRange),
   ])
 
   return {
-    logs,
+    wishingWellContributions,
     streak,
-    totalLogs,
+    totalWishingWellContributions,
     dailyAverage,
   }
 }

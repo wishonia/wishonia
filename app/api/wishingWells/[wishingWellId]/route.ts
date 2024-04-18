@@ -1,12 +1,12 @@
 import * as z from "zod"
 
-import { verifyActivity } from "@/lib/api/activities"
+import { verifyWishingWell } from "@/lib/api/wishingWells"
 import { db } from "@/lib/db"
-import { activityPatchSchema } from "@/lib/validations/activity"
+import { wishingWellPatchSchema } from "@/lib/validations/wishingWell"
 
 const routeContextSchema = z.object({
   params: z.object({
-    activityId: z.string(),
+    wishingWellId: z.string(),
   }),
 })
 
@@ -17,22 +17,21 @@ export async function PATCH(
   try {
     const { params } = routeContextSchema.parse(context)
 
-    if (!(await verifyActivity(params.activityId))) {
+    if (!(await verifyWishingWell(params.wishingWellId))) {
       return new Response(null, { status: 403 })
     }
 
     const json = await req.json()
-    const body = activityPatchSchema.parse(json)
+    const body = wishingWellPatchSchema.parse(json)
 
-    // Update the activity
-    await db.activity.update({
+    // Update the wishingWell
+    await db.wishingWell.update({
       where: {
-        id: params.activityId,
+        id: params.wishingWellId,
       },
       data: {
         name: body.name,
         description: body.description,
-        colorCode: body.colorCode,
         updatedAt: new Date(),
       },
     })
@@ -54,14 +53,14 @@ export async function DELETE(
   try {
     const { params } = routeContextSchema.parse(context)
 
-    if (!(await verifyActivity(params.activityId))) {
+    if (!(await verifyWishingWell(params.wishingWellId))) {
       return new Response(null, { status: 403 })
     }
 
-    // Delete the activity
-    await db.activity.delete({
+    // Delete the wishingWell
+    await db.wishingWell.delete({
       where: {
-        id: params.activityId as string,
+        id: params.wishingWellId as string,
       },
     })
 

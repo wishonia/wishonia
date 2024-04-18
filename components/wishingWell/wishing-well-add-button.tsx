@@ -16,9 +16,9 @@ import {
 import { toast } from "@/components/ui/use-toast"
 import { Icons } from "@/components/icons"
 
-interface ActivityAddButtonProps extends ButtonProps {}
+interface WishingWellAddButtonProps extends ButtonProps {}
 
-export function ActivityAddButton({ ...props }: ActivityAddButtonProps) {
+export function WishingWellAddButton({ ...props }: WishingWellAddButtonProps) {
   const router = useRouter()
   const [showAddAlert, setShowAddAlert] = React.useState<boolean>(false)
   const [isLoading, setIsLoading] = React.useState<boolean>(false)
@@ -26,14 +26,13 @@ export function ActivityAddButton({ ...props }: ActivityAddButtonProps) {
   async function onClick() {
     setIsLoading(true)
 
-    const response = await fetch("/api/activities", {
+    const response = await fetch("/api/wishingWells", {
       method: "POST",
       headers: {
         "Content-Type": "application/json",
       },
       body: JSON.stringify({
-        name: "New Activity",
-        colorCode: "#ffffff",
+        name: "New WishingWell",
       }),
     })
 
@@ -43,21 +42,21 @@ export function ActivityAddButton({ ...props }: ActivityAddButtonProps) {
 
       return toast({
         title: "Something went wrong.",
-        description: "Your activity was not created. Please try again.",
+        description: "Your wishingWell was not created. Please try again.",
         variant: "destructive",
       })
     }
 
     toast({
-      description: "A new activity has been created successfully.",
+      description: "A new wishingWell has been created successfully.",
     })
 
-    const activity = await response.json()
+    const wishingWell = await response.json()
 
     setIsLoading(false)
     setShowAddAlert(false)
 
-    router.push(`/dashboard/activities/${activity.id}/settings`)
+    router.push(`/dashboard/wishingWells/${wishingWell.id}/settings`)
     router.refresh()
   }
 
@@ -65,7 +64,7 @@ export function ActivityAddButton({ ...props }: ActivityAddButtonProps) {
     <>
       <Button onClick={() => setShowAddAlert(true)} {...props}>
         <Icons.add className="mr-2 h-4 w-4" />
-        New activity
+        New wishingWell
       </Button>
 
       {/* Add Alert */}
@@ -73,10 +72,10 @@ export function ActivityAddButton({ ...props }: ActivityAddButtonProps) {
         <CredenzaContent>
           <CredenzaHeader>
             <CredenzaTitle>
-              Are you sure you want to create a new activity?
+              Are you sure you want to create a new wishingWell?
             </CredenzaTitle>
             <CredenzaDescription>
-              This will add a new activity to your account.
+              This will add a new wishingWell to your account.
             </CredenzaDescription>
           </CredenzaHeader>
           <CredenzaFooter className="flex flex-col-reverse">
@@ -89,7 +88,7 @@ export function ActivityAddButton({ ...props }: ActivityAddButtonProps) {
               ) : (
                 <Icons.add className="mr-2 h-4 w-4" />
               )}
-              <span>Add activity</span>
+              <span>Add wishingWell</span>
             </Button>
           </CredenzaFooter>
         </CredenzaContent>

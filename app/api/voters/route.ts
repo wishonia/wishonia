@@ -10,7 +10,7 @@ export async function GET() {
       return new Response("Unauthorized", { status: 403 })
     }
 
-    // Get all of current user's activities
+    // Get all of current user's wishingWells
     const voters = await db.user.findMany({
       select: {
         id: true,

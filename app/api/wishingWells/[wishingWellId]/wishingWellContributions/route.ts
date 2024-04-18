@@ -1,18 +1,18 @@
 import { getServerSession } from "next-auth/next"
 import * as z from "zod"
 
-import { verifyActivity } from "@/lib/api/activities"
+import { verifyWishingWell } from "@/lib/api/wishingWells"
 import { authOptions } from "@/lib/auth"
 import { db } from "@/lib/db"
 
-const activityLogCreateSchema = z.object({
+const wishingWellContributionCreateSchema = z.object({
   date: z.string(),
   count: z.number(),
 })
 
 const routeContextSchema = z.object({
   params: z.object({
-    activityId: z.string(),
+    wishingWellId: z.string(),
   }),
 })
 
@@ -28,23 +28,23 @@ export async function GET(
       return new Response("Unauthorized", { status: 403 })
     }
 
-    if (!(await verifyActivity(params.activityId))) {
+    if (!(await verifyWishingWell(params.wishingWellId))) {
       return new Response(null, { status: 403 })
     }
 
-    // Get all of logs for the activity
-    const logs = await db.activityLog.findMany({
+    // Get all of wishingWellContributions for the wishingWell
+    const wishingWellContributions = await db.wishingWellContribution.findMany({
       select: {
         id: true,
         date: true,
         count: true,
       },
       where: {
-        activityId: params.activityId,
+        wishingWellId: params.wishingWellId,
       },
     })
 
-    return new Response(JSON.stringify(logs))
+    return new Response(JSON.stringify(wishingWellContributions))
   } catch (error) {
     return new Response(null, { status: 500 })
   }
@@ -62,49 +62,47 @@ export async function POST(
       return new Response("Unauthorized", { status: 403 })
     }
 
-    if (!(await verifyActivity(params.activityId))) {
+    if (!(await verifyWishingWell(params.wishingWellId))) {
       return new Response(null, { status: 403 })
     }
 
     const json = await req.json()
-    const body = activityLogCreateSchema.parse(json)
+    const body = wishingWellContributionCreateSchema.parse(json)
 
-    // Check if the log exists for the current date
-    const existingLog = await db.activityLog.findFirst({
+    const existingContribution = await db.wishingWellContribution.findFirst({
       where: {
         date: body.date,
-        activityId: params.activityId,
+        wishingWellId: params.wishingWellId,
       },
     })
 
-    // If log already exists, update the count
-    if (existingLog) {
-      const updatedLog = await db.activityLog.update({
-        where: { id: existingLog.id },
+    if (existingContribution) {
+      const updatedContribution = await db.wishingWellContribution.update({
+        where: { id: existingContribution.id },
         data: {
-          count: existingLog.count + body.count,
+          count: existingContribution.count + body.count,
         },
         select: {
           id: true,
         },
       })
 
-      return new Response(JSON.stringify(updatedLog))
+      return new Response(JSON.stringify(updatedContribution))
     }
 
-    // Create new log for the selected activity if no log exists
-    const logs = await db.activityLog.create({
+    // Create a new contribution for the selected wishingWell if no contribution exists
+    const wishingWellContributions = await db.wishingWellContribution.create({
       data: {
         date: body.date,
         count: body.count,
-        activityId: params.activityId,
+        wishingWellId: params.wishingWellId,
       },
       select: {
         id: true,
       },
     })
 
-    return new Response(JSON.stringify(logs))
+    return new Response(JSON.stringify(wishingWellContributions))
   } catch (error) {
     if (error instanceof z.ZodError) {
       return new Response(JSON.stringify(error.issues), { status: 422 })

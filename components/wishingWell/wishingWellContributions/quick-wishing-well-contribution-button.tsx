@@ -8,10 +8,10 @@ import { toast } from "@/components/ui/use-toast"
 import { Icons } from "@/components/icons"
 
 interface QuickLogButtonProps extends ButtonProps {
-  activityId: string
+  wishingWellId: string
 }
 
-export function QuickLogButton({ activityId, ...props }: QuickLogButtonProps) {
+export function QuickWishingWellContributionButton({ wishingWellId, ...props }: QuickLogButtonProps) {
   const router = useRouter()
   const [isLoading, setIsLoading] = React.useState<boolean>(false)
 
@@ -21,7 +21,7 @@ export function QuickLogButton({ activityId, ...props }: QuickLogButtonProps) {
     const dateToday = new Date()
     dateToday.setHours(0, 0, 0, 0)
 
-    const response = await fetch(`/api/activities/${activityId}/logs`, {
+    const response = await fetch(`/api/wishingWells/${wishingWellId}/wishingWellContributions`, {
       method: "POST",
       headers: {
         "Content-Type": "application/json",
@@ -35,12 +35,12 @@ export function QuickLogButton({ activityId, ...props }: QuickLogButtonProps) {
     if (!response?.ok) {
       toast({
         title: "Something went wrong.",
-        description: "Your activity was not logged. Please try again.",
+        description: "Your contribution was not logged. Please try again.",
         variant: "destructive",
       })
     } else {
       toast({
-        description: "Your activity has been logged successfully.",
+        description: "Your contribution has been logged successfully.",
       })
     }
 

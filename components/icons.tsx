@@ -37,7 +37,7 @@ const icons = {
 
   // Dashboard Icons
   dashboard: RxDashboard,
-  activity: BsActivity,
+  wishingWell: BsActivity,
   settings: LuSettings,
   bomb: FaBomb,
   skull: FaSkull,

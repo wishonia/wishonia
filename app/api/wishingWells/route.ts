@@ -4,10 +4,9 @@ import * as z from "zod"
 import { authOptions } from "@/lib/auth"
 import { db } from "@/lib/db"
 
-const activityCreateSchema = z.object({
+const wishingWellCreateSchema = z.object({
   name: z.string(),
   description: z.string().optional(),
-  colorCode: z.string(),
 })
 
 export async function GET() {
@@ -18,13 +17,12 @@ export async function GET() {
       return new Response("Unauthorized", { status: 403 })
     }
 
-    // Get all of current user's activities
-    const activities = await db.activity.findMany({
+    // Get all of current user's wishingWells
+    const wishingWells = await db.wishingWell.findMany({
       select: {
         id: true,
         name: true,
         description: true,
-        colorCode: true,
         createdAt: true,
       },
       where: {
@@ -32,7 +30,7 @@ export async function GET() {
       },
     })
 
-    return new Response(JSON.stringify(activities))
+    return new Response(JSON.stringify(wishingWells))
   } catch (error) {
     return new Response(null, { status: 500 })
   }
@@ -46,15 +44,14 @@ export async function POST(req: Request) {
       return new Response("Unauthorized", { status: 403 })
     }
 
-    // Create new activity for authenticated user
+    // Create a new wishingWell for authenticated user
     const json = await req.json()
-    const body = activityCreateSchema.parse(json)
+    const body = wishingWellCreateSchema.parse(json)
 
-    const activity = await db.activity.create({
+    const wishingWell = await db.wishingWell.create({
       data: {
         name: body.name,
         description: body.description,
-        colorCode: body.colorCode,
         userId: session.user.id,
       },
       select: {
@@ -62,7 +59,7 @@ export async function POST(req: Request) {
       },
     })
 
-    return new Response(JSON.stringify(activity))
+    return new Response(JSON.stringify(wishingWell))
   } catch (error) {
     if (error instanceof z.ZodError) {
       return new Response(JSON.stringify(error.issues), { status: 422 })

@@ -7,19 +7,19 @@ import { cn } from "@/lib/utils"
 import { Button, buttonVariants } from "@/components/ui/button"
 import { Icons } from "@/components/icons"
 
-import { LogsDeleteButton } from "./logs-delete-button"
+import { WishingWellContributionsDeleteButton } from "./wishing-well-contributions-delete-button"
 
-export type LogsType = {
+export type WishingWellContributionsType = {
   id: string
   date: Date
   count: number
-  activity: {
+  wishingWell: {
     id: string
     name: string
   }
 }
 
-export const logColumns: ColumnDef<LogsType>[] = [
+export const wishingWellContributionsColumns: ColumnDef<WishingWellContributionsType>[] = [
   {
     accessorKey: "date",
     header: ({ column }) => {
@@ -45,26 +45,26 @@ export const logColumns: ColumnDef<LogsType>[] = [
     },
   },
   {
-    accessorKey: "activity",
+    accessorKey: "wishingWell",
     header: ({ column }) => {
       return (
         <Button
           variant="ghost"
           onClick={() => column.toggleSorting(column.getIsSorted() === "asc")}
         >
-          Activity
+          WishingWell
           <Icons.sort className="ml-2 h-4 w-4" />
         </Button>
       )
     },
     cell: (row) => {
-      const activity = row.row.original.activity
-      const name = activity.name
-      const id = activity.id
+      const wishingWell = row.row.original.wishingWell
+      const name = wishingWell.name
+      const id = wishingWell.id
 
       return (
         <Link
-          href={`/dashboard/activities/${id}`}
+          href={`/dashboard/wishingWells/${id}`}
           className={cn(buttonVariants({ variant: "ghost" }))}
         >
           {name}
@@ -93,8 +93,8 @@ export const logColumns: ColumnDef<LogsType>[] = [
   {
     id: "actions",
     cell: ({ row }) => {
-      const logs = row.original
-      return <LogsDeleteButton logs={logs} />
+      const wishingWellContributions = row.original
+      return <WishingWellContributionsDeleteButton wishingWellContributions={wishingWellContributions} />
     },
   },
 ]

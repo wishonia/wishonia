@@ -1,21 +1,21 @@
-import { ActivityByDate, ActivityEntry, DateRange } from "@/types"
+import {DateRange, WishingWellByDate, WishingWellEntry} from "@/types"
 
-import { db } from "@/lib/db"
+import {db} from "@/lib/db"
 
-export async function getLogs(
+export async function getWishingWellContributions(
   id: string,
   dateRange: DateRange,
-  type: "user" | "activity"
+  type: "user" | "wishingWell"
 ) {
   const typeCondition =
-    type === "activity" ? { activityId: id } : { activity: { userId: id } }
+    type === "wishingWell" ? { wishingWellId: id } : { wishingWell: { userId: id } }
 
-  return await db.activityLog.findMany({
+  return db.wishingWellContribution.findMany({
     select: {
       id: true,
       date: true,
       count: true,
-      activity: {
+      wishingWell: {
         select: {
           id: true,
           name: true,
@@ -32,26 +32,26 @@ export async function getLogs(
     orderBy: {
       date: "desc",
     },
-  })
+  });
 }
 
 export async function getStreak(
   id: string,
-  type: "user" | "activity"
+  type: "user" | "wishingWell"
 ): Promise<{
   currentStreak: number
   longestStreak: number
 }> {
   const typeCondition =
-    type === "activity" ? { activityId: id } : { activity: { userId: id } }
+    type === "wishingWell" ? { wishingWellId: id } : { wishingWell: { userId: id } }
 
-  const logs = await db.activityLog.findMany({
+  const wishingWellContributions = await db.wishingWellContribution.findMany({
     where: typeCondition,
     distinct: "date",
     orderBy: { date: "asc" },
   })
 
-  if (logs.length === 0) {
+  if (wishingWellContributions.length === 0) {
     return { longestStreak: 0, currentStreak: 0 }
   }
 
@@ -60,9 +60,9 @@ export async function getStreak(
 
   const oneDay = 24 * 60 * 60 * 1000
 
-  for (let i = 0; i < logs.length - 1; i++) {
-    const latestDate = new Date(logs[i].date).getTime()
-    const nextDate = new Date(logs[i + 1].date).getTime()
+  for (let i = 0; i < wishingWellContributions.length - 1; i++) {
+    const latestDate = new Date(wishingWellContributions[i].date).getTime()
+    const nextDate = new Date(wishingWellContributions[i + 1].date).getTime()
 
     const timeDiff = latestDate - nextDate
 
@@ -81,9 +81,9 @@ export async function getStreak(
   }
 
   // Reset streak if user is inactive
-  const lastLogDate = new Date(logs[logs.length - 1].date).getTime()
+  const lastContributionDate = new Date(wishingWellContributions[wishingWellContributions.length - 1].date).getTime()
   const currentDate = new Date().getTime()
-  const timeDiff = currentDate - lastLogDate
+  const timeDiff = currentDate - lastContributionDate
 
   if (Math.abs(timeDiff) > oneDay * 2) {
     currentStreak = 0
@@ -92,15 +92,15 @@ export async function getStreak(
   return { longestStreak, currentStreak }
 }
 
-export async function getTotalLogs(
+export async function getTotalWishingWellContributions(
   id: string,
   dateRange: DateRange,
-  type: "user" | "activity"
+  type: "user" | "wishingWell"
 ) {
   const typeCondition =
-    type === "activity" ? { activityId: id } : { activity: { userId: id } }
+    type === "wishingWell" ? { wishingWellId: id } : { wishingWell: { userId: id } }
 
-  const logs = await db.activityLog.findMany({
+  const wishingWellContributions = await db.wishingWellContribution.findMany({
     where: {
       date: {
         gte: dateRange.from,
@@ -113,25 +113,25 @@ export async function getTotalLogs(
     },
   })
 
-  if (logs.length === 0) {
+  if (wishingWellContributions.length === 0) {
     return 0
   }
 
   let totalCount = 0
 
-  for (const log of logs) {
-    totalCount += log.count
+  for (const contribution of wishingWellContributions) {
+    totalCount += contribution.count
   }
 
   return totalCount
 }
 
-export async function getMostLoggedActivity(
+export async function getMostContributedWishingWell(
   userId: string,
   dateRange: DateRange
 ) {
-  const logs = await db.activityLog.groupBy({
-    by: ["activityId"],
+  const wishingWellContributions = await db.wishingWellContribution.groupBy({
+    by: ["wishingWellId"],
     _sum: {
       count: true,
     },
@@ -141,7 +141,7 @@ export async function getMostLoggedActivity(
       },
     },
     where: {
-      activity: {
+      wishingWell: {
         userId: userId,
       },
       date: {
@@ -151,29 +151,29 @@ export async function getMostLoggedActivity(
     },
   })
 
-  if (logs.length === 0) {
+  if (wishingWellContributions.length === 0) {
     return "N/A"
   }
 
-  const mostLoggedActivityId = logs[0].activityId
-  const mostLoggedActivity = await db.activity.findUnique({
+  const mostContributedWishingWellId = wishingWellContributions[0].wishingWellId
+  const mostContributedWishingWell = await db.wishingWell.findUnique({
     select: {
       name: true,
     },
     where: {
-      id: mostLoggedActivityId,
+      id: mostContributedWishingWellId,
     },
   })
 
-  return mostLoggedActivity?.name
+  return mostContributedWishingWell?.name
 }
 
-export async function getTopActivities(
+export async function getTopWishingWells(
   userId: string,
   dateRange: DateRange
-): Promise<ActivityEntry[]> {
-  const logs = await db.activityLog.groupBy({
-    by: ["activityId"],
+): Promise<WishingWellEntry[]> {
+  const wishingWellContributions = await db.wishingWellContribution.groupBy({
+    by: ["wishingWellId"],
     _sum: {
       count: true,
     },
@@ -183,7 +183,7 @@ export async function getTopActivities(
       },
     },
     where: {
-      activity: {
+      wishingWell: {
         userId: userId,
       },
       date: {
@@ -193,29 +193,26 @@ export async function getTopActivities(
     },
   })
 
-  const topActivities = await Promise.all(
-    logs.slice(0, 10).map(async (log) => {
-      const activity = await db.activity.findUnique({
-        where: {
-          id: log.activityId,
-        },
+  return await Promise.all(
+      wishingWellContributions.slice(0, 10).map(async (contribution) => {
+        const wishingWell = await db.wishingWell.findUnique({
+          where: {
+            id: contribution.wishingWellId,
+          },
+        })
+        return {
+          name: wishingWell?.name || "N/A",
+          count: contribution._sum.count,
+        }
       })
-      return {
-        name: activity?.name || "N/A",
-        count: log._sum.count,
-        color: activity?.colorCode || "#FFFFFF",
-      }
-    })
   )
-
-  return topActivities
 }
 
-export async function getActivityCountByDate(
+export async function getWishingWellCountByDate(
   userId: string,
   dateRange: DateRange
-): Promise<ActivityByDate[]> {
-  const logs = await db.activityLog.groupBy({
+): Promise<WishingWellByDate[]> {
+  const wishingWellContributions = await db.wishingWellContribution.groupBy({
     by: ["date"],
     _sum: {
       count: true,
@@ -224,7 +221,7 @@ export async function getActivityCountByDate(
       date: "asc",
     },
     where: {
-      activity: {
+      wishingWell: {
         userId: userId,
       },
       date: {
@@ -236,19 +233,19 @@ export async function getActivityCountByDate(
 
   const dateMap = new Map<string, number>()
 
-  logs.forEach((log) => {
-    dateMap.set(log.date.toISOString(), log._sum.count ?? 0)
+  wishingWellContributions.forEach((contribution) => {
+    dateMap.set(contribution.date.toISOString(), contribution._sum.count ?? 0)
   })
 
   let earliestNonZeroDate = null
-  for (const log of logs) {
-    if (log._sum.count !== 0) {
-      earliestNonZeroDate = log.date
+  for (const contribution of wishingWellContributions) {
+    if (contribution._sum.count !== 0) {
+      earliestNonZeroDate = contribution.date
       break
     }
   }
 
-  const result: ActivityByDate[] = []
+  const result: WishingWellByDate[] = []
 
   if (earliestNonZeroDate) {
     let currentDate = new Date(earliestNonZeroDate)
@@ -268,12 +265,12 @@ export async function getActivityCountByDate(
 }
 
 export async function getDailyAverage(
-  activityId: string,
+  wishingWellId: string,
   dateRange: DateRange
 ): Promise<number> {
-  const logs = await db.activityLog.findMany({
+  const wishingWellContributions = await db.wishingWellContribution.findMany({
     where: {
-      activityId: activityId,
+      wishingWellId: wishingWellId,
       date: {
         gte: dateRange.from,
         lte: dateRange.to,
@@ -284,13 +281,13 @@ export async function getDailyAverage(
     },
   })
 
-  const totalCount = logs.reduce((sum, log) => sum + log.count, 0)
+  const totalCount = wishingWellContributions.reduce((sum, contribution) => sum + contribution.count, 0)
 
   if (totalCount === 0) {
     return 0
   }
 
-  const oldestDate = new Date(logs[0].date)
+  const oldestDate = new Date(wishingWellContributions[0].date)
   const today = new Date(dateRange.to.toISOString())
   const timePeriodInDays = Math.ceil(
     (today.getTime() - oldestDate.getTime()) / (1000 * 60 * 60 * 24)
