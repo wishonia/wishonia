@@ -6,14 +6,14 @@ import { formatDate } from "@/lib/utils"
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card"
 import { Icons } from "@/components/icons"
 
-interface DashboardCardsProps {
+interface StatsCardsProps {
   data: {
     streak: {
       currentStreak: number
       longestStreak: number
     }
     totalWishingWellContributions: number
-    mostContributedWishingWell: string | undefined
+    dailyAverage: number
   }
   searchParams: SearchParams
 }
@@ -30,9 +30,9 @@ function displayDateRange(searchParams: SearchParams) {
   )
 }
 
-export function DashboardCards({ data, searchParams }: DashboardCardsProps) {
+export function StatsCards({ data, searchParams }: StatsCardsProps) {
   return (
-    <div className="grid gap-4 md:grid-cols-2">
+    <div className="grid gap-4 md:grid-cols-2 lg:grid-cols-4">
       <Card>
         <CardHeader className="flex flex-row items-center justify-between space-y-0 pb-2">
           <CardTitle className="text-sm font-medium">Current Streak</CardTitle>
@@ -67,15 +67,11 @@ export function DashboardCards({ data, searchParams }: DashboardCardsProps) {
       </Card>
       <Card>
         <CardHeader className="flex flex-row items-center justify-between space-y-0 pb-2">
-          <CardTitle className="text-sm font-medium">
-            Most Logged WishingWell
-          </CardTitle>
-          <Icons.wishingWell className="h-4 w-4 text-muted-foreground" />
+          <CardTitle className="text-sm font-medium">Daily Average</CardTitle>
+          <Icons.statsBar className="h-4 w-4 text-muted-foreground" />
         </CardHeader>
         <CardContent>
-          <div className="overflow-hidden overflow-ellipsis whitespace-nowrap text-2xl font-bold">
-            {data.mostContributedWishingWell}
-          </div>
+          <div className="text-2xl font-bold">{data.dailyAverage}</div>
           <p className="text-xs text-muted-foreground">
             {displayDateRange(searchParams)}
           </p>

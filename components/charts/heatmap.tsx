@@ -29,7 +29,7 @@ interface Value {
 
 interface HeatmapProps {
   data: {
-    activity: {
+    wishingWell: {
       id: string
       name: string
     }
@@ -37,24 +37,24 @@ interface HeatmapProps {
     date: Date
     count: number
   }[]
-  params: { activityId: string }
+  params: { wishingWellId: string }
 }
 
-async function deleteActivity(activityId: string, logsId: string) {
-  const response = await fetch(`/api/activities/${activityId}/logs/${logsId}`, {
+async function deleteWishingWell(wishingWellId: string, wishingWellContributionsId: string) {
+  const response = await fetch(`/api/wishingWells/${wishingWellId}/wishingWellContributions/${wishingWellContributionsId}`, {
     method: "DELETE",
   })
 
   if (!response?.ok) {
     toast({
       title: "Something went wrong.",
-      description: "Your activity was not deleted. Please try again.",
+      description: "Your wishingWell was not deleted. Please try again.",
       variant: "destructive",
     })
   } else {
     toast({
       title: "Item has been deleted.",
-      description: "Your activity has been deleted successfully.",
+      description: "Your wishingWell has been deleted successfully.",
       variant: "default",
     })
   }
@@ -72,7 +72,7 @@ export function Heatmap({ data, params }: HeatmapProps) {
   const handleDelete = async () => {
     if (selectedLog) {
       setIsDeleteLoading(true)
-      const deleted = await deleteActivity(params.activityId, selectedLog.id)
+      const deleted = await deleteWishingWell(params.wishingWellId, selectedLog.id)
 
       if (deleted) {
         setIsDeleteLoading(false)
@@ -106,10 +106,10 @@ export function Heatmap({ data, params }: HeatmapProps) {
   const getTitle = (value: Value) => {
     if (value && value.count) {
       return `${value.count} ${
-        value.count === 1 ? "log" : "logs"
+        value.count === 1 ? "log" : "wishingWellContributions"
       } on ${formatDate(value.date)}`
     }
-    return "No logs"
+    return "No wishingWellContributions"
   }
 
   const currentDate = new Date()
@@ -140,7 +140,7 @@ export function Heatmap({ data, params }: HeatmapProps) {
           <CredenzaContent>
             <CredenzaHeader>
               <CredenzaTitle>
-                Delete logs from {selectedDate ? formatDate(selectedDate) : ""}?
+                Delete wishingWellContributions from {selectedDate ? formatDate(selectedDate) : ""}?
               </CredenzaTitle>
               <CredenzaDescription>
                 This action cannot be undone.

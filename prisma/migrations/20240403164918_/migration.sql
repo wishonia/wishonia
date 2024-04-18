@@ -92,13 +92,13 @@ CREATE TABLE "activities" (
 );
 
 -- CreateTable
-CREATE TABLE "activity_log" (
+CREATE TABLE "wishing_well_contribution" (
     "id" TEXT NOT NULL,
-    "activity_id" TEXT NOT NULL,
+    "wishing_well_id" TEXT NOT NULL,
     "date" TIMESTAMP(3) NOT NULL DEFAULT CURRENT_TIMESTAMP,
     "count" INTEGER NOT NULL DEFAULT 1,
 
-    CONSTRAINT "activity_log_pkey" PRIMARY KEY ("id")
+    CONSTRAINT "wishing_well_contribution_pkey" PRIMARY KEY ("id")
 );
 
 -- CreateIndex
@@ -129,4 +129,4 @@ ALTER TABLE "sessions" ADD CONSTRAINT "sessions_user_id_fkey" FOREIGN KEY ("user
 ALTER TABLE "activities" ADD CONSTRAINT "activities_user_id_fkey" FOREIGN KEY ("user_id") REFERENCES "users"("id") ON DELETE RESTRICT ON UPDATE CASCADE;
 
 -- AddForeignKey
-ALTER TABLE "activity_log" ADD CONSTRAINT "activity_log_activity_id_fkey" FOREIGN KEY ("activity_id") REFERENCES "activities"("id") ON DELETE RESTRICT ON UPDATE CASCADE;
+ALTER TABLE "wishing_well_contribution" ADD CONSTRAINT "wishing_well_contribution_wishing_well_id_fkey" FOREIGN KEY ("wishing_well_id") REFERENCES "activities"("id") ON DELETE RESTRICT ON UPDATE CASCADE;

@@ -60,6 +60,15 @@ export function UserAuthForm({ className, ...props }: UserAuthFormProps) {
         )}{" "}
           Verify with Github
       </button>
+
+
+        {/* OR Divider */}
+        <div className="flex items-center justify-center my-4">
+            <div className="border-t border-gray-300 flex-grow"></div>
+            <span className="px-4">OR</span>
+            <div className="border-t border-gray-300 flex-grow"></div>
+        </div>
+
         {/* Email login section */}
         <div id="email-login" className="flex flex-col gap-2">
             <div className="flex items-center">

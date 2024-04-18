@@ -10,9 +10,9 @@ function Cards() {
     <>
       <Card className="flex flex-grow flex-col justify-between gap-4 p-8 text-left dark:bg-secondary">
         <RxActivityLog className="text-4xl" />
-        <CardTitle>Activity Tracking</CardTitle>
+        <CardTitle>WishingWell Tracking</CardTitle>
         <CardDescription>
-          Easily add and track daily habits and activities, creating a
+          Easily add and track daily habits and wishingWells, creating a
           comprehensive progress log.
         </CardDescription>
       </Card>
@@ -20,7 +20,7 @@ function Cards() {
         <BsFire className="text-4xl" />
         <CardTitle>Streak Monitoring</CardTitle>
         <CardDescription>
-          Track streaks for each activity, motivating consistent engagement and
+          Track streaks for each wishingWell, motivating consistent engagement and
           achieving personal milestones.
         </CardDescription>
       </Card>
@@ -28,7 +28,7 @@ function Cards() {
         <TbDeviceAnalytics className="text-4xl" />
         <CardTitle>Insightful Analytics</CardTitle>
         <CardDescription>
-          Get data-driven insights and visualizations to analyze activity trends
+          Get data-driven insights and visualizations to analyze wishingWell trends
           and make informed decisions.
         </CardDescription>
       </Card>
@@ -36,7 +36,7 @@ function Cards() {
         <BsLayoutTextWindowReverse className="text-4xl" />
         <CardTitle>Seamless UI</CardTitle>
         <CardDescription>
-          Intuitive and user-friendly interface for easy navigation, activity
+          Intuitive and user-friendly interface for easy navigation, wishingWell
           addition, and progress viewing.
         </CardDescription>
       </Card>

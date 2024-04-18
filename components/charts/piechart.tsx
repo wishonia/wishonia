@@ -1,12 +1,12 @@
 "use client"
 
-import { ActivityEntry } from "@/types"
+import { WishingWellEntry } from "@/types"
 import { Cell, Pie, PieChart, ResponsiveContainer, Tooltip } from "recharts"
 
 import { Card } from "@/components/ui/card"
 
 interface PieChartProps {
-  data: ActivityEntry[]
+  data: WishingWellEntry[]
 }
 
 export function PieChartComponent({ data }: PieChartProps) {
@@ -26,7 +26,7 @@ export function PieChartComponent({ data }: PieChartProps) {
             label
           >
             {data.map((entry, index) => (
-              <Cell key={`cell-${index}`} fill={entry.color} />
+              <Cell key={`cell-${index}`} fill={"white"} />
             ))}
           </Pie>
           <Tooltip
@@ -44,10 +44,6 @@ export function PieChartComponent({ data }: PieChartProps) {
               key={`label-${index}`}
               className="mb-2 flex items-center text-sm"
             >
-              <span
-                className="mr-2 inline-block h-4 w-4 shadow-sm"
-                style={{ backgroundColor: entry.color }}
-              ></span>
               {entry.name}
             </div>
           ))}

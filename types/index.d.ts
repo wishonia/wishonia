@@ -55,3 +55,13 @@ export type SearchParams = {
   from: string
   to: string
 }
+
+export type WishingWellEntry = {
+  name: string
+  count: number | null
+}
+
+export type WishingWellByDate = {
+  date: string
+  count: number
+}
