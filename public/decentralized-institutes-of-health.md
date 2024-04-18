@@ -74,9 +74,6 @@ Decentralized Institutes of Health (DIH) Platform
     - Researchers: Submit project proposals and manage funded projects
     - Funders: Contribute funds to projects and participate in governance
     - Reviewers: Evaluate project proposals and provide feedback
-    - Administrators: Oversee platform operations and resolve disputes
-    - Regulators: Ensure compliance with relevant healthcare regulations
-    - Experts: Provide guidance on research priorities and validate findings
 
    2.2 Project Submission
     - Researchers can submit project proposals with a description, funding goal, timeline, and regulatory compliance plan

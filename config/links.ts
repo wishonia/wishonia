@@ -28,11 +28,11 @@ export const dashboardLinks: Navigation = {
       href: "/dashboard",
       icon: "dashboard",
     },
-    // {
-    //   title: "Signatures",
-    //   href: "/dashboard/activities",
-    //   icon: "activity",
-    // },
+    {
+      title: "Wishing Wells",
+      href: "/dashboard/wishingWells",
+      icon: "wishingWell",
+    },
     {
       title: "Profile Settings",
       href: "/dashboard/settings",

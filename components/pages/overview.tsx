@@ -14,7 +14,7 @@ export default function Overview() {
           <ImageFrame>
             <Image
               className="rounded-lg"
-              src="/images/activities.jpg"
+              src="/images/wishingWells.jpg"
               width="1280"
               height="720"
               alt="Showcase image"
@@ -41,7 +41,7 @@ export default function Overview() {
           <ImageFrame>
             <Image
               className="rounded-lg"
-              src="/images/activity-stats.jpg"
+              src="/images/wishing-well-stats.jpg"
               width="1280"
               height="720"
               alt="Showcase image"
