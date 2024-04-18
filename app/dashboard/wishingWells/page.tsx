@@ -1,35 +1,35 @@
 import { Metadata } from "next"
 import { redirect } from "next/navigation"
 
-import { getUserActivities } from "@/lib/api/activities"
+import { getUserWishingWells } from "@/lib/api/wishingWells"
 import { authOptions } from "@/lib/auth"
 import { getCurrentUser } from "@/lib/session"
-import { ActivityAddButton } from "@/components/activity/activity-add-button"
-import { ActivityList } from "@/components/activity/activity-list"
+import { WishingWellAddButton } from "@/components/wishingWell/wishing-well-add-button"
+import { WishingWellList } from "@/components/wishingWell/wishing-well-list"
 import { Shell } from "@/components/layout/shell"
 import { DashboardHeader } from "@/components/pages/dashboard/dashboard-header"
 
 export const metadata: Metadata = {
-  title: "Activities",
-  description: "Manage account activities/hobbies.",
+  title: "WishingWells",
+  description: "Manage account wishingWells/hobbies.",
 }
 
-export default async function ActivitiesPage() {
+export default async function WishingWellsPage() {
   const user = await getCurrentUser()
 
   if (!user) {
     redirect(authOptions?.pages?.signIn || "/signin")
   }
 
-  const activities = await getUserActivities(user.id)
+  const wishingWells = await getUserWishingWells(user.id)
 
   return (
     <Shell>
-      <DashboardHeader heading="Activities" text="Manage account activities.">
-        <ActivityAddButton />
+      <DashboardHeader heading="WishingWells" text="Manage account wishingWells.">
+        <WishingWellAddButton />
       </DashboardHeader>
       <div className="divide-y divide-border rounded-md border">
-        <ActivityList activities={activities} />
+        <WishingWellList wishingWells={wishingWells} />
       </div>
     </Shell>
   )

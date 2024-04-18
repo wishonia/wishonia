@@ -1,42 +1,41 @@
-import { Activity, User } from "@prisma/client"
+import { WishingWell, User } from "@prisma/client"
 import { getServerSession } from "next-auth"
 
 import { authOptions } from "@/lib/auth"
 import { db } from "@/lib/db"
 
-type UserActivities = Activity & {
+type UserWishingWells = WishingWell & {
   total_count: number
 }
 
-// Fetch user's activity
-export async function getUserActivity(
-  activityId: Activity["id"],
+// Fetch user's wishingWell
+export async function getUserWishingWell(
+  wishingWellId: WishingWell["id"],
   userId: User["id"]
 ) {
-  return await db.activity.findFirst({
+  return await db.wishingWell.findFirst({
     where: {
-      id: activityId,
+      id: wishingWellId,
       userId: userId,
     },
   })
 }
 
-// Fetch all of the activities for the selected user
-export async function getUserActivities(
+// Fetch all of the wishingWells for the selected user
+export async function getUserWishingWells(
   userId: string
-): Promise<UserActivities[]> {
-  const results: UserActivities[] = await db.$queryRaw`
+): Promise<UserWishingWells[]> {
+  const results: UserWishingWells[] = await db.$queryRaw`
     SELECT
       A.id,
       A.name,
       A.description,
-      A.color_code AS "colorCode",
       A.created_at AS "createdAt",
       SUM(AL.count) AS total_count
     FROM
-      activities A
+      wishingWells A
     LEFT JOIN
-      activity_log AL ON A.id = AL.activity_id
+      wishing_well_contribution AL ON A.id = AL.wishingWell_id
     WHERE
       A.user_id = ${userId}
     GROUP BY
@@ -50,12 +49,12 @@ export async function getUserActivities(
   }))
 }
 
-// Verify if the user has access to the activity
-export async function verifyActivity(activityId: string) {
+// Verify if the user has access to the wishingWell
+export async function verifyWishingWell(wishingWellId: string) {
   const session = await getServerSession(authOptions)
-  const count = await db.activity.count({
+  const count = await db.wishingWell.count({
     where: {
-      id: activityId,
+      id: wishingWellId,
       userId: session?.user.id,
     },
   })

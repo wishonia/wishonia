@@ -12,8 +12,8 @@ interface DashboardCardsProps {
       currentStreak: number
       longestStreak: number
     }
-    totalLogs: number
-    mostLoggedActivity: string | undefined
+    totalWishingWellContributions: number
+    mostContributedWishingWell: string | undefined
   }
   searchParams: SearchParams
 }
@@ -55,11 +55,11 @@ export function DashboardCards({ data, searchParams }: DashboardCardsProps) {
       </Card>
       <Card>
         <CardHeader className="flex flex-row items-center justify-between space-y-0 pb-2">
-          <CardTitle className="text-sm font-medium">Total Logs</CardTitle>
+          <CardTitle className="text-sm font-medium">Total WishingWellContributions</CardTitle>
           <Icons.history className="h-4 w-4 text-muted-foreground" />
         </CardHeader>
         <CardContent>
-          <div className="text-2xl font-bold">{data.totalLogs}</div>
+          <div className="text-2xl font-bold">{data.totalWishingWellContributions}</div>
           <p className="text-xs text-muted-foreground">
             {displayDateRange(searchParams)}
           </p>
@@ -68,13 +68,13 @@ export function DashboardCards({ data, searchParams }: DashboardCardsProps) {
       <Card>
         <CardHeader className="flex flex-row items-center justify-between space-y-0 pb-2">
           <CardTitle className="text-sm font-medium">
-            Most Logged Activity
+            Most Logged WishingWell
           </CardTitle>
-          <Icons.activity className="h-4 w-4 text-muted-foreground" />
+          <Icons.wishingWell className="h-4 w-4 text-muted-foreground" />
         </CardHeader>
         <CardContent>
           <div className="overflow-hidden overflow-ellipsis whitespace-nowrap text-2xl font-bold">
-            {data.mostLoggedActivity}
+            {data.mostContributedWishingWell}
           </div>
           <p className="text-xs text-muted-foreground">
             {displayDateRange(searchParams)}

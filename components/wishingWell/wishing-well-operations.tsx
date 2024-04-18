@@ -3,7 +3,7 @@
 import * as React from "react"
 import Link from "next/link"
 import { useRouter } from "next/navigation"
-import { Activity } from "@prisma/client"
+import { WishingWell } from "@prisma/client"
 
 import { Button } from "@/components/ui/button"
 import {
@@ -25,37 +25,37 @@ import {
 import { toast } from "@/components/ui/use-toast"
 import { Icons } from "@/components/icons"
 
-import { LogsAddForm } from "./logs/logs-add-form"
+import { WishingWellContributionsAddForm } from "./wishingWellContributions/wishing-well-contributions-add-form"
 
-async function deleteActivity(activityId: string) {
-  const response = await fetch(`/api/activities/${activityId}`, {
+async function deleteWishingWell(wishingWellId: string) {
+  const response = await fetch(`/api/wishingWells/${wishingWellId}`, {
     method: "DELETE",
   })
 
   if (!response?.ok) {
     toast({
       title: "Something went wrong.",
-      description: "Your activity was not deleted. Please try again.",
+      description: "Your wishingWell was not deleted. Please try again.",
       variant: "destructive",
     })
   } else {
     toast({
-      description: "Your activity has been deleted successfully.",
+      description: "Your wishingWell has been deleted successfully.",
     })
   }
 
   return true
 }
 
-interface ActivityOperationsProps {
-  activity: Pick<Activity, "id">
+interface WishingWellOperationsProps {
+  wishingWell: Pick<WishingWell, "id">
   children?: React.ReactNode
 }
 
-export function ActivityOperations({
-  activity,
+export function WishingWellOperations({
+  wishingWell,
   children,
-}: ActivityOperationsProps) {
+}: WishingWellOperationsProps) {
   const router = useRouter()
   const [showDeleteAlert, setShowDeleteAlert] = React.useState<boolean>(false)
   const [isDeleteLoading, setIsDeleteLoading] = React.useState<boolean>(false)
@@ -89,7 +89,7 @@ export function ActivityOperations({
           <DropdownMenuSeparator />
           <DropdownMenuItem>
             <Link
-              href={`/dashboard/activities/${activity.id}/settings`}
+              href={`/dashboard/wishingWells/${wishingWell.id}/settings`}
               className="flex w-full"
             >
               <Icons.settings className="mr-2 h-4 w-4" />
@@ -114,13 +114,13 @@ export function ActivityOperations({
       <Credenza open={showLogAlert} onOpenChange={setShowLogAlert}>
         <CredenzaContent>
           <CredenzaHeader>
-            <CredenzaTitle>Log Activity</CredenzaTitle>
+            <CredenzaTitle>Contribute to Wishing Well</CredenzaTitle>
             <CredenzaDescription>
-              This will create an activity log.
+              This will create an wishing well contribution.
             </CredenzaDescription>
           </CredenzaHeader>
-          <LogsAddForm
-            activityId={activity.id}
+          <WishingWellContributionsAddForm
+            wishingWellId={wishingWell.id}
             setShowLogAlert={setShowLogAlert}
           />
         </CredenzaContent>
@@ -131,7 +131,7 @@ export function ActivityOperations({
         <CredenzaContent>
           <CredenzaHeader>
             <CredenzaTitle>
-              Are you sure you want to delete this activity?
+              Are you sure you want to delete this wishingWell?
             </CredenzaTitle>
             <CredenzaDescription>
               This action cannot be undone.
@@ -148,7 +148,7 @@ export function ActivityOperations({
                 event.preventDefault()
                 setIsDeleteLoading(true)
 
-                const deleted = await deleteActivity(activity.id)
+                const deleted = await deleteWishingWell(wishingWell.id)
 
                 if (deleted) {
                   setIsDeleteLoading(false)

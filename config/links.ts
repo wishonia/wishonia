@@ -30,8 +30,8 @@ export const dashboardLinks: Navigation = {
     },
     // {
     //   title: "Signatures",
-    //   href: "/dashboard/activities",
-    //   icon: "activity",
+    //   href: "/dashboard/wishingWells",
+    //   icon: "wishingWell",
     // },
     {
       title: "Profile Settings",

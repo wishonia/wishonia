@@ -1,12 +1,12 @@
 import * as z from "zod"
 
-import { verifyActivity } from "@/lib/api/activities"
+import { verifyWishingWell } from "@/lib/api/wishingWells"
 import { db } from "@/lib/db"
 
 const routeContextSchema = z.object({
   params: z.object({
-    activityId: z.string(),
-    logId: z.string(),
+    wishingWellId: z.string(),
+    wishingWellContributionId: z.string(),
   }),
 })
 
@@ -17,16 +17,16 @@ export async function DELETE(
   try {
     const { params } = routeContextSchema.parse(context)
 
-    if (!(await verifyActivity(params.activityId))) {
+    if (!(await verifyWishingWell(params.wishingWellId))) {
       return new Response(null, { status: 403 })
     }
 
     // Delete the log
-    await db.activityLog.delete({
+    await db.wishingWellContribution.delete({
       where: {
-        id: params.logId as string,
-        activity: {
-          id: params.activityId as string,
+        id: params.wishingWellContributionId as string,
+        wishingWell: {
+          id: params.wishingWellId as string,
         },
       },
     })

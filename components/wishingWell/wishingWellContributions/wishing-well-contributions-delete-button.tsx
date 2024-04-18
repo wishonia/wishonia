@@ -17,46 +17,46 @@ import {
 import { toast } from "@/components/ui/use-toast"
 import { Icons } from "@/components/icons"
 
-interface LogsDeleteButtonProps {
-  logs: {
+interface WishingWellContributionsDeleteButtonProps {
+  wishingWellContributions: {
     id: string
     date: Date
     count: number
-    activity: {
+    wishingWell: {
       id: string
       name: string
     }
   }
 }
 
-async function deleteActivity(activityId: string, logsId: string) {
-  const response = await fetch(`/api/activities/${activityId}/logs/${logsId}`, {
+async function deleteWishingWell(wishingWellId: string, wishingWellContributionsId: string) {
+  const response = await fetch(`/api/wishingWells/${wishingWellId}/wishingWellContributions/${wishingWellContributionsId}`, {
     method: "DELETE",
   })
 
   if (!response?.ok) {
     toast({
       title: "Something went wrong.",
-      description: "Your log was not deleted. Please try again.",
+      description: "Your contribution was not deleted. Please try again.",
       variant: "destructive",
     })
   } else {
     toast({
-      description: "Your log has been deleted successfully.",
+      description: "Your contribution has been deleted successfully.",
     })
   }
 
   return true
 }
 
-export function LogsDeleteButton({ logs }: LogsDeleteButtonProps) {
+export function WishingWellContributionsDeleteButton({ wishingWellContributions }: WishingWellContributionsDeleteButtonProps) {
   const router = useRouter()
   const [showDeleteAlert, setShowDeleteAlert] = React.useState<boolean>(false)
   const [isDeleteLoading, setIsDeleteLoading] = React.useState<boolean>(false)
 
   const handleDelete = async () => {
     setIsDeleteLoading(true)
-    const deleted = await deleteActivity(logs.activity.id, logs.id)
+    const deleted = await deleteWishingWell(wishingWellContributions.wishingWell.id, wishingWellContributions.id)
 
     if (deleted) {
       setIsDeleteLoading(false)
@@ -80,7 +80,7 @@ export function LogsDeleteButton({ logs }: LogsDeleteButtonProps) {
         <CredenzaContent>
           <CredenzaHeader>
             <CredenzaTitle>
-              Delete logs from {formatDate(logs.date)}?
+              Delete wishingWellContributions from {formatDate(wishingWellContributions.date)}?
             </CredenzaTitle>
             <CredenzaDescription>
               This action cannot be undone.

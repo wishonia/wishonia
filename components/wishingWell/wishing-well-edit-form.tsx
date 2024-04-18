@@ -3,13 +3,13 @@
 import * as React from "react"
 import { useRouter } from "next/navigation"
 import { zodResolver } from "@hookform/resolvers/zod"
-import { Activity } from "@prisma/client"
+import { WishingWell } from "@prisma/client"
 import { HexColorPicker } from "react-colorful"
 import { useForm } from "react-hook-form"
 import * as z from "zod"
 
 import { cn } from "@/lib/utils"
-import { activityPatchSchema } from "@/lib/validations/activity"
+import { wishingWellPatchSchema } from "@/lib/validations/wishingWell"
 import { buttonVariants } from "@/components/ui/button"
 import {
   Card,
@@ -25,34 +25,32 @@ import { Textarea } from "@/components/ui/textarea"
 import { toast } from "@/components/ui/use-toast"
 import { Icons } from "@/components/icons"
 
-interface ActivityEditFormProps extends React.HTMLAttributes<HTMLFormElement> {
-  activity: Pick<Activity, "id" | "name" | "description" | "colorCode">
+interface WishingWellEditFormProps extends React.HTMLAttributes<HTMLFormElement> {
+  wishingWell: Pick<WishingWell, "id" | "name" | "description" >
 }
 
-type FormData = z.infer<typeof activityPatchSchema>
+type FormData = z.infer<typeof wishingWellPatchSchema>
 
-export function ActivityEditForm({
-  activity,
+export function WishingWellEditForm({
+  wishingWell,
   className,
   ...props
-}: ActivityEditFormProps) {
+}: WishingWellEditFormProps) {
   const router = useRouter()
   const {
     handleSubmit,
     register,
     formState: { errors, isSubmitting },
   } = useForm<FormData>({
-    resolver: zodResolver(activityPatchSchema),
+    resolver: zodResolver(wishingWellPatchSchema),
     defaultValues: {
-      name: activity?.name || "",
-      description: activity?.description || "",
-      colorCode: "",
+      name: wishingWell?.name || "",
+      description: wishingWell?.description || "",
     },
   })
-  const [color, setColor] = React.useState(activity.colorCode || "#ffffff")
 
   async function onSubmit(data: FormData) {
-    const response = await fetch(`/api/activities/${activity.id}`, {
+    const response = await fetch(`/api/wishingWells/${wishingWell.id}`, {
       method: "PATCH",
       headers: {
         "Content-Type": "application/json",
@@ -60,20 +58,19 @@ export function ActivityEditForm({
       body: JSON.stringify({
         name: data.name,
         description: data.description,
-        colorCode: color,
       }),
     })
 
     if (!response?.ok) {
       return toast({
         title: "Something went wrong.",
-        description: "Your activity was not updated. Please try again.",
+        description: "Your wishingWell was not updated. Please try again.",
         variant: "destructive",
       })
     }
 
     toast({
-      description: "Your activity has been updated.",
+      description: "Your wishingWell has been updated.",
     })
 
     router.back()
@@ -88,9 +85,9 @@ export function ActivityEditForm({
     >
       <Card>
         <CardHeader>
-          <CardTitle>{activity.name}</CardTitle>
-          {activity.description && (
-            <CardDescription>{activity.description}</CardDescription>
+          <CardTitle>{wishingWell.name}</CardTitle>
+          {wishingWell.description && (
+            <CardDescription>{wishingWell.description}</CardDescription>
           )}
         </CardHeader>
         <CardContent className="space-y-4">
@@ -121,10 +118,6 @@ export function ActivityEditForm({
                 {errors.description.message}
               </p>
             )}
-          </div>
-          <div className="grid gap-3">
-            <Label>Color</Label>
-            <HexColorPicker color={color} onChange={setColor} />
           </div>
         </CardContent>
         <CardFooter>

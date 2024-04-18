@@ -12,7 +12,7 @@ interface StatsCardsProps {
       currentStreak: number
       longestStreak: number
     }
-    totalLogs: number
+    totalWishingWellContributions: number
     dailyAverage: number
   }
   searchParams: SearchParams
@@ -55,11 +55,11 @@ export function StatsCards({ data, searchParams }: StatsCardsProps) {
       </Card>
       <Card>
         <CardHeader className="flex flex-row items-center justify-between space-y-0 pb-2">
-          <CardTitle className="text-sm font-medium">Total Logs</CardTitle>
+          <CardTitle className="text-sm font-medium">Total WishingWellContributions</CardTitle>
           <Icons.history className="h-4 w-4 text-muted-foreground" />
         </CardHeader>
         <CardContent>
-          <div className="text-2xl font-bold">{data.totalLogs}</div>
+          <div className="text-2xl font-bold">{data.totalWishingWellContributions}</div>
           <p className="text-xs text-muted-foreground">
             {displayDateRange(searchParams)}
           </p>

@@ -28,8 +28,8 @@ import {
 import { toast } from "@/components/ui/use-toast"
 import { Icons } from "@/components/icons"
 
-interface LogsAddFormProps {
-  activityId: string
+interface WishingWellContributionsAddFormProps {
+  wishingWellId: string
   setShowLogAlert: (active: boolean) => void
 }
 
@@ -48,7 +48,7 @@ const defaultValues: Partial<FormValues> = {
   date: currentDate,
 }
 
-export function LogsAddForm({ activityId, setShowLogAlert }: LogsAddFormProps) {
+export function WishingWellContributionsAddForm({ wishingWellId, setShowLogAlert }: WishingWellContributionsAddFormProps) {
   const router = useRouter()
   const form = useForm<z.infer<typeof FormSchema>>({
     resolver: zodResolver(FormSchema),
@@ -59,7 +59,7 @@ export function LogsAddForm({ activityId, setShowLogAlert }: LogsAddFormProps) {
   async function onSubmit(data: z.infer<typeof FormSchema>) {
     setIsLoading(true)
 
-    const response = await fetch(`/api/activities/${activityId}/logs`, {
+    const response = await fetch(`/api/wishingWells/${wishingWellId}/wishingWellContributions`, {
       method: "POST",
       headers: {
         "Content-Type": "application/json",
@@ -73,12 +73,12 @@ export function LogsAddForm({ activityId, setShowLogAlert }: LogsAddFormProps) {
     if (!response?.ok) {
       toast({
         title: "Something went wrong.",
-        description: "Your activity was not logged. Please try again.",
+        description: "Please try again.",
         variant: "destructive",
       })
     } else {
       toast({
-        description: "Your activity has been logged successfully.",
+        description: "Your wishingWell has been logged successfully.",
       })
     }
 
@@ -132,7 +132,7 @@ export function LogsAddForm({ activityId, setShowLogAlert }: LogsAddFormProps) {
                 </PopoverContent>
               </Popover>
               <FormDescription>
-                Date when the activity is performed.
+                Date when the wishingWell is performed.
               </FormDescription>
               <FormMessage />
             </FormItem>
