@@ -99,21 +99,28 @@ model User {
   web3Wallet           String?   @map("web3_wallet")
   website              String?   @map("website")
 
-  accounts                   Account[]
-  sessions                   Session[]
-  activities                 Activity[]
-  wishingWells               WishingWell[]
-  educations                 Education[]
-  positions                  Position[]
-  skills                     Skill[]
-  endorsements               Endorsement[]
-  userRecommendations        Recommendation[] @relation("UserRecommendations")
-  recommenderRecommendations Recommendation[] @relation("RecommenderRecommendations")
-  posts                      Post[]
-  likes                      Like[]
-  comments                   Comment[]
-  initiatedFriendships       Friendship[]     @relation(name: "InitiatorFriendships")
-  receivedFriendships        Friendship[]     @relation(name: "ReceiverFriendships")
+  accounts                        Account[]
+  sessions                        Session[]
+  activities                      Activity[]
+  wishingWells                    WishingWell[]
+  educations                      Education[]
+  positions                       Position[]
+  skills                          Skill[]
+  endorsements                    Endorsement[]
+  userRecommendations             Recommendation[]          @relation("UserRecommendations")
+  recommenderRecommendations      Recommendation[]          @relation("RecommenderRecommendations")
+  posts                           Post[]
+  likes                           Like[]
+  comments                        Comment[]
+  initiatedFriendships            Friendship[]              @relation(name: "InitiatorFriendships")
+  receivedFriendships             Friendship[]              @relation(name: "ReceiverFriendships")
+  createdGenieDAOs                GenieDAO[]                @relation("CreatedGenieDAOs")
+  joinedGenieDAOs                 GenieDAO[]                @relation("JoinedGenieDAOs")
+  createdWishFulfillmentProposals WishFulfillmentProposal[] @relation("CreatedProposals")
+  createdProposalProgressReports  ProposalProgressReport[]
+  proposalComparisons             ProposalComparison[]
+  wishingWellComparisons          WishingWellComparison[]
+  genieDAOFeedback                GenieDAOFeedback[]
 
   @@map("users")
 }
@@ -266,6 +273,7 @@ model WishingWell {
   updatedAt                DateTime                  @updatedAt @map("updated_at")
   user                     User                      @relation(fields: [userId], references: [id])
   wishingWellContributions WishingWellContribution[]
+  proposals                WishFulfillmentProposal[]
 
   @@map("wishing_wells")
 }
@@ -278,4 +286,93 @@ model WishingWellContribution {
   wishingWell   WishingWell @relation(fields: [wishingWellId], references: [id])
 
   @@map("wishing_well_contributions")
+}
+
+model GenieDAO {
+  id             String                    @id @default(cuid())
+  name           String
+  reputation     Float                     @default(0)
+  createdAt      DateTime                  @default(now()) @map("created_at")
+  updatedAt      DateTime                  @updatedAt @map("updated_at")
+  creator        User                      @relation("CreatedGenieDAOs", fields: [creatorId], references: [id])
+  creatorId      String
+  members        User[]                    @relation("JoinedGenieDAOs")
+  proposals      WishFulfillmentProposal[]
+  collaborations WishFulfillmentProposal[] @relation("ProposalCollaborators")
+  feedback       GenieDAOFeedback[]
+
+  @@map("genie_daos")
+}
+
+model WishFulfillmentProposal {
+  id            String                   @id @default(cuid())
+  wishingWellId String                   @map("wishing_well_id")
+  genieDAOId    String                   @map("genie_dao_id")
+  description   String
+  leadIndicator String
+  lagIndicator  String
+  wishTokens    Int
+  createdAt     DateTime                 @default(now()) @map("created_at")
+  updatedAt     DateTime                 @updatedAt @map("updated_at")
+  wishingWell   WishingWell              @relation(fields: [wishingWellId], references: [id])
+  genieDAO      GenieDAO                 @relation(fields: [genieDAOId], references: [id])
+  collaborators GenieDAO[]               @relation("ProposalCollaborators")
+  reports       ProposalProgressReport[]
+  creator       User                     @relation("CreatedProposals", fields: [creatorId], references: [id])
+  creatorId     String
+
+  @@map("wish_fulfillment_proposals")
+}
+
+model ProposalProgressReport {
+  id         String                  @id @default(cuid())
+  proposalId String                  @map("proposal_id")
+  content    String
+  createdAt  DateTime                @default(now()) @map("created_at")
+  updatedAt  DateTime                @updatedAt @map("updated_at")
+  proposal   WishFulfillmentProposal @relation(fields: [proposalId], references: [id])
+  creator    User                    @relation(fields: [creatorId], references: [id])
+  creatorId  String
+
+  @@map("proposal_progress_reports")
+}
+
+model ProposalComparison {
+  id                     String   @id @default(cuid())
+  userId                 String   @map("user_id")
+  thisProposalId         String   @map("this_proposal_id")
+  thatProposalId         String   @map("that_proposal_id")
+  thisProposalPercentage Float    @map("this_proposal_percentage")
+  createdAt              DateTime @default(now()) @map("created_at")
+  updatedAt              DateTime @updatedAt @map("updated_at")
+  user                   User     @relation(fields: [userId], references: [id])
+
+  @@map("proposal_comparisons")
+}
+
+model WishingWellComparison {
+  id                        String   @id @default(cuid())
+  userId                    String   @map("user_id")
+  thisWishingWellId         String   @map("this_wishing_well_id")
+  thatWishingWellId         String   @map("that_wishing_well_id")
+  thisWishingWellPercentage Float    @map("this_wishing_well_percentage")
+  createdAt                 DateTime @default(now()) @map("created_at")
+  updatedAt                 DateTime @updatedAt @map("updated_at")
+  user                      User     @relation(fields: [userId], references: [id])
+
+  @@map("wishing_well_comparisons")
+}
+
+model GenieDAOFeedback {
+  id         String   @id @default(cuid())
+  userId     String   @map("user_id")
+  genieDAOId String   @map("genie_dao_id")
+  rating     Float
+  comment    String?
+  createdAt  DateTime @default(now()) @map("created_at")
+  updatedAt  DateTime @updatedAt @map("updated_at")
+  genieDAO   GenieDAO @relation(fields: [genieDAOId], references: [id])
+  user       User     @relation(fields: [userId], references: [id])
+
+  @@map("genie_dao_feedback")
 }
