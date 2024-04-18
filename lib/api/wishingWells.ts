@@ -13,15 +13,15 @@ export async function getUserWishingWell(
   wishingWellId: WishingWell["id"],
   userId: User["id"]
 ) {
-  return await db.wishingWell.findFirst({
+  return db.wishingWell.findFirst({
     where: {
       id: wishingWellId,
       userId: userId,
     },
-  })
+  });
 }
 
-// Fetch all of the wishingWells for the selected user
+// Fetch all the wishingWells for the selected user
 export async function getUserWishingWells(
   userId: string
 ): Promise<UserWishingWells[]> {
@@ -33,13 +33,13 @@ export async function getUserWishingWells(
       A.created_at AS "createdAt",
       SUM(AL.count) AS total_count
     FROM
-      wishingWells A
+      wishing_wells A
     LEFT JOIN
-      wishing_well_contribution AL ON A.id = AL.wishingWell_id
+      wishing_well_contributions AL ON A.id = AL.wishing_well_id
     WHERE
       A.user_id = ${userId}
     GROUP BY
-      A.id, A.name, A.description, A.color_code
+      A.id, A.name, A.description
     ORDER BY
       total_count DESC;`
 
