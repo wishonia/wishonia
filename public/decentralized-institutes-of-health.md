@@ -6,13 +6,13 @@ excerpt: >-
   Exploring the transformative potential of Decentralized Institutes of Health
   (DIH) in reallocating resources from war to medical breakthroughs using
   blockchain, AI, and decentralized tools.
-coverImage: decentralized-institutes-of-health.png
+coverImage: '/decentralized-institutes-of-health.png'
 #  date: '2022-10-18'
-author:
-  name: Anonymous
+#author:
+#  name: Anonymous
 #  picture: ''
 ogImage:
-  url: 'decentralized-institutes-of-health.png'
+  url: '/decentralized-institutes-of-health.png'
 ---
 # The Decentralized Institutes of Health
 
