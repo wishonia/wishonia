@@ -88,7 +88,7 @@ export function WishingWellAddButton({ ...props }: WishingWellAddButtonProps) {
               ) : (
                 <Icons.add className="mr-2 h-4 w-4" />
               )}
-              <span>Add wishingWell</span>
+              <span>Add wishing well</span>
             </Button>
           </CredenzaFooter>
         </CredenzaContent>
