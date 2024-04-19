@@ -48,13 +48,13 @@ async function deleteWishingWell(wishingWellId: string, wishingWellContributions
   if (!response?.ok) {
     toast({
       title: "Something went wrong.",
-      description: "Your wishingWell was not deleted. Please try again.",
+      description: "Your wish was not deleted. Please try again.",
       variant: "destructive",
     })
   } else {
     toast({
       title: "Item has been deleted.",
-      description: "Your wishingWell has been deleted successfully.",
+      description: "Your wish has been deleted successfully.",
       variant: "default",
     })
   }
@@ -106,10 +106,10 @@ export function Heatmap({ data, params }: HeatmapProps) {
   const getTitle = (value: Value) => {
     if (value && value.count) {
       return `${value.count} ${
-        value.count === 1 ? "log" : "wishingWellContributions"
+        value.count === 1 ? "Wishing Well Contribution" : "Wishing Well Contributions"
       } on ${formatDate(value.date)}`
     }
-    return "No wishingWellContributions"
+    return "No Wishing Well Contributions"
   }
 
   const currentDate = new Date()

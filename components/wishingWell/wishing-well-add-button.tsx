@@ -32,7 +32,7 @@ export function WishingWellAddButton({ ...props }: WishingWellAddButtonProps) {
         "Content-Type": "application/json",
       },
       body: JSON.stringify({
-        name: "New WishingWell",
+        name: "New Wish",
       }),
     })
 
