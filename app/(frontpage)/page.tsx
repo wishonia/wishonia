@@ -9,12 +9,12 @@ import { PWARedirect } from "@/components/pwa-redirect"
 export default function Home() {
   return (
     <main>
-      <WishocracyLandingPage />
+{/*      <WishocracyLandingPage />*/}
       <Poll />
-       <Hero />
+{/*       <Hero />
       <FeatureCards />
       <Overview />
-      <OpenSource />
+      <OpenSource />*/}
       <PWARedirect />
     </main>
   )
