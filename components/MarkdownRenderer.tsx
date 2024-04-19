@@ -5,6 +5,7 @@ import axios from 'axios';
 import rehypeRaw from 'rehype-raw';
 import matter from 'gray-matter';
 import { Icons } from './icons';
+import Script from "next/script";
 
 interface MarkdownRendererProps {
     url: string;
@@ -34,15 +35,22 @@ const MarkdownRenderer: FC<MarkdownRendererProps> = ({ url }) => {
                 const { data, content: markdownContent } = matter(response.data);
                 setMetadata(data);
                 const siteRoot = process.env.NEXT_PUBLIC_APP_URL || '';
-                        // Replace image links with absolute paths
-        const updatedMarkdownContent = markdownContent.replace(/!\[(.*?)\]\((.*?)\)/g, (match, altText, url) => {
-            // Check if the URL is already an absolute path
-            if (url.startsWith('http://') || url.startsWith('https://')) {
-                return match; // Return the original string if it's an absolute URL
-            }
-            // Return the modified string with the site root prefixed
-            return `![${altText}](${siteRoot}${url.startsWith('/') ? '' : '/'}${url})`;
-        });
+                // Replace image links with absolute paths
+                let updatedMarkdownContent = markdownContent.replace(/!\[(.*?)\]\((.*?)\)/g, (match, altText, url) => {
+                    // Check if the URL is already an absolute path
+                    if (url.startsWith('http://') || url.startsWith('https://')) {
+                        return match; // Return the original string if it's an absolute URL
+                    }
+                    // Return the modified string with the site root prefixed
+                    return `![${altText}](${siteRoot}${url.startsWith('/') ? '' : '/'}${url})`;
+                });
+                const replaceMermaidSyntax = (markdownContent: string): string => {
+                    const mermaidRegex = /```mermaid([^`]*)```/g;
+                    return markdownContent.replace(mermaidRegex, (match, mermaidContent) => {
+                        return `<pre class="mermaid bg-white flex justify-center">${mermaidContent.trim()}</pre>`;
+                    });
+                };
+                updatedMarkdownContent = replaceMermaidSyntax(updatedMarkdownContent);
                 setContent(updatedMarkdownContent);
                 setIsLoading(false);
             } catch (error) {
@@ -95,6 +103,17 @@ const MarkdownRenderer: FC<MarkdownRendererProps> = ({ url }) => {
                   >
                       {content}
                   </ReactMarkdown>
+                    <Script
+                        type="module"
+                        strategy="afterInteractive"
+                        dangerouslySetInnerHTML={{
+                            __html: `
+        import mermaid from "https://cdn.jsdelivr.net/npm/mermaid@9/dist/mermaid.esm.min.mjs";
+        mermaid.initialize({startOnLoad: true});
+        mermaid.contentLoaded();
+`,
+                        }}
+                    />
                 </>
             )}
         </div>
