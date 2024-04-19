@@ -64,13 +64,13 @@ export function WishingWellEditForm({
     if (!response?.ok) {
       return toast({
         title: "Something went wrong.",
-        description: "Your wishingWell was not updated. Please try again.",
+        description: "Your Wishing Well was not updated. Please try again.",
         variant: "destructive",
       })
     }
 
     toast({
-      description: "Your wishingWell has been updated.",
+      description: "Your Wishing Well has been updated.",
     })
 
     router.back()

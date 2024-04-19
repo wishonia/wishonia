@@ -10,8 +10,8 @@ import { Shell } from "@/components/layout/shell"
 import { DashboardHeader } from "@/components/pages/dashboard/dashboard-header"
 
 export const metadata: Metadata = {
-  title: "WishingWells",
-  description: "Manage account wishingWells/hobbies.",
+  title: "Wishes",
+  description: "Manage your wishes.",
 }
 
 export default async function WishingWellsPage() {
@@ -25,7 +25,7 @@ export default async function WishingWellsPage() {
 
   return (
     <Shell>
-      <DashboardHeader heading="WishingWells" text="Manage account wishingWells.">
+      <DashboardHeader heading="Wishes" text="Manage your wishes.">
         <WishingWellAddButton />
       </DashboardHeader>
       <div className="divide-y divide-border rounded-md border">

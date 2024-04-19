@@ -35,12 +35,12 @@ async function deleteWishingWell(wishingWellId: string) {
   if (!response?.ok) {
     toast({
       title: "Something went wrong.",
-      description: "Your wishingWell was not deleted. Please try again.",
+      description: "Your Wishing Well was not deleted. Please try again.",
       variant: "destructive",
     })
   } else {
     toast({
-      description: "Your wishingWell has been deleted successfully.",
+      description: "Your Wishing Well has been deleted successfully.",
     })
   }
 

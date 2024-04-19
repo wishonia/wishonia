@@ -9,7 +9,7 @@ import { Shell } from "@/components/layout/shell"
 import { DashboardHeader } from "@/components/pages/dashboard/dashboard-header"
 
 export const metadata: Metadata = {
-  title: "WishingWell Settings",
+  title: "Wishing Well Settings",
 }
 
 interface WishingWellEditProps {
@@ -32,8 +32,8 @@ export default async function WishingWellEdit({ params }: WishingWellEditProps) 
   return (
     <Shell>
       <DashboardHeader
-        heading="WishingWell Settings"
-        text="Modify wishingWell details."
+        heading="Wishing Well Settings"
+        text="Modify wishing well details."
       />
       <div className="grid grid-cols-1 gap-10">
         <WishingWellEditForm
