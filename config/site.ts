@@ -6,7 +6,7 @@ export const siteConfig: SiteConfig = {
   name: "Wishonia",
   author: "mikepsinn",
   description:
-    "A kingdom where all wishes can be granted through the magic of intelligent voluntary cooperation",
+    "Using collective intelligence to maximize median health and happiness.",
   keywords: [
   ],
   url: {
