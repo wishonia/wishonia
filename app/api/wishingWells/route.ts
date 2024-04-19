@@ -44,7 +44,7 @@ export async function POST(req: Request) {
       return new Response("Unauthorized", { status: 403 })
     }
 
-    // Create a new wishingWell for authenticated user
+    // Create a new wishing well for authenticated user
     const json = await req.json()
     const body = wishingWellCreateSchema.parse(json)
 

@@ -48,7 +48,7 @@ export function WishingWellAddButton({ ...props }: WishingWellAddButtonProps) {
     }
 
     toast({
-      description: "A new wishingWell has been created successfully.",
+      description: "A new wishing well has been created successfully.",
     })
 
     const wishingWell = await response.json()
@@ -64,7 +64,7 @@ export function WishingWellAddButton({ ...props }: WishingWellAddButtonProps) {
     <>
       <Button onClick={() => setShowAddAlert(true)} {...props}>
         <Icons.add className="mr-2 h-4 w-4" />
-        New wishingWell
+        New wishing well
       </Button>
 
       {/* Add Alert */}
@@ -72,10 +72,10 @@ export function WishingWellAddButton({ ...props }: WishingWellAddButtonProps) {
         <CredenzaContent>
           <CredenzaHeader>
             <CredenzaTitle>
-              Are you sure you want to create a new wishingWell?
+              Are you sure you want to create a new wishing well?
             </CredenzaTitle>
             <CredenzaDescription>
-              This will add a new wishingWell to your account.
+              This will add a new wishing well to your account.
             </CredenzaDescription>
           </CredenzaHeader>
           <CredenzaFooter className="flex flex-col-reverse">
