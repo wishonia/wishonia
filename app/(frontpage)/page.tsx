@@ -1,3 +1,4 @@
+import { WishocracyLandingPage } from "@/components/component/wishocracy-landing-page"
 import FeatureCards from "@/components/pages/feature-cards"
 import Hero from "@/components/pages/hero"
 import OpenSource from "@/components/pages/opensource"
@@ -8,11 +9,12 @@ import { PWARedirect } from "@/components/pwa-redirect"
 export default function Home() {
   return (
     <main>
+      <WishocracyLandingPage />
       <Poll />
-{/*       <Hero />
+       <Hero />
       <FeatureCards />
       <Overview />
-      <OpenSource />*/}
+      <OpenSource />
       <PWARedirect />
     </main>
   )

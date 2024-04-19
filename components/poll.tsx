@@ -20,7 +20,7 @@ export const Poll = () => {
 
     return (
     <>
-        <section className="space-y-8 pb-12 pt-4 md:space-y-16 md:pt-10 lg:py-32">
+        <section className="space-y-4 pb-12 pt-4 md:space-y-8 md:pt-5 lg:py-16">
             <div className="container flex max-w-[64rem] flex-col items-center gap-0 text-center">
                 <p className="rounded-2xl bg-muted px-4 py-1.5 text-sm font-medium">
                     Global Priorities Referendum on
