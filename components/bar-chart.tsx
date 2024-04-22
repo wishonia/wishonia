@@ -1,5 +1,7 @@
 "use client";
 import React, {useEffect, useState} from 'react';
+import { warImages } from '@/lib/warImagePaths';
+
 
 interface ChartContainerProps {
     warPercentageDesired: number;
@@ -9,17 +11,17 @@ interface ChartContainerProps {
 // New BarChart component
 const BarChart: React.FC<ChartContainerProps> = ({ warPercentageDesired, labelsPosition = 'top' }) => {
   const researchPercentageDesired = 100 - warPercentageDesired;
-  let [warImages, setWarImages] = useState<string[]>([]);
+  //let [warImages, setWarImages] = useState<string[]>([]);
   const [currentImageIndex, setCurrentImageIndex] = useState(0);
   // Extract backgroundImage to a variable, initially set to an empty string
     const img =  warImages.length > 0 ? warImages[currentImageIndex] : '/img/war/vietnam.jpg';
   const backgroundImage = warImages.length > 0 ? `url(${img})` : '';
 
   useEffect(() => {
-    fetch('/api/warImages')
-        .then(response => response.json())
-        .then(filePaths => setWarImages(filePaths))
-        .catch(error => console.error('Error fetching war images:', error));
+    // fetch('/api/warImages')
+    //     .then(response => response.json())
+    //     .then(filePaths => setWarImages(filePaths))
+    //     .catch(error => console.error('Error fetching war images:', error));
 
     const interval = setInterval(() => {
         setCurrentImageIndex(prevIndex => (prevIndex + 1) % warImages.length);
