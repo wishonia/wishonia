@@ -9,14 +9,14 @@ Chart.register(CategoryScale, LinearScale, BarElement, Title, Tooltip, Legend, C
 const blue = 'rgb(0,0,243)';
 const data = {
   labels: [
-    'Military Spending',
-    'Cardiovascular diseases',
-    'Neoplasms (Cancers)',
-    'Mental disorders',
-    'Chronic respiratory diseases',
-    'Neurological disorders',
+    'War & Military',
+    'Heart Disease',
+    'Cancer',
+    'Mental Disorders',
+    'Respiratory Diseases',
+    'Neurological Disorders',
     //'Diabetes/Urogenital/Blood/Endocrine diseases',
-    'Musculoskeletal disorders',
+    'Musculoskeletal Disorders',
     //'Communicable, maternal, neonatal, and nutritional diseases',
   ],
   datasets: [
@@ -26,7 +26,7 @@ const data = {
     //   backgroundColor: 'rgba(75, 192, 192, 0.6)',
     // },
     {
-      label: 'Research Funding (in billions USD)',
+      label: 'Research Funding (Billions USD)',
       data: [
           2100, // 2021 Global Military Spending
         2.4, 6.9, 1.0, 0.7, 3.0,
@@ -114,20 +114,25 @@ const SpendingOnDiseasesVsMilitary = () => {
     const headerHeight = document.querySelector('h2')?.clientHeight || 0;
     const screenHeight = window.innerHeight;
     const minHeight = 600;
-    const chartHeight = Math.max(screenHeight - headerHeight, minHeight);
+    const chartHeight = 0.9 * Math.max(screenHeight - headerHeight, minHeight);
     setHeight(`${chartHeight}px`);
   }, []);
 
   return (
-    <>
-      <h2>Military Spending Compared to Spending on Research for Diseases</h2>
-      <div style={{ height: height, width: '100%'  }}>
-        <Bar
-            data={data}
-            options={options}
-        />
-      </div>
-    </>
+      <>
+        <h2 className="text-xl font-bold md:text-3xl pb-2">
+          War vs Cures
+        </h2>
+        <p className="text-xs text-muted-foreground pb-4">
+          How much we currently spend on war & military vs curing diseases in billions of dollars per year.
+        </p>
+        <div style={{height: height, width: '100%'}}>
+          <Bar
+              data={data}
+              options={options}
+          />
+        </div>
+      </>
   );
 };
 
