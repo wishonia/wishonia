@@ -1,19 +1,16 @@
 ---
 title: >-
-  A Logical Approach to Healthcare Innovation: The Treaty for AI-Driven Clinical
-  Research
+  The 1% Treaty
 excerpt: >-
-  Exploring the potential for AI to revolutionize medical research and alleviate
-  global suffering from chronic diseases through a collaborative treaty.
-coverImage: logical-treaty.png
+  A global accord to redirect 1% of military spending to discovering new treatments and cures for chronic diseases.
+coverImage: '/1-percent-treaty.png'
 #  date: 'October 1, 2021'
 author:
-  name: Healthcare Innovator
+  name: The Department of Peace
   # picture: author-image.jpg
 ogImage:
-  url: logical-treaty.png
+  url: '/1-percent-treaty.png'
 ---
-# LOGICAL Treaty
 
 ## Facts:
 
