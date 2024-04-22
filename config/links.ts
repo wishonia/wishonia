@@ -52,6 +52,11 @@ export const dashboardLinks: Navigation = {
         title: "Decentralized Institutes of Health",
         href: "/docs/decentralized-institutes-of-health",
         icon: "health",
+    },
+    {
+      title: "The 1% Treaty",
+      href: "/docs/1-percent-treaty",
+      icon: "peace",
     }
   ],
 }
