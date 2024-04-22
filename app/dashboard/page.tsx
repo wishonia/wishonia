@@ -11,8 +11,8 @@ import SpendingOnDiseasesVsMilitary from "@/components/charts/spending-on-diseas
 import AfterLoginHandler from "@/components/AfterLoginHandler"
 
 export const metadata: Metadata = {
-  title: "Dashboard",
-  description: "Monitor your progress.",
+  title: "Results",
+  description: "What people want and what governments allocate.",
 }
 
 interface DashboardProps {
@@ -33,7 +33,8 @@ export default async function Dashboard({ searchParams }: DashboardProps) {
   return (
     <Shell>
         <AfterLoginHandler></AfterLoginHandler>
-        <div className="flex flex-col items-center justify-between gap-4 px-2 pb-4 text-center">
+        <div className="flex flex-col items-center justify-between gap-4 pb-4 text-center"
+             style={{ maxWidth: "90%" }}>
             <div className="flex flex-col items-center justify-between gap-4 px-2 pb-4 text-center md:flex-row">
                 <div className="grid gap-1">
                     <h1 className="text-2xl font-bold md:text-3xl">

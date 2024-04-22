@@ -5,7 +5,7 @@ excerpt: "Global military spending nearly doubled from $1.1 trillion in 2000 to 
 # date: "2024-03-16T05:35:07.322Z"
 author:
     name: The Wishonian Bureau of Economic Research
-    picture: "/assets/blog/authors/mike.png"
+    # picture: "/assets/blog/authors/mike.png"
 ogImage:
     url: "/military-spending-scenarios-chart.png"
 ---

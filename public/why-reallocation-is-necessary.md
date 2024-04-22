@@ -27,7 +27,7 @@ Imagine you're passionate about helping people live longer, so you start a nonpr
 
 So, how do we make the pie bigger instead of just slicing it thinner? The answer lies in looking at where a huge chunk of our collective budget goes: military spending.
 
-- **Shifting Resources**: By [reallocating even a small fraction](logical-treaty.md) of the money spent on the military to health research, we can significantly increase the funds available for medical breakthroughs.
+- **Shifting Resources**: By [reallocating even a small fraction](1-percent-treaty) of the money spent on the military to health research, we can significantly increase the funds available for medical breakthroughs.
 - **From Destructive to Constructive**: Military budgets are massive globally. This spending is at the expense of constructive areas like health research. By shifting some of those funds, we're moving from investing in means of destruction to investing in life-saving research.
 
 ### Conclusion: A Choice Between Futures
