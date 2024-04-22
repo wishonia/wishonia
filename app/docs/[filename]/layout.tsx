@@ -26,7 +26,9 @@ export default async function DashboardLayout({
         <aside className="hidden w-[200px] flex-col md:flex">
           <DashboardNav items={dashboardLinks.data} />
         </aside>
-        <main className="flex w-full flex-1 flex-col">{children}</main>
+        <main className="flex w-full flex-1 flex-col"
+          style={{ maxWidth: "90%" }}
+        >{children}</main>
       </div>
       <Footer />
     </div>
