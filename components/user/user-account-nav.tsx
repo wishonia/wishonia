@@ -4,7 +4,7 @@ import Link from "next/link"
 import { User } from "next-auth"
 import { signOut } from "next-auth/react"
 
-import { dashboardLinks } from "@/config/links"
+import {avatarMenuLinks, leftLinks} from "@/config/links"
 import {
   DropdownMenu,
   DropdownMenuContent,
@@ -43,7 +43,7 @@ export function UserAccountNav({ user }: UserAccountNavProps) {
           </div>
         </div>
         <DropdownMenuSeparator />
-        {dashboardLinks.data.map((item, index) => {
+        {avatarMenuLinks.data.map((item, index) => {
           const Icon = Icons[item.icon || "next"]
           return (
             item.href && (
