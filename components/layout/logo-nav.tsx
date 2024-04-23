@@ -2,7 +2,7 @@
 
 import Link from "next/link"
 
-import { dashboardLinks } from "@/config/links"
+import { leftLinks } from "@/config/links"
 import {
   DropdownMenu,
   DropdownMenuContent,
@@ -25,7 +25,7 @@ export function LogoNavMenu() {
               </span>
         </DropdownMenuTrigger>
         <DropdownMenuContent align="end">
-        {dashboardLinks.data.map((item, index) => {
+        {leftLinks.data.map((item, index) => {
           const Icon = Icons[item.icon || "next"]
           return (
             item.href && (

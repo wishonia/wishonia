@@ -3,7 +3,7 @@
 import Link from "next/link"
 import { User } from "next-auth"
 
-import { navLinks } from "@/config/links"
+import { dashboardTopLinks } from "@/config/links"
 import { siteConfig } from "@/config/site"
 import { UserNavDisplay } from "@/components/user/user-nav-display"
 import {WandIcon} from "lucide-react";
@@ -29,7 +29,7 @@ export default function Navbar({ user }: NavbarProps) {
             style={{ width: "100%", maxWidth: "20rem" }}
           >
             <ul className="flex flex-col items-center space-y-4 opacity-60 md:flex-row md:space-x-6 md:space-y-0">
-              {navLinks.data.map((item, index) => {
+              {dashboardTopLinks.data.map((item, index) => {
                 return (
                   item.href && (
                     <Link

@@ -25,7 +25,7 @@ const BarChart: React.FC<ChartContainerProps> = ({ warPercentageDesired, labelsP
 
     const interval = setInterval(() => {
         setCurrentImageIndex(prevIndex => (prevIndex + 1) % warImages.length);
-    }, 1000);
+    }, 2000);
 
     return () => clearInterval(interval);
 }, [warImages.length]);
