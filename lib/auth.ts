@@ -2,6 +2,7 @@ import { PrismaAdapter } from "@next-auth/prisma-adapter"
 import { NextAuthOptions } from "next-auth"
 import GithubProvider from "next-auth/providers/github"
 import GoogleProvider from "next-auth/providers/google"
+import EmailProvider from "next-auth/providers/email";
 
 import { env } from "@/env.mjs"
 import { db } from "@/lib/db"
@@ -15,6 +16,11 @@ export const authOptions: NextAuthOptions = {
     signIn: "/signin",
   },
   providers: [
+    EmailProvider({
+      server: env.EMAIL_SERVER, // Configure your email server credentials
+      from: env.EMAIL_FROM, // The email address to send magic link emails from
+      // You can add more EmailProvider options here
+    }),
     GoogleProvider({
       clientId: env.GOOGLE_CLIENT_ID,
       clientSecret: env.GOOGLE_CLIENT_SECRET,
