@@ -16,7 +16,7 @@ ogImage:
 
 1. **2 billion people suffer** from chronic diseases including cancer, diabetes, heart disease, autoimmune disorders, and many others. This causes immense human anguish as well as crippling economic costs.
 2. **Medical research** to find cures for these diseases remains far **too slow** to meet the desperate needs of patients.
-3. **Artificial intelligence** can radically accelerate the clinical research process by **automating **analysis of medical data, identifying promising drug targets, optimizing clinical trial designs, and more.
+3. **Artificial intelligence** can radically accelerate the clinical research process by automating analysis of medical data, identifying promising drug targets, optimizing clinical trial designs, and more.
 4. A global collaborative effort to deploy AI to automate clinical research, coordinated and governed by the people, could produce revolutionary breakthroughs against chronic diseases and **alleviate the suffering of billions of people.**
 
 ## Logical Proof:
