@@ -1,16 +1,17 @@
 ---
 title: "Cost to Create a Decentralized Institute of Health DAO"
-excerpt: "Global military spending nearly doubled from $1.1 trillion in 2000 to $1.9 trillion in 2020 (in 2020 inflation-adjusted dollars). This is an average increase of $3.9% or $42 billion a year."
-coverImage: "/treaty/military-spending-scenarios-chart.png"
-date: "2024-03-16T05:35:07.322Z"
-author:
-name: Mike P. Sinn
-picture: "/assets/blog/authors/mike.png"
+excerpt: "How much it would cost to create a DAO to fund the 1% Treaty Initiative"
+coverImage: "/military-spending-scenarios-chart.png"
+# date: "2024-03-16T05:35:07.322Z"
+#author:
+#    name: Mike P. Sinn
+#    picture: "/assets/blog/authors/mike.png"
 ogImage:
-url: "/treaty/military-spending-scenarios-chart.png"
+url: "/military-spending-scenarios-chart.png"
 ---
 
-To estimate the cost of creating a DAO like ConstitutionDAO to get initial funding, we need to consider the various expenses involved in setting up and running the DAO. Let's break it down:
+To estimate the cost of creating a DAO like [ConstitutionDAO](https://juicebox.money/p/constitutiondao)
+to get initial funding, we need to consider the various expenses involved in setting up and running the DAO:
 
 1. Smart Contract Development:
   - Developing the smart contracts for the DAO, including token creation, voting mechanisms, and treasury management.
@@ -52,9 +53,3 @@ Putting it all together:
 Total Estimated Cost Range: $287,500 - $1,610,000
 
 Therefore, based on these estimates, the cost of creating a DAO like ConstitutionDAO to get initial funding could range from around $300,000 to $1.6 million.
-
-However, it's important to note that these are rough estimates based on typical costs for similar projects. The actual costs could vary significantly depending on factors such as the specific requirements of the DAO, the expertise of the team, and market conditions.
-
-Additionally, the success of the DAO in attracting contributions would depend on many factors beyond the initial setup costs, such as the appeal of the project's mission, the strength of the community, and the overall market sentiment towards DAOs and cryptocurrencies.
-
-Nonetheless, this estimate provides a ballpark range for the initial investment required to create a DAO like ConstitutionDAO, which could potentially unlock much larger amounts of funding if the project resonates with a wide audience.
