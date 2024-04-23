@@ -18,7 +18,17 @@ import {
   BsMoonStars,
   BsSun,
 } from "react-icons/bs"
-import {FaBomb, FaBookMedical, FaPeace, FaRegStar, FaSkull, FaSort, FaUserAlt, FaVoteYea} from "react-icons/fa"
+import {
+  FaBomb,
+  FaBookMedical,
+  FaDisease,
+  FaPeace,
+  FaRegStar,
+  FaSkull,
+  FaSort,
+  FaUserAlt,
+  FaVoteYea
+} from "react-icons/fa"
 import { ImSpinner8, ImStatsBars } from "react-icons/im"
 import { LuSettings } from "react-icons/lu"
 import { MdDeleteForever, MdOutlineLogout } from "react-icons/md"
@@ -44,6 +54,9 @@ const icons = {
   vote: FaVoteYea,
   health: FaBookMedical,
   peace: FaPeace,
+  results: FaVoteYea,
+  disease: FaDisease,
+
 
   clipboard: AiOutlineCopy,
 

@@ -1,4 +1,4 @@
-import { dashboardLinks } from "@/config/links"
+import { leftLinks } from "@/config/links"
 import { getCurrentUser } from "@/lib/session"
 import Footer from "@/components/layout/footer"
 import Navbar from "@/components/layout/navbar"
@@ -24,7 +24,7 @@ export default async function DashboardLayout({
       />
       <div className="container grid flex-1 gap-12 md:grid-cols-[200px_1fr]">
         <aside className="hidden w-[200px] flex-col md:flex">
-          <DashboardNav items={dashboardLinks.data} />
+          <DashboardNav items={leftLinks.data} />
         </aside>
         <main className="flex w-full flex-1 flex-col"
               style={{ maxWidth: "90%" }}>

@@ -6,6 +6,12 @@ import rehypeRaw from 'rehype-raw';
 import matter from 'gray-matter';
 import { Icons } from './icons';
 import Script from "next/script";
+import Link from "next/link";
+import { Button } from './ui/button';
+import {siteConfig} from "@/config/site";
+import {
+    AiFillGithub
+} from "react-icons/ai"
 
 interface MarkdownRendererProps {
     url: string;
@@ -26,6 +32,9 @@ const MarkdownRenderer: FC<MarkdownRendererProps> = ({ url }) => {
     const [content, setContent] = useState('');
     const [isLoading, setIsLoading] = useState(true);
     const [metadata, setMetadata] = useState<Metadata | null>(null);
+ 
+    const githubEditUrl = `${siteConfig.links.github}/edit/main/${url}`;
+
 
     useEffect(() => {
         const fetchMarkdown = async () => {
@@ -41,16 +50,18 @@ const MarkdownRenderer: FC<MarkdownRendererProps> = ({ url }) => {
                     if (url.startsWith('http://') || url.startsWith('https://')) {
                         return match; // Return the original string if it's an absolute URL
                     }
-                    // Return the modified string with the site root prefixed
-                    return `![${altText}](${siteRoot}${url.startsWith('/') ? '' : '/'}${url})`;
+                    // Remove the .md suffix for relative URLs ending in .md
+                    const updatedUrl = url.endsWith('.md') ? url.slice(0, -3) : url;
+                    return `![${altText}](${siteRoot}${updatedUrl.startsWith('/') ? '' : '/'}${updatedUrl})`;
                 });
                 const replaceMermaidSyntax = (markdownContent: string): string => {
-                    const mermaidRegex = /```mermaid([^`]*)```/g;
+                    const mermaidRegex = /mermaid([^`]*)/g;
                     return markdownContent.replace(mermaidRegex, (match, mermaidContent) => {
                         return `<pre class="mermaid bg-white flex justify-center">${mermaidContent.trim()}</pre>`;
                     });
                 };
                 updatedMarkdownContent = replaceMermaidSyntax(updatedMarkdownContent);
+
                 setContent(updatedMarkdownContent);
                 setIsLoading(false);
             } catch (error) {
@@ -103,6 +114,14 @@ const MarkdownRenderer: FC<MarkdownRendererProps> = ({ url }) => {
                   >
                       {content}
                   </ReactMarkdown>
+<div className="flex items-center gap-x-2 justify-end">
+    <Link href={githubEditUrl}>
+        <Button variant="outline" className="rounded-full">
+            <AiFillGithub className="mr-2"></AiFillGithub>
+             Edit Me
+        </Button>
+    </Link>
+</div>
                     <Script
                         type="module"
                         strategy="afterInteractive"

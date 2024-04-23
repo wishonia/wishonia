@@ -14,7 +14,7 @@ export const siteConfig: SiteConfig = {
     author: "https://wishonia.love",
   },
   links: {
-    github: "https://github.com/wishonia",
+    github: "https://github.com/wishonia/wishonia",
   },
   ogImage: `${env.NEXT_PUBLIC_APP_URL}/og.png`,
 }

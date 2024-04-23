@@ -1,12 +1,12 @@
 import Link from "next/link"
 
-import { navLinks } from "@/config/links"
+import {dashboardTopLinks, footerLinks} from "@/config/links"
 import { siteConfig } from "@/config/site"
 
 import { ModeToggle } from "../mode-toggle"
 
 export default function Footer() {
-  return null;
+
   return (
     <footer className="mt-auto">
       <div className="mx-auto w-full max-w-screen-xl p-6 md:py-8">
@@ -17,7 +17,7 @@ export default function Footer() {
             </h1>
           </Link>
           <ul className="mb-6 flex flex-wrap items-center opacity-60 sm:mb-0">
-            {navLinks.data.map((item, index) => {
+            {footerLinks.data.map((item, index) => {
               return (
                 item.href && (
                   <li key={index}>
@@ -42,9 +42,9 @@ export default function Footer() {
               href="https://github.com/Wishonia"
               className="hover:underline"
             >
-              Wishonia App
+              Wishonia
             </a>
-            . All Rights Reserved.
+            . Your Rights Reserved.
           </div>
         </div>
       </div>
