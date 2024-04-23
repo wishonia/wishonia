@@ -11,8 +11,8 @@ interface DocsProps {
 }
 
 export default async function Docs({ params }: DocsProps) {
-  const { filename } = params;
-
+  let { filename } = params;
+  filename = filename.replace(/\.md$/, '');
   return (
     <MarkdownRenderer url={`/${filename}.md`}/>
   )
