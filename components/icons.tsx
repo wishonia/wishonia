@@ -33,6 +33,7 @@ import { ImSpinner8, ImStatsBars } from "react-icons/im"
 import { LuSettings } from "react-icons/lu"
 import { MdDeleteForever, MdOutlineLogout } from "react-icons/md"
 import { RxDashboard, RxMixerHorizontal } from "react-icons/rx"
+import {FaSquarePollVertical} from "react-icons/fa6";
 
 export type IconKeys = keyof typeof icons
 
@@ -54,7 +55,7 @@ const icons = {
   vote: FaVoteYea,
   health: FaBookMedical,
   peace: FaPeace,
-  results: FaVoteYea,
+  results: FaSquarePollVertical,
   disease: FaDisease,
 
 
