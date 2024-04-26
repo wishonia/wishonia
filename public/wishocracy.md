@@ -1,3 +1,17 @@
+---
+title: 'Wishocracy'
+excerpt: >-
+  How we can use collective intelligence to identify and prioritize the most important wishes for society and allocate resources to the most promising solutions.
+# coverImage: why-reallocation-is-necessary.png
+#  date: '2022-11-15'
+#author:
+#  name: The Office of the President
+#  # picture: 
+#ogImage:
+#  url: 
+---
+
+
 **Goal**: Optimally allocate scarce resources such that they maximize median health and happiness. 
 
 # Abstract Approach:

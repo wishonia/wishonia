@@ -1,13 +1,12 @@
 ---
-title: 'Military Spending vs. Health Research: A Brain Drain'
+title: 'Why Reallocation From Public Bads to Public Goods Is Better Than Just Increasing Spending on Public Goods'
 excerpt: >-
-  Exploring the implications of allocating funds from military spending to
-  health research and the impact on our collective well-being.
+  Simply increasing spending on medical research while simultaneously increasing military spending does not actually increase the number of brains and resources available for research.
 coverImage: why-reallocation-is-necessary.png
 #  date: '2022-11-15'
 author:
   name: The Office of the President
-  # picture: author-image.jpg
+  # picture: 
 ogImage:
   url: why-reallocation-is-necessary.png
 ---
