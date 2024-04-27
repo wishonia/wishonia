@@ -107,19 +107,19 @@ model User {
   positions                       Position[]
   skills                          Skill[]
   endorsements                    Endorsement[]
-  userRecommendations             Recommendation[]          @relation("UserRecommendations")
-  recommenderRecommendations      Recommendation[]          @relation("RecommenderRecommendations")
+  userRecommendations             Recommendation[]            @relation("UserRecommendations")
+  recommenderRecommendations      Recommendation[]            @relation("RecommenderRecommendations")
   posts                           Post[]
   likes                           Like[]
   comments                        Comment[]
-  initiatedFriendships            Friendship[]              @relation(name: "InitiatorFriendships")
-  receivedFriendships             Friendship[]              @relation(name: "ReceiverFriendships")
-  createdGenieDAOs                GenieDAO[]                @relation("CreatedGenieDAOs")
-  joinedGenieDAOs                 GenieDAO[]                @relation("JoinedGenieDAOs")
-  createdWishFulfillmentProposals WishFulfillmentProposal[] @relation("CreatedProposals")
+  initiatedFriendships            Friendship[]                @relation(name: "InitiatorFriendships")
+  receivedFriendships             Friendship[]                @relation(name: "ReceiverFriendships")
+  createdGenieDAOs                GenieDAO[]                  @relation("CreatedGenieDAOs")
+  joinedGenieDAOs                 GenieDAO[]                  @relation("JoinedGenieDAOs")
+  createdWishFulfillmentProposals WishFulfillmentProposal[]   @relation("CreatedProposals")
   createdProposalProgressReports  ProposalProgressReport[]
   proposalComparisons             ProposalComparison[]
-  wishingWellComparisons          WishingWellComparison[]
+  wishingWellPairAllocations      WishingWellPairAllocation[]
   genieDAOFeedback                GenieDAOFeedback[]
 
   @@map("users")
@@ -350,7 +350,7 @@ model ProposalComparison {
   @@map("proposal_comparisons")
 }
 
-model WishingWellComparison {
+model WishingWellPairAllocation {
   id                        String   @id @default(cuid())
   userId                    String   @map("user_id")
   thisWishingWellId         String   @map("this_wishing_well_id")
@@ -360,7 +360,7 @@ model WishingWellComparison {
   updatedAt                 DateTime @updatedAt @map("updated_at")
   user                      User     @relation(fields: [userId], references: [id])
 
-  @@map("wishing_well_comparisons")
+  @@map("wishing_well_pair_allocations")
 }
 
 model GenieDAOFeedback {
