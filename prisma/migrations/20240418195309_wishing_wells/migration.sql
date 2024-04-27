@@ -108,7 +108,7 @@ CREATE TABLE "proposal_comparisons" (
 );
 
 -- CreateTable
-CREATE TABLE "wishing_well_comparisons" (
+CREATE TABLE "wishing_well_pair_allocations" (
     "id" TEXT NOT NULL,
     "user_id" TEXT NOT NULL,
     "this_wishing_well_id" TEXT NOT NULL,
@@ -117,7 +117,7 @@ CREATE TABLE "wishing_well_comparisons" (
     "created_at" TIMESTAMP(3) NOT NULL DEFAULT CURRENT_TIMESTAMP,
     "updated_at" TIMESTAMP(3) NOT NULL,
 
-    CONSTRAINT "wishing_well_comparisons_pkey" PRIMARY KEY ("id")
+    CONSTRAINT "wishing_well_pair_allocations_pkey" PRIMARY KEY ("id")
 );
 
 -- CreateTable
@@ -188,7 +188,7 @@ ALTER TABLE "proposal_progress_reports" ADD CONSTRAINT "proposal_progress_report
 ALTER TABLE "proposal_comparisons" ADD CONSTRAINT "proposal_comparisons_user_id_fkey" FOREIGN KEY ("user_id") REFERENCES "users"("id") ON DELETE RESTRICT ON UPDATE CASCADE;
 
 -- AddForeignKey
-ALTER TABLE "wishing_well_comparisons" ADD CONSTRAINT "wishing_well_comparisons_user_id_fkey" FOREIGN KEY ("user_id") REFERENCES "users"("id") ON DELETE RESTRICT ON UPDATE CASCADE;
+ALTER TABLE "wishing_well_pair_allocations" ADD CONSTRAINT "wishing_well_pair_allocations_user_id_fkey" FOREIGN KEY ("user_id") REFERENCES "users"("id") ON DELETE RESTRICT ON UPDATE CASCADE;
 
 -- AddForeignKey
 ALTER TABLE "genie_dao_feedback" ADD CONSTRAINT "genie_dao_feedback_genie_dao_id_fkey" FOREIGN KEY ("genie_dao_id") REFERENCES "genie_daos"("id") ON DELETE RESTRICT ON UPDATE CASCADE;
