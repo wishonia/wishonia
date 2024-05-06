@@ -32,7 +32,7 @@ export function WishingWellAddButton({ ...props }: WishingWellAddButtonProps) {
         "Content-Type": "application/json",
       },
       body: JSON.stringify({
-        name: "New Wish",
+        name: "Make Wish",
       }),
     })
 
@@ -42,7 +42,7 @@ export function WishingWellAddButton({ ...props }: WishingWellAddButtonProps) {
 
       return toast({
         title: "Something went wrong.",
-        description: "Your wishingWell was not created. Please try again.",
+        description: "Your wish was not created. Please try again.",
         variant: "destructive",
       })
     }

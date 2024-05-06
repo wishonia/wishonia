@@ -1,38 +1,36 @@
-"use client";
-import React, {useEffect, useState} from 'react';
-import { warImages } from '@/lib/warImagePaths';
+import React, { useEffect, useState } from 'react';
 
+interface Priority {
+    name: string;
+    percentage?: number;
+    backgroundImages: string[];
+    backgroundColor: string;
+}
 
-interface ChartContainerProps {
-    warPercentageDesired: number;
+interface BarChartProps {
+    thisPriority: Priority;
+    thatPriority: Priority;
     labelsPosition?: 'top' | 'bottom';
 }
 
-// New BarChart component
-const BarChart: React.FC<ChartContainerProps> = ({ warPercentageDesired, labelsPosition = 'top' }) => {
-  const researchPercentageDesired = 100 - warPercentageDesired;
-  //let [warImages, setWarImages] = useState<string[]>([]);
-  const [currentImageIndex, setCurrentImageIndex] = useState(0);
-  // Extract backgroundImage to a variable, initially set to an empty string
-    const img =  warImages.length > 0 ? warImages[currentImageIndex] : '/img/war/vietnam.jpg';
-  const backgroundImage = warImages.length > 0 ? `url(${img})` : '';
+const BarChart: React.FC<BarChartProps> = ({ thisPriority, thatPriority, labelsPosition = 'top' }) => {
+    const [currentImageIndexes, setCurrentImageIndexes] = useState([0, 0]);
 
-  useEffect(() => {
-    // fetch('/api/warImages')
-    //     .then(response => response.json())
-    //     .then(filePaths => setWarImages(filePaths))
-    //     .catch(error => console.error('Error fetching war images:', error));
+    useEffect(() => {
+        const interval = setInterval(() => {
+            setCurrentImageIndexes(prevIndexes => [
+                (prevIndexes[0] + 1) % thisPriority.backgroundImages.length,
+                (prevIndexes[1] + 1) % thatPriority.backgroundImages.length,
+            ]);
+        }, 1000);
 
-    const interval = setInterval(() => {
-        setCurrentImageIndex(prevIndex => (prevIndex + 1) % warImages.length);
-    }, 2000);
+        return () => clearInterval(interval);
+    }, [thisPriority.backgroundImages.length, thatPriority.backgroundImages.length]);
 
-    return () => clearInterval(interval);
-}, [warImages.length]);
+    const thatPriorityPercentage = 100 - (thisPriority.percentage || 0);
 
     return (
-        <div id="chart-container"
-             style={{display: 'flex', justifyContent: 'center', marginBottom: '5px'}}>
+        <div id="chart-container" style={{ display: 'flex', justifyContent: 'center', marginBottom: '5px' }}>
             <div style={{
                 display: 'flex',
                 flexDirection: 'column',
@@ -42,65 +40,42 @@ const BarChart: React.FC<ChartContainerProps> = ({ warPercentageDesired, labelsP
                 height: '200px',
                 justifyContent: 'flex-end'
             }}>
-                <div style={{display: 'flex', width: '100%', justifyContent: 'space-between', height: '100%'}}>
-                    <div style={{
-                        width: '48%',
-                        display: 'flex',
-                        flexDirection: 'column',
-                        alignItems: 'center',
-                        justifyContent: 'flex-end',
-                        maxWidth: '200px'
-                    }}>
-                        {labelsPosition === 'top' && (
-                            <span id="warPercentageDesiredLabel" className="text-sm text-center">
-                  {warPercentageDesired}% War / Military
+                <div style={{ display: 'flex', width: '100%', justifyContent: 'space-between', height: '100%' }}>
+                    {[thisPriority, { ...thatPriority, percentage: thatPriorityPercentage }].map((priority, index) => (
+                        <div key={priority.name} style={{
+                            width: '48%',
+                            display: 'flex',
+                            flexDirection: 'column',
+                            alignItems: 'center',
+                            justifyContent: 'flex-end',
+                            maxWidth: '200px'
+                        }}>
+                            {labelsPosition === 'top' && (
+                                <span id={`${priority.name}PercentageLabel`} className="text-sm text-center">
+                  {priority.percentage}% {priority.name}
                 </span>
-                        )}
-                        <div id="warBar"
-                             style={{
-                                 height: `${warPercentageDesired}%`,
-                                 backgroundColor: 'black',
-                                 width: '100%',
-                                 backgroundImage: backgroundImage,
-                                 backgroundSize: 'cover',
-                                 backgroundPosition: 'center' // Adjusts the background image to be centered
-                             }}>
+                            )}
+                            <div
+                                id={`${priority.name}Bar`}
+                                style={{
+                                    height: `${priority.percentage}%`,
+                                    backgroundColor: priority.backgroundColor,
+                                    width: '100%',
+                                    backgroundImage: `url(${priority.backgroundImages[currentImageIndexes[index]]})`,
+                                    backgroundSize: 'cover',
+                                    backgroundPosition: 'center'
+                                }}
+                            ></div>
                         </div>
-                    </div>
-                    <div style={{
-                        width: '48%',
-                        display: 'flex',
-                        flexDirection: 'column',
-                        alignItems: 'center',
-                        justifyContent: 'flex-end',
-                        maxWidth: '200px'
-                    }}>
-                        {labelsPosition === 'top' && (
-                            <span id="researchPercentageDesiredLabel" className="text-sm text-center px-2">
-                  {researchPercentageDesired}% Medical Research
-                </span>
-                        )}
-                        <div id="researchBar"
-                             style={{
-                                 height: `${researchPercentageDesired}%`,
-                                 backgroundColor: '#0075ff',
-                                 width: '100%',
-                                 backgroundImage: 'url(img/people/grandma.jpg)',
-                                 backgroundSize: 'cover'
-                             }}>
-                        </div>
-                    </div>
+                    ))}
                 </div>
                 {labelsPosition === 'bottom' && (
-                    <div style={{display: 'flex', width: '100%', justifyContent: 'space-between', marginTop: '8px'}}>
-                      <span id="warPercentageDesiredLabel" className="text-xs text-center"
-                            style={{width: '48%'}}>
-                        {warPercentageDesired}% War & Military
-                      </span>
-                        <span id="researchPercentageDesiredLabel" className="text-xs text-center px-2"
-                              style={{width: '48%'}}>
-                            {researchPercentageDesired}% Medical Research
-                      </span>
+                    <div style={{ display: 'flex', width: '100%', justifyContent: 'space-between', marginTop: '8px' }}>
+                        {[thisPriority, { ...thatPriority, percentage: thatPriorityPercentage }].map((priority, index) => (
+                            <span key={priority.name} id={`${priority.name}PercentageLabel`} className="text-xs text-center" style={{ width: '48%' }}>
+                {priority.percentage}% {priority.name}
+              </span>
+                        ))}
                     </div>
                 )}
             </div>

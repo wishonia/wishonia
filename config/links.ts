@@ -81,11 +81,18 @@ export const footerLinks: Navigation = {
   ],
 };
 
+let createWish: NavItem = {
+    title: "Create Wish",
+    href: "/dashboard/wishingWells",
+    icon: "star",
+
+};
 export const avatarMenuLinks: Navigation = {
   data: [
     profileSettingsLink,
     referendumLink,
-    resultsLink
+    resultsLink,
+    //createWish,
   ],
 };
 
