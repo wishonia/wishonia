@@ -6,7 +6,7 @@ import { authOptions } from "@/lib/auth"
 import { getCurrentUser } from "@/lib/session"
 import { dateRangeParams } from "@/lib/utils"
 import { Shell } from "@/components/layout/shell"
-import BarChart from "@/components/bar-chart";
+import WarVsResearchBarChart from "@/components/war-vs-research-bar-chart";
 import SpendingOnDiseasesVsMilitary from "@/components/charts/spending-on-diseases-vs-military-chartsjs";
 import AfterLoginHandler from "@/components/AfterLoginHandler"
 
@@ -59,11 +59,11 @@ export default async function Dashboard({ searchParams }: DashboardProps) {
             </div>
             <div style={{display: 'flex', justifyContent: 'center'}}>
                 <div className="p-2 border-2 border-black mr-1 bg-white text-black">
-                    <BarChart warPercentageDesired={dashboardData.averageWarPercentageDesired}
-                              labelsPosition={"bottom"}/>
+                    <WarVsResearchBarChart warPercentageDesired={dashboardData.averageWarPercentageDesired}
+                                           labelsPosition={"bottom"}/>
                 </div>
                 <div className="p-2 border-2 border-black ml-1 bg-white text-black">
-                    <BarChart warPercentageDesired={95} labelsPosition={"bottom"}/>
+                    <WarVsResearchBarChart warPercentageDesired={95} labelsPosition={"bottom"}/>
                 </div>
             </div>
             <div className={"bg-white text-black p-5"}>

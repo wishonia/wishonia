@@ -1,12 +1,12 @@
 "use client"
 
 import * as React from "react"
+
 import { useRouter } from "next/navigation"
 import { zodResolver } from "@hookform/resolvers/zod"
-import { WishingWell } from "@prisma/client"
-import { HexColorPicker } from "react-colorful"
 import { useForm } from "react-hook-form"
 import * as z from "zod"
+import { useEffect, useState } from "react";
 
 import { cn } from "@/lib/utils"
 import { wishingWellPatchSchema } from "@/lib/validations/wishingWell"
@@ -24,6 +24,8 @@ import { Label } from "@/components/ui/label"
 import { Textarea } from "@/components/ui/textarea"
 import { toast } from "@/components/ui/use-toast"
 import { Icons } from "@/components/icons"
+import {WishingWell} from "@prisma/client";
+import {CopilotTextarea} from "@copilotkit/react-textarea";
 
 interface WishingWellEditFormProps extends React.HTMLAttributes<HTMLFormElement> {
   wishingWell: Pick<WishingWell, "id" | "name" | "description" >
@@ -37,10 +39,13 @@ export function WishingWellEditForm({
   ...props
 }: WishingWellEditFormProps) {
   const router = useRouter()
+  const [longDescription, setLongDescription] = useState("");
+  const [nameInput, setNameInput] = useState(wishingWell?.name || "");
   const {
     handleSubmit,
     register,
     formState: { errors, isSubmitting },
+    watch,
   } = useForm<FormData>({
     resolver: zodResolver(wishingWellPatchSchema),
     defaultValues: {
@@ -48,6 +53,14 @@ export function WishingWellEditForm({
       description: wishingWell?.description || "",
     },
   })
+
+  // Watch for changes in the name input
+  const name = watch("name");
+
+  // Update the nameInput state whenever the name changes
+  useEffect(() => {
+    setNameInput(name);
+  }, [name]);
 
   async function onSubmit(data: FormData) {
     const response = await fetch(`/api/wishingWells/${wishingWell.id}`, {
@@ -58,19 +71,20 @@ export function WishingWellEditForm({
       body: JSON.stringify({
         name: data.name,
         description: data.description,
+        longDescription: data.longDescription,
       }),
     })
 
     if (!response?.ok) {
       return toast({
         title: "Something went wrong.",
-        description: "Your Wishing Well was not updated. Please try again.",
+        description: "Your Wish was not updated. Please try again.",
         variant: "destructive",
       })
     }
 
     toast({
-      description: "Your Wishing Well has been updated.",
+      description: "Your Wish has been updated.",
     })
 
     router.back()
@@ -92,11 +106,12 @@ export function WishingWellEditForm({
         </CardHeader>
         <CardContent className="space-y-4">
           <div className="grid gap-3">
-            <Label htmlFor="name">Name</Label>
+            <Label htmlFor="name">I wish...</Label>
             <Input
               id="name"
               className="w-full lg:w-[400px]"
               size={32}
+              placeholder="ex. everyone had a free superintelligent robot doctor"
               {...register("name")}
             />
             {errors?.name && (
@@ -105,8 +120,7 @@ export function WishingWellEditForm({
           </div>
           <div className="grid gap-3">
             <Label htmlFor="description">
-              Description{" "}
-              <span className="text-muted-foreground">(optional)</span>
+              Short Description{" "}
             </Label>
             <Textarea
               id="description"
@@ -114,10 +128,34 @@ export function WishingWellEditForm({
               {...register("description")}
             />
             {errors?.description && (
-              <p className="px-1 text-xs text-red-600">
-                {errors.description.message}
-              </p>
+                <p className="px-1 text-xs text-red-600">
+                  {errors.description.message}
+                </p>
             )}
+          </div>
+          <div className="grid gap-3">
+            <Label htmlFor="longDescription">
+              Longer Detailed Description{" "}
+            </Label>
+            <CopilotTextarea
+                id="longDescription"
+                className="px-4 py-4"
+                value={longDescription}
+                onValueChange={(value: string) => setLongDescription(value)}
+                placeholder={`Please provide more details about the wish: ${nameInput}`}
+                autosuggestionsConfig={{
+                  textareaPurpose: `More information about the wish: ${nameInput}`,
+                  chatApiConfigs: {
+                    suggestionsApiConfig: {
+                      forwardedParams: {
+                        max_tokens: 20,
+                        stop: [".", "?", "!"],
+                      },
+                    },
+                  },
+                }}
+            />
+
           </div>
         </CardContent>
         <CardFooter>
@@ -129,7 +167,7 @@ export function WishingWellEditForm({
             {isSubmitting && (
               <Icons.spinner className="mr-2 h-4 w-4 animate-spin" />
             )}
-            <span>Save changes</span>
+            <span>Save wish</span>
           </button>
         </CardFooter>
       </Card>

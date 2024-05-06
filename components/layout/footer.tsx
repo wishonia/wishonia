@@ -8,7 +8,7 @@ import { ModeToggle } from "../mode-toggle"
 export default function Footer() {
 
   return (
-    <footer className="mt-auto">
+    <footer className="mt-auto  mx-auto">
       <div className="mx-auto w-full max-w-screen-xl p-6 md:py-8">
         <div className="sm:flex sm:items-center sm:justify-between">
 {/*          <Link href="/">
@@ -44,7 +44,7 @@ export default function Footer() {
             >
               Wishonia
             </a>
-            . Your Rights Reserved.
+            . Everyone's Rights Reserved.
           </div>
         </div>
       </div>

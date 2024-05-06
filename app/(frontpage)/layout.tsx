@@ -21,6 +21,7 @@ export default async function FrontPageLayout({
         }}
       />*/}
       {children}
+      <div style={{ height: '200px' }}></div>
       <Footer />
     </>
   )

@@ -4,18 +4,19 @@ import Link from "next/link";
 import { Button } from "@/components/ui/button";
 import {Input} from "@/components/ui/input";
 import React, { useState } from "react";
+import WarVsResearchBarChart from "@/components/war-vs-research-bar-chart";
 import BarChart from "@/components/bar-chart";
 
 import { warImages } from '@/lib/warImagePaths';
-export const Poll = () => {
-  const [thatPercentageDesired, setThatPercentageDesired] = useState(50); // Define allocation state
-  const [thisPercentageDesired, setThisPercentageDesired] = useState(50); // Define allocation state
+export const PollWarResearch = () => {
+  const [researchPercentageDesired, setResearchPercentageDesired] = useState(50); // Define allocation state
+  const [warPercentageDesired, setWarPercentageDesired] = useState(50); // Define allocation state
 
   const handleSliderChange = (event: React.ChangeEvent<HTMLInputElement>) => {
       const researchPercentageDesired = parseInt(event.target.value, 10);
       const warPercentageDesired = 100 - researchPercentageDesired;
-      setThatPercentageDesired(researchPercentageDesired);
-      setThisPercentageDesired(warPercentageDesired);
+      setResearchPercentageDesired(researchPercentageDesired);
+      setWarPercentageDesired(warPercentageDesired);
       localStorage.setItem('warPercentageDesired', warPercentageDesired.toString());
   };
 
@@ -43,21 +44,8 @@ export const Poll = () => {
                     <div id="chart-and-slider-container"
                          className="px-4 lg:px-8"
                          style={{maxWidth: '300px'}}>
-                        <BarChart
-                            thisPriority={{
-                                name: 'War/Military',
-                                percentage: thisPercentageDesired,
-                                backgroundImages: warImages,
-                                backgroundColor: '#0075ff'
-                            }}
-                            thatPriority={{
-                                name: 'Medical Research',
-                                backgroundImages: ['img/people/grandma.jpg'],
-                                backgroundColor: '#00ff00'
-                            }}
-                            labelsPosition="bottom"
-                        />
-                        <Input type="range" min="0" max="100" value={thatPercentageDesired.toString()}
+                        <WarVsResearchBarChart warPercentageDesired={warPercentageDesired}/>
+                        <Input type="range" min="0" max="100" value={researchPercentageDesired.toString()}
                                onChange={handleSliderChange}/>
                         <div>
                             <span style={{float: 'left'}}>👈 More War</span>
