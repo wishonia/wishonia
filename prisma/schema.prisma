@@ -265,18 +265,41 @@ model ActivityLog {
 }
 
 model WishingWell {
-  id                       String                    @id @default(cuid())
-  userId                   String                    @map("user_id")
-  name                     String
-  description              String?
-  longDescription          String?                   @map("long_description")
-  createdAt                DateTime                  @default(now()) @map("created_at")
-  updatedAt                DateTime                  @updatedAt @map("updated_at")
-  user                     User                      @relation(fields: [userId], references: [id])
-  wishingWellContributions WishingWellContribution[]
-  proposals                WishFulfillmentProposal[]
+  id                         String                      @id @default(cuid())
+  userId                     String                      @map("user_id")
+  name                       String
+  description                String?
+  longDescription            String?                     @map("long_description")
+  backgroundColor            String                      @map("background_color")
+  images                     String[]
+  label                      String
+  createdAt                  DateTime                    @default(now()) @map("created_at")
+  updatedAt                  DateTime                    @updatedAt @map("updated_at")
+  user                       User                        @relation(fields: [userId], references: [id])
+  wishingWellContributions   WishingWellContribution[]
+  proposals                  WishFulfillmentProposal[]
+  thisWishingWellAllocations WishingWellPairAllocation[] @relation("ThisWishingWellRelation")
+  thatWishingWellAllocations WishingWellPairAllocation[] @relation("ThatWishingWellRelation")
 
   @@map("wishing_wells")
+}
+
+model WishingWellPairAllocation {
+  id                        String      @id @default(cuid())
+  userId                    String      @map("user_id")
+  thisWishingWellId         String      @map("this_wishing_well_id")
+  thatWishingWellId         String      @map("that_wishing_well_id")
+  thisWishingWellPercentage Float       @map("this_wishing_well_percentage")
+  title                     String
+  subtitle                  String
+  description               String
+  createdAt                 DateTime    @default(now()) @map("created_at")
+  updatedAt                 DateTime    @updatedAt @map("updated_at")
+  user                      User        @relation(fields: [userId], references: [id])
+  thisWishingWell           WishingWell @relation("ThisWishingWellRelation", fields: [thisWishingWellId], references: [id])
+  thatWishingWell           WishingWell @relation("ThatWishingWellRelation", fields: [thatWishingWellId], references: [id])
+
+  @@map("wishing_well_pair_allocations")
 }
 
 model WishingWellContribution {
@@ -349,19 +372,6 @@ model ProposalComparison {
   user                   User     @relation(fields: [userId], references: [id])
 
   @@map("proposal_comparisons")
-}
-
-model WishingWellPairAllocation {
-  id                        String   @id @default(cuid())
-  userId                    String   @map("user_id")
-  thisWishingWellId         String   @map("this_wishing_well_id")
-  thatWishingWellId         String   @map("that_wishing_well_id")
-  thisWishingWellPercentage Float    @map("this_wishing_well_percentage")
-  createdAt                 DateTime @default(now()) @map("created_at")
-  updatedAt                 DateTime @updatedAt @map("updated_at")
-  user                      User     @relation(fields: [userId], references: [id])
-
-  @@map("wishing_well_pair_allocations")
 }
 
 model GenieDAOFeedback {

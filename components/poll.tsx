@@ -8,8 +8,8 @@ import BarChart from "@/components/bar-chart";
 
 import { warImages } from '@/lib/warImagePaths';
 export const Poll = () => {
-  const [thatPercentageDesired, setThatPercentageDesired] = useState(50); // Define allocation state
-  const [thisPercentageDesired, setThisPercentageDesired] = useState(50); // Define allocation state
+  const [thatPercentageDesired, setThatPercentageDesired] = useState(50);
+  const [thisPercentageDesired, setThisPercentageDesired] = useState(50);
 
   const handleSliderChange = (event: React.ChangeEvent<HTMLInputElement>) => {
       const researchPercentageDesired = parseInt(event.target.value, 10);
