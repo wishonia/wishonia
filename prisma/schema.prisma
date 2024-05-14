@@ -271,8 +271,7 @@ model GlobalProblem {
   name                         String
   description                  String?
   content                      String?
-  featuredImage                String[]                      @map("featured_image")
-  images                       String[]
+  featuredImage                String?                       @map("featured_image")
   createdAt                    DateTime                      @default(now()) @map("created_at")
   updatedAt                    DateTime                      @updatedAt @map("updated_at")
   user                         User                          @relation(fields: [userId], references: [id])
@@ -304,7 +303,7 @@ model WishingWell {
   description                String?
   content                    String?                     @map("long_description")
   images                     String[]
-  featuredImage              String[]                    @map("featured_image")
+  featuredImage              String?                     @map("featured_image")
   createdAt                  DateTime                    @default(now()) @map("created_at")
   updatedAt                  DateTime                    @updatedAt @map("updated_at")
   user                       User                        @relation(fields: [userId], references: [id])

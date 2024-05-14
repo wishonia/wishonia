@@ -1,6 +1,5 @@
 const { OpenAI } = require("openai");
 const fetch = require("node-fetch");
-const path = require("path");
 const fs = require("fs-extra");
 
 const openai = new OpenAI({
@@ -51,7 +50,19 @@ async function generateAndSaveImage(content, imagePath) {
     return imagePath;
 }
 
+function convertToRelativePath(absolutePath) {
+    // Split the coverImage path into an array of directories
+    let pathArray = absolutePath.split(/\/|\\/);
+    // Find the index of the 'public' directory
+    let publicIndex = pathArray.indexOf('public');
+    // If 'public' directory is not found, return the original path
+    if (publicIndex === -1) {return absolutePath;}
+    // Get the path after the 'public' directory
+    return '/' + pathArray.slice(publicIndex + 1).join('/');
+}
+
 module.exports = {
     generateImage,
-    generateAndSaveImage
+    generateAndSaveImage,
+    convertToRelativePath
 };
