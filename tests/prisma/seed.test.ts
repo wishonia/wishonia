@@ -1,9 +1,20 @@
-import {PrismaClient, User} from "@prisma/client";
+/**
+ * @jest-environment node
+ */
+import { PrismaClient, User } from "@prisma/client";
 import fs from "fs";
 import path from "path";
 
 const prisma = new PrismaClient();
 async function createTestUser() {
+    let user = await prisma.user.findUnique({
+        where: {
+            email: "test@example.com",
+        },
+    });
+    if(user) {
+        return user;
+    }
     return prisma.user.create({
         data: {
             email: "test@example.com",
@@ -60,38 +71,22 @@ async function createWishingWells(testUser: User) {
 }
 
 async function createProblems(testUser: User) {
-    const absolutePath = path.resolve(__dirname, 'problems.json');
-    const data = fs.readFileSync(absolutePath, 'utf8');
-    const globalProblems = JSON.parse(data);
-    for (const problem of globalProblems) {
-        let problemData = {
-            name: problem.name,
-            description: problem.description,
-            content: '',
-            featuredImage: problem.featuredImage,
+    const result = await prisma.globalProblem.create({
+        data: {
+            name: "Cancer",
+            description: "Description",
+            content: 'Content',
+            featuredImage: "https://image.jpg",
             userId: testUser.id,
-        };
-        debugger
-        console.log("Creating problem: ", problemData)
-        const result = await prisma.globalProblem.create({
-            data: problemData,
-        });
-        console.log("Problem created result: ", result);
-    }
-}
-
-async function main() {
-    const testUser = await createTestUser();
-    await createWishingWells(testUser);
-    await createProblems(testUser);
-}
-
-main()
-    .catch((e) => {
-        debugger
-        console.error(e);
-        process.exit(1);
-    })
-    .finally(async () => {
-        await prisma.$disconnect();
+        },
     });
+}
+
+describe("createProblems", () => {
+    it("creates a problem successfully", async () => {
+        const testUser = await createTestUser();
+
+        await createProblems(testUser);
+    });
+
+});
