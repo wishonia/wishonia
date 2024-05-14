@@ -4,7 +4,7 @@ const path = require("path");
 const matter = require("gray-matter");
 const fetch = require('node-fetch');
 require('dotenv').config({ path: join(__dirname, '../.env') });
-const { generateImage } = require("./generateImage");
+const { generateImage, generateAndSaveImage} = require("./generatePostImage");
 const { generateText } = require("./generateText");
 
 // Function to generate metadata
@@ -28,6 +28,8 @@ async function getPostContent(slug) {
   return fs.readFileSync(fullPath, "utf8");
 }
 
+
+
 // Main function to process markdown files
 async function processMarkdownFiles() {
   const paths = getPostPaths();
@@ -39,19 +41,9 @@ async function processMarkdownFiles() {
     }
     const metadata = await generateMetadata(content);
     const { data } = matter(metadata);
-    const imagePrompt = `Generate a cover image for the following article. Do not include any text in the image. Use a colorful 16-bit style. Here's the article: ${content}`;
-    const response = await generateImage({
-      prompt: imagePrompt,
-      resolution: "1792x1024",
-      amount: 1
-    });
-    const imageUrl = response.url;
-    const image = await fetch(imageUrl);
-    const buffer = await image.buffer();
     const imagePath = path.join(postsDirectory, `${file.replace(/\.md$/, ".png")}`);
-    await fs.writeFile(imagePath, buffer);
-    const relativeImagePath = path.relative(postsDirectory, imagePath);
-    data.coverImage = relativeImagePath;
+    await generateAndSaveImage(content, imagePath);
+    data.coverImage = path.relative(postsDirectory, imagePath);
     const newFileContents = matter.stringify(content, data);
     await fs.writeFile(file, newFileContents);
     console.log(`Processed ${path.basename(file)}`);
