@@ -72,7 +72,6 @@ model User {
   likeCount            Int?      @map("like_count") // Number of likes
   listedCount          Int?      @map("listed_count")
   location             String? // User's location as per their Twitter profile
-  name                 String?
   newsletterSubscribed Boolean   @default(false) @map("newsletter_subscribed")
   phoneNumber          String?   @map("phone_number")
   points               Int?
@@ -107,19 +106,21 @@ model User {
   positions                       Position[]
   skills                          Skill[]
   endorsements                    Endorsement[]
-  userRecommendations             Recommendation[]            @relation("UserRecommendations")
-  recommenderRecommendations      Recommendation[]            @relation("RecommenderRecommendations")
+  userRecommendations             Recommendation[]              @relation("UserRecommendations")
+  recommenderRecommendations      Recommendation[]              @relation("RecommenderRecommendations")
   posts                           Post[]
   likes                           Like[]
   comments                        Comment[]
-  initiatedFriendships            Friendship[]                @relation(name: "InitiatorFriendships")
-  receivedFriendships             Friendship[]                @relation(name: "ReceiverFriendships")
-  createdGenieDAOs                GenieDAO[]                  @relation("CreatedGenieDAOs")
-  joinedGenieDAOs                 GenieDAO[]                  @relation("JoinedGenieDAOs")
-  createdWishFulfillmentProposals WishFulfillmentProposal[]   @relation("CreatedProposals")
+  initiatedFriendships            Friendship[]                  @relation(name: "InitiatorFriendships")
+  receivedFriendships             Friendship[]                  @relation(name: "ReceiverFriendships")
+  createdGenieDAOs                GenieDAO[]                    @relation("CreatedGenieDAOs")
+  joinedGenieDAOs                 GenieDAO[]                    @relation("JoinedGenieDAOs")
+  createdWishFulfillmentProposals WishFulfillmentProposal[]     @relation("CreatedProposals")
   createdProposalProgressReports  ProposalProgressReport[]
   proposalComparisons             ProposalComparison[]
   wishingWellPairAllocations      WishingWellPairAllocation[]
+  globalProblemPairAllocations    GlobalProblemPairAllocation[]
+  globalProblems                  GlobalProblem[]
   genieDAOFeedback                GenieDAOFeedback[]
 
   @@map("users")
@@ -264,15 +265,46 @@ model ActivityLog {
   @@map("activity_log")
 }
 
+model GlobalProblem {
+  id                           String                        @id @default(cuid())
+  userId                       String                        @map("user_id")
+  name                         String
+  description                  String?
+  content                      String?
+  featuredImage                String[]                      @map("featured_image")
+  images                       String[]
+  createdAt                    DateTime                      @default(now()) @map("created_at")
+  updatedAt                    DateTime                      @updatedAt @map("updated_at")
+  user                         User                          @relation(fields: [userId], references: [id])
+  thisGlobalProblemAllocations GlobalProblemPairAllocation[] @relation("ThisGlobalProblemRelation")
+  thatGlobalProblemAllocations GlobalProblemPairAllocation[] @relation("ThatGlobalProblemRelation")
+
+  @@map("global_problems")
+}
+
+model GlobalProblemPairAllocation {
+  id                          String        @id @default(cuid())
+  userId                      String        @map("user_id")
+  thisGlobalProblemId         String        @map("this_global_problem_id")
+  thatGlobalProblemId         String        @map("that_global_problem_id")
+  thisGlobalProblemPercentage Float         @map("this_global_problem_percentage")
+  createdAt                   DateTime      @default(now()) @map("created_at")
+  updatedAt                   DateTime      @updatedAt @map("updated_at")
+  user                        User          @relation(fields: [userId], references: [id])
+  thisGlobalProblem           GlobalProblem @relation("ThisGlobalProblemRelation", fields: [thisGlobalProblemId], references: [id])
+  thatGlobalProblem           GlobalProblem @relation("ThatGlobalProblemRelation", fields: [thatGlobalProblemId], references: [id])
+
+  @@map("global_problem_pair_allocations")
+}
+
 model WishingWell {
   id                         String                      @id @default(cuid())
   userId                     String                      @map("user_id")
   name                       String
   description                String?
-  longDescription            String?                     @map("long_description")
-  backgroundColor            String                      @map("background_color")
+  content                    String?                     @map("long_description")
   images                     String[]
-  label                      String
+  featuredImage              String[]                    @map("featured_image")
   createdAt                  DateTime                    @default(now()) @map("created_at")
   updatedAt                  DateTime                    @updatedAt @map("updated_at")
   user                       User                        @relation(fields: [userId], references: [id])
@@ -290,9 +322,6 @@ model WishingWellPairAllocation {
   thisWishingWellId         String      @map("this_wishing_well_id")
   thatWishingWellId         String      @map("that_wishing_well_id")
   thisWishingWellPercentage Float       @map("this_wishing_well_percentage")
-  title                     String
-  subtitle                  String
-  description               String
   createdAt                 DateTime    @default(now()) @map("created_at")
   updatedAt                 DateTime    @updatedAt @map("updated_at")
   user                      User        @relation(fields: [userId], references: [id])
