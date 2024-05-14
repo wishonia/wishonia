@@ -1,4 +1,7 @@
 const { OpenAI } = require("openai");
+const fetch = require("node-fetch");
+const path = require("path");
+const fs = require("fs-extra");
 
 const openai = new OpenAI({
     apiKey: process.env.OPENAI_API_KEY,
@@ -34,7 +37,21 @@ async function generateImage(body, model = "dall-e-3") {
 
     return response.data[0];
 }
+async function generateAndSaveImage(content, imagePath) {
+    const imagePrompt = `Generate a cover image for the following article. Do not include any text in the image. Use a colorful 16-bit style. Here's the article: ${content}`;
+    const response = await generateImage({
+        prompt: imagePrompt,
+        resolution: "1792x1024",
+        amount: 1
+    });
+    const imageUrl = response.url;
+    const image = await fetch(imageUrl);
+    const buffer = await image.buffer();
+    await fs.writeFile(imagePath, buffer);
+    return imagePath;
+}
 
 module.exports = {
     generateImage,
+    generateAndSaveImage
 };
