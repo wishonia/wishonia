@@ -7,7 +7,7 @@ async function createTestUser() {
     return prisma.user.create({
         data: {
             email: "test@example.com",
-            username: "testuser",
+            username: "test-user",
             firstName: "Test",
             lastName: "User",
             bio: "I am a test user",
@@ -67,7 +67,7 @@ async function createProblems(testUser: User) {
         let problemData = {
             name: problem.name,
             description: problem.description,
-            content: '',
+            content: problem.content,
             featuredImage: problem.featuredImage,
             userId: testUser.id,
         };

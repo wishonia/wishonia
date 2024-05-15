@@ -72,6 +72,7 @@ model User {
   likeCount            Int?      @map("like_count") // Number of likes
   listedCount          Int?      @map("listed_count")
   location             String? // User's location as per their Twitter profile
+  name                 String?   @map("name")
   newsletterSubscribed Boolean   @default(false) @map("newsletter_subscribed")
   phoneNumber          String?   @map("phone_number")
   points               Int?

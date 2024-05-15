@@ -18,7 +18,8 @@
     "test": "jest --watch",
     "test:ci": "jest --ci",
     "format": "pnpm prettier . --write",
-    "format:check": "pnpm prettier . --check"
+    "format:check": "pnpm prettier . --check",
+    "seed": "ts-node --compiler-options {\"module\":\"CommonJS\"} prisma/seed.ts"
   },
   "prisma": {
     "seed": "ts-node --compiler-options {\"module\":\"CommonJS\"} prisma/seed.ts"
