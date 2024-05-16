@@ -1,6 +1,7 @@
 const { OpenAI } = require("openai");
 const fetch = require("node-fetch");
 const fs = require("fs-extra");
+const {generateText} = require("./textGenerator");
 
 const openai = new OpenAI({
     apiKey: process.env.OPENAI_API_KEY,
@@ -37,15 +38,21 @@ async function generateImage(body, model = "dall-e-3") {
     return response.data[0];
 }
 async function generateAndSaveImage(content, imagePath) {
-    const imagePrompt = `Generate a cover image for the following article. Do not include any text in the image. Use a colorful 16-bit style. Here's the article: ${content}`;
+    const prePrompt = `full width image for an article on ${content}. 
+    Requirements: 
+    1. THE IMAGE SHOULD NOT CONTAIN ANY TEXT! 
+    2. Use a colorful 16-bit style.`;
+    const generatedPrompt = await generateText(`Generate an detailed prompt description for an AI image generator to generate an ${prePrompt} `, "gpt-4o");
+    //console.log(generatedPrompt)
     const response = await generateImage({
-        prompt: imagePrompt,
+        prompt: prePrompt,
         resolution: "1792x1024",
         amount: 1
     });
     const imageUrl = response.url;
     const image = await fetch(imageUrl);
     const buffer = await image.buffer();
+    console.log(`Saving image to ${imagePath}`);
     await fs.writeFile(imagePath, buffer);
     return imagePath;
 }
