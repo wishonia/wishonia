@@ -1,9 +1,9 @@
 ---
 title: Individual ROI on Getting Friends to Sign the Treaty
-excerpt: >-
+description: >-
   Discover how investing just 5 hours of your time can lead to significant
   impact in garnering support for global initiatives through your friends.
-coverImage: individual-roi.png
+featuredImage: individual-roi.png
 #  date: 'June 14, 2023'
 author:
   name: The Office of the President

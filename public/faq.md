@@ -1,9 +1,9 @@
 ---
 title: Frequently Asked Questions
-excerpt: >-
+description: >-
   Discover how a small reduction in military budgets can lead to significant
   advancements in health research, global cooperation, and security.
-coverImage: faq.png
+featuredImage: faq.png
 #  date: 'September 15, 2022'
 author:
   #name: The Office of the President

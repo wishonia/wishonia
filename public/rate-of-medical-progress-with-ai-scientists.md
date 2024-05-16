@@ -1,8 +1,8 @@
 ---
 title: Potential Rate of Medical Progress with AI Scientists
-excerpt: >-
+description: >-
   AI scientists could potentially achieve 260 years of medical progress in a single year.
-coverImage: rate-of-medical-progress-with-ai-scientists.png
+featuredImage: rate-of-medical-progress-with-ai-scientists.png
 #  date: '2023-09-15'
 author:
   name: AI Research Insights

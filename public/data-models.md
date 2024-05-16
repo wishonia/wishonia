@@ -1,8 +1,8 @@
 ---
 title: 'Data Models for Wishonia'
-excerpt: >-
+description: >-
   A comprehensive list of data models needed to support the various features of Wishonia
-# coverImage: why-reallocation-is-necessary.png
+# featuredImage: why-reallocation-is-necessary.png
 #  date: '2022-11-15'
 #author:
 #  name: The Office of the President

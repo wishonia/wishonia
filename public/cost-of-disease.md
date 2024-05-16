@@ -1,7 +1,7 @@
 ---
 title: "Global Cost Of Disease"
-excerpt: "Disease costs the world trillions through healthcare costs, indirect economic losses"
-coverImage: "/cost-of-disease.png"
+description: "Disease costs the world trillions through healthcare costs, indirect economic losses"
+featuredImage: "/cost-of-disease.png"
 # date: "2024-03-16T05:35:07.322Z"
 # author:
 #  name: Mike P. Sinn

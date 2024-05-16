@@ -1,10 +1,10 @@
 ---
 title: 'A File System Structure for Wishonia'
-excerpt: >-
+description: >-
     A proposed file system structure for the forkable world of Wishonia, outlining the
     organization of directories and files to facilitate collaboration and
     development.
-# coverImage: why-reallocation-is-necessary.png
+# featuredImage: why-reallocation-is-necessary.png
 #  date: '2022-11-15'
 #author:
 #  name: The Office of the President

@@ -1,9 +1,9 @@
 ---
 title: 'Logical Proof: The Case for the Global 1% Treaty'
-excerpt: >-
+description: >-
   Exploring the logical reasoning behind reallocating 1% of military spending to
   medical research through international cooperation and decentralized funding.
-coverImage: logical-proof.png
+featuredImage: logical-proof.png
 date: Include publication date
 author:
   name: The Office of the President
