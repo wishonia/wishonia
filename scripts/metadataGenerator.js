@@ -2,15 +2,14 @@ const fs = require("fs-extra");
 const {join} = require("path");
 const path = require("path");
 const matter = require("gray-matter");
-const fetch = require('node-fetch');
 require('dotenv').config({ path: join(__dirname, '../.env') });
-const { generateImage, generateAndSaveImage} = require("./generatePostImage");
-const { generateText } = require("./generateText");
+const { generateAndSaveImage} = require("./imageGenerator");
+const { generateText } = require("./textGenerator");
 
 // Function to generate metadata
 async function generateMetadata(content) {
   return await generateText(
-    `Generate metadata for a blog post given the following content:\n\n${content}\n\nMetadata format:\n---\ntitle: ""\nexcerpt: ""\ncoverImage: ""\ndate: ""\nauthor:\n name: ""\n picture: ""\nogImage:\n url: ""\n---\n`,
+    `Generate metadata for a blog post given the following content:\n\n${content}\n\nMetadata format:\n---\ntitle: ""\ndescription: ""\nfeaturedImage: ""\ndate: ""\nauthor:\n name: ""\n picture: ""\nogImage:\n url: ""\n---\n`,
     "gpt-3.5-turbo"
   );
 }
