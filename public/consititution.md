@@ -1,9 +1,9 @@
 ---
 title: >-
   The Constitution of Wishonia
-excerpt: >-
+description: >-
   The governing framework of Wishonia, aimed at optimally allocating scarce resources to maximize median health and happiness.
-# coverImage: '/1-percent-treaty.png'
+# featuredImage: '/1-percent-treaty.png'
 #  date: 'October 1, 2021'
 #author:
 #  name: The Department of Peace

@@ -2,11 +2,11 @@
 title: >-
   The Decentralized Institutes of Health: Revolutionizing Healthcare Through
   Decentralized Science and AI
-excerpt: >-
+description: >-
   Exploring the transformative potential of Decentralized Institutes of Health
   (DIH) in reallocating resources from war to medical breakthroughs using
   blockchain, AI, and decentralized tools.
-coverImage: '/decentralized-institutes-of-health.png'
+featuredImage: '/decentralized-institutes-of-health.png'
 #  date: '2022-10-18'
 #author:
 #  name: Anonymous

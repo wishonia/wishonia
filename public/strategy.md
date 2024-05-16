@@ -1,9 +1,9 @@
 ---
 title: Roadmap for Creating a Decentralized Autonomous Organization (DAO)
-excerpt: >-
+description: >-
   Explore the detailed roadmap for establishing a DAO, including crowdfunding
   strategies, lobbying efforts, and post-launch activities.
-coverImage: strategy.png
+featuredImage: strategy.png
 #  date: '2023-09-15'
 author:
   name: The Office of the President

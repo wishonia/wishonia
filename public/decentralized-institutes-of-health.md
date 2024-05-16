@@ -1,9 +1,9 @@
 ---
 title: >-
   The Decentralized Institutes of Health
-excerpt: >-
+description: >-
  Radically Accelerating Medical Research and Funding by Harnessing the Power of Decentralized Science, Collective Intelligence, and Blockchain Technology.
-coverImage: '/decentralized-institutes-of-health.png'
+featuredImage: '/decentralized-institutes-of-health.png'
 #  date: '2022-10-18'
 #author:
 #  name: Anonymous

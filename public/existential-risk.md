@@ -1,9 +1,9 @@
 ---
 title: The Dangers of Excessive Military Spending and the AI Arms Race
-excerpt: >-
+description: >-
   Exploring the implications of current military expenditures on global security
   and the looming threats posed by the AI arms race.
-coverImage: existential-risk.png
+featuredImage: existential-risk.png
 # #  date: '2022-09-15'
 author:
   name: Wishonian Department of Defense

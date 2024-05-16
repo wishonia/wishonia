@@ -1,8 +1,8 @@
 ---
 title: 'Why Reallocation From Public Bads to Public Goods Is Better Than Just Increasing Spending on Public Goods'
-excerpt: >-
+description: >-
   Simply increasing spending on medical research while simultaneously increasing military spending does not actually increase the number of brains and resources available for research.
-coverImage: why-reallocation-is-necessary.png
+featuredImage: why-reallocation-is-necessary.png
 #  date: '2022-11-15'
 author:
   name: The Office of the President
