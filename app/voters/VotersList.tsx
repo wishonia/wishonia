@@ -58,7 +58,7 @@ export async function VotersList() {
                   <Avatar>
                     <AvatarImage src={user.image as string} />
                     <AvatarFallback className="uppercase">
-                      {getInitials(user.name)}
+                      {getInitials(user.firstName + " " + user.lastName)}
                     </AvatarFallback>
                   </Avatar>
                   <div className="flex flex-col w-full overflow-hidden">
