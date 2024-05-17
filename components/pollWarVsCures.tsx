@@ -1,17 +1,20 @@
 "use client";
-import Link from "next/link";
-
-import { Button } from "@/components/ui/button";
 import {Input} from "@/components/ui/input";
 import React, { useState } from "react";
-import WarVsResearchBarChart from "@/components/war-vs-research-bar-chart";
-import BarChart from "@/components/bar-chart";
+import WarVsCuresBarChart from "@/components/war-vs-cures-bar-chart";
+import {AnonymousVoteButton} from "@/components/anonymous-vote-button";
+import {LoggedInVoteButton} from "@/components/logged-in-vote-button";
+import {User} from "next-auth";
+import {useRouter} from "next/navigation";
 
-import { warImages } from '@/lib/warImagePaths';
-export const PollWarResearch = () => {
+interface PollProps {
+    user?: User;
+}
+export const PollWarVsCures: React.FC<PollProps> = ({ user }) => {
   const [researchPercentageDesired, setResearchPercentageDesired] = useState(50); // Define allocation state
   const [warPercentageDesired, setWarPercentageDesired] = useState(50); // Define allocation state
-
+  const router = useRouter();
+  
   const handleSliderChange = (event: React.ChangeEvent<HTMLInputElement>) => {
       const researchPercentageDesired = parseInt(event.target.value, 10);
       const warPercentageDesired = 100 - researchPercentageDesired;
@@ -20,6 +23,11 @@ export const PollWarResearch = () => {
       localStorage.setItem('warPercentageDesired', warPercentageDesired.toString());
   };
 
+  const onButtonClick = () => {
+      localStorage.setItem('afterLoginRedirect', '/warVsCures/results');
+
+        router.push('/warVsCures/results');
+  }
 
     return (
     <>
@@ -44,7 +52,7 @@ export const PollWarResearch = () => {
                     <div id="chart-and-slider-container"
                          className="px-4 lg:px-8"
                          style={{maxWidth: '300px'}}>
-                        <WarVsResearchBarChart warPercentageDesired={warPercentageDesired}/>
+                        <WarVsCuresBarChart warPercentageDesired={warPercentageDesired}/>
                         <Input type="range" min="0" max="100" value={researchPercentageDesired.toString()}
                                onChange={handleSliderChange}/>
                         <div>
@@ -53,22 +61,11 @@ export const PollWarResearch = () => {
                         </div>
                     </div>
                 </div>
-                <Link href={"/signup"}>
-                    <Button
-                        //onClick={() => handleClick()}
-                        className="text-xl p-6 md:p-8 rounded-full font-semibold
-                 hover:border hover:border-black mt-2"
-                    >
-                        Vote to See Results
-                    </Button>
-                </Link>
-                <div className="">
-                    <div className="text-xs px-4 pt-4">
-                        It&apos;s necessary to sign in to ensure electoral integrity.  Robots don&apos;t get to vote!
-                    </div>
-                </div>
+                <LoggedInVoteButton user={user}
+                                    onButtonClick={onButtonClick}
+                                    data={{"warPercentageDesired": warPercentageDesired}}/>
+                <AnonymousVoteButton user={user}/>
             </div>
-
         </section>
     </>
 )
