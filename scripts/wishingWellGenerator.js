@@ -12,7 +12,7 @@ const wishingWellNames = [
     'Cure Cancer',
     'Cure Depression',
     'End Suffering of Factory Farmed Animals',
-    'Stop Climate Change',
+    'Stop Global Warming',
     "Cure Alzheimer's Disease",
     'End Malaria',
     'End Starvation',
