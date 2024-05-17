@@ -67,7 +67,8 @@ export const PollSpecificGeneral = <T,>({
                     </div>
                 </div>
                 <div style={{ display: "flex", justifyContent: "center", alignItems: "center" }}>
-                    <div id="chart-and-slider-container" className="px-4 lg:px-8" style={{ maxWidth: "300px" }}>
+                    <div id="chart-and-slider-container"
+                         className="px-4 lg:px-8 text-sm" style={{maxWidth: "400px"}}>
                         <BarChartGeneral
                             thisItem={thisItem}
                             thatItem={thatItem}
@@ -82,22 +83,31 @@ export const PollSpecificGeneral = <T,>({
                             value={thatPercentageDesired.toString()}
                             onChange={handleSliderChange}
                         />
-                        <div style={{ display: "flex", width: "100%" }}>
-                            <span style={{ flex: "1 1 50%", textAlign: "left", wordWrap: "break-word" }}>
-                                👈 More to {getItemName(thisItem)}
+                        <div style={{display: "flex", width: "100%"}}>
+                            <span style={{flex: "1 1 50%", textAlign: "left", wordWrap: "break-word"}}>
+                                👈 More to
                             </span>
-                            <span style={{ flex: "1 1 50%", textAlign: "right", wordWrap: "break-word" }}>
-                                More to {getItemName(thatItem)} 👉
+                            <span style={{flex: "1 1 50%", textAlign: "right", wordWrap: "break-word"}}>
+                                More to 👉
+                            </span>
+                        </div>
+
+                        <div style={{display: "flex", width: "100%"}}>
+                            <span style={{flex: "1 1 50%", textAlign: "left", wordWrap: "break-word"}}>
+                                {getItemName(thisItem)}
+                            </span>
+                            <span style={{flex: "1 1 50%", textAlign: "right", wordWrap: "break-word"}}>
+                                {getItemName(thatItem)}
                             </span>
                         </div>
                     </div>
                 </div>
                 <LoggedInVoteButton
                     user={user}
-                    data={{ thisItem, thatItem, thisPercentageDesired }}
+                    data={{thisItem, thatItem, thisPercentageDesired}}
                     onButtonClick={onButtonClick}
                 ></LoggedInVoteButton>
-                <AnonymousVoteButton user={user} />
+                <AnonymousVoteButton user={user}/>
             </div>
         </section>
     );
