@@ -9,7 +9,7 @@ interface ChartContainerProps {
 }
 
 // New BarChart component
-const WarVsResearchBarChart: React.FC<ChartContainerProps> = ({ warPercentageDesired, labelsPosition = 'top' }) => {
+const WarVsCuresBarChart: React.FC<ChartContainerProps> = ({ warPercentageDesired, labelsPosition = 'top' }) => {
   const researchPercentageDesired = 100 - warPercentageDesired;
   //let [warImages, setWarImages] = useState<string[]>([]);
   const [currentImageIndex, setCurrentImageIndex] = useState(0);
@@ -53,8 +53,8 @@ const WarVsResearchBarChart: React.FC<ChartContainerProps> = ({ warPercentageDes
                     }}>
                         {labelsPosition === 'top' && (
                             <span id="warPercentageDesiredLabel" className="text-sm text-center">
-                  {warPercentageDesired}% War / Military
-                </span>
+                              {warPercentageDesired}% War / Military
+                            </span>
                         )}
                         <div id="warBar"
                              style={{
@@ -85,7 +85,7 @@ const WarVsResearchBarChart: React.FC<ChartContainerProps> = ({ warPercentageDes
                                  height: `${researchPercentageDesired}%`,
                                  backgroundColor: '#0075ff',
                                  width: '100%',
-                                 backgroundImage: 'url(img/people/grandma.jpg)',
+                                 backgroundImage: 'url(/img/people/grandma.jpg)',
                                  backgroundSize: 'cover'
                              }}>
                         </div>
@@ -108,4 +108,4 @@ const WarVsResearchBarChart: React.FC<ChartContainerProps> = ({ warPercentageDes
     );
 };
 
-export default WarVsResearchBarChart;
+export default WarVsCuresBarChart;
