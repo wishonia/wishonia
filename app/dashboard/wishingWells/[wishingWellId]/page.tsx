@@ -83,7 +83,7 @@ export default async function WishingWellPage({
       <Heatmap data={dashboardData.wishingWellContributions} params={params} />
       <StatsCards data={dashboardData} searchParams={searchParams} />
       <DataTable columns={wishingWellContributionsColumns} data={dashboardData.wishingWellContributions}>
-        Log History
+        Wishing Well Contributions
       </DataTable>
     </Shell>
   )
