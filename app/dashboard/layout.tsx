@@ -3,6 +3,7 @@ import { getCurrentUser } from "@/lib/session"
 import Footer from "@/components/layout/footer"
 import TopNavbar from "@/components/layout/topNavbar"
 import { SidebarNav } from "@/components/sidebar-nav"
+import React from "react";
 
 interface DashboardLayoutProps {
   children: React.ReactNode

@@ -4,10 +4,10 @@ import { authOptions } from "@/lib/auth"
 import { getCurrentUser } from "@/lib/session"
 import { Shell } from "@/components/layout/shell"
 import AfterLoginHandler from "@/components/AfterLoginHandler"
-import {GlobalProblemsList} from "@/components/global-problems-list";
+import {WishingWellsList} from "@/components/wishing-well-list";
 
 export const metadata: Metadata = {
-  title: "Results",
+  title: "Your Wishing Wells",
   description: "How much everyone thinks we should allocate to solving each global problem",
 }
 
@@ -25,7 +25,7 @@ export default async function Dashboard({ searchParams }: DashboardProps) {
   return (
     <Shell>
         <AfterLoginHandler></AfterLoginHandler>
-        <GlobalProblemsList></GlobalProblemsList>
+        <WishingWellsList></WishingWellsList>
     </Shell>
   )
 }
