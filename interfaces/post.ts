@@ -4,9 +4,9 @@ export type Post = {
   slug: string;
   title: string;
   date: string;
-  coverImage: string;
+  featuredImage: string;
   author: Author;
-  excerpt: string;
+  description: string;
   ogImage: {
     url: string;
   };
