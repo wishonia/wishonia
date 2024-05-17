@@ -17,6 +17,7 @@ export type SiteConfig = {
 
 export type NavItem = {
   title: string
+  tooltip?: string
   disabled?: boolean
   external?: boolean
   icon?: IconKeys
