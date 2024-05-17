@@ -1,0 +1,22 @@
+import {getMarkdownObjects} from "@/scripts/markdownReader";
+import {PrismaClient, User} from "@prisma/client";
+const prisma = new PrismaClient();
+
+export async function seedWishingWells(testUser: User) {
+    const wishingWells =
+        getMarkdownObjects('public/wishingWells');
+    for (const wishingWell of wishingWells) {
+        let wishingWellData = {
+            name: wishingWell.data.name,
+            description: wishingWell.data.description,
+            content: wishingWell.content,
+            featuredImage: wishingWell.data.featuredImage,
+            userId: testUser.id,
+        };
+        console.log("Creating wishing well: ", wishingWellData)
+        const result = await prisma.wishingWell.create({
+            data: wishingWellData,
+        });
+        console.log("Wishing well created result: ", result);
+    }
+}
