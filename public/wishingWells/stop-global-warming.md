@@ -1,16 +1,16 @@
 ---
-name: Stop Climate Change
+name: Stop Global Warming
 description: >-
-  The goal of "Stop Climate Change" is to implement sustainable practices and
+  The goal of "Stop Global Warming" is to implement sustainable practices and
   reduce greenhouse gas emissions to prevent further global warming and preserve
   the planet for future generations.
-featuredImage: /wishingWells/stop-climate-change.png
+featuredImage: /wishingWells/stop-global-warming.png
 ---
-# Stop Climate Change: An Analysis of Its Goal and Significance
+# Stop Global Warming: An Analysis of Its Goal and Significance
 
 ## Introduction
 
-The goal to "Stop Climate Change" is a monumental task aimed at mitigating the adverse effects of global warming and stabilizing the Earth's climate. This objective holds profound significance for humanity, as it involves ensuring environmental sustainability, preserving biodiversity, and securing a livable planet for future generations.
+The goal to "Stop Global Warming" is a monumental task aimed at mitigating the adverse effects of global warming and stabilizing the Earth's climate. This objective holds profound significance for humanity, as it involves ensuring environmental sustainability, preserving biodiversity, and securing a livable planet for future generations.
 
 ## Reason for the Goal
 
