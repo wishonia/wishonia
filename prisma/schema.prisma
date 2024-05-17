@@ -278,6 +278,7 @@ model GlobalProblem {
   user                         User                          @relation(fields: [userId], references: [id])
   thisGlobalProblemAllocations GlobalProblemPairAllocation[] @relation("ThisGlobalProblemRelation")
   thatGlobalProblemAllocations GlobalProblemPairAllocation[] @relation("ThatGlobalProblemRelation")
+  averageAllocation            Float?                        @map("average_allocation")
 
   @@map("global_problems")
 }
@@ -312,6 +313,7 @@ model WishingWell {
   proposals                  WishFulfillmentProposal[]
   thisWishingWellAllocations WishingWellPairAllocation[] @relation("ThisWishingWellRelation")
   thatWishingWellAllocations WishingWellPairAllocation[] @relation("ThatWishingWellRelation")
+  averageAllocation          Float?                      @map("average_allocation")
 
   @@map("wishing_wells")
 }
