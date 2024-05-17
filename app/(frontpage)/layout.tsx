@@ -1,11 +1,10 @@
 import { getCurrentUser } from "@/lib/session"
 import Footer from "@/components/layout/footer"
-import Navbar from "@/components/layout/navbar"
+import TopNavbar from "@/components/layout/topNavbar"
 
 interface FrontPageLayoutProps {
   children: React.ReactNode
 }
-
 export default async function FrontPageLayout({
   children,
 }: FrontPageLayoutProps) {
@@ -13,13 +12,15 @@ export default async function FrontPageLayout({
 
   return (
     <>
-{/*      <Navbar
-        user={{
-          name: user?.name,
-          image: user?.image,
-          email: user?.email,
-        }}
-      />*/}
+      {user && (
+        <TopNavbar
+          user={{
+            name: user?.name,
+            image: user?.image,
+            email: user?.email,
+          }}
+        />
+      )}
       {children}
       <div style={{ height: '200px' }}></div>
       <Footer />
