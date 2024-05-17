@@ -2,7 +2,7 @@
 
 import Link from "next/link"
 
-import { leftLinks } from "@/config/links"
+import {generalSidebarNav} from "@/config/links"
 import {
   DropdownMenu,
   DropdownMenuContent,
@@ -13,9 +13,17 @@ import {
 import { Icons } from "@/components/icons"
 import {WandIcon} from "lucide-react";
 import {siteConfig} from "@/config/site";
+import { NavItem } from "@/types"
+import {Key} from "react";
 
+interface LogoNavMenuProps {
+    navItems?: NavItem[];
+}
 
-export function LogoNavMenu() {
+export function LogoNavMenu({ navItems }: LogoNavMenuProps) {
+    if(!navItems){
+        navItems = generalSidebarNav.data;
+    }
   return (
     <DropdownMenu>
         <DropdownMenuTrigger>
@@ -25,7 +33,7 @@ export function LogoNavMenu() {
               </span>
         </DropdownMenuTrigger>
         <DropdownMenuContent align="end">
-        {leftLinks.data.map((item, index) => {
+        {navItems.map((item: NavItem, index: Key | null | undefined) => {
           const Icon = Icons[item.icon || "next"]
           return (
             item.href && (

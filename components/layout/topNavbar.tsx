@@ -3,24 +3,30 @@
 import Link from "next/link"
 import { User } from "next-auth"
 
-import { dashboardTopLinks } from "@/config/links"
-import { siteConfig } from "@/config/site"
+import {generalDashboardTopNav} from "@/config/links"
 import { UserNavDisplay } from "@/components/user/user-nav-display"
-import {WandIcon} from "lucide-react";
 import {LogoNavMenu} from "@/components/layout/logo-nav";
+import React from "react";
+import {NavItem} from "@/types";
 
 interface NavbarProps extends React.HTMLAttributes<HTMLDivElement> {
-  user: Pick<User, "name" | "image" | "email">
+    user: Pick<User, "name" | "image" | "email">
+    logoNavItems?: NavItem[]
+    topNavItems?: NavItem[]
+    avatarNavItems?: NavItem[]
 }
 
-export default function Navbar({ user }: NavbarProps) {
+export default function TopNavbar({ user, logoNavItems, topNavItems, avatarNavItems }: NavbarProps) {
 
+    if(!topNavItems){
+        topNavItems = generalDashboardTopNav.data;
+    }
   return (
     <header className="select-none">
       <nav className="mx-auto flex items-center justify-between px-4 md:px-8 lg:max-w-7xl">
         <div>
           <div className="flex items-center justify-between py-3 md:block md:py-5">
-            <LogoNavMenu></LogoNavMenu>
+            <LogoNavMenu navItems={logoNavItems}></LogoNavMenu>
           </div>
         </div>
         <div className="hidden md:block">
@@ -29,7 +35,7 @@ export default function Navbar({ user }: NavbarProps) {
             style={{ width: "100%", maxWidth: "20rem" }}
           >
             <ul className="flex flex-col items-center space-y-4 opacity-60 md:flex-row md:space-x-6 md:space-y-0">
-              {dashboardTopLinks.data.map((item, index) => {
+              {topNavItems.map((item, index) => {
                 return (
                   item.href && (
                     <Link
@@ -51,6 +57,7 @@ export default function Navbar({ user }: NavbarProps) {
             image: user?.image,
             email: user?.email,
           }}
+          avatarNavItems={avatarNavItems}
         />
       </nav>
     </header>
