@@ -32,7 +32,7 @@ export default async function DashboardLayout({
           <SidebarNav items={warVsCuresNav.data} />
         </aside>
         <main className="flex w-full flex-1 flex-col"
-              style={{ maxWidth: "90%" }}>
+              style={{ maxWidth: "98%" }}>
             {children}
         </main>
       </div>
