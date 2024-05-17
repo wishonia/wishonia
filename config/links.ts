@@ -1,13 +1,21 @@
 import {Navigation, NavItem} from "@/types"
 
-const referendumLink: NavItem = {
-  title: "Referendum",
-  href: "/",
+const warVsCuresVoteLink: NavItem = {
+  title: "Vote",
+  href: "/warVsCures",
   icon: "vote",
+  tooltip: "Vote on the allocation of resources between war and cures",
 };
 
-const resultsLink: NavItem = {
-  title: "Results",
+const warVsCuresResultsLink: NavItem = {
+    title: "Results",
+    href: "/warVsCures/results",
+    icon: "results",
+    tooltip: "View the results of the War vs Cures vote",
+}
+
+const dashboardLink: NavItem = {
+  title: "Dashboard",
   href: "/dashboard",
   icon: "results",
 };
@@ -24,10 +32,28 @@ const costOfWarLink: NavItem = {
   icon: "skull",
 };
 
+const globalProblemsVoteLink: NavItem = {
+    title: "Prioritize Problems",
+    href: "/globalProblems",
+    icon: "frown",
+}
+
+const globalProblemsResultsLink: NavItem = {
+  title: "Problem Prioritization Results",
+  href: "/globalProblems/results",
+  icon: "pieChart",
+}
+
+const wishingWellsResultsLink: NavItem = {
+    title: "Society's Wishes",
+    href: "/wishingWells/results",
+    icon: "ranking",
+}
+
 const wishingWellsLink: NavItem = {
-  title: "Wishing Wells",
-  href: "/dashboard/wishingWells",
-  icon: "wishingWell",
+  title: "Prioritize Wishes",
+  href: "/wishingWells",
+  icon: "star",
 };
 
 const voterLeaderboardLink: NavItem = {
@@ -59,25 +85,37 @@ const costOfDiseaseLink: NavItem = {
     icon: "disease",
 };
 
+const homeLink: NavItem = {
+    title: "Home",
+    href: "/",
+    icon: "home",
+};
+
 const overviewLink: NavItem = {
   title: "Overview",
   href: "/#overview",
 };
 
-export const dashboardTopLinks: Navigation = {
-  data: [
-    referendumLink,
-    resultsLink
-  ],
+export const generalDashboardTopNav: Navigation = {
+    data: [
+       // warVsCuresVoteLink,
+        //dashboardLink
+    ],
 };
 
+export const warVsCuresTopNav: Navigation = {
+    data: [
+        warVsCuresVoteLink,
+        warVsCuresResultsLink
+    ],
+};
 
-export const footerLinks: Navigation = {
+export const generalFooterNav: Navigation = {
   data: [
-    costOfDiseaseLink,
-    costOfWarLink,
-    treatyLink,
-    dihLink,
+      wishingWellsLink,
+      wishingWellsResultsLink,
+      globalProblemsVoteLink,
+      globalProblemsResultsLink,
   ],
 };
 
@@ -85,30 +123,47 @@ let createWish: NavItem = {
     title: "Create Wish",
     href: "/dashboard/wishingWells",
     icon: "star",
-
 };
-export const avatarMenuLinks: Navigation = {
+export const avatarNav: Navigation = {
   data: [
     profileSettingsLink,
-    referendumLink,
-    resultsLink,
-    //createWish,
+    wishingWellsLink,
+    globalProblemsVoteLink,
+      {
+          title: "War vs Cures",
+          href: "/warVsCures",
+          icon: "vote",
+      }
   ],
 };
 
 export const landingPageLinks: Navigation = {
-  data: [featuresLink, overviewLink],
+  data: [
+    featuresLink,
+    overviewLink
+  ],
 };
 
-export const leftLinks: Navigation = {
+export const warVsCuresNav: Navigation = {
   data: [
+      warVsCuresVoteLink,
+      warVsCuresResultsLink,
     costOfDiseaseLink,
     costOfWarLink,
-    resultsLink,
+    dashboardLink,
     treatyLink,
     dihLink,
     //wishingWellsLink,
     //voterLeaderboardLink,
+  ],
+}
+
+export const generalSidebarNav: Navigation = {
+  data: [
+    wishingWellsLink,
+    wishingWellsResultsLink,
+    globalProblemsVoteLink,
+    globalProblemsResultsLink,
   ],
 }
 
