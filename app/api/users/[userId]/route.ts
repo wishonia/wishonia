@@ -5,6 +5,7 @@ import { authOptions } from "@/lib/auth"
 import { db } from "@/lib/db"
 import { userNameSchema } from "@/lib/validations/user"
 import {handleError} from "@/lib/errorHandler";
+import {getUserId} from "@/lib/api/getUserId";
 
 const routeContextSchema = z.object({
   params: z.object({
@@ -25,9 +26,9 @@ export async function PATCH(
 ) {
   try {
     const { params } = routeContextSchema.parse(context)
-    const session = await getServerSession(authOptions)
+    const userId = await getUserId();
 
-    if (!session?.user || params.userId !== session?.user.id) {
+    if (userId || params.userId !== userId) {
       return new Response(null, { status: 403 })
     }
 
@@ -38,7 +39,7 @@ export async function PATCH(
     try {
       await db.user.update({
         where: {
-          id: session.user.id,
+          id: userId,
         },
         data: {
           username: payload.username,
