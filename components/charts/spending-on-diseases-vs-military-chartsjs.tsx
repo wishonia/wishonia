@@ -68,7 +68,7 @@ const options = {
     hooks: {
       // Doesn't work as expected
       afterDraw: (chart: { chartArea: any; config: { options: { scales: { y: { ticks: { sourcePixelSize: number; }; }; }; }; }; ctx: { drawImage: (arg0: HTMLImageElement, arg1: any, arg2: number, arg3: number, arg4: number) => void; }; }, args: { datasets: any[]; }) => {
-        debugger
+
         const svgCode = ''; // Replace with your SVG code
         const image = new Image();
         image.src = 'data:image/svg+xml;base64,' + btoa(svgCode); // Convert SVG to base64
