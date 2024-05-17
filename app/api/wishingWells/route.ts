@@ -1,8 +1,6 @@
-import { getServerSession } from "next-auth/next"
 import * as z from "zod"
-
-import { authOptions } from "@/lib/auth"
 import { db } from "@/lib/db"
+import {getUserId} from "@/lib/api/getUserId";
 
 const wishingWellCreateSchema = z.object({
   name: z.string(),
@@ -11,25 +9,7 @@ const wishingWellCreateSchema = z.object({
 
 export async function GET() {
   try {
-    const session = await getServerSession(authOptions)
-
-    if (!session) {
-      return new Response("Unauthorized", { status: 403 })
-    }
-
-    // Get all of current user's wishingWells
-    const wishingWells = await db.wishingWell.findMany({
-      select: {
-        id: true,
-        name: true,
-        description: true,
-        createdAt: true,
-      },
-      where: {
-        userId: session.user.id,
-      },
-    })
-
+    const wishingWells = await db.wishingWell.findMany()
     return new Response(JSON.stringify(wishingWells))
   } catch (error) {
     return new Response(null, { status: 500 })
@@ -38,13 +18,12 @@ export async function GET() {
 
 export async function POST(req: Request) {
   try {
-    const session = await getServerSession(authOptions)
+    const userId = await getUserId();
 
-    if (!session) {
+    if (!userId) {
       return new Response("Unauthorized", { status: 403 })
     }
 
-    // Create a new wishing well for authenticated user
     const json = await req.json()
     const body = wishingWellCreateSchema.parse(json)
 
@@ -52,7 +31,7 @@ export async function POST(req: Request) {
       data: {
         name: body.name,
         description: body.description,
-        userId: session.user.id,
+        userId: userId,
       },
       select: {
         id: true,
