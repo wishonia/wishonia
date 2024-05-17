@@ -1,42 +1,23 @@
 "use client";
 import { useEffect } from 'react';
+import {postVoteData} from "@/lib/api/postVoteData";
+import {useRouter} from "next/navigation";
 
 const AfterLoginHandler = () => {
+  const router = useRouter();
   useEffect(() => {
     // Ensure this code runs only in the browser
     if (typeof window !== 'undefined') {
-      let referrerUserId = localStorage.getItem('referrerUserId');
-      const warPercentageDesired = localStorage.getItem('warPercentageDesired');
-      const data = {
-        referrerUserId: referrerUserId || undefined,
-        warPercentageDesired: warPercentageDesired || undefined
-      }
-
-      if (referrerUserId || warPercentageDesired) {
-        // Here you would send `referrerId` to your server
-        // For example, using fetch to POST to your API route
-        fetch('/api/vote', {
-          method: 'POST',
-          headers: {
-            'Content-Type': 'application/json',
-            // Include any necessary headers, such as authentication tokens
-          },
-          body: JSON.stringify(data),
-        })
-        .then(response => response.json())
-        .then(data => {
-          console.log('Success:', data);
-          // Optionally clear the localStorage after successful submission
-          //localStorage.removeItem('referrerId');
-        })
-        .catch((error) => {
-          console.error('Error:', error);
-        });
+      postVoteData()
+      const afterLoginRedirect = localStorage.getItem('afterLoginRedirect');
+      if (afterLoginRedirect) {
+        localStorage.removeItem('afterLoginRedirect');
+        router.push(afterLoginRedirect);
       }
     }
   }, []);
 
-  return null; // This component doesn't render anything
+  return null;
 };
 
 export default AfterLoginHandler;
