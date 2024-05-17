@@ -5,12 +5,15 @@ import { cn } from "@/lib/utils"
 import { buttonVariants } from "@/components/ui/button"
 
 import { UserAccountNav } from "./user-account-nav"
+import {NavItem} from "@/types";
+import React from "react";
 
 interface UserNavDisplayProps extends React.HTMLAttributes<HTMLDivElement> {
   user: Pick<User, "name" | "image" | "email">
+    avatarNavItems?: NavItem[]
 }
 
-export function UserNavDisplay({ user }: UserNavDisplayProps) {
+export function UserNavDisplay({ user, avatarNavItems }: UserNavDisplayProps) {
   if (user.email === null || user.email === undefined) {
     return (
       <Link
@@ -29,6 +32,7 @@ export function UserNavDisplay({ user }: UserNavDisplayProps) {
         image: user.image,
         email: user.email,
       }}
+      avatarNavItems={avatarNavItems}
     />
   )
 }
