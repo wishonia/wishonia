@@ -8,7 +8,6 @@ import {
   getTopWishingWells,
   getTotalWishingWellContributions,
 } from "@/lib/api/wishingWellContributions"
-import {getAverageWarPercentageDesired} from "@/lib/api/poll";
 
 type DateRangeType = {
   from: Date
@@ -27,7 +26,6 @@ export async function getDashboardData(
     wishingWellCountByDate,
     topWishingWells,
     userWishingWells,
-    averageWarPercentageDesired
   ] = await Promise.all([
     getWishingWellContributions(userId, dateRange, "user"),
     getStreak(userId, "user"),
@@ -36,7 +34,6 @@ export async function getDashboardData(
     getWishingWellCountByDate(userId, dateRange),
     getTopWishingWells(userId, dateRange),
     getUserWishingWells(userId),
-    getAverageWarPercentageDesired()
   ])
 
   return {
@@ -47,7 +44,6 @@ export async function getDashboardData(
     wishingWellCountByDate,
     topWishingWells,
     userWishingWells,
-    averageWarPercentageDesired
   }
 }
 
