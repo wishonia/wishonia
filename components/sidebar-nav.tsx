@@ -7,11 +7,11 @@ import { NavItem } from "@/types"
 import { cn } from "@/lib/utils"
 import { Icons } from "@/components/icons"
 
-interface DashboardNavProps {
+interface SidebarNavProps {
   items: NavItem[]
 }
 
-export function DashboardNav({ items }: DashboardNavProps) {
+export function SidebarNav({ items }: SidebarNavProps) {
   const path = usePathname()
 
   if (!items?.length) {
@@ -19,7 +19,7 @@ export function DashboardNav({ items }: DashboardNavProps) {
   }
 
   return (
-    <nav className="grid items-start gap-2">
+    <nav id="sidebar-nav" className="grid items-start gap-2">
       {items.map((item, index) => {
         const Icon = Icons[item.icon || "next"]
         return (
