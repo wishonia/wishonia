@@ -71,7 +71,7 @@ export function WishingWellEditForm({
       body: JSON.stringify({
         name: data.name,
         description: data.description,
-        longDescription: data.longDescription,
+        content: data.content,
       }),
     })
 
