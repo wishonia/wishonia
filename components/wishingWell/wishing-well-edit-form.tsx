@@ -133,12 +133,13 @@ export function WishingWellEditForm({
                 </p>
             )}
           </div>
-          <div className="grid gap-3">
+{/*          <div className="grid gap-3">
             <Label htmlFor="longDescription">
               Longer Detailed Description{" "}
             </Label>
             <CopilotTextarea
-                id="longDescription"
+                style={{ "--copilot-kit-background-color": "#000000" } as any}
+                id="content"
                 className="px-4 py-4"
                 value={longDescription}
                 onValueChange={(value: string) => setLongDescription(value)}
@@ -156,7 +157,7 @@ export function WishingWellEditForm({
                 }}
             />
 
-          </div>
+          </div>*/}
         </CardContent>
         <CardFooter>
           <button
