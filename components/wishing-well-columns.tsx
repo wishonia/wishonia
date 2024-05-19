@@ -60,7 +60,7 @@ export const wishingWellColumns: ColumnDef<WishingWell>[] = [
     cell: (row) => {
       let averageAllocation = row.getValue() as number
       averageAllocation = parseFloat(averageAllocation.toFixed(1));
-      return <div className="min-w-[5rem] md:px-4">
+      return <div className="min-w-[5rem] md:px-4 text-center">
         {averageAllocation}%
       </div>
     },
