@@ -19,8 +19,7 @@ export const postVoteData = (): Promise<any> => {
             data.globalProblemPairAllocation = JSON.parse(globalProblemPairAllocation);
         }
         if (!referrerUserId && !wishingWellPairAllocation && !globalProblemPairAllocation) {
-            console.error('No data to post to vote endpoint');
-            reject('No data to post to vote endpoint');
+            resolve('No data to post to vote endpoint');
             return;
         }
         fetch('/api/vote', {

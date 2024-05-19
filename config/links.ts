@@ -133,7 +133,8 @@ export const avatarNav: Navigation = {
           title: "War vs Cures",
           href: "/warVsCures",
           icon: "vote",
-      }
+      },
+      createWish
   ],
 };
 
