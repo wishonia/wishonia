@@ -5,6 +5,7 @@ const prisma = new PrismaClient();
 export async function seedWishingWells(testUser: User) {
     const wishingWells =
         getMarkdownObjects('public/wishingWells');
+    let results = [];
     for (const wishingWell of wishingWells) {
         let wishingWellData = {
             name: wishingWell.data.name,
@@ -13,10 +14,12 @@ export async function seedWishingWells(testUser: User) {
             featuredImage: wishingWell.data.featuredImage,
             userId: testUser.id,
         };
-        console.log("Creating wishing well: ", wishingWellData)
+        //console.log("Creating wishing well: ", wishingWellData)
         const result = await prisma.wishingWell.create({
             data: wishingWellData,
         });
-        console.log("Wishing well created result: ", result);
+        //console.log("Wishing well created result: ", result);
+        results.push(result)
     }
+    return results;
 }
