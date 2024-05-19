@@ -5,12 +5,29 @@ const matter = require("gray-matter");
 require('dotenv').config({ path: join(__dirname, '../.env') });
 const { generateAndSaveImage} = require("./imageGenerator");
 const { generateText } = require("./textGenerator");
+let model = "gpt-3.5-turbo";
 
 // Function to generate metadata
-async function generateMetadata(content) {
+async function generateMetadataFromContent(content) {
+  const title = await generateTitleFromContent(content);
+  const description = await generateDescriptionFromContent(content);
+  return {
+    title: title,
+    description: description,
+  };
+}
+
+async function generateTitleFromContent(content) {
   return await generateText(
-    `Generate metadata for a blog post given the following content:\n\n${content}\n\nMetadata format:\n---\ntitle: ""\ndescription: ""\nfeaturedImage: ""\ndate: ""\nauthor:\n name: ""\n picture: ""\nogImage:\n url: ""\n---\n`,
-    "gpt-3.5-turbo"
+      `Generate title for a blog post given the following content:\n\n${content}\n\n`,
+      model
+  );
+}
+
+async function generateDescriptionFromContent(content) {
+  return await generateText(
+      `Generate description for a blog post given the following content:\n\n${content}\n\n`,
+      model
   );
 }
 
@@ -38,12 +55,17 @@ async function processMarkdownFiles() {
         console.error("Already has metadata for", path.basename(file));
         continue; // Skip to the next file if metadata parsing fails
     }
-    const metadata = await generateMetadata(content);
-    const { data } = matter(metadata);
+    const metadata = {
+        title: "",
+        description: "",
+        featuredImage: "",
+    }
+    metadata.title = await generateTitleFromContent(content);
+    metadata.description = await generateDescriptionFromContent(content);
     const imagePath = path.join(postsDirectory, `${file.replace(/\.md$/, ".png")}`);
     await generateAndSaveImage(content, imagePath);
-    data.coverImage = path.relative(postsDirectory, imagePath);
-    const newFileContents = matter.stringify(content, data);
+    metadata.coverImage = path.relative(postsDirectory, imagePath);
+    const newFileContents = matter.stringify(content, metadata);
     await fs.writeFile(file, newFileContents);
     console.log(`Processed ${path.basename(file)}`);
   }

@@ -1,17 +1,43 @@
-# Wishonia
+# Wishocracy: A Decentralized To-Do List for Humanity
 
-## Overview
-Wishonia is an imaginary magical kingdom
-intended to envision a possible world
-where scarce societal resources are optimally allocated to maximize wish fulfillment of its citizens.
+**Wishocracy** is a system for optimally allocating societal resources to maximize universal wish fulfillment using collective intelligence.  It's meant to be a general-purpose system to be used by any organization like nonprofits, DAOs, businesses, etc.
 
-# Problems
+**Wishonia** is an imaginary magical kingdom meant to illustrate the concept of Wishocracy and test the idea in a simulated virtual world to see how it works.
+
+# Why Are You Doing This?
+
+**The most universal goal we all share is to
+maximize the median health and happiness for sentient beings.**
+
+As a human with this goal, you have a limited amount of time, energy, and resources to achieve it.
+
+Unfortunately, there's a 99% chance that you're not doing it optimally.
+Either:
+- one of the other eight billion people on the planet is already doing what you're doing, and you're totally wasting your resources duplicating effort
+- you're simply not doing the best thing that you could be doing, given your skills and resources
+
+# Solution: Collective Intelligence and Coordination
+
+The best system we have for maximizing individual health and happiness is the free market.
+It's a decentralized system that uses collective intelligence
+to maximize wish fulfillment.
+It works by letting everyone vote with their dollars to determine what everyone should be doing for 40 hours a week.
+It's able to coordinate thousands of people who don't even know each other exist to produce goods and services that are more complex than any one person could produce on their own.
+
+The invisible handle kind of turns humanity into a magical genie
+that can produce wonders indistinguishable from magic to people who lived before Adam Smith.
+
+[![Video Name](http://img.youtube.com/vi/67tHtpac5ws/0.jpg)](http://www.youtube.com/watch?v=67tHtpac5ws "I, Pencil")
+
+# Public Goods
+
+The free market works well for producing private goods like pencils and iPhones.
+However, it doesn't work well for producing public goods like solutions to societal problems.
 
 The world has a lot of problems like disease, poverty, and war.
-
-Society makes far less progress in solving these problems than it could because:
-1. **Limited Resources** -
-   Society has limited resources to solve these problems, 
+However, we make far less progress in solving these problems than it could because:
+1. **Lack of a System for Prioritizing Allocation of Scarce Resources** -
+   Society has limited resources to solve these problems,
    and there's no systematic way to determine how much should be allocated to each problem.
 2. **Inefficient Allocation** -
    Resources are often allocated based on political or emotional reasons rather than cost-effectiveness.
@@ -32,125 +58,123 @@ Society makes far less progress in solving these problems than it could because:
 8. **Lack of Incentives** -
    Decision-makers often lack incentives to allocate resources efficiently.
    They may be more focused on short-term political gains than long-term societal benefits.
-9. **Political Interference** -
-   Political considerations often drive resource allocation decisions rather than evidence-based approaches.
 
 # The Solution: A Wish Fulfillment System (WFS)
 
 The core components of a Wish Fulfillment System (WFS) are:
 
 1. **Problems**: A comprehensive list of societal problems that need to be solved.
-2. **Budget**: A percentage of available resources allocated to solving each problem.
+2. **Budget**: A breakdown of the percentage of available resources to allocate to solving each problem.
 3. **Solutions**: A comprehensive list of proposed solutions for each problem.  It's also necessary to consider the cost-effectiveness of each solution and unintended side effects.  A solution may solve multiple problems or create new problems.
 4. **Tasks**: A list of tasks that need to be completed to implement each solution.  Some tasks may contribute to multiple solutions.
-5. **Solvers**: People or organizations responsible for completing each task.
+5. **Solvers**: People/organizations responsible for completing each task.
 6. **Progress**: Tracking the impact of each solution and adjusting resource allocation as needed.
 7. **Results**: The outcomes of each solution and the overall positive and negative impact on society.
 
 # The Wish Fulfillment Process
 
-1. **Identify Problems**: Create a comprehensive list of societal problems that need to be solved.
-2. **Prioritize Problems**: Determine the relative importance of each problem based on its impact on society.
-3. **Solicit Proposals**: Create a comprehensive list of proposed solutions for each problem.
-4. **Evaluate Solutions**: Determine the cost-effectiveness of each solution and unintended side effects.
-5. **Allocate Resources**: Allocate resources to the most cost-effective solutions for each problem.
-6. **Assign Tasks**: Assign tasks to people or organizations responsible for implementing each solution.
-7. **Monitor Progress**: Track the impact of each solution and adjust resource allocation as needed.
-8. **Review Results**: Evaluate the outcomes of each solution and the overall positive and negative impact on society.
-9. **Adjust Allocation**: Adjust resource allocation based on the results of each solution and the changing needs of society.
-10. **Repeat**: Continuously iterate on the wish fulfillment process to maximize societal well-being.
+## Step 1. Catalog Wishes
+Create a comprehensive list of societal goals or problems that need to be solved.
 
-# Creating a Budget
+## Step 2. Create a Budget
+Determine how much of our scarce resources should be allocated to solving each problem or fulfilling each wish.
 
-One approach would be to create a list of societal wishes
-and let everyone allocate a percentage of available resources to each wish and average the results.
+There are a number of ways to do this like democracy and crowdfunding campaigns but they suffer from various limitations:
+- **Representative Democracy:** The interests of representatives do not match the interests of all citizens.  Additionally, representatives have limited knowledge and cognitive capacity to effectively weigh the relative importance of thousands of wishes.
+- **Crowdfunding Campaigns:** People vote with their dollars to determine the allocation of resources.  However, again humans have limited cognitive capacity to effectively weigh the relative importance of thousands of wishes.
 
-However,
-humans have limited cognitive capacity
-and don't have the cognitive ability
-to weigh the relative importance of thousands of wishes to effectively determine the percentage for each wish.
+A possible solution to this is **Aggregated Pairwise Preference Allocation (APPA)**. 
+This involves showing everyone a random pair of wishes or problems
+and asking them to allocate a percentage of available resources to each.
 
-1. Make a comprehensive list of all societal wishes.
-2. Show everyone a random pair of public goods.
-3. Given $100 to allocate, how much would you allocate to efforts to solve each problem?
-![wish allocation slider](public/img/wish-allocation.png)
-4. Collect everyone's allocations and calculate the average allocation for each problem.
+![](public/img/problem-allocation.png)
 
-Then we'll have a pie chart showing the percentage of available resources that should be allocated to each problem.
+By aggregating lots of pairwise allocations from lots of people, we may be to determine the percentage of available resources that should be allocated to each problem.
 
-| **Goods/Services**                         | **Desired % of Total Spending**              |
-|--------------------------------------------|----------------------------------------------|
-| **Nuclear Weapons**                        | 0.5%                                         |
-| **Military Services**                      | 15%                                          |
-| **Cybersecurity Measures**                 | 0.1%                                         |
-| **Crime Prevention Programs**              | 1%                                           |
-| **Border Security**                        | 0.5%                                         |
-| **Cancer Research**                        | 0.8%                                         |
-| **Alzheimer's Research**                   | 0.2%                                         |
-| **Renewable Energy Projects**              | 0.4%                                         |
-| **Public Health Services**                 | 5%                                           |
-| **Welfare Payments**                       | 6%                                           |
-| **Medicaid and Medicare**                  | 15%                                          |
-| **Mental Health Services**                 | 0.5%                                         |
-| **Disaster Relief**                        | 0.3%                                         |
-| **Public Education**                       | 15%                                          |
-| **Cultural Grants**                        | 0.1%                                         |
-| **Library Services**                       | 0.2%                                         |
-| **Scientific Grants**                      | 0.4%                                         |
-| **Transportation Infrastructure**          | 5%                                           |
-| **Water and Sanitation Services**          | 2%                                           |
-| **Public Parks and Recreation**            | 0.3%                                         |
-| **Waste Management**                       | 0.5%                                         |
-| **Bank Bailouts**                          | Variable; can be significant in crisis years |
-| **Consumer Protection Services**           | 0.1%                                         |
-| **Financial Regulation**                   | 0.3%                                         |
-| **Incarceration for Marijuana Possession** | 0.4%                                         |
-| **Legal Aid**                              | 0.1%                                         |
-| **Judicial Systems**                       | 1.5%                                         |
-| **Wildlife Protection**                    | 0.2%                                         |
-| **Pollution Control**                      | 0.3%                                         |
-| **Land Management**                        | 0.4%                                         |
+![](public/img/problem-allocation-list-with-heading.png)
 
-This table provides a broad overview based on typical allocations in large, developed countries. The actual percentages can differ based on specific national budgets and policy priorities.
+## Step 3: Create a List of Solutions
+
+Allow people or AI agents to submit proposed solutions for each problem
+or wish to create a comprehensive list of proposed strategies to fullfill each wish or solve each problem.
 
 
-## 2. Solicit Proposals
+## Step 4: Evaluate Solutions
 
-1. For each problem, create a comprehensive list of all proposed solutions for each problem. For instance, for "Aging" we might have "Stem Cell Research", "Senolytics", etc.
-2. 
+Again, use collective intelligence through Aggregated Pairwise Preference Allocation to determine the percentage of problem resources that should be allocated to each solution.
+The evaluators should take into account the:
+- **cost-effectiveness** of each solution 
+- **positive side effects** of the solution in terms of solving other problems
+- **negative side effects** of the solution in terms of creating new problems
+
+## Step 5. Create Tasks
+Decompose each solution into a list of atomic tasks that need to be completed.
+Each task should be SMART (Specific, Measurable, Achievable, Relevant, Time-bound).
+
+Some tasks may contribute to multiple solutions,
+so it's important to link tasks to multiple solutions so that they are not duplicated and that costs are shared across solutions.
+
+## Step 6. Create Prizes
+
+Offer rewards for completing tasks to incentivize the completion of tasks.  
+
+Possible ways to decide on the amount of the prize include:
+- **Bidding:** People bid on the tasks by submitting the amount they would be willing to accept to complete the task
+- **AI Prediction Markets:** Use AI to predict the cost of completing the task and offer a prize that is slightly higher than the predicted cost
+
+## Step 6. Evaluate Submissions
+Evaluate the completed tasks to determine if they meet the criteria for completion and award the prize.
+
+## Step 7. Monitor Progress and Impact
+Track the impact of each solution.
+Evaluate the outcomes of each solution and the overall positive and negative impact on society.
+
+## Step 8.  Feedback and Iterative Improvement
+
+Provide impact data to people making pairwise allocations to help them make better decisions in the future.
+This will enable continuous improvement in the allocation of resources to maximize wish fulfillment.
+
+# Potential and Challenges of Wishocracy
+
+Wishocracy presents a compelling vision for coordinating human effort towards common goals in an open, efficient, and adaptive way. By harnessing collective intelligence through aggregated pairwise preference allocation (APPA), the system aims to optimally allocate society's resources to maximize wish fulfillment and solve pressing problems.
+
+## Key Innovations
+
+- **Aggregated Pairwise Preference Allocation (APPA)**: This mechanism allows for scalable surfacing of the "wisdom of crowds" in budgeting resources across competing wishes/problems and evaluating potential solutions.
+- **Iterative Feedback Loops**: The system incorporates continuous improvement of allocations based on impact data and participant input.
+- **Decentralized Task Allocation**: By decomposing solutions into atomic tasks and cost-sharing across multiple organizations, Wishocracy aims to minimize duplication of effort and maximize efficiency.
+
+## Potential Challenges
+
+1. **Participation**: Ensuring sufficient engagement and thoughtful participation from a representative sample of people to make the APPA inputs meaningful.
+2. **Framing**: Carefully framing wishes/problems and solution options to be evaluable by laypeople, potentially requiring an intermediate expert translation stage.
+3. **Incentivization**: Incentivizing task completion, especially for large and long-term tasks, solely through prizes. Alternative incentive structures may need to be considered.
+4. **Impact Measurement**: Measuring and attributing impact, especially for tasks and solutions with long time horizons and multi-faceted outcomes, is crucial for steering the system effectively.
+
+## Additional Features to Consider
+
+1. **Dependency Specification**: Allowing specification of dependencies between wishes, problems, solutions, and tasks to create a network of links and surface efficiencies.
+2. **Matching Engine**: Adding a layer for matching tasks and solutions to people and teams based on skills, experience, resources, and interest.
+3. **Governance Mechanisms**: Developing mechanisms for handling disputes, gaming behaviors, and bad actors to ensure system integrity.
+4. **Transparency and Explainability**: Incorporating features that allow participants to see how decisions were made and drill down from high-level priorities to specific tasks and vice versa.
+
+# Next Steps
+
+1. **Figure Out How to Integrate Existing Public Goods Protocols and Platforms**:
+Identify and analyze existing projects and platforms that aim to optimize resource allocation such as Gitcoin Grants, HyperCerts, and others. Figure out how Wishocracy can complement or integrate with them.
+2. **Prototype Development**: Creating prototypes of the system, even if focused on a narrow domain, to validate and refine the core mechanics.
+3. **Domain Application**: Exploring applications of Wishocracy within various contexts such as organizations, DAOs, governments, or global scale initiatives.
+4. **Integration with Existing Task Management Systems**: Developing integrations with existing task management systems to facilitate task import, syncing, creation, assignment, and tracking.
+5. **Iterative Refinement**: Continuously gathering feedback and iterating on the system design to address challenges and incorporate new features.
 
 
+# Frequently Asked Questions
 
-## Installation
-To set up this project locally, follow these steps:
-1. Clone the repository to your local machine.
-2. Navigate to the project directory.
-3. Install the required dependencies using `pnpm install`.
+## Q: Isn't this insanely ambitious?  Why not just focus on smaller achievable goals?
 
-## Features
+The goal is to minimize wasted duplication of effort to optimize societal resource allocation.
+By limiting its scope to small organizations, it would not be able to prevent duplication of effort on a global scale.
 
-1. Desired Allocation Poll: presents the user with a question asking how much they think should be spent on war (Option A) relative to clinical research (Option B). It includes a single slider input to allocate the percentage between the two options, along with two bars above the slider that dynamically visualize the allocation as the user adjusts the slider. The user submits their desired allocation by clicking the "Submit" button, and their response is saved in the browser's local storage.
+Furthermore, size matters when it comes to collective intelligence.
+The larger the group, the higher the likelihood that the group's decision will be better than the best decision of any individual in the group.
 
-2. Actual Allocation Poll: asking the user how much they think is actually spent on war (Option A) relative to clinical research (Option B). It includes the same slider input and dynamic bars for visualizing the allocation. The user submits their perceived actual allocation by clicking the "Submit" button, and their response is saved in the browser's local storage.
-
-3. User Authentication: After completing both polls, the user is prompted to log in or register to view the results. They can log in using their email and password or through OAuth with Google. Upon successful login or registration, a new user record is created in the database, and their poll responses are retrieved from local storage and saved in the database.
-
-4. Results Page: After logging in, the user is directed to the Results page, which displays their desired and perceived actual allocation percentages between "War" and "Clinical Research" using bar visualizations. The page also shows the average desired and perceived actual allocation percentages from all users using bar visualizations, allowing the user to compare their responses to the average person. The page includes a link to the petition page.
-
-5. Petition Page: presents information about the petition to shift 1% of military spending to clinical research. It includes a form for users to sign the petition by providing their name, email, address, city, state, and zip code. Upon successful submission, the user is redirected to a thank you page.
-
-6. Thank You Page: displays a message thanking the user for signing the petition and provides information about the next steps or updates related to the petition.
-
-7. Profile Page: displays the user's unique referral link, which they can share with others to invite them to participate in the polls. It also shows a list of users who have signed up using the referral link, indicating whether they have completed the polls and signed the petition.
-
-8. Social Sharing: allows users to easily share their participation in the polls and petition on social media platforms, with pre-populated posts and relevant hashtags.
-
-9. Email Notifications: sends email notifications to users after they complete the polls, sign the petition, or refer someone to the app. Users can opt-out of email notifications if desired.
-
-10. Localization: allows the app to support multiple languages based on the user's browser settings or a language selector, ensuring that the app's content, including questions and instructions, can be easily translated.
-
-11. Gamification: introduces gamification elements to encourage user participation and engagement, such as a points or badge system for completing polls, signing the petition, or referring others. It may also include leaderboards to showcase top referrers or most active participants.
-
-12. Personalized Experience: tailors the app's content and recommendations based on the user's previous interactions and preferences, providing personalized insights or comparisons based on their poll responses and suggesting related petitions or initiatives that align with their interests.
-
-13. Data Visualization: enhances the Results page with interactive data visualizations, such as dynamic charts or graphs, allowing users to explore and compare the poll results based on different criteria, such as demographics or location. It may also provide downloadable reports or infographics for users to share or use in their advocacy efforts.

@@ -24,5 +24,6 @@ module.exports = {
     getMarkdownObjects
 }
 
-const objects = getMarkdownObjects(path.join(__dirname, '..', 'public', 'wishingWells'));
-console.log("wishingWells: ", objects);
+let folder = path.join(__dirname, '..', 'public', 'wishingWells');
+const objects = getMarkdownObjects(folder);
+console.log(`Got ${objects.length} objects from ${folder}`);
