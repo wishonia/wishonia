@@ -269,7 +269,7 @@ model ActivityLog {
 model GlobalProblem {
   id                           String                        @id @default(cuid())
   userId                       String                        @map("user_id")
-  name                         String
+  name                         String                        @unique
   description                  String?
   content                      String?
   featuredImage                String?                       @map("featured_image")
@@ -301,7 +301,7 @@ model GlobalProblemPairAllocation {
 model WishingWell {
   id                         String                      @id @default(cuid())
   userId                     String                      @map("user_id")
-  name                       String
+  name                       String                      @unique
   description                String?
   content                    String?                     @map("long_description")
   images                     String[]

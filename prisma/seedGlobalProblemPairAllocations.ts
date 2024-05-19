@@ -4,7 +4,9 @@ const prisma = new PrismaClient();
 
 export async function seedGlobalProblemPairAllocations(testUser: User) {
     const pairs = await getAllRandomGlobalProblemPairs();
+    let idsWithPair: string[] = [];
     for (const pair of pairs) {
+        if(idsWithPair.includes(pair[0].id) && idsWithPair.includes(pair[1].id)) {continue;}
         const result = await prisma.globalProblemPairAllocation.create({
             data: {
                 thisGlobalProblemId: pair[0].id,
@@ -13,6 +15,7 @@ export async function seedGlobalProblemPairAllocations(testUser: User) {
                 thisGlobalProblemPercentage: 50,
             },
         });
-        console.log("Problem pair allocation created result: ", result);
+        idsWithPair.push(pair[0].id);
+        idsWithPair.push(pair[1].id);
     }
 }

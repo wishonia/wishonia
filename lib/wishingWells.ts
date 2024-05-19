@@ -31,38 +31,47 @@ export async function getRandomWishingWellPair(userId: string | undefined) {
     return randomPair;
 }
 
-export async function getAllRandomWishingWellPairs() {
-    let randomPairs: WishingWell[][] = [];
-    const wishingWells = await prisma.wishingWell.findMany();
-    for (let i = 0; i < wishingWells.length; i += 2) {
-        randomPairs.push([wishingWells[i], wishingWells[i + 1]]);
+export async function generateAllWishingWellPairs() {
+    let combinations: WishingWell[][] = [];
+    function generateCombinations(wishingWells: WishingWell[], currentCombination: WishingWell[] = []) {
+        if (wishingWells.length === 0) {
+            combinations.push(currentCombination);
+        } else {
+            for (let i = 0; i < wishingWells.length; i++) {
+                let newCombination = currentCombination.concat(wishingWells[i]);
+                let remainingWishingWells = wishingWells.slice(0, i).concat(wishingWells.slice(i + 1));
+                generateCombinations(remainingWishingWells, newCombination);
+            }
+        }
     }
-    return randomPairs;
+    const wishingWells = await prisma.wishingWell.findMany();
+    generateCombinations(wishingWells);
+    return combinations;
 }
 
 export async function aggregateWishingWellPairAllocations() {
     const allocations = await prisma.wishingWellPairAllocation.findMany();
-    const problemAllocations: Record<string, number> = {};
+    const allocationsByWishingWellId: Record<string, number> = {};
     // Sum up the percentages for each problem
     for (const allocation of allocations) {
         const { thisWishingWellId, thatWishingWellId, thisWishingWellPercentage } = allocation;
 
-        problemAllocations[thisWishingWellId] = (problemAllocations[thisWishingWellId] || 0) + thisWishingWellPercentage;
-        problemAllocations[thatWishingWellId] = (problemAllocations[thatWishingWellId] || 0) + (100 - thisWishingWellPercentage);
+        allocationsByWishingWellId[thisWishingWellId] = (allocationsByWishingWellId[thisWishingWellId] || 0) + thisWishingWellPercentage;
+        allocationsByWishingWellId[thatWishingWellId] = (allocationsByWishingWellId[thatWishingWellId] || 0) + (100 - thisWishingWellPercentage);
     }
 
-    const totalAllocations = Object.values(problemAllocations).reduce((sum, allocation) => sum + allocation, 0);
+    const totalAllocations = Object.values(allocationsByWishingWellId).reduce((sum, allocation) => sum + allocation, 0);
 
     // Normalize the allocations to ensure they add up to 100%
     const normalizedAllocations: Record<string, number> = {};
-    for (const problemId in problemAllocations) {
-        normalizedAllocations[problemId] = (problemAllocations[problemId] / totalAllocations) * 100;
+    for (const problemId in allocationsByWishingWellId) {
+        normalizedAllocations[problemId] = (allocationsByWishingWellId[problemId] / totalAllocations) * 100;
     }
     const results = [];
-    for (const problemId in normalizedAllocations) {
+    for (const wishingWellId in normalizedAllocations) {
         const result = await prisma.wishingWell.update({
-            where: { id: problemId },
-            data: { averageAllocation: normalizedAllocations[problemId] },
+            where: { id: wishingWellId },
+            data: { averageAllocation: normalizedAllocations[wishingWellId] },
         });
         results.push(result);
     }

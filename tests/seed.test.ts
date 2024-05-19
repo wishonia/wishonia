@@ -13,7 +13,6 @@ import {seedWishingWellPairAllocations} from "@/prisma/seedWishingWellPairAlloca
 const prisma = new PrismaClient();
 beforeAll(async () => {
     await checkDatabaseName();
-    await truncateAllTables();
 });
 async function createTestUser() {
     let user = await prisma.user.findUnique({
@@ -29,7 +28,7 @@ async function truncateAllTables() {
     await prisma.globalProblem.deleteMany({});
     await prisma.wishingWellPairAllocation.deleteMany({});
     await prisma.wishingWell.deleteMany({});
-    await prisma.user.deleteMany({});
+    //await prisma.user.deleteMany({});
     // Add more tables as needed
 }
 async function checkDatabaseName() {
@@ -70,9 +69,29 @@ async function checkWishingWells<ExtArgs>(testUser: User) {
 describe("seedDB", () => {
     it("seeds DB with user, wishing wells and problems", async () => {
         await checkDatabaseName();
+        await truncateAllTables();
         const testUser = await createTestUser();
-        await seedWishingWells(testUser);
         await checkGlobalProblems(testUser);
         await checkWishingWells(testUser);
+    });
+    it("averages wishingWell allocations", async () => {
+        const testUser = await createTestUser();
+        await prisma.wishingWellPairAllocation.deleteMany({});
+        await seedWishingWellPairAllocations(testUser);
+        await aggregateWishingWellPairAllocations();
+        const wishingWells = await prisma.wishingWell.findMany();
+        for (const wishingWell of wishingWells) {
+            expect(wishingWell.averageAllocation).toBe(100 / wishingWells.length);
+        }
+    });
+    it("averages globalProblem allocations", async () => {
+        const testUser = await createTestUser();
+        await prisma.globalProblemPairAllocation.deleteMany({});
+        await seedGlobalProblemPairAllocations(testUser);
+        await aggregateGlobalProblemPairAllocations();
+        const globalProblems = await prisma.globalProblem.findMany();
+        for (const globalProblem of globalProblems) {
+            expect(globalProblem.averageAllocation).toBe(100 / globalProblems.length);
+        }
     });
 });

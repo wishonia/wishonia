@@ -15,6 +15,6 @@ export async function seedGlobalProblems(testUser: User) {
                 userId: testUser.id,
             },
         });
-        console.log("Problem created result: ", result);
+        //console.log("Problem created result: ", result);
     }
 }
