@@ -1,6 +1,7 @@
 import * as z from "zod"
 import { db } from "@/lib/db"
 import {getUserId} from "@/lib/api/getUserId";
+import {handleError} from "@/lib/errorHandler";
 
 const wishingWellCreateSchema = z.object({
   name: z.string(),
@@ -40,10 +41,6 @@ export async function POST(req: Request) {
 
     return new Response(JSON.stringify(wishingWell))
   } catch (error) {
-    if (error instanceof z.ZodError) {
-      return new Response(JSON.stringify(error.issues), { status: 422 })
-    }
-
-    return new Response(null, { status: 500 })
+    return handleError(error)
   }
 }
