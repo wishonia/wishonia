@@ -7,7 +7,7 @@ settings:
 dependencies:
   '@copilotkit/backend':
     specifier: ^0.9.0
-    version: 0.9.0(axios@1.6.8)
+    version: 0.9.0(axios@1.6.8)(ignore@5.3.1)
   '@copilotkit/react-core':
     specifier: ^0.25.0
     version: 0.25.0(react@18.2.0)
@@ -107,6 +107,9 @@ dependencies:
   '@vercel/analytics':
     specifier: ^1.2.2
     version: 1.2.2(next@14.1.0)(react@18.2.0)
+  '@vercel/blob':
+    specifier: ^0.23.2
+    version: 0.23.2
   autoprefixer:
     specifier: 10.4.17
     version: 10.4.17(postcss@8.4.35)
@@ -146,6 +149,9 @@ dependencies:
   gray-matter:
     specifier: ^4.0.3
     version: 4.0.3
+  ignore:
+    specifier: ^5.3.1
+    version: 5.3.1
   lucide-react:
     specifier: ^0.259.0
     version: 0.259.0(react@18.2.0)
@@ -679,14 +685,14 @@ packages:
     resolution: {integrity: sha512-0hYQ8SB4Db5zvZB4axdMHGwEaQjkZzFjQiN9LVYvIFB2nSUHW9tYpxWriPrWDASIxiaXax83REcLxuSdnGPZtw==}
     dev: true
 
-  /@copilotkit/backend@0.9.0(axios@1.6.8):
+  /@copilotkit/backend@0.9.0(axios@1.6.8)(ignore@5.3.1):
     resolution: {integrity: sha512-oAjvtKcOVSpiQDoCxS2JZUzhoaBXGMk4kDm8rDbbDluM9hg+u126IuvO0h4LEehZSoEZ4CI3NhufOl0nzscwOw==}
     dependencies:
       '@copilotkit/shared': 0.9.0
       '@langchain/core': 0.1.62(openai@4.43.0)
       '@langchain/openai': 0.0.28
       js-tiktoken: 1.0.11
-      langchain: 0.1.36(axios@1.6.8)(openai@4.43.0)
+      langchain: 0.1.36(axios@1.6.8)(ignore@5.3.1)(openai@4.43.0)
       openai: 4.43.0
       zod: 3.23.8
     transitivePeerDependencies:
@@ -1040,6 +1046,11 @@ packages:
     resolution: {integrity: sha512-gMsVel9D7f2HLkBma9VbtzZRehRogVRfbr++f06nL2vnCGCNlzOD+/MUov/F4p8myyAHspEhVobgjpX64q5m6A==}
     engines: {node: ^12.22.0 || ^14.17.0 || >=16.0.0}
     dev: true
+
+  /@fastify/busboy@2.1.1:
+    resolution: {integrity: sha512-vBZP4NlzfOlerQTnba4aqZoMhE/a9HY7HRqoOPaETQcSQuWEIyZMHGfVu6w9wGtGK5fED5qRs2DteVCjOH60sA==}
+    engines: {node: '>=14'}
+    dev: false
 
   /@floating-ui/core@1.6.0:
     resolution: {integrity: sha512-PcF++MykgmTj3CIyOQbKA/hDzOAiqI3mhuoN44WRCopIs1sgoDoU4oty4Jtqaj/y3oDU6fnVSm4QG0a3t5i0+g==}
@@ -3978,6 +3989,16 @@ packages:
       server-only: 0.0.1
     dev: false
 
+  /@vercel/blob@0.23.2:
+    resolution: {integrity: sha512-wejIdxb/CJkQpV18/TgGDuQFzZ2BCV+T2F786bmtt7LytmJmfhH8wHuJ70odOyvmiO3RIL57ht5GLZmeV8jqiA==}
+    engines: {node: '>=16.14'}
+    dependencies:
+      async-retry: 1.3.3
+      bytes: 3.1.2
+      is-buffer: 2.0.5
+      undici: 5.28.4
+    dev: false
+
   /@webassemblyjs/ast@1.12.1:
     resolution: {integrity: sha512-EKfMUOPRRUTy5UII4qJDGPpqfwjOmZ5jeGFwid9mnoqIFK+e0vqoi1qH56JpmZSzEL53jKnNzScdmftJyG5xWg==}
     dependencies:
@@ -4351,6 +4372,12 @@ packages:
     hasBin: true
     dev: false
 
+  /async-retry@1.3.3:
+    resolution: {integrity: sha512-wfr/jstw9xNi/0teMHrRW7dsz3Lt5ARhYNZ2ewpadnhaIp5mbALhOAP+EAdsC7t4Z6wqsDVv9+W6gm1Dk9mEyw==}
+    dependencies:
+      retry: 0.13.1
+    dev: false
+
   /asynciterator.prototype@1.0.0:
     resolution: {integrity: sha512-wwHYEIS0Q80f5mosx3L/dfG5t5rjEa9Ft51GTaNt862EnpyGHpgz2RkZvLPp1oF5TnAiTohkEKVEu8pQPJI7Vg==}
     dependencies:
@@ -4567,6 +4594,11 @@ packages:
     engines: {node: '>=10.16.0'}
     dependencies:
       streamsearch: 1.1.0
+
+  /bytes@3.1.2:
+    resolution: {integrity: sha512-/Nf7TyzTx6S3yRJObOAV7956r8cr2+Oj8AC5dt8wSP3BQAoeX58NoHyCU8P8zGkNXStjTSi6fzO6F0pBdcYbEg==}
+    engines: {node: '>= 0.8'}
+    dev: false
 
   /call-bind@1.0.7:
     resolution: {integrity: sha512-GHTSNSYICQ7scH7sZ+M2rFopRoLh8t2bLSW6BbgrtLsahOIB5iyAVJf9GjWK3cYTDaMj4XdBpM1cA6pIS0Kv2w==}
@@ -6498,7 +6530,6 @@ packages:
   /ignore@5.3.1:
     resolution: {integrity: sha512-5Fytz/IraMjqpwfd34ke28PTVMjZjJG2MPn5t7OE4eUCUNf8BAa7b5WUS9/Qvr6mwOQS7Mk6vdsMno5he+T8Xw==}
     engines: {node: '>= 4'}
-    dev: true
 
   /immer@9.0.21:
     resolution: {integrity: sha512-bc4NBHqOqSfRW7POMkHd51LvClaeMXpm8dx0e8oE2GORbq5aRK7Bxl4FyzVLdGtLmvLKL7BTDBG5ACQm4HWjTA==}
@@ -7515,7 +7546,7 @@ packages:
     engines: {node: '>=6'}
     dev: false
 
-  /langchain@0.1.36(axios@1.6.8)(openai@4.43.0):
+  /langchain@0.1.36(axios@1.6.8)(ignore@5.3.1)(openai@4.43.0):
     resolution: {integrity: sha512-NTbnCL/jKWIeEI//Nm1oG8nhW3vkYWvEMr1MPotmTThTfeKfO87eV/OAzAyh6Ruy6GFs/qofRgQZGIe6XvXTNQ==}
     engines: {node: '>=18'}
     peerDependencies:
@@ -7684,6 +7715,7 @@ packages:
       '@langchain/textsplitters': 0.0.0(openai@4.43.0)
       axios: 1.6.8
       binary-extensions: 2.2.0
+      ignore: 5.3.1
       js-tiktoken: 1.0.11
       js-yaml: 4.1.0
       jsonpointer: 5.0.1
@@ -11124,6 +11156,13 @@ packages:
 
   /undici-types@5.26.5:
     resolution: {integrity: sha512-JlCMO+ehdEIKqlFxk6IfVoAUVmgz7cU7zD/h9XZ0qzeosSHmUJVOzSQvvYSYWXkFXC+IfLKSIffhv0sVZup6pA==}
+
+  /undici@5.28.4:
+    resolution: {integrity: sha512-72RFADWFqKmUb2hmmvNODKL3p9hcB6Gt2DOQMis1SEBaV6a4MH8soBvzg+95CYhCKPFedut2JY9bMfrDl9D23g==}
+    engines: {node: '>=14.0'}
+    dependencies:
+      '@fastify/busboy': 2.1.1
+    dev: false
 
   /unified@10.1.2:
     resolution: {integrity: sha512-pUSWAi/RAnVy1Pif2kAoeWNBa3JVrx0MId2LASj8G+7AiHWoKZNTomq6LG326T68U7/e263X6fTdcXIy7XnF7Q==}
