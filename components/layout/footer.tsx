@@ -1,23 +1,27 @@
 import Link from "next/link"
 
-import {dashboardTopLinks, footerLinks} from "@/config/links"
-import { siteConfig } from "@/config/site"
+import { generalFooterNav } from "@/config/links"
+import { Key } from "react"
+import { NavItem } from "@/types";
 
-import { ModeToggle } from "../mode-toggle"
+interface FooterProps {
+  footerNavItems?: NavItem[]
+}
 
-export default function Footer() {
+export default function Footer({ footerNavItems }: FooterProps) {
+  const footerLinks = footerNavItems || generalFooterNav.data;
 
   return (
-    <footer className="mt-auto">
+    <footer className="mt-auto  mx-auto">
       <div className="mx-auto w-full max-w-screen-xl p-6 md:py-8">
         <div className="sm:flex sm:items-center sm:justify-between">
-{/*          <Link href="/">
-            <h1 className="mb-2 text-2xl font-bold sm:mb-0">
-              {siteConfig.name}
-            </h1>
-          </Link>*/}
+          {/*          <Link href="/">
+          <h1 className="mb-2 text-2xl font-bold sm:mb-0">
+            {siteConfig.name}
+          </h1>
+        </Link>*/}
           <ul className="mb-6 flex flex-wrap items-center opacity-60 sm:mb-0 justify-center">
-            {footerLinks.data.map((item, index) => {
+            {footerLinks.map((item: NavItem, index: Key | null | undefined) => {
               return (
                 item.href && (
                   <li key={index} className={"p-2"}>
@@ -44,7 +48,7 @@ export default function Footer() {
             >
               Wishonia
             </a>
-            . Your Rights Reserved.
+            . Everyone's Rights Reserved.
           </div>
         </div>
       </div>

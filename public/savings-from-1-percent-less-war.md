@@ -1,10 +1,10 @@
 ---
 title: Cumulative Savings from Decreased Annual Cost of War
-excerpt: >-
+description: >-
   Explore the potential savings from reducing the annual cost of war by 1% over
   80 years, leading to a cumulative global savings of $179 trillion and
   $22,969.68 per person.
-coverImage: savings-from-1-percent-less-war.png
+featuredImage: savings-from-1-percent-less-war.png
 #  date: '[insert publication date]'
 author:
   name: '[author''s name]'

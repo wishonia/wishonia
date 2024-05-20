@@ -1,9 +1,9 @@
 ---
 title: >-
   The 1% Treaty
-excerpt: >-
+description: >-
   A global accord to redirect 1% of military spending to discovering new treatments and cures for chronic diseases.
-coverImage: '/1-percent-treaty.png'
+featuredImage: '/1-percent-treaty.png'
 #  date: 'October 1, 2021'
 author:
   name: The Department of Peace

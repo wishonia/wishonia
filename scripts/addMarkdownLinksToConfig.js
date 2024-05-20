@@ -24,9 +24,13 @@ function appendLinkToConfig(title, href) {
     fs.writeFileSync(linksFilePath, updatedContent);
 }
 
+function listMarkdownFiles(path) {
+    return fs.readdirSync(path).filter(file => file.endsWith('.md'));
+}
+
 // Main function to scan markdown files and update config
 function updateLinksConfig() {
-    const markdownFiles = fs.readdirSync(publicDirPath).filter(file => file.endsWith('.md'));
+    const markdownFiles = listMarkdownFiles(publicDirPath);
 
     markdownFiles.forEach(file => {
         const filePath = path.join(publicDirPath, file);

@@ -1,10 +1,10 @@
 ---
 title: Understanding the Return on Investment in Lobbying within the Defense Sector
-excerpt: >-
+description: >-
   Explore the significant expenditures and considerable gains of defense
   companies in lobbying efforts to influence government policies and secure
   contracts.
-coverImage: lobbying.png
+featuredImage: lobbying.png
 #  date: 'December 15, 2021'
 author:
   name: The Office of the President

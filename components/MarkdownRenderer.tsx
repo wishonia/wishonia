@@ -12,15 +12,16 @@ import {siteConfig} from "@/config/site";
 import {
     AiFillGithub
 } from "react-icons/ai"
+import {SpinningLoader} from "@/components/spinningLoader";
 
 interface MarkdownRendererProps {
     url: string;
 }
 
 interface Metadata {
-    title?: string;
-    excerpt?: string;
-    coverImage?: string;
+    name?: string;
+    description?: string;
+    featuredImage?: string;
     author?: {
         name?: string;
         picture?: string;
@@ -76,15 +77,13 @@ const MarkdownRenderer: FC<MarkdownRendererProps> = ({url}) => {
     return (
         <div className="text-left">
             {isLoading ? (
-                <div className="flex justify-center p-8">
-                    <Icons.spinner className="animate-spin text-4xl"/>
-                </div>
+                <SpinningLoader/>
             ) : (
                 <>
                     {/* Conditionally render metadata if it exists */}
                     {metadata && (
                         <div className="metadata">
-                            {metadata.title && <h1 className="text-3xl mb-4 mt-4 font-bold">{metadata.title}</h1>}
+                            {metadata.name && <h1 className="text-3xl mb-4 mt-4 font-bold">{metadata.name}</h1>}
                             {metadata.author && (
                                 <div className="author-info flex items-center mb-4">
                                     {/* Add a style attribute to limit the max-width */}
@@ -96,8 +95,8 @@ const MarkdownRenderer: FC<MarkdownRendererProps> = ({url}) => {
                             )}
                             {metadata.date &&
                                 <p className="mb-4 text-gray-500">{new Date(metadata.date).toLocaleDateString()}</p>}
-                            {metadata.excerpt && <p className="mb-4">{metadata.excerpt}</p>}
-                            {metadata.coverImage && <img src={metadata.coverImage} alt="Cover Image" className="mb-4"/>}
+                            {metadata.description && <p className="mb-4">{metadata.description}</p>}
+                            {metadata.featuredImage && <img src={metadata.featuredImage} alt="Cover Image" className="mb-4"/>}
                         </div>
                     )}
                     <ReactMarkdown

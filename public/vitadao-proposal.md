@@ -1,12 +1,11 @@
 ---
 title: >-
-  A Proposal for VitaDAO to Launch the Decentralized Institutes of Health (DIH)
-  DAO
-excerpt: >-
+  Proposal for VitaDAO to Launch the Decentralized Institutes of Health (DIH)
+description: >-
   Proposing the creation of the Decentralized Institutes of Health (DIH) DAO by
   VitaDAO to redirect global military spending towards medical research through
   decentralized collaboration.
-coverImage: vitadao-proposal.png
+featuredImage: vitadao-proposal.png
 #  date: ''
 author:
   name: 'The Office of the President'
@@ -35,13 +34,9 @@ By leading this initiative, VitaDAO has the opportunity to scale its impact to a
 4. **Ecosystem Collaboration**: Launching the DIH will require close collaboration with other key stakeholders in the DeSci and DAO ecosystems. VitaDAO's strong reputation and partnerships put it in an ideal position to convene and align a diverse coalition behind this shared mission.
 
 # Next Steps:
-If this proposal resonates with the VitaDAO community, I suggest the following next steps:
 
 1. Form a DIH Launch Working Group within VitaDAO to further refine the vision, strategy, and roadmap.
 2. Conduct outreach to potential partners and supporters within the DeSci and DAO communities to gauge interest and identify collaboration opportunities.
 3. Develop a detailed budget and fundraising plan for the initial launch phase, potentially including a dedicated token sale or grants program.
 4. Begin drafting the core governance documents and technical specifications for the DIH DAO, incorporating best practices and learnings from VitaDAO and other successful DAOs.
 
-I believe that by embracing this challenge and leading the way in launching the DIH DAO, VitaDAO has the potential to catalyze a new era of global cooperation and progress in the fight against disease. It is an ambitious undertaking, but one that I am convinced is both achievable and urgently necessary.
-
-I look forward to discussing this proposal further with the community and working together to turn this vision into reality.

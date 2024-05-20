@@ -24,9 +24,9 @@ export function WishingWellList({ wishingWells }: WishingWellListProps) {
           <div className="flex h-20 w-20 items-center justify-center rounded-full bg-muted">
             <Icons.wishingWell className="h-10 w-10" />
           </div>
-          <EmptyPlaceholder.Title>No wishingWells created</EmptyPlaceholder.Title>
+          <EmptyPlaceholder.Title>No wishes made!</EmptyPlaceholder.Title>
           <EmptyPlaceholder.Description>
-            Add an wishingWell to start monitoring your progress.
+            Make a wish!
           </EmptyPlaceholder.Description>
           <WishingWellAddButton variant="outline" />
         </EmptyPlaceholder>

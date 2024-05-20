@@ -1,4 +1,19 @@
-A crowdsourced budget allocation app aims to facilitate the process of allocating budgets for projects, events, or activities by gathering input from the crowd. The app should be user-friendly, visually appealing, and easy to navigate. Here's a set of wireframes to provide an overall structure for the app:
+---
+title: 'Features Required for a Wishocratic Platform'
+description: >-
+  Here are the essential features needed for a crowdsourced budget allocation platform that aims to maximize universal preference satisfaction.
+# featuredImage: why-reallocation-is-necessary.png
+#  date: '2022-11-15'
+#author:
+#  name: The Office of the President
+#  # picture: 
+#ogImage:
+#  url: 
+---
+
+A crowdsourced budget allocation platform aims to maximize universal preference satisfaction by allowing users to propose, vote on, and implement budget allocations for various ideas.
+
+# Features:
 
 1. **Welcome Screen**: The app starts with a welcome screen that introduces the app's purpose, features, and a call-to-action (CTA) button to sign up or log in.
 
@@ -22,7 +37,7 @@ A crowdsourced budget allocation app aims to facilitate the process of allocatin
 
 11. **Settings**: This section allows users to customize their app experience, such as changing the app's theme, managing notifications, and connecting to social media accounts.
 
-* **Web3 Login**: In the Sign Up/Log In screen, add the option for users to log in using their web3 wallets (e.g., MetaMask, WalletConnect). This will provide a secure, decentralized login method and facilitate seamless integration with blockchain-based services.
+* **Web3 Login**: In the Sign-Up/Log In screen, add the option for users to log in using their web3 wallets (e.g., MetaMask, WalletConnect). This will provide a secure, decentralized login method and facilitate seamless integration with blockchain-based services.
 
 * **Aragon DAO Integration**: The app can be connected to the Aragon framework, which allows for the creation and management of decentralized autonomous organizations (DAOs). In the "Create Project" screen, include an option to "Create DAO" with the project. When a user creates a new project and selects this option, the app will automatically create an Aragon DAO associated with the project. In the "Project Details" screen, display a link to the DAO's governance dashboard on Aragon.
 
