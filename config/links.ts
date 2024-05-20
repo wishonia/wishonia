@@ -124,9 +124,16 @@ let createWish: NavItem = {
     href: "/dashboard/wishingWells",
     icon: "star",
 };
+
+const yourWishesLink: NavItem = {
+    title: "Your Wishes",
+    href: "/dashboard/wishingWells",
+    icon: "star",
+}
 export const avatarNav: Navigation = {
   data: [
     profileSettingsLink,
+      yourWishesLink,
     wishingWellsLink,
     globalProblemsVoteLink,
       {

@@ -7,6 +7,14 @@ export async function seedWishingWells(testUser: User) {
         getMarkdownObjects('public/wishingWells');
     let results = [];
     for (const wishingWell of wishingWells) {
+        const existing = await prisma.wishingWell.findUnique({
+            where: {
+                name: wishingWell.data.name,
+            },
+        });
+        if (existing) {
+            continue;
+        }
         let wishingWellData = {
             name: wishingWell.data.name,
             description: wishingWell.data.description,
