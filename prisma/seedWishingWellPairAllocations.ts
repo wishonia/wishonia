@@ -1,9 +1,11 @@
 import {PrismaClient, User} from "@prisma/client";
-import {generateAllWishingWellPairs} from "@/lib/wishingWells";
+import {
+    createMinimalWishingWellPairs,
+} from "@/lib/wishingWells";
 const prisma = new PrismaClient();
 
 export async function seedWishingWellPairAllocations(testUser: User) {
-    const pairs = await generateAllWishingWellPairs();
+    const pairs = await createMinimalWishingWellPairs(testUser.id);
     console.log("Generating "+pairs.length+" wishing well pairs...");
     let counter = 0;
     let idsWithPair: string[] = [];

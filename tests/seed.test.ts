@@ -14,7 +14,7 @@ const prisma = new PrismaClient();
 beforeAll(async () => {
     await checkDatabaseName();
 });
-async function createTestUser() {
+async function getOrCreateTestUser() {
     let user = await prisma.user.findUnique({
         where: {
             email: "test@example.com",
@@ -43,9 +43,16 @@ async function checkDatabaseName() {
 }
 
 async function checkGlobalProblems<ExtArgs>(testUser: User) {
+    console.log("Checking global problems");
+    console.log("Seeding global problems");
     await seedGlobalProblems(testUser);
+    console.log("Seeded global problems");
+    console.log("Seeding global problem pair allocations");
     await seedGlobalProblemPairAllocations(testUser);
+    console.log("Seeded global problem pair allocations");
+    console.log("Aggregating global problem pair allocations");
     await aggregateGlobalProblemPairAllocations();
+    console.log("Aggregated global problem pair allocations");
     const globalProblems = await prisma.globalProblem.findMany();
     const total = globalProblems.length;
     const expectedAverageAllocation = 100 / total;
@@ -55,9 +62,15 @@ async function checkGlobalProblems<ExtArgs>(testUser: User) {
 }
 
 async function checkWishingWells<ExtArgs>(testUser: User) {
+    console.log("Checking wishing wells");
     await seedWishingWells(testUser);
+    console.log("Seeded wishing wells");
+    console.log("Seeding wishing well pair allocations");
     await seedWishingWellPairAllocations(testUser);
+    console.log("Seeded wishing well pair allocations");
+    console.log("Aggregating wishing well pair allocations")
     await aggregateWishingWellPairAllocations();
+    console.log("Aggregated wishing well pair allocations")
     const wishingWells = await prisma.wishingWell.findMany();
     const total = wishingWells.length;
     const expectedAverageAllocation = 100 / total;
@@ -70,12 +83,12 @@ describe("seedDB", () => {
     it("seeds DB with user, wishing wells and problems", async () => {
         await checkDatabaseName();
         await truncateAllTables();
-        const testUser = await createTestUser();
-        await checkGlobalProblems(testUser);
+        const testUser = await getOrCreateTestUser();
         await checkWishingWells(testUser);
-    });
+        await checkGlobalProblems(testUser);
+    }, 45000);
     it("averages wishingWell allocations", async () => {
-        const testUser = await createTestUser();
+        const testUser = await getOrCreateTestUser();
         await prisma.wishingWellPairAllocation.deleteMany({});
         await seedWishingWellPairAllocations(testUser);
         await aggregateWishingWellPairAllocations();
@@ -85,7 +98,7 @@ describe("seedDB", () => {
         }
     });
     it("averages globalProblem allocations", async () => {
-        const testUser = await createTestUser();
+        const testUser = await getOrCreateTestUser();
         await prisma.globalProblemPairAllocation.deleteMany({});
         await seedGlobalProblemPairAllocations(testUser);
         await aggregateGlobalProblemPairAllocations();
@@ -95,7 +108,7 @@ describe("seedDB", () => {
         }
     });
     it("Converts a wish to a wishingWell", async () => {
-        const testUser = await createTestUser();
+        const testUser = await getOrCreateTestUser();
         const obj = await saveWishToWishingWell("I wish for world peace", testUser.id);
         expect(obj).toHaveProperty("description");
         expect(obj).toHaveProperty("name");

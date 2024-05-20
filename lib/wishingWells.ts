@@ -137,3 +137,25 @@ export async function saveWishToWishingWell(wish: string, userId: string) {
         },
     });
 }
+export async function createMinimalWishingWellPairs(testUserId: string) {
+    const wishingWells: WishingWell[] = await prisma.wishingWell.findMany();
+    const pairs: [WishingWell, WishingWell][] = [];
+
+    for (let i = 0; i < wishingWells.length; i++) {
+        const thisWishingWell = wishingWells[i];
+        const thatWishingWell = i + 1 < wishingWells.length ? wishingWells[i + 1] : wishingWells[0];
+
+        pairs.push([thisWishingWell, thatWishingWell]);
+
+        await prisma.wishingWellPairAllocation.create({
+            data: {
+                thisWishingWellId: thisWishingWell.id,
+                thatWishingWellId: thatWishingWell.id,
+                thisWishingWellPercentage: 50,
+                userId: testUserId
+            },
+        });
+    }
+
+    return pairs;
+}
