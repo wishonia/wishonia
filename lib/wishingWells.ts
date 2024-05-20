@@ -1,8 +1,8 @@
 import {PrismaClient, WishingWell} from "@prisma/client";
 import {convertKeysToCamelCase, toTitleCase} from "@/lib/stringHelpers";
 import {db} from "@/lib/db";
-import {wishToWishingWell} from "@/scripts/wishingWellGenerator";
 import {put} from "@vercel/blob";
+import {textCompletion} from "@/lib/llm";
 
 const prisma = new PrismaClient();
 
@@ -88,6 +88,23 @@ export async function uploadImageToVercel(buffer: Buffer, fileName: string) {
     });
     return blob.url;
 }
+
+export async function wishToWishingWell(wish: string) {
+    const str = await textCompletion(
+        `Return a json object with the following properties of an article on this wish: 
+      
+      ${wish}
+      
+      Here are the Properties of the object you should return:
+      1. "name": a generalized name for the wish of the under 64 characters long. Make it generalized and as short as possible so we can avoid duplicate wish entries.  Should not include the word Wish.
+      2. "description": a meta description for the article under 240 characters long`,
+        "json_object");
+    let obj = JSON.parse(str);
+    //obj.content = textCompletion(generateArticlePrompt(wish), "text");
+    //await generateAndUploadImageToVercel(obj);
+    return obj;
+}
+
 
 export async function saveWishToWishingWell(wish: string, userId: string) {
     const obj = await wishToWishingWell(wish);
