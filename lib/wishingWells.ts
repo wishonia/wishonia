@@ -1,5 +1,9 @@
-import {WishingWell, PrismaClient} from "@prisma/client";
+import {PrismaClient, WishingWell} from "@prisma/client";
 import {convertKeysToCamelCase, toTitleCase} from "@/lib/stringHelpers";
+import {db} from "@/lib/db";
+import {wishToWishingWell} from "@/scripts/wishingWellGenerator";
+import {put} from "@vercel/blob";
+
 const prisma = new PrismaClient();
 
 export async function getRandomWishingWellPair(userId: string | undefined) {
@@ -76,4 +80,43 @@ export async function aggregateWishingWellPairAllocations() {
         results.push(result);
     }
     return results;
+}
+
+export async function uploadImageToVercel(buffer: Buffer, fileName: string) {
+    const blob = await put(fileName, buffer, {
+        access: 'public',
+    });
+    return blob.url;
+}
+
+export async function saveWishToWishingWell(wish: string, userId: string) {
+    const obj = await wishToWishingWell(wish);
+    obj.userId = userId;
+
+    // Check if a wishingWell with the same name already exists
+    const existingWishingWell = await db.wishingWell.findFirst({
+        where: {
+            name: obj.name,
+        },
+        select: {
+            id: true,
+            name: true,
+            description: true,
+        },
+    });
+
+    // If it exists, return it
+    if (existingWishingWell) {
+        return existingWishingWell;
+    }
+
+    // If it doesn't exist, create a new one
+    return db.wishingWell.create({
+        data: obj,
+        select: {
+            id: true,
+            name: true,
+            description: true,
+        },
+    });
 }
