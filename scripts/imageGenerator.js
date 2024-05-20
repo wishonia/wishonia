@@ -37,7 +37,8 @@ async function generateImage(body, model = "dall-e-3") {
 
     return response.data[0];
 }
-async function generateAndSaveImage(content, imagePath) {
+
+export async function generateFeaturedImage(content) {
     const prePrompt = `full width image for an article on ${content}. 
     Requirements: 
     1. THE IMAGE SHOULD NOT CONTAIN ANY TEXT! 
@@ -51,7 +52,11 @@ async function generateAndSaveImage(content, imagePath) {
     });
     const imageUrl = response.url;
     const image = await fetch(imageUrl);
-    const buffer = await image.buffer();
+    return await image.buffer();
+}
+
+async function generateAndSaveImage(content, imagePath) {
+    const buffer = await generateFeaturedImage(content);
     console.log(`Saving image to ${imagePath}`);
     await fs.writeFile(imagePath, buffer);
     return imagePath;
