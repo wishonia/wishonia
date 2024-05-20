@@ -4,12 +4,14 @@ const nextConfig = {
   pageExtensions: ['js', 'jsx', 'mdx', 'ts', 'tsx'],
   images: {
     remotePatterns: [
-      "intercontinental.com",
-      "oaidalleapiprodscus.blob.core.windows.net",
-      "cdn.openai.com",
       {
         protocol: 'https',
         hostname: 'wishonia-blob.public.blob.vercel-storage.com',
+        port: '',
+      },
+      {
+        protocol: 'https',
+        hostname: 'cdn.openai.com',
         port: '',
       },
     ]
