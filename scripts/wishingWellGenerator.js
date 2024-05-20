@@ -109,22 +109,6 @@ async function generateAndUploadImageToVercel(obj) {
     obj.featuredImage = await uploadImageToVercel(buffer, imageName);
 }
 
-export async function wishToWishingWell(wish) {
-    const str = await textCompletion(
-        `Return a json object with the following properties of an article on this wish: 
-      
-      ${wish}
-      
-      Here are the Properties of the object you should return:
-      1. "name": a generalized name for the wish of the under 64 characters long. Make it generalized and as short as possible so we can avoid duplicate wish entries.  Should not include the word Wish.
-      2. "description": a meta description for the article under 240 characters long`,
-        "json_object");
-    let obj = JSON.parse(str);
-    //obj.content  = textCompletion(generateArticlePrompt(wish), "text");
-    //await generateAndUploadImageToVercel(obj);
-    return obj;
-}
-
 async function generateWishingWellMarkdownFile(wishingWellName, markdownPath, imagePath) {
     const description = await generateText(
         `Please generate a sentence description of the goal of "${wishingWellName}" under 240 characters.  
