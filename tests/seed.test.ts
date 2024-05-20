@@ -7,7 +7,7 @@ import {seedWishingWells} from "@/prisma/seedWishingWells";
 import {seedUser} from "@/prisma/seedUser";
 import {seedGlobalProblemPairAllocations} from "@/prisma/seedGlobalProblemPairAllocations";
 import {aggregateGlobalProblemPairAllocations} from "@/lib/globalProblems";
-import {aggregateWishingWellPairAllocations} from "@/lib/wishingWells";
+import {aggregateWishingWellPairAllocations, saveWishToWishingWell} from "@/lib/wishingWells";
 import {seedWishingWellPairAllocations} from "@/prisma/seedWishingWellPairAllocations";
 
 const prisma = new PrismaClient();
@@ -93,5 +93,12 @@ describe("seedDB", () => {
         for (const globalProblem of globalProblems) {
             expect(globalProblem.averageAllocation).toBe(100 / globalProblems.length);
         }
+    });
+    it("Converts a wish to a wishingWell", async () => {
+        const testUser = await createTestUser();
+        const obj = await saveWishToWishingWell("I wish for world peace", testUser.id);
+        expect(obj).toHaveProperty("description");
+        expect(obj).toHaveProperty("name");
+        expect(obj).toHaveProperty("content");
     });
 });
