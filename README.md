@@ -152,6 +152,9 @@ Here is a proposed design for Wishocracy as a decentralized, interoperable proto
 
 ## Wishocracy Protocol Primitives
 
+The current models are available in the [Prisma schema here](prisma/schema.prisma).
+However, we'll ultimately want to define these as JSON schemas and switch to a decentralized data store for interoperability.
+
 1. **Wish/Problem Statement (WPS)**
 - Globally unique identifier
 - Title (short description)
