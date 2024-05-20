@@ -1,6 +1,5 @@
 import { Metadata } from "next"
-import { Shell } from "@/components/layout/shell"
-import MarkdownRenderer from "@/components/MarkdownRenderer";
+import MarkdownFileRenderer from "@/components/MarkdownFileRenderer";
 
 export const metadata: Metadata = {
   title: "Cost of War",
@@ -14,6 +13,6 @@ export default async function Docs({ params }: DocsProps) {
   let { filename } = params;
   filename = filename.replace(/\.md$/, '');
   return (
-    <MarkdownRenderer url={`/${filename}.md`}/>
+    <MarkdownFileRenderer url={`/${filename}.md`}/>
   )
 }
