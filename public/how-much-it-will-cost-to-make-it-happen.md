@@ -2,11 +2,11 @@
 title: >-
   Optimizing Costs: Strategies to Gather 80 Million Signatures for a Global
   Initiative
-excerpt: >-
+description: >-
   Analyzing the potential cost range per signature and total estimated costs for
   different strategies to achieve a goal of 80 million signatures for the
   LOGICAL Treaty.
-coverImage: how-much-it-will-cost-to-make-it-happen.png
+featuredImage: how-much-it-will-cost-to-make-it-happen.png
 #  date: '2023-09-15'
 author:
   name: The Office of the President

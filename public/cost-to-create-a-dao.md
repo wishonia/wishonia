@@ -1,7 +1,7 @@
 ---
 title: "Cost to Create a Decentralized Institute of Health DAO"
-excerpt: "How much it would cost to create a DAO to fund the 1% Treaty Initiative"
-coverImage: "/military-spending-scenarios-chart.png"
+description: "How much it would cost to create a DAO to fund the 1% Treaty Initiative"
+featuredImage: "/military-spending-scenarios-chart.png"
 # date: "2024-03-16T05:35:07.322Z"
 #author:
 #    name: Mike P. Sinn

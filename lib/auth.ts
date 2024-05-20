@@ -34,7 +34,11 @@ export const authOptions: NextAuthOptions = {
     async session({ token, session }) {
       if (token) {
         session.user.id = token.id
-        session.user.name = token.name
+        let name = token.name
+        if(token.firstName && token.lastName) {
+            name = `${token.firstName} ${token.lastName}`
+        }
+        session.user.name = name
         session.user.email = token.email as string | null | undefined;
         session.user.image = token.picture as string | null | undefined;
         // Use type assertion to bypass the type error
@@ -59,7 +63,6 @@ export const authOptions: NextAuthOptions = {
 
       return {
         id: dbUser.id,
-        name: dbUser.name,
         username: dbUser.username,
         email: dbUser.email,
         picture: dbUser.image,

@@ -1,9 +1,8 @@
 ---
-title: Increased Efficiency of Automating Clinical Discovery
-excerpt: >-
-  Exploring the potential productivity gains of Artificial General Intelligence
-  (AGI) in scientific research and drug discovery compared to human scientists.
-coverImage: rate-of-medical-progress-with-ai-scientists.png
+title: Potential Rate of Medical Progress with AI Scientists
+description: >-
+  AI scientists could potentially achieve 260 years of medical progress in a single year.
+featuredImage: rate-of-medical-progress-with-ai-scientists.png
 #  date: '2023-09-15'
 author:
   name: AI Research Insights
@@ -69,7 +68,8 @@ To estimate the increased efficiency of AGI AI scientists compared to human scie
   - Cognitive efficiency: 13.14 * 2 = 26.28
   - Experimental iteration: 26.28 * 10 = 262.8
 
-Therefore, based on these assumptions and estimates, an AGI AI scientist could potentially be around 260 times more productive than a human scientist.
+Therefore, based on these assumptions and estimates,
+AI scientists could potentially achieve 260 years of medical progress in a single year.
 
 
 

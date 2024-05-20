@@ -1,9 +1,9 @@
 ---
 title: 'Choosing Between Paths: The Urgency of the PATH Treaty'
-excerpt: >-
+description: >-
   Exploring the critical juncture humanity faces in deciding between AI-driven
   warfare or a path towards health, longevity, and global well-being.
-coverImage: paths.png
+featuredImage: paths.png
 #  date: ''
 author:
   name: ''

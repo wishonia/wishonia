@@ -1,12 +1,11 @@
-import { getServerSession } from "next-auth/next"
-import { authOptions } from "@/lib/auth"
 import { db } from "@/lib/db"
+import {getUserId} from "@/lib/api/getUserId";
 
 export async function GET() {
   try {
-    const session = await getServerSession(authOptions)
+    const userId = await getUserId();
 
-    if (!session) {
+    if (!userId) {
       return new Response("Unauthorized", { status: 403 })
     }
 
@@ -19,7 +18,7 @@ export async function GET() {
         createdAt: true,
       },
       where: {
-        referrerUserId: session.user.id,
+        referrerUserId: userId,
       },
     })
 

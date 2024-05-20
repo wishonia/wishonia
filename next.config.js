@@ -3,10 +3,17 @@ const nextConfig = {
   // Configure `pageExtensions` to include MDX files
   pageExtensions: ['js', 'jsx', 'mdx', 'ts', 'tsx'],
   images: {
-    domains: [
-      "googleusercontent.com",
-      "oaidalleapiprodscus.blob.core.windows.net",
-      "cdn.openai.com"
+    remotePatterns: [
+      {
+        protocol: 'https',
+        hostname: 'wishonia-blob.public.blob.vercel-storage.com',
+        port: '',
+      },
+      {
+        protocol: 'https',
+        hostname: 'cdn.openai.com',
+        port: '',
+      },
     ]
   },
 }

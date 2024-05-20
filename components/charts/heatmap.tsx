@@ -64,10 +64,14 @@ async function deleteWishingWell(wishingWellId: string, wishingWellContributions
 
 export function Heatmap({ data, params }: HeatmapProps) {
   const router = useRouter()
-  const [showDeleteAlert, setShowDeleteAlert] = React.useState<boolean>(false)
-  const [isDeleteLoading, setIsDeleteLoading] = React.useState<boolean>(false)
-  const [selectedLog, setSelectedLog] = React.useState<Value | null>(null)
-  const [selectedDate, setSelectedDate] = React.useState<Date | null>(null)
+  const [showDeleteAlert, setShowDeleteAlert] =
+      React.useState<boolean>(false)
+  const [isDeleteLoading, setIsDeleteLoading] =
+      React.useState<boolean>(false)
+  const [selectedLog, setSelectedLog] =
+      React.useState<Value | null>(null)
+  const [selectedDate, setSelectedDate] =
+      React.useState<Date | null>(null)
 
   const handleDelete = async () => {
     if (selectedLog) {

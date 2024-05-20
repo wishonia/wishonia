@@ -33,7 +33,7 @@ export default async function WishingWellEdit({ params }: WishingWellEditProps) 
     <Shell>
       <DashboardHeader
         heading="Wishing Well Settings"
-        text="Modify wishing well details."
+        text="Enter the name and a detailed description of your wish. "
       />
       <div className="grid grid-cols-1 gap-10">
         <WishingWellEditForm

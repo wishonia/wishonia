@@ -10,8 +10,8 @@ import { Shell } from "@/components/layout/shell"
 import { DashboardHeader } from "@/components/pages/dashboard/dashboard-header"
 
 export const metadata: Metadata = {
-  title: "Wishes",
-  description: "Manage your wishes.",
+  title: "Your Wishing Wells",
+  description: "Manage the Wishing Wells you make.",
 }
 
 export default async function WishingWellsPage() {
