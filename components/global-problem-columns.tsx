@@ -28,7 +28,7 @@ export const globalProblemColumns: ColumnDef<GlobalProblem>[] = [
       const description = row.row.original.description
       return (
         <Link
-          href={`/dashboard/globalProblems/${id}`}
+          href={`/globalProblems/${id}`}
           className={cn(buttonVariants({ variant: "ghost" }))}
           title={description || ""}
         >
