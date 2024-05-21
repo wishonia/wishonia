@@ -22,13 +22,33 @@ function traverseDir(dir) {
 
 // Function to compress image
 function compressImage(imagePath) {
-    const output = path.join(path.dirname(imagePath), 'compressed', path.basename(imagePath));
-    sharp(imagePath)
-        .jpeg({ quality: 80 })
-        .toFile(output, (err, info) => {
-            if (err) console.log(err);
-            else console.log(`Image compressed: ${output}`);
-        });
+    // Convert imagePath to an absolute path
+    imagePath = path.resolve(imagePath);
+    // create a new directory for compressed images
+    fs.mkdirSync(path.join(path.dirname(imagePath), 'compressed'), { recursive: true });
+    const output = path.join(path.dirname(imagePath),
+        'compressed',
+        path.basename(imagePath));
+    const ext = path.extname(imagePath).toLowerCase();
+
+    let sharpInstance;
+    switch (ext) {
+        case '.jpg':
+        case '.jpeg':
+            sharpInstance = sharp(imagePath).jpeg({ quality: 50 });
+            break;
+        case '.png':
+            sharpInstance = sharp(imagePath).png({ quality: 10 });
+            break;
+        default:
+            console.log(`Unsupported image format: ${ext}`);
+            return;
+    }
+
+    sharpInstance.toFile(output, (err, info) => {
+        if (err) console.log(err);
+        else console.log(`Image compressed: ${output}`);
+    });
 }
 
 // Start the script with the directory you want to traverse
