@@ -244,6 +244,37 @@ By defining these common primitives and leveraging decentralized data networks, 
 2. **Incentivization**: Incentivizing task completion, especially for large and long-term tasks, solely through prizes. Alternative incentive structures may need to be considered.
 3. **Impact Measurement**: Measuring and attributing impact, especially for tasks and solutions with long time horizons and multi-faceted outcomes, is crucial for steering the system effectively.
 
+# General Functions of Wishocracy
+
+1. **Wish Management System**: A system for creating, categorizing, and prioritizing wishes or problems that need to be solved.
+2. **Budget Allocation System**: A system for determining how much of our scarce resources should be allocated to solving each problem or fulfilling each wish.
+3. **Solution Management System**: A system for creating, categorizing, and evaluating proposed solutions to solve each problem or fulfill each wish.
+4. **Task Management System**: A system for decomposing each solution into a list of atomic tasks that need to be completed.
+5. **Wisher Relationship Management (WRM) System**: A system for tracking the relationship between wishes, solutions, tasks, and wishers.  This is similar to a Customer Relationship Management (CRM) system but for global coordination between Wishers.
+
+# Digital Twins: Wishonia
+
+We'd like to allow people to create Digital Twins of themselves in the simulated World of Wishonia.
+Digital Twins are meant to be autonomous agents to work together to find positive sum games,
+figure out how their analog real-world counterparts can work together to maximize wish fulfillment.
+They should also be able to use tools and interact with the world to automate the production of public goods.
+
+A Digital Twin is a digital representation of a person that is defined by their:
+- **Wishes**: What they want to accomplish in the world
+- **Skills**: What they're good at
+- **Resources**: What they have to offer
+- **Interests**: What they're interested in
+- **Time**: How much time they have to offer
+- **Reputation**: How trustworthy they are
+- **Network**: Who they know
+- **Location**: Where they are
+- **Language**: What languages they speak
+
+Functionally, it consists of:
+- **A Large Language Model**: To understand and generate text
+- **A Knowledge Graph**: To store and reason about the person's wishes, skills, resources, interests, time, reputation, network, location, and language
+- **A Vector Database**: To store and query the person's knowledge graph using retrival 
+
 ## Additional Stuff to Consider
 
 1. **Dependency Specification**: Allowing specification of dependencies between wishes, problems, solutions, and tasks to create a network of links and surface efficiencies.
