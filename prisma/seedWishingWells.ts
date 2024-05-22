@@ -12,9 +12,6 @@ export async function seedWishingWells(testUser: User) {
                 name: wishingWell.data.name,
             },
         });
-        if (existing) {
-            continue;
-        }
         let wishingWellData = {
             name: wishingWell.data.name,
             description: wishingWell.data.description,
@@ -23,8 +20,10 @@ export async function seedWishingWells(testUser: User) {
             userId: testUser.id,
         };
         //console.log("Creating wishing well: ", wishingWellData)
-        const result = await prisma.wishingWell.create({
-            data: wishingWellData,
+        const result = await prisma.wishingWell.upsert({
+            where: { name: wishingWell.data.name },
+            update: wishingWellData,
+            create: wishingWellData,
         });
         //console.log("Wishing well created result: ", result);
         results.push(result)
