@@ -1,4 +1,3 @@
-import {textCompletion} from "@/lib/llm";
 import {generateFeaturedImage} from "@/scripts/imageGenerator";
 import {uploadImageToVercel} from "@/lib/wishingWells";
 
@@ -22,6 +21,8 @@ const wishingWellNames = [
     'End Starvation',
     'Universal Access to Clean Water',
     'End War',
+    'War and Military',
+    'Cure Diseases',
     // 'Incarcerate Murders',
     // 'Incarcerate People for Possession of Marijuana',
     // 'Incarcerate People for Possession of MDMA',
@@ -118,7 +119,8 @@ async function generateWishingWellMarkdownFile(wishingWellName, markdownPath, im
     await saveMarkdownPost(markdownPath, wishingWellName, description, imagePath, content)
 }
 
-async function wishingWellGenerator() {
+export async function wishingWellGenerator() {
+    const wishingWells = [];
     for (let wishingWellName of wishingWellNames) {
         wishingWellName = titleCase(wishingWellName)
         const wishingWellSlug = slugify(wishingWellName, { lower: true, strict: true });
@@ -132,7 +134,12 @@ async function wishingWellGenerator() {
         if(overwrite || !fs.existsSync(imagePath)) {
             await generateAndSaveImage(`Humanity's Goal of ${wishingWellName}`, imagePath);
         }
+        wishingWells.push({
+            name: wishingWellName,
+            slug: wishingWellSlug,
+            imagePath: imagePath,
+            markdownPath: markdownPath
+        });
     }
+    return wishingWells;
 }
-
-wishingWellGenerator();

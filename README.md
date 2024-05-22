@@ -92,11 +92,11 @@ A possible solution to this is **Aggregated Pairwise Preference Allocation (APPA
 This involves showing everyone a random pair of wishes or problems
 and asking them to allocate a percentage of available resources to each.
 
-![](public/img/problem-allocation.png)
+![](public/img/screenshots/problem-allocation.png)
 
 By aggregating lots of pairwise allocations from lots of people, we may be to determine the percentage of available resources that should be allocated to each problem.
 
-![](public/img/problem-allocation-list-with-heading.png)
+![](public/img/screenshots/problem-allocation-list-with-heading.png)
 
 ## Step 3: Create a List of Solutions
 

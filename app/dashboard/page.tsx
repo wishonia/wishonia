@@ -4,7 +4,7 @@ import { authOptions } from "@/lib/auth"
 import { getCurrentUser } from "@/lib/session"
 import { Shell } from "@/components/layout/shell"
 import AfterLoginHandler from "@/components/AfterLoginHandler"
-import {WishingWellsList} from "@/components/wishing-well-list";
+import {DashboardCards} from "@/components/pages/dashboard/dashboard-cards";
 
 export const metadata: Metadata = {
   title: "Your Wishing Wells",
@@ -25,7 +25,7 @@ export default async function Dashboard({ searchParams }: DashboardProps) {
   return (
     <Shell>
         <AfterLoginHandler></AfterLoginHandler>
-        <WishingWellsList></WishingWellsList>
+        <DashboardCards searchParams={searchParams}/>
     </Shell>
   )
 }
