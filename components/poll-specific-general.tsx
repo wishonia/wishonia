@@ -6,6 +6,9 @@ import BarChartGeneral from "@/components/bar-chart-general";
 import {AnonymousVoteButton} from "@/components/anonymous-vote-button";
 import {LoggedInVoteButton} from "@/components/logged-in-vote-button";
 import {GlobalProblem, WishingWell} from "@prisma/client";
+import {Dialog, DialogContent, DialogTrigger} from "@/components/ui/dialog";
+import MarkdownRenderer from "@/components/MarkdownRenderer";
+import MarkdownRendererForItem from "@/components/MarkdownRendererForItem";
 
 interface PollProps<T> {
     thisItem: WishingWell | GlobalProblem;
@@ -52,15 +55,29 @@ export const PollSpecificGeneral = <T,>({
                 <p className="rounded-2xl bg-muted px-4 py-1.5 text-sm font-medium">
                     How Much Would You Donate to
                 </p>
-                <h1 className="text-4xl font-semibold sm:text-4xl md:text-5xl lg:text-5xl pt-2">
-                    {getItemName(thisItem)}
-                </h1>
+                <Dialog defaultOpen={false}>
+                    <DialogTrigger asChild className={"cursor-pointer"}>
+                        <h1 className="text-4xl font-semibold sm:text-4xl md:text-5xl lg:text-5xl pt-2">
+                            {getItemName(thisItem)}
+                        </h1>
+                    </DialogTrigger>
+                    <DialogContent className="sm:max-w-[600px] w-full max-h-[90vh] overflow-auto rounded-lg">
+                        <MarkdownRendererForItem item={thisItem} />
+                    </DialogContent>
+                </Dialog>
                 <h1 className="text-2xl font-semibold sm:text-2xl md:text-3xl lg:text-3xl pt-2">
                     vs
                 </h1>
-                <h1 className="text-4xl font-semibold sm:text-4xl md:text-5xl lg:text-5xl pt-2">
-                    {getItemName(thatItem)}
-                </h1>
+                <Dialog defaultOpen={false}>
+                    <DialogTrigger asChild className={"cursor-pointer"}>
+                        <h1 className="text-4xl font-semibold sm:text-4xl md:text-5xl lg:text-5xl pt-2">
+                            {getItemName(thatItem)}
+                        </h1>
+                    </DialogTrigger>
+                    <DialogContent className="sm:max-w-[600px] w-full max-h-[90vh] overflow-auto rounded-lg">
+                        <MarkdownRendererForItem item={thatItem} />
+                    </DialogContent>
+                </Dialog>
                 <div id="poll-description">
                     <div className="text-sm md:text-xl px-0 pb-2 pt-2">
                         Adjust the slider to indicate how much you'd donate to each item if you had to donate $100.

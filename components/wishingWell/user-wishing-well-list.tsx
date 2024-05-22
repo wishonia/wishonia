@@ -10,7 +10,7 @@ interface WishingWellListProps {
   wishingWells: WishingWell[]
 }
 
-export function WishingWellList({ wishingWells }: WishingWellListProps) {
+export function UserWishingWellList({ wishingWells }: WishingWellListProps) {
   return (
     <>
       {wishingWells?.length ? (
