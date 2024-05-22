@@ -45,7 +45,7 @@ By combining the power of AI, the resources of global crowdfunding, and the coll
 
 # Cost of War
 
-The direct and indirect costs of war come out to [$74,259](cost-of-war.md) per person over an 80-year lifespan.
+The direct and indirect costs of war come out to [$74,259](globalSolutions/1-percent-treaty/cost-of-war.mds/1-percent-treaty/cost-of-war.md) per person over an 80-year lifespan.
 
 # Cumulative Savings from Decreased Annual Cost of War
 
@@ -53,7 +53,7 @@ Reducing spending on war by 1% annually would reduce the per-person costs by [$2
 
 # Cost of Disease
 
-The [**$244 trillion**](cost-of-disease.md) total global annual cost of disease is a comprehensive measure that encompasses direct healthcare costs, indirect economic losses, and the $100k valuation of a Year of Life Lost (YLL) and a $100k valuation Disability-Adjusted Life Year (DALYs).
+The [**$244 trillion**](globalSolutions/1-percent-treaty/cost-of-disease.mdpercent-treaty/cost-of-disease.md) total global annual cost of disease is a comprehensive measure that encompasses direct healthcare costs, indirect economic losses, and the $100k valuation of a Year of Life Lost (YLL) and a $100k valuation Disability-Adjusted Life Year (DALYs).
 
 # Redirecting 1% of Military Spending to Healthcare Innovation
 

@@ -39,7 +39,7 @@ export function WishingWellEditForm({
   ...props
 }: WishingWellEditFormProps) {
   const router = useRouter()
-  const [longDescription, setLongDescription] = useState("");
+  const [content, setContent] = useState("");
   const [nameInput, setNameInput] = useState(wishingWell?.name || "");
   const {
     handleSubmit,
@@ -134,15 +134,15 @@ export function WishingWellEditForm({
             )}
           </div>
 {/*          <div className="grid gap-3">
-            <Label htmlFor="longDescription">
+            <Label htmlFor="content">
               Longer Detailed Description{" "}
             </Label>
             <CopilotTextarea
                 style={{ "--copilot-kit-background-color": "#000000" } as any}
                 id="content"
                 className="px-4 py-4"
-                value={longDescription}
-                onValueChange={(value: string) => setLongDescription(value)}
+                value={content}
+                onValueChange={(value: string) => setContent(value)}
                 placeholder={`Please provide more details about the wish: ${nameInput}`}
                 autosuggestionsConfig={{
                   textareaPurpose: `More information about the wish: ${nameInput}`,

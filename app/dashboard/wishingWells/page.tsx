@@ -5,7 +5,7 @@ import { getUserWishingWells } from "@/lib/api/wishingWells"
 import { authOptions } from "@/lib/auth"
 import { getCurrentUser } from "@/lib/session"
 import { WishingWellAddButton } from "@/components/wishingWell/wishing-well-add-button"
-import { WishingWellList } from "@/components/wishingWell/wishing-well-list"
+import { UserWishingWellList } from "@/components/wishingWell/user-wishing-well-list"
 import { Shell } from "@/components/layout/shell"
 import { DashboardHeader } from "@/components/pages/dashboard/dashboard-header"
 
@@ -29,7 +29,7 @@ export default async function WishingWellsPage() {
         <WishingWellAddButton />
       </DashboardHeader>
       <div className="divide-y divide-border rounded-md border">
-        <WishingWellList wishingWells={wishingWells} />
+        <UserWishingWellList wishingWells={wishingWells} />
       </div>
     </Shell>
   )

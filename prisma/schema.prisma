@@ -303,7 +303,7 @@ model WishingWell {
   userId                     String                      @map("user_id")
   name                       String                      @unique
   description                String?
-  content                    String?                     @map("long_description")
+  content                    String?                     @map("content")
   images                     String[]
   featuredImage              String?                     @map("featured_image")
   createdAt                  DateTime                    @default(now()) @map("created_at")

@@ -2,13 +2,6 @@
 title: 'Wishocracy'
 description: >-
   How we can use collective intelligence to identify and prioritize the most important wishes for society and allocate resources to the most promising solutions.
-# featuredImage: why-reallocation-is-necessary.png
-#  date: '2022-11-15'
-#author:
-#  name: The Office of the President
-#  # picture: 
-#ogImage:
-#  url: 
 ---
 
 
@@ -38,7 +31,7 @@ Example Action: I will write a letter to the president of the United States aski
 **How Wishocracy Works**
 ========================
 
-Wishocracy is a unique platform that uses the power of collective intelligence to identify and prioritize the most important wishes for society. It then allocates resources to the most promising solutions using a novel approach called Pairwise Voting.
+Wishocracy is a unique platform that uses the power of collective intelligence to identify and prioritize the most important wishes for society. It then allocates resources to the most promising solutions using a novel approach called Aggregated Pairwise Preference Allocation.
 
 **Discovering the Most Impactful Wishes**
 =========================================
@@ -55,7 +48,7 @@ GenieDAOs are special teams formed within Wishocracy where people with shared pa
 
 GenieDAOs can submit detailed proposals outlining their plans to fulfill a wish. The community then votes on these proposals using WishTokens, a unique funding mechanism. The proposals with the most votes receive the necessary resources to implement their solutions.
 
-**Pairwise Voting: Making Decisions through Comparisons**
+**Aggregated Pairwise Preference Allocation: Making Decisions through Comparisons**
 ========================================================
 
-Wishocracy uses a novel voting system called Pairwise Voting to make decisions. Instead of voting on many options at once, people are presented with pairs of wishes or proposals and asked to choose the one they prefer. This process is repeated many times, and the results are used to determine which wishes and proposals are the most popular and should be prioritized.
+Wishocracy uses a novel voting system called Aggregated Pairwise Preference Allocation to make decisions. Instead of voting on many options at once, people are presented with pairs of wishes or proposals and asked to choose the one they prefer. This process is repeated many times, and the results are used to determine which wishes and proposals are the most popular and should be prioritized.
