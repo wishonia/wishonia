@@ -10,8 +10,12 @@ import {aggregateGlobalProblemPairAllocations} from "@/lib/globalProblems";
 import {aggregateWishingWellPairAllocations, saveWishToWishingWell} from "@/lib/wishingWells";
 import {seedWishingWellPairAllocations} from "@/prisma/seedWishingWellPairAllocations";
 
-const prisma = new PrismaClient();
+let prisma = new PrismaClient();
 beforeAll(async () => {
+    process.env.DATABASE_URL = "postgresql://user:pass@localhost:5432/wishonia_test?schema=public";
+    if(!prisma){
+        prisma = new PrismaClient();
+    }
     await checkDatabaseName();
 });
 async function getOrCreateTestUser() {
@@ -79,7 +83,7 @@ async function checkWishingWells<ExtArgs>(testUser: User) {
     }
 }
 
-describe("seedDB", () => {
+describe("Database-related tests", () => {
     it("seeds DB with user, wishing wells and problems", async () => {
         await checkDatabaseName();
         await truncateAllTables();

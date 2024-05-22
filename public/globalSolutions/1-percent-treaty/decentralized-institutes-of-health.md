@@ -22,7 +22,7 @@ Today, governments collectively spend over 20 times more on war and the military
 This imbalance in priorities has led to a global health crisis, with millions of lives lost each year to preventable and treatable conditions. The DIH aims to correct this imbalance by providing a platform for governments to easily and transparently redirect a portion of their military budgets to medical research.
 
 # The 1% Treaty
-The [1% Treaty](1-percent-treaty.md) is an agreement that enables governments to join the DIH and contribute to its mission. By signing the treaty, governments pledge to allocate 1% of their military spending to the DIH democratic crowdfunding platform. This small but significant contribution has the potential to generate billions of dollars for medical research, accelerating the development of life-saving treatments and cures.
+The [1% Treaty](globalSolutions/1-percent-treaty/1-percent-treaty.mdercent-treaty/1-percent-treaty.md) is an agreement that enables governments to join the DIH and contribute to its mission. By signing the treaty, governments pledge to allocate 1% of their military spending to the DIH democratic crowdfunding platform. This small but significant contribution has the potential to generate billions of dollars for medical research, accelerating the development of life-saving treatments and cures.
 
 # Unique Value Proposition
 1. **Global Cooperation**: The DIH fosters unprecedented collaboration among nations, researchers, and individuals, transcending borders and political differences to address the world's most pressing health challenges.
@@ -36,7 +36,7 @@ The [1% Treaty](1-percent-treaty.md) is an agreement that enables governments to
 5. **Catalyzing Medical Breakthroughs**: By pooling resources from governments, organizations, and individuals worldwide, the DIH accelerates the development of life-saving treatments and cures that might otherwise remain underfunded.
 
 # How It Works
-1. Governments sign the [1% Treaty](1-percent-treaty.md)
+1. Governments sign the [1% Treaty](globalSolutions/1-percent-treaty/1-percent-treaty.mdercent-treaty/1-percent-treaty.md)
  pledging to allocate 1% of their military spending to the DIH's decentralized, trustless repository.
 
 2. Researchers and scientists submit their project proposals to the DIH platform.

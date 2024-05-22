@@ -21,7 +21,7 @@ Artificial General Intelligence (AGI) and Artificial Superintelligence (ASI) rep
 
 ## Economic Implications
 
-The global cost of disease, currently estimated at approximately [$244 trillion](cost-of-disease.md) annually, embodies both direct healthcare expenses and indirect costs, such as lost productivity. Integrating AGI and ASI into healthcare systems could significantly reduce these costs by improving operational efficiencies, accelerating drug development, enhancing treatment outcomes, and advancing preventive medicine.
+The global cost of disease, currently estimated at approximately [$244 trillion](globalSolutions/1-percent-treaty/cost-of-disease.mdpercent-treaty/cost-of-disease.md) annually, embodies both direct healthcare expenses and indirect costs, such as lost productivity. Integrating AGI and ASI into healthcare systems could significantly reduce these costs by improving operational efficiencies, accelerating drug development, enhancing treatment outcomes, and advancing preventive medicine.
 
 ### Assumptions for Economic Analysis
 
