@@ -21,6 +21,17 @@ export async function getUserWishingWell(
   });
 }
 
+// Fetch user's wishingWell
+export async function getGlobalWishingWell(
+    wishingWellId: WishingWell["id"],
+) {
+  return db.wishingWell.findFirst({
+    where: {
+      id: wishingWellId,
+    },
+  });
+}
+
 // Fetch all the wishingWells for the selected user
 export async function getUserWishingWells(
   userId: string

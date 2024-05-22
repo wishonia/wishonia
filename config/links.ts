@@ -1,83 +1,77 @@
 import {Navigation, NavItem} from "@/types"
 
-const dashboardLink: NavItem = {
+export const dashboardLink: NavItem = {
     title: "Dashboard",
     href: "/dashboard",
     icon: "dashboard",
 };
 
-
-const globalProblemsVoteLink: NavItem = {
-    title: "Prioritize Problems",
+export const globalProblemsVoteLink: NavItem = {
+    title: "Vote on Problems",
     href: "/globalProblems",
     icon: "frown",
+    img: "/img/screenshots/problem-allocation-short.png",
+    tooltip: "Vote on the allocation of resources between global problems",
 }
 
-const globalProblemsResultsLink: NavItem = {
-    title: "Problem Prioritization Results",
+export const globalProblemsResultsLink: NavItem = {
+    title: "Problem Allocations",
     href: "/globalProblems/results",
     icon: "pieChart",
+    img: "/img/screenshots/problem-allocation-list.png",
+    tooltip: "Percent of resources society wants to allocate to each problem"
 }
 
-const wishingWellsResultsLink: NavItem = {
-    title: "Society's Wishes",
+export const wishingWellsResultsLink: NavItem = {
+    title: "Wish Allocations",
     href: "/wishingWells/results",
     icon: "ranking",
+    img: "/img/screenshots/wish-allocation-list.png",
+    tooltip: "Percent of resources society wants to allocate to each wish",
 }
 
-const wishingWellsLink: NavItem = {
-    title: "Prioritize Wishes",
+export const wishingWellsLink: NavItem = {
+    title: "Vote on Wishes",
     href: "/wishingWells",
     icon: "star",
+    img: "/img/screenshots/wish-allocation-short.png",
+    tooltip: "Vote on the allocation of resources between society's wishes",
 };
 
-const voterLeaderboardLink: NavItem = {
+export const voterLeaderboardLink: NavItem = {
     title: "Voter Leaderboard",
     href: "/voters",
     icon: "vote",
+    tooltip: "View the leaderboard of voters",
 };
 
 
-
-const profileSettingsLink: NavItem = {
+export const profileSettingsLink: NavItem = {
     title: "Profile Settings",
     href: "/dashboard/settings",
     icon: "settings",
+    tooltip: "Update your profile settings",
 };
 
-const featuresLink: NavItem = {
+export const featuresLink: NavItem = {
     title: "Features",
     href: "/#features",
 };
 
 
-
-const homeLink: NavItem = {
+export const homeLink: NavItem = {
     title: "Home",
     href: "/",
     icon: "home",
 };
 
-const overviewLink: NavItem = {
+export const overviewLink: NavItem = {
     title: "Overview",
     href: "/#overview",
 };
 
 export const generalDashboardTopNav: Navigation = {
-    data: [
-
-    ],
-};
-
-
-
-export const generalFooterNav: Navigation = {
-    data: [
-        wishingWellsLink,
-        wishingWellsResultsLink,
-        globalProblemsVoteLink,
-        globalProblemsResultsLink,
-    ],
+    data: [],
 };
 
 let createWish: NavItem = {
@@ -85,15 +79,15 @@ let createWish: NavItem = {
     href: "/wish",
     icon: "star",
     tooltip: "Create a new wish",
-    img: "img/wish.png",
+    img: "/img/wish.png",
 };
 
-const yourWishesLink: NavItem = {
+export const yourWishesLink: NavItem = {
     title: "Your Wishes",
     href: "/dashboard/wishingWells",
     icon: "star",
     tooltip: "View your wishes",
-    img: "img/wish.png",
+    img: "/img/wish.png",
 }
 export const avatarNav: Navigation = {
     data: [
@@ -122,3 +116,12 @@ export const generalSidebarNav: Navigation = {
     ],
 }
 
+
+export const generalFooterNav: Navigation = {
+    data: [
+        wishingWellsLink,
+        wishingWellsResultsLink,
+        globalProblemsVoteLink,
+        globalProblemsResultsLink,
+    ],
+};

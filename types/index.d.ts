@@ -22,30 +22,12 @@ export type NavItem = {
   external?: boolean
   img?: string
   icon?: IconKeys
-} & (
-  | {
-      href: string
-      items?: never
-    }
-  | {
-      href?: string
-      items: NavLink[]
-    }
-)
+  href: string
+}
+
 
 export type Navigation = {
   data: NavItem[]
-}
-
-export type ActivityEntry = {
-  name: string
-  count: number | null
-  color: string
-}
-
-export type ActivityByDate = {
-  date: string
-  count: number
 }
 
 export type DateRange = {

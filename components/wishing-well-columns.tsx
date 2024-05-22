@@ -28,14 +28,14 @@ export const wishingWellColumns: ColumnDef<WishingWell>[] = [
       const description = row.row.original.description
       return (
         <Link
-          href={`/dashboard/wishingWells/${id}`}
+          href={`/wishingWells/${id}`}
           className={cn(buttonVariants({ variant: "ghost" }))}
           title={description || ""}
         >
           <Image
             src={featuredImage}
             className={"object-cover rounded-full p-2"}
-            alt="Global Problem"
+            alt="Global Wish"
             width={50}
             height={50}
           />
