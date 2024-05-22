@@ -1,4 +1,4 @@
-import {warVsCuresTopNav, warVsCuresNav} from "@/config/links"
+import {warVsCuresTopNav, warVsCuresNav} from "./warVsCuresLinks"
 import { getCurrentUser } from "@/lib/session"
 import Footer from "@/components/layout/footer"
 import TopNavbar from "@/components/layout/topNavbar"

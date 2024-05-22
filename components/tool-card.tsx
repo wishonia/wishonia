@@ -7,25 +7,21 @@ import {
   CardHeader,
   CardTitle,
   CardDescription,
-  CardContent,
 } from "@/components/ui/card";
-import { Badge } from "@/components/ui/badge";
 import { useRouter } from "next/navigation";
 
 interface ToolCardProps {
   src: string,
   href: string,
   title: string,
-  description: string,
-  premium?: boolean;
+  description: string
 }
 
 export const ToolCard = ({
   src,
   href,
   title,
-  description,
-  premium
+  description
 }: ToolCardProps) => {
   const router = useRouter();
   
@@ -43,11 +39,6 @@ export const ToolCard = ({
           {title}
         </CardTitle>
         <CardDescription>{description}</CardDescription>
-        {premium && (
-          <CardContent className="p-0">
-            <Badge variant="premium" className="uppercase">pro</Badge>
-          </CardContent>
-        )}
       </CardHeader>
     </Card>
   );

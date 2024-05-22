@@ -20,6 +20,7 @@ export type NavItem = {
   tooltip?: string
   disabled?: boolean
   external?: boolean
+  img?: string
   icon?: IconKeys
 } & (
   | {
