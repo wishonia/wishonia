@@ -6,7 +6,7 @@ import {seedGlobalProblems} from "@/prisma/seedGlobalProblems";
 import {seedWishingWells} from "@/prisma/seedWishingWells";
 import {seedGlobalProblemPairAllocations} from "@/prisma/seedGlobalProblemPairAllocations";
 import {aggregateGlobalProblemPairAllocations} from "@/lib/globalProblems";
-import {aggregateWishingWellPairAllocations, saveWishToWishingWell} from "@/lib/wishingWells";
+import {aggregateWishingWellPairAllocations} from "@/lib/wishingWells";
 import {seedWishingWellPairAllocations} from "@/prisma/seedWishingWellPairAllocations";
 import {assertTestDB, getOrCreateTestUser, truncateAllTables} from "@/tests/test-helpers";
 
