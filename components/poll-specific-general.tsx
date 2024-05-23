@@ -7,8 +7,8 @@ import {AnonymousVoteButton} from "@/components/anonymous-vote-button";
 import {LoggedInVoteButton} from "@/components/logged-in-vote-button";
 import {GlobalProblem, WishingWell} from "@prisma/client";
 import {Dialog, DialogContent, DialogTrigger} from "@/components/ui/dialog";
-import MarkdownRenderer from "@/components/MarkdownRenderer";
 import MarkdownRendererForItem from "@/components/MarkdownRendererForItem";
+import {Icons} from "@/components/icons";
 
 interface PollProps<T> {
     thisItem: WishingWell | GlobalProblem;
@@ -59,6 +59,7 @@ export const PollSpecificGeneral = <T,>({
                     <DialogTrigger asChild className={"cursor-pointer"}>
                         <h1 className="text-4xl font-semibold sm:text-4xl md:text-5xl lg:text-5xl pt-2">
                             {getItemName(thisItem)}
+                            <Icons.question className="h-4 w-4 inline-block text-xs align-top" />
                         </h1>
                     </DialogTrigger>
                     <DialogContent className="sm:max-w-[600px] w-full max-h-[90vh] overflow-auto rounded-lg">
@@ -72,6 +73,7 @@ export const PollSpecificGeneral = <T,>({
                     <DialogTrigger asChild className={"cursor-pointer"}>
                         <h1 className="text-4xl font-semibold sm:text-4xl md:text-5xl lg:text-5xl pt-2">
                             {getItemName(thatItem)}
+                            <Icons.question className="h-4 w-4 inline-block text-xs align-top" />
                         </h1>
                     </DialogTrigger>
                     <DialogContent className="sm:max-w-[600px] w-full max-h-[90vh] overflow-auto rounded-lg">
