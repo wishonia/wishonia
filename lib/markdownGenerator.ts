@@ -3,24 +3,18 @@ import { stringify } from "gray-matter";
 import { textCompletion } from "@/lib/llm";
 import {generateAndSaveFeaturedImageJpg} from "@/lib/imageGenerator";
 import {convertToRelativePath} from "@/lib/fileHelper";
-
-interface PostMetadata {
-    name: string;
-    description: string;
-    featuredImage: string;
-}
+import {Post} from "@/interfaces/post";
 
 export async function saveMarkdownPost(
-    postPath: string,
-    name: string,
-    description: string,
-    featuredImage: string,
-    content: string
+    post: Post
 ): Promise<void> {
-    const relativeImagePath = convertToRelativePath(featuredImage);
-    const postContent = stringify(content, { name, description, featuredImage: relativeImagePath });
-    writeFileSync(postPath, postContent);
-    console.log(`Post saved to ${postPath}`);
+    if(post.featuredImage){post.featuredImage = convertToRelativePath(post.featuredImage);}
+    const content = post.content;
+    const metadata = JSON.parse(JSON.stringify(post));
+    delete metadata.content;
+    const postContent = stringify(content, metadata);
+    writeFileSync(post.absFilePath, postContent);
+    console.log(`Post saved to ${post.absFilePath}`);
 }
 
 export async function generateMarkdownAndImageFromDescription(
@@ -35,8 +29,12 @@ export async function generateMarkdownAndImageFromDescription(
     // if a Markdown code block wrapper with backticks like ```markdown is found,
     // extract the content between the backticks
     content = content.replace(/```markdown\n([\s\S]+?)\n```/g, "$1");
-    const metaData: PostMetadata = { name, description, featuredImage: jpgPath };
-    const markdownWithMetaString = stringify(content, metaData);
-    writeFileSync(postPath, markdownWithMetaString);
-    console.log(`Post saved to ${postPath}`);
+    const post = {
+        name: name,
+        description: description,
+        content: content,
+        featuredImage: jpgPath,
+        absFilePath: postPath
+    } as Post;
+    return saveMarkdownPost(post);
 }

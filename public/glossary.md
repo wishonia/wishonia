@@ -1,5 +1,13 @@
 ---
-sidebar_position: 2
+slug: glossary
+name: 'Understanding the Wishocratic Government: Key Terms and Concepts'
+featuredImage: /glossary.jpg
+description: >-
+  Discover the Wishocratic world, where daily $WISH tokens empower individuals,
+  support community initiatives, and are governed by decentralized Genies.
+  Explore key terms like Wisher, Wishing Well, and Common Good Initiatives, all
+  promoting societal well-being.
+absFilePath: 'C:\code\wishonia\public\glossary.md'
 ---
 
 # Glossary

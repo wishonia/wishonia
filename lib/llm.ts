@@ -3,12 +3,13 @@ import OpenAI from 'openai';
 export const openai = new OpenAI({
   apiKey: process.env.OPENAI_API_KEY || '',
 });
+let model = process.env.OPENAI_MODEL || 'gpt-4o';
 
 export async function textCompletion(promptText: string, returnType: "text" | "json_object"): Promise<string> {
 
   // Ask OpenAI for a streaming chat completion given the prompt
   const response = await openai.chat.completions.create({
-    model: 'gpt-4-turbo',
+    model: model,
     stream: false,
     //max_tokens: 150,
     messages: [

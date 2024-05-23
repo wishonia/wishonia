@@ -1,8 +1,10 @@
 ---
-title: >-
-  The Constitution of Wishonia
+slug: constitution
+name: 'Constitution of Wishonia: Maximizing Health and Happiness'
+featuredImage: /constitution.jpg
 description: >-
-  The governing framework of Wishonia, aimed at optimally allocating scarce resources to maximize median health and happiness.
+  The governing framework of Wishonia, aimed at optimally allocating scarce
+  resources to maximize median health and happiness.
 ---
 
 

@@ -44,6 +44,8 @@ export async function generateFeaturedImage(content: string): Promise<Buffer> {
     Requirements: 
     1. THE IMAGE SHOULD NOT CONTAIN ANY TEXT! 
     2. Use a colorful 16-bit style.`;
+    console.log(`Generating image for content:
+     ${content}`)
     const generatedPrompt = await textCompletion(
         `Generate an detailed prompt description for an AI image generator to generate an ${prePrompt} `,
         "text");
@@ -71,7 +73,7 @@ export async function generateAndSaveFeaturedImageJpg(content: string, imagePath
 
     let pngPath = await generateAndSaveFeaturedImagePng(content, imagePath);
     const jpgPath = pngPath.replace('.png', '.jpg');
-    await sharp(imagePath)
+    await sharp(pngPath)
         .jpeg({ quality: 50 })
         .toFile(jpgPath);
     await fs.unlink(imagePath);
