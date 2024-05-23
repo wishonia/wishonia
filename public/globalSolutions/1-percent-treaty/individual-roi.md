@@ -1,15 +1,15 @@
 ---
+slug: individual-roi
 name: Individual ROI on Getting Friends to Sign the Treaty
+featuredImage: /globalSolutions/1-percent-treaty/individual-roi.jpg
+author:
+  name: The Office of the President
 description: >-
   Discover how investing just 5 hours of your time can lead to significant
   impact in garnering support for global initiatives through your friends.
-featuredImage: individual-roi.png
-#  date: 'June 14, 2023'
-author:
-  name: The Office of the President
-#  picture: ''
 ogImage:
-  url: 'individual-roi.png'
+  url: individual-roi.png
+absFilePath: 'C:\code\wishonia\public\globalSolutions\1-percent-treaty\individual-roi.md'
 ---
 # Individual ROI on Getting Friends to Sign the Treaty
 

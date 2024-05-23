@@ -1,18 +1,18 @@
 ---
+slug: decentralized-institutes-of-health-details
 name: >-
   The Decentralized Institutes of Health: Revolutionizing Healthcare Through
   Decentralized Science and AI
+featuredImage: >-
+  /globalSolutions/1-percent-treaty/decentralized-institutes-of-health-details.jpg
 description: >-
   Exploring the transformative potential of Decentralized Institutes of Health
   (DIH) in reallocating resources from war to medical breakthroughs using
   blockchain, AI, and decentralized tools.
-featuredImage: '/decentralized-institutes-of-health.png'
-#  date: '2022-10-18'
-#author:
-#  name: Anonymous
-#  picture: ''
 ogImage:
-  url: '/decentralized-institutes-of-health.png'
+  url: /globalSolutions/1-percent-treaty/decentralized-institutes-of-health.png
+absFilePath: >-
+  C:\code\wishonia\public\globalSolutions\1-percent-treaty\decentralized-institutes-of-health-details.md
 ---
 # The Decentralized Institutes of Health
 

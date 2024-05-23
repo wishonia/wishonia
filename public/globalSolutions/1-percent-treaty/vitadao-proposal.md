@@ -1,17 +1,16 @@
 ---
-name: >-
-  Proposal for VitaDAO to Launch the Decentralized Institutes of Health (DIH)
+slug: vitadao-proposal
+name: Proposal for VitaDAO to Launch the Decentralized Institutes of Health (DIH)
+featuredImage: /globalSolutions/1-percent-treaty/vitadao-proposal.jpg
+author:
+  name: The Office of the President
 description: >-
   Proposing the creation of the Decentralized Institutes of Health (DIH) DAO by
   VitaDAO to redirect global military spending towards medical research through
   decentralized collaboration.
-featuredImage: vitadao-proposal.png
-#  date: ''
-author:
-  name: 'The Office of the President'
-#  picture: ''
 ogImage:
-  url: 'vitadao-proposal.png'
+  url: vitadao-proposal.png
+absFilePath: 'C:\code\wishonia\public\globalSolutions\1-percent-treaty\vitadao-proposal.md'
 ---
 # A Proposal for VitaDAO to Launch the Decentralized Institutes of Health (DIH) DAO
 

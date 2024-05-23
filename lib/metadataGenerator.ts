@@ -63,7 +63,7 @@ export async function generateMetadataWhereMissing(pathRelativeToPublic?: string
         } else {
             const absPath = absPathFromPublic(post.featuredImage);
             const imageExists = fs.existsSync(absPath);
-            if(!imageExists){
+            if(!imageExists || post.featuredImage.endsWith('.png')){
                 post.featuredImage = await generateAndSaveFeaturedImageJpg(post.content, post.absFilePath);
                 updated = true;
             }

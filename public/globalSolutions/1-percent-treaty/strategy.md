@@ -1,15 +1,15 @@
 ---
+slug: strategy
 name: Roadmap for Creating a Decentralized Autonomous Organization (DAO)
+featuredImage: /globalSolutions/1-percent-treaty/strategy.jpg
+author:
+  name: The Office of the President
 description: >-
   Explore the detailed roadmap for establishing a DAO, including crowdfunding
   strategies, lobbying efforts, and post-launch activities.
-featuredImage: strategy.png
-#  date: '2023-09-15'
-author:
-  name: The Office of the President
-#  picture: ''
 ogImage:
-  url: 'strategy.png'
+  url: strategy.png
+absFilePath: 'C:\code\wishonia\public\globalSolutions\1-percent-treaty\strategy.md'
 ---
 # Roadmap
 
