@@ -3,7 +3,7 @@ const {join} = require("path");
 const path = require("path");
 const matter = require("gray-matter");
 require('dotenv').config({ path: join(__dirname, '../.env') });
-const { generateAndSaveImage} = require("./imageGenerator");
+const { generateAndSaveFeaturedImagePng} = require("./imageGenerator");
 const { generateText } = require("./textGenerator");
 let model = "gpt-3.5-turbo";
 
@@ -63,7 +63,7 @@ async function processMarkdownFiles() {
     metadata.title = await generateTitleFromContent(content);
     metadata.description = await generateDescriptionFromContent(content);
     const imagePath = path.join(postsDirectory, `${file.replace(/\.md$/, ".png")}`);
-    await generateAndSaveImage(content, imagePath);
+    await generateAndSaveFeaturedImagePng(content, imagePath);
     metadata.coverImage = path.relative(postsDirectory, imagePath);
     const newFileContents = matter.stringify(content, metadata);
     await fs.writeFile(file, newFileContents);

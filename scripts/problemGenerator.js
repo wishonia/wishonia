@@ -1,4 +1,4 @@
-const {generateAndSaveImage} = require("./imageGenerator");
+const {generateAndSaveFeaturedImagePng} = require("./imageGenerator");
 const generateText = require("./textGenerator").generateText;
 const slugify = require('slugify');
 const fs = require('fs');
@@ -54,7 +54,7 @@ async function generateProblems() {
             console.log(`Markdown file already exists for ${problemName}`);
         }
         if(overwriteImages || !fs.existsSync(imagePath)) {
-            await generateAndSaveImage(`The problem of ${problemName}`, imagePath);
+            await generateAndSaveFeaturedImagePng(`The problem of ${problemName}`, imagePath);
         } else {
             console.log(`Image already exists for ${problemName}`);
         }
