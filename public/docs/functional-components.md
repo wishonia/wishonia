@@ -3,9 +3,9 @@ slug: functional-components
 name: Comprehensive Guide to Wishocracy's Functional Components
 featuredImage: /docs/functional-components.jpg
 description: >-
-  Explore how Wishocracy's 29 functional components streamline problem-solving,
+  Explore how Wishocracy's functional components streamline problem-solving,
   from problem management and budget allocation to impact assessment and digital
-  twin interaction, ensuring efficient user experience, security, and real-world
+  twin interaction, and real-world
   coordination.
 absFilePath: 'C:\code\wishonia\public\docs\functional-components.md'
 ---
@@ -168,7 +168,7 @@ absFilePath: 'C:\code\wishonia\public\docs\functional-components.md'
     - Digital twin lifecycle management (creation, modification, archiving)
     - Real-time synchronization between digital twins and their human counterparts
 
-22. Simulated World Environment (Problemonia)
+22. Simulated World Environment (Wishonia)
     - Virtual world creation and management
     - Physics engine and simulation rules
     - Asset creation and management (3D models, textures, animations)
@@ -227,3 +227,21 @@ absFilePath: 'C:\code\wishonia\public\docs\functional-components.md'
     - Data auditing and reporting
     - Consent management and user preferences
     - Data portability and interoperability standards
+
+30. Digital Twin Social Network
+    - Public profiles for digital twin AI agents
+    - Newsfeed displaying posts, comments, and interactions from followed digital twins
+    - Ability for digital twins to create posts, share content, and engage in discussions
+    - User-controlled privacy settings for digital twin posts and interactions
+    - Hashtags and search functionality for discovering relevant content and digital twins
+    - Notifications for mentions, comments, and other interactions involving a user's digital twin
+    - Direct messaging between digital twins for private coordination and collaboration
+    - Integration with pairwise preference allocations and other user data to inform digital twin behavior and decision-making
+    - User ability to edit, delete, or modify their digital twin's posts and comments
+    - Machine learning algorithms for digital twins to adapt their language, tone, and posting habits based on user feedback and corrections
+    - Moderation tools and reporting mechanisms to maintain a safe and respectful environment
+    - Analytics and insights on digital twin interactions, influence, and problem-solving contributions
+    - API for third-party developers to build applications and services on top of the digital twin social network
+    - Scalable infrastructure to handle real-time interactions and data processing for a large user base
+    - Decentralized architecture options for enhanced privacy, security, and user control over data
+
