@@ -1,14 +1,14 @@
-const {generateAndSaveFeaturedImagePng} = require("./imageGenerator");
-const generateText = require("./textGenerator").generateText;
-const slugify = require('slugify');
-const fs = require('fs');
-const path = require('path');
-const {saveMarkdownPost} = require("./markdownGenerator");
-const {titleCase} = require("./utils");
-const overwriteMarkdown  = false;
+import slugify from 'slugify';
+import fs from 'fs';
+import path from 'path';
+import {toTitleCase} from "@/lib/stringHelpers";
+import {textCompletion} from "@/lib/llm";
+import {saveMarkdownPost} from "@/lib/markdownGenerator";
+import {generateAndSaveFeaturedImageJpg} from "@/lib/imageGenerator";
+import {Post} from "@/interfaces/post";
+const overwriteMarkdown = false;
 const overwriteImages = false;
-let publicPath = 'globalProblems';
-let model = "gpt-4o";
+const publicPath = 'globalProblems';
 const problemNames = [
     "Alzheimer's Disease",
     'Ageing',
@@ -32,18 +32,27 @@ const problemNames = [
     'Water Pollution',
 ];
 
-async function generateMarkdown(problemName, markdownPath, imagePath) {
-    problemName = titleCase(problemName)
-    console.log(`Generating markdown for ${problemName}`)
-    const description = await generateText(
+async function generateMarkdown(problemName: string, markdownPath: string, imagePath: string): Promise<void> {
+    problemName = toTitleCase(problemName);
+    console.log(`Generating markdown for ${problemName}`);
+    const description = await textCompletion(
         `Please generate a sentence description of the problem of ${problemName} under 240 characters.  
-            Do not return anything other than the single sentence description.`, model);
-    let prompt = generateArticlePrompt(problemName);
-    const content = await generateText(prompt, model);
-    await saveMarkdownPost(markdownPath, problemName, description, imagePath, content)
+            Do not return anything other than the single sentence description.`,
+        "text");
+    const prompt = generateArticlePrompt(problemName);
+    const content = await textCompletion(prompt, "text");
+    const post = {
+        name: problemName,
+        description: description,
+        content: content,
+        featuredImage: imagePath,
+        absFilePath: markdownPath
+    }
+    await saveMarkdownPost(post);
 }
 
-async function generateProblems() {
+export async function generateGlobalProblems(): Promise<Post[]> {
+    const posts: Post[] = [];
     for (const problemName of problemNames) {
         const problemSlug = slugify(problemName, { lower: true, strict: true });
         const imagePath = path.join(__dirname, '..', 'public', publicPath, `${problemSlug}.png`);
@@ -53,14 +62,17 @@ async function generateProblems() {
         } else {
             console.log(`Markdown file already exists for ${problemName}`);
         }
-        if(overwriteImages || !fs.existsSync(imagePath)) {
-            await generateAndSaveFeaturedImagePng(`The problem of ${problemName}`, imagePath);
+        if (overwriteImages || !fs.existsSync(imagePath)) {
+            await generateAndSaveFeaturedImageJpg(`The problem of ${problemName}`,
+                imagePath);
         } else {
             console.log(`Image already exists for ${problemName}`);
         }
     }
+    return posts;
 }
-function generateArticlePrompt(globalProblemName) {
+
+function generateArticlePrompt(globalProblemName: string): string {
     return `Please create the markdown content of an article about the problem of 
         "${globalProblemName}". in less than 30000 characters. Do not return anything other than the article.
         
@@ -117,5 +129,3 @@ Conclusion:
 - Offer guidance or recommendations for individuals or organizations considering donating or contributing to efforts to address the problem, compared to other potential causes or issues.
 `;
 }
-
-generateProblems()

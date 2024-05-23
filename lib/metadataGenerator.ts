@@ -5,6 +5,8 @@ import {Post} from "@/interfaces/post";
 import {readAllMarkdownFiles} from "@/lib/markdownReader";
 import {generateAndSaveFeaturedImageJpg} from "@/lib/imageGenerator";
 import {saveMarkdownPost} from "@/lib/markdownGenerator";
+import {absPathFromPublic} from "@/lib/fileHelper";
+import fs from "fs";
 dotenv.config({ path: join(__dirname, "../.env") });
 async function generateMetadataFromContent(content: string): Promise<Post> {
     const name = await generateTitleFromContent(content);
@@ -43,11 +45,17 @@ async function generateDescriptionFromContent(content: string): Promise<string> 
 }
 
 export async function generateMetadataWhereMissing(): Promise<Post[]> {
-    const posts = await readAllMarkdownFiles('public');
+    const absFolderPath = absPathFromPublic();
+    const posts = await readAllMarkdownFiles(absFolderPath);
     for(const post of posts) {
         let updated = false;
         if(!post.name){
-            post.name = await generateTitleFromContent(post.content);
+            if(post.title){
+                post.name = post.title;
+                delete post.title;
+            } else {
+                post.name = await generateTitleFromContent(post.content);
+            }
             updated = true;
         }
         if(!post.description){
@@ -57,6 +65,13 @@ export async function generateMetadataWhereMissing(): Promise<Post[]> {
         if(!post.featuredImage) {
             post.featuredImage = await generateAndSaveFeaturedImageJpg(post.content, post.absFilePath);
             updated = true;
+        } else {
+            const absPath = absPathFromPublic(post.featuredImage);
+            const imageExists = fs.existsSync(absPath);
+            if(!imageExists){
+                post.featuredImage = await generateAndSaveFeaturedImageJpg(post.content, post.absFilePath);
+                updated = true;
+            }
         }
         if(updated){
             await saveMarkdownPost(post);

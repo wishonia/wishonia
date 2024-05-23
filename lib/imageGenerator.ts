@@ -71,12 +71,21 @@ async function generateAndSaveFeaturedImagePng(content: string, imagePath: strin
 
 export async function generateAndSaveFeaturedImageJpg(content: string, imagePath: string): Promise<string> {
 
-    let pngPath = await generateAndSaveFeaturedImagePng(content, imagePath);
+    const pngPath = imagePath.replace(/\.[^/.]+$/, ".png");
+    if(!fs.existsSync(pngPath)) {
+        await generateAndSaveFeaturedImagePng(content, pngPath);
+    } else {
+        console.log(`Image already exists at ${pngPath}`);
+    }
     const jpgPath = pngPath.replace('.png', '.jpg');
+    if(fs.existsSync(jpgPath)) {
+        console.log(`JPG image already exists at ${jpgPath}`);
+        return jpgPath;
+    }
     await sharp(pngPath)
         .jpeg({ quality: 50 })
         .toFile(jpgPath);
-    await fs.unlink(imagePath);
+    await fs.unlink(pngPath);
     return jpgPath;
 }
 

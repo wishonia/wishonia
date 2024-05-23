@@ -3,16 +3,19 @@ import {Post} from "@/interfaces/post";
 import fs from 'fs';
 import path from 'path';
 import matter from 'gray-matter';
-import {getNonIgnoredFiles} from "@/lib/fileHelper";
+import {absPathFromPublic, getNonIgnoredFiles} from "@/lib/fileHelper";
 
-export async function readAllMarkdownFiles(folderPath?: string): Promise<Post[]> {
+export async function readAllMarkdownFiles(absFolderPath?: string): Promise<Post[]> {
+    if(!absFolderPath){
+        absFolderPath = absPathFromPublic('');
+    }
     // Get an absolute path to directory above this script
-    const allFiles = getNonIgnoredFiles(folderPath);
+    const allFiles = getNonIgnoredFiles(absFolderPath);
     const markdownFiles = allFiles.filter(file => file.endsWith('.md'));
     return markdownFiles.map(fullPath => {
         const fileContents = fs.readFileSync(fullPath, 'utf8');
         const {data, content} = matter(fileContents);
-        // get filename without extension
+        // get filename without an extension
         const slug = path.basename(fullPath).replace(/\.md$/, '');
         const post: Post = {
             slug: slug,
