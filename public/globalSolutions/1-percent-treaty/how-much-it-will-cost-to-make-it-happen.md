@@ -1,5 +1,5 @@
 ---
-title: >-
+name: >-
   Optimizing Costs: Strategies to Gather 80 Million Signatures for a Global
   Initiative
 description: >-

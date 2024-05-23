@@ -1,5 +1,5 @@
 ---
-title: Using AI to Automate Clinical Research and Drug Development
+name: Using AI to Automate Clinical Research and Drug Development
 description: >-
   Investment in artificial intelligence to accelerate clinical research would produce a massive return on investment through
   cost reductions and improved treatment outcomes.

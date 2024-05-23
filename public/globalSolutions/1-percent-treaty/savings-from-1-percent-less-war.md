@@ -1,5 +1,5 @@
 ---
-title: Cumulative Savings from Decreased Annual Cost of War
+name: Cumulative Savings from Decreased Annual Cost of War
 description: >-
   Explore the potential savings from reducing the annual cost of war by 1% over
   80 years, leading to a cumulative global savings of $179 trillion and

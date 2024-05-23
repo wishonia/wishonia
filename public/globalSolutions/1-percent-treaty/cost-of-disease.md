@@ -1,5 +1,5 @@
 ---
-title: "Global Cost Of Disease"
+name: "Global Cost Of Disease"
 description: "Disease costs the world trillions through healthcare costs, indirect economic losses"
 featuredImage: "/cost-of-disease.png"
 # date: "2024-03-16T05:35:07.322Z"

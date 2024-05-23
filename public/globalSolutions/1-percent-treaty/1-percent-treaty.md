@@ -1,5 +1,5 @@
 ---
-title: >-
+name: >-
   The 1% Treaty
 description: >-
   A global accord to redirect 1% of military spending to discovering new treatments and cures for chronic diseases.

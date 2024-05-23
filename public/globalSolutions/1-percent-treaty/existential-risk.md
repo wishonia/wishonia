@@ -1,5 +1,5 @@
 ---
-title: The Dangers of Excessive Military Spending and the AI Arms Race
+name: The Dangers of Excessive Military Spending and the AI Arms Race
 description: >-
   Exploring the implications of current military expenditures on global security
   and the looming threats posed by the AI arms race.
