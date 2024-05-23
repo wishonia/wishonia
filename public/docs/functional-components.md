@@ -1,3 +1,14 @@
+---
+slug: functional-components
+name: Comprehensive Guide to Wishocracy's Functional Components
+featuredImage: /docs/functional-components.jpg
+description: >-
+  Explore how Wishocracy's 29 functional components streamline problem-solving,
+  from problem management and budget allocation to impact assessment and digital
+  twin interaction, ensuring efficient user experience, security, and real-world
+  coordination.
+absFilePath: 'C:\code\wishonia\public\docs\functional-components.md'
+---
 # Functional Components of Wishocracy
 
 1. Problem Management System
