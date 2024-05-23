@@ -1,5 +1,5 @@
 ---
-title: Understanding the Return on Investment in Lobbying within the Defense Sector
+name: Understanding the Return on Investment in Lobbying within the Defense Sector
 description: >-
   Explore the significant expenditures and considerable gains of defense
   companies in lobbying efforts to influence government policies and secure

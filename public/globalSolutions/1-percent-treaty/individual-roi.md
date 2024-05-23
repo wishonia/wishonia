@@ -1,5 +1,5 @@
 ---
-title: Individual ROI on Getting Friends to Sign the Treaty
+name: Individual ROI on Getting Friends to Sign the Treaty
 description: >-
   Discover how investing just 5 hours of your time can lead to significant
   impact in garnering support for global initiatives through your friends.

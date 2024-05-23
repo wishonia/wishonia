@@ -1,5 +1,5 @@
 ---
-title: >-
+name: >-
   Proposal for VitaDAO to Launch the Decentralized Institutes of Health (DIH)
 description: >-
   Proposing the creation of the Decentralized Institutes of Health (DIH) DAO by

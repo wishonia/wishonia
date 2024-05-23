@@ -1,5 +1,5 @@
 ---
-title: Frequently Asked Questions
+name: Frequently Asked Questions
 description: >-
   Discover how a small reduction in military budgets can lead to significant
   advancements in health research, global cooperation, and security.

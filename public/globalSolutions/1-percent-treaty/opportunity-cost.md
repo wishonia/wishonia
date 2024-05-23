@@ -1,5 +1,5 @@
 ---
-title: >-
+name: >-
   Opportunity Cost of Military Spending: Redirecting $2 Trillion towards Health
   Research
 description: >-

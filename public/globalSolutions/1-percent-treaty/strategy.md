@@ -1,5 +1,5 @@
 ---
-title: Roadmap for Creating a Decentralized Autonomous Organization (DAO)
+name: Roadmap for Creating a Decentralized Autonomous Organization (DAO)
 description: >-
   Explore the detailed roadmap for establishing a DAO, including crowdfunding
   strategies, lobbying efforts, and post-launch activities.

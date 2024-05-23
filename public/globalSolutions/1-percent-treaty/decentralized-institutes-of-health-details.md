@@ -1,5 +1,5 @@
 ---
-title: >-
+name: >-
   The Decentralized Institutes of Health: Revolutionizing Healthcare Through
   Decentralized Science and AI
 description: >-

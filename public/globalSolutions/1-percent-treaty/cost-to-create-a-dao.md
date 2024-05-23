@@ -1,5 +1,5 @@
 ---
-title: "Cost to Create a Decentralized Institute of Health DAO"
+name: "Cost to Create a Decentralized Institute of Health DAO"
 description: "How much it would cost to create a DAO to fund the 1% Treaty Initiative"
 featuredImage: "/military-spending-scenarios-chart.png"
 # date: "2024-03-16T05:35:07.322Z"

@@ -1,5 +1,5 @@
 ---
-title: >-
+name: >-
   The Decentralized Institutes of Health
 description: >-
  Radically Accelerating Medical Research and Funding by Harnessing the Power of Decentralized Science, Collective Intelligence, and Blockchain Technology.
