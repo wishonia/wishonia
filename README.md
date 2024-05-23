@@ -252,7 +252,7 @@ By defining these common primitives and leveraging decentralized data networks, 
 4. **Task Management System**: A system for decomposing each solution into a list of atomic tasks that need to be completed.
 5. **Wisher Relationship Management (WRM) System**: A system for tracking the relationship between wishes, solutions, tasks, and wishers.  This is similar to a Customer Relationship Management (CRM) system but for global coordination between Wishers.
 
-# Digital Twins: Wishonia
+# Digital Twins
 
 We'd like to allow people to create Digital Twins of themselves in the simulated World of Wishonia.
 Digital Twins are meant to be autonomous agents to work together to find positive sum games,
