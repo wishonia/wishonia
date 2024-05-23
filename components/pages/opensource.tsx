@@ -16,6 +16,8 @@ export default async function OpenSource() {
     .then((res) => res.json())
     .catch((e) => console.error(e))
 
+  const buttonText = `Star on Github`
+
   return (
     <section className="container py-12 lg:py-20">
       <div className="flex flex-col items-center gap-4">
@@ -23,7 +25,7 @@ export default async function OpenSource() {
           subtext="Feel free to view the codebase or contribute!"
           className="text-center"
         >
-          Fully Open Source
+          Wishocracy is Free and Open Source!
         </HeadingText>
         <Link
           href={siteConfig.links.github}
@@ -31,7 +33,7 @@ export default async function OpenSource() {
           className={cn(buttonVariants({ variant: "outline" }))}
         >
           <Icons.star className="mr-2 h-4 w-4" />
-          <span>{stars} on Github</span>
+          <span>{buttonText}</span>
         </Link>
       </div>
     </section>

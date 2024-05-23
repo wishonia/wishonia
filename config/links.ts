@@ -9,7 +9,7 @@ export const dashboardLink: NavItem = {
 export const globalProblemsVoteLink: NavItem = {
     title: "Vote on Problems",
     href: "/globalProblems",
-    icon: "frown",
+    icon: "vote",
     img: "/img/screenshots/problem-allocation-short.png",
     tooltip: "Vote on the allocation of resources between global problems",
 }
@@ -92,10 +92,11 @@ export const yourWishesLink: NavItem = {
 export const avatarNav: Navigation = {
     data: [
         profileSettingsLink,
-        yourWishesLink,
-        wishingWellsLink,
-        globalProblemsVoteLink,
-        createWish
+        dashboardLink,
+        //yourWishesLink,
+        //wishingWellsLink,
+        //globalProblemsVoteLink,
+        //createWish
     ],
 };
 
@@ -109,8 +110,9 @@ export const landingPageLinks: Navigation = {
 
 export const generalSidebarNav: Navigation = {
     data: [
-        wishingWellsLink,
-        wishingWellsResultsLink,
+        dashboardLink,
+        //wishingWellsLink,
+        //wishingWellsResultsLink,
         globalProblemsVoteLink,
         globalProblemsResultsLink,
     ],
@@ -119,8 +121,8 @@ export const generalSidebarNav: Navigation = {
 
 export const generalFooterNav: Navigation = {
     data: [
-        wishingWellsLink,
-        wishingWellsResultsLink,
+        //wishingWellsLink,
+        //wishingWellsResultsLink,
         globalProblemsVoteLink,
         globalProblemsResultsLink,
     ],
