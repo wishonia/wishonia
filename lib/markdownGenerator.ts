@@ -11,6 +11,7 @@ export async function saveMarkdownPost(
     if(post.featuredImage){post.featuredImage = convertToRelativePath(post.featuredImage);}
     const content = post.content;
     const metadata = JSON.parse(JSON.stringify(post));
+    delete metadata.absFilePath;
     delete metadata.content;
     const postContent = stringify(content, metadata);
     writeFileSync(post.absFilePath, postContent);

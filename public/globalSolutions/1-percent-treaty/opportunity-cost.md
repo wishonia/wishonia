@@ -1,18 +1,18 @@
 ---
+slug: opportunity-cost
 name: >-
   Opportunity Cost of Military Spending: Redirecting $2 Trillion towards Health
   Research
+featuredImage: /globalSolutions/1-percent-treaty/opportunity-cost.jpg
+author:
+  name: The Office of the President
 description: >-
   Exploring the implications of reallocating $2 trillion from global militarism
   to health research and treatment, potentially employing 25 million individuals
   and transforming public health outcomes worldwide.
-featuredImage: opportunity-cost.png
-#  date: 'August 25, 2021'
-author:
-  name: The Office of the President
-  # picture: author-image.jpg
 ogImage:
   url: opportunity-cost.png
+absFilePath: 'C:\code\wishonia\public\globalSolutions\1-percent-treaty\opportunity-cost.md'
 ---
 ### Opportunity Cost of Military Spending
 

@@ -79,6 +79,7 @@ export async function generateAndSaveFeaturedImageJpg(content: string, imagePath
     }
     const jpgPath = pngPath.replace('.png', '.jpg');
     if(fs.existsSync(jpgPath)) {
+        await fs.unlink(pngPath);
         console.log(`JPG image already exists at ${jpgPath}`);
         return jpgPath;
     }

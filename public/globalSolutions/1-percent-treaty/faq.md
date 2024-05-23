@@ -1,15 +1,14 @@
 ---
+slug: faq
 name: Frequently Asked Questions
+featuredImage: /globalSolutions/1-percent-treaty/faq.jpg
+author: null
 description: >-
   Discover how a small reduction in military budgets can lead to significant
   advancements in health research, global cooperation, and security.
-featuredImage: faq.png
-#  date: 'September 15, 2022'
-author:
-  #name: The Office of the President
-  #picture: author_image_url_here
 ogImage:
-  url:  faq.png
+  url: faq.png
+absFilePath: 'C:\code\wishonia\public\globalSolutions\1-percent-treaty\faq.md'
 ---
 # FAQ
 
