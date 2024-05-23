@@ -44,18 +44,13 @@ async function generateDescriptionFromContent(content: string): Promise<string> 
     return text;
 }
 
-export async function generateMetadataWhereMissing(): Promise<Post[]> {
-    const absFolderPath = absPathFromPublic();
+export async function generateMetadataWhereMissing(pathRelativeToPublic?: string): Promise<Post[]> {
+    const absFolderPath = absPathFromPublic(pathRelativeToPublic);
     const posts = await readAllMarkdownFiles(absFolderPath);
     for(const post of posts) {
         let updated = false;
         if(!post.name){
-            if(post.title){
-                post.name = post.title;
-                delete post.title;
-            } else {
-                post.name = await generateTitleFromContent(post.content);
-            }
+            post.name = await generateTitleFromContent(post.content);
             updated = true;
         }
         if(!post.description){
