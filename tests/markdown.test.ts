@@ -11,8 +11,9 @@ beforeAll(async () => {
 });
 
 describe("Test Markdown Reader", () => {
-    it("generates missing metadata", async () => {
-        const posts = await generateMetadataWhereMissing();
+    it("metadata updater", async () => {
+        const posts = await generateMetadataWhereMissing(
+            'globalSolutions');
     });
     it("gets markdown posts", async () => {
         const results = await readAllMarkdownFiles();
