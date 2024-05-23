@@ -1,11 +1,9 @@
-import Image from "next/image"
 import Link from "next/link"
 
 import { siteConfig } from "@/config/site"
 import { cn } from "@/lib/utils"
 import { buttonVariants } from "@/components/ui/button"
 import { Icons } from "@/components/icons"
-import { ImageFrame } from "@/components/image-frame"
 
 export default function HeroHeader() {
   return (
@@ -37,18 +35,6 @@ export default function HeroHeader() {
               <span>Improve Wishonia</span>
             </Link>
           </div>
-        </div>
-        <div className="mx-auto max-w-6xl px-6 lg:px-8">
-          <ImageFrame>
-            <Image
-                className="rounded-lg"
-                src="/images/hero-img.jpg"
-                width={1364}
-              height={866}
-              quality={100}
-              alt="Header image"
-            />
-          </ImageFrame>
         </div>
       </section>
     </>

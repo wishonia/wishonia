@@ -137,7 +137,7 @@ export function UserNameForm({ user, className, ...props }: UserNameFormProps) {
                   Copy
                 </button>
               </div>
-              <p className="mt-2 text-sm text-gray-600">Earn a $WISH for each person you persuade to vote in the poll with your URL.</p>
+              <p className="mt-2 text-sm text-gray-600">Earn WISH points for each new citizen that joins with your URL!</p>
             </div>
           </div>
         </CardContent>
