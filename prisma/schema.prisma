@@ -122,6 +122,13 @@ model User {
   wishingWellPairAllocations      WishingWellPairAllocation[]
   globalProblemPairAllocations    GlobalProblemPairAllocation[]
   globalProblems                  GlobalProblem[]
+  globalProblemVotes              GlobalProblemVote[]
+  globalSolutions                 GlobalSolution[]
+  globalSolutionVotes             GlobalSolutionVote[]
+  globalTasks                     GlobalTask[]
+  userTasks                       UserTask[]
+  bids                            Bid[]
+  rewards                         Reward[]
   genieDAOFeedback                GenieDAOFeedback[]
 
   @@map("users")
@@ -275,10 +282,16 @@ model GlobalProblem {
   featuredImage                String?                       @map("featured_image")
   createdAt                    DateTime                      @default(now()) @map("created_at")
   updatedAt                    DateTime                      @updatedAt @map("updated_at")
-  user                         User                          @relation(fields: [userId], references: [id])
   thisGlobalProblemAllocations GlobalProblemPairAllocation[] @relation("ThisGlobalProblemRelation")
   thatGlobalProblemAllocations GlobalProblemPairAllocation[] @relation("ThatGlobalProblemRelation")
   averageAllocation            Float?                        @map("average_allocation")
+  status                       String
+  creator                      User                          @relation(fields: [creatorId], references: [id])
+  creatorId                    String
+  globalSolutions              GlobalSolution[]
+  problemCategories            ProblemCategory[]
+  problemTags                  ProblemTag[]
+  votes                        GlobalProblemVote[]
 
   @@map("global_problems")
 }
@@ -417,4 +430,171 @@ model GenieDAOFeedback {
   user       User     @relation(fields: [userId], references: [id])
 
   @@map("genie_dao_feedback")
+}
+
+model GlobalProblemVote {
+  id              String        @id @default(cuid())
+  globalProblem   GlobalProblem @relation(fields: [globalProblemId], references: [id])
+  globalProblemId String
+  user            User          @relation(fields: [userId], references: [id])
+  userId          String
+  vote            Int
+  createdAt       DateTime      @default(now()) @map("created_at")
+  updatedAt       DateTime      @updatedAt @map("updated_at")
+
+  @@map("global_problem_votes")
+}
+
+model GlobalSolution {
+  id                 String               @id @default(cuid())
+  globalProblem      GlobalProblem        @relation(fields: [globalProblemId], references: [id])
+  globalProblemId    String
+  title              String
+  description        String
+  status             String
+  createdAt          DateTime             @default(now()) @map("created_at")
+  updatedAt          DateTime             @updatedAt @map("updated_at")
+  creator            User                 @relation(fields: [creatorId], references: [id])
+  creatorId          String
+  globalTasks        GlobalTask[]
+  solutionCategories SolutionCategory[]
+  solutionTags       SolutionTag[]
+  votes              GlobalSolutionVote[]
+
+  @@map("global_solutions")
+}
+
+model GlobalSolutionVote {
+  id               String         @id @default(cuid())
+  globalSolution   GlobalSolution @relation(fields: [globalSolutionId], references: [id])
+  globalSolutionId String
+  user             User           @relation(fields: [userId], references: [id])
+  userId           String
+  vote             Int
+  createdAt        DateTime       @default(now()) @map("created_at")
+  updatedAt        DateTime       @updatedAt @map("updated_at")
+
+  @@map("global_solution_votes")
+}
+
+model GlobalTask {
+  id               String         @id @default(cuid())
+  globalSolution   GlobalSolution @relation(fields: [globalSolutionId], references: [id])
+  globalSolutionId String
+  title            String
+  description      String
+  status           String
+  createdAt        DateTime       @default(now()) @map("created_at")
+  updatedAt        DateTime       @updatedAt @map("updated_at")
+  userTasks        UserTask[]
+  taskCategories   TaskCategory[]
+  taskTags         TaskTag[]
+  bids             Bid[]
+  budget           Budget?
+  rewards          Reward[]
+  User             User?          @relation(fields: [userId], references: [id])
+  userId           String?
+
+  @@map("global_tasks")
+}
+
+model UserTask {
+  id           String     @id @default(cuid())
+  globalTask   GlobalTask @relation(fields: [globalTaskId], references: [id])
+  globalTaskId String
+  user         User       @relation(fields: [userId], references: [id])
+  userId       String
+  status       String
+  createdAt    DateTime   @default(now()) @map("created_at")
+  updatedAt    DateTime   @updatedAt @map("updated_at")
+
+  @@map("user_tasks")
+}
+
+model Bid {
+  id           String     @id @default(cuid())
+  globalTask   GlobalTask @relation(fields: [globalTaskId], references: [id])
+  globalTaskId String
+  user         User       @relation(fields: [userId], references: [id])
+  userId       String
+  amount       Float
+  status       String
+  createdAt    DateTime   @default(now()) @map("created_at")
+  updatedAt    DateTime   @updatedAt @map("updated_at")
+
+  @@map("bids")
+}
+
+model ProblemCategory {
+  id             String          @id @default(cuid())
+  name           String
+  globalProblems GlobalProblem[]
+
+  @@map("problem_categories")
+}
+
+model ProblemTag {
+  id             String          @id @default(cuid())
+  name           String
+  globalProblems GlobalProblem[]
+
+  @@map("problem_tags")
+}
+
+model SolutionCategory {
+  id              String           @id @default(cuid())
+  name            String
+  globalSolutions GlobalSolution[]
+
+  @@map("solution_categories")
+}
+
+model SolutionTag {
+  id              String           @id @default(cuid())
+  name            String
+  globalSolutions GlobalSolution[]
+
+  @@map("solution_tags")
+}
+
+model TaskCategory {
+  id          String       @id @default(cuid())
+  name        String
+  globalTasks GlobalTask[]
+
+  @@map("task_categories")
+}
+
+model TaskTag {
+  id          String       @id @default(cuid())
+  name        String
+  globalTasks GlobalTask[]
+
+  @@map("task_tags")
+}
+
+model Budget {
+  id           String     @id @default(cuid())
+  globalTask   GlobalTask @relation(fields: [globalTaskId], references: [id])
+  globalTaskId String     @unique
+  amount       Float
+  status       String
+  createdAt    DateTime   @default(now()) @map("created_at")
+  updatedAt    DateTime   @updatedAt @map("updated_at")
+
+  @@map("budgets")
+}
+
+model Reward {
+  id           String     @id @default(cuid())
+  globalTask   GlobalTask @relation(fields: [globalTaskId], references: [id])
+  globalTaskId String
+  user         User       @relation(fields: [userId], references: [id])
+  userId       String
+  amount       Float
+  status       String
+  createdAt    DateTime   @default(now()) @map("created_at")
+  updatedAt    DateTime   @updatedAt @map("updated_at")
+
+  @@map("rewards")
 }
