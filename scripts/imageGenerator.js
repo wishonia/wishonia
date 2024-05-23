@@ -1,3 +1,5 @@
+import sharp from "sharp";
+
 const { OpenAI } = require("openai");
 const fetch = require("node-fetch");
 const fs = require("fs-extra");
@@ -55,11 +57,21 @@ export async function generateFeaturedImage(content) {
     return await image.buffer();
 }
 
-async function generateAndSaveImage(content, imagePath) {
+async function generateAndSaveFeaturedImagePng(content, imagePath) {
     const buffer = await generateFeaturedImage(content);
     console.log(`Saving image to ${imagePath}`);
     await fs.writeFile(imagePath, buffer);
     return imagePath;
+}
+
+async function generateAndSaveFeaturedImageJpg(content, imagePath) {
+    const pngPath = await generateAndSaveFeaturedImagePng(content);
+    const jpgPath = pngPath.replace('.png', '.jpg');
+    await sharp(imagePath)
+        .jpeg({ quality: 50 })
+        .toFile(jpgPath);
+    await fs.unlink(imagePath);
+    return jpgPath;
 }
 
 function convertToRelativePath(absolutePath) {
@@ -74,7 +86,7 @@ function convertToRelativePath(absolutePath) {
 }
 
 module.exports = {
-    generateImage,
-    generateAndSaveImage,
+    generateAndSaveFeaturedImageJpg,
+    generateAndSaveFeaturedImagePng,
     convertToRelativePath
 };

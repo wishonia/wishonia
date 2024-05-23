@@ -1,7 +1,7 @@
 import {generateFeaturedImage} from "@/scripts/imageGenerator";
 import {uploadImageToVercel} from "@/lib/wishingWells";
 
-const {generateAndSaveImage} = require("./imageGenerator");
+const {generateAndSaveFeaturedImagePng} = require("./imageGenerator");
 const generateText = require("./textGenerator").generateText;
 const slugify = require('slugify');
 const fs = require('fs');
@@ -132,7 +132,7 @@ export async function wishingWellGenerator() {
             await generateWishingWellMarkdownFile(wishingWellName, markdownPath, imagePath);
         }
         if(overwrite || !fs.existsSync(imagePath)) {
-            await generateAndSaveImage(`Humanity's Goal of ${wishingWellName}`, imagePath);
+            await generateAndSaveFeaturedImagePng(`Humanity's Goal of ${wishingWellName}`, imagePath);
         }
         wishingWells.push({
             name: wishingWellName,
