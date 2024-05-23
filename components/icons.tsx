@@ -22,7 +22,7 @@ import {
   FaBomb,
   FaBookMedical, FaChartPie,
   FaDisease, FaHome,
-  FaPeace,
+  FaPeace, FaQuestionCircle,
   FaRegStar, FaSadCry,
   FaSkull,
   FaSort,
@@ -33,7 +33,7 @@ import { ImSpinner8, ImStatsBars } from "react-icons/im"
 import { LuSettings } from "react-icons/lu"
 import { MdDeleteForever, MdOutlineLogout } from "react-icons/md"
 import { RxDashboard, RxMixerHorizontal } from "react-icons/rx"
-import {FaRankingStar, FaSquarePollVertical} from "react-icons/fa6";
+import {FaHand, FaRankingStar, FaSquarePollVertical} from "react-icons/fa6";
 
 export type IconKeys = keyof typeof icons
 
@@ -92,6 +92,8 @@ const icons = {
   check: BsCheck2,
   star: FaRegStar,
   ranking: FaRankingStar,
+  question: FaQuestionCircle,
+  volunteer: FaHand
 }
 
 export const Icons: IconsType = icons
