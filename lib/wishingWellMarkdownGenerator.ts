@@ -1,15 +1,15 @@
-import {generateFeaturedImage} from "@/scripts/imageGenerator";
-import {uploadImageToVercel} from "@/lib/wishingWells";
+import { uploadImageToVercel } from "@/lib/wishingWells";
+import slugify from 'slugify';
+import fs from 'fs';
+import path from 'path';
+import {WishingWell} from "@prisma/client";
+import {textCompletion} from "@/lib/llm";
+import {saveMarkdownPost} from "@/lib/markdownGenerator";
+import {Post} from "@/interfaces/post";
+import {toTitleCase} from "@/lib/stringHelpers";
+import {generateAndSaveFeaturedImageJpg, generateFeaturedImage} from "@/lib/imageGenerator";
 
-const {generateAndSaveFeaturedImagePng} = require("./imageGenerator");
-const generateText = require("./textGenerator").generateText;
-const slugify = require('slugify');
-const fs = require('fs');
-const path = require('path');
-const {saveMarkdownPost} = require("./markdownGenerator");
-const {titleCase} = require("./utils");
-const overwrite  = false;
-let model = "gpt-4o";
+const overwrite = false;
 const wishingWellNames = [
     'Cure Aging',
     'Cure Cancer',
@@ -23,31 +23,9 @@ const wishingWellNames = [
     'End War',
     'War and Military',
     'Cure Diseases',
-    // 'Incarcerate Murders',
-    // 'Incarcerate People for Possession of Marijuana',
-    // 'Incarcerate People for Possession of MDMA',
-    // 'Funding for Nuclear Bombs',
-    // 'Abolish Autonomous Weapons Systems',
-    // 'Abolish Weapons of Mass Destruction',
-    // 'Prevent Child Abuse and Neglect',
-    // 'End Terrorism',
-    // 'Prevent Genocide',
-    // 'Help Refugees',
-    // 'End Forced Displacement',
-    // 'Clear Landmines and Unexploded Ordinances',
-    // 'Reduce Cybercrime',
-    // 'Reduce Armed Robbery',
-    // 'Reduce Kidnapping',
-    // 'Reduce Piracy',
-    // 'End Gang Violence',
-    // 'Reduce Corruption',
-    // 'Reduce Deforestation',
-    // 'Reduce Air Pollution',
-    // 'Reduce Water Pollution',
-    // 'Universal Access to Education',
 ];
 
-export function generateArticlePrompt(wishingWellName) {
+export function generateArticlePrompt(wishingWellName: string): string {
     return `Please create the markdown content of an article about the goal of 
         "${wishingWellName}". in less than 30000 characters. Do not return anything other than the article.
         
@@ -103,43 +81,52 @@ Conclusion:
          `;
 }
 
-async function generateAndUploadImageToVercel(obj) {
+async function generateAndUploadImageToVercel(obj: WishingWell): Promise<void> {
+    if(!obj.content){
+        throw new Error("Content is required to generate an image.");
+    }
     const buffer = await generateFeaturedImage(obj.content);
     const slug = obj.name.toLowerCase().replace(/ /g, "-");
     const imageName = `${slug}.png`;
     obj.featuredImage = await uploadImageToVercel(buffer, imageName);
 }
 
-async function generateWishingWellMarkdownFile(wishingWellName, markdownPath, imagePath) {
-    const description = await generateText(
+async function generateWishingWellMarkdownFile(wishingWellName: string,
+                                               markdownPath: string,
+                                               imagePath: string): Promise<Post> {
+    const description = await textCompletion(
         `Please generate a sentence description of the goal of "${wishingWellName}" under 240 characters.  
-            Do not return anything other than the single sentence description.`, model);
-    let prompt = generateArticlePrompt(wishingWellName);
-    const content = await generateText(prompt, model);
-    await saveMarkdownPost(markdownPath, wishingWellName, description, imagePath, content)
+            Do not return anything other than the single sentence description.`, "text");
+    const prompt = generateArticlePrompt(wishingWellName);
+    const content = await textCompletion(prompt, "text");
+    const post = {
+        name: wishingWellName,
+        description: description,
+        content: content,
+        absFilePath: markdownPath,
+        featuredImage: imagePath
+    } as Post;
+    await saveMarkdownPost(post);
+    return post;
 }
 
-export async function wishingWellGenerator() {
-    const wishingWells = [];
+export async function generateWishingWellMarkdown(): Promise<Post[]> {
+    const posts: Post[] = [];
     for (let wishingWellName of wishingWellNames) {
-        wishingWellName = titleCase(wishingWellName)
+        let post: Post | undefined;
+        wishingWellName = toTitleCase(wishingWellName);
         const wishingWellSlug = slugify(wishingWellName, { lower: true, strict: true });
-        const imagePath = path.join(__dirname, '..', 'public', 'wishingWells',
-            `${wishingWellSlug}.png`);
-        const markdownPath = path.join(__dirname, '..', 'public', 'wishingWells',
-            `${wishingWellSlug}.md`);
+        const imagePath = path.join(__dirname, '..', 'public', 'wishingWells', `${wishingWellSlug}.png`);
+        const markdownPath = path.join(__dirname, '..', 'public', 'wishingWells', `${wishingWellSlug}.md`);
         if (overwrite || !fs.existsSync(markdownPath)) {
-            await generateWishingWellMarkdownFile(wishingWellName, markdownPath, imagePath);
+            post = await generateWishingWellMarkdownFile(wishingWellName, markdownPath, imagePath);
         }
-        if(overwrite || !fs.existsSync(imagePath)) {
-            await generateAndSaveFeaturedImagePng(`Humanity's Goal of ${wishingWellName}`, imagePath);
+        if (overwrite || !fs.existsSync(imagePath)) {
+            await generateAndSaveFeaturedImageJpg(`Humanity's Goal of ${wishingWellName}`, imagePath);
         }
-        wishingWells.push({
-            name: wishingWellName,
-            slug: wishingWellSlug,
-            imagePath: imagePath,
-            markdownPath: markdownPath
-        });
+        if(post){
+            posts.push(post);
+        }
     }
-    return wishingWells;
+    return posts;
 }

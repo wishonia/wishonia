@@ -13,17 +13,22 @@ export function convertToRelativePath(absolutePath: string): string {
 }
 
 function isAbsolute(pathRelativeToRepoRoot: string): boolean {
-    return path.isAbsolute(pathRelativeToRepoRoot);
+    // Get the absolute path to the repository root
+    const repoRoot = path.resolve(__dirname, '../');
+
+    // Check if the path to the repository root is included in the path
+    return pathRelativeToRepoRoot.startsWith(repoRoot);
 }
 
-export function convertToAbsolutePath(pathRelativeToRepoRoot: string): string {
-    if(isAbsolute(pathRelativeToRepoRoot)) {
-        return pathRelativeToRepoRoot;
+export function absPathFromPublic(pathRelativeToPublic?: string): string {
+    if(pathRelativeToPublic && isAbsolute(pathRelativeToPublic)) {
+        return pathRelativeToPublic;
     }
     // Get the absolute path to the 'public' directory
-    const repoDir = path.join(__dirname, '..');
+    const publicDir = path.join(__dirname, '../public');
+    if(!pathRelativeToPublic){return publicDir;}
     // Return the absolute path to the file
-    return path.join(repoDir, pathRelativeToRepoRoot);
+    return path.join(publicDir, pathRelativeToPublic);
 }
 
 function loadGitignore(rootDir: string): Ignore {
@@ -38,35 +43,35 @@ function loadGitignore(rootDir: string): Ignore {
     return ig;
 }
 
-function getAllFiles(dirPath: string, ig: Ignore, arrayOfFiles: string[] = []): string[] {
-    dirPath = convertToAbsolutePath(dirPath);
-    const files = fs.readdirSync(dirPath);
+function getAllFiles(absPath: string, ig: Ignore, arrayOfFiles: string[] = []): string[] {
+
+    const files = fs.readdirSync(absPath);
 
     files.forEach(file => {
-        const filePath = path.join(dirPath, file);
-        const relativeFilePath = path.relative(dirPath, filePath);
+        const absFilePath = path.join(absPath, file);
+        const relativeFilePath = path.relative(absPath, absFilePath);
 
         // Skip file if it matches .gitignore patterns
         if (ig.ignores(relativeFilePath)) {
             return;
         }
 
-        if (fs.statSync(filePath).isDirectory()) {
-            arrayOfFiles = getAllFiles(filePath, ig, arrayOfFiles);
+        if (fs.statSync(absFilePath).isDirectory()) {
+            arrayOfFiles = getAllFiles(absFilePath, ig, arrayOfFiles);
         } else {
-            arrayOfFiles.push(filePath);
+            arrayOfFiles.push(absFilePath);
         }
     });
 
     return arrayOfFiles;
 }
 
-export function getNonIgnoredFiles(folderPath?: string): string[] {
+export function getNonIgnoredFiles(absFolderPath?: string): string[] {
     // Get an absolute path to directory above this script
     const rootDir = path.dirname(__dirname);
     const ig = loadGitignore(rootDir);
-    if(!folderPath) {
-        folderPath = rootDir;
+    if(!absFolderPath) {
+        absFolderPath = rootDir;
     }
-    return getAllFiles(folderPath, ig);
+    return getAllFiles(absFolderPath, ig);
 }
