@@ -3,7 +3,6 @@
  */
 
 import fs from "fs";
-import {textCompletion} from "@/lib/llm";
 import {generateMarkdownAndImageFromDescription} from "@/lib/markdownGenerator";
 
 // Generate a cross-platform absolute path to "../public/docs" relative to the current file
