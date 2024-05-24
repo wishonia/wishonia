@@ -1,5 +1,5 @@
 import * as z from "zod"
-import { db } from "@/lib/db"
+import { prisma as db } from "@/lib/db"
 import {getServerSession} from "next-auth/next";
 import {authOptions} from "@/lib/auth";
 

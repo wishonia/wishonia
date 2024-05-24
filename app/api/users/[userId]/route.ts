@@ -1,8 +1,5 @@
-import { getServerSession } from "next-auth/next"
 import { z } from "zod"
-
-import { authOptions } from "@/lib/auth"
-import { db } from "@/lib/db"
+import { prisma as db } from "@/lib/db"
 import { userNameSchema } from "@/lib/validations/user"
 import {handleError} from "@/lib/errorHandler";
 import {getUserId} from "@/lib/api/getUserId";
