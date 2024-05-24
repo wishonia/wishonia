@@ -3,7 +3,7 @@ import * as z from "zod"
 
 import { verifyWishingWell } from "@/lib/api/wishingWells"
 import { authOptions } from "@/lib/auth"
-import { db } from "@/lib/db"
+import { prisma as db } from "@/lib/db"
 
 const wishingWellContributionCreateSchema = z.object({
   date: z.string(),

@@ -1,4 +1,4 @@
-import { db } from "@/lib/db"
+import { prisma as db } from "@/lib/db"
 import {getUserId} from "@/lib/api/getUserId";
 
 export async function GET() {

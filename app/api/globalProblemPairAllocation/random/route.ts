@@ -1,8 +1,5 @@
 import {getUserId} from "@/lib/api/getUserId";
-import { PrismaClient, GlobalProblem } from '@prisma/client';
 import {getRandomGlobalProblemPair} from "@/lib/globalProblems";
-const prisma = new PrismaClient();
-
 
 
 export async function GET() {

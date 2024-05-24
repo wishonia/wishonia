@@ -1,10 +1,10 @@
-import {PrismaClient, WishingWell} from "@prisma/client";
+import {WishingWell} from "@prisma/client";
 import {convertKeysToCamelCase, toTitleCase} from "@/lib/stringHelpers";
-import {db} from "@/lib/db";
+import {prisma as db} from "@/lib/db";
 import {put} from "@vercel/blob";
 import {textCompletion} from "@/lib/llm";
 
-const prisma = new PrismaClient();
+import { prisma } from "@/lib/db";
 
 export async function getRandomWishingWellPair(userId: string | undefined) {
     let randomPair: WishingWell[] = [];
