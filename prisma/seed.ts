@@ -1,21 +1,9 @@
 import {PrismaClient} from "@prisma/client";
-import {seedGlobalProblems} from "@/prisma/seedGlobalProblems";
-import {seedWishingWells} from "@/prisma/seedWishingWells";
-import {seedUser} from "@/prisma/seedUser";
-import {seedGlobalProblemPairAllocations} from "@/prisma/seedGlobalProblemPairAllocations";
-import {aggregateGlobalProblemPairAllocations} from "@/lib/globalProblems";
-import {seedWishingWellPairAllocations} from "@/prisma/seedWishingWellPairAllocations";
-import {aggregateWishingWellPairAllocations} from "@/lib/wishingWells";
 const prisma = new PrismaClient();
 
 async function main() {
-    const testUser = await seedUser();
-    await seedGlobalProblems(testUser);
-    await seedWishingWells(testUser);
-    await seedGlobalProblemPairAllocations(testUser);
-    await aggregateGlobalProblemPairAllocations();
-    await seedWishingWellPairAllocations(testUser);
-    await aggregateWishingWellPairAllocations();
+    console.log(`Run tests/seed.test.ts to seed the database.  
+    For some reason prisma can't resolve the seeder libraries.`)
 }
 
 main()

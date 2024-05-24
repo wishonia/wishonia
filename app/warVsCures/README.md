@@ -1,3 +1,14 @@
+---
+slug: README
+name: Interactive Poll Comparing War vs. Clinical Research Spending
+featuredImage: 'C:\code\wishonia\app\warVsCures\README.jpg'
+description: >-
+  Discover the features of the War vs. Cures Poll app, from allocation polls and
+  dynamic visualizations to user authentication, personalized experiences, and
+  gamification. Engage with the community through social sharing, email
+  notifications, and impactful data visualizations.
+absFilePath: 'C:\code\wishonia\app\warVsCures\README.md'
+---
 ## Features of the War vs. Cures Poll
 
 1. Desired Allocation Poll: presents the user with a question asking how much they think should be spent on war (Option A) relative to clinical research (Option B). It includes a single slider input to allocate the percentage between the two options, along with two bars above the slider that dynamically visualize the allocation as the user adjusts the slider. The user submits their desired allocation by clicking the "Submit" button, and their response is saved in the browser's local storage.

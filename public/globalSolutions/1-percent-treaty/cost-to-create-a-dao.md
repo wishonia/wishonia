@@ -1,13 +1,11 @@
 ---
-title: "Cost to Create a Decentralized Institute of Health DAO"
-description: "How much it would cost to create a DAO to fund the 1% Treaty Initiative"
-featuredImage: "/military-spending-scenarios-chart.png"
-# date: "2024-03-16T05:35:07.322Z"
-#author:
-#    name: Mike P. Sinn
-#    picture: "/assets/blog/authors/mike.png"
-ogImage:
-url: "/military-spending-scenarios-chart.png"
+slug: cost-to-create-a-dao
+name: Cost to Create a Decentralized Institute of Health DAO
+featuredImage: /globalSolutions/1-percent-treaty/cost-to-create-a-dao.jpg
+description: How much it would cost to create a DAO to fund the 1% Treaty Initiative
+ogImage: null
+absFilePath: >-
+  C:\code\wishonia\public\globalSolutions\1-percent-treaty\cost-to-create-a-dao.md
 ---
 
 To estimate the cost of creating a DAO like [ConstitutionDAO](https://juicebox.money/p/constitutiondao)

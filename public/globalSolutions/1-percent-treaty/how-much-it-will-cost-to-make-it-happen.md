@@ -1,18 +1,19 @@
 ---
-title: >-
+slug: how-much-it-will-cost-to-make-it-happen
+name: >-
   Optimizing Costs: Strategies to Gather 80 Million Signatures for a Global
   Initiative
+featuredImage: /globalSolutions/1-percent-treaty/how-much-it-will-cost-to-make-it-happen.jpg
+author:
+  name: The Office of the President
 description: >-
   Analyzing the potential cost range per signature and total estimated costs for
   different strategies to achieve a goal of 80 million signatures for the
   LOGICAL Treaty.
-featuredImage: how-much-it-will-cost-to-make-it-happen.png
-#  date: '2023-09-15'
-author:
-  name: The Office of the President
-  #picture: your-profile-picture-url.jpg
 ogImage:
   url: how-much-it-will-cost-to-make-it-happen.png
+absFilePath: >-
+  C:\code\wishonia\public\globalSolutions\1-percent-treaty\how-much-it-will-cost-to-make-it-happen.md
 ---
 # How Much Will It Cost to Make It Happen?
 

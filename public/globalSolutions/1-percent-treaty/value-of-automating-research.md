@@ -1,15 +1,17 @@
 ---
-title: Using AI to Automate Clinical Research and Drug Development
-description: >-
-  Investment in artificial intelligence to accelerate clinical research would produce a massive return on investment through
-  cost reductions and improved treatment outcomes.
-featuredImage: '/value-of-automating-research.png'
-#  date: '2022-10-25'
+slug: value-of-automating-research
+name: Using AI to Automate Clinical Research and Drug Development
+featuredImage: /globalSolutions/1-percent-treaty/value-of-automating-research.jpg
 author:
   name: The Office of the President
-#  picture: ''
+description: >-
+  Investment in artificial intelligence to accelerate clinical research would
+  produce a massive return on investment through cost reductions and improved
+  treatment outcomes.
 ogImage:
-  url: '/value-of-automating-research.png'
+  url: /globalSolutions/1-percent-treaty/value-of-automating-research.png
+absFilePath: >-
+  C:\code\wishonia\public\globalSolutions\1-percent-treaty\value-of-automating-research.md
 ---
 # The Using AI to Automate Clinical Research and Drug Development
 
