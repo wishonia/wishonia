@@ -1,16 +1,16 @@
 ---
-title: Understanding the Return on Investment in Lobbying within the Defense Sector
+slug: lobbying
+name: Understanding the Return on Investment in Lobbying within the Defense Sector
+featuredImage: /globalSolutions/1-percent-treaty/lobbying.jpg
+author:
+  name: The Office of the President
 description: >-
   Explore the significant expenditures and considerable gains of defense
   companies in lobbying efforts to influence government policies and secure
   contracts.
-featuredImage: lobbying.png
-#  date: 'December 15, 2021'
-author:
-  name: The Office of the President
-  #picture: author_image_link
 ogImage:
   url: lobbying.png
+absFilePath: 'C:\code\wishonia\public\globalSolutions\1-percent-treaty\lobbying.md'
 ---
 # Return on Investment in Lobbying
 

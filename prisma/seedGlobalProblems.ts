@@ -1,14 +1,14 @@
-import {getMarkdownObjects} from "@/scripts/markdownReader";
 import {PrismaClient, User} from "@prisma/client";
+import {readAllMarkdownFiles} from "@/lib/markdownReader";
 const prisma = new PrismaClient();
 
 export async function seedGlobalProblems(testUser: User) {
-    const globalProblems = getMarkdownObjects('public/globalProblems')
-    for (const problem of globalProblems) {
+    const posts = await readAllMarkdownFiles('public/globalProblems')
+    for (const post of posts) {
         // Check if the globalProblem already exists
         const existingProblem = await prisma.globalProblem.findUnique({
             where: {
-                name: problem.data.name,
+                name: post.name,
             },
         });
 
@@ -16,10 +16,10 @@ export async function seedGlobalProblems(testUser: User) {
         if (!existingProblem) {
             const result = await prisma.globalProblem.create({
                 data: {
-                    name: problem.data.name,
-                    description: problem.data.description,
-                    content: problem.content,
-                    featuredImage: problem.data.featuredImage,
+                    name: post.name,
+                    description: post.description,
+                    content: post.content,
+                    featuredImage: post.featuredImage,
                     userId: testUser.id,
                 },
             });

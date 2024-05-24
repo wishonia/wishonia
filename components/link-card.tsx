@@ -26,7 +26,7 @@ export const LinkCard = ({
   }
 
   return (
-    <Card onClick={onClick} className="group cursor-pointer">
+    <Card onClick={onClick} className="group cursor-pointer max-w-sm">
       <CardHeader>
         <CardTitle className="text-lg font-bold flex items-center">
 {/*        {navItem.img && (

@@ -1,6 +1,7 @@
 import { getCurrentUser } from "@/lib/session"
 import Footer from "@/components/layout/footer"
 import TopNavbar from "@/components/layout/topNavbar"
+import React from "react";
 
 interface FrontPageLayoutProps {
   children: React.ReactNode

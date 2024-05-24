@@ -6,19 +6,14 @@ import {seedGlobalProblems} from "@/prisma/seedGlobalProblems";
 import {seedWishingWells} from "@/prisma/seedWishingWells";
 import {seedGlobalProblemPairAllocations} from "@/prisma/seedGlobalProblemPairAllocations";
 import {aggregateGlobalProblemPairAllocations} from "@/lib/globalProblems";
-import {aggregateWishingWellPairAllocations, saveWishToWishingWell} from "@/lib/wishingWells";
+import {aggregateWishingWellPairAllocations} from "@/lib/wishingWells";
 import {seedWishingWellPairAllocations} from "@/prisma/seedWishingWellPairAllocations";
 import {assertTestDB, getOrCreateTestUser, truncateAllTables} from "@/tests/test-helpers";
 
 let prisma = new PrismaClient();
 beforeAll(async () => {
-    process.env.DATABASE_URL = "postgresql://user:pass@localhost:5432/wishonia_test?schema=public";
-    if(!prisma){
-        prisma = new PrismaClient();
-    }
     await assertTestDB();
 });
-
 
 async function checkGlobalProblems<ExtArgs>(testUser: User) {
     console.log("Checking global problems");
@@ -69,5 +64,10 @@ describe("Database-related tests", () => {
         const testUser = await getOrCreateTestUser();
         await checkWishingWells(testUser);
         await checkGlobalProblems(testUser);
+    }, 45000);
+    it("Seed wishing wells", async () => {
+        const testUser = await getOrCreateTestUser();
+        await checkWishingWells(testUser);
+        //await checkGlobalProblems(testUser);
     }, 45000);
 });

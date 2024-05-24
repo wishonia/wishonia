@@ -1,15 +1,15 @@
 ---
-title: 'Choosing Between Paths: The Urgency of the PATH Treaty'
+slug: paths
+name: 'Choosing Between Paths: The Urgency of the PATH Treaty'
+featuredImage: /globalSolutions/1-percent-treaty/paths.jpg
+author:
+  name: ''
 description: >-
   Exploring the critical juncture humanity faces in deciding between AI-driven
   warfare or a path towards health, longevity, and global well-being.
-featuredImage: paths.png
-#  date: ''
-author:
-  name: ''
-#  picture: ''
 ogImage:
-  url: 'paths.png'
+  url: paths.png
+absFilePath: 'C:\code\wishonia\public\globalSolutions\1-percent-treaty\paths.md'
 ---
 # Choose Your Path
 

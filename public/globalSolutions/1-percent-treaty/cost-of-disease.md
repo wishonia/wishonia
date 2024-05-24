@@ -1,13 +1,13 @@
 ---
-title: "Global Cost Of Disease"
-description: "Disease costs the world trillions through healthcare costs, indirect economic losses"
-featuredImage: "/cost-of-disease.png"
-# date: "2024-03-16T05:35:07.322Z"
-# author:
-#  name: Mike P. Sinn
-#  picture: "/assets/blog/authors/mike.png"
+slug: cost-of-disease
+name: Global Cost Of Disease
+featuredImage: /globalSolutions/1-percent-treaty/cost-of-disease.jpg
+description: >-
+  Disease costs the world trillions through healthcare costs, indirect economic
+  losses
 ogImage:
-  url: "/cost-of-disease.png"
+  url: /cost-of-disease.png
+absFilePath: 'C:\code\wishonia\public\globalSolutions\1-percent-treaty\cost-of-disease.md'
 ---
 
 The **$244 trillion** annual total global cost of disease encompasses direct healthcare costs, indirect economic losses, and the $100k valuation of a Year of Life Lost (YLL) and a $100k valuation Disability-Adjusted Life Year (DALYs). 

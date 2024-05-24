@@ -1,14 +1,19 @@
 ---
-title: 'Why Reallocation From Public Bads to Public Goods Is Better Than Just Increasing Spending on Public Goods'
-description: >-
-  Simply increasing spending on medical research while simultaneously increasing military spending does not actually increase the number of brains and resources available for research.
-featuredImage: why-reallocation-is-necessary.png
-#  date: '2022-11-15'
+slug: why-reallocation-is-necessary
+name: >-
+  Why Reallocation From Public Bads to Public Goods Is Better Than Just
+  Increasing Spending on Public Goods
+featuredImage: /globalSolutions/1-percent-treaty/why-reallocation-is-necessary.jpg
 author:
   name: The Office of the President
-  # picture: 
+description: >-
+  Simply increasing spending on medical research while simultaneously increasing
+  military spending does not actually increase the number of brains and
+  resources available for research.
 ogImage:
   url: why-reallocation-is-necessary.png
+absFilePath: >-
+  C:\code\wishonia\public\globalSolutions\1-percent-treaty\why-reallocation-is-necessary.md
 ---
 ### Military Spending vs. Health Research: A Brain Drain
 

@@ -1,15 +1,15 @@
 ---
-title: >-
-  The 1% Treaty
-description: >-
-  A global accord to redirect 1% of military spending to discovering new treatments and cures for chronic diseases.
-featuredImage: '/1-percent-treaty.png'
-#  date: 'October 1, 2021'
+slug: 1-percent-treaty
+name: The 1% Treaty
+featuredImage: /globalSolutions/1-percent-treaty/1-percent-treaty.jpg
 author:
   name: The Department of Peace
-  # picture: author-image.jpg
+description: >-
+  A global accord to redirect 1% of military spending to discovering new
+  treatments and cures for chronic diseases.
 ogImage:
-  url: '/1-percent-treaty.png'
+  url: /globalSolutions/1-percent-treaty/1-percent-treaty.png
+absFilePath: 'C:\code\wishonia\public\globalSolutions\1-percent-treaty\1-percent-treaty.md'
 ---
 
 ## Facts:

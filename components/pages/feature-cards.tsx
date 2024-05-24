@@ -3,36 +3,39 @@ import { FaHandshake, FaRegStar } from "react-icons/fa"
 
 import { Card, CardDescription, CardTitle } from "@/components/ui/card"
 import HeadingText from "@/components/heading-text"
+import { Icons } from "../icons"
 
 function Cards() {
     return (
         <>
             <Card className="flex flex-grow flex-col justify-between gap-4 p-8 text-left dark:bg-secondary">
                 <BsLightbulb className="text-4xl" />
-                <CardTitle>Collaborative Wish Fulfillment</CardTitle>
+                <CardTitle>
+                    Prioritize Resource Allocation
+                </CardTitle>
                 <CardDescription>
-                    Harness the power of collective intelligence to identify and fulfill the most impactful wishes in the universe.
+                    Given two goals or problems, indicate what percentage of $100 should be allocated to each.
                 </CardDescription>
             </Card>
             <Card className="flex flex-grow flex-col justify-between gap-4 p-8 text-left dark:bg-secondary">
-                <BsPeopleFill className="text-4xl" />
-                <CardTitle>GenieDAO Formation</CardTitle>
+                <Icons.pieChart className="text-4xl" />
+                <CardTitle>Collective Intelligence</CardTitle>
                 <CardDescription>
-                    Facilitate the creation and collaboration of GenieDAOs, empowering individuals to unite around shared wishes and goals.
+                    We then combine the results to create a pie chart to see the aggregate priorities of humanity.
                 </CardDescription>
             </Card>
             <Card className="flex flex-grow flex-col justify-between gap-4 p-8 text-left dark:bg-secondary">
-                <FaHandshake className="text-4xl" />
-                <CardTitle>Wish Fulfillment Proposals</CardTitle>
+                <Icons.volunteer className="text-4xl" />
+                <CardTitle>Propose Solutions</CardTitle>
                 <CardDescription>
-                    Enable GenieDAOs to submit proposals for receiving WishTokens in exchange for completing actions that advance wish fulfillment.
+                    Submit to solve the most pressing problems or fulfill the most desired wishes.
                 </CardDescription>
             </Card>
             <Card className="flex flex-grow flex-col justify-between gap-4 p-8 text-left dark:bg-secondary">
                 <FaRegStar className="text-4xl" />
-                <CardTitle>Collective Resource Allocation</CardTitle>
+                <CardTitle>A Global ToDo List for Humanity</CardTitle>
                 <CardDescription>
-                    Utilize pairwise comparisons and collective decision-making to allocate resources effectively to the most promising wishes and proposals.
+                    Solutions are decomposed into a decentralized global todo list avoiding wasteful duplication of effort.
                 </CardDescription>
             </Card>
         </>

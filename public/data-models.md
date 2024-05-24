@@ -1,14 +1,11 @@
 ---
-title: 'Data Models for Wishonia'
+slug: data-models
+name: Comprehensive Guide to Wishonia's Core Features & Models
+featuredImage: /data-models.jpg
 description: >-
-  A comprehensive list of data models needed to support the various features of Wishonia
-# featuredImage: why-reallocation-is-necessary.png
-#  date: '2022-11-15'
-#author:
-#  name: The Office of the President
-#  # picture: 
-#ogImage:
-#  url: 
+  A comprehensive list of data models needed to support the various features of
+  Wishonia
+absFilePath: 'C:\code\wishonia\public\data-models.md'
 ---
 
 
