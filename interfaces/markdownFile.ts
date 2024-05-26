@@ -1,6 +1,6 @@
 import { type Author } from "./author";
 
-export type Post = {
+export type MarkdownFile = {
   slug?: string;
   name: string;
   date?: string;
