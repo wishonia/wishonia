@@ -5,13 +5,13 @@ import {toTitleCase} from "@/lib/stringHelpers";
 import {textCompletion} from "@/lib/llm";
 import {saveMarkdownPost} from "@/lib/markdownGenerator";
 import {generateAndSaveFeaturedImageJpg} from "@/lib/imageGenerator";
-import {Post} from "@/interfaces/post";
+import {MarkdownFile} from "@/interfaces/markdownFile";
 const overwriteMarkdown = false;
 const overwriteImages = false;
 const publicPath = 'globalProblems';
 const problemNames = [
     "Alzheimer's Disease",
-    'Ageing',
+    'Aging',
     'Air Pollution',
     'Animal Suffering',
     'Cancer',
@@ -51,8 +51,8 @@ async function generateMarkdown(problemName: string, markdownPath: string, image
     await saveMarkdownPost(post);
 }
 
-export async function generateGlobalProblems(): Promise<Post[]> {
-    const posts: Post[] = [];
+export async function generateGlobalProblems(): Promise<MarkdownFile[]> {
+    const posts: MarkdownFile[] = [];
     for (const problemName of problemNames) {
         const problemSlug = slugify(problemName, { lower: true, strict: true });
         const imagePath = path.join(__dirname, '..', 'public', publicPath, `${problemSlug}.png`);

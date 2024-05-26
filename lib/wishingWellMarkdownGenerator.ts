@@ -5,7 +5,7 @@ import path from 'path';
 import {WishingWell} from "@prisma/client";
 import {textCompletion} from "@/lib/llm";
 import {saveMarkdownPost} from "@/lib/markdownGenerator";
-import {Post} from "@/interfaces/post";
+import {MarkdownFile} from "@/interfaces/markdownFile";
 import {toTitleCase} from "@/lib/stringHelpers";
 import {generateAndSaveFeaturedImageJpg, generateFeaturedImage} from "@/lib/imageGenerator";
 
@@ -93,7 +93,7 @@ async function generateAndUploadImageToVercel(obj: WishingWell): Promise<void> {
 
 async function generateWishingWellMarkdownFile(wishingWellName: string,
                                                markdownPath: string,
-                                               imagePath: string): Promise<Post> {
+                                               imagePath: string): Promise<MarkdownFile> {
     const description = await textCompletion(
         `Please generate a sentence description of the goal of "${wishingWellName}" under 240 characters.  
             Do not return anything other than the single sentence description.`, "text");
@@ -105,15 +105,15 @@ async function generateWishingWellMarkdownFile(wishingWellName: string,
         content: content,
         absFilePath: markdownPath,
         featuredImage: imagePath
-    } as Post;
+    } as MarkdownFile;
     await saveMarkdownPost(post);
     return post;
 }
 
-export async function generateWishingWellMarkdown(): Promise<Post[]> {
-    const posts: Post[] = [];
+export async function generateWishingWellMarkdown(): Promise<MarkdownFile[]> {
+    const posts: MarkdownFile[] = [];
     for (let wishingWellName of wishingWellNames) {
-        let post: Post | undefined;
+        let post: MarkdownFile | undefined;
         wishingWellName = toTitleCase(wishingWellName);
         const wishingWellSlug = slugify(wishingWellName, { lower: true, strict: true });
         const imagePath = path.join(__dirname, '..', 'public', 'wishingWells', `${wishingWellSlug}.png`);

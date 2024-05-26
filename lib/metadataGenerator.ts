@@ -1,21 +1,21 @@
 import { join } from "path";
 import dotenv from "dotenv";
 import {textCompletion} from "@/lib/llm";
-import {Post} from "@/interfaces/post";
+import {MarkdownFile} from "@/interfaces/markdownFile";
 import {readAllMarkdownFiles} from "@/lib/markdownReader";
 import {generateAndSaveFeaturedImageJpg} from "@/lib/imageGenerator";
 import {saveMarkdownPost} from "@/lib/markdownGenerator";
 import {absPathFromPublic} from "@/lib/fileHelper";
 import fs from "fs";
 dotenv.config({ path: join(__dirname, "../.env") });
-async function generateMetadataFromContent(content: string): Promise<Post> {
+async function generateMetadataFromContent(content: string): Promise<MarkdownFile> {
     const name = await generateTitleFromContent(content);
     const description = await generateDescriptionFromContent(content);
     return {
         name: name,
         description: description,
         content: content
-    } as Post;
+    } as MarkdownFile;
 }
 
 async function generateTitleFromContent(content: string): Promise<string> {
@@ -44,7 +44,7 @@ async function generateDescriptionFromContent(content: string): Promise<string> 
     return text;
 }
 
-export async function generateMetadataWhereMissing(pathRelativeToPublic?: string): Promise<Post[]> {
+export async function generateMetadataWhereMissing(pathRelativeToPublic?: string): Promise<MarkdownFile[]> {
     const absFolderPath = absPathFromPublic(pathRelativeToPublic);
     const posts = await readAllMarkdownFiles(absFolderPath);
     for(const post of posts) {

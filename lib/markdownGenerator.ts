@@ -3,10 +3,10 @@ import { stringify } from "gray-matter";
 import { textCompletion } from "@/lib/llm";
 import {generateAndSaveFeaturedImageJpg} from "@/lib/imageGenerator";
 import {convertToRelativePath} from "@/lib/fileHelper";
-import {Post} from "@/interfaces/post";
+import {MarkdownFile} from "@/interfaces/markdownFile";
 
 export async function saveMarkdownPost(
-    post: Post
+    post: MarkdownFile
 ): Promise<void> {
     if(post.featuredImage){post.featuredImage = convertToRelativePath(post.featuredImage);}
     const content = post.content;
@@ -36,6 +36,6 @@ export async function generateMarkdownAndImageFromDescription(
         content: content,
         featuredImage: jpgPath,
         absFilePath: postPath
-    } as Post;
+    } as MarkdownFile;
     return saveMarkdownPost(post);
 }
