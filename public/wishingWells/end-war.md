@@ -1,10 +1,11 @@
 ---
+slug: end-war
 name: End War
+featuredImage: /wishingWells/end-war.jpg
 description: >-
   The goal of "End War" is to eliminate armed conflict worldwide by promoting
   diplomacy, fostering peaceful resolutions, and addressing the root causes of
   violence to ensure global stability and safety.
-featuredImage: /wishingWells/end-war.png
 ---
 # The Goal of "End War"
 

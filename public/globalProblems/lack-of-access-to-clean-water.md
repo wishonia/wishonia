@@ -1,9 +1,10 @@
 ---
+slug: lack-of-access-to-clean-water
 name: Lack Of Access To Clean Water
+featuredImage: /globalProblems/lack-of-access-to-clean-water.jpg
 description: >-
   Millions worldwide suffer from the lack of access to clean water, leading to
   severe health risks, economic hardships, and diminished quality of life.
-featuredImage: /globalProblems/lack-of-access-to-clean-water.png
 ---
 # Lack of Access to Clean Water
 

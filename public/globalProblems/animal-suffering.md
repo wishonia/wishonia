@@ -1,11 +1,12 @@
 ---
+slug: animal-suffering
 name: Animal Suffering
+featuredImage: /globalProblems/animal-suffering.jpg
 description: >-
   Animal suffering refers to the physical and emotional pain experienced by
   animals due to human activities such as factory farming, experimentation,
   deforestation, and neglect, raising ethical concerns about their treatment and
   welfare.
-featuredImage: /globalProblems/animal-suffering.png
 ---
 # The Problem of Animal Suffering
 

@@ -1,10 +1,11 @@
 ---
+slug: cure-aging
 name: Cure Aging
+featuredImage: /wishingWells/cure-aging.jpg
 description: >-
   The goal of "Cure Aging" is to combine scientific research and medical
   advancements to prevent, halt, or reverse the biological aging process,
   extending healthy human lifespan and improving quality of life.
-featuredImage: /wishingWells/cure-aging.png
 ---
 # The Goal of "Cure Aging"
 

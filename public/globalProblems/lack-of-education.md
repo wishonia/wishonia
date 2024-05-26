@@ -1,10 +1,11 @@
 ---
+slug: lack-of-education
 name: Lack Of Education
+featuredImage: /globalProblems/lack-of-education.jpg
 description: >-
   The problem of lack of education results in limited job opportunities, lower
   economic growth, increased inequality, and hinders individuals' and
   communities' ability to fully participate in societal development.
-featuredImage: /globalProblems/lack-of-education.png
 ---
 # Lack of Education
 

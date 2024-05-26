@@ -1,10 +1,11 @@
 ---
+slug: cure-cancer
 name: Cure Cancer
+featuredImage: /wishingWells/cure-cancer.jpg
 description: >-
   The goal of "Cure Cancer" is to develop effective treatments and preventive
   measures to completely eradicate cancer by targeting its root causes and
   enhancing the body's ability to fight cancerous cells.
-featuredImage: /wishingWells/cure-cancer.png
 ---
 # Cure Cancer: An Ambitious Goal with Global Significance
 
