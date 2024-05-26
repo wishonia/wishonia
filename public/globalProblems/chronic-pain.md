@@ -1,10 +1,11 @@
 ---
+slug: chronic-pain
 name: Chronic Pain
+featuredImage: /globalProblems/chronic-pain.jpg
 description: >-
   Chronic pain is a long-lasting condition where individuals experience
   persistent and ongoing discomfort or pain that lasts for months or years,
   often without a clear cause or injury.
-featuredImage: /globalProblems/chronic-pain.png
 ---
 # Chronic Pain: A Comprehensive Analysis
 

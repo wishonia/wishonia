@@ -1,10 +1,11 @@
 ---
+slug: cancer
 name: Cancer
+featuredImage: /globalProblems/cancer.jpg
 description: >-
   Cancer is a complex disease characterized by uncontrolled cell growth and
   spread to other parts of the body, leading to severe health complications and
   often being fatal without appropriate treatment.
-featuredImage: /globalProblems/cancer.png
 ---
 # Cancer: An Analytical Examination
 

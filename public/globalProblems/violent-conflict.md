@@ -1,10 +1,11 @@
 ---
+slug: violent-conflict
 name: Violent Conflict
+featuredImage: /globalProblems/violent-conflict.jpg
 description: >-
   Violent conflict arises from severe disputes between groups or nations, often
   driven by political, economic, or social differences, resulting in physical
   aggression and significant harm to people and property.
-featuredImage: /globalProblems/violent-conflict.png
 ---
 # Violent Conflict
 

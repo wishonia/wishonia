@@ -1,10 +1,11 @@
 ---
+slug: alzheimers-disease
 name: Alzheimer's Disease
+featuredImage: /globalProblems/alzheimers-disease.jpg
 description: >-
   Alzheimer's Disease is a progressive neurological disorder that leads to
   memory loss, cognitive decline, and ultimately, the inability to perform
   simple daily tasks.
-featuredImage: /globalProblems/alzheimers-disease.png
 ---
 # Alzheimer's Disease: An In-Depth Analysis
 
