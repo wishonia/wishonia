@@ -5,13 +5,13 @@ import TopNavbar from "@/components/layout/topNavbar"
 import { SidebarNav } from "@/components/sidebar-nav"
 import React from "react";
 
-interface DocsLayoutProps {
+interface DashboardLayoutProps {
   children: React.ReactNode
 }
 
-export default async function DocsLayout({
+export default async function DashboardLayout({
   children,
-}: DocsLayoutProps) {
+}: DashboardLayoutProps) {
   const user = await getCurrentUser()
 
   return (
@@ -28,8 +28,9 @@ export default async function DocsLayout({
           <SidebarNav items={generalSidebarNav.data} />
         </aside>
         <main className="flex w-full flex-1 flex-col"
-          style={{ maxWidth: "90%" }}
-        >{children}</main>
+              style={{ maxWidth: "90%" }}>
+            {children}
+        </main>
       </div>
       <Footer />
     </div>

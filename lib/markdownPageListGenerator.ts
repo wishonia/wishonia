@@ -13,6 +13,11 @@ export async function generateMarkdownPageList() {
   const markdownPages: MarkdownPage[] = markdownFiles.map((file) => {
     const markdownPage = JSON.parse(JSON.stringify(file));
     markdownPage.url = pathRelativeToPublic(file.absFilePath);
+    markdownPage.url = markdownPage.url.replace('.md', '');
+    if(!file.name){
+        console.log('No name found for file:', file.absFilePath);
+        throw new Error(`No name found for file: ${file.absFilePath}`);
+    }
     return {
       name: file.name,
       url: markdownPage.url,
@@ -22,7 +27,7 @@ export async function generateMarkdownPageList() {
     } as MarkdownPage;
   });
 
-  const markdownPagesCode = `export const markdownPages: MarkdownPage[] = ${JSON.stringify(markdownPages, null, 2)}`;
+  const markdownPagesCode = `export const markdownPages = ${JSON.stringify(markdownPages, null, 2)}`;
 
   const filePath = absPathFromRepo('.markdown/markdownPages.ts');
   const fileContent = `${markdownPagesCode}\n`;

@@ -11,6 +11,12 @@ interface DocsProps {
 
 export default async function Docs({ params }: DocsProps) {
   let { filename } = params;
+  // implode filename to string if it's an array
+    if (Array.isArray(filename)) {
+        filename = filename.join('/');
+    }
+  //debugger
+  console.log(`filename: ${filename}`);
   filename = filename.replace(/\.md$/, '');
   return (
     <MarkdownFileRenderer url={`/${filename}.md`}/>
