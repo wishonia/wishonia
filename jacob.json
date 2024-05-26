@@ -1,0 +1,34 @@
+{
+  "language": "TypeScript",
+  "installCommand": "pnpm install",
+  "formatCommand": "",
+  "buildCommand": "npm run build --verbose",
+  "style": "Tailwind",
+  "iconSet": "Font Awesome",
+  "componentExamples": "/components/data-table.tsx",
+  "apiEndpointsExamples": "/app/api/vote/route.ts",
+  "pageExamples": "/app/wishingWells/page.tsx",
+  "directories": {
+    "components": "/components",
+    "pages": "/app",
+    "types": "/types",
+    "styles": "/styles",
+    "tailwindConfig": "/tailwind.config.js",
+    "staticAssets": "/public/assets"
+  },
+  "stateManagement": {
+    "tool": "None"
+  },
+  "testing": {
+    "writeTests": true,
+    "testFramework": "Jest"
+  },
+  "storybook": {
+    "writeStories": true,
+    "storiesLocation": "/stories"
+  },
+  "envVariables": {
+    "exampleFile": "/.env.example"
+  },
+  "env": "NEXT_PUBLIC_APP_URL=http://localhost:3000"
+}
