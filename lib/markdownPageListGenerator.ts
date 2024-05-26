@@ -29,7 +29,7 @@ export async function generateMarkdownPageList() {
 
   const markdownPagesCode = `export const markdownPages = ${JSON.stringify(markdownPages, null, 2)}`;
 
-  const filePath = absPathFromRepo('.markdown/markdownPages.ts');
+  const filePath = absPathFromRepo('lib/markdownPages.ts');
   const fileContent = `${markdownPagesCode}\n`;
 
   // Save the file content to the specified file path
