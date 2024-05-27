@@ -1,7 +1,11 @@
 ---
-title: 'Wishocracy'
+slug: wishocracy
+name: 'Wishocracy: Harnessing Collective Intelligence for Global Impact'
+featuredImage: /wishocracy.jpg
 description: >-
-  How we can use collective intelligence to identify and prioritize the most important wishes for society and allocate resources to the most promising solutions.
+  How we can use collective intelligence to identify and prioritize the most
+  important wishes for society and allocate resources to the most promising
+  solutions.
 ---
 
 

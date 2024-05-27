@@ -1,7 +1,7 @@
 import {getUserId} from "@/lib/api/getUserId";
-import { PrismaClient, WishingWell } from '@prisma/client';
+import { WishingWell } from '@prisma/client';
 import {convertKeysToCamelCase} from "@/lib/stringHelpers";
-const prisma = new PrismaClient();
+import { prisma } from "@/lib/db";
 export async function GET() {
     try {
         const userId = await getUserId();

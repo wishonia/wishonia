@@ -2,7 +2,7 @@ import { WishingWell, User } from "@prisma/client"
 import { getServerSession } from "next-auth"
 
 import { authOptions } from "@/lib/auth"
-import { db } from "@/lib/db"
+import { prisma as db } from "@/lib/db"
 
 type UserWishingWells = WishingWell & {
   total_count: number

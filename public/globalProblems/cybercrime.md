@@ -1,10 +1,11 @@
 ---
+slug: cybercrime
 name: Cybercrime
+featuredImage: /globalProblems/cybercrime.jpg
 description: >-
   Cybercrime involves illegal activities conducted via the internet, such as
   hacking, identity theft, and financial fraud, posing significant threats to
   individuals, organizations, and national security.
-featuredImage: /globalProblems/cybercrime.png
 ---
 # The Problem of Cybercrime
 

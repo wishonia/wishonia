@@ -1,10 +1,11 @@
 ---
+slug: nuclear-weapons
 name: Nuclear Weapons
+featuredImage: /globalProblems/nuclear-weapons.jpg
 description: >-
   Nuclear weapons pose a global threat due to their immense destructive power,
   risk of proliferation, potential for accidental deployment, and the long-term
   environmental and humanitarian consequences they could unleash.
-featuredImage: /globalProblems/nuclear-weapons.png
 ---
 # Nuclear Weapons: A Comprehensive Analysis
 

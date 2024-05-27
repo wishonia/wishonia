@@ -1,14 +1,10 @@
 ---
-title: 'Features Required for a Wishocratic Platform'
+slug: wireframe
+name: 'Features Required for a Wishocratic Platform'
+featuredImage: /wireframe.jpg
 description: >-
-  Here are the essential features needed for a crowdsourced budget allocation platform that aims to maximize universal preference satisfaction.
-# featuredImage: why-reallocation-is-necessary.png
-#  date: '2022-11-15'
-#author:
-#  name: The Office of the President
-#  # picture: 
-#ogImage:
-#  url: 
+  Here are the essential features needed for a crowdsourced budget allocation
+  platform that aims to maximize universal preference satisfaction.
 ---
 
 A crowdsourced budget allocation platform aims to maximize universal preference satisfaction by allowing users to propose, vote on, and implement budget allocations for various ideas.

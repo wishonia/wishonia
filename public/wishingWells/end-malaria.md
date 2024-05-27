@@ -1,10 +1,11 @@
 ---
+slug: end-malaria
 name: End Malaria
+featuredImage: /wishingWells/end-malaria.jpg
 description: >-
   The goal of "End Malaria" is to eradicate malaria through prevention,
   treatment, education, and research to save lives and enhance the well-being of
   affected communities worldwide.
-featuredImage: /wishingWells/end-malaria.png
 ---
 # End Malaria
 

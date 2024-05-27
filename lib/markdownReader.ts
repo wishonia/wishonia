@@ -1,11 +1,11 @@
-import {Post} from "@/interfaces/post";
+import {MarkdownFile} from "@/interfaces/markdownFile";
 
 import fs from 'fs';
 import path from 'path';
 import matter from 'gray-matter';
 import {absPathFromPublic, getNonIgnoredFiles} from "@/lib/fileHelper";
 
-export async function readAllMarkdownFiles(absFolderPath?: string): Promise<Post[]> {
+export async function readAllMarkdownFiles(absFolderPath?: string): Promise<MarkdownFile[]> {
     if(!absFolderPath){
         absFolderPath = absPathFromPublic('');
     }
@@ -17,7 +17,7 @@ export async function readAllMarkdownFiles(absFolderPath?: string): Promise<Post
         const {data, content} = matter(fileContents);
         // get filename without an extension
         const slug = path.basename(fullPath).replace(/\.md$/, '');
-        const post: Post = {
+        const post: MarkdownFile = {
             slug: slug,
             name: data.name,
             date: data.date,

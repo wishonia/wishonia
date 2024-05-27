@@ -1,10 +1,11 @@
 ---
+slug: universal-access-to-clean-water
 name: Universal Access To Clean Water
+featuredImage: /wishingWells/universal-access-to-clean-water.jpg
 description: >-
   Ensuring everyone has reliable and affordable access to safe and clean
   drinking water to improve health, reduce poverty, and promote sustainable
   development worldwide.
-featuredImage: /wishingWells/universal-access-to-clean-water.png
 ---
 # Universal Access To Clean Water
 

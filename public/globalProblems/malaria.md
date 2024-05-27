@@ -1,10 +1,11 @@
 ---
+slug: malaria
 name: Malaria
+featuredImage: /globalProblems/malaria.jpg
 description: >-
   Malaria is a life-threatening disease caused by Plasmodium parasites,
   transmitted to humans through the bites of infected Anopheles mosquitoes,
   leading to severe fever, chills, and potentially fatal complications.
-featuredImage: /globalProblems/malaria.png
 ---
 # The Problem of Malaria
 
