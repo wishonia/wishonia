@@ -1,0 +1,15 @@
+on:
+  issue_comment:
+
+jobs:
+  comment-summary:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v3
+      - name: Comment Summary
+        uses: MaurerKrisztian/issue-improver-action@latest
+        if: contains(github.event.comment.body, '!summarize')
+        with:
+          openai-key: ${{ secrets.OPENAPI_KEY }}
+          max-tokens: 400
+          add-comment-summary-section: true

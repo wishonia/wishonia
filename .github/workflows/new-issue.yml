@@ -1,0 +1,19 @@
+name: Improve issues
+
+on:
+  issues:
+    types: [opened, edited]
+
+jobs:
+  gpt-comment:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v3
+
+      - name: add useful comments to the new issue
+        uses: MaurerKrisztian/issue-improver-action@latest
+        with:
+          openai-key: ${{ secrets.OPENAPI_KEY }}
+          add-summary-section: true
+          add-related-issues-section: true
+          add-label-section: true
