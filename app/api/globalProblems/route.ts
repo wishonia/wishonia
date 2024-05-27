@@ -1,6 +1,4 @@
-import { PrismaClient, GlobalProblem } from '@prisma/client';
-const prisma = new PrismaClient();
-
+import { prisma } from "@/lib/db";
 export async function GET() {
     try {
         const globalProblems = await prisma.globalProblem.findMany();

@@ -1,6 +1,6 @@
-import {PrismaClient, User} from "@prisma/client";
+import {User} from "@prisma/client";
 import {readAllMarkdownFiles} from "@/lib/markdownReader";
-const prisma = new PrismaClient();
+import { prisma } from "@/lib/db";
 
 export async function seedGlobalProblems(testUser: User) {
     const posts = await readAllMarkdownFiles('public/globalProblems')

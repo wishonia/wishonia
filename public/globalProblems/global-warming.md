@@ -1,11 +1,12 @@
 ---
+slug: global-warming
 name: Global Warming
+featuredImage: /globalProblems/global-warming.jpg
 description: >-
   Global warming is the long-term increase in Earth's average surface
   temperature due to human activities, primarily the emission of greenhouse
   gases from burning fossil fuels, leading to severe environmental and ecosystem
   disruptions.
-featuredImage: /globalProblems/global-warming.png
 ---
 # Global Warming
 

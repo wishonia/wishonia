@@ -1,6 +1,6 @@
 import {DateRange, WishingWellByDate, WishingWellEntry} from "@/types"
 
-import {db} from "@/lib/db"
+import {prisma as db} from "@/lib/db"
 
 export async function getWishingWellContributions(
   id: string,

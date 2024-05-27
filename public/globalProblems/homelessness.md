@@ -1,10 +1,11 @@
 ---
+slug: homelessness
 name: Homelessness
+featuredImage: /globalProblems/homelessness.jpg
 description: >-
   Homelessness is a complex social issue where individuals lack stable, safe,
   and adequate housing, often due to factors like economic hardship, mental
   health issues, and systemic inequalities.
-featuredImage: /globalProblems/homelessness.png
 ---
 # The Problem of Homelessness
 
