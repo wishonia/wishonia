@@ -1,10 +1,11 @@
 ---
+slug: poverty
 name: Poverty
+featuredImage: /globalProblems/poverty.jpg
 description: >-
   Poverty is a multifaceted social problem where individuals or groups lack the
   financial resources and essentials for a minimum standard of living, leading
   to adverse impacts on health, education, and overall quality of life.
-featuredImage: /globalProblems/poverty.png
 ---
 # The Problem of Poverty
 

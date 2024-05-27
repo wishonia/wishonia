@@ -1,4 +1,4 @@
-import { db } from "@/lib/db"
+import { prisma as db } from "@/lib/db"
 
 // Calculate the average warPercentageDesired
 export async function getAverageWarPercentageDesired(): Promise<number> {

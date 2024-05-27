@@ -1,10 +1,11 @@
 ---
+slug: malnutrition
 name: Malnutrition
+featuredImage: /globalProblems/malnutrition.jpg
 description: >-
   Malnutrition is a public health issue where individuals, due to inadequate or
   imbalanced diets, experience deficiencies or excesses of calories, nutrients,
   and vitamins necessary for proper health and development.
-featuredImage: /globalProblems/malnutrition.png
 ---
 ## Introduction
 

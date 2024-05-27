@@ -1,10 +1,11 @@
 ---
+slug: deforestation
 name: Deforestation
+featuredImage: /globalProblems/deforestation.jpg
 description: >-
   Deforestation is the large-scale clearing of trees, leading to habitat loss,
   biodiversity decline, and contributing to climate change by reducing CO2
   absorption and increasing greenhouse gas emissions.
-featuredImage: /globalProblems/deforestation.png
 ---
 # The Problem of Deforestation
 

@@ -1,10 +1,11 @@
 ---
+slug: cure-depression
 name: Cure Depression
+featuredImage: /wishingWells/cure-depression.jpg
 description: >-
   The goal of "Cure Depression" is to develop and implement effective treatments
   and support systems that alleviate the symptoms of depression, improve mental
   health, and enhance the overall quality of life for those affected.
-featuredImage: /wishingWells/cure-depression.png
 ---
 # Cure Depression: A Comprehensive Analysis
 

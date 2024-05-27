@@ -1,11 +1,12 @@
 ---
+slug: cure-alzheimers-disease
 name: Cure Alzheimer's Disease
+featuredImage: /wishingWells/cure-alzheimers-disease.jpg
 description: >-
   The goal of "Cure Alzheimer's Disease" is to develop effective treatments or
   interventions that halt, reverse, or completely prevent the progression of
   Alzheimer's, ultimately eliminating the disease and its debilitating effects
   on patients' memory and cognitive functions.
-featuredImage: /wishingWells/cure-alzheimers-disease.png
 ---
 # Cure Alzheimer's Disease
 

@@ -1,10 +1,11 @@
 ---
+slug: end-starvation
 name: End Starvation
+featuredImage: /wishingWells/end-starvation.jpg
 description: >-
   The goal of "End Starvation" is to ensure that every person has access to
   sufficient, safe, and nutritious food by eliminating hunger and addressing the
   root causes of food insecurity globally.
-featuredImage: /wishingWells/end-starvation.png
 ---
 # End Starvation: An In-depth Analysis of a Global Goal
 
