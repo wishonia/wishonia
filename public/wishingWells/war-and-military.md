@@ -1,8 +1,11 @@
 ---
+slug: war-and-military
 name: War And Military
+featuredImage: /wishingWells/war-and-military.jpg
 description: >-
-  Global military spending nearly doubled from $1.1 trillion in 2000 to $1.9 trillion in 2020 (in 2020 inflation-adjusted dollars). This is an average increase of $3.9% or $42 billion a year.
-featuredImage: /wishingWells/war-and-military.png
+  Global military spending nearly doubled from $1.1 trillion in 2000 to $1.9
+  trillion in 2020 (in 2020 inflation-adjusted dollars). This is an average
+  increase of $3.9% or $42 billion a year.
 ---
 ## Direct Military Spending
 

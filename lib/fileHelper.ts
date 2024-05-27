@@ -31,6 +31,17 @@ export function absPathFromPublic(pathRelativeToPublic?: string): string {
     return path.join(publicDir, pathRelativeToPublic);
 }
 
+export function absPathFromRepo(pathRelativeToRepo?: string): string {
+    if(pathRelativeToRepo && isAbsolute(pathRelativeToRepo)) {
+        return pathRelativeToRepo;
+    }
+    // Get the absolute path to the 'public' directory
+    const repoDir = path.join(__dirname, '..');
+    if(!pathRelativeToRepo){return repoDir;}
+    // Return the absolute path to the file
+    return path.join(repoDir, pathRelativeToRepo);
+}
+
 function loadGitignore(rootDir: string): Ignore {
     const ig = ignore();
     const gitignorePath = path.join(rootDir, '.gitignore');

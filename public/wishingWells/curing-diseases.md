@@ -1,10 +1,11 @@
 ---
+slug: curing-diseases
 name: Curing Diseases
+featuredImage: /wishingWells/curing-diseases.jpg
 description: >-
   The goal of "Curing Diseases" is to develop and implement effective treatments
   and strategies that eliminate or significantly reduce the impact of various
   illnesses, improving overall health and quality of life.
-featuredImage: /wishingWells/curing-diseases.png
 ---
 # Curing Diseases: A Comprehensive Analysis
 

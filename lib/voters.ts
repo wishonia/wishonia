@@ -1,4 +1,4 @@
-import {db} from "@/lib/db";
+import {prisma as db} from "@/lib/db";
 
 async function getVotersByReferrer(referrerUserId: string) {
     return db.user.findMany({

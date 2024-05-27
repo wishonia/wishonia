@@ -1,6 +1,6 @@
-import {GlobalProblem, PrismaClient} from "@prisma/client";
+import {GlobalProblem} from "@prisma/client";
 import {convertKeysToCamelCase, toTitleCase} from "@/lib/stringHelpers";
-const prisma = new PrismaClient();
+import { prisma } from "@/lib/db";
 
 export async function getRandomGlobalProblemPair(userId: string | undefined) {
     let randomPair: GlobalProblem[] = [];

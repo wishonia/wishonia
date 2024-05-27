@@ -1,7 +1,7 @@
 import * as z from "zod"
 
 import { verifyWishingWell } from "@/lib/api/wishingWells"
-import { db } from "@/lib/db"
+import { prisma as db } from "@/lib/db"
 import { wishingWellPatchSchema } from "@/lib/validations/wishingWell"
 
 const routeContextSchema = z.object({

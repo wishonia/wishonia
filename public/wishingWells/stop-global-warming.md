@@ -1,10 +1,11 @@
 ---
+slug: stop-global-warming
 name: Stop Global Warming
+featuredImage: /wishingWells/stop-global-warming.jpg
 description: >-
   The goal of "Stop Global Warming" is to implement sustainable practices and
   reduce greenhouse gas emissions to prevent further global warming and preserve
   the planet for future generations.
-featuredImage: /wishingWells/stop-global-warming.png
 ---
 # Stop Global Warming: An Analysis of Its Goal and Significance
 

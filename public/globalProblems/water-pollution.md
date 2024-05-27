@@ -1,10 +1,11 @@
 ---
+slug: water-pollution
 name: Water Pollution
+featuredImage: /globalProblems/water-pollution.jpg
 description: >-
   Water pollution is the contamination of water bodies due to harmful substances
   such as chemicals, waste, and microorganisms, leading to detrimental effects
   on ecosystems and human health.
-featuredImage: /globalProblems/water-pollution.png
 ---
 # Water Pollution
 

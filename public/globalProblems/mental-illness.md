@@ -1,10 +1,11 @@
 ---
+slug: mental-illness
 name: Mental Illness
+featuredImage: /globalProblems/mental-illness.jpg
 description: >-
   Mental illness is a wide range of mental health conditions that affect mood,
   thinking, and behavior, causing distress and impaired functioning in daily
   life.
-featuredImage: /globalProblems/mental-illness.png
 ---
 # The Problem of Mental Illness
 

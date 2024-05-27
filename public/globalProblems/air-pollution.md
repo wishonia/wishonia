@@ -1,10 +1,11 @@
 ---
+slug: air-pollution
 name: Air Pollution
+featuredImage: /globalProblems/air-pollution.jpg
 description: >-
   Air pollution is the presence of harmful substances in the atmosphere,
   including pollutants like particulate matter and toxic gases, which pose
   significant health risks and environmental damage.
-featuredImage: /globalProblems/air-pollution.png
 ---
 # Air Pollution
 

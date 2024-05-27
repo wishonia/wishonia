@@ -1,10 +1,11 @@
 ---
+slug: end-suffering-of-factory-farmed-animals
 name: End Suffering Of Factory Farmed Animals
+featuredImage: /wishingWells/end-suffering-of-factory-farmed-animals.jpg
 description: >-
   The goal is to eliminate the harsh conditions and cruelty faced by animals in
   factory farms through improved welfare standards, humane treatment, and
   alternative farming practices.
-featuredImage: /wishingWells/end-suffering-of-factory-farmed-animals.png
 ---
 ## Ending Suffering Of Factory Farmed Animals
 
