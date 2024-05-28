@@ -1,7 +1,6 @@
 import * as z from "zod"
 import { prisma as db } from "@/lib/db"
-import {getServerSession} from "next-auth/next";
-import {authOptions} from "@/lib/auth";
+import {getCurrentUser} from "@/lib/session";
 
 const routeContextSchema = z.object({
   params: z.object({
@@ -16,7 +15,7 @@ export async function GET(
   const { params } = routeContextSchema.parse(context)
 
   try {
-    const session = await getServerSession(authOptions)
+    const session = await getCurrentUser()
 
     if (!session) {
       return new Response("Unauthorized", { status: 403 })

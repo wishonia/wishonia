@@ -1,9 +1,8 @@
-import { getServerSession } from "next-auth/next"
 import * as z from "zod"
 
 import { verifyWishingWell } from "@/lib/api/wishingWells"
-import { authOptions } from "@/lib/auth"
 import { prisma as db } from "@/lib/db"
+import {getCurrentUser} from "@/lib/session";
 
 const wishingWellContributionCreateSchema = z.object({
   date: z.string(),
@@ -21,7 +20,7 @@ export async function GET(
   context: z.infer<typeof routeContextSchema>
 ) {
   try {
-    const session = await getServerSession(authOptions)
+    const session = await getCurrentUser()
     const { params } = routeContextSchema.parse(context)
 
     if (!session) {
@@ -55,7 +54,7 @@ export async function POST(
   context: z.infer<typeof routeContextSchema>
 ) {
   try {
-    const session = await getServerSession(authOptions)
+    const session = await getCurrentUser();
     const { params } = routeContextSchema.parse(context)
 
     if (!session) {
