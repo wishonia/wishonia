@@ -1,5 +1,7 @@
 generator client {
-  provider = "prisma-client-js"
+  provider        = "prisma-client-js"
+  previewFeatures = ["postgresqlExtensions"]
+  extensions      = [vector(schema: "public")]
 }
 
 datasource db {
@@ -45,59 +47,59 @@ model User {
   banned               Boolean?
   bio                  String?   @db.Text // User's bio or description
   birthday             DateTime?
-  blog                 String?   @map("blog")
+  blog                 String?
   city                 String?
-  company              String?   @map("company")
-  contributorsEnabled  Boolean?  @map("contributors_enabled")
-  countryCode          String?   @map("country_code")
-  createdAt            DateTime  @default(now()) @map("created_at")
-  createdAtTwitter     DateTime? @map("created_at_twitter")
-  deletedAt            DateTime? @map("deleted_at")
+  company              String?
+  contributorsEnabled  Boolean?
+  countryCode          String?
+  createdAt            DateTime  @default(now())
+  createdAtTwitter     DateTime?
+  deletedAt            DateTime?
   email                String?   @unique
-  emailVerified        DateTime? @map("email_verified")
-  favouritesCount      Int?      @map("favourites_count")
-  firstName            String?   @map("first_name")
-  followersCount       Int?      @map("followers_count") // Number of followers
-  followingCount       Int?      @map("following_count") // Number of accounts the user is following
-  gdprConsent          Boolean   @default(false) @map("gdpr_consent")
+  emailVerified        DateTime?
+  favouritesCount      Int?
+  firstName            String?
+  followersCount       Int? // Number of followers
+  followingCount       Int? // Number of accounts the user is following
+  gdprConsent          Boolean   @default(false)
   gender               String?
-  geoEnabled           Boolean?  @map("geo_enabled")
-  githubUsername       String?   @map("github_username")
-  hireable             Boolean?  @map("hireable")
+  geoEnabled           Boolean?
+  githubUsername       String?
+  hireable             Boolean?
   image                String?
-  ipAddress            String?   @map("ip_address") @db.VarChar(45)
+  ipAddress            String?   @db.VarChar(45)
   language             String?
-  lastName             String?   @map("last_name")
-  lastSignInAt         BigInt?   @map("last_sign_in_at")
-  likeCount            Int?      @map("like_count") // Number of likes
-  listedCount          Int?      @map("listed_count")
+  lastName             String?
+  lastSignInAt         BigInt?
+  likeCount            Int? // Number of likes
+  listedCount          Int?
   location             String? // User's location as per their Twitter profile
-  name                 String?   @map("name")
-  newsletterSubscribed Boolean   @default(false) @map("newsletter_subscribed")
-  phoneNumber          String?   @map("phone_number")
+  name                 String?
+  newsletterSubscribed Boolean   @default(false)
+  phoneNumber          String?
   points               Int?
-  postalCode           String?   @map("postal_code")
-  privateMetadata      Json?     @map("private_metadata")
-  profileBannerUrl     String?   @map("profile_banner_url")
-  protected            Boolean?  @map("protected")
-  publicMetadata       Json?     @map("public_metadata")
-  referrerUserId       String?   @map("referrer_user_id")
-  signatureTimestamp   DateTime  @default(now()) @map("signature_timestamp")
-  signedPetition       Boolean   @default(false) @map("signed_petition")
-  stateProvince        String?   @map("state_province")
-  statusesCount        Int?      @map("statuses_count")
-  timeZone             String?   @map("time_zone")
-  tweetCount           Int?      @map("tweet_count") // Number of tweets (including retweets)
-  twitterHandle        String?   @map("twitter_handle") // Twitter username/handle
-  type                 String?   @map("type")
-  unsafeMetadata       Json?     @map("unsafe_metadata")
-  updatedAt            DateTime  @updatedAt @map("updated_at")
+  postalCode           String?
+  privateMetadata      Json?
+  profileBannerUrl     String?
+  protected            Boolean?
+  publicMetadata       Json?
+  referrerUserId       String?
+  signatureTimestamp   DateTime  @default(now())
+  signedPetition       Boolean   @default(false)
+  stateProvince        String?
+  statusesCount        Int?
+  timeZone             String?
+  tweetCount           Int? // Number of tweets (including retweets)
+  twitterHandle        String? // Twitter username/handle
+  type                 String?
+  unsafeMetadata       Json?
+  updatedAt            DateTime  @updatedAt
   username             String    @unique @default(uuid())
-  verified             Boolean?  @map("verified")
-  warPercentageDesired Float?    @map("war_percentage_desired")
-  warPercentageGuessed Float?    @map("war_percentage_guessed")
-  web3Wallet           String?   @map("web3_wallet")
-  website              String?   @map("website")
+  verified             Boolean?
+  warPercentageDesired Float?
+  warPercentageGuessed Float?
+  web3Wallet           String?
+  website              String?
 
   accounts                        Account[]
   sessions                        Session[]
@@ -123,8 +125,6 @@ model User {
   globalProblemPairAllocations    GlobalProblemPairAllocation[]
   globalProblems                  GlobalProblem[]
   genieDAOFeedback                GenieDAOFeedback[]
-
-  @@map("users")
 }
 
 model Education {
@@ -136,8 +136,6 @@ model Education {
   fieldOfStudy String?
   startDate    DateTime
   endDate      DateTime?
-
-  @@map("educations")
 }
 
 model Position {
@@ -149,8 +147,6 @@ model Position {
   startDate DateTime
   endDate   DateTime?
   isCurrent Boolean
-
-  @@map("positions")
 }
 
 model Skill {
@@ -159,8 +155,6 @@ model Skill {
   userId       String
   name         String
   endorsements Endorsement[]
-
-  @@map("skills")
 }
 
 model Endorsement {
@@ -169,8 +163,6 @@ model Endorsement {
   skillId String
   user    User   @relation(fields: [userId], references: [id])
   userId  String
-
-  @@map("endorsements")
 }
 
 model Recommendation {
@@ -180,8 +172,6 @@ model Recommendation {
   recommenderId String
   recommender   User   @relation(name: "RecommenderRecommendations", fields: [recommenderId], references: [id])
   text          String
-
-  @@map("recommendations")
 }
 
 model Post {
@@ -193,8 +183,6 @@ model Post {
   updatedAt DateTime  @updatedAt
   likes     Like[]
   comments  Comment[]
-
-  @@map("posts")
 }
 
 model Like {
@@ -203,8 +191,6 @@ model Like {
   userId String
   post   Post   @relation(fields: [postId], references: [id])
   postId String
-
-  @@map("likes")
 }
 
 model Comment {
@@ -216,8 +202,6 @@ model Comment {
   content   String
   createdAt DateTime @default(now())
   updatedAt DateTime @updatedAt
-
-  @@map("comments")
 }
 
 model Friendship {
@@ -229,8 +213,6 @@ model Friendship {
   status    String   @default("pending")
   createdAt DateTime @default(now())
   updatedAt DateTime @updatedAt
-
-  @@map("friendships")
 }
 
 model VerificationToken {
@@ -239,182 +221,157 @@ model VerificationToken {
   expires    DateTime
 
   @@unique([identifier, token])
-  @@map("verification_tokens")
 }
 
 model Activity {
   id           String        @id @default(cuid())
-  userId       String        @map("user_id")
+  userId       String
   name         String
   description  String?
-  colorCode    String        @map("color_code")
-  createdAt    DateTime      @default(now()) @map("created_at")
-  updatedAt    DateTime      @updatedAt @map("updated_at")
+  colorCode    String
+  createdAt    DateTime      @default(now())
+  updatedAt    DateTime      @updatedAt
   user         User          @relation(fields: [userId], references: [id])
   activityLogs ActivityLog[]
-
-  @@map("activities")
 }
 
 model ActivityLog {
   id         String   @id @default(cuid())
-  activityId String   @map("activity_id")
+  activityId String
   date       DateTime @default(now())
   count      Int      @default(1)
   activity   Activity @relation(fields: [activityId], references: [id])
-
-  @@map("activity_log")
 }
 
 model GlobalProblem {
   id                           String                        @id @default(cuid())
-  userId                       String                        @map("user_id")
+  userId                       String
   name                         String                        @unique
   description                  String?
   content                      String?
-  featuredImage                String?                       @map("featured_image")
-  createdAt                    DateTime                      @default(now()) @map("created_at")
-  updatedAt                    DateTime                      @updatedAt @map("updated_at")
+  featuredImage                String?
+  createdAt                    DateTime                      @default(now())
+  updatedAt                    DateTime                      @updatedAt
   user                         User                          @relation(fields: [userId], references: [id])
   thisGlobalProblemAllocations GlobalProblemPairAllocation[] @relation("ThisGlobalProblemRelation")
   thatGlobalProblemAllocations GlobalProblemPairAllocation[] @relation("ThatGlobalProblemRelation")
-  averageAllocation            Float?                        @map("average_allocation")
-
-  @@map("global_problems")
+  averageAllocation            Float?
 }
 
 model GlobalProblemPairAllocation {
   id                          String        @id @default(cuid())
-  userId                      String        @map("user_id")
-  thisGlobalProblemId         String        @map("this_global_problem_id")
-  thatGlobalProblemId         String        @map("that_global_problem_id")
-  thisGlobalProblemPercentage Float         @map("this_global_problem_percentage")
-  createdAt                   DateTime      @default(now()) @map("created_at")
-  updatedAt                   DateTime      @updatedAt @map("updated_at")
+  userId                      String
+  thisGlobalProblemId         String
+  thatGlobalProblemId         String
+  thisGlobalProblemPercentage Float
+  createdAt                   DateTime      @default(now())
+  updatedAt                   DateTime      @updatedAt
   user                        User          @relation(fields: [userId], references: [id])
   thisGlobalProblem           GlobalProblem @relation("ThisGlobalProblemRelation", fields: [thisGlobalProblemId], references: [id])
   thatGlobalProblem           GlobalProblem @relation("ThatGlobalProblemRelation", fields: [thatGlobalProblemId], references: [id])
-
-  @@map("global_problem_pair_allocations")
 }
 
 model WishingWell {
   id                         String                      @id @default(cuid())
-  userId                     String                      @map("user_id")
+  userId                     String
   name                       String                      @unique
   description                String?
-  content                    String?                     @map("content")
+  content                    String?
   images                     String[]
-  featuredImage              String?                     @map("featured_image")
-  createdAt                  DateTime                    @default(now()) @map("created_at")
-  updatedAt                  DateTime                    @updatedAt @map("updated_at")
+  featuredImage              String?
+  createdAt                  DateTime                    @default(now())
+  updatedAt                  DateTime                    @updatedAt
   user                       User                        @relation(fields: [userId], references: [id])
   wishingWellContributions   WishingWellContribution[]
   proposals                  WishFulfillmentProposal[]
   thisWishingWellAllocations WishingWellPairAllocation[] @relation("ThisWishingWellRelation")
   thatWishingWellAllocations WishingWellPairAllocation[] @relation("ThatWishingWellRelation")
-  averageAllocation          Float?                      @map("average_allocation")
-
-  @@map("wishing_wells")
+  averageAllocation          Float?
 }
 
 model WishingWellPairAllocation {
   id                        String      @id @default(cuid())
-  userId                    String      @map("user_id")
-  thisWishingWellId         String      @map("this_wishing_well_id")
-  thatWishingWellId         String      @map("that_wishing_well_id")
-  thisWishingWellPercentage Float       @map("this_wishing_well_percentage")
-  createdAt                 DateTime    @default(now()) @map("created_at")
-  updatedAt                 DateTime    @updatedAt @map("updated_at")
+  userId                    String
+  thisWishingWellId         String
+  thatWishingWellId         String
+  thisWishingWellPercentage Float
+  createdAt                 DateTime    @default(now())
+  updatedAt                 DateTime    @updatedAt
   user                      User        @relation(fields: [userId], references: [id])
   thisWishingWell           WishingWell @relation("ThisWishingWellRelation", fields: [thisWishingWellId], references: [id])
   thatWishingWell           WishingWell @relation("ThatWishingWellRelation", fields: [thatWishingWellId], references: [id])
-
-  @@map("wishing_well_pair_allocations")
 }
 
 model WishingWellContribution {
   id            String      @id @default(cuid())
-  wishingWellId String      @map("wishing_well_id")
+  wishingWellId String
   date          DateTime    @default(now())
   count         Int         @default(1)
   wishingWell   WishingWell @relation(fields: [wishingWellId], references: [id])
-
-  @@map("wishing_well_contributions")
 }
 
 model GenieDAO {
   id             String                    @id @default(cuid())
   name           String
   reputation     Float                     @default(0)
-  createdAt      DateTime                  @default(now()) @map("created_at")
-  updatedAt      DateTime                  @updatedAt @map("updated_at")
+  createdAt      DateTime                  @default(now())
+  updatedAt      DateTime                  @updatedAt
   creator        User                      @relation("CreatedGenieDAOs", fields: [creatorId], references: [id])
   creatorId      String
   members        User[]                    @relation("JoinedGenieDAOs")
   proposals      WishFulfillmentProposal[]
   collaborations WishFulfillmentProposal[] @relation("ProposalCollaborators")
   feedback       GenieDAOFeedback[]
-
-  @@map("genie_daos")
 }
 
 model WishFulfillmentProposal {
   id            String                   @id @default(cuid())
-  wishingWellId String                   @map("wishing_well_id")
-  genieDAOId    String                   @map("genie_dao_id")
+  wishingWellId String
+  genieDAOId    String
   description   String
   leadIndicator String
   lagIndicator  String
   wishTokens    Int
-  createdAt     DateTime                 @default(now()) @map("created_at")
-  updatedAt     DateTime                 @updatedAt @map("updated_at")
+  createdAt     DateTime                 @default(now())
+  updatedAt     DateTime                 @updatedAt
   wishingWell   WishingWell              @relation(fields: [wishingWellId], references: [id])
   genieDAO      GenieDAO                 @relation(fields: [genieDAOId], references: [id])
   collaborators GenieDAO[]               @relation("ProposalCollaborators")
   reports       ProposalProgressReport[]
   creator       User                     @relation("CreatedProposals", fields: [creatorId], references: [id])
   creatorId     String
-
-  @@map("wish_fulfillment_proposals")
 }
 
 model ProposalProgressReport {
   id         String                  @id @default(cuid())
-  proposalId String                  @map("proposal_id")
+  proposalId String
   content    String
-  createdAt  DateTime                @default(now()) @map("created_at")
-  updatedAt  DateTime                @updatedAt @map("updated_at")
+  createdAt  DateTime                @default(now())
+  updatedAt  DateTime                @updatedAt
   proposal   WishFulfillmentProposal @relation(fields: [proposalId], references: [id])
   creator    User                    @relation(fields: [creatorId], references: [id])
   creatorId  String
-
-  @@map("proposal_progress_reports")
 }
 
 model ProposalComparison {
   id                     String   @id @default(cuid())
-  userId                 String   @map("user_id")
-  thisProposalId         String   @map("this_proposal_id")
-  thatProposalId         String   @map("that_proposal_id")
-  thisProposalPercentage Float    @map("this_proposal_percentage")
-  createdAt              DateTime @default(now()) @map("created_at")
-  updatedAt              DateTime @updatedAt @map("updated_at")
+  userId                 String
+  thisProposalId         String
+  thatProposalId         String
+  thisProposalPercentage Float
+  createdAt              DateTime @default(now())
+  updatedAt              DateTime @updatedAt
   user                   User     @relation(fields: [userId], references: [id])
-
-  @@map("proposal_comparisons")
 }
 
 model GenieDAOFeedback {
   id         String   @id @default(cuid())
-  userId     String   @map("user_id")
-  genieDAOId String   @map("genie_dao_id")
+  userId     String
+  genieDAOId String
   rating     Float
   comment    String?
-  createdAt  DateTime @default(now()) @map("created_at")
-  updatedAt  DateTime @updatedAt @map("updated_at")
+  createdAt  DateTime @default(now())
+  updatedAt  DateTime @updatedAt
   genieDAO   GenieDAO @relation(fields: [genieDAOId], references: [id])
   user       User     @relation(fields: [userId], references: [id])
-
-  @@map("genie_dao_feedback")
 }
