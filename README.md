@@ -14,6 +14,7 @@ As a human with this goal, you have a limited amount of time, energy, and resour
 Unfortunately, there's a 99% chance that you're not doing it optimally.
 
 Either:
+
 - one of the other eight billion people on the planet is already doing what you're doing, and you're totally wasting your resources duplicating effort
 - you're simply not doing the best thing that you could be doing, given your skills and resources
 
@@ -28,7 +29,7 @@ It's able to coordinate thousands of people who don't even know each other exist
 The invisible handle kind of turns humanity into a magical genie
 that can produce innovations indistinguishable from magic to people who lived before Adam Smith.
 
-[![Video Name](http://img.youtube.com/vi/67tHtpac5ws/0.jpg)](http://www.youtube.com/watch?v=67tHtpac5ws "I, Pencil")
+![Video Name](http://img.youtube.com/vi/67tHtpac5ws/0.jpg)
 
 # Public Goods
 
@@ -36,6 +37,7 @@ The free market works well for producing private goods like pencils and iPhones.
 However, it doesn't work well for producing public goods like solutions to societal problems.
 
 We make far less progress in solving these problems than we could because:
+
 1. **We Lack a System for Prioritizing Allocation of Scarce Resources** -
    Society has limited resources and thousands of problems.
    We have democratic systems and proposals with up-down votes,
@@ -68,9 +70,9 @@ The core components of a Wish Fulfillment System are:
 
 1. **Problems or Wishes**: A comprehensive list of societal problems that need to be solved or wishes to be fulfilled.
 2. **Budget**: A breakdown of the percentage of available resources to allocate to solving each problem/wish.
-3. **Solutions**: A comprehensive list of proposed solutions to solve each problem or realize each wish. 
-It's also necessary to consider the cost-effectiveness of each solution and unintended side effects. 
-A solution may solve multiple problems or create new problems.
+3. **Solutions**: A comprehensive list of proposed solutions to solve each problem or realize each wish.
+   It's also necessary to consider the cost-effectiveness of each solution and unintended side effects.
+   A solution may solve multiple problems or create new problems.
 4. **Tasks**: A list of SMART (Specific, Measurable, Achievable, Relevant, Time-bound) tasks that need to be completed to implement each solution.  Some tasks may contribute to multiple solutions.
 5. **Solvers**: People/organizations responsible for completing each task.
 6. **Progress**: Tracking the impact of each solution and adjusting resource allocation as needed.
@@ -79,16 +81,19 @@ A solution may solve multiple problems or create new problems.
 # The Wish Fulfillment Process
 
 ## Step 1. Catalog Wishes or Problems
+
 Create a comprehensive list of societal goals or problems that need to be solved.
 
 ## Step 2. Create a Budget
+
 Determine how much of our scarce resources should be allocated to solving each problem or fulfilling each wish.
 
 There are a number of ways to do this like democracy and crowdfunding campaigns but they suffer from various limitations:
+
 - **Representative Democracy:** The interests of representatives do not match the interests of all citizens.  Additionally, representatives have limited knowledge and cognitive capacity to effectively weigh the relative importance of thousands of wishes.
 - **Crowdfunding Campaigns:** People vote with their dollars to determine the allocation of resources.  However, again humans have limited cognitive capacity to effectively weigh the relative importance of thousands of wishes.
 
-A possible solution to this is **Aggregated Pairwise Preference Allocation (APPA)**. 
+A possible solution to this is **Aggregated Pairwise Preference Allocation (APPA)**.
 This involves showing everyone a random pair of wishes or problems
 and asking them to allocate a percentage of available resources to each.
 
@@ -103,16 +108,17 @@ By aggregating lots of pairwise allocations from lots of people, we may be to de
 Allow people or AI agents to submit proposed solutions for each problem
 or wish to create a comprehensive list of proposed strategies to fullfill each wish or solve each problem.
 
-
 ## Step 4: Evaluate Solutions
 
 Again, use collective intelligence through Aggregated Pairwise Preference Allocation to determine the percentage of problem resources that should be allocated to each solution.
 The evaluators should take into account the:
-- **cost-effectiveness** of each solution 
+
+- **cost-effectiveness** of each solution
 - **positive side effects** of the solution in terms of solving other problems
 - **negative side effects** of the solution in terms of creating new problems
 
 ## Step 5. Create Tasks
+
 Decompose each solution into a list of atomic tasks that need to be completed.
 Each task should be SMART (Specific, Measurable, Achievable, Relevant, Time-bound).
 
@@ -121,16 +127,19 @@ so it's important to link tasks to multiple solutions so that they are not dupli
 
 ## Step 6. Create Prizes
 
-Offer rewards for completing tasks to incentivize the completion of tasks.  
+Offer rewards for completing tasks to incentivize the completion of tasks.
 
 Possible ways to decide on the amount of the prize include:
+
 - **Bidding:** People bid on the tasks by submitting the amount they would be willing to accept to complete the task
 - **AI Prediction Markets:** Use AI to predict the cost of completing the task and offer a prize that is slightly higher than the predicted cost
 
 ## Step 6. Evaluate Submissions
+
 Evaluate the completed tasks to determine if they meet the criteria for completion and award the prize.
 
 ## Step 7. Monitor Progress and Impact
+
 Track the impact of each solution.
 Evaluate the outcomes of each solution and the overall positive and negative impact on society.
 
@@ -138,7 +147,6 @@ Evaluate the outcomes of each solution and the overall positive and negative imp
 
 Provide impact data to people making pairwise allocations to help them make better decisions in the future.
 This will enable continuous improvement in the allocation of resources to maximize wish fulfillment.
-
 
 # How is Wishocracy Different from Other Systems?
 
@@ -156,6 +164,7 @@ The current models are available in the [Prisma schema here](prisma/schema.prism
 However, we'll ultimately want to define these as JSON schemas and switch to a decentralized data store for interoperability.
 
 1. **Wish/Problem Statement (WPS)**
+
 - Globally unique identifier
 - Title (short description)
 - Detailed description
@@ -164,6 +173,7 @@ However, we'll ultimately want to define these as JSON schemas and switch to a d
 - Creator ID (DID or public key)
 
 2. **Pairwise Allocation Vote (PAV)**
+
 - Voter ID (DID or public key)
 - Wish/Problem A ID
 - Wish/Problem B ID
@@ -172,6 +182,7 @@ However, we'll ultimately want to define these as JSON schemas and switch to a d
 - Timestamp
 
 3. **Solution Proposal (SP)**
+
 - Globally unique identifier
 - Associated Wish/Problem ID(s)
 - Title
@@ -183,13 +194,14 @@ However, we'll ultimately want to define these as JSON schemas and switch to a d
 - Creator ID
 
 4. **Task Definition (TD)**
+
 - Globally unique identifier
 - Associated Solution Proposal ID(s)
 - SMART task specification
-   - Title
-   - Detailed description
-   - Measurable completion criteria
-   - Due date
+  - Title
+  - Detailed description
+  - Measurable completion criteria
+  - Due date
 - Estimated cost
 - Dependent Task IDs
 - Category tags
@@ -197,18 +209,21 @@ However, we'll ultimately want to define these as JSON schemas and switch to a d
 - Creator ID
 
 5. **Task Allocation Commitment (TAC)**
+
 - Allocated Task Definition ID
 - Solver ID
 - Committed budget
 - Acceptance timestamp
 
 6. **Task Submission (TS)**
+
 - Allocated Task Definition ID
 - Solver ID
 - Deliverable data/proof
 - Submission timestamp
 
 7. **Task Evaluation Result (TER)**
+
 - Task Submission ID
 - Evaluator ID
 - Evaluation score
@@ -216,11 +231,12 @@ However, we'll ultimately want to define these as JSON schemas and switch to a d
 - Evaluation timestamp
 
 8. **Impact Report (IR)**
+
 - Associated Solution Proposal ID(s)
 - Reporting period
 - Impact metrics
-   - Quantitative measures
-   - Qualitative outcomes
+  - Quantitative measures
+  - Qualitative outcomes
 - Associated Task Submission IDs
 - Report timestamp
 - Reporter ID
@@ -232,6 +248,7 @@ These primitives can be represented as standardized data schemas (e.g., JSON, XM
 Existing task management or resource allocation platforms can map their internal data models to these common primitives, and publish/subscribe to relevant data streams. This allows different systems to coordinate on a global "task graph" without tight coupling.
 
 Some example integration patterns:
+
 - A DAO's internal project management system can automatically generate Task Definitions from its own tasks/issues/bounties and publish them for external contributors to submit Task Allocation Commitments and Task Submissions.
 - A public goods crowdfunding platform can post funded initiatives as Solution Proposals, and allocate a portion of the raised funds to Task Definitions drawn from Wishocracy's task graph.
 - An analytics platform can aggregate Impact Reports from multiple sources to surface insights on global resource allocation efficiency and identify neglected areas or emerging opportunities.
@@ -260,6 +277,7 @@ figure out how their analog real-world counterparts can work together to maximiz
 They should also be able to use tools and interact with the world to automate the production of public goods.
 
 A Digital Twin is a digital representation of a person that is defined by their:
+
 - **Wishes**: What they want to accomplish in the world
 - **Skills**: What they're good at
 - **Resources**: What they have to offer
@@ -271,9 +289,10 @@ A Digital Twin is a digital representation of a person that is defined by their:
 - **Language**: What languages they speak
 
 Functionally, it consists of:
+
 - **A Large Language Model**: To understand and generate text
 - **A Knowledge Graph**: To store and reason about the person's wishes, skills, resources, interests, time, reputation, network, location, and language
-- **A Vector Database**: To store and query the person's knowledge graph using retrival 
+- **A Vector Database**: To store and query the person's knowledge graph using retrival
 
 ## Additional Stuff to Consider
 
@@ -285,12 +304,11 @@ Functionally, it consists of:
 # Next Steps
 
 1. **Integrate Existing Public Goods Protocols and Platforms**:
-Identify and analyze existing projects and platforms that aim to optimize resource allocation such as Gitcoin Grants, HyperCerts, and others. Figure out how Wishocracy can complement or integrate with them.
+   Identify and analyze existing projects and platforms that aim to optimize resource allocation such as Gitcoin Grants, HyperCerts, and others. Figure out how Wishocracy can complement or integrate with them.
 2. **Prototype Development**: Creating prototypes of the system, even if focused on a narrow domain, to validate and refine the core mechanics.
 3. **Domain Application**: Exploring applications of Wishocracy within various contexts such as organizations, DAOs, governments, or global scale initiatives.
 4. **Integration with Existing Task Management Systems**: Developing integrations with existing task management systems to facilitate task import, syncing, creation, assignment, and tracking.
 5. **Iterative Refinement**: Continuously gathering feedback and iterating on the system design to address challenges and incorporate new features.
-
 
 # Frequently Asked Questions
 
