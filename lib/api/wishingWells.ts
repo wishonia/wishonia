@@ -41,14 +41,14 @@ export async function getUserWishingWells(
       A.id,
       A.name,
       A.description,
-      A.created_at AS "createdAt",
+      A."createdAt",
       SUM(AL.count) AS total_count
     FROM
-      wishing_wells A
+      "WishingWell" A
     LEFT JOIN
-      wishing_well_contributions AL ON A.id = AL.wishing_well_id
+      "WishingWellContribution" AL ON A.id = AL."wishingWellId"
     WHERE
-      A.user_id = ${userId}
+      A."userId" = ${userId}
     GROUP BY
       A.id, A.name, A.description
     ORDER BY
