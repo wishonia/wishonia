@@ -7,11 +7,11 @@ export async function getRandomGlobalProblemPair(userId: string | undefined) {
     if (userId) {
         randomPair = await prisma.$queryRaw`
           SELECT *
-          FROM "global_problems"
+          FROM "GlobalProblem"
           WHERE id NOT IN (
-            SELECT "this_global_problem_id" FROM "global_problem_pair_allocations" WHERE "user_id" = ${userId}
+            SELECT "thisGlobalProblemId" FROM "GlobalProblemPairAllocation" WHERE "GlobalProblem"."userId" = ${userId}
             UNION
-            SELECT "that_global_problem_id" FROM "global_problem_pair_allocations" WHERE "user_id" = ${userId}
+            SELECT "thatGlobalProblemId" FROM "GlobalProblemPairAllocation" WHERE "GlobalProblem"."userId" = ${userId}
           )
           ORDER BY random()
           LIMIT 2;
@@ -19,7 +19,7 @@ export async function getRandomGlobalProblemPair(userId: string | undefined) {
     } else {
         randomPair = await prisma.$queryRaw`
           SELECT *
-          FROM "global_problems"
+          FROM "GlobalProblem"
           ORDER BY random()
           LIMIT 2;
         `;
