@@ -4,6 +4,36 @@
 
 **Wishonia** is an imaginary magical kingdom meant to illustrate the concept of Wishocracy and test the idea in a simulated virtual world to see how it works.
 
+# Quick Start
+
+1. **Install Dependencies**:
+   - [Node.js](https://nodejs.org/en/) v18 or higher
+   - [Yarn](https://yarnpkg.com/)
+   - [pnpm](https://pnpm.io/)
+   - [Docker](https://www.docker.com/)
+
+2. **Configure Environment Variables**:
+    - Rename .env.example files to .env and configure the environment variables
+
+3. **Start the Database With Docker**:
+    ```sh
+    docker-compose up -d
+    ```
+4. **Install pgvector**:
+    ```sh
+    docker exec -it wishocracy_server_1 npx prisma migrate deploy
+    ```
+5. **Install Dependencies**:
+    ```sh
+   pnpm install
+    ```
+6. **Seed the Database**:
+
+Seed the database with default problems and wishes by running tests/seed.test.ts with the following command:
+    ```sh
+    jest tests/seed.test.ts
+    ```
+
 # Why Are You Doing This?
 
 **The most universal goal we all share is to

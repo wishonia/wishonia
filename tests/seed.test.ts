@@ -15,6 +15,10 @@ beforeAll(async () => {
     await assertTestDB();
 });
 
+async function installPgVector() {
+    await prisma.$executeRaw`CREATE EXTENSION IF NOT EXISTS vector`;
+}
+
 async function checkGlobalProblems<ExtArgs>(testUser: User) {
     console.log("Checking global problems");
     console.log("Seeding global problems");
@@ -57,8 +61,9 @@ async function checkWishingWells<ExtArgs>(testUser: User) {
     }
 }
 
-describe("Database-related tests", () => {
+describe("Database-seeder tests", () => {
     it("seeds DB with user, wishing wells and problems", async () => {
+        await installPgVector();
         await assertTestDB();
         await truncateAllTables();
         const testUser = await getOrCreateTestUser();
