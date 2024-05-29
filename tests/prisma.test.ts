@@ -14,8 +14,7 @@ describe("Prisma Editor", () => {
         result = result.replace(/@map\(".*"\)/g, '');
         fs.writeFileSync(absPath, result, 'utf8');
     });
-    it("Adds models to prisma file using AI to maintain proper formatting",
-        async ()=> {
-            await addModelsToPrismaSchema();
+    it("Adds models to prisma file using AI to maintain proper formatting", async () => {
+        await addModelsToPrismaSchema();
     });
 });
