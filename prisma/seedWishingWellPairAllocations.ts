@@ -2,7 +2,7 @@ import {PrismaClient, User} from "@prisma/client";
 import {
     createMinimalWishingWellPairs,
 } from "@/lib/wishingWells";
-const prisma = new PrismaClient();
+import { prisma } from "@/lib/db";
 
 export async function seedWishingWellPairAllocations(testUser: User) {
     const pairs = await createMinimalWishingWellPairs(testUser.id);

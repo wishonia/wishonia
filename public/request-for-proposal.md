@@ -1,3 +1,13 @@
+---
+slug: request-for-proposal
+name: 'Request for Proposals: A Decentralized Resource Optimization System'
+featuredImage: /request-for-proposal.jpg
+description: >-
+  The Wishocracy project's call for proposals to design a decentralized,
+  interoperable Wish Fulfillment System aimed at optimizing resource allocation
+  and addressing global challenges. Learn about the project's comprehensive
+  objectives, scope of work, and submission guidelines.
+---
 # Request for Proposal (RFP)
 
 ## Objectives

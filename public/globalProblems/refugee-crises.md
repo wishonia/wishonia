@@ -1,10 +1,11 @@
 ---
+slug: refugee-crises
 name: Refugee Crises
+featuredImage: /globalProblems/refugee-crises.jpg
 description: >-
   Refugee crises involve large-scale displacements of people fleeing conflict,
   persecution, or disaster, straining resources and services in host countries,
   and requiring urgent humanitarian assistance and long-term solutions.
-featuredImage: /globalProblems/refugee-crises.png
 ---
 # Refugee Crises: A Comprehensive Analysis
 

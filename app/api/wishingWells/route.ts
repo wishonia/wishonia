@@ -1,5 +1,5 @@
 import * as z from "zod"
-import { db } from "@/lib/db"
+import { prisma as db } from "@/lib/db"
 import {getUserId} from "@/lib/api/getUserId";
 import {handleError} from "@/lib/errorHandler";
 

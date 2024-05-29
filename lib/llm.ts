@@ -15,7 +15,7 @@ export async function textCompletion(promptText: string, returnType: "text" | "j
     messages: [
       {
         role: "system",
-        content: `You are a helpful assistant that translates user requests into JSON objects`
+        content: `You are a helpful assistant`
       },
       {
         role: "user", // user = the dFDA app

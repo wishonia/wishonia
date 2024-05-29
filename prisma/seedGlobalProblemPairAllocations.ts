@@ -1,6 +1,6 @@
-import {PrismaClient, User} from "@prisma/client";
+import {User} from "@prisma/client";
 import {getAllRandomGlobalProblemPairs} from "@/lib/globalProblems";
-const prisma = new PrismaClient();
+import { prisma } from "@/lib/db";
 
 export async function seedGlobalProblemPairAllocations(testUser: User) {
     const pairs = await getAllRandomGlobalProblemPairs();
