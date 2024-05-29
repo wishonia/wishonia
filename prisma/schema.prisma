@@ -125,6 +125,8 @@ model User {
   globalProblemPairAllocations    GlobalProblemPairAllocation[]
   globalProblems                  GlobalProblem[]
   genieDAOFeedback                GenieDAOFeedback[]
+  Agents                          Agent[]
+  UserApiKeys                     UserApiKey[]
 }
 
 model Education {
@@ -374,4 +376,214 @@ model GenieDAOFeedback {
   updatedAt  DateTime @updatedAt
   genieDAO   GenieDAO @relation(fields: [genieDAOId], references: [id])
   user       User     @relation(fields: [userId], references: [id])
+}
+
+model Agent {
+  id                            String             @id @default(uuid())
+  publicId                      String             @unique @default(uuid())
+  name                          String
+  userId                        String?
+  User                          User?              @relation(fields: [userId], references: [id])
+  description                   String?
+  createdAt                     DateTime           @default(now())
+  temperature                   Float              @default(0.7)
+  noOfDocumentsToRetrieve       Int?               @default(4)
+  noOfChatHistoryInContext      Int?               @default(15)
+  semanticSearchSimilarityScore String?            @default("none")
+  model                         String             @default("gpt-3.5-turbo")
+  provider                      String             @default("openai")
+  embedding                     String             @default("openai")
+  streaming                     Boolean            @default(false)
+  showRef                       Boolean            @default(false)
+  questionGeneratorPrompt       String             @default("Given the following conversation and a follow up question, rephrase the follow up question to be a standalone question.   Chat History: {chat_history} Follow Up Input: {question} Standalone question:")
+  qaPrompt                      String             @default("You are a helpful AI assistant. Use the following pieces of context to answer the question at the end. If you don't know the answer, just say you don't know. DO NOT try to make up an answer. If the question is not related to the context, politely respond that you are tuned to only answer questions that are related to the context.  {context}  Question: {question} Helpful answer in markdown:")
+  voiceToTextType               String             @default("web_api")
+  textToVoiceEnabled            Boolean            @default(false)
+  textToVoiceType               String             @default("web_api")
+  textToVoiceTypeMetadata       Json               @default("{}") @db.Json
+  useHybridSearch               Boolean            @default(false)
+  haveDataSourcesBeenAdded      Boolean            @default(false)
+  useRag                        Boolean            @default(false)
+  agentProtect                  Boolean            @default(false)
+  agentApiKey                   String?
+  agentModelApiKey              String?
+  options                       Json?              @default("{}") @db.Json
+  AgentAppearances              AgentAppearance[]
+  AgentDocuments                AgentDocument[]
+  AgentIntegrations             AgentIntegration[]
+  AgentPlaygrounds              AgentPlayground[]
+  AgentSources                  AgentSource[]
+}
+
+model AgentSource {
+  id             String          @id @default(uuid())
+  agentId        String
+  type           String          @default("website")
+  content        String?
+  location       String?
+  isPending      Boolean         @default(true)
+  status         String          @default("pending")
+  createdAt      DateTime        @default(now())
+  updatedAt      DateTime        @updatedAt
+  options        Json?           @db.Json
+  AgentDocuments AgentDocument[]
+  Agent          Agent           @relation(fields: [agentId], references: [id])
+}
+
+model AgentDocument {
+  id          String                @id @default(uuid())
+  sourceId    String
+  agentId     String
+  content     String
+  embedding   Unsupported("vector")
+  metadata    Json
+  Agent       Agent                 @relation(fields: [agentId], references: [id])
+  AgentSource AgentSource           @relation(fields: [sourceId], references: [id])
+}
+
+model GlobalSettings {
+  id                           String   @id @default(uuid())
+  noOfAgentsPerUser            Int      @default(10)
+  allowUserToCreateAgents      Boolean  @default(true)
+  allowUserToRegister          Boolean  @default(false)
+  numberOfDocuments            Int      @default(10)
+  legacyMode                   Boolean  @default(false)
+  hidePlayground               Boolean  @default(false)
+  defaultChunkSize             Int?     @default(1000)
+  defaultChunkOverlap          Int?     @default(200)
+  dynamicallyFetchOllamaModels Boolean? @default(false)
+  hideDefaultModels            Boolean? @default(false)
+  defaultChatModel             String   @default("gpt-3.5-turbo-dbase")
+  defaultEmbeddingModel        String   @default("dialoqbase_eb_text-embedding-ada-002")
+  ollamaURL                    String?  @default("http://host.docker.internal:11434")
+}
+
+model AgentIntegration {
+  id                             String   @id @default(uuid())
+  provider                       String
+  agentId                        String
+  identifier                     String
+  telegramAgentToken             String?
+  isPause                        Boolean? @default(false)
+  discordAgentToken              String?
+  discordSlashCommand            String?  @default("hey")
+  discordSlashCommandDescription String?  @default("Use this command to get help")
+  discordApplicationId           String?
+  whatsappAccessToken            String?
+  discordShowSources             Boolean? @default(false)
+  discordSmartLabel              Boolean? @default(false)
+  whatsappVerifyToken            String?
+  whatsappPhoneNumber            String?
+  slackAuthToken                 String?
+  slackSigningSecret             String?
+  slackAppToken                  String?
+  Agent                          Agent    @relation(fields: [agentId], references: [id], onDelete: Cascade)
+}
+
+model AgentTelegramHistory {
+  id         String   @id @default(uuid())
+  chatId     Int?
+  newChatId  String?
+  identifier String?
+  human      String?
+  agent      String?
+  createdAt  DateTime @default(now())
+}
+
+model AgentDiscordHistory {
+  id         String   @id @default(uuid())
+  chatId     String?
+  identifier String?
+  human      String?
+  agent      String?
+  createdAt  DateTime @default(now())
+}
+
+model AgentAppearance {
+  id                   String  @id @default(uuid())
+  agentId              String
+  agentName            String
+  firstMessage         String
+  backgroundColor      String?
+  chatAgentBubbleStyle Json?   @db.Json
+  chatHumanBubbleStyle Json?   @db.Json
+  tts                  Boolean @default(false)
+  ttsVoice             String?
+  ttsProvider          String?
+  ttsModel             String?
+  Agent                Agent   @relation(fields: [agentId], references: [id], onDelete: Cascade)
+}
+
+model AgentPlayground {
+  id                      String                   @id @default(uuid())
+  agentId                 String
+  title                   String                   @default("New Chat")
+  createdAt               DateTime                 @default(now())
+  Agent                   Agent                    @relation(fields: [agentId], references: [id])
+  AgentPlaygroundMessages AgentPlaygroundMessage[]
+}
+
+model AgentPlaygroundMessage {
+  id                String          @id @default(uuid())
+  agentPlaygroundId String
+  type              String
+  message           String
+  isAgent           Boolean         @default(false)
+  sources           Json?
+  createdAt         DateTime        @default(now())
+  AgentPlayground   AgentPlayground @relation(fields: [agentPlaygroundId], references: [id], onDelete: Cascade)
+}
+
+model AgentWhatsappHistory {
+  id         String   @id @default(uuid())
+  chatId     String?
+  from       String?
+  identifier String?
+  agentId    String?
+  human      String?
+  agent      String?
+  createdAt  DateTime @default(now())
+}
+
+model AgentWebHistory {
+  id        String   @id @default(uuid())
+  agentId   String
+  chatId    String
+  metadata  Json?
+  sources   Json?
+  human     String?
+  agent     String?
+  createdAt DateTime @default(now())
+}
+
+model AiModels {
+  id              String   @id @default(uuid())
+  name            String?
+  modelId         String   @unique
+  modelType       String   @default("chat")
+  streamAvailable Boolean  @default(false)
+  modelProvider   String?
+  localModel      Boolean  @default(false)
+  config          Json     @default("{}") @db.Json
+  hide            Boolean  @default(false)
+  deleted         Boolean  @default(false)
+  createdAt       DateTime @default(now())
+}
+
+model AgentApiHistory {
+  id        String    @id @default(uuid())
+  apiKey    String
+  agentId   String?
+  human     String?
+  agent     String?
+  createdAt DateTime? @default(now())
+}
+
+model UserApiKey {
+  id        String   @id @default(uuid())
+  name      String
+  apiKey    String
+  userId    String
+  User      User     @relation(fields: [userId], references: [id])
+  createdAt DateTime @default(now())
 }
