@@ -7,32 +7,40 @@
 # Quick Start
 
 1. **Install Dependencies**:
+
    - [Node.js](https://nodejs.org/en/) v18 or higher
    - [Yarn](https://yarnpkg.com/)
    - [pnpm](https://pnpm.io/)
    - [Docker](https://www.docker.com/)
 
 2. **Configure Environment Variables**:
-    - Rename .env.example files to .env and configure the environment variables
+
+   - Rename .env.example files to .env and configure the environment variables
 
 3. **Start the Database With Docker**:
-    ```sh
-    docker-compose up -d
-    ```
+
+   ```sh
+   docker-compose up -d
+   ```
+
 4. **Install pgvector**:
-    ```sh
-    docker exec -it wishocracy_server_1 npx prisma migrate deploy
-    ```
+
+   ```sh
+   docker exec -it wishocracy_server_1 npx prisma migrate deploy
+   ```
+
 5. **Install Dependencies**:
-    ```sh
+
+   ```sh
    pnpm install
-    ```
+   ```
+
 6. **Seed the Database**:
 
 Seed the database with default problems and wishes by running tests/seed.test.ts with the following command:
-    ```sh
+`sh
     jest tests/seed.test.ts
-    ```
+    `
 
 # Why Are You Doing This?
 
@@ -50,17 +58,15 @@ Either:
 
 ## Coordination Failure
 
-The exponential coordination complexity problem illustrates how the number of potential lines of communication grows rapidly as more people are involved in a decision-making process. 
+The exponential coordination complexity problem illustrates how the number of potential lines of communication grows rapidly as more people are involved in a decision-making process.
 
 ![](public/img/coordination-complexity-node-graph.jpeg)
 
-This is visually represented in the graphs, where each additional person significantly increases the total number of connections needed for effective communication. This complexity can hinder our ability to make decisions efficiently, especially as group sizes increase. 
+This is visually represented in the graphs, where each additional person significantly increases the total number of connections needed for effective communication. This complexity can hinder our ability to make decisions efficiently, especially as group sizes increase.
 
 ![](public/img/coordination-complexity-exponential-graph.jpeg)
 
 However, digital twin AI agents, which are AI representations of individuals with higher cognitive bandwidth perfectly aligned to their preferences, can mitigate this issue. These agents can process vast amounts of information and make decisions more efficiently, acting on behalf of their human counterparts. By integrating these AI agents into a Global Todo List for humanity, we can streamline the coordination of efforts towards shared societal goals. These agents can continuously analyze data, predict outcomes, and suggest optimal actions, ensuring that resources are allocated effectively and that collaborative efforts are maximized. This approach can lead to more informed decision-making, reduced friction in communication, and accelerated progress towards achieving our collective objectives on a global scale.
-
-
 
 # Solution: Collective Intelligence and Coordination
 
