@@ -16,19 +16,19 @@ const warVsCuresVoteLink: NavItem = {
 
 const costOfWarLink: NavItem = {
     title: "Cost of War",
-    href: "/docs/globalSolutions/1-percent-treaty/cost-of-war",
+    href: "/warVsCures/cost-of-war",
     icon: "skull",
 };
 
 const dihLink: NavItem = {
     title: "Decentralized Institutes of Health",
-    href: "/docs/globalSolutions/1-percent-treaty/decentralized-institutes-of-health",
+    href: "/warVsCures/decentralized-institutes-of-health",
     icon: "health",
 };
 
 const costOfDiseaseLink: NavItem = {
     title: "Cost of Disease",
-    href: "/docs/globalSolutions/1-percent-treaty/cost-of-disease",
+    href: "/warVsCures/cost-of-disease",
     icon: "disease",
 };
 
@@ -36,7 +36,7 @@ const costOfDiseaseLink: NavItem = {
 
 const treatyLink: NavItem = {
     title: "The 1% Treaty",
-    href: "/docs/globalSolutions/1-percent-treaty/1-percent-treaty",
+    href: "/warVsCures/1-percent-treaty",
     icon: "peace",
 };
 
