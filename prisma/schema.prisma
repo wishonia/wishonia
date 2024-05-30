@@ -454,7 +454,7 @@ model GlobalSettings {
   dynamicallyFetchOllamaModels Boolean? @default(false)
   hideDefaultModels            Boolean? @default(false)
   defaultChatModel             String   @default("gpt-3.5-turbo-dbase")
-  defaultEmbeddingModel        String   @default("dialoqbase_eb_text-embedding-ada-002")
+  defaultEmbeddingModel        String   @default("wishonia_eb_text-embedding-ada-002")
   ollamaURL                    String?  @default("http://host.docker.internal:11434")
 }
 

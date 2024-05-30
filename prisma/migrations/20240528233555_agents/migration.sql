@@ -1,3 +1,5 @@
+CREATE EXTENSION IF NOT EXISTS vector;
+
 -- CreateTable
 CREATE TABLE "Agent" (
     "id" TEXT NOT NULL,
@@ -74,7 +76,7 @@ CREATE TABLE "GlobalSettings" (
     "dynamicallyFetchOllamaModels" BOOLEAN DEFAULT false,
     "hideDefaultModels" BOOLEAN DEFAULT false,
     "defaultChatModel" TEXT NOT NULL DEFAULT 'gpt-3.5-turbo-dbase',
-    "defaultEmbeddingModel" TEXT NOT NULL DEFAULT 'dialoqbase_eb_text-embedding-ada-002',
+    "defaultEmbeddingModel" TEXT NOT NULL DEFAULT 'wishonia_eb_text-embedding-ada-002',
     "ollamaURL" TEXT DEFAULT 'http://host.docker.internal:11434',
 
     CONSTRAINT "GlobalSettings_pkey" PRIMARY KEY ("id")
