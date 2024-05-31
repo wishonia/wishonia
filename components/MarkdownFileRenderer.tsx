@@ -34,7 +34,7 @@ const MarkdownFileRenderer: FC<MarkdownRendererProps> = ({url}) => {
     const [metadata, setMetadata] = useState<Metadata | null>(null);
 
     const githubEditUrl = `${siteConfig.links.github}/edit/main/public${url}`;
-
+    const folder = url.split('/').slice(0, -1).join('/');
 
     useEffect(() => {
         const fetchMarkdown = async () => {
@@ -43,7 +43,10 @@ const MarkdownFileRenderer: FC<MarkdownRendererProps> = ({url}) => {
                 // Use gray-matter to parse the markdown content and extract metadata
                 const {data, content: markdownContent} = matter(response.data);
                 setMetadata(data);
-                const siteRoot = process.env.NEXT_PUBLIC_APP_URL || '';
+                let baseUrlForImages = process.env.NEXT_PUBLIC_APP_URL || '';
+                if(folder){
+                    baseUrlForImages += folder;
+                }
                 // Replace image links with absolute paths
                 let updatedMarkdownContent = markdownContent.replace(/!\[(.*?)\]\((.*?)\)/g, (match, altText, url) => {
                     // Check if the URL is already an absolute path
@@ -52,7 +55,7 @@ const MarkdownFileRenderer: FC<MarkdownRendererProps> = ({url}) => {
                     }
                     // Remove the .md suffix for relative URLs ending in .md
                     const updatedUrl = url.endsWith('.md') ? url.slice(0, -3) : url;
-                    return `![${altText}](${siteRoot}${updatedUrl.startsWith('/') ? '' : '/'}${updatedUrl})`;
+                    return `![${altText}](${baseUrlForImages}${updatedUrl.startsWith('/') ? '' : '/'}${updatedUrl})`;
                 });
                 const replaceMermaidSyntax = (markdownContent: string): string => {
                     const mermaidRegex = /mermaid([^`]*)/g;
