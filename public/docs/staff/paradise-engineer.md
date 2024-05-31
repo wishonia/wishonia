@@ -1,3 +1,13 @@
+---
+slug: paradise-engineer
+name: Join the Mission to Engineer a Utopian AI-Driven Virtual World
+featuredImage: /docs/staff/paradise-engineer.jpg
+description: >-
+  Discover how to become a Paradise Engineer and create virtual worlds filled
+  with pro-social AI! Learn about crafting Digital Twins, Decider Agents, and
+  Actor Agents in just three easy steps to maximize universal well-being while
+  respecting human rights. Join us now and make a difference!
+---
 ![Paradise Engineers Wanted](../../images/paradise-engineers-wanted-wide.png)
 
 ## Your Mission

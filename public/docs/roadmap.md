@@ -1,3 +1,13 @@
+---
+slug: roadmap
+name: 'AI-Powered Project Management: Roadmap to Optimal Resource Allocation'
+featuredImage: /docs/roadmap.jpg
+description: >-
+  Discover how to optimize resource allocation efficiently using decentralized
+  AI-powered project management. Learn about creating autonomous agents, modular
+  approaches, agent architecture, and specialized capabilities in our
+  comprehensive roadmap.
+---
 # Roadmap to Optimal Resource Allocation
 
 ## Milestones

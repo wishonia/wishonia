@@ -1,3 +1,14 @@
+---
+slug: cooperation-ai-engineer
+name: Building Autonomous AI Agents for Enhanced Health Collaboration
+featuredImage: /docs/staff/cooperation-ai-engineer.jpg
+description: >-
+  Discover the role of an Autonomous Cooperation Engineer focused on developing
+  AI agents to enhance collaboration between government agencies, non-profits,
+  and digital health firms. Learn about their responsibilities, required
+  qualifications, and desired outcomes for a more cooperative healthcare
+  ecosystem.
+---
 ## Autonomous Cooperation Engineer
 
 We are looking for a software engineer with to help develop autonomous AI agents that facilitate intelligent voluntary cooperation and reduce duplication of effort between government agencies, disease advocacy non-profits, and digital health companies.

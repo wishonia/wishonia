@@ -49,7 +49,7 @@ export async function getMarkdownFilesWithoutMetaData(absFolderPath?: string): P
             mdFilesWithoutMetaData.push(markdownFile);
         }
     }
-    const filenames = mdFiles.map(mdFile => mdFile.absFilePath);
+    const filenames = mdFilesWithoutMetaData.map(mdFile => mdFile.absFilePath);
     console.log(`Files without metadata: ${filenames.join('\n\t- ')} `);
     return mdFilesWithoutMetaData;
 }
