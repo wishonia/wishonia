@@ -15,13 +15,18 @@ absFilePath: 'C:\code\wishonia\public\globalSolutions\1-percent-treaty\cost-of-w
 
 ## Direct Military Spending
 
+Global military spending nearly doubled from $1.1 trillion in 2000 to $1.9 trillion in 2020 (in 2020 inflation-adjusted dollars). This is an average increase of $3.9% or $42 billion a year.
+
 ![military-spending-scenarios-chart.png](military-spending-scenarios-chart.png)
 
-Global military spending nearly doubled from $1.1 trillion in 2000 to $1.9 trillion in 2020 (in 2020 inflation-adjusted dollars). This is an average increase of $3.9% or $42 billion a year.
+This is 100X more than funding to cure any disease:
+
+![](spending-on-war-vs-cures-bar-chart.png)
 
 ## Direct Annual Costs of War:
 
 1. **Military Expenditure: $1,981 billion.** This reflects the total global spending on armed forces, including salaries, operations, maintenance, and procurement of weapons and equipment.
+
 2. **Economic Impact of Conflict: $521 billion.** Costs incurred due to the immediate effects of war, such as destruction of property, loss of life, and the displacement of people.
 3. **Infrastructure Destruction: $1,875 billion.** Represents the cost to repair or replace infrastructure damaged or destroyed during conflicts, including roads, bridges, and utilities.
 4. **Trade and Investment Disruption: $616 billion.** Estimated losses from interruptions in trade flows and deterred investments in conflict zones or areas under threat.

@@ -38,5 +38,4 @@ BEGIN
         LIMIT match_count;
 END;
 $$;
--- AlterTable
-ALTER TABLE "Agent" ADD COLUMN "useHybridSearch" BOOLEAN NOT NULL DEFAULT false;
+
