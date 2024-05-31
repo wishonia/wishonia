@@ -1,3 +1,13 @@
+---
+slug: ui-overview
+name: Streamlining Non-Profit Operations with Autonomous Agents
+featuredImage: /docs/roadmap/positron-network/user-interface/ui-overview.jpg
+description: >-
+  Learn how nonprofits can optimize their operations using an autonomous agent
+  platform. From signing in and specifying missions to defining agents and
+  pooling resources for maximized impact, streamline your efforts and
+  collaborate for shared success.
+---
 # Ui Overview
 
 1. Non-profit member signs in

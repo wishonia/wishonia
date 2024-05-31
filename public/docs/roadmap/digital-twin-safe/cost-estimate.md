@@ -1,3 +1,13 @@
+---
+slug: cost-estimate
+name: 'Digital Twin Safe: Cost Breakdown and Benefits for Seamless Management'
+featuredImage: /docs/roadmap/digital-twin-safe/cost-estimate.jpg
+description: >-
+  Discover the comprehensive cost breakdown and timeline for developing the
+  Digital Twin Safe—a cutting-edge platform that streamlines digital twin
+  creation with automation, AI, and seamless integration. Explore development
+  phases, additional costs, team composition, and project benefits.
+---
 # Cost Estimate for Digital Twin Safe
 
 The Digital Twin Safe empowers individuals to create and manage their digital twins seamlessly. It leverages automation, API integrations, and AI to streamline the process, offering features such as automated digital twin creation, GitHub repository synchronization, data import scheduling, a chat interface, API access, and a user-friendly dashboard.

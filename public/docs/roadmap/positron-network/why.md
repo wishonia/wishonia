@@ -1,3 +1,13 @@
+---
+slug: why
+name: 'Leveraging AI for Positive Change: Empowering Pro-Social Entities'
+featuredImage: /docs/roadmap/positron-network/why.jpg
+description: >-
+  Learn how effective non-profits leverage autonomous agents to maximize their
+  impact and counteract the growing threats from cybercriminals and
+  authoritarian governments. Understand the critical need to shift the balance
+  of power towards pro-social entities in the AI arms race.
+---
 ### Maximizing Leverage for Good
 
 ![leverage-archimedes-comic.png](../images/leverage-archimedes-comic.png)

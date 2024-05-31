@@ -1,3 +1,14 @@
+---
+slug: self-improvement
+name: 'Building a Self-Improving GitHub Repository: How to Get Started'
+featuredImage: /docs/roadmap/positron-network/self-improvement.jpg
+description: >-
+  Discover how to set up a self-improving GitHub repository, leveraging
+  autonomous agents for continuous monitoring and development. Learn the
+  decision-making process, agents' roles, and the essential initial tasks to
+  establish a repository that evolves autonomously. Maximize efficiency and
+  streamline contributions!
+---
 # Self-Improving GitHub Repository
 
 The goal is to turn this project is to create a self-improving GitHub repository. 

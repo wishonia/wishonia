@@ -1,3 +1,14 @@
+---
+slug: wishonian-government
+name: 'Wishonia: A Virtual World Reshaping Real-World Outcomes'
+featuredImage: /docs/roadmap/wishonian-government/wishonian-government.jpg
+description: >-
+  Explore Wishonia, an AI-powered virtual world with 8 billion digital twins
+  reflecting our desires, values, and knowledge. Through simulated institutions
+  like the Wishonian Congress, United Nations, and more, we can test and improve
+  real-world governance, health, and cybersecurity. Discover how this innovative
+  platform bridges the gap between virtual foresight and real-world action!
+---
 # Wishonia
 
 Wishonia is a virtual world where 8 billion digital twins of every person on Earth. 

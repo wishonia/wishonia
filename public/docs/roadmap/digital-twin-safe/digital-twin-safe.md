@@ -1,3 +1,16 @@
+---
+slug: digital-twin-safe
+name: Comprehensive Guide to Digital Twin Safe Product Requirements
+featuredImage: /docs/roadmap/digital-twin-safe/digital-twin-safe.jpg
+description: >-
+  Unlock the future of personal data management with Digital Twin Safe. Our
+  comprehensive platform uses automation, API integration, and AI to streamline
+  the digital twin creation process. From collecting training data to chat
+  interfaces, API utilities, GitHub syncing, and robust privacy controls, we've
+  got you covered. Explore SDKs for app integration, OAuth2 for secure access,
+  and responsive design for mobile use. Learn more about building and managing
+  your digital twin today.
+---
 # Digital Twin Safe Product Requirements
 
 ![digital-twin-safe-no-text.png](../../images/digital-twin-safe-no-text.png)

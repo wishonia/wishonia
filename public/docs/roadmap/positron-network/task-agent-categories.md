@@ -1,3 +1,13 @@
+---
+slug: task-agent-categories
+name: Empowering Non-Profits with Key Autonomous Agent Strategies
+featuredImage: /docs/roadmap/positron-network/task-agent-categories.jpg
+description: >-
+  Explore six key behaviors essential for top-performing non-profits, from
+  networking and collective intelligence to market engagement, movement
+  building, and advocacy. Learn how specialized agents and meta-agents drive
+  efficiency, collaboration, and innovation tailored to your mission.
+---
 # Agent Categories
 
 At a minimum, there should be an autonomous agent definition for each of the following activities characteristic of the most effective non-profit organizations.  However, the below general activities should be customized to specifically apply to the specific mission of the nonprofit.  Here are the six behaviors characteristic of the most effective non-profits:

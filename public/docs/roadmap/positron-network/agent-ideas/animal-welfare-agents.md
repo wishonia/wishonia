@@ -1,3 +1,13 @@
+---
+slug: animal-welfare-agents
+name: Creating Autonomous Agents to Improve Animal Welfare
+featuredImage: /docs/roadmap/positron-network/agent-ideas/animal-welfare-agents.jpg
+description: >-
+  Explore how autonomous agents can tackle animal suffering by researching
+  living conditions, quantifying distress, raising awareness, creating
+  petitions, and supporting policy changes to ensure better treatment in both
+  wild settings and factory farms.
+---
 ## Animal Welfare Agents
 
 Billions of animals are unnecessarily suffering in factory farms and in the wild.

@@ -1,3 +1,14 @@
+---
+slug: positron-network-architect-agent
+name: Comprehensive Guide to Positron Network Architect Agent
+featuredImage: >-
+  /docs/roadmap/positron-network/positron-network-architect-agent/positron-network-architect-agent.jpg
+description: >-
+  Discover the comprehensive guide to the Positron Network Architect Agent,
+  covering its purpose, functions, design principles, responsibilities, and
+  detailed documentation process, ensuring structured development and seamless
+  GitHub integration for efficient network architecture management.
+---
 # Positron Network Architect Agent Overview
 
 A centralized overview of the Positron Network Architect Agent's purpose, functions, and design, providing in-depth insights into each component of the system.

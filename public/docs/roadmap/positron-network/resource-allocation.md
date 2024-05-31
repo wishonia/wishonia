@@ -1,3 +1,13 @@
+---
+slug: resource-allocation
+name: Innovative Funding Mechanisms for the Positron Network
+featuredImage: /docs/roadmap/positron-network/resource-allocation.jpg
+description: >-
+  Discover how the Positron Network optimizes resource allocation using
+  participatory budgeting, quadratic public goods funding, and retroactive
+  public goods funding to create a transparent, equitable, and community-driven
+  system that maximizes collective impact.
+---
 # Mechanisms for Optimizing Resource Allocation
 
 **1. Participatory Budgeting:**

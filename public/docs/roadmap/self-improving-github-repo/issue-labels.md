@@ -1,3 +1,13 @@
+---
+slug: issue-labels
+name: Essential Issue Labels for Effective Software Project Management
+featuredImage: /docs/roadmap/self-improving-github-repo/issue-labels.jpg
+description: >-
+  Learn the key issue labels in project management systems for software
+  development to enhance team communication and workflow efficiency. Understand
+  common labels like status, priority, decision, type, workflow-specific, and
+  contextual indicators.
+---
 # Issue Labels
 
 In project management systems used for software development, issues are typically labeled or tagged to indicate their current status and priority. These labels help teams to quickly understand the state of each issue and plan their work accordingly. Here are some common labels used for such purposes:

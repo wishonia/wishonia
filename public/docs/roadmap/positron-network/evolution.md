@@ -1,3 +1,13 @@
+---
+slug: evolution
+name: Optimizing Task Agents with Evolutionary Processes and Strategic Funding
+featuredImage: /docs/roadmap/positron-network/evolution.jpg
+description: >-
+  Explore how the Positron Network leverages evolutionary processes and
+  innovative funding methods, like participatory budgeting and quadratic
+  funding, to optimize Task Agents. Discover how continuous performance
+  monitoring drives mission success in non-profits.
+---
 # Using Evolutionary Processes to Improve Task Agents
 
 The evolutionary process for optimizing Task Agents in the Positron Network based on their return on investment in terms of Key Performance Indicators (KPIs) involves several steps:
