@@ -1,3 +1,14 @@
+---
+slug: discovery-ai-engineer
+name: Seeking an Engineer for Autonomous AI Agents in Health Analysis
+featuredImage: /docs/staff/discovery-ai-engineer.jpg
+description: >-
+  Join our team as an Autonomous Discovery Engineer to pioneer the development
+  of AI agents that analyze health data, drive collaboration in healthcare, and
+  support the creation of impactful health studies and insights. Ideal
+  candidates will have expertise in AI, a passion for innovation, and an
+  interest in contributing to the open-source community.
+---
 ## Autonomous Discovery Engineer
 
 We are seeking a software engineer to assist with the creation of autonomous AI agents to quantify the precise effects of foods, drugs, supplements, and medical interventions on human health.

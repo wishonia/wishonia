@@ -7,6 +7,7 @@ import {generateAndSaveFeaturedImageJpg} from "@/lib/imageGenerator";
 import {saveMarkdownPost} from "@/lib/markdownGenerator";
 import {absPathFromPublic} from "@/lib/fileHelper";
 import fs from "fs";
+import {generateMarkdownPageList} from "@/lib/markdownPageListGenerator";
 dotenv.config({ path: join(__dirname, "../.env") });
 async function generateMetadataFromContent(content: string): Promise<MarkdownFile> {
     const name = await generateTitleFromContent(content);
@@ -76,7 +77,9 @@ export async function generateMetadataWhereMissing(pathRelativeToPublic?: string
         } else {
             haveMetaData.push(markdownFile);
         }
-
+    }
+    if(missingMetaData.length > 0){
+        const result = await generateMarkdownPageList();
     }
     return markdownFiles;
 }
