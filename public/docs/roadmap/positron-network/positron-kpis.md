@@ -1,3 +1,13 @@
+---
+slug: positron-kpis
+name: 'Tracking Success: KPIs for the Positron Project'
+featuredImage: /docs/roadmap/positron-network/positron-kpis.jpg
+description: >-
+  Explore how Positron uses key performance indicators to measure and drive
+  success. Learn about the lag and lead measures critical for tracking
+  autonomous agent development, nonprofit usage, impact on public goods, and
+  community growth.
+---
 # Positron Key Performance Indicators (KPIs)
 
 For the Positron project, effectively measuring progress and success involves identifying both lag and lead measures. Lag measures track the outcomes we're trying to achieve, while lead measures track the high-impact activities that drive those outcomes. Here's how these can be applied to the Positron project:

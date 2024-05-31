@@ -1,3 +1,13 @@
+---
+slug: dts-site-map
+name: Comprehensive Guide to the Digital Twin Safe Platform Sitemap
+featuredImage: /docs/roadmap/digital-twin-safe/dts-site-map.jpg
+description: >-
+  Dive into the comprehensive **Digital Twin Safe Sitemap** guide, detailing
+  essential pages from the Home Page, Login/Signup, personalized Dashboard, data
+  import synchronization, chat interface, API management, documentation, user
+  settings, support, and community engagement.
+---
 ### Digital Twin Safe Sitemap
 
 1. **Home Page (URL: `https://example.com/`)**

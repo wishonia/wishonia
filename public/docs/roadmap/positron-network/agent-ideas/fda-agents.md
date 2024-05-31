@@ -1,3 +1,13 @@
+---
+slug: fda-agents
+name: 'Revolutionizing Health: Decentralized FDA Agents and AI'
+featuredImage: /docs/roadmap/positron-network/agent-ideas/fda-agents.jpg
+description: >-
+  Explore how decentralized FDA agents, using conversational AI and machine
+  learning, can revolutionize health data collection, analysis, and personalized
+  healthcare. Discover how these advancements contribute to an open-access
+  repository like 'Clinipedia' for greater public benefit.
+---
 ## Decentralized FDA Agents
 
 **Data Collection Agent:** This agent would contact individuals, possibly through phone calls or a digital platform, to gather information about their dietary habits, medication usage, and any symptoms or side effects they experience. The agent could use conversational AI to make the process user-friendly and efficient.

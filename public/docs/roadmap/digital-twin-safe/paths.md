@@ -1,3 +1,13 @@
+---
+slug: paths
+name: 'Choosing the Right AI: Task-Focused Agents vs. Digital Twins'
+featuredImage: /docs/roadmap/digital-twin-safe/paths.jpg
+description: >-
+  Explore the pros and cons of different AI approaches, from task-focused agents
+  to digital twins generated from natural or manual data, assessing their
+  utility in solving problems while balancing factors like privacy, data
+  aggregation, and ease of use.
+---
 # Paths to Utility Maximization
 
 1. **Generic Task-Focused Agents** - Make it easy for people to manually create teams of generic AI agents that can work together to solve problems.

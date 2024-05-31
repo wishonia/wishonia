@@ -1,3 +1,12 @@
+---
+slug: cybersecurity-agents
+name: Using Autonomous Agents to Combat Cybercrime Effectively
+featuredImage: /docs/roadmap/positron-network/agent-ideas/cybersecurity-agents.jpg
+description: >-
+  Explore the future of cybersecurity with autonomous agents that prevent,
+  report, collaborate with law enforcement, and aid in recovery. Learn how these
+  agents provide education, support victims, and combat cybercrime effectively.
+---
 ## Cybersecurity Defender Agents
 
 Cybercrime is extracting exponentially increasing costs from individuals, businesses, and governments.

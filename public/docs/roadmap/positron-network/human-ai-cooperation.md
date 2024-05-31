@@ -1,3 +1,13 @@
+---
+slug: human-ai-cooperation
+name: 'Human-AI Synergy: Enhancing the Positron Network via GitHub'
+featuredImage: /docs/roadmap/positron-network/human-ai-cooperation.jpg
+description: >-
+  Explore how the Positron Network leverages human-AI collaboration using GitHub
+  for issue tracking and pull requests to maximize efficiency and ethical
+  decision-making. Learn about the role of SCRUM meetings, sprint planning, and
+  task outsourcing in this innovative workflow.
+---
 # Mechanism for Human-AI Cooperation
 
 Given the limitations of current AI technology, it's important to consider how humans and AI can work together to achieve the Positron Network's mission. This human-AI cooperation mechanism is designed to leverage the strengths of both humans and AI, while mitigating their weaknesses.

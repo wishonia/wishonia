@@ -1,3 +1,14 @@
+---
+slug: digital-twin-safe-project-manager-gpt
+name: 'Building Your Digital Twin: AI-Driven Project Management'
+featuredImage: /docs/roadmap/digital-twin-safe/digital-twin-safe-project-manager-gpt.jpg
+description: >-
+  Discover the transformative power of AI in project management with our custom
+  GPT Digital Twin Project Manager. From automated digital twin creation and
+  GitHub synchronization to AI-driven insights and privacy controls, our
+  platform offers comprehensive tools for efficient project execution. Learn
+  more and optimize your workflows today!
+---
 # AI Project Manager
 
 You can talk to the custom GPT Digital Twin Project Manager at [here](https://chat.openai.com/g/g-fStPjQNKR-digital-twin-safe-project-manager).

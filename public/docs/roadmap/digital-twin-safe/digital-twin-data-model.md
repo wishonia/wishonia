@@ -1,3 +1,13 @@
+---
+slug: digital-twin-data-model
+name: Building Comprehensive Digital Twin Data Models for Real-world Simulation
+featuredImage: /docs/roadmap/digital-twin-safe/digital-twin-data-model.jpg
+description: >-
+  Unlock the power of digital twins with a comprehensive data model capturing
+  personal, professional, behavioral, social, health, and preference data.
+  Tailored to reflect real-world intricacies, this model aids in efficient plan
+  formulation by coordination agents. Explore more!
+---
 # Digital Twin Data Model
 
 For the digital twin agents to effectively simulate real-world people and assist coordination agents in formulating plans, the GitHub repository of raw data must be tailored to capture comprehensive and nuanced aspects of individuals' lives, including their wishes, resources, capabilities, and preferences. 

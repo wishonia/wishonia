@@ -1,3 +1,14 @@
+---
+slug: api-interaction
+name: 'Managing Documentation with GitHub API: A Guide for Devs'
+featuredImage: >-
+  /docs/roadmap/self-improving-github-repo/github-integration/api-interaction.jpg
+description: >-
+  Discover how the Positron Network Architect Agent leverages the GitHub API to
+  create and manage documentation seamlessly, using OAuth 2.0 for secure
+  authentication and key endpoints for issues, pull requests, and file
+  management.
+---
 # Api Interaction
 
 The Positron Network Architect Agent interacts with the GitHub API to create and manage documentation. This section provides an overview of the API and its usage in the agent.

@@ -1,3 +1,14 @@
+---
+slug: competition
+name: Maximizing Efficiency Through High-Resolution Agent Competition
+featuredImage: /docs/roadmap/positron-network/competition.jpg
+description: >-
+  Discover how high-resolution agent competition can transform industries,
+  addressing the drawbacks of traditional competition by focusing on
+  task-specific KPIs. Learn how this innovative approach leads to increased
+  efficiency, reduced risk, and encourages constant improvement and
+  transparency.
+---
 # Advantages of High-Resolution Agent Competition
 
 The free-market is an evolutionary process.  Organizations best at adapting and providing value survive and those worse at it die from bankruptcy. This evolutionary pressure encourages constant improvement, innovation, and efficiency among businesses, which can lead to greater benefits for society as a whole.  
