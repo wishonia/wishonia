@@ -17,7 +17,7 @@ export async function readAllMarkdownFiles(absFolderPath?: string): Promise<Mark
         const {data, content} = matter(fileContents);
         // get filename without an extension
         const slug = path.basename(fullPath).replace(/\.md$/, '');
-        const post: MarkdownFile = {
+        const markdownFile: MarkdownFile = {
             slug: slug,
             name: data.name,
             date: data.date,
@@ -30,6 +30,26 @@ export async function readAllMarkdownFiles(absFolderPath?: string): Promise<Mark
             absFilePath: fullPath
         };
 
-        return post;
+        return markdownFile;
     });
+}
+
+export async function getMarkdownFilesWithoutMetaData(absFolderPath?: string): Promise<MarkdownFile[]> {
+    const allFiles = getNonIgnoredFiles(absFolderPath);
+    const mdFilePaths = allFiles.filter(file => file.endsWith('.md'));
+    const mdFilesWithoutMetaData = [];
+    for (const mdFilePath of mdFilePaths) {
+        const fileContents = fs.readFileSync(mdFilePath, 'utf8');
+        const {data} = matter(fileContents);
+        if (!data.name) {
+            const markdownFile: MarkdownFile = {
+                absFilePath: mdFilePath,
+                name: data.name
+            };
+            mdFilesWithoutMetaData.push(markdownFile);
+        }
+    }
+    const filenames = mdFiles.map(mdFile => mdFile.absFilePath);
+    console.log(`Files without metadata: ${filenames.join('\n\t- ')} `);
+    return mdFilesWithoutMetaData;
 }
