@@ -45,6 +45,21 @@ export const voterLeaderboardLink: NavItem = {
     tooltip: "View the leaderboard of voters",
 };
 
+export const docsLink: NavItem = {
+    title: "Docs",
+    href: "/docs",
+    icon: "docs",
+    tooltip: "View the documentation",
+}
+
+export const githubLink: NavItem = {
+    title: "Github",
+    href: "https://github.com/wishonia/wishonia",
+    icon: "github",
+    tooltip: "Contribute to the project on Github",
+    external: true,
+}
+
 
 export const profileSettingsLink: NavItem = {
     title: "Profile Settings",
@@ -69,6 +84,8 @@ export const overviewLink: NavItem = {
     title: "Overview",
     href: "/#overview",
 };
+
+
 
 export const generalDashboardTopNav: Navigation = {
     data: [],
@@ -115,6 +132,8 @@ export const generalSidebarNav: Navigation = {
         //wishingWellsResultsLink,
         globalProblemsVoteLink,
         globalProblemsResultsLink,
+        docsLink,
+        githubLink,
     ],
 }
 
@@ -125,5 +144,7 @@ export const generalFooterNav: Navigation = {
         //wishingWellsResultsLink,
         globalProblemsVoteLink,
         globalProblemsResultsLink,
+        docsLink,
+        githubLink,
     ],
 };
