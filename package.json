@@ -98,7 +98,7 @@
     "node-fetch": "2.7.0",
     "nodemailer": "^6.9.13",
     "openai": "^4.0.0",
-    "pdfjs-dist": "^3.7.107",
+    "pdfjs-dist": "^4.2.67",
     "postcss": "8.4.35",
     "react": "18.2.0",
     "react-calendar-heatmap": "^1.9.0",
