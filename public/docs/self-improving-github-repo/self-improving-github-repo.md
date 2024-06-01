@@ -175,5 +175,5 @@ Here's a proposed structure along with essential files and directories:
 
 
 ## More Details
-1. [Architect Agent](positron-network-architect-agent/positron-network-architect-agent.md)
+1. [Architect Agent](architect-agent.md)
 
