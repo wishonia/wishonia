@@ -1,7 +1,7 @@
 ---
 slug: issue-labels
 name: Essential Issue Labels for Effective Software Project Management
-featuredImage: /docs/roadmap/self-improving-github-repo/issue-labels.jpg
+featuredImage: /docs/self-improving-github-repo/issue-labels.jpg
 description: >-
   Learn the key issue labels in project management systems for software
   development to enhance team communication and workflow efficiency. Understand
