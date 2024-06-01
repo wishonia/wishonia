@@ -13,6 +13,44 @@ description: >-
 
 The goal is to turn this project is to create a self-improving GitHub repository. 
 
+We need to index the repository, issues, and comments to create a tool to allow the agents to know what's been built already and provide links to files and ask questions about the project. This will be necessary for all the coding and project management agents.
+
+To do this we need to create tables in the Prisma schema that mirror the Github issues API response including comments and related models. We should prefix these schema tables with `github_` to avoid conflicts with other tables.  I guess we can just keep the snake_case naming convention for the fields to maintain consistency with the Github API and simplify insertion?
+
+For generating the embeddings we can either create an `embeddings` field on the table or a separate embeddings table(s) that can be linked to the GitHub tables.
+
+Then we'll need to create a sync job to update the tables and embeddings on a regular basis.
+
+We'll want a function for querying the embeddings. This will be used in 
+- Agents for commenting on issues, adding context, generating code, etc.
+- An API endpoint for querying the embeddings
+- A chat web interface for querying the embeddings
+
+The function should return the top N most relevant chunks of text from the issue, comments, and related files and links to the sources.
+
+# References
+- https://github.com/run-llama/LlamaIndexTS/blob/main/examples/anthropic/agent.ts
+- https://github.com/marketplace?type=actions&query=todo+
+- https://dosu.dev/
+- https://js.langchain.com/v0.1/docs/expression_language/cookbook/retrieval/
+- https://js.langchain.com/v0.1/docs/expression_language/cookbook/tools/
+- https://github.com/Codium-ai/pr-agent/blob/main/pr_agent/tools/pr_code_suggestions.py
+
+# Required Agents
+
+This will require the following agents:
+- Project Manager Agent
+- Builder Agent
+- Architect Agent
+- Researcher Agent
+- Human Agent
+- Critic Agent
+- Webhook Agent
+- GitHub Action Agent
+- Documentation Agent
+- Endpoint Generator Agents - Given requirements generate API endpoints consistent with the existing endpoints.
+- Prisma Schema Agent - Given requirements generate data models and relationships in the Prisma schema.
+
 Humans can guide and control the direction by contributing to the documentation, creating/commenting on GitHub issues, and reviewing/merging pull requests.
 
 However, the Project Manager Agent will continuously monitor the state of the code and create issues to address any functional deficiencies.  These issues can be addressed through code contributions by Builder Agents.
@@ -128,65 +166,14 @@ for organizing the project and setting the groundwork for future autonomous deve
 Here's a proposed structure along with essential files and directories:
 
 ```
-self-improving-repo/
-│
-├── .github/
-│   ├── workflows/           # GitHub Actions workflows
-│   │   ├── issue_handling.yml  # Workflow for handling new issues
-│   │   └── pr_review.yml       # Workflow for pull request review
-│   └── templates/           # Issue and PR templates
-│       ├── bug_report.md
-│       └── feature_request.md
-│
 ├── agents/                 # Autonomous agents
 │   ├── issue_reader/       # Agent for reading and analyzing issues
 │   ├── research_agent/     # Agent for conducting web research
 │   └── pr_creator/         # Agent for creating pull requests
 │
-├── src/                    # Source code for the project
-│   ├── utils/              # Utility scripts and modules
-│   ├── main.py             # Main application script
-│   └── requirements.txt    # Python dependencies
-│
-├── tests/                  # Test cases for the agents and other code
-│   ├── agent_tests/
-│   └── integration_tests/
-│
-├── docs/                   # Documentation
-│   ├── setup.md            # Setup instructions
-│   ├── usage.md            # Usage guide
-│   └── contribution.md     # Contribution guidelines
-│
-├── .gitignore              # Git ignore file
-├── LICENSE                 # License file
-└── README.md               # Readme file
 ```
 
-### Initial Tasks to Set Up the Repository:
-
-1. **Set Up GitHub Workflows:** Create the `.github/workflows` directory and add workflows for issue handling and pull request review.
-
-2. **Issue and PR Templates:** Design templates for bug reports and feature requests in `.github/templates`.
-
-3. **Develop Autonomous Agents:**
-    - **Issue Reader:** Build an agent to read and analyze incoming issues.
-    - **Research Agent:** Develop an agent for web research based on issues.
-    - **PR Creator:** Create an agent to automatically generate pull requests.
-
-4. **Source Code:** Initialize the `src` directory with main application scripts and utility modules.
-
-5. **Testing:** Write test cases for agents and other functionalities in the `tests` directory.
-
-6. **Documentation:** Prepare comprehensive documentation including setup, usage, and contribution guidelines in the `docs` directory.
-
-7. **Initialize Repository:** Add `.gitignore`, `LICENSE`, and `README.md` to the root directory.
-
-By setting up this structure and completing these initial tasks,
-you'll lay a solid foundation for the repository to evolve and improve autonomously over time.
 
 ## More Details
 1. [Architect Agent](positron-network-architect-agent/positron-network-architect-agent.md)
 
-## Related Projects
-
-See [references.md](references.md#autonomous-code-generation)

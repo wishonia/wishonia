@@ -8,9 +8,9 @@ description: >-
   autonomous agent development, nonprofit usage, impact on public goods, and
   community growth.
 ---
-# Positron Key Performance Indicators (KPIs)
+# Key Performance Indicators (KPIs)
 
-For the Positron project, effectively measuring progress and success involves identifying both lag and lead measures. Lag measures track the outcomes we're trying to achieve, while lead measures track the high-impact activities that drive those outcomes. Here's how these can be applied to the Positron project:
+For the project, effectively measuring progress and success involves identifying both lag and lead measures. Lag measures track the outcomes we're trying to achieve, while lead measures track the high-impact activities that drive those outcomes. Here's how these can be applied to the project:
 
 **Lag Measures:**
 - **Number of Autonomous Agents Developed:** Tracks the cumulative total of autonomous agents created through the project.

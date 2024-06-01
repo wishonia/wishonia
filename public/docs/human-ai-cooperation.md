@@ -10,19 +10,15 @@ description: >-
 ---
 # Mechanism for Human-AI Cooperation
 
-Given the limitations of current AI technology, it's important to consider how humans and AI can work together to achieve the Positron Network's mission. This human-AI cooperation mechanism is designed to leverage the strengths of both humans and AI, while mitigating their weaknesses.
-
-The mechanism for human-AI cooperation in the Positron Network, uses GitHub issues and pull requests to blend human insights with AI's capabilities. This approach allows for effective collaboration, leveraging the strengths of both humans and AI in the network's development and maintenance. Here's how it works:
-
 **1. Issue Creation and Identification:**
-   - **AI-Generated Issues:** The AI, like the Positron Network Architect Agent, identifies potential enhancements or issues within the network. It then creates GitHub issues detailing these findings.
+   - **AI-Generated Issues:** The Network Architect Agent, identifies potential enhancements or issues within the network. It then creates GitHub issues detailing these findings.
    - **Human-Generated Issues:** Network participants (developers, non-profit staff, etc.) can also create issues on GitHub to suggest changes, report bugs, or propose new features.
 
-**2. AI Analysis of Issues:**
-   - The AI reviews and analyzes both AI-generated and human-generated issues.
+**2. Analysis of Issues:**
+   - The Project Manager Agent reviews and analyzes both AI-generated and human-generated issues.
    - It prioritizes them based on predefined criteria such as impact, feasibility, and alignment with the network's goals.
 
-**3. Human-AI Discussion:**
+**3. Discussion:**
    - **Collaborative Deliberation:** For each issue, there's a collaborative discussion involving both humans and the AI. The AI can provide data-driven insights, simulations, or projections to inform the discussion.
    - **Feedback Integration:** Humans provide contextual understanding, ethical considerations, and strategic direction. They can offer feedback on the AI's suggestions and analyses.
 
@@ -37,7 +33,7 @@ The mechanism for human-AI cooperation in the Positron Network, uses GitHub issu
    - Once approved, the changes are merged into the main branch of the repository.
 
 **6. Continuous Learning and Adaptation:**
-   - The AI learns from human feedback and decisions made on issues and pull requests, refining its future contributions and analyses.
+   - The Project Manager Agent learns from human feedback (thumbs up and down votes) and decisions made on issues and pull requests, refining its future contributions and analyses.
    - Human participants also gain insights from AI-generated data and recommendations, enhancing their decision-making processes.
 
 **7. Documentation and Transparency:**
@@ -46,23 +42,7 @@ The mechanism for human-AI cooperation in the Positron Network, uses GitHub issu
 
 This human-AI cooperation mechanism facilitates a synergistic relationship where AI enhances human capabilities with data-driven insights and automation, while human participants provide contextual intelligence, creativity, and ethical guidance. GitHub, as a platform, offers an ideal environment for this collaboration, with its APIs and tools for issue tracking, code review, and version control.
 
-## Meetings
 
-SCRUM and Sprint Planning meetings should be transcribed using a service like Fireflies.ai and sent to the Project Manager Agent to turn action items into GitHub Issues and the Documentation Agent to update documentation files in the repository.
-
-### SCRUM Meetings
-
-These should be daily 15-minutes strictly time-limited meetings focused on answering the questions:
-1. What did you do yesterday?
-2. What are you doing today?
-3. What do you need to succeed today?
-
-### Weekly Sprint Planning Meetings
-
-Weekly sprint planning meetings are 1-hour meetings held at the start of each week. The team:
-1. discuss the work to be done in the upcoming sprint
-2. breaks larger tasks into smaller, manageable tasks
-3. assign them to team members
 
 ## Human Project Manager
 
