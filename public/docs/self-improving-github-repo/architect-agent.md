@@ -11,8 +11,6 @@ description: >-
 ---
 # Positron Network Architect Agent Overview
 
-A centralized overview of the Positron Network Architect Agent's purpose, functions, and design, providing in-depth insights into each component of the system.
-
 ### Purpose
 The Positron Network Architect Agent  primary objective is to ensure a structured, efficient, and scalable design that aligns with the overarching goals of the network.
 
@@ -45,10 +43,10 @@ In its design, the agent embodies principles of clarity, scalability, and future
 - [Data Models](documentation-creation/data-models.md): Gain insights into the data structures and flow within the network.
 
 ## GitHub Integration
-- [API Interaction](../../self-improving-github-repo/github-integration/api-interaction.md): Understand how the agent interacts with GitHub APIs for documentation management.
-- [Pull Requests](../../self-improving-github-repo/github-integration/pull-requests.md): Learn about the process of creating and managing pull requests for continuous improvement.
-
+- [API Interaction](../self-improving-github-repo/github-integration/api-interaction.md): Understand how the agent interacts with GitHub APIs for documentation management.
+- [Pull Requests](../self-improving-github-repo/github-integration/pull-requests.md): Learn about the process of creating and managing pull requests for continuous improvement.
 
 ## References
 
 1. [RFC Process](https://dev.to/wasp/develop-the-right-thing-every-time-and-become-a-10x-engineer-the-art-of-writing-rfcs-2mc6)
+2. [Forces for Good](https://ssir.org/articles/entry/local_forces_for_good) - The Six Practices of High-Impact Nonprofits

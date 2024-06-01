@@ -9,11 +9,11 @@ description: >-
 ---
 # Pull Requests
 
-The Positron Network Architect Agent uses pull requests to manage documentation. This section provides an overview of the pull request process and its usage in the agent.
+The Architect Agent uses pull requests to manage documentation. This section provides an overview of the pull request process and its usage in the agent.
 
 ## Pull Request Process
 
-The Positron Network Architect Agent uses pull requests to manage documentation. This section provides an overview of the pull request process and its usage in the agent.
+The Architect Agent uses pull requests to manage documentation. This section provides an overview of the pull request process and its usage in the agent.
 
 ### Creating a Pull Request
 

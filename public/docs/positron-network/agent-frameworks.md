@@ -21,3 +21,6 @@ description: >-
 * [ChatDev](https://github.com/OpenBMB/ChatDev) - Create Customized Software using Natural Language Idea (through LLM-powered Multi-Agent Collaboration)
 * [MetaGPT](https://github.com/geekan/MetaGPT) - MetaGPT takes a one line requirement as input and outputs user stories / competitive analysis / requirements / data structures / APIs / documents, etc.
 Internally, MetaGPT includes product managers / architects / project managers / engineers. It provides the entire process of a software company along with carefully orchestrated SOPs.
+
+## Research Papers
+* [Autonomous Agent Landscape](https://www.semanticscholar.org/reader/28c6ac721f54544162865f41c5692e70d61bccab) - A 2023 survey autonomous agent frameworks

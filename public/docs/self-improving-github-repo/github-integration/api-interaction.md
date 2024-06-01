@@ -11,7 +11,7 @@ description: >-
 ---
 # Api Interaction
 
-The Positron Network Architect Agent interacts with the GitHub API to create and manage documentation. This section provides an overview of the API and its usage in the agent.
+The Architect Agent interacts with the GitHub API to create and manage documentation. This section provides an overview of the API and its usage in the agent.
 
 ## GitHub API
 

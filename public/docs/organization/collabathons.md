@@ -16,7 +16,7 @@ description: >-
 
 Collabathons are like hackathons, but all participants work together on the same open-source project. Judges vote on what contributions get accepted and the rewards for them. These produce more long-term value than just creating little projects typically abandoned after the hackathon.
 
-Positron Collabathons are designed
+Collabathons are designed
 to maximize wish fulfillment and minimize suffering by:
 - creating autonomous agents to produce public goods
 - supporting non-profit organizations in their missions
@@ -32,18 +32,18 @@ to maximize wish fulfillment and minimize suffering by:
 
 **Avoiding Wheel Reinvention**
 
-Positron is not intended to be a standalone autonomous agent framework.
+
 There are already a lot of great autonomous agent frameworks such as Autogen, OpenAgents, TaskWeaver, AutoGPT, SuperAGI, etc.
 
-The Positron repository is meant to be a collection of specific operationalized autonomous agents that these existing frameworks and libraries to create operational agents that can be run in GitHub Actions.
+The repository is meant to be a collection of specific operationalized autonomous agents that these existing frameworks and libraries to create operational agents that can be run in GitHub Actions.
 
 
 ### Types of Contributions
 
 1. **Autonomous Public Good (APG) Agents**: Directly creates a real public good that improves the world in a measurable way. [Examples below](#example-public-good-agents)
 2. **Autonomous Non-Profit (ANP) Agents**: Supports a non-profit organization in its mission in accordance with the [Six Practices of High-Impact Nonprofits](../../autonomous-nonprofit-designer-gpt/instructions.md).
-3. **Positron Framework Contributions**: Bring the Positron framework closer to the long-term vision of a self-improving repository capable of sustaining itself and autonomously granting prosocial wishes submitted as GitHub issues.
-4. **External Framework Contributions**: Improvements to third-party open-source libraries or other autonomous agent frameworks that are used by Positron agents or the Positron Framework should be encouraged and rewarded.  One should provide a link to their external repo-commits and an illustration of the benefits with an agent implementation.
+3. **Framework Contributions**: Bring the framework closer to the long-term vision of a self-improving repository capable of sustaining itself and autonomously granting prosocial wishes submitted as GitHub issues.
+4. **External Framework Contributions**: Improvements to third-party open-source libraries or other autonomous agent frameworks that are used by agents or the Framework should be encouraged and rewarded.  One should provide a link to their external repo-commits and an illustration of the benefits with an agent implementation.
 
 ### Prize Eligibility Requirements
 - **Open-Source**: Must be licensed under [GPLv3](../../LICENSE).
