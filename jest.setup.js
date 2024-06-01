@@ -3,3 +3,6 @@ global.ReadableStream = require('web-streams-polyfill').ReadableStream;
 import "@testing-library/jest-dom"
 import fetch from 'node-fetch';
 global.fetch = fetch; // This makes fetch globally available as it would be in the browser
+const { Request, Response } = require('node-fetch');
+global.Request = Request;
+global.Response = Response;
