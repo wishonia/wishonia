@@ -1,7 +1,7 @@
 /**
  * @jest-environment node
  */
-import {PrismaClient, User} from "@prisma/client";
+import {PrismaClient} from "@prisma/client";
 import {seedGlobalProblemPairAllocations} from "@/prisma/seedGlobalProblemPairAllocations";
 import {aggregateGlobalProblemPairAllocations} from "@/lib/globalProblems";
 import {aggregateWishingWellPairAllocations, saveWishToWishingWell} from "@/lib/wishingWells";

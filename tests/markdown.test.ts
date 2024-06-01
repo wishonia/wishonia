@@ -6,7 +6,7 @@ import {generateMetadataWhereMissing} from "@/lib/metadataGenerator";
 import {generateWishingWellMarkdown} from "@/lib/wishingWellMarkdownGenerator";
 import {generateGlobalProblems} from "@/lib/globalProblemGenerator";
 import {generateMarkdownPageList} from "@/lib/markdownPageListGenerator";
-import {absPathFromPublic, absPathFromRepo, getAllFiles, getNonIgnoredFiles} from "@/lib/fileHelper";
+import {absPathFromPublic, absPathFromRepo, getNonIgnoredFiles} from "@/lib/fileHelper";
 
 describe("Test Markdown Reader", () => {
     // Set timeout to 10 minutes
