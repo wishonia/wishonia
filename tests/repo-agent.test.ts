@@ -1,9 +1,8 @@
 /**
  * @jest-environment node
  */
-import {absPathFromPublic} from "@/lib/fileHelper";
 import queryRepo from "@/lib/github/repoAgent";
-describe("llamaindex", () => {
+describe("Repo Agent", () => {
     it("queryRepo should index and respond to queries about the repo", async () => {
         const answer = await queryRepo(
                 "Please provide a list of the steps required to optimize societal resource allocation.");
