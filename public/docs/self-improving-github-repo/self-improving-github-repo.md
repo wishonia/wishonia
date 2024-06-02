@@ -6,20 +6,99 @@ description: >-
   Discover how to set up a self-improving GitHub repository, leveraging
   autonomous agents for continuous monitoring and development. Learn the
   decision-making process, agents' roles, and the essential initial tasks to
-  establish a repository that evolves autonomously. Maximize efficiency and
-  streamline contributions!
+  establish a repository that evolves autonomously.
 ---
 # Self-Improving GitHub Repository
 
 The goal is to turn this project is to create a self-improving GitHub repository.
 
+## Tasks
+
+- [x] Create a Prisma schema for storing Agent definitions, including objectives and data sources.  See https://github.com/wishonia/wishonia/blob/main/prisma/schema.prisma#L381
+- [ ] Implement a library/endpoint/UI/tests for creating updating agents (objectives/data sources) based on the Prisma schema.
+- [ ] Develop a library/endpoint/UI/test for adding data sources starting with GitHub repositories that can be assigned to agents.  See 
+- [ ] Create an API endpoint for creating agents and assigning data sources to them.
+- [ ] Page for managing agents, allowing users to create, edit, and delete agents, as well as assign data sources.
+- [ ] Page creating and editing agent objectives and data sources.
+- [X] Design a Prisma schema for mirroring the GitHub issues API response, including comments and related models. See https://github.com/wishonia/wishonia/blob/main/prisma/schema.prisma#L591
+- [ ] Implement a GitHub sync library for syncing repository data, issues, and comments using Octokit.
+- [ ] Generate embeddings for the indexed repository data, either by adding an `embeddings` field to the existing tables or creating separate embedding tables linked to the GitHub tables. Using an embeddings table is simplest, but the content of each record may need to have multiple chunks in which case, it would require multiple records and wouldn't be able to be stored in a single embeddings field. Here are some instructions  https://js.langchain.com/v0.2/docs/how_to/indexing/ to create embeddings without wasting money on reindexing content that already has embeddings. It also should update embeddings and delete the old ones when the files in the repo change based on the github repo changelog.
+- [ ] Set up a sync job using GitHub Actions and/or webhooks to regularly update the tables and embeddings.
+- [ ] Create a chat endpoint/UI for querying the embeddings, which will be used by agents for commenting on issues, adding context, generating code, and in API endpoints and chat interfaces.
+- [ ] Design and implement the following agents in the UI for managing the GitHub project:
+    - [ ] Project Manager Agent
+    - [ ] Issue Triager Agent
+    - [ ] Requirements Analyzer Agent
+    - [ ] Solution Architect Agent
+    - [ ] Development Team Agent
+    - [ ] Code Reviewer Agent
+    - [ ] Issue Commenter Agent
+    - [ ] Continuous Integration (CI) Agent
+    - [ ] Documentation Agent
+    - [ ] Prisma Schema Manager Agent
+    - [ ] API Endpoint Generator Agent
+    - [ ] UI Component Generator Agent
+- [ ] Develop the necessary tools (https://js.langchain.com/v0.1/docs/expression_language/cookbook/tools/) and capabilities for the agents, including:
+    - [ ] Repository Querying Tool with RAG (Retrieval-Augmented Generation)
+    - [ ] Issue Creation and Management Tool
+    - [ ] Issue Search and Filtering Tool
+    - [ ] Pull Request Management Tool
+- [ ] Implement the decision-making process for the agents, following the provided decision tree diagram.
+- [ ] Set up continuous monitoring and self-improvement mechanisms for the agents to identify and implement improvements.
+- [ ] Establish a process for handling limitations and seeking human intervention when necessary.
+- [ ] Conduct thorough testing and validation of the self-improving GitHub repository system.
+- [ ] Deploy the system and monitor its performance, making adjustments as needed.
+- [ ] Continuously iterate and improve the system based on feedback and identified areas for enhancement.
+
+## Step 1: Create function for creating agents
+
+We need to store the Agent definitions (objectives, their data sources) in the Postgres database using the [Prisma schema](../../../prisma/schema.prisma). 
+
+See Agent model in https://github.com/wishonia/wishonia/blob/main/prisma/schema.prisma#L418
+
+## Step 2. Create Jest test for agent creation
+
+We need to create a Jest test to ensure that the agents are created correctly and that they can be queried from the database.
+
+## Step 3. Create function for adding GitHub repos as data sources that can be assigned to agents
+
+We need to create a function that allows us to add GitHub repositories as data sources that can be assigned to agents. This will allow the agents to access the repository data and perform their tasks.
+
+See AgentSource model in https://github.com/wishonia/wishonia/blob/main/prisma/schema.prisma#L418
+
+## Create API Endpoint for Creating Agents
+
+We need to create an API endpoint that allows us to create agents and assign data sources to them. This will allow us to manage the agents and their data sources through a web interface.
+
+## Create Page for Managing Agents
+
+We need to create a web page that allows us to manage the agents and their data sources. This page should allow us to create, edit, and delete agents, as well as assign data sources to them.
+
+## Create Page for Creating/Editing Agent Objective and Data Sources
+
+We need to create a web page that allows us to create and edit agent objectives and data sources. 
+This page should allow us to define the objectives of the agents and assign data sources to them.
+
+## Create GitHub Sync Library for GitHub Repo Data Sources
+
 We need to index the repository, issues, and comments to create a tool to allow the agents to know what's been built already and provide links to files and ask questions about the project. This will be necessary for all the coding and project management agents.
 
-To do this we need to create tables in the Prisma schema that mirror the Github issues API response including comments and related models. We should prefix these schema tables with `github_` to avoid conflicts with other tables.  I guess we can just keep the snake_case naming convention for the fields to maintain consistency with the Github API and simplify insertion?
+To do this,
+we created tables in the Prisma schema that mirror the GitHub issues API response including comments and related models.
+See GitHub models in https://github.com/wishonia/wishonia/blob/main/prisma/schema.prisma#L591
 
-For generating the embeddings we can either create an `embeddings` field on the table or a separate embeddings table(s) that can be linked to the GitHub tables.
+**Generate Embeddings**
+
+For generating the embeddings,
+we can either create an `embeddings` field on the table or a separate embeddings table(s)
+that can be linked to the GitHub tables.
+
+
+## Step 5: Create GitHub Action and/or Webhooks for Syncing GitHub Repo Data
 
 Then we'll need to create a sync job to update the tables and embeddings on a regular basis.
+
+## Step 6: Create Function for Querying Embeddings
 
 We'll want a function for querying the embeddings. This will be used in
 - Agents for commenting on issues, adding context, generating code, etc.
@@ -36,7 +115,7 @@ The function should return the top N most relevant chunks of text from the issue
 - https://js.langchain.com/v0.1/docs/expression_language/cookbook/tools/
 - https://github.com/Codium-ai/pr-agent/blob/main/pr_agent/tools/pr_code_suggestions.py
 
-# Required Agents
+# Create Agents in the UI for managing the GitHub project
 
 To design a process where AI agents manage a GitHub project, automatically plan and prioritize development, and create and make helpful comments on GitHub issues, we would need several specialized agents with focused objectives. Here's a breakdown of the required agents and their objectives:
 

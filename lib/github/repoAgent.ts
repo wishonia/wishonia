@@ -13,7 +13,10 @@ async function initializeQueryEngine() {
     const markdownFiles = await readAllMarkdownFiles(absPathFromPublic(""));
 
     const documents = markdownFiles.map((file) => {
-        return new Document({ text: file.content, id_: file.absFilePath });
+        return new Document({
+            text: file.content,
+            id_: file.absFilePath
+        });
     });
 
     // Split text and create embeddings. Store them in a VectorStoreIndex
@@ -38,10 +41,14 @@ async function queryRepo(question: string): Promise<string> {
 
         if (sourceNodes) {
             sourceNodes.forEach((source: NodeWithScore, index: number) => {
+                const relationships = source.node.relationships;
+                const filePath = relationships.SOURCE;
                 console.log(
                     `\n${index}: Score: ${source.score} - ${source.node
                         .getContent(MetadataMode.NONE)
-                        .substring(0, 50)}...\n`
+                        .substring(0, 50)}...\n
+                        filePath: ${filePath}\n
+                        `
                 );
             });
         }
