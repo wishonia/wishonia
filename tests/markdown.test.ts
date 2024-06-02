@@ -1,26 +1,38 @@
 /**
  * @jest-environment node
  */
-import {readAllMarkdownFiles} from "@/lib/markdownReader";
+import {getMarkdownFilesWithoutMetaData, readAllMarkdownFiles} from "@/lib/markdownReader";
 import {generateMetadataWhereMissing} from "@/lib/metadataGenerator";
 import {generateWishingWellMarkdown} from "@/lib/wishingWellMarkdownGenerator";
 import {generateGlobalProblems} from "@/lib/globalProblemGenerator";
 import {generateMarkdownPageList} from "@/lib/markdownPageListGenerator";
-
-beforeAll(async () => {
-    //await checkDatabaseName();
-});
+import {absPathFromPublic, absPathFromRepo, getNonIgnoredFiles} from "@/lib/fileHelper";
 
 describe("Test Markdown Reader", () => {
     // Set timeout to 10 minutes
     jest.setTimeout(600000);
+    it("gets markdown files without metadata", async () => {
+        const mdFiles = await getMarkdownFilesWithoutMetaData(absPathFromRepo('public'));
+        expect(mdFiles.length).toEqual(0);
+    })
     it("metadata updater", async () => {
-        const posts = await generateMetadataWhereMissing(
+        let mdFilesUpdated = await generateMetadataWhereMissing(
             '');
+        const mdFilesWithoutMetaData = await getMarkdownFilesWithoutMetaData(absPathFromRepo('public'));
+        expect(mdFilesWithoutMetaData.length).toEqual(0);
     });
     it("gets markdown posts", async () => {
-        const results = await readAllMarkdownFiles();
-        expect(results.length).toBeGreaterThan(60);
+        const absFolderPath = absPathFromPublic('docs/roadmap');
+        const allFiles = getNonIgnoredFiles(absFolderPath);
+        let mdFiles = await readAllMarkdownFiles(absFolderPath);
+        expect(allFiles.length).toBeGreaterThan(0);
+        let hasWishoniaGovernment = allFiles.some(file => file.endsWith('wishonian-government.md'));
+        expect(hasWishoniaGovernment).toBeTruthy();
+        mdFiles = await readAllMarkdownFiles();
+        expect(mdFiles.length).toBeGreaterThan(60);
+        hasWishoniaGovernment = mdFiles.some(mdFile => mdFile.absFilePath.includes('wishonian-government.md'));
+        expect(hasWishoniaGovernment).toBeTruthy();
+
     });
     it("generates markdown and images for default wishing wells", async () => {
         const posts = await generateWishingWellMarkdown();

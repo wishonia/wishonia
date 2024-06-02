@@ -7,6 +7,7 @@ import {generateAndSaveFeaturedImageJpg} from "@/lib/imageGenerator";
 import {saveMarkdownPost} from "@/lib/markdownGenerator";
 import {absPathFromPublic} from "@/lib/fileHelper";
 import fs from "fs";
+import {generateMarkdownPageList} from "@/lib/markdownPageListGenerator";
 dotenv.config({ path: join(__dirname, "../.env") });
 async function generateMetadataFromContent(content: string): Promise<MarkdownFile> {
     const name = await generateTitleFromContent(content);
@@ -46,32 +47,39 @@ async function generateDescriptionFromContent(content: string): Promise<string> 
 
 export async function generateMetadataWhereMissing(pathRelativeToPublic?: string): Promise<MarkdownFile[]> {
     const absFolderPath = absPathFromPublic(pathRelativeToPublic);
-    const posts = await readAllMarkdownFiles(absFolderPath);
-    for(const post of posts) {
+    const markdownFiles = await readAllMarkdownFiles(absFolderPath);
+    const haveMetaData = [];
+    const missingMetaData = [];
+    for(const markdownFile of markdownFiles) {
         let updated = false;
-        if(!post.name){
-            post.name = await generateTitleFromContent(post.content);
+        if(!markdownFile.name){
+            markdownFile.name = await generateTitleFromContent(markdownFile.content);
             updated = true;
         }
-        if(!post.description){
-            post.description = await generateDescriptionFromContent(post.content);
+        if(!markdownFile.description){
+            markdownFile.description = await generateDescriptionFromContent(markdownFile.content);
             updated = true;
         }
-        if(!post.featuredImage) {
-            post.featuredImage = await generateAndSaveFeaturedImageJpg(post.content, post.absFilePath);
+        if(!markdownFile.featuredImage) {
+            markdownFile.featuredImage = await generateAndSaveFeaturedImageJpg(markdownFile.content, markdownFile.absFilePath);
             updated = true;
         } else {
-            const absPath = absPathFromPublic(post.featuredImage);
+            const absPath = absPathFromPublic(markdownFile.featuredImage);
             const imageExists = fs.existsSync(absPath);
-            if(!imageExists || post.featuredImage.endsWith('.png')){
-                post.featuredImage = await generateAndSaveFeaturedImageJpg(post.content, post.absFilePath);
+            if(!imageExists || markdownFile.featuredImage.endsWith('.png')){
+                markdownFile.featuredImage = await generateAndSaveFeaturedImageJpg(markdownFile.content, markdownFile.absFilePath);
                 updated = true;
             }
         }
         if(updated){
-            await saveMarkdownPost(post);
+            missingMetaData.push(markdownFile);
+            await saveMarkdownPost(markdownFile);
+        } else {
+            haveMetaData.push(markdownFile);
         }
-
     }
-    return posts;
+    if(missingMetaData.length > 0){
+        const result = await generateMarkdownPageList();
+    }
+    return markdownFiles;
 }
