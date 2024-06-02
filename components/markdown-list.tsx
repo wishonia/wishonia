@@ -20,7 +20,7 @@ export default function MarkdownPagesList() {
             className="mb-4 p-2 w-full"
         />
         {filteredPages.map((mdPage, idx) => (
-            <div className="mb-4">
+            <div className="mb-4" key={idx}> 
               <LinkCard navItem={{
                 title: mdPage.name,
                 tooltip: mdPage.description,
@@ -29,7 +29,7 @@ export default function MarkdownPagesList() {
                 img: mdPage.featuredImage,
                 icon: undefined,
                 href: mdPage.url.toString()
-              }} key={idx} {...mdPage} />
+              }} {...mdPage} />
             </div>
         ))}
       </div>
