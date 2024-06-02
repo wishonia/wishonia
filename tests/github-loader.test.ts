@@ -1,3 +1,6 @@
+/**
+ * @jest-environment node
+ */
 import {GithubRepoLoader} from "langchain/document_loaders/web/github";
 describe("githubLoader", () => {
     it("should load and process GitHub repository", async () => {

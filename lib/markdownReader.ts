@@ -5,13 +5,16 @@ import path from 'path';
 import matter from 'gray-matter';
 import {absPathFromPublic, getNonIgnoredFiles} from "@/lib/fileHelper";
 
-export async function readAllMarkdownFiles(absFolderPath?: string): Promise<MarkdownFile[]> {
+export function listMarkdownFiles(absFolderPath?: string): string[] {
     if(!absFolderPath){
         absFolderPath = absPathFromPublic('');
     }
-    // Get an absolute path to directory above this script
     const allFiles = getNonIgnoredFiles(absFolderPath);
-    const markdownFiles = allFiles.filter(file => file.endsWith('.md'));
+    return allFiles.filter(file => file.endsWith('.md'));
+}
+
+export async function readAllMarkdownFiles(absFolderPath?: string): Promise<MarkdownFile[]> {
+    const markdownFiles = listMarkdownFiles(absFolderPath)
     return markdownFiles.map(fullPath => {
         const fileContents = fs.readFileSync(fullPath, 'utf8');
         const {data, content} = matter(fileContents);
@@ -43,6 +46,7 @@ export async function getMarkdownFilesWithoutMetaData(absFolderPath?: string): P
         const {data} = matter(fileContents);
         if (!data.name) {
             const markdownFile: MarkdownFile = {
+                content: fileContents,
                 absFilePath: mdFilePath,
                 name: data.name
             };
