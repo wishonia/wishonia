@@ -1,6 +1,6 @@
-import { BaseDocumentLoader } from "langchain/document_loaders/base";
-import { Document } from "langchain/document";
-import { execSync } from "node:child_process";
+import {BaseDocumentLoader} from "langchain/document_loaders/base";
+import {Document} from "langchain/document";
+import {execSync} from "node:child_process";
 import * as fs from "fs/promises";
 
 export interface GithubRepoLoaderParams {
@@ -50,18 +50,14 @@ export class Github extends BaseDocumentLoader
       path,
     );
 
-    const docs = data.map((file) => {
-      const doc = new Document<Record<string, any>>({
+    return data.map((file) => {
+      return new Document<Record<string, any>>({
         pageContent: file.content,
         metadata: {
           path: file.path,
         },
       });
-
-      return doc;
     });
-
-    return docs;
   }
 
   private async is_folder(path: string) {

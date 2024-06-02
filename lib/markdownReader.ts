@@ -5,19 +5,22 @@ import path from 'path';
 import matter from 'gray-matter';
 import {absPathFromPublic, getNonIgnoredFiles} from "@/lib/fileHelper";
 
-export async function readAllMarkdownFiles(absFolderPath?: string): Promise<MarkdownFile[]> {
+export function listMarkdownFiles(absFolderPath?: string): string[] {
     if(!absFolderPath){
         absFolderPath = absPathFromPublic('');
     }
-    // Get an absolute path to directory above this script
     const allFiles = getNonIgnoredFiles(absFolderPath);
-    const markdownFiles = allFiles.filter(file => file.endsWith('.md'));
+    return allFiles.filter(file => file.endsWith('.md'));
+}
+
+export async function readAllMarkdownFiles(absFolderPath?: string): Promise<MarkdownFile[]> {
+    const markdownFiles = listMarkdownFiles(absFolderPath)
     return markdownFiles.map(fullPath => {
         const fileContents = fs.readFileSync(fullPath, 'utf8');
         const {data, content} = matter(fileContents);
         // get filename without an extension
         const slug = path.basename(fullPath).replace(/\.md$/, '');
-        const post: MarkdownFile = {
+        const markdownFile: MarkdownFile = {
             slug: slug,
             name: data.name,
             date: data.date,
@@ -30,6 +33,27 @@ export async function readAllMarkdownFiles(absFolderPath?: string): Promise<Mark
             absFilePath: fullPath
         };
 
-        return post;
+        return markdownFile;
     });
+}
+
+export async function getMarkdownFilesWithoutMetaData(absFolderPath?: string): Promise<MarkdownFile[]> {
+    const allFiles = getNonIgnoredFiles(absFolderPath);
+    const mdFilePaths = allFiles.filter(file => file.endsWith('.md'));
+    const mdFilesWithoutMetaData = [];
+    for (const mdFilePath of mdFilePaths) {
+        const fileContents = fs.readFileSync(mdFilePath, 'utf8');
+        const {data} = matter(fileContents);
+        if (!data.name) {
+            const markdownFile: MarkdownFile = {
+                content: fileContents,
+                absFilePath: mdFilePath,
+                name: data.name
+            };
+            mdFilesWithoutMetaData.push(markdownFile);
+        }
+    }
+    const filenames = mdFilesWithoutMetaData.map(mdFile => mdFile.absFilePath);
+    console.log(`Files without metadata: ${filenames.join('\n\t- ')} `);
+    return mdFilesWithoutMetaData;
 }

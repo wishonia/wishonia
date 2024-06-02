@@ -3,6 +3,7 @@ import Link from "next/link"
 import { generalFooterNav } from "@/config/links"
 import { Key } from "react"
 import { NavItem } from "@/types";
+import {Icons} from "@/components/icons";
 
 interface FooterProps {
   footerNavItems?: NavItem[]
@@ -22,6 +23,7 @@ export default function Footer({ footerNavItems }: FooterProps) {
         </Link>*/}
           <ul className="mb-6 flex flex-wrap items-center opacity-60 sm:mb-0 justify-center">
             {footerLinks.map((item: NavItem, index: Key | null | undefined) => {
+              const Icon = Icons[item.icon || "next"]
               return (
                 item.href && (
                   <li key={index} className={"p-2"}>
@@ -29,7 +31,10 @@ export default function Footer({ footerNavItems }: FooterProps) {
                       href={item.disabled ? "/" : item.href}
                       className="mr-4 hover:underline md:mr-6"
                     >
-                      {item.title}
+                      <span className="flex items-center">
+                        <Icon className="mr-2 h-4 w-4" />
+                        {item.title}
+                      </span>
                     </Link>
                   </li>
                 )

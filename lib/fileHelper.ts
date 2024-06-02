@@ -54,7 +54,7 @@ function loadGitignore(rootDir: string): Ignore {
     return ig;
 }
 
-function getAllFiles(absPath: string, ig: Ignore, arrayOfFiles: string[] = []): string[] {
+export function getAllFiles(absPath: string, ig: Ignore, arrayOfFiles: string[] = []): string[] {
 
     const files = fs.readdirSync(absPath);
 

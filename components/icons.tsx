@@ -19,7 +19,7 @@ import {
   BsSun,
 } from "react-icons/bs"
 import {
-  FaBomb,
+  FaBomb, FaBook,
   FaBookMedical, FaChartPie,
   FaDisease, FaHome,
   FaPeace, FaQuestionCircle,
@@ -60,7 +60,7 @@ const icons = {
   home: FaHome,
   frown: FaSadCry,
   pieChart: FaChartPie,
-
+  docs: FaBook,
 
   clipboard: AiOutlineCopy,
 
