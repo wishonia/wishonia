@@ -51,17 +51,21 @@ export async function generateGlobalSolutions() {
             const featuredImage = await generateAndSaveFeaturedImageJpg(solutionName, imagePath);
 
             // Insert the solution into the database
-            await prisma.globalSolution.create({
+            const createdSolution = await prisma.globalSolution.create({
                 data: {
                     name: solutionName,
                     description: description,
                     content: content,
                     featuredImage: featuredImage,
-                    globalProblem: {
-                        connect: {
-                            id: globalProblem.id
-                        }
-                    }
+                    userId: globalProblem.userId  // Assuming this is the correct user ID
+                }
+            });
+
+            // Create a link in the GlobalProblemSolution table
+            await prisma.globalProblemSolution.create({
+                data: {
+                    globalProblemId: globalProblem.id,
+                    globalSolutionId: createdSolution.id
                 }
             });
         }
