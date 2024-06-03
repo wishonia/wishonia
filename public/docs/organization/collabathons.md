@@ -1,7 +1,7 @@
 ---
 slug: collabathons
 name: 'Maximizing Impact: The Power of Collabathons for Public Good'
-featuredImage: /docs/collabathons/collabathons.jpg
+featuredImage: /docs/organization/collabathons.jpg
 description: >-
   Discover the power of Positron Collabathons, where participants collaborate on
   open-source projects to create lasting impact. With $1000 in weekly prizes,

@@ -1,7 +1,7 @@
 ---
 slug: project-structure
-name: 'A File System Structure for Wishonia'
-featuredImage: /project-structure.jpg
+name: A File System Structure for Wishonia
+featuredImage: /docs/wishonian-government/project-structure.jpg
 description: >-
   A proposed file system structure for the forkable world of Wishonia, outlining
   the organization of directories and files to facilitate collaboration and

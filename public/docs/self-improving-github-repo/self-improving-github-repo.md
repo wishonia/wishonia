@@ -1,7 +1,7 @@
 ---
-slug: self-improvement
+slug: self-improving-github-repo
 name: 'Building a Self-Improving GitHub Repository: How to Get Started'
-featuredImage: /docs/roadmap/positron-network/self-improvement.jpg
+featuredImage: /docs/self-improving-github-repo/self-improving-github-repo.jpg
 description: >-
   Discover how to set up a self-improving GitHub repository, leveraging
   autonomous agents for continuous monitoring and development. Learn the

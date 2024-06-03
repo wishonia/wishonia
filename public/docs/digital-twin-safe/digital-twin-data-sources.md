@@ -1,7 +1,7 @@
 ---
 slug: digital-twin-data-sources
 name: Essential Data Sources for Creating Your Digital Twin
-featuredImage: /docs/roadmap/digital-twin-safe/digital-twin-data-sources.jpg
+featuredImage: /docs/digital-twin-safe/digital-twin-data-sources.jpg
 description: >-
   Explore various digital twin data sources, from Plaid's financial data
   aggregation to Google APIs, Apple HealthKit, and social media data via

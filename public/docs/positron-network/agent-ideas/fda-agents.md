@@ -1,7 +1,7 @@
 ---
 slug: fda-agents
 name: 'Revolutionizing Health: Decentralized FDA Agents and AI'
-featuredImage: /docs/roadmap/positron-network/agent-ideas/fda-agents.jpg
+featuredImage: /docs/positron-network/agent-ideas/fda-agents.jpg
 description: >-
   Explore how decentralized FDA agents, using conversational AI and machine
   learning, can revolutionize health data collection, analysis, and personalized

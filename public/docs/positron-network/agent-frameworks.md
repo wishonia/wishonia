@@ -1,7 +1,7 @@
 ---
 slug: agent-frameworks
 name: Best Agent Frameworks and Tools for LLM Applications and Code Gen
-featuredImage: /docs/roadmap/positron-network/agent-frameworks.jpg
+featuredImage: /docs/positron-network/agent-frameworks.jpg
 description: >-
   Discover cutting-edge agent frameworks like SuperAGI and Autogen for
   developing robust AI applications. Explore tools for data analysis, seamless

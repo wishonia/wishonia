@@ -1,7 +1,7 @@
 ---
 slug: how-to-build-a-digital-twin
 name: 'Creating Your Digital Twin: A Comprehensive Guide'
-featuredImage: /docs/roadmap/digital-twin-safe/how-to-build-a-digital-twin.jpg
+featuredImage: /docs/digital-twin-safe/how-to-build-a-digital-twin.jpg
 description: >-
   Creating your digital twin? Start by designing a Digital Twin Safe to securely
   store defining personal data. Customize AI models with this data for a

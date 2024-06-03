@@ -1,7 +1,7 @@
 ---
 slug: competition
 name: Maximizing Efficiency Through High-Resolution Agent Competition
-featuredImage: /docs/roadmap/positron-network/competition.jpg
+featuredImage: /docs/positron-network/competition.jpg
 description: >-
   Discover how high-resolution agent competition can transform industries,
   addressing the drawbacks of traditional competition by focusing on

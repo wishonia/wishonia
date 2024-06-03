@@ -1,7 +1,7 @@
 ---
 slug: coordinator-agents
 name: Leveraging AI Agents to Streamline Organizational Coordination
-featuredImage: /docs/roadmap/positron-network/agent-ideas/coordinator-agents.jpg
+featuredImage: /docs/positron-network/agent-ideas/coordinator-agents.jpg
 description: >-
   Explore how AI agents, free from human limitations like ego and negotiation
   aversion, can streamline organizational coordination. Understand their role in

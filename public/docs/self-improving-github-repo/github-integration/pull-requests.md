@@ -1,7 +1,7 @@
 ---
 slug: pull-requests
 name: Managing Documentation with Pull Requests in Positron Network Agent
-featuredImage: /docs/roadmap/self-improving-github-repo/github-integration/pull-requests.jpg
+featuredImage: /docs/self-improving-github-repo/github-integration/pull-requests.jpg
 description: >-
   Learn how the Positron Network Architect Agent uses a structured pull request
   process to manage and update documentation efficiently with automated and

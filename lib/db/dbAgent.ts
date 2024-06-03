@@ -5,7 +5,7 @@ import {formatPrismaModelSchema} from "@/lib/prismaAgent";
 export async function addModelsToPrismaSchema(){
     const pathToSchema = absPathFromRepo('lib/db/schema.prisma');
     const newSchemaContents = fs.readFileSync(pathToSchema, 'utf8');
-    const models = extractModelDefinitions(newSchemaContents);
+    const models = extractPrismaModelDefinitions(newSchemaContents);
     const formattedModels: string[] = [];
     for (const model of models){
         formattedModels.push(await formatModelSchema(model));
@@ -22,7 +22,7 @@ export async function readPrismaSchema(){
     return fs.readFileSync(path, 'utf8');
 }
 
-function extractModelDefinitions(schema: string): string[] {
+function extractPrismaModelDefinitions(schema: string): string[] {
     const modelRegex = /model\s+\w+\s*{/;
     const closingBraceRegex = /^\s*}\s*$/;
 
@@ -50,4 +50,9 @@ function extractModelDefinitions(schema: string): string[] {
 }
 export async function formatModelSchema(prismaModel: string): Promise<string> {
     return formatPrismaModelSchema(prismaModel);
+}
+
+export async function getPrismaModelDefinitions(): Promise<string[]> {
+    const schema = await readPrismaSchema();
+    return extractPrismaModelDefinitions(schema);
 }

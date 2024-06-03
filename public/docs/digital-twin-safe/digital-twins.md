@@ -1,7 +1,7 @@
 ---
 slug: digital-twins
 name: 'Digital Twins: Your AI Mirror for Knowledge and Decisions'
-featuredImage: /docs/roadmap/digital-twin-safe/digital-twins.jpg
+featuredImage: /docs/digital-twin-safe/digital-twins.jpg
 description: >-
   Discover the future of personal AI agents with digital twins—digital versions
   of yourself that mirror your knowledge, values, and preferences to automate
