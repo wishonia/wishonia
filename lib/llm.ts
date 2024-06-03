@@ -32,3 +32,11 @@ export async function textCompletion(promptText: string, returnType: "text" | "j
 
   return response.choices[0].message.content;
 }
+
+export async function jsonArrayCompletion(promptText: string): Promise<string[]> {
+  const response =  JSON.parse(await textCompletion(`Return a json array containing ${promptText}`, "text"));
+  if (!Array.isArray(response)) {
+    throw new Error('Response is not an array');
+  }
+    return response;
+}

@@ -107,26 +107,30 @@ model User {
   wishingWells                    WishingWell[]
   educations                      Education[]
   positions                       Position[]
-  skills                          Skill[]
+  userSkills                      UserSkill[]
   endorsements                    Endorsement[]
-  userRecommendations             Recommendation[]              @relation("UserRecommendations")
-  recommenderRecommendations      Recommendation[]              @relation("RecommenderRecommendations")
+  userRecommendations             Recommendation[]               @relation("UserRecommendations")
+  recommenderRecommendations      Recommendation[]               @relation("RecommenderRecommendations")
   posts                           Post[]
   likes                           Like[]
   comments                        Comment[]
-  initiatedFriendships            Friendship[]                  @relation(name: "InitiatorFriendships")
-  receivedFriendships             Friendship[]                  @relation(name: "ReceiverFriendships")
-  createdGenieDAOs                GenieDAO[]                    @relation("CreatedGenieDAOs")
-  joinedGenieDAOs                 GenieDAO[]                    @relation("JoinedGenieDAOs")
-  createdWishFulfillmentProposals WishFulfillmentProposal[]     @relation("CreatedProposals")
+  initiatedFriendships            Friendship[]                   @relation(name: "InitiatorFriendships")
+  receivedFriendships             Friendship[]                   @relation(name: "ReceiverFriendships")
+  createdGenieDAOs                GenieDAO[]                     @relation("CreatedGenieDAOs")
+  joinedGenieDAOs                 GenieDAO[]                     @relation("JoinedGenieDAOs")
+  createdWishFulfillmentProposals WishFulfillmentProposal[]      @relation("CreatedProposals")
   createdProposalProgressReports  ProposalProgressReport[]
   proposalComparisons             ProposalComparison[]
   wishingWellPairAllocations      WishingWellPairAllocation[]
   globalProblemPairAllocations    GlobalProblemPairAllocation[]
   globalProblems                  GlobalProblem[]
+  globalSolutionPairAllocations   GlobalSolutionPairAllocation[]
+  globalSolutions                 GlobalSolution[]
   genieDAOFeedback                GenieDAOFeedback[]
-  Agents                          Agent[]
-  UserApiKeys                     UserApiKey[]
+  agents                          Agent[]
+  userApiKeys                     UserApiKey[]
+  globalTasksCreated              GlobalTask[]
+  userTasks                       UserTask[]
 }
 
 model Education {
@@ -151,20 +155,30 @@ model Position {
   isCurrent Boolean
 }
 
-model Skill {
+model UserSkill {
   id           String        @id @default(cuid())
   user         User          @relation(fields: [userId], references: [id])
   userId       String
-  name         String
+  skillId      String
   endorsements Endorsement[]
+  skill        Skill         @relation(fields: [skillId], references: [id])
+
+  @@unique([userId, skillId])
+}
+
+model Skill {
+  id          String            @id @default(cuid())
+  name        String            @unique
+  globalTasks GlobalTaskSkill[]
+  users       UserSkill[]
 }
 
 model Endorsement {
-  id      String @id @default(cuid())
-  skill   Skill  @relation(fields: [skillId], references: [id])
-  skillId String
-  user    User   @relation(fields: [userId], references: [id])
-  userId  String
+  id          String     @id @default(cuid())
+  user        User       @relation(fields: [userId], references: [id])
+  userId      String
+  userSkill   UserSkill? @relation(fields: [userSkillId], references: [id])
+  userSkillId String?
 }
 
 model Recommendation {
@@ -249,8 +263,8 @@ model GlobalProblem {
   id                           String                        @id @default(cuid())
   userId                       String
   name                         String                        @unique
-  description                  String?
-  content                      String?
+  description                  String?                       @unique
+  content                      String?                       @unique
   featuredImage                String?
   createdAt                    DateTime                      @default(now())
   updatedAt                    DateTime                      @updatedAt
@@ -258,6 +272,7 @@ model GlobalProblem {
   thisGlobalProblemAllocations GlobalProblemPairAllocation[] @relation("ThisGlobalProblemRelation")
   thatGlobalProblemAllocations GlobalProblemPairAllocation[] @relation("ThatGlobalProblemRelation")
   averageAllocation            Float?
+  globalProblemSolutions       GlobalProblemSolution[]       @relation("GlobalProblemToSolution")
 }
 
 model GlobalProblemPairAllocation {
@@ -271,6 +286,143 @@ model GlobalProblemPairAllocation {
   user                        User          @relation(fields: [userId], references: [id])
   thisGlobalProblem           GlobalProblem @relation("ThisGlobalProblemRelation", fields: [thisGlobalProblemId], references: [id])
   thatGlobalProblem           GlobalProblem @relation("ThatGlobalProblemRelation", fields: [thatGlobalProblemId], references: [id])
+}
+
+model GlobalSolution {
+  id                            String                         @id @default(cuid())
+  userId                        String
+  name                          String                         @unique
+  description                   String?                        @unique
+  content                       String?                        @unique
+  featuredImage                 String?
+  createdAt                     DateTime                       @default(now())
+  updatedAt                     DateTime                       @updatedAt
+  user                          User                           @relation(fields: [userId], references: [id])
+  thisGlobalSolutionAllocations GlobalSolutionPairAllocation[] @relation("ThisGlobalSolutionRelation")
+  thatGlobalSolutionAllocations GlobalSolutionPairAllocation[] @relation("ThatGlobalSolutionRelation")
+  averageAllocation             Float?
+  globalProblemSolutions        GlobalProblemSolution[]        @relation("GlobalSolutionToProblem")
+  globalTaskSolutions           GlobalTaskSolution[]           @relation("GlobalSolutionToTask")
+}
+
+model GlobalSolutionPairAllocation {
+  id                           String         @id @default(cuid())
+  userId                       String
+  thisGlobalSolutionId         String
+  thatGlobalSolutionId         String
+  thisGlobalSolutionPercentage Float
+  createdAt                    DateTime       @default(now())
+  updatedAt                    DateTime       @updatedAt
+  user                         User           @relation(fields: [userId], references: [id])
+  thisGlobalSolution           GlobalSolution @relation("ThisGlobalSolutionRelation", fields: [thisGlobalSolutionId], references: [id])
+  thatGlobalSolution           GlobalSolution @relation("ThatGlobalSolutionRelation", fields: [thatGlobalSolutionId], references: [id])
+}
+
+model GlobalProblemSolution {
+  id               String         @id @default(cuid())
+  globalProblemId  String
+  globalSolutionId String
+  createdAt        DateTime       @default(now())
+  updatedAt        DateTime       @updatedAt
+  globalProblem    GlobalProblem  @relation("GlobalProblemToSolution", fields: [globalProblemId], references: [id])
+  globalSolution   GlobalSolution @relation("GlobalSolutionToProblem", fields: [globalSolutionId], references: [id])
+
+  @@unique([globalProblemId, globalSolutionId])
+}
+
+model GlobalTaskSolution {
+  id               String         @id @default(cuid())
+  globalTaskId     String
+  globalSolutionId String
+  createdAt        DateTime       @default(now())
+  updatedAt        DateTime       @updatedAt
+  globalTask       GlobalTask     @relation("GlobalTaskToSolution", fields: [globalTaskId], references: [id])
+  globalSolution   GlobalSolution @relation("GlobalSolutionToTask", fields: [globalSolutionId], references: [id])
+
+  @@unique([globalTaskId, globalSolutionId])
+}
+
+model GlobalTask {
+  id                    String                 @id @default(cuid())
+  userId                String
+  name                  String                 @unique
+  description           String?                @unique
+  content               String?                @unique
+  featuredImage         String?
+  createdAt             DateTime               @default(now())
+  updatedAt             DateTime               @updatedAt
+  skills                GlobalTaskSkill[]
+  priority              String?
+  status                TaskStatus             @default(NOT_STARTED)
+  dueDate               DateTime?
+  budget                Float?
+  comments              String[]
+  creator               User                   @relation(fields: [userId], references: [id])
+  globalTaskSolutions   GlobalTaskSolution[]   @relation("GlobalTaskToSolution")
+  blockingTasks         GlobalTaskDependency[] @relation("BlockingTask")
+  dependentTasks        GlobalTaskDependency[] @relation("DependentTask")
+  globalTaskContextUrls GlobalTaskContextUrl[]
+  userTasks             UserTask[]
+}
+
+model GlobalTaskSkill {
+  id           String     @id @default(cuid())
+  globalTaskId String
+  skillId      String
+  globalTask   GlobalTask @relation(fields: [globalTaskId], references: [id])
+  skill        Skill      @relation(fields: [skillId], references: [id])
+
+  @@unique([globalTaskId, skillId])
+}
+
+enum TaskStatus {
+  NOT_STARTED
+  IN_PROGRESS
+  COMPLETED
+}
+
+model GlobalTaskDependency {
+  id              String     @id @default(cuid())
+  blockingTaskId  String
+  dependentTaskId String
+  createdAt       DateTime   @default(now())
+  updatedAt       DateTime   @updatedAt
+  blockingTask    GlobalTask @relation("BlockingTask", fields: [blockingTaskId], references: [id])
+  dependentTask   GlobalTask @relation("DependentTask", fields: [dependentTaskId], references: [id])
+
+  @@unique([blockingTaskId, dependentTaskId])
+}
+
+model GlobalTaskContextUrl {
+  id          String       @id @default(cuid())
+  url         String       @unique
+  createdAt   DateTime     @default(now())
+  updatedAt   DateTime     @updatedAt
+  globalTasks GlobalTask[]
+}
+
+model UserTask {
+  id             String       @id @default(cuid())
+  userId         String
+  globalTaskId   String
+  role           UserTaskRole @default(ASSIGNEE)
+  status         TaskStatus   @default(NOT_STARTED)
+  startDate      DateTime?
+  endDate        DateTime?
+  estimatedHours Float?
+  actualHours    Float?
+  comments       String?
+  assignedAt     DateTime     @default(now())
+  user           User         @relation(fields: [userId], references: [id])
+  globalTask     GlobalTask   @relation(fields: [globalTaskId], references: [id])
+
+  @@unique([userId, globalTaskId])
+}
+
+enum UserTaskRole {
+  ASSIGNEE
+  REVIEWER
+  COLLABORATOR
 }
 
 model WishingWell {
