@@ -1,7 +1,7 @@
 ---
 slug: cooperation-ai-engineer
 name: Building Autonomous AI Agents for Enhanced Health Collaboration
-featuredImage: /docs/staff/cooperation-ai-engineer.jpg
+featuredImage: /docs/organization/cooperation-ai-engineer.jpg
 description: >-
   Discover the role of an Autonomous Cooperation Engineer focused on developing
   AI agents to enhance collaboration between government agencies, non-profits,

@@ -1,7 +1,7 @@
 ---
 slug: organizations-working-on-this
 name: Top Organizations Empowering Personal Data and Health Privacy
-featuredImage: /docs/roadmap/digital-twin-safe/organizations-working-on-this.jpg
+featuredImage: /docs/digital-twin-safe/organizations-working-on-this.jpg
 description: >-
   Discover organizations like Data Lake, Weavechain, SingularityNET, Rejuve.ai,
   and Prifina that are leading the charge in data empowerment, security, and

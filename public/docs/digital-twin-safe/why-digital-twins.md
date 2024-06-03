@@ -1,7 +1,7 @@
 ---
 slug: why-digital-twins
 name: How Digital Twins Can Amplify Human Intelligence and Security
-featuredImage: /docs/roadmap/digital-twin-safe/why-digital-twins.jpg
+featuredImage: /docs/digital-twin-safe/why-digital-twins.jpg
 description: >-
   Discover how digital twins can amplify human intelligence, protect against
   totalitarianism, enhance cybersecurity, and optimize public policy, career

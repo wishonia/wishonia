@@ -1,7 +1,7 @@
 ---
 slug: paradise-engineer
 name: Join the Mission to Engineer a Utopian AI-Driven Virtual World
-featuredImage: /docs/staff/paradise-engineer.jpg
+featuredImage: /docs/organization/paradise-engineer.jpg
 description: >-
   Discover how to become a Paradise Engineer and create virtual worlds filled
   with pro-social AI! Learn about crafting Digital Twins, Decider Agents, and

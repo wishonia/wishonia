@@ -1,7 +1,7 @@
 ---
-slug: why
+slug: positron-network
 name: 'Leveraging AI for Positive Change: Empowering Pro-Social Entities'
-featuredImage: /docs/roadmap/positron-network/why.jpg
+featuredImage: /docs/positron-network/positron-network.jpg
 description: >-
   Learn how effective non-profits leverage autonomous agents to maximize their
   impact and counteract the growing threats from cybercriminals and

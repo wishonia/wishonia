@@ -1,7 +1,7 @@
 ---
 slug: request-for-proposal
 name: 'Request for Proposals: A Decentralized Resource Optimization System'
-featuredImage: /request-for-proposal.jpg
+featuredImage: /docs/wishocracy/request-for-proposal.jpg
 description: >-
   The Wishocracy project's call for proposals to design a decentralized,
   interoperable Wish Fulfillment System aimed at optimizing resource allocation

@@ -1,7 +1,7 @@
 ---
 slug: paths
 name: 'Choosing the Right AI: Task-Focused Agents vs. Digital Twins'
-featuredImage: /docs/roadmap/digital-twin-safe/paths.jpg
+featuredImage: /docs/digital-twin-safe/paths.jpg
 description: >-
   Explore the pros and cons of different AI approaches, from task-focused agents
   to digital twins generated from natural or manual data, assessing their

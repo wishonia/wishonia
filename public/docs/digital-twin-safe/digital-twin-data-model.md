@@ -1,7 +1,7 @@
 ---
 slug: digital-twin-data-model
 name: Building Comprehensive Digital Twin Data Models for Real-world Simulation
-featuredImage: /docs/roadmap/digital-twin-safe/digital-twin-data-model.jpg
+featuredImage: /docs/digital-twin-safe/digital-twin-data-model.jpg
 description: >-
   Unlock the power of digital twins with a comprehensive data model capturing
   personal, professional, behavioral, social, health, and preference data.

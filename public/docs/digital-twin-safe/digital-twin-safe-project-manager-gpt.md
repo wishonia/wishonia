@@ -1,7 +1,7 @@
 ---
 slug: digital-twin-safe-project-manager-gpt
 name: 'Building Your Digital Twin: AI-Driven Project Management'
-featuredImage: /docs/roadmap/digital-twin-safe/digital-twin-safe-project-manager-gpt.jpg
+featuredImage: /docs/digital-twin-safe/digital-twin-safe-project-manager-gpt.jpg
 description: >-
   Discover the transformative power of AI in project management with our custom
   GPT Digital Twin Project Manager. From automated digital twin creation and

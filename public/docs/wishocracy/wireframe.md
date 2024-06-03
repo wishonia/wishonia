@@ -1,7 +1,7 @@
 ---
 slug: wireframe
-name: 'Features Required for a Wishocratic Platform'
-featuredImage: /wireframe.jpg
+name: Features Required for a Wishocratic Platform
+featuredImage: /docs/wishocracy/wireframe.jpg
 description: >-
   Here are the essential features needed for a crowdsourced budget allocation
   platform that aims to maximize universal preference satisfaction.

@@ -8,7 +8,7 @@ function pathRelativeToPublic(absPath: string) {
 }
 
 export async function generateMarkdownPageList() {
-  const markdownFiles = await readAllMarkdownFiles();
+  const markdownFiles = await readAllMarkdownFiles(absPathFromPublic('docs'));
 
   const markdownPages: MarkdownPage[] = markdownFiles.map((file) => {
     const markdownPage = JSON.parse(JSON.stringify(file));

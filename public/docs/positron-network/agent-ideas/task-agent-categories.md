@@ -1,7 +1,7 @@
 ---
 slug: task-agent-categories
 name: Empowering Non-Profits with Key Autonomous Agent Strategies
-featuredImage: /docs/roadmap/positron-network/task-agent-categories.jpg
+featuredImage: /docs/positron-network/agent-ideas/task-agent-categories.jpg
 description: >-
   Explore six key behaviors essential for top-performing non-profits, from
   networking and collective intelligence to market engagement, movement

@@ -1,7 +1,7 @@
 ---
-slug: positron-kpis
+slug: kpis
 name: 'Tracking Success: KPIs for the Positron Project'
-featuredImage: /docs/roadmap/positron-network/positron-kpis.jpg
+featuredImage: /docs/organization/kpis.jpg
 description: >-
   Explore how Positron uses key performance indicators to measure and drive
   success. Learn about the lag and lead measures critical for tracking
