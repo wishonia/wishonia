@@ -42,8 +42,8 @@
     "@huggingface/inference": "^2.7.0",
     "@langchain/anthropic": "^0.1.4",
     "@langchain/cohere": "^0.0.6",
-    "@langchain/community": "^0.0.35",
-    "@langchain/core": "0.1.43",
+    "@langchain/community": "0.2.4",
+    "@langchain/core": "0.2.4",
     "@langchain/google-genai": "^0.0.10",
     "@langchain/openai": "^0.0.18",
     "@llamaindex/pdf-viewer": "^1.1.1",
@@ -97,7 +97,7 @@
     "gray-matter": "^4.0.3",
     "ignore": "^5.3.1",
     "json-to-prisma-schema-convertor": "^0.1.0",
-    "langchain": "^0.2.3",
+    "langchain": "^0.2.4",
     "llamaindex": "^0.3.14",
     "lucide-react": "^0.259.0",
     "mammoth": "^1.6.0",
@@ -180,6 +180,14 @@
     "prisma-erd-generator": "^1.11.2",
     "ts-jest": "^29.1.4",
     "ts-node": "^10.9.2"
+  },
+  "overrides": {
+    "@langchain/core": "0.2.4"
+  },
+  "pnpm": {
+    "overrides": {
+      "@langchain/core": "0.2.4"
+    }
   },
   "trigger.dev": {
     "endpointId": "wishonia-RmKR"

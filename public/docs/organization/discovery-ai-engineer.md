@@ -1,7 +1,7 @@
 ---
 slug: discovery-ai-engineer
 name: Seeking an Engineer for Autonomous AI Agents in Health Analysis
-featuredImage: /docs/staff/discovery-ai-engineer.jpg
+featuredImage: /docs/organization/discovery-ai-engineer.jpg
 description: >-
   Join our team as an Autonomous Discovery Engineer to pioneer the development
   of AI agents that analyze health data, drive collaboration in healthcare, and

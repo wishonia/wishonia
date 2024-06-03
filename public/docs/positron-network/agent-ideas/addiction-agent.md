@@ -1,7 +1,7 @@
 ---
 slug: addiction-agent
 name: 'Combating the Opioid Crisis: How Data Agents Can Offer Solutions'
-featuredImage: /docs/roadmap/positron-network/agent-ideas/addiction-agent.jpg
+featuredImage: /docs/positron-network/agent-ideas/addiction-agent.jpg
 description: >-
   Explore how an advanced agent can tackle the opioid crisis by analyzing
   diverse data sources to uncover root causes, suggest preventive measures,

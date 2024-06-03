@@ -1,7 +1,7 @@
 ---
 slug: reasoning
 name: 'Enhancing Autonomous Agents'' Reasoning with LLMs: A Practical Guide'
-featuredImage: /docs/reasoning.jpg
+featuredImage: /docs/positron-network/reasoning.jpg
 description: >-
   Learn practical techniques to enhance decision-making in autonomous agents
   using Large Language Models (LLMs). Explore methods like Introspective Tips,

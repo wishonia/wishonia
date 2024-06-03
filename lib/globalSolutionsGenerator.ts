@@ -3,6 +3,8 @@ import path from 'path';
 import { jsonArrayCompletion, textCompletion } from "@/lib/llm";
 import { generateAndSaveFeaturedImageJpg } from "@/lib/imageGenerator";
 import { prisma } from "@/lib/db";
+import {saveMarkdownPost} from "@/lib/markdownGenerator";
+import {MarkdownFile} from "@/interfaces/markdownFile";
 
 const publicPath = 'globalSolutions';
 
@@ -60,7 +62,14 @@ export async function generateGlobalSolutions() {
                     userId: globalProblem.userId  // Assuming this is the correct user ID
                 }
             });
-
+            await saveMarkdownPost({
+                name: solutionName,
+                content: content,
+                description: description,
+                featuredImage: featuredImage,
+                absFilePath: publicPath,
+                slug: slugify(solutionName, { lower: true, strict: true })
+            } as MarkdownFile);
             // Create a link in the GlobalProblemSolution table
             await prisma.globalProblemSolution.create({
                 data: {

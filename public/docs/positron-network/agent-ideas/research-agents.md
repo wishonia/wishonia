@@ -1,7 +1,7 @@
 ---
 slug: research-agents
 name: 'Autonomous Agents: Keeping Up with Rapid Information Growth'
-featuredImage: /docs/roadmap/positron-network/agent-ideas/research-agents.jpg
+featuredImage: /docs/positron-network/agent-ideas/research-agents.jpg
 description: >-
   Explore the role of autonomous agents in managing the ever-increasing flow of
   information and advancements in various fields, ensuring we stay up-to-date

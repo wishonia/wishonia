@@ -1,8 +1,7 @@
 ---
-slug: positron-network-architect-agent
+slug: architect-agent
 name: Comprehensive Guide to Positron Network Architect Agent
-featuredImage: >-
-  /docs/roadmap/positron-network/positron-network-architect-agent/positron-network-architect-agent.jpg
+featuredImage: /docs/self-improving-github-repo/architect-agent.jpg
 description: >-
   Discover the comprehensive guide to the Positron Network Architect Agent,
   covering its purpose, functions, design principles, responsibilities, and
