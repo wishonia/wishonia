@@ -1,73 +1,40 @@
-import slugify from 'slugify';
-import path from 'path';
-import { jsonArrayCompletion, textCompletion } from "@/lib/llm";
-import { generateAndSaveFeaturedImageJpg } from "@/lib/imageGenerator";
-import { prisma } from "@/lib/db";
-
-const publicPath = 'globalSolutions';
-
-export async function generateGlobalSolutions() {
+export async function generateAllGlobalSolutions() {
     // Fetch all GlobalProblems
     const globalProblems = await prisma.globalProblem.findMany();
 
-    // Loop through each GlobalProblem
+    // Generate solutions for each problem
     for (const globalProblem of globalProblems) {
-        // Use textCompletion to ask the LLM to provide an array of the most promising actionable solutions for the given global problem
-        const solutions = await jsonArrayCompletion(
-            `5 concrete actionable solutions to solve the problem of "${globalProblem.name}"`
-        );
+        await generateSolutionsForProblem(globalProblem);
+    }
+}
 
-        // Loop through each solution
-        for (const solutionName of solutions) {
-            // Check if the solution already exists in the database
-            const existingSolution = await prisma.globalSolution.findUnique({
-                where: {
-                    name: solutionName
-                }
-            });
+async function decomposeSolutionToTasks(globalSolution: GlobalSolution) {
+    // Use textCompletion to ask the LLM to provide a list of tasks to implement the solution
+    const tasks = await jsonArrayCompletion(
+        `List the tasks required to implement the solution "${globalSolution.name}" for the problem "${globalSolution.globalProblem.name}"`
+    );
 
-            if (existingSolution) {
-                console.log(`Solution "${solutionName}" already exists in the database.`);
-                continue;
+    // Create GlobalTask records for each task
+    for (const taskName of tasks) {
+        await prisma.globalTask.create({
+            data: {
+                name: taskName,
+                globalSolutionId: globalSolution.id
             }
+        });
+    }
+}
 
-            const imagePath = path.join(
-                __dirname,
-                '..',
-                'public',
-                publicPath,
-                `${slugify(solutionName, { lower: true, strict: true })}.jpg`
-            );
-
-            // Have the LLM generate the content, description, and featured image for the solution
-            const content = await textCompletion(
-                `Given the global problem "${globalProblem.name}", provide a detailed content for the solution "${solutionName}".`,
-                'text'
-            );
-            const description = await textCompletion(
-                `provide a brief description for the solution "${solutionName}".`,
-                'text'
-            );
-            const featuredImage = await generateAndSaveFeaturedImageJpg(solutionName, imagePath);
-
-            // Insert the solution into the database
-            const createdSolution = await prisma.globalSolution.create({
-                data: {
-                    name: solutionName,
-                    description: description,
-                    content: content,
-                    featuredImage: featuredImage,
-                    userId: globalProblem.userId  // Assuming this is the correct user ID
-                }
-            });
-
-            // Create a link in the GlobalProblemSolution table
-            await prisma.globalProblemSolution.create({
-                data: {
-                    globalProblemId: globalProblem.id,
-                    globalSolutionId: createdSolution.id
-                }
-            });
+export async function decomposeAllSolutionsToTasks() {
+    // Fetch all GlobalSolutions
+    const globalSolutions = await prisma.globalSolution.findMany({
+        include: {
+            globalProblem: true
         }
+    });
+
+    // Decompose each solution into tasks
+    for (const globalSolution of globalSolutions) {
+        await decomposeSolutionToTasks(globalSolution);
     }
 }
