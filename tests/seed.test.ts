@@ -76,7 +76,7 @@ describe("Database-seeder tests", () => {
         const testUser = await getOrCreateTestUser();
         await checkWishingWells(testUser);
     }, 45000);
-    it("Seed global problems", async () => {
+    it("Seed global problems and solutions", async () => {
         const testUser = await getOrCreateTestUser();
         await checkGlobalProblems(testUser);
     }, 45000);

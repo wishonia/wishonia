@@ -1,7 +1,7 @@
 ---
 slug: welfare-check-agent
 name: 'Revolutionizing Elder Care: The Welfare Check Agent'
-featuredImage: /docs/roadmap/positron-network/agent-ideas/welfare-check-agent.jpg
+featuredImage: /docs/positron-network/agent-ideas/welfare-check-agent.jpg
 description: >-
   Learn how the Welfare Check Agent uses regular calls and natural language
   processing to ensure the well-being, medication adherence, and mental

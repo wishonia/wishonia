@@ -1,7 +1,7 @@
 ---
 slug: README
 name: Harnessing the Power of 8 Billion Digital Twins for a Better World
-featuredImage: /docs/roadmap/digital-twin-safe/README.jpg
+featuredImage: /docs/digital-twin-safe/README.jpg
 description: >-
   Explore the concept of digital twins: digital representations of individuals
   that automate tasks, make decisions, and coordinate with 8 billion others to

@@ -1,7 +1,7 @@
 ---
 slug: prize
 name: Maximize Your Contributions with Wishonia's Daily $100 Prize!
-featuredImage: /prize.jpg
+featuredImage: /docs/organization/prize.jpg
 description: >-
   Contribute to the future of wish fulfillment with Wishonia! Discover how
   developers, designers, project managers, and community managers can help build

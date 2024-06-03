@@ -1,7 +1,7 @@
 ---
 slug: digital-twin-safe
 name: Comprehensive Guide to Digital Twin Safe Product Requirements
-featuredImage: /docs/roadmap/digital-twin-safe/digital-twin-safe.jpg
+featuredImage: /docs/digital-twin-safe/digital-twin-safe.jpg
 description: >-
   Unlock the future of personal data management with Digital Twin Safe. Our
   comprehensive platform uses automation, API integration, and AI to streamline

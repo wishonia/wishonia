@@ -1,7 +1,7 @@
 ---
 slug: wishonian-government
 name: 'Wishonia: A Virtual World Reshaping Real-World Outcomes'
-featuredImage: /docs/roadmap/wishonian-government/wishonian-government.jpg
+featuredImage: /docs/wishonian-government/wishonian-government.jpg
 description: >-
   Explore Wishonia, an AI-powered virtual world with 8 billion digital twins
   reflecting our desires, values, and knowledge. Through simulated institutions

@@ -1,7 +1,7 @@
 ---
-slug: evolution
+slug: agent-evolution
 name: Optimizing Task Agents with Evolutionary Processes and Strategic Funding
-featuredImage: /docs/roadmap/positron-network/evolution.jpg
+featuredImage: /docs/positron-network/agent-evolution.jpg
 description: >-
   Explore how the Positron Network leverages evolutionary processes and
   innovative funding methods, like participatory budgeting and quadratic
