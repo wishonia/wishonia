@@ -1,13 +1,12 @@
-import { uploadImageToVercel } from "@/lib/wishingWells";
 import slugify from 'slugify';
 import fs from 'fs';
 import path from 'path';
-import {WishingWell} from "@prisma/client";
 import {textCompletion} from "@/lib/llm";
 import {saveMarkdownPost} from "@/lib/markdownGenerator";
 import {MarkdownFile} from "@/interfaces/markdownFile";
 import {toTitleCase} from "@/lib/stringHelpers";
 import {generateAndSaveFeaturedImageJpg, generateFeaturedImage} from "@/lib/imageGenerator";
+import {uploadImageToVercel} from "@/lib/imageUploader";
 
 const overwrite = false;
 const wishingWellNames = [
@@ -79,16 +78,6 @@ Conclusion:
 - Offer guidance or recommendations for individuals or organizations considering donating or contributing to efforts to achieve the goal, compared to other potential goals or causes.
          
          `;
-}
-
-async function generateAndUploadImageToVercel(obj: WishingWell): Promise<void> {
-    if(!obj.content){
-        throw new Error("Content is required to generate an image.");
-    }
-    const buffer = await generateFeaturedImage(obj.content);
-    const slug = obj.name.toLowerCase().replace(/ /g, "-");
-    const imageName = `${slug}.png`;
-    obj.featuredImage = await uploadImageToVercel(buffer, imageName);
 }
 
 async function generateWishingWellMarkdownFile(wishingWellName: string,

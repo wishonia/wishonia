@@ -23,7 +23,7 @@ export async function getRandomWishingWellPair(userId: string | undefined) {
     } else {
         randomPair = await prisma.$queryRaw`
           SELECT *
-          FROM "wishing_wells"
+          FROM "WishingWell"
           ORDER BY random()
           LIMIT 2;
         `;
@@ -80,13 +80,6 @@ export async function aggregateWishingWellPairAllocations() {
         results.push(result);
     }
     return results;
-}
-
-export async function uploadImageToVercel(buffer: Buffer, fileName: string) {
-    const blob = await put(fileName, buffer, {
-        access: 'public',
-    });
-    return blob.url;
 }
 
 export async function wishToWishingWell(wish: string) {

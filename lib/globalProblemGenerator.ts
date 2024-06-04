@@ -63,7 +63,7 @@ export async function generateGlobalProblems(): Promise<MarkdownFile[]> {
             console.log(`Markdown file already exists for ${problemName}`);
         }
         if (overwriteImages || !fs.existsSync(imagePath)) {
-            await generateAndSaveFeaturedImageJpg(`The problem of ${problemName}`,
+            const imageUrl = await generateAndSaveFeaturedImageJpg(`The problem of ${problemName}`,
                 imagePath);
         } else {
             console.log(`Image already exists for ${problemName}`);
