@@ -1,28 +1,28 @@
 -- Enable pgvector extension
-create extension if not exists vector with schema public;
+create extension if not exists vector with schema docs;
 
 -- Create tables 
-create table "public"."nods_page" (
+create table "docs"."nods_page" (
   id bigserial primary key,
-  parent_page_id bigint references public.nods_page,
+  parent_page_id bigint references docs.nods_page,
   path text not null unique,
   checksum text,
   meta jsonb,
   type text,
   source text
 );
-alter table "public"."nods_page" enable row level security;
+alter table "docs"."nods_page" enable row level security;
 
-create table "public"."nods_page_section" (
+create table "docs"."nods_page_section" (
   id bigserial primary key,
-  page_id bigint not null references public.nods_page on delete cascade,
+  page_id bigint not null references docs.nods_page on delete cascade,
   content text,
   token_count int,
   embedding vector(1536),
   slug text,
   heading text
 );
-alter table "public"."nods_page_section" enable row level security;
+alter table "docs"."nods_page_section" enable row level security;
 
 -- Create embedding similarity search functions
 create or replace function match_page_sections(embedding vector(1536), match_threshold float, match_count int, min_content_length int)
