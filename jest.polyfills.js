@@ -16,11 +16,11 @@ Object.defineProperties(globalThis, {
     TextEncoder: { value: TextEncoder },
 })
 
-const { TransformStream, ReadableStream } = require('web-streams-polyfill');
-Object.defineProperties(globalThis, {
-    TransformStream: { value: TransformStream },
-    ReadableStream: { value: ReadableStream },
-});
+//const { TransformStream, ReadableStream } = require('web-streams-polyfill');
+// Object.defineProperties(globalThis, {
+//     TransformStream: { value: TransformStream },
+//     ReadableStream: { value: ReadableStream },
+// });
 // Break API requests during tests
 //const { Blob, File } = require('node:buffer')
 // const { fetch, Headers, FormData, Request, Response } = require('undici')
