@@ -2,6 +2,7 @@ import sharp from "sharp";
 import fetch from "node-fetch";
 import fs from "fs-extra";
 import {openai, textCompletion} from "@/lib/llm";
+import {uploadImageToVercel} from "@/lib/imageUploader";
 
 interface GenerateImageOptions {
     prompt: string;
@@ -87,6 +88,6 @@ export async function generateAndSaveFeaturedImageJpg(content: string, imagePath
         .jpeg({ quality: 50 })
         .toFile(jpgPath);
     await fs.unlink(pngPath);
-    return jpgPath;
+    return await uploadImageToVercel(fs.readFileSync(jpgPath), jpgPath);
 }
 
