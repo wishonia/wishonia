@@ -9,11 +9,11 @@ export async function GET() {
         if (userId) {
             randomPair = await prisma.$queryRaw`
           SELECT *
-          FROM "wishing_wells"
+          FROM "WishingWell"
           WHERE id NOT IN (
-            SELECT "this_wishing_well_id" FROM "wishing_well_pair_allocations" WHERE "user_id" = ${userId}
+            SELECT "thisWishingWellId" FROM "WishingWellPairAllocation" WHERE "userId" = ${userId}
             UNION
-            SELECT "that_wishing_well_id" FROM "wishing_well_pair_allocations" WHERE "user_id" = ${userId}
+            SELECT "thatWishingWellId" FROM "WishingWellPairAllocation" WHERE "userId" = ${userId}
           )
           ORDER BY random()
           LIMIT 2;
@@ -21,7 +21,7 @@ export async function GET() {
         } else {
             randomPair = await prisma.$queryRaw`
           SELECT *
-          FROM "wishing_wells"
+          FROM "WishingWell"
           ORDER BY random()
           LIMIT 2;
         `;
