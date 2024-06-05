@@ -264,7 +264,7 @@ model GlobalProblem {
   userId                       String
   name                         String                        @unique
   description                  String?                       @unique
-  content                      String?                       @unique
+  content                      String?
   featuredImage                String?
   createdAt                    DateTime                      @default(now())
   updatedAt                    DateTime                      @updatedAt
@@ -293,7 +293,7 @@ model GlobalSolution {
   userId                        String
   name                          String                         @unique
   description                   String?                        @unique
-  content                       String?                        @unique
+  content                       String?
   featuredImage                 String?
   createdAt                     DateTime                       @default(now())
   updatedAt                     DateTime                       @updatedAt
@@ -347,7 +347,7 @@ model GlobalTask {
   userId                String
   name                  String                 @unique
   description           String?                @unique
-  content               String?                @unique
+  content               String?
   featuredImage         String?
   createdAt             DateTime               @default(now())
   updatedAt             DateTime               @updatedAt
