@@ -1,7 +1,7 @@
 import fs from 'fs';
 import path from 'path';
 import ignore, { Ignore } from 'ignore';
-export function convertToRelativePath(absolutePath: string): string {
+export function relativePathFromPublic(absolutePath: string): string {
     // Split the coverImage path into an array of directories
     let pathArray = absolutePath.split(/\/|\\/);
     // Find the index of the 'public' directory

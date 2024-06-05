@@ -2,13 +2,13 @@ import { writeFileSync } from "fs";
 import { stringify } from "gray-matter";
 import { textCompletion } from "@/lib/llm";
 import {generateAndSaveFeaturedImageJpg} from "@/lib/imageGenerator";
-import {convertToRelativePath} from "@/lib/fileHelper";
+import {relativePathFromPublic} from "@/lib/fileHelper";
 import {MarkdownFile} from "@/interfaces/markdownFile";
 
 export async function saveMarkdownPost(
     post: MarkdownFile
 ): Promise<void> {
-    if(post.featuredImage){post.featuredImage = convertToRelativePath(post.featuredImage);}
+    if(post.featuredImage){post.featuredImage = relativePathFromPublic(post.featuredImage);}
     const content = post.content;
     const metadata = JSON.parse(JSON.stringify(post));
     delete metadata.absFilePath;
@@ -25,7 +25,7 @@ export async function generateMarkdownAndImageFromDescription(
     contentInstructions: string
 ): Promise<void> {
     let jpgPath = await generateAndSaveFeaturedImageJpg(description, postPath);
-    jpgPath = convertToRelativePath(jpgPath);
+    jpgPath = relativePathFromPublic(jpgPath);
     let content = await textCompletion(contentInstructions, "text");
     // if a Markdown code block wrapper with backticks like ```markdown is found,
     // extract the content between the backticks
