@@ -4,7 +4,7 @@ import path from 'path';
 import {toTitleCase} from "@/lib/stringHelpers";
 import {textCompletion} from "@/lib/llm";
 import {saveMarkdownPost} from "@/lib/markdownGenerator";
-import {generateAndSaveFeaturedImageJpg} from "@/lib/imageGenerator";
+import {generateAndUploadFeaturedImageJpg} from "@/lib/imageGenerator";
 import {MarkdownFile} from "@/interfaces/markdownFile";
 const overwriteMarkdown = false;
 const overwriteImages = false;
@@ -63,7 +63,7 @@ export async function generateGlobalProblems(): Promise<MarkdownFile[]> {
             console.log(`Markdown file already exists for ${problemName}`);
         }
         if (overwriteImages || !fs.existsSync(imagePath)) {
-            const imageUrl = await generateAndSaveFeaturedImageJpg(`The problem of ${problemName}`,
+            const imageUrl = await generateAndUploadFeaturedImageJpg(`The problem of ${problemName}`,
                 imagePath);
         } else {
             console.log(`Image already exists for ${problemName}`);

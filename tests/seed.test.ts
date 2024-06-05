@@ -20,6 +20,30 @@ async function installPgVector() {
     await prisma.$executeRaw`CREATE EXTENSION IF NOT EXISTS vector`;
 }
 
+describe("Database-seeder tests", () => {
+    jest.setTimeout(600000);
+    it("seeds DB with user, wishing wells and problems", async () => {
+        await installPgVector();
+        await assertTestDB();
+        await truncateAllTables();
+        const testUser = await getOrCreateTestUser();
+        await checkWishingWells(testUser);
+        await checkGlobalProblems(testUser);
+    }, 45000);
+    it("Seed wishing wells", async () => {
+        const testUser = await getOrCreateTestUser();
+        await checkWishingWells(testUser);
+    }, 45000);
+    it("Seed global problems and solutions", async () => {
+        const testUser = await getOrCreateTestUser();
+        await checkGlobalProblems(testUser);
+    }, 45000);
+    it("Seed global solutions", async () => {
+        await generateGlobalSolutions();
+    }, 600000);
+});
+
+
 async function checkGlobalProblems<ExtArgs>(testUser: User) {
     console.log("Checking global problems");
     console.log("Seeding global problems");
@@ -37,7 +61,7 @@ async function checkGlobalProblems<ExtArgs>(testUser: User) {
     for (const problem of globalProblems) {
         expect(problem.averageAllocation).toBe(expectedAverageAllocation);
     }
-   const globalSolutions =  await generateGlobalSolutions();
+    const globalSolutions =  await generateGlobalSolutions();
 }
 
 async function checkWishingWells<ExtArgs>(testUser: User) {
@@ -62,22 +86,3 @@ async function checkWishingWells<ExtArgs>(testUser: User) {
         expect(wellRoundedAllocation).toBe(roundedAverageAllocation);
     }
 }
-
-describe("Database-seeder tests", () => {
-    it("seeds DB with user, wishing wells and problems", async () => {
-        await installPgVector();
-        await assertTestDB();
-        await truncateAllTables();
-        const testUser = await getOrCreateTestUser();
-        await checkWishingWells(testUser);
-        await checkGlobalProblems(testUser);
-    }, 45000);
-    it("Seed wishing wells", async () => {
-        const testUser = await getOrCreateTestUser();
-        await checkWishingWells(testUser);
-    }, 45000);
-    it("Seed global problems and solutions", async () => {
-        const testUser = await getOrCreateTestUser();
-        await checkGlobalProblems(testUser);
-    }, 45000);
-});

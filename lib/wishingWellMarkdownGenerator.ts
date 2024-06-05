@@ -5,7 +5,7 @@ import {textCompletion} from "@/lib/llm";
 import {saveMarkdownPost} from "@/lib/markdownGenerator";
 import {MarkdownFile} from "@/interfaces/markdownFile";
 import {toTitleCase} from "@/lib/stringHelpers";
-import {generateAndSaveFeaturedImageJpg, generateFeaturedImage} from "@/lib/imageGenerator";
+import {generateAndUploadFeaturedImageJpg, generateFeaturedImagePngBuffer} from "@/lib/imageGenerator";
 import {uploadImageToVercel} from "@/lib/imageUploader";
 
 const overwrite = false;
@@ -111,7 +111,7 @@ export async function generateWishingWellMarkdown(): Promise<MarkdownFile[]> {
             post = await generateWishingWellMarkdownFile(wishingWellName, markdownPath, imagePath);
         }
         if (overwrite || !fs.existsSync(imagePath)) {
-            await generateAndSaveFeaturedImageJpg(`Humanity's Goal of ${wishingWellName}`, imagePath);
+            await generateAndUploadFeaturedImageJpg(`Humanity's Goal of ${wishingWellName}`, imagePath);
         }
         if(post){
             posts.push(post);
