@@ -324,6 +324,10 @@ model GlobalProblemSolution {
   id               String         @id @default(cuid())
   globalProblemId  String
   globalSolutionId String
+  name             String         @unique
+  description      String?        @unique
+  content          String?
+  featuredImage    String?
   createdAt        DateTime       @default(now())
   updatedAt        DateTime       @updatedAt
   globalProblem    GlobalProblem  @relation("GlobalProblemToSolution", fields: [globalProblemId], references: [id])
