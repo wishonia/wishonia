@@ -3,7 +3,7 @@ import fetch from "node-fetch";
 import fs from "fs-extra";
 import {openai} from "@/lib/llm";
 import {uploadImageToVercel, vercelImageExists} from "@/lib/imageUploader";
-import {relativePathFromPublic} from "@/lib/fileHelper";
+import {absPathFromPublic, relativePathFromPublic} from "@/lib/fileHelper";
 
 interface GenerateImageOptions {
     prompt: string;
@@ -11,8 +11,8 @@ interface GenerateImageOptions {
     resolution?: "512x512" | "256x256" | "1024x1024" | "1792x1024" | "1024x1792" | null | undefined;
 }
 
-export async function generateImage(body: GenerateImageOptions, model: string = "dall-e-3"): Promise<any> {
-    let { prompt, amount = 1, resolution = "512x512" } = body;
+export async function generateImage(body: GenerateImageOptions, model: "dall-e-2" | "dall-e-3"): Promise<any> {
+    let { prompt, amount = 1, resolution } = body;
 
     if (!process.env.OPENAI_API_KEY) {
         throw Error("OpenAI API Key not configured.");
@@ -35,7 +35,7 @@ export async function generateImage(body: GenerateImageOptions, model: string = 
         model,
         prompt,
         n: amount || 1,
-        size: resolution || "512x512"
+        size: resolution
     });
 
     return response.data[0];
@@ -56,7 +56,7 @@ export async function generateFeaturedImagePngBuffer(content: string): Promise<B
         prompt: prePrompt,
         resolution: "1792x1024",
         amount: 1
-    });
+    }, "dall-e-3");
     const imageUrl = response.url;
     const image = await fetch(imageUrl);
     return await image.buffer();
@@ -69,7 +69,8 @@ async function convertPngBufferToJpgBuffer(pngBuffer: Buffer): Promise<Buffer> {
 }
 
 export async function generateAndUploadFeaturedImageJpg(content: string, imagePath: string): Promise<string> {
-    const jpgAbsPath = imagePath.replace(/\.[^/.]+$/, ".jpg");
+    imagePath = imagePath.replace(/\.[^/.]+$/, ".jpg");
+    const jpgAbsPath = absPathFromPublic(imagePath);
     const jpgPublicPath = relativePathFromPublic(jpgAbsPath);
     if(fs.existsSync(jpgAbsPath)) {
         console.log(`JPG image already exists at ${jpgAbsPath}`);
@@ -80,6 +81,8 @@ export async function generateAndUploadFeaturedImageJpg(content: string, imagePa
         return url;
     }
     const pngBuffer = await generateFeaturedImagePngBuffer(content);
+    fs.writeFileSync(jpgAbsPath.replace('.jpg', '.png'), pngBuffer);
     const jpgBuffer = await convertPngBufferToJpgBuffer(pngBuffer);
+    fs.writeFileSync(jpgAbsPath, jpgBuffer);
     return await uploadImageToVercel(jpgBuffer, jpgPublicPath);
 }
