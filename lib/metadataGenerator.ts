@@ -3,7 +3,7 @@ import dotenv from "dotenv";
 import {textCompletion} from "@/lib/llm";
 import {MarkdownFile} from "@/interfaces/markdownFile";
 import {readAllMarkdownFiles} from "@/lib/markdownReader";
-import {generateAndSaveFeaturedImageJpg} from "@/lib/imageGenerator";
+import {generateAndUploadFeaturedImageJpg} from "@/lib/imageGenerator";
 import {saveMarkdownPost} from "@/lib/markdownGenerator";
 import {absPathFromPublic} from "@/lib/fileHelper";
 import fs from "fs";
@@ -61,13 +61,13 @@ export async function generateMetadataWhereMissing(pathRelativeToPublic?: string
             updated = true;
         }
         if(!markdownFile.featuredImage) {
-            markdownFile.featuredImage = await generateAndSaveFeaturedImageJpg(markdownFile.content, markdownFile.absFilePath);
+            markdownFile.featuredImage = await generateAndUploadFeaturedImageJpg(markdownFile.content, markdownFile.absFilePath);
             updated = true;
         } else {
             const absPath = absPathFromPublic(markdownFile.featuredImage);
             const imageExists = fs.existsSync(absPath);
             if(!imageExists || markdownFile.featuredImage.endsWith('.png')){
-                markdownFile.featuredImage = await generateAndSaveFeaturedImageJpg(markdownFile.content, markdownFile.absFilePath);
+                markdownFile.featuredImage = await generateAndUploadFeaturedImageJpg(markdownFile.content, markdownFile.absFilePath);
                 updated = true;
             }
         }

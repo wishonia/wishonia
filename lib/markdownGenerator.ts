@@ -1,7 +1,7 @@
 import { writeFileSync } from "fs";
 import { stringify } from "gray-matter";
 import { textCompletion } from "@/lib/llm";
-import {generateAndSaveFeaturedImageJpg} from "@/lib/imageGenerator";
+import {generateAndUploadFeaturedImageJpg} from "@/lib/imageGenerator";
 import {relativePathFromPublic} from "@/lib/fileHelper";
 import {MarkdownFile} from "@/interfaces/markdownFile";
 
@@ -24,7 +24,7 @@ export async function generateMarkdownAndImageFromDescription(
     description: string,
     contentInstructions: string
 ): Promise<void> {
-    let jpgPath = await generateAndSaveFeaturedImageJpg(description, postPath);
+    let jpgPath = await generateAndUploadFeaturedImageJpg(description, postPath);
     jpgPath = relativePathFromPublic(jpgPath);
     let content = await textCompletion(contentInstructions, "text");
     // if a Markdown code block wrapper with backticks like ```markdown is found,

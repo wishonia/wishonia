@@ -33,12 +33,19 @@ export async function textCompletion(promptText: string, returnType: "text" | "j
   return response.choices[0].message.content;
 }
 
-export async function jsonArrayCompletion(promptText: string): Promise<string[]> {
+export async function jsonArrayCompletion(promptText: string): Promise<any[]> {
   const response =  await textCompletion(`Return a json array containing ${promptText}`,
     "json_object");
   const arr = JSON.parse(response);
-  if (!Array.isArray(arr)) {
-    throw new Error('Response is not an array');
+  if(!Array.isArray(arr)) {
+    for (const key in arr) {
+      if (Object.prototype.hasOwnProperty.call(arr, key)) {
+        const element = arr[key];
+        if(Array.isArray(element)) {
+          return element;
+        }
+      }
+    }
   }
   return arr;
 }

@@ -1,8 +1,9 @@
 import sharp from "sharp";
 import fetch from "node-fetch";
 import fs from "fs-extra";
-import {openai, textCompletion} from "@/lib/llm";
-import {uploadImageToVercel} from "@/lib/imageUploader";
+import {openai} from "@/lib/llm";
+import {uploadImageToVercel, vercelImageExists} from "@/lib/imageUploader";
+import {relativePathFromPublic} from "@/lib/fileHelper";
 
 interface GenerateImageOptions {
     prompt: string;
@@ -40,16 +41,16 @@ export async function generateImage(body: GenerateImageOptions, model: string = 
     return response.data[0];
 }
 
-export async function generateFeaturedImage(content: string): Promise<Buffer> {
+export async function generateFeaturedImagePngBuffer(content: string): Promise<Buffer> {
     const prePrompt = `full width image for an article on ${content}. 
     Requirements: 
     1. THE IMAGE SHOULD NOT CONTAIN ANY TEXT! 
     2. Use a colorful 16-bit style.`;
     console.log(`Generating image for content:
      ${content}`)
-    const generatedPrompt = await textCompletion(
-        `Generate an detailed prompt description for an AI image generator to generate an ${prePrompt} `,
-        "text");
+    // const generatedPrompt = await textCompletion(
+    //     `Generate a detailed prompt description for an AI image generator to generate an ${prePrompt} `,
+    //     "text");
     //console.log(generatedPrompt)
     const response = await generateImage({
         prompt: prePrompt,
@@ -61,33 +62,24 @@ export async function generateFeaturedImage(content: string): Promise<Buffer> {
     return await image.buffer();
 }
 
-async function generateAndSaveFeaturedImagePng(content: string, imagePath: string): Promise<string> {
-    // replace extensions with png
-    imagePath = imagePath.replace(/\.[^/.]+$/, ".png");
-    const buffer = await generateFeaturedImage(content);
-    console.log(`Saving image to ${imagePath}`);
-    await fs.writeFile(imagePath, buffer);
-    return imagePath;
+async function convertPngBufferToJpgBuffer(pngBuffer: Buffer): Promise<Buffer> {
+    return await sharp(pngBuffer)
+        .jpeg({quality: 50})
+        .toBuffer();
 }
 
-export async function generateAndSaveFeaturedImageJpg(content: string, imagePath: string): Promise<string> {
-
-    const pngPath = imagePath.replace(/\.[^/.]+$/, ".png");
-    if(!fs.existsSync(pngPath)) {
-        await generateAndSaveFeaturedImagePng(content, pngPath);
-    } else {
-        console.log(`Image already exists at ${pngPath}`);
+export async function generateAndUploadFeaturedImageJpg(content: string, imagePath: string): Promise<string> {
+    const jpgAbsPath = imagePath.replace(/\.[^/.]+$/, ".jpg");
+    const jpgPublicPath = relativePathFromPublic(jpgAbsPath);
+    if(fs.existsSync(jpgAbsPath)) {
+        console.log(`JPG image already exists at ${jpgAbsPath}`);
+        return await uploadImageToVercel(fs.readFileSync(jpgAbsPath), jpgPublicPath);
     }
-    const jpgPath = pngPath.replace('.png', '.jpg');
-    if(fs.existsSync(jpgPath)) {
-        await fs.unlink(pngPath);
-        console.log(`JPG image already exists at ${jpgPath}`);
-        return jpgPath;
+    let url = await vercelImageExists(jpgPublicPath);
+    if(url) {
+        return url;
     }
-    await sharp(pngPath)
-        .jpeg({ quality: 50 })
-        .toFile(jpgPath);
-    await fs.unlink(pngPath);
-    return await uploadImageToVercel(fs.readFileSync(jpgPath), jpgPath);
+    const pngBuffer = await generateFeaturedImagePngBuffer(content);
+    const jpgBuffer = await convertPngBufferToJpgBuffer(pngBuffer);
+    return await uploadImageToVercel(jpgBuffer, jpgPublicPath);
 }
-
