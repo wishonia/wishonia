@@ -1,8 +1,9 @@
 import slugify from 'slugify';
-import { jsonArrayCompletion, textCompletion } from "@/lib/llm";
+import {jsonArrayCompletion, textCompletion} from "@/lib/llm";
 import { generateAndUploadFeaturedImageJpg } from "@/lib/imageGenerator";
 import { prisma } from "@/lib/db";
 import {GlobalProblem} from "@prisma/client";
+import {generateAndSaveEmbedding, generateOpenAIEmbeddings} from "@/lib/openai";
 export async function generateGlobalSolutions() {
     const globalProblems = await prisma.globalProblem.findMany();
     for (const globalProblem of globalProblems) {
@@ -40,13 +41,19 @@ For instance, for the global problem of "Mental Illness", you could return somet
     "Epigenetic Editing Therapies"
 ]
 `);
+        let counter = 0;
+        const totalSolutions = generatedSolutions.length;
+
         for (const generatedSolution of generatedSolutions) {
             await saveGlobalSolution(generatedSolution, globalProblem);
+            counter++;
+            const percentCompleted = ((counter / totalSolutions) * 100).toFixed(2);
+            console.log(`Completed: ${counter}/${totalSolutions} (${percentCompleted}%)`);
         }
     }
 }
 
-function linkGlobalProblemSolution(globalProblemId: string, globalSolutionId: string) {
+async function linkGlobalProblemSolution(globalProblemId: string, globalSolutionId: string) {
     return prisma.globalProblemSolution.create({
         data: {
             globalProblemId: globalProblemId,
@@ -63,23 +70,25 @@ async function saveGlobalSolution(generatedSolution: {name: string, description:
     });
     if (existingSolution) {
         console.log(`Solution "${generatedSolution.name}" already exists in the database.`);
-        linkGlobalProblemSolution(globalProblem.id, existingSolution.id);
+        await linkGlobalProblemSolution(globalProblem.id, existingSolution.id);
         return;
     }
     const slug = generatedSolution.name.toLowerCase().replace(/ /g, '-');
     const imagePath = `global-solutions/${slugify(slug)}.jpg`
     const content = await generateSolutionContent(generatedSolution);
     const featuredImageUrl = await generateAndUploadFeaturedImageJpg(generatedSolution.name, imagePath);
+    const embedding =
+        await generateOpenAIEmbeddings(generatedSolution.name + " " + generatedSolution.description);
     const createdSolution = await prisma.globalSolution.create({
         data: {
             name: generatedSolution.name,
             description: generatedSolution.description,
             content: content,
             featuredImage: featuredImageUrl,
-            userId: globalProblem.userId
+            userId: globalProblem.userId,
         }
     });
-    linkGlobalProblemSolution(globalProblem.id, createdSolution.id);
+    await linkGlobalProblemSolution(globalProblem.id, createdSolution.id);
 }
 
 async function generateSolutionContent(generatedSolution: { name: string, description: string}) {
@@ -122,4 +131,12 @@ the solution to enable readers to make informed decisions about its merits and p
 `,
         'text'
     );
+}
+
+export async function generateGlobalSolutionEmbeddings(){
+    const globalSolutions = await prisma.globalSolution.findMany();
+    for (const globalSolution of globalSolutions) {
+        await generateAndSaveEmbedding(globalSolution.name + " " + globalSolution.description,
+            'GlobalSolution', globalSolution.id);
+    }
 }
