@@ -385,9 +385,6 @@ CREATE UNIQUE INDEX "GlobalSolution_name_key" ON "GlobalSolution"("name");
 CREATE UNIQUE INDEX "GlobalSolution_description_key" ON "GlobalSolution"("description");
 
 -- CreateIndex
-CREATE UNIQUE INDEX "GlobalSolution_content_key" ON "GlobalSolution"("content");
-
--- CreateIndex
 CREATE UNIQUE INDEX "GlobalProblemSolution_globalProblemId_globalSolutionId_key" ON "GlobalProblemSolution"("globalProblemId", "globalSolutionId");
 
 -- CreateIndex
@@ -398,9 +395,6 @@ CREATE UNIQUE INDEX "GlobalTask_name_key" ON "GlobalTask"("name");
 
 -- CreateIndex
 CREATE UNIQUE INDEX "GlobalTask_description_key" ON "GlobalTask"("description");
-
--- CreateIndex
-CREATE UNIQUE INDEX "GlobalTask_content_key" ON "GlobalTask"("content");
 
 -- CreateIndex
 CREATE UNIQUE INDEX "GlobalTaskSkill_globalTaskId_skillId_key" ON "GlobalTaskSkill"("globalTaskId", "skillId");
@@ -452,9 +446,6 @@ CREATE INDEX "_GithubLabelToGithubPullRequest_B_index" ON "_GithubLabelToGithubP
 
 -- CreateIndex
 CREATE UNIQUE INDEX "GlobalProblem_description_key" ON "GlobalProblem"("description");
-
--- CreateIndex
-CREATE UNIQUE INDEX "GlobalProblem_content_key" ON "GlobalProblem"("content");
 
 -- CreateIndex
 CREATE UNIQUE INDEX "Skill_name_key" ON "Skill"("name");
