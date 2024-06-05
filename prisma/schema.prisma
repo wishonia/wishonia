@@ -273,6 +273,7 @@ model GlobalProblem {
   thatGlobalProblemAllocations GlobalProblemPairAllocation[] @relation("ThatGlobalProblemRelation")
   averageAllocation            Float?
   globalProblemSolutions       GlobalProblemSolution[]       @relation("GlobalProblemToSolution")
+  embedding                    Unsupported("vector(1536)")?
 }
 
 model GlobalProblemPairAllocation {
@@ -303,6 +304,7 @@ model GlobalSolution {
   averageAllocation             Float?
   globalProblemSolutions        GlobalProblemSolution[]        @relation("GlobalSolutionToProblem")
   globalTaskSolutions           GlobalTaskSolution[]           @relation("GlobalSolutionToTask")
+  embedding                     Unsupported("vector(1536)")?
 }
 
 model GlobalSolutionPairAllocation {
@@ -343,26 +345,27 @@ model GlobalTaskSolution {
 }
 
 model GlobalTask {
-  id                    String                 @id @default(cuid())
+  id                    String                       @id @default(cuid())
   userId                String
-  name                  String                 @unique
-  description           String?                @unique
+  name                  String                       @unique
+  description           String?                      @unique
   content               String?
   featuredImage         String?
-  createdAt             DateTime               @default(now())
-  updatedAt             DateTime               @updatedAt
+  createdAt             DateTime                     @default(now())
+  updatedAt             DateTime                     @updatedAt
   skills                GlobalTaskSkill[]
   priority              String?
-  status                TaskStatus             @default(NOT_STARTED)
+  status                TaskStatus                   @default(NOT_STARTED)
   dueDate               DateTime?
   budget                Float?
   comments              String[]
-  creator               User                   @relation(fields: [userId], references: [id])
-  globalTaskSolutions   GlobalTaskSolution[]   @relation("GlobalTaskToSolution")
-  blockingTasks         GlobalTaskDependency[] @relation("BlockingTask")
-  dependentTasks        GlobalTaskDependency[] @relation("DependentTask")
+  creator               User                         @relation(fields: [userId], references: [id])
+  globalTaskSolutions   GlobalTaskSolution[]         @relation("GlobalTaskToSolution")
+  blockingTasks         GlobalTaskDependency[]       @relation("BlockingTask")
+  dependentTasks        GlobalTaskDependency[]       @relation("DependentTask")
   globalTaskContextUrls GlobalTaskContextUrl[]
   userTasks             UserTask[]
+  embedding             Unsupported("vector(1536)")?
 }
 
 model GlobalTaskSkill {
@@ -426,21 +429,22 @@ enum UserTaskRole {
 }
 
 model WishingWell {
-  id                         String                      @id @default(cuid())
+  id                         String                       @id @default(cuid())
   userId                     String
-  name                       String                      @unique
+  name                       String                       @unique
   description                String?
   content                    String?
   images                     String[]
   featuredImage              String?
-  createdAt                  DateTime                    @default(now())
-  updatedAt                  DateTime                    @updatedAt
-  user                       User                        @relation(fields: [userId], references: [id])
+  createdAt                  DateTime                     @default(now())
+  updatedAt                  DateTime                     @updatedAt
+  user                       User                         @relation(fields: [userId], references: [id])
   wishingWellContributions   WishingWellContribution[]
   proposals                  WishFulfillmentProposal[]
-  thisWishingWellAllocations WishingWellPairAllocation[] @relation("ThisWishingWellRelation")
-  thatWishingWellAllocations WishingWellPairAllocation[] @relation("ThatWishingWellRelation")
+  thisWishingWellAllocations WishingWellPairAllocation[]  @relation("ThisWishingWellRelation")
+  thatWishingWellAllocations WishingWellPairAllocation[]  @relation("ThatWishingWellRelation")
   averageAllocation          Float?
+  embedding                  Unsupported("vector(1536)")?
 }
 
 model WishingWellPairAllocation {
@@ -465,17 +469,18 @@ model WishingWellContribution {
 }
 
 model GenieDAO {
-  id             String                    @id @default(cuid())
+  id             String                       @id @default(cuid())
   name           String
-  reputation     Float                     @default(0)
-  createdAt      DateTime                  @default(now())
-  updatedAt      DateTime                  @updatedAt
-  creator        User                      @relation("CreatedGenieDAOs", fields: [creatorId], references: [id])
+  reputation     Float                        @default(0)
+  createdAt      DateTime                     @default(now())
+  updatedAt      DateTime                     @updatedAt
+  creator        User                         @relation("CreatedGenieDAOs", fields: [creatorId], references: [id])
   creatorId      String
-  members        User[]                    @relation("JoinedGenieDAOs")
+  members        User[]                       @relation("JoinedGenieDAOs")
   proposals      WishFulfillmentProposal[]
-  collaborations WishFulfillmentProposal[] @relation("ProposalCollaborators")
+  collaborations WishFulfillmentProposal[]    @relation("ProposalCollaborators")
   feedback       GenieDAOFeedback[]
+  embedding      Unsupported("vector(1536)")?
 }
 
 model WishFulfillmentProposal {
