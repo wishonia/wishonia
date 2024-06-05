@@ -10,6 +10,7 @@ import {aggregateWishingWellPairAllocations} from "@/lib/wishingWells";
 import {seedWishingWellPairAllocations} from "@/prisma/seedWishingWellPairAllocations";
 import {assertTestDB, getOrCreateTestUser, truncateAllTables} from "@/tests/test-helpers";
 import {generateGlobalSolutions} from "@/lib/globalSolutionsGenerator";
+import {dumpDatabaseToJson} from "@/lib/prisma/dumpDatabaseToJson";
 
 let prisma = new PrismaClient();
 beforeAll(async () => {
@@ -37,10 +38,23 @@ describe("Database-seeder tests", () => {
     it("Seed global problems and solutions", async () => {
         const testUser = await getOrCreateTestUser();
         await checkGlobalProblems(testUser);
-    }, 45000);
+        const globalSolutions =  await generateGlobalSolutions();
+    }, 6000000);
     it("Seed global solutions", async () => {
         await generateGlobalSolutions();
     }, 6000000);
+    // it("Generates seed scripts", async () => {
+    //     await readAllTables({
+    //         allSeeds: true,
+    //         seedFile: true,
+    //         logTables: false,
+    //         onlyTables: [],
+    //     });
+    // });
+    it("Dumps the database to json files", async () => {
+        await dumpDatabaseToJson();
+
+    });
 });
 
 
@@ -61,7 +75,6 @@ async function checkGlobalProblems<ExtArgs>(testUser: User) {
     for (const problem of globalProblems) {
         expect(problem.averageAllocation).toBe(expectedAverageAllocation);
     }
-    const globalSolutions =  await generateGlobalSolutions();
 }
 
 async function checkWishingWells<ExtArgs>(testUser: User) {

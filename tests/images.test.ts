@@ -1,13 +1,13 @@
 /**
  * @jest-environment node
  */
-import { uploadPublicImagesToVercel} from "@/lib/imageUploader";
+import {downloadAllBlobImages, uploadPublicImagesToVercel} from "@/lib/imageUploader";
 describe("Test Images", () => {
     it("should upload all images", async () => {
         const urls = await uploadPublicImagesToVercel()
         expect(urls).toBeDefined();
     });
-    it("should generate a featured image", async () => {
-        // Test code here
+    it("should download all blobs", async () => {
+        await downloadAllBlobImages()
     });
 });
