@@ -1,4 +1,4 @@
-import {put} from "@vercel/blob";
+import {list, put} from "@vercel/blob";
 import {absPathFromPublic, getNonIgnoredFiles, relativePathFromPublic} from "@/lib/fileHelper";
 import fs from "fs";
 
@@ -57,4 +57,23 @@ export async function uploadImageToVercelIfNecessary(pathFromPublic: string) {
     url = await uploadImageToVercel(buffer, pathFromPublic);
     console.log(`Uploaded: ${url}`);
     return url;
+}
+
+export async function downloadAllBlobImages() {
+    const listBlobResult = await list();
+    const blobs = listBlobResult.blobs;
+    // Loop through array of blobs
+    for (const blob of blobs) {
+        const url = blob.url;
+        // Download image from url
+        const response = await fetch(url);
+        const buffer = await response.text();
+        let pathname = relativePathFromPublic(blob.pathname);
+        const absPath = absPathFromPublic(pathname);
+        if(fs.existsSync(absPath)) {
+            console.log(`Image already exists: ${absPath}`);
+            continue;
+        }
+        fs.writeFileSync(absPath, buffer);
+    }
 }

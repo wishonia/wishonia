@@ -8,7 +8,7 @@ import {absPathFromPublic, relativePathFromPublic} from "@/lib/fileHelper";
 interface GenerateImageOptions {
     prompt: string;
     amount?: number;
-    resolution?: "512x512" | "256x256" | "1024x1024" | "1792x1024" | "1024x1792" | null | undefined;
+    resolution?: "512x512" | "256x256" | "1024x1024" | "1792x1024" | "1024x1792";
 }
 
 export async function generateImage(body: GenerateImageOptions, model: "dall-e-2" | "dall-e-3"): Promise<any> {
@@ -48,8 +48,9 @@ export async function generateFeaturedImagePngBuffer(content: string): Promise<B
     2. Use a colorful 16-bit style.`;
     console.log(`Generating image for content:
      ${content}`)
-    // const generatedPrompt = await textCompletion(
-    //     `Generate a detailed prompt description for an AI image generator to generate an ${prePrompt} `,
+    // const generatedPrompt = await textCompletion(`Generate a detailed prompt description
+    // for an AI image generator to generate
+    //     an ${prePrompt} `,
     //     "text");
     //console.log(generatedPrompt)
     const response = await generateImage({
