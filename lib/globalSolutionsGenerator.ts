@@ -4,52 +4,32 @@ import { generateAndUploadFeaturedImageJpg } from "@/lib/imageGenerator";
 import { prisma } from "@/lib/db";
 import {GlobalProblem} from "@prisma/client";
 import {generateAndSaveEmbedding, generateOpenAIEmbeddings} from "@/lib/openai";
+import {saveMarkdownPost} from "@/lib/markdownGenerator";
+import {absPathFromPublic} from "@/lib/fileHelper";
 export async function generateGlobalSolutions() {
     const globalProblems = await prisma.globalProblem.findMany();
+    let counter = 0;
     for (const globalProblem of globalProblems) {
-        // Use textCompletion to ask the LLM to provide an array of the most promising actionable solutions for the given global problem
-        const generatedSolutions: {name: string, description: string}[] = await jsonArrayCompletion(
-            `
-Return a json array of SMART (Specific, Measurable, Achievable, Relevant, and Time-bound)
-scientific interventions that could significantly contribute to solving or reducing the
-impact of "${globalProblem.name}". 
-
-For each intervention, provide a 
-'name': a concise name that captures the essence of the intervention
-'description': a brief description of the intervention
-
-Focus on radically innovative and novel solutions.
-            
-For instance, for the global problem of "Mental Illness", you could return something like:
-[
-    "Global Treaty to Redirect 1% of Military Spending to Medical Research",
-    "A Decentralized FDA to Accelerate Clinical Discovery",
-    "Precision Psychiatry International Consortia",
-    "Psychedelic-Assisted Therapy Evaluation Trials",
-    "Global Neuromodulation Advancement Project",
-    "Digital Mental Health Therapeutics Acceleration Network",
-    "Gut-Brain Axis Optimization Research",
-    "FAAH Inhibitor Therapy",
-    "FAAH-OUT Gene Therapy",
-    "Optogenetic Brain Stimulation",
-    "Transcranial Focused Ultrasound Stimulation",
-    "Ketamine-Assisted Psychotherapy",
-    "Psilocybin-Assisted Therapy",
-    "MDMA-Assisted Psychotherapy",
-    "Neuropeptide-Based Therapeutics",
-    "Microbiome-Based Interventions",
-    "Epigenetic Editing Therapies"
-]
-`);
-        let counter = 0;
-        const totalSolutions = generatedSolutions.length;
-
-        for (const generatedSolution of generatedSolutions) {
-            await saveGlobalSolution(generatedSolution, globalProblem);
-            counter++;
-            const percentCompleted = ((counter / totalSolutions) * 100).toFixed(2);
-            console.log(`Completed: ${counter}/${totalSolutions} (${percentCompleted}%)`);
+        console.log(`Generating solutions for global problem: ${globalProblem.name}`)
+        const existing = await prisma.globalProblemSolution.findMany({
+            where: {
+                globalProblemId: globalProblem.id
+            }
+        });
+        if(existing.length > 5) {
+            console.log(`Global problem ${globalProblem.name} already has solutions`);
+            continue
         }
+        // Use textCompletion to ask the LLM to provide an array of the most promising actionable solutions for the given global problem
+        const generatedSolutions = await getSolutionArray(globalProblem);
+        counter++;
+        const totalSolutions = generatedSolutions.length;
+        for (const generatedSolution of generatedSolutions) {
+            console.log(`Generating solution: ${generatedSolution.name} for problem: ${globalProblem.name}`);
+            await saveGlobalSolution(generatedSolution, globalProblem);
+        }
+        const percentCompleted = ((counter / totalSolutions) * 100).toFixed(2);
+        console.log(`Completed: ${counter}/${totalSolutions} (${percentCompleted}%)`);
     }
 }
 
@@ -75,19 +55,28 @@ async function saveGlobalSolution(generatedSolution: {name: string, description:
     }
     const slug = generatedSolution.name.toLowerCase().replace(/ /g, '-');
     const imagePath = `global-solutions/${slugify(slug)}.jpg`
+    const mdPath = `global-solutions/${slug}.md`;
+    const mdAbsPath = absPathFromPublic(mdPath);
     const content = await generateSolutionContent(generatedSolution);
-    const featuredImageUrl = await generateAndUploadFeaturedImageJpg(generatedSolution.name, imagePath);
-    const embedding =
-        await generateOpenAIEmbeddings(generatedSolution.name + " " + generatedSolution.description);
+    //const featuredImageUrl = await generateAndUploadFeaturedImageJpg(generatedSolution.name, imagePath);
     const createdSolution = await prisma.globalSolution.create({
         data: {
             name: generatedSolution.name,
             description: generatedSolution.description,
             content: content,
-            featuredImage: featuredImageUrl,
+            // featuredImage: featuredImageUrl,
             userId: globalProblem.userId,
         }
     });
+    //await generateAndSaveEmbedding(generatedSolution.name + " " + generatedSolution.description,
+    //    'GlobalSolution', createdSolution.id);
+    await saveMarkdownPost({
+        name: generatedSolution.name,
+        description: generatedSolution.description,
+        content: content,
+        // featuredImage: featuredImageUrl,
+        absFilePath: mdAbsPath
+    })
     await linkGlobalProblemSolution(globalProblem.id, createdSolution.id);
 }
 
@@ -139,4 +128,41 @@ export async function generateGlobalSolutionEmbeddings(){
         await generateAndSaveEmbedding(globalSolution.name + " " + globalSolution.description,
             'GlobalSolution', globalSolution.id);
     }
+}
+async function getSolutionArray(globalProblem: GlobalProblem): Promise<{name: string, description: string}[]> {
+    return await jsonArrayCompletion(
+        `
+Return a json array of SMART (Specific, Measurable, Achievable, Relevant, and Time-bound)
+scientific interventions that could significantly contribute to solving or reducing the
+impact of "${globalProblem.name}". 
+
+For each array item should have two properties::
+1. 'name': generalized name with the fewest words that captures the essence of the solution 
+(we want to minimize variation to avoid duplication with synonyms in the database. For instance, we should have 
+"Personalized Cancer Vaccine" and not "Personalized Cancer Vaccine Development" or "Personalized Cancer Vaccine Research")
+2. 'description': a brief description of the intervention
+
+Focus on radically innovative and novel solutions.
+            
+For instance, for the global problem of "Mental Illness", you could return something like:
+[
+    "Global Treaty to Redirect 1% of Military Spending to Medical Research",
+    "A Decentralized FDA to Accelerate Clinical Discovery",
+    "Precision Psychiatry International Consortia",
+    "Psychedelic-Assisted Therapy Evaluation Trials",
+    "Global Neuromodulation Advancement Project",
+    "Digital Mental Health Therapeutics Acceleration Network",
+    "Gut-Brain Axis Optimization Research",
+    "FAAH Inhibitor Therapy",
+    "FAAH-OUT Gene Therapy",
+    "Optogenetic Brain Stimulation",
+    "Transcranial Focused Ultrasound Stimulation",
+    "Ketamine-Assisted Psychotherapy",
+    "Psilocybin-Assisted Therapy",
+    "MDMA-Assisted Psychotherapy",
+    "Neuropeptide-Based Therapeutics",
+    "Microbiome-Based Interventions",
+    "Epigenetic Editing Therapies"
+]
+`);
 }
