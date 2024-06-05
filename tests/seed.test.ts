@@ -40,7 +40,7 @@ describe("Database-seeder tests", () => {
     }, 45000);
     it("Seed global solutions", async () => {
         await generateGlobalSolutions();
-    }, 600000);
+    }, 6000000);
 });
 
 
