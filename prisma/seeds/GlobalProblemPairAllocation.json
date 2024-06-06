@@ -1,0 +1,542 @@
+[
+  {
+    "thisGlobalProblemPercentage": "50",
+    "createdAt": "2024-06-05 04:56:38.657",
+    "updatedAt": "2024-06-05 04:56:38.657",
+    "id": "clx1cwg750016q5t1xno54h0l",
+    "thatGlobalProblemId": "clx1cwg1d0004q5t1jsgdhtu2",
+    "userId": "clx1cwfzb0000q5t1f68xks0s",
+    "thisGlobalProblemId": "clx1cwg0q0002q5t16oxn43r5"
+  },
+  {
+    "thisGlobalProblemPercentage": "50",
+    "createdAt": "2024-06-05 04:56:38.664",
+    "updatedAt": "2024-06-05 04:56:38.664",
+    "id": "clx1cwg7c0018q5t196qk50de",
+    "thatGlobalProblemId": "clx1cwg2d0008q5t14ac2iw3c",
+    "userId": "clx1cwfzb0000q5t1f68xks0s",
+    "thisGlobalProblemId": "clx1cwg1q0006q5t1u4e8y0dp"
+  },
+  {
+    "thisGlobalProblemPercentage": "50",
+    "createdAt": "2024-06-05 04:56:38.668",
+    "updatedAt": "2024-06-05 04:56:38.668",
+    "id": "clx1cwg7f001aq5t1xpsa7h3y",
+    "thatGlobalProblemId": "clx1cwg35000cq5t1bxrm1i87",
+    "userId": "clx1cwfzb0000q5t1f68xks0s",
+    "thisGlobalProblemId": "clx1cwg2q000aq5t12ktc1crc"
+  },
+  {
+    "thisGlobalProblemPercentage": "50",
+    "createdAt": "2024-06-05 04:56:38.672",
+    "updatedAt": "2024-06-05 04:56:38.672",
+    "id": "clx1cwg7j001cq5t1lle1qd4d",
+    "thatGlobalProblemId": "clx1cwg40000gq5t1oe1nrbwa",
+    "userId": "clx1cwfzb0000q5t1f68xks0s",
+    "thisGlobalProblemId": "clx1cwg3k000eq5t1bymwr5jt"
+  },
+  {
+    "thisGlobalProblemPercentage": "50",
+    "createdAt": "2024-06-05 04:56:38.675",
+    "updatedAt": "2024-06-05 04:56:38.675",
+    "id": "clx1cwg7n001eq5t1zva29py4",
+    "thatGlobalProblemId": "clx1cwg4v000kq5t1iskxmrg1",
+    "userId": "clx1cwfzb0000q5t1f68xks0s",
+    "thisGlobalProblemId": "clx1cwg4f000iq5t1xcnu3js3"
+  },
+  {
+    "thisGlobalProblemPercentage": "50",
+    "createdAt": "2024-06-05 04:56:38.679",
+    "updatedAt": "2024-06-05 04:56:38.679",
+    "id": "clx1cwg7r001gq5t1jsys2b6b",
+    "thatGlobalProblemId": "clx1cwg5d000oq5t1lfu390bb",
+    "userId": "clx1cwfzb0000q5t1f68xks0s",
+    "thisGlobalProblemId": "clx1cwg55000mq5t1us14d4vd"
+  },
+  {
+    "thisGlobalProblemPercentage": "50",
+    "createdAt": "2024-06-05 04:56:38.683",
+    "updatedAt": "2024-06-05 04:56:38.683",
+    "id": "clx1cwg7v001iq5t1fdnsgxh9",
+    "thatGlobalProblemId": "clx1cwg5r000sq5t18792yafx",
+    "userId": "clx1cwfzb0000q5t1f68xks0s",
+    "thisGlobalProblemId": "clx1cwg5l000qq5t14wnwr8od"
+  },
+  {
+    "thisGlobalProblemPercentage": "50",
+    "createdAt": "2024-06-05 04:56:38.687",
+    "updatedAt": "2024-06-05 04:56:38.687",
+    "id": "clx1cwg7y001kq5t1aen8xfpj",
+    "thatGlobalProblemId": "clx1cwg67000wq5t1vrxaa0au",
+    "userId": "clx1cwfzb0000q5t1f68xks0s",
+    "thisGlobalProblemId": "clx1cwg5y000uq5t1is0rq58y"
+  },
+  {
+    "thisGlobalProblemPercentage": "50",
+    "createdAt": "2024-06-05 04:56:38.691",
+    "updatedAt": "2024-06-05 04:56:38.691",
+    "id": "clx1cwg82001mq5t1a5pmw3me",
+    "thatGlobalProblemId": "clx1cwg6k0010q5t18x70u92n",
+    "userId": "clx1cwfzb0000q5t1f68xks0s",
+    "thisGlobalProblemId": "clx1cwg6d000yq5t1xk2w7nk2"
+  },
+  {
+    "thisGlobalProblemPercentage": "50",
+    "createdAt": "2024-06-05 04:56:38.695",
+    "updatedAt": "2024-06-05 04:56:38.695",
+    "id": "clx1cwg86001oq5t1xo0e0iha",
+    "thatGlobalProblemId": "clx1cwg6u0014q5t1w6z9tuk0",
+    "userId": "clx1cwfzb0000q5t1f68xks0s",
+    "thisGlobalProblemId": "clx1cwg6p0012q5t10wt3vrv2"
+  },
+  {
+    "thisGlobalProblemPercentage": "50",
+    "createdAt": "2024-06-05 04:57:38.008",
+    "updatedAt": "2024-06-05 04:57:38.008",
+    "id": "clx1cxpzs0001rg13qllteu27",
+    "thatGlobalProblemId": "clx1cwg1d0004q5t1jsgdhtu2",
+    "userId": "clx1cwfzb0000q5t1f68xks0s",
+    "thisGlobalProblemId": "clx1cwg0q0002q5t16oxn43r5"
+  },
+  {
+    "thisGlobalProblemPercentage": "50",
+    "createdAt": "2024-06-05 04:57:38.014",
+    "updatedAt": "2024-06-05 04:57:38.014",
+    "id": "clx1cxpzy0003rg137gezzxr0",
+    "thatGlobalProblemId": "clx1cwg2d0008q5t14ac2iw3c",
+    "userId": "clx1cwfzb0000q5t1f68xks0s",
+    "thisGlobalProblemId": "clx1cwg1q0006q5t1u4e8y0dp"
+  },
+  {
+    "thisGlobalProblemPercentage": "50",
+    "createdAt": "2024-06-05 04:57:38.018",
+    "updatedAt": "2024-06-05 04:57:38.018",
+    "id": "clx1cxq020005rg13stomierm",
+    "thatGlobalProblemId": "clx1cwg35000cq5t1bxrm1i87",
+    "userId": "clx1cwfzb0000q5t1f68xks0s",
+    "thisGlobalProblemId": "clx1cwg2q000aq5t12ktc1crc"
+  },
+  {
+    "thisGlobalProblemPercentage": "50",
+    "createdAt": "2024-06-05 04:57:38.022",
+    "updatedAt": "2024-06-05 04:57:38.022",
+    "id": "clx1cxq050007rg13g35e58bh",
+    "thatGlobalProblemId": "clx1cwg40000gq5t1oe1nrbwa",
+    "userId": "clx1cwfzb0000q5t1f68xks0s",
+    "thisGlobalProblemId": "clx1cwg3k000eq5t1bymwr5jt"
+  },
+  {
+    "thisGlobalProblemPercentage": "50",
+    "createdAt": "2024-06-05 04:57:38.025",
+    "updatedAt": "2024-06-05 04:57:38.025",
+    "id": "clx1cxq090009rg13x26irujn",
+    "thatGlobalProblemId": "clx1cwg4v000kq5t1iskxmrg1",
+    "userId": "clx1cwfzb0000q5t1f68xks0s",
+    "thisGlobalProblemId": "clx1cwg4f000iq5t1xcnu3js3"
+  },
+  {
+    "thisGlobalProblemPercentage": "50",
+    "createdAt": "2024-06-05 04:57:38.028",
+    "updatedAt": "2024-06-05 04:57:38.028",
+    "id": "clx1cxq0c000brg13mcxmokq6",
+    "thatGlobalProblemId": "clx1cwg5d000oq5t1lfu390bb",
+    "userId": "clx1cwfzb0000q5t1f68xks0s",
+    "thisGlobalProblemId": "clx1cwg55000mq5t1us14d4vd"
+  },
+  {
+    "thisGlobalProblemPercentage": "50",
+    "createdAt": "2024-06-05 04:57:38.032",
+    "updatedAt": "2024-06-05 04:57:38.032",
+    "id": "clx1cxq0g000drg13ct9lu299",
+    "thatGlobalProblemId": "clx1cwg5y000uq5t1is0rq58y",
+    "userId": "clx1cwfzb0000q5t1f68xks0s",
+    "thisGlobalProblemId": "clx1cwg5l000qq5t14wnwr8od"
+  },
+  {
+    "thisGlobalProblemPercentage": "50",
+    "createdAt": "2024-06-05 04:57:38.035",
+    "updatedAt": "2024-06-05 04:57:38.035",
+    "id": "clx1cxq0j000frg13i9gs8zf0",
+    "thatGlobalProblemId": "clx1cwg6d000yq5t1xk2w7nk2",
+    "userId": "clx1cwfzb0000q5t1f68xks0s",
+    "thisGlobalProblemId": "clx1cwg67000wq5t1vrxaa0au"
+  },
+  {
+    "thisGlobalProblemPercentage": "50",
+    "createdAt": "2024-06-05 04:57:38.039",
+    "updatedAt": "2024-06-05 04:57:38.039",
+    "id": "clx1cxq0m000hrg13opv77nwl",
+    "thatGlobalProblemId": "clx1cwg6p0012q5t10wt3vrv2",
+    "userId": "clx1cwfzb0000q5t1f68xks0s",
+    "thisGlobalProblemId": "clx1cwg6k0010q5t18x70u92n"
+  },
+  {
+    "thisGlobalProblemPercentage": "50",
+    "createdAt": "2024-06-05 04:57:38.042",
+    "updatedAt": "2024-06-05 04:57:38.042",
+    "id": "clx1cxq0q000jrg1358obdugv",
+    "thatGlobalProblemId": "clx1cwg5r000sq5t18792yafx",
+    "userId": "clx1cwfzb0000q5t1f68xks0s",
+    "thisGlobalProblemId": "clx1cwg6u0014q5t1w6z9tuk0"
+  },
+  {
+    "thisGlobalProblemPercentage": "50",
+    "createdAt": "2024-06-05 04:58:58.754",
+    "updatedAt": "2024-06-05 04:58:58.754",
+    "id": "clx1czgap0001c3pdamimeaq6",
+    "thatGlobalProblemId": "clx1cwg1q0006q5t1u4e8y0dp",
+    "userId": "clx1cwfzb0000q5t1f68xks0s",
+    "thisGlobalProblemId": "clx1cwg1d0004q5t1jsgdhtu2"
+  },
+  {
+    "thisGlobalProblemPercentage": "50",
+    "createdAt": "2024-06-05 04:58:58.76",
+    "updatedAt": "2024-06-05 04:58:58.76",
+    "id": "clx1czgaw0003c3pdm68i9j7v",
+    "thatGlobalProblemId": "clx1cwg2q000aq5t12ktc1crc",
+    "userId": "clx1cwfzb0000q5t1f68xks0s",
+    "thisGlobalProblemId": "clx1cwg2d0008q5t14ac2iw3c"
+  },
+  {
+    "thisGlobalProblemPercentage": "50",
+    "createdAt": "2024-06-05 04:58:58.764",
+    "updatedAt": "2024-06-05 04:58:58.764",
+    "id": "clx1czgb00005c3pdm58biv44",
+    "thatGlobalProblemId": "clx1cwg3k000eq5t1bymwr5jt",
+    "userId": "clx1cwfzb0000q5t1f68xks0s",
+    "thisGlobalProblemId": "clx1cwg35000cq5t1bxrm1i87"
+  },
+  {
+    "thisGlobalProblemPercentage": "50",
+    "createdAt": "2024-06-05 04:58:58.768",
+    "updatedAt": "2024-06-05 04:58:58.768",
+    "id": "clx1czgb30007c3pdvxvpxor5",
+    "thatGlobalProblemId": "clx1cwg4f000iq5t1xcnu3js3",
+    "userId": "clx1cwfzb0000q5t1f68xks0s",
+    "thisGlobalProblemId": "clx1cwg40000gq5t1oe1nrbwa"
+  },
+  {
+    "thisGlobalProblemPercentage": "50",
+    "createdAt": "2024-06-05 04:58:58.772",
+    "updatedAt": "2024-06-05 04:58:58.772",
+    "id": "clx1czgb70009c3pdr5ca7c6g",
+    "thatGlobalProblemId": "clx1cwg55000mq5t1us14d4vd",
+    "userId": "clx1cwfzb0000q5t1f68xks0s",
+    "thisGlobalProblemId": "clx1cwg4v000kq5t1iskxmrg1"
+  },
+  {
+    "thisGlobalProblemPercentage": "50",
+    "createdAt": "2024-06-05 04:58:58.776",
+    "updatedAt": "2024-06-05 04:58:58.776",
+    "id": "clx1czgbc000bc3pdj91twxbw",
+    "thatGlobalProblemId": "clx1cwg5l000qq5t14wnwr8od",
+    "userId": "clx1cwfzb0000q5t1f68xks0s",
+    "thisGlobalProblemId": "clx1cwg5d000oq5t1lfu390bb"
+  },
+  {
+    "thisGlobalProblemPercentage": "50",
+    "createdAt": "2024-06-05 04:58:58.781",
+    "updatedAt": "2024-06-05 04:58:58.781",
+    "id": "clx1czgbg000dc3pdb9e8vvzd",
+    "thatGlobalProblemId": "clx1cwg67000wq5t1vrxaa0au",
+    "userId": "clx1cwfzb0000q5t1f68xks0s",
+    "thisGlobalProblemId": "clx1cwg5y000uq5t1is0rq58y"
+  },
+  {
+    "thisGlobalProblemPercentage": "50",
+    "createdAt": "2024-06-05 04:58:58.786",
+    "updatedAt": "2024-06-05 04:58:58.786",
+    "id": "clx1czgbl000fc3pdoed44za7",
+    "thatGlobalProblemId": "clx1cwg6k0010q5t18x70u92n",
+    "userId": "clx1cwfzb0000q5t1f68xks0s",
+    "thisGlobalProblemId": "clx1cwg6d000yq5t1xk2w7nk2"
+  },
+  {
+    "thisGlobalProblemPercentage": "50",
+    "createdAt": "2024-06-05 04:58:58.791",
+    "updatedAt": "2024-06-05 04:58:58.791",
+    "id": "clx1czgbq000hc3pdn54c8qfz",
+    "thatGlobalProblemId": "clx1cwg6u0014q5t1w6z9tuk0",
+    "userId": "clx1cwfzb0000q5t1f68xks0s",
+    "thisGlobalProblemId": "clx1cwg6p0012q5t10wt3vrv2"
+  },
+  {
+    "thisGlobalProblemPercentage": "50",
+    "createdAt": "2024-06-05 04:58:58.795",
+    "updatedAt": "2024-06-05 04:58:58.795",
+    "id": "clx1czgbu000jc3pdylod1ycm",
+    "thatGlobalProblemId": "clx1cwg5r000sq5t18792yafx",
+    "userId": "clx1cwfzb0000q5t1f68xks0s",
+    "thisGlobalProblemId": "clx1cwg0q0002q5t16oxn43r5"
+  },
+  {
+    "thisGlobalProblemPercentage": "50",
+    "createdAt": "2024-06-05 05:03:31.212",
+    "updatedAt": "2024-06-05 05:03:31.212",
+    "id": "clx1d5aiz0001kb622t35gmtf",
+    "thatGlobalProblemId": "clx1cwg2d0008q5t14ac2iw3c",
+    "userId": "clx1cwfzb0000q5t1f68xks0s",
+    "thisGlobalProblemId": "clx1cwg1q0006q5t1u4e8y0dp"
+  },
+  {
+    "thisGlobalProblemPercentage": "50",
+    "createdAt": "2024-06-05 05:03:31.218",
+    "updatedAt": "2024-06-05 05:03:31.218",
+    "id": "clx1d5aj60003kb62ms8c3c8l",
+    "thatGlobalProblemId": "clx1cwg35000cq5t1bxrm1i87",
+    "userId": "clx1cwfzb0000q5t1f68xks0s",
+    "thisGlobalProblemId": "clx1cwg2q000aq5t12ktc1crc"
+  },
+  {
+    "thisGlobalProblemPercentage": "50",
+    "createdAt": "2024-06-05 05:03:31.222",
+    "updatedAt": "2024-06-05 05:03:31.222",
+    "id": "clx1d5aj90005kb62vy21c1po",
+    "thatGlobalProblemId": "clx1cwg40000gq5t1oe1nrbwa",
+    "userId": "clx1cwfzb0000q5t1f68xks0s",
+    "thisGlobalProblemId": "clx1cwg3k000eq5t1bymwr5jt"
+  },
+  {
+    "thisGlobalProblemPercentage": "50",
+    "createdAt": "2024-06-05 05:03:31.225",
+    "updatedAt": "2024-06-05 05:03:31.225",
+    "id": "clx1d5ajd0007kb62b9lk5cbl",
+    "thatGlobalProblemId": "clx1cwg4v000kq5t1iskxmrg1",
+    "userId": "clx1cwfzb0000q5t1f68xks0s",
+    "thisGlobalProblemId": "clx1cwg4f000iq5t1xcnu3js3"
+  },
+  {
+    "thisGlobalProblemPercentage": "50",
+    "createdAt": "2024-06-05 05:03:31.229",
+    "updatedAt": "2024-06-05 05:03:31.229",
+    "id": "clx1d5ajg0009kb629z230iha",
+    "thatGlobalProblemId": "clx1cwg5d000oq5t1lfu390bb",
+    "userId": "clx1cwfzb0000q5t1f68xks0s",
+    "thisGlobalProblemId": "clx1cwg55000mq5t1us14d4vd"
+  },
+  {
+    "thisGlobalProblemPercentage": "50",
+    "createdAt": "2024-06-05 05:03:31.232",
+    "updatedAt": "2024-06-05 05:03:31.232",
+    "id": "clx1d5ajj000bkb62qk4dj8w8",
+    "thatGlobalProblemId": "clx1cwg5y000uq5t1is0rq58y",
+    "userId": "clx1cwfzb0000q5t1f68xks0s",
+    "thisGlobalProblemId": "clx1cwg5l000qq5t14wnwr8od"
+  },
+  {
+    "thisGlobalProblemPercentage": "50",
+    "createdAt": "2024-06-05 05:03:31.235",
+    "updatedAt": "2024-06-05 05:03:31.235",
+    "id": "clx1d5ajn000dkb62q7bual25",
+    "thatGlobalProblemId": "clx1cwg6d000yq5t1xk2w7nk2",
+    "userId": "clx1cwfzb0000q5t1f68xks0s",
+    "thisGlobalProblemId": "clx1cwg67000wq5t1vrxaa0au"
+  },
+  {
+    "thisGlobalProblemPercentage": "50",
+    "createdAt": "2024-06-05 05:03:31.238",
+    "updatedAt": "2024-06-05 05:03:31.238",
+    "id": "clx1d5ajq000fkb62wiif2639",
+    "thatGlobalProblemId": "clx1cwg6p0012q5t10wt3vrv2",
+    "userId": "clx1cwfzb0000q5t1f68xks0s",
+    "thisGlobalProblemId": "clx1cwg6k0010q5t18x70u92n"
+  },
+  {
+    "thisGlobalProblemPercentage": "50",
+    "createdAt": "2024-06-05 05:03:31.242",
+    "updatedAt": "2024-06-05 05:03:31.242",
+    "id": "clx1d5ajt000hkb629hebcqrk",
+    "thatGlobalProblemId": "clx1cwg0q0002q5t16oxn43r5",
+    "userId": "clx1cwfzb0000q5t1f68xks0s",
+    "thisGlobalProblemId": "clx1cwg6u0014q5t1w6z9tuk0"
+  },
+  {
+    "thisGlobalProblemPercentage": "50",
+    "createdAt": "2024-06-05 05:03:31.245",
+    "updatedAt": "2024-06-05 05:03:31.245",
+    "id": "clx1d5ajx000jkb62jef2k8ss",
+    "thatGlobalProblemId": "clx1cwg5r000sq5t18792yafx",
+    "userId": "clx1cwfzb0000q5t1f68xks0s",
+    "thisGlobalProblemId": "clx1cwg1d0004q5t1jsgdhtu2"
+  },
+  {
+    "thisGlobalProblemPercentage": "50",
+    "createdAt": "2024-06-05 05:08:28.129",
+    "updatedAt": "2024-06-05 05:08:28.129",
+    "id": "clx1dbnmp0001ttdvikv2h4df",
+    "thatGlobalProblemId": "clx1cwg2q000aq5t12ktc1crc",
+    "userId": "clx1cwfzb0000q5t1f68xks0s",
+    "thisGlobalProblemId": "clx1cwg2d0008q5t14ac2iw3c"
+  },
+  {
+    "thisGlobalProblemPercentage": "50",
+    "createdAt": "2024-06-05 05:08:28.136",
+    "updatedAt": "2024-06-05 05:08:28.136",
+    "id": "clx1dbnmw0003ttdvprg1m0he",
+    "thatGlobalProblemId": "clx1cwg3k000eq5t1bymwr5jt",
+    "userId": "clx1cwfzb0000q5t1f68xks0s",
+    "thisGlobalProblemId": "clx1cwg35000cq5t1bxrm1i87"
+  },
+  {
+    "thisGlobalProblemPercentage": "50",
+    "createdAt": "2024-06-05 05:08:28.14",
+    "updatedAt": "2024-06-05 05:08:28.14",
+    "id": "clx1dbnmz0005ttdvwai9i028",
+    "thatGlobalProblemId": "clx1cwg4f000iq5t1xcnu3js3",
+    "userId": "clx1cwfzb0000q5t1f68xks0s",
+    "thisGlobalProblemId": "clx1cwg40000gq5t1oe1nrbwa"
+  },
+  {
+    "thisGlobalProblemPercentage": "50",
+    "createdAt": "2024-06-05 05:08:28.143",
+    "updatedAt": "2024-06-05 05:08:28.143",
+    "id": "clx1dbnn30007ttdvft7h5k0f",
+    "thatGlobalProblemId": "clx1cwg55000mq5t1us14d4vd",
+    "userId": "clx1cwfzb0000q5t1f68xks0s",
+    "thisGlobalProblemId": "clx1cwg4v000kq5t1iskxmrg1"
+  },
+  {
+    "thisGlobalProblemPercentage": "50",
+    "createdAt": "2024-06-05 05:08:28.147",
+    "updatedAt": "2024-06-05 05:08:28.147",
+    "id": "clx1dbnn60009ttdvab4uobpl",
+    "thatGlobalProblemId": "clx1cwg5l000qq5t14wnwr8od",
+    "userId": "clx1cwfzb0000q5t1f68xks0s",
+    "thisGlobalProblemId": "clx1cwg5d000oq5t1lfu390bb"
+  },
+  {
+    "thisGlobalProblemPercentage": "50",
+    "createdAt": "2024-06-05 05:08:28.15",
+    "updatedAt": "2024-06-05 05:08:28.15",
+    "id": "clx1dbnna000bttdv9b5hy5j9",
+    "thatGlobalProblemId": "clx1cwg67000wq5t1vrxaa0au",
+    "userId": "clx1cwfzb0000q5t1f68xks0s",
+    "thisGlobalProblemId": "clx1cwg5y000uq5t1is0rq58y"
+  },
+  {
+    "thisGlobalProblemPercentage": "50",
+    "createdAt": "2024-06-05 05:08:28.154",
+    "updatedAt": "2024-06-05 05:08:28.154",
+    "id": "clx1dbnne000dttdvwcypks0j",
+    "thatGlobalProblemId": "clx1cwg6k0010q5t18x70u92n",
+    "userId": "clx1cwfzb0000q5t1f68xks0s",
+    "thisGlobalProblemId": "clx1cwg6d000yq5t1xk2w7nk2"
+  },
+  {
+    "thisGlobalProblemPercentage": "50",
+    "createdAt": "2024-06-05 05:08:28.158",
+    "updatedAt": "2024-06-05 05:08:28.158",
+    "id": "clx1dbnnh000fttdv5w9cg3fq",
+    "thatGlobalProblemId": "clx1cwg6u0014q5t1w6z9tuk0",
+    "userId": "clx1cwfzb0000q5t1f68xks0s",
+    "thisGlobalProblemId": "clx1cwg6p0012q5t10wt3vrv2"
+  },
+  {
+    "thisGlobalProblemPercentage": "50",
+    "createdAt": "2024-06-05 05:08:28.162",
+    "updatedAt": "2024-06-05 05:08:28.162",
+    "id": "clx1dbnnl000httdvhvxc17k2",
+    "thatGlobalProblemId": "clx1cwg1d0004q5t1jsgdhtu2",
+    "userId": "clx1cwfzb0000q5t1f68xks0s",
+    "thisGlobalProblemId": "clx1cwg0q0002q5t16oxn43r5"
+  },
+  {
+    "thisGlobalProblemPercentage": "50",
+    "createdAt": "2024-06-05 05:08:28.166",
+    "updatedAt": "2024-06-05 05:08:28.166",
+    "id": "clx1dbnnp000jttdvc0kdlj6d",
+    "thatGlobalProblemId": "clx1cwg5r000sq5t18792yafx",
+    "userId": "clx1cwfzb0000q5t1f68xks0s",
+    "thisGlobalProblemId": "clx1cwg1q0006q5t1u4e8y0dp"
+  },
+  {
+    "thisGlobalProblemPercentage": "50",
+    "createdAt": "2024-06-05 05:13:26.741",
+    "updatedAt": "2024-06-05 05:13:26.741",
+    "id": "clx1di21h0001138v6kz5zjn2",
+    "thatGlobalProblemId": "clx1cwg35000cq5t1bxrm1i87",
+    "userId": "clx1cwfzb0000q5t1f68xks0s",
+    "thisGlobalProblemId": "clx1cwg2q000aq5t12ktc1crc"
+  },
+  {
+    "thisGlobalProblemPercentage": "50",
+    "createdAt": "2024-06-05 05:13:26.748",
+    "updatedAt": "2024-06-05 05:13:26.748",
+    "id": "clx1di21o0003138vu6sxm2pa",
+    "thatGlobalProblemId": "clx1cwg40000gq5t1oe1nrbwa",
+    "userId": "clx1cwfzb0000q5t1f68xks0s",
+    "thisGlobalProblemId": "clx1cwg3k000eq5t1bymwr5jt"
+  },
+  {
+    "thisGlobalProblemPercentage": "50",
+    "createdAt": "2024-06-05 05:13:26.753",
+    "updatedAt": "2024-06-05 05:13:26.753",
+    "id": "clx1di21t0005138v07koeycz",
+    "thatGlobalProblemId": "clx1cwg4v000kq5t1iskxmrg1",
+    "userId": "clx1cwfzb0000q5t1f68xks0s",
+    "thisGlobalProblemId": "clx1cwg4f000iq5t1xcnu3js3"
+  },
+  {
+    "thisGlobalProblemPercentage": "50",
+    "createdAt": "2024-06-05 05:13:26.766",
+    "updatedAt": "2024-06-05 05:13:26.766",
+    "id": "clx1di2250007138vfihky1kx",
+    "thatGlobalProblemId": "clx1cwg5d000oq5t1lfu390bb",
+    "userId": "clx1cwfzb0000q5t1f68xks0s",
+    "thisGlobalProblemId": "clx1cwg55000mq5t1us14d4vd"
+  },
+  {
+    "thisGlobalProblemPercentage": "50",
+    "createdAt": "2024-06-05 05:13:26.771",
+    "updatedAt": "2024-06-05 05:13:26.771",
+    "id": "clx1di22a0009138vlbw41h3l",
+    "thatGlobalProblemId": "clx1cwg5y000uq5t1is0rq58y",
+    "userId": "clx1cwfzb0000q5t1f68xks0s",
+    "thisGlobalProblemId": "clx1cwg5l000qq5t14wnwr8od"
+  },
+  {
+    "thisGlobalProblemPercentage": "50",
+    "createdAt": "2024-06-05 05:13:26.776",
+    "updatedAt": "2024-06-05 05:13:26.776",
+    "id": "clx1di22f000b138vi88y44t1",
+    "thatGlobalProblemId": "clx1cwg6d000yq5t1xk2w7nk2",
+    "userId": "clx1cwfzb0000q5t1f68xks0s",
+    "thisGlobalProblemId": "clx1cwg67000wq5t1vrxaa0au"
+  },
+  {
+    "thisGlobalProblemPercentage": "50",
+    "createdAt": "2024-06-05 05:13:26.78",
+    "updatedAt": "2024-06-05 05:13:26.78",
+    "id": "clx1di22k000d138v4v97rsd2",
+    "thatGlobalProblemId": "clx1cwg6p0012q5t10wt3vrv2",
+    "userId": "clx1cwfzb0000q5t1f68xks0s",
+    "thisGlobalProblemId": "clx1cwg6k0010q5t18x70u92n"
+  },
+  {
+    "thisGlobalProblemPercentage": "50",
+    "createdAt": "2024-06-05 05:13:26.784",
+    "updatedAt": "2024-06-05 05:13:26.784",
+    "id": "clx1di22o000f138vx7pqfr1e",
+    "thatGlobalProblemId": "clx1cwg0q0002q5t16oxn43r5",
+    "userId": "clx1cwfzb0000q5t1f68xks0s",
+    "thisGlobalProblemId": "clx1cwg6u0014q5t1w6z9tuk0"
+  },
+  {
+    "thisGlobalProblemPercentage": "50",
+    "createdAt": "2024-06-05 05:13:26.789",
+    "updatedAt": "2024-06-05 05:13:26.789",
+    "id": "clx1di22s000h138vh51i49da",
+    "thatGlobalProblemId": "clx1cwg1q0006q5t1u4e8y0dp",
+    "userId": "clx1cwfzb0000q5t1f68xks0s",
+    "thisGlobalProblemId": "clx1cwg1d0004q5t1jsgdhtu2"
+  },
+  {
+    "thisGlobalProblemPercentage": "50",
+    "createdAt": "2024-06-05 05:13:26.793",
+    "updatedAt": "2024-06-05 05:13:26.793",
+    "id": "clx1di22x000j138vweg797cv",
+    "thatGlobalProblemId": "clx1cwg5r000sq5t18792yafx",
+    "userId": "clx1cwfzb0000q5t1f68xks0s",
+    "thisGlobalProblemId": "clx1cwg2d0008q5t14ac2iw3c"
+  }
+]
