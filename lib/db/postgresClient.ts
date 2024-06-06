@@ -21,6 +21,7 @@ function getPostgresClient(): Pool {
     const dbName = parsedUrl.pathname?.slice(1);
     const dbUser = parsedUrl.auth?.split(':')[0];
     const dbPassword = parsedUrl.auth?.split(':')[1];
+    //const dbSchema = parsedUrl.query?.split('=')[1] || 'public';
 
     pool = new Pool({
         host: dbHost,
