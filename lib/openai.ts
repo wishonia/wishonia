@@ -19,11 +19,18 @@ export async function generateOpenAIEmbeddings(_input: string){
 }
 
 export async function saveEmbedding(embedding: EmbeddingModelV1Embedding, table: string, id: string){
-  await prisma.$executeRaw`
-        UPDATE ${table}
-        SET embedding = ${embedding}::vector
-        WHERE id = ${id}
-    `
+  // await prisma.$executeRaw`
+  //       UPDATE ${table}
+  //       SET embedding = ${embedding}::vector
+  //       WHERE id = ${id}
+  //   `
+  const embeddingStr = embedding.join(', ');
+  const query = `
+    UPDATE ${table}
+    SET embedding = ARRAY[${embeddingStr}]::float[]
+    WHERE id = $1
+  `;
+  await prisma.$executeRawUnsafe(query, id);
 }
 
 export async function generateAndSaveEmbedding(input: string, table: string, id: string){
