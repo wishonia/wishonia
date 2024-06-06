@@ -9,7 +9,6 @@
 1. **Install Dependencies**:
 
    - [Node.js](https://nodejs.org/en/) v18 or higher
-   - [Yarn](https://yarnpkg.com/)
    - [pnpm](https://pnpm.io/)
    - [Docker](https://www.docker.com/)
 

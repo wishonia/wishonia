@@ -16,6 +16,7 @@
     "prisma:seed": "prisma db seed",
     "prisma:reset": "prisma migrate reset",
     "prisma:format": "prisma format",
+    "db:up": "docker-compose up -d",
     "test": "jest --watch",
     "test:ci": "jest --ci",
     "format": "pnpm prettier . --write",

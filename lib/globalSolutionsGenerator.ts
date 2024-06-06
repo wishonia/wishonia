@@ -2,10 +2,12 @@ import slugify from 'slugify';
 import {jsonArrayCompletion, textCompletion} from "@/lib/llm";
 import { generateAndUploadFeaturedImageJpg } from "@/lib/imageGenerator";
 import { prisma } from "@/lib/db";
-import {GlobalProblem} from "@prisma/client";
-import {generateAndSaveEmbedding, generateOpenAIEmbeddings} from "@/lib/openai";
+import {GlobalProblem, GlobalSolution} from "@prisma/client";
+import {generateAndSaveEmbedding} from "@/lib/openai";
 import {saveMarkdownPost} from "@/lib/markdownGenerator";
 import {absPathFromPublic} from "@/lib/fileHelper";
+
+const generateImages = false;
 export async function generateGlobalSolutions() {
     const globalProblems = await prisma.globalProblem.findMany();
     let counter = 0;
@@ -33,11 +35,20 @@ export async function generateGlobalSolutions() {
     }
 }
 
-async function linkGlobalProblemSolution(globalProblemId: string, globalSolutionId: string) {
+async function linkGlobalProblemSolution(globalProblem: GlobalProblem,
+                                         globalSolution: GlobalSolution) {
+    const description = await textCompletion(
+        `Write a brief description of how the solution "${globalSolution.name}" addresses the global problem "${globalProblem.name}".`,
+        'text');
+    const content = await generateProblemSolutionContent(globalProblem, globalSolution);
     return prisma.globalProblemSolution.create({
         data: {
-            globalProblemId: globalProblemId,
-            globalSolutionId: globalSolutionId
+            globalProblemId: globalProblem.id,
+            globalSolutionId: globalSolution.id,
+            name: `How ${globalSolution.name} Solves ${globalProblem.name}`,
+            description: description,
+            content: content,
+            featuredImage: globalSolution.featuredImage,
         }
     });
 }
@@ -50,7 +61,7 @@ async function saveGlobalSolution(generatedSolution: {name: string, description:
     });
     if (existingSolution) {
         console.log(`Solution "${generatedSolution.name}" already exists in the database.`);
-        await linkGlobalProblemSolution(globalProblem.id, existingSolution.id);
+        await linkGlobalProblemSolution(globalProblem, existingSolution);
         return;
     }
     const slug = generatedSolution.name.toLowerCase().replace(/ /g, '-');
@@ -58,13 +69,18 @@ async function saveGlobalSolution(generatedSolution: {name: string, description:
     const mdPath = `global-solutions/${slug}.md`;
     const mdAbsPath = absPathFromPublic(mdPath);
     const content = await generateSolutionContent(generatedSolution);
-    //const featuredImageUrl = await generateAndUploadFeaturedImageJpg(generatedSolution.name, imagePath);
+    let featuredImageUrl;
+    if(generateImages) {
+        featuredImageUrl =  await generateAndUploadFeaturedImageJpg(
+            ` ${generatedSolution.name} : ${generatedSolution.description}`,
+            imagePath);
+    }
     const createdSolution = await prisma.globalSolution.create({
         data: {
             name: generatedSolution.name,
             description: generatedSolution.description,
             content: content,
-            // featuredImage: featuredImageUrl,
+            featuredImage: featuredImageUrl,
             userId: globalProblem.userId,
         }
     });
@@ -74,17 +90,12 @@ async function saveGlobalSolution(generatedSolution: {name: string, description:
         name: generatedSolution.name,
         description: generatedSolution.description,
         content: content,
-        // featuredImage: featuredImageUrl,
+        featuredImage: featuredImageUrl,
         absFilePath: mdAbsPath
     })
-    await linkGlobalProblemSolution(globalProblem.id, createdSolution.id);
+    await linkGlobalProblemSolution(globalProblem, createdSolution);
 }
-
-async function generateSolutionContent(generatedSolution: { name: string, description: string}) {
-   return await textCompletion(
-        `Write a comprehensive article about "${generatedSolution.name}". 
-
-The article should cover the following aspects to help readers make informed decisions
+let sharedSolutionPromptText = `The article should cover the following aspects to help readers make informed decisions
  about funding and prioritizing this solution:
 
 1. Mechanism of Action: Explain how the solution works, its target(s), 
@@ -116,10 +127,24 @@ highlighting its relative advantages, disadvantages, and potential synergies.
 advocates working on or supporting this solution, and their perspectives on its potential impact.
 
 The article should be written in an objective, evidence-based manner, providing a comprehensive overview of 
-the solution to enable readers to make informed decisions about its merits and potential impact on the problem at hand.
+the solution to enable readers to make informed decisions about its merits and potential impact on the problem at hand.`;
+async function generateSolutionContent(generatedSolution: { name: string, description: string}) {
+    return await textCompletion(
+        `Write a comprehensive article about "${generatedSolution.name}". 
+
+${sharedSolutionPromptText}
 `,
         'text'
     );
+}
+
+async function generateProblemSolutionContent(globalProblem: GlobalProblem, globalSolution: GlobalSolution) {
+    return await textCompletion(
+        `Write a comprehensive article about how the solution "${globalSolution.name}" addresses the global problem "${globalProblem.name}".
+        
+        ${sharedSolutionPromptText}
+        `,
+        'text');
 }
 
 export async function generateGlobalSolutionEmbeddings(){

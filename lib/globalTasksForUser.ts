@@ -1,4 +1,4 @@
-import { prisma } from '@/lib/db';
+import {prisma} from '@/lib/db';
 export async function getGlobalTasksForUser(userId: string | undefined) {
     const userWithSkills = await prisma.user.findUnique({
         where: { id: userId },
@@ -17,7 +17,7 @@ export async function getGlobalTasksForUser(userId: string | undefined) {
 
     const userSkills = userWithSkills.userSkills.map((userSkill) => userSkill.skill);
 
-    const globalTasksWithRequiredSkills = await prisma.globalTask.findMany({
+    return prisma.globalTask.findMany({
         where: {
             skills: {
                 every: {
@@ -30,5 +30,4 @@ export async function getGlobalTasksForUser(userId: string | undefined) {
             },
         },
     });
-    return globalTasksWithRequiredSkills;
 }
