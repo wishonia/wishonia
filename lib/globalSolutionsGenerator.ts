@@ -130,11 +130,12 @@ export async function generateGlobalSolutionEmbeddings(){
     }
 }
 async function getSolutionArray(globalProblem: GlobalProblem): Promise<{name: string, description: string}[]> {
-    return await jsonArrayCompletion(
-        `
-Return a json array of SMART (Specific, Measurable, Achievable, Relevant, and Time-bound)
-scientific interventions that could significantly contribute to solving or reducing the
-impact of "${globalProblem.name}". 
+    return await jsonArrayCompletion(` 
+Imagine a futuristic utopian world where the problem of "${globalProblem.name}" has been solved.
+
+Return a json array of the 5 best SMART
+ (Specific, Measurable, Achievable, Relevant, and Time-bound)
+radically innovative solutions the problem of "${globalProblem.name}". 
 
 For each array item should have two properties::
 1. 'name': generalized name with the fewest words that captures the essence of the solution 
@@ -142,26 +143,22 @@ For each array item should have two properties::
 "Personalized Cancer Vaccine" and not "Personalized Cancer Vaccine Development" or "Personalized Cancer Vaccine Research")
 2. 'description': a brief description of the intervention
 
-Focus on radically innovative and novel solutions.
             
-For instance, for the global problem of "Mental Illness", you could return something like:
+For instance, for the global problem of "Mental Illness", you could return solutions like:
 [
     "Global Treaty to Redirect 1% of Military Spending to Medical Research",
-    "A Decentralized FDA to Accelerate Clinical Discovery",
-    "Precision Psychiatry International Consortia",
-    "Psychedelic-Assisted Therapy Evaluation Trials",
-    "Global Neuromodulation Advancement Project",
-    "Digital Mental Health Therapeutics Acceleration Network",
-    "Gut-Brain Axis Optimization Research",
-    "FAAH Inhibitor Therapy",
-    "FAAH-OUT Gene Therapy",
-    "Optogenetic Brain Stimulation",
+    "Decentralized FDA to Automate Clinical Discovery",
+    "Precision Psychiatry Platform",
+    "Psychedelic-Assisted Therapy",
+    "Gut-Brain Axis Optimization",
+    "FAAH Inhibitor Therapies",
+    "FAAH-OUT Gene Therapies",
     "Transcranial Focused Ultrasound Stimulation",
     "Ketamine-Assisted Psychotherapy",
-    "Psilocybin-Assisted Therapy",
+    "Psilocybin-Assisted Therapies",
     "MDMA-Assisted Psychotherapy",
-    "Neuropeptide-Based Therapeutics",
-    "Microbiome-Based Interventions",
+    "Neuropeptide-Based Therapies",
+    "Microbiome-Based Therapies",
     "Epigenetic Editing Therapies"
 ]
 `);
