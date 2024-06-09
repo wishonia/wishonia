@@ -88,7 +88,3 @@ The Budget Allocation System includes all functionalities related to managing bu
 - **Stakeholders:** Individuals or groups with an interest in budget allocation decisions.
 - **Budget Allocation:** The process of assigning monetary resources to different problems or projects.
 - **Reallocation:** Adjusting previously made budget allocations.
-
----
-
-This Product Requirements Document is intended to guide the development of the Budget Allocation System within Wishocracy, ensuring all necessary functionalities are included and adequately addressed.
