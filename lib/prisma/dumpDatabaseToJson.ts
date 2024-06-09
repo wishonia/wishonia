@@ -105,8 +105,6 @@ export async function loadJsonToDatabase(filter?: string) {
         }
 
         console.log('Data imported successfully.');
-    } catch (error) {
-        console.error('Error importing data:', error);
     } finally {
         // Get the PostgreSQL client
         const pool = getPostgresClient();
