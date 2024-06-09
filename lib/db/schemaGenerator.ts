@@ -1,9 +1,17 @@
 import fs from "fs";
 
-export function generatePrismaSchema(modelName: string, exampleObject: any): string {
+export function generatePrismaSchema(modelName: string, exampleObject: any,
+                                     prefix?: string, recursive: boolean = true): string | false {
+    if(alreadyGenerated(modelName)){
+        console.log(`Model ${modelName} already exists in schema`);
+        return false;
+    }
     const newSchemaArr: string[] = [];
+    if(prefix && !modelName.startsWith(prefix)) {
+        modelName = `${prefix}${modelName}`;
+    }
 
-    newSchemaArr.push(`model ${modelName} {`);
+    newSchemaArr.push(`\nmodel ${modelName} {`);
 
     function processProperty(propName: string, propValue: any, indent: string = '  ') {
         if (propName === 'id') {
@@ -18,26 +26,33 @@ export function generatePrismaSchema(modelName: string, exampleObject: any): str
             newSchemaArr.push(`${indent}id ${idType} @id`);
         } else if (propValue === null) {
             newSchemaArr.push(`${indent}${propName} String?`);
-        } else if (Array.isArray(propValue)) {
+        } else if (Array.isArray(propValue) && recursive) {
             if (propValue.length > 0) {
-                const relatedModelName = `${modelName}${propName}`;
+                const pascalPropName = snakeToPascalCase(propName);
+                let relatedModelName = `${modelName}${pascalPropName}`;
+                if(prefix && !relatedModelName.startsWith(prefix)) {
+                    relatedModelName = `${prefix}${relatedModelName}`;
+                }
                 newSchemaArr.push(`${indent}${propName} ${relatedModelName}[]`);
                 newSchemaArr.push(`}`);
                 newSchemaArr.push(``);
-                newSchemaArr.push(`model ${relatedModelName} {`);
+                newSchemaArr.push(`\nmodel ${relatedModelName} {`);
                 processObject(propValue[0], '  ');
                 newSchemaArr.push(`  ${modelName}Id Int`);
                 newSchemaArr.push(`  ${modelName} ${modelName} @relation(fields: [${modelName}Id], references: [id])`);
             } else {
                 newSchemaArr.push(`${indent}${propName} Json`);
             }
-        } else if (typeof propValue === 'object') {
-            const pascalPropName = propName.charAt(0).toUpperCase() + propName.slice(1);
-            const relatedModelName = `${modelName}${pascalPropName}`;
+        } else if (typeof propValue === 'object' && recursive) {
+            let pascalPropName = snakeToPascalCase(propName);
+            let relatedModelName = `${modelName}${pascalPropName}`;
+            if(prefix && !relatedModelName.startsWith(prefix)) {
+                relatedModelName = `${prefix}${relatedModelName}`;
+            }
             newSchemaArr.push(`${indent}${propName} ${relatedModelName}`);
             newSchemaArr.push(`}`);
             newSchemaArr.push(``);
-            newSchemaArr.push(`model ${relatedModelName} {`);
+            newSchemaArr.push(`\nmodel ${relatedModelName} {`);
             processObject(propValue, '  ');
         } else {
             let propType: string;
@@ -76,8 +91,7 @@ export function generatePrismaSchema(modelName: string, exampleObject: any): str
 }
 
 function getPathToPrismaSchema() {
-    const path = require('path').join(__dirname, '../../prisma/schema.prisma');
-    return path;
+    return require('path').join(__dirname, '../../prisma/schema.prisma');
 }
 
 function getPrismaSchemaContents() {
@@ -91,5 +105,16 @@ export function appendToPrismaSchema(newSchema: string) {
        console.log(`Model already present in schema`);
        return;
     }
-    fs.appendFileSync(getPathToPrismaSchema(), newSchema);
+    fs.appendFileSync(getPathToPrismaSchema(), '\n'+newSchema);
+}
+
+function alreadyGenerated(modelName: string) {
+    return existingSchemaContains(`model ${modelName} `);
+}
+
+function snakeToPascalCase(snakeCaseString: string): string {
+    return snakeCaseString.split('_').map(word => word.charAt(0).toUpperCase() + word.slice(1)).join('');
+}
+function existingSchemaContains(str: string): boolean {
+    return getPrismaSchemaContents().indexOf(str) !== -1;
 }
