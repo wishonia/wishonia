@@ -383,9 +383,9 @@ The key potential benefits of a global, decentralized todo list are:
 1. **Preventing Waste** - Minimizing duplicated effort by surfacing what problems/wishes people are already working on solving. This allows resources to be allocated more efficiently. Governments and charitable foundations spend billions on solving important problems, but lack of coordination often leads to significant duplication of effort. For instance, if two research organizations each spend $1 million doing animal trials on the same drug, that's effectively $1 million of funding wasted and lots of extra animals suffering for no reason.
 
 2. **Information** - In democracies, representatives are supposed to do what people want.  
-But how can they do that if we don't have a system to create a budget that illustrates what everyone wants? 
-Tapping into the "wisdom of crowds" to surface which problems are most important to solve and what the most promising solutions are.
-[Aggregated Pairwise Preference Allocation](#aggregated-pairwise-preference-allocation-appa) can lead to better prioritization than top-down government decisions.
+But how can they do that if we don't have a system to create a budget that illustrates what everyone wants?
+[Aggregated Pairwise Preference Allocation](#aggregated-pairwise-preference-allocation-appa) is a unique way to quantify what everyone wants.
+Thus, just having this information available to representatives would actually make it possible for representatives to do what people want.
 
 3. **Coordination and Cost-Sharing** -
    By decomposing solutions into atomic tasks
