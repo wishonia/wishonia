@@ -748,3 +748,99 @@ model UserApiKey {
   User      User     @relation(fields: [userId], references: [id])
   createdAt DateTime @default(now())
 }
+
+model GithubUser {
+  id                    Int                    @id
+  avatar_url            String
+  bio                   String?
+  blog                  String?
+  created_at            String
+  company               String?
+  email                 String?
+  events_url            String
+  followers             Int
+  followers_url         String
+  following             Int
+  following_url         String
+  gists_url             String
+  gravatar_id           String?
+  hireable              Boolean?
+  html_url              String
+  location              String?
+  login                 String
+  name                  String?
+  node_id               String
+  organizations_url     String
+  public_gists          Int
+  public_repos          Int
+  received_events_url   String
+  repos_url             String
+  site_admin            Boolean
+  starred_url           String
+  subscriptions_url     String
+  twitter_username      String?
+  type                  String
+  url                   String
+  updated_at            String
+  generalDeveloperScore Float?
+  githubIssuesCreated   GithubIssue[]
+  githubRepos           GithubRepo[]
+  repoDeveloperScores   RepoContributorScore[]
+}
+
+model GithubIssue {
+  url            String
+  repository_url String
+  labels_url     String
+  comments_url   String
+  events_url     String
+  html_url       String
+  id             Int        @id
+  node_id        String
+  number         Int
+  title          String
+  creator        GithubUser @relation(fields: [githubUserId], references: [id])
+  githubUserId   Int
+}
+
+model GithubRepo {
+  id           Int        @id
+  node_id      String
+  name         String
+  full_name    String
+  private      Boolean
+  owner        GithubUser @relation(fields: [githubUserId], references: [id])
+  githubUserId Int
+}
+
+model RepoContributorScore {
+  id                      Int        @id @default(autoincrement())
+  githubUserId            Int
+  repoOwner               String
+  repoName                String
+  score                   Float
+  commitsCount            Int
+  totalPullRequestsCount  Int
+  mergedPullRequestsCount Int
+  issuesCreatedCount      Int
+  issueCommentsCount      Int
+  commentReactionsScore   Float
+  githubUser              GithubUser @relation(fields: [githubUserId], references: [id])
+
+  @@unique([githubUserId, repoOwner, repoName])
+}
+
+model Library {
+  id          String   @id @default(cuid())
+  name        String
+  version     String
+  type        String
+  description String?
+  keywords    String[]
+  author      String
+  repository  String
+  githubUrl   String?
+  tags        String[]
+  createdAt   DateTime @default(now())
+  updatedAt   DateTime @updatedAt
+}
