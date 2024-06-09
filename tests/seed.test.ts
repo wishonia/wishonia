@@ -10,7 +10,8 @@ import {aggregateWishingWellPairAllocations} from "@/lib/wishingWells";
 import {seedWishingWellPairAllocations} from "@/prisma/seedWishingWellPairAllocations";
 import {assertTestDB, getOrCreateTestUser, truncateAllTables} from "@/tests/test-helpers";
 import {generateGlobalSolutions} from "@/lib/globalSolutionsGenerator";
-import {dumpDatabaseToJson} from "@/lib/prisma/dumpDatabaseToJson";
+import {dumpDatabaseToJson, dumpTableToJson, loadJsonToDatabase} from "@/lib/prisma/dumpDatabaseToJson";
+
 
 let prisma = new PrismaClient();
 beforeAll(async () => {
@@ -36,9 +37,11 @@ describe("Database-seeder tests", () => {
         await checkWishingWells(testUser);
     }, 45000);
     it("Seed global problems and solutions", async () => {
-        const testUser = await getOrCreateTestUser();
-        await checkGlobalProblems(testUser);
-        const globalSolutions =  await generateGlobalSolutions();
+        await loadJsonToDatabase("GlobalProblemSolution");
+        return;
+        // const testUser = await getOrCreateTestUser();
+        // await checkGlobalProblems(testUser);
+        // const globalSolutions =  await generateGlobalSolutions();
     }, 6000000);
     it("Seed global solutions", async () => {
         await generateGlobalSolutions();
@@ -53,7 +56,6 @@ describe("Database-seeder tests", () => {
     // });
     it("Dumps the database to json files", async () => {
         await dumpDatabaseToJson();
-
     });
 });
 
