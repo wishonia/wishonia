@@ -11,6 +11,9 @@ import {seedWishingWellPairAllocations} from "@/prisma/seedWishingWellPairAlloca
 import {assertTestDB, getOrCreateTestUser, truncateAllTables} from "@/tests/test-helpers";
 import {generateGlobalSolutions} from "@/lib/globalSolutionsGenerator";
 import {dumpDatabaseToJson, dumpTableToJson, loadJsonToDatabase} from "@/lib/prisma/dumpDatabaseToJson";
+import {seedGlobalSolutions} from "@/prisma/seedGlobalSolutions";
+import {aggregateGlobalSolutionPairAllocations} from "@/lib/globalSolutions";
+import {seedGlobalSolutionPairAllocations} from "@/prisma/seedGlobalSolutionPairAllocations";
 
 
 let prisma = new PrismaClient();
@@ -43,8 +46,11 @@ describe("Database-seeder tests", () => {
         // await checkGlobalProblems(testUser);
         // const globalSolutions =  await generateGlobalSolutions();
     }, 6000000);
-    it("Seed global solutions", async () => {
+    it("Generate global solutions", async () => {
         await generateGlobalSolutions();
+    }, 6000000);
+    it("Seed global solutions", async () => {
+        await checkGlobalSolutions(await getOrCreateTestUser());
     }, 6000000);
     // it("Generates seed scripts", async () => {
     //     await readAllTables({
@@ -79,6 +85,25 @@ async function checkGlobalProblems<ExtArgs>(testUser: User) {
     }
 }
 
+
+async function checkGlobalSolutions<ExtArgs>(testUser: User) {
+    console.log("Checking global solutions");
+    console.log("Seeding global solutions");
+    await seedGlobalSolutions(testUser);
+    console.log("Seeded global solutions");
+    console.log("Seeding global solution pair allocations");
+    await seedGlobalSolutionPairAllocations(testUser);
+    console.log("Seeded global solution pair allocations");
+    console.log("Aggregating global solution pair allocations");
+    await aggregateGlobalSolutionPairAllocations();
+    console.log("Aggregated global solution pair allocations");
+    const globalSolutions = await prisma.globalSolution.findMany();
+    const total = globalSolutions.length;
+    const expectedAverageAllocation = 100 / total;
+    for (const problem of globalSolutions) {
+        expect(problem.averageAllocation).toBe(expectedAverageAllocation);
+    }
+}
 async function checkWishingWells<ExtArgs>(testUser: User) {
     console.log("Checking wishing wells");
     await seedWishingWells(testUser);

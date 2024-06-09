@@ -1,7 +1,6 @@
 import {getUserId} from "@/lib/api/getUserId";
 import {getRandomGlobalProblemPair} from "@/lib/globalProblems";
-
-
+import {handleError} from "@/lib/errorHandler";
 export async function GET() {
     try {
         const userId = await getUserId();
@@ -11,6 +10,7 @@ export async function GET() {
           thatGlobalProblem: randomPair[1],
         }))
     } catch (error) {
-        return new Response(null, { status: 500 })
+        return handleError(error,
+            'Could not get random global problem pair because:')
     }
 }

@@ -5,7 +5,7 @@ import {SearchParams} from "@/types"
 import {LinkCard} from "@/components/link-card";
 import {
     globalProblemsResultsLink,
-    globalProblemsVoteLink,
+    globalProblemsVoteLink, globalSolutionsVoteLink,
     wishingWellsLink,
     wishingWellsResultsLink
 } from "@/config/links";
@@ -20,6 +20,8 @@ export function DashboardCards({searchParams}: DashboardCardsProps) {
 {/*            <LinkCard navItem={wishingWellsLink}/>
             <LinkCard navItem={wishingWellsResultsLink}/>*/}
             <LinkCard navItem={globalProblemsVoteLink}/>
+            <LinkCard navItem={globalProblemsResultsLink}/>
+            <LinkCard navItem={globalSolutionsVoteLink}/>
             <LinkCard navItem={globalProblemsResultsLink}/>
         </div>
     )

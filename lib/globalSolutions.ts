@@ -1,16 +1,16 @@
-import {GlobalProblem} from "@prisma/client";
-import {prisma} from "@/lib/db";
+import {GlobalSolution} from "@prisma/client";
+import { prisma } from "@/lib/db";
 
-export async function getRandomGlobalProblemPair(userId: string | undefined) {
+export async function getRandomGlobalSolutionPair(userId: string | undefined) {
     let ids: { id: string }[] = [];
     if (userId) {
         ids = await prisma.$queryRaw`
           SELECT id
-          FROM "GlobalProblem"
+          FROM "GlobalSolution"
           WHERE id NOT IN (
-            SELECT "thisGlobalProblemId" FROM "GlobalProblemPairAllocation" WHERE "GlobalProblem"."userId" = ${userId}
+            SELECT "thisGlobalSolutionId" FROM "GlobalSolutionPairAllocation" WHERE "GlobalSolution"."userId" = ${userId}
             UNION
-            SELECT "thatGlobalProblemId" FROM "GlobalProblemPairAllocation" WHERE "GlobalProblem"."userId" = ${userId}
+            SELECT "thatGlobalSolutionId" FROM "GlobalSolutionPairAllocation" WHERE "GlobalSolution"."userId" = ${userId}
           )
           ORDER BY random()
           LIMIT 2;
@@ -18,7 +18,7 @@ export async function getRandomGlobalProblemPair(userId: string | undefined) {
     } else {
         ids = await prisma.$queryRaw`
           SELECT id
-          FROM "GlobalProblem"
+          FROM "GlobalSolution"
           ORDER BY random()
           LIMIT 2;
         `;
@@ -27,7 +27,7 @@ export async function getRandomGlobalProblemPair(userId: string | undefined) {
     for(let i = 0; i < ids.length; i++) {
         where.push(ids[i].id);
     }
-    return prisma.globalProblem.findMany({
+    return prisma.globalSolution.findMany({
         where: {
             id: {
                 in: where
@@ -36,25 +36,25 @@ export async function getRandomGlobalProblemPair(userId: string | undefined) {
     });
 }
 
-export async function getAllRandomGlobalProblemPairs() {
-    let randomPairs: GlobalProblem[][] = [];
-    const globalProblems = await prisma.globalProblem.findMany();
-    for (let i = 0; i < globalProblems.length; i += 2) {
-        randomPairs.push([globalProblems[i], globalProblems[i + 1]]);
+export async function getAllRandomGlobalSolutionPairs() {
+    let randomPairs: GlobalSolution[][] = [];
+    const globalSolutions = await prisma.globalSolution.findMany();
+    for (let i = 0; i < globalSolutions.length; i += 2) {
+        randomPairs.push([globalSolutions[i], globalSolutions[i + 1]]);
     }
     return randomPairs;
 }
 
 
-export async function aggregateGlobalProblemPairAllocations() {
-    const allocations = await prisma.globalProblemPairAllocation.findMany();
+export async function aggregateGlobalSolutionPairAllocations() {
+    const allocations = await prisma.globalSolutionPairAllocation.findMany();
     const problemAllocations: Record<string, number> = {};
     // Sum up the percentages for each problem
     for (const allocation of allocations) {
-        const { thisGlobalProblemId, thatGlobalProblemId, thisGlobalProblemPercentage } = allocation;
+        const { thisGlobalSolutionId, thatGlobalSolutionId, thisGlobalSolutionPercentage } = allocation;
 
-        problemAllocations[thisGlobalProblemId] = (problemAllocations[thisGlobalProblemId] || 0) + thisGlobalProblemPercentage;
-        problemAllocations[thatGlobalProblemId] = (problemAllocations[thatGlobalProblemId] || 0) + (100 - thisGlobalProblemPercentage);
+        problemAllocations[thisGlobalSolutionId] = (problemAllocations[thisGlobalSolutionId] || 0) + thisGlobalSolutionPercentage;
+        problemAllocations[thatGlobalSolutionId] = (problemAllocations[thatGlobalSolutionId] || 0) + (100 - thisGlobalSolutionPercentage);
     }
 
     const totalAllocations = Object.values(problemAllocations).reduce((sum, allocation) => sum + allocation, 0);
@@ -66,7 +66,7 @@ export async function aggregateGlobalProblemPairAllocations() {
     }
     const results = [];
     for (const problemId in normalizedAllocations) {
-        const result = await prisma.globalProblem.update({
+        const result = await prisma.globalSolution.update({
             where: { id: problemId },
             data: { averageAllocation: normalizedAllocations[problemId] },
         });
