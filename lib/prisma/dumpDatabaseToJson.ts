@@ -108,6 +108,6 @@ export async function loadJsonToDatabase(filter?: string) {
     } finally {
         // Get the PostgreSQL client
         const pool = getPostgresClient();
-        await pool.end();
+        //await pool.end();
     }
 }
