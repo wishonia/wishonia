@@ -42,7 +42,7 @@ export async function PATCH(
       return new Response(JSON.stringify(error.issues), { status: 422 })
     }
 
-    return new Response(null, { status: 500 })
+    return handleError(error)
   }
 }
 
@@ -70,6 +70,6 @@ export async function DELETE(
       return new Response(JSON.stringify(error.issues), { status: 422 })
     }
 
-    return new Response(null, { status: 500 })
+    return handleError(error)
   }
 }

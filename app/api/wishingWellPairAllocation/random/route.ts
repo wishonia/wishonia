@@ -2,6 +2,7 @@ import {getUserId} from "@/lib/api/getUserId";
 import { WishingWell } from '@prisma/client';
 import {convertKeysToCamelCase} from "@/lib/stringHelpers";
 import { prisma } from "@/lib/db";
+import {handleError} from "@/lib/errorHandler";
 export async function GET() {
     try {
         const userId = await getUserId();
@@ -34,6 +35,6 @@ export async function GET() {
           thatWishingWell: randomPair[1],
         }))
     } catch (error) {
-        return new Response(null, { status: 500 })
+        return handleError(error)
     }
 }

@@ -2,6 +2,7 @@ import * as z from "zod"
 
 import { verifyWishingWell } from "@/lib/api/wishingWells"
 import { prisma as db } from "@/lib/db"
+import {handleError} from "@/lib/errorHandler";
 
 const routeContextSchema = z.object({
   params: z.object({
@@ -37,6 +38,6 @@ export async function DELETE(
       return new Response(JSON.stringify(error.issues), { status: 422 })
     }
 
-    return new Response(null, { status: 500 })
+    return handleError(error)
   }
 }
