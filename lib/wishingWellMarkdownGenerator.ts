@@ -1,13 +1,12 @@
-import { uploadImageToVercel } from "@/lib/wishingWells";
 import slugify from 'slugify';
 import fs from 'fs';
 import path from 'path';
-import {WishingWell} from "@prisma/client";
 import {textCompletion} from "@/lib/llm";
 import {saveMarkdownPost} from "@/lib/markdownGenerator";
 import {MarkdownFile} from "@/interfaces/markdownFile";
 import {toTitleCase} from "@/lib/stringHelpers";
-import {generateAndSaveFeaturedImageJpg, generateFeaturedImage} from "@/lib/imageGenerator";
+import {generateAndUploadFeaturedImageJpg, generateFeaturedImagePngBuffer} from "@/lib/imageGenerator";
+import {uploadImageToVercel} from "@/lib/imageUploader";
 
 const overwrite = false;
 const wishingWellNames = [
@@ -81,16 +80,6 @@ Conclusion:
          `;
 }
 
-async function generateAndUploadImageToVercel(obj: WishingWell): Promise<void> {
-    if(!obj.content){
-        throw new Error("Content is required to generate an image.");
-    }
-    const buffer = await generateFeaturedImage(obj.content);
-    const slug = obj.name.toLowerCase().replace(/ /g, "-");
-    const imageName = `${slug}.png`;
-    obj.featuredImage = await uploadImageToVercel(buffer, imageName);
-}
-
 async function generateWishingWellMarkdownFile(wishingWellName: string,
                                                markdownPath: string,
                                                imagePath: string): Promise<MarkdownFile> {
@@ -122,7 +111,7 @@ export async function generateWishingWellMarkdown(): Promise<MarkdownFile[]> {
             post = await generateWishingWellMarkdownFile(wishingWellName, markdownPath, imagePath);
         }
         if (overwrite || !fs.existsSync(imagePath)) {
-            await generateAndSaveFeaturedImageJpg(`Humanity's Goal of ${wishingWellName}`, imagePath);
+            await generateAndUploadFeaturedImageJpg(`Humanity's Goal of ${wishingWellName}`, imagePath);
         }
         if(post){
             posts.push(post);

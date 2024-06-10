@@ -264,7 +264,7 @@ model GlobalProblem {
   userId                       String
   name                         String                        @unique
   description                  String?                       @unique
-  content                      String?                       @unique
+  content                      String?
   featuredImage                String?
   createdAt                    DateTime                      @default(now())
   updatedAt                    DateTime                      @updatedAt
@@ -273,6 +273,7 @@ model GlobalProblem {
   thatGlobalProblemAllocations GlobalProblemPairAllocation[] @relation("ThatGlobalProblemRelation")
   averageAllocation            Float?
   globalProblemSolutions       GlobalProblemSolution[]       @relation("GlobalProblemToSolution")
+  embedding                    Unsupported("vector(1536)")?
 }
 
 model GlobalProblemPairAllocation {
@@ -293,7 +294,7 @@ model GlobalSolution {
   userId                        String
   name                          String                         @unique
   description                   String?                        @unique
-  content                       String?                        @unique
+  content                       String?
   featuredImage                 String?
   createdAt                     DateTime                       @default(now())
   updatedAt                     DateTime                       @updatedAt
@@ -303,6 +304,7 @@ model GlobalSolution {
   averageAllocation             Float?
   globalProblemSolutions        GlobalProblemSolution[]        @relation("GlobalSolutionToProblem")
   globalTaskSolutions           GlobalTaskSolution[]           @relation("GlobalSolutionToTask")
+  embedding                     Unsupported("vector(1536)")?
 }
 
 model GlobalSolutionPairAllocation {
@@ -322,6 +324,10 @@ model GlobalProblemSolution {
   id               String         @id @default(cuid())
   globalProblemId  String
   globalSolutionId String
+  name             String         @unique
+  description      String?        @unique
+  content          String?
+  featuredImage    String?
   createdAt        DateTime       @default(now())
   updatedAt        DateTime       @updatedAt
   globalProblem    GlobalProblem  @relation("GlobalProblemToSolution", fields: [globalProblemId], references: [id])
@@ -343,26 +349,27 @@ model GlobalTaskSolution {
 }
 
 model GlobalTask {
-  id                    String                 @id @default(cuid())
+  id                    String                       @id @default(cuid())
   userId                String
-  name                  String                 @unique
-  description           String?                @unique
-  content               String?                @unique
+  name                  String                       @unique
+  description           String?                      @unique
+  content               String?
   featuredImage         String?
-  createdAt             DateTime               @default(now())
-  updatedAt             DateTime               @updatedAt
+  createdAt             DateTime                     @default(now())
+  updatedAt             DateTime                     @updatedAt
   skills                GlobalTaskSkill[]
   priority              String?
-  status                TaskStatus             @default(NOT_STARTED)
+  status                TaskStatus                   @default(NOT_STARTED)
   dueDate               DateTime?
   budget                Float?
   comments              String[]
-  creator               User                   @relation(fields: [userId], references: [id])
-  globalTaskSolutions   GlobalTaskSolution[]   @relation("GlobalTaskToSolution")
-  blockingTasks         GlobalTaskDependency[] @relation("BlockingTask")
-  dependentTasks        GlobalTaskDependency[] @relation("DependentTask")
+  creator               User                         @relation(fields: [userId], references: [id])
+  globalTaskSolutions   GlobalTaskSolution[]         @relation("GlobalTaskToSolution")
+  blockingTasks         GlobalTaskDependency[]       @relation("BlockingTask")
+  dependentTasks        GlobalTaskDependency[]       @relation("DependentTask")
   globalTaskContextUrls GlobalTaskContextUrl[]
   userTasks             UserTask[]
+  embedding             Unsupported("vector(1536)")?
 }
 
 model GlobalTaskSkill {
@@ -426,21 +433,22 @@ enum UserTaskRole {
 }
 
 model WishingWell {
-  id                         String                      @id @default(cuid())
+  id                         String                       @id @default(cuid())
   userId                     String
-  name                       String                      @unique
+  name                       String                       @unique
   description                String?
   content                    String?
   images                     String[]
   featuredImage              String?
-  createdAt                  DateTime                    @default(now())
-  updatedAt                  DateTime                    @updatedAt
-  user                       User                        @relation(fields: [userId], references: [id])
+  createdAt                  DateTime                     @default(now())
+  updatedAt                  DateTime                     @updatedAt
+  user                       User                         @relation(fields: [userId], references: [id])
   wishingWellContributions   WishingWellContribution[]
   proposals                  WishFulfillmentProposal[]
-  thisWishingWellAllocations WishingWellPairAllocation[] @relation("ThisWishingWellRelation")
-  thatWishingWellAllocations WishingWellPairAllocation[] @relation("ThatWishingWellRelation")
+  thisWishingWellAllocations WishingWellPairAllocation[]  @relation("ThisWishingWellRelation")
+  thatWishingWellAllocations WishingWellPairAllocation[]  @relation("ThatWishingWellRelation")
   averageAllocation          Float?
+  embedding                  Unsupported("vector(1536)")?
 }
 
 model WishingWellPairAllocation {
@@ -465,17 +473,18 @@ model WishingWellContribution {
 }
 
 model GenieDAO {
-  id             String                    @id @default(cuid())
+  id             String                       @id @default(cuid())
   name           String
-  reputation     Float                     @default(0)
-  createdAt      DateTime                  @default(now())
-  updatedAt      DateTime                  @updatedAt
-  creator        User                      @relation("CreatedGenieDAOs", fields: [creatorId], references: [id])
+  reputation     Float                        @default(0)
+  createdAt      DateTime                     @default(now())
+  updatedAt      DateTime                     @updatedAt
+  creator        User                         @relation("CreatedGenieDAOs", fields: [creatorId], references: [id])
   creatorId      String
-  members        User[]                    @relation("JoinedGenieDAOs")
+  members        User[]                       @relation("JoinedGenieDAOs")
   proposals      WishFulfillmentProposal[]
-  collaborations WishFulfillmentProposal[] @relation("ProposalCollaborators")
+  collaborations WishFulfillmentProposal[]    @relation("ProposalCollaborators")
   feedback       GenieDAOFeedback[]
+  embedding      Unsupported("vector(1536)")?
 }
 
 model WishFulfillmentProposal {
@@ -740,210 +749,98 @@ model UserApiKey {
   createdAt DateTime @default(now())
 }
 
-model GithubProject {
-  id           String                       @id @default(cuid())
-  name         String
-  description  String?
-  url          String
-  owner        GithubUser                   @relation(fields: [ownerId], references: [id])
-  ownerId      String
-  repository   String
-  issues       GithubIssue[]
-  pullRequests GithubPullRequest[]
-  labels       GithubLabel[]
-  milestones   GithubMilestone[]
-  contributors GithubProjectContributor[]
-  codebase     GithubCodebase[]
-  requirements GithubRequirement[]
-  roadmaps     GithubRoadmap[]
-  createdAt    DateTime                     @default(now())
-  updatedAt    DateTime                     @updatedAt
-  embedding    Unsupported("vector(1536)")?
-}
-
 model GithubUser {
-  id                   String                       @id @default(cuid())
-  username             String
-  name                 String?
-  email                String?
-  url                  String
-  avatarUrl            String?
-  bio                  String?
-  location             String?
-  company              String?
-  expertise            String[]
-  ownedProjects        GithubProject[]
-  createdIssues        GithubIssue[]                @relation("CreatedIssues")
-  assignedIssues       GithubIssue[]                @relation("AssignedIssues")
-  createdPullRequests  GithubPullRequest[]          @relation("CreatedPullRequests")
-  assignedPullRequests GithubPullRequest[]          @relation("AssignedPullRequests")
-  comments             GithubComment[]
-  contributedProjects  GithubProjectContributor[]
-  createdAt            DateTime                     @default(now())
-  updatedAt            DateTime                     @updatedAt
-  embedding            Unsupported("vector(1536)")?
+  id                    Int                    @id
+  avatar_url            String
+  bio                   String?
+  blog                  String?
+  created_at            String
+  company               String?
+  email                 String?
+  events_url            String
+  followers             Int
+  followers_url         String
+  following             Int
+  following_url         String
+  gists_url             String
+  gravatar_id           String?
+  hireable              Boolean?
+  html_url              String
+  location              String?
+  login                 String
+  name                  String?
+  node_id               String
+  organizations_url     String
+  public_gists          Int
+  public_repos          Int
+  received_events_url   String
+  repos_url             String
+  site_admin            Boolean
+  starred_url           String
+  subscriptions_url     String
+  twitter_username      String?
+  type                  String
+  url                   String
+  updated_at            String
+  generalDeveloperScore Float?
+  githubIssuesCreated   GithubIssue[]
+  githubRepos           GithubRepo[]
+  repoDeveloperScores   RepoContributorScore[]
 }
 
 model GithubIssue {
-  id          String                       @id @default(cuid())
-  title       String
-  body        String
-  url         String
-  state       String
-  number      Int
-  creator     GithubUser                   @relation("CreatedIssues", fields: [creatorId], references: [id])
-  creatorId   String
-  assignees   GithubUser[]                 @relation("AssignedIssues")
-  project     GithubProject                @relation(fields: [projectId], references: [id])
-  projectId   String
-  comments    GithubComment[]
-  labels      GithubLabel[]
-  issueLabels GithubIssueLabel[]
-  milestone   GithubMilestone?             @relation(fields: [milestoneId], references: [id])
-  milestoneId String?
-  blockedBy   GithubIssue[]                @relation("IssueBlocks")
-  blocking    GithubIssue[]                @relation("IssueBlocks")
-  priority    Int?
-  createdAt   DateTime                     @default(now())
-  updatedAt   DateTime                     @updatedAt
-  closedAt    DateTime?
-  embedding   Unsupported("vector(1536)")?
+  url            String
+  repository_url String
+  labels_url     String
+  comments_url   String
+  events_url     String
+  html_url       String
+  id             Int        @id
+  node_id        String
+  number         Int
+  title          String
+  creator        GithubUser @relation(fields: [githubUserId], references: [id])
+  githubUserId   Int
 }
 
-model GithubPullRequest {
-  id                String                       @id @default(cuid())
-  title             String
-  body              String
-  url               String
-  state             String
-  number            Int
-  creator           GithubUser                   @relation("CreatedPullRequests", fields: [creatorId], references: [id])
-  creatorId         String
-  assignees         GithubUser[]                 @relation("AssignedPullRequests")
-  project           GithubProject                @relation(fields: [projectId], references: [id])
-  projectId         String
-  comments          GithubComment[]
-  labels            GithubLabel[]
-  pullRequestLabels GithubPullRequestLabel[]
-  milestone         GithubMilestone?             @relation(fields: [milestoneId], references: [id])
-  milestoneId       String?
-  createdAt         DateTime                     @default(now())
-  updatedAt         DateTime                     @updatedAt
-  mergedAt          DateTime?
-  closedAt          DateTime?
-  embedding         Unsupported("vector(1536)")?
+model GithubRepo {
+  id           Int        @id
+  node_id      String
+  name         String
+  full_name    String
+  private      Boolean
+  owner        GithubUser @relation(fields: [githubUserId], references: [id])
+  githubUserId Int
 }
 
-model GithubComment {
-  id            String                       @id @default(cuid())
-  body          String
-  url           String
-  issue         GithubIssue?                 @relation(fields: [issueId], references: [id])
-  issueId       String?
-  pullRequest   GithubPullRequest?           @relation(fields: [pullRequestId], references: [id])
-  pullRequestId String?
-  author        GithubUser                   @relation(fields: [authorId], references: [id])
-  authorId      String
-  createdAt     DateTime                     @default(now())
-  updatedAt     DateTime                     @updatedAt
-  embedding     Unsupported("vector(1536)")?
+model RepoContributorScore {
+  id                      Int        @id @default(autoincrement())
+  githubUserId            Int
+  repoOwner               String
+  repoName                String
+  score                   Float
+  commitsCount            Int
+  totalPullRequestsCount  Int
+  mergedPullRequestsCount Int
+  issuesCreatedCount      Int
+  issueCommentsCount      Int
+  commentReactionsScore   Float
+  githubUser              GithubUser @relation(fields: [githubUserId], references: [id])
+
+  @@unique([githubUserId, repoOwner, repoName])
 }
 
-model GithubLabel {
-  id                String                       @id @default(cuid())
-  name              String
-  color             String
-  description       String?
-  project           GithubProject                @relation(fields: [projectId], references: [id])
-  projectId         String
-  issues            GithubIssue[]
-  issueLabels       GithubIssueLabel[]
-  pullRequests      GithubPullRequest[]
-  pullRequestLabels GithubPullRequestLabel[]
-  embedding         Unsupported("vector(1536)")?
-}
-
-model GithubIssueLabel {
-  issue      GithubIssue @relation(fields: [issueId], references: [id])
-  issueId    String
-  label      GithubLabel @relation(fields: [labelId], references: [id])
-  labelId    String
-  assignedAt DateTime    @default(now())
-
-  @@id([issueId, labelId])
-}
-
-model GithubPullRequestLabel {
-  pullRequest   GithubPullRequest @relation(fields: [pullRequestId], references: [id])
-  pullRequestId String
-  label         GithubLabel       @relation(fields: [labelId], references: [id])
-  labelId       String
-  assignedAt    DateTime          @default(now())
-
-  @@id([pullRequestId, labelId])
-}
-
-model GithubMilestone {
-  id              String                       @id @default(cuid())
-  title           String
-  description     String?
-  dueDate         DateTime?
-  state           String
-  number          Int
-  project         GithubProject                @relation(fields: [projectId], references: [id])
-  projectId       String
-  issues          GithubIssue[]
-  pullRequests    GithubPullRequest[]
-  createdAt       DateTime                     @default(now())
-  updatedAt       DateTime                     @updatedAt
-  closedAt        DateTime?
-  embedding       Unsupported("vector(1536)")?
-  GithubRoadmap   GithubRoadmap?               @relation(fields: [githubRoadmapId], references: [id])
-  githubRoadmapId String?
-}
-
-model GithubProjectContributor {
-  project       GithubProject @relation(fields: [projectId], references: [id])
-  projectId     String
-  contributor   GithubUser    @relation(fields: [contributorId], references: [id])
-  contributorId String
-  role          String?
-  joinedAt      DateTime      @default(now())
-
-  @@id([projectId, contributorId])
-}
-
-model GithubCodebase {
-  id        String                       @id @default(cuid())
-  path      String
-  content   String
-  project   GithubProject                @relation(fields: [projectId], references: [id])
-  projectId String
-  language  String
-  createdAt DateTime                     @default(now())
-  updatedAt DateTime                     @updatedAt
-  embedding Unsupported("vector(1536)")?
-}
-
-model GithubRequirement {
-  id          String                       @id @default(cuid())
-  title       String
-  description String
-  project     GithubProject                @relation(fields: [projectId], references: [id])
-  projectId   String
-  createdAt   DateTime                     @default(now())
-  updatedAt   DateTime                     @updatedAt
-  embedding   Unsupported("vector(1536)")?
-}
-
-model GithubRoadmap {
-  id          String                       @id @default(cuid())
-  title       String
-  description String
-  project     GithubProject                @relation(fields: [projectId], references: [id])
-  projectId   String
-  milestones  GithubMilestone[]
-  createdAt   DateTime                     @default(now())
-  updatedAt   DateTime                     @updatedAt
-  embedding   Unsupported("vector(1536)")?
+model Library {
+  id          String   @id @default(cuid())
+  name        String
+  version     String
+  type        String
+  description String?
+  keywords    String[]
+  author      String
+  repository  String
+  githubUrl   String?
+  tags        String[]
+  createdAt   DateTime @default(now())
+  updatedAt   DateTime @updatedAt
 }

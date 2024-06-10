@@ -43,7 +43,8 @@ export async function POST(
         const userId = currentUser.id;
         let { wishingWellPairAllocation,
             referrerUserId,
-            globalProblemPairAllocation
+            globalProblemPairAllocation,
+            globalSolutionPairAllocation
         } = body;
         if(referrerUserId) {await saveReferrerUserId(referrerUserId, currentUser);}
         if(wishingWellPairAllocation) {
@@ -71,6 +72,19 @@ export async function POST(
                 return handleError(error, 'Could not save globalProblemPairAllocation because:', {
                     error,
                     globalProblemPairAllocation,
+                })
+            }
+        }
+        if(globalSolutionPairAllocation) {
+            globalSolutionPairAllocation.userId = userId;
+            try {
+                body.globalSolutionPairAllocation = await db.globalSolutionPairAllocation.create({
+                    data: globalSolutionPairAllocation,
+                });
+            } catch (error) {
+                return handleError(error, 'Could not save globalSolutionPairAllocation because:', {
+                    error,
+                    globalSolutionPairAllocation,
                 })
             }
         }
