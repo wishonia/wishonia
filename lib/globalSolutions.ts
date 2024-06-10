@@ -34,7 +34,7 @@ function createWhereClause(ids: { id: string }[]) {
     return where;
 }
 
-export async function getRandomGlobalSolutionPair(userId: string | undefined, problemId: string | undefined) {
+export async function getRandomGlobalSolutionPair(userId: string | undefined) {
     let ids: { id: string }[] = [];
     if (userId) {
         ids = await getRandomGlobalSolutionsForUser(userId);
