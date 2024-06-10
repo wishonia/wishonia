@@ -176,16 +176,21 @@ export async function generateGlobalSolutionImages() {
         console.log(`Completed: ${counter}/${solutionsWithoutImages.length} (${percentCompleted}%)`);
         const slug = globalSolution.name.toLowerCase().replace(/ /g, '-');
         const imagePath = `global-solutions/${slugify(slug)}.jpg`
-        const imageUrl = await generateAndUploadFeaturedImageJpg(
-            `${globalSolution.name} : ${globalSolution.description}`,
-            imagePath);
-        await prisma.globalSolution.update({
-            where: {
-                id: globalSolution.id
-            },
-            data: {
-                featuredImage: imageUrl
-            }
-        });
+        try {
+            const imageUrl = await generateAndUploadFeaturedImageJpg(
+                `${globalSolution.name} : ${globalSolution.description}`,
+                imagePath);
+            await prisma.globalSolution.update({
+                where: {
+                    id: globalSolution.id
+                },
+                data: {
+                    featuredImage: imageUrl
+                }
+            });
+        } catch (error) {
+            console.error(`Error generating image for global solution: ${globalSolution.name}`);
+            console.error(error);
+        }
     }
 }
