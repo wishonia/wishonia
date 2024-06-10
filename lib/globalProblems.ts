@@ -1,12 +1,11 @@
 import {GlobalProblem} from "@prisma/client";
-import {convertKeysToCamelCase, toTitleCase} from "@/lib/stringHelpers";
-import { prisma } from "@/lib/db";
+import {prisma} from "@/lib/db";
 
 export async function getRandomGlobalProblemPair(userId: string | undefined) {
-    let randomPair: GlobalProblem[] = [];
+    let ids: { id: string }[] = [];
     if (userId) {
-        randomPair = await prisma.$queryRaw`
-          SELECT *
+        ids = await prisma.$queryRaw`
+          SELECT id
           FROM "GlobalProblem"
           WHERE id NOT IN (
             SELECT "thisGlobalProblemId" FROM "GlobalProblemPairAllocation" WHERE "GlobalProblem"."userId" = ${userId}
@@ -17,18 +16,24 @@ export async function getRandomGlobalProblemPair(userId: string | undefined) {
           LIMIT 2;
         `;
     } else {
-        randomPair = await prisma.$queryRaw`
-          SELECT *
+        ids = await prisma.$queryRaw`
+          SELECT id
           FROM "GlobalProblem"
           ORDER BY random()
           LIMIT 2;
         `;
     }
-    randomPair = randomPair.map(convertKeysToCamelCase);
-    for (const problem of randomPair) {
-        problem.name = toTitleCase(problem.name)
+    const where = [];
+    for(let i = 0; i < ids.length; i++) {
+        where.push(ids[i].id);
     }
-    return randomPair;
+    return prisma.globalProblem.findMany({
+        where: {
+            id: {
+                in: where
+            }
+        }
+    });
 }
 
 export async function getAllRandomGlobalProblemPairs() {

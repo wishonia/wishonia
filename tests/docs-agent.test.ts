@@ -4,6 +4,7 @@
 
 import fs from "fs";
 import {generateMarkdownAndImageFromDescription} from "@/lib/markdownGenerator";
+import {askSupabase} from "@/lib/docs/docsAgent";
 
 // Generate a cross-platform absolute path to "../public/docs" relative to the current file
 const docsPath = fs.realpathSync(`${__dirname}/../public/docs`);
@@ -41,5 +42,10 @@ describe("Docs Generator", () => {
             const outputPath = `${docsPath}/functional-components/${slugifiedTitle}.md`;
             await generateMarkdownAndImageFromDescription(outputPath, title, section, contentInstructions);
         }
+    });
+    it("Asks supabase about wishonia", async () => {
+        const stream = await askSupabase("What is Wishonia?");
+        console.log(stream);
+        expect(stream).toBeDefined();
     });
 });

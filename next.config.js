@@ -11,6 +11,11 @@ const nextConfig = {
       },
       {
         protocol: 'https',
+        hostname: 'pcpfoetqkuq7jmso.public.blob.vercel-storage.com',
+        port: '',
+      },
+      {
+        protocol: 'https',
         hostname: 'cdn.openai.com',
         port: '',
       },

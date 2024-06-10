@@ -22,6 +22,22 @@ export const globalProblemsResultsLink: NavItem = {
     tooltip: "Percent of resources society wants to allocate to each problem"
 }
 
+export const globalSolutionsVoteLink: NavItem = {
+    title: "Vote on Solutions",
+    href: "/globalSolutions",
+    icon: "vote",
+    img: "/img/screenshots/problem-allocation-short.png",
+    tooltip: "Vote on the allocation of resources between global problems",
+}
+
+export const globalSolutionsResultsLink: NavItem = {
+    title: "Solutions Allocations",
+    href: "/globalSolutions/results",
+    icon: "pieChart",
+    img: "/img/screenshots/problem-allocation-list.png",
+    tooltip: "Percent of resources society wants to allocate to each problem"
+}
+
 export const wishingWellsResultsLink: NavItem = {
     title: "Wish Allocations",
     href: "/wishingWells/results",
@@ -132,6 +148,8 @@ export const generalSidebarNav: Navigation = {
         //wishingWellsResultsLink,
         globalProblemsVoteLink,
         globalProblemsResultsLink,
+        globalSolutionsVoteLink,
+        globalSolutionsResultsLink,
         docsLink,
         githubLink,
     ],

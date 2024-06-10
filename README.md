@@ -9,7 +9,6 @@
 1. **Install Dependencies**:
 
    - [Node.js](https://nodejs.org/en/) v18 or higher
-   - [Yarn](https://yarnpkg.com/)
    - [pnpm](https://pnpm.io/)
    - [Docker](https://www.docker.com/)
 
@@ -142,6 +141,8 @@ There are a number of ways to do this like democracy and crowdfunding campaigns 
 
 - **Representative Democracy:** The interests of representatives do not match the interests of all citizens.  Additionally, representatives have limited knowledge and cognitive capacity to effectively weigh the relative importance of thousands of wishes.
 - **Crowdfunding Campaigns:** People vote with their dollars to determine the allocation of resources.  However, again humans have limited cognitive capacity to effectively weigh the relative importance of thousands of wishes.
+
+### Aggregated Pairwise Preference Allocation (APPA)
 
 A possible solution to this is **Aggregated Pairwise Preference Allocation (APPA)**.
 This involves showing everyone a random pair of wishes or problems
@@ -371,3 +372,30 @@ Furthermore,
 research has shown that the quality of decisions made by groups is proportional to the diversity of the group. By focusing on a global scale, Wishocracy can tap into the wisdom of the crowd to make better decisions than any one person or small group of people could make.
 
 This requires that Wishocracy be more of a decentralized protocol that can integrate with any existing system rather than a standalone system.
+
+## Q: What's the benefit of a global todo list. How would an individual's vote matter? Doesn't the government make decisions on what problems are to be prioritized?
+
+The goal of Wishocracy isn't to replace existing governments, DAOs, nonprofits or other organizations but to
+help them coordinate and make optimal resource allocation decisions.
+
+The key potential benefits of a global, decentralized todo list are:
+
+1. **Preventing Waste** - Minimizing duplicated effort by surfacing what problems/wishes people are already working on solving. This allows resources to be allocated more efficiently. Governments and charitable foundations spend billions on solving important problems, but lack of coordination often leads to significant duplication of effort. For instance, if two research organizations each spend $1 million doing animal trials on the same drug, that's effectively $1 million of funding wasted and lots of extra animals suffering for no reason.
+
+2. **Information** - In democracies, representatives are supposed to do what people want.  
+But how can they do that if we don't have a system to create a budget that illustrates what everyone wants?
+[Aggregated Pairwise Preference Allocation](#aggregated-pairwise-preference-allocation-appa) is a unique way to quantify what everyone wants.
+Thus, just having this information available to representatives would actually make it possible for representatives to do what people want.
+
+3. **Coordination and Cost-Sharing** -
+   By decomposing solutions into atomic tasks
+   that anyone can contribute to, it enables cost-sharing between organizations that need the same thing.  
+This would enable all organizations to accomplish more with the same amount of resources.
+
+4. **Helping People Maximize Their Impact** - Say you're a charitable individual who wants to improve the world. How can you figure out what the most important thing you can do  A global decentralized to do list could help charitable people find the highest impact tasks to work on given their skills and resources.
+
+5.  **Iterative Improvement through Impact Tracking** - Iteratively improving allocation of resources over time by feeding impact data back into the prioritization process. The system gets smarter.
+
+The key is to start with small-scale experiments and grow gradually, 
+while maintaining the north star of empowering individuals to self-organize to solve important problems, 
+augmenting rather than replacing existing institutions. 
