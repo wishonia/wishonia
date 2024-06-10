@@ -1,32 +1,47 @@
 import {GlobalSolution} from "@prisma/client";
 import { prisma } from "@/lib/db";
 
-export async function getRandomGlobalSolutionPair(userId: string | undefined) {
-    let ids: { id: string }[] = [];
-    if (userId) {
-        ids = await prisma.$queryRaw`
-          SELECT id
-          FROM "GlobalSolution"
-          WHERE id NOT IN (
-            SELECT "thisGlobalSolutionId" FROM "GlobalSolutionPairAllocation" WHERE "GlobalSolution"."userId" = ${userId}
-            UNION
-            SELECT "thatGlobalSolutionId" FROM "GlobalSolutionPairAllocation" WHERE "GlobalSolution"."userId" = ${userId}
-          )
-          ORDER BY random()
-          LIMIT 2;
-        `;
-    } else {
-        ids = await prisma.$queryRaw`
-          SELECT id
-          FROM "GlobalSolution"
-          ORDER BY random()
-          LIMIT 2;
-        `;
-    }
+async function getRandomGlobalSolutionsForUser(userId: string): Promise<{ id: string }[]> {
+    return prisma.$queryRaw`
+        SELECT id
+        FROM "GlobalSolution"
+        WHERE id NOT IN (SELECT "thisGlobalSolutionId"
+                         FROM "GlobalSolutionPairAllocation"
+                         WHERE "GlobalSolution"."userId" = ${userId}
+                         UNION
+                         SELECT "thatGlobalSolutionId"
+                         FROM "GlobalSolutionPairAllocation"
+                         WHERE "GlobalSolution"."userId" = ${userId})
+        ORDER BY random()
+        LIMIT 2;
+    `;
+}
+
+async function getRandomGlobalSolutionsAnonymous(): Promise<{ id: string }[]> {
+    return prisma.$queryRaw`
+        SELECT id
+        FROM "GlobalSolution"
+        ORDER BY random()
+        LIMIT 2;
+    `;
+}
+
+function createWhereClause(ids: { id: string }[]) {
     const where = [];
-    for(let i = 0; i < ids.length; i++) {
+    for (let i = 0; i < ids.length; i++) {
         where.push(ids[i].id);
     }
+    return where;
+}
+
+export async function getRandomGlobalSolutionPair(userId: string | undefined, problemId: string | undefined) {
+    let ids: { id: string }[] = [];
+    if (userId) {
+        ids = await getRandomGlobalSolutionsForUser(userId);
+    } else {
+        ids = await getRandomGlobalSolutionsAnonymous();
+    }
+    const where = createWhereClause(ids);
     return prisma.globalSolution.findMany({
         where: {
             id: {
