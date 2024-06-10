@@ -6,6 +6,7 @@ import {GlobalProblem, GlobalSolution} from "@prisma/client";
 import {generateAndSaveEmbedding} from "@/lib/openai";
 import {saveMarkdownPost} from "@/lib/markdownGenerator";
 import {absPathFromPublic} from "@/lib/fileHelper";
+import {linkGlobalProblemSolution} from "@/lib/globalProblemSolutionGenerator";
 
 const generateImages = false;
 export async function generateGlobalSolutions() {
@@ -35,23 +36,6 @@ export async function generateGlobalSolutions() {
     }
 }
 
-async function linkGlobalProblemSolution(globalProblem: GlobalProblem,
-                                         globalSolution: GlobalSolution) {
-    const description = await textCompletion(
-        `Write a brief description of how the solution "${globalSolution.name}" addresses the global problem "${globalProblem.name}".`,
-        'text');
-    const content = await generateProblemSolutionContent(globalProblem, globalSolution);
-    return prisma.globalProblemSolution.create({
-        data: {
-            globalProblemId: globalProblem.id,
-            globalSolutionId: globalSolution.id,
-            name: `How ${globalSolution.name} Solves ${globalProblem.name}`,
-            description: description,
-            content: content,
-            featuredImage: globalSolution.featuredImage,
-        }
-    });
-}
 
 async function saveGlobalSolution(generatedSolution: {name: string, description: string}, globalProblem: GlobalProblem) {
     const existingSolution = await prisma.globalSolution.findUnique({
@@ -95,7 +79,7 @@ async function saveGlobalSolution(generatedSolution: {name: string, description:
     })
     await linkGlobalProblemSolution(globalProblem, createdSolution);
 }
-let sharedSolutionPromptText = `The article should cover the following aspects to help readers make informed decisions
+export const sharedSolutionPromptText = `The article should cover the following aspects to help readers make informed decisions
  about funding and prioritizing this solution:
 
 1. Mechanism of Action: Explain how the solution works, its target(s), 
@@ -138,15 +122,6 @@ ${sharedSolutionPromptText}
     );
 }
 
-async function generateProblemSolutionContent(globalProblem: GlobalProblem, globalSolution: GlobalSolution) {
-    return await textCompletion(
-        `Write a comprehensive article about how the solution "${globalSolution.name}" addresses the global problem "${globalProblem.name}".
-        
-        ${sharedSolutionPromptText}
-        `,
-        'text');
-}
-
 export async function generateGlobalSolutionEmbeddings(){
     const globalSolutions = await prisma.globalSolution.findMany();
     for (const globalSolution of globalSolutions) {
@@ -187,4 +162,30 @@ For instance, for the global problem of "Mental Illness", you could return solut
     "Epigenetic Editing Therapies"
 ]
 `);
+}
+
+export async function generateGlobalSolutionImages() {
+    const globalSolutions = await prisma.globalSolution.findMany();
+    const solutionsWithoutImages = globalSolutions.filter(solution => !solution.featuredImage);
+    console.log(`Generating images for ${solutionsWithoutImages.length} global solutions`);
+    let counter = 0;
+    for (const globalSolution of solutionsWithoutImages) {
+        counter++;
+        // Log percent complete
+        const percentCompleted = ((counter / solutionsWithoutImages.length) * 100).toFixed(2);
+        console.log(`Completed: ${counter}/${solutionsWithoutImages.length} (${percentCompleted}%)`);
+        const slug = globalSolution.name.toLowerCase().replace(/ /g, '-');
+        const imagePath = `global-solutions/${slugify(slug)}.jpg`
+        const imageUrl = await generateAndUploadFeaturedImageJpg(
+            `${globalSolution.name} : ${globalSolution.description}`,
+            imagePath);
+        await prisma.globalSolution.update({
+            where: {
+                id: globalSolution.id
+            },
+            data: {
+                featuredImage: imageUrl
+            }
+        });
+    }
 }
