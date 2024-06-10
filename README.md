@@ -43,6 +43,14 @@ Seed the database with default problems and wishes by running tests/seed.test.ts
 
 # Why Are You Doing This?
 
+How we currently allocate over 44% of societal resources:
+
+[![Video Name](public/assets/congress.jpg)](https://youtu.be/NOAsMhtjAbs)
+
+The result is that humanity spends 333 times more on fighting with each other than curing any disease.
+
+![spending-on-war-vs-cures-bar-chart](public/globalSolutions/1-percent-treaty/spending-on-war-vs-cures-bar-chart.png)
+
 **The most universal goal we all share is to
 maximize the median health and happiness for sentient beings.**
 
