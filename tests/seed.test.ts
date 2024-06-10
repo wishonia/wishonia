@@ -90,6 +90,7 @@ async function checkGlobalSolutions<ExtArgs>(testUser: User) {
     console.log("Checking global solutions");
     console.log("Seeding global solutions");
     await seedGlobalSolutions(testUser);
+    await loadJsonToDatabase("GlobalProblemSolution");
     console.log("Seeded global solutions");
     console.log("Seeding global solution pair allocations");
     await seedGlobalSolutionPairAllocations(testUser);
