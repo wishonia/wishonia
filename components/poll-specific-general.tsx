@@ -5,14 +5,14 @@ import { User } from "next-auth";
 import BarChartGeneral from "@/components/bar-chart-general";
 import {AnonymousVoteButton} from "@/components/anonymous-vote-button";
 import {LoggedInVoteButton} from "@/components/logged-in-vote-button";
-import {GlobalProblem, WishingWell} from "@prisma/client";
+import {GlobalProblem, GlobalProblemSolution, WishingWell} from "@prisma/client";
 import {Dialog, DialogContent, DialogTrigger} from "@/components/ui/dialog";
 import MarkdownRendererForItem from "@/components/MarkdownRendererForItem";
 import {Icons} from "@/components/icons";
 
 interface PollProps<T> {
-    thisItem: WishingWell | GlobalProblem;
-    thatItem: WishingWell | GlobalProblem;
+    thisItem: WishingWell | GlobalProblem | GlobalProblemSolution;
+    thatItem: WishingWell | GlobalProblem | GlobalProblemSolution;
     updatePair?: () => void;
     user?: User;
     getItemName: (item: {name: string}) => string;
