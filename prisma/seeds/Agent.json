@@ -1,0 +1,32 @@
+[
+  {
+    "options": "{}",
+    "createdAt": "2024-06-11 00:38:37.15",
+    "temperature": "0.7",
+    "noOfDocumentsToRetrieve": "4",
+    "noOfChatHistoryInContext": "15",
+    "streaming": "false",
+    "showRef": "false",
+    "textToVoiceEnabled": "false",
+    "textToVoiceTypeMetadata": "{}",
+    "useHybridSearch": "false",
+    "haveDataSourcesBeenAdded": "false",
+    "useRag": "false",
+    "agentProtect": "false",
+    "agentModelApiKey": null,
+    "id": "c3cfee61-c4f1-4082-bffa-8c6457560e26",
+    "questionGeneratorPrompt": "Given the following conversation and a follow up question, rephrase the follow up question to be a standalone question.   Chat History: {chat_history} Follow Up Input: {question} Standalone question:",
+    "publicId": "83ca3da5-a4a4-4873-a29f-be47ac1994c1",
+    "name": "Wishonia Docs Agent",
+    "userId": "clx1cwfzb0000q5t1f68xks0s",
+    "description": null,
+    "qaPrompt": "You are a helpful AI assistant. Use the following pieces of context to answer the question at the end. If you don't know the answer, just say you don't know. DO NOT try to make up an answer. If the question is not related to the context, politely respond that you are tuned to only answer questions that are related to the context.  {context}  Question: {question} Helpful answer in markdown:",
+    "voiceToTextType": "web_api",
+    "agentApiKey": null,
+    "textToVoiceType": "web_api",
+    "semanticSearchSimilarityScore": "none",
+    "model": "wishonia_eb_text-embedding-ada-002",
+    "provider": "OpenAI",
+    "embedding": "gpt-3.5-turbo-dbase"
+  }
+]
