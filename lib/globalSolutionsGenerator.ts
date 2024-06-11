@@ -1,5 +1,5 @@
 import slugify from 'slugify';
-import {jsonArrayCompletion, textCompletion} from "@/lib/llm";
+import {formatTextResponse, jsonArrayCompletion, textCompletion} from "@/lib/llm";
 import { generateAndUploadFeaturedImageJpg } from "@/lib/imageGenerator";
 import { prisma } from "@/lib/db";
 import {GlobalProblem, GlobalSolution} from "@prisma/client";
@@ -228,9 +228,7 @@ export async function generalizeGlobalSolutionDescriptions(){
             for an article about how it could be used to solve global problems.`,
             'text'
         );
-        // Remove quote marks
-        updatedDescription = updatedDescription.replace(/"/g, '');
-        updatedDescription = updatedDescription.replace('delves into', 'explores');
+        updatedDescription = formatTextResponse(updatedDescription);
         console.log(`Updated description for ${globalSolution.name}: to 
         ${updatedDescription} 
         instead of

@@ -83,7 +83,7 @@ to maximize wish fulfillment.
 It works by letting everyone vote with their dollars to determine what everyone should be doing for 40 hours a week.
 It's able to coordinate thousands of people who don't even know each other exist to produce goods and services that are more complex than any one person could produce on their own.
 
-The invisible handle kind of turns humanity into a magical genie
+The invisible hand kind of turns humanity into a magical genie
 that can produce innovations indistinguishable from magic to people who lived before Adam Smith.
 
 https://github.com/mikepsinn/wishonia/assets/2808553/95c056e1-ee9c-4e90-b956-4a2e60d3ad0a
