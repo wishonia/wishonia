@@ -1,10 +1,10 @@
 "use client";
 import React, {FC} from 'react';
-import {GlobalProblem, WishingWell} from "@prisma/client";
+import {GlobalProblem, GlobalProblemSolution, WishingWell} from "@prisma/client";
 import MarkdownRenderer from "@/components/MarkdownRenderer";
 
 interface MarkdownRendererProps {
-    item: WishingWell | GlobalProblem;
+    item: WishingWell | GlobalProblem | GlobalProblemSolution;
 }
 
 const MarkdownRendererForItem: FC<MarkdownRendererProps> = ({item}) => {
