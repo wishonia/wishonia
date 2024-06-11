@@ -44,13 +44,22 @@ export async function generateGlobalProblemSolutions() {
     const globalProblems = await prisma.globalProblem.findMany();
     const globalSolutions = await prisma.globalSolution.findMany();
     const globalProblemSolutions = await prisma.globalProblemSolution.findMany();
+    // Calculate the number of combinations of globalProblems and globalSolutions
+    const numberOfCombinations = globalProblems.length * globalSolutions.length;
+    console.log(`There are ${numberOfCombinations} possible global problem-solution combinations`);
+    let count = 0;
     for (const globalProblem of globalProblems) {
         for (const globalSolution of globalSolutions) {
+            count++;
+            const percentage = (count / numberOfCombinations) * 100;
+            console.log(`Progress: ${count}/${numberOfCombinations} (${percentage.toFixed(2)}%)`);
             if(globalProblemSolutions.some(gps =>
                 gps.globalProblemId === globalProblem.id && gps.globalSolutionId === globalSolution.id)){
+                console.log(`Already linked ${globalSolution.name} to ${globalProblem.name}`);
                 continue;
             }
             if(alreadyUpdated(globalSolution, globalProblem)){
+                console.log(`Already checked ${globalSolution.name} for ${globalProblem.name}`);
                 continue;
             }
             const prompt = `Is the solution "${globalSolution.name}"
@@ -59,7 +68,9 @@ export async function generateGlobalProblemSolutions() {
             `;
             const isGoodSolution = await textCompletion(prompt,
                 'text');
-            console.log(`Is ${globalSolution.name} a good solution for ${globalProblem.name}?
+            console.log(`Would "${globalSolution.name}"
+contribute to solving the global problem of     
+ "${globalProblem.name}"?
              Answer: ${isGoodSolution}`)
             if(isGoodSolution === 'YES'){
                 await linkGlobalProblemSolution(globalProblem, globalSolution);
@@ -79,7 +90,8 @@ function cacheCheckedId(globalSolution: GlobalSolution, globalProblem: GlobalPro
     }
     const updatedIds = getCachedIds();
     updatedIds.push(pair);
-    fs.writeFileSync(cacheFilePath, JSON.stringify(updatedIds));
+    // Save Pretty Print
+    fs.writeFileSync(cacheFilePath, JSON.stringify(updatedIds, null, 4));
 }
 
 function alreadyUpdated(globalSolution: GlobalSolution, globalProblem: GlobalProblem) {
