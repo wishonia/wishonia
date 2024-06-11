@@ -54,7 +54,7 @@ describe("githubQueueController", () => {
         const chunks = await textSplitter.splitDocuments(docs);
 
         const embeddingInfo = await getModelInfo({
-            model: source.embedding,
+            modelId: source.embedding,
             prisma,
             type: "embedding",
         });

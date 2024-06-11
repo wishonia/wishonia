@@ -3,12 +3,12 @@ import { getSettings } from "./common";
 import { cleanUrl, getAllOllamaModels } from "./ollama";
 import { v4 as uuidv4 } from 'uuid';
 export const getModelInfo = async ({
-  model,
+  modelId,
   prisma,
   type = "all",
 }: {
   prisma: PrismaClient;
-  model: string;
+  modelId: string;
   type?: "all" | "chat" | "embedding";
 }): Promise<AiModels | null> => {
   let modelInfo: AiModels | null = null;
@@ -19,7 +19,7 @@ export const getModelInfo = async ({
   if (type === "all") {
     modelInfo = await prisma.aiModels.findFirst({
       where: {
-        modelId: model,
+        modelId,
         hide: false,
         deleted: false,
         modelProvider: {
@@ -37,10 +37,10 @@ export const getModelInfo = async ({
         },
         OR: [
           {
-            modelId: model,
+            modelId,
           },
           {
-            modelId: `${model}-dbase`,
+            modelId: `${modelId}-dbase`,
           },
         ],
       },
@@ -50,10 +50,10 @@ export const getModelInfo = async ({
       where: {
         OR: [
           {
-            modelId: model,
+            modelId,
           },
           {
-            modelId: `wishonia_eb_${model}`,
+            modelId: `wishonia_eb_${modelId}`,
           },
         ],
         hide: false,
@@ -69,8 +69,8 @@ export const getModelInfo = async ({
       if(!settings.ollamaURL) {
         throw new Error("Ollama URL is not set");
       }
-      const ollamaModles = await getAllOllamaModels(settings.ollamaURL);
-      const ollamaInfo = ollamaModles.find((m) => m.value === model);
+      const ollamaModels = await getAllOllamaModels(settings.ollamaURL);
+      const ollamaInfo = ollamaModels.find((m) => m.value === modelId);
       if (ollamaInfo) {
         return {
           name: ollamaInfo.name,
