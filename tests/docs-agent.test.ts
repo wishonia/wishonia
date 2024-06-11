@@ -5,6 +5,9 @@
 import fs from "fs";
 import {generateMarkdownAndImageFromDescription} from "@/lib/markdownGenerator";
 import {askSupabase} from "@/lib/docs/docsAgent";
+import {createAgent} from "@/lib/agents/createAgent";
+import {getOrCreateTestUser} from "@/tests/test-helpers";
+import {getDialoqbaseClient, getWishoniaDocsAgent} from "@/lib/dialoqbase";
 
 // Generate a cross-platform absolute path to "../public/docs" relative to the current file
 const docsPath = fs.realpathSync(`${__dirname}/../public/docs`);
@@ -12,6 +15,23 @@ const docsPath = fs.realpathSync(`${__dirname}/../public/docs`);
 const overviewPath = `${docsPath}/functional-components.md`;
 
 describe("Docs Generator", () => {
+    it("gets wishonia docs agent", async () => {
+        const agent = await getWishoniaDocsAgent();
+        const dialoqbase = await getDialoqbaseClient();
+        const response = await dialoqbase.bot.chat(agent.id, {
+            message: "Hello tell me a joke",
+            stream: false,
+            history: []
+        });
+    });
+    it("Creates an agent", async () => {
+        const testUser = await getOrCreateTestUser();
+        const agent = await createAgent(
+            testUser.id,
+            "Wishonia Docs Agent",
+        );
+        expect(agent).toBeDefined();
+    });
     it("Parses the function components overview documentation file and creates individual page", async () => {
         // read the overview file
         const overview = fs.readFileSync(overviewPath, "utf8");
