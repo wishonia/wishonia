@@ -10,7 +10,7 @@ description: >-
 ---
 ### Digital Twin Safe Sitemap
 
-1. **Home Page (URL: `https://example.com/`)**
+1. **Home Page (URL: `/`)**
    - **Description:** This is the landing page where users get an overview of the platform. It includes information about the digital twin concept, key features, user benefits, and calls to action for signing up or logging in.
 
 2. **Login/Signup Page**
@@ -56,10 +56,9 @@ description: >-
 
 16. **Web Pages** - Each markdown file in the user's digital twin GitHub repository should be rendered as a web page at `/{user_name}/files/{file_name}`.  The user should be able to share these web pages with others.
 
-17. **Settings** (URL: `/{user_name}/settings`) -
-    The user should be able to manage their account settings,
-    including their name, email address, password, and profile picture.
-    They should also be able to manage their notification preferences.
+17. **Settings** (URL: `/{user_name}/settings`) - The user should be able to manage their account settings, 
+including their name, email address, password, and profile picture.
+They should also be able to manage their notification preferences.
 
 18. **Agents** (URL: `/{user_name}/agents`) - A list of agents that have been created.
 
@@ -79,5 +78,6 @@ description: >-
 
 26. **Agent Logs** (URL: `/{user_name}/agents/{agent_id}/logs`) - This page should provide the user with logs of the agent's activity such as data ingestion, processing, and interactions and the source of the interactions
 
-27. **Agent API Keys** (URL: `/{user_name}/agents/{agent_id}/api-keys`) - This page should provide the user with a list of API keys that have been generated for the agent to be used in the embedding, chat interface, and API.
+27. **Agent API Keys** (URL: `/{user_name}/agents/{agent_id}/api-keys`) - 
+This page should provide the user with a list of API keys that have been generated for the agent to be used in the embedding, chat interface, and API.
 
