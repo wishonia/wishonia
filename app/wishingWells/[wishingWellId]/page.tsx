@@ -2,12 +2,7 @@ import { Metadata } from "next"
 import { notFound } from "next/navigation"
 
 import {getGlobalWishingWell} from "@/lib/api/wishingWells"
-import { cn } from "@/lib/utils"
-import { buttonVariants } from "@/components/ui/button"
-import { WishingWellOperations } from "@/components/wishingWell/wishing-well-operations"
-import { Icons } from "@/components/icons"
 import { Shell } from "@/components/layout/shell"
-import { DashboardHeader } from "@/components/pages/dashboard/dashboard-header"
 import MarkdownRendererForItem from "@/components/MarkdownRendererForItem";
 
 interface WishingWellPageProps {
