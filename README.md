@@ -45,7 +45,7 @@ Seed the database with default problems and wishes by running tests/seed.test.ts
 
 How we currently allocate over 44% of societal resources:
 
-[![Video Name](public/assets/congress.jpg)](https://youtu.be/NOAsMhtjAbs)
+https://github.com/mikepsinn/wishonia/assets/2808553/f2d859ad-a24f-410d-b95a-05410bfcb063
 
 The result is that humanity spends 333 times more on fighting with each other than curing any disease.
 
