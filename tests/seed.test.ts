@@ -9,11 +9,16 @@ import {aggregateGlobalProblemPairAllocations} from "@/lib/globalProblems";
 import {aggregateWishingWellPairAllocations} from "@/lib/wishingWells";
 import {seedWishingWellPairAllocations} from "@/prisma/seedWishingWellPairAllocations";
 import {assertTestDB, getOrCreateTestUser, truncateAllTables} from "@/tests/test-helpers";
-import {generateGlobalSolutions} from "@/lib/globalSolutionsGenerator";
+import {
+    generalizeGlobalSolutionDescriptions,
+    generateGlobalSolutionImages,
+    generateGlobalSolutions
+} from "@/lib/globalSolutionsGenerator";
 import {dumpDatabaseToJson, dumpTableToJson, loadJsonToDatabase} from "@/lib/prisma/dumpDatabaseToJson";
 import {seedGlobalSolutions} from "@/prisma/seedGlobalSolutions";
 import {aggregateGlobalSolutionPairAllocations} from "@/lib/globalSolutions";
 import {seedGlobalSolutionPairAllocations} from "@/prisma/seedGlobalSolutionPairAllocations";
+import {generateGlobalProblemSolutions} from "@/lib/globalProblemSolutionGenerator";
 
 
 let prisma = new PrismaClient();
@@ -26,7 +31,7 @@ async function installPgVector() {
 }
 
 describe("Database-seeder tests", () => {
-    jest.setTimeout(600000);
+    jest.setTimeout(6000000);
     it("seeds DB with user, wishing wells and problems", async () => {
         await installPgVector();
         await assertTestDB();
@@ -34,6 +39,7 @@ describe("Database-seeder tests", () => {
         const testUser = await getOrCreateTestUser();
         await checkWishingWells(testUser);
         await checkGlobalProblems(testUser);
+        await checkGlobalSolutions(testUser);
     }, 45000);
     it("Seed wishing wells", async () => {
         const testUser = await getOrCreateTestUser();
@@ -52,6 +58,15 @@ describe("Database-seeder tests", () => {
     it("Seed global solutions", async () => {
         await checkGlobalSolutions(await getOrCreateTestUser());
     }, 6000000);
+    it("Generates GlobalSolution images", async () => {
+        await generateGlobalSolutionImages();
+    }, 6000000);
+    it("Generates GlobalProblemSolutions", async () => {
+        await generateGlobalProblemSolutions();
+    }, 6000000);
+    it("Generalizes the GlobalSolution descriptions", async () => {
+        await generalizeGlobalSolutionDescriptions();
+    });
     // it("Generates seed scripts", async () => {
     //     await readAllTables({
     //         allSeeds: true,

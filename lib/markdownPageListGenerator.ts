@@ -12,7 +12,7 @@ export async function generateMarkdownPageList() {
 
   const markdownPages: MarkdownPage[] = markdownFiles.map((file) => {
     const markdownPage = JSON.parse(JSON.stringify(file));
-    markdownPage.url = pathRelativeToPublic(file.absFilePath);
+    markdownPage.url = '/md' + pathRelativeToPublic(file.absFilePath);
     markdownPage.url = markdownPage.url.replace('.md', '');
     if(!file.name){
         console.log('No name found for file:', file.absFilePath);

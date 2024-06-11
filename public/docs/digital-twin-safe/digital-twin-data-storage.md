@@ -1,3 +1,14 @@
+---
+slug: digital-twin-data-storage
+name: GitHub for Digital Twin Data Storage and Indexing
+featuredImage: >-
+  https://pcpfoetqkuq7jmso.public.blob.vercel-storage.com/docs/digital-twin-safe/digital-twin-data-storage.jpg
+description: >-
+  Discover the benefits of using GitHub for digital twin data storage, including
+  version control, security, collaboration, and scalability. Learn how to
+  structure, manage, and automate your digital twin repositories using GitHub
+  API and GitHub Actions for seamless integration and data processing.
+---
 # Digital Twin Data Storage and Indexing
 
 The application should create a private GitHub repository for each user to store their digital twin data. This repository will be used to store the user's digital twin data, which will be used by the digital twin agents to simulate the user's behavior and preferences.
