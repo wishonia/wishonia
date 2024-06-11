@@ -86,7 +86,7 @@ It's able to coordinate thousands of people who don't even know each other exist
 The invisible handle kind of turns humanity into a magical genie
 that can produce innovations indistinguishable from magic to people who lived before Adam Smith.
 
-![Video Name](http://img.youtube.com/vi/67tHtpac5ws/0.jpg)
+https://github.com/mikepsinn/wishonia/assets/2808553/95c056e1-ee9c-4e90-b956-4a2e60d3ad0a
 
 # Public Goods
 
