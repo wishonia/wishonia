@@ -10,11 +10,15 @@ export const postVoteData = (): Promise<any> => {
         const globalProblemPairAllocation = localStorage.getItem('globalProblemPairAllocation');
         localStorage.removeItem('globalProblemPairAllocation');
         const globalSolutionPairAllocation = localStorage.getItem('globalSolutionPairAllocation');
+        localStorage.removeItem('globalSolutionPairAllocation');
+        const globalProblemSolutionPairAllocation = localStorage.getItem('globalProblemSolutionPairAllocation');
+        localStorage.removeItem('globalProblemSolutionPairAllocation');
         const data = {
             referrerUserId: referrerUserId || undefined,
             wishingWellPairAllocation: undefined,
             globalProblemPairAllocation: undefined,
             globalSolutionPairAllocation: undefined,
+            globalProblemSolutionPairAllocation: undefined,
         }
         if (wishingWellPairAllocation) {
             data.wishingWellPairAllocation = JSON.parse(wishingWellPairAllocation);
@@ -24,6 +28,9 @@ export const postVoteData = (): Promise<any> => {
         }
         if(globalSolutionPairAllocation){
             data.globalSolutionPairAllocation = JSON.parse(globalSolutionPairAllocation);
+        }
+        if(globalProblemSolutionPairAllocation){
+            data.globalProblemSolutionPairAllocation = JSON.parse(globalProblemSolutionPairAllocation);
         }
         if (!referrerUserId && !wishingWellPairAllocation && !globalProblemPairAllocation) {
             resolve('No data to post to vote endpoint');

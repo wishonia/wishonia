@@ -46,6 +46,7 @@ export default async function GlobalProblemPage({
                         description={globalProblem.description}
                         content={globalProblem.content} />
       <GlobalProblemSolutionsList
+          user={user}
           globalProblemId={globalProblem.id}>
       </GlobalProblemSolutionsList>
     </Shell>

@@ -13,7 +13,8 @@ interface PollProps {
 
 export const PollSpecificGlobalProblemSolutions: React.FC<PollProps> = ({ thisGlobalProblemSolution,
                                                             thatGlobalProblemSolution,
-                                                            updatePair, user }) => {
+                                                            updatePair,
+                                                                            user }) => {
 
     const getGlobalProblemSolutionName = (item: {
         name: string;
