@@ -13,9 +13,6 @@ interface PollProps {
 }
 
 export const GlobalProblemSolutionsVoteAndSolutionsList: React.FC<PollProps> = ({ globalProblemId, user }) => {
-
-
-
     const [globalProblem, setGlobalProblem] =
         useState<GlobalProblem>();
     const [loading, setLoading] = useState(true);
@@ -44,7 +41,7 @@ export const GlobalProblemSolutionsVoteAndSolutionsList: React.FC<PollProps> = (
                 text={`Vote on the best solutions to ${globalProblem.name}!`}
             >
             </DashboardHeader>
-            <PollRandomGlobalProblemSolutions globalProblemId={globalProblemId}>
+            <PollRandomGlobalProblemSolutions globalProblemId={globalProblemId} user={user}>
             </PollRandomGlobalProblemSolutions>
             <GlobalProblemSolutionsList globalProblemId={globalProblemId}>
             </GlobalProblemSolutionsList>

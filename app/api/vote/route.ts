@@ -5,6 +5,9 @@ import { User } from "next-auth";
 import {handleError} from "@/lib/errorHandler";
 import {aggregateGlobalProblemPairAllocations} from "@/lib/globalProblems";
 import {aggregateWishingWellPairAllocations} from "@/lib/wishingWells";
+import {
+    updateOrCreateGlobalProblemSolutionPairAllocation
+} from "@/lib/globalProblemSolutions";
 
 async function saveReferrerUserId(referrerUserId: string, currentUser: User & { id: string; username: string; }) {
     const referrerUser = await db.user.findFirst({
@@ -44,7 +47,8 @@ export async function POST(
         let { wishingWellPairAllocation,
             referrerUserId,
             globalProblemPairAllocation,
-            globalSolutionPairAllocation
+            globalSolutionPairAllocation,
+            globalProblemSolutionPairAllocation
         } = body;
         if(referrerUserId) {await saveReferrerUserId(referrerUserId, currentUser);}
         if(wishingWellPairAllocation) {
@@ -88,6 +92,22 @@ export async function POST(
                 })
             }
         }
+        if(globalProblemSolutionPairAllocation) {
+            globalProblemSolutionPairAllocation.userId = userId;
+            try {
+                body.globalProblemSolutionPairAllocation = await updateOrCreateGlobalProblemSolutionPairAllocation(
+                    globalProblemSolutionPairAllocation.thisGlobalProblemSolutionId,
+                    globalProblemSolutionPairAllocation.thatGlobalProblemSolutionId,
+                    globalProblemSolutionPairAllocation.thisGlobalProblemSolutionPercentage,
+                    userId
+                );
+            } catch (error) {
+                return handleError(error, 'Could not save globalProblemSolutionPairAllocation because:', {
+                    error,
+                    globalProblemSolutionPairAllocation,
+                })
+            }
+        }
 
         return NextResponse.json(body, { status: 201 });
     } catch (error) {
@@ -95,4 +115,4 @@ export async function POST(
             error,
         })
     }
-};
+}
