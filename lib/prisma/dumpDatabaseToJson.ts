@@ -5,6 +5,8 @@ import {getPostgresClient, getSchemaName} from "@/lib/db/postgresClient";
 
 const prisma = new PrismaClient();
 
+const ignoreTables = ['_prisma_migrations', 'User', 'accounts', 'sessions'];
+
 export async function dumpTableToJson(tableName: string) {
     // Retrieve the column names of the current table
     const columns = await prisma.$queryRaw<Array<{ column_name: string }>>`
@@ -50,6 +52,9 @@ export async function dumpDatabaseToJson() {
         // Loop through each table and export its data
         for (const table of tables) {
             const tableName = table.tablename;
+            if(ignoreTables.includes(tableName)) {
+                continue;
+            }
             await dumpTableToJson(tableName);
         }
 
