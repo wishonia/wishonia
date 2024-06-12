@@ -1,26 +1,31 @@
 import {GlobalProblem, GlobalProblemSolution} from "@prisma/client";
-import { prisma } from "@/lib/db";
+import {prisma} from "@/lib/db";
 
 async function getRandomGlobalProblemSolutionsForUser(globalProblemId: string,
                                                       userId: string): Promise<{ id: string }[]> {
-    const existingGlobalProblemSolutionPairAllocationIds =
-        await getGlobalProblemSolutionPairAllocationIdsForUserAndGlobalProblem(
-        userId, globalProblemId);
-
-    return prisma.$queryRaw`
-        SELECT id
-        FROM "GlobalProblemSolution"
-        WHERE id NOT IN (SELECT "thisGlobalProblemSolutionId"
-                         FROM "GlobalProblemSolutionPairAllocation"
-                         WHERE "GlobalProblemSolutionPairAllocation"."userId" = ${userId}
-                         AND "GlobalProblemSolutionPairAllocation"."globalProblemId" = ${globalProblemId}
-                         UNION
-                         SELECT "thatGlobalProblemSolutionId"
-                         FROM "GlobalProblemSolutionPairAllocation"
-                         WHERE "GlobalProblemSolutionPairAllocation"."userId" = ${userId})
-        ORDER BY random()
-        LIMIT 2;
-    `;
+    const existingAllocations = await prisma.globalProblemSolutionPairAllocation.findMany({
+        where: {
+            globalProblemId: globalProblemId,
+            userId: userId
+        },
+        select: {
+            thisGlobalProblemSolutionId: true,
+            thatGlobalProblemSolutionId: true
+        }
+    });
+    return prisma.globalProblemSolution.findMany({
+        where: {
+            globalProblemId: globalProblemId,
+            id: {
+                notIn: existingAllocations.map(allocation =>
+                    allocation.thisGlobalProblemSolutionId)
+            }
+        },
+        orderBy: {
+            id: 'asc'
+        },
+        take: 2
+    });
 }
 
 async function getRandomGlobalProblemSolutionsAnonymous(globalProblemId: string): Promise<{ id: string }[]> {
@@ -42,7 +47,7 @@ function createWhereClause(ids: { id: string }[]) {
 }
 
 export async function getRandomGlobalProblemSolutionPair(globalProblemId: string, userId: string | undefined) {
-    let ids: { id: string }[] = [];
+    let ids: { id: string }[];
     if (userId) {
         ids = await getRandomGlobalProblemSolutionsForUser(globalProblemId, userId);
     } else {
@@ -86,59 +91,69 @@ export async function getAllRandomGlobalProblemSolutionPairs() {
 }
 
 
+async function fetchGlobalProblemsWithSolutions() {
+    return prisma.globalProblem.findMany({
+        include: {
+            globalProblemSolutions: true
+        }
+    });
+}
+
 export async function aggregateGlobalProblemSolutionPairAllocations() {
-    const allocations = await prisma.globalProblemSolutionPairAllocation.findMany();
-    const problemAllocations: Record<string, number> = {};
-    // Sum up the percentages for each problem
-    for (const allocation of allocations) {
-        const { thisGlobalProblemSolutionId, thatGlobalProblemSolutionId, thisGlobalProblemSolutionPercentage } = allocation;
+    const globalProblems = await fetchGlobalProblemsWithSolutions();
 
-        problemAllocations[thisGlobalProblemSolutionId] = (problemAllocations[thisGlobalProblemSolutionId] || 0) + thisGlobalProblemSolutionPercentage;
-        problemAllocations[thatGlobalProblemSolutionId] = (problemAllocations[thatGlobalProblemSolutionId] || 0) + (100 - thisGlobalProblemSolutionPercentage);
-    }
-
-    const totalAllocations = Object.values(problemAllocations).reduce((sum, allocation) => sum + allocation, 0);
-
-    // Normalize the allocations to ensure they add up to 100%
-    const normalizedAllocations: Record<string, number> = {};
-    for (const problemId in problemAllocations) {
-        normalizedAllocations[problemId] = (problemAllocations[problemId] / totalAllocations) * 100;
-    }
-    const results = [];
-    for (const problemId in normalizedAllocations) {
-        const result = await prisma.globalProblemSolution.update({
-            where: { id: problemId },
-            data: { averageAllocation: normalizedAllocations[problemId] },
-        });
-        results.push(result);
-    }
-    return results;
-}
-
-async function getGlobalProblemSolutionPairAllocationIdsForUserAndGlobalProblem(
-    userId: string, globalProblemId: string) {
-    const globalProblemSolutionIdsForGlobalProblem =
-        await getGlobalProblemSolutionIdsForGlobalProblem(globalProblemId);
-    return prisma.globalProblemSolutionPairAllocation.findMany({
-        where: {
-            userId: userId,
-            thisGlobalProblemSolutionId: {
-                in: globalProblemSolutionIdsForGlobalProblem.map(globalProblemSolution => globalProblemSolution.id)
+    for (const globalProblem of globalProblems) {
+        const globalProblemSolutions = globalProblem.globalProblemSolutions;
+        const globalProblemSolutionAllocations = await prisma.globalProblemSolutionPairAllocation.findMany({
+            where: {
+                globalProblemId: globalProblem.id
             }
-        },
-        select: {
-            id: true
+        });
+        const allocationsToEachGlobalProblemSolution: Record<string, number[]> = {};
+        for (const allocation of globalProblemSolutionAllocations) {
+            const { thisGlobalProblemSolutionId, thisGlobalProblemSolutionPercentage } = allocation;
+            allocationsToEachGlobalProblemSolution[thisGlobalProblemSolutionId] =
+                (allocationsToEachGlobalProblemSolution[thisGlobalProblemSolutionId] || [])
+                    .concat(thisGlobalProblemSolutionPercentage);
+            if(!allocationsToEachGlobalProblemSolution[allocation.thatGlobalProblemSolutionId]) {
+                allocationsToEachGlobalProblemSolution[allocation.thatGlobalProblemSolutionId] = [];
+            }
+            allocationsToEachGlobalProblemSolution[allocation.thatGlobalProblemSolutionId]
+                .push(100 - thisGlobalProblemSolutionPercentage);
         }
-    });
-}
-
-async function getGlobalProblemSolutionIdsForGlobalProblem(globalProblemId: string) {
-    return prisma.globalProblemSolution.findMany({
-        where: {
-            globalProblemId: globalProblemId
-        },
-        select: {
-            id: true
+        const averageAllocationsToEachGlobalProblemSolution: Record<string, number> = {};
+        for (const globalProblemSolution of globalProblemSolutions) {
+            const allocations = allocationsToEachGlobalProblemSolution[globalProblemSolution.id] || [];
+            const length = allocations.length;
+            if (length === 0) {
+                throw new Error(`No allocations found for global problem solution: ${globalProblemSolution.id}`);
+            }
+            const sum = allocations.reduce((sum, allocation) => sum + allocation, 0);
+            if(isNaN(sum)) {
+                throw new Error(`Invalid sum: ${sum}`);
+            }
+            averageAllocationsToEachGlobalProblemSolution[globalProblemSolution.id] = sum / length;
         }
-    });
+        const normalizedAllocationToEachGlobalProblemSolution: Record<string, number> = {};
+        let total = 0;
+        for (const globalProblemSolutionId in averageAllocationsToEachGlobalProblemSolution) {
+            const value = averageAllocationsToEachGlobalProblemSolution[globalProblemSolutionId];
+            // make sure the value is a number between 0 and 100
+            if (isNaN(value) || value < 0 || value > 100) {
+                throw new Error(`Invalid average allocation value: ${value}`);
+            }
+            total += value;
+        }
+        for (const globalProblemSolutionId in averageAllocationsToEachGlobalProblemSolution) {
+            normalizedAllocationToEachGlobalProblemSolution[globalProblemSolutionId] =
+                (averageAllocationsToEachGlobalProblemSolution[globalProblemSolutionId] / total) * 100;
+        }
+        for (const globalProblemSolution of globalProblemSolutions) {
+            const averageAllocation = normalizedAllocationToEachGlobalProblemSolution[globalProblemSolution.id];
+            await prisma.globalProblemSolution.update({
+                where: { id: globalProblemSolution.id },
+                data: { averageAllocation: averageAllocation }
+            });
+        }
+    }
 }
