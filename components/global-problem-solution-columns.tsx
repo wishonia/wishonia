@@ -16,13 +16,17 @@ export const globalProblemSolutionColumns: ColumnDef<GlobalProblemSolution>[] = 
           variant="ghost"
           onClick={() => column.toggleSorting(column.getIsSorted() === "asc")}
         >
-          Problem
+          Solution
           <Icons.sort className="ml-2 h-4 w-4" />
         </Button>
       )
     },
     cell: (row) => {
-      const name = row.row.original.name
+      let name = row.row.original.name
+      const matches = name.match(/How (.*) Solves/)
+      if (matches) {
+          name = matches[1]
+      }
       const id = row.row.original.id
       const featuredImage = row.row.original.featuredImage || ""
       const description = row.row.original.description
