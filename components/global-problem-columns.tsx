@@ -6,7 +6,6 @@ import { Button, buttonVariants } from "@/components/ui/button"
 import { Icons } from "@/components/icons"
 import {GlobalProblem} from "@prisma/client";
 import Image from "next/image";
-
 export const globalProblemColumns: ColumnDef<GlobalProblem>[] = [
   {
     accessorKey: "name",
@@ -63,6 +62,22 @@ export const globalProblemColumns: ColumnDef<GlobalProblem>[] = [
       return <div className="min-w-[5rem] md:px-4 text-center">
         {averageAllocation}%
       </div>
+    },
+  },
+  {
+    id: "actions",
+    cell: ({ row }) => {
+      const globalProblem = row.original
+      const id = globalProblem.id
+      return (
+          <Button
+              variant="ghost"
+              onClick={() => window.location.href = `/globalProblems/${id}/solutions`}
+          >
+            Solutions
+            <Icons.lightbulb className="ml-2 h-4 w-4" />
+          </Button>
+      )
     },
   },
 ]

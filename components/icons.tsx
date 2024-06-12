@@ -21,7 +21,7 @@ import {
 import {
   FaBomb, FaBook,
   FaBookMedical, FaChartPie,
-  FaDisease, FaHome,
+  FaDisease, FaHome, FaLightbulb,
   FaPeace, FaQuestionCircle,
   FaRegStar, FaSadCry,
   FaSkull,
@@ -93,7 +93,8 @@ const icons = {
   star: FaRegStar,
   ranking: FaRankingStar,
   question: FaQuestionCircle,
-  volunteer: FaHand
+  volunteer: FaHand,
+  lightbulb: FaLightbulb
 }
 
 export const Icons: IconsType = icons

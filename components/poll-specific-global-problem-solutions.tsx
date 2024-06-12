@@ -17,7 +17,11 @@ export const PollSpecificGlobalProblemSolutions: React.FC<PollProps> = ({ thisGl
 
     const getGlobalProblemSolutionName = (item: {
         name: string;
-    }) =>  item.name;
+    }) => {
+        const start = item.name.indexOf("How ") + 4; // +4 to skip "How "
+        const end = item.name.indexOf(" Solves", start);
+        return start > 3 && end > -1 ? item.name.substring(start, end) : "";
+    };
 
     const getGlobalProblemSolutionImage = (item: {
         featuredImage: string | null;
