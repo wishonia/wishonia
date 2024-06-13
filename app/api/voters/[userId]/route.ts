@@ -1,6 +1,7 @@
 import * as z from "zod"
 import { prisma as db } from "@/lib/db"
 import {getCurrentUser} from "@/lib/session";
+import {handleError} from "@/lib/errorHandler";
 
 const routeContextSchema = z.object({
   params: z.object({
@@ -35,6 +36,6 @@ export async function GET(
 
     return new Response(JSON.stringify(voters))
   } catch (error) {
-    return new Response(null, { status: 500 })
+    return handleError(error)
   }
 }

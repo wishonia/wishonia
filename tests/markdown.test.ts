@@ -17,7 +17,7 @@ describe("Test Markdown Reader", () => {
     })
     it("metadata updater", async () => {
         let mdFilesUpdated = await generateMetadataWhereMissing(
-            '');
+            'docs');
         const mdFilesWithoutMetaData = await getMarkdownFilesWithoutMetaData(absPathFromRepo('public'));
         expect(mdFilesWithoutMetaData.length).toEqual(0);
     });

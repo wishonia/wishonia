@@ -9,7 +9,9 @@ interface PollProps {
     data: object;
     onButtonClick?: () => void;
 }
-export const LoggedInVoteButton: React.FC<PollProps> = ({ user, data, onButtonClick }) => {
+export const LoggedInVoteButton: React.FC<PollProps> = ({ user,
+                                                            data,
+                                                            onButtonClick }) => {
     if (!user) {
         return null;
     }

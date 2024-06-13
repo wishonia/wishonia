@@ -30,7 +30,8 @@ export async function textCompletion(promptText: string, returnType: "text" | "j
     throw new Error('No content in response');
   }
 
-  return response.choices[0].message.content;
+  const str = response.choices[0].message.content;
+  return replaceStupidWords(str);
 }
 
 export async function jsonArrayCompletion(promptText: string): Promise<any[]> {
@@ -48,4 +49,16 @@ export async function jsonArrayCompletion(promptText: string): Promise<any[]> {
     }
   }
   return arr;
+}
+
+export function formatTextResponse(text: string): string {
+  // Remove quote marks
+  text = text.replace(/"/g, '');
+  text = replaceStupidWords(text);
+  return text;
+}
+
+function replaceStupidWords(text: string): string {
+  text = text.replace('delves into', 'explores');
+    return text;
 }

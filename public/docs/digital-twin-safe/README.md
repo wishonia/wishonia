@@ -18,3 +18,4 @@ A digital twin is the closest possible digital representation of your knowledge,
   - [Site Map](dts-site-map.md)
 - [Data Sources](digital-twin-data-sources.md)
 - [Data Model](digital-twin-data-model.md)
+- [Data Storage and Indexing](digital-twin-data-storage.md)

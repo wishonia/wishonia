@@ -24,11 +24,7 @@ function getPostgresClient(): Pool {
     //const dbSchema = parsedUrl.query?.split('=')[1] || 'public';
 
     pool = new Pool({
-        host: dbHost,
-        port: dbPort,
-        database: dbName,
-        user: dbUser,
-        password: dbPassword,
+        connectionString: databaseUrl
     });
 
     return pool;
