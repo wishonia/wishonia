@@ -3,6 +3,7 @@ import * as z from "zod"
 import { verifyWishingWell } from "@/lib/api/wishingWells"
 import { prisma as db } from "@/lib/db"
 import { wishingWellPatchSchema } from "@/lib/validations/wishingWell"
+import {handleError} from "@/lib/errorHandler";
 
 const routeContextSchema = z.object({
   params: z.object({
@@ -42,7 +43,7 @@ export async function PATCH(
       return new Response(JSON.stringify(error.issues), { status: 422 })
     }
 
-    return new Response(null, { status: 500 })
+    return handleError(error)
   }
 }
 
@@ -70,6 +71,6 @@ export async function DELETE(
       return new Response(JSON.stringify(error.issues), { status: 422 })
     }
 
-    return new Response(null, { status: 500 })
+    return handleError(error)
   }
 }

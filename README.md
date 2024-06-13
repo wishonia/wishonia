@@ -43,6 +43,14 @@ Seed the database with default problems and wishes by running tests/seed.test.ts
 
 # Why Are You Doing This?
 
+How we currently allocate over 44% of societal resources:
+
+https://github.com/mikepsinn/wishonia/assets/2808553/f2d859ad-a24f-410d-b95a-05410bfcb063
+
+The result is that humanity spends 333 times more on fighting with each other than curing any disease.
+
+![spending-on-war-vs-cures-bar-chart](public/globalSolutions/1-percent-treaty/spending-on-war-vs-cures-bar-chart.png)
+
 **The most universal goal we all share is to
 maximize the median health and happiness for sentient beings.**
 
@@ -75,10 +83,10 @@ to maximize wish fulfillment.
 It works by letting everyone vote with their dollars to determine what everyone should be doing for 40 hours a week.
 It's able to coordinate thousands of people who don't even know each other exist to produce goods and services that are more complex than any one person could produce on their own.
 
-The invisible handle kind of turns humanity into a magical genie
+The invisible hand kind of turns humanity into a magical genie
 that can produce innovations indistinguishable from magic to people who lived before Adam Smith.
 
-![Video Name](http://img.youtube.com/vi/67tHtpac5ws/0.jpg)
+https://github.com/mikepsinn/wishonia/assets/2808553/95c056e1-ee9c-4e90-b956-4a2e60d3ad0a
 
 # Public Goods
 

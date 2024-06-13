@@ -13,7 +13,7 @@ export async function GET() {
     const wishingWells = await db.wishingWell.findMany()
     return new Response(JSON.stringify(wishingWells))
   } catch (error) {
-    return new Response(null, { status: 500 })
+    return handleError(error)
   }
 }
 

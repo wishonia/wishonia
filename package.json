@@ -28,6 +28,7 @@
     "seed": "ts-node --compiler-options {\"module\":\"CommonJS\"} prisma/seed.ts"
   },
   "dependencies": {
+    "@agentic/stdlib": "^6.1.5",
     "@ai-sdk/openai": "^0.0.14",
     "@ai-sdk/provider": "^0.0.8",
     "@copilotkit/backend": "^0.9.0",
@@ -96,6 +97,7 @@
     "cmdk": "^0.2.0",
     "common-tags": "^1.8.2",
     "date-fns": "^3.3.1",
+    "dialoqbase": "^0.2.1",
     "dotenv": "16.4.5",
     "fs-extra": "^11.2.0",
     "github-slugger": "^2.0.0",
@@ -106,6 +108,7 @@
     "json-to-prisma-schema-convertor": "^0.1.0",
     "langchain": "^0.2.4",
     "llamaindex": "^0.3.14",
+    "llmclient": "^8.1.19",
     "lucide-react": "^0.259.0",
     "mammoth": "^1.6.0",
     "mdast": "^3.0.0",

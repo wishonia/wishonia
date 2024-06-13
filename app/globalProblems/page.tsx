@@ -2,6 +2,7 @@ import { Metadata } from "next"
 import { Shell } from "@/components/layout/shell"
 import {PollRandomGlobalProblems} from "@/components/poll-random-global-problems";
 import {getCurrentUser} from "@/lib/session";
+import {GlobalProblemsList} from "@/components/global-problems-list";
 
 export const metadata: Metadata = {
   title: "Global Problems",
@@ -19,6 +20,7 @@ export default async function GlobalProblemsPage({ searchParams }: DashboardProp
   return (
     <Shell>
         <PollRandomGlobalProblems user={user}></PollRandomGlobalProblems>
+      <GlobalProblemsList user={user}></GlobalProblemsList>
     </Shell>
   )
 }
