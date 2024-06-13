@@ -1,7 +1,7 @@
 import {textCompletion} from "@/lib/llm";
 import { prisma } from "@/lib/db";
 import {GlobalProblem, GlobalSolution} from "@prisma/client";
-import {sharedSolutionPromptText} from "@/lib/globalSolutionsGenerator";
+import {generateGlobalSolution, sharedSolutionPromptText} from "@/lib/globalSolutionsGenerator";
 import {generateAndUploadFeaturedImageJpg} from "@/lib/imageGenerator";
 import {absPathFromRepo} from "@/lib/fileHelper";
 import fs from "fs";
@@ -113,4 +113,23 @@ function createCachePair(globalSolution: GlobalSolution, globalProblem: GlobalPr
         globalSolutionId: globalSolution.id,
         globalProblemId: globalProblem.id,
     }
+}
+
+
+export async function saveGlobalProblemSolution(globalSolutionName: string,
+                                                globalSolutionDescription: string,
+                                                globalProblem: GlobalProblem) {
+    let existingGlobalSolution = await prisma.globalSolution.findUnique({
+        where: {
+            name: globalSolutionName
+        }
+    });
+    if (!existingGlobalSolution) {
+        console.log(`Solution "${globalSolutionName}" already exists in the database.`);
+        existingGlobalSolution =
+            await generateGlobalSolution(globalSolutionName, globalSolutionDescription,
+                globalProblem.userId);
+    }
+
+    await linkGlobalProblemSolution(globalProblem, existingGlobalSolution);
 }

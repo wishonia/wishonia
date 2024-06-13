@@ -6,8 +6,8 @@ import {GlobalProblem, GlobalSolution} from "@prisma/client";
 import {generateAndSaveEmbedding} from "@/lib/openai";
 import {saveMarkdownPost} from "@/lib/markdownGenerator";
 import {absPathFromPublic, absPathFromRepo} from "@/lib/fileHelper";
-import {linkGlobalProblemSolution} from "@/lib/globalProblemSolutionGenerator";
 import fs from "fs";
+import {saveGlobalProblemSolution} from "@/lib/globalProblemSolutionGenerator";
 
 const generateImages = false;
 export async function generateGlobalSolutions() {
@@ -15,70 +15,62 @@ export async function generateGlobalSolutions() {
     let counter = 0;
     for (const globalProblem of globalProblems) {
         console.log(`Generating solutions for global problem: ${globalProblem.name}`)
-        const existing = await prisma.globalProblemSolution.findMany({
-            where: {
-                globalProblemId: globalProblem.id
-            }
-        });
-        if(existing.length > 5) {
-            console.log(`Global problem ${globalProblem.name} already has solutions`);
-            continue
-        }
-        // Use textCompletion to ask the LLM to provide an array of the most promising actionable solutions for the given global problem
-        const generatedSolutions = await getSolutionArray(globalProblem);
+        await generateGlobalProblemSolutionsForGlobalProblem(globalProblem);
         counter++;
-        const totalSolutions = generatedSolutions.length;
-        for (const generatedSolution of generatedSolutions) {
-            console.log(`Generating solution: ${generatedSolution.name} for problem: ${globalProblem.name}`);
-            await saveGlobalSolution(generatedSolution, globalProblem);
+        const percentCompleted = ((counter / globalProblems.length) * 100).toFixed(2);
+        console.log(`Completed: ${counter}/${globalProblems.length} (${percentCompleted}%)`);
+    }
+}
+
+export async function generateGlobalProblemSolutionsForGlobalProblem(globalProblem: GlobalProblem) {
+    const existing = await prisma.globalProblemSolution.findMany({
+        where: {
+            globalProblemId: globalProblem.id
         }
-        const percentCompleted = ((counter / totalSolutions) * 100).toFixed(2);
-        console.log(`Completed: ${counter}/${totalSolutions} (${percentCompleted}%)`);
+    });
+    if(existing.length > 5) {
+        console.log(`Global problem ${globalProblem.name} already has solutions`);
+        return;
+    }
+    const generatedSolutionNamesDescriptions =
+        await generateSolutionNamesForGlobalProblem(globalProblem);
+    for (const nameDescription of generatedSolutionNamesDescriptions) {
+        console.log(`Generating solution: ${nameDescription.name} for problem: ${globalProblem.name}`);
+        await saveGlobalProblemSolution(nameDescription.name,
+            nameDescription.description, globalProblem);
     }
 }
 
 
-async function saveGlobalSolution(generatedSolution: {name: string, description: string}, globalProblem: GlobalProblem) {
-    const existingSolution = await prisma.globalSolution.findUnique({
-        where: {
-            name: generatedSolution.name
-        }
-    });
-    if (existingSolution) {
-        console.log(`Solution "${generatedSolution.name}" already exists in the database.`);
-        await linkGlobalProblemSolution(globalProblem, existingSolution);
-        return;
-    }
-    const slug = generatedSolution.name.toLowerCase().replace(/ /g, '-');
+export async function generateGlobalSolution(name: string, description: string, userId: string) {
+    const slug = name.toLowerCase().replace(/ /g, '-');
     const imagePath = `global-solutions/${slugify(slug)}.jpg`
     const mdPath = `global-solutions/${slug}.md`;
     const mdAbsPath = absPathFromPublic(mdPath);
-    const content = await generateSolutionContent(generatedSolution);
+    const content = await generateGlobalSolutionContent(name);
     let featuredImageUrl;
     if(generateImages) {
         featuredImageUrl =  await generateAndUploadFeaturedImageJpg(
-            ` ${generatedSolution.name} : ${generatedSolution.description}`,
+            ` ${name} : ${description}`,
             imagePath);
     }
     const createdSolution = await prisma.globalSolution.create({
         data: {
-            name: generatedSolution.name,
-            description: generatedSolution.description,
+            name: name,
+            description: description,
             content: content,
             featuredImage: featuredImageUrl,
-            userId: globalProblem.userId,
+            userId: userId,
         }
     });
-    //await generateAndSaveEmbedding(generatedSolution.name + " " + generatedSolution.description,
-    //    'GlobalSolution', createdSolution.id);
     await saveMarkdownPost({
-        name: generatedSolution.name,
-        description: generatedSolution.description,
+        name: name,
+        description: description,
         content: content,
         featuredImage: featuredImageUrl,
         absFilePath: mdAbsPath
     })
-    await linkGlobalProblemSolution(globalProblem, createdSolution);
+    return createdSolution;
 }
 export const sharedSolutionPromptText = `The article should cover the following aspects to help readers make informed decisions
  about funding and prioritizing this solution:
@@ -113,9 +105,9 @@ advocates working on or supporting this solution, and their perspectives on its 
 
 The article should be written in an objective, evidence-based manner, providing a comprehensive overview of 
 the solution to enable readers to make informed decisions about its merits and potential impact on the problem at hand.`;
-async function generateSolutionContent(generatedSolution: { name: string, description: string}) {
+async function generateGlobalSolutionContent(name: string) {
     return await textCompletion(
-        `Write a comprehensive article about "${generatedSolution.name}". 
+        `Write a comprehensive article about the global solution of "${name}". 
 
 ${sharedSolutionPromptText}
 `,
@@ -130,7 +122,7 @@ export async function generateGlobalSolutionEmbeddings(){
             'GlobalSolution', globalSolution.id);
     }
 }
-async function getSolutionArray(globalProblem: GlobalProblem): Promise<{name: string, description: string}[]> {
+export async function generateSolutionNamesForGlobalProblem(globalProblem: GlobalProblem): Promise<{name: string, description: string}[]> {
     return await jsonArrayCompletion(` 
 Imagine a futuristic utopian world where the problem of "${globalProblem.name}" has been solved.
 
@@ -172,7 +164,6 @@ export async function generateGlobalSolutionImages() {
     let counter = 0;
     for (const globalSolution of solutionsWithoutImages) {
         counter++;
-        // Log percent complete
         const percentCompleted = ((counter / solutionsWithoutImages.length) * 100).toFixed(2);
         console.log(`Completed: ${counter}/${solutionsWithoutImages.length} (${percentCompleted}%)`);
         const slug = globalSolution.name.toLowerCase().replace(/ /g, '-');
