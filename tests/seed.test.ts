@@ -14,7 +14,7 @@ import {
     generateGlobalSolutionImages,
     generateGlobalSolutions
 } from "@/lib/globalSolutionsGenerator";
-import {dumpDatabaseToJson, dumpTableToJson, loadJsonToDatabase} from "@/lib/prisma/dumpDatabaseToJson";
+import {loadJsonToDatabase} from "@/lib/prisma/dumpDatabaseToJson";
 import {seedGlobalSolutions} from "@/prisma/seedGlobalSolutions";
 import {aggregateGlobalSolutionPairAllocations} from "@/lib/globalSolutions";
 import {seedGlobalSolutionPairAllocations} from "@/prisma/seedGlobalSolutionPairAllocations";
@@ -114,17 +114,6 @@ describe("Database-seeder tests", () => {
     });
     it("Generalizes the GlobalSolution descriptions", async () => {
         await generalizeGlobalSolutionDescriptions();
-    });
-    // it("Generates seed scripts", async () => {
-    //     await readAllTables({
-    //         allSeeds: true,
-    //         seedFile: true,
-    //         logTables: false,
-    //         onlyTables: [],
-    //     });
-    // });
-    it("Dumps the database to json files", async () => {
-        await dumpDatabaseToJson();
     });
 });
 
