@@ -1,13 +1,14 @@
-import {textCompletion} from "@/lib/llm";
+import {askYesOrNoQuestion, textCompletion} from "@/lib/llm";
 import {prisma} from "@/lib/db";
 import {GlobalProblem, GlobalSolution} from "@prisma/client";
 import {generateGlobalSolution, sharedSolutionPromptText} from "@/lib/globalSolutionsGenerator";
 import {generateAndUploadFeaturedImageJpg} from "@/lib/imageGenerator";
 import {absPathFromRepo} from "@/lib/fileHelper";
 import fs from "fs";
+import {getRedisClient} from "@/lib/utils/redis";
 
 const generateImages = false;
-export async function createGlobalProblemSolution(globalProblem: GlobalProblem,
+async function generate(globalProblem: GlobalProblem,
                                                   globalSolution: GlobalSolution) {
     const description = await textCompletion(
         `Write a concise sentence about how the solution "${globalSolution.name}" 
@@ -64,7 +65,7 @@ export async function generateGlobalProblemSolutions() {
                 continue;
             }
             if(await isGoodSolution(globalProblem.name, globalSolution.name)){
-                await createGlobalProblemSolution(globalProblem, globalSolution);
+                await generate(globalProblem, globalSolution);
             }
             cacheCheckedId(globalSolution, globalProblem);
         }
@@ -72,20 +73,18 @@ export async function generateGlobalProblemSolutions() {
 }
 
 export async function isGoodSolution(problemName: string, solutionName: string) {
-    const prompt = `Is "${solutionName}"
-            a good solution for the global problem "${problemName}"?
-            Please only respond with the word "YES" or the word "NO".
-            `;
-    let result = await textCompletion(prompt,
-        'text');
-    result = result.trim().toUpperCase();
-    // strip quotes
-    result = result.replace(/['"]+/g, '');
-    if(result === 'YES' || result === 'NO'){
-
-        return result === 'YES';
+    const redisKey = `good-solution-${problemName}-${solutionName}`;
+    const redis = getRedisClient();
+    const alreadyChecked = await redis.get(redisKey);
+    if(alreadyChecked) {
+        console.log(`Already checked ${solutionName} for ${problemName}`);
+        return alreadyChecked === 'yes';
     }
-    throw new Error(`Invalid response: ${result} from prompt: ${prompt}`);
+    const answer = await askYesOrNoQuestion(`Could work
+or research on "${solutionName}" significantly contribute to solving the
+global problem "${problemName}"?`);
+    await redis.set(redisKey, answer ? 'yes' : 'no', 'EX', 60 * 60 * 24);
+    return answer;
 }
 
 const cacheFilePath = absPathFromRepo('updatedGlobalProblemSolutionIds.json');
@@ -124,9 +123,9 @@ function createCachePair(globalSolution: GlobalSolution, globalProblem: GlobalPr
 }
 
 
-export async function saveGlobalProblemSolution(globalSolutionName: string,
-                                                globalSolutionDescription: string | null | undefined,
-                                                globalProblem: GlobalProblem) {
+export async function createGlobalProblemSolution(globalSolutionName: string,
+                                                  globalSolutionDescription: string | null | undefined,
+                                                  globalProblem: GlobalProblem) {
     let existingGlobalSolution = await prisma.globalSolution.findUnique({
         where: {
             name: globalSolutionName
@@ -138,5 +137,5 @@ export async function saveGlobalProblemSolution(globalSolutionName: string,
             await generateGlobalSolution(globalSolutionName, globalSolutionDescription,
                 globalProblem.userId);
     }
-    await createGlobalProblemSolution(globalProblem, existingGlobalSolution);
+    return await generate(globalProblem, existingGlobalSolution);
 }
