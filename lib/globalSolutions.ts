@@ -1,5 +1,6 @@
 import {GlobalSolution} from "@prisma/client";
-import { prisma } from "@/lib/db";
+import {prisma} from "@/lib/db";
+import {askYesOrNoQuestion} from "@/lib/llm";
 
 async function getRandomGlobalSolutionsForUser(userId: string): Promise<{ id: string }[]> {
     return prisma.$queryRaw`
@@ -88,4 +89,10 @@ export async function aggregateGlobalSolutionPairAllocations() {
         results.push(result);
     }
     return results;
+}
+
+export async function isGoodSolution(problemName: string, solutionName: string) {
+    return await askYesOrNoQuestion(`
+Is "${solutionName}" something you'd expect to see on a website that lists potential 
+global solutions to the problem of ${problemName}?`);
 }
