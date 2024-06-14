@@ -10,6 +10,17 @@ import {isGoodSolution} from "@/lib/globalSolutions";
 const generateImages = false;
 async function generate(globalProblem: GlobalProblem,
                                                   globalSolution: GlobalSolution) {
+    const existing = await prisma.globalProblemSolution.findFirst({
+        where: {
+            globalProblemId: globalProblem.id,
+            globalSolutionId: globalSolution.id
+        }
+    });
+    if(existing){
+        console.log(`Already linked ${globalSolution.name} to ${globalProblem.name}`);
+        return
+    }
+    console.log(`Generating global problem solution for ${globalProblem.name} and ${globalSolution.name}`);
     const description = await textCompletion(
         `Write a concise sentence about how the solution "${globalSolution.name}" 
         addresses the global problem "${globalProblem.name}".`,

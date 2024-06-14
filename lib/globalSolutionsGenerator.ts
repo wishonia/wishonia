@@ -130,13 +130,6 @@ ${sharedSolutionPromptText}
     );
 }
 
-export async function generateGlobalSolutionEmbeddings(){
-    const globalSolutions = await prisma.globalSolution.findMany();
-    for (const globalSolution of globalSolutions) {
-        await generateAndSaveEmbedding(globalSolution.name + " " + globalSolution.description,
-            'GlobalSolution', globalSolution.id);
-    }
-}
 export async function generateSolutionNamesForGlobalProblem(globalProblem: GlobalProblem): Promise<{name: string, description: string}[]> {
     return await jsonArrayCompletion(` 
 Imagine a futuristic utopian world where the problem of "${globalProblem.name}" has been solved.
@@ -173,15 +166,19 @@ For instance, for the global problem of "Mental Illness", you could return solut
 }
 
 export async function generateGlobalSolutionImages() {
-    const globalSolutions = await prisma.globalSolution.findMany();
-    const solutionsWithoutImages = globalSolutions.filter(solution => !solution.featuredImage);
+    const solutionsWithoutImages = await prisma.globalSolution.findMany({
+        where: {
+            featuredImage: null
+        }
+    });
     console.log(`Generating images for ${solutionsWithoutImages.length} global solutions`);
     let counter = 0;
     for (const globalSolution of solutionsWithoutImages) {
         counter++;
         const percentCompleted = ((counter / solutionsWithoutImages.length) * 100).toFixed(2);
         console.log(`Completed: ${counter}/${solutionsWithoutImages.length} (${percentCompleted}%)`);
-        const slug = globalSolution.name.toLowerCase().replace(/ /g, '-');
+        const slug = globalSolution.name.toLowerCase()
+            .replace(/ /g, '-');
         const imagePath = `global-solutions/${slugify(slug)}.jpg`
         try {
             const imageUrl = await generateAndUploadFeaturedImageJpg(
