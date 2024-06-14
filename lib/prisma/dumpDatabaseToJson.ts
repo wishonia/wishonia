@@ -2,6 +2,7 @@ import { PrismaClient } from '@prisma/client';
 import fs from 'fs';
 import {absPathFromRepo} from "@/lib/fileHelper";
 import {getPostgresClient, getSchemaName} from "@/lib/db/postgresClient";
+import {getVercelImageUrlFromPath} from "@/lib/imageUploader";
 
 const prisma = new PrismaClient();
 
@@ -23,15 +24,41 @@ export async function dumpTableToJson(tableName: string) {
 
     // Retrieve the data from the current table using Prisma
     const data = await prisma.$queryRawUnsafe<Array<any>>(
-        `SELECT ${selectQuery} FROM "${tableName}"`
+        `SELECT ${selectQuery}
+         FROM "${tableName}"
+        `
     );
     if(!data || data.length === 0) {
         console.log(`No data found for table: ${tableName}`);
         return;
     }
+    const keep = [];
+    for (const row of data) {
+        if(row.userId && row.userId !== 'test-user') {
+            continue;
+        }
+        if(row.name){
+            // convert the name to URL friendly slug and replace the id with it
+            row.id = row.name.toLowerCase().replace(/ /g, '-');
+        }
+        if(row.featuredImage && !row.featuredImage.includes('http')) {
+            const url = await getVercelImageUrlFromPath(row.featuredImage);
+            if(url) {
+                row.featuredImage = url;
+            } else {
+                console.log(`Image not found: ${row.featuredImage}`);
+            }
+        }
+        keep.push(row);
+    }
+
+    // order by id if it exists
+    if(keep[0].id) {
+        keep.sort((a, b) => a.id.localeCompare(b.id));
+    }
 
     // Convert the data to JSON format
-    const jsonData = JSON.stringify(data, null, 2);
+    const jsonData = JSON.stringify(keep, null, 2);
 
     // Save the data to a file using the file system module
     const absPath = absPathFromRepo(`prisma/seeds/${tableName}.json`)
