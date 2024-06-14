@@ -79,8 +79,12 @@ export function parseRedisUrl(
   return result.length > 0 ? result[0] : undefined;
 }
 
+export function getRedisClient() {
+  return new Redis(process.env.REDIS_URL || "redis://localhost:6379");
+}
+
 export function getRedisModelCache(){
   // See https://github.com/redis/ioredis for connection options
-  const client = new Redis(process.env.REDIS_URL || "redis://localhost:6379");
+  const client = getRedisClient();
   return new RedisCache(client);
 }
