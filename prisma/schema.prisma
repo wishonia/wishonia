@@ -320,6 +320,8 @@ model GlobalSolutionPairAllocation {
   user                         User           @relation(fields: [userId], references: [id])
   thisGlobalSolution           GlobalSolution @relation("ThisGlobalSolutionRelation", fields: [thisGlobalSolutionId], references: [id])
   thatGlobalSolution           GlobalSolution @relation("ThatGlobalSolutionRelation", fields: [thatGlobalSolutionId], references: [id])
+
+  @@unique([userId, thisGlobalSolutionId, thatGlobalSolutionId])
 }
 
 model GlobalProblemSolution {
@@ -354,6 +356,8 @@ model GlobalProblemSolutionPairAllocation {
   globalProblem                       GlobalProblem?        @relation(fields: [globalProblemId], references: [id])
   thisGlobalProblemSolution           GlobalProblemSolution @relation("ThisGlobalProblemSolutionRelation", fields: [thisGlobalProblemSolutionId], references: [id])
   thatGlobalProblemSolution           GlobalProblemSolution @relation("ThatGlobalProblemSolutionRelation", fields: [thatGlobalProblemSolutionId], references: [id])
+
+  @@unique([userId, thisGlobalProblemSolutionId, thatGlobalProblemSolutionId])
 }
 
 model GlobalTaskSolution {
