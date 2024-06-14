@@ -1,7 +1,8 @@
-import { ChatPromptTemplate } from "@langchain/core/prompts";
-import { ChatOpenAI } from "@langchain/openai";
-import { z } from "zod";
-import {getRedisModelCache} from "@/lib/utils/redis";
+import {ChatPromptTemplate} from "@langchain/core/prompts";
+import {z} from "zod";
+import {getChatOpenAIModel} from "@/lib/openai";
+
+
 
 /**
  * Classify a given text based on provided enumerated options
@@ -23,16 +24,11 @@ export async function classifyText(input: string, options: string[], description
 
 Only extract the properties mentioned in the 'Classification' function.
 
-Passage:
+Text to Classify:
 {input}
 `
     );
-
-    const llm = new ChatOpenAI({
-        temperature: 0,
-        modelName: "gpt-3.5-turbo-0125",
-        cache: getRedisModelCache()
-    });
+    const llm = getChatOpenAIModel();
     const llmWihStructuredOutput = llm.withStructuredOutput(classificationSchema, {
         name: "extractor",
     });

@@ -11,11 +11,14 @@ import { Replicate } from "@langchain/community/llms/replicate";
 export const chatModelProvider = (
   provider: string,
   modelName: string,
-  temperature: number,
+  temperature?: number,
   otherFields?: any
 ) => {
   modelName = modelName.replace("-dbase", "");
   modelName = modelName.replace(/_wishonia_[0-9]+$/, "");
+  if(!temperature) {
+    temperature = 0;
+  }
 
   switch (provider.toLowerCase()) {
     case "openai":
