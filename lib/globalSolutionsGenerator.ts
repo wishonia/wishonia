@@ -7,7 +7,7 @@ import {generateAndSaveEmbedding} from "@/lib/openai";
 import {saveMarkdownPost} from "@/lib/markdownGenerator";
 import {absPathFromPublic, absPathFromRepo} from "@/lib/fileHelper";
 import fs from "fs";
-import {saveGlobalProblemSolution} from "@/lib/globalProblemSolutionGenerator";
+import {createGlobalProblemSolution} from "@/lib/globalProblemSolutionGenerator";
 
 const generateImages = false;
 export async function generateGlobalSolutions() {
@@ -36,7 +36,7 @@ export async function generateGlobalProblemSolutionsForGlobalProblem(globalProbl
         await generateSolutionNamesForGlobalProblem(globalProblem);
     for (const nameDescription of generatedSolutionNamesDescriptions) {
         console.log(`Generating solution: ${nameDescription.name} for problem: ${globalProblem.name}`);
-        await saveGlobalProblemSolution(nameDescription.name,
+        await createGlobalProblemSolution(nameDescription.name,
             nameDescription.description, globalProblem);
     }
 }
