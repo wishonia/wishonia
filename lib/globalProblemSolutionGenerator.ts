@@ -5,7 +5,7 @@ import {generateGlobalSolution, sharedSolutionPromptText} from "@/lib/globalSolu
 import {generateAndUploadFeaturedImageJpg} from "@/lib/imageGenerator";
 import {absPathFromRepo} from "@/lib/fileHelper";
 import fs from "fs";
-import {getRedisClient} from "@/lib/utils/redis";
+import {isGoodSolution} from "@/lib/globalSolutions";
 
 const generateImages = false;
 async function generate(globalProblem: GlobalProblem,
@@ -66,25 +66,12 @@ export async function generateGlobalProblemSolutions() {
             }
             if(await isGoodSolution(globalProblem.name, globalSolution.name)){
                 await generate(globalProblem, globalSolution);
+            } else {
+                console.log(`Skipping solution "${globalSolution.name}" because it was not a good solution for ${globalProblem.name}`);
             }
             cacheCheckedId(globalSolution, globalProblem);
         }
     }
-}
-
-export async function isGoodSolution(problemName: string, solutionName: string) {
-    const redisKey = `good-solution-${problemName}-${solutionName}`;
-    const redis = getRedisClient();
-    const alreadyChecked = await redis.get(redisKey);
-    if(alreadyChecked) {
-        console.log(`Already checked ${solutionName} for ${problemName}`);
-        return alreadyChecked === 'yes';
-    }
-    const answer = await askYesOrNoQuestion(`Could work
-or research on "${solutionName}" significantly contribute to solving the
-global problem "${problemName}"?`);
-    await redis.set(redisKey, answer ? 'yes' : 'no', 'EX', 60 * 60 * 24);
-    return answer;
 }
 
 const cacheFilePath = absPathFromRepo('updatedGlobalProblemSolutionIds.json');
