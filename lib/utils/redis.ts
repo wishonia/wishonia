@@ -1,5 +1,7 @@
 // copied from https://github.com/glani/parse-redis-url-simple/blob/master/src/index.ts
-import { parse } from "url";
+import {parse} from "url";
+import {RedisCache} from "@langchain/community/caches/ioredis";
+import {Redis} from "ioredis";
 
 const redisDefaultPort = 6379;
 const sentinelDefaultPort = 26379;
@@ -75,4 +77,10 @@ export function parseRedisUrl(
   }
 
   return result.length > 0 ? result[0] : undefined;
+}
+
+export function getRedisModelCache(){
+  // See https://github.com/redis/ioredis for connection options
+  const client = new Redis(process.env.REDIS_URL || "redis://localhost:6379");
+  return new RedisCache(client);
 }
