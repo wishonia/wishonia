@@ -1,4 +1,7 @@
 import OpenAI from 'openai';
+import {getChatOpenAIModel} from "@/lib/openai";
+import {HumanMessage, SystemMessage} from "@langchain/core/messages";
+import {StringOutputParser} from "@langchain/core/output_parsers";
 // Create an OpenAI API client (that's edge-friendly!)
 export const openai = new OpenAI({
   apiKey: process.env.OPENAI_API_KEY || '',
@@ -61,4 +64,22 @@ export function formatTextResponse(text: string): string {
 function replaceStupidWords(text: string): string {
   text = text.replace('delves into', 'explores');
     return text;
+}
+
+export async function askYesOrNoQuestion(question: string): Promise<boolean> {
+  const model = getChatOpenAIModel('gpt-3.5-turbo-0125');
+  const messages = [
+    new SystemMessage(`Accurately answer the following question with a 'YES' or 'NO'.`),
+    new HumanMessage(question),
+  ];
+
+  const result = await model.invoke(messages);
+  const parser = new StringOutputParser();
+  let answer = await parser.invoke(result);
+  answer = answer.replace(/['"]+/g, '');
+    answer = answer.trim().toUpperCase();
+  if(answer === 'YES' || answer === 'NO'){
+    return answer === 'YES';
+  }
+  throw new Error(`Invalid response: ${result} from question: ${question}`);
 }
