@@ -1,6 +1,7 @@
 import { ChatPromptTemplate } from "@langchain/core/prompts";
 import { ChatOpenAI } from "@langchain/openai";
 import { z } from "zod";
+import {getRedisModelCache} from "@/lib/utils/redis";
 
 /**
  * Classify a given text based on provided enumerated options
@@ -30,6 +31,7 @@ Passage:
     const llm = new ChatOpenAI({
         temperature: 0,
         modelName: "gpt-3.5-turbo-0125",
+        cache: getRedisModelCache()
     });
     const llmWihStructuredOutput = llm.withStructuredOutput(classificationSchema, {
         name: "extractor",
