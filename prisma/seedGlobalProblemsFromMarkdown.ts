@@ -2,7 +2,7 @@ import {User} from "@prisma/client";
 import {readAllMarkdownFiles} from "@/lib/markdownReader";
 import { prisma } from "@/lib/db";
 
-export async function seedGlobalProblems(testUser: User) {
+export async function seedGlobalProblemsFromMarkdown(testUser: User) {
     const posts = await readAllMarkdownFiles('public/globalProblems')
     for (const post of posts) {
         // Check if the globalProblem already exists

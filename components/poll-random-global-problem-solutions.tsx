@@ -18,7 +18,6 @@ export const PollRandomGlobalProblemSolutions: React.FC<PollProps> = ({ globalPr
     const fetchGlobalProblemSolutions = async () => {
         setLoading(true);
         const response = await fetch('/api/globalProblems/' + globalProblemId + '/solutions/random');
-        debugger
         const data = await response.json();
         if(!data.thisGlobalProblemSolution){
             router.push('/globalProblemSolutions/results');
