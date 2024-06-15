@@ -307,3 +307,19 @@ export async function deleteAllGlobalProblemSolutionsForProblem(globalProblemNam
         });
     }
 }
+
+export async function deleteGlobalProblemSolutionById(id: string) {
+    await prisma.globalProblemSolutionPairAllocation.deleteMany({
+        where: {
+            thisGlobalProblemSolutionId: id
+        }
+    });
+    await prisma.globalProblemSolutionPairAllocation.deleteMany({
+        where: {
+            thatGlobalProblemSolutionId: id
+        }
+    });
+    await prisma.globalProblemSolution.delete({
+        where: {id}
+    });
+}
