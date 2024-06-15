@@ -100,6 +100,7 @@ model User {
   warPercentageGuessed Float?
   web3Wallet           String?
   website              String?
+  admin                Boolean?  @default(false)
 
   accounts                              Account[]
   sessions                              Session[]
