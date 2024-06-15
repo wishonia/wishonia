@@ -43,6 +43,7 @@ export const authOptions: NextAuthOptions = {
         session.user.image = token.picture as string | null | undefined;
         // Use type assertion to bypass the type error
         (session.user as any).username = token.username as string | null | undefined;
+        session.user.admin = token.admin as boolean | undefined;
       }
 
       return session
@@ -71,6 +72,7 @@ export const authOptions: NextAuthOptions = {
         createdAt: dbUser.createdAt,
         updatedAt: dbUser.updatedAt,
         web3Wallet: dbUser.web3Wallet,
+        admin: dbUser.admin
       }
     },
   },
