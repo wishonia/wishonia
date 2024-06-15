@@ -43,7 +43,9 @@ export const GlobalProblemSolutionsVoteAndSolutionsList: React.FC<PollProps> = (
             </DashboardHeader>
             <PollRandomGlobalProblemSolutions globalProblemId={globalProblemId} user={user}>
             </PollRandomGlobalProblemSolutions>
-            <GlobalProblemSolutionsList globalProblemId={globalProblemId}>
+            <GlobalProblemSolutionsList
+                user={user}
+                globalProblemId={globalProblemId}>
             </GlobalProblemSolutionsList>
         </Shell>
     )
