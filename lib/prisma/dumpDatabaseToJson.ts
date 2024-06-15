@@ -1,12 +1,20 @@
-import { PrismaClient } from '@prisma/client';
+import {PrismaClient} from '@prisma/client';
 import fs from 'fs';
 import {absPathFromRepo} from "@/lib/fileHelper";
-import {getPostgresClient, getSchemaName} from "@/lib/db/postgresClient";
 import {getVercelImageUrlFromPath} from "@/lib/imageUploader";
 
 const prisma = new PrismaClient();
 
 const ignoreTables = ['_prisma_migrations', 'User', 'accounts', 'sessions'];
+
+export function saveJsonToDump(keep: any[], tableName: string) {
+    // Convert the data to JSON format
+    const jsonData = JSON.stringify(keep, null, 2);
+
+    // Save the data to a file using the file system module
+    const absPath = absPathFromRepo(`prisma/seeds/${tableName}.json`)
+    fs.writeFileSync(absPath, jsonData);
+}
 
 export async function dumpTableToJson(tableName: string) {
     // Retrieve the column names of the current table
@@ -56,13 +64,7 @@ export async function dumpTableToJson(tableName: string) {
     if(keep[0].id) {
         keep.sort((a, b) => a.id.localeCompare(b.id));
     }
-
-    // Convert the data to JSON format
-    const jsonData = JSON.stringify(keep, null, 2);
-
-    // Save the data to a file using the file system module
-    const absPath = absPathFromRepo(`prisma/seeds/${tableName}.json`)
-    fs.writeFileSync(absPath, jsonData);
+    saveJsonToDump(keep, tableName);
 
     console.log(`Data exported for table: ${tableName}`);
 }
@@ -90,56 +92,5 @@ export async function dumpDatabaseToJson() {
         console.error('Error exporting data:', error);
     } finally {
         await prisma.$disconnect();
-    }
-}
-
-export async function loadJsonToDatabase(filter?: string) {
-    try {
-        // Get the PostgreSQL client
-        const pool = getPostgresClient();
-
-        // Get all JSON files from the prisma/seeds directory
-        const seedsDirectory = absPathFromRepo('prisma/seeds');
-        const jsonFiles = fs.readdirSync(seedsDirectory).filter(file => file.endsWith('.json'));
-
-        // Loop through each JSON file and import its data
-        for (const file of jsonFiles) {
-            if(filter && !file.includes(filter)) {
-                continue;
-            }
-            const tableName = file.replace('.json', '');
-
-            // Read the JSON file
-            const absPath = absPathFromRepo(`prisma/seeds/${file}`);
-            const jsonData = fs.readFileSync(absPath, 'utf-8');
-
-            // Parse the JSON data
-            const data = JSON.parse(jsonData);
-
-            // Get the column names from the first object in the data array
-            const columns = Object.keys(data[0]);
-
-            // Prepare the INSERT statement with the specified schema
-            const schema = getSchemaName();
-            const insertQuery = `
-        INSERT INTO "${schema}"."${tableName}" (${columns.map(column => `"${column}"`).join(', ')})
-        VALUES (${columns.map((_, index) => `$${index + 1}`).join(', ')})
-        ON CONFLICT DO NOTHING
-      `;
-
-            // Insert the data into the current table using pg
-            for (const row of data) {
-                const values = columns.map(column => row[column]);
-                await pool.query(insertQuery, values);
-            }
-
-            console.log(`Data imported for table: ${tableName}`);
-        }
-
-        console.log('Data imported successfully.');
-    } finally {
-        // Get the PostgreSQL client
-        const pool = getPostgresClient();
-        //await pool.end();
     }
 }
