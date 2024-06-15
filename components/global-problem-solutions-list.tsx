@@ -1,6 +1,6 @@
 "use client";
 import React, { useState, useEffect } from "react";
-import {User} from "next-auth";
+import { ExtendedUser } from "@/types/auth";
 import {SpinningLoader} from "@/components/spinningLoader";
 import {DataTable} from "@/components/data-table";
 import {GlobalProblemSolution} from "@prisma/client";
@@ -12,8 +12,8 @@ import {cn} from "@/lib/utils";
 import Image from "next/image";
 
 interface PollProps {
-  user?: User;
-    globalProblemId: string;
+  globalProblemId: string;
+  user?: ExtendedUser;
 }
 
 export const GlobalProblemSolutionsList: React.FC<PollProps> = ({ globalProblemId, user }) => {
@@ -101,8 +101,9 @@ export const GlobalProblemSolutionsList: React.FC<PollProps> = ({ globalProblemI
     },
 
   ]
+  debugger
 
-  if(user) {
+  if(user && user.admin) {
     globalProblemSolutionColumns.push({
       accessorKey: "id",
       header: "Actions",
