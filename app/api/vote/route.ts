@@ -71,7 +71,7 @@ export async function POST(
                 body.globalProblemPairAllocation = await db.globalProblemPairAllocation.create({
                     data: globalProblemPairAllocation,
                 });
-                aggregateGlobalProblemPairAllocations();
+                await aggregateGlobalProblemPairAllocations();
             } catch (error) {
                 return handleError(error, 'Could not save globalProblemPairAllocation because:', {
                     error,
