@@ -7,7 +7,7 @@ import {generateAndSaveEmbedding} from "@/lib/openai";
 import {saveMarkdownPost} from "@/lib/markdownGenerator";
 import {absPathFromPublic, absPathFromRepo} from "@/lib/fileHelper";
 import fs from "fs";
-import {saveGlobalProblemSolution} from "@/lib/globalProblemSolutionGenerator";
+import {createGlobalProblemSolution} from "@/lib/globalProblemSolutionGenerator";
 
 const generateImages = false;
 export async function generateGlobalSolutions() {
@@ -36,13 +36,26 @@ export async function generateGlobalProblemSolutionsForGlobalProblem(globalProbl
         await generateSolutionNamesForGlobalProblem(globalProblem);
     for (const nameDescription of generatedSolutionNamesDescriptions) {
         console.log(`Generating solution: ${nameDescription.name} for problem: ${globalProblem.name}`);
-        await saveGlobalProblemSolution(nameDescription.name,
+        await createGlobalProblemSolution(nameDescription.name,
             nameDescription.description, globalProblem);
     }
 }
 
-
-export async function generateGlobalSolution(name: string, description: string, userId: string) {
+export async function getOrCreateGlobalSolution(name: string, description: string, userId: string) {
+    const existing = await prisma.globalSolution.findFirst({
+        where: {
+            name: name
+        }
+    });
+    if(existing) {
+        return existing;
+    }
+    return generateGlobalSolution(name, description, userId);
+}
+export async function generateGlobalSolution(name: string, description: string | null | undefined, userId: string) {
+    if(!description) {
+        description = await generateGlobalSolutionDescription(name);
+    }
     const slug = name.toLowerCase().replace(/ /g, '-');
     const imagePath = `global-solutions/${slugify(slug)}.jpg`
     const mdPath = `global-solutions/${slug}.md`;
@@ -56,6 +69,7 @@ export async function generateGlobalSolution(name: string, description: string, 
     }
     const createdSolution = await prisma.globalSolution.create({
         data: {
+            id: slug,
             name: name,
             description: description,
             content: content,
@@ -68,7 +82,8 @@ export async function generateGlobalSolution(name: string, description: string, 
         description: description,
         content: content,
         featuredImage: featuredImageUrl,
-        absFilePath: mdAbsPath
+        absFilePath: mdAbsPath,
+        slug,
     })
     return createdSolution;
 }
@@ -103,11 +118,11 @@ highlighting its relative advantages, disadvantages, and potential synergies.
 10. Key Stakeholders and Advocates: Identify the key stakeholders, experts, organizations, and 
 advocates working on or supporting this solution, and their perspectives on its potential impact.
 
-The article should be written in an objective, evidence-based manner, providing a comprehensive overview of 
+The article should be written in an objective, evidence-based manner, providing a information-dense overview of 
 the solution to enable readers to make informed decisions about its merits and potential impact on the problem at hand.`;
 async function generateGlobalSolutionContent(name: string) {
     return await textCompletion(
-        `Write a comprehensive article about the global solution of "${name}". 
+        `Write a information-dense article about the global solution of "${name}". 
 
 ${sharedSolutionPromptText}
 `,
@@ -115,13 +130,6 @@ ${sharedSolutionPromptText}
     );
 }
 
-export async function generateGlobalSolutionEmbeddings(){
-    const globalSolutions = await prisma.globalSolution.findMany();
-    for (const globalSolution of globalSolutions) {
-        await generateAndSaveEmbedding(globalSolution.name + " " + globalSolution.description,
-            'GlobalSolution', globalSolution.id);
-    }
-}
 export async function generateSolutionNamesForGlobalProblem(globalProblem: GlobalProblem): Promise<{name: string, description: string}[]> {
     return await jsonArrayCompletion(` 
 Imagine a futuristic utopian world where the problem of "${globalProblem.name}" has been solved.
@@ -158,15 +166,19 @@ For instance, for the global problem of "Mental Illness", you could return solut
 }
 
 export async function generateGlobalSolutionImages() {
-    const globalSolutions = await prisma.globalSolution.findMany();
-    const solutionsWithoutImages = globalSolutions.filter(solution => !solution.featuredImage);
+    const solutionsWithoutImages = await prisma.globalSolution.findMany({
+        where: {
+            featuredImage: null
+        }
+    });
     console.log(`Generating images for ${solutionsWithoutImages.length} global solutions`);
     let counter = 0;
     for (const globalSolution of solutionsWithoutImages) {
         counter++;
         const percentCompleted = ((counter / solutionsWithoutImages.length) * 100).toFixed(2);
         console.log(`Completed: ${counter}/${solutionsWithoutImages.length} (${percentCompleted}%)`);
-        const slug = globalSolution.name.toLowerCase().replace(/ /g, '-');
+        const slug = globalSolution.name.toLowerCase()
+            .replace(/ /g, '-');
         const imagePath = `global-solutions/${slugify(slug)}.jpg`
         try {
             const imageUrl = await generateAndUploadFeaturedImageJpg(
@@ -215,8 +227,7 @@ export async function generalizeGlobalSolutionDescriptions(){
         const percentCompleted = ((counter / globalSolutionsToUpdate.length) * 100).toFixed(2);
         console.log(`Completed: ${counter}/${globalSolutionsToUpdate.length} (${percentCompleted}%)`);
         let updatedDescription = await textCompletion(
-            `Create a one sentence description of the global solution "${globalSolution.name}" 
-            for an article about how it could be used to solve global problems.`,
+            `Provide a one sentence overview about how "${globalSolution.name}" could be used to solve global problems.`,
             'text'
         );
         updatedDescription = formatTextResponse(updatedDescription);
@@ -258,4 +269,12 @@ function alreadyUpdated(globalSolution: GlobalSolution) {
     } catch (error) {
         return false;
     }
+}
+
+async function generateGlobalSolutionDescription(name: string) {
+    return await textCompletion(
+        `Create a one sentence description of the global solution "${name}" 
+        for an article about how it could be used to solve global problems.`,
+        'text'
+    );
 }

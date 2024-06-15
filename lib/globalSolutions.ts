@@ -1,5 +1,8 @@
 import {GlobalSolution} from "@prisma/client";
-import { prisma } from "@/lib/db";
+import {prisma} from "@/lib/db";
+import {askYesOrNoQuestion} from "@/lib/llm";
+import fs from "fs";
+import {absPathFromRepo} from "@/lib/fileHelper";
 
 async function getRandomGlobalSolutionsForUser(userId: string): Promise<{ id: string }[]> {
     return prisma.$queryRaw`
@@ -88,4 +91,38 @@ export async function aggregateGlobalSolutionPairAllocations() {
         results.push(result);
     }
     return results;
+}
+
+export async function isGoodSolution(problemName: string, solutionName: string) {
+    return await askYesOrNoQuestion(`
+Is "${solutionName}" something you'd expect to see on a website that lists potential 
+global solutions to the problem of ${problemName}?`);
+}
+
+export async function dumpGlobalSolutionNames(){
+    const solutionsByProblemId: { [key: string]: string[] } = {};
+    const globalProblems = await prisma.globalProblem.findMany();
+    for (const globalProblem of globalProblems) {
+        console.log(`Global Problem: ${globalProblem.name}`);
+        const globalProblemSolutions = await prisma.globalProblemSolution.findMany({
+            where: {
+                globalProblemId: globalProblem.id
+            }
+        });
+        for (const globalProblemSolution of globalProblemSolutions) {
+            const globalSolution = await prisma.globalSolution.findFirst({
+                where: {
+                    id: globalProblemSolution.globalSolutionId
+                }
+            });
+            if (!globalSolution) throw new Error("Global Solution not found");
+            if(!solutionsByProblemId[globalProblem.name]){
+                solutionsByProblemId[globalProblem.name] = [];
+            }
+            solutionsByProblemId[globalProblem.name].push(globalSolution.name);
+        }
+    }
+    fs.writeFileSync(absPathFromRepo(
+            'prisma/seeds/globalSolutionNames.json'),
+        JSON.stringify(solutionsByProblemId, null, 2));
 }

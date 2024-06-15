@@ -2,7 +2,7 @@
  * @jest-environment node
  */
 import {PrismaClient, User} from "@prisma/client";
-import {seedGlobalProblems} from "@/prisma/seedGlobalProblems";
+import {seedGlobalProblemsFromMarkdown} from "@/prisma/seedGlobalProblemsFromMarkdown";
 import {seedWishingWells} from "@/prisma/seedWishingWells";
 import {seedGlobalProblemPairAllocations} from "@/prisma/seedGlobalProblemPairAllocations";
 import {aggregateGlobalProblemPairAllocations} from "@/lib/globalProblems";
@@ -11,31 +11,48 @@ import {seedWishingWellPairAllocations} from "@/prisma/seedWishingWellPairAlloca
 import {assertTestDB, getOrCreateTestUser, truncateAllTables} from "@/tests/test-helpers";
 import {
     generalizeGlobalSolutionDescriptions,
-    generateGlobalSolutionImages,
     generateGlobalSolutions
 } from "@/lib/globalSolutionsGenerator";
-import {dumpDatabaseToJson, dumpTableToJson, loadJsonToDatabase} from "@/lib/prisma/dumpDatabaseToJson";
+import {saveJsonToDump} from "@/lib/prisma/dumpDatabaseToJson";
 import {seedGlobalSolutions} from "@/prisma/seedGlobalSolutions";
 import {aggregateGlobalSolutionPairAllocations} from "@/lib/globalSolutions";
 import {seedGlobalSolutionPairAllocations} from "@/prisma/seedGlobalSolutionPairAllocations";
 import {generateGlobalProblemSolutions} from "@/lib/globalProblemSolutionGenerator";
 import {aggregateGlobalProblemSolutionPairAllocations} from "@/lib/globalProblemSolutions";
 import {seedGlobalProblemSolutionPairAllocations} from "@/prisma/seedGlobalProblemSolutionPairAllocations";
+import {loadJsonToDatabase, readDumpFile} from "@/lib/prisma/loadDatabaseFromJson";
 
 
 let prisma = new PrismaClient();
 beforeAll(async () => {
-    await assertTestDB();
+    //await assertTestDB();
 });
-
-async function installPgVector() {
-    await prisma.$executeRaw`CREATE EXTENSION IF NOT EXISTS vector`;
-}
 
 describe("Database-seeder tests", () => {
     jest.setTimeout(6000000);
+    it("Seeds from JSON dump", async () => {
+        //await loadJsonToDatabase("User");
+        //await loadJsonToDatabase("GlobalSolution");
+        const globalProblemSolutions = readDumpFile("GlobalProblemSolution");
+        const keep = [];
+        const globalSolutionIds = await prisma.globalSolution.findMany({
+            select: {
+                id: true
+            }
+        });
+        const globalSolutionIdsSet = new Set(globalSolutionIds.map(globalSolution => globalSolution.id));
+        for (const problemSolution of globalProblemSolutions) {
+            if(globalSolutionIdsSet.has(problemSolution.globalSolutionId)) {
+                keep.push(problemSolution);
+            } else {
+                console.log(`GlobalSolution not found for GlobalProblemSolution: ${problemSolution.id}`);
+            }
+        }
+        saveJsonToDump( keep, "GlobalProblemSolution");
+        await loadJsonToDatabase("GlobalProblemSolution");
+        await loadJsonToDatabase("WishingWell");
+    });
     it("seeds DB with user, wishing wells and problems", async () => {
-        await installPgVector();
         await assertTestDB();
         await truncateAllTables();
         const testUser = await getOrCreateTestUser();
@@ -50,18 +67,11 @@ describe("Database-seeder tests", () => {
     it("Seed GlobalProblemSolutions", async () => {
         await checkGlobalProblemSolutions(await getOrCreateTestUser());
     });
-    it("Seed GlobalProblemSolutions", async () => {
-        await checkGlobalProblemSolutions(await getOrCreateTestUser());
-    });
     it("Aggregates global problem pair allocations", async () => {
         await aggregateGlobalProblemSolutionPairAllocations();
     });
     it("Seed global problems and solutions", async () => {
         await loadJsonToDatabase("GlobalProblemSolution");
-        return;
-        // const testUser = await getOrCreateTestUser();
-        // await checkGlobalProblems(testUser);
-        // const globalSolutions =  await generateGlobalSolutions();
     }, 6000000);
     it("Generate global solutions", async () => {
         await generateGlobalSolutions();
@@ -69,62 +79,11 @@ describe("Database-seeder tests", () => {
     it("Seed global solutions", async () => {
         await checkGlobalSolutions(await getOrCreateTestUser());
     }, 6000000);
-    it("Generates GlobalSolution images", async () => {
-        await generateGlobalSolutionImages();
-    }, 6000000);
     it("Generates GlobalProblemSolutions", async () => {
         await generateGlobalProblemSolutions();
     }, 6000000);
-    it("updates globalProblemIds on GlobalProblemSolutionPairAllocation", async () => {
-        const globalProblemSolutionPairAllocations =
-            await prisma.globalProblemSolutionPairAllocation.findMany({
-                where: {
-                    globalProblemId: null
-                },
-                include: {
-                    thisGlobalProblemSolution: true,
-                    thatGlobalProblemSolution: true
-                }
-            });
-        for (const allocation of globalProblemSolutionPairAllocations) {
-            const thisGlobalProblemSolution = allocation.thisGlobalProblemSolution;
-            const thatGlobalProblemSolution = allocation.thatGlobalProblemSolution;
-            if(thisGlobalProblemSolution.globalProblemId !== thatGlobalProblemSolution.globalProblemId) {
-                const thisGlobalProblem = await prisma.globalProblem.findUnique({
-                    where: {
-                        id: thisGlobalProblemSolution.globalProblemId
-                    }
-                });
-                const thatGlobalProblem = await prisma.globalProblem.findUnique({
-                    where: {
-                        id: thatGlobalProblemSolution.globalProblemId
-                    }
-                });
-                throw new Error("GlobalProblemIds do not match");
-            }
-            await prisma.globalProblemSolutionPairAllocation.update({
-                where: {
-                    id: allocation.id
-                },
-                data: {
-                    globalProblemId: thatGlobalProblemSolution.globalProblemId
-                }
-            });
-        }
-    });
     it("Generalizes the GlobalSolution descriptions", async () => {
         await generalizeGlobalSolutionDescriptions();
-    });
-    // it("Generates seed scripts", async () => {
-    //     await readAllTables({
-    //         allSeeds: true,
-    //         seedFile: true,
-    //         logTables: false,
-    //         onlyTables: [],
-    //     });
-    // });
-    it("Dumps the database to json files", async () => {
-        await dumpDatabaseToJson();
     });
 });
 
@@ -132,7 +91,7 @@ describe("Database-seeder tests", () => {
 async function checkGlobalProblems<ExtArgs>(testUser: User) {
     console.log("Checking global problems");
     console.log("Seeding global problems");
-    await seedGlobalProblems(testUser);
+    await seedGlobalProblemsFromMarkdown(testUser);
     console.log("Seeded global problems");
     console.log("Seeding global problem pair allocations");
     await seedGlobalProblemPairAllocations(testUser);

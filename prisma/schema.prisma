@@ -100,6 +100,7 @@ model User {
   warPercentageGuessed Float?
   web3Wallet           String?
   website              String?
+  admin                Boolean?  @default(false)
 
   accounts                              Account[]
   sessions                              Session[]
@@ -320,6 +321,8 @@ model GlobalSolutionPairAllocation {
   user                         User           @relation(fields: [userId], references: [id])
   thisGlobalSolution           GlobalSolution @relation("ThisGlobalSolutionRelation", fields: [thisGlobalSolutionId], references: [id])
   thatGlobalSolution           GlobalSolution @relation("ThatGlobalSolutionRelation", fields: [thatGlobalSolutionId], references: [id])
+
+  @@unique([userId, thisGlobalSolutionId, thatGlobalSolutionId])
 }
 
 model GlobalProblemSolution {
@@ -354,6 +357,8 @@ model GlobalProblemSolutionPairAllocation {
   globalProblem                       GlobalProblem?        @relation(fields: [globalProblemId], references: [id])
   thisGlobalProblemSolution           GlobalProblemSolution @relation("ThisGlobalProblemSolutionRelation", fields: [thisGlobalProblemSolutionId], references: [id])
   thatGlobalProblemSolution           GlobalProblemSolution @relation("ThatGlobalProblemSolutionRelation", fields: [thatGlobalProblemSolutionId], references: [id])
+
+  @@unique([userId, thisGlobalProblemSolutionId, thatGlobalProblemSolutionId])
 }
 
 model GlobalTaskSolution {
@@ -863,4 +868,30 @@ model Library {
   tags        String[]
   createdAt   DateTime @default(now())
   updatedAt   DateTime @updatedAt
+}
+
+model Organization {
+  id            String   @id @default(cuid())
+  name          String
+  alternateName String?
+  description   String?
+  url           String?
+  logo          String?
+  member        Person[]
+  createdAt     DateTime @default(now())
+  updatedAt     DateTime @updatedAt
+  email         String?
+  telephone     String?
+}
+
+model Person {
+  id             String       @id @default(cuid())
+  name           String
+  email          String?
+  telephone      String?
+  jobTitle       String?
+  organization   Organization @relation(fields: [organizationId], references: [id])
+  organizationId String
+  createdAt      DateTime     @default(now())
+  updatedAt      DateTime     @updatedAt
 }

@@ -1,6 +1,7 @@
 import {list, put} from "@vercel/blob";
 import {absPathFromPublic, getNonIgnoredFiles, relativePathFromPublic} from "@/lib/fileHelper";
 import fs from "fs";
+import {getRedisClient} from "@/lib/utils/redis";
 
 export async function uploadImageToVercel(buffer: Buffer, pathFromPublic: string) {
     if(pathFromPublic.startsWith('/')) {
@@ -76,4 +77,30 @@ export async function downloadAllBlobImages() {
         }
         fs.writeFileSync(absPath, buffer);
     }
+}
+
+export async function listImagesOnVercel() {
+    const cacheKey = 'vercelImages';
+    const cachedImages = await getRedisClient().get(cacheKey);
+    if(cachedImages) {
+        return JSON.parse(cachedImages);
+    }
+    const listBlobResult = await list();
+    const blobs = listBlobResult.blobs;
+    const urls = [];
+    for (const blob of blobs) {
+        urls.push(blob.url);
+    }
+    await getRedisClient().set(cacheKey, JSON.stringify(urls));
+    return urls;
+}
+
+export async function getVercelImageUrlFromPath(pathFromPublic: string) {
+    const vercelImages = await listImagesOnVercel();
+    for (const url of vercelImages) {
+        if (url.includes(pathFromPublic)) {
+            return url;
+        }
+    }
+    return null;
 }

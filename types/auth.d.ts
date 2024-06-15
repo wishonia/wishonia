@@ -1,12 +1,13 @@
-import { User } from "next-auth"
+import { User as NextAuthUser } from "next-auth"
 import { JWT } from "next-auth/jwt"
 
 type UserId = string
 
 type NavUser = {
-  user?: User & {
+  user?: NextAuthUser & {
     id: UserId
     username?: string
+    admin?: boolean
   }
 }
 
@@ -18,9 +19,15 @@ declare module "next-auth/jwt" {
 
 declare module "next-auth" {
   interface Session {
-    user: User & {
+    user: NextAuthUser & {
       id: UserId
       username: string
+      admin?: boolean
     }
   }
+}
+
+export interface ExtendedUser extends NextAuthUser {
+  admin?: boolean;
+  username?: string
 }

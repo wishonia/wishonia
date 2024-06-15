@@ -8,8 +8,9 @@ import {aggregateWishingWellPairAllocations} from "@/lib/wishingWells";
 import {
     updateOrCreateGlobalProblemSolutionPairAllocation
 } from "@/lib/globalProblemSolutions";
+import {ExtendedUser} from "@/types/auth";
 
-async function saveReferrerUserId(referrerUserId: string, currentUser: User & { id: string; username: string; }) {
+async function saveReferrerUserId(referrerUserId: string, currentUser: ExtendedUser ) {
     const referrerUser = await db.user.findFirst({
         where: {
             OR: [
@@ -71,7 +72,7 @@ export async function POST(
                 body.globalProblemPairAllocation = await db.globalProblemPairAllocation.create({
                     data: globalProblemPairAllocation,
                 });
-                aggregateGlobalProblemPairAllocations();
+                await aggregateGlobalProblemPairAllocations();
             } catch (error) {
                 return handleError(error, 'Could not save globalProblemPairAllocation because:', {
                     error,

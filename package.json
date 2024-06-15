@@ -105,6 +105,7 @@
     "gpt3-tokenizer": "^1.1.5",
     "gray-matter": "^4.0.3",
     "ignore": "^5.3.1",
+    "ioredis": "^5.4.1",
     "json-to-prisma-schema-convertor": "^0.1.0",
     "langchain": "^0.2.4",
     "llamaindex": "^0.3.14",

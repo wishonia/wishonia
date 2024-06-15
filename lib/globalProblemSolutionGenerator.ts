@@ -1,16 +1,29 @@
-import {textCompletion} from "@/lib/llm";
-import { prisma } from "@/lib/db";
+import {askYesOrNoQuestion, textCompletion} from "@/lib/llm";
+import {prisma} from "@/lib/db";
 import {GlobalProblem, GlobalSolution} from "@prisma/client";
 import {generateGlobalSolution, sharedSolutionPromptText} from "@/lib/globalSolutionsGenerator";
 import {generateAndUploadFeaturedImageJpg} from "@/lib/imageGenerator";
 import {absPathFromRepo} from "@/lib/fileHelper";
 import fs from "fs";
+import {isGoodSolution} from "@/lib/globalSolutions";
 
 const generateImages = false;
-export async function linkGlobalProblemSolution(globalProblem: GlobalProblem,
-                                         globalSolution: GlobalSolution) {
+async function generate(globalProblem: GlobalProblem,
+                                                  globalSolution: GlobalSolution) {
+    const existing = await prisma.globalProblemSolution.findFirst({
+        where: {
+            globalProblemId: globalProblem.id,
+            globalSolutionId: globalSolution.id
+        }
+    });
+    if(existing){
+        console.log(`Already linked ${globalSolution.name} to ${globalProblem.name}`);
+        return
+    }
+    console.log(`Generating global problem solution for ${globalProblem.name} and ${globalSolution.name}`);
     const description = await textCompletion(
-        `Write a brief description of how the solution "${globalSolution.name}" addresses the global problem "${globalProblem.name}".`,
+        `Write a concise sentence about how the solution "${globalSolution.name}" 
+        addresses the global problem "${globalProblem.name}".`,
         'text');
     const content = await generateProblemSolutionContent(globalProblem, globalSolution);
     let featuredImage = globalSolution.featuredImage;
@@ -62,18 +75,10 @@ export async function generateGlobalProblemSolutions() {
                 console.log(`Already checked ${globalSolution.name} for ${globalProblem.name}`);
                 continue;
             }
-            const prompt = `Is the solution "${globalSolution.name}"
-            a good solution for the global problem "${globalProblem.name}"?
-            Please only respond with the word YES or the word NO.
-            `;
-            const isGoodSolution = await textCompletion(prompt,
-                'text');
-            console.log(`Would "${globalSolution.name}"
-contribute to solving the global problem of     
- "${globalProblem.name}"?
-             Answer: ${isGoodSolution}`)
-            if(isGoodSolution === 'YES'){
-                await linkGlobalProblemSolution(globalProblem, globalSolution);
+            if(await isGoodSolution(globalProblem.name, globalSolution.name)){
+                await generate(globalProblem, globalSolution);
+            } else {
+                console.log(`Skipping solution "${globalSolution.name}" because it was not a good solution for ${globalProblem.name}`);
             }
             cacheCheckedId(globalSolution, globalProblem);
         }
@@ -116,20 +121,19 @@ function createCachePair(globalSolution: GlobalSolution, globalProblem: GlobalPr
 }
 
 
-export async function saveGlobalProblemSolution(globalSolutionName: string,
-                                                globalSolutionDescription: string,
-                                                globalProblem: GlobalProblem) {
+export async function createGlobalProblemSolution(globalSolutionName: string,
+                                                  globalSolutionDescription: string | null | undefined,
+                                                  globalProblem: GlobalProblem) {
     let existingGlobalSolution = await prisma.globalSolution.findUnique({
         where: {
             name: globalSolutionName
         }
     });
     if (!existingGlobalSolution) {
-        console.log(`Solution "${globalSolutionName}" already exists in the database.`);
+        console.log(`Solution "${globalSolutionName}" not found, generating new solution`);
         existingGlobalSolution =
             await generateGlobalSolution(globalSolutionName, globalSolutionDescription,
                 globalProblem.userId);
     }
-
-    await linkGlobalProblemSolution(globalProblem, existingGlobalSolution);
+    return await generate(globalProblem, existingGlobalSolution);
 }
