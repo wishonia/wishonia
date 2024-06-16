@@ -290,6 +290,8 @@ model GlobalProblemPairAllocation {
   user                        User          @relation(fields: [userId], references: [id])
   thisGlobalProblem           GlobalProblem @relation("ThisGlobalProblemRelation", fields: [thisGlobalProblemId], references: [id])
   thatGlobalProblem           GlobalProblem @relation("ThatGlobalProblemRelation", fields: [thatGlobalProblemId], references: [id])
+
+  @@unique([userId, thisGlobalProblemId, thatGlobalProblemId])
 }
 
 model GlobalSolution {
@@ -487,6 +489,8 @@ model WishingWellPairAllocation {
   user                      User        @relation(fields: [userId], references: [id])
   thisWishingWell           WishingWell @relation("ThisWishingWellRelation", fields: [thisWishingWellId], references: [id])
   thatWishingWell           WishingWell @relation("ThatWishingWellRelation", fields: [thatWishingWellId], references: [id])
+
+  @@unique([userId, thisWishingWellId, thatWishingWellId])
 }
 
 model WishingWellContribution {
