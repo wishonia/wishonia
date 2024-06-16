@@ -1,3 +1,4 @@
+import slugify from 'slugify';
 import {askYesOrNoQuestion, textCompletion} from "@/lib/llm";
 import {prisma} from "@/lib/db";
 import {GlobalProblem, GlobalSolution} from "@prisma/client";
@@ -124,16 +125,17 @@ function createCachePair(globalSolution: GlobalSolution, globalProblem: GlobalPr
 export async function createGlobalProblemSolution(globalSolutionName: string,
                                                   globalSolutionDescription: string | null | undefined,
                                                   globalProblem: GlobalProblem) {
+    const slug = slugify(globalSolutionName);
     let existingGlobalSolution = await prisma.globalSolution.findUnique({
         where: {
-            name: globalSolutionName
+            id: slug
         }
     });
     if (!existingGlobalSolution) {
         console.log(`Solution "${globalSolutionName}" not found, generating new solution`);
         existingGlobalSolution =
             await generateGlobalSolution(globalSolutionName, globalSolutionDescription,
-                globalProblem.userId);
+                globalProblem.userId, slug);
     }
     return await generate(globalProblem, existingGlobalSolution);
 }

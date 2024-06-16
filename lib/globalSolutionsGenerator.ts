@@ -41,24 +41,33 @@ export async function generateGlobalProblemSolutionsForGlobalProblem(globalProbl
     }
 }
 
-export async function getOrCreateGlobalSolution(name: string, description: string, userId: string) {
+export async function getOrCreateGlobalSolution(
+    name: string,
+    description: string,
+    userId: string,
+    id: string
+) {
     const existing = await prisma.globalSolution.findFirst({
         where: {
-            name: name
+            id: id
         }
     });
     if(existing) {
         return existing;
     }
-    return generateGlobalSolution(name, description, userId);
+    return generateGlobalSolution(name, description, userId, id);
 }
-export async function generateGlobalSolution(name: string, description: string | null | undefined, userId: string) {
+export async function generateGlobalSolution(
+    name: string,
+    description: string | null | undefined,
+    userId: string,
+    id: string
+) {
     if(!description) {
         description = await generateGlobalSolutionDescription(name);
     }
-    const slug = name.toLowerCase().replace(/ /g, '-');
-    const imagePath = `global-solutions/${slugify(slug)}.jpg`
-    const mdPath = `global-solutions/${slug}.md`;
+    const imagePath = `global-solutions/${id}.jpg`
+    const mdPath = `global-solutions/${id}.md`;
     const mdAbsPath = absPathFromPublic(mdPath);
     const content = await generateGlobalSolutionContent(name);
     let featuredImageUrl;
@@ -69,7 +78,7 @@ export async function generateGlobalSolution(name: string, description: string |
     }
     const createdSolution = await prisma.globalSolution.create({
         data: {
-            id: slug,
+            id: slugify(name),
             name: name,
             description: description,
             content: content,
@@ -83,7 +92,7 @@ export async function generateGlobalSolution(name: string, description: string |
         content: content,
         featuredImage: featuredImageUrl,
         absFilePath: mdAbsPath,
-        slug,
+        slug: id,
     })
     return createdSolution;
 }
@@ -138,11 +147,12 @@ Return a json array of the 5 best SMART
  (Specific, Measurable, Achievable, Relevant, and Time-bound)
 radically innovative solutions the problem of "${globalProblem.name}". 
 
-For each array item should have two properties::
-1. 'name': generalized name with the fewest words that captures the essence of the solution 
-(we want to minimize variation to avoid duplication with synonyms in the database. For instance, we should have 
+For each array item should have three properties:
+1. 'id': a URL-friendly slug version of the name
+2. 'name': generalized name with the fewest words that captures the essence of the solution
+(we want to minimize variation to avoid duplication with synonyms in the database. For instance, we should have
 "Personalized Cancer Vaccine" and not "Personalized Cancer Vaccine Development" or "Personalized Cancer Vaccine Research")
-2. 'description': a brief description of the intervention
+3. 'description': a brief description of the intervention
 
             
 For instance, for the global problem of "Mental Illness", you could return solutions like:
