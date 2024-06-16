@@ -101,8 +101,6 @@ export const GlobalProblemSolutionsList: React.FC<PollProps> = ({ globalProblemI
     },
 
   ]
-  debugger
-
   if(user && user.admin) {
     globalProblemSolutionColumns.push({
       accessorKey: "id",

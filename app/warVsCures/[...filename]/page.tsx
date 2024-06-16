@@ -15,7 +15,6 @@ export default async function Docs({ params }: DocsProps) {
     if (Array.isArray(filename)) {
         filename = filename.join('/');
     }
-  //debugger
   console.log(`filename: ${filename}`);
   filename = filename.replace(/\.md$/, '');
   return (
