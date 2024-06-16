@@ -13,6 +13,7 @@ export const PollRandomGlobalProblems: React.FC<PollProps> = ({ user }) => {
     const [globalProblems, setGlobalProblems] =
         useState<{ thisGlobalProblem?: any; thatGlobalProblem?: any }>({});
     const [loading, setLoading] = useState(true);
+    const [dataLoaded, setDataLoaded] = useState(false);
     const router = useRouter();
     const fetchGlobalProblems = async () => {
         setLoading(true);
@@ -28,11 +29,14 @@ export const PollRandomGlobalProblems: React.FC<PollProps> = ({ user }) => {
         }
         setGlobalProblems(data);
         setLoading(false);
+        setDataLoaded(true);
     };
 
     useEffect(() => {
-        fetchGlobalProblems();
-    }, []);
+        if (!dataLoaded) {
+            fetchGlobalProblems();
+        }
+    }, [dataLoaded]);
 
     if (loading) {
         return <SpinningLoader />;
