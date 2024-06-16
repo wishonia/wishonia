@@ -16,7 +16,6 @@ export const LoggedInVoteButton: React.FC<PollProps> = ({ user,
         return null;
     }
     const handleClick = () => {
-        //debugger
         postVoteData()
         if (onButtonClick) {
             onButtonClick();
