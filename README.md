@@ -22,19 +22,13 @@
    docker-compose up -d
    ```
 
-4. **Install pgvector**:
-
-   ```sh
-   docker exec -it wishocracy_server_1 npx prisma migrate deploy
-   ```
-
-5. **Install Dependencies**:
+4. **Install Dependencies**:
 
    ```sh
    pnpm install
    ```
 
-6. **Seed the Database**:
+5. **Seed the Database**:
 
 Seed the database with default problems and wishes by running tests/seed.test.ts with the following command:
 `sh
