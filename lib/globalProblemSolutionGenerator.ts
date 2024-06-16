@@ -1,4 +1,4 @@
-import {askYesOrNoQuestion, textCompletion} from "@/lib/llm";
+import {textCompletion} from "@/lib/llm";
 import {prisma} from "@/lib/db";
 import {GlobalProblem, GlobalSolution} from "@prisma/client";
 import {generateGlobalSolution, sharedSolutionPromptText} from "@/lib/globalSolutionsGenerator";

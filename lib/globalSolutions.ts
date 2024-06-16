@@ -3,6 +3,7 @@ import {prisma} from "@/lib/db";
 import {askYesOrNoQuestion} from "@/lib/llm";
 import fs from "fs";
 import {absPathFromRepo} from "@/lib/fileHelper";
+import {createSlug} from "@/lib/stringHelper";
 
 async function getRandomGlobalSolutionsForUser(userId: string): Promise<{ id: string }[]> {
     return prisma.$queryRaw`
@@ -152,3 +153,17 @@ export async function updateOrCreateGlobalSolutionPairAllocation(thisGlobalSolut
     await aggregateGlobalSolutionPairAllocations();
     return result;
 }
+export async function createGlobalSolution(name: string, description: string, content: string,
+                                    featuredImage: string | undefined, userId: string) {
+    return prisma.globalSolution.create({
+        data: {
+            id: createSlug(name),
+            name,
+            description,
+            content,
+            featuredImage,
+            userId,
+        }
+    });
+}
+

@@ -18,7 +18,7 @@ import {seedGlobalSolutions} from "@/prisma/seedGlobalSolutions";
 import {aggregateGlobalSolutionPairAllocations} from "@/lib/globalSolutions";
 import {seedGlobalSolutionPairAllocations} from "@/prisma/seedGlobalSolutionPairAllocations";
 import {generateGlobalProblemSolutions} from "@/lib/globalProblemSolutionGenerator";
-import {aggregateGlobalProblemSolutionPairAllocations} from "@/lib/globalProblemSolutions";
+import {aggregateGlobalProblemSolutionPairAllocations} from "@/lib/globalProblemSolutionPairAllocations";
 import {seedGlobalProblemSolutionPairAllocations} from "@/prisma/seedGlobalProblemSolutionPairAllocations";
 import {loadJsonToDatabase, readDumpFile} from "@/lib/prisma/loadDatabaseFromJson";
 
