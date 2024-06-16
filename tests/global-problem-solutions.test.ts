@@ -8,7 +8,7 @@ import {seedGlobalProblemSolutionPairAllocations} from "@/prisma/seedGlobalProbl
 import {getOrCreateTestUser} from "@/tests/test-helpers";
 import {generateGlobalSolutionImages} from "@/lib/globalSolutionsGenerator";
 import {dumpGlobalSolutionNames} from "@/lib/globalSolutions";
-import {aggregateGlobalProblemSolutionPairAllocations} from "@/lib/globalProblemSolutions";
+import {aggregateGlobalProblemSolutionPairAllocations} from "@/lib/globalProblemSolutionPairAllocations";
 let prisma = new PrismaClient();
 
 describe("Global Problem Solutions", () => {

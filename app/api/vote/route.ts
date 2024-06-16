@@ -3,7 +3,7 @@ import {getCurrentUser} from "@/lib/session";
 import {handleError} from "@/lib/errorHandler";
 import {updateOrCreateGlobalProblemPairAllocation} from "@/lib/globalProblems";
 import {updateOrCreateWishingWellPairAllocation} from "@/lib/wishingWells";
-import {updateOrCreateGlobalProblemSolutionPairAllocation} from "@/lib/globalProblemSolutions";
+import {updateOrCreateGlobalProblemSolutionPairAllocation} from "@/lib/globalProblemSolutionPairAllocations";
 import {updateOrCreateGlobalSolutionPairAllocation} from "@/lib/globalSolutions";
 import {saveReferrerUserId} from "@/lib/user";
 

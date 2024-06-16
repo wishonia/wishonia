@@ -1,6 +1,7 @@
 import {User} from "@prisma/client";
 import {readAllMarkdownFiles} from "@/lib/markdownReader";
 import { prisma } from "@/lib/db";
+import {createGlobalProblem} from "@/lib/globalProblems";
 
 export async function seedGlobalProblemsFromMarkdown(testUser: User) {
     const posts = await readAllMarkdownFiles('public/globalProblems')
@@ -12,17 +13,19 @@ export async function seedGlobalProblemsFromMarkdown(testUser: User) {
             },
         });
 
+        if(!post.description) {
+            throw new Error(`Description not found for global problem: ${post.name}`);
+        }
+
         // If the globalProblem does not exist, create it
         if (!existingProblem) {
-            const result = await prisma.globalProblem.create({
-                data: {
-                    name: post.name,
-                    description: post.description,
-                    content: post.content,
-                    featuredImage: post.featuredImage,
-                    userId: testUser.id,
-                },
-            });
+            const result = await createGlobalProblem(
+                post.name,
+                post.description,
+                post.content,
+                post.featuredImage,
+                testUser.id
+            )
             //console.log("Problem created result: ", result);
         }
     }
