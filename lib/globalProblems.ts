@@ -1,5 +1,6 @@
 import {GlobalProblem} from "@prisma/client";
 import {prisma} from "@/lib/db";
+import {createSlug} from "@/lib/stringHelper";
 
 export async function getRandomGlobalProblemPair(userId: string | undefined) {
     let ids: { id: string }[] = [];
@@ -73,4 +74,44 @@ export async function aggregateGlobalProblemPairAllocations() {
         results.push(result);
     }
     return results;
+}
+
+export async function updateOrCreateGlobalProblemPairAllocation(thisGlobalProblemId: string,
+                                                              thatGlobalProblemId: string,
+                                                              thisGlobalProblemPercentage: number,
+                                                              userId: string) {
+    const result = await prisma.globalProblemPairAllocation.upsert({
+        where: {
+            userId_thisGlobalProblemId_thatGlobalProblemId: {
+                userId: userId,
+                thisGlobalProblemId: thisGlobalProblemId,
+                thatGlobalProblemId: thatGlobalProblemId,
+            },
+        },
+        update: {
+            thisGlobalProblemPercentage,
+        },
+        create: {
+            thisGlobalProblemId,
+            thatGlobalProblemId,
+            thisGlobalProblemPercentage,
+            userId,
+        },
+    });
+    await aggregateGlobalProblemPairAllocations();
+    return result;
+}
+
+export async function createGlobalProblem(name: string, description: string, content: string,
+                                           featuredImage: string | undefined, userId: string) {
+    return prisma.globalProblem.create({
+        data: {
+            id: createSlug(name),
+            name,
+            description,
+            content,
+            featuredImage,
+            userId,
+        }
+    });
 }

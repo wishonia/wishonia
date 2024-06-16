@@ -32,7 +32,9 @@ export const postVoteData = (): Promise<any> => {
         if(globalProblemSolutionPairAllocation){
             data.globalProblemSolutionPairAllocation = JSON.parse(globalProblemSolutionPairAllocation);
         }
-        if (!referrerUserId && !wishingWellPairAllocation && !globalProblemPairAllocation) {
+        // If the data object is empty, resolve with a message
+        const isEmpty = Object.keys(data).length === 0 && data.constructor === Object;
+        if (isEmpty) {
             resolve('No data to post to vote endpoint');
             return;
         }

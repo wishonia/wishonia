@@ -152,3 +152,28 @@ export async function createMinimalWishingWellPairs(testUserId: string) {
 
     return pairs;
 }
+export async function updateOrCreateWishingWellPairAllocation(thisWishingWellId: string,
+                                                              thatWishingWellId: string,
+                                                              thisWishingWellPercentage: number,
+                                                              userId: string) {
+    const result = await prisma.wishingWellPairAllocation.upsert({
+        where: {
+            userId_thisWishingWellId_thatWishingWellId: {
+                userId: userId,
+                thisWishingWellId: thisWishingWellId,
+                thatWishingWellId: thatWishingWellId,
+            },
+        },
+        update: {
+            thisWishingWellPercentage,
+        },
+        create: {
+            thisWishingWellId,
+            thatWishingWellId,
+            thisWishingWellPercentage,
+            userId,
+        },
+    });
+    await aggregateWishingWellPairAllocations();
+    return result;
+}
