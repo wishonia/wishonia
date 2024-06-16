@@ -229,7 +229,7 @@ export async function updateOrCreateGlobalProblemSolutionPairAllocation(
             data: {thisGlobalProblemSolutionPercentage}
         });
     }
-    return prisma.globalProblemSolutionPairAllocation.create({
+    const result = prisma.globalProblemSolutionPairAllocation.create({
         data: {
             globalProblemId,
             thisGlobalProblemSolutionId,
@@ -238,6 +238,8 @@ export async function updateOrCreateGlobalProblemSolutionPairAllocation(
             userId
         }
     });
+    await aggregateGlobalProblemSolutionPairAllocationsForProblem(globalProblemId);
+    return result;
 }
 
 export async function deleteGlobalProblemSolution(

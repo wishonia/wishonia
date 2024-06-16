@@ -74,3 +74,29 @@ export async function aggregateGlobalProblemPairAllocations() {
     }
     return results;
 }
+
+export async function updateOrCreateGlobalProblemPairAllocation(thisGlobalProblemId: string,
+                                                              thatGlobalProblemId: string,
+                                                              thisGlobalProblemPercentage: number,
+                                                              userId: string) {
+    const result = await prisma.globalProblemPairAllocation.upsert({
+        where: {
+            userId_thisGlobalProblemId_thatGlobalProblemId: {
+                userId: userId,
+                thisGlobalProblemId: thisGlobalProblemId,
+                thatGlobalProblemId: thatGlobalProblemId,
+            },
+        },
+        update: {
+            thisGlobalProblemPercentage,
+        },
+        create: {
+            thisGlobalProblemId,
+            thatGlobalProblemId,
+            thisGlobalProblemPercentage,
+            userId,
+        },
+    });
+    await aggregateGlobalProblemPairAllocations();
+    return result;
+}

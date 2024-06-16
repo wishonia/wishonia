@@ -126,3 +126,29 @@ export async function dumpGlobalSolutionNames(){
             'prisma/seeds/globalSolutionNames.json'),
         JSON.stringify(solutionsByProblemId, null, 2));
 }
+
+export async function updateOrCreateGlobalSolutionPairAllocation(thisGlobalSolutionId: string,
+                                                              thatGlobalSolutionId: string,
+                                                              thisGlobalSolutionPercentage: number,
+                                                              userId: string) {
+    const result = await prisma.globalSolutionPairAllocation.upsert({
+        where: {
+            userId_thisGlobalSolutionId_thatGlobalSolutionId: {
+                userId: userId,
+                thisGlobalSolutionId: thisGlobalSolutionId,
+                thatGlobalSolutionId: thatGlobalSolutionId,
+            },
+        },
+        update: {
+            thisGlobalSolutionPercentage,
+        },
+        create: {
+            thisGlobalSolutionId,
+            thatGlobalSolutionId,
+            thisGlobalSolutionPercentage,
+            userId,
+        },
+    });
+    await aggregateGlobalSolutionPairAllocations();
+    return result;
+}
