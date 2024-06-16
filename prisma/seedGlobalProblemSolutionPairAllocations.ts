@@ -1,9 +1,7 @@
 import {User} from "@prisma/client";
 import { prisma } from "@/lib/db";
-import {
-    aggregateGlobalProblemSolutionPairAllocations,
-    getAllRandomGlobalProblemSolutionPairs
-} from "@/lib/globalProblemSolutions";
+import {getAllRandomGlobalProblemSolutionPairs} from "@/lib/globalProblemSolutions";
+import {aggregateGlobalProblemSolutionPairAllocations} from "@/lib/globalProblemSolutionPairAllocations";
 
 export async function seedGlobalProblemSolutionPairAllocations(testUser: User) {
     const pairs = await getAllRandomGlobalProblemSolutionPairs();

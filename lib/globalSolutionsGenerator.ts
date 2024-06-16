@@ -1,13 +1,14 @@
 import slugify from 'slugify';
 import {formatTextResponse, jsonArrayCompletion, textCompletion} from "@/lib/llm";
-import { generateAndUploadFeaturedImageJpg } from "@/lib/imageGenerator";
-import { prisma } from "@/lib/db";
+import {generateAndUploadFeaturedImageJpg} from "@/lib/imageGenerator";
+import {prisma} from "@/lib/db";
 import {GlobalProblem, GlobalSolution} from "@prisma/client";
-import {generateAndSaveEmbedding} from "@/lib/openai";
 import {saveMarkdownPost} from "@/lib/markdownGenerator";
 import {absPathFromPublic, absPathFromRepo} from "@/lib/fileHelper";
 import fs from "fs";
 import {createGlobalProblemSolution} from "@/lib/globalProblemSolutionGenerator";
+import {createSlug} from "@/lib/stringHelper";
+import {createGlobalSolution} from "@/lib/globalSolutions";
 
 const generateImages = false;
 export async function generateGlobalSolutions() {
@@ -52,11 +53,13 @@ export async function getOrCreateGlobalSolution(name: string, description: strin
     }
     return generateGlobalSolution(name, description, userId);
 }
+
+
 export async function generateGlobalSolution(name: string, description: string | null | undefined, userId: string) {
     if(!description) {
         description = await generateGlobalSolutionDescription(name);
     }
-    const slug = name.toLowerCase().replace(/ /g, '-');
+    const slug = createSlug(name)
     const imagePath = `global-solutions/${slugify(slug)}.jpg`
     const mdPath = `global-solutions/${slug}.md`;
     const mdAbsPath = absPathFromPublic(mdPath);
@@ -67,16 +70,8 @@ export async function generateGlobalSolution(name: string, description: string |
             ` ${name} : ${description}`,
             imagePath);
     }
-    const createdSolution = await prisma.globalSolution.create({
-        data: {
-            id: slug,
-            name: name,
-            description: description,
-            content: content,
-            featuredImage: featuredImageUrl,
-            userId: userId,
-        }
-    });
+    const createdSolution =
+        await createGlobalSolution(name, description, content, featuredImageUrl, userId);
     await saveMarkdownPost({
         name: name,
         description: description,

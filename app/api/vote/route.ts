@@ -1,39 +1,12 @@
 import { NextResponse } from "next/server";
-import { prisma as db } from "@/lib/db"
 import {getCurrentUser} from "@/lib/session";
-import { User } from "next-auth";
 import {handleError} from "@/lib/errorHandler";
-import {aggregateGlobalProblemPairAllocations} from "@/lib/globalProblems";
-import {aggregateWishingWellPairAllocations} from "@/lib/wishingWells";
-import {
-    updateOrCreateGlobalProblemSolutionPairAllocation
-} from "@/lib/globalProblemSolutions";
-import {ExtendedUser} from "@/types/auth";
+import {updateOrCreateGlobalProblemPairAllocation} from "@/lib/globalProblems";
+import {updateOrCreateWishingWellPairAllocation} from "@/lib/wishingWells";
+import {updateOrCreateGlobalProblemSolutionPairAllocation} from "@/lib/globalProblemSolutionPairAllocations";
+import {updateOrCreateGlobalSolutionPairAllocation} from "@/lib/globalSolutions";
+import {saveReferrerUserId} from "@/lib/user";
 
-async function saveReferrerUserId(referrerUserId: string, currentUser: ExtendedUser ) {
-    const referrerUser = await db.user.findFirst({
-        where: {
-            OR: [
-                {id: referrerUserId},
-                {username: referrerUserId},
-                {referrerUserId: referrerUserId}
-            ],
-        },
-    });
-    if (referrerUser) {
-        referrerUserId = referrerUser.id
-    }
-    const data = {
-        referrerUserId: referrerUserId,
-    };
-    const user = await db.user.update({
-        where: {
-            id: currentUser.id,
-        },
-        data: data,
-    });
-    return referrerUserId;
-}
 
 export async function POST(
     req: Request
@@ -55,10 +28,11 @@ export async function POST(
         if(wishingWellPairAllocation) {
             wishingWellPairAllocation.userId = currentUser.id;
             try {
-                body.wishingWellPairAllocation = await db.wishingWellPairAllocation.create({
-                    data: wishingWellPairAllocation,
-                });
-                aggregateWishingWellPairAllocations();
+                body.wishingWellPairAllocation = await updateOrCreateWishingWellPairAllocation(
+                    wishingWellPairAllocation.thisWishingWellId,
+                    wishingWellPairAllocation.thatWishingWellId,
+                    wishingWellPairAllocation.thisWishingWellPercentage,
+                    userId);
             } catch (error) {
                 return handleError(error, 'Could not save globalProblemPairAllocation because:', {
                     error,
@@ -69,10 +43,12 @@ export async function POST(
         if(globalProblemPairAllocation) {
             globalProblemPairAllocation.userId = userId;
             try {
-                body.globalProblemPairAllocation = await db.globalProblemPairAllocation.create({
-                    data: globalProblemPairAllocation,
-                });
-                await aggregateGlobalProblemPairAllocations();
+                body.globalProblemPairAllocation = await updateOrCreateGlobalProblemPairAllocation(
+                    globalProblemPairAllocation.thisGlobalProblemId,
+                    globalProblemPairAllocation.thatGlobalProblemId,
+                    globalProblemPairAllocation.thisGlobalProblemPercentage,
+                    userId
+                )
             } catch (error) {
                 return handleError(error, 'Could not save globalProblemPairAllocation because:', {
                     error,
@@ -83,9 +59,12 @@ export async function POST(
         if(globalSolutionPairAllocation) {
             globalSolutionPairAllocation.userId = userId;
             try {
-                body.globalSolutionPairAllocation = await db.globalSolutionPairAllocation.create({
-                    data: globalSolutionPairAllocation,
-                });
+                body.globalSolutionPairAllocation = await updateOrCreateGlobalSolutionPairAllocation(
+                    globalSolutionPairAllocation.thisGlobalSolutionId,
+                    globalSolutionPairAllocation.thatGlobalSolutionId,
+                    globalSolutionPairAllocation.thisGlobalSolutionPercentage,
+                    userId
+                );
             } catch (error) {
                 return handleError(error, 'Could not save globalSolutionPairAllocation because:', {
                     error,

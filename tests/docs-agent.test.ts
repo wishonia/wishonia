@@ -8,6 +8,7 @@ import {askSupabase} from "@/lib/docs/docsAgent";
 import {createAgent} from "@/lib/agents/createAgent";
 import {getOrCreateTestUser} from "@/tests/test-helpers";
 import {getDialoqbaseClient, getWishoniaDocsAgent} from "@/lib/dialoqbase";
+import {createSlug} from "@/lib/stringHelper";
 
 // Generate a cross-platform absolute path to "../public/docs" relative to the current file
 const docsPath = fs.realpathSync(`${__dirname}/../public/docs`);
@@ -50,7 +51,7 @@ describe("Docs Generator", () => {
             }
             // remove any leading or trailing whitespace or line separators
             title = title.trim();
-            const slugifiedTitle = title.toLowerCase().replace(/ /g, "-");
+            const slugifiedTitle = createSlug(title)
             let contentInstructions =
                 `Please create a detailed product requirements document in markdown for the following
                  functional component of a universal

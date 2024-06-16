@@ -3,6 +3,7 @@ import {prisma} from "@/lib/db";
 import {askYesOrNoQuestion} from "@/lib/llm";
 import fs from "fs";
 import {absPathFromRepo} from "@/lib/fileHelper";
+import {createSlug} from "@/lib/stringHelper";
 
 async function getRandomGlobalSolutionsForUser(userId: string): Promise<{ id: string }[]> {
     return prisma.$queryRaw`
@@ -126,3 +127,43 @@ export async function dumpGlobalSolutionNames(){
             'prisma/seeds/globalSolutionNames.json'),
         JSON.stringify(solutionsByProblemId, null, 2));
 }
+
+export async function updateOrCreateGlobalSolutionPairAllocation(thisGlobalSolutionId: string,
+                                                              thatGlobalSolutionId: string,
+                                                              thisGlobalSolutionPercentage: number,
+                                                              userId: string) {
+    const result = await prisma.globalSolutionPairAllocation.upsert({
+        where: {
+            userId_thisGlobalSolutionId_thatGlobalSolutionId: {
+                userId: userId,
+                thisGlobalSolutionId: thisGlobalSolutionId,
+                thatGlobalSolutionId: thatGlobalSolutionId,
+            },
+        },
+        update: {
+            thisGlobalSolutionPercentage,
+        },
+        create: {
+            thisGlobalSolutionId,
+            thatGlobalSolutionId,
+            thisGlobalSolutionPercentage,
+            userId,
+        },
+    });
+    await aggregateGlobalSolutionPairAllocations();
+    return result;
+}
+export async function createGlobalSolution(name: string, description: string, content: string,
+                                    featuredImage: string | undefined, userId: string) {
+    return prisma.globalSolution.create({
+        data: {
+            id: createSlug(name),
+            name,
+            description,
+            content,
+            featuredImage,
+            userId,
+        }
+    });
+}
+

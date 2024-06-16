@@ -2,6 +2,7 @@ import {PrismaClient} from '@prisma/client';
 import fs from 'fs';
 import {absPathFromRepo} from "@/lib/fileHelper";
 import {getVercelImageUrlFromPath} from "@/lib/imageUploader";
+import {createSlug} from "@/lib/stringHelper";
 
 const prisma = new PrismaClient();
 
@@ -47,7 +48,7 @@ export async function dumpTableToJson(tableName: string) {
         }
         if(row.name){
             // convert the name to URL friendly slug and replace the id with it
-            row.id = row.name.toLowerCase().replace(/ /g, '-');
+            row.id = createSlug(row.name)
         }
         if(row.featuredImage && !row.featuredImage.includes('http')) {
             const url = await getVercelImageUrlFromPath(row.featuredImage);
