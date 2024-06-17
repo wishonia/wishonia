@@ -2,7 +2,7 @@ import {User} from "@prisma/client";
 import {readAllMarkdownFiles} from "@/lib/markdownReader";
 import { prisma } from "@/lib/db";
 
-export async function seedWishingWells(testUser: User) {
+export async function seedWishingWellsFromMarkdown(testUser: User) {
     const posts = await readAllMarkdownFiles('public/wishingWells');
     let results = [];
     for (const post of posts) {

@@ -1,15 +1,25 @@
 /**
  * @jest-environment node
  */
-import {PrismaClient} from "@prisma/client";
-import {createGlobalProblemSolution} from "@/lib/globalProblemSolutionGenerator";
+import {User} from "@prisma/client";
+import {prisma} from "@/lib/db";
+import {createGlobalProblemSolution, generateGlobalProblemSolutions} from "@/lib/globalProblemSolutionGenerator";
 import {globalSolutionNames} from "@/prisma/seeds/globalSolutionNames";
 import {seedGlobalProblemSolutionPairAllocations} from "@/prisma/seedGlobalProblemSolutionPairAllocations";
-import {getOrCreateTestUser} from "@/tests/test-helpers";
-import {generateGlobalSolutionImages} from "@/lib/globalSolutionsGenerator";
-import {dumpGlobalSolutionNames} from "@/lib/globalSolutions";
+import {assertTestDB, getOrCreateTestUser, truncateAllTables} from "@/tests/test-helpers";
+import {
+    generalizeGlobalSolutionDescriptions,
+    generateGlobalSolutionImages,
+    generateGlobalSolutions
+} from "@/lib/globalSolutionsGenerator";
+import {aggregateGlobalSolutionPairAllocations, dumpGlobalSolutionNames} from "@/lib/globalSolutions";
 import {aggregateGlobalProblemSolutionPairAllocations} from "@/lib/globalProblemSolutionPairAllocations";
-let prisma = new PrismaClient();
+import {seedGlobalProblemPairAllocations} from "@/prisma/seedGlobalProblemPairAllocations";
+import {seedGlobalSolutions} from "@/prisma/seedGlobalSolutions";
+import {loadJsonToDatabase} from "@/lib/prisma/loadDatabaseFromJson";
+import {seedGlobalSolutionPairAllocations} from "@/prisma/seedGlobalSolutionPairAllocations";
+import {seedGlobalProblemsFromMarkdown} from "@/prisma/seedGlobalProblemsFromMarkdown";
+import {aggregateGlobalProblemPairAllocations} from "@/lib/globalProblems";
 
 describe("Global Problem Solutions", () => {
     jest.setTimeout(6000000);
@@ -72,4 +82,98 @@ describe("Global Problem Solutions", () => {
         }
         await seedGlobalProblemSolutionPairAllocations(await getOrCreateTestUser());
     });
+    it("Generates Global Problem Pair Allocations", async () => {
+        await seedGlobalProblemPairAllocations(await getOrCreateTestUser());
+    });
+    it("Generates GlobalProblemSolutions", async () => {
+        await checkGlobalSolutions(await getOrCreateTestUser());
+    });
+    it("seeds DB with user, wishing wells and problems", async () => {
+        await assertTestDB();
+        await truncateAllTables();
+        const testUser = await getOrCreateTestUser();
+        await checkGlobalProblems(testUser);
+        await checkGlobalSolutions(testUser);
+    }, 45000);
+
+    it("Seed GlobalProblemSolutions", async () => {
+        await checkGlobalProblemSolutions(await getOrCreateTestUser());
+    });
+    it("Aggregates global problem pair allocations", async () => {
+        await aggregateGlobalProblemSolutionPairAllocations();
+    });
+    it("Seed global problems and solutions", async () => {
+        await loadJsonToDatabase("GlobalProblemSolution");
+    }, 6000000);
+    it("Generate global solutions", async () => {
+        await generateGlobalSolutions();
+    }, 6000000);
+    it("Seed global solutions", async () => {
+        await checkGlobalSolutions(await getOrCreateTestUser());
+    }, 6000000);
+    it("Generates GlobalProblemSolutions", async () => {
+        await generateGlobalProblemSolutions();
+    }, 6000000);
+    it("Generalizes the GlobalSolution descriptions", async () => {
+        await generalizeGlobalSolutionDescriptions();
+    });
 });
+
+async function checkGlobalSolutions<ExtArgs>(testUser: User) {
+    console.log("Checking global solutions");
+    console.log("Seeding global solutions");
+    await seedGlobalSolutions(testUser);
+    await loadJsonToDatabase("GlobalProblemSolution");
+    console.log("Seeded global solutions");
+    console.log("Seeding global solution pair allocations");
+    await seedGlobalSolutionPairAllocations(testUser);
+    console.log("Seeded global solution pair allocations");
+    console.log("Aggregating global solution pair allocations");
+    await aggregateGlobalSolutionPairAllocations();
+    console.log("Aggregated global solution pair allocations");
+    const globalSolutions = await prisma.globalSolution.findMany();
+    const total = globalSolutions.length;
+    const expectedAverageAllocation = 100 / total;
+    for (const problem of globalSolutions) {
+        expect(problem.averageAllocation).toBe(expectedAverageAllocation);
+    }
+}
+
+
+async function checkGlobalProblems<ExtArgs>(testUser: User) {
+    console.log("Checking global problems");
+    console.log("Seeding global problems");
+    await seedGlobalProblemsFromMarkdown(testUser);
+    console.log("Seeded global problems");
+    console.log("Seeding global problem pair allocations");
+    await seedGlobalProblemPairAllocations(testUser);
+    console.log("Seeded global problem pair allocations");
+    console.log("Aggregating global problem pair allocations");
+    await aggregateGlobalProblemPairAllocations();
+    console.log("Aggregated global problem pair allocations");
+    const globalProblems = await prisma.globalProblem.findMany();
+    const total = globalProblems.length;
+    const expectedAverageAllocation = 100 / total;
+    for (const problem of globalProblems) {
+        expect(problem.averageAllocation).toBe(expectedAverageAllocation);
+    }
+}
+
+async function checkGlobalProblemSolutions<ExtArgs>(testUser: User) {
+    console.log("Checking globalProblemSolutions");
+    console.log("Seeding globalProblemSolutions");
+    //await seedGlobalProblemSolutions(testUser);
+    console.log("Seeded globalProblemSolutions");
+    console.log("Seeding globalProblemSolution pair allocations");
+    await seedGlobalProblemSolutionPairAllocations(testUser);
+    console.log("Seeded globalProblemSolution pair allocations");
+    console.log("Aggregating globalProblemSolution pair allocations");
+    await aggregateGlobalProblemSolutionPairAllocations();
+    console.log("Aggregated globalProblemSolution pair allocations");
+    const globalProblemSolutions = await prisma.globalProblemSolution.findMany();
+    const total = globalProblemSolutions.length;
+    const expectedAverageAllocation = 100 / total;
+    for (const problem of globalProblemSolutions) {
+        expect(problem.averageAllocation).toBe(expectedAverageAllocation);
+    }
+}
