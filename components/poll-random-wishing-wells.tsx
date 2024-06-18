@@ -12,7 +12,7 @@ interface PollProps {
 export const PollRandomWishingWells: React.FC<PollProps> = ({ user }) => {
     const [wishingWells, setWishingWells] =
         useState<{ thisWishingWell?: any; thatWishingWell?: any }>({});
-    const [loading, setLoading] = useState(true);
+    const [loading, setLoading] = useState(false);
     const router = useRouter();
     const fetchWishingWells = async () => {
         setLoading(true);
@@ -31,10 +31,12 @@ export const PollRandomWishingWells: React.FC<PollProps> = ({ user }) => {
     };
 
     useEffect(() => {
-        fetchWishingWells();
+        if (!loading) {
+            fetchWishingWells();
+        }
     }, []);
 
-    if (loading) {
+    if (loading || !wishingWells.thisWishingWell || !wishingWells.thatWishingWell) {
         return <SpinningLoader />;
     }
 

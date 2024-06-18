@@ -23,7 +23,7 @@ export async function POST(
 
     const sanitizedQuery = query.trim()
     // Return a StreamingTextResponse, which can be consumed by the client
-    return await askSupabase(sanitizedQuery)
+    return await askSupabase(sanitizedQuery, true)
   } catch (err: unknown) {
     if (err instanceof UserError) {
       return new Response(

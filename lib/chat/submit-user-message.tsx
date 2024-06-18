@@ -17,7 +17,7 @@ import { z } from 'zod'
 import OpenAI from 'openai'
 import { AI } from './actions'
 import { nanoid } from 'nanoid'
-import { systemPrompt } from './system-prompt'
+import { githubSystemPrompt } from './github-system-prompt'
 import { Profile } from '@/components/assistant/Profile'
 import Repositories from '@/components/assistant/Repositories'
 import { ProfileList } from '@/components/assistant/ProfileList'
@@ -34,7 +34,7 @@ import RepositorySkeleton from '@/components/assistant/RepositorySkeleton'
 import ReadmeSkeleton, {
   DirectorySkeleton,
 } from '@/components/assistant/ReadmeSkeleton'
-import {getUserIdServer} from "@/lib/api/getUserIdServer";
+import {askSupabase} from "@/lib/docs/docsAgent";
 
 const openai = new OpenAI({
   apiKey: process.env.OPENAI_API_KEY || '',
@@ -66,7 +66,7 @@ export async function submitUserMessage(content: string, attribute: string) {
     messages: [
       {
         role: 'system',
-        content: systemPrompt,
+        content: githubSystemPrompt,
       },
       ...aiState.get().messages.map((message: any) => ({
         role: message.role,
@@ -294,6 +294,49 @@ export async function submitUserMessage(content: string, attribute: string) {
                 <RateLimited />
               )}
             </BotCard>
+          )
+        },
+      },
+      ask_about_wishonia: {
+        description: 'Ask a general question about wishonia or wishocracy',
+        parameters: z.object({
+          question: z.string().describe('The question to answer about wishonia or wishocracy'),
+        }),
+        render: async function* ({ question }) {
+          yield (
+              <BotCard>
+                <ReadmeSkeleton />
+              </BotCard>
+          )
+          //const rateLimitRemaining = await checkRateLimit()
+          const rateLimitRemaining = true;
+          if(!rateLimitRemaining){
+            return (
+                <BotCard>
+                  <RateLimited />
+                </BotCard>
+            )
+          }
+          const content = await askSupabase(question, false)
+          sleep(1000)
+
+          aiState.done({
+            ...aiState.get(),
+            messages: [
+              ...aiState.get().messages,
+              {
+                id: nanoid(),
+                role: 'function',
+                name: 'ask_about_wishonia',
+                content: content,
+              },
+            ],
+          })
+
+          return (
+              <BotCard>
+                <Readme props={content} />
+              </BotCard>
           )
         },
       },
