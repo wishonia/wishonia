@@ -13,7 +13,7 @@ interface PollProps {
 export const PollRandomGlobalProblemSolutions: React.FC<PollProps> = ({ globalProblemId, user }) => {
     const [globalProblemSolutions, setGlobalProblemSolutions] =
         useState<{ thisGlobalProblemSolution?: any; thatGlobalProblemSolution?: any }>({});
-    const [loading, setLoading] = useState(true);
+    const [loading, setLoading] = useState(false);
     const router = useRouter();
     const fetchGlobalProblemSolutions = async () => {
         setLoading(true);
@@ -32,10 +32,13 @@ export const PollRandomGlobalProblemSolutions: React.FC<PollProps> = ({ globalPr
     };
 
     useEffect(() => {
-        fetchGlobalProblemSolutions();
+        if(!loading){
+            fetchGlobalProblemSolutions();
+        }
     }, []);
 
-    if (loading) {
+    if (loading || !globalProblemSolutions.thisGlobalProblemSolution ||
+        !globalProblemSolutions.thatGlobalProblemSolution) {
         return <SpinningLoader />;
     }
 

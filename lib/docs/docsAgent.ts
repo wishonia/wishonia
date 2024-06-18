@@ -100,7 +100,7 @@ async function getPaths(pageSections: { page_id: any; }[]) {
     return paths;
 }
 
-export async function askSupabase(query: string) {
+export async function askSupabase(query: string, streaming: boolean) {
 
 
     await moderateContent(query);
@@ -140,12 +140,26 @@ export async function askSupabase(query: string) {
         messages: [chatMessage],
         max_tokens: 512,
         temperature: 0,
-        stream: true,
+        stream: streaming,
     });
 
     if (!response.ok) {
         const error = await response.json();
         throw new ApplicationError('Failed to generate completion', error);
+    }
+
+    if(!streaming) {
+        const obj = await response.json();
+        const str = obj.choices[0].message.content;
+        const possiblePrefixes = ['Answer:**', 'Answer:', 'Answer'];
+        let stripped = str;
+        for (const prefix of possiblePrefixes) {
+            if(str.indexOf(prefix) !== -1) {
+                stripped = str.substring(str.indexOf(prefix) + prefix.length).trim();
+                return stripped;
+            }
+        }
+        return stripped;
     }
 
     const openAIStream = OpenAIStream(response);
