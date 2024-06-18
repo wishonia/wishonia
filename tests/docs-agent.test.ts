@@ -55,7 +55,12 @@ describe("Docs Generator", () => {
         }
     });
     it("Asks supabase about wishonia", async () => {
-        const stream = await askSupabase("What is Wishonia?");
+        const stream = await askSupabase("What is Wishonia?", true);
+        console.log(stream);
+        expect(stream).toBeDefined();
+    });
+    it("Asks supabase about wishonia without streaming", async () => {
+        const stream = await askSupabase("What is Wishonia?", false);
         console.log(stream);
         expect(stream).toBeDefined();
     });
