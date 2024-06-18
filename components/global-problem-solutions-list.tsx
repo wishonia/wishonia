@@ -19,7 +19,7 @@ interface PollProps {
 export const GlobalProblemSolutionsList: React.FC<PollProps> = ({ globalProblemId, user }) => {
   const [globalProblemSolutions, setGlobalProblemSolutions] =
       useState<GlobalProblemSolution[]>([]);
-  const [loading, setLoading] = useState(true);
+  const [loading, setLoading] = useState(false);
   const fetchGlobalProblemSolutions = async (globalProblemId: string) => {
     setLoading(true);
     const response = await fetch('/api/globalProblems/' + globalProblemId + '/solutions');
