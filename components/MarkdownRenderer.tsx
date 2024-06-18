@@ -23,6 +23,9 @@ const MarkdownRenderer: FC<MarkdownRendererProps> = ({name,
         });
     };
     if(content){content = replaceMermaidSyntax(content);}
+    if(!content){
+        throw new Error("Content is null");
+    }
     return (
         <div className="text-left">
             <>
@@ -33,7 +36,7 @@ const MarkdownRenderer: FC<MarkdownRendererProps> = ({name,
                         <img src={featuredImage} alt="Cover Image" className="mb-4"/>}
                 </div>
                 <ReactMarkdown
-                    rehypePlugins={[rehypeRaw]}
+                    rehypePlugins={[rehypeRaw as any]}
                     components={{
                         p: ({node, ...props}) => <p className="mb-4" {...props} />,
                         h1: ({node, ...props}) => <h1 className="text-3xl mb-4 mt-4 font-bold" {...props} />,

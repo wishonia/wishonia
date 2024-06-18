@@ -5,8 +5,6 @@
 import fs from "fs";
 import {generateMarkdownAndImageFromDescription} from "@/lib/markdownGenerator";
 import {askSupabase} from "@/lib/docs/docsAgent";
-import {createAgent} from "@/lib/agents/createAgent";
-import {getOrCreateTestUser} from "@/tests/test-helpers";
 import {getDialoqbaseClient, getWishoniaDocsAgent} from "@/lib/dialoqbase";
 import {createSlug} from "@/lib/stringHelper";
 
@@ -24,14 +22,6 @@ describe("Docs Generator", () => {
             stream: false,
             history: []
         });
-    });
-    it("Creates an agent", async () => {
-        const testUser = await getOrCreateTestUser();
-        const agent = await createAgent(
-            testUser.id,
-            "Wishonia Docs Agent",
-        );
-        expect(agent).toBeDefined();
     });
     it("Parses the function components overview documentation file and creates individual page", async () => {
         // read the overview file

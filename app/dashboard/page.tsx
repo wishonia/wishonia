@@ -5,9 +5,11 @@ import { getCurrentUser } from "@/lib/session"
 import { Shell } from "@/components/layout/shell"
 import AfterLoginHandler from "@/components/AfterLoginHandler"
 import {DashboardCards} from "@/components/pages/dashboard/dashboard-cards";
+import {PollRandomGlobalProblems} from "@/components/poll-random-global-problems";
+import {GlobalProblemsList} from "@/components/global-problems-list";
 
 export const metadata: Metadata = {
-  title: "Your Wishing Wells",
+  title: "Dashboard",
   description: "How much everyone thinks we should allocate to solving each global problem",
 }
 
@@ -25,6 +27,8 @@ export default async function Dashboard({ searchParams }: DashboardProps) {
   return (
     <Shell>
         <AfterLoginHandler></AfterLoginHandler>
+        <PollRandomGlobalProblems></PollRandomGlobalProblems>
+        <GlobalProblemsList></GlobalProblemsList>
         <DashboardCards searchParams={searchParams}/>
     </Shell>
   )
