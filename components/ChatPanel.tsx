@@ -12,8 +12,8 @@ function ChatPanel() {
   const exampleMessages = [
     {
       heading: 'Search for the username',
-      subheading: 'Jaredpalmer',
-      message: `Search for the username jaredpalmer`,
+      subheading: 'wishonia',
+      message: `Search for the username wishonia`,
     },
     {
       heading: 'Search for repositories',
@@ -23,13 +23,13 @@ function ChatPanel() {
     },
     {
       heading: 'Search for repository content',
-      subheading: 'of shadcn/ui',
-      message: `Search for repository content of shadcn-ui/ui.`,
+      subheading: 'of wishonia/wishonia',
+      message: `Search for repository content of wishonia/wishonia.`,
     },
     {
       heading: 'Show README.md of',
-      subheading: 'Reduxjs/redux?',
-      message: `Show README.md of Reduxjs/redux`,
+      subheading: 'wishonia/wishonia?',
+      message: `Show README.md of wishonia/wishonia`,
     },
   ]
   const [aiState] = useAIState()
