@@ -1,4 +1,4 @@
-import {getUserId} from "@/lib/api/getUserId";
+import {getUserIdServer} from "@/lib/api/getUserIdServer";
 import {getRandomGlobalProblemSolutionPair} from "@/lib/globalProblemSolutions";
 import {handleError} from "@/lib/errorHandler";
 import * as z from "zod";
@@ -11,7 +11,7 @@ const routeContextSchema = z.object({
 export async function GET(    req: Request,
                               context: z.infer<typeof routeContextSchema>) {
     try {
-        const userId = await getUserId();
+        const userId = await getUserIdServer();
         const { params } = routeContextSchema.parse(context)
         const globalProblemId = params.globalProblemId;
         let randomPair = await getRandomGlobalProblemSolutionPair(globalProblemId, userId);

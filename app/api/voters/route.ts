@@ -1,10 +1,10 @@
 import { prisma as db } from "@/lib/db"
-import {getUserId} from "@/lib/api/getUserId";
+import {getUserIdServer} from "@/lib/api/getUserIdServer";
 import {handleError} from "@/lib/errorHandler";
 
 export async function GET() {
   try {
-    const userId = await getUserId();
+    const userId = await getUserIdServer();
 
     if (!userId) {
       return new Response("Unauthorized", { status: 403 })
