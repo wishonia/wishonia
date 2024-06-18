@@ -42,7 +42,9 @@ const openai = new OpenAI({
 
 export async function submitUserMessage(content: string, attribute: string) {
   'use server'
+  debugger
 
+  console.log(`submitUserMessage: ${content}`);
   const aiState = getMutableAIState<typeof AI>()
 
   aiState.update({
