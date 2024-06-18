@@ -2,7 +2,7 @@ import { z } from "zod"
 import { prisma as db } from "@/lib/db"
 import { userNameSchema } from "@/lib/validations/user"
 import {handleError} from "@/lib/errorHandler";
-import {getUserId} from "@/lib/api/getUserId";
+import {getUserIdServer} from "@/lib/api/getUserIdServer";
 
 const routeContextSchema = z.object({
   params: z.object({
@@ -23,7 +23,7 @@ export async function PATCH(
 ) {
   try {
     const { params } = routeContextSchema.parse(context)
-    const userId = await getUserId();
+    const userId = await getUserIdServer();
 
     if (userId || params.userId !== userId) {
       return new Response(null, { status: 403 })

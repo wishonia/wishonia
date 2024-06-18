@@ -1,11 +1,11 @@
-import {getUserId} from "@/lib/api/getUserId";
+import {getUserIdServer} from "@/lib/api/getUserIdServer";
 import { WishingWell } from '@prisma/client';
 import {convertKeysToCamelCase} from "@/lib/stringHelpers";
 import { prisma } from "@/lib/db";
 import {handleError} from "@/lib/errorHandler";
 export async function GET() {
     try {
-        const userId = await getUserId();
+        const userId = await getUserIdServer();
         let randomPair: WishingWell[] = [];
         if (userId) {
             randomPair = await prisma.$queryRaw`

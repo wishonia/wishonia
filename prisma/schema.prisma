@@ -139,6 +139,7 @@ model User {
   vectorDb                              VectorDb[]
   workflowConfigs                       WorkflowConfig[]
   apiKeys                               ApiKey[]
+  chats                                 Chat[]
 }
 
 model Education {
@@ -955,4 +956,39 @@ model Person {
   organizationId String
   createdAt      DateTime     @default(now())
   updatedAt      DateTime     @updatedAt
+}
+
+model Chat {
+  id        String        @id @default(uuid())
+  title     String
+  userId    String
+  createdAt DateTime      @default(now())
+  path      String
+  messages  ChatMessage[]
+  user      User          @relation(fields: [userId], references: [id])
+}
+
+enum MessageRole {
+  system
+  user
+  assistant
+  function
+  data
+  tool
+}
+
+model ChatMessage {
+  id            String      @id @default(uuid())
+  chat          Chat        @relation(fields: [chatId], references: [id])
+  chatId        String
+  tool_call_id  String?
+  createdAt     DateTime    @default(now())
+  content       String
+  ui            String?
+  role          MessageRole
+  name          String?
+  function_call String?
+  data          Json?
+  tool_calls    String?
+  annotations   Json?
 }
