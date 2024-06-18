@@ -84,20 +84,17 @@ export async function saveChat(savedChat: Chat) {
         }
       })
     }
-    for (const message of savedChat.messages) {
+    for (let message of savedChat.messages) {
+      // Ensure data is a valid JSON value or undefined, not null
+      let chatMessage = JSON.parse(JSON.stringify(message))
       await prisma.chatMessage.upsert({
         where: {
-          id: message.id,
+          id: chatMessage.id,
         },
-        update: {
-          content: message.content,
-          role: message.role,
-        },
+        update: chatMessage,
         create: {
-          id: message.id,
-          content: message.content,
-          role: message.role,
-          chatId: savedChat.id,
+          ...chatMessage,
+          chat: { connect: { id: existingChat.id } } // Correctly reference the existingChat's ID
         }
       })
     }
@@ -135,12 +132,19 @@ export async function removeChat({ id, path }: { id: string; path: string }) {
     }
   }
 
-  await prisma.chat.delete({
-    where: {
-      id,
-    },
-  })
+// Delete associated chat messages first
+await prisma.chatMessage.deleteMany({
+  where: {
+    chatId: id,
+  },
+})
 
+// Then delete the chat
+await prisma.chat.delete({
+  where: {
+    id,
+  },
+})
   const queryCache = new QueryCache({
     onError: (error) => {
       console.log(error)
@@ -162,7 +166,7 @@ export const clearAllChats = async (userId: string) => {
   const user = await getCurrentUser()
   if (!user || !userId) {
     return {
-      error: 'UnuserIdized',
+      error: 'Unauthorized',
     }
   }
 
@@ -174,6 +178,13 @@ export const clearAllChats = async (userId: string) => {
     })
 
     if (deletedChats.length) {
+      await prisma.chatMessage.deleteMany({
+        where: {
+          chatId: {
+            in: deletedChats.map((chat) => chat.id),
+          },
+        },
+      })
       await prisma.chat.deleteMany({
         where: {
           userId: userId,
