@@ -102,7 +102,7 @@ const MarkdownFileRenderer: FC<MarkdownRendererProps> = ({url}) => {
                         </div>
                     )}
                     <ReactMarkdown
-                        rehypePlugins={[rehypeRaw]}
+                        rehypePlugins={[rehypeRaw as any]}
                         components={{
                             p: ({node, ...props}) => <p className="mb-4" {...props} />,
                             h1: ({node, ...props}) => <h1 className="text-3xl mb-4 mt-4 font-bold" {...props} />,
