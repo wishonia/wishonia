@@ -13,7 +13,7 @@ interface PollProps {
 export const WishingWellsList: React.FC<PollProps> = ({ user }) => {
   const [wishingWells, setWishingWells] =
       useState<WishingWell[]>([]);
-  const [loading, setLoading] = useState(true);
+  const [loading, setLoading] = useState(false);
   const fetchWishingWells = async () => {
     setLoading(true);
     const response = await fetch('/api/wishingWells');
@@ -23,10 +23,12 @@ export const WishingWellsList: React.FC<PollProps> = ({ user }) => {
   };
 
   useEffect(() => {
-    fetchWishingWells();
+    if(!loading) {
+        fetchWishingWells();
+    }
   }, []);
 
-  if (loading) {
+  if (loading || !wishingWells || wishingWells.length === 0) {
     return <SpinningLoader />;
   }
 
