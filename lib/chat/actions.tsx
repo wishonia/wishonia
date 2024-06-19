@@ -1,22 +1,19 @@
 import 'server-only'
 
-import {
-  BotCard,
-  BotMessage,
-  UserMessage,
-} from '@/components/assistant/Message'
-import { Chat } from '../types'
-import { saveChat } from '@/app/actions'
-import { getCurrentUser } from '@/lib/session'
-import { createAI, getAIState } from 'ai/rsc'
-import { Readme } from '@/components/assistant/Readme'
+import {BotCard, BotMessage, UserMessage,} from '@/components/assistant/Message'
+import {Chat} from '../types'
+import {saveChat} from '@/lib/chat'
+import {getCurrentUser} from '@/lib/session'
+import {createAI, getAIState} from 'ai/rsc'
+import {Readme} from '@/components/assistant/Readme'
 import Directory from '@/components/assistant/Directory'
-import { Profile } from '@/components/assistant/Profile'
-import { submitUserMessage } from './submit-user-message'
-import { nanoid, runAsyncFnWithoutBlocking } from '../utils'
+import {Profile} from '@/components/assistant/Profile'
+import {submitUserMessage} from './submit-user-message'
+import {nanoid} from '../utils'
 import Repositories from '@/components/assistant/Repositories'
-import { ProfileList } from '@/components/assistant/ProfileList'
-import { dirAction, readmeAction, repoAction } from './submit-user-action'
+import {ProfileList} from '@/components/assistant/ProfileList'
+import {dirAction, readmeAction, repoAction} from './submit-user-action'
+import {PollRandomGlobalProblems} from "@/components/poll-random-global-problems";
 
 export interface Message {
   role?: 'user' | 'assistant' | 'system' | 'function' | 'data' | 'tool'
@@ -57,8 +54,7 @@ export const AI = createAI<AIState, UIState>({
       const aiState = getAIState()
 
       if (aiState) {
-        const uiState = getUIStateFromAIState(aiState)
-        return uiState
+          return getUIStateFromAIState(aiState)
       }
     } else {
       return
@@ -69,9 +65,11 @@ export const AI = createAI<AIState, UIState>({
     'use server'
 
     const user = await getCurrentUser()
+      const { chatId, messages } = state
 
     if (user) {
-      const { chatId, messages } = state
+        //debugger
+
 
       const createdAt = new Date()
       const userId = user.id as string
@@ -98,6 +96,7 @@ export const AI = createAI<AIState, UIState>({
 // Parses the previously rendered content and returns the UI state.
 // (Useful for chat history to rerender the UI components again when switching between the chats)
 export const getUIStateFromAIState = async (aiState: Chat) => {
+    const user = await getCurrentUser()
   return aiState.messages
       .filter((message) => message.role !== 'system')
       .map((m, index) => ({
@@ -116,9 +115,18 @@ export const getUIStateFromAIState = async (aiState: Chat) => {
                     <BotCard>
                       <Repositories props={JSON.parse(m.content)} />
                     </BotCard>
+                ) : m.name === 'ask_about_wishonia' ? (
+                    <BotCard>
+                        <div>m.content</div>
+                    </BotCard>
                 ) : m.name === 'show_readme_ui' ? (
                     <BotCard>
                       <Readme props={JSON.parse(m.content)} />
+                    </BotCard>
+                ) : m.name === 'problems_vote_ui' ? (
+                    <BotCard>
+                        <PollRandomGlobalProblems user={user}>
+                        </PollRandomGlobalProblems>
                     </BotCard>
                 ) : m.name === 'show_directory_ui' ? (
                     <BotCard>
