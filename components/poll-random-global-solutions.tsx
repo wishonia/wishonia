@@ -18,11 +18,7 @@ export const PollRandomGlobalSolutions: React.FC<PollProps> = ({ user }) => {
         setLoading(true);
         const response = await fetch('/api/globalSolutionPairAllocation/random');
         const data = await response.json();
-        if(!data.thisGlobalSolution){
-            router.push('/globalSolutions/results');
-            return;
-        }
-        if(!data.thatGlobalSolution){
+        if(!data.thisGlobalSolution || !data.thatGlobalSolution){
             router.push('/globalSolutions/results');
             return;
         }
