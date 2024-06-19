@@ -23,7 +23,6 @@ export function handleError(error: unknown, message?: string, meta?: any) {
                 } }),
             {
                 status: 500,
-                headers: { "Content-Type": "application/json" },
             }
         )
     } else {
@@ -31,7 +30,6 @@ export function handleError(error: unknown, message?: string, meta?: any) {
             JSON.stringify({ error: "Internal Server Error" }),
             {
                 status: 500,
-                headers: { "Content-Type": "application/json" },
             }
         )
     }
