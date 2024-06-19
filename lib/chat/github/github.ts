@@ -1,11 +1,4 @@
-import {
-  Readme,
-  RepoProps,
-  Directory,
-  GithubUser,
-  ListOfUsers,
-  RepoFetchProps,
-} from '@/lib/types'
+import {Directory, GithubUser, ListOfUsers, Readme, RepoFetchProps, RepoProps,} from '@/lib/types'
 import {getGithubAccessToken} from "@/lib/getOauthAccessToken";
 import {getUserIdServer} from "@/lib/api/getUserIdServer";
 
@@ -27,8 +20,7 @@ export const checkRateLimit = async () => {
   })
 
   const rateLimitData = await res.json()
-  const remaining: number = rateLimitData.resources.core.remaining
-  return remaining
+  return rateLimitData.resources.core.remaining
 }
 
 function createHeaders(accessToken?: string): {
