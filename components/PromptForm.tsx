@@ -6,7 +6,7 @@ import {
   Sparkle,
   BookBookmark,
   ArrowElbowDownLeft,
-  Plus,
+  Plus, MagicWand,
 } from '@phosphor-icons/react'
 import {
   DropdownMenu,
@@ -46,14 +46,21 @@ const ChatFilters = [
   },
   {
     name: 'Repository Search',
-    value: 'repository-search',
+    value: 'repository_search',
     role: 'function',
     icon: <BookBookmark />,
     status: 'active',
   },
   {
+    name: 'Ask About Wishonia',
+    value: 'ask_about_wishonia',
+    role: 'function',
+    icon: <MagicWand />,
+    status: 'active',
+  },
+  {
     name: 'Code Search',
-    value: 'code-search',
+    value: 'code_search',
     role: 'function',
     icon: <Code />,
     status: 'disabled',

@@ -7,31 +7,9 @@ import { UserMessage } from './assistant/Message'
 import { useSidebar } from '@/lib/hooks/use-sidebar'
 import { useAIState, useActions, useUIState } from 'ai/rsc'
 import {ArrowRight, GithubLogo, MagicWand} from '@phosphor-icons/react'
+import {exampleMessages} from "@/components/ChatExampleQuestions";
 
 function ChatPanel() {
-  const exampleMessages = [
-    {
-      heading: 'Search for the username',
-      subheading: 'wishonia',
-      message: `Search for the username wishonia`,
-    },
-    {
-      heading: 'Search for repositories',
-      subheading: 'with "state management" in description.',
-      message:
-        'Search for repositories with "state management" in description.',
-    },
-    {
-      heading: 'Search for repository content',
-      subheading: 'of wishonia/wishonia',
-      message: `Search for repository content of wishonia/wishonia.`,
-    },
-    {
-      heading: 'Show README.md of',
-      subheading: 'wishonia/wishonia?',
-      message: `Show README.md of wishonia/wishonia`,
-    },
-  ]
   const [aiState] = useAIState()
   const { submitUserMessage } = useActions()
   const [messages, setMessages] = useUIState<typeof AI>()

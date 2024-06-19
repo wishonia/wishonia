@@ -29,33 +29,35 @@ import { createStreamableValue, getMutableAIState, render } from 'ai/rsc'
 import Directory from '@/components/assistant/Directory'
 import { Readme } from '@/components/assistant/Readme'
 import RateLimited from '@/components/RateLimited'
-import { sleep } from '../utils'
+import {cn, sleep} from '../utils'
 import RepositorySkeleton from '@/components/assistant/RepositorySkeleton'
 import ReadmeSkeleton, {
   DirectorySkeleton,
 } from '@/components/assistant/ReadmeSkeleton'
 import {askSupabase} from "@/lib/docs/docsAgent";
+import {PollRandomGlobalProblems} from "@/components/poll-random-global-problems";
+import {getCurrentUser} from "@/lib/session";
 
 const openai = new OpenAI({
   apiKey: process.env.OPENAI_API_KEY || '',
 })
 
-export async function submitUserMessage(content: string, attribute: string) {
+export async function submitUserMessage(
+    content: string, attribute: string)
+{
   'use server'
+  //debugger
 
+  console.log(`submitUserMessage: ${content}`);
   const aiState = getMutableAIState<typeof AI>()
 
-  aiState.update({
-    ...aiState.get(),
-    messages: [
-      ...aiState.get().messages,
-      {
-        id: nanoid(),
-        role: 'user',
-        content,
-      },
-    ],
-  })
+  const newState = aiState.get();
+  newState.messages.push({
+    id: nanoid(),
+    role: 'user',
+    content,
+  });
+  aiState.update(newState)
 
   let textStream: undefined | ReturnType<typeof createStreamableValue<string>>
   let textNode: undefined | React.ReactNode
@@ -217,6 +219,42 @@ export async function submitUserMessage(content: string, attribute: string) {
           )
         },
       },
+      show_problems_vote_ui: {
+        description: 'Show the found problems vote UI',
+        parameters: z.object({}),
+        render: async function* ({  }) {
+          console.log("show_problems_vote_ui called")
+          yield (
+              <BotCard>
+                <ReadmeSkeleton />
+              </BotCard>
+          )
+
+          aiState.done({
+            ...aiState.get(),
+            messages: [
+              ...aiState.get().messages,
+              {
+                id: nanoid(),
+                role: 'function',
+                name: 'show_problems_vote_ui',
+                content: JSON.stringify({}),
+              },
+            ],
+          })
+          const user = await getCurrentUser()
+
+          return (
+              <BotCard>
+                <div className={cn('group flex items-start w-full')}>
+                  <div className='flex-1 space-y-2 overflow-hidden px-1 w-full'>
+                    <PollRandomGlobalProblems user={user}></PollRandomGlobalProblems>
+                  </div>
+                </div>
+              </BotCard>
+          )
+        },
+      },
       show_readme_ui: {
         description: 'Show the found Readme.md UI',
         parameters: z.object({
@@ -298,7 +336,7 @@ export async function submitUserMessage(content: string, attribute: string) {
         },
       },
       ask_about_wishonia: {
-        description: 'Ask a general question about wishonia or wishocracy',
+        description: 'Ask a general question about Wishonia or Wishocracy',
         parameters: z.object({
           question: z.string().describe('The question to answer about wishonia or wishocracy'),
         }),
