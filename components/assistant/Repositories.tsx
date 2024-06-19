@@ -41,7 +41,7 @@ function Repositories({ props: repos }: { props: RepoProps[] }) {
   const RepoActions = [
     {
       name: 'Show Readme',
-      value: 'show-readme',
+      value: 'show_readme',
       function: async (repo: string, owner: string) => {
         const response = await readmeAction(repo, owner)
         setMessages((currentMessages: any) => [
@@ -65,7 +65,7 @@ function Repositories({ props: repos }: { props: RepoProps[] }) {
     },
     {
       name: 'Code Search',
-      value: 'code-search',
+      value: 'code_search',
       function: async () => {},
       status: 'disabled',
     },
@@ -185,7 +185,7 @@ function Repositories({ props: repos }: { props: RepoProps[] }) {
                             value={action.value}
                             className='p-2 cursor-pointer'
                             onSelect={async () => {
-                              if (action.value === 'show-readme') {
+                              if (action.value === 'show_readme') {
                                 await action.function(r.name, r.owner.login)
                               } else if (action.value === 'show-directory') {
                                 await action.function(r.name, r.owner.login)
