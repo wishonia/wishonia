@@ -6,7 +6,6 @@ import {revalidatePath} from 'next/cache'
 import {QueryCache} from '@tanstack/react-query'
 import {getCurrentUser} from "@/lib/session";
 import {type Message as AIMessage} from 'ai';
-import {ChatMessage} from "@prisma/client";
 
 type GetChatResult = Chat[] | null
 type SetChatResults = Chat[]
