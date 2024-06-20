@@ -5,6 +5,7 @@ import {loadJsonToDatabase} from "@/lib/prisma/loadDatabaseFromJson";
 import {assertTestDB, getOrCreateTestUser} from "@/tests/test-helpers";
 import {seedGlobalProblemPairAllocations} from "@/prisma/seedGlobalProblemPairAllocations";
 import {seedGlobalProblemSolutionPairAllocations} from "@/prisma/seedGlobalProblemSolutionPairAllocations";
+import {seedGlobalSolutionPairAllocations} from "@/prisma/seedGlobalSolutionPairAllocations";
 beforeAll(async () => {
     await assertTestDB();
 });
@@ -19,6 +20,7 @@ describe("Database-seeder tests", () => {
         await loadJsonToDatabase("GlobalProblemSolution", testUser.id);
         await seedGlobalProblemPairAllocations(testUser);
         await seedGlobalProblemSolutionPairAllocations(testUser);;
+        await seedGlobalSolutionPairAllocations(testUser);
         await loadJsonToDatabase("WishingWell", testUser.id);
     });
 });
