@@ -1,5 +1,5 @@
 import {User} from "@prisma/client";
-import {getAllRandomGlobalSolutionPairs} from "@/lib/globalSolutions";
+import {aggregateGlobalSolutionPairAllocations, getAllRandomGlobalSolutionPairs} from "@/lib/globalSolutions";
 import { prisma } from "@/lib/db";
 
 export async function seedGlobalSolutionPairAllocations(testUser: User) {
@@ -22,4 +22,5 @@ export async function seedGlobalSolutionPairAllocations(testUser: User) {
         idsWithPair.push(pair[0].id);
         idsWithPair.push(pair[1].id);
     }
+    await aggregateGlobalSolutionPairAllocations();
 }
