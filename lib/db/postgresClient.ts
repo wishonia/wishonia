@@ -14,15 +14,6 @@ function getPostgresClient(): Pool {
         throw new Error('DATABASE_URL environment variable is not set.');
     }
 
-    const parsedUrl = url.parse(databaseUrl);
-
-    const dbHost = parsedUrl.hostname || 'localhost';
-    const dbPort = parseInt(parsedUrl.port || '5432', 10);
-    const dbName = parsedUrl.pathname?.slice(1);
-    const dbUser = parsedUrl.auth?.split(':')[0];
-    const dbPassword = parsedUrl.auth?.split(':')[1];
-    //const dbSchema = parsedUrl.query?.split('=')[1] || 'public';
-
     pool = new Pool({
         connectionString: databaseUrl
     });

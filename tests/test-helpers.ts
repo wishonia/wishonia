@@ -4,7 +4,7 @@ import {prisma as db} from "@/lib/db";
 export async function getOrCreateTestUser() {
     let user = await db.user.findUnique({
         where: {
-            email: "test@example.com",
+            id: "test-user",
         },
     });
     if(user) {return user;}
