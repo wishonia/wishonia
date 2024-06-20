@@ -59,6 +59,16 @@ export const globalSolutionColumns: ColumnDef<GlobalSolution>[] = [
     },
     cell: (row) => {
       let averageAllocation = row.getValue() as number
+      if(!averageAllocation) {
+        return (
+            <Button
+                variant="ghost"
+                onClick={() => window.location.href = `/globalSolutions`}
+            >
+              Vote to See Results
+              <Icons.lightbulb className="ml-2 h-4 w-4" />
+            </Button>
+        )}
       averageAllocation = parseFloat(averageAllocation.toFixed(1));
       return <div className="min-w-[5rem] md:px-4 text-center">
         {averageAllocation}%

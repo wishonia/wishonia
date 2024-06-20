@@ -23,8 +23,8 @@ export function DashboardCards({searchParams}: DashboardCardsProps) {
             <LinkCard navItem={wishingWellsResultsLink}/>*/}
             <LinkCard navItem={globalProblemsVoteLink}/>
             <LinkCard navItem={globalProblemsResultsLink}/>
-            <LinkCard navItem={globalSolutionsVoteLink}/>
-            <LinkCard navItem={globalSolutionsResultsLink}/>
+            {/*<LinkCard navItem={globalSolutionsVoteLink}/>*/}
+            {/*<LinkCard navItem={globalSolutionsResultsLink}/>*/}
         </div>
     )
 }
