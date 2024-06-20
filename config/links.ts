@@ -25,7 +25,7 @@ export const globalProblemsResultsLink: NavItem = {
 export const globalSolutionsVoteLink: NavItem = {
     title: "Vote on Solutions",
     href: "/globalSolutions",
-    icon: "vote",
+    icon: "lightbulb",
     img: "/img/screenshots/problem-allocation-short.png",
     tooltip: "Vote on the allocation of resources between global problems",
 }
@@ -147,9 +147,9 @@ export const generalSidebarNav: Navigation = {
         //wishingWellsLink,
         //wishingWellsResultsLink,
         globalProblemsVoteLink,
-        globalProblemsResultsLink,
+        //globalProblemsResultsLink,
         globalSolutionsVoteLink,
-        globalSolutionsResultsLink,
+        //globalSolutionsResultsLink,
         docsLink,
         githubLink,
     ],

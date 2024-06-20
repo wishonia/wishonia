@@ -2,19 +2,22 @@ import type { Chat } from "@/lib/types";
 import { prisma } from "@/lib/db";
 
 async function createNewChat(chat: Chat) {
-    const createdChat = await prisma.chat.create({
-        data: {
-            id: chat.id,
-            title: chat.title,
-            userId: chat.userId,
-            createdAt: chat.createdAt,
-            path: chat.path,
-        },
-    });
-
-    await createChatMessages(chat.messages, createdChat.id);
-
-    return createdChat;
+    try {
+        const createdChat = await prisma.chat.create({
+            data: {
+                id: chat.id,
+                title: chat.title,
+                userId: chat.userId,
+                createdAt: chat.createdAt,
+                path: chat.path,
+            },
+        });
+        await createChatMessages(chat.messages, createdChat.id);
+        return createdChat;
+    } catch (error) {
+        console.error(`createNewChat error: ${error}. could not create chat with params: `, chat);
+        throw error;
+    }
 }
 
 async function getExistingMessageIds(chatId: string) {
