@@ -1,38 +1,51 @@
-import {generalSidebarNav} from "@/config/links"
-import { getCurrentUser } from "@/lib/session"
-import Footer from "@/components/layout/footer"
-import TopNavbar from "@/components/layout/topNavbar"
-import { SidebarNav } from "@/components/sidebar-nav"
-import React from "react";
+import { Metadata, Viewport } from 'next'
+import { ChatHistory } from '@/components/ChatHistory'
+import SidebarMobile from '@/components/SidebarMobile'
+import SidebarToggle from '@/components/SidebarToggle'
+import SidebarDesktop from '@/components/SidebarDesktop'
+import {Providers} from "@/app/providers";
 
-interface DashboardLayoutProps {
+interface ChatLayoutProps {
   children: React.ReactNode
 }
 
-export default async function DashboardLayout({
-  children,
-}: DashboardLayoutProps) {
-  const user = await getCurrentUser()
+const title = 'Talk to Wishonia'
+const description =
+  "Wishonia is a magical kingdom where resources are allocated to maximize universal wish fulfillment. Talk to Wishonia's AI to learn more."
+export const metadata: Metadata = {
+  metadataBase: new URL('https://wishonia.love/chat'),
+  title,
+  description,
+  openGraph: {
+    title,
+    description,
+  },
+  twitter: {
+    title,
+    description,
+    card: 'summary_large_image',
+    creator: '@thinkbynumbers',
+  },
+}
 
+export const viewport: Viewport = {
+  width: 'device-width',
+  initialScale: 1,
+  minimumScale: 1,
+  maximumScale: 1,
+}
+
+export default async function ChatLayout({ children }: ChatLayoutProps) {
   return (
-    <div className="flex min-h-screen flex-col space-y-6">
-      <TopNavbar
-        user={{
-          name: user?.name,
-          image: user?.image,
-          email: user?.email,
-        }}
-      />
-      <div className="container grid flex-1 gap-12 md:grid-cols-[200px_1fr]">
-        <aside className="hidden w-[200px] flex-col md:flex">
-          <SidebarNav items={generalSidebarNav.data} />
-        </aside>
-        <main className="flex w-full flex-1 flex-col"
-              style={{ maxWidth: "90%" }}>
-            {children}
-        </main>
-      </div>
-      <Footer />
+      <Providers>
+    <div className='w-full flex h-screen'>
+      <SidebarMobile>
+        <ChatHistory />
+      </SidebarMobile>
+      <SidebarToggle />
+      <SidebarDesktop />
+      {children}
     </div>
+      </Providers>
   )
 }

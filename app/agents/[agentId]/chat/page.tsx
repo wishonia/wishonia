@@ -1,20 +1,18 @@
-import {Shell} from "@/components/layout/shell";
-import React from "react";
+import Chat from '@/components/Chat'
+import { nanoid } from '@/lib/utils'
+import { AI } from '@/lib/chat/actions'
+import { getMissingKeys } from '@/app/actions'
 
+export default async function IndexPage() {
+  const missingKeys = await getMissingKeys()
+  const id = nanoid()
 
-export default function AddAgentDataSourcePage() {
-    return (
-        <Shell>
-            <h1>
-                TODO: Add chat UI like
-            </h1>
-            <div>
-                <a href="https://githubassistant.vercel.app/">https://githubassistant.vercel.app/</a>
-            </div>
-            <div>
-                Code at <a href="https://github.com/kayaayberk/generative-ui-github-assistant">
-                GitHub</a>
-            </div>
-        </Shell>
-    )
+  return (
+    <AI initialAIState={{ chatId: id, messages: [] }}>
+      <Chat
+        id={id}
+        missingKeys={missingKeys}
+      />
+    </AI>
+  )
 }
