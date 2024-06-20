@@ -5,6 +5,7 @@ import {walk} from '@/lib/loaders/sources/util'
 import {prisma} from '@/lib/db'
 import {getOpenaiClient} from "@/lib/openaiClient";
 import {Datasource} from "@prisma/client";
+import {getPostgresClient} from "@/lib/db/postgresClient";
 
 export async function generateMarkdownEmbeddings(
     docsRootPath: string,
@@ -143,16 +144,28 @@ export async function generateMarkdownEmbeddings(
 
                     if(!slug) {throw new Error('Page section slug is required')}
                     if(!heading) {throw new Error('Page section heading is required')}
-                    const datasourcePageSection = await prisma.datasourcePageSection.create({
-                        data: {
-                            datasourcePageId: datasourcePage.id,
-                            slug,
-                            heading,
-                            content,
-                            tokenCount: embeddingResponse.data.usage.total_tokens,
-                            embedding: responseData.embedding
+                    const pool = getPostgresClient();
+                    const createDatasourcePageSection = async (
+                        datasourcePageId: string,
+                        slug: string,
+                        heading: string,
+                        content: string,
+                        tokenCount: any,
+                        embedding: any) => {
+                        const client = await pool.connect();
+                        try {
+                            await client.query('BEGIN');
+                            const insertText =
+                                'INSERT INTO DatasourcePageSection(datasourcePageId, slug, heading, content, tokenCount, embedding) VALUES($1, $2, $3, $4, $5, $6)';
+                            const res = await client.query(insertText, [datasourcePageId, slug, heading, content, tokenCount, embedding]);
+                            await client.query('COMMIT');
+                        } catch (e) {
+                            await client.query('ROLLBACK');
+                            throw e;
+                        } finally {
+                            client.release();
                         }
-                    })
+                    }
 
                 } catch (err) {
                     // TODO: decide how to better handle failed embeddings
