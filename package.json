@@ -21,7 +21,7 @@
     "test:ci": "jest --ci",
     "format": "pnpm prettier . --write",
     "format:check": "pnpm prettier . --check",
-    "seed": "ts-node --compiler-options {\"module\":\"CommonJS\"} prisma/seed.ts",
+    "seed": "jest tests/seed.test.ts",
     "json-to-prisma": "json-to-prisma-schema-convertor convert --inputPath='./prisma/schema.json' --outputPath='./prisma/schema.prisma'"
   },
   "prisma": {
