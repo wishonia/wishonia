@@ -18,22 +18,23 @@
 
 3. **Start the Database With Docker**:
 
-   ```sh
-   docker-compose up -d
-   ```
+```sh
+docker-compose up -d
+```
 
 4. **Install Dependencies**:
 
-   ```sh
-   pnpm install
-   ```
+```sh
+pnpm install
+```
 
 5. **Seed the Database**:
 
 Seed the database with default problems and wishes by running tests/seed.test.ts with the following command:
-`sh
-    jest tests/seed.test.ts
-    `
+```sh
+jest tests/seed.test.ts
+``` 
+
 
 # Why Are You Doing This?
 
@@ -67,7 +68,9 @@ This is visually represented in the graphs, where each additional person signifi
 
 ![](public/img/coordination-complexity-exponential-graph.jpeg)
 
-However, digital twin AI agents, which are AI representations of individuals with higher cognitive bandwidth perfectly aligned to their preferences, can mitigate this issue. These agents can process vast amounts of information and make decisions more efficiently, acting on behalf of their human counterparts. By integrating these AI agents into a Global Todo List for humanity, we can streamline the coordination of efforts towards shared societal goals. These agents can continuously analyze data, predict outcomes, and suggest optimal actions, ensuring that resources are allocated effectively and that collaborative efforts are maximized. This approach can lead to more informed decision-making, reduced friction in communication, and accelerated progress towards achieving our collective objectives on a global scale.
+However, digital twin AI agents, which are AI representations of individuals with higher cognitive bandwidth perfectly aligned to their preferences, can mitigate this issue. These agents can process vast amounts of information and make decisions more efficiently, acting on behalf of their human counterparts. 
+
+By integrating these AI agents into a Global Todo List for humanity, we can streamline the coordination of efforts towards shared societal goals. These agents can continuously analyze data, predict outcomes, and suggest optimal actions, ensuring that resources are allocated effectively and that collaborative efforts are maximized. This approach can lead to more informed decision-making, reduced friction in communication, and accelerated progress towards achieving our collective objectives on a global scale.
 
 # Solution: Collective Intelligence and Coordination
 
@@ -178,14 +181,14 @@ Each task should be SMART (Specific, Measurable, Achievable, Relevant, Time-boun
 Some tasks may contribute to multiple solutions,
 so it's important to link tasks to multiple solutions so that they are not duplicated and that costs are shared across solutions.
 
-## Step 6. Create Prizes
+## Step 6. Create Prizes and Incentives
 
-Offer rewards for completing tasks to incentivize the completion of tasks.
+Offer rewards for completing tasks to incentivize the completion of tasks. This not only motivates individuals or AI agents to undertake and complete tasks but also promotes cost-sharing between multiple organizations. By doing so, we can prevent wasteful duplication of effort and resources, as multiple organizations can contribute to the reward pool for tasks that align with their objectives.
 
 Possible ways to decide on the amount of the prize include:
 
-- **Bidding:** People bid on the tasks by submitting the amount they would be willing to accept to complete the task
-- **AI Prediction Markets:** Use AI to predict the cost of completing the task and offer a prize that is slightly higher than the predicted cost
+- **Bidding:** People or AI agents bid on the tasks by submitting the amount they would be willing to accept to complete the task. This creates a competitive environment that can lead to more efficient task completion.
+- **AI Prediction Markets:** Use AI to predict the cost of completing the task and offer a prize that is slightly higher than the predicted cost. This ensures that the task is attractive enough to be undertaken, while also keeping costs under control.
 
 ## Step 6. Evaluate Submissions
 
@@ -308,12 +311,6 @@ Some example integration patterns:
 
 By defining these common primitives and leveraging decentralized data networks, Wishocracy can serve as a connective tissue that enables various task management and resource allocation systems to interoperate towards the shared goal of optimizing global effort, without requiring disruptive changes to their existing workflows.
 
-# Potential Challenges
-
-1. **Framing**: Carefully framing wishes/problems and solution options to be evaluable by laypeople, potentially requiring an intermediate expert translation stage.
-2. **Incentivization**: Incentivizing task completion, especially for large and long-term tasks, solely through prizes. Alternative incentive structures may need to be considered.
-3. **Impact Measurement**: Measuring and attributing impact, especially for tasks and solutions with long time horizons and multi-faceted outcomes, is crucial for steering the system effectively.
-
 # General Functions of Wishocracy
 
 1. **Wish Management System**: A system for creating, categorizing, and prioritizing wishes or problems that need to be solved.
@@ -341,11 +338,11 @@ A Digital Twin is a digital representation of a person that is defined by their:
 - **Location**: Where they are
 - **Language**: What languages they speak
 
-Functionally, it consists of:
+The basic technical ingredients of a digital twin are:
 
 - **A Large Language Model**: To understand and generate text
 - **A Knowledge Graph**: To store and reason about the person's wishes, skills, resources, interests, time, reputation, network, location, and language
-- **A Vector Database**: To store and query the person's knowledge graph using retrival
+- **A Vector Database**: To store and query the person's knowledge graph using retrieval
 
 ## Additional Stuff to Consider
 
@@ -401,3 +398,17 @@ This would enable all organizations to accomplish more with the same amount of r
 The key is to start with small-scale experiments and grow gradually, 
 while maintaining the north star of empowering individuals to self-organize to solve important problems, 
 augmenting rather than replacing existing institutions. 
+
+## Q: Even if we had a global to-do list, we need every organization to use it for it to be useful. How will we make it so that every organization decides to use it?
+
+Widespread adoption of a global to-do list could be achieved by:
+
+1. **Demonstrating Cost Savings**: Even if only two organizations use it, it could theoretically cut their costs in half by reducing duplication of efforts.
+
+2. **Providing Competitive Advantage**: For businesses, ["coopetition"](https://en.wikipedia.org/wiki/Coopetition) would be a competitive advantage, as it increases efficiency and access to resources.
+
+3. **Multiplying Nonprofit Impact**: For nonprofits, it would multiply the impact of donations, attracting donors who want to maximize the effectiveness of their contributions.
+
+4. **Autonomous Agents**: As AI frontier models improve in reasoning, autonomous agents can take on more tasks, further reducing costs and increasing efficiency.
+
+5. **Ensuring Easy Integration**: Seamless integration with existing tools and workflows will minimize adoption friction.
