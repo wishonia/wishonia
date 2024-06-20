@@ -675,6 +675,7 @@ enum VectorDbProvider {
   WEAVIATE
   QDRANT
   SUPABASE
+  POSTGRES
 }
 
 model ApiKey {
@@ -712,21 +713,22 @@ model Agent {
 }
 
 model Datasource {
-  id          String            @id @default(uuid())
-  name        String
-  content     String?           @db.Text()
-  description String?
-  url         String?
-  type        DatasourceType
-  userId      String
-  user        User              @relation(fields: [userId], references: [id])
-  createdAt   DateTime          @default(now())
-  updatedAt   DateTime          @updatedAt
-  metadata    String?           @db.Text
-  status      DatasourceStatus  @default(IN_PROGRESS)
-  datasources AgentDatasource[]
-  vectorDb    VectorDb?         @relation(fields: [vectorDbId], references: [id])
-  vectorDbId  String?
+  id              String            @id @default(uuid())
+  name            String
+  content         String?           @db.Text()
+  description     String?
+  url             String?
+  type            DatasourceType
+  userId          String
+  user            User              @relation(fields: [userId], references: [id])
+  createdAt       DateTime          @default(now())
+  updatedAt       DateTime          @updatedAt
+  metadata        String?           @db.Text
+  status          DatasourceStatus  @default(IN_PROGRESS)
+  datasources     AgentDatasource[]
+  vectorDb        VectorDb?         @relation(fields: [vectorDbId], references: [id])
+  vectorDbId      String?
+  datasourcePages DatasourcePage[]
 }
 
 model AgentDatasource {
@@ -738,6 +740,37 @@ model AgentDatasource {
   updatedAt    DateTime   @updatedAt
 
   @@id([agentId, datasourceId])
+}
+
+model DatasourcePage {
+  id          String   @id @default(cuid())
+  checksum    String?
+  path        String   @unique
+  type        String
+  source      String
+  meta        Json
+  version     String
+  lastRefresh DateTime @default(now())
+
+  parentDatasourcePage   DatasourcePage?         @relation("PageToPage", fields: [parentPageId], references: [id])
+  parentPageId           String?
+  childDatasourcePages   DatasourcePage[]        @relation("PageToPage")
+  datasourcePageSections DatasourcePageSection[]
+
+  datasource   Datasource? @relation(fields: [datasourceId], references: [id])
+  datasourceId String?
+}
+
+model DatasourcePageSection {
+  id               String                       @id @default(cuid())
+  datasourcePageId String
+  slug             String
+  heading          String
+  content          String                       @db.Text
+  tokenCount       Int
+  embedding        Unsupported("vector(1536)")?
+
+  datasourcePage DatasourcePage @relation(fields: [datasourcePageId], references: [id], onDelete: Cascade)
 }
 
 model Tool {
