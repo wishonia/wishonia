@@ -81,7 +81,8 @@ export function PromptForm({
   const [newAttribute, setNewAttribute] = React.useState(null)
 
   // Unique identifier for this UI component.
-  const id = React.useId()
+  //const id = React.useId()
+  const id = nanoid() // Use a more random I'd for DB
   const { formRef, onKeyDown } = useEnterSubmit()
   const inputRef = React.useRef<HTMLTextAreaElement>(null)
   const pathname = usePathname()
