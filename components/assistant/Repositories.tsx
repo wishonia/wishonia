@@ -23,7 +23,7 @@ import AssistantDisplay from '../AssistantDisplay'
 import { Sparkle, Star } from '@phosphor-icons/react'
 
 function Repositories({ props: repos }: { props: RepoProps[] }) {
-  const { readmeAction, dirAction } = useActions()
+  const { readmeAction} = useActions()
   const [action, setAction] = React.useState('')
   const [messages, setMessages] = useUIState<typeof AI>()
 
@@ -45,18 +45,6 @@ function Repositories({ props: repos }: { props: RepoProps[] }) {
       function: async (repo: string, owner: string) => {
         const response = await readmeAction(repo, owner)
         setMessages((currentMessages: any) => [
-          ...currentMessages,
-          response.newMessage,
-        ])
-      },
-      status: 'active',
-    },
-    {
-      name: 'Show Directory',
-      value: 'show-directory',
-      function: async (repo: string, owner: string) => {
-        const response = await dirAction(repo, owner)
-        setMessages((currentMessages: UIState) => [
           ...currentMessages,
           response.newMessage,
         ])

@@ -14,7 +14,7 @@ export async function ChatHistory() {
   }
 
   return (
-    <div className='gap-4 p-3 overflow-scroll border-r flex flex-col h-full justify-between'>
+    <div className='gap-4 p-3  border-r flex flex-col h-full justify-between'>
       <div className='px-2 font-light text-sm tracking-wide'>Chat History</div>
       <Link
         href='/chat'
