@@ -6,21 +6,14 @@ import {saveChat} from '@/lib/chat'
 import {getCurrentUser} from '@/lib/session'
 import {createAI, getAIState} from 'ai/rsc'
 import {Readme} from '@/components/assistant/Readme'
-import Directory from '@/components/assistant/Directory'
 import {Profile} from '@/components/assistant/Profile'
 import {submitUserMessage} from './submit-user-message'
 import {nanoid} from '../utils'
 import Repositories from '@/components/assistant/Repositories'
 import {ProfileList} from '@/components/assistant/ProfileList'
-import {dirAction, readmeAction, repoAction} from './submit-user-action'
+import {readmeAction, repoAction} from './submit-user-action'
 import {PollRandomGlobalProblems} from "@/components/poll-random-global-problems";
-
-export interface Message {
-  role?: 'user' | 'assistant' | 'system' | 'function' | 'data' | 'tool'
-  content?: string
-  id: string
-  name?: string
-}
+import {Message} from "ai";
 
 export type AIState = {
   chatId: string
@@ -38,30 +31,29 @@ export type UIState = {
 }[]
 
 export const AI = createAI<AIState, UIState>({
-  actions: { submitUserMessage, repoAction, readmeAction, dirAction },
+  actions: { submitUserMessage, repoAction, readmeAction },
   initialAIState: {
     chatId: nanoid(),
     messages: [],
   },
   initialUIState: [],
 
-  unstable_onGetUIState: async () => {
+  onGetUIState: async () => {
     'use server'
 
     const user = await getCurrentUser()
 
     if (user) {
       const aiState = getAIState()
-
       if (aiState) {
-          return getUIStateFromAIState(aiState)
+          return getUIStateFromAIState(aiState as Chat)
       }
     } else {
       return
     }
   },
 
-  unstable_onSetAIState: async ({ state }) => {
+  onSetAIState: async ({ state }) => {
     'use server'
 
     const user = await getCurrentUser()
@@ -98,8 +90,8 @@ export const AI = createAI<AIState, UIState>({
 export const getUIStateFromAIState = async (aiState: Chat) => {
     const user = await getCurrentUser()
   return aiState.messages
-      .filter((message) => message.role !== 'system')
-      .map((m, index) => ({
+      .filter((message: Message) => message.role !== 'system')
+      .map((m: Message, index: number) => ({
         id: `${aiState.id}-${index}`,
         display:
             m.role === 'function' ? (
@@ -127,10 +119,6 @@ export const getUIStateFromAIState = async (aiState: Chat) => {
                     <BotCard>
                         <PollRandomGlobalProblems user={user}>
                         </PollRandomGlobalProblems>
-                    </BotCard>
-                ) : m.name === 'show_directory_ui' ? (
-                    <BotCard>
-                      <Directory props={JSON.parse(m.content)} />
                     </BotCard>
                 ) : null
             ) : m.role === 'user' ? (

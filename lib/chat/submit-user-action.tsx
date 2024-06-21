@@ -13,7 +13,6 @@ import { runAsyncFnWithoutBlocking, sleep } from '../utils'
 import { Readme } from '@/components/assistant/Readme'
 import { BotCard } from '@/components/assistant/Message'
 import { Spinner } from '@/components/assistant/Spinner'
-import Directory from '@/components/assistant/Directory'
 import Repositories from '@/components/assistant/Repositories'
 import { createStreamableUI, getMutableAIState } from 'ai/rsc'
 import { ProfileSkeleton } from '@/components/assistant/ProfileSkeleton'
@@ -141,68 +140,6 @@ export async function readmeAction(repo: string, owner: string) {
 
   return {
     readmeUI: loadingReadme.value,
-    newMessage: {
-      id: nanoid(),
-      display: systemMessage.value,
-    },
-  }
-}
-
-export async function dirAction(repo: string, owner: string) {
-  'use server'
-
-  const aiState = getMutableAIState<typeof AI>()
-
-  const loadingDirectory = createStreamableUI(<BotCard>{Spinner}</BotCard>)
-
-  const systemMessage = createStreamableUI(null)
-
-  runAsyncFnWithoutBlocking(async () => {
-    loadingDirectory.update(
-      <BotCard>
-        <ProfileSkeleton />
-      </BotCard>,
-    )
-    const rateLimitRemaining = await checkRateLimit()
-    const directory = await getDir({ repo, owner })
-
-    loadingDirectory.done(
-      <BotCard>
-        <ProfileSkeleton />
-      </BotCard>,
-    )
-    sleep(1000)
-    systemMessage.done(
-      <BotCard>
-        {rateLimitRemaining !== 0 ? (
-          <Directory props={directory} />
-        ) : (
-          <RateLimited />
-        )}
-      </BotCard>,
-    )
-
-    aiState.done({
-      ...aiState.get(),
-      messages: [
-        ...aiState.get().messages,
-        {
-          id: nanoid(),
-          role: 'function',
-          name: 'show_directory_ui',
-          content: JSON.stringify(directory),
-        },
-        {
-          id: nanoid(),
-          role: 'system',
-          content: `[User has clicked on the 'Show Directory' button]`,
-        },
-      ],
-    })
-  })
-
-  return {
-    directoryUI: loadingDirectory.value,
     newMessage: {
       id: nanoid(),
       display: systemMessage.value,

@@ -15,6 +15,7 @@ async function createNewChat(chat: Chat) {
         await createChatMessages(chat.messages, createdChat.id);
         return createdChat;
     } catch (error) {
+        debugger
         console.error(`createNewChat error: ${error}. could not create chat with params: `, chat);
         throw error;
     }
@@ -43,7 +44,8 @@ async function createChatMessages(messages: Chat["messages"], chatId: string) {
                 data: chatMessage,
             });
         } catch (error) {
-            console.error(`createChatMessages error: ${error}`);
+            debugger
+            console.error(`createChatMessages error: ${error} for chatMessage: `, chatMessage);
         }
     }
 }

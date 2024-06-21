@@ -26,14 +26,11 @@ import {
   ProfileSkeleton,
 } from '@/components/assistant/ProfileSkeleton'
 import { createStreamableValue, getMutableAIState, render } from 'ai/rsc'
-import Directory from '@/components/assistant/Directory'
 import { Readme } from '@/components/assistant/Readme'
 import RateLimited from '@/components/RateLimited'
 import {cn, sleep} from '../utils'
 import RepositorySkeleton from '@/components/assistant/RepositorySkeleton'
-import ReadmeSkeleton, {
-  DirectorySkeleton,
-} from '@/components/assistant/ReadmeSkeleton'
+import ReadmeSkeleton from '@/components/assistant/ReadmeSkeleton'
 import {askSupabase} from "@/lib/docs/docsAgent";
 import {PollRandomGlobalProblems} from "@/components/poll-random-global-problems";
 import {getCurrentUser} from "@/lib/session";
@@ -288,46 +285,6 @@ export async function submitUserMessage(
             <BotCard>
               {rateLimitRemaining !== 0 ? (
                 <Readme props={response.content} />
-              ) : (
-                <RateLimited />
-              )}
-            </BotCard>
-          )
-        },
-      },
-      show_directory_ui: {
-        description: 'Show the repository directory UI',
-        parameters: z.object({
-          repo: z.string().describe('The repo to search for'),
-          owner: z.string().describe('The owner of the repo'),
-        }),
-        render: async function* ({ repo, owner }) {
-          yield (
-            <BotCard>
-              <DirectorySkeleton />
-            </BotCard>
-          )
-          const rateLimitRemaining = await checkRateLimit()
-          const response = await getDir({ repo, owner })
-          sleep(1000)
-
-          aiState.done({
-            ...aiState.get(),
-            messages: [
-              ...aiState.get().messages,
-              {
-                id: nanoid(),
-                role: 'function',
-                name: 'show_directory_ui',
-                content: JSON.stringify(response),
-              },
-            ],
-          })
-
-          return (
-            <BotCard>
-              {rateLimitRemaining !== 0 ? (
-                <Directory props={response} />
               ) : (
                 <RateLimited />
               )}
