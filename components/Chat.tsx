@@ -36,6 +36,15 @@ function Chat({ id, missingKeys }: ChatProps) {
   const [_, setNewChatId] = useLocalStorage('newChatId', id)
   const { isSidebarOpen, isLoading, toggleSidebar } = useSidebar()
 
+  const messagesEndRef =
+      useRef<HTMLDivElement | null>(null);
+
+  useEffect(() => {
+    if (messagesEndRef.current) {
+      messagesEndRef.current.scrollIntoView({ behavior: 'smooth' });
+    }
+  }, [messages]);
+
   useEffect(() => {
     const messagesLength = aiState.messages?.length
     if (messagesLength === 3) {
@@ -64,21 +73,20 @@ function Chat({ id, missingKeys }: ChatProps) {
     <div className={`size-full`}>
       <ScrollArea className='size-full'>
         <div
-          ref={ref}
-          className={`w-full sm:max-w-2xl mx-auto sm:pt-0 pt-14 pb-36 sm:pb-28 ${isSidebarOpen && session ? 'lg:translate-x-[100px]' : ''} transition-all duration-300 ${messages.length !== 0 && 'px-3'}`}
+            ref={ref}
+            className={`w-full sm:max-w-2xl mx-auto sm:pt-0 pt-14 pb-36 sm:pb-28 ${isSidebarOpen && session ? 'lg:translate-x-[100px]' : ''} transition-all duration-300 ${messages.length !== 0 && 'px-3'}`}
         >
-          <ChatMessage id={id} messages={messages} />
+          <ChatMessage id={id} messages={messages}/>
+          <div ref={messagesEndRef}/>
         </div>
-        <ChatPanel />
+        <ChatPanel/>
       </ScrollArea>
       <div
-        className={`${messages.length !== 0 || pathname === '/chat' || pathname === '/' ? 'block' : 'hidden'} ${isSidebarOpen && session ? 'lg:translate-x-[100px]' : ''} w-full mx-auto transition-all duration-300 fixed bottom-0 bg-gradient-to-t from-background to-transparent via-background`}
+        className={`${messages.length !== 0 || pathname === '/chat' || pathname === '/' ? 'block' : 
+        'hidden'} ${isSidebarOpen && session ? 'lg:translate-x-[100px]' : 
+        ''} w-full mx-auto transition-all duration-300 fixed bottom-0 bg-gradient-to-t from-background to-transparent via-background`}
       >
         <PromptForm input={input} setInput={setInput} />
-        <p className='text-xs text-center px-6 mb-2 hidden sm:block tracking-normal text-zinc-600 mt-1'>
-          GitHub assistant is a personal and experimental project. Please do not
-          abuse it in term of token usage.
-        </p>
       </div>
     </div>
   )

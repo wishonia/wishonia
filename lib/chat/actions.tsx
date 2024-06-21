@@ -13,13 +13,7 @@ import Repositories from '@/components/assistant/Repositories'
 import {ProfileList} from '@/components/assistant/ProfileList'
 import {readmeAction, repoAction} from './submit-user-action'
 import {PollRandomGlobalProblems} from "@/components/poll-random-global-problems";
-
-export interface Message {
-  role?: 'user' | 'assistant' | 'system' | 'function' | 'data' | 'tool'
-  content?: string
-  id: string
-  name?: string
-}
+import {Message} from "ai";
 
 export type AIState = {
   chatId: string
@@ -44,23 +38,22 @@ export const AI = createAI<AIState, UIState>({
   },
   initialUIState: [],
 
-  unstable_onGetUIState: async () => {
+  onGetUIState: async () => {
     'use server'
 
     const user = await getCurrentUser()
 
     if (user) {
       const aiState = getAIState()
-
       if (aiState) {
-          return getUIStateFromAIState(aiState)
+          return getUIStateFromAIState(aiState as Chat)
       }
     } else {
       return
     }
   },
 
-  unstable_onSetAIState: async ({ state }) => {
+  onSetAIState: async ({ state }) => {
     'use server'
 
     const user = await getCurrentUser()
@@ -97,8 +90,8 @@ export const AI = createAI<AIState, UIState>({
 export const getUIStateFromAIState = async (aiState: Chat) => {
     const user = await getCurrentUser()
   return aiState.messages
-      .filter((message) => message.role !== 'system')
-      .map((m, index) => ({
+      .filter((message: Message) => message.role !== 'system')
+      .map((m: Message, index: number) => ({
         id: `${aiState.id}-${index}`,
         display:
             m.role === 'function' ? (

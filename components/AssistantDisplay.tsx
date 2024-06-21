@@ -10,7 +10,7 @@ function AssistantDisplay({ children }: AssistantDisplayProps) {
   return (
     <div className={cn('group flex items-start w-full')}>
       <div className='flex-1 space-y-2 overflow-hidden px-1 w-full'>
-        <span className='font-semibold'>Talk to Wishonia</span>
+        <span className='font-semibold'>AI Assistant</span>
         {children}
       </div>
     </div>
