@@ -106,7 +106,7 @@ export function GlobalSolutionEditForm({
         </CardHeader>
         <CardContent className="space-y-4">
           <div className="grid gap-3">
-            <Label htmlFor="name">I globalSolution...</Label>
+            <Label htmlFor="name">Global Solution Name</Label>
             <Input
               id="name"
               className="w-full lg:w-[400px]"
@@ -168,7 +168,7 @@ export function GlobalSolutionEditForm({
             {isSubmitting && (
               <Icons.spinner className="mr-2 h-4 w-4 animate-spin" />
             )}
-            <span>Save globalSolution</span>
+            <span>Save Global Solution</span>
           </button>
         </CardFooter>
       </Card>

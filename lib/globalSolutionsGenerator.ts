@@ -9,6 +9,7 @@ import fs from "fs";
 import {createGlobalProblemSolution} from "@/lib/globalProblemSolutionGenerator";
 import {createSlug} from "@/lib/stringHelper";
 import {createGlobalSolution} from "@/lib/globalSolutions";
+import {isCLI} from "@/lib/utils";
 
 const generateImages = false;
 export async function generateGlobalSolutions() {
@@ -59,6 +60,14 @@ export async function generateGlobalSolution(name: string, description: string |
     if(!description) {
         description = await generateGlobalSolutionDescription(name);
     }
+    const existing = await prisma.globalSolution.findFirst({
+        where: {
+            name: name
+        }
+    });
+    if(existing) {
+        return existing;
+    }
     const slug = createSlug(name)
     const imagePath = `global-solutions/${slugify(slug)}.jpg`
     const mdPath = `global-solutions/${slug}.md`;
@@ -72,14 +81,20 @@ export async function generateGlobalSolution(name: string, description: string |
     }
     const createdSolution =
         await createGlobalSolution(name, description, content, featuredImageUrl, userId);
-    await saveMarkdownPost({
-        name: name,
-        description: description,
-        content: content,
-        featuredImage: featuredImageUrl,
-        absFilePath: mdAbsPath,
-        slug,
-    })
+    // Check if this is an API request or CLI script
+    const isCli = isCLI();
+    if(!isCli) {
+        await saveMarkdownPost({
+            name: name,
+            description: description,
+            content: content,
+            featuredImage: featuredImageUrl,
+            absFilePath: mdAbsPath,
+            slug,
+        })
+    } else {
+        console.log(`Generated global solution: ${name} with description: ${description}. Not saving markdown file.`);
+    }
     return createdSolution;
 }
 export const sharedSolutionPromptText = `The article should cover the following aspects to help readers make informed decisions
@@ -267,9 +282,10 @@ function alreadyUpdated(globalSolution: GlobalSolution) {
 }
 
 async function generateGlobalSolutionDescription(name: string) {
-    return await textCompletion(
+    const result =  await textCompletion(
         `Create a one sentence description of the global solution "${name}" 
         for an article about how it could be used to solve global problems.`,
         'text'
     );
+    return formatTextResponse(result);
 }
