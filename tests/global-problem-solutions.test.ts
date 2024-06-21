@@ -8,7 +8,7 @@ import {globalSolutionNames} from "@/prisma/seeds/globalSolutionNames";
 import {seedGlobalProblemSolutionPairAllocations} from "@/prisma/seedGlobalProblemSolutionPairAllocations";
 import {assertTestDB, getOrCreateTestUser, truncateAllTables} from "@/tests/test-helpers";
 import {
-    generalizeGlobalSolutionDescriptions,
+    generalizeGlobalSolutionDescriptions, generateGlobalSolution,
     generateGlobalSolutionImages,
     generateGlobalSolutions
 } from "@/lib/globalSolutionsGenerator";
@@ -23,6 +23,10 @@ import {aggregateGlobalProblemPairAllocations} from "@/lib/globalProblems";
 
 describe("Global Problem Solutions", () => {
     jest.setTimeout(6000000);
+    it("Generates a global Solution", async () => {
+        const user = await getOrCreateTestUser();
+        await generateGlobalSolution("Military", null,  user.id);
+    });
     it("Adds missing images to GlobalProblemSolutions", async () => {
         const globalProblemSolutions =
             await prisma.globalProblemSolution.findMany({
