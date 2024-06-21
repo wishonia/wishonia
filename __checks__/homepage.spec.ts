@@ -5,11 +5,14 @@
 import {expect, test} from '@playwright/test'
 
 if(process.env.VERCEL_BYPASS_TOKEN) {
+  console.log('Using Vercel bypass token')
   test.use({
     extraHTTPHeaders: {
       'x-vercel-protection-bypass': process.env.VERCEL_BYPASS_TOKEN
     }
   })
+} else {
+    console.log('No Vercel bypass token found')
 }
 
 test('visit page and take screenshot', async ({ page }) => {
