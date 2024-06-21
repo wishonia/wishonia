@@ -25,7 +25,11 @@ export async function getUserOauthAccessToken(userId: string, provider: string):
 export async function getGithubAccessToken(userId: string): Promise<string> {
     const str =  await getUserOauthAccessToken(userId, 'github');
     if (!str) {
-        throw new Error(`No GitHub access token found for user ${userId}`);
+        if(process.env.GITHUB_ACCESS_TOKEN) {
+            return process.env.GITHUB_ACCESS_TOKEN;
+        }
+        throw new Error(`No GitHub access token found for user 
+        ${userId} and process.env.GITHUB_ACCESS_TOKEN not set`);
     }
     return str;
 }
