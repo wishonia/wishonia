@@ -6,13 +6,12 @@ import {saveChat} from '@/lib/chat'
 import {getCurrentUser} from '@/lib/session'
 import {createAI, getAIState} from 'ai/rsc'
 import {Readme} from '@/components/assistant/Readme'
-import Directory from '@/components/assistant/Directory'
 import {Profile} from '@/components/assistant/Profile'
 import {submitUserMessage} from './submit-user-message'
 import {nanoid} from '../utils'
 import Repositories from '@/components/assistant/Repositories'
 import {ProfileList} from '@/components/assistant/ProfileList'
-import {dirAction, readmeAction, repoAction} from './submit-user-action'
+import {readmeAction, repoAction} from './submit-user-action'
 import {PollRandomGlobalProblems} from "@/components/poll-random-global-problems";
 
 export interface Message {
@@ -38,7 +37,7 @@ export type UIState = {
 }[]
 
 export const AI = createAI<AIState, UIState>({
-  actions: { submitUserMessage, repoAction, readmeAction, dirAction },
+  actions: { submitUserMessage, repoAction, readmeAction },
   initialAIState: {
     chatId: nanoid(),
     messages: [],
@@ -127,10 +126,6 @@ export const getUIStateFromAIState = async (aiState: Chat) => {
                     <BotCard>
                         <PollRandomGlobalProblems user={user}>
                         </PollRandomGlobalProblems>
-                    </BotCard>
-                ) : m.name === 'show_directory_ui' ? (
-                    <BotCard>
-                      <Directory props={JSON.parse(m.content)} />
                     </BotCard>
                 ) : null
             ) : m.role === 'user' ? (

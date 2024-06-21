@@ -16,8 +16,11 @@ import { Button } from './ui/button';
 import { Skeleton } from './ui/skeleton';
 import { useRouter } from 'next/navigation';
 import LoadingSpinner from './LoadingSpinner';
-import { Gear, SignOut, User } from '@phosphor-icons/react';
+import { Gear, SignOut } from '@phosphor-icons/react';
 import { DropdownMenuItem } from '@radix-ui/react-dropdown-menu';
+import Link from "next/link";
+import {avatarNav} from "@/config/links";
+import {Icons} from "@/components/icons";
 
 function UserBadge() {
   const [position, setPosition] = React.useState('bottom');
@@ -102,15 +105,23 @@ function UserBadge() {
                   <span className='text-xs'>In progress...</span>
                 </span>
                   </DropdownMenuItem>
-                  <DropdownMenuItem className='flex pointer-events-none opacity-50 items-center gap-1 text-sm dark:hover:bg-muted hover:bg-muted py-1 rounded-md px-2 focus:outline-none cursor-pointer'>
-                <span>
-                  <User />
-                </span>
-                    <span className='flex items-center justify-between w-full'>
-                  <span>Profile</span>
-                  <span className='text-xs'>In progress...</span>
-                </span>
-                  </DropdownMenuItem>
+                    {avatarNav.data.map((item, index) => {
+                        const Icon = Icons[item.icon || "next"]
+                        return (
+                            item.href && (
+                                <DropdownMenuItem key={index}
+                                                  className='flex items-center gap-1 text-sm dark:hover:bg-muted py-1 rounded-md px-2 hover:bg-muted focus:outline-none cursor-pointer'
+                                                  asChild>
+                                    <Link href={item.href}>
+                                        <div className="flex items-center">
+                                            <Icon className="mr-2 h-4 w-4" />
+                                            <span>{item.title}</span>
+                                        </div>
+                                    </Link>
+                                </DropdownMenuItem>
+                            )
+                        )
+                    })}
                   <DropdownMenuItem
                       onClick={() => signOut({ callbackUrl: '/' })}
                       className='flex items-center gap-1 text-sm dark:hover:bg-muted py-1 rounded-md px-2 hover:bg-muted focus:outline-none cursor-pointer'
