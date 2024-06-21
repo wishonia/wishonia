@@ -4,10 +4,18 @@
  */
 import {expect, test} from '@playwright/test'
 
+if(process.env.VERCEL_BYPASS_TOKEN) {
+  test.use({
+    extraHTTPHeaders: {
+      'x-vercel-protection-bypass': process.env.VERCEL_BYPASS_TOKEN
+    }
+  })
+}
+
 test('visit page and take screenshot', async ({ page }) => {
   // If available, we set the target URL to a preview deployment URL provided by the ENVIRONMENT_URL created by Vercel.
   // Otherwise, we use the Production URL.
-  const targetUrl = process.env.ENVIRONMENT_URL || 'https://wishonia.love'
+  const targetUrl = process.env.ENVIRONMENT_URL || 'https://wishonia.love/'
 
   // We visit the page. This waits for the "load" event by default.
   const response = await page.goto(targetUrl)
