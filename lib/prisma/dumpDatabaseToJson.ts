@@ -58,6 +58,8 @@ export async function dumpTableToJson(tableName: string) {
                 console.log(`Image not found: ${row.featuredImage}`);
             }
         }
+        delete row.updatedAt;
+        delete row.createdAt;
         keep.push(row);
     }
 
