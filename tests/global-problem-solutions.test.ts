@@ -8,11 +8,15 @@ import {globalSolutionNames} from "@/prisma/seeds/globalSolutionNames";
 import {seedGlobalProblemSolutionPairAllocations} from "@/prisma/seedGlobalProblemSolutionPairAllocations";
 import {assertTestDB, getOrCreateTestUser, truncateAllTables} from "@/tests/test-helpers";
 import {
-    generalizeGlobalSolutionDescriptions,
+    generalizeGlobalSolutionDescriptions, generateGlobalSolution,
     generateGlobalSolutionImages,
     generateGlobalSolutions
 } from "@/lib/globalSolutionsGenerator";
-import {aggregateGlobalSolutionPairAllocations, dumpGlobalSolutionNames} from "@/lib/globalSolutions";
+import {
+    aggregateGlobalSolutionPairAllocations,
+    dumpGlobalSolutionNames,
+    updateOrCreateGlobalSolutionPairAllocation
+} from "@/lib/globalSolutions";
 import {aggregateGlobalProblemSolutionPairAllocations} from "@/lib/globalProblemSolutionPairAllocations";
 import {seedGlobalProblemPairAllocations} from "@/prisma/seedGlobalProblemPairAllocations";
 import {seedGlobalSolutions} from "@/prisma/seedGlobalSolutions";
@@ -20,9 +24,14 @@ import {loadJsonToDatabase} from "@/lib/prisma/loadDatabaseFromJson";
 import {seedGlobalSolutionPairAllocations} from "@/prisma/seedGlobalSolutionPairAllocations";
 import {seedGlobalProblemsFromMarkdown} from "@/prisma/seedGlobalProblemsFromMarkdown";
 import {aggregateGlobalProblemPairAllocations} from "@/lib/globalProblems";
+import {medicalResearchGlobalSolutionId, warGlobalSolutionId} from "@/lib/api/warVsCures";
 
 describe("Global Problem Solutions", () => {
     jest.setTimeout(6000000);
+    it("Generates a global Solution", async () => {
+        const user = await getOrCreateTestUser();
+        await generateGlobalSolution("Military", null,  user.id);
+    });
     it("Adds missing images to GlobalProblemSolutions", async () => {
         const globalProblemSolutions =
             await prisma.globalProblemSolution.findMany({
@@ -116,6 +125,20 @@ describe("Global Problem Solutions", () => {
     }, 6000000);
     it("Generalizes the GlobalSolution descriptions", async () => {
         await generalizeGlobalSolutionDescriptions();
+    });
+    it("Updates or creates GlobalSolutionPairAllocations", async () => {
+        const warPercentageDesired = 5;
+        await updateOrCreateGlobalSolutionPairAllocation(
+            warGlobalSolutionId, medicalResearchGlobalSolutionId,
+            warPercentageDesired, "test-user");
+        const globalSolutions = await prisma.globalSolution.findMany();
+        expect(globalSolutions.length).toBeGreaterThan(0);
+        const warGlobalSolution =
+            globalSolutions.find(solution => solution.id === warGlobalSolutionId);
+        if (!warGlobalSolution) throw new Error("War Global Solution not found");
+        if(warGlobalSolution.averageAllocation == null || typeof warGlobalSolution.averageAllocation !== "number"){
+            throw new Error("War Global Solution average allocation not updated");
+        }
     });
 });
 

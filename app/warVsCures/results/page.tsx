@@ -14,10 +14,9 @@ export const metadata: Metadata = {
 }
 
 interface DashboardProps {
-  searchParams: { from: string; to: string }
 }
 
-export default async function Dashboard({ searchParams }: DashboardProps) {
+export default async function Dashboard({  }: DashboardProps) {
   const user = await getCurrentUser()
 
   if (!user) {

@@ -526,6 +526,9 @@ devDependencies:
   '@types/node-fetch':
     specifier: ^2.6.11
     version: 2.6.11
+  '@types/nodemailer':
+    specifier: ^6.4.15
+    version: 6.4.15
   '@types/react':
     specifier: 18.2.55
     version: 18.2.55
@@ -8779,6 +8782,12 @@ packages:
     dependencies:
       undici-types: 5.26.5
     dev: false
+
+  /@types/nodemailer@6.4.15:
+    resolution: {integrity: sha512-0EBJxawVNjPkng1zm2vopRctuWVCxk34JcIlRuXSf54habUWdz1FB7wHDqOqvDa8Mtpt0Q3LTXQkAs2LNyK5jQ==}
+    dependencies:
+      '@types/node': 20.11.17
+    dev: true
 
   /@types/normalize-package-data@2.4.4:
     resolution: {integrity: sha512-37i+OaWTh9qeK4LSHPsyRC7NahnGotNuZvjLSgcPzblpHB3rrCJxAOgI5gCdKm7coonsaX1Of0ILiTcnZjbfxA==}

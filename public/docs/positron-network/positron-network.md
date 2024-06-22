@@ -10,11 +10,11 @@ description: >-
 ---
 ### Maximizing Leverage for Good
 
-![leverage-archimedes-comic.png](../images/leverage-archimedes-comic.png)
+![leverage-archimedes-comic.png](leverage-archimedes-comic.png)
 
 Compressed into a word, what separates effective non-profits from ineffective ones is leverage.
 
-![nonprofit-leverage.png](../images/nonprofit-leverage.png)
+![nonprofit-leverage.png](nonprofit-leverage.png)
 
 The highest leverage thing anyone can do at this point is to make it as easy as possible for pro-social entities to accelerate their mission through autonomous agents.
 
@@ -26,7 +26,7 @@ Anti-social entities like cybercriminal organizations are already using AI to au
 
 If the exponential trend continues, the parasite could kill its host by extracting more value than the host can produce. Governments currently apprehend a tiny percentage of cybercriminals, so it's unlikely that they will be able to stop this trend.
 
-![](../images/cost-of-cybercrime-projections-beige.jpg)
+![](cost-of-cybercrime-projections-beige.jpg)
 
 Governments are [spending billions](https://www.marketsandmarkets.com/Market-Reports/artificial-intelligence-military-market-41793495.html) on "slaughter bots" and other autonomous weapons as well as [mass surveillance](https://www.wired.com/story/ai-surveillance-cameras-europe/).
 
