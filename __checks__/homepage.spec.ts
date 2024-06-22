@@ -12,7 +12,7 @@ if(process.env.VERCEL_BYPASS_TOKEN) {
     }
   })
 } else {
-    console.log('No Vercel bypass token found')
+    console.error('=== NO VERCEL_BYPASS_TOKEN FOUND!!! ===')
 }
 
 test('visit page and take screenshot', async ({ page }) => {

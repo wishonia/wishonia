@@ -32,7 +32,7 @@ export const PollSpecificGeneral = <T,>({
     const [thatPercentageDesired, setThatPercentageDesired] = useState(50);
     const [thisPercentageDesired, setThisPercentageDesired] = useState(50);
 
-    const handleSliderChange = (event: React.ChangeEvent<HTMLInputElement>) => {
+    const handleSliderChange = (event: React.ChangeEvent<HTMLInputElement>)  => {
         const thatPercentageDesired = parseInt(event.target.value, 10);
         const thisPercentageDesired = 100 - thatPercentageDesired;
         setThatPercentageDesired(thatPercentageDesired);
