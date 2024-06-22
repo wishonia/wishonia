@@ -202,6 +202,7 @@
     "@types/jest": "^29.5.12",
     "@types/mdast": "^4.0.4",
     "@types/node-fetch": "^2.6.11",
+    "@types/nodemailer": "^6.4.15",
     "@types/react": "18.2.55",
     "@types/react-calendar-heatmap": "^1.6.7",
     "@types/react-modal": "^3.16.3",
