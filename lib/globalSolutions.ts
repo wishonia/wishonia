@@ -67,27 +67,28 @@ export async function getAllRandomGlobalSolutionPairs() {
 
 export async function aggregateGlobalSolutionPairAllocations() {
     const allocations = await prisma.globalSolutionPairAllocation.findMany();
-    const problemAllocations: Record<string, number> = {};
-    // Sum up the percentages for each problem
+    const solutionAllocations: Record<string, number> = {};
+    // Sum up the percentages for each solution
     for (const allocation of allocations) {
         const { thisGlobalSolutionId, thatGlobalSolutionId, thisGlobalSolutionPercentage } = allocation;
 
-        problemAllocations[thisGlobalSolutionId] = (problemAllocations[thisGlobalSolutionId] || 0) + thisGlobalSolutionPercentage;
-        problemAllocations[thatGlobalSolutionId] = (problemAllocations[thatGlobalSolutionId] || 0) + (100 - thisGlobalSolutionPercentage);
+        solutionAllocations[thisGlobalSolutionId] = (solutionAllocations[thisGlobalSolutionId] || 0) + thisGlobalSolutionPercentage;
+        solutionAllocations[thatGlobalSolutionId] = (solutionAllocations[thatGlobalSolutionId] || 0) + (100 - thisGlobalSolutionPercentage);
     }
 
-    const totalAllocations = Object.values(problemAllocations).reduce((sum, allocation) => sum + allocation, 0);
+    const totalAllocations = Object.values(solutionAllocations)
+        .reduce((sum, allocation) => sum + allocation, 0);
 
     // Normalize the allocations to ensure they add up to 100%
     const normalizedAllocations: Record<string, number> = {};
-    for (const problemId in problemAllocations) {
-        normalizedAllocations[problemId] = (problemAllocations[problemId] / totalAllocations) * 100;
+    for (const globalSolutionId in solutionAllocations) {
+        normalizedAllocations[globalSolutionId] = (solutionAllocations[globalSolutionId] / totalAllocations) * 100;
     }
     const results = [];
-    for (const problemId in normalizedAllocations) {
+    for (const globalSolutionId in normalizedAllocations) {
         const result = await prisma.globalSolution.update({
-            where: { id: problemId },
-            data: { averageAllocation: normalizedAllocations[problemId] },
+            where: { id: globalSolutionId },
+            data: { averageAllocation: normalizedAllocations[globalSolutionId] },
         });
         results.push(result);
     }

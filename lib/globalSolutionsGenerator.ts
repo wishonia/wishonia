@@ -9,7 +9,6 @@ import fs from "fs";
 import {createGlobalProblemSolution} from "@/lib/globalProblemSolutionGenerator";
 import {createSlug} from "@/lib/stringHelper";
 import {createGlobalSolution} from "@/lib/globalSolutions";
-import {isCLI} from "@/lib/utils";
 
 const generateImages = false;
 export async function generateGlobalSolutions() {
@@ -82,7 +81,7 @@ export async function generateGlobalSolution(name: string, description: string |
     const createdSolution =
         await createGlobalSolution(name, description, content, featuredImageUrl, userId);
     // Check if this is an API request or CLI script
-    const isCli = isCLI();
+    const isCli = typeof window === 'undefined'
     if(!isCli) {
         await saveMarkdownPost({
             name: name,

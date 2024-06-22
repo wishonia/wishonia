@@ -6,6 +6,8 @@ import {AnonymousVoteButton} from "@/components/anonymous-vote-button";
 import {LoggedInVoteButton} from "@/components/logged-in-vote-button";
 import {User} from "next-auth";
 import {useRouter} from "next/navigation";
+import {GlobalSolutionPairAllocation} from "@prisma/client";
+import {medicalResearchGlobalSolutionId, warGlobalSolutionId} from "@/lib/api/warVsCures";
 
 interface PollProps {
     user?: User;
@@ -21,6 +23,12 @@ export const PollWarVsCures: React.FC<PollProps> = ({ user }) => {
       setResearchPercentageDesired(researchPercentageDesired);
       setWarPercentageDesired(warPercentageDesired);
       localStorage.setItem('warPercentageDesired', warPercentageDesired.toString());
+      const allocation: Partial<GlobalSolutionPairAllocation> = {
+          thisGlobalSolutionId: warGlobalSolutionId,
+          thatGlobalSolutionId: medicalResearchGlobalSolutionId,
+          thisGlobalSolutionPercentage: warPercentageDesired,
+      };
+      localStorage.setItem("globalSolutionPairAllocation", JSON.stringify(allocation));
   };
 
   const onButtonClick = () => {
