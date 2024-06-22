@@ -9,6 +9,7 @@ import fs from "fs";
 import {createGlobalProblemSolution} from "@/lib/globalProblemSolutionGenerator";
 import {createSlug} from "@/lib/stringHelper";
 import {createGlobalSolution} from "@/lib/globalSolutions";
+import {dumpTableToJson} from "@/lib/prisma/dumpDatabaseToJson";
 
 const generateImages = false;
 export async function generateGlobalSolutions() {
@@ -208,6 +209,7 @@ export async function generateGlobalSolutionImages() {
             }
         }
     }
+    await dumpTableToJson("GlobalSolution");
 }
 
 async function saveGlobalSolutionImage(globalSolution: GlobalSolution, imageUrl: string) {
