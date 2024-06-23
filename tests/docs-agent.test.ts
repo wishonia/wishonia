@@ -23,7 +23,7 @@ describe("Docs Generator", () => {
             history: []
         });
     });
-    it("Parses the function components overview documentation file and creates individual page", async () => {
+    it("Parses the functional components overview documentation file and creates individual page", async () => {
         // read the overview file
         const overview = fs.readFileSync(overviewPath, "utf8");
         // split into sections based on top-level numbered list
