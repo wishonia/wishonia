@@ -1,5 +1,7 @@
 import { createHash } from 'crypto';
 import { readFile } from 'fs/promises';
+import grayMatter from "gray-matter";
+import {MarkdownReader} from "llamaindex";
 
 interface Section {
   content: string;
@@ -19,29 +21,68 @@ function extractMetaExport(content: string): Record<string, any> | undefined {
       console.error('Error parsing meta export:', error);
     }
   }
+    const matter = grayMatter(content);
+    if(matter.data){
+      return matter.data;
+    }
 
   return undefined;
 }
 
 function splitSections(content: string): Section[] {
-  const sectionRegex = /^(#+)\s(.*)$/gm;
+  const sectionRegex = /^(#+)\s(.*)$/;
   const sections: Section[] = [];
-
-  let match;
   let currentSection: Section | null = null;
+  let inFrontmatter = false;
+  let frontmatterContent = '';
 
   const lines = content.split('\n');
-  for (const line of lines) {
-    if ((match = sectionRegex.exec(line)) !== null) {
+  for (let i = 0; i < lines.length; i++) {
+    const line = lines[i];
+
+    // Handle YAML frontmatter
+    if (line.trim() === '---') {
+      if (!inFrontmatter) {
+        inFrontmatter = true;
+        continue;
+      } else {
+        inFrontmatter = false;
+        // Create a section for the frontmatter
+        sections.push({
+          content: frontmatterContent,
+          heading: 'Frontmatter',
+          level: 0,
+          slug: 'frontmatter'
+        });
+        continue;
+      }
+    }
+
+    if (inFrontmatter) {
+      frontmatterContent += line + '\n';
+      continue;
+    }
+
+    const match = sectionRegex.exec(line);
+
+    if (match) {
       if (currentSection) {
         sections.push(currentSection);
       }
-      const [, heading, title] = match;
+      const [fullMatch, heading, title] = match;
       const level = heading.length;
       const slug = title.toLowerCase().replace(/\s+/g, '-');
-      currentSection = { content: '', heading: title, level, slug };
+      currentSection = { content: fullMatch + '\n', heading: title, level, slug };
     } else if (currentSection) {
       currentSection.content += line + '\n';
+    } else {
+      // If we're not in a section and not in frontmatter, create a default section
+      currentSection = {
+        content: line + '\n',
+        heading: 'Content',
+        level: 0,
+        slug: 'content'
+      };
     }
   }
 
@@ -49,6 +90,20 @@ function splitSections(content: string): Section[] {
     sections.push(currentSection);
   }
 
+  if(!sections.length){
+    const markdownReader = new MarkdownReader();
+    const tups = markdownReader.markdownToTups(content);
+    for (const [heading, text] of tups) {
+      sections.push(
+        {
+          content: text,
+          heading: heading || '',
+          level: 1,
+          slug: heading?.toLowerCase().replace(/\s+/g, '-') || ''
+        }
+      )
+    }
+  }
   return sections;
 }
 
@@ -82,7 +137,18 @@ export class MarkdownSource {
 
     const checksum = createHash('sha256').update(contents).digest('base64');
     const meta = extractMetaExport(contents);
-    const sections = splitSections(contents);
+    let sections = splitSections(contents);
+    if(!sections.length){
+      const grayMatterData = grayMatter(contents);
+        sections.push(
+            {
+              content: grayMatterData.content,
+              heading: grayMatterData.data.title,
+              level: 1,
+              slug: grayMatterData.data.title.toLowerCase().replace(/\s+/g, '-')
+            }
+        )
+    }
 
     this.checksum = checksum;
     this.meta = meta;
