@@ -45,10 +45,11 @@
     "@huggingface/inference": "^2.7.0",
     "@langchain/anthropic": "^0.1.4",
     "@langchain/cohere": "^0.0.6",
-    "@langchain/community": "0.2.4",
-    "@langchain/core": "0.2.4",
+    "@langchain/community": "0.2.6",
+    "@langchain/core": "0.2.6",
     "@langchain/google-genai": "^0.0.10",
     "@langchain/openai": "^0.0.18",
+    "@langchain/textsplitters": "^0.0.3",
     "@llamaindex/pdf-viewer": "^1.1.1",
     "@mdx-js/loader": "^3.0.1",
     "@mdx-js/react": "^3.0.1",
@@ -117,7 +118,7 @@
     "ignore": "^5.3.1",
     "ioredis": "^5.4.1",
     "json-to-prisma-schema-convertor": "^0.1.0",
-    "langchain": "^0.2.4",
+    "langchain": "^0.2.6",
     "llamaindex": "^0.3.14",
     "llmclient": "^8.1.19",
     "lucide-react": "^0.259.0",
@@ -226,11 +227,11 @@
     "typescript": "latest"
   },
   "overrides": {
-    "@langchain/core": "0.2.4"
+    "@langchain/core": "0.2.6"
   },
   "pnpm": {
     "overrides": {
-      "@langchain/core": "0.2.4"
+      "@langchain/core": "0.2.6"
     }
   },
   "trigger.dev": {
