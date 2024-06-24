@@ -1,4 +1,4 @@
-import {Datasource} from ".prisma/client";
+import {Datasource} from "@prisma/client";
 import {WishoniaVectorStore} from "@/lib/utils/vectorStore";
 import {OpenAIEmbeddings} from "@langchain/openai";
 import {readAllMarkdownFiles} from "@/lib/markdownReader";

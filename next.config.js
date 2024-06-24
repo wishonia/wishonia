@@ -33,8 +33,9 @@ const nextConfig = {
 
 module.exports =  nextConfig
 
-
-// Injected content via Sentry wizard below
+if(! process.env.SENTRY_AUTH_TOKEN) {
+  return module.exports
+}
 
 const { withSentryConfig } = require("@sentry/nextjs");
 
@@ -44,8 +45,8 @@ module.exports = withSentryConfig(
     // For all available options, see:
     // https://github.com/getsentry/sentry-webpack-plugin#options
 
-    org: "quantimodo-ru",
-    project: "wishonia",
+    org: "wishonia-org",
+    project: "wishonia-project",
 
     // Only print logs for uploading source maps in CI
     silent: !process.env.CI,

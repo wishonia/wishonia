@@ -4,7 +4,7 @@
 import {getOrCreateTestUser} from "@/tests/test-helpers";
 import {generateMarkdownEmbeddings} from "@/lib/loaders/github-markdown";
 import {absPathFromPublic} from "@/lib/fileHelper";
-import {DatasourceType} from ".prisma/client";
+import {DatasourceType} from "@prisma/client";
 import {getOrCreateDataSource} from "@/lib/datasource";
 
 describe('Markdown Embedding', () => {
