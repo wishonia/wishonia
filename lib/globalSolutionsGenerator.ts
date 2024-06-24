@@ -4,7 +4,7 @@ import {generateAndUploadFeaturedImageJpg} from "@/lib/imageGenerator";
 import {prisma} from "@/lib/db";
 import {GlobalProblem, GlobalSolution} from "@prisma/client";
 import {saveMarkdownPost} from "@/lib/markdownGenerator";
-import {absPathFromPublic, absPathFromRepo} from "@/lib/fileHelper";
+import {absPathFromPublic, absPathFromRepo, pathToMarkdownUrl} from "@/lib/fileHelper";
 import fs from "fs";
 import {createGlobalProblemSolution} from "@/lib/globalProblemSolutionGenerator";
 import {createSlug} from "@/lib/stringHelper";
@@ -91,6 +91,7 @@ export async function generateGlobalSolution(name: string, description: string |
             featuredImage: featuredImageUrl,
             absFilePath: mdAbsPath,
             slug,
+            url: pathToMarkdownUrl(mdAbsPath)
         })
     } else {
         console.log(`Generated global solution: ${name} with description: ${description}. Not saving markdown file.`);

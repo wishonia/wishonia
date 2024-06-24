@@ -3,6 +3,7 @@
  */
 import {downloadAllBlobImages, uploadPublicImagesToVercel} from "@/lib/imageUploader";
 import {generateGlobalSolutionImages} from "@/lib/globalSolutionsGenerator";
+import {convertLargeImagesToJpg} from "@/lib/imageGenerator";
 describe("Test Images", () => {
     it("should upload all images", async () => {
         const urls = await uploadPublicImagesToVercel()
@@ -14,4 +15,7 @@ describe("Test Images", () => {
     it("should generateGlobalSolutionImages", async () => {
         await generateGlobalSolutionImages();
     });
+    it('should convert large images to jpg', async () => {
+        await convertLargeImagesToJpg();
+    })
 });

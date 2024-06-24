@@ -1,8 +1,5 @@
 import { Pool } from 'pg';
-import url from 'url';
-
 let pool: Pool | null = null;
-
 function getPostgresClient(): Pool {
     if (pool) {
         return pool;
@@ -39,4 +36,14 @@ function getSchemaName(): string {
     return 'public';
 }
 
+export function getPostgresConfig() {
+    const databaseUrl = process.env.DATABASE_URL;
+
+    if (!databaseUrl) {
+        throw new Error('DATABASE_URL environment variable is not set.');
+    }
+    return {
+        connectionString: databaseUrl,
+    }
+}
 export { getPostgresClient, getSchemaName };

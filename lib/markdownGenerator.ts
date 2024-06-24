@@ -2,20 +2,32 @@ import { writeFileSync } from "fs";
 import { stringify } from "gray-matter";
 import { textCompletion } from "@/lib/llm";
 import {generateAndUploadFeaturedImageJpg} from "@/lib/imageGenerator";
-import {relativePathFromPublic} from "@/lib/fileHelper";
-import {MarkdownFile} from "@/interfaces/markdownFile";
+import {pathToUrl, relativePathFromPublic} from "@/lib/fileHelper";
+import {MarkdownFile, MarkdownMeta} from "@/interfaces/markdownFile";
 
 export async function saveMarkdownPost(
-    post: MarkdownFile
+    markdownFile: MarkdownFile
 ): Promise<void> {
-    if(post.featuredImage){post.featuredImage = relativePathFromPublic(post.featuredImage);}
-    const content = post.content;
-    const metadata = JSON.parse(JSON.stringify(post));
+    if(markdownFile.featuredImage){markdownFile.featuredImage = relativePathFromPublic(markdownFile.featuredImage);}
+    const content = markdownFile.content;
+    const metadata = getMetaFromMarkdownFile(markdownFile);
+    const postContent = stringify(content, metadata);
+    writeFileSync(markdownFile.absFilePath, postContent);
+    console.log(`Post saved to ${markdownFile.absFilePath}`);
+}
+
+const baseMarkdownUrl = "https://wishonia.love/md/";
+
+export function getMetaFromMarkdownFile(
+    markdownFile: MarkdownFile
+): MarkdownMeta|any {
+    const metadata = JSON.parse(JSON.stringify(markdownFile));
+    if(!metadata.url){
+        metadata.url = pathToUrl(markdownFile.absFilePath, baseMarkdownUrl);
+    }
     delete metadata.absFilePath;
     delete metadata.content;
-    const postContent = stringify(content, metadata);
-    writeFileSync(post.absFilePath, postContent);
-    console.log(`Post saved to ${post.absFilePath}`);
+    return metadata;
 }
 
 export async function generateMarkdownAndImageFromDescription(

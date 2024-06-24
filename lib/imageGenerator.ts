@@ -3,7 +3,8 @@ import fetch from "node-fetch";
 import fs from "fs-extra";
 import {openai} from "@/lib/llm";
 import {uploadImageToVercel, vercelImageExists} from "@/lib/imageUploader";
-import {absPathFromPublic, relativePathFromPublic} from "@/lib/fileHelper";
+import {absPathFromPublic, absPathFromRepo, getNonIgnoredFiles, relativePathFromPublic} from "@/lib/fileHelper";
+
 
 interface GenerateImageOptions {
     prompt: string;
@@ -63,13 +64,19 @@ export async function generateFeaturedImagePngBuffer(content: string): Promise<B
     return await image.buffer();
 }
 
+const JPG_QUALITY = 30;
+
 async function convertPngBufferToJpgBuffer(pngBuffer: Buffer): Promise<Buffer> {
     return await sharp(pngBuffer)
-        .jpeg({quality: 50})
+        .jpeg({quality: JPG_QUALITY})
         .toBuffer();
 }
 
 export async function generateAndUploadFeaturedImageJpg(content: string, imagePath: string): Promise<string> {
+    if(!process.env.GENERATE_IMAGES) {
+        throw new Error(`Set process.env.GENERATE_IMAGES to true to generate images. 
+         This is to prevent accidental image generation which can be costly.`);
+    }
     imagePath = imagePath.replace(/\.[^/.]+$/, ".jpg");
     const jpgAbsPath = absPathFromPublic(imagePath);
     const jpgPublicPath = relativePathFromPublic(jpgAbsPath);
@@ -86,4 +93,38 @@ export async function generateAndUploadFeaturedImageJpg(content: string, imagePa
     const jpgBuffer = await convertPngBufferToJpgBuffer(pngBuffer);
     fs.writeFileSync(jpgAbsPath, jpgBuffer);
     return await uploadImageToVercel(jpgBuffer, jpgPublicPath);
+}
+
+export async function convertLargeImagesToJpg(){
+    const allFiles = await getImagesGreaterThan(300);
+    for(const file of allFiles){
+        const absPath = absPathFromRepo(file);
+        convertToJpg(absPath);
+    }
+}
+function convertToJpg(absPath: string){
+    const buffer = fs.readFileSync(absPath);
+    let outputJpgAbsPath = absPath.replace(/\.[^/.]+$/, ".jpg");
+    try {
+        fs.writeFileSync(outputJpgAbsPath, buffer);
+    } catch(e) {
+        outputJpgAbsPath = absPath.replace(/\.[^/.]+$/, "-compressed.jpg");
+        console.error(`Error converting ${absPath} to jpg. Saving as ${outputJpgAbsPath}`);
+        fs.writeFileSync(outputJpgAbsPath, buffer);
+    }
+}
+
+async function getImagesGreaterThan(maxKb: number){
+    const allFiles = getNonIgnoredFiles(absPathFromRepo());
+    const largeFiles = [];
+    for(const file of allFiles){
+        if(!file.endsWith('.png') && !file.endsWith('.jpg') && !file.endsWith('.jpeg') && !file.endsWith('.webp') && !file.endsWith('.gif')){
+            continue;
+        }
+        const stats = await fs.stat(file);
+        if(stats.size > maxKb * 1024) {
+            largeFiles.push(file);
+        }
+    }
+    return largeFiles;
 }

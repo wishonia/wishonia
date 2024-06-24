@@ -3,7 +3,7 @@ import {MarkdownFile} from "@/interfaces/markdownFile";
 import fs from 'fs';
 import path from 'path';
 import matter from 'gray-matter';
-import {absPathFromPublic, getNonIgnoredFiles} from "@/lib/fileHelper";
+import {absPathFromPublic, getNonIgnoredFiles, pathToMarkdownUrl} from "@/lib/fileHelper";
 
 export function listMarkdownFiles(absFolderPath?: string): string[] {
     if(!absFolderPath){
@@ -30,7 +30,8 @@ export async function readAllMarkdownFiles(absFolderPath?: string): Promise<Mark
             ogImage: data.ogImage,
             content: content,
             preview: data.preview,
-            absFilePath: fullPath
+            absFilePath: fullPath,
+            url: pathToMarkdownUrl(fullPath)
         };
 
         return markdownFile;
@@ -48,7 +49,8 @@ export async function getMarkdownFilesWithoutMetaData(absFolderPath?: string): P
             const markdownFile: MarkdownFile = {
                 content: fileContents,
                 absFilePath: mdFilePath,
-                name: data.name
+                name: data.name,
+                url: pathToMarkdownUrl(mdFilePath)
             };
             mdFilesWithoutMetaData.push(markdownFile);
         }
