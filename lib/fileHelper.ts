@@ -98,3 +98,15 @@ export function getNonIgnoredFiles(absFolderPath?: string): string[] {
     }
     return getAllFiles(absFolderPath, ig);
 }
+
+export function pathToUrl(filePath: string, baseUrl: string): string {
+    if(!baseUrl.endsWith('/')) {
+        baseUrl = baseUrl + '/';
+    }
+    let relativeToPublic = relativePathFromPublic(filePath);
+    return `${baseUrl}${relativeToPublic}`
+}
+
+export function pathToMarkdownUrl(filePath: string): string {
+    return pathToUrl(filePath, "https://wishonia.love/md/");
+}

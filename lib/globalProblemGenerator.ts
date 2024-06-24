@@ -6,6 +6,7 @@ import {textCompletion} from "@/lib/llm";
 import {saveMarkdownPost} from "@/lib/markdownGenerator";
 import {generateAndUploadFeaturedImageJpg} from "@/lib/imageGenerator";
 import {MarkdownFile} from "@/interfaces/markdownFile";
+import {pathToMarkdownUrl} from "@/lib/fileHelper";
 const overwriteMarkdown = false;
 const overwriteImages = false;
 const publicPath = 'globalProblems';
@@ -46,7 +47,8 @@ async function generateMarkdown(problemName: string, markdownPath: string, image
         description: description,
         content: content,
         featuredImage: imagePath,
-        absFilePath: markdownPath
+        absFilePath: markdownPath,
+        url: pathToMarkdownUrl(markdownPath)
     }
     await saveMarkdownPost(post);
 }
