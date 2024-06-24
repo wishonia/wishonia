@@ -4,7 +4,7 @@ import {Shell} from "@/components/layout/shell";
 export default function AgentListPage() {
 
   return (
-      <Shell>
+      <Shell className="size-full">
         <AgentList></AgentList>
       </Shell>
   )

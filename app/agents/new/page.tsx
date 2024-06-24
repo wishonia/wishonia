@@ -5,7 +5,7 @@ import React from "react";
 
 export default function NewAgentPage() {
   return (
-      <Shell>
+      <Shell className="size-full">
         <NewAgent>
         </NewAgent>
       </Shell>

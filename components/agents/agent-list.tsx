@@ -1,24 +1,31 @@
+'use client'
+
+import Link from 'next/link'
 import { Badge } from "@/components/ui/badge"
+import { useSidebar } from "@/lib/hooks/use-sidebar"
 import { JSX, SVGProps } from "react"
 
 export default function AgentList() {
+    const {isSidebarOpen}=useSidebar()
     return (
-        <div className="bg-[#121212] text-white p-8">
+        <div className={`p-8 mx-auto  ${isSidebarOpen?'lg:ml-[270px]':''}`}>
             <h1 className="text-3xl font-semibold mb-6">My Agents</h1>
-            <div className="flex items-center space-x-4 mb-4">
-                <PlusIcon className="bg-[#333333] p-2 rounded-full h-8 w-8"/>
+            <Link  href='/agents/new'>
+            <div className="flex items-center space-x-4 p-4 rounded-sm hover:bg-secondary">
+                <PlusIcon className="dark:bg-white dark:text-black bg-black text-white p-2 rounded-full h-8 w-8"/>
                 <div>
                     <div className="font-semibold">Create a Agent</div>
-                    <div className="text-[#BBBBBB]">Customize a version of Agent for a specific purpose</div>
+                    <div className="text-[#848080]">Customize a version of Agent for a specific purpose</div>
                 </div>
             </div>
-            <div className="border-t border-[#333333] pt-4">
-                <div className="flex items-start justify-between mb-4">
+            </Link>
+            <div className="border-t border-[#333333]">
+                <div className="flex items-start justify-between p-4  rounded-sm hover:bg-secondary">
                     <div className="flex items-center space-x-4">
-                        <HexagonIcon className="bg-[#333333] p-2 rounded-full h-8 w-8"/>
+                        <HexagonIcon className="dark:bg-white dark:text-black bg-black text-white p-2 rounded-full h-8 w-8"/>
                         <div>
                             <div className="font-semibold">Decentralized FDA Architect</div>
-                            <div className="text-[#BBBBBB]">
+                            <div className="text-[#848080]">
                                 A planning agent designed to act as a project manager for realizing a decentralized FDA
                                 powered ...
                             </div>
@@ -30,12 +37,12 @@ export default function AgentList() {
                         <DotIcon className="h-5 w-5"/>
                     </div>
                 </div>
-                <div className="flex items-start justify-between">
+                <div className="flex items-start justify-between p-4  rounded-sm hover:bg-secondary">
                     <div className="flex items-center space-x-4">
-                        <HexagonIcon className="bg-[#333333] p-2 rounded-full h-8 w-8"/>
+                        <HexagonIcon className="dark:bg-white dark:text-black bg-black text-white p-2 rounded-full h-8 w-8"/>
                         <div>
                             <div className="font-semibold">FDAi Docs Improver</div>
-                            <div className="text-[#BBBBBB]">This improves the mintlify docs for the FDAi API</div>
+                            <div className="text-[#848080]">This improves the mintlify docs for the FDAi API</div>
                         </div>
                     </div>
                     <div className="flex items-center space-x-4">

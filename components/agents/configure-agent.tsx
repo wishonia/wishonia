@@ -1,107 +1,113 @@
+'use client'
+
 import { Button } from "@/components/ui/button"
 import { Label } from "@/components/ui/label"
 import { JSX, SVGProps } from "react"
-
-
 import { Input } from "@/components/ui/input"
 import { Textarea } from "@/components/ui/textarea"
-import {Checkbox} from "@radix-ui/themes";
+import { Checkbox } from "@radix-ui/themes";
+import { useSidebar } from "@/lib/hooks/use-sidebar"
+
 export default function ConfigureAgent() {
+    const {isSidebarOpen}=useSidebar()
+    
+    const navigateBack=()=>window.history.back();
+
     return (
-        <div className="flex h-screen bg-[#121212]">
-            <div className="flex flex-col w-1/2 p-8 space-y-6">
+        <div className={`flex h-screen  mx-auto ${isSidebarOpen?'ml-[270px]':''}`}>
+            <div className="flex overflow-y-auto flex-col w-1/2 p-8 space-y-6">
                 <div className="flex items-center space-x-4">
-                    <ArrowLeftIcon className="text-white h-6 w-6" />
-                    <h1 className="text-xl font-semibold text-white">New Agent</h1>
+                    <ArrowLeftIcon onClick={navigateBack} className="h-6 w-6 cursor-pointer" />
+                    <h1 className="text-xl font-semibold ">New Agent</h1>
                     <span className="ml-auto px-3 py-1 text-sm font-medium text-yellow-500 bg-yellow-600 rounded-full">
-            Draft
-          </span>
+                        Draft
+                    </span>
                 </div>
                 <div className="flex space-x-4">
-                    <Button className="bg-white text-black">Create</Button>
-                    <Button variant="outline" className="border-white text-white">
+                    <Button className="dark:bg-white dark:text-black bg-black text-white">Create</Button>
+                    <Button variant="outline" className="dark:border-white dark:text-white border-black text-black">
                         Configure
                     </Button>
                 </div>
                 <div className="space-y-4">
                     <div className="space-y-2">
-                        <Label htmlFor="name" className="text-sm font-medium text-white">
+                        <Label htmlFor="name" className="text-sm font-medium ">
                             Name
                         </Label>
-                        <Input id="name" placeholder="Name your Agent" className="bg-[#1E1E1E] text-white" />
+                        <Input id="name" placeholder="Name your Agent" className=" text-white" />
                     </div>
                     <div className="space-y-2">
-                        <Label htmlFor="description" className="text-sm font-medium text-white">
+                        <Label htmlFor="description" className="text-sm font-medium">
                             Description
                         </Label>
                         <Textarea
                             id="description"
                             placeholder="Add a short description about what this Agent does"
-                            className="bg-[#1E1E1E] text-white min-h-[100px]"
+                            className="text-white min-h-[100px]"
                         />
                     </div>
                     <div className="space-y-2">
-                        <Label htmlFor="instructions" className="text-sm font-medium text-white">
+                        <Label htmlFor="instructions" className="text-sm font-medium ">
                             Instructions
                         </Label>
                         <Textarea
                             id="instructions"
                             placeholder="What does this Agent do? How does it behave? What should it avoid doing?"
-                            className="bg-[#1E1E1E] text-white min-h-[100px]"
+                            className="text-white min-h-[100px]"
                         />
                     </div>
                     <div className="space-y-2">
-                        <Label htmlFor="conversation-starters" className="text-sm font-medium text-white">
+                        <Label htmlFor="conversation-starters" className="text-sm font-medium ">
                             Conversation starters
                         </Label>
                         <Textarea
                             id="conversation-starters"
                             placeholder="Enter conversation starters"
-                            className="bg-[#1E1E1E] text-white min-h-[100px]"
+                            className="text-white min-h-[100px]"
                         />
                     </div>
                 </div>
                 <div className="space-y-4">
                     <div className="space-y-2">
-                        <Label htmlFor="knowledge" className="text-sm font-medium text-white">
+                        <Label htmlFor="knowledge" className="text-sm font-medium ">
                             Knowledge
                         </Label>
                         <p className="text-sm text-gray-400">
                             If you upload files under Knowledge, conversations with your Agent may include file contents. Files can be
                             downloaded when Code Interpreter is enabled
                         </p>
-                        <Button className="bg-white text-black">Upload files</Button>
+                        <Button className="bg-white text-black hover:text-white">Upload files</Button>
                     </div>
                     <div className="space-y-2">
-                        <Label className="text-sm font-medium text-white">Capabilities</Label>
+                        <Label className="text-sm font-medium ">Capabilities</Label>
                         <div className="flex items-center space-x-2">
                             <Checkbox id="web-browsing" />
-                            <Label htmlFor="web-browsing" className="text-sm text-white">
+                            <Label htmlFor="web-browsing" className="text-sm">
                                 Web Browsing
                             </Label>
                         </div>
                         <div className="flex items-center space-x-2">
                             <Checkbox id="image-generation" />
-                            <Label htmlFor="image-generation" className="text-sm text-white">
+                            <Label htmlFor="image-generation" className="text-sm">
                                 DALL-E: Image Generation
                             </Label>
                         </div>
                         <div className="flex items-center space-x-2">
                             <Checkbox id="code-interpreter" />
-                            <Label htmlFor="code-interpreter" className="text-sm text-white">
+                            <Label htmlFor="code-interpreter" className="text-sm">
                                 Code Interpreter & Data Analysis
                             </Label>
                         </div>
                     </div>
-                    <Button variant="outline" className="border-white text-white">
+                    <Button variant="outline" className="dark:border-white">
                         Create new action
                     </Button>
                 </div>
             </div>
-            <div className="w-1/2 bg-[#1E1E1E] p-8">
+            <div className="w-1/2 bg-secondary p-8">
                 <div className="flex flex-col h-full justify-between">
                     <div className="flex items-center justify-center h-full">
-                        <CuboidIcon className="text-white h-12 w-12" />
+                        <CuboidIcon className="h-12 w-12 text-gray-400" />
                     </div>
                     <div className="text-center">
                         <p className="text-sm text-gray-400">Start by defining your Agent.</p>
