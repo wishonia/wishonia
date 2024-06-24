@@ -42,16 +42,8 @@ export function getPostgresConfig() {
     if (!databaseUrl) {
         throw new Error('DATABASE_URL environment variable is not set.');
     }
-
-    const parsedUrl = new URL(databaseUrl);
-
     return {
-        type: "postgres",
-        host: parsedUrl.hostname,
-        port: Number(parsedUrl.port),
-        user: parsedUrl.username,
-        password: parsedUrl.password,
-        database: parsedUrl.pathname.slice(1), // Remove leading slash
-    };
+        connectionString: databaseUrl,
+    }
 }
 export { getPostgresClient, getSchemaName };

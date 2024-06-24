@@ -1,8 +1,11 @@
-import { Document } from "@langchain/core/documents";
-import { Embeddings } from "@langchain/core/embeddings";
-import { VectorStore } from "@langchain/core/vectorstores";
-import { prisma } from "../db";
-import {createHash} from "crypto";
+import {Document} from "@langchain/core/documents";
+import {Embeddings} from "@langchain/core/embeddings";
+import {VectorStore} from "@langchain/core/vectorstores";
+import {PostgresRecordManager} from "@langchain/community/indexes/postgres";
+import {PGVectorStore} from "@langchain/community/vectorstores/pgvector";
+import {OpenAIEmbeddings} from "@langchain/openai";
+import {index} from "@langchain/core/indexing";
+import {getPostgresConfig} from "@/lib/db/postgresClient";
 
 export interface WishoniaLibArgs {
   //agentId: string;
@@ -29,50 +32,57 @@ export class WishoniaVectorStore extends VectorStore {
   }
 
   async addVectors(vectors: number[][], documents: Document[]): Promise<void> {
-    try {
-      for (let i = 0; i < vectors.length; i++) {
-        const embedding = vectors[i];
-        const document = documents[i];
-        const content = document.pageContent.replace(/\x00/g, "").trim();
-        const metadata = JSON.stringify(document.metadata);
-        const vector = `[${embedding.join(",")}]`;
-        let path = document.metadata?.path || document.metadata?.filename || document.metadata?.source || `${this.datasourceId}_${Date.now()}_${i}`;
-        const checksum = createHash('sha256').update(document.pageContent).digest('base64');
-        let datasourcePage = await prisma.datasourcePage.findUnique({
-            where: { path },
-          });
-
-      if(!datasourcePage) {
-        // Create DatasourcePage
-        datasourcePage = await prisma.datasourcePage.create({
-          data: {
-            path,
-            type: 'vector',
-            source: 'WishoniaVectorStore',
-            meta: document.metadata,
-            version: '1.0',
-            datasourceId: this.datasourceId,
-          },
-        });
-      }
-
-
-        // Insert into DatasourcePageSection using raw SQL
-        await prisma.$executeRaw`
-          INSERT INTO "DatasourcePageSection" ("id", "content", "embedding", "datasourcePageId")
-          VALUES (${datasourcePage.id}, ${content}, ${vector}::vector, ${datasourcePage.id})
-        `;
-      }
-    } catch (e) {
-      console.error("Error in addVectors:", e);
-      throw e;
-    }
+      throw new Error(`Use index() in addDocuments() instead`);
   }
 
   async addDocuments(documents: Document[]): Promise<void> {
-    const texts = documents.map(({ pageContent }) => pageContent);
-    const embeddings = await this.embeddings.embedDocuments(texts);
-    return this.addVectors(embeddings, documents);
+    const vectorStore = await this.getVectorStore();
+    // https://js.langchain.com/v0.2/docs/how_to/indexing
+    const recordManagerConfig = {
+      postgresConnectionOptions: getPostgresConfig(),
+      tableName: "DocumentsUpsertionRecords",
+    };
+    const recordManager = new PostgresRecordManager(
+        //Use a namespace that takes into account both the vector store and
+        // the collection name in the vector store;
+        // e.g., 'redis/my_docs', 'chromadb/my_docs' or 'postgres/my_docs'.
+        this._vectorstoreType()+"/"+this.datasourceId,
+        recordManagerConfig
+    );
+
+    // Create the schema if it doesn't exist
+    await recordManager.createSchema();
+
+    const result = await index({
+      docsSource: documents,
+      recordManager,
+      vectorStore,
+      options: {
+        cleanup: undefined,
+        sourceIdKey: "source",
+      },
+    })
+    console.log(`Indexed ${result} documents. Result: `, result);
+  }
+
+  private async getVectorStore() {
+    const config = {
+      postgresConnectionOptions: getPostgresConfig(),
+      tableName: "datasource_documents",
+      collectionName: this.datasourceId,
+      collectionTableName: "document_collections",
+      columns: {
+        idColumnName: "id",
+        vectorColumnName: "vector",
+        contentColumnName: "content",
+        metadataColumnName: "metadata",
+      },
+    };
+
+    return await PGVectorStore.initialize(
+        new OpenAIEmbeddings(),
+        config
+    );
   }
 
   static async fromDocuments(
@@ -103,55 +113,19 @@ export class WishoniaVectorStore extends VectorStore {
     return this.fromDocuments(docs, embeddings, dbConfig);
   }
 
-  static async fromExistingIndex(
-      embeddings: Embeddings,
-      dbConfig: WishoniaLibArgs
-  ) {
-    return new this(embeddings, dbConfig);
-  }
-
   async similaritySearchVectorWithScore(
       query: number[],
       k: number,
-      filter?: this["FilterType"] | undefined
+      filter?: Record<string, unknown> | undefined
   ): Promise<[Document<Record<string, any>>, number][]> {
     if (!query) {
       return [];
     }
-    const vector = `[${query?.join(",")}]`;
-
-    const match_count = k;
-    const semanticSearchSimilarityScore = 0;
-
-    const data = await prisma.$queryRaw`
-      SELECT 
-        dps.id,
-        dps.content,
-        dp.meta as metadata,
-        1 - (dps.embedding <=> ${vector}::vector) as similarity
-      FROM "DatasourcePageSection" dps
-      JOIN "DatasourcePage" dp ON dps."datasourcePageId" = dp.id
-      WHERE dp."datasourceId" = ${this.datasourceId}
-      ORDER BY similarity DESC
-      LIMIT ${match_count}
-    `;
-
-    const result: [Document, number][] = (
-        data as SearchEmbeddingsResponse[]
-    ).map((resp) => [
-      new Document({
-        metadata: resp.metadata,
-        pageContent: resp.content,
-      }),
-      resp.similarity,
-    ]);
-
-    return result.filter(
-        ([, similarity]) => similarity >= semanticSearchSimilarityScore
-    );
+    const pgvectorStore = await this.getVectorStore();
+    return await pgvectorStore.similaritySearchVectorWithScore(query, k, filter)
   }
 
   _vectorstoreType(): string {
-    return "wishonia";
+    return "wishonia_postgres";
   }
 }
