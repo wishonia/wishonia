@@ -12,6 +12,16 @@ export function relativePathFromPublic(absolutePath: string): string {
     return '/' + pathArray.slice(publicIndex + 1).join('/');
 }
 
+export function relativePathFromRepo(absolutePath: string): string {
+    // Get the absolute path to the repository root
+    const repoRoot = path.resolve(__dirname, '../');
+   const noRepo = absolutePath.replace(repoRoot, '');
+   // fix slashes
+    const noRoot =  noRepo.replace(/\\/g, '/');
+    /// remove leading slash
+    return noRoot.startsWith('/') ? noRoot.slice(1) : noRoot;
+}
+
 function isAbsolute(pathRelativeToRepoRoot: string): boolean {
     // Get the absolute path to the repository root
     const repoRoot = path.resolve(__dirname, '../');
@@ -47,7 +57,9 @@ function loadGitignore(rootDir: string): Ignore {
     const gitignorePath = path.join(rootDir, '.gitignore');
 
     if (fs.existsSync(gitignorePath)) {
-        const gitignore = fs.readFileSync(gitignorePath).toString();
+        let gitignore = fs.readFileSync(gitignorePath).toString();
+        // add .git folder
+        gitignore += '\n.git';
         ig.add(gitignore);
     }
 
@@ -60,7 +72,7 @@ export function getAllFiles(absPath: string, ig: Ignore, arrayOfFiles: string[] 
 
     files.forEach(file => {
         const absFilePath = path.join(absPath, file);
-        const relativeFilePath = path.relative(absPath, absFilePath);
+        const relativeFilePath = relativePathFromRepo(absFilePath);
 
         // Skip file if it matches .gitignore patterns
         if (ig.ignores(relativeFilePath)) {
@@ -85,4 +97,16 @@ export function getNonIgnoredFiles(absFolderPath?: string): string[] {
         absFolderPath = rootDir;
     }
     return getAllFiles(absFolderPath, ig);
+}
+
+export function pathToUrl(filePath: string, baseUrl: string): string {
+    if(!baseUrl.endsWith('/')) {
+        baseUrl = baseUrl + '/';
+    }
+    let relativeToPublic = relativePathFromPublic(filePath);
+    return `${baseUrl}${relativeToPublic}`
+}
+
+export function pathToMarkdownUrl(filePath: string): string {
+    return pathToUrl(filePath, "https://wishonia.love/md/");
 }

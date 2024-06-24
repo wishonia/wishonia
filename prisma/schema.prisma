@@ -743,34 +743,19 @@ model AgentDatasource {
 }
 
 model DatasourcePage {
-  id          String   @id @default(cuid())
+  id          String                       @id @default(cuid())
   checksum    String?
-  path        String   @unique
+  path        String                       @unique
   type        String
-  source      String
   meta        Json
   version     String
-  lastRefresh DateTime @default(now())
-
-  parentDatasourcePage   DatasourcePage?         @relation("PageToPage", fields: [parentPageId], references: [id])
-  parentPageId           String?
-  childDatasourcePages   DatasourcePage[]        @relation("PageToPage")
-  datasourcePageSections DatasourcePageSection[]
+  lastRefresh DateTime                     @default(now())
+  content     String                       @db.Text
+  tokenCount  Int?
+  embedding   Unsupported("vector(1536)")?
 
   datasource   Datasource? @relation(fields: [datasourceId], references: [id])
   datasourceId String?
-}
-
-model DatasourcePageSection {
-  id               String                       @id @default(cuid())
-  datasourcePageId String
-  slug             String
-  heading          String
-  content          String                       @db.Text
-  tokenCount       Int
-  embedding        Unsupported("vector(1536)")?
-
-  datasourcePage DatasourcePage @relation(fields: [datasourcePageId], references: [id], onDelete: Cascade)
 }
 
 model Tool {
