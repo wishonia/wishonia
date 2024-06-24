@@ -1,5 +1,5 @@
 import {prisma} from "@/lib/db";
-import {DatasourceType} from ".prisma/client";
+import {DatasourceType} from "@prisma/client";
 
 export async function getOrCreateDataSource(name: string,
                                             type: DatasourceType,
