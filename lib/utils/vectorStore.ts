@@ -6,6 +6,7 @@ import {PGVectorStore} from "@langchain/community/vectorstores/pgvector";
 import {OpenAIEmbeddings} from "@langchain/openai";
 import {index} from "@langchain/core/indexing";
 import {getPostgresConfig} from "@/lib/db/postgresClient";
+import {RecursiveCharacterTextSplitter} from "langchain/text_splitter";
 
 export interface WishoniaLibArgs {
   //agentId: string;
@@ -128,4 +129,12 @@ export class WishoniaVectorStore extends VectorStore {
   _vectorstoreType(): string {
     return "wishonia_postgres";
   }
+}
+
+export async function splitDocuments(documents: Document[] ): Promise<Document[]> {
+  const textSplitter = new RecursiveCharacterTextSplitter({
+    chunkSize: 1000,
+    chunkOverlap: 200,
+  });
+  return await textSplitter.splitDocuments(documents);
 }

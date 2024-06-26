@@ -1,7 +1,7 @@
 import {Document} from "langchain/document";
 import {BaseDocumentLoader} from "langchain/document_loaders/base";
 import axios from "axios";
-import {RecursiveCharacterTextSplitter} from "langchain/text_splitter";
+import {splitDocuments} from "@/lib/utils/vectorStore";
 
 export interface RestLoaderParams {
   url: string;
@@ -62,16 +62,14 @@ export class RestApi extends BaseDocumentLoader
   async load(): Promise<Document<Record<string, any>>[]> {
     const output = await this._request();
     const outputText = JSON.stringify(output.data);
-    const textSplitter = new RecursiveCharacterTextSplitter({
-      chunkSize: 1000,
-      chunkOverlap: 200,
-    });
-    return await textSplitter.splitDocuments([
+
+    let metadata = {
+      source: this.url,
+    };
+    return await splitDocuments([
       {
         pageContent: outputText,
-        metadata: {
-          source: this.url,
-        },
+        metadata: metadata,
       },
     ]);
   }
