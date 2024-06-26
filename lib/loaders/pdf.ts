@@ -1,9 +1,12 @@
 import { BufferLoader } from "langchain/document_loaders/fs/buffer";
 import { Document } from "langchain/document";
 import * as pdfjS from "pdfjs-dist";
+import {Datasource} from "@prisma/client";
+import {splitDocuments, WishoniaVectorStore} from "@/lib/utils/vectorStore";
+import {OpenAIEmbeddings} from "@langchain/openai";
 
 export class PDFLoader extends BufferLoader {
-  private splitPages: boolean;
+  private readonly splitPages: boolean;
 
   constructor(
     filePathOrBlob: string | Blob,
@@ -76,5 +79,16 @@ export class PDFLoader extends BufferLoader {
         },
       }),
     ];
+  }
+  public async processSource(dataSource: Datasource) {
+    const docs = await this.load();
+    const chunks = await splitDocuments(docs);
+    await WishoniaVectorStore.fromDocuments(
+        chunks,
+        new OpenAIEmbeddings(),
+        {
+          datasourceId: dataSource.id,
+        }
+    );
   }
 }
