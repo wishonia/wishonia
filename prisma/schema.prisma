@@ -691,25 +691,26 @@ model ApiKey {
 }
 
 model Agent {
-  id             String            @id @default(uuid())
-  type           AgentType         @default(SUPERAGENT)
-  name           String
-  avatar         String?
-  initialMessage String?           @db.Text()
-  description    String            @default("Add a agent description...") @db.Text
-  isActive       Boolean           @default(false)
-  createdAt      DateTime          @default(now())
-  updatedAt      DateTime          @updatedAt
-  llms           AgentLLM[]
-  llmModel       LLMModel?         @default(GPT_3_5_TURBO_16K_0613)
-  prompt         String?
-  userId         String
-  user           User              @relation(fields: [userId], references: [id])
-  datasources    AgentDatasource[]
-  tools          AgentTool[]
-  workflowSteps  WorkflowStep[]
-  metadata       Json?
-  outputSchema   String?
+  id                   String            @id @default(uuid())
+  type                 AgentType         @default(SUPERAGENT)
+  name                 String
+  avatar               String?
+  initialMessage       String?           @default("Hello, how can I help you today?") @db.Text()
+  description          String            @default("Add a agent description...") @db.Text
+  isActive             Boolean           @default(false)
+  createdAt            DateTime          @default(now())
+  updatedAt            DateTime          @updatedAt
+  llms                 AgentLLM[]
+  llmModel             LLMModel?         @default(GPT_3_5_TURBO_16K_0613)
+  prompt               String?           @default("You are a helpful AI Assistant")
+  userId               String
+  user                 User              @relation(fields: [userId], references: [id])
+  datasources          AgentDatasource[]
+  tools                AgentTool[]
+  workflowSteps        WorkflowStep[]
+  metadata             Json?
+  outputSchema         String?
+  conversationStarters String[]          @default(["What can you do?"])
 }
 
 model Datasource {
@@ -717,7 +718,7 @@ model Datasource {
   name            String
   content         String?           @db.Text()
   description     String?
-  url             String?
+  url             String? // The URL where the raw data is stored like on a website or a cloud storage
   type            DatasourceType
   userId          String
   user            User              @relation(fields: [userId], references: [id])
