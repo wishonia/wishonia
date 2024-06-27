@@ -21,3 +21,12 @@ services:
       - .redis:/data
     ports:
       - 6379:6379
+
+  pg_dump:
+    image: postgres:latest
+    env_file:
+      - .env
+    volumes:
+      - ./dumps:/dumps
+      - ./scripts:/scripts
+    command: ["bash", "/scripts/pg_dump_script.sh"]

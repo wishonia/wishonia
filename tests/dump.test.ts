@@ -1,11 +1,14 @@
 /**
  * @jest-environment node
  */
-import {dumpDatabaseToJson} from "@/lib/prisma/dumpDatabaseToJson";
+import {dumpFullDatabaseToJson, dumpTestDatabaseToJson} from "@/lib/prisma/dumpDatabaseToJson";
 
 describe("Database-seeder tests", () => {
     jest.setTimeout(6000000);
-    it("Dumps the database to json files", async () => {
-        await dumpDatabaseToJson();
+    it("Dumps the test database to json files", async () => {
+        await dumpTestDatabaseToJson();
+    });
+    it("Dumps the full database to json files", async () => {
+        await dumpFullDatabaseToJson();
     });
 });

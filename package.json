@@ -11,6 +11,7 @@
     "preview": "next build && next start",
     "postinstall": "prisma generate",
     "prisma:generate": "prisma generate",
+    "prisma:migrate:create": "prisma migrate dev --create-only",
     "prisma:migrate": "prisma migrate dev",
     "prisma:studio": "prisma studio",
     "prisma:seed": "prisma db seed",
