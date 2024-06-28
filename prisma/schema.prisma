@@ -1,12 +1,13 @@
 generator client {
   provider        = "prisma-client-js"
   previewFeatures = ["postgresqlExtensions"]
-  extensions      = [vector(schema: "public")]
+  extensions      = ["(function)"]
 }
 
 datasource db {
-  provider = "postgresql"
-  url      = env("DATABASE_URL")
+  provider   = "postgresql"
+  url        = env("DATABASE_URL")
+  extensions = [uuid_ossp(map: "uuid-ossp", schema: "public")]
 }
 
 model Account {
@@ -15,12 +16,12 @@ model Account {
   type              String
   provider          String
   providerAccountId String   @map("provider_account_id")
-  refresh_token     String?  @db.Text
-  access_token      String?  @db.Text
+  refresh_token     String?
+  access_token      String?
   expires_at        Int?
   token_type        String?
   scope             String?
-  id_token          String?  @db.Text
+  id_token          String?
   session_state     String?
   createdAt         DateTime @default(now()) @map("created_at")
   updatedAt         DateTime @updatedAt @map("updated_at")
@@ -41,136 +42,135 @@ model Session {
 }
 
 model User {
-  id                   String    @id @default(cuid())
-  address              String?
-  badges               Json?
-  banned               Boolean?
-  bio                  String?   @db.Text // User's bio or description
-  birthday             DateTime?
-  blog                 String?
-  city                 String?
-  company              String?
-  contributorsEnabled  Boolean?
-  countryCode          String?
-  createdAt            DateTime  @default(now())
-  createdAtTwitter     DateTime?
-  deletedAt            DateTime?
-  email                String?   @unique
-  emailVerified        DateTime?
-  favouritesCount      Int?
-  firstName            String?
-  followersCount       Int? // Number of followers
-  followingCount       Int? // Number of accounts the user is following
-  gdprConsent          Boolean   @default(false)
-  gender               String?
-  geoEnabled           Boolean?
-  githubUsername       String?
-  hireable             Boolean?
-  image                String?
-  ipAddress            String?   @db.VarChar(45)
-  language             String?
-  lastName             String?
-  lastSignInAt         BigInt?
-  likeCount            Int? // Number of likes
-  listedCount          Int?
-  location             String? // User's location as per their Twitter profile
-  name                 String?
-  newsletterSubscribed Boolean   @default(false)
-  phoneNumber          String?
-  points               Int?
-  postalCode           String?
-  privateMetadata      Json?
-  profileBannerUrl     String?
-  protected            Boolean?
-  publicMetadata       Json?
-  referrerUserId       String?
-  signatureTimestamp   DateTime  @default(now())
-  signedPetition       Boolean   @default(false)
-  stateProvince        String?
-  statusesCount        Int?
-  timeZone             String?
-  tweetCount           Int? // Number of tweets (including retweets)
-  twitterHandle        String? // Twitter username/handle
-  type                 String?
-  unsafeMetadata       Json?
-  updatedAt            DateTime  @updatedAt
-  username             String    @unique @default(uuid())
-  verified             Boolean?
-  warPercentageDesired Float?
-  warPercentageGuessed Float?
-  web3Wallet           String?
-  website              String?
-  admin                Boolean?  @default(false)
-
-  accounts                              Account[]
-  sessions                              Session[]
+  id                                    String                                @id @default(cuid())
+  address                               String?
+  badges                                Json?
+  banned                                Boolean?
+  bio                                   String?
+  birthday                              DateTime?
+  blog                                  String?
+  city                                  String?
+  company                               String?
+  contributorsEnabled                   Boolean?
+  countryCode                           String?
+  createdAt                             DateTime                              @default(now())
+  createdAtTwitter                      DateTime?
+  deletedAt                             DateTime?
+  email                                 String?                               @unique
+  emailVerified                         DateTime?
+  favouritesCount                       Int?
+  firstName                             String?
+  followersCount                        Int?
+  followingCount                        Int?
+  gdprConsent                           Boolean                               @default(false)
+  gender                                String?
+  geoEnabled                            Boolean?
+  githubUsername                        String?
+  hireable                              Boolean?
+  image                                 String?
+  ipAddress                             String?                               @db.VarChar(45)
+  language                              String?
+  lastName                              String?
+  lastSignInAt                          BigInt?
+  likeCount                             Int?
+  listedCount                           Int?
+  location                              String?
+  name                                  String?
+  newsletterSubscribed                  Boolean                               @default(false)
+  phoneNumber                           String?
+  points                                Int?
+  postalCode                            String?
+  privateMetadata                       Json?
+  profileBannerUrl                      String?
+  protected                             Boolean?
+  publicMetadata                        Json?
+  referrerUserId                        String?
+  signatureTimestamp                    DateTime                              @default(now())
+  signedPetition                        Boolean                               @default(false)
+  stateProvince                         String?
+  statusesCount                         Int?
+  timeZone                              String?
+  tweetCount                            Int?
+  twitterHandle                         String?
+  type                                  String?
+  unsafeMetadata                        Json?
+  updatedAt                             DateTime                              @updatedAt
+  username                              String                                @unique @default(uuid())
+  verified                              Boolean?
+  warPercentageDesired                  Float?
+  warPercentageGuessed                  Float?
+  web3Wallet                            String?
+  website                               String?
+  admin                                 Boolean?                              @default(false)
   activities                            Activity[]
-  wishingWells                          WishingWell[]
-  educations                            Education[]
-  positions                             Position[]
-  userSkills                            UserSkill[]
-  endorsements                          Endorsement[]
-  userRecommendations                   Recommendation[]                      @relation("UserRecommendations")
-  recommenderRecommendations            Recommendation[]                      @relation("RecommenderRecommendations")
-  posts                                 Post[]
-  likes                                 Like[]
-  comments                              Comment[]
-  initiatedFriendships                  Friendship[]                          @relation(name: "InitiatorFriendships")
-  receivedFriendships                   Friendship[]                          @relation(name: "ReceiverFriendships")
-  createdGenieDAOs                      GenieDAO[]                            @relation("CreatedGenieDAOs")
-  joinedGenieDAOs                       GenieDAO[]                            @relation("JoinedGenieDAOs")
-  createdWishFulfillmentProposals       WishFulfillmentProposal[]             @relation("CreatedProposals")
-  createdProposalProgressReports        ProposalProgressReport[]
-  proposalComparisons                   ProposalComparison[]
-  wishingWellPairAllocations            WishingWellPairAllocation[]
-  globalProblemPairAllocations          GlobalProblemPairAllocation[]
-  globalProblems                        GlobalProblem[]
-  globalSolutionPairAllocations         GlobalSolutionPairAllocation[]
-  globalSolutions                       GlobalSolution[]
-  globalProblemSolutionsPairAllocations GlobalProblemSolutionPairAllocation[]
-  genieDAOFeedback                      GenieDAOFeedback[]
   agents                                Agent[]
-  globalTasksCreated                    GlobalTask[]
-  userTasks                             UserTask[]
-  llms                                  LLM[]
-  datasources                           Datasource[]
-  tools                                 Tool[]
-  workflows                             Workflow[]
-  vectorDb                              VectorDb[]
-  workflowConfigs                       WorkflowConfig[]
   apiKeys                               ApiKey[]
   chats                                 Chat[]
+  comments                              Comment[]
+  datasources                           Datasource[]
+  educations                            Education[]
+  endorsements                          Endorsement[]
+  receivedFriendships                   Friendship[]                          @relation("ReceiverFriendships")
+  initiatedFriendships                  Friendship[]                          @relation("InitiatorFriendships")
+  createdGenieDAOs                      GenieDAO[]                            @relation("CreatedGenieDAOs")
+  genieDAOFeedback                      GenieDAOFeedback[]
+  globalProblems                        GlobalProblem[]
+  globalProblemPairAllocations          GlobalProblemPairAllocation[]
+  globalProblemSolutionsPairAllocations GlobalProblemSolutionPairAllocation[]
+  globalSolutions                       GlobalSolution[]
+  globalSolutionPairAllocations         GlobalSolutionPairAllocation[]
+  globalTasksCreated                    GlobalTask[]
+  llms                                  LLM[]
+  likes                                 Like[]
+  positions                             Position[]
+  posts                                 Post[]
+  proposalComparisons                   ProposalComparison[]
+  createdProposalProgressReports        ProposalProgressReport[]
+  recommenderRecommendations            Recommendation[]                      @relation("RecommenderRecommendations")
+  userRecommendations                   Recommendation[]                      @relation("UserRecommendations")
+  tools                                 Tool[]
+  userSkills                            UserSkill[]
+  userTasks                             UserTask[]
+  vectorDb                              VectorDb[]
+  createdWishFulfillmentProposals       WishFulfillmentProposal[]             @relation("CreatedProposals")
+  wishingWells                          WishingWell[]
+  wishingWellPairAllocations            WishingWellPairAllocation[]
+  workflows                             Workflow[]
+  workflowConfigs                       WorkflowConfig[]
+  accounts                              Account[]
+  sessions                              Session[]
+  joinedGenieDAOs                       GenieDAO[]                            @relation("JoinedGenieDAOs")
 }
 
 model Education {
   id           String    @id @default(cuid())
-  user         User      @relation(fields: [userId], references: [id])
   userId       String
   school       String
   degree       String?
   fieldOfStudy String?
   startDate    DateTime
   endDate      DateTime?
+  user         User      @relation(fields: [userId], references: [id])
 }
 
 model Position {
   id        String    @id @default(cuid())
-  user      User      @relation(fields: [userId], references: [id])
   userId    String
   title     String
   company   String
   startDate DateTime
   endDate   DateTime?
   isCurrent Boolean
+  user      User      @relation(fields: [userId], references: [id])
 }
 
 model UserSkill {
   id           String        @id @default(cuid())
-  user         User          @relation(fields: [userId], references: [id])
   userId       String
   skillId      String
   endorsements Endorsement[]
   skill        Skill         @relation(fields: [skillId], references: [id])
+  user         User          @relation(fields: [userId], references: [id])
 
   @@unique([userId, skillId])
 }
@@ -184,60 +184,60 @@ model Skill {
 
 model Endorsement {
   id          String     @id @default(cuid())
-  user        User       @relation(fields: [userId], references: [id])
   userId      String
-  userSkill   UserSkill? @relation(fields: [userSkillId], references: [id])
   userSkillId String?
+  user        User       @relation(fields: [userId], references: [id])
+  userSkill   UserSkill? @relation(fields: [userSkillId], references: [id])
 }
 
 model Recommendation {
   id            String @id @default(cuid())
-  user          User   @relation(name: "UserRecommendations", fields: [userId], references: [id])
   userId        String
   recommenderId String
-  recommender   User   @relation(name: "RecommenderRecommendations", fields: [recommenderId], references: [id])
   text          String
+  recommender   User   @relation("RecommenderRecommendations", fields: [recommenderId], references: [id])
+  user          User   @relation("UserRecommendations", fields: [userId], references: [id])
 }
 
 model Post {
   id        String    @id @default(cuid())
-  user      User      @relation(fields: [userId], references: [id])
   userId    String
   content   String
   createdAt DateTime  @default(now())
   updatedAt DateTime  @updatedAt
-  likes     Like[]
   comments  Comment[]
+  likes     Like[]
+  user      User      @relation(fields: [userId], references: [id])
 }
 
 model Like {
   id     String @id @default(cuid())
-  user   User   @relation(fields: [userId], references: [id])
   userId String
-  post   Post   @relation(fields: [postId], references: [id])
   postId String
+  post   Post   @relation(fields: [postId], references: [id])
+  user   User   @relation(fields: [userId], references: [id])
 }
 
 model Comment {
   id        String   @id @default(cuid())
-  user      User     @relation(fields: [userId], references: [id])
   userId    String
-  post      Post     @relation(fields: [postId], references: [id])
   postId    String
   content   String
   createdAt DateTime @default(now())
   updatedAt DateTime @updatedAt
+  post      Post     @relation(fields: [postId], references: [id])
+  user      User     @relation(fields: [userId], references: [id])
 }
 
 model Friendship {
   id        String   @id @default(cuid())
-  user      User     @relation(name: "InitiatorFriendships", fields: [userId], references: [id])
   userId    String
   friendId  String
-  friend    User     @relation(name: "ReceiverFriendships", fields: [friendId], references: [id])
   status    String   @default("pending")
   createdAt DateTime @default(now())
   updatedAt DateTime @updatedAt
+  friend    User     @relation("ReceiverFriendships", fields: [friendId], references: [id])
+  user      User     @relation("InitiatorFriendships", fields: [userId], references: [id])
 }
 
 model VerificationToken {
@@ -277,12 +277,12 @@ model GlobalProblem {
   featuredImage                         String?
   createdAt                             DateTime                              @default(now())
   updatedAt                             DateTime                              @updatedAt
-  user                                  User                                  @relation(fields: [userId], references: [id])
-  thisGlobalProblemAllocations          GlobalProblemPairAllocation[]         @relation("ThisGlobalProblemRelation")
-  thatGlobalProblemAllocations          GlobalProblemPairAllocation[]         @relation("ThatGlobalProblemRelation")
   averageAllocation                     Float?
+  embedding                             Unsupported("vector")?
+  user                                  User                                  @relation(fields: [userId], references: [id])
+  thatGlobalProblemAllocations          GlobalProblemPairAllocation[]         @relation("ThatGlobalProblemRelation")
+  thisGlobalProblemAllocations          GlobalProblemPairAllocation[]         @relation("ThisGlobalProblemRelation")
   globalProblemSolutions                GlobalProblemSolution[]               @relation("GlobalProblemToSolution")
-  embedding                             Unsupported("vector(1536)")?
   globalProblemSolutionsPairAllocations GlobalProblemSolutionPairAllocation[]
 }
 
@@ -294,9 +294,9 @@ model GlobalProblemPairAllocation {
   thisGlobalProblemPercentage Float
   createdAt                   DateTime      @default(now())
   updatedAt                   DateTime      @updatedAt
-  user                        User          @relation(fields: [userId], references: [id])
-  thisGlobalProblem           GlobalProblem @relation("ThisGlobalProblemRelation", fields: [thisGlobalProblemId], references: [id])
   thatGlobalProblem           GlobalProblem @relation("ThatGlobalProblemRelation", fields: [thatGlobalProblemId], references: [id])
+  thisGlobalProblem           GlobalProblem @relation("ThisGlobalProblemRelation", fields: [thisGlobalProblemId], references: [id])
+  user                        User          @relation(fields: [userId], references: [id])
 
   @@unique([userId, thisGlobalProblemId, thatGlobalProblemId])
 }
@@ -310,13 +310,13 @@ model GlobalSolution {
   featuredImage                 String?
   createdAt                     DateTime                       @default(now())
   updatedAt                     DateTime                       @updatedAt
-  user                          User                           @relation(fields: [userId], references: [id])
-  thisGlobalSolutionAllocations GlobalSolutionPairAllocation[] @relation("ThisGlobalSolutionRelation")
-  thatGlobalSolutionAllocations GlobalSolutionPairAllocation[] @relation("ThatGlobalSolutionRelation")
   averageAllocation             Float?
+  embedding                     Unsupported("vector")?
   globalProblemSolutions        GlobalProblemSolution[]        @relation("GlobalSolutionToProblem")
+  user                          User                           @relation(fields: [userId], references: [id])
+  thatGlobalSolutionAllocations GlobalSolutionPairAllocation[] @relation("ThatGlobalSolutionRelation")
+  thisGlobalSolutionAllocations GlobalSolutionPairAllocation[] @relation("ThisGlobalSolutionRelation")
   globalTaskSolutions           GlobalTaskSolution[]           @relation("GlobalSolutionToTask")
-  embedding                     Unsupported("vector(1536)")?
 }
 
 model GlobalSolutionPairAllocation {
@@ -327,9 +327,9 @@ model GlobalSolutionPairAllocation {
   thisGlobalSolutionPercentage Float
   createdAt                    DateTime       @default(now())
   updatedAt                    DateTime       @updatedAt
-  user                         User           @relation(fields: [userId], references: [id])
-  thisGlobalSolution           GlobalSolution @relation("ThisGlobalSolutionRelation", fields: [thisGlobalSolutionId], references: [id])
   thatGlobalSolution           GlobalSolution @relation("ThatGlobalSolutionRelation", fields: [thatGlobalSolutionId], references: [id])
+  thisGlobalSolution           GlobalSolution @relation("ThisGlobalSolutionRelation", fields: [thisGlobalSolutionId], references: [id])
+  user                         User           @relation(fields: [userId], references: [id])
 
   @@unique([userId, thisGlobalSolutionId, thatGlobalSolutionId])
 }
@@ -338,17 +338,17 @@ model GlobalProblemSolution {
   id                                   String                                @id @default(cuid())
   globalProblemId                      String
   globalSolutionId                     String
-  name                                 String                                @unique
-  description                          String?                               @unique
-  content                              String?
-  featuredImage                        String?
-  averageAllocation                    Float?
   createdAt                            DateTime                              @default(now())
   updatedAt                            DateTime                              @updatedAt
+  content                              String?
+  description                          String?                               @unique
+  featuredImage                        String?
+  name                                 String                                @unique
+  averageAllocation                    Float?
   globalProblem                        GlobalProblem                         @relation("GlobalProblemToSolution", fields: [globalProblemId], references: [id])
   globalSolution                       GlobalSolution                        @relation("GlobalSolutionToProblem", fields: [globalSolutionId], references: [id])
-  thisGlobalProblemSolutionAllocations GlobalProblemSolutionPairAllocation[] @relation("ThisGlobalProblemSolutionRelation")
   thatGlobalProblemSolutionAllocations GlobalProblemSolutionPairAllocation[] @relation("ThatGlobalProblemSolutionRelation")
+  thisGlobalProblemSolutionAllocations GlobalProblemSolutionPairAllocation[] @relation("ThisGlobalProblemSolutionRelation")
 
   @@unique([globalProblemId, globalSolutionId])
 }
@@ -356,16 +356,16 @@ model GlobalProblemSolution {
 model GlobalProblemSolutionPairAllocation {
   id                                  String                @id @default(cuid())
   userId                              String
-  globalProblemId                     String?
   thisGlobalProblemSolutionId         String
   thatGlobalProblemSolutionId         String
   thisGlobalProblemSolutionPercentage Float
   createdAt                           DateTime              @default(now())
   updatedAt                           DateTime              @updatedAt
-  user                                User                  @relation(fields: [userId], references: [id])
+  globalProblemId                     String?
   globalProblem                       GlobalProblem?        @relation(fields: [globalProblemId], references: [id])
-  thisGlobalProblemSolution           GlobalProblemSolution @relation("ThisGlobalProblemSolutionRelation", fields: [thisGlobalProblemSolutionId], references: [id])
   thatGlobalProblemSolution           GlobalProblemSolution @relation("ThatGlobalProblemSolutionRelation", fields: [thatGlobalProblemSolutionId], references: [id])
+  thisGlobalProblemSolution           GlobalProblemSolution @relation("ThisGlobalProblemSolutionRelation", fields: [thisGlobalProblemSolutionId], references: [id])
+  user                                User                  @relation(fields: [userId], references: [id])
 
   @@unique([userId, thisGlobalProblemSolutionId, thatGlobalProblemSolutionId])
 }
@@ -376,34 +376,34 @@ model GlobalTaskSolution {
   globalSolutionId String
   createdAt        DateTime       @default(now())
   updatedAt        DateTime       @updatedAt
-  globalTask       GlobalTask     @relation("GlobalTaskToSolution", fields: [globalTaskId], references: [id])
   globalSolution   GlobalSolution @relation("GlobalSolutionToTask", fields: [globalSolutionId], references: [id])
+  globalTask       GlobalTask     @relation("GlobalTaskToSolution", fields: [globalTaskId], references: [id])
 
   @@unique([globalTaskId, globalSolutionId])
 }
 
 model GlobalTask {
-  id                    String                       @id @default(cuid())
+  id                    String                 @id @default(cuid())
   userId                String
-  name                  String                       @unique
-  description           String?                      @unique
+  name                  String                 @unique
+  description           String?                @unique
   content               String?
   featuredImage         String?
-  createdAt             DateTime                     @default(now())
-  updatedAt             DateTime                     @updatedAt
-  skills                GlobalTaskSkill[]
+  createdAt             DateTime               @default(now())
+  updatedAt             DateTime               @updatedAt
   priority              String?
-  status                TaskStatus                   @default(NOT_STARTED)
+  status                TaskStatus             @default(NOT_STARTED)
   dueDate               DateTime?
   budget                Float?
   comments              String[]
-  creator               User                         @relation(fields: [userId], references: [id])
-  globalTaskSolutions   GlobalTaskSolution[]         @relation("GlobalTaskToSolution")
-  blockingTasks         GlobalTaskDependency[]       @relation("BlockingTask")
-  dependentTasks        GlobalTaskDependency[]       @relation("DependentTask")
-  globalTaskContextUrls GlobalTaskContextUrl[]
+  embedding             Unsupported("vector")?
+  creator               User                   @relation(fields: [userId], references: [id])
+  blockingTasks         GlobalTaskDependency[] @relation("BlockingTask")
+  dependentTasks        GlobalTaskDependency[] @relation("DependentTask")
+  skills                GlobalTaskSkill[]
+  globalTaskSolutions   GlobalTaskSolution[]   @relation("GlobalTaskToSolution")
   userTasks             UserTask[]
-  embedding             Unsupported("vector(1536)")?
+  globalTaskContextUrls GlobalTaskContextUrl[] @relation("GlobalTaskToGlobalTaskContextUrl")
 }
 
 model GlobalTaskSkill {
@@ -414,12 +414,6 @@ model GlobalTaskSkill {
   skill        Skill      @relation(fields: [skillId], references: [id])
 
   @@unique([globalTaskId, skillId])
-}
-
-enum TaskStatus {
-  NOT_STARTED
-  IN_PROGRESS
-  COMPLETED
 }
 
 model GlobalTaskDependency {
@@ -439,7 +433,7 @@ model GlobalTaskContextUrl {
   url         String       @unique
   createdAt   DateTime     @default(now())
   updatedAt   DateTime     @updatedAt
-  globalTasks GlobalTask[]
+  globalTasks GlobalTask[] @relation("GlobalTaskToGlobalTaskContextUrl")
 }
 
 model UserTask {
@@ -454,35 +448,29 @@ model UserTask {
   actualHours    Float?
   comments       String?
   assignedAt     DateTime     @default(now())
-  user           User         @relation(fields: [userId], references: [id])
   globalTask     GlobalTask   @relation(fields: [globalTaskId], references: [id])
+  user           User         @relation(fields: [userId], references: [id])
 
   @@unique([userId, globalTaskId])
 }
 
-enum UserTaskRole {
-  ASSIGNEE
-  REVIEWER
-  COLLABORATOR
-}
-
 model WishingWell {
-  id                         String                       @id @default(cuid())
+  id                         String                      @id @default(cuid())
   userId                     String
-  name                       String                       @unique
+  name                       String                      @unique
   description                String?
   content                    String?
   images                     String[]
   featuredImage              String?
-  createdAt                  DateTime                     @default(now())
-  updatedAt                  DateTime                     @updatedAt
-  user                       User                         @relation(fields: [userId], references: [id])
-  wishingWellContributions   WishingWellContribution[]
-  proposals                  WishFulfillmentProposal[]
-  thisWishingWellAllocations WishingWellPairAllocation[]  @relation("ThisWishingWellRelation")
-  thatWishingWellAllocations WishingWellPairAllocation[]  @relation("ThatWishingWellRelation")
+  createdAt                  DateTime                    @default(now())
+  updatedAt                  DateTime                    @updatedAt
   averageAllocation          Float?
-  embedding                  Unsupported("vector(1536)")?
+  embedding                  Unsupported("vector")?
+  proposals                  WishFulfillmentProposal[]
+  user                       User                        @relation(fields: [userId], references: [id])
+  wishingWellContributions   WishingWellContribution[]
+  thatWishingWellAllocations WishingWellPairAllocation[] @relation("ThatWishingWellRelation")
+  thisWishingWellAllocations WishingWellPairAllocation[] @relation("ThisWishingWellRelation")
 }
 
 model WishingWellPairAllocation {
@@ -493,9 +481,9 @@ model WishingWellPairAllocation {
   thisWishingWellPercentage Float
   createdAt                 DateTime    @default(now())
   updatedAt                 DateTime    @updatedAt
-  user                      User        @relation(fields: [userId], references: [id])
-  thisWishingWell           WishingWell @relation("ThisWishingWellRelation", fields: [thisWishingWellId], references: [id])
   thatWishingWell           WishingWell @relation("ThatWishingWellRelation", fields: [thatWishingWellId], references: [id])
+  thisWishingWell           WishingWell @relation("ThisWishingWellRelation", fields: [thisWishingWellId], references: [id])
+  user                      User        @relation(fields: [userId], references: [id])
 
   @@unique([userId, thisWishingWellId, thatWishingWellId])
 }
@@ -509,18 +497,18 @@ model WishingWellContribution {
 }
 
 model GenieDAO {
-  id             String                       @id @default(cuid())
+  id             String                    @id @default(cuid())
   name           String
-  reputation     Float                        @default(0)
-  createdAt      DateTime                     @default(now())
-  updatedAt      DateTime                     @updatedAt
-  creator        User                         @relation("CreatedGenieDAOs", fields: [creatorId], references: [id])
+  reputation     Float                     @default(0)
+  createdAt      DateTime                  @default(now())
+  updatedAt      DateTime                  @updatedAt
   creatorId      String
-  members        User[]                       @relation("JoinedGenieDAOs")
-  proposals      WishFulfillmentProposal[]
-  collaborations WishFulfillmentProposal[]    @relation("ProposalCollaborators")
+  embedding      Unsupported("vector")?
+  creator        User                      @relation("CreatedGenieDAOs", fields: [creatorId], references: [id])
   feedback       GenieDAOFeedback[]
-  embedding      Unsupported("vector(1536)")?
+  proposals      WishFulfillmentProposal[]
+  members        User[]                    @relation("JoinedGenieDAOs")
+  collaborations WishFulfillmentProposal[] @relation("ProposalCollaborators")
 }
 
 model WishFulfillmentProposal {
@@ -533,12 +521,12 @@ model WishFulfillmentProposal {
   wishTokens    Int
   createdAt     DateTime                 @default(now())
   updatedAt     DateTime                 @updatedAt
-  wishingWell   WishingWell              @relation(fields: [wishingWellId], references: [id])
-  genieDAO      GenieDAO                 @relation(fields: [genieDAOId], references: [id])
-  collaborators GenieDAO[]               @relation("ProposalCollaborators")
+  creatorId     String
   reports       ProposalProgressReport[]
   creator       User                     @relation("CreatedProposals", fields: [creatorId], references: [id])
-  creatorId     String
+  genieDAO      GenieDAO                 @relation(fields: [genieDAOId], references: [id])
+  wishingWell   WishingWell              @relation(fields: [wishingWellId], references: [id])
+  collaborators GenieDAO[]               @relation("ProposalCollaborators")
 }
 
 model ProposalProgressReport {
@@ -547,9 +535,9 @@ model ProposalProgressReport {
   content    String
   createdAt  DateTime                @default(now())
   updatedAt  DateTime                @updatedAt
-  proposal   WishFulfillmentProposal @relation(fields: [proposalId], references: [id])
-  creator    User                    @relation(fields: [creatorId], references: [id])
   creatorId  String
+  creator    User                    @relation(fields: [creatorId], references: [id])
+  proposal   WishFulfillmentProposal @relation(fields: [proposalId], references: [id])
 }
 
 model ProposalComparison {
@@ -573,6 +561,360 @@ model GenieDAOFeedback {
   updatedAt  DateTime @updatedAt
   genieDAO   GenieDAO @relation(fields: [genieDAOId], references: [id])
   user       User     @relation(fields: [userId], references: [id])
+}
+
+model ApiKey {
+  id            String   @id @default(uuid())
+  name          String
+  displayApiKey String
+  createdAt     DateTime @default(now())
+  updatedAt     DateTime @updatedAt
+  userId        String
+  user          User     @relation(fields: [userId], references: [id])
+
+  @@index([userId], map: "api_user_id")
+}
+
+model Agent {
+  id                   String            @id @default(uuid())
+  name                 String
+  userId               String
+  description          String            @default("Add a agent description...")
+  createdAt            DateTime          @default(now())
+  avatar               String?
+  initialMessage       String?           @default("Hello, how can I help you today?")
+  isActive             Boolean           @default(false)
+  llmModel             LLMModel?         @default(GPT_3_5_TURBO_16K_0613)
+  metadata             Json?
+  outputSchema         String?
+  prompt               String?           @default("You are a helpful AI Assistant")
+  type                 AgentType         @default(SUPERAGENT)
+  updatedAt            DateTime          @updatedAt
+  conversationStarters String[]          @default(["What can you do?"])
+  user                 User              @relation(fields: [userId], references: [id])
+  datasources          AgentDatasource[]
+  llms                 AgentLLM[]
+  tools                AgentTool[]
+  workflowSteps        WorkflowStep[]
+
+  @@unique([userId, name])
+}
+
+model Datasource {
+  id          String            @id @default(uuid())
+  name        String
+  content     String?
+  description String?
+  url         String?
+  type        DatasourceType
+  userId      String
+  createdAt   DateTime          @default(now())
+  updatedAt   DateTime          @updatedAt
+  metadata    String?
+  status      DatasourceStatus  @default(IN_PROGRESS)
+  vectorDbId  String?
+  datasources AgentDatasource[]
+  user        User              @relation(fields: [userId], references: [id])
+  vectorDb    VectorDb?         @relation(fields: [vectorDbId], references: [id])
+}
+
+model AgentDatasource {
+  agentId      String
+  datasourceId String
+  createdAt    DateTime   @default(now())
+  updatedAt    DateTime   @updatedAt
+  agent        Agent      @relation(fields: [agentId], references: [id], onDelete: Cascade)
+  datasource   Datasource @relation(fields: [datasourceId], references: [id], onDelete: Cascade)
+
+  @@id([agentId, datasourceId])
+}
+
+model Tool {
+  id           String      @id @default(uuid())
+  name         String
+  description  String
+  type         ToolType
+  returnDirect Boolean     @default(false)
+  metadata     String?
+  createdAt    DateTime    @default(now())
+  updatedAt    DateTime    @updatedAt
+  userId       String
+  toolConfig   Json?
+  tools        AgentTool[]
+  user         User        @relation(fields: [userId], references: [id])
+}
+
+model AgentTool {
+  agentId   String
+  toolId    String
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+  agent     Agent    @relation(fields: [agentId], references: [id], onDelete: Cascade)
+  tool      Tool     @relation(fields: [toolId], references: [id], onDelete: Cascade)
+
+  @@id([agentId, toolId])
+}
+
+model LLM {
+  id        String      @id @default(uuid())
+  provider  LLMProvider @default(OPENAI)
+  apiKey    String
+  options   Json?
+  createdAt DateTime    @default(now())
+  updatedAt DateTime    @updatedAt
+  userId    String
+  agents    AgentLLM[]
+  user      User        @relation(fields: [userId], references: [id])
+}
+
+model AgentLLM {
+  agentId   String
+  llmId     String
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+  agent     Agent    @relation(fields: [agentId], references: [id], onDelete: Cascade)
+  llm       LLM      @relation(fields: [llmId], references: [id])
+
+  @@id([agentId, llmId])
+}
+
+model Workflow {
+  id              String           @id @default(uuid())
+  name            String
+  description     String?
+  createdAt       DateTime         @default(now())
+  updatedAt       DateTime         @updatedAt
+  userId          String
+  user            User             @relation(fields: [userId], references: [id])
+  workflowConfigs WorkflowConfig[]
+  steps           WorkflowStep[]
+}
+
+model WorkflowConfig {
+  id         String   @id @default(uuid())
+  config     Json
+  createdAt  DateTime @default(now())
+  updatedAt  DateTime @updatedAt
+  workflowId String
+  userId     String?
+  User       User?    @relation(fields: [userId], references: [id])
+  workflow   Workflow @relation(fields: [workflowId], references: [id], onDelete: Cascade)
+}
+
+model WorkflowStep {
+  id         String   @id @default(uuid())
+  order      Int
+  workflowId String
+  createdAt  DateTime @default(now())
+  updatedAt  DateTime @updatedAt
+  input      String?
+  output     String?
+  agentId    String
+  agent      Agent    @relation(fields: [agentId], references: [id], onDelete: Cascade)
+  workflow   Workflow @relation(fields: [workflowId], references: [id], onDelete: Cascade)
+}
+
+model VectorDb {
+  id          String           @id @default(uuid())
+  provider    VectorDbProvider @default(PINECONE)
+  options     Json
+  createdAt   DateTime         @default(now())
+  updatedAt   DateTime         @updatedAt
+  userId      String
+  datasources Datasource[]
+  user        User             @relation(fields: [userId], references: [id])
+}
+
+model GithubUser {
+  name                  String?
+  email                 String?
+  url                   String
+  bio                   String?
+  location              String?
+  company               String?
+  followers             Int
+  avatar_url            String
+  blog                  String?
+  events_url            String
+  followers_url         String
+  following             Int
+  following_url         String
+  generalDeveloperScore Float?
+  gists_url             String
+  gravatar_id           String?
+  hireable              Boolean?
+  html_url              String
+  login                 String
+  node_id               String
+  organizations_url     String
+  public_gists          Int
+  public_repos          Int
+  received_events_url   String
+  repos_url             String
+  site_admin            Boolean
+  starred_url           String
+  subscriptions_url     String
+  twitter_username      String?
+  type                  String
+  id                    Int                    @id
+  created_at            String
+  updated_at            String
+  githubIssuesCreated   GithubIssue[]
+  githubRepos           GithubRepo[]
+  repoDeveloperScores   RepoContributorScore[]
+}
+
+model GithubIssue {
+  title          String
+  url            String
+  number         Int
+  comments_url   String
+  events_url     String
+  githubUserId   Int
+  html_url       String
+  labels_url     String
+  node_id        String
+  repository_url String
+  id             Int        @id
+  creator        GithubUser @relation(fields: [githubUserId], references: [id])
+}
+
+model GithubRepo {
+  id           Int        @id
+  node_id      String
+  name         String
+  full_name    String
+  private      Boolean
+  githubUserId Int
+  owner        GithubUser @relation(fields: [githubUserId], references: [id])
+}
+
+model RepoContributorScore {
+  id                      Int        @id @default(autoincrement())
+  githubUserId            Int
+  repoOwner               String
+  repoName                String
+  score                   Float
+  commitsCount            Int
+  issuesCreatedCount      Int
+  issueCommentsCount      Int
+  commentReactionsScore   Float
+  mergedPullRequestsCount Int
+  totalPullRequestsCount  Int
+  githubUser              GithubUser @relation(fields: [githubUserId], references: [id])
+
+  @@unique([githubUserId, repoOwner, repoName])
+}
+
+model Library {
+  id          String   @id @default(cuid())
+  name        String
+  version     String
+  type        String
+  description String?
+  keywords    String[]
+  author      String
+  repository  String
+  githubUrl   String?
+  tags        String[]
+  createdAt   DateTime @default(now())
+  updatedAt   DateTime @updatedAt
+}
+
+model Organization {
+  id            String   @id @default(cuid())
+  name          String
+  alternateName String?
+  description   String?
+  url           String?
+  logo          String?
+  createdAt     DateTime @default(now())
+  updatedAt     DateTime @updatedAt
+  email         String?
+  telephone     String?
+  member        Person[]
+}
+
+model Person {
+  id             String       @id @default(cuid())
+  name           String
+  email          String?
+  telephone      String?
+  jobTitle       String?
+  organizationId String
+  createdAt      DateTime     @default(now())
+  updatedAt      DateTime     @updatedAt
+  organization   Organization @relation(fields: [organizationId], references: [id])
+}
+
+model Chat {
+  id        String        @id @default(uuid())
+  title     String
+  userId    String
+  createdAt DateTime      @default(now())
+  path      String
+  user      User          @relation(fields: [userId], references: [id])
+  messages  ChatMessage[]
+}
+
+model ChatMessage {
+  id            String      @id @default(uuid())
+  chatId        String
+  tool_call_id  String?
+  createdAt     DateTime    @default(now())
+  content       String
+  ui            String?
+  role          MessageRole
+  name          String?
+  function_call String?
+  data          Json?
+  tool_calls    String?
+  annotations   Json?
+  chat          Chat        @relation(fields: [chatId], references: [id])
+}
+
+model datasource_documents {
+  id                   String                 @id @default(dbgenerated("uuid_generate_v4()")) @db.Uuid
+  content              String?
+  metadata             Json?
+  vector               Unsupported("vector")?
+  collection_id        String?                @db.Uuid
+  document_collections document_collections?  @relation(fields: [collection_id], references: [uuid], onDelete: Cascade, onUpdate: NoAction)
+}
+
+model document_collections {
+  uuid                 String                 @id @default(dbgenerated("uuid_generate_v4()")) @db.Uuid
+  name                 String?                @db.VarChar
+  cmetadata            Json?
+  datasource_documents datasource_documents[]
+
+  @@index([name], map: "idx_document_collections_name")
+}
+
+model document_upsertion_records {
+  uuid       String  @id @default(dbgenerated("gen_random_uuid()")) @db.Uuid
+  key        String
+  namespace  String
+  updated_at Float
+  group_id   String?
+
+  @@unique([key, namespace])
+  @@index([group_id], map: "group_id_index")
+  @@index([key], map: "key_index")
+  @@index([namespace], map: "namespace_index")
+  @@index([updated_at], map: "updated_at_index")
+}
+
+enum TaskStatus {
+  NOT_STARTED
+  IN_PROGRESS
+  COMPLETED
+}
+
+enum UserTaskRole {
+  ASSIGNEE
+  REVIEWER
+  COLLABORATOR
 }
 
 enum AgentType {
@@ -600,7 +942,6 @@ enum LLMModel {
   GPT_3_5_TURBO_0613
   GPT_3_5_TURBO_1106
   GPT_3_5_TURBO_0125
-
   GPT_4
   GPT_4_0613
   GPT_4_32K
@@ -678,315 +1019,6 @@ enum VectorDbProvider {
   POSTGRES
 }
 
-model ApiKey {
-  id            String   @id @default(uuid())
-  name          String
-  displayApiKey String
-  createdAt     DateTime @default(now())
-  updatedAt     DateTime @updatedAt
-  userId        String
-  user          User     @relation(fields: [userId], references: [id])
-
-  @@index([userId], name: "api_user_id")
-}
-
-model Agent {
-  id                   String            @id @default(uuid())
-  type                 AgentType         @default(SUPERAGENT)
-  name                 String
-  avatar               String?
-  initialMessage       String?           @default("Hello, how can I help you today?") @db.Text()
-  description          String            @default("Add a agent description...") @db.Text
-  isActive             Boolean           @default(false)
-  createdAt            DateTime          @default(now())
-  updatedAt            DateTime          @updatedAt
-  llms                 AgentLLM[]
-  llmModel             LLMModel?         @default(GPT_3_5_TURBO_16K_0613)
-  prompt               String?           @default("You are a helpful AI Assistant")
-  userId               String
-  user                 User              @relation(fields: [userId], references: [id])
-  datasources          AgentDatasource[]
-  tools                AgentTool[]
-  workflowSteps        WorkflowStep[]
-  metadata             Json?
-  outputSchema         String?
-  conversationStarters String[]          @default(["What can you do?"])
-}
-
-model Datasource {
-  id              String            @id @default(uuid())
-  name            String
-  content         String?           @db.Text()
-  description     String?
-  url             String? // The URL where the raw data is stored like on a website or a cloud storage
-  type            DatasourceType
-  userId          String
-  user            User              @relation(fields: [userId], references: [id])
-  createdAt       DateTime          @default(now())
-  updatedAt       DateTime          @updatedAt
-  metadata        String?           @db.Text
-  status          DatasourceStatus  @default(IN_PROGRESS)
-  datasources     AgentDatasource[]
-  vectorDb        VectorDb?         @relation(fields: [vectorDbId], references: [id])
-  vectorDbId      String?
-  datasourcePages DatasourcePage[]
-}
-
-model AgentDatasource {
-  agentId      String
-  datasourceId String
-  agent        Agent      @relation(fields: [agentId], references: [id], onDelete: Cascade)
-  datasource   Datasource @relation(fields: [datasourceId], references: [id], onDelete: Cascade)
-  createdAt    DateTime   @default(now())
-  updatedAt    DateTime   @updatedAt
-
-  @@id([agentId, datasourceId])
-}
-
-model DatasourcePage {
-  id          String                       @id @default(cuid())
-  checksum    String?
-  path        String                       @unique
-  type        String
-  meta        Json
-  version     String
-  lastRefresh DateTime                     @default(now())
-  content     String                       @db.Text
-  tokenCount  Int?
-  embedding   Unsupported("vector(1536)")?
-
-  datasource   Datasource? @relation(fields: [datasourceId], references: [id])
-  datasourceId String?
-}
-
-model Tool {
-  id           String      @id @default(uuid())
-  name         String
-  description  String
-  type         ToolType
-  returnDirect Boolean     @default(false)
-  metadata     String?     @db.Text
-  createdAt    DateTime    @default(now())
-  updatedAt    DateTime    @updatedAt
-  userId       String
-  user         User        @relation(fields: [userId], references: [id])
-  tools        AgentTool[]
-  toolConfig   Json?
-}
-
-model AgentTool {
-  agentId   String
-  toolId    String
-  agent     Agent    @relation(fields: [agentId], references: [id], onDelete: Cascade)
-  tool      Tool     @relation(fields: [toolId], references: [id], onDelete: Cascade)
-  createdAt DateTime @default(now())
-  updatedAt DateTime @updatedAt
-
-  @@id([agentId, toolId])
-}
-
-model LLM {
-  id        String      @id @default(uuid())
-  provider  LLMProvider @default(OPENAI)
-  apiKey    String
-  options   Json?
-  agents    AgentLLM[]
-  createdAt DateTime    @default(now())
-  updatedAt DateTime    @updatedAt
-  userId    String
-  user      User        @relation(fields: [userId], references: [id])
-}
-
-model AgentLLM {
-  agentId   String
-  llmId     String
-  agent     Agent    @relation(fields: [agentId], references: [id], onDelete: Cascade)
-  llm       LLM      @relation(fields: [llmId], references: [id])
-  createdAt DateTime @default(now())
-  updatedAt DateTime @updatedAt
-
-  @@id([agentId, llmId])
-}
-
-model Workflow {
-  id              String           @id @default(uuid())
-  name            String
-  description     String?
-  createdAt       DateTime         @default(now())
-  updatedAt       DateTime         @updatedAt
-  steps           WorkflowStep[]
-  userId          String
-  user            User             @relation(fields: [userId], references: [id])
-  workflowConfigs WorkflowConfig[]
-}
-
-model WorkflowConfig {
-  id         String   @id @default(uuid())
-  config     Json
-  createdAt  DateTime @default(now())
-  updatedAt  DateTime @updatedAt
-  workflowId String
-  workflow   Workflow @relation(fields: [workflowId], references: [id], onDelete: Cascade)
-  User       User?    @relation(fields: [userId], references: [id])
-  userId     String?
-}
-
-model WorkflowStep {
-  id         String   @id @default(uuid())
-  order      Int
-  workflowId String
-  workflow   Workflow @relation(fields: [workflowId], references: [id], onDelete: Cascade)
-  createdAt  DateTime @default(now())
-  updatedAt  DateTime @updatedAt
-  input      String?  @db.Text
-  output     String?  @db.Text
-  agentId    String
-  agent      Agent    @relation(fields: [agentId], references: [id], onDelete: Cascade)
-}
-
-model VectorDb {
-  id          String           @id @default(uuid())
-  provider    VectorDbProvider @default(PINECONE)
-  options     Json
-  datasources Datasource[]
-  createdAt   DateTime         @default(now())
-  updatedAt   DateTime         @updatedAt
-  userId      String
-  user        User             @relation(fields: [userId], references: [id])
-}
-
-model GithubUser {
-  id                    Int                    @id
-  avatar_url            String
-  bio                   String?
-  blog                  String?
-  created_at            String
-  company               String?
-  email                 String?
-  events_url            String
-  followers             Int
-  followers_url         String
-  following             Int
-  following_url         String
-  gists_url             String
-  gravatar_id           String?
-  hireable              Boolean?
-  html_url              String
-  location              String?
-  login                 String
-  name                  String?
-  node_id               String
-  organizations_url     String
-  public_gists          Int
-  public_repos          Int
-  received_events_url   String
-  repos_url             String
-  site_admin            Boolean
-  starred_url           String
-  subscriptions_url     String
-  twitter_username      String?
-  type                  String
-  url                   String
-  updated_at            String
-  generalDeveloperScore Float?
-  githubIssuesCreated   GithubIssue[]
-  githubRepos           GithubRepo[]
-  repoDeveloperScores   RepoContributorScore[]
-}
-
-model GithubIssue {
-  url            String
-  repository_url String
-  labels_url     String
-  comments_url   String
-  events_url     String
-  html_url       String
-  id             Int        @id
-  node_id        String
-  number         Int
-  title          String
-  creator        GithubUser @relation(fields: [githubUserId], references: [id])
-  githubUserId   Int
-}
-
-model GithubRepo {
-  id           Int        @id
-  node_id      String
-  name         String
-  full_name    String
-  private      Boolean
-  owner        GithubUser @relation(fields: [githubUserId], references: [id])
-  githubUserId Int
-}
-
-model RepoContributorScore {
-  id                      Int        @id @default(autoincrement())
-  githubUserId            Int
-  repoOwner               String
-  repoName                String
-  score                   Float
-  commitsCount            Int
-  totalPullRequestsCount  Int
-  mergedPullRequestsCount Int
-  issuesCreatedCount      Int
-  issueCommentsCount      Int
-  commentReactionsScore   Float
-  githubUser              GithubUser @relation(fields: [githubUserId], references: [id])
-
-  @@unique([githubUserId, repoOwner, repoName])
-}
-
-model Library {
-  id          String   @id @default(cuid())
-  name        String
-  version     String
-  type        String
-  description String?
-  keywords    String[]
-  author      String
-  repository  String
-  githubUrl   String?
-  tags        String[]
-  createdAt   DateTime @default(now())
-  updatedAt   DateTime @updatedAt
-}
-
-model Organization {
-  id            String   @id @default(cuid())
-  name          String
-  alternateName String?
-  description   String?
-  url           String?
-  logo          String?
-  member        Person[]
-  createdAt     DateTime @default(now())
-  updatedAt     DateTime @updatedAt
-  email         String?
-  telephone     String?
-}
-
-model Person {
-  id             String       @id @default(cuid())
-  name           String
-  email          String?
-  telephone      String?
-  jobTitle       String?
-  organization   Organization @relation(fields: [organizationId], references: [id])
-  organizationId String
-  createdAt      DateTime     @default(now())
-  updatedAt      DateTime     @updatedAt
-}
-
-model Chat {
-  id        String        @id @default(uuid())
-  title     String
-  userId    String
-  createdAt DateTime      @default(now())
-  path      String
-  messages  ChatMessage[]
-  user      User          @relation(fields: [userId], references: [id])
-}
-
 enum MessageRole {
   system
   user
@@ -994,20 +1026,4 @@ enum MessageRole {
   function
   data
   tool
-}
-
-model ChatMessage {
-  id            String      @id @default(uuid())
-  chat          Chat        @relation(fields: [chatId], references: [id])
-  chatId        String
-  tool_call_id  String?
-  createdAt     DateTime    @default(now())
-  content       String
-  ui            String?
-  role          MessageRole
-  name          String?
-  function_call String?
-  data          Json?
-  tool_calls    String?
-  annotations   Json?
 }
