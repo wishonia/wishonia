@@ -27,7 +27,7 @@ import { UserMessage } from './assistant/Message'
 import { useAIState, useActions, useUIState } from 'ai/rsc'
 import { useEnterSubmit } from '@/lib/hooks/use-enter-submit'
 import { usePathname } from 'next/navigation'
-import Link from 'next/link'
+import { Agent } from '@prisma/client'
 
 const ChatFilters = [
   {
@@ -70,9 +70,11 @@ const ChatFilters = [
 export function PromptForm({
   input,
   setInput,
+  agent
 }: {
   input: string
-  setInput: (value: string) => void
+  setInput: (value: string) => void,
+  agent?:Agent|null
 }) {
   const [_, setMessages] = useUIState<typeof AI>()
   const [aiState, setAIState] = useAIState<typeof AI>()
@@ -159,7 +161,7 @@ export function PromptForm({
 
         // Force attributes
         // Submit and get response message
-        const responseMessage = await submitUserMessage(value)
+        const responseMessage = await submitUserMessage(value,agent)
         setMessages((currentMessages: UIState) => [...currentMessages, responseMessage])
       }}
       className='w-full max-w-2xl mx-auto flex items-center'
