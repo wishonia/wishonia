@@ -1,5 +1,5 @@
-import { BsLightbulb, BsPeopleFill } from "react-icons/bs"
-import { FaHandshake, FaRegStar } from "react-icons/fa"
+import { BsLightbulb } from "react-icons/bs"
+import { FaRegStar } from "react-icons/fa"
 
 import { Card, CardDescription, CardTitle } from "@/components/ui/card"
 import HeadingText from "@/components/heading-text"
