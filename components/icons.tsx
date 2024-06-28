@@ -23,7 +23,7 @@ import {
   FaBookMedical, FaChartPie,
   FaDisease, FaEdit, FaHome, FaLightbulb,
   FaPeace, FaQuestionCircle,
-  FaRegStar, FaSadCry,
+  FaRegStar, FaRobot, FaSadCry,
   FaSkull,
   FaSort,
   FaUserAlt,
@@ -61,6 +61,7 @@ const icons = {
   frown: FaSadCry,
   pieChart: FaChartPie,
   docs: FaBook,
+  robot: FaRobot,
 
   clipboard: AiOutlineCopy,
 
