@@ -111,3 +111,11 @@ export interface Directory {
     html: string
   }
 }
+
+export interface Agent {
+  name:string
+  type?:string
+  avatar?:string
+  prompt?:string
+
+}

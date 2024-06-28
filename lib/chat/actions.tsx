@@ -124,7 +124,7 @@ export const getUIStateFromAIState = async (aiState: Chat) => {
             ) : m.role === 'user' ? (
                 <UserMessage>{m.content}</UserMessage>
             ) : (
-                <BotMessage content={m.content} />
+                <BotMessage agentName={m.name} content={m.content} />
             ),
       }))
 }
