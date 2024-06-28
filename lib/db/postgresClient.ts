@@ -1,6 +1,6 @@
 import { Pool } from 'pg';
 let pool: Pool | null = null;
-function getPostgresClient(): Pool {
+export function getPostgresClient(): Pool {
     if (pool) {
         return pool;
     }
@@ -18,7 +18,7 @@ function getPostgresClient(): Pool {
     return pool;
 }
 
-function getSchemaName(): string {
+export function getSchemaName(): string {
     const databaseUrl = process.env.DATABASE_URL;
 
     if (!databaseUrl) {
@@ -46,4 +46,3 @@ export function getPostgresConfig() {
         connectionString: databaseUrl,
     }
 }
-export { getPostgresClient, getSchemaName };

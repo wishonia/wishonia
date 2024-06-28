@@ -210,7 +210,7 @@ export async function generateGlobalSolutionImages() {
             }
         }
     }
-    await dumpTableToJson("GlobalSolution");
+    await dumpTableToJson("GlobalSolution", true);
 }
 
 async function saveGlobalSolutionImage(globalSolution: GlobalSolution, imageUrl: string) {
