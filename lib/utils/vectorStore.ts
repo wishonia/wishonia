@@ -41,7 +41,7 @@ export class WishoniaVectorStore extends VectorStore {
     // https://js.langchain.com/v0.2/docs/how_to/indexing
     const recordManagerConfig = {
       postgresConnectionOptions: getPostgresConfig(),
-      tableName: "DocumentsUpsertionRecords",
+      tableName: "document_upsertion_records",
     };
     const recordManager = new PostgresRecordManager(
         //Use a namespace that takes into account both the vector store and
@@ -128,6 +128,13 @@ export class WishoniaVectorStore extends VectorStore {
 
   _vectorstoreType(): string {
     return "wishonia_postgres";
+  }
+
+  static async fromExistingIndex(
+      embeddings: Embeddings,
+      dbConfig: WishoniaLibArgs
+  ) {
+    return new this(embeddings, dbConfig);
   }
 }
 

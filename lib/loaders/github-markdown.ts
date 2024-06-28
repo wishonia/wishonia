@@ -7,17 +7,18 @@ import {getMetaFromMarkdownFile} from "@/lib/markdownGenerator";
 export async function generateMarkdownEmbeddings(docsRootPath: string, dataSource: Datasource, shouldRefresh?: boolean) {
     const markdownFiles = await readAllMarkdownFiles(docsRootPath);
     console.log(`Discovered ${markdownFiles.length} markdownFiles`);
+    const results = [];
     for (const markdownFile of markdownFiles) {
-
         const meta = getMetaFromMarkdownFile(markdownFile);
-
         meta.datasourceId = dataSource.id;
-        await WishoniaVectorStore.fromTexts([markdownFile.content], meta,
+        const result = await
+            WishoniaVectorStore.fromTexts([markdownFile.content], meta,
             new OpenAIEmbeddings(),
             {
                 datasourceId: dataSource.id,
             });
+        results.push(result);
     }
-
     console.log('Embedding generation complete');
+    return results;
 }

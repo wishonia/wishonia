@@ -20,21 +20,24 @@ export const postVoteData = (): Promise<any> => {
             globalSolutionPairAllocation: undefined,
             globalProblemSolutionPairAllocation: undefined,
         }
+        let post = false;
         if (wishingWellPairAllocation) {
             data.wishingWellPairAllocation = JSON.parse(wishingWellPairAllocation);
+            post = true;
         }
         if (globalProblemPairAllocation) {
             data.globalProblemPairAllocation = JSON.parse(globalProblemPairAllocation);
+            post = true;
         }
         if(globalSolutionPairAllocation){
             data.globalSolutionPairAllocation = JSON.parse(globalSolutionPairAllocation);
+            post = true;
         }
         if(globalProblemSolutionPairAllocation){
             data.globalProblemSolutionPairAllocation = JSON.parse(globalProblemSolutionPairAllocation);
+            post = true;
         }
-        // If the data object is empty, resolve with a message
-        const isEmpty = Object.keys(data).length === 0 && data.constructor === Object;
-        if (isEmpty) {
+        if (post) {
             resolve('No data to post to vote endpoint');
             return;
         }
