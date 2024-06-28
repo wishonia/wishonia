@@ -20,7 +20,7 @@ type FormData = z.infer<typeof agentSchema>
 export default function ConfigureAgent() {
     const router=useRouter();
     const { isSidebarOpen } = useSidebar()
-    const [avatar,setAvatar]=useState(null);
+    const [avatar,setAvatar]=useState<string | null>(null);
     const [loading,setLoading]=useState(false);
     const {
       handleSubmit,
@@ -76,7 +76,10 @@ export default function ConfigureAgent() {
         if (file) {
             const reader = new FileReader();
             reader.onload = function(e) {
-                setAvatar(e.target?.result)
+                const result = e.target?.result;
+                if (typeof result === 'string') {
+                    setAvatar(result);
+                }
             };
             reader.readAsDataURL(file);
             
