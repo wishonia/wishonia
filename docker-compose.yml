@@ -29,7 +29,7 @@ services:
     volumes:
       - ./dumps:/dumps
       - ./scripts:/scripts
-    command: ["bash", "-c", "pg_dump -a -Fc -v --no-owner -d $$DATABASE_URL -f /dumps/dump_file_name"]
+    command: ["bash", "-c", "pg_dump -T '_prisma_migrations' -a -Fc -v --no-owner -d $$DATABASE_URL -f /dumps/dump_file_name"]
 
   pg_restore_data:
     image: postgres:latest
