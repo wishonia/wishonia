@@ -13,14 +13,16 @@ import { useSidebar } from '@/lib/hooks/use-sidebar'
 import { usePathname, useRouter } from 'next/navigation'
 import { useLocalStorage } from '@/lib/hooks/use-local-storage'
 import {useSession} from "next-auth/react";
+import { Agent } from '@prisma/client'
 
 export interface ChatProps extends React.ComponentProps<'div'> {
   initialMessages?: Message[]
   id: string
   missingKeys: string[]
+  agentData?:Agent | null
 }
 
-function Chat({ id, missingKeys }: ChatProps) {
+function Chat({ id, missingKeys ,agentData}: ChatProps) {
   const ref = useRef<HTMLDivElement>(null)
   const session = useSession()
 
@@ -79,14 +81,14 @@ function Chat({ id, missingKeys }: ChatProps) {
           <ChatMessage id={id} messages={messages}/>
           <div ref={messagesEndRef}/>
         </div>
-        <ChatPanel/>
+        <ChatPanel agentData={agentData}/>
       </ScrollArea>
       <div
-        className={`${messages.length !== 0 || pathname === '/chat' || pathname === '/' ? 'block' : 
+        className={`${messages.length !== 0 || pathname === '/chat' || pathname === '/' || pathname.includes('chat')? 'block' : 
         'hidden'} ${isSidebarOpen && session ? 'lg:translate-x-[100px]' : 
         ''} w-full mx-auto transition-all duration-300 fixed bottom-0 bg-gradient-to-t from-background to-transparent via-background`}
       >
-        <PromptForm input={input} setInput={setInput} />
+        <PromptForm input={input} setInput={setInput} agent={agentData}/>
       </div>
     </div>
   )

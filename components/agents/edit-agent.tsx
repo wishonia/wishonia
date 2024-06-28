@@ -2,7 +2,7 @@
 
 import { Button } from "@/components/ui/button"
 import { Label } from "@/components/ui/label"
-import { JSX, SVGProps, useEffect, useState } from "react"
+import { JSX, SVGProps, useState } from "react"
 import * as z from "zod"
 import { Input } from "@/components/ui/input"
 import { Textarea } from "@/components/ui/textarea"
@@ -13,24 +13,41 @@ import { zodResolver } from "@hookform/resolvers/zod"
 import { toast } from "@/components/ui/use-toast"
 import { useRouter } from "next/navigation"
 import {Trash,PlusCircle} from '@phosphor-icons/react'
+import { Agent } from "@prisma/client"
+import { Icons } from "../icons"
 import axios from "axios"
 
+interface AgentEditProps extends React.HTMLAttributes<HTMLFormElement> {
+    agentData: Pick<Agent, "id" | "name" | "description" | "prompt" |"initialMessage"|"conversationStarters"|"avatar">
+  }
+  
 type FormData = z.infer<typeof agentSchema>
 
-export default function ConfigureAgent() {
+export default function EditAgent({
+    agentData,
+    className,
+    ...props
+}:AgentEditProps) {
     const router=useRouter();
     const { isSidebarOpen } = useSidebar()
-    const [avatar,setAvatar]=useState(null);
     const [loading,setLoading]=useState(false);
+    const [avatar,setAvatar]=useState(agentData.avatar||null);
     const {
       handleSubmit,
       register,
       formState: { errors, isSubmitting },
       control,
       watch,
-      setValue
+      setValue,
     }=useForm<FormData>({
         resolver:zodResolver(agentSchema),
+        defaultValues:{
+            name:agentData.name,
+            description:agentData.description,
+            prompt:agentData.prompt,
+            initialMessage:agentData.initialMessage,
+            conversationStarters:agentData.conversationStarters||['']
+        }
     })
     const { fields, append, remove } = useFieldArray({
         control,
@@ -39,8 +56,9 @@ export default function ConfigureAgent() {
     const navigateBack = () => window.history.back();
 
     async function onSubmit(data: FormData) {
-        const response = await fetch(`/api/agents`, {
-          method: "POST",
+        setLoading(true)
+        const response = await fetch(`/api/agents/${agentData.id}`, {
+          method: "PATCH",
           headers: {
             "Content-Type": "application/json",
           },
@@ -50,27 +68,29 @@ export default function ConfigureAgent() {
             prompt:data.prompt,
             initialMessage:data.initialMessage,
             avatar:data.avatar,
-            conversationStarters:data.conversationStarters,
+            metadata:{
+                conversationStarters:data.conversationStarters 
+            }
           }),
         })
     
         if (!response?.ok) {
+          setLoading(false)
           return toast({
             title: "Something went wrong.",
-            description: "Agent was not created . Please try again.",
+            description: "Agent was not updated . Please try again.",
             variant: "destructive",
           })
         }
         toast({
-          description: "Your Agent has been created.",
+          description: "Your Agent has been updated.",
         })
-    
+        setLoading(false)
         router.back()
         router.refresh()
-      }
-    
+    }
     const name=watch('name');
-
+    
     const handleUpload=async(event:any)=>{
         const file = event.target?.files?.[0];
         if (file) {
@@ -91,21 +111,13 @@ export default function ConfigureAgent() {
             setLoading(false)
         }
     }
-    useEffect(()=>{
-        if(!fields.length){
-            append('');
-        }
-    },[fields])
-
+    
     return (
         <div className={`flex mx-auto h-screen  ${isSidebarOpen?'lg:ml-[270px] lg:w-[calc(100%-270px)]':'w-full lg:w-[96%]'}`}>
             <div className="flex overflow-y-auto flex-col w-full md:w-1/2 p-8 space-y-6">
                 <div className="flex items-center space-x-4">
                     <ArrowLeftIcon onClick={navigateBack} className="h-6 w-6 cursor-pointer" />
                     <h1 className="text-xl font-semibold ">{name||"New Agent"}</h1>
-                    <span className="ml-auto px-3 py-1 text-sm font-medium text-yellow-500 bg-yellow-600 rounded-full">
-            Draft
-          </span>
                 </div>
                 <form 
                   onSubmit={handleSubmit(onSubmit)}
@@ -113,7 +125,7 @@ export default function ConfigureAgent() {
                     <div className="space-y-4">
                         <div className="space-y-2">
                             <div className="border border-gray-400 h-20 w-20 rounded-full mx-auto overflow-hidden p-1 relative">
-                               <Input type="file" onChange={handleUpload} className="w-full h-full absolute z-10 opacity-0" accept="image/png, image/gif, image/jpeg"/>
+                               <Input type="file" onChange={handleUpload} className="w-full h-full opacity-0 absolute z-10" accept="image/png, image/gif, image/jpeg"/>
                                {avatar?<img className="w-full h-full" src={avatar}/>:null}
                             </div>
                         </div>
@@ -161,7 +173,7 @@ export default function ConfigureAgent() {
                         </div>
                         <div className="space-y-2">
                             <Label htmlFor="conversation-starters" className="text-sm font-medium flex items-center">
-                                Conversation Starters <PlusCircle type='button' onClick={()=>append('')} className="ml-2 p-1 cursor-pointer hover:shadow-md rounded-full  w-7 h-7"/>
+                                Conversation Starters <PlusCircle onClick={()=>append('')} className="ml-2 p-1 cursor-pointer hover:shadow-md rounded-full  w-7 h-7"/>
                             </Label>
                             {fields.map((item: any, index: number) => {
                                 return (
@@ -199,7 +211,12 @@ export default function ConfigureAgent() {
                             </div>
                         </div> */}
                         <Button variant="outline" disabled={loading} className="dark:bg-white dark:text-black bg-black text-white">
-                            Create new action
+                          {
+                            loading ?
+                            <Icons.spinner className="animate-spin text-sm"/>
+                            :
+                            "Create new action"
+                          }
                         </Button>
                     </div>
                     </div>
@@ -209,7 +226,7 @@ export default function ConfigureAgent() {
             <div className="w-1/2 bg-secondary p-8 hidden md:block">
                 <div className="flex flex-col h-full justify-between">
                     <div className="flex items-center justify-center h-full">
-                        <CuboidIcon className="text-white h-12 w-12" />
+                        <CuboidIcon className="h-12 w-12 text-gray-400" />
                     </div>
                     <div className="text-center">
                         <p className="text-sm text-gray-400">Start by defining your Agent.</p>
