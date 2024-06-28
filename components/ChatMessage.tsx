@@ -17,7 +17,9 @@ export function ChatMessage({ messages, id }: ChatList) {
   useEffect(() => {
     if (isSignedIn) {
       if (!pathname.includes(id) && messages.length === 1) {
-        window.history.replaceState({}, '', `/chat/${id}`)
+        if(!pathname.includes('agents')){
+          window.history.replaceState({}, '', `/chat/${id}`)
+        }
       }
     }
   }, [pathname, isSignedIn, messages])
