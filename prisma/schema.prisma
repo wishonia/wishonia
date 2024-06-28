@@ -596,6 +596,7 @@ model Agent {
   llms                 AgentLLM[]
   tools                AgentTool[]
   workflowSteps        WorkflowStep[]
+  Chat                 Chat[]
 
   @@unique([userId, name])
 }
@@ -851,10 +852,12 @@ model Chat {
   id        String        @id @default(uuid())
   title     String
   userId    String
+  agentId   String?
   createdAt DateTime      @default(now())
   path      String
   user      User          @relation(fields: [userId], references: [id])
   messages  ChatMessage[]
+  agent     Agent?        @relation(fields: [agentId], references: [id])
 }
 
 model ChatMessage {
