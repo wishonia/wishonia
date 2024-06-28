@@ -43,10 +43,10 @@ export default function EditAgent({
         resolver:zodResolver(agentSchema),
         defaultValues:{
             name:agentData.name,
-            description:agentData.description,
-            prompt:agentData.prompt,
-            initialMessage:agentData.initialMessage,
-            conversationStarters:agentData.conversationStarters||['']
+            description:agentData.description ?? '',
+            prompt:agentData.prompt ?? '',
+            initialMessage:agentData.initialMessage ?? '',
+            conversationStarters:agentData.conversationStarters || ['']
         }
     })
     const { fields, append, remove } = useFieldArray({
@@ -68,12 +68,10 @@ export default function EditAgent({
             prompt:data.prompt,
             initialMessage:data.initialMessage,
             avatar:data.avatar,
-            metadata:{
-                conversationStarters:data.conversationStarters 
-            }
+            conversationStarters:data.conversationStarters
           }),
         })
-    
+
         if (!response?.ok) {
           setLoading(false)
           return toast({
@@ -90,13 +88,16 @@ export default function EditAgent({
         router.refresh()
     }
     const name=watch('name');
-    
+
     const handleUpload=async(event:any)=>{
         const file = event.target?.files?.[0];
         if (file) {
             const reader = new FileReader();
             reader.onload = function(e) {
-                setAvatar(e.target?.result)
+                const result = e.target?.result;
+                if (typeof result === 'string') {
+                    setAvatar(result);
+                }
             };
             reader.readAsDataURL(file);
             
