@@ -34,13 +34,14 @@ import ReadmeSkeleton from '@/components/assistant/ReadmeSkeleton'
 import {askSupabase} from "@/lib/docs/docsAgent";
 import {PollRandomGlobalProblems} from "@/components/poll-random-global-problems";
 import {getCurrentUser} from "@/lib/session";
-
+import { prisma } from "@/lib/db";
+import {Agent} from "@/lib/types";
 const openai = new OpenAI({
   apiKey: process.env.OPENAI_API_KEY || '',
 })
 
 export async function submitUserMessage(
-    content: string, attribute: string)
+    content: string,agent:Agent, attribute: string, )
 {
   'use server'
   //debugger
@@ -58,14 +59,20 @@ export async function submitUserMessage(
 
   let textStream: undefined | ReturnType<typeof createStreamableValue<string>>
   let textNode: undefined | React.ReactNode
+  let agentPrompt=githubSystemPrompt;
+  if(agent && agent.prompt){
+      agentPrompt=agent.prompt;
+  }
+
+  
   const ui = render({
     model: 'gpt-3.5-turbo',
     provider: openai,
-    initial: <SpinnerMessage />,
+    initial: <SpinnerMessage avatar={agent?.avatar}/>,
     messages: [
       {
         role: 'system',
-        content: githubSystemPrompt,
+        content: agentPrompt,
       },
       ...aiState.get().messages.map((message: any) => ({
         role: message.role,
@@ -76,7 +83,7 @@ export async function submitUserMessage(
     text: ({ content, done, delta }) => {
       if (!textStream) {
         textStream = createStreamableValue('')
-        textNode = <BotMessage content={textStream.value} />
+        textNode = <BotMessage agentName={agent?.name} avatar={agent?.avatar} content={textStream.value} />
       }
 
       if (done) {

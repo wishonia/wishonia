@@ -14,11 +14,13 @@ import { MemoizedReactMarkdown } from '../Markdown'
 import { useStreamableText } from '@/lib/hooks/use-streamable-text'
 import { useTheme } from 'next-themes'
 
-export function SpinnerMessage() {
+export function SpinnerMessage({avatar}:{
+    avatar?:string,
+}) {
     return (
         <div className='group relative flex items-start md:-ml-12'>
-            <div className='flex size-[24px] shrink-0 select-none items-center justify-center rounded-md border bg-primary text-primary-foreground shadow-sm'>
-                <Sparkle />
+            <div className={`flex size-[25px] shrink-0 select-none items-center justify-center rounded-md ${avatar?"":'bg-primary'} text-primary-foreground shadow-sm overflow-hidden`}>
+              {avatar?<img src={avatar}/>:<Sparkle />} 
             </div>
             <div className='ml-4 h-[24px] flex flex-row items-center flex-1 space-y-2 overflow-hidden px-1'>
                 {Spinner}
@@ -29,20 +31,24 @@ export function SpinnerMessage() {
 
 export function BotMessage({
                                content,
+                               avatar,
                                className,
+                               agentName,
                            }: {
     content: string | StreamableValue<string>
-    className?: string
+    className?: string,
+    agentName?:string,
+    avatar?:string,
 }) {
     const { rawContent, isLoading } = useStreamableText(content)
 
     return (
         <div className={cn('group relative flex items-start md:-ml-12', className)}>
-            <div className='flex size-[25px] shrink-0 select-none items-center justify-center rounded-md bg-primary text-primary-foreground shadow-sm'>
-                <Sparkle />
+            <div className={`flex size-[25px] shrink-0 select-none items-center justify-center rounded-md ${avatar?"":'bg-primary'} text-primary-foreground shadow-sm overflow-hidden`}>
+               {avatar?<img src={avatar} alt={agentName}/>:<Sparkle />} 
             </div>
             <div className='ml-4 flex-1 space-y-2 overflow-hidden px-1'>
-                <span className='font-semibold'>Talk to Wishonia</span>
+                <span className='font-semibold'>{agentName||"Talk to Wishonia"}</span>
                 <MemoizedReactMarkdown
                     className='prose break-words dark:prose-invert prose-p:leading-relaxed prose-pre:p-0'
                     remarkPlugins={[remarkGfm, remarkMath]}

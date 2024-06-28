@@ -1,50 +1,119 @@
-import { Badge } from "@/components/ui/badge"
-import { JSX, SVGProps } from "react"
+'use client';
+
+import { JSX, SVGProps, useEffect, useState } from "react";
+import Link from 'next/link';
+import { DotsThree, Trash } from '@phosphor-icons/react';
+import { Agent } from '@prisma/client';
+import { useSidebar } from "@/lib/hooks/use-sidebar";
+import { Badge } from "@/components/ui/badge";
+import { DropdownMenu, DropdownMenuContent, DropdownMenuLabel, DropdownMenuRadioGroup, DropdownMenuRadioItem, DropdownMenuSeparator, DropdownMenuTrigger } from '@/components/ui/dropdown-menu';
+import { toast } from "@/components/ui/use-toast";
+import { SpinningLoader } from "@/components/spinningLoader";
+import { Button } from '../ui/button';
+
 
 export default function AgentList() {
+    const [agents,setAgents]=useState<Agent[]>([]);
+    const [loading, setLoading] = useState(false);
+    const {isSidebarOpen}=useSidebar()
+    
+    const fetchAgents=async()=>{
+        setLoading(true);
+        const response = await fetch('/api/agents');
+        const data = await response.json();
+        setAgents(data);
+        setLoading(false);
+    }
+
+    const deleteAgent = async (agentId: string) => {
+      try {
+        const response = await fetch(`/api/agents/${agentId}`, {
+          method: "DELETE",
+        })
+        if (!response?.ok) {
+          return toast({
+            title: "Something went wrong.",
+            description: "Agent was not deleted . Please try again.",
+            variant: "destructive",
+          })
+        }
+        toast({
+          description: "Your Agent has been deleted.",
+        })
+        fetchAgents()
+      } catch {}
+    }
+    useEffect(() => {
+      if (!loading) {
+        fetchAgents()
+      }
+    }, [])
+
     return (
-        <div className="bg-[#121212] text-white p-8">
+        <div className={`pt-8 p-2 md:p-8 mx-auto h-screen overflow-auto scroll-m-1 xl:max-w-[1000px]  ${isSidebarOpen?'lg:ml-[270px] lg:w-[calc(100%-270px)]':'w-full lg:w-[96%]'}`}>
             <h1 className="text-3xl font-semibold mb-6">My Agents</h1>
-            <div className="flex items-center space-x-4 mb-4">
-                <PlusIcon className="bg-[#333333] p-2 rounded-full h-8 w-8"/>
+            <Link  href='/agents/new'>
+            <div className="flex items-center space-x-4 p-4 rounded-sm hover:bg-secondary w-full">
+                <div>
+                <PlusIcon className="dark:bg-white dark:text-black bg-black text-white p-2 rounded-full h-8 w-8"/>
+                </div>
                 <div>
                     <div className="font-semibold">Create a Agent</div>
                     <div className="text-[#BBBBBB]">Customize a version of Agent for a specific purpose</div>
                 </div>
             </div>
-            <div className="border-t border-[#333333] pt-4">
-                <div className="flex items-start justify-between mb-4">
-                    <div className="flex items-center space-x-4">
-                        <HexagonIcon className="bg-[#333333] p-2 rounded-full h-8 w-8"/>
-                        <div>
-                            <div className="font-semibold">Decentralized FDA Architect</div>
-                            <div className="text-[#BBBBBB]">
-                                A planning agent designed to act as a project manager for realizing a decentralized FDA
-                                powered ...
+            </Link>
+            <div className="border-t border-[#333333] ">
+              {loading && <SpinningLoader/>}
+              {agents.map((agent)=>{
+                return(
+                    <div className="flex justify-between p-4  rounded-sm hover:bg-secondary">
+                        <Link href={`/agents/${agent.id}/chat`} className="flex flex-col md:flex-row justify-between md:items-center w-full">
+                            <div className="flex items-center p-0 w-full">
+                                <div className="h-full flex items-center mr-2">
+                                    <HexagonIcon className="dark:bg-white dark:text-black bg-black text-white p-2 rounded-full h-8 w-8" />
+                                </div>
+                                <div className='overflow-hidden w-full  md:mx-4 text-ellipsis'>
+                                    <div className="font-semibold  overflow-hidden text-ellipsis ">{agent.name}</div>
+                                    <div>
+                                        <p className="text-[#848080] line-clamp-1 overflow-hidden text-ellipsis text-sm">{agent.description}</p>
+                                    </div>
+                                </div>
                             </div>
+                            <div className="hidden md:flex md:ml-auto mt-2 md:mr-2  flex-wrap justify-start">
+                                <Badge variant="secondary" className="m-1 w-max line-clamp-1 text-xs">Only me</Badge>
+                            </div>
+                        </Link>
+                        <div className="flex items-center space-x-4 ml-1">
+                            <Link href={`/agents/edit/${agent.id}`}><PencilIcon className="h-5 w-5" /></Link>
+                            <DropdownMenu>
+                                <DropdownMenuTrigger >
+                                    <Button
+                                        variant='outline'
+                                        className='flex items-center gap-1 font-normal px-2'
+                                    >
+                                        <DotsThree className="h-5 w-5" />
+                                    </Button>
+                                </DropdownMenuTrigger>
+                                <DropdownMenuContent className='w-56'>
+                                    <DropdownMenuLabel>Action</DropdownMenuLabel>
+                                    <DropdownMenuSeparator />
+                                    <DropdownMenuRadioGroup
+                                    >
+                                        <DropdownMenuRadioItem
+                                            value='delete'
+                                            className='text-sm text-red-600 font-bold text-left px-2'
+                                            onSelect={() => deleteAgent(agent.id)}
+                                        >
+                                            <Trash className='mr-2' /> Delete
+                                        </DropdownMenuRadioItem>
+                                    </DropdownMenuRadioGroup>
+                                </DropdownMenuContent>
+                            </DropdownMenu>
                         </div>
                     </div>
-                    <div className="flex items-center space-x-4">
-                        <Badge variant="secondary">Only me</Badge>
-                        <PencilIcon className="h-5 w-5"/>
-                        <DotIcon className="h-5 w-5"/>
-                    </div>
-                </div>
-                <div className="flex items-start justify-between">
-                    <div className="flex items-center space-x-4">
-                        <HexagonIcon className="bg-[#333333] p-2 rounded-full h-8 w-8"/>
-                        <div>
-                            <div className="font-semibold">FDAi Docs Improver</div>
-                            <div className="text-[#BBBBBB]">This improves the mintlify docs for the FDAi API</div>
-                        </div>
-                    </div>
-                    <div className="flex items-center space-x-4">
-                        <Badge variant="secondary">3 Chats</Badge>
-                        <Badge variant="secondary">Anyone with a link</Badge>
-                        <PencilIcon className="h-5 w-5"/>
-                        <DotIcon className="h-5 w-5"/>
-                    </div>
-                </div>
+                  )
+                })}
             </div>
         </div>
     )
