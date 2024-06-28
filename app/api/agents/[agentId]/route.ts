@@ -46,7 +46,7 @@ export async function PATCH(
             updatedAt: new Date(),
         }
     })
-    return new Response(agent, { status: 200 })
+    return new Response(JSON.stringify(agent), { status: 200 })
     } catch (error) {
         if (error instanceof z.ZodError) {
             return new Response(JSON.stringify(error.issues), { status: 422 })
