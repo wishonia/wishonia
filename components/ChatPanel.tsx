@@ -23,9 +23,11 @@ function ChatPanel() {
       <div
         className={`${messages.length > 0 ? 'hidden' : 'block'} mx-auto w-full flex flex-col gap-4 z-10 justify-center items-center`}
       >
-        <h1 className='text-4xl flex items-center whitespace-nowrap md:text-[65px] font-extrabold tracking-wider leading-none'>
+        <h1 className='text-4xl flex items-center
+         md:text-[65px] font-extrabold tracking-wider leading-none'>
           <MagicWand />
-          <span className='bg-gradient-to-t dark:from-white/50 from-black/50 to-black dark:to-white bg-clip-text text-transparent'>
+          <span className='
+          bg-gradient-to-t dark:from-white/50 from-black/50 to-black dark:to-white bg-clip-text text-transparent'>
             Talk to Wishonia
           </span>
         </h1>
