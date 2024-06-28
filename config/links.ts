@@ -84,6 +84,13 @@ export const profileSettingsLink: NavItem = {
     tooltip: "Update your profile settings",
 };
 
+export const agentsLink: NavItem = {
+    title: "Agents",
+    href: "/agents",
+    icon: "robot",
+    tooltip: "Manage your digital slaves",
+}
+
 export const featuresLink: NavItem = {
     title: "Features",
     href: "/#features",
@@ -126,6 +133,7 @@ export const avatarNav: Navigation = {
     data: [
         profileSettingsLink,
         dashboardLink,
+        agentsLink,
         //yourWishesLink,
         //wishingWellsLink,
         //globalProblemsVoteLink,
