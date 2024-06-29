@@ -16,19 +16,19 @@ function SidebarMobile({ children }: SidebarMobileProps) {
   return (
     <Sheet>
       <SheetTrigger className={`ml-1 mt-1 top-0 left-0 absolute z-30`}>
-        <Button
-          size='icon'
-          className={`p-0 flex lg:hidden hover:bg-transparent bg-transparent shadow-none focus:bg-transparent focus:ring-0 focus-within:ring-0`}
+        <div
+          className={`p-3 flex lg:hidden hover:bg-transparent bg-transparent shadow-none focus:bg-transparent focus:ring-0 focus-within:ring-0`}
         >
           <SidebarSimple
             color={theme === 'dark' ? 'white' : 'black'}
             size={16}
           />
-        </Button>
+        </div>
       </SheetTrigger>
       <SheetContent
         side='left'
         className='inset-y-0 flex h-auto w-[270px] flex-col p-0'
+        aria-describedby={`sidebar`}
       >
         <Sidebar className='flex'>{children}</Sidebar>
       </SheetContent>

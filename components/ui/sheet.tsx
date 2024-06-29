@@ -58,13 +58,21 @@ const SheetContent = React.forwardRef<
   React.ElementRef<typeof SheetPrimitive.Content>,
   SheetContentProps
 >(({ side = "right", className, children, ...props }, ref) => (
-  <SheetPortal>
+  <SheetPortal
+      aria-describedby={"dialog"}
+  >
     <SheetOverlay />
     <SheetPrimitive.Content
+        aria-describedby={"dialog"}
       ref={ref}
       className={cn(sheetVariants({ side }), className)}
       {...props}
     >
+      <VisuallyHidden asChild>
+        <SheetPrimitive.Description className="text-sm text-muted-foreground">
+          This is a list of previous chat messages
+        </SheetPrimitive.Description>
+        </VisuallyHidden>
         <VisuallyHidden asChild>
           <SheetPrimitive.Title className="DialogTitle">Menu
           </SheetPrimitive.Title>

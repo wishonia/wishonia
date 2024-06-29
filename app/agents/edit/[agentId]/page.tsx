@@ -4,8 +4,8 @@ import { notFound, redirect } from "next/navigation"
 import { getAgent } from "@/lib/api/agents"
 import { authOptions } from "@/lib/auth"
 import { getCurrentUser } from "@/lib/session"
-import EditAgent from "@/components/agents/edit-agent"
 import { Shell } from "@/components/layout/shell"
+import AgentForm from "@/components/agents/agent-form";
 
 export const metadata: Metadata = {
   title: "Edit Agent",
@@ -29,7 +29,7 @@ export default async function EditAgentPage({ params }: AgentEditProps) {
   }
   return (
     <Shell className="size-full block md:grid">
-      <EditAgent agentData={agent}></EditAgent>
+      <AgentForm agentData={agent}></AgentForm>
     </Shell>
   )
 }
