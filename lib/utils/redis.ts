@@ -1,29 +1,29 @@
 // copied from https://github.com/glani/parse-redis-url-simple/blob/master/src/index.ts
-import {parse} from "url";
-import {RedisCache} from "@langchain/community/caches/ioredis";
-import {Redis} from "ioredis";
+import { parse } from "url"
+import { RedisCache } from "@langchain/community/caches/ioredis"
+import { Redis } from "ioredis"
 
-const redisDefaultPort = 6379;
-const sentinelDefaultPort = 26379;
+const redisDefaultPort = 6379
+const sentinelDefaultPort = 26379
 
 export interface IRedisUrl {
-  database?: string;
-  host: string;
-  password?: string;
-  port: number;
+  database?: string
+  host: string
+  password?: string
+  port: number
 }
 
-const predefinedSeparatorRegexp = /,|;|\s/;
+const predefinedSeparatorRegexp = /,|;|\s/
 
 function preparePassword(auth: string | null, encoding?: BufferEncoding) {
   if (!auth) {
-    return undefined;
+    return undefined
   }
 
   const vv = (encoding ? Buffer.from(auth, encoding).toString() : auth).split(
     ":"
-  );
-  return vv.length > 1 ? vv[1] : vv[0];
+  )
+  return vv.length > 1 ? vv[1] : vv[0]
 }
 
 function prepareResult(
@@ -32,9 +32,9 @@ function prepareResult(
   encoding?: BufferEncoding
 ): IRedisUrl {
   if (v.search("://") === -1) {
-    v = "redis://" + v;
+    v = "redis://" + v
   }
-  const urlWithStringQuery = parse(v);
+  const urlWithStringQuery = parse(v)
 
   return {
     database: sentinel
@@ -48,7 +48,7 @@ function prepareResult(
       urlWithStringQuery.port ||
         (sentinel ? sentinelDefaultPort : redisDefaultPort)
     ),
-  };
+  }
 }
 
 export function parseRedisUrl(
@@ -62,29 +62,29 @@ export function parseRedisUrl(
       database: sentinel ? undefined : "0",
       host: "localhost",
       port: sentinel ? sentinelDefaultPort : redisDefaultPort,
-    };
+    }
   }
 
-  const result = new Array<IRedisUrl>();
+  const result = new Array<IRedisUrl>()
   const urlValues = value
     .split(separatorRegexp)
     .map((value1) => value1.trim())
-    .filter((value1) => value1 && value1.length);
+    .filter((value1) => value1 && value1.length)
 
   for (const urlValue of urlValues) {
-    const parsedResult = prepareResult(urlValue, sentinel, encoding);
-    result.push(parsedResult);
+    const parsedResult = prepareResult(urlValue, sentinel, encoding)
+    result.push(parsedResult)
   }
 
-  return result.length > 0 ? result[0] : undefined;
+  return result.length > 0 ? result[0] : undefined
 }
 
 export function getRedisClient() {
-  return new Redis(process.env.REDIS_URL || "redis://localhost:6379");
+  return new Redis(process.env.REDIS_URL || "redis://localhost:6379")
 }
 
-export function getRedisModelCache(){
+export function getRedisModelCache() {
   // See https://github.com/redis/ioredis for connection options
-  const client = getRedisClient();
-  return new RedisCache(client);
+  const client = getRedisClient()
+  return new RedisCache(client)
 }

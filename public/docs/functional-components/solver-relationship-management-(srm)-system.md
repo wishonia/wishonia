@@ -3,6 +3,7 @@ name: Solver Relationship Management (SRM) System
 description: "Solver Relationship Management (SRM) System\r\n    - Solver profile creation and management\r\n    - Solver skills, interests, and preferences tracking\r\n    - Solver contribution and participation tracking\r\n    - Solver communication and collaboration tools\r\n    - Solver reputation and trust management\r\n\r"
 featuredImage: /docs/functional-components/solver-relationship-management-(srm)-system.jpg
 ---
+
 # Product Requirements Document: Solver Relationship Management (SRM) System for Wishocracy
 
 ## Table of Contents
@@ -10,11 +11,11 @@ featuredImage: /docs/functional-components/solver-relationship-management-(srm)-
 1. [Introduction](#introduction)
 2. [Objectives](#objectives)
 3. [Functional Requirements](#functional-requirements)
-    1. [Solver Profile Creation and Management](#solver-profile-creation-and-management)
-    2. [Solver Skills, Interests, and Preferences Tracking](#solver-skills-interests-and-preferences-tracking)
-    3. [Solver Contribution and Participation Tracking](#solver-contribution-and-participation-tracking)
-    4. [Solver Communication and Collaboration Tools](#solver-communication-and-collaboration-tools)
-    5. [Solver Reputation and Trust Management](#solver-reputation-and-trust-management)
+   1. [Solver Profile Creation and Management](#solver-profile-creation-and-management)
+   2. [Solver Skills, Interests, and Preferences Tracking](#solver-skills-interests-and-preferences-tracking)
+   3. [Solver Contribution and Participation Tracking](#solver-contribution-and-participation-tracking)
+   4. [Solver Communication and Collaboration Tools](#solver-communication-and-collaboration-tools)
+   5. [Solver Reputation and Trust Management](#solver-reputation-and-trust-management)
 4. [Non-Functional Requirements](#non-functional-requirements)
 5. [Existing Systems](#existing-systems)
 6. [Appendix](#appendix)

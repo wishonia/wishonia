@@ -3,6 +3,7 @@ name: Task Management System
 description: "Task Management System\r\n    - Task creation and decomposition\r\n    - Task assignment and allocation\r\n    - Task scheduling and timeline management\r\n    - Task progress tracking and reporting\r\n    - Task completion and verification\r\n\r"
 featuredImage: /docs/functional-components/task-management-system.jpg
 ---
+
 # Product Requirements Document: Task Management System for Wishocracy
 
 ### Introduction
@@ -14,11 +15,11 @@ This document outlines the specifications for the Task Management System, a core
 1. [Objectives](#objectives)
 2. [Scope](#scope)
 3. [Key Features](#key-features)
-    - Task Creation and Decomposition
-    - Task Assignment and Allocation
-    - Task Scheduling and Timeline Management
-    - Task Progress Tracking and Reporting
-    - Task Completion and Verification
+   - Task Creation and Decomposition
+   - Task Assignment and Allocation
+   - Task Scheduling and Timeline Management
+   - Task Progress Tracking and Reporting
+   - Task Completion and Verification
 4. [User Roles and Permissions](#user-roles-and-permissions)
 5. [Functional Requirements](#functional-requirements)
 6. [Non-functional Requirements](#non-functional-requirements)
@@ -34,6 +35,7 @@ The primary objective of the Task Management System is to facilitate the efficie
 ## Scope
 
 The scope of the Task Management System encompasses all functionalities related to task management within the Wishocracy ecosystem. This includes:
+
 - Managing lifecycle stages from creation to verification.
 - Providing reporting mechanisms to track progress and outcomes.
 - Integrating with other components of Wishocracy.
@@ -41,24 +43,29 @@ The scope of the Task Management System encompasses all functionalities related 
 ## Key Features
 
 ### Task Creation and Decomposition
+
 - **Task Creation**: Users should be able to create new tasks with descriptions, priorities, and deadlines.
 - **Task Decomposition**: Complex tasks should be decomposable into smaller, manageable sub-tasks.
 
 ### Task Assignment and Allocation
+
 - **Assignment Mechanism**: Tasks should be assignable to users or groups of users based on roles, expertise, and availability.
 - **Resource Allocation**: Allocate necessary resources (time, budget, tools) to each task.
 
 ### Task Scheduling and Timeline Management
+
 - **Scheduling**: Establish start and end dates for tasks and sub-tasks.
 - **Dependencies**: Define task dependencies and manage the schedule accordingly.
 - **Timeline**: Visual representation of tasks and their timelines (e.g., Gantt Chart).
 
 ### Task Progress Tracking and Reporting
+
 - **Progress Tracking**: Mark tasks as in-progress, pending, or completed.
 - **Reporting**: Generate reports on task status, time spent, resource utilization, and outcomes.
 - **Notifications**: Send alerts for upcoming deadlines and overdue tasks.
 
 ### Task Completion and Verification
+
 - **Completion Criteria**: Define clear criteria for task completion.
 - **Verification**: Provide mechanisms for verifying and approving completed tasks.
 
@@ -103,6 +110,7 @@ The scope of the Task Management System encompasses all functionalities related 
 ## Existing Systems
 
 Several existing systems offer functionalities similar to those required by the Task Management System. These include:
+
 - **Trello**: Task creation, assignment, and tracking with Kanban boards.
 - **Asana**: Comprehensive project management, including task decomposition, scheduling, and reporting.
 - **Jira**: Provides robust task management features tailored for software development but adaptable for general use.

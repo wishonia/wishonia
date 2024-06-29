@@ -8,6 +8,7 @@ description: >-
   create a better world. Learn about their benefits, creation, safety, data
   sources, and models.
 ---
+
 # Digital Twins
 
 A digital twin is the closest possible digital representation of your knowledge, values, and preferences. Ideally they will be able to help everyone create a better world by automating tasks, making decisions, and perfectly coordinating with 8 billion other digital twins.

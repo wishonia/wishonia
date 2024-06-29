@@ -10,11 +10,12 @@ description: |
 featuredImage: >-
   https://pcpfoetqkuq7jmso.public.blob.vercel-storage.com/docs/functional-components/notification-and-communication-system.jpg
 ---
+
 # Wishocracy: Notification and Communication System
 
 ## Overview
 
-The Notification and Communication System in Wishocracy aims to provide users with timely and effective communication related to their wishes, ensuring they are promptly informed about the status and actions required. This system includes various channels such as in-app messaging, email, SMS, and push notifications. 
+The Notification and Communication System in Wishocracy aims to provide users with timely and effective communication related to their wishes, ensuring they are promptly informed about the status and actions required. This system includes various channels such as in-app messaging, email, SMS, and push notifications.
 
 ## Functional Requirements
 
@@ -23,11 +24,13 @@ The Notification and Communication System in Wishocracy aims to provide users wi
 **Description:** Users should have the ability to manage their notification preferences to ensure they receive relevant and timely updates in their preferred manner.
 
 **Requirements:**
+
 - Users can opt-in/opt-out of receiving notifications.
 - Users can choose their preferred notification channels (e.g., email, SMS, push notifications).
 - Users can customize notification settings for different types of events (e.g., wish fulfillment status changes, new messages, reminders).
 
 **Acceptance Criteria:**
+
 - Users can update their notification preferences from their profile/settings page.
 - Changes to notification preferences are saved and applied immediately.
 - Users receive only the selected types of notifications through the chosen channels.
@@ -37,10 +40,12 @@ The Notification and Communication System in Wishocracy aims to provide users wi
 **Description:** Users should receive real-time alerts and updates about their wishes and related activities.
 
 **Requirements:**
+
 - The system should push real-time notifications for critical events (e.g., wish granted, wish status update).
 - Real-time updates should be reflected within the app without manual refresh.
 
 **Acceptance Criteria:**
+
 - Real-time notifications are delivered within seconds of the triggering event.
 - The app interface updates to reflect real-time changes without requiring a manual refresh.
 
@@ -49,11 +54,13 @@ The Notification and Communication System in Wishocracy aims to provide users wi
 **Description:** Provide users with an in-app messaging system to facilitate communication about their wishes.
 
 **Requirements:**
+
 - Users can send and receive messages within the app.
 - Messages are stored and can be retrieved for future reference.
 - Users are notified of new messages through their chosen channels.
 
 **Acceptance Criteria:**
+
 - Users can initiate and respond to messages in the app.
 - Message history is accessible and displayed in a clear format.
 - Notification of new messages adheres to user preferences.
@@ -63,11 +70,13 @@ The Notification and Communication System in Wishocracy aims to provide users wi
 **Description:** Integrate email and SMS as channels for delivering notifications to users who prefer these methods.
 
 **Requirements:**
+
 - The system should send emails and SMS messages for predefined events.
 - Message content should be customizable and include relevant details about the event.
 - Ensure compliance with relevant regulations for sending electronic communications.
 
 **Acceptance Criteria:**
+
 - Emails and SMS messages are sent promptly after the event occurs.
 - Users receive notifications as per their preferences.
 - Message content is accurate, relevant, and complies with legal regulations.
@@ -77,11 +86,13 @@ The Notification and Communication System in Wishocracy aims to provide users wi
 **Description:** Utilize push notifications to ensure users receive timely reminders and updates directly on their mobile devices.
 
 **Requirements:**
+
 - Implement push notifications for critical updates and reminders.
 - Users can manage the frequency and type of push notifications they receive.
 - Notification content should be concise and actionable.
 
 **Acceptance Criteria:**
+
 - Push notifications are delivered instantly upon event trigger.
 - Users have control over push notification settings.
 - Notifications are clear, concise, and provide necessary actions.
@@ -89,18 +100,22 @@ The Notification and Communication System in Wishocracy aims to provide users wi
 ## Existing Systems and Technologies for Reference
 
 ### Firebase Cloud Messaging (FCM)
+
 - **Features:** Real-time notifications, cross-platform support, in-app messaging.
 - **Use Case:** Can be used to implement push notifications and in-app messaging.
 
 ### Twilio
+
 - **Features:** SMS and email integration, robust API, regulatory compliance.
 - **Use Case:** Can be leveraged for integrating SMS and email notifications.
 
 ### OneSignal
+
 - **Features:** Push notifications, in-app messaging, comprehensive analytics.
 - **Use Case:** Ideal for managing push notifications and rich in-app messaging.
 
 ### SendGrid
+
 - **Features:** Email delivery, template management, regulatory compliance.
 - **Use Case:** Can be utilized for email notifications and communication.
 

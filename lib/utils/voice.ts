@@ -1,100 +1,100 @@
-import axios from "axios";
+import axios from "axios"
 
-export const BASE_URL = "https://api.elevenlabs.io/v1";
+export const BASE_URL = "https://api.elevenlabs.io/v1"
 
 type VerificationAttempt = {
-  text: string;
-  date_unix: number;
-  accepted: boolean;
-  similarity: number;
-  levenshtein_distance: number;
+  text: string
+  date_unix: number
+  accepted: boolean
+  similarity: number
+  levenshtein_distance: number
   recording: {
-    recording_id: string;
-    mime_type: string;
-    size_bytes: number;
-    upload_date_unix: number;
-    transcription: string;
-  };
-};
+    recording_id: string
+    mime_type: string
+    size_bytes: number
+    upload_date_unix: number
+    transcription: string
+  }
+}
 
 type ManualVerification = {
-  extra_text: string;
-  request_time_unix: number;
+  extra_text: string
+  request_time_unix: number
   files: {
-    file_id: string;
-    file_name: string;
-    mime_type: string;
-    size_bytes: number;
-    upload_date_unix: number;
-  }[];
-};
+    file_id: string
+    file_name: string
+    mime_type: string
+    size_bytes: number
+    upload_date_unix: number
+  }[]
+}
 
 type FineTuning = {
-  language: string;
-  is_allowed_to_fine_tune: boolean;
-  fine_tuning_requested: boolean;
-  finetuning_state: string;
-  verification_attempts: VerificationAttempt[];
-  verification_failures: string[];
-  verification_attempts_count: number;
-  slice_ids: string[];
-  manual_verification: ManualVerification;
-  manual_verification_requested: boolean;
-};
+  language: string
+  is_allowed_to_fine_tune: boolean
+  fine_tuning_requested: boolean
+  finetuning_state: string
+  verification_attempts: VerificationAttempt[]
+  verification_failures: string[]
+  verification_attempts_count: number
+  slice_ids: string[]
+  manual_verification: ManualVerification
+  manual_verification_requested: boolean
+}
 
 type Labels = {
-  [key: string]: string;
-};
+  [key: string]: string
+}
 
 type Settings = {
-  stability: number;
-  similarity_boost: number;
-  style: number;
-  use_speaker_boost: boolean;
-};
+  stability: number
+  similarity_boost: number
+  style: number
+  use_speaker_boost: boolean
+}
 
 type Sharing = {
-  status: string;
-  history_item_sample_id: string;
-  original_voice_id: string;
-  public_owner_id: string;
-  liked_by_count: number;
-  cloned_by_count: number;
-  whitelisted_emails: string[];
-  name: string;
-  labels: Labels;
-  description: string;
-  review_status: string;
-  review_message: string;
-  enabled_in_library: boolean;
-};
+  status: string
+  history_item_sample_id: string
+  original_voice_id: string
+  public_owner_id: string
+  liked_by_count: number
+  cloned_by_count: number
+  whitelisted_emails: string[]
+  name: string
+  labels: Labels
+  description: string
+  review_status: string
+  review_message: string
+  enabled_in_library: boolean
+}
 
 type VoiceSample = {
-  sample_id: string;
-  file_name: string;
-  mime_type: string;
-  size_bytes: number;
-  hash: string;
-};
+  sample_id: string
+  file_name: string
+  mime_type: string
+  size_bytes: number
+  hash: string
+}
 
 export type Voice = {
-  voice_id: string;
-  name: string;
-  samples: VoiceSample[];
-  category: string;
-  fine_tuning: FineTuning;
-  labels: Labels;
-  description: string;
-  preview_url: string;
-  available_for_tiers: string[];
-  settings: Settings;
-  sharing: Sharing;
-  high_quality_base_modelIds: string[];
-};
+  voice_id: string
+  name: string
+  samples: VoiceSample[]
+  category: string
+  fine_tuning: FineTuning
+  labels: Labels
+  description: string
+  preview_url: string
+  available_for_tiers: string[]
+  settings: Settings
+  sharing: Sharing
+  high_quality_base_modelIds: string[]
+}
 
 type VoiceData = {
-  voices: Voice[];
-};
+  voices: Voice[]
+}
 
 export const isElevenLabAPIKeyValid = async (apiKey: string) => {
   try {
@@ -102,50 +102,50 @@ export const isElevenLabAPIKeyValid = async (apiKey: string) => {
       headers: {
         "xi-api-key": apiKey,
       },
-    });
+    })
 
-    return response.status === 200;
+    return response.status === 200
   } catch (e) {
-    return false;
+    return false
   }
-};
+}
 
 export const isElevenLabAPIKeyPresent = () => {
-  const apiKey = process.env.ELEVENLABS_API_KEY;
-  return !!apiKey;
-};
+  const apiKey = process.env.ELEVENLABS_API_KEY
+  return !!apiKey
+}
 
 export const isElevenLabAPIValid = () => {
-  const apiKey = process.env.ELEVENLABS_API_KEY;
+  const apiKey = process.env.ELEVENLABS_API_KEY
   if (!apiKey) {
-    return false;
+    return false
   }
 
-  return isElevenLabAPIKeyValid(apiKey);
-};
+  return isElevenLabAPIKeyValid(apiKey)
+}
 
 export const getVoices = async () => {
-  const apiKey = process.env.ELEVENLABS_API_KEY;
+  const apiKey = process.env.ELEVENLABS_API_KEY
 
   const response = await axios.get(`${BASE_URL}/voices`, {
     headers: {
       "xi-api-key": apiKey,
     },
-  });
+  })
 
-  const data: VoiceData = response.data;
+  const data: VoiceData = response.data
 
-  return data.voices;
-};
+  return data.voices
+}
 
 export const getElevenLab = async () => {
-  let voices: Voice[] = [];
-  const is11LabAPIVPresent = isElevenLabAPIKeyPresent();
-  let is11LabAPIVValid = false;
+  let voices: Voice[] = []
+  const is11LabAPIVPresent = isElevenLabAPIKeyPresent()
+  let is11LabAPIVValid = false
   if (is11LabAPIVPresent) {
-    is11LabAPIVValid = await isElevenLabAPIValid();
+    is11LabAPIVValid = await isElevenLabAPIValid()
     if (is11LabAPIVValid) {
-      voices = await getVoices();
+      voices = await getVoices()
     }
   }
 
@@ -153,16 +153,16 @@ export const getElevenLab = async () => {
     eleven_labs_api_key_present: is11LabAPIVPresent,
     eleven_labs_api_key_valid: is11LabAPIVValid,
     voices: voices,
-  };
-};
+  }
+}
 export const getElevenLabTTS = async () => {
-  let voices: Voice[] = [];
-  const is11LabAPIVPresent = isElevenLabAPIKeyPresent();
-  let is11LabAPIVValid = false;
+  let voices: Voice[] = []
+  const is11LabAPIVPresent = isElevenLabAPIKeyPresent()
+  let is11LabAPIVValid = false
   if (is11LabAPIVPresent) {
-    is11LabAPIVValid = await isElevenLabAPIValid();
+    is11LabAPIVValid = await isElevenLabAPIValid()
     if (is11LabAPIVValid) {
-      voices = await getVoices();
+      voices = await getVoices()
     }
   }
 
@@ -172,16 +172,16 @@ export const getElevenLabTTS = async () => {
       return {
         label: e.name,
         value: e.voice_id,
-      };
+      }
     }),
-  };
-};
+  }
+}
 export const getOpenAITTS = async () => {
   if (!process.env.OPENAI_API_KEY) {
     return {
       models: [],
       voices: [],
-    };
+    }
   }
 
   return {
@@ -221,11 +221,11 @@ export const getOpenAITTS = async () => {
         value: "shimmer",
       },
     ],
-  };
-};
+  }
+}
 
 export const textToSpeech = async (text: string, voiceId: string) => {
-  const apiKey = process.env.ELEVENLABS_API_KEY;
+  const apiKey = process.env.ELEVENLABS_API_KEY
 
   const response = await axios.post(
     `${BASE_URL}/text-to-speech/${voiceId}`,
@@ -238,17 +238,17 @@ export const textToSpeech = async (text: string, voiceId: string) => {
       },
       responseType: "arraybuffer",
     }
-  );
+  )
 
-  return response.data;
-};
+  return response.data
+}
 
 export const textToSpeechOpenAI = async (
   input: string,
   voice: string,
   model: string
 ) => {
-  const apiKey = process.env.OPENAI_API_KEY;
+  const apiKey = process.env.OPENAI_API_KEY
   const response = await axios.post(
     "https://api.openai.com/v1/audio/speech",
     {
@@ -262,11 +262,11 @@ export const textToSpeechOpenAI = async (
       },
       responseType: "arraybuffer",
     }
-  );
+  )
 
-  return response.data;
-};
+  return response.data
+}
 
 export const isOpenAIAPIKeyPresent = () => {
-  return !!process.env.OPENAI_API_KEY;
+  return !!process.env.OPENAI_API_KEY
 }

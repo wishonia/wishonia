@@ -2,14 +2,16 @@
  * @jest-environment node
  */
 
-import {websiteParser} from "@/lib/utils/website-parser";
+import { websiteParser } from "@/lib/utils/website-parser"
 
 describe("Test Website Loader", () => {
-    it("should load and process website", async () => {
-        const parsed = await websiteParser(html);
-        expect(parsed).toEqual(`# Supporting aging research, age reversal tech, & rejuvenation`);
-    });
-});
+  it("should load and process website", async () => {
+    const parsed = await websiteParser(html)
+    expect(parsed).toEqual(
+      `# Supporting aging research, age reversal tech, & rejuvenation`
+    )
+  })
+})
 
 const html = `
 
@@ -99,4 +101,4 @@ for (var i = 0; i < elements.length; i++) {
 <!-- END -->
 
 <wized projectid="OWmdcGPqhRrCTAS7Ojdj"></wized><script src="https://embed.wized.io/js/app.js"></script></body></html>
-`;
+`

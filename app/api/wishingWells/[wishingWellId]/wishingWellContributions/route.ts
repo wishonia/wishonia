@@ -2,8 +2,8 @@ import * as z from "zod"
 
 import { verifyWishingWell } from "@/lib/api/wishingWells"
 import { prisma as db } from "@/lib/db"
-import {getCurrentUser} from "@/lib/session";
-import {handleError} from "@/lib/errorHandler";
+import { handleError } from "@/lib/errorHandler"
+import { getCurrentUser } from "@/lib/session"
 
 const wishingWellContributionCreateSchema = z.object({
   date: z.string(),
@@ -55,7 +55,7 @@ export async function POST(
   context: z.infer<typeof routeContextSchema>
 ) {
   try {
-    const session = await getCurrentUser();
+    const session = await getCurrentUser()
     const { params } = routeContextSchema.parse(context)
 
     if (!session) {

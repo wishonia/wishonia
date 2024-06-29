@@ -1,6 +1,6 @@
 ---
 slug: reasoning
-name: 'Enhancing Autonomous Agents'' Reasoning with LLMs: A Practical Guide'
+name: "Enhancing Autonomous Agents' Reasoning with LLMs: A Practical Guide"
 featuredImage: /docs/positron-network/reasoning.jpg
 description: >-
   Learn practical techniques to enhance decision-making in autonomous agents
@@ -8,6 +8,7 @@ description: >-
   Chain of Thought reasoning, Multi-Agent Collaboration, Self-Prompting, and
   more to boost reasoning abilities in LLMs.
 ---
+
 # Improving Reasoning in Autonomous Agents using Large Language Models (LLMs)
 
 This guide provides practical instructions for improving reasoning in autonomous agents using Large Language Models (LLMs). The focus is on enhancing decision-making capabilities in task completion.

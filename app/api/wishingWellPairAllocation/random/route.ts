@@ -1,14 +1,16 @@
-import {getUserIdServer} from "@/lib/api/getUserIdServer";
-import { WishingWell } from '@prisma/client';
-import {convertKeysToCamelCase} from "@/lib/stringHelpers";
-import { prisma } from "@/lib/db";
-import {handleError} from "@/lib/errorHandler";
+import { WishingWell } from "@prisma/client"
+
+import { getUserIdServer } from "@/lib/api/getUserIdServer"
+import { prisma } from "@/lib/db"
+import { handleError } from "@/lib/errorHandler"
+import { convertKeysToCamelCase } from "@/lib/stringHelpers"
+
 export async function GET() {
-    try {
-        const userId = await getUserIdServer();
-        let randomPair: WishingWell[] = [];
-        if (userId) {
-            randomPair = await prisma.$queryRaw`
+  try {
+    const userId = await getUserIdServer()
+    let randomPair: WishingWell[] = []
+    if (userId) {
+      randomPair = await prisma.$queryRaw`
           SELECT *
           FROM "WishingWell"
           WHERE id NOT IN (
@@ -18,23 +20,25 @@ export async function GET() {
           )
           ORDER BY random()
           LIMIT 2;
-        `;
-        } else {
-            randomPair = await prisma.$queryRaw`
+        `
+    } else {
+      randomPair = await prisma.$queryRaw`
           SELECT *
           FROM "WishingWell"
           ORDER BY random()
           LIMIT 2;
-        `;
-        }
-        // Use the helper function to convert keys to camelCase
-        randomPair = randomPair.map(convertKeysToCamelCase);
-
-        return new Response(JSON.stringify({
-          thisWishingWell: randomPair[0],
-          thatWishingWell: randomPair[1],
-        }))
-    } catch (error) {
-        return handleError(error)
+        `
     }
+    // Use the helper function to convert keys to camelCase
+    randomPair = randomPair.map(convertKeysToCamelCase)
+
+    return new Response(
+      JSON.stringify({
+        thisWishingWell: randomPair[0],
+        thatWishingWell: randomPair[1],
+      })
+    )
+  } catch (error) {
+    return handleError(error)
+  }
 }

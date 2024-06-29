@@ -11,7 +11,10 @@ interface QuickLogButtonProps extends ButtonProps {
   wishingWellId: string
 }
 
-export function QuickWishingWellContributionButton({ wishingWellId, ...props }: QuickLogButtonProps) {
+export function QuickWishingWellContributionButton({
+  wishingWellId,
+  ...props
+}: QuickLogButtonProps) {
   const router = useRouter()
   const [isLoading, setIsLoading] = React.useState<boolean>(false)
 
@@ -21,16 +24,19 @@ export function QuickWishingWellContributionButton({ wishingWellId, ...props }: 
     const dateToday = new Date()
     dateToday.setHours(0, 0, 0, 0)
 
-    const response = await fetch(`/api/wishingWells/${wishingWellId}/wishingWellContributions`, {
-      method: "POST",
-      headers: {
-        "Content-Type": "application/json",
-      },
-      body: JSON.stringify({
-        date: dateToday,
-        count: 1,
-      }),
-    })
+    const response = await fetch(
+      `/api/wishingWells/${wishingWellId}/wishingWellContributions`,
+      {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify({
+          date: dateToday,
+          count: 1,
+        }),
+      }
+    )
 
     if (!response?.ok) {
       toast({

@@ -7,6 +7,7 @@ description: >-
   imbalanced diets, experience deficiencies or excesses of calories, nutrients,
   and vitamins necessary for proper health and development.
 ---
+
 ## Introduction
 
 Malnutrition is a significant global issue that affects individuals and communities, undermining health, economic productivity, and social stability. Defined as deficiencies, excesses, or imbalances in an individual's intake of energy and/or nutrients, malnutrition encompasses both undernutrition (wasting, stunting, underweight) and overnutrition (overweight, obesity, diet-related noncommunicable diseases). Understanding malnutrition's complex and multifaceted nature is crucial for developing effective strategies to combat it.

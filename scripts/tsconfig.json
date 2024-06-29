@@ -13,7 +13,7 @@
     "composite": true,
     "paths": {
       "@/*": ["../*"]
-    },
+    }
   },
   "ts-node": {
     "files": true,

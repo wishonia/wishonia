@@ -7,6 +7,7 @@ description: >-
   thinking, and behavior, causing distress and impaired functioning in daily
   life.
 ---
+
 # The Problem of Mental Illness
 
 ## Introduction

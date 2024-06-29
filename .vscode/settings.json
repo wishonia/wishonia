@@ -1,7 +1,7 @@
 {
-    "WillLuke.nextjs.addTypesOnSave": true,
-    "WillLuke.nextjs.hasPrompted": true,
-    "files.associations": {
-        "*.mdx": "markdown"
-      }
+  "WillLuke.nextjs.addTypesOnSave": true,
+  "WillLuke.nextjs.hasPrompted": true,
+  "files.associations": {
+    "*.mdx": "markdown"
+  }
 }

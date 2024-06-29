@@ -8,6 +8,7 @@ description: >-
   gases from burning fossil fuels, leading to severe environmental and ecosystem
   disruptions.
 ---
+
 # Global Warming
 
 ## Introduction

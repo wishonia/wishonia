@@ -1,23 +1,25 @@
-"use client";
-import { useEffect } from 'react';
-import {postVoteData} from "@/lib/api/postVoteData";
-import {useRouter} from "next/navigation";
+"use client"
+
+import { useEffect } from "react"
+import { useRouter } from "next/navigation"
+
+import { postVoteData } from "@/lib/api/postVoteData"
 
 const AfterLoginHandler = () => {
-  const router = useRouter();
+  const router = useRouter()
   useEffect(() => {
     // Ensure this code runs only in the browser
-    if (typeof window !== 'undefined') {
+    if (typeof window !== "undefined") {
       postVoteData()
-      const afterLoginRedirect = localStorage.getItem('afterLoginRedirect');
+      const afterLoginRedirect = localStorage.getItem("afterLoginRedirect")
       if (afterLoginRedirect) {
-        localStorage.removeItem('afterLoginRedirect');
-        router.push(afterLoginRedirect);
+        localStorage.removeItem("afterLoginRedirect")
+        router.push(afterLoginRedirect)
       }
     }
-  }, []);
+  }, [])
 
-  return null;
-};
+  return null
+}
 
-export default AfterLoginHandler;
+export default AfterLoginHandler

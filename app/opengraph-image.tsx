@@ -1,13 +1,14 @@
-import {
-  sharedTitle,
-  sharedImage,
-  sharedDescription,
-} from '@/app/shared-metadata'
-import { ImageResponse } from 'next/og'
-import { getMediumFont } from '@/lib/utils'
-import { OgImage } from '@/components/OgImage'
+import { ImageResponse } from "next/og"
 
-export const runtime = 'edge'
+import { getMediumFont } from "@/lib/utils"
+import { OgImage } from "@/components/OgImage"
+import {
+  sharedDescription,
+  sharedImage,
+  sharedTitle,
+} from "@/app/shared-metadata"
+
+export const runtime = "edge"
 
 export const alt = sharedTitle
 
@@ -24,18 +25,18 @@ export default async function Image() {
       ...size,
       fonts: [
         {
-          name: 'Space Grotesk',
+          name: "Space Grotesk",
           data: await getMediumFont(),
-          style: 'normal',
+          style: "normal",
           weight: 500,
         },
         {
-          name: 'Space Grotesk',
+          name: "Space Grotesk",
           data: await getMediumFont(),
-          style: 'normal',
+          style: "normal",
           weight: 600,
         },
       ],
-    },
+    }
   )
 }

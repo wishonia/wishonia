@@ -14,6 +14,7 @@ ogImage:
   url: opportunity-cost.png
 absFilePath: 'C:\code\wishonia\public\globalSolutions\1-percent-treaty\opportunity-cost.md'
 ---
+
 ### Opportunity Cost of Military Spending
 
 Humanity currently spends $2 trillion on militarism annually. Reallocating this $2 trillion to health research and treatment could employ approximately 25 million individuals at an average salary of $80,000. This workforce could comprise researchers, physicians, nurses, and support staff, dramatically expanding global capacity to address health crises, develop treatments, and improve public health outcomes.

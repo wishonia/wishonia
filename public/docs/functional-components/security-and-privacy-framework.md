@@ -3,16 +3,19 @@ name: Security and Privacy Framework
 description: "Security and Privacy Framework\r\n    - Data protection and privacy controls\r\n    - Secure authentication and authorization\r\n    - Encryption and data integrity\r\n    - Audit logging and monitoring\r\n    - Compliance with relevant regulations and standards\r\n\r"
 featuredImage: /docs/functional-components/security-and-privacy-framework.jpg
 ---
+
 # Wishocracy - Security and Privacy Framework
 
 ## Document Version
-| Version | Date       | Description                | Author                      | Reviewer          |
-|---------|------------|----------------------------|-----------------------------|-------------------|
-| 1.0     | 2023-10-05 | Initial draft              | Your_Name                   |                    |
+
+| Version | Date       | Description   | Author    | Reviewer |
+| ------- | ---------- | ------------- | --------- | -------- |
+| 1.0     | 2023-10-05 | Initial draft | Your_Name |          |
 
 ---
 
 ## Table of Contents
+
 1. [Introduction](#introduction)
 2. [Objectives](#objectives)
 3. [Scope](#scope)
@@ -47,6 +50,7 @@ Wishocracy is a universal wish fulfillment system designed to handle and process
 ## Scope
 
 The Security and Privacy Framework focuses on securing the Wishocracy system across different functional areas:
+
 - Data protection and privacy.
 - Secure authentication and authorization.
 - Encryption and data integrity.
@@ -97,6 +101,7 @@ The Security and Privacy Framework focuses on securing the Wishocracy system acr
 ## Assumptions and Constraints
 
 - **Assumptions:**
+
   - Users have unique identifiers.
   - A designated security team is available for incident response.
   - The system infrastructure supports encryption protocols.

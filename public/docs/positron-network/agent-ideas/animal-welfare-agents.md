@@ -8,6 +8,7 @@ description: >-
   petitions, and supporting policy changes to ensure better treatment in both
   wild settings and factory farms.
 ---
+
 ## Animal Welfare Agents
 
 Billions of animals are unnecessarily suffering in factory farms and in the wild.
@@ -24,4 +25,3 @@ We need to create autonomous agents that can help us reduce this suffering.
 5. **Policy Change Support:** By providing robust, data-backed evidence of animal suffering, the agent could support campaigns for legislative or policy changes to ensure better treatment of animals in both wild settings and factory farms.
 
 Such an agent would not only raise awareness about animal suffering but could also drive tangible improvements in animal welfare practices and policies.
-

@@ -10,7 +10,7 @@ ogImage:
 absFilePath: 'C:\code\wishonia\public\globalSolutions\1-percent-treaty\cost-of-disease.md'
 ---
 
-The **$244 trillion** annual total global cost of disease encompasses direct healthcare costs, indirect economic losses, and the $100k valuation of a Year of Life Lost (YLL) and a $100k valuation Disability-Adjusted Life Year (DALYs). 
+The **$244 trillion** annual total global cost of disease encompasses direct healthcare costs, indirect economic losses, and the $100k valuation of a Year of Life Lost (YLL) and a $100k valuation Disability-Adjusted Life Year (DALYs).
 
 ## Direct Healthcare Costs
 
@@ -42,18 +42,17 @@ The value of a DALY attempts to quantify the burden of both morbidity and mortal
 
 While specific monetary values can vary widely, a common approach in international health policy analysis is to value a DALY at 1 to 3 times the gross domestic product (GDP) per capita of a country. This approach provides a benchmark that adjusts for the economic conditions of the country. For instance, in a country with a GDP per capita of $50,000, a DALY might be valued between $50,000 and $150,000.
 
-
 ### Economic Valuation of Excess Mortality (YLL)
 
 To monetize YLL, we adopt a conservative value that reflects the economic loss due to premature mortality. Assuming an average income approach or a statistical value of life approach, we might assign a figure like $100,000 per YLL. If we base our calculation on the WHO's reported 63 million excess deaths annually:
 
-- **YLL Economic Valuation:** $100,000 per YLL * YLLs (calculated from 63 million excess deaths with an average YLL estimate per death).
+- **YLL Economic Valuation:** $100,000 per YLL \* YLLs (calculated from 63 million excess deaths with an average YLL estimate per death).
 
 ### Economic Valuation of Morbidity and Disability (DALYs)
 
 For DALYs, which combine YLL with Years Lived with Disability (YLD), we use a similar valuation approach. Assigning a value to each DALY reflects the cost of both premature death and living with disability. Assuming $100,000 per DALY as a conservative estimate:
 
-- **DALY Economic Valuation:** $100,000 per DALY * 1.68 billion DALYs.
+- **DALY Economic Valuation:** $100,000 per DALY \* 1.68 billion DALYs.
 
 ## Total Annual Economic Impact: Calculations
 
@@ -62,7 +61,7 @@ For YLL, assuming an average of 10 years lost per death, and for DALYs, directly
 1. **YLL Economic Impact:** Assuming 63 million excess deaths and an average YLL per death, with a specific valuation per YLL.
 2. **DALY Economic Impact:** 1.68 billion DALYs valued at $100,000 each.
 
-These calculations provide us with a monetary estimate of the total global burden of disease, incorporating both health outcomes and direct plus indirect economic losses. 
+These calculations provide us with a monetary estimate of the total global burden of disease, incorporating both health outcomes and direct plus indirect economic losses.
 
 The calculations incorporating economic valuations for Years of Life Lost (YLL) and Disability-Adjusted Life Years (DALYs) yield the following insights into the global disease burden:
 
@@ -75,5 +74,3 @@ This leads to a **Total Annual Economic Impact** of the global disease burden of
 - Indirect Economic Losses: $4.7 trillion
 - Economic Valuation of YLL: $63 trillion
 - Economic Valuation of DALYs: $168 trillion
-
-

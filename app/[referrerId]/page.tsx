@@ -1,6 +1,6 @@
 import { getCurrentUser } from "@/lib/session"
 import { Shell } from "@/components/layout/shell"
-import ReferrerCapture from "@/components/ReferrerCapture";
+import ReferrerCapture from "@/components/ReferrerCapture"
 
 interface ReferrerPageProps {
   params: { referrerId: string }
@@ -13,11 +13,9 @@ export default async function ReferrerPage({
 }: ReferrerPageProps) {
   const user = await getCurrentUser()
 
-
-
   return (
     <Shell>
-        <ReferrerCapture referrerId={params.referrerId} />
+      <ReferrerCapture referrerId={params.referrerId} />
     </Shell>
   )
 }

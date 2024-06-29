@@ -1,16 +1,17 @@
 import { GlobalSolution } from "@prisma/client"
+import { getServerSession } from "next-auth/next"
+
+import { authOptions } from "@/lib/auth"
 import { prisma as db } from "@/lib/db"
-import {authOptions} from "@/lib/auth";
-import {getServerSession} from "next-auth/next";
 
 export async function getGlobalSolution(
-  globalSolutionId: GlobalSolution["id"],
+  globalSolutionId: GlobalSolution["id"]
 ) {
   return db.globalSolution.findFirst({
     where: {
       id: globalSolutionId,
     },
-  });
+  })
 }
 
 // Verify if the user has access to the globalSolution

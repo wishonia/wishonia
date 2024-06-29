@@ -1,6 +1,6 @@
-import {DateRange, WishingWellByDate, WishingWellEntry} from "@/types"
+import { DateRange, WishingWellByDate, WishingWellEntry } from "@/types"
 
-import {prisma as db} from "@/lib/db"
+import { prisma as db } from "@/lib/db"
 
 export async function getWishingWellContributions(
   id: string,
@@ -8,7 +8,9 @@ export async function getWishingWellContributions(
   type: "user" | "wishingWell"
 ) {
   const typeCondition =
-    type === "wishingWell" ? { wishingWellId: id } : { wishingWell: { userId: id } }
+    type === "wishingWell"
+      ? { wishingWellId: id }
+      : { wishingWell: { userId: id } }
 
   return db.wishingWellContribution.findMany({
     select: {
@@ -32,7 +34,7 @@ export async function getWishingWellContributions(
     orderBy: {
       date: "desc",
     },
-  });
+  })
 }
 
 export async function getStreak(
@@ -43,7 +45,9 @@ export async function getStreak(
   longestStreak: number
 }> {
   const typeCondition =
-    type === "wishingWell" ? { wishingWellId: id } : { wishingWell: { userId: id } }
+    type === "wishingWell"
+      ? { wishingWellId: id }
+      : { wishingWell: { userId: id } }
 
   const wishingWellContributions = await db.wishingWellContribution.findMany({
     where: typeCondition,
@@ -81,7 +85,9 @@ export async function getStreak(
   }
 
   // Reset streak if user is inactive
-  const lastContributionDate = new Date(wishingWellContributions[wishingWellContributions.length - 1].date).getTime()
+  const lastContributionDate = new Date(
+    wishingWellContributions[wishingWellContributions.length - 1].date
+  ).getTime()
   const currentDate = new Date().getTime()
   const timeDiff = currentDate - lastContributionDate
 
@@ -98,7 +104,9 @@ export async function getTotalWishingWellContributions(
   type: "user" | "wishingWell"
 ) {
   const typeCondition =
-    type === "wishingWell" ? { wishingWellId: id } : { wishingWell: { userId: id } }
+    type === "wishingWell"
+      ? { wishingWellId: id }
+      : { wishingWell: { userId: id } }
 
   const wishingWellContributions = await db.wishingWellContribution.findMany({
     where: {
@@ -194,17 +202,17 @@ export async function getTopWishingWells(
   })
 
   return await Promise.all(
-      wishingWellContributions.slice(0, 10).map(async (contribution) => {
-        const wishingWell = await db.wishingWell.findUnique({
-          where: {
-            id: contribution.wishingWellId,
-          },
-        })
-        return {
-          name: wishingWell?.name || "N/A",
-          count: contribution._sum.count,
-        }
+    wishingWellContributions.slice(0, 10).map(async (contribution) => {
+      const wishingWell = await db.wishingWell.findUnique({
+        where: {
+          id: contribution.wishingWellId,
+        },
       })
+      return {
+        name: wishingWell?.name || "N/A",
+        count: contribution._sum.count,
+      }
+    })
   )
 }
 
@@ -281,7 +289,10 @@ export async function getDailyAverage(
     },
   })
 
-  const totalCount = wishingWellContributions.reduce((sum, contribution) => sum + contribution.count, 0)
+  const totalCount = wishingWellContributions.reduce(
+    (sum, contribution) => sum + contribution.count,
+    0
+  )
 
   if (totalCount === 0) {
     return 0

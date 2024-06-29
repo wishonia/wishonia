@@ -1,69 +1,69 @@
-import { BaseLanguageModel } from "@langchain/core/language_models/base";
-import { BaseChatModel } from "@langchain/core/language_models/chat_models";
-import { Document } from "@langchain/core/documents";
+import { Document } from "@langchain/core/documents"
+import { BaseLanguageModel } from "@langchain/core/language_models/base"
+import { BaseChatModel } from "@langchain/core/language_models/chat_models"
+import { AIMessage, BaseMessage, HumanMessage } from "@langchain/core/messages"
+import { StringOutputParser } from "@langchain/core/output_parsers"
 import {
   ChatPromptTemplate,
   MessagesPlaceholder,
   PromptTemplate,
-} from "@langchain/core/prompts";
-import { AIMessage, BaseMessage, HumanMessage } from "@langchain/core/messages";
-import { StringOutputParser } from "@langchain/core/output_parsers";
+} from "@langchain/core/prompts"
 import {
   Runnable,
   RunnableBranch,
   RunnableLambda,
   RunnableMap,
   RunnableSequence,
-} from "@langchain/core/runnables";
+} from "@langchain/core/runnables"
 
 type RetrievalChainInput = {
-  chat_history: string;
-  question: string;
-};
+  chat_history: string
+  question: string
+}
 
 export function groupMessagesByConversation(messages: any[]) {
   // check if messages are in even numbers if not remove the last message
   if (messages.length % 2 !== 0) {
-    messages.pop();
+    messages.pop()
   }
 
-  const groupedMessages = [];
+  const groupedMessages = []
   // [ { human: "", ai: "" } ]
   for (let i = 0; i < messages.length; i += 2) {
     groupedMessages.push({
       human: messages[i].content,
       ai: messages[i + 1].content,
-    });
+    })
   }
 
-  return groupedMessages;
+  return groupedMessages
 }
 
 const formatChatHistoryAsString = (history: BaseMessage[]) => {
   return history
     .map((message) => `${message._getType()}: ${message.content}`)
-    .join("\n");
-};
+    .join("\n")
+}
 
 const formatDocs = (docs: Document[]) => {
   return docs
     .map((doc, i) => `<doc id='${i}'>${doc.pageContent}</doc>`)
-    .join("\n");
-};
+    .join("\n")
+}
 
 const serializeHistory = (input: any) => {
-  const chatHistory = input.chat_history || [];
-  const convertedChatHistory = [];
+  const chatHistory = input.chat_history || []
+  const convertedChatHistory = []
   for (const message of chatHistory) {
     if (message.human !== undefined) {
-      convertedChatHistory.push(new HumanMessage({ content: message.human }));
+      convertedChatHistory.push(new HumanMessage({ content: message.human }))
     }
     if (message["ai"] !== undefined) {
-      convertedChatHistory.push(new AIMessage({ content: message.ai }));
+      convertedChatHistory.push(new AIMessage({ content: message.ai }))
     }
   }
-  return convertedChatHistory;
-};
+  return convertedChatHistory
+}
 
 const createRetrieverChain = (
   llm: BaseLanguageModel,
@@ -71,20 +71,20 @@ const createRetrieverChain = (
   question_template: string
 ) => {
   const CONDENSE_QUESTION_PROMPT =
-    PromptTemplate.fromTemplate(question_template);
+    PromptTemplate.fromTemplate(question_template)
   const condenseQuestionChain = RunnableSequence.from([
     CONDENSE_QUESTION_PROMPT,
     llm,
     new StringOutputParser(),
   ]).withConfig({
     runName: "CondenseQuestion",
-  });
+  })
   const hasHistoryCheckFn = RunnableLambda.from(
     (input: RetrievalChainInput) => input.chat_history.length > 0
-  ).withConfig({ runName: "HasChatHistoryCheck" });
+  ).withConfig({ runName: "HasChatHistoryCheck" })
   const conversationChain = condenseQuestionChain.pipe(retriever).withConfig({
     runName: "RetrievalChainWithHistory",
-  });
+  })
   const basicRetrievalChain = RunnableLambda.from(
     (input: RetrievalChainInput) => input.question
   )
@@ -92,15 +92,15 @@ const createRetrieverChain = (
       runName: "Itemgetter:question",
     })
     .pipe(retriever)
-    .withConfig({ runName: "RetrievalChainWithNoHistory" });
+    .withConfig({ runName: "RetrievalChainWithNoHistory" })
 
   return RunnableBranch.from([
     [hasHistoryCheckFn, conversationChain],
     basicRetrievalChain,
   ]).withConfig({
     runName: "FindDocs",
-  });
-};
+  })
+}
 
 export const createChain = ({
   llm,
@@ -109,24 +109,24 @@ export const createChain = ({
   retriever,
   response_template,
 }: {
-  llm: BaseLanguageModel<any> | BaseChatModel<any> ;
-  question_llm: BaseLanguageModel<any> | BaseChatModel<any>;
-  retriever: Runnable;
-  question_template: string;
-  response_template: string;
+  llm: BaseLanguageModel<any> | BaseChatModel<any>
+  question_llm: BaseLanguageModel<any> | BaseChatModel<any>
+  retriever: Runnable
+  question_template: string
+  response_template: string
 }) => {
   const retrieverChain = createRetrieverChain(
     question_llm,
     retriever,
     question_template
-  );
+  )
   const context = RunnableMap.from({
     context: RunnableSequence.from([
       ({ question, chat_history }) => {
         return {
           question: question,
           chat_history: formatChatHistoryAsString(chat_history),
-        };
+        }
       },
       retrieverChain,
       RunnableLambda.from(formatDocs).withConfig({
@@ -143,12 +143,12 @@ export const createChain = ({
     ).withConfig({
       runName: "Itemgetter:chat_history",
     }),
-  }).withConfig({ tags: ["RetrieveDocs"] });
+  }).withConfig({ tags: ["RetrieveDocs"] })
   const prompt = ChatPromptTemplate.fromMessages([
     ["system", response_template],
     new MessagesPlaceholder("chat_history"),
     ["human", "{question}"],
-  ]);
+  ])
 
   const responseSynthesizerChain = RunnableSequence.from([
     prompt,
@@ -156,7 +156,7 @@ export const createChain = ({
     new StringOutputParser(),
   ]).withConfig({
     tags: ["GenerateResponse"],
-  });
+  })
   return RunnableSequence.from([
     {
       question: RunnableLambda.from(
@@ -170,5 +170,5 @@ export const createChain = ({
     },
     context,
     responseSynthesizerChain,
-  ]);
-};
+  ])
+}

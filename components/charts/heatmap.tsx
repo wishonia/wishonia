@@ -2,7 +2,9 @@
 
 import * as React from "react"
 import { useRouter } from "next/navigation"
-import CalendarHeatmap, { ReactCalendarHeatmapValue } from "react-calendar-heatmap"
+import CalendarHeatmap, {
+  ReactCalendarHeatmapValue,
+} from "react-calendar-heatmap"
 
 import "react-calendar-heatmap/dist/styles.css"
 
@@ -40,10 +42,16 @@ interface HeatmapProps {
   params: { wishingWellId: string }
 }
 
-async function deleteWishingWell(wishingWellId: string, wishingWellContributionsId: string) {
-  const response = await fetch(`/api/wishingWells/${wishingWellId}/wishingWellContributions/${wishingWellContributionsId}`, {
-    method: "DELETE",
-  })
+async function deleteWishingWell(
+  wishingWellId: string,
+  wishingWellContributionsId: string
+) {
+  const response = await fetch(
+    `/api/wishingWells/${wishingWellId}/wishingWellContributions/${wishingWellContributionsId}`,
+    {
+      method: "DELETE",
+    }
+  )
 
   if (!response?.ok) {
     toast({
@@ -64,19 +72,18 @@ async function deleteWishingWell(wishingWellId: string, wishingWellContributions
 
 export function Heatmap({ data, params }: HeatmapProps) {
   const router = useRouter()
-  const [showDeleteAlert, setShowDeleteAlert] =
-      React.useState<boolean>(false)
-  const [isDeleteLoading, setIsDeleteLoading] =
-      React.useState<boolean>(false)
-  const [selectedLog, setSelectedLog] =
-      React.useState<Value | null>(null)
-  const [selectedDate, setSelectedDate] =
-      React.useState<Date | null>(null)
+  const [showDeleteAlert, setShowDeleteAlert] = React.useState<boolean>(false)
+  const [isDeleteLoading, setIsDeleteLoading] = React.useState<boolean>(false)
+  const [selectedLog, setSelectedLog] = React.useState<Value | null>(null)
+  const [selectedDate, setSelectedDate] = React.useState<Date | null>(null)
 
   const handleDelete = async () => {
     if (selectedLog) {
       setIsDeleteLoading(true)
-      const deleted = await deleteWishingWell(params.wishingWellId, selectedLog.id)
+      const deleted = await deleteWishingWell(
+        params.wishingWellId,
+        selectedLog.id
+      )
 
       if (deleted) {
         setIsDeleteLoading(false)
@@ -110,7 +117,9 @@ export function Heatmap({ data, params }: HeatmapProps) {
   const getTitle = (value: Value) => {
     if (value && value.count) {
       return `${value.count} ${
-        value.count === 1 ? "Wishing Well Contribution" : "Wishing Well Contributions"
+        value.count === 1
+          ? "Wishing Well Contribution"
+          : "Wishing Well Contributions"
       } on ${formatDate(value.date)}`
     }
     return "No Wishing Well Contributions"
@@ -144,7 +153,8 @@ export function Heatmap({ data, params }: HeatmapProps) {
           <CredenzaContent>
             <CredenzaHeader>
               <CredenzaTitle>
-                Delete wishingWellContributions from {selectedDate ? formatDate(selectedDate) : ""}?
+                Delete wishingWellContributions from{" "}
+                {selectedDate ? formatDate(selectedDate) : ""}?
               </CredenzaTitle>
               <CredenzaDescription>
                 This action cannot be undone.

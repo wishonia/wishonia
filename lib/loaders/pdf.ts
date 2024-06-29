@@ -1,45 +1,46 @@
-import { BufferLoader } from "langchain/document_loaders/fs/buffer";
-import { Document } from "langchain/document";
-import * as pdfjS from "pdfjs-dist";
-import {Datasource} from "@prisma/client";
-import {splitDocuments, WishoniaVectorStore} from "@/lib/utils/vectorStore";
-import {OpenAIEmbeddings} from "@langchain/openai";
+import { OpenAIEmbeddings } from "@langchain/openai"
+import { Datasource } from "@prisma/client"
+import { Document } from "langchain/document"
+import { BufferLoader } from "langchain/document_loaders/fs/buffer"
+import * as pdfjS from "pdfjs-dist"
+
+import { splitDocuments, WishoniaVectorStore } from "@/lib/utils/vectorStore"
 
 export class PDFLoader extends BufferLoader {
-  private readonly splitPages: boolean;
+  private readonly splitPages: boolean
 
-  constructor(
-    filePathOrBlob: string | Blob,
-    { splitPages = true } = {},
-  ) {
-    super(filePathOrBlob);
-    this.splitPages = splitPages;
+  constructor(filePathOrBlob: string | Blob, { splitPages = true } = {}) {
+    super(filePathOrBlob)
+    this.splitPages = splitPages
   }
 
   public async parse(
     raw: Buffer,
-    metadata: Document["metadata"],
+    metadata: Document["metadata"]
   ): Promise<Document[]> {
     const pdf = await pdfjS.getDocument({
       data: new Uint8Array(raw.buffer),
       useWorkerFetch: false,
       isEvalSupported: false,
       useSystemFonts: true,
-    }).promise;
-    const meta = await pdf.getMetadata().catch(() => null);
+    }).promise
+    const meta = await pdf.getMetadata().catch(() => null)
 
-    const documents: Document[] = [];
+    const documents: Document[] = []
 
     for (let i = 1; i <= pdf.numPages; i += 1) {
-      const page = await pdf.getPage(i);
-      const content = await page.getTextContent();
+      const page = await pdf.getPage(i)
+      const content = await page.getTextContent()
 
       if (content.items.length === 0) {
-        continue;
+        continue
       }
 
-      const text = content.items.map((item: any) => item.str).join("\n")
-        .replace(/\x00/g, "").trim();
+      const text = content.items
+        .map((item: any) => item.str)
+        .join("\n")
+        .replace(/\x00/g, "")
+        .trim()
       documents.push(
         new Document({
           pageContent: text,
@@ -54,16 +55,16 @@ export class PDFLoader extends BufferLoader {
               pageNumber: i,
             },
           },
-        }),
-      );
+        })
+      )
     }
 
     if (this.splitPages) {
-      return documents;
+      return documents
     }
 
     if (documents.length === 0) {
-      return [];
+      return []
     }
 
     return [
@@ -78,17 +79,13 @@ export class PDFLoader extends BufferLoader {
           },
         },
       }),
-    ];
+    ]
   }
   public async processSource(dataSource: Datasource) {
-    const docs = await this.load();
-    const chunks = await splitDocuments(docs);
-    await WishoniaVectorStore.fromDocuments(
-        chunks,
-        new OpenAIEmbeddings(),
-        {
-          datasourceId: dataSource.id,
-        }
-    );
+    const docs = await this.load()
+    const chunks = await splitDocuments(docs)
+    await WishoniaVectorStore.fromDocuments(chunks, new OpenAIEmbeddings(), {
+      datasourceId: dataSource.id,
+    })
   }
 }

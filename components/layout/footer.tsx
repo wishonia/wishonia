@@ -1,19 +1,19 @@
+import { Key } from "react"
 import Link from "next/link"
+import { NavItem } from "@/types"
 
 import { generalFooterNav } from "@/config/links"
-import { Key } from "react"
-import { NavItem } from "@/types";
-import {Icons} from "@/components/icons";
+import { Icons } from "@/components/icons"
 
 interface FooterProps {
   footerNavItems?: NavItem[]
 }
 
 export default function Footer({ footerNavItems }: FooterProps) {
-  const footerLinks = footerNavItems || generalFooterNav.data;
+  const footerLinks = footerNavItems || generalFooterNav.data
 
   return (
-    <footer className="mt-auto  mx-auto">
+    <footer className="mx-auto  mt-auto">
       <div className="mx-auto w-full max-w-screen-xl p-6 md:py-8">
         <div className="sm:flex sm:items-center sm:justify-between">
           {/*          <Link href="/">
@@ -21,7 +21,7 @@ export default function Footer({ footerNavItems }: FooterProps) {
             {siteConfig.name}
           </h1>
         </Link>*/}
-          <ul className="mb-6 flex flex-wrap items-center opacity-60 sm:mb-0 justify-center">
+          <ul className="mb-6 flex flex-wrap items-center justify-center opacity-60 sm:mb-0">
             {footerLinks.map((item: NavItem, index: Key | null | undefined) => {
               const Icon = Icons[item.icon || "next"]
               return (

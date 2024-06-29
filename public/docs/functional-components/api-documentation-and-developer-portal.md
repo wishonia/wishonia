@@ -12,6 +12,7 @@ description: |
 featuredImage: >-
   https://pcpfoetqkuq7jmso.public.blob.vercel-storage.com/docs/functional-components/api-documentation-and-developer-portal.jpg
 ---
+
 # Wishocracy API Documentation and Developer Portal Product Requirements Document (PRD)
 
 ## Introduction

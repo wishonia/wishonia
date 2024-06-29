@@ -2,14 +2,14 @@ import "./globals.css"
 
 import { Metadata, Viewport } from "next"
 import { Inter } from "next/font/google"
-import NextTopLoader from "nextjs-toploader"
+import { CopilotKit } from "@copilotkit/react-core"
 import { Analytics } from "@vercel/analytics/react"
+import NextTopLoader from "nextjs-toploader"
 
 import { siteConfig } from "@/config/site"
 import { cn } from "@/lib/utils"
 import { Toaster } from "@/components/ui/toaster"
 import { ThemeProvider } from "@/components/theme-provider"
-import {CopilotKit} from "@copilotkit/react-core";
 
 const inter = Inter({ subsets: ["latin"] })
 
@@ -74,19 +74,19 @@ export default async function RootLayout({ children }: RootLayoutProps) {
   return (
     <html lang="en" suppressHydrationWarning>
       <body className={cn("antialiased", inter.className)}>
-      <CopilotKit url="/api/copilot/openai/">
-        <ThemeProvider attribute="class" defaultTheme="light" enableSystem>
-          <NextTopLoader color="#DC2645" height={2.5} showSpinner={false} />
-          <div
-            vaul-drawer-wrapper=""
-            className="flex min-h-screen flex-col bg-background"
-          >
-            {children}
-          </div>
-          <Toaster />
-        </ThemeProvider>
-        <Analytics />
-      </CopilotKit>
+        <CopilotKit url="/api/copilot/openai/">
+          <ThemeProvider attribute="class" defaultTheme="light" enableSystem>
+            <NextTopLoader color="#DC2645" height={2.5} showSpinner={false} />
+            <div
+              vaul-drawer-wrapper=""
+              className="flex min-h-screen flex-col bg-background"
+            >
+              {children}
+            </div>
+            <Toaster />
+          </ThemeProvider>
+          <Analytics />
+        </CopilotKit>
       </body>
     </html>
   )

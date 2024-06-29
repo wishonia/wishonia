@@ -16,7 +16,9 @@ interface GlobalSolutionEditProps {
   params: { globalSolutionId: string }
 }
 
-export default async function GlobalSolutionEdit({ params }: GlobalSolutionEditProps) {
+export default async function GlobalSolutionEdit({
+  params,
+}: GlobalSolutionEditProps) {
   const user = await getCurrentUser()
 
   if (!user) {

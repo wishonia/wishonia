@@ -28,6 +28,6 @@ declare module "next-auth" {
 }
 
 export interface ExtendedUser extends NextAuthUser {
-  admin?: boolean;
+  admin?: boolean
   username?: string
 }

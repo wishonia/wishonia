@@ -1,4 +1,4 @@
-import { WishingWell, User } from "@prisma/client"
+import { User, WishingWell } from "@prisma/client"
 import { getServerSession } from "next-auth"
 
 import { authOptions } from "@/lib/auth"
@@ -18,18 +18,16 @@ export async function getUserWishingWell(
       id: wishingWellId,
       userId: userId,
     },
-  });
+  })
 }
 
 // Fetch user's wishingWell
-export async function getGlobalWishingWell(
-    wishingWellId: WishingWell["id"],
-) {
+export async function getGlobalWishingWell(wishingWellId: WishingWell["id"]) {
   return db.wishingWell.findFirst({
     where: {
       id: wishingWellId,
     },
-  });
+  })
 }
 
 // Fetch all the wishingWells for the selected user

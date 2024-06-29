@@ -9,6 +9,7 @@ description: >-
   qualifications, and desired outcomes for a more cooperative healthcare
   ecosystem.
 ---
+
 ## Autonomous Cooperation Engineer
 
 We are looking for a software engineer with to help develop autonomous AI agents that facilitate intelligent voluntary cooperation and reduce duplication of effort between government agencies, disease advocacy non-profits, and digital health companies.
@@ -18,34 +19,41 @@ We are looking for a software engineer with to help develop autonomous AI agents
 Initially, the human Autonomous Cooperation Engineer will be responsible for the following roles, but over time, the goal is to develop autonomous AI agents to take over as many responsibilities as is feasible and desirable:
 
 1. **Development of Autonomous AI Agents**
-    - Design and implement autonomous AI agents that facilitate cooperation and communication between government agencies, disease advocacy non-profits, and digital health companies.
-    - Ensure these AI agents can autonomously identify and bridge gaps in data, resources, and research between different entities.
+
+   - Design and implement autonomous AI agents that facilitate cooperation and communication between government agencies, disease advocacy non-profits, and digital health companies.
+   - Ensure these AI agents can autonomously identify and bridge gaps in data, resources, and research between different entities.
 
 2. **Enhancement of Collaboration and Data Sharing**
-    - Develop systems within the AI agents that promote and simplify data sharing and collaboration, adhering to privacy and security standards.
-    - Create mechanisms for these agents to negotiate and find common ground among different organizations, fostering positive-sum outcomes.
+
+   - Develop systems within the AI agents that promote and simplify data sharing and collaboration, adhering to privacy and security standards.
+   - Create mechanisms for these agents to negotiate and find common ground among different organizations, fostering positive-sum outcomes.
 
 3. **Integration with Existing Digital Health Platforms**
-    - Ensure the AI agents are compatible with various digital health platforms, enhancing their ability to gather and analyze data across different sources.
-    - Focus on interoperability and standardization to facilitate seamless integration.
+
+   - Ensure the AI agents are compatible with various digital health platforms, enhancing their ability to gather and analyze data across different sources.
+   - Focus on interoperability and standardization to facilitate seamless integration.
 
 4. **Community and Stakeholder Engagement**
-    - Regularly engage with stakeholders from government, non-profits, and private sectors to understand their needs and how the AI agents can best serve them.
-    - Foster a community around the project that encourages collaboration, feedback, and joint development.
+
+   - Regularly engage with stakeholders from government, non-profits, and private sectors to understand their needs and how the AI agents can best serve them.
+   - Foster a community around the project that encourages collaboration, feedback, and joint development.
 
 5. **Development of Intelligent Decision-Support Systems**
-    - Incorporate decision-support capabilities within the AI agents to assist organizations in making informed choices based on collective data and insights.
-    - Design these systems to be adaptable to different organizational goals and strategies.
+
+   - Incorporate decision-support capabilities within the AI agents to assist organizations in making informed choices based on collective data and insights.
+   - Design these systems to be adaptable to different organizational goals and strategies.
 
 6. **Research and Development**
-    - Stay abreast of the latest advancements in AI, especially those relevant to healthcare, data analysis, and collaborative technologies.
-    - Continuously evolve the AI agents based on new research, technologies, and stakeholder feedback.
+
+   - Stay abreast of the latest advancements in AI, especially those relevant to healthcare, data analysis, and collaborative technologies.
+   - Continuously evolve the AI agents based on new research, technologies, and stakeholder feedback.
 
 7. **Documentation and Knowledge Dissemination**
-    - Create thorough documentation for the AI agents, detailing their capabilities, integration processes, and use cases.
-    - Organize workshops, webinars, and training sessions to educate stakeholders on leveraging these AI agents for enhanced cooperation.
+   - Create thorough documentation for the AI agents, detailing their capabilities, integration processes, and use cases.
+   - Organize workshops, webinars, and training sessions to educate stakeholders on leveraging these AI agents for enhanced cooperation.
 
 ### Qualifications and Skills:
+
 - Deep expertise in AI, machine learning, and data science.
 - Strong experience in software development and system integration.
 - Knowledge of healthcare systems, data standards, and regulatory environments.
@@ -53,6 +61,7 @@ Initially, the human Autonomous Cooperation Engineer will be responsible for the
 - Proven track record of developing collaborative technologies.
 
 ### Desired Outcomes:
+
 - Effective autonomous AI agents that enhance cooperation among health-focused entities.
 - Strong networks and partnerships formed as a result of improved collaboration.
 - Significant advancements in healthcare data sharing and analysis.

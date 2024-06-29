@@ -1,7 +1,8 @@
 import * as z from "zod"
+
+import { getUserIdServer } from "@/lib/api/getUserIdServer"
 import { prisma as db } from "@/lib/db"
-import {getUserIdServer} from "@/lib/api/getUserIdServer";
-import {handleError} from "@/lib/errorHandler";
+import { handleError } from "@/lib/errorHandler"
 
 const wishingWellCreateSchema = z.object({
   name: z.string(),
@@ -19,7 +20,7 @@ export async function GET() {
 
 export async function POST(req: Request) {
   try {
-    const userId = await getUserIdServer();
+    const userId = await getUserIdServer()
 
     if (!userId) {
       return new Response("Unauthorized", { status: 403 })

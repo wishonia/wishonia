@@ -8,12 +8,13 @@ description: >-
   building, and advocacy. Learn how specialized agents and meta-agents drive
   efficiency, collaboration, and innovation tailored to your mission.
 ---
+
 # Agent Categories
 
-At a minimum, there should be an autonomous agent definition for each of the following activities characteristic of the most effective non-profit organizations.  However, the below general activities should be customized to specifically apply to the specific mission of the nonprofit.  Here are the six behaviors characteristic of the most effective non-profits:
+At a minimum, there should be an autonomous agent definition for each of the following activities characteristic of the most effective non-profit organizations. However, the below general activities should be customized to specifically apply to the specific mission of the nonprofit. Here are the six behaviors characteristic of the most effective non-profits:
 
-1. **Nonprofit Networking Agents** - These agents should support other nonprofits/Positron instances. An agent should catalog all similar nonprofit organizations/Positron instances.  It should provide a feed sharing:
-   - agent definitions and efficiency 
+1. **Nonprofit Networking Agents** - These agents should support other nonprofits/Positron instances. An agent should catalog all similar nonprofit organizations/Positron instances. It should provide a feed sharing:
+   - agent definitions and efficiency
    - opportunities to pool resources on what would normally be duplicative initiatives
    - accumulated expertise
    - talent databases
@@ -26,4 +27,4 @@ At a minimum, there should be an autonomous agent definition for each of the fol
 
 ## Meta-Agents:
 
-**Agent Evaluator** - This is more of a meta-agent should supervise and monitor the effectiveness of the other agents at advancing the mission based on their lead and lag metrics.  It should also monitor the internet for new approaches that could advance the mission. It should propose create new experimental agents with a WIG, lead, and lag measure to experiment these new approaches.  It should send the executive team and board regular reports with its evaluation and recommendations.
+**Agent Evaluator** - This is more of a meta-agent should supervise and monitor the effectiveness of the other agents at advancing the mission based on their lead and lag metrics. It should also monitor the internet for new approaches that could advance the mission. It should propose create new experimental agents with a WIG, lead, and lag measure to experiment these new approaches. It should send the executive team and board regular reports with its evaluation and recommendations.

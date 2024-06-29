@@ -7,8 +7,7 @@ export const siteConfig: SiteConfig = {
   author: "mikepsinn",
   description:
     "Using collective intelligence to maximize median health and happiness.",
-  keywords: [
-  ],
+  keywords: [],
   url: {
     base: env.NEXT_PUBLIC_APP_URL,
     author: "https://wishonia.love",

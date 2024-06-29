@@ -1,5 +1,35 @@
-import 'server-only'
+import "server-only"
 
+import { createStreamableValue, getMutableAIState, render } from "ai/rsc"
+import { nanoid } from "nanoid"
+import OpenAI from "openai"
+import { z } from "zod"
+
+import { prisma } from "@/lib/db"
+import { askSupabase } from "@/lib/docs/docsAgent"
+import { getCurrentUser } from "@/lib/session"
+import { Agent } from "@/lib/types"
+import {
+  BotCard,
+  BotMessage,
+  SpinnerMessage,
+} from "@/components/assistant/Message"
+import { Profile } from "@/components/assistant/Profile"
+import { ProfileList } from "@/components/assistant/ProfileList"
+import {
+  ProfileListSkeleton,
+  ProfileSkeleton,
+} from "@/components/assistant/ProfileSkeleton"
+import { Readme } from "@/components/assistant/Readme"
+import ReadmeSkeleton from "@/components/assistant/ReadmeSkeleton"
+import Repositories from "@/components/assistant/Repositories"
+import RepositorySkeleton from "@/components/assistant/RepositorySkeleton"
+import { PollRandomGlobalProblems } from "@/components/poll-random-global-problems"
+import RateLimited from "@/components/RateLimited"
+
+import { cn, sleep } from "../utils"
+import { AI } from "./actions"
+import { githubSystemPrompt } from "./github-system-prompt"
 import {
   checkRateLimit,
   convertUserType,
@@ -7,71 +37,45 @@ import {
   getGithubProfile,
   getReadme,
   searchRepositories,
-} from './github/github'
-import {
-  BotCard,
-  BotMessage,
-  SpinnerMessage,
-} from '@/components/assistant/Message'
-import { z } from 'zod'
-import OpenAI from 'openai'
-import { AI } from './actions'
-import { nanoid } from 'nanoid'
-import { githubSystemPrompt } from './github-system-prompt'
-import { Profile } from '@/components/assistant/Profile'
-import Repositories from '@/components/assistant/Repositories'
-import { ProfileList } from '@/components/assistant/ProfileList'
-import {
-  ProfileListSkeleton,
-  ProfileSkeleton,
-} from '@/components/assistant/ProfileSkeleton'
-import { createStreamableValue, getMutableAIState, render } from 'ai/rsc'
-import { Readme } from '@/components/assistant/Readme'
-import RateLimited from '@/components/RateLimited'
-import {cn, sleep} from '../utils'
-import RepositorySkeleton from '@/components/assistant/RepositorySkeleton'
-import ReadmeSkeleton from '@/components/assistant/ReadmeSkeleton'
-import {askSupabase} from "@/lib/docs/docsAgent";
-import {PollRandomGlobalProblems} from "@/components/poll-random-global-problems";
-import {getCurrentUser} from "@/lib/session";
-import { prisma } from "@/lib/db";
-import {Agent} from "@/lib/types";
+} from "./github/github"
+
 const openai = new OpenAI({
-  apiKey: process.env.OPENAI_API_KEY || '',
+  apiKey: process.env.OPENAI_API_KEY || "",
 })
 
 export async function submitUserMessage(
-    content: string,agent:Agent, attribute: string, )
-{
-  'use server'
+  content: string,
+  agent: Agent,
+  attribute: string
+) {
+  "use server"
   //debugger
 
-  console.log(`submitUserMessage: ${content}`);
+  console.log(`submitUserMessage: ${content}`)
   const aiState = getMutableAIState<typeof AI>()
 
-  const newState = aiState.get();
+  const newState = aiState.get()
   newState.messages.push({
     id: nanoid(),
-    role: 'user',
+    role: "user",
     content,
-  });
+  })
   aiState.update(newState)
 
   let textStream: undefined | ReturnType<typeof createStreamableValue<string>>
   let textNode: undefined | React.ReactNode
-  let agentPrompt=githubSystemPrompt;
-  if(agent && agent.prompt){
-      agentPrompt=agent.prompt;
+  let agentPrompt = githubSystemPrompt
+  if (agent && agent.prompt) {
+    agentPrompt = agent.prompt
   }
 
-  
   const ui = render({
-    model: 'gpt-3.5-turbo',
+    model: "gpt-3.5-turbo",
     provider: openai,
-    initial: <SpinnerMessage avatar={agent?.avatar}/>,
+    initial: <SpinnerMessage avatar={agent?.avatar} />,
     messages: [
       {
-        role: 'system',
+        role: "system",
         content: agentPrompt,
       },
       ...aiState.get().messages.map((message: any) => ({
@@ -82,8 +86,14 @@ export async function submitUserMessage(
     ],
     text: ({ content, done, delta }) => {
       if (!textStream) {
-        textStream = createStreamableValue('')
-        textNode = <BotMessage agentName={agent?.name} avatar={agent?.avatar} content={textStream.value} />
+        textStream = createStreamableValue("")
+        textNode = (
+          <BotMessage
+            agentName={agent?.name}
+            avatar={agent?.avatar}
+            content={textStream.value}
+          />
+        )
       }
 
       if (done) {
@@ -94,7 +104,7 @@ export async function submitUserMessage(
             ...aiState.get().messages,
             {
               id: nanoid(),
-              role: 'assistant',
+              role: "assistant",
               content,
             },
           ],
@@ -107,11 +117,11 @@ export async function submitUserMessage(
 
     functions: {
       show_user_profile_ui: {
-        description: 'Show the found user profile UI',
+        description: "Show the found user profile UI",
         parameters: z.object({
           username: z
             .string()
-            .describe('The username of the user to search for'),
+            .describe("The username of the user to search for"),
         }),
         render: async function* ({ username }) {
           yield (
@@ -129,8 +139,8 @@ export async function submitUserMessage(
               ...aiState.get().messages,
               {
                 id: nanoid(),
-                role: 'function',
-                name: 'show_user_profile_ui',
+                role: "function",
+                name: "show_user_profile_ui",
                 content: JSON.stringify(profile),
               },
             ],
@@ -148,9 +158,9 @@ export async function submitUserMessage(
         },
       },
       show_user_list_ui: {
-        description: 'Show the found user list UI',
+        description: "Show the found user list UI",
         parameters: z.object({
-          query: z.string().describe('The query to search for users'),
+          query: z.string().describe("The query to search for users"),
         }),
         render: async function* ({ query }) {
           yield (
@@ -167,8 +177,8 @@ export async function submitUserMessage(
               ...aiState.get().messages,
               {
                 id: nanoid(),
-                role: 'function',
-                name: 'show_user_list_ui',
+                role: "function",
+                name: "show_user_list_ui",
                 content: JSON.stringify(profiles),
               },
             ],
@@ -185,9 +195,9 @@ export async function submitUserMessage(
         },
       },
       show_repository_ui: {
-        description: 'Show the found repositories UI',
+        description: "Show the found repositories UI",
         parameters: z.object({
-          query: z.string().describe('The query to search for users'),
+          query: z.string().describe("The query to search for users"),
         }),
         render: async function* ({ query }) {
           yield (
@@ -205,8 +215,8 @@ export async function submitUserMessage(
               ...aiState.get().messages,
               {
                 id: nanoid(),
-                role: 'function',
-                name: 'show_repository_ui',
+                role: "function",
+                name: "show_repository_ui",
                 content: JSON.stringify(repositories),
               },
             ],
@@ -224,14 +234,14 @@ export async function submitUserMessage(
         },
       },
       show_problems_vote_ui: {
-        description: 'Show the found problems vote UI',
+        description: "Show the found problems vote UI",
         parameters: z.object({}),
-        render: async function* ({  }) {
+        render: async function* ({}) {
           console.log("show_problems_vote_ui called")
           yield (
-              <BotCard>
-                <ReadmeSkeleton />
-              </BotCard>
+            <BotCard>
+              <ReadmeSkeleton />
+            </BotCard>
           )
 
           aiState.done({
@@ -240,8 +250,8 @@ export async function submitUserMessage(
               ...aiState.get().messages,
               {
                 id: nanoid(),
-                role: 'function',
-                name: 'show_problems_vote_ui',
+                role: "function",
+                name: "show_problems_vote_ui",
                 content: JSON.stringify({}),
               },
             ],
@@ -249,21 +259,23 @@ export async function submitUserMessage(
           const user = await getCurrentUser()
 
           return (
-              <BotCard>
-                <div className={cn('group flex items-start w-full')}>
-                  <div className='flex-1 space-y-2 overflow-hidden px-1 w-full'>
-                    <PollRandomGlobalProblems user={user}></PollRandomGlobalProblems>
-                  </div>
+            <BotCard>
+              <div className={cn("group flex w-full items-start")}>
+                <div className="w-full flex-1 space-y-2 overflow-hidden px-1">
+                  <PollRandomGlobalProblems
+                    user={user}
+                  ></PollRandomGlobalProblems>
                 </div>
-              </BotCard>
+              </div>
+            </BotCard>
           )
         },
       },
       show_readme_ui: {
-        description: 'Show the found Readme.md UI',
+        description: "Show the found Readme.md UI",
         parameters: z.object({
-          repo: z.string().describe('The repo to search for'),
-          owner: z.string().describe('The owner of the repo'),
+          repo: z.string().describe("The repo to search for"),
+          owner: z.string().describe("The owner of the repo"),
         }),
         render: async function* ({ repo, owner }) {
           yield (
@@ -281,8 +293,8 @@ export async function submitUserMessage(
               ...aiState.get().messages,
               {
                 id: nanoid(),
-                role: 'function',
-                name: 'show_readme_ui',
+                role: "function",
+                name: "show_readme_ui",
                 content: JSON.stringify(response.content),
               },
             ],
@@ -300,23 +312,25 @@ export async function submitUserMessage(
         },
       },
       ask_about_wishonia: {
-        description: 'Ask a general question about Wishonia or Wishocracy',
+        description: "Ask a general question about Wishonia or Wishocracy",
         parameters: z.object({
-          question: z.string().describe('The question to answer about wishonia or wishocracy'),
+          question: z
+            .string()
+            .describe("The question to answer about wishonia or wishocracy"),
         }),
         render: async function* ({ question }) {
           yield (
-              <BotCard>
-                <ReadmeSkeleton />
-              </BotCard>
+            <BotCard>
+              <ReadmeSkeleton />
+            </BotCard>
           )
           //const rateLimitRemaining = await checkRateLimit()
-          const rateLimitRemaining = true;
-          if(!rateLimitRemaining){
+          const rateLimitRemaining = true
+          if (!rateLimitRemaining) {
             return (
-                <BotCard>
-                  <RateLimited />
-                </BotCard>
+              <BotCard>
+                <RateLimited />
+              </BotCard>
             )
           }
           const content = await askSupabase(question, false)
@@ -328,17 +342,17 @@ export async function submitUserMessage(
               ...aiState.get().messages,
               {
                 id: nanoid(),
-                role: 'function',
-                name: 'ask_about_wishonia',
+                role: "function",
+                name: "ask_about_wishonia",
                 content: content,
               },
             ],
           })
 
           return (
-              <BotCard>
-                <Readme props={content} />
-              </BotCard>
+            <BotCard>
+              <Readme props={content} />
+            </BotCard>
           )
         },
       },

@@ -1,11 +1,14 @@
 "use client"
+
+import Image from "next/image"
 import Link from "next/link"
+import { GlobalProblem } from "@prisma/client"
 import { ColumnDef } from "@tanstack/react-table"
+
 import { cn } from "@/lib/utils"
 import { Button, buttonVariants } from "@/components/ui/button"
 import { Icons } from "@/components/icons"
-import {GlobalProblem} from "@prisma/client";
-import Image from "next/image";
+
 export const globalProblemColumns: ColumnDef<GlobalProblem>[] = [
   {
     accessorKey: "name",
@@ -33,7 +36,7 @@ export const globalProblemColumns: ColumnDef<GlobalProblem>[] = [
         >
           <Image
             src={featuredImage}
-            className={"object-cover rounded-full p-2"}
+            className={"rounded-full object-cover p-2"}
             alt="Global Problem"
             width={50}
             height={50}
@@ -47,31 +50,34 @@ export const globalProblemColumns: ColumnDef<GlobalProblem>[] = [
     accessorKey: "averageAllocation",
     header: ({ column }) => {
       return (
-          <Button
-              variant="ghost"
-              onClick={() => column.toggleSorting(column.getIsSorted() === "asc")}
-          >
-            Average Allocation
-            <Icons.sort className="ml-2 h-4 w-4" />
-          </Button>
+        <Button
+          variant="ghost"
+          onClick={() => column.toggleSorting(column.getIsSorted() === "asc")}
+        >
+          Average Allocation
+          <Icons.sort className="ml-2 h-4 w-4" />
+        </Button>
       )
     },
     cell: (row) => {
       let averageAllocation = row.getValue() as number
-      if(!averageAllocation) {
+      if (!averageAllocation) {
         return (
-            <Button
-                variant="ghost"
-                onClick={() => window.location.href = `/globalSolutions`}
-            >
-              Vote to See Results
-              <Icons.lightbulb className="ml-2 h-4 w-4" />
-            </Button>
-        )}
-      averageAllocation = parseFloat(averageAllocation.toFixed(1));
-      return <div className="min-w-[5rem] md:px-4 text-center">
-        {averageAllocation}%
-      </div>
+          <Button
+            variant="ghost"
+            onClick={() => (window.location.href = `/globalSolutions`)}
+          >
+            Vote to See Results
+            <Icons.lightbulb className="ml-2 h-4 w-4" />
+          </Button>
+        )
+      }
+      averageAllocation = parseFloat(averageAllocation.toFixed(1))
+      return (
+        <div className="min-w-[5rem] text-center md:px-4">
+          {averageAllocation}%
+        </div>
+      )
     },
   },
   {
@@ -80,13 +86,15 @@ export const globalProblemColumns: ColumnDef<GlobalProblem>[] = [
       const globalProblem = row.original
       const id = globalProblem.id
       return (
-          <Button
-              variant="ghost"
-              onClick={() => window.location.href = `/globalProblems/${id}/solutions`}
-          >
-            Solutions
-            <Icons.lightbulb className="ml-2 h-4 w-4" />
-          </Button>
+        <Button
+          variant="ghost"
+          onClick={() =>
+            (window.location.href = `/globalProblems/${id}/solutions`)
+          }
+        >
+          Solutions
+          <Icons.lightbulb className="ml-2 h-4 w-4" />
+        </Button>
       )
     },
   },
