@@ -15,6 +15,7 @@ ogImage:
 absFilePath: >-
   C:\code\wishonia\public\globalSolutions\1-percent-treaty\how-much-it-will-cost-to-make-it-happen.md
 ---
+
 # How Much Will It Cost to Make It Happen?
 
 Here's the potential range of cost per signature for various strategies to gather 80 million signatures for a global initiative like the LOGICAL Treaty. Then, we'll calculate the total estimated cost for achieving this goal through each method.
@@ -85,6 +86,7 @@ Combining various strategies to gather 80 million signatures for a global initia
 Given the base and enhanced approaches:
 
 - **Lower Bound**: $0.01 to $0.05 per signature for primarily volunteer and social media-driven efforts, plus the efficiency of a referral program, could lead to a minimal increase.
+
   - **Total Cost Range**: $800,000 to $4 million.
 
 - **Upper Bound**: Considering some use of paid advertising and partnerships, and assuming efficient use of funds from a crypto sale to cover these costs effectively, the per signature cost might slightly increase.

@@ -10,13 +10,18 @@ interface GlobalSolutionListProps {
   globalSolutions: GlobalSolution[]
 }
 
-export function UserGlobalSolutionList({ globalSolutions }: GlobalSolutionListProps) {
+export function UserGlobalSolutionList({
+  globalSolutions,
+}: GlobalSolutionListProps) {
   return (
     <>
       {globalSolutions?.length ? (
         <>
           {globalSolutions.map((globalSolution) => (
-            <GlobalSolutionItem key={globalSolution.id} globalSolution={globalSolution} />
+            <GlobalSolutionItem
+              key={globalSolution.id}
+              globalSolution={globalSolution}
+            />
           ))}
         </>
       ) : (
@@ -24,7 +29,9 @@ export function UserGlobalSolutionList({ globalSolutions }: GlobalSolutionListPr
           <div className="flex h-20 w-20 items-center justify-center rounded-full bg-muted">
             <Icons.lightbulb className="h-10 w-10" />
           </div>
-          <EmptyPlaceholder.Title>No global solutions made!</EmptyPlaceholder.Title>
+          <EmptyPlaceholder.Title>
+            No global solutions made!
+          </EmptyPlaceholder.Title>
           <EmptyPlaceholder.Description>
             Make a global solution!
           </EmptyPlaceholder.Description>

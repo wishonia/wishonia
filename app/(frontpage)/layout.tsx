@@ -1,7 +1,8 @@
+import React from "react"
+
 import { getCurrentUser } from "@/lib/session"
 import Footer from "@/components/layout/footer"
 import TopNavbar from "@/components/layout/topNavbar"
-import React from "react";
 
 interface FrontPageLayoutProps {
   children: React.ReactNode
@@ -23,7 +24,7 @@ export default async function FrontPageLayout({
         />
       )}
       {children}
-      <div style={{ height: '200px' }}></div>
+      <div style={{ height: "200px" }}></div>
       <Footer />
     </>
   )

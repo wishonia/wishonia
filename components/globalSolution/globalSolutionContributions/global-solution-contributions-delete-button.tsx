@@ -29,10 +29,16 @@ interface GlobalSolutionContributionsDeleteButtonProps {
   }
 }
 
-async function deleteGlobalSolution(globalSolutionId: string, globalSolutionContributionsId: string) {
-  const response = await fetch(`/api/globalSolutions/${globalSolutionId}/globalSolutionContributions/${globalSolutionContributionsId}`, {
-    method: "DELETE",
-  })
+async function deleteGlobalSolution(
+  globalSolutionId: string,
+  globalSolutionContributionsId: string
+) {
+  const response = await fetch(
+    `/api/globalSolutions/${globalSolutionId}/globalSolutionContributions/${globalSolutionContributionsId}`,
+    {
+      method: "DELETE",
+    }
+  )
 
   if (!response?.ok) {
     toast({
@@ -49,14 +55,19 @@ async function deleteGlobalSolution(globalSolutionId: string, globalSolutionCont
   return true
 }
 
-export function GlobalSolutionContributionsDeleteButton({ globalSolutionContributions }: GlobalSolutionContributionsDeleteButtonProps) {
+export function GlobalSolutionContributionsDeleteButton({
+  globalSolutionContributions,
+}: GlobalSolutionContributionsDeleteButtonProps) {
   const router = useRouter()
   const [showDeleteAlert, setShowDeleteAlert] = React.useState<boolean>(false)
   const [isDeleteLoading, setIsDeleteLoading] = React.useState<boolean>(false)
 
   const handleDelete = async () => {
     setIsDeleteLoading(true)
-    const deleted = await deleteGlobalSolution(globalSolutionContributions.globalSolution.id, globalSolutionContributions.id)
+    const deleted = await deleteGlobalSolution(
+      globalSolutionContributions.globalSolution.id,
+      globalSolutionContributions.id
+    )
 
     if (deleted) {
       setIsDeleteLoading(false)
@@ -80,7 +91,8 @@ export function GlobalSolutionContributionsDeleteButton({ globalSolutionContribu
         <CredenzaContent>
           <CredenzaHeader>
             <CredenzaTitle>
-              Delete globalSolutionContributions from {formatDate(globalSolutionContributions.date)}?
+              Delete globalSolutionContributions from{" "}
+              {formatDate(globalSolutionContributions.date)}?
             </CredenzaTitle>
             <CredenzaDescription>
               This action cannot be undone.

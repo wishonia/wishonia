@@ -1,15 +1,17 @@
-import {ComponentPreview, Previews} from "@react-buddy/ide-toolbox-next";
-import {PaletteTree} from "./palette";
-import {PollRandomWishingWells} from "@/components/poll-random-wishing-wells";
+import { ComponentPreview, Previews } from "@react-buddy/ide-toolbox-next"
+
+import { PollRandomWishingWells } from "@/components/poll-random-wishing-wells"
+
+import { PaletteTree } from "./palette"
 
 const ComponentPreviews = () => {
-    return (
-        <Previews palette={<PaletteTree/>}>
-            <ComponentPreview path="/PollRandom">
-                <PollRandomWishingWells/>
-            </ComponentPreview>
-        </Previews>
-    );
-};
+  return (
+    <Previews palette={<PaletteTree />}>
+      <ComponentPreview path="/PollRandom">
+        <PollRandomWishingWells />
+      </ComponentPreview>
+    </Previews>
+  )
+}
 
-export default ComponentPreviews;
+export default ComponentPreviews

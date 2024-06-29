@@ -1,12 +1,12 @@
-import { ChatAnthropic } from "@langchain/anthropic";
-import { ChatOpenAI } from "@langchain/openai";
-import { ChatGooglePaLM } from "@langchain/community/chat_models/googlepalm";
-import { HuggingFaceInference } from "@langchain/community/llms/hf";
-import { WishoniaFireworksModel } from "../models/fireworks";
-import { OpenAI } from "@langchain/openai";
-import { ChatGoogleGenerativeAI } from "@langchain/google-genai";
-import { ChatOllama } from "@langchain/community/chat_models/ollama";
-import { Replicate } from "@langchain/community/llms/replicate";
+import { ChatAnthropic } from "@langchain/anthropic"
+import { ChatGooglePaLM } from "@langchain/community/chat_models/googlepalm"
+import { ChatOllama } from "@langchain/community/chat_models/ollama"
+import { HuggingFaceInference } from "@langchain/community/llms/hf"
+import { Replicate } from "@langchain/community/llms/replicate"
+import { ChatGoogleGenerativeAI } from "@langchain/google-genai"
+import { ChatOpenAI, OpenAI } from "@langchain/openai"
+
+import { WishoniaFireworksModel } from "../models/fireworks"
 
 export const chatModelProvider = (
   provider: string,
@@ -14,10 +14,10 @@ export const chatModelProvider = (
   temperature?: number,
   otherFields?: any
 ) => {
-  modelName = modelName.replace("-dbase", "");
-  modelName = modelName.replace(/_wishonia_[0-9]+$/, "");
-  if(!temperature) {
-    temperature = 0;
+  modelName = modelName.replace("-dbase", "")
+  modelName = modelName.replace(/_wishonia_[0-9]+$/, "")
+  if (!temperature) {
+    temperature = 0
   }
 
   switch (provider.toLowerCase()) {
@@ -30,32 +30,32 @@ export const chatModelProvider = (
           ...otherFields.configuration,
           baseURL: process.env.OPENAI_API_URL,
         },
-      });
+      })
     case "anthropic":
       return new ChatAnthropic({
         modelName: modelName,
         temperature: temperature,
         ...otherFields,
-      });
+      })
     case "google-bison":
       return new ChatGooglePaLM({
         temperature: temperature,
         apiKey: process.env.GOOGLE_API_KEY,
         ...otherFields,
-      });
+      })
     case "huggingface-api":
       return new HuggingFaceInference({
         modelName: modelName,
         temperature: temperature,
         ...otherFields,
-      });
+      })
     case "fireworks":
       return new WishoniaFireworksModel({
         model: modelName,
         temperature: temperature,
         is_chat: !notChatModels.includes(modelName),
         ...otherFields,
-      });
+      })
     case "openai-instruct":
       return new OpenAI({
         modelName: modelName,
@@ -64,7 +64,7 @@ export const chatModelProvider = (
         configuration: {
           baseURL: process.env.OPENAI_API_URL,
         },
-      });
+      })
     case "local":
       return new ChatOpenAI({
         modelName: modelName,
@@ -80,27 +80,27 @@ export const chatModelProvider = (
             "X-Title": process.env.LOCAL_TITLE || "Local Title",
           },
         },
-      });
+      })
     case "google":
       return new ChatGoogleGenerativeAI({
         modelName: modelName,
         maxOutputTokens: 2048,
         apiKey: process.env.GOOGLE_API_KEY,
         ...otherFields,
-      });
+      })
     case "ollama":
       return new ChatOllama({
         baseUrl: otherFields.baseURL,
         model: modelName,
         ...otherFields,
-      });
+      })
     case "replicate":
       return new Replicate({
         model: modelName,
         temperature: temperature,
         apiKey: otherFields.apiKey,
         ...otherFields,
-      });
+      })
     case "groq":
       return new ChatOpenAI({
         modelName: modelName,
@@ -110,16 +110,16 @@ export const chatModelProvider = (
           baseURL: "https://api.groq.com/openai/v1",
           apiKey: process.env.GROQ_API_KEY! || "",
         },
-      });
+      })
     default:
-      console.log("using default");
+      console.log("using default")
       return new ChatOpenAI({
         modelName: modelName,
         temperature: temperature,
         ...otherFields,
-      });
+      })
   }
-};
+}
 
 export const streamingSupportedModels = [
   "gpt-3.5-turbo",
@@ -138,17 +138,17 @@ export const streamingSupportedModels = [
   "llama-v2-34b-code-instruct-w8a16",
   "gpt-3.5-turbo-instruct",
   "mistral-7b-instruct-4k",
-];
+]
 
 export const isStreamingSupported = (model: string) => {
-  return streamingSupportedModels.includes(model);
-};
+  return streamingSupportedModels.includes(model)
+}
 
 export const notChatModels = [
   "accounts/fireworks/models/llama-v2-13b-code-instruct",
   "accounts/fireworks/models/llama-v2-34b-code-instruct-w8a16",
   "accounts/fireworks/models/mistral-7b-instruct-4k",
-];
+]
 
 export const supportedModels = [
   "gpt-3.5-turbo",
@@ -169,4 +169,4 @@ export const supportedModels = [
   "llama-v2-34b-code-instruct-w8a16",
   "gpt-3.5-turbo-instruct",
   "mistral-7b-instruct-4k",
-];
+]

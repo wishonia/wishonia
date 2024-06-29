@@ -11,4 +11,3 @@ export const globalSolutionSchema = z.object({
   description: z.string().max(240).optional(),
   content: z.string().max(30000).optional(),
 })
-

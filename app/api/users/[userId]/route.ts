@@ -1,8 +1,9 @@
 import { z } from "zod"
+
+import { getUserIdServer } from "@/lib/api/getUserIdServer"
 import { prisma as db } from "@/lib/db"
+import { handleError } from "@/lib/errorHandler"
 import { userNameSchema } from "@/lib/validations/user"
-import {handleError} from "@/lib/errorHandler";
-import {getUserIdServer} from "@/lib/api/getUserIdServer";
 
 const routeContextSchema = z.object({
   params: z.object({
@@ -11,10 +12,10 @@ const routeContextSchema = z.object({
 })
 
 interface DatabaseError extends Error {
-  code: string;
+  code: string
   meta?: {
-    target?: string[];
-  };
+    target?: string[]
+  }
 }
 
 export async function PATCH(
@@ -23,7 +24,7 @@ export async function PATCH(
 ) {
   try {
     const { params } = routeContextSchema.parse(context)
-    const userId = await getUserIdServer();
+    const userId = await getUserIdServer()
 
     if (userId || params.userId !== userId) {
       return new Response(null, { status: 403 })
@@ -44,11 +45,17 @@ export async function PATCH(
         },
       })
     } catch (error) {
-      const dbError = error as DatabaseError;
-      if (dbError.code === 'P2002' && dbError.meta?.target?.includes('username')) {
-        return new Response(JSON.stringify({ message: "Username is already taken" }), { status: 409, headers: { 'Content-Type': 'application/json' } })
+      const dbError = error as DatabaseError
+      if (
+        dbError.code === "P2002" &&
+        dbError.meta?.target?.includes("username")
+      ) {
+        return new Response(
+          JSON.stringify({ message: "Username is already taken" }),
+          { status: 409, headers: { "Content-Type": "application/json" } }
+        )
       }
-      throw error;
+      throw error
     }
 
     return new Response(null, { status: 200 })

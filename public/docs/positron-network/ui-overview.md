@@ -8,13 +8,14 @@ description: >-
   pooling resources for maximized impact, streamline your efforts and
   collaborate for shared success.
 ---
+
 # Ui Overview
 
 1. Non-profit member signs in
 2. Specify their mission
 3. Define or select from existing autonomous agent definitions, i.e., instructions, key performance indicators (KPIs), etc.
-4. Fund the operation of autonomous agents 
-5. See which models/instruction sets are most cost-effective at KPI 
+4. Fund the operation of autonomous agents
+5. See which models/instruction sets are most cost-effective at KPI
 6. Minimize duplication of effort and waste by pooling resources with other organizations running the same agent
 7. Maximize the impact of the organization's mission by sharing the results of the autonomous agents with other organizations running the same agent
 8. Collaborate with other nonprofits to develop a shared open-source F.A.I.R. autonomous self-improving agent platform that any nonprofit organization can use to:
@@ -80,7 +81,9 @@ description: >-
 5. The user can now select their agent from the list of agents on the home page
 
 ### 3.2. Select Existing Agent
-The user can: 
+
+The user can:
+
 1. start their agent by clicking the "Start Agent" button
 2. stop their agent by clicking the "Stop Agent" button
 3. delete their agent by clicking the "Delete Agent" button

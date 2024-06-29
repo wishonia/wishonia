@@ -1,23 +1,26 @@
 interface ExampleQueryButtonProps {
-  exampleQuery: string;
-    setQuery: (query: string) => void;
+  exampleQuery: string
+  setQuery: (query: string) => void
 }
 
-const ExampleQueryButton: React.FC<ExampleQueryButtonProps> = ({ exampleQuery, setQuery }) => (
+const ExampleQueryButton: React.FC<ExampleQueryButtonProps> = ({
+  exampleQuery,
+  setQuery,
+}) => (
   <button
     type="button"
-    className="px-1.5 py-1 m-1
-    bg-slate-50 dark:bg-gray-500
-    hover:bg-slate-100 dark:hover:bg-gray-600
-    rounded border border-slate-200 dark:border-slate-600
-    transition-colors"
+    className="m-1 rounded border
+    border-slate-200 bg-slate-50
+    px-1.5 py-1
+    transition-colors hover:bg-slate-100 dark:border-slate-600 dark:bg-gray-500
+    dark:hover:bg-gray-600"
     onClick={() => {
-      setQuery(exampleQuery);
+      setQuery(exampleQuery)
     }}
   >
     {exampleQuery}
   </button>
-);
-ExampleQueryButton.displayName = 'ExampleQueryButton';
+)
+ExampleQueryButton.displayName = "ExampleQueryButton"
 
-export { ExampleQueryButton };
+export { ExampleQueryButton }

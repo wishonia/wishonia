@@ -1,8 +1,9 @@
-'use client'
+"use client"
 
-import AssistantDisplay from '../AssistantDisplay'
-import { Profile } from './Profile'
-import { GithubUser } from '@/lib/types'
+import { GithubUser } from "@/lib/types"
+
+import AssistantDisplay from "../AssistantDisplay"
+import { Profile } from "./Profile"
 
 export function ProfileList({ props: profiles }: { props: GithubUser[] }) {
   if (!Array.isArray(profiles)) {
@@ -13,7 +14,7 @@ export function ProfileList({ props: profiles }: { props: GithubUser[] }) {
   }
   return (
     <AssistantDisplay>
-      <div className='flex flex-col gap-2'>
+      <div className="flex flex-col gap-2">
         {profiles.map((user: GithubUser, index) => {
           return <Profile key={index} props={user} isMultiple />
         })}

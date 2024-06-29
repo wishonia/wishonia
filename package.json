@@ -10,6 +10,7 @@
     "lint": "next lint",
     "preview": "next build && next start",
     "postinstall": "prisma generate",
+    "prettier": "prettier --write .",
     "prisma:generate": "prisma generate",
     "prisma:migrate:create": "prisma migrate dev --create-only",
     "prisma:migrate": "prisma migrate dev",

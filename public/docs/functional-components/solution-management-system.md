@@ -3,6 +3,7 @@ name: Solution Management System
 description: "Solution Management System\r\n    - Solution proposal creation and submission\r\n    - Solution evaluation and selection\r\n    - Solution categorization and tagging\r\n    - Solution status tracking\r\n    - Solution impact assessment\r\n\r"
 featuredImage: /docs/functional-components/solution-management-system.jpg
 ---
+
 # Product Requirements Document (PRD) for Wishocracy: Solution Management System
 
 ## Table of Contents
@@ -31,6 +32,7 @@ The objective of the Solution Management System is to provide a structured frame
 ## Scope
 
 This document details the functional and non-functional requirements for the Solution Management System. It includes the following core functionalities:
+
 - Solution Proposal Creation and Submission
 - Solution Evaluation and Selection
 - Solution Categorization and Tagging
@@ -42,9 +44,11 @@ This document details the functional and non-functional requirements for the Sol
 ### Solution Proposal Creation and Submission
 
 #### Description
+
 Users should be able to create and submit solution proposals. This functionality includes providing a user-friendly interface for solution submission and ensuring that necessary information is captured during the process.
 
 #### Requirements
+
 - **User Interface**:
   - Form to capture solution title, description, objectives, and expected outcomes.
   - Upload functionality for supporting documents or media.
@@ -58,9 +62,11 @@ Users should be able to create and submit solution proposals. This functionality
 ### Solution Evaluation and Selection
 
 #### Description
+
 Proposed solutions should undergo evaluation by a designated team or community. The system should facilitate and document the evaluation and selection process.
 
 #### Requirements
+
 - **Evaluation Workflow**:
   - Assign evaluators or evaluation committee.
   - Define evaluation criteria (e.g., feasibility, impact, cost).
@@ -73,9 +79,11 @@ Proposed solutions should undergo evaluation by a designated team or community. 
 ### Solution Categorization and Tagging
 
 #### Description
+
 Proposed solutions should be categorized and tagged to facilitate better organization, searchability, and management.
 
 #### Requirements
+
 - **Categorization**:
   - Allow categorization based on predefined categories (e.g., environment, technology, healthcare).
   - Support custom categories defined by administrators.
@@ -86,9 +94,11 @@ Proposed solutions should be categorized and tagged to facilitate better organiz
 ### Solution Status Tracking
 
 #### Description
+
 Track the status of solutions through their lifecycle from proposal to implementation and post-implementation review.
 
 #### Requirements
+
 - **Status Indicators**:
   - Define and track statuses such as submitted, under review, approved, in progress, completed, rejected.
 - **Notifications**:
@@ -98,9 +108,11 @@ Track the status of solutions through their lifecycle from proposal to implement
 ### Solution Impact Assessment
 
 #### Description
+
 Assess the impact of implemented solutions to gauge their success and inform future decision-making.
 
 #### Requirements
+
 - **Impact Metrics**:
   - Define and track key performance indicators (KPIs) relevant to the solution.
 - **Feedback Collection**:
@@ -121,6 +133,7 @@ Assess the impact of implemented solutions to gauge their success and inform fut
 ## Existing Systems
 
 Several existing systems offer similar functionalities and can provide insights or reference models for the Solution Management System. Some of these systems include:
+
 - **IdeaScale**: A platform for crowdsourcing ideas and managing innovation.
 - **Aha!**: A product management tool that allows for idea submissions and prioritization.
 - **Monday.com**: A work operating system that can be adapted for managing solution proposals and workflows.
@@ -130,6 +143,5 @@ Several existing systems offer similar functionalities and can provide insights 
 - **Glossary**: Definitions of key terms used in this document.
 - **User Personas**: Descriptions of typical users interacting with the system.
 - **Workflow Diagrams**: Visual representations of the processes involved in proposal submission, evaluation, and tracking.
-
 
 ---

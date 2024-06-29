@@ -1,31 +1,30 @@
-import { BaseChatModel, BaseChatModelParams } from "@langchain/core/language_models/chat_models";
-import { CallbackManagerForLLMRun } from "@langchain/core/callbacks/manager";
+import { CallbackManagerForLLMRun } from "@langchain/core/callbacks/manager"
 import {
-  AIMessage,
-  BaseMessage,
-} from "@langchain/core/messages";
-
-import { ChatGeneration, ChatResult } from "@langchain/core/outputs";
+  BaseChatModel,
+  BaseChatModelParams,
+} from "@langchain/core/language_models/chat_models"
+import { AIMessage, BaseMessage } from "@langchain/core/messages"
+import { ChatGeneration, ChatResult } from "@langchain/core/outputs"
 
 declare interface WishoniaFireworksModelInput {
-  temperature?: number;
-  top_p?: number;
-  streaming?: boolean;
-  max_tokens?: number;
-  n?: number;
-  model?: string;
-  is_chat?: boolean;
+  temperature?: number
+  top_p?: number
+  streaming?: boolean
+  max_tokens?: number
+  n?: number
+  model?: string
+  is_chat?: boolean
 }
 
 interface ChatCompletionRequest {
   messages?: {
-    role: string;
-    content: string;
-  }[];
-  prompt?: string;
-  stream?: boolean;
-  temperature?: number;
-  top_p?: number;
+    role: string
+    content: string
+  }[]
+  prompt?: string
+  stream?: boolean
+  temperature?: number
+  top_p?: number
 }
 // interface ChatCompletionResponse {
 //     object: string;
@@ -46,209 +45,210 @@ interface ChatCompletionRequest {
 // }
 
 function messageToFireworkRole(message: BaseMessage): string {
-  const type = message._getType();
+  const type = message._getType()
   switch (type) {
     case "system":
-      return "system";
+      return "system"
     case "ai":
-      return "assistant";
+      return "assistant"
     case "human":
-      return "user";
+      return "user"
     default:
-      throw new Error(`Unknown message type: ${type}`);
+      throw new Error(`Unknown message type: ${type}`)
   }
 }
 export class WishoniaFireworksModel
   extends BaseChatModel
-  implements WishoniaFireworksModelInput {
-  temperature: number | undefined;
+  implements WishoniaFireworksModelInput
+{
+  temperature: number | undefined
 
-  top_p?: number | undefined;
+  top_p?: number | undefined
 
-  streaming?: boolean | undefined;
+  streaming?: boolean | undefined
 
-  model: string;
+  model: string
 
-  max_tokens?: number | undefined;
+  max_tokens?: number | undefined
 
-  n?: number | undefined;
+  n?: number | undefined
 
-  is_chat?: boolean | undefined;
+  is_chat?: boolean | undefined
 
   constructor(
     fields?: Partial<WishoniaFireworksModelInput> & BaseChatModelParams
   ) {
-    super(fields ?? {});
+    super(fields ?? {})
 
-    this.model = fields?.model ?? "accounts/fireworks/models/llama-v2-7b-chat";
-    this.temperature = fields?.temperature ?? 0.7;
-    this.top_p = fields?.top_p ?? this.top_p;
-    this.streaming = fields?.streaming ?? false;
-    this.max_tokens = fields?.max_tokens ?? 1048;
-    this.n = fields?.n ?? 1;
-    this.is_chat = fields?.is_chat ?? true;
+    this.model = fields?.model ?? "accounts/fireworks/models/llama-v2-7b-chat"
+    this.temperature = fields?.temperature ?? 0.7
+    this.top_p = fields?.top_p ?? this.top_p
+    this.streaming = fields?.streaming ?? false
+    this.max_tokens = fields?.max_tokens ?? 1048
+    this.n = fields?.n ?? 1
+    this.is_chat = fields?.is_chat ?? true
 
     if (!process.env.FIREWORKS_API_KEY) {
-      throw new Error("FIREWORKS_API_KEY is not set");
+      throw new Error("FIREWORKS_API_KEY is not set")
     }
   }
 
   _llmType(): string {
-    return "wishonia_fireworks";
+    return "wishonia_fireworks"
   }
   async _generate(
     messages: BaseMessage[],
     options: this["ParsedCallOptions"],
     runManager?: CallbackManagerForLLMRun | undefined
   ): Promise<ChatResult> {
-    const params = this.invocationParams(options);
+    const params = this.invocationParams(options)
 
     const messagesMapped = messages.map((message) => ({
       role: messageToFireworkRole(message),
       content: message.content,
-    }));
+    }))
 
     const prompt = messagesMapped.reduce((acc, message) => {
-      return `[INST]${message.content}\n[/INST]`;
-    }, "");
+      return `[INST]${message.content}\n[/INST]`
+    }, "")
 
-    console.log(this.model);
+    console.log(this.model)
 
     let data = this.streaming
       ? await new Promise<any>((resolve, reject) => {
-        let response: any;
-        let rejected = false;
-        let resolved = false;
+          let response: any
+          let rejected = false
+          let resolved = false
 
-        this.completionWithRetry(
+          this.completionWithRetry(
+            {
+              ...params,
+              messages: this.is_chat
+                ? messagesMapped.map(({ role, content }) => ({
+                    role,
+                    content: content.toString(),
+                  }))
+                : undefined,
+              prompt: !this.is_chat ? prompt : undefined,
+            },
+            options?.signal,
+            (event) => {
+              // console.log(event.data);
+              if (event.data === "[DONE]") {
+                if (resolved || rejected) {
+                  return
+                }
+                resolved = true
+                resolve(response)
+                return
+              }
+              try {
+                const data = JSON.parse(event.data)
+                if (data?.error_code) {
+                  if (rejected) {
+                    return
+                  }
+                  rejected = true
+                  reject(data)
+                  return
+                }
+                const message = data as {
+                  id: string
+                  object: string
+                  created: number
+                  model: string
+                  choices: {
+                    index: number
+                    delta?: {
+                      content?: string
+                      role?: string
+                    }
+                    text?: string
+                    finish_reason: string
+                  }[]
+                }
+
+                if (!response) {
+                  if (message.choices.length > 0) {
+                    response = {
+                      id: message.id,
+                      object: message.object,
+                      created: message.created,
+                      result:
+                        message.choices[0]?.delta?.content ||
+                        message?.choices[0]?.text ||
+                        "",
+                    }
+                  }
+                } else {
+                  if (message.choices.length > 0) {
+                    response.created = message.created
+                    response.result +=
+                      message.choices[0]?.delta?.content ||
+                      message?.choices[0]?.text ||
+                      ""
+                  }
+                }
+                void runManager?.handleLLMNewToken(
+                  message.choices[0]?.delta?.content ||
+                    message?.choices[0]?.text ||
+                    ""
+                )
+              } catch (e) {
+                console.error(e)
+
+                if (rejected) {
+                  return
+                }
+                rejected = true
+                reject(e)
+
+                return
+              }
+            }
+          ).catch((e) => {
+            if (rejected) {
+              return
+            }
+            rejected = true
+            reject(e)
+          })
+        })
+      : await this.completionWithRetry(
           {
             ...params,
             messages: this.is_chat
               ? messagesMapped.map(({ role, content }) => ({
-                role,
-                content: content.toString(),
-              }))
+                  role,
+                  content: content.toString(),
+                }))
               : undefined,
             prompt: !this.is_chat ? prompt : undefined,
           },
-          options?.signal,
-          (event) => {
-            // console.log(event.data);
-            if (event.data === "[DONE]") {
-              if (resolved || rejected) {
-                return;
-              }
-              resolved = true;
-              resolve(response);
-              return;
-            }
-            try {
-              const data = JSON.parse(event.data);
-              if (data?.error_code) {
-                if (rejected) {
-                  return;
-                }
-                rejected = true;
-                reject(data);
-                return;
-              }
-              const message = data as {
-                id: string;
-                object: string;
-                created: number;
-                model: string;
-                choices: {
-                  index: number;
-                  delta?: {
-                    content?: string;
-                    role?: string;
-                  };
-                  text?: string;
-                  finish_reason: string;
-                }[];
-              };
-
-              if (!response) {
-                if (message.choices.length > 0) {
-                  response = {
-                    id: message.id,
-                    object: message.object,
-                    created: message.created,
-                    result:
-                      message.choices[0]?.delta?.content ||
-                      message?.choices[0]?.text ||
-                      "",
-                  };
-                }
-              } else {
-                if (message.choices.length > 0) {
-                  response.created = message.created;
-                  response.result +=
-                    message.choices[0]?.delta?.content ||
-                    message?.choices[0]?.text ||
-                    "";
-                }
-              }
-              void runManager?.handleLLMNewToken(
-                message.choices[0]?.delta?.content ||
-                message?.choices[0]?.text ||
-                ""
-              );
-            } catch (e) {
-              console.error(e);
-
-              if (rejected) {
-                return;
-              }
-              rejected = true;
-              reject(e);
-
-              return;
-            }
-          }
-        ).catch((e) => {
-          if (rejected) {
-            return;
-          }
-          rejected = true;
-          reject(e);
-        });
-      })
-      : await this.completionWithRetry(
-        {
-          ...params,
-          messages: this.is_chat
-            ? messagesMapped.map(({ role, content }) => ({
-              role,
-              content: content.toString(),
-            }))
-            : undefined,
-          prompt: !this.is_chat ? prompt : undefined,
-        },
-        options?.signal
-      );
+          options?.signal
+        )
     // console.log(data);
     const text =
       data?.result ??
       data?.choices[0]?.message?.content ??
       data?.choices[0]?.text ??
-      "";
+      ""
 
-    const generations: ChatGeneration[] = [];
+    const generations: ChatGeneration[] = []
 
     generations.push({
       text,
       message: new AIMessage(text),
-    });
+    })
 
     return {
       generations,
-    };
+    }
   }
 
   /** @ignore */
   _combineLLMOutput() {
-    return [];
+    return []
   }
 
   invocationParams(options?: this["ParsedCallOptions"]) {
@@ -258,7 +258,7 @@ export class WishoniaFireworksModel
       top_p: this.top_p,
       stream: this.streaming,
       max_tokens: this.max_tokens,
-    };
+    }
   }
 
   /** @ignore */
@@ -268,12 +268,12 @@ export class WishoniaFireworksModel
     onmessage?: (event: MessageEvent) => void
   ) {
     if (!process.env.FIREWORKS_API_KEY) {
-      throw new Error("FIREWORKS_API_KEY is not set");
+      throw new Error("FIREWORKS_API_KEY is not set")
     }
     const makeCompletionRequest = async () => {
-      const baseURL = "https://api.fireworks.ai/inference/v1";
-      const completionURL = this.is_chat ? "/chat/completions" : "/completions";
-      const url = `${baseURL}${completionURL}`;
+      const baseURL = "https://api.fireworks.ai/inference/v1"
+      const completionURL = this.is_chat ? "/chat/completions" : "/completions"
+      const url = `${baseURL}${completionURL}`
       const response = await fetch(url, {
         method: "POST",
         headers: {
@@ -282,47 +282,47 @@ export class WishoniaFireworksModel
         },
         body: JSON.stringify(request),
         signal,
-      });
+      })
 
       if (!this.streaming) {
-        return response.json();
+        return response.json()
       } else {
         if (response.body) {
-          const reader = response.body.getReader();
-          const decoder = new TextDecoder("utf-8");
-          let data = "";
+          const reader = response.body.getReader()
+          const decoder = new TextDecoder("utf-8")
+          let data = ""
 
-          let continueReading = true;
+          let continueReading = true
 
           while (continueReading) {
-            const { done, value } = await reader.read();
+            const { done, value } = await reader.read()
             if (done) {
-              continueReading = false;
-              break;
+              continueReading = false
+              break
             }
-            data += decoder.decode(value);
-            let continueProcessing = true;
+            data += decoder.decode(value)
+            let continueProcessing = true
             while (continueProcessing) {
-              const newlineIndex = data.indexOf("\n");
+              const newlineIndex = data.indexOf("\n")
               if (newlineIndex === -1) {
-                continueProcessing = false;
-                break;
+                continueProcessing = false
+                break
               }
-              const line = data.slice(0, newlineIndex);
-              data = data.slice(newlineIndex + 1);
+              const line = data.slice(0, newlineIndex)
+              data = data.slice(newlineIndex + 1)
 
               if (line.startsWith("data:")) {
                 const event = new MessageEvent("message", {
                   data: line.slice("data:".length).trim(),
-                });
-                onmessage?.(event);
+                })
+                onmessage?.(event)
               }
             }
           }
         }
       }
-    };
+    }
 
-    return this.caller.call(makeCompletionRequest);
+    return this.caller.call(makeCompletionRequest)
   }
 }

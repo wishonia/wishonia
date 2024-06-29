@@ -7,6 +7,7 @@ description: >-
   spread to other parts of the body, leading to severe health complications and
   often being fatal without appropriate treatment.
 ---
+
 # Cancer: An Analytical Examination
 
 ## Introduction
@@ -42,7 +43,7 @@ Efforts to mitigate cancer often lead to unintended consequences, such as the fi
    - **Radiation Therapy**: Used to kill or shrink tumors.
    - **Chemotherapy**: Involves drugs to target cancer cells.
    - **Immunotherapy and Targeted Therapy**: Newer treatments that harness the immune system or target specific genetic mutations.
-   
+
 Each approach has strengths: prevention and early detection can significantly reduce mortality; treatments increasingly offer targeted and personalized options. Weaknesses include limited accessibility, side effects, and the high cost of innovative therapies.
 
 ## Key Players and Organizations

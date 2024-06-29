@@ -40,7 +40,9 @@ export function LineChartComponent({ data }: LineChartProps) {
             axisLine={false}
           />
           <Tooltip
-            formatter={(count, name, entry) => [`WishingWellContributions: ${entry.payload.count}`]}
+            formatter={(count, name, entry) => [
+              `WishingWellContributions: ${entry.payload.count}`,
+            ]}
             labelStyle={{ color: "#000" }}
             labelFormatter={formatDate}
           />

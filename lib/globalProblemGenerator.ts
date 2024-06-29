@@ -1,81 +1,102 @@
-import slugify from 'slugify';
-import fs from 'fs';
-import path from 'path';
-import {toTitleCase} from "@/lib/stringHelpers";
-import {textCompletion} from "@/lib/llm";
-import {saveMarkdownPost} from "@/lib/markdownGenerator";
-import {generateAndUploadFeaturedImageJpg} from "@/lib/imageGenerator";
-import {MarkdownFile} from "@/interfaces/markdownFile";
-import {pathToMarkdownUrl} from "@/lib/fileHelper";
-const overwriteMarkdown = false;
-const overwriteImages = false;
-const publicPath = 'globalProblems';
-const problemNames = [
-    "Alzheimer's Disease",
-    'Aging',
-    'Air Pollution',
-    'Animal Suffering',
-    'Cancer',
-    'Chronic Pain',
-    'Cybercrime',
-    'Deforestation',
-    'Global Warming',
-    'Homelessness',
-    'Lack of Education',
-    'Lack of Access to Clean Water',
-    'Malaria',
-    'Malnutrition',
-    'Mental Illness',
-    'Nuclear Weapons',
-    'Poverty',
-    'Refugee Crises',
-    'Violent Conflict',
-    'Water Pollution',
-];
+import fs from "fs"
+import path from "path"
+import { MarkdownFile } from "@/interfaces/markdownFile"
+import slugify from "slugify"
 
-async function generateMarkdown(problemName: string, markdownPath: string, imagePath: string): Promise<void> {
-    problemName = toTitleCase(problemName);
-    console.log(`Generating markdown for ${problemName}`);
-    const description = await textCompletion(
-        `Please generate a sentence description of the problem of ${problemName} under 240 characters.  
+import { pathToMarkdownUrl } from "@/lib/fileHelper"
+import { generateAndUploadFeaturedImageJpg } from "@/lib/imageGenerator"
+import { textCompletion } from "@/lib/llm"
+import { saveMarkdownPost } from "@/lib/markdownGenerator"
+import { toTitleCase } from "@/lib/stringHelpers"
+
+const overwriteMarkdown = false
+const overwriteImages = false
+const publicPath = "globalProblems"
+const problemNames = [
+  "Alzheimer's Disease",
+  "Aging",
+  "Air Pollution",
+  "Animal Suffering",
+  "Cancer",
+  "Chronic Pain",
+  "Cybercrime",
+  "Deforestation",
+  "Global Warming",
+  "Homelessness",
+  "Lack of Education",
+  "Lack of Access to Clean Water",
+  "Malaria",
+  "Malnutrition",
+  "Mental Illness",
+  "Nuclear Weapons",
+  "Poverty",
+  "Refugee Crises",
+  "Violent Conflict",
+  "Water Pollution",
+]
+
+async function generateMarkdown(
+  problemName: string,
+  markdownPath: string,
+  imagePath: string
+): Promise<void> {
+  problemName = toTitleCase(problemName)
+  console.log(`Generating markdown for ${problemName}`)
+  const description = await textCompletion(
+    `Please generate a sentence description of the problem of ${problemName} under 240 characters.  
             Do not return anything other than the single sentence description.`,
-        "text");
-    const prompt = generateArticlePrompt(problemName);
-    const content = await textCompletion(prompt, "text");
-    const post = {
-        name: problemName,
-        description: description,
-        content: content,
-        featuredImage: imagePath,
-        absFilePath: markdownPath,
-        url: pathToMarkdownUrl(markdownPath)
-    }
-    await saveMarkdownPost(post);
+    "text"
+  )
+  const prompt = generateArticlePrompt(problemName)
+  const content = await textCompletion(prompt, "text")
+  const post = {
+    name: problemName,
+    description: description,
+    content: content,
+    featuredImage: imagePath,
+    absFilePath: markdownPath,
+    url: pathToMarkdownUrl(markdownPath),
+  }
+  await saveMarkdownPost(post)
 }
 
 export async function generateGlobalProblems(): Promise<MarkdownFile[]> {
-    const posts: MarkdownFile[] = [];
-    for (const problemName of problemNames) {
-        const problemSlug = slugify(problemName, { lower: true, strict: true });
-        const imagePath = path.join(__dirname, '..', 'public', publicPath, `${problemSlug}.png`);
-        const markdownPath = path.join(__dirname, '..', 'public', publicPath, `${problemSlug}.md`);
-        if (overwriteMarkdown || !fs.existsSync(markdownPath)) {
-            await generateMarkdown(problemName, markdownPath, imagePath);
-        } else {
-            console.log(`Markdown file already exists for ${problemName}`);
-        }
-        if (overwriteImages || !fs.existsSync(imagePath)) {
-            const imageUrl = await generateAndUploadFeaturedImageJpg(`The problem of ${problemName}`,
-                imagePath);
-        } else {
-            console.log(`Image already exists for ${problemName}`);
-        }
+  const posts: MarkdownFile[] = []
+  for (const problemName of problemNames) {
+    const problemSlug = slugify(problemName, { lower: true, strict: true })
+    const imagePath = path.join(
+      __dirname,
+      "..",
+      "public",
+      publicPath,
+      `${problemSlug}.png`
+    )
+    const markdownPath = path.join(
+      __dirname,
+      "..",
+      "public",
+      publicPath,
+      `${problemSlug}.md`
+    )
+    if (overwriteMarkdown || !fs.existsSync(markdownPath)) {
+      await generateMarkdown(problemName, markdownPath, imagePath)
+    } else {
+      console.log(`Markdown file already exists for ${problemName}`)
     }
-    return posts;
+    if (overwriteImages || !fs.existsSync(imagePath)) {
+      const imageUrl = await generateAndUploadFeaturedImageJpg(
+        `The problem of ${problemName}`,
+        imagePath
+      )
+    } else {
+      console.log(`Image already exists for ${problemName}`)
+    }
+  }
+  return posts
 }
 
 function generateArticlePrompt(globalProblemName: string): string {
-    return `Please create the markdown content of an article about the problem of 
+  return `Please create the markdown content of an article about the problem of 
         "${globalProblemName}". in less than 30000 characters. Do not return anything other than the article.
         
 # REQUIREMENTS
@@ -129,5 +150,5 @@ Conclusion:
 - Summarize the key points and arguments presented in the article
 - Provide a final assessment of the overall importance and priority of addressing the problem, considering the various factors discussed
 - Offer guidance or recommendations for individuals or organizations considering donating or contributing to efforts to address the problem, compared to other potential causes or issues.
-`;
+`
 }

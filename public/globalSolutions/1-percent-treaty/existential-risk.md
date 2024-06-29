@@ -12,16 +12,16 @@ ogImage:
   url: military-spending-scenarios-chart.png
 absFilePath: 'C:\code\wishonia\public\globalSolutions\1-percent-treaty\existential-risk.md'
 ---
+
 # Why Current Military Spending is Excessive
 
-If you simply consider one part of military spending, nuclear weapons, we already have 13,000 nuclear weapons. This is enough to cause between 13 and 130 "extinction-level events" if you account for the effects of nuclear winter.  
+If you simply consider one part of military spending, nuclear weapons, we already have 13,000 nuclear weapons. This is enough to cause between 13 and 130 "extinction-level events" if you account for the effects of nuclear winter.
 
 Even if you believe some level of military spending is warranted, we certainly don't need to be able to exterminate the human race more than once.
 
 Yet, we keep increasing military spending by $42 billion dollars a year.
 
 ![military-spending-scenarios-chart.png](military-spending-scenarios-chart.png)
-
 
 ## Calculations
 

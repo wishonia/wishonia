@@ -1,9 +1,10 @@
-'use client'
+"use client"
 
-import { useEffect } from 'react'
-import { useUser } from '@/lib/useUser'
-import { UIState } from '@/lib/chat/actions'
-import { usePathname } from 'next/navigation'
+import { useEffect } from "react"
+import { usePathname } from "next/navigation"
+
+import { UIState } from "@/lib/chat/actions"
+import { useUser } from "@/lib/useUser"
 
 export interface ChatList {
   messages: UIState
@@ -17,8 +18,8 @@ export function ChatMessage({ messages, id }: ChatList) {
   useEffect(() => {
     if (isSignedIn) {
       if (!pathname.includes(id) && messages.length === 1) {
-        if(!pathname.includes('agents')){
-          window.history.replaceState({}, '', `/chat/${id}`)
+        if (!pathname.includes("agents")) {
+          window.history.replaceState({}, "", `/chat/${id}`)
         }
       }
     }
@@ -28,9 +29,9 @@ export function ChatMessage({ messages, id }: ChatList) {
     return null
   }
   return (
-    <div className='whitespace-pre-wrap flex pt-10 flex-col items-start size-full gap-5'>
+    <div className="flex size-full flex-col items-start gap-5 whitespace-pre-wrap pt-10">
       {messages.map((message, index) => (
-        <div key={message.id || index} className='w-full'>
+        <div key={message.id || index} className="w-full">
           {message.display}
         </div>
       ))}

@@ -1,8 +1,8 @@
-'use client'
+"use client"
 
-import * as React from 'react'
+import * as React from "react"
 
-const LOCAL_STORAGE_KEY = 'sidebar'
+const LOCAL_STORAGE_KEY = "sidebar"
 
 interface SidebarContext {
   isSidebarOpen: boolean
@@ -11,13 +11,13 @@ interface SidebarContext {
 }
 
 const SidebarContext = React.createContext<SidebarContext | undefined>(
-  undefined,
+  undefined
 )
 
 export function useSidebar() {
   const context = React.useContext(SidebarContext)
   if (!context) {
-    throw new Error('useSidebarContext must be used within a SidebarProvider')
+    throw new Error("useSidebarContext must be used within a SidebarProvider")
   }
   return context
 }

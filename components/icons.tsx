@@ -1,7 +1,8 @@
 import {
   AiFillGithub,
   AiFillGoogleCircle,
-  AiOutlineClose, AiOutlineCopy,
+  AiOutlineClose,
+  AiOutlineCopy,
   AiOutlineEllipsis,
   AiOutlinePlus,
   AiOutlineWarning,
@@ -19,21 +20,29 @@ import {
   BsSun,
 } from "react-icons/bs"
 import {
-  FaBomb, FaBook,
-  FaBookMedical, FaChartPie,
-  FaDisease, FaEdit, FaHome, FaLightbulb,
-  FaPeace, FaQuestionCircle,
-  FaRegStar, FaRobot, FaSadCry,
+  FaBomb,
+  FaBook,
+  FaBookMedical,
+  FaChartPie,
+  FaDisease,
+  FaEdit,
+  FaHome,
+  FaLightbulb,
+  FaPeace,
+  FaQuestionCircle,
+  FaRegStar,
+  FaRobot,
+  FaSadCry,
   FaSkull,
   FaSort,
   FaUserAlt,
-  FaVoteYea
+  FaVoteYea,
 } from "react-icons/fa"
+import { FaHand, FaRankingStar, FaSquarePollVertical } from "react-icons/fa6"
 import { ImSpinner8, ImStatsBars } from "react-icons/im"
 import { LuSettings } from "react-icons/lu"
 import { MdDeleteForever, MdOutlineLogout } from "react-icons/md"
 import { RxDashboard, RxMixerHorizontal } from "react-icons/rx"
-import {FaHand, FaRankingStar, FaSquarePollVertical} from "react-icons/fa6";
 
 export type IconKeys = keyof typeof icons
 

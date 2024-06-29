@@ -7,6 +7,7 @@ description: >-
   and adequate housing, often due to factors like economic hardship, mental
   health issues, and systemic inequalities.
 ---
+
 # The Problem of Homelessness
 
 ## Introduction
@@ -35,7 +36,7 @@ The impact of homelessness is profound and multifaceted, affecting both individu
 
 2. **Societal Costs**: Communities bear significant costs in providing emergency shelter, healthcare, and law enforcement services to homeless populations. It is estimated that healthcare expenditures for homeless individuals are substantially higher than for the general population.
 
-3. **Economic Impact**: Lost productivity and potential, coupled with the cost of homelessness services, represent significant economic burdens. 
+3. **Economic Impact**: Lost productivity and potential, coupled with the cost of homelessness services, represent significant economic burdens.
 
 4. **Social Utility**: The net utility impact includes decreased life satisfaction, increased stress, and societal stigma faced by homeless individuals. Their exclusion from meaningful societal participation contributes to social instability.
 
@@ -74,7 +75,7 @@ Numerous organizations and individuals are dedicated to addressing homelessness:
 1. **National Alliance to End Homelessness (NAEH)**: Advocates for federal policy changes and provides research and data.
 2. **HUD (U.S. Department of Housing and Urban Development)**: Principal federal agency providing funding and policy guidance.
 3. **Coalition for the Homeless**: Provides direct services and advocates for affordable housing policies.
-4. **Local Governments and NGOs**: Implement programs and services tailored to local needs. 
+4. **Local Governments and NGOs**: Implement programs and services tailored to local needs.
 
 Key milestones include the expansion of the Housing First model across various U.S. states, demonstrating effective reductions in chronic homelessness.
 
@@ -95,12 +96,12 @@ Several factors hinder progress:
 
 ## Resource Requirements and Costs
 
-Effective homelessness interventions require substantial resources. 
+Effective homelessness interventions require substantial resources.
 
 1. **Financial Cost**: Research indicates that solving homelessness in the U.S. could require billions annually. Housing First programs, for instance, while cost-effective over the long term, necessitate high initial investments.
- 
+
 2. **Human Resources**: Skilled professionals in social work, healthcare, and policy are critical.
- 
+
 3. **Current Gaps**: Many programs operate underfunded and lack consistent support, leading to inefficiencies.
 
 ## Potential Future Developments

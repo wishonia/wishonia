@@ -1,5 +1,5 @@
-import {readdir, stat} from 'fs/promises'
-import {basename, dirname, join} from 'path'
+import { readdir, stat } from "fs/promises"
+import { basename, dirname, join } from "path"
 
 export type WalkEntry = {
   path: string
@@ -13,7 +13,7 @@ export async function walk(
   const immediateFiles = await readdir(dir)
 
   const recursiveFiles = await Promise.all(
-    immediateFiles.map(async file => {
+    immediateFiles.map(async (file) => {
       const path = join(dir, file)
       const stats = await stat(path)
       if (stats.isDirectory()) {
@@ -30,8 +30,8 @@ export async function walk(
         return [
           {
             path: path,
-            parentPath
-          }
+            parentPath,
+          },
         ]
       } else {
         return []

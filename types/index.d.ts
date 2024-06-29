@@ -1,5 +1,6 @@
+import { AgentSource } from "@prisma/client"
+
 import { IconKeys } from "@/components/icons"
-import {AgentSource} from "@prisma/client";
 
 export type SiteConfig = {
   name: string
@@ -26,7 +27,6 @@ export type NavItem = {
   href: string
 }
 
-
 export type Navigation = {
   data: NavItem[]
 }
@@ -51,12 +51,11 @@ export type WishingWellByDate = {
   count: number
 }
 
-
 export interface QSource extends AgentSource {
-  options: string;
-  embedding: string;
-  maxDepth?: number;
-  maxLinks?: number;
-  chunkSize: number;
-  chunkOverlap: number;
+  options: string
+  embedding: string
+  maxDepth?: number
+  maxLinks?: number
+  chunkSize: number
+  chunkOverlap: number
 }

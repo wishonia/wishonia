@@ -3,6 +3,7 @@ name: Knowledge Management System
 description: "Knowledge Management System\r\n    - Knowledge capture and curation\r\n    - Best practices and lessons learned documentation\r\n    - Knowledge sharing and collaboration platforms\r\n    - Search and discovery tools\r\n    - Content creation and management workflows\r\n\r"
 featuredImage: /docs/functional-components/knowledge-management-system.jpg
 ---
+
 # Wishocracy: Knowledge Management System (KMS) Requirements Document
 
 ## Table of Contents
@@ -10,11 +11,11 @@ featuredImage: /docs/functional-components/knowledge-management-system.jpg
 1. [Introduction](#introduction)
 2. [Objectives](#objectives)
 3. [Functional Requirements](#functional-requirements)
-    - [Knowledge Capture and Curation](#knowledge-capture-and-curation)
-    - [Best Practices and Lessons Learned Documentation](#best-practices-and-lessons-learned-documentation)
-    - [Knowledge Sharing and Collaboration Platforms](#knowledge-sharing-and-collaboration-platforms)
-    - [Search and Discovery Tools](#search-and-discovery-tools)
-    - [Content Creation and Management Workflows](#content-creation-and-management-workflows)
+   - [Knowledge Capture and Curation](#knowledge-capture-and-curation)
+   - [Best Practices and Lessons Learned Documentation](#best-practices-and-lessons-learned-documentation)
+   - [Knowledge Sharing and Collaboration Platforms](#knowledge-sharing-and-collaboration-platforms)
+   - [Search and Discovery Tools](#search-and-discovery-tools)
+   - [Content Creation and Management Workflows](#content-creation-and-management-workflows)
 4. [Non-Functional Requirements](#non-functional-requirements)
 5. [User Roles and Permissions](#user-roles-and-permissions)
 6. [Existing Systems and Solutions](#existing-systems-and-solutions)
@@ -38,14 +39,15 @@ The Knowledge Management System (KMS) for Wishocracy is to facilitate the effect
 ### Knowledge Capture and Curation
 
 #### Features
+
 - **Knowledge Capture Interfaces**
+
   - Provide tools for users to easily capture information (notes, documents, multimedia).
   - Enable capturing knowledge from various sources, including meetings, emails, and research materials.
 
 - **Curation Tools**
   - Allow users to categorize and tag captured knowledge for organized storage.
   - Provide tools for editing and updating knowledge entries.
-  
 - **Metadata Management**
   - Automate metadata generation based on content analysis.
   - Allow manual addition and editing of metadata.
@@ -53,11 +55,14 @@ The Knowledge Management System (KMS) for Wishocracy is to facilitate the effect
 ### Best Practices and Lessons Learned Documentation
 
 #### Features
+
 - **Documentation Templates**
+
   - Provide templates for documenting best practices and lessons learned.
   - Ensure templates are customizable to meet diverse needs.
 
 - **Review and Approval Workflows**
+
   - Establish workflows for reviewing and approving documentation before it is published.
   - Allow users to track changes and maintain version control.
 
@@ -68,11 +73,14 @@ The Knowledge Management System (KMS) for Wishocracy is to facilitate the effect
 ### Knowledge Sharing and Collaboration Platforms
 
 #### Features
+
 - **Discussion Forums**
+
   - Create forums for users to discuss topics and share knowledge.
   - Enable thread categorization and tagging.
 
 - **Collaboration Spaces**
+
   - Provide virtual spaces for project teams to collaborate and share information.
   - Integrate with existing communication tools (e.g., Slack, Microsoft Teams).
 
@@ -82,11 +90,14 @@ The Knowledge Management System (KMS) for Wishocracy is to facilitate the effect
 ### Search and Discovery Tools
 
 #### Features
+
 - **Advanced Search**
+
   - Implement search functionality allowing keyword, tag, and metadata searches.
   - Provide filters to narrow down search results.
 
 - **Recommendation Systems**
+
   - Integrate AI-driven recommendation systems to surface relevant content based on user behavior and preferences.
 
 - **Content Indexing**
@@ -96,11 +107,14 @@ The Knowledge Management System (KMS) for Wishocracy is to facilitate the effect
 ### Content Creation and Management Workflows
 
 #### Features
+
 - **Authoring Tools**
+
   - Provide rich text editor and multimedia support for content creation.
   - Enable collaborative editing with real-time updates.
 
 - **Workflow Management**
+
   - Define workflows for content creation, review, and approval.
   - Implement notifications for status changes and task assignments.
 
@@ -112,14 +126,13 @@ The Knowledge Management System (KMS) for Wishocracy is to facilitate the effect
 
 - **Scalability**
   - The system should scale to accommodate increasing volumes of data and users.
-  
 - **Accessibility**
+
   - Ensure the system is accessible to users with disabilities, adhering to relevant accessibility standards (e.g., WCAG).
 
 - **Security**
   - Implement robust security measures to protect sensitive information.
   - Ensure user data is encrypted both at rest and in transit.
-  
 - **Performance**
   - Ensure the system performs efficiently under normal and peak loads.
 
@@ -127,11 +140,12 @@ The Knowledge Management System (KMS) for Wishocracy is to facilitate the effect
 
 - **Administrators**
   - Full access to configure system settings, manage user roles, and oversee content.
-  
 - **Editors**
+
   - Ability to create, edit, and approve content.
 
 - **Contributors**
+
   - Permission to contribute knowledge and request edits, but not publish.
 
 - **Viewers**
@@ -141,11 +155,10 @@ The Knowledge Management System (KMS) for Wishocracy is to facilitate the effect
 
 - **Confluence**
   - Popular knowledge management tool offering documentation, collaboration, and search features.
-  
 - **SharePoint**
   - Microsoft’s platform for document management and collaboration.
-  
 - **Notion**
+
   - All-in-one workspace for notes, tasks, and project management, with robust organizational capabilities.
 
 - **Mindtouch**

@@ -1,9 +1,9 @@
 "use client"
 
+import { GlobalProblem } from "@prisma/client"
 import { Cell, Pie, PieChart, ResponsiveContainer, Tooltip } from "recharts"
 
 import { Card } from "@/components/ui/card"
-import {GlobalProblem} from "@prisma/client";
 
 interface PieChartProps {
   data: GlobalProblem[]

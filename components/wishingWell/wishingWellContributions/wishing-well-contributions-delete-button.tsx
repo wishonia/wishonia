@@ -29,10 +29,16 @@ interface WishingWellContributionsDeleteButtonProps {
   }
 }
 
-async function deleteWishingWell(wishingWellId: string, wishingWellContributionsId: string) {
-  const response = await fetch(`/api/wishingWells/${wishingWellId}/wishingWellContributions/${wishingWellContributionsId}`, {
-    method: "DELETE",
-  })
+async function deleteWishingWell(
+  wishingWellId: string,
+  wishingWellContributionsId: string
+) {
+  const response = await fetch(
+    `/api/wishingWells/${wishingWellId}/wishingWellContributions/${wishingWellContributionsId}`,
+    {
+      method: "DELETE",
+    }
+  )
 
   if (!response?.ok) {
     toast({
@@ -49,14 +55,19 @@ async function deleteWishingWell(wishingWellId: string, wishingWellContributions
   return true
 }
 
-export function WishingWellContributionsDeleteButton({ wishingWellContributions }: WishingWellContributionsDeleteButtonProps) {
+export function WishingWellContributionsDeleteButton({
+  wishingWellContributions,
+}: WishingWellContributionsDeleteButtonProps) {
   const router = useRouter()
   const [showDeleteAlert, setShowDeleteAlert] = React.useState<boolean>(false)
   const [isDeleteLoading, setIsDeleteLoading] = React.useState<boolean>(false)
 
   const handleDelete = async () => {
     setIsDeleteLoading(true)
-    const deleted = await deleteWishingWell(wishingWellContributions.wishingWell.id, wishingWellContributions.id)
+    const deleted = await deleteWishingWell(
+      wishingWellContributions.wishingWell.id,
+      wishingWellContributions.id
+    )
 
     if (deleted) {
       setIsDeleteLoading(false)
@@ -80,7 +91,8 @@ export function WishingWellContributionsDeleteButton({ wishingWellContributions 
         <CredenzaContent>
           <CredenzaHeader>
             <CredenzaTitle>
-              Delete wishingWellContributions from {formatDate(wishingWellContributions.date)}?
+              Delete wishingWellContributions from{" "}
+              {formatDate(wishingWellContributions.date)}?
             </CredenzaTitle>
             <CredenzaDescription>
               This action cannot be undone.

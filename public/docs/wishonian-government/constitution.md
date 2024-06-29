@@ -1,14 +1,14 @@
 ---
 slug: constitution
-name: 'Constitution of Wishonia: Maximizing Health and Happiness'
+name: "Constitution of Wishonia: Maximizing Health and Happiness"
 featuredImage: /docs/wishonian-government/constitution.jpg
 description: >-
   The governing framework of Wishonia, aimed at optimally allocating scarce
   resources to maximize median health and happiness.
 ---
 
-
 # Preamble:
+
 We, the people of Wishonia, in order to optimally allocate scarce resources to maximize median health and happiness establish this Constitution for the Wishocratic Republic of Wishonia.
 
 Article I: The Wishocratic System

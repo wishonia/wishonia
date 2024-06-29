@@ -1,5 +1,5 @@
-import { StreamableValue, readStreamableValue } from 'ai/rsc'
-import { useEffect, useState } from 'react'
+import { useEffect, useState } from "react"
+import { readStreamableValue, StreamableValue } from "ai/rsc"
 
 /**
  * The useStreamableText hook is used to handle streaming text content, updating the raw content state
@@ -14,20 +14,20 @@ import { useEffect, useState } from 'react'
  * Custom hook by Vercel see here: https://github.com/vercel/ai-chatbot/blob/main/lib/hooks/use-streamable-text.ts#L4
  */
 export const useStreamableText = (
-  content: string | StreamableValue<string>,
+  content: string | StreamableValue<string>
 ) => {
   const [rawContent, setRawContent] = useState(
-    typeof content === 'string' ? content : '',
+    typeof content === "string" ? content : ""
   )
 
-  const [isLoading, setIsLoading] = useState(typeof content === 'object')
+  const [isLoading, setIsLoading] = useState(typeof content === "object")
 
   useEffect(() => {
     ;(async () => {
-      if (typeof content === 'object') {
-        let value = ''
+      if (typeof content === "object") {
+        let value = ""
         for await (const delta of readStreamableValue(content)) {
-          if (typeof delta === 'string') {
+          if (typeof delta === "string") {
             setRawContent((value = value + delta))
           }
         }

@@ -1,27 +1,29 @@
-'use client'
+"use client"
 
+import * as React from "react"
+import { useRouter } from "next/navigation"
+import { Trash } from "@phosphor-icons/react"
+
+import { Chat, ServerActionResult } from "@/lib/types"
 import {
   AlertDialog,
-  AlertDialogTitle,
   AlertDialogAction,
   AlertDialogCancel,
-  AlertDialogFooter,
-  AlertDialogHeader,
   AlertDialogContent,
   AlertDialogDescription,
-} from '@/components/ui/alert-dialog'
+  AlertDialogFooter,
+  AlertDialogHeader,
+  AlertDialogTitle,
+} from "@/components/ui/alert-dialog"
+import { Button } from "@/components/ui/button"
 import {
   Tooltip,
   TooltipContent,
   TooltipTrigger,
-} from '@/components/ui/tooltip'
-import * as React from 'react'
-import { useToast } from './ui/use-toast'
-import { useRouter } from 'next/navigation'
-import LoadingSpinner from './LoadingSpinner'
-import { Trash } from '@phosphor-icons/react'
-import { Button } from '@/components/ui/button'
-import { Chat, ServerActionResult } from '@/lib/types'
+} from "@/components/ui/tooltip"
+
+import LoadingSpinner from "./LoadingSpinner"
+import { useToast } from "./ui/use-toast"
 
 interface SidebarActionsProps {
   chat: Chat
@@ -36,17 +38,17 @@ function SideBarActions({ chat, removeChat }: SidebarActionsProps) {
 
   return (
     <>
-      <div className=''>
+      <div className="">
         <Tooltip>
           <TooltipTrigger asChild>
             <Button
-              variant='ghost'
-              className='size-7 p-0 hover:bg-background'
+              variant="ghost"
+              className="size-7 p-0 hover:bg-background"
               disabled={isRemovePending}
               onClick={() => setDeleteDialogOpen(true)}
             >
               <Trash />
-              <span className='sr-only'>Delete</span>
+              <span className="sr-only">Delete</span>
             </Button>
           </TooltipTrigger>
           <TooltipContent>Delete chat</TooltipContent>
@@ -74,25 +76,25 @@ function SideBarActions({ chat, removeChat }: SidebarActionsProps) {
                     id: chat.id,
                     path: chat.path,
                   })
-                  if (result && 'error' in result) {
+                  if (result && "error" in result) {
                     toast({
-                      title: 'Error',
+                      title: "Error",
                       description: result.error,
-                      variant: 'destructive',
+                      variant: "destructive",
                     })
                     return
                   }
                   setDeleteDialogOpen(false)
                   router.refresh()
-                  router.push('/chat')
+                  router.push("/chat")
                   toast({
-                    title: 'Chat deleted',
-                    description: 'Your chat has been successfully deleted.',
-                    className: 'bg-green-500 text-white',
+                    title: "Chat deleted",
+                    description: "Your chat has been successfully deleted.",
+                    className: "bg-green-500 text-white",
                   })
                 })
               }}
-              className='flex items-center gap-2 bg-red-500 hover:bg-red-600 text-white'
+              className="flex items-center gap-2 bg-red-500 text-white hover:bg-red-600"
             >
               {isRemovePending && <LoadingSpinner />}
               Delete

@@ -1,4 +1,4 @@
-import {generalSidebarNav} from "@/config/links"
+import { generalSidebarNav } from "@/config/links"
 import { getCurrentUser } from "@/lib/session"
 import Footer from "@/components/layout/footer"
 import TopNavbar from "@/components/layout/topNavbar"

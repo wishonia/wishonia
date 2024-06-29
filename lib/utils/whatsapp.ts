@@ -1,42 +1,42 @@
-import axios, { AxiosError } from "axios";
+import axios, { AxiosError } from "axios"
 
 // https://developers.facebook.com/docs/whatsapp/cloud-api/guides/send-messages
 interface OfficialSendMessageResult {
-  messaging_product: "whatsapp";
+  messaging_product: "whatsapp"
   contacts: {
-    input: string;
-    wa_id: string;
-  }[];
+    input: string
+    wa_id: string
+  }[]
   messages: {
-    id: string;
-  }[];
+    id: string
+  }[]
 }
 interface Message {
-  messaging_product: "whatsapp";
-  recipient_type: "individual";
-  to: string;
+  messaging_product: "whatsapp"
+  recipient_type: "individual"
+  to: string
 }
 export interface Text {
-  body: string;
-  preview_url?: boolean;
+  body: string
+  preview_url?: boolean
 }
 
 export interface TextMessage extends Message {
-  type: "text";
-  text: Text;
+  type: "text"
+  text: Text
 }
 
 export interface SendMessageResult {
-  messageId: string;
-  phoneNumber: string;
-  whatsappId: string;
+  messageId: string
+  phoneNumber: string
+  whatsappId: string
 }
 
 export const sendWhatsappMessage = async (
   fromPhoneNumberId: string,
   accessToken: string,
   // version: string = "v18.0",
-  data: TextMessage,
+  data: TextMessage
 ) => {
   try {
     const { data: rawResult } = await axios({
@@ -48,21 +48,21 @@ export const sendWhatsappMessage = async (
         "Content-Type": "application/json",
         Accept: "application/json",
       },
-    });
-    const result = rawResult as OfficialSendMessageResult;
+    })
+    const result = rawResult as OfficialSendMessageResult
 
     return {
       messageId: result.messages?.[0]?.id,
       phoneNumber: result.contacts?.[0]?.input,
       whatsappId: result.contacts?.[0]?.wa_id,
-    };
+    }
   } catch (err: unknown) {
     if ((err as any).response) {
-      throw (err as AxiosError)?.response?.data;
+      throw (err as AxiosError)?.response?.data
     } else if (err instanceof Error) {
-      throw (err as Error).message;
+      throw (err as Error).message
     } else {
-      throw err;
+      throw err
     }
   }
-};
+}
