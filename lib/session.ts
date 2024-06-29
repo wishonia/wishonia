@@ -1,8 +1,8 @@
 import { getServerSession } from "next-auth/next"
 
+import { ExtendedUser } from "@/types/auth"
 import { authOptions } from "@/lib/auth"
 import { prisma } from "@/lib/db"
-import {ExtendedUser} from "@/types/auth";
 
 export async function getCurrentUser() {
   const session = await getServerSession(authOptions)
@@ -12,11 +12,11 @@ export async function getCurrentUser() {
 
 export async function isAdmin() {
   const sessionUser = await getCurrentUser()
-  if(!sessionUser) return false
+  if (!sessionUser) return false
   const user = await prisma.user.findUnique({
     where: {
-      id: sessionUser.id
-    }
+      id: sessionUser.id,
+    },
   })
 
   return user?.admin

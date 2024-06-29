@@ -1,10 +1,11 @@
-'use client'
+"use client"
 
-import Sidebar from './Sidebar'
-import { Button } from './ui/button'
-import { useTheme } from 'next-themes'
-import { SidebarSimple } from '@phosphor-icons/react'
-import { Sheet, SheetContent, SheetTrigger } from './ui/sheet'
+import { SidebarSimple } from "@phosphor-icons/react"
+import { useTheme } from "next-themes"
+
+import Sidebar from "./Sidebar"
+import { Button } from "./ui/button"
+import { Sheet, SheetContent, SheetTrigger } from "./ui/sheet"
 
 interface SidebarMobileProps {
   children: React.ReactNode
@@ -15,22 +16,22 @@ function SidebarMobile({ children }: SidebarMobileProps) {
 
   return (
     <Sheet>
-      <SheetTrigger className={`ml-1 mt-1 top-0 left-0 absolute z-30`}>
+      <SheetTrigger className={`absolute left-0 top-0 z-30 ml-1 mt-1`}>
         <div
-          className={`p-3 flex lg:hidden hover:bg-transparent bg-transparent shadow-none focus:bg-transparent focus:ring-0 focus-within:ring-0`}
+          className={`flex bg-transparent p-3 shadow-none focus-within:ring-0 hover:bg-transparent focus:bg-transparent focus:ring-0 lg:hidden`}
         >
           <SidebarSimple
-            color={theme === 'dark' ? 'white' : 'black'}
+            color={theme === "dark" ? "white" : "black"}
             size={16}
           />
         </div>
       </SheetTrigger>
       <SheetContent
-        side='left'
-        className='inset-y-0 flex h-auto w-[270px] flex-col p-0'
+        side="left"
+        className="inset-y-0 flex h-auto w-[270px] flex-col p-0"
         aria-describedby={`sidebar`}
       >
-        <Sidebar className='flex'>{children}</Sidebar>
+        <Sidebar className="flex">{children}</Sidebar>
       </SheetContent>
     </Sheet>
   )

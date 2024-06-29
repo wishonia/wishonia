@@ -5,9 +5,9 @@ import { getGlobalSolution } from "@/lib/api/globalSolutions"
 import { authOptions } from "@/lib/auth"
 import { getCurrentUser } from "@/lib/session"
 import { GlobalSolutionEditForm } from "@/components/globalSolution/global-solution-edit-form"
+import { GlobalSolutionForm } from "@/components/globalSolution/global-solution-form"
 import { Shell } from "@/components/layout/shell"
 import { DashboardHeader } from "@/components/pages/dashboard/dashboard-header"
-import {GlobalSolutionForm} from "@/components/globalSolution/global-solution-form";
 
 export const metadata: Metadata = {
   title: "Global Solution Settings",
@@ -17,7 +17,9 @@ interface GlobalSolutionEditProps {
   params: { globalSolutionId: string }
 }
 
-export default async function GlobalSolutionEdit({ params }: GlobalSolutionEditProps) {
+export default async function GlobalSolutionEdit({
+  params,
+}: GlobalSolutionEditProps) {
   const user = await getCurrentUser()
 
   if (!user) {
@@ -37,7 +39,7 @@ export default async function GlobalSolutionEdit({ params }: GlobalSolutionEditP
         text="Enter the name and a detailed description of your solution. "
       />
       <div className="grid grid-cols-1 gap-10">
-        <GlobalSolutionForm/>
+        <GlobalSolutionForm />
       </div>
     </Shell>
   )

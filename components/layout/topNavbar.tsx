@@ -1,26 +1,30 @@
 "use client"
 
+import React from "react"
 import Link from "next/link"
+import { NavItem } from "@/types"
 import { User } from "next-auth"
 
-import {generalDashboardTopNav} from "@/config/links"
+import { generalDashboardTopNav } from "@/config/links"
+import { LogoNavMenu } from "@/components/layout/logo-nav"
 import { UserNavDisplay } from "@/components/user/user-nav-display"
-import {LogoNavMenu} from "@/components/layout/logo-nav";
-import React from "react";
-import {NavItem} from "@/types";
 
 interface NavbarProps extends React.HTMLAttributes<HTMLDivElement> {
-    user: Pick<User, "name" | "image" | "email">
-    logoNavItems?: NavItem[]
-    topNavItems?: NavItem[]
-    avatarNavItems?: NavItem[]
+  user: Pick<User, "name" | "image" | "email">
+  logoNavItems?: NavItem[]
+  topNavItems?: NavItem[]
+  avatarNavItems?: NavItem[]
 }
 
-export default function TopNavbar({ user, logoNavItems, topNavItems, avatarNavItems }: NavbarProps) {
-
-    if(!topNavItems){
-        topNavItems = generalDashboardTopNav.data;
-    }
+export default function TopNavbar({
+  user,
+  logoNavItems,
+  topNavItems,
+  avatarNavItems,
+}: NavbarProps) {
+  if (!topNavItems) {
+    topNavItems = generalDashboardTopNav.data
+  }
   return (
     <header className="select-none">
       <nav className="mx-auto flex items-center justify-between px-4 md:px-8 lg:max-w-7xl">

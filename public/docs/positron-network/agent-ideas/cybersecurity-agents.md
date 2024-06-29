@@ -7,6 +7,7 @@ description: >-
   report, collaborate with law enforcement, and aid in recovery. Learn how these
   agents provide education, support victims, and combat cybercrime effectively.
 ---
+
 ## Cybersecurity Defender Agents
 
 Cybercrime is extracting exponentially increasing costs from individuals, businesses, and governments.

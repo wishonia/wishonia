@@ -11,7 +11,10 @@ interface QuickLogButtonProps extends ButtonProps {
   globalSolutionId: string
 }
 
-export function QuickGlobalSolutionContributionButton({ globalSolutionId, ...props }: QuickLogButtonProps) {
+export function QuickGlobalSolutionContributionButton({
+  globalSolutionId,
+  ...props
+}: QuickLogButtonProps) {
   const router = useRouter()
   const [isLoading, setIsLoading] = React.useState<boolean>(false)
 
@@ -21,16 +24,19 @@ export function QuickGlobalSolutionContributionButton({ globalSolutionId, ...pro
     const dateToday = new Date()
     dateToday.setHours(0, 0, 0, 0)
 
-    const response = await fetch(`/api/globalSolutions/${globalSolutionId}/globalSolutionContributions`, {
-      method: "POST",
-      headers: {
-        "Content-Type": "application/json",
-      },
-      body: JSON.stringify({
-        date: dateToday,
-        count: 1,
-      }),
-    })
+    const response = await fetch(
+      `/api/globalSolutions/${globalSolutionId}/globalSolutionContributions`,
+      {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify({
+          date: dateToday,
+          count: 1,
+        }),
+      }
+    )
 
     if (!response?.ok) {
       toast({

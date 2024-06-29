@@ -1,6 +1,6 @@
 ---
 slug: logical-proof
-name: 'Logical Proof: The Case for the Global 1% Treaty'
+name: "Logical Proof: The Case for the Global 1% Treaty"
 date: Include publication date
 featuredImage: /globalSolutions/1-percent-treaty/logical-proof.jpg
 author:
@@ -12,11 +12,13 @@ ogImage:
   url: logical-proof.png
 absFilePath: 'C:\code\wishonia\public\globalSolutions\1-percent-treaty\logical-proof.md'
 ---
+
 # Logical Proof
 
 Why it is logical for the nations and citizens of the world to sign the 1% Treaty and reallocate 1% of military spending to medical research each year:
 
 ## Axioms:
+
 1. Reducing death and suffering is a worthy goal.
 2. War increases death and suffering.
 3. Medical research reduces death and suffering.
@@ -24,6 +26,7 @@ Why it is logical for the nations and citizens of the world to sign the 1% Treat
 5. Countries act in their self-interest.
 
 ## Premises:
+
 1. The world has finite resources.
 2. Resources spent on war are 20 times greater than resources spent on medical research.[^1]
 3. AI technology developed for warfare could lead to catastrophic outcomes like a Skynet scenario.[^2]
@@ -35,6 +38,7 @@ Why it is logical for the nations and citizens of the world to sign the 1% Treat
 9. Lobbyists are motivated by financial incentives and will work for the highest bidder.[^7]
 
 ## Propositions:
+
 1. An international treaty where all countries allocate 1% of military budgets to medical research would maintain the balance of power while increasing resources for medical research.
 2. Reducing military budgets by 1% and allocating that to medical research would increase net national security by reducing the risk of AI-driven catastrophe.
 3. Using a decentralized crowdfunding platform, such as a blockchain-based system, to allocate medical research funds would be more transparent, efficient, and resistant to corruption compared to centralized government allocation.[^8]
@@ -46,11 +50,13 @@ Why it is logical for the nations and citizens of the world to sign the 1% Treat
 9. To ensure sufficient funding to out-lobby the military-industrial complex, contributors must be compensated at a rate of at least 10% annually, which is higher than the average return of the S&P 500.[^12]
 
 ## Counterarguments:
+
 1. Global coordination on the 1% Treaty may be challenging due to differing national interests and priorities. However, the potential benefits of the Treaty, such as reduced catastrophic risks and increased medical research, provide a strong incentive for countries to cooperate.
 2. Some countries may attempt to cheat on the agreement by not fully reallocating 1% of their military budgets. However, the proposed auditing and verification mechanisms, such as satellite monitoring and on-site inspections, would help detect and deter cheating.
 3. The military-industrial complex may oppose the 1% Treaty due to the potential loss of funding. However, by outbidding defense contractors for their top lobbyists, the DAO can gain a lobbying advantage and counteract their opposition.
 
 ## Proof:
+
 1. Resources spent on war cannot be spent on medical research. (Axiom 4)
 2. Resources spent on war are 20 times the resources spent on medical research. (Premise 2)
 3. Therefore, reallocating some resources from war to medical research would increase resources for medical research. (From 1 and 2)
@@ -91,6 +97,7 @@ Why it is logical for the nations and citizens of the world to sign the 1% Treat
 38. Therefore, the DAO must offer returns greater than 10% to attract necessary funding. (From 37)
 
 ## Conclusion:
+
 The 1% Treaty, which reallocates a portion of military spending to medical research in a stable, decentralized, and verifiable way, would reduce catastrophic risks, increase resources for beneficial research, and yield significant humanitarian benefits. Given the exorbitant destructive capacity of current nuclear arsenals, safely reducing military budgets through agreements like the 1% Treaty is a reasonable goal.
 
 The plan to create a DAO, crowdfund $40 million, and lobby for the international 1% Treaty is logically sound and feasible based on the proven effectiveness of lobbying and the potential for crowdfunding. By outbidding defense contractors for their top lobbyists, the DAO could potentially reduce their lobbying capacity by 50% and increase its own by 100%, gaining a significant lobbying advantage. To attract the necessary funding to out-lobby the military-industrial complex, the DAO must offer annual returns greater than 10%, exceeding alternative investments like the S&P 500.
@@ -98,7 +105,6 @@ The plan to create a DAO, crowdfund $40 million, and lobby for the international
 Although implementing the 1% Treaty may face challenges such as global coordination difficulties and potential cheating by countries, the proposed auditing and verification mechanisms, along with the significant potential benefits, provide strong incentives for cooperation and compliance.
 
 The Treaty would maintain geopolitical stability while massively increasing medical research, reducing catastrophic risks, and generating immense economic value. Given the feasibility, low initial funding requirements, and extraordinary potential benefits, this plan should be seriously considered.
-
 
 [^1]: World Bank. (2021). Military expenditure (% of GDP). https://data.worldbank.org/indicator/MS.MIL.XPND.GD.ZS
 

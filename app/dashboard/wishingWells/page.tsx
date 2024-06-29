@@ -4,10 +4,10 @@ import { redirect } from "next/navigation"
 import { getUserWishingWells } from "@/lib/api/wishingWells"
 import { authOptions } from "@/lib/auth"
 import { getCurrentUser } from "@/lib/session"
-import { WishingWellAddButton } from "@/components/wishingWell/wishing-well-add-button"
-import { UserWishingWellList } from "@/components/wishingWell/user-wishing-well-list"
 import { Shell } from "@/components/layout/shell"
 import { DashboardHeader } from "@/components/pages/dashboard/dashboard-header"
+import { UserWishingWellList } from "@/components/wishingWell/user-wishing-well-list"
+import { WishingWellAddButton } from "@/components/wishingWell/wishing-well-add-button"
 
 export const metadata: Metadata = {
   title: "Your Wishing Wells",

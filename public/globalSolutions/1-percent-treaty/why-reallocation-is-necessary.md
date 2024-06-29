@@ -15,6 +15,7 @@ ogImage:
 absFilePath: >-
   C:\code\wishonia\public\globalSolutions\1-percent-treaty\why-reallocation-is-necessary.md
 ---
+
 ### Military Spending vs. Health Research: A Brain Drain
 
 When we talk about where our money goes, especially the big budgets like what's spent on the military, it's like choosing between two futures. One future focuses on weapons and wars, which can lead to destruction and loss of lives. The other invests in health research, aiming to cure diseases and help us live longer, healthier lives.

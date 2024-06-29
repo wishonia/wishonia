@@ -7,6 +7,7 @@ description: >-
   biodiversity decline, and contributing to climate change by reducing CO2
   absorption and increasing greenhouse gas emissions.
 ---
+
 # The Problem of Deforestation
 
 ## Introduction

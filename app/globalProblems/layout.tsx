@@ -1,4 +1,4 @@
-import {generalSidebarNav } from "@/config/links"
+import { generalSidebarNav } from "@/config/links"
 import { getCurrentUser } from "@/lib/session"
 import Footer from "@/components/layout/footer"
 import TopNavbar from "@/components/layout/topNavbar"
@@ -26,9 +26,11 @@ export default async function DashboardLayout({
         <aside className="hidden w-[200px] flex-col md:flex">
           <SidebarNav items={generalSidebarNav.data} />
         </aside>
-        <main className="flex w-full flex-1 flex-col"
-              style={{ maxWidth: "98%" }}>
-            {children}
+        <main
+          className="flex w-full flex-1 flex-col"
+          style={{ maxWidth: "98%" }}
+        >
+          {children}
         </main>
       </div>
       <Footer />

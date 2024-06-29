@@ -3,6 +3,7 @@ name: Incentive and Reward System
 description: "Incentive and Reward System\r\n    - Incentive mechanism design\r\n    - Reward structure and distribution\r\n    - Contribution and achievement recognition\r\n    - Reputation and status tracking\r\n    - Gamification and engagement mechanics\r\n\r"
 featuredImage: /docs/functional-components/incentive-and-reward-system.jpg
 ---
+
 # Wishocracy: Incentive and Reward System Requirements Document
 
 ## Introduction
@@ -10,20 +11,21 @@ featuredImage: /docs/functional-components/incentive-and-reward-system.jpg
 **Wishocracy** is a universal wish fulfillment system tailored to help users achieve their goals and dreams through a community-driven approach. The Incentive and Reward System is a critical functional component designed to enhance user engagement, motivate contributions, and recognize achievements.
 
 ## Table of Contents
-* [Scope](#scope)
-* [Objectives](#objectives)
-* [Functional Requirements](#functional-requirements)
-  * [Incentive Mechanism Design](#incentive-mechanism-design)
-  * [Reward Structure and Distribution](#reward-structure-and-distribution)
-  * [Contribution and Achievement Recognition](#contribution-and-achievement-recognition)
-  * [Reputation and Status Tracking](#reputation-and-status-tracking)
-  * [Gamification and Engagement Mechanics](#gamification-and-engagement-mechanics)
-* [Non-Functional Requirements](#non-functional-requirements)
-* [Use Cases](#use-cases)
-* [Existing Systems](#existing-systems)
-* [Dependencies](#dependencies)
-* [Assumptions](#assumptions)
-* [Acceptance Criteria](#acceptance-criteria)
+
+- [Scope](#scope)
+- [Objectives](#objectives)
+- [Functional Requirements](#functional-requirements)
+  - [Incentive Mechanism Design](#incentive-mechanism-design)
+  - [Reward Structure and Distribution](#reward-structure-and-distribution)
+  - [Contribution and Achievement Recognition](#contribution-and-achievement-recognition)
+  - [Reputation and Status Tracking](#reputation-and-status-tracking)
+  - [Gamification and Engagement Mechanics](#gamification-and-engagement-mechanics)
+- [Non-Functional Requirements](#non-functional-requirements)
+- [Use Cases](#use-cases)
+- [Existing Systems](#existing-systems)
+- [Dependencies](#dependencies)
+- [Assumptions](#assumptions)
+- [Acceptance Criteria](#acceptance-criteria)
 
 ## Scope
 
@@ -41,6 +43,7 @@ The scope of this document is to outline and specify the requirements for the In
 ### Incentive Mechanism Design
 
 1. Design a system that offers various types of incentives, such as:
+
    - Points
    - Badges
    - Levels
@@ -58,6 +61,7 @@ The scope of this document is to outline and specify the requirements for the In
 1. Define a clear structure for rewards based on user actions, contributions, and achievements.
 
 2. Implement an automatic distribution system to:
+
    - Allocate points or virtual currency
    - Award badges and levels
    - Grant access to exclusive content or privileges
@@ -67,6 +71,7 @@ The scope of this document is to outline and specify the requirements for the In
 ### Contribution and Achievement Recognition
 
 1. Develop a systematic method to recognize user contributions, such as:
+
    - Completing tasks or challenges
    - Helping other users
    - Participating in community events
@@ -81,6 +86,7 @@ The scope of this document is to outline and specify the requirements for the In
 1. Implement a reputation system that tracks and displays a user's status within the community.
 
 2. Allow accumulation of reputation points through various activities, such as:
+
    - Quality of contributions
    - Frequency and consistency of participation
    - Community feedback or ratings
@@ -90,6 +96,7 @@ The scope of this document is to outline and specify the requirements for the In
 ### Gamification and Engagement Mechanics
 
 1. Integrate gamified elements to enhance user engagement, including:
+
    - Daily or weekly challenges
    - Competitions and leaderboards
    - Mission-based tasks or quests
@@ -108,6 +115,7 @@ The scope of this document is to outline and specify the requirements for the In
 ## Use Cases
 
 ### Example Use Cases
+
 1. **Earning Points:** A user completes a community task and earns points automatically.
 2. **Getting a Badge:** A user’s helpful answer is upvoted, leading to the award of a “Helpful Contributor” badge.
 3. **Leveling Up:** A user accumulates points and progresses to a higher level, unlocking new privileges.
@@ -116,6 +124,7 @@ The scope of this document is to outline and specify the requirements for the In
 ## Existing Systems
 
 ### Comparable Systems:
+
 1. **Reddit's Karma System:** Recognizes user contributions based on upvotes and downvotes.
 2. **Stack Overflow:** Uses reputation points and badges to reward helpful and knowledgeable participants.
 3. **Duolingo:** Gamifies language learning with levels, points, and streaks to drive engagement and progress.

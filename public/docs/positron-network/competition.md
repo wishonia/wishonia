@@ -9,9 +9,10 @@ description: >-
   efficiency, reduced risk, and encourages constant improvement and
   transparency.
 ---
+
 # Advantages of High-Resolution Agent Competition
 
-The free-market is an evolutionary process.  Organizations best at adapting and providing value survive and those worse at it die from bankruptcy. This evolutionary pressure encourages constant improvement, innovation, and efficiency among businesses, which can lead to greater benefits for society as a whole.  
+The free-market is an evolutionary process. Organizations best at adapting and providing value survive and those worse at it die from bankruptcy. This evolutionary pressure encourages constant improvement, innovation, and efficiency among businesses, which can lead to greater benefits for society as a whole.
 
 ## Problems with Low-Resolution Competition
 
@@ -25,7 +26,7 @@ Currently, the philanthropy sector rewards organizations that are good at market
 
 The solution to all of these problems is high-resolution task agent-level competition and reallocation based on Key Performance Indicators (KPIs):
 
-1. **High-Resolution Competition:** Unlike traditional organizational competition where entire entities compete, having autonomous agents compete at a task-specific level allows for more granular and precise improvements. This method focuses on the efficiency and effectiveness of each individual task rather than the overall performance of an organization. 
+1. **High-Resolution Competition:** Unlike traditional organizational competition where entire entities compete, having autonomous agents compete at a task-specific level allows for more granular and precise improvements. This method focuses on the efficiency and effectiveness of each individual task rather than the overall performance of an organization.
 
 2. **Task-Specific KPIs:** By evaluating performance based on specific KPIs for each task, it becomes easier to identify which methods or agents are most effective. This targeted approach ensures that only the best strategies are employed for each specific task, leading to optimal resource utilization and outcome improvement.
 

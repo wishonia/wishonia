@@ -1,16 +1,18 @@
 import { Metadata } from "next"
 import { redirect } from "next/navigation"
+
 import { authOptions } from "@/lib/auth"
 import { getCurrentUser } from "@/lib/session"
-import { Shell } from "@/components/layout/shell"
 import AfterLoginHandler from "@/components/AfterLoginHandler"
-import {DashboardCards} from "@/components/pages/dashboard/dashboard-cards";
-import {PollRandomGlobalProblems} from "@/components/poll-random-global-problems";
-import {GlobalProblemsList} from "@/components/global-problems-list";
+import { GlobalProblemsList } from "@/components/global-problems-list"
+import { Shell } from "@/components/layout/shell"
+import { DashboardCards } from "@/components/pages/dashboard/dashboard-cards"
+import { PollRandomGlobalProblems } from "@/components/poll-random-global-problems"
 
 export const metadata: Metadata = {
   title: "Dashboard",
-  description: "How much everyone thinks we should allocate to solving each global problem",
+  description:
+    "How much everyone thinks we should allocate to solving each global problem",
 }
 
 interface DashboardProps {
@@ -26,10 +28,10 @@ export default async function Dashboard({ searchParams }: DashboardProps) {
 
   return (
     <Shell>
-        <AfterLoginHandler></AfterLoginHandler>
-        <PollRandomGlobalProblems user={user}></PollRandomGlobalProblems>
-        <GlobalProblemsList user={user}></GlobalProblemsList>
-        <DashboardCards searchParams={searchParams}/>
+      <AfterLoginHandler></AfterLoginHandler>
+      <PollRandomGlobalProblems user={user}></PollRandomGlobalProblems>
+      <GlobalProblemsList user={user}></GlobalProblemsList>
+      <DashboardCards searchParams={searchParams} />
     </Shell>
   )
 }

@@ -8,95 +8,93 @@ description: >-
   development.
 ---
 
-
 wishonia/
 ├── .github/
-│   ├── ISSUE_TEMPLATE/
-│   ├── PULL_REQUEST_TEMPLATE/
-│   └── workflows/
+│ ├── ISSUE_TEMPLATE/
+│ ├── PULL_REQUEST_TEMPLATE/
+│ └── workflows/
 ├── constitution/
-│   ├── preamble.md
-│   ├── bill-of-rights.md
-│   ├── governance.md
-│   ├── values-principles.md
-│   ├── funding-allocation.md
-│   ├── intellectual-property.md
-│   └── amendments.md
+│ ├── preamble.md
+│ ├── bill-of-rights.md
+│ ├── governance.md
+│ ├── values-principles.md
+│ ├── funding-allocation.md
+│ ├── intellectual-property.md
+│ └── amendments.md
 ├── contracts/
-│   ├── governance/
-│   │   ├── GenieDAO.sol
-│   │   └── WishoniaGovernance.sol
-│   ├── token/
-│   │   ├── WISHToken.sol
-│   │   └── TokenSale.sol
-│   ├── funding/
-│   │   ├── QuadraticFunding.sol
-│   │   └── CrowdfundingCampaign.sol
-│   └── registry/
-│       ├── ProjectRegistry.sol
-│       └── ContributorRegistry.sol
+│ ├── governance/
+│ │ ├── GenieDAO.sol
+│ │ └── WishoniaGovernance.sol
+│ ├── token/
+│ │ ├── WISHToken.sol
+│ │ └── TokenSale.sol
+│ ├── funding/
+│ │ ├── QuadraticFunding.sol
+│ │ └── CrowdfundingCampaign.sol
+│ └── registry/
+│ ├── ProjectRegistry.sol
+│ └── ContributorRegistry.sol
 ├── laws/
-│   ├── criminal-code.md
-│   ├── civil-code.md
-│   ├── tax-laws.md
-│   ├── environmental-laws.md
-│   └── [...other relevant laws...]
+│ ├── criminal-code.md
+│ ├── civil-code.md
+│ ├── tax-laws.md
+│ ├── environmental-laws.md
+│ └── [...other relevant laws...]
 ├── policies/
-│   ├── foreign-policy.md
-│   ├── economic-policy.md
-│   ├── education-policy.md
-│   ├── healthcare-policy.md
-│   ├── immigration-policy.md
-│   └── [...other relevant policies...]
+│ ├── foreign-policy.md
+│ ├── economic-policy.md
+│ ├── education-policy.md
+│ ├── healthcare-policy.md
+│ ├── immigration-policy.md
+│ └── [...other relevant policies...]
 ├── government/
-│   ├── executive-branch.md
-│   ├── legislative-branch.md
-│   ├── judicial-branch.md
-│   ├── agencies-departments.md
-│   └── [...other relevant government entities...]
+│ ├── executive-branch.md
+│ ├── legislative-branch.md
+│ ├── judicial-branch.md
+│ ├── agencies-departments.md
+│ └── [...other relevant government entities...]
 ├── economy/
-│   ├── currency.md
-│   ├── central-bank.md
-│   ├── trade-agreements.md
-│   ├── economic-indicators.md
-│   └── [...other relevant economic information...]
+│ ├── currency.md
+│ ├── central-bank.md
+│ ├── trade-agreements.md
+│ ├── economic-indicators.md
+│ └── [...other relevant economic information...]
 ├── citizenship/
-│   ├── requirements.md
-│   ├── rights-responsibilities.md
-│   ├── naturalization-process.md
-│   └── [...other relevant citizenship information...]
+│ ├── requirements.md
+│ ├── rights-responsibilities.md
+│ ├── naturalization-process.md
+│ └── [...other relevant citizenship information...]
 ├── territory/
-│   ├── borders.md
-│   ├── administrative-divisions.md
-│   ├── land-use-planning.md
-│   └── [...other relevant territorial information...]
+│ ├── borders.md
+│ ├── administrative-divisions.md
+│ ├── land-use-planning.md
+│ └── [...other relevant territorial information...]
 ├── symbols/
-│   ├── flag.md
-│   ├── coat-of-arms.md
-│   ├── national-anthem.md
-│   └── [...other relevant national symbols...]
+│ ├── flag.md
+│ ├── coat-of-arms.md
+│ ├── national-anthem.md
+│ └── [...other relevant national symbols...]
 ├── culture/
-│   ├── languages.md
-│   ├── traditions.md
-│   ├── holidays.md
-│   ├── arts.md
-│   └── [...other relevant cultural information...]
+│ ├── languages.md
+│ ├── traditions.md
+│ ├── holidays.md
+│ ├── arts.md
+│ └── [...other relevant cultural information...]
 ├── infrastructure/
-│   ├── transportation.md
-│   ├── energy.md
-│   ├── telecommunications.md
-│   ├── water-sanitation.md
-│   └── [...other relevant infrastructure information...]
+│ ├── transportation.md
+│ ├── energy.md
+│ ├── telecommunications.md
+│ ├── water-sanitation.md
+│ └── [...other relevant infrastructure information...]
 ├── architecture/
-│   ├── [...same as before...]
+│ ├── [...same as before...]
 ├── developer-docs/
-│   ├── [...same as before...]
+│ ├── [...same as before...]
 ├── research/
-│   ├── [...same as before...]
+│ ├── [...same as before...]
 ├── roadmap.md
 ├── FAQ.md
 ├── CODE_OF_CONDUCT.md
 ├── CONTRIBUTING.md
 ├── LICENSE
 └── README.md
-

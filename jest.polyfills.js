@@ -9,11 +9,11 @@
  * you don't want to deal with this.
  */
 
-const { TextDecoder, TextEncoder } = require('node:util')
+const { TextDecoder, TextEncoder } = require("node:util")
 
 Object.defineProperties(globalThis, {
-    TextDecoder: { value: TextDecoder },
-    TextEncoder: { value: TextEncoder },
+  TextDecoder: { value: TextDecoder },
+  TextEncoder: { value: TextEncoder },
 })
 
 //const { TransformStream, ReadableStream } = require('web-streams-polyfill');
@@ -34,7 +34,3 @@ Object.defineProperties(globalThis, {
 //     Request: { value: Request },
 //     Response: { value: Response },
 // })
-
-
-
-

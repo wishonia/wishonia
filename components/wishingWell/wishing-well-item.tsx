@@ -9,10 +9,7 @@ import { WishingWellOperations } from "@/components/wishingWell/wishing-well-ope
 import { QuickWishingWellContributionButton } from "@/components/wishingWell/wishingWellContributions/quick-wishing-well-contribution-button"
 
 interface WishingWellItemProps {
-  wishingWell: Pick<
-    WishingWell,
-    "id" | "name" | "description" | "createdAt"
-  >
+  wishingWell: Pick<WishingWell, "id" | "name" | "description" | "createdAt">
 }
 
 export function WishingWellItem({ wishingWell }: WishingWellItemProps) {

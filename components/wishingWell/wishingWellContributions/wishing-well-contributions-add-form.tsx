@@ -48,7 +48,10 @@ const defaultValues: Partial<FormValues> = {
   date: currentDate,
 }
 
-export function WishingWellContributionsAddForm({ wishingWellId, setShowLogAlert }: WishingWellContributionsAddFormProps) {
+export function WishingWellContributionsAddForm({
+  wishingWellId,
+  setShowLogAlert,
+}: WishingWellContributionsAddFormProps) {
   const router = useRouter()
   const form = useForm<z.infer<typeof FormSchema>>({
     resolver: zodResolver(FormSchema),
@@ -59,16 +62,19 @@ export function WishingWellContributionsAddForm({ wishingWellId, setShowLogAlert
   async function onSubmit(data: z.infer<typeof FormSchema>) {
     setIsLoading(true)
 
-    const response = await fetch(`/api/wishingWells/${wishingWellId}/wishingWellContributions`, {
-      method: "POST",
-      headers: {
-        "Content-Type": "application/json",
-      },
-      body: JSON.stringify({
-        date: data.date,
-        count: 1,
-      }),
-    })
+    const response = await fetch(
+      `/api/wishingWells/${wishingWellId}/wishingWellContributions`,
+      {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify({
+          date: data.date,
+          count: 1,
+        }),
+      }
+    )
 
     if (!response?.ok) {
       toast({

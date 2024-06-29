@@ -1,102 +1,139 @@
-import slugify from 'slugify';
-import {formatTextResponse, jsonArrayCompletion, textCompletion} from "@/lib/llm";
-import {generateAndUploadFeaturedImageJpg} from "@/lib/imageGenerator";
-import {prisma} from "@/lib/db";
-import {GlobalProblem, GlobalSolution} from "@prisma/client";
-import {saveMarkdownPost} from "@/lib/markdownGenerator";
-import {absPathFromPublic, absPathFromRepo, pathToMarkdownUrl} from "@/lib/fileHelper";
-import fs from "fs";
-import {createGlobalProblemSolution} from "@/lib/globalProblemSolutionGenerator";
-import {createSlug} from "@/lib/stringHelper";
-import {createGlobalSolution} from "@/lib/globalSolutions";
-import {dumpTableToJson} from "@/lib/prisma/dumpDatabaseToJson";
+import fs from "fs"
+import { GlobalProblem, GlobalSolution } from "@prisma/client"
+import slugify from "slugify"
 
-const generateImages = false;
+import { prisma } from "@/lib/db"
+import {
+  absPathFromPublic,
+  absPathFromRepo,
+  pathToMarkdownUrl,
+} from "@/lib/fileHelper"
+import { createGlobalProblemSolution } from "@/lib/globalProblemSolutionGenerator"
+import { createGlobalSolution } from "@/lib/globalSolutions"
+import { generateAndUploadFeaturedImageJpg } from "@/lib/imageGenerator"
+import {
+  formatTextResponse,
+  jsonArrayCompletion,
+  textCompletion,
+} from "@/lib/llm"
+import { saveMarkdownPost } from "@/lib/markdownGenerator"
+import { dumpTableToJson } from "@/lib/prisma/dumpDatabaseToJson"
+import { createSlug } from "@/lib/stringHelper"
+
+const generateImages = false
 export async function generateGlobalSolutions() {
-    const globalProblems = await prisma.globalProblem.findMany();
-    let counter = 0;
-    for (const globalProblem of globalProblems) {
-        console.log(`Generating solutions for global problem: ${globalProblem.name}`)
-        await generateGlobalProblemSolutionsForGlobalProblem(globalProblem);
-        counter++;
-        const percentCompleted = ((counter / globalProblems.length) * 100).toFixed(2);
-        console.log(`Completed: ${counter}/${globalProblems.length} (${percentCompleted}%)`);
-    }
+  const globalProblems = await prisma.globalProblem.findMany()
+  let counter = 0
+  for (const globalProblem of globalProblems) {
+    console.log(
+      `Generating solutions for global problem: ${globalProblem.name}`
+    )
+    await generateGlobalProblemSolutionsForGlobalProblem(globalProblem)
+    counter++
+    const percentCompleted = ((counter / globalProblems.length) * 100).toFixed(
+      2
+    )
+    console.log(
+      `Completed: ${counter}/${globalProblems.length} (${percentCompleted}%)`
+    )
+  }
 }
 
-export async function generateGlobalProblemSolutionsForGlobalProblem(globalProblem: GlobalProblem) {
-    const existing = await prisma.globalProblemSolution.findMany({
-        where: {
-            globalProblemId: globalProblem.id
-        }
-    });
-    if(existing.length > 5) {
-        console.log(`Global problem ${globalProblem.name} already has solutions`);
-        return;
-    }
-    const generatedSolutionNamesDescriptions =
-        await generateSolutionNamesForGlobalProblem(globalProblem);
-    for (const nameDescription of generatedSolutionNamesDescriptions) {
-        console.log(`Generating solution: ${nameDescription.name} for problem: ${globalProblem.name}`);
-        await createGlobalProblemSolution(nameDescription.name,
-            nameDescription.description, globalProblem);
-    }
+export async function generateGlobalProblemSolutionsForGlobalProblem(
+  globalProblem: GlobalProblem
+) {
+  const existing = await prisma.globalProblemSolution.findMany({
+    where: {
+      globalProblemId: globalProblem.id,
+    },
+  })
+  if (existing.length > 5) {
+    console.log(`Global problem ${globalProblem.name} already has solutions`)
+    return
+  }
+  const generatedSolutionNamesDescriptions =
+    await generateSolutionNamesForGlobalProblem(globalProblem)
+  for (const nameDescription of generatedSolutionNamesDescriptions) {
+    console.log(
+      `Generating solution: ${nameDescription.name} for problem: ${globalProblem.name}`
+    )
+    await createGlobalProblemSolution(
+      nameDescription.name,
+      nameDescription.description,
+      globalProblem
+    )
+  }
 }
 
-export async function getOrCreateGlobalSolution(name: string, description: string, userId: string) {
-    const existing = await prisma.globalSolution.findFirst({
-        where: {
-            name: name
-        }
-    });
-    if(existing) {
-        return existing;
-    }
-    return generateGlobalSolution(name, description, userId);
+export async function getOrCreateGlobalSolution(
+  name: string,
+  description: string,
+  userId: string
+) {
+  const existing = await prisma.globalSolution.findFirst({
+    where: {
+      name: name,
+    },
+  })
+  if (existing) {
+    return existing
+  }
+  return generateGlobalSolution(name, description, userId)
 }
 
-
-export async function generateGlobalSolution(name: string, description: string | null | undefined, userId: string) {
-    if(!description) {
-        description = await generateGlobalSolutionDescription(name);
-    }
-    const existing = await prisma.globalSolution.findFirst({
-        where: {
-            name: name
-        }
-    });
-    if(existing) {
-        return existing;
-    }
-    const slug = createSlug(name)
-    const imagePath = `global-solutions/${slugify(slug)}.jpg`
-    const mdPath = `global-solutions/${slug}.md`;
-    const mdAbsPath = absPathFromPublic(mdPath);
-    const content = await generateGlobalSolutionContent(name);
-    let featuredImageUrl;
-    if(generateImages) {
-        featuredImageUrl =  await generateAndUploadFeaturedImageJpg(
-            ` ${name} : ${description}`,
-            imagePath);
-    }
-    const createdSolution =
-        await createGlobalSolution(name, description, content, featuredImageUrl, userId);
-    // Check if this is an API request or CLI script
-    const isCli = typeof window === 'undefined'
-    if(!isCli) {
-        await saveMarkdownPost({
-            name: name,
-            description: description,
-            content: content,
-            featuredImage: featuredImageUrl,
-            absFilePath: mdAbsPath,
-            slug,
-            url: pathToMarkdownUrl(mdAbsPath)
-        })
-    } else {
-        console.log(`Generated global solution: ${name} with description: ${description}. Not saving markdown file.`);
-    }
-    return createdSolution;
+export async function generateGlobalSolution(
+  name: string,
+  description: string | null | undefined,
+  userId: string
+) {
+  if (!description) {
+    description = await generateGlobalSolutionDescription(name)
+  }
+  const existing = await prisma.globalSolution.findFirst({
+    where: {
+      name: name,
+    },
+  })
+  if (existing) {
+    return existing
+  }
+  const slug = createSlug(name)
+  const imagePath = `global-solutions/${slugify(slug)}.jpg`
+  const mdPath = `global-solutions/${slug}.md`
+  const mdAbsPath = absPathFromPublic(mdPath)
+  const content = await generateGlobalSolutionContent(name)
+  let featuredImageUrl
+  if (generateImages) {
+    featuredImageUrl = await generateAndUploadFeaturedImageJpg(
+      ` ${name} : ${description}`,
+      imagePath
+    )
+  }
+  const createdSolution = await createGlobalSolution(
+    name,
+    description,
+    content,
+    featuredImageUrl,
+    userId
+  )
+  // Check if this is an API request or CLI script
+  const isCli = typeof window === "undefined"
+  if (!isCli) {
+    await saveMarkdownPost({
+      name: name,
+      description: description,
+      content: content,
+      featuredImage: featuredImageUrl,
+      absFilePath: mdAbsPath,
+      slug,
+      url: pathToMarkdownUrl(mdAbsPath),
+    })
+  } else {
+    console.log(
+      `Generated global solution: ${name} with description: ${description}. Not saving markdown file.`
+    )
+  }
+  return createdSolution
 }
 export const sharedSolutionPromptText = `The article should cover the following aspects to help readers make informed decisions
  about funding and prioritizing this solution:
@@ -130,19 +167,21 @@ highlighting its relative advantages, disadvantages, and potential synergies.
 advocates working on or supporting this solution, and their perspectives on its potential impact.
 
 The article should be written in an objective, evidence-based manner, providing a information-dense overview of 
-the solution to enable readers to make informed decisions about its merits and potential impact on the problem at hand.`;
+the solution to enable readers to make informed decisions about its merits and potential impact on the problem at hand.`
 async function generateGlobalSolutionContent(name: string) {
-    return await textCompletion(
-        `Write a information-dense article about the global solution of "${name}". 
+  return await textCompletion(
+    `Write a information-dense article about the global solution of "${name}". 
 
 ${sharedSolutionPromptText}
 `,
-        'text'
-    );
+    "text"
+  )
 }
 
-export async function generateSolutionNamesForGlobalProblem(globalProblem: GlobalProblem): Promise<{name: string, description: string}[]> {
-    return await jsonArrayCompletion(` 
+export async function generateSolutionNamesForGlobalProblem(
+  globalProblem: GlobalProblem
+): Promise<{ name: string; description: string }[]> {
+  return await jsonArrayCompletion(` 
 Imagine a futuristic utopian world where the problem of "${globalProblem.name}" has been solved.
 
 Return a json array of the 5 best SMART
@@ -173,121 +212,141 @@ For instance, for the global problem of "Mental Illness", you could return solut
     "Microbiome-Based Therapies",
     "Epigenetic Editing Therapies"
 ]
-`);
+`)
 }
 
 export async function generateGlobalSolutionImages() {
-    const solutionsWithoutImages = await prisma.globalSolution.findMany({
-        where: {
-            featuredImage: null
-        }
-    });
-    console.log(`Generating images for ${solutionsWithoutImages.length} global solutions`);
-    let counter = 0;
-    for (const globalSolution of solutionsWithoutImages) {
-        counter++;
-        const percentCompleted = ((counter / solutionsWithoutImages.length) * 100).toFixed(2);
-        console.log(`Completed: ${counter}/${solutionsWithoutImages.length} (${percentCompleted}%)`);
-        const slug = globalSolution.name.toLowerCase()
-            .replace(/ /g, '-');
-        const imagePath = `global-solutions/${slugify(slug)}.jpg`
-        try {
-            const imageUrl = await generateAndUploadFeaturedImageJpg(
-                `${globalSolution.name} : ${globalSolution.description}`,
-                imagePath);
-            await saveGlobalSolutionImage(globalSolution, imageUrl);
-        } catch (error) {
-            console.error(`Error generating image for global solution: ${globalSolution.name}`);
-            console.error(error);
-            try {
-                const imageUrl = await generateAndUploadFeaturedImageJpg(
-                    `${globalSolution.name}`,
-                    imagePath);
-                await saveGlobalSolutionImage(globalSolution, imageUrl);
-            } catch (error) {
-                console.error(`Error generating image for global solution: ${globalSolution.name}`);
-                console.error(error);
-            }
-        }
+  const solutionsWithoutImages = await prisma.globalSolution.findMany({
+    where: {
+      featuredImage: null,
+    },
+  })
+  console.log(
+    `Generating images for ${solutionsWithoutImages.length} global solutions`
+  )
+  let counter = 0
+  for (const globalSolution of solutionsWithoutImages) {
+    counter++
+    const percentCompleted = (
+      (counter / solutionsWithoutImages.length) *
+      100
+    ).toFixed(2)
+    console.log(
+      `Completed: ${counter}/${solutionsWithoutImages.length} (${percentCompleted}%)`
+    )
+    const slug = globalSolution.name.toLowerCase().replace(/ /g, "-")
+    const imagePath = `global-solutions/${slugify(slug)}.jpg`
+    try {
+      const imageUrl = await generateAndUploadFeaturedImageJpg(
+        `${globalSolution.name} : ${globalSolution.description}`,
+        imagePath
+      )
+      await saveGlobalSolutionImage(globalSolution, imageUrl)
+    } catch (error) {
+      console.error(
+        `Error generating image for global solution: ${globalSolution.name}`
+      )
+      console.error(error)
+      try {
+        const imageUrl = await generateAndUploadFeaturedImageJpg(
+          `${globalSolution.name}`,
+          imagePath
+        )
+        await saveGlobalSolutionImage(globalSolution, imageUrl)
+      } catch (error) {
+        console.error(
+          `Error generating image for global solution: ${globalSolution.name}`
+        )
+        console.error(error)
+      }
     }
-    await dumpTableToJson("GlobalSolution", true);
+  }
+  await dumpTableToJson("GlobalSolution", true)
 }
 
-async function saveGlobalSolutionImage(globalSolution: GlobalSolution, imageUrl: string) {
-    return prisma.globalSolution.update({
-        where: {
-            id: globalSolution.id
-        },
-        data: {
-            featuredImage: imageUrl
-        }
-    });
+async function saveGlobalSolutionImage(
+  globalSolution: GlobalSolution,
+  imageUrl: string
+) {
+  return prisma.globalSolution.update({
+    where: {
+      id: globalSolution.id,
+    },
+    data: {
+      featuredImage: imageUrl,
+    },
+  })
 }
 
-export async function generalizeGlobalSolutionDescriptions(){
-    const globalSolutions = await prisma.globalSolution.findMany();
-    const globalSolutionsToUpdate = [];
-    for (const globalSolution of globalSolutions) {
-        if(!alreadyUpdated(globalSolution)) {
-            globalSolutionsToUpdate.push(globalSolution);
-        }
+export async function generalizeGlobalSolutionDescriptions() {
+  const globalSolutions = await prisma.globalSolution.findMany()
+  const globalSolutionsToUpdate = []
+  for (const globalSolution of globalSolutions) {
+    if (!alreadyUpdated(globalSolution)) {
+      globalSolutionsToUpdate.push(globalSolution)
     }
-    let counter = 0;
-    for (const globalSolution of globalSolutionsToUpdate) {
-        counter++;
-        // Log percent complete
-        const percentCompleted = ((counter / globalSolutionsToUpdate.length) * 100).toFixed(2);
-        console.log(`Completed: ${counter}/${globalSolutionsToUpdate.length} (${percentCompleted}%)`);
-        let updatedDescription = await textCompletion(
-            `Provide a one sentence overview about how "${globalSolution.name}" could be used to solve global problems.`,
-            'text'
-        );
-        updatedDescription = formatTextResponse(updatedDescription);
-        console.log(`Updated description for ${globalSolution.name}: to 
+  }
+  let counter = 0
+  for (const globalSolution of globalSolutionsToUpdate) {
+    counter++
+    // Log percent complete
+    const percentCompleted = (
+      (counter / globalSolutionsToUpdate.length) *
+      100
+    ).toFixed(2)
+    console.log(
+      `Completed: ${counter}/${globalSolutionsToUpdate.length} (${percentCompleted}%)`
+    )
+    let updatedDescription = await textCompletion(
+      `Provide a one sentence overview about how "${globalSolution.name}" could be used to solve global problems.`,
+      "text"
+    )
+    updatedDescription = formatTextResponse(updatedDescription)
+    console.log(`Updated description for ${globalSolution.name}: to 
         ${updatedDescription} 
         instead of
-        ${globalSolution.description}`);
-        await prisma.globalSolution.update({
-            where: {
-                id: globalSolution.id
-            },
-            data: {
-                description: updatedDescription
-            }
-        });
-        cacheUpdatedId(globalSolution);
-    }
+        ${globalSolution.description}`)
+    await prisma.globalSolution.update({
+      where: {
+        id: globalSolution.id,
+      },
+      data: {
+        description: updatedDescription,
+      },
+    })
+    cacheUpdatedId(globalSolution)
+  }
 }
 
 function cacheUpdatedId(globalSolution: GlobalSolution) {
-    const filePath = absPathFromRepo('updatedGlobalSolutionIds.json');
-    // Cache the updated id's to a file so we can avoid duplication
-    if(!fs.existsSync(filePath)) {
-        fs.writeFileSync(filePath, JSON.stringify([globalSolution.id]));
-        return;
-    }
-    const str = fs.readFileSync(filePath);
-    const updatedIds = JSON.parse(str.toString());
-    updatedIds.push(globalSolution.id);
-    fs.writeFileSync(filePath, JSON.stringify(updatedIds));
+  const filePath = absPathFromRepo("updatedGlobalSolutionIds.json")
+  // Cache the updated id's to a file so we can avoid duplication
+  if (!fs.existsSync(filePath)) {
+    fs.writeFileSync(filePath, JSON.stringify([globalSolution.id]))
+    return
+  }
+  const str = fs.readFileSync(filePath)
+  const updatedIds = JSON.parse(str.toString())
+  updatedIds.push(globalSolution.id)
+  fs.writeFileSync(filePath, JSON.stringify(updatedIds))
 }
 
 function alreadyUpdated(globalSolution: GlobalSolution) {
-    const filePath = absPathFromRepo('updatedGlobalSolutionIds.json');
-    try {
-        const str = fs.readFileSync(filePath);
-        const updatedIds = JSON.parse(str.toString());
-        return updatedIds.includes(globalSolution.id);
-    } catch (error) {
-        return false;
-    }
+  const filePath = absPathFromRepo("updatedGlobalSolutionIds.json")
+  try {
+    const str = fs.readFileSync(filePath)
+    const updatedIds = JSON.parse(str.toString())
+    return updatedIds.includes(globalSolution.id)
+  } catch (error) {
+    return false
+  }
 }
 
 async function generateGlobalSolutionDescription(name: string) {
-    const result =  await textCompletion(
-        `Create a one sentence description of the global solution "${name}" 
+  const result = await textCompletion(
+    `Create a one sentence description of the global solution "${name}" 
         for an article about how it could be used to solve global problems.`,
-        'text'
-    );
-    return formatTextResponse(result);
+    "text"
+  )
+  return formatTextResponse(result)
 }

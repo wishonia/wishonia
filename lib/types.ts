@@ -1,4 +1,4 @@
-import { type Message } from 'ai'
+import { type Message } from "ai"
 
 export interface Chat extends Record<string, any> {
   id: string
@@ -100,7 +100,7 @@ export interface Readme {
 export interface Directory {
   name: string
   path: string
-  type: 'file' | 'dir'
+  type: "file" | "dir"
   url: string
   html_url: string
   sha: string
@@ -113,9 +113,8 @@ export interface Directory {
 }
 
 export interface Agent {
-  name:string
-  type?:string
-  avatar?:string
-  prompt?:string
-
+  name: string
+  type?: string
+  avatar?: string
+  prompt?: string
 }

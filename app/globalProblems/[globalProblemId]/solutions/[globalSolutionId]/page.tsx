@@ -3,21 +3,22 @@ import { notFound } from "next/navigation"
 
 import { getGlobalProblemSolution } from "@/lib/api/globalProblemSolutions"
 import { Shell } from "@/components/layout/shell"
-import MarkdownRenderer from "@/components/MarkdownRenderer";
+import MarkdownRenderer from "@/components/MarkdownRenderer"
 
 interface GlobalProblemSolutionPageProps {
   params: {
-    globalSolutionId: string,
-    globalProblemId: string,
+    globalSolutionId: string
+    globalProblemId: string
   }
 }
 
 export async function generateMetadata({
   params,
 }: GlobalProblemSolutionPageProps): Promise<Metadata> {
-
   const globalProblemSolution = await getGlobalProblemSolution(
-      params.globalProblemId, params.globalSolutionId);
+    params.globalProblemId,
+    params.globalSolutionId
+  )
 
   return {
     title: globalProblemSolution?.name || "Not Found",
@@ -28,11 +29,10 @@ export async function generateMetadata({
 export default async function GlobalProblemSolutionPage({
   params,
 }: GlobalProblemSolutionPageProps) {
-
-  const globalProblemSolution =
-      await getGlobalProblemSolution(
-          params.globalProblemId,
-          params.globalSolutionId);
+  const globalProblemSolution = await getGlobalProblemSolution(
+    params.globalProblemId,
+    params.globalSolutionId
+  )
 
   if (!globalProblemSolution) {
     notFound()
@@ -40,10 +40,12 @@ export default async function GlobalProblemSolutionPage({
 
   return (
     <Shell>
-      <MarkdownRenderer name={globalProblemSolution.name}
-                        featuredImage={globalProblemSolution.featuredImage}
-                        description={globalProblemSolution.description}
-                        content={globalProblemSolution.content} />
+      <MarkdownRenderer
+        name={globalProblemSolution.name}
+        featuredImage={globalProblemSolution.featuredImage}
+        description={globalProblemSolution.description}
+        content={globalProblemSolution.content}
+      />
     </Shell>
   )
 }

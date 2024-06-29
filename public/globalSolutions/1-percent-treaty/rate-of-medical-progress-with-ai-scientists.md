@@ -13,6 +13,7 @@ ogImage:
 absFilePath: >-
   C:\code\wishonia\public\globalSolutions\1-percent-treaty\rate-of-medical-progress-with-ai-scientists.md
 ---
+
 # Increased Efficiency of Automating Clinical Discovery
 
 ![](robot-lab-scientist.png)
@@ -65,16 +66,14 @@ To estimate the increased efficiency of AGI AI scientists compared to human scie
 
 - Baseline human scientist annual output: 1
 - AGI AI scientist annual output:
-  - Working hours: 1 * 4.38 = 4.38
-  - Knowledge sharing: 4.38 * 2 = 8.76
-  - Eliminating redundancy: 8.76 * 1.5 = 13.14
-  - Cognitive efficiency: 13.14 * 2 = 26.28
-  - Experimental iteration: 26.28 * 10 = 262.8
+  - Working hours: 1 \* 4.38 = 4.38
+  - Knowledge sharing: 4.38 \* 2 = 8.76
+  - Eliminating redundancy: 8.76 \* 1.5 = 13.14
+  - Cognitive efficiency: 13.14 \* 2 = 26.28
+  - Experimental iteration: 26.28 \* 10 = 262.8
 
 Therefore, based on these assumptions and estimates,
 AI scientists could potentially achieve 260 years of medical progress in a single year.
-
-
 
 # Examples
 
@@ -107,7 +106,6 @@ Moderna Therapeutics stands out for its swift response to the COVID-19 pandemic,
 # Future House
 
 [Future House](https://www.futurehouse.org/) is 10-year mission is to build semi-autonomous AIs that can scale scientific research, to accelerate the pace of discovery and to provide world-wide access to cutting-edge scientific, medical, and engineering expertise.
-
 
 ## Additional AI Innovations in Drug Discovery
 

@@ -12,13 +12,14 @@ ogImage:
   url: lobbying.png
 absFilePath: 'C:\code\wishonia\public\globalSolutions\1-percent-treaty\lobbying.md'
 ---
+
 # Return on Investment in Lobbying
 
 Defense companies globally are estimated to spend between $200 million and $300 million annually on lobbying efforts. These investments are directed towards influencing defense policy, securing contracts, and shaping military spending priorities.
 
 #### Government Contracts to Defense Companies
 
-Military contractors globally receive between $800 billion to $1 trillion annually from government contracts. 
+Military contractors globally receive between $800 billion to $1 trillion annually from government contracts.
 
 ```mermaid
 graph LR
@@ -32,7 +33,7 @@ style G fill:#fff,stroke:#333,stroke-width:2px,color:#000
 
 #### Calculating the ROI
 
-The return on investment (ROI) for lobbying efforts is calculated using the formula: 
+The return on investment (ROI) for lobbying efforts is calculated using the formula:
 
 ROI = ( Benefit − Cost ) / Cost × 100
 

@@ -7,6 +7,7 @@ description: >-
   driven by political, economic, or social differences, resulting in physical
   aggression and significant harm to people and property.
 ---
+
 # Violent Conflict
 
 ## Introduction

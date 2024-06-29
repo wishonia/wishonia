@@ -1,9 +1,9 @@
 ---
 slug: paths
-name: 'Choosing Between Paths: The Urgency of the PATH Treaty'
+name: "Choosing Between Paths: The Urgency of the PATH Treaty"
 featuredImage: /globalSolutions/1-percent-treaty/paths.jpg
 author:
-  name: ''
+  name: ""
 description: >-
   Exploring the critical juncture humanity faces in deciding between AI-driven
   warfare or a path towards health, longevity, and global well-being.
@@ -11,6 +11,7 @@ ogImage:
   url: paths.png
 absFilePath: 'C:\code\wishonia\public\globalSolutions\1-percent-treaty\paths.md'
 ---
+
 # Choose Your Path
 
 The PATH Treaty stands at a critical juncture in human history, offering a stark choice between two futures: one path veers towards a precipice of destruction, fueled by an arms race of increasingly powerful artificial intelligence (AI) systems designed for warfare; the other leads to a horizon bright with the promise of health, longevity, and global well-being. The former is not just a continuation of the status quo—it's an acceleration towards potential human extinction.
@@ -28,12 +29,15 @@ As nations pour trillions into military budgets, a significant portion is dedica
 Against this backdrop, the LOGICAL Treaty proposes a radical but necessary redirection of resources:
 
 #### The Current Spendings
+
 - **Global Military Expenditure**: Over $2 trillion a year, with an increasing focus on autonomous warfare capabilities.
 
 #### The Proposal
+
 - **Reallocate 1% of Military Budgets**: A seemingly small shift with profound implications, funneling resources into AI-driven health research instead of destructive technologies.
 
 #### The Impact
+
 - **Health and Longevity**: Accelerating the fight against chronic diseases, improving global health, and extending human lifespans.
 - **Averting Catastrophe**: Every dollar redirected is a step away from the brink of AI-driven warfare and towards a future where technology serves humanity's best interests.
 

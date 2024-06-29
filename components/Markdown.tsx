@@ -1,5 +1,5 @@
-import { FC, memo } from 'react'
-import ReactMarkDown, { Options } from 'react-markdown'
+import { FC, memo } from "react"
+import ReactMarkDown, { Options } from "react-markdown"
 
 /**
  * This code snippet is creating a memoized version of the ReactMarkDown component using the memo function from React.
@@ -9,5 +9,5 @@ export const MemoizedReactMarkdown: FC<Options> = memo(
   ReactMarkDown,
   (prevProps, nextProps) =>
     prevProps.children === nextProps.children &&
-    prevProps.className === nextProps.className,
+    prevProps.className === nextProps.className
 )

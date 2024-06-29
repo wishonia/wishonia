@@ -1,4 +1,4 @@
-import {textCompletion} from "@/lib/llm";
+import { textCompletion } from "@/lib/llm"
 
 export async function formatPrismaModelSchema(schema: string): Promise<string> {
   function generatePrompt(schemaToFormat: string): string {
@@ -27,8 +27,8 @@ Please format this schema to be consistent with the conventions of the above sch
 ${schemaToFormat}
 
 }
-`;
+`
   }
-    const prompt = generatePrompt(schema);
-  return await textCompletion(prompt, "text");
+  const prompt = generatePrompt(schema)
+  return await textCompletion(prompt, "text")
 }

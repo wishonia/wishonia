@@ -3,7 +3,7 @@ import { notFound } from "next/navigation"
 
 import { getGlobalSolution } from "@/lib/api/globalSolutions"
 import { Shell } from "@/components/layout/shell"
-import MarkdownRenderer from "@/components/MarkdownRenderer";
+import MarkdownRenderer from "@/components/MarkdownRenderer"
 
 interface GlobalSolutionPageProps {
   params: { globalSolutionId: string }
@@ -12,7 +12,6 @@ interface GlobalSolutionPageProps {
 export async function generateMetadata({
   params,
 }: GlobalSolutionPageProps): Promise<Metadata> {
-
   const globalSolution = await getGlobalSolution(params.globalSolutionId)
 
   return {
@@ -24,7 +23,6 @@ export async function generateMetadata({
 export default async function GlobalSolutionPage({
   params,
 }: GlobalSolutionPageProps) {
-
   const globalSolution = await getGlobalSolution(params.globalSolutionId)
 
   if (!globalSolution) {
@@ -33,10 +31,12 @@ export default async function GlobalSolutionPage({
 
   return (
     <Shell>
-      <MarkdownRenderer name={globalSolution.name}
-                        featuredImage={globalSolution.featuredImage}
-                        description={globalSolution.description}
-                        content={globalSolution.content} />
+      <MarkdownRenderer
+        name={globalSolution.name}
+        featuredImage={globalSolution.featuredImage}
+        description={globalSolution.description}
+        content={globalSolution.content}
+      />
     </Shell>
   )
 }

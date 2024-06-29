@@ -1,32 +1,34 @@
-'use client'
+"use client"
 
-import { Message } from 'ai'
-import ChatPanel from './ChatPanel'
-import { sleep } from '@/lib/utils'
-import { useToast } from './ui/use-toast'
-import { PromptForm } from './PromptForm'
-import { ChatMessage } from './ChatMessage'
-import { ScrollArea } from './ui/scroll-area'
-import { useUIState, useAIState } from 'ai/rsc'
-import { useEffect, useRef, useState } from 'react'
-import { useSidebar } from '@/lib/hooks/use-sidebar'
-import { usePathname, useRouter } from 'next/navigation'
-import { useLocalStorage } from '@/lib/hooks/use-local-storage'
-import {useSession} from "next-auth/react";
-import { Agent } from '@prisma/client'
+import { useEffect, useRef, useState } from "react"
+import { usePathname, useRouter } from "next/navigation"
+import { Agent } from "@prisma/client"
+import { Message } from "ai"
+import { useAIState, useUIState } from "ai/rsc"
+import { useSession } from "next-auth/react"
 
-export interface ChatProps extends React.ComponentProps<'div'> {
+import { useLocalStorage } from "@/lib/hooks/use-local-storage"
+import { useSidebar } from "@/lib/hooks/use-sidebar"
+import { sleep } from "@/lib/utils"
+
+import { ChatMessage } from "./ChatMessage"
+import ChatPanel from "./ChatPanel"
+import { PromptForm } from "./PromptForm"
+import { ScrollArea } from "./ui/scroll-area"
+import { useToast } from "./ui/use-toast"
+
+export interface ChatProps extends React.ComponentProps<"div"> {
   initialMessages?: Message[]
   id: string
   missingKeys: string[]
-  agentData?:Agent | null
+  agentData?: Agent | null
 }
 
-function Chat({ id, missingKeys ,agentData}: ChatProps) {
+function Chat({ id, missingKeys, agentData }: ChatProps) {
   const ref = useRef<HTMLDivElement>(null)
   const session = useSession()
 
-  const [input, setInput] = useState('')
+  const [input, setInput] = useState("")
   const [messages] = useUIState()
   const [aiState] = useAIState()
 
@@ -35,17 +37,16 @@ function Chat({ id, missingKeys ,agentData}: ChatProps) {
 
   const { toast } = useToast()
 
-  const [_, setNewChatId] = useLocalStorage('newChatId', id)
+  const [_, setNewChatId] = useLocalStorage("newChatId", id)
   const { isSidebarOpen, isLoading, toggleSidebar } = useSidebar()
 
-  const messagesEndRef =
-      useRef<HTMLDivElement | null>(null);
+  const messagesEndRef = useRef<HTMLDivElement | null>(null)
 
   useEffect(() => {
     if (messagesEndRef.current) {
-      messagesEndRef.current.scrollIntoView({ behavior: 'smooth' });
+      messagesEndRef.current.scrollIntoView({ behavior: "smooth" })
     }
-  }, [messages]);
+  }, [messages])
 
   useEffect(() => {
     const messagesLength = aiState.messages?.length
@@ -64,31 +65,38 @@ function Chat({ id, missingKeys ,agentData}: ChatProps) {
   useEffect(() => {
     missingKeys.map((key) => {
       toast({
-        title: 'Error',
+        title: "Error",
         description: `Missing ${key} environment variable!`,
-        variant: 'destructive',
+        variant: "destructive",
       })
     })
   }, [missingKeys])
 
   return (
     <div className={`size-full`}>
-      <ScrollArea className='size-full'>
+      <ScrollArea className="size-full">
         <div
-            ref={ref}
-            className={`w-full sm:max-w-2xl mx-auto sm:pt-0 pt-14 pb-36 sm:pb-28 ${isSidebarOpen && session ? 'lg:translate-x-[100px]' : ''} transition-all duration-300 ${messages.length !== 0 && 'px-3'}`}
+          ref={ref}
+          className={`mx-auto w-full pb-36 pt-14 sm:max-w-2xl sm:pb-28 sm:pt-0 ${isSidebarOpen && session ? "lg:translate-x-[100px]" : ""} transition-all duration-300 ${messages.length !== 0 && "px-3"}`}
         >
-          <ChatMessage id={id} messages={messages}/>
-          <div ref={messagesEndRef}/>
+          <ChatMessage id={id} messages={messages} />
+          <div ref={messagesEndRef} />
         </div>
-        <ChatPanel agentData={agentData}/>
+        <ChatPanel agentData={agentData} />
       </ScrollArea>
       <div
-        className={`${messages.length !== 0 || pathname === '/chat' || pathname === '/' || pathname.includes('chat')? 'block' : 
-        'hidden'} ${isSidebarOpen && session ? 'lg:translate-x-[100px]' : 
-        ''} w-full mx-auto transition-all duration-300 fixed bottom-0 bg-gradient-to-t from-background to-transparent via-background`}
+        className={`${
+          messages.length !== 0 ||
+          pathname === "/chat" ||
+          pathname === "/" ||
+          pathname.includes("chat")
+            ? "block"
+            : "hidden"
+        } ${
+          isSidebarOpen && session ? "lg:translate-x-[100px]" : ""
+        } fixed bottom-0 mx-auto w-full bg-gradient-to-t from-background via-background to-transparent transition-all duration-300`}
       >
-        <PromptForm input={input} setInput={setInput} agent={agentData}/>
+        <PromptForm input={input} setInput={setInput} agent={agentData} />
       </div>
     </div>
   )

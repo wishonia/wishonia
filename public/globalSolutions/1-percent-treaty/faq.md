@@ -10,6 +10,7 @@ ogImage:
   url: faq.png
 absFilePath: 'C:\code\wishonia\public\globalSolutions\1-percent-treaty\faq.md'
 ---
+
 # FAQ
 
 ## Q: Why focus on reducing military spending? Shouldn't we just increase health research funding directly?
@@ -18,9 +19,9 @@ While increasing health research funding through any means is valuable, tying it
 
 ## Q: Is a 1% reduction in military budgets really enough to make a difference?
 
-While 1% may seem small, it translates to around $20 billion per year globally - a transformative sum for health research. 
+While 1% may seem small, it translates to around $20 billion per year globally - a transformative sum for health research.
 
-It's also important to remember that this is intended as a starting point, not an end goal. As countries experience the benefits of this reallocation, they may be inspired to go further. 
+It's also important to remember that this is intended as a starting point, not an end goal. As countries experience the benefits of this reallocation, they may be inspired to go further.
 
 Even a 1% shift sets a crucial precedent and begins to normalize the idea of prioritizing health over warfare.
 
@@ -33,8 +34,8 @@ The treaty should include robust auditing and verification mechanisms to hold co
 So there are two ways to increase national security:
 
 1. Have an endless arms race where everyone keeps spending more and more on weapons.
-2. All countries will be reducing their military budgets proportionally, so the balance of power remains unchanged. 
-No country gains a military advantage. 
+2. All countries will be reducing their military budgets proportionally, so the balance of power remains unchanged.
+   No country gains a military advantage.
 
 In fact,
 the national security of everyone would be _**increased**_ because all their enemies would have 1% less bombs,
@@ -43,7 +44,7 @@ biological weapons, etc. to destroy them with.
 ## Q: How can we be sure the research funding will be spent effectively?
 
 The proposal's decentralized, crowdsourced approach is designed to maximize impact.
-By transparently allowing scientists, institutions, and the public to propose and vote on projects, it taps into collective wisdom and promotes accountability. 
+By transparently allowing scientists, institutions, and the public to propose and vote on projects, it taps into collective wisdom and promotes accountability.
 Rigorous reporting on outcomes will also allow continuous improvement and ensure that funds flow to the most promising work.
 While no system is perfect, this approach offers significant advantages over centralized, opaque allocation processes vulnerable to special interests.
 
@@ -66,6 +67,6 @@ Even if your country is a leader in health research, a global effort will yield 
 
 Diseases don't respect borders, and breakthroughs in one part of the world can save lives everywhere.
 
-By pooling resources and expertise on a global scale, we accelerate progress and ensure fair access to treatments. 
+By pooling resources and expertise on a global scale, we accelerate progress and ensure fair access to treatments.
 
 We also reduce the risk of devastating cross-border biological threats, enhancing everyone's security. Supporting this treaty is a recognition that, in our interconnected age, health is a global public good that requires collective action.

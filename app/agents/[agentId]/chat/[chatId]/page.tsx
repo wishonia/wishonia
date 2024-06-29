@@ -1,8 +1,9 @@
-import Chat from '@/components/Chat'
-import { AI } from '@/lib/chat/actions'
-import { notFound, redirect } from 'next/navigation'
-import { getChat, getMissingKeys } from '@/app/actions'
-import {getCurrentUser} from "@/lib/session";
+import { notFound, redirect } from "next/navigation"
+
+import { AI } from "@/lib/chat/actions"
+import { getCurrentUser } from "@/lib/session"
+import Chat from "@/components/Chat"
+import { getChat, getMissingKeys } from "@/app/actions"
 
 export interface ChatPageProps {
   params: {
@@ -20,11 +21,11 @@ export default async function ChatPage({ params }: ChatPageProps) {
   const chat = await getChat(params.chatId, user.id)
 
   if (!chat) {
-    redirect('/chat')
+    redirect("/chat")
   }
 
-  if(!chat[0]) {
-    redirect('/chat')
+  if (!chat[0]) {
+    redirect("/chat")
   }
 
   if (chat[0].userId !== user?.id) {
@@ -33,10 +34,7 @@ export default async function ChatPage({ params }: ChatPageProps) {
 
   return (
     <AI initialAIState={{ chatId: chat[0].id, messages: chat[0].messages }}>
-      <Chat
-        id={chat[0].id}
-        missingKeys={missingKeys}
-      />
+      <Chat id={chat[0].id} missingKeys={missingKeys} />
     </AI>
   )
 }

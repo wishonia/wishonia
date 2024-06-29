@@ -2,23 +2,23 @@
  * To learn more about Playwright Test visit:
  * https://www.checklyhq.com/docs/browser-checks/playwright-test/
  */
-import {expect, test} from '@playwright/test'
+import { expect, test } from "@playwright/test"
 
-if(process.env.VERCEL_BYPASS_TOKEN) {
-  console.log('Using Vercel bypass token')
+if (process.env.VERCEL_BYPASS_TOKEN) {
+  console.log("Using Vercel bypass token")
   test.use({
     extraHTTPHeaders: {
-      'x-vercel-protection-bypass': process.env.VERCEL_BYPASS_TOKEN
-    }
+      "x-vercel-protection-bypass": process.env.VERCEL_BYPASS_TOKEN,
+    },
   })
 } else {
-    console.error('=== NO VERCEL_BYPASS_TOKEN FOUND!!! ===')
+  console.error("=== NO VERCEL_BYPASS_TOKEN FOUND!!! ===")
 }
 
-test('visit page and take screenshot', async ({ page }) => {
+test("visit page and take screenshot", async ({ page }) => {
   // If available, we set the target URL to a preview deployment URL provided by the ENVIRONMENT_URL created by Vercel.
   // Otherwise, we use the Production URL.
-  const targetUrl = process.env.ENVIRONMENT_URL || 'https://wishonia.love/'
+  const targetUrl = process.env.ENVIRONMENT_URL || "https://wishonia.love/"
 
   // We visit the page. This waits for the "load" event by default.
   const response = await page.goto(targetUrl)
@@ -43,8 +43,11 @@ test('visit page and take screenshot', async ({ page }) => {
   if (response === null) {
     throw new Error(`Could not load ${targetUrl}`)
   }
-  expect(response.status(),'should respond with correct status code').toBeLessThan(400)
+  expect(
+    response.status(),
+    "should respond with correct status code"
+  ).toBeLessThan(400)
 
   // Take a screenshot
-  await page.screenshot({ path: '__checks__/screenshots/screenshot.jpg' })
+  await page.screenshot({ path: "__checks__/screenshots/screenshot.jpg" })
 })

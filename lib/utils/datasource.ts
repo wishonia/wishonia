@@ -6,4 +6,4 @@ export const SUPPORTED_SOURCE_TYPES = [
   "youtube",
   "rest",
   "sitemap",
-];
+]
