@@ -13,9 +13,10 @@ ogImage:
 absFilePath: >-
   C:\code\wishonia\public\globalSolutions\1-percent-treaty\value-of-automating-research.md
 ---
+
 # The Using AI to Automate Clinical Research and Drug Development
 
-By redirecting 1% of military spending to automating clinical research with AI, we could enjoy a future where diseases are not just managed but potentially eradicated. 
+By redirecting 1% of military spending to automating clinical research with AI, we could enjoy a future where diseases are not just managed but potentially eradicated.
 
 ## AGI and ASI in Healthcare
 

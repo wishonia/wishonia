@@ -1,6 +1,7 @@
-import { type ClassValue, clsx } from 'clsx'
-import { customAlphabet } from 'nanoid'
-import { twMerge } from 'tailwind-merge'
+import { clsx, type ClassValue } from "clsx"
+import { customAlphabet } from "nanoid"
+import { twMerge } from "tailwind-merge"
+
 import { env } from "@/env.mjs"
 
 export function cn(...inputs: ClassValue[]) {
@@ -41,22 +42,22 @@ export function dateRangeParams(searchParams: { from: string; to: string }) {
 }
 
 export const nanoid = customAlphabet(
-  '0123456789ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz',
-  7,
+  "0123456789ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz",
+  7
 )
 
 export const sleep = (ms: number) =>
   new Promise((resolve) => setTimeout(resolve, ms))
 
 export const runAsyncFnWithoutBlocking = (
-  fn: (...args: any) => Promise<any>,
+  fn: (...args: any) => Promise<any>
 ) => {
   fn()
 }
 
 export const getMediumFont = async () => {
   const response = await fetch(
-    new URL('@/assets/fonts/LabilGrotesk-Medium.ttf', import.meta.url),
+    new URL("@/assets/fonts/LabilGrotesk-Medium.ttf", import.meta.url)
   )
   const font = await response.arrayBuffer()
   return font
@@ -67,5 +68,5 @@ export function absoluteUrl(path: string) {
 }
 
 export function isCLI() {
-  return typeof window === 'undefined'
+  return typeof window === "undefined"
 }

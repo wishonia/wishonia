@@ -1,4 +1,4 @@
-name: 'generate_embeddings'
+name: "generate_embeddings"
 on: # run on main branch changes
   push:
     branches:
@@ -11,7 +11,7 @@ jobs:
       - uses: actions/checkout@v3
       - uses: supabase/embeddings-generator@v0.0.5 # Find the latest version in the Marketplace
         with:
-          supabase-url: 'https://scqhjglwdranqzljqesd.supabase.co'
+          supabase-url: "https://scqhjglwdranqzljqesd.supabase.co"
           supabase-service-role-key: ${{ secrets.SUPABASE_SERVICE_ROLE_KEY }}
           openai-key: ${{ secrets.OPENAI_API_KEY }}
-          docs-root-path: 'public/docs' # the path to the root of your md(x) files
+          docs-root-path: "public/docs" # the path to the root of your md(x) files

@@ -1,5 +1,6 @@
 import { Metadata } from "next"
-import MarkdownFileRenderer from "@/components/MarkdownFileRenderer";
+
+import MarkdownFileRenderer from "@/components/MarkdownFileRenderer"
 
 export const metadata: Metadata = {
   title: "Docs",
@@ -10,14 +11,16 @@ interface DocsProps {
 }
 
 export default async function Docs({ params }: DocsProps) {
-  let { filename } = params;
+  let { filename } = params
   // implode filename to string if it's an array
-    if (Array.isArray(filename)) {
-        filename = filename.join('/');
-    }
-  console.log(`filename: ${filename}`);
-  filename = filename.replace(/\.md$/, '');
+  if (Array.isArray(filename)) {
+    filename = filename.join("/")
+  }
+  console.log(`filename: ${filename}`)
+  filename = filename.replace(/\.md$/, "")
   return (
-    <MarkdownFileRenderer url={`/globalSolutions/1-percent-treaty/${filename}.md`}/>
+    <MarkdownFileRenderer
+      url={`/globalSolutions/1-percent-treaty/${filename}.md`}
+    />
   )
 }

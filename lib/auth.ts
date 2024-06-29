@@ -2,6 +2,7 @@ import { PrismaAdapter } from "@next-auth/prisma-adapter"
 import { NextAuthOptions } from "next-auth"
 import GithubProvider from "next-auth/providers/github"
 import GoogleProvider from "next-auth/providers/google"
+
 //import EmailProvider from "next-auth/providers/email";
 
 import { env } from "@/env.mjs"
@@ -35,21 +36,24 @@ export const authOptions: NextAuthOptions = {
       if (token) {
         session.user.id = token.id
         let name = token.name
-        if(token.firstName && token.lastName) {
-            name = `${token.firstName} ${token.lastName}`
+        if (token.firstName && token.lastName) {
+          name = `${token.firstName} ${token.lastName}`
         }
         session.user.name = name
-        session.user.email = token.email as string | null | undefined;
-        session.user.image = token.picture as string | null | undefined;
+        session.user.email = token.email as string | null | undefined
+        session.user.image = token.picture as string | null | undefined
         // Use type assertion to bypass the type error
-        (session.user as any).username = token.username as string | null | undefined;
-        session.user.admin = token.admin as boolean | undefined;
+        ;(session.user as any).username = token.username as
+          | string
+          | null
+          | undefined
+        session.user.admin = token.admin as boolean | undefined
       }
 
       return session
     },
     async jwt({ token, user }) {
-      if(token.id){
+      if (token.id) {
         return token
       }
       const dbUser = await db.user.findFirst({
@@ -75,7 +79,7 @@ export const authOptions: NextAuthOptions = {
         createdAt: dbUser.createdAt,
         updatedAt: dbUser.updatedAt,
         web3Wallet: dbUser.web3Wallet,
-        admin: dbUser.admin
+        admin: dbUser.admin,
       }
     },
   },

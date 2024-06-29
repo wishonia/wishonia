@@ -1,12 +1,13 @@
 "use client"
 
 import * as React from "react"
-
+import { useEffect, useState } from "react"
 import { useRouter } from "next/navigation"
+import { CopilotTextarea } from "@copilotkit/react-textarea"
 import { zodResolver } from "@hookform/resolvers/zod"
+import { WishingWell } from "@prisma/client"
 import { useForm } from "react-hook-form"
 import * as z from "zod"
-import { useEffect, useState } from "react";
 
 import { cn } from "@/lib/utils"
 import { wishingWellPatchSchema } from "@/lib/validations/wishingWell"
@@ -24,11 +25,10 @@ import { Label } from "@/components/ui/label"
 import { Textarea } from "@/components/ui/textarea"
 import { toast } from "@/components/ui/use-toast"
 import { Icons } from "@/components/icons"
-import {WishingWell} from "@prisma/client";
-import {CopilotTextarea} from "@copilotkit/react-textarea";
 
-interface WishingWellEditFormProps extends React.HTMLAttributes<HTMLFormElement> {
-  wishingWell: Pick<WishingWell, "id" | "name" | "description" >
+interface WishingWellEditFormProps
+  extends React.HTMLAttributes<HTMLFormElement> {
+  wishingWell: Pick<WishingWell, "id" | "name" | "description">
 }
 
 type FormData = z.infer<typeof wishingWellPatchSchema>
@@ -39,8 +39,8 @@ export function WishingWellEditForm({
   ...props
 }: WishingWellEditFormProps) {
   const router = useRouter()
-  const [content, setContent] = useState("");
-  const [nameInput, setNameInput] = useState(wishingWell?.name || "");
+  const [content, setContent] = useState("")
+  const [nameInput, setNameInput] = useState(wishingWell?.name || "")
   const {
     handleSubmit,
     register,
@@ -55,12 +55,12 @@ export function WishingWellEditForm({
   })
 
   // Watch for changes in the name input
-  const name = watch("name");
+  const name = watch("name")
 
   // Update the nameInput state whenever the name changes
   useEffect(() => {
-    setNameInput(name);
-  }, [name]);
+    setNameInput(name)
+  }, [name])
 
   async function onSubmit(data: FormData) {
     const response = await fetch(`/api/wishingWells/${wishingWell.id}`, {
@@ -119,21 +119,19 @@ export function WishingWellEditForm({
             )}
           </div>
           <div className="grid gap-3">
-            <Label htmlFor="description">
-              Short Description{" "}
-            </Label>
+            <Label htmlFor="description">Short Description </Label>
             <Textarea
               id="description"
               className="w-full lg:w-[400px]"
               {...register("description")}
             />
             {errors?.description && (
-                <p className="px-1 text-xs text-red-600">
-                  {errors.description.message}
-                </p>
+              <p className="px-1 text-xs text-red-600">
+                {errors.description.message}
+              </p>
             )}
           </div>
-{/*          <div className="grid gap-3">
+          {/*          <div className="grid gap-3">
             <Label htmlFor="content">
               Longer Detailed Description{" "}
             </Label>

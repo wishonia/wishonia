@@ -1,40 +1,40 @@
-import { BaseDocumentLoader } from "langchain/document_loaders/base";
-import { Document } from "langchain/document";
+import { Document } from "langchain/document"
+import { BaseDocumentLoader } from "langchain/document_loaders/base"
 
 export interface YoutubeTranscriptParams {
-  url: string;
-  language_code: string;
+  url: string
+  language_code: string
 }
 
 export class YoutubeTranscript
   extends BaseDocumentLoader
   implements YoutubeTranscriptParams
 {
-  language_code: string;
-  url: string;
+  language_code: string
+  url: string
 
   constructor({ language_code, url }: YoutubeTranscriptParams) {
-    super();
-    this.language_code = language_code;
-    this.url = url;
+    super()
+    this.language_code = language_code
+    this.url = url
   }
 
   async load(): Promise<Document<Record<string, any>>[]> {
-    const { YtTranscript } = await import("yt-transcript");
+    const { YtTranscript } = await import("yt-transcript")
 
     const ytTranscript = new YtTranscript({
       url: this.url,
-    });
+    })
 
-    const script = await ytTranscript.getTranscript(this.language_code);
+    const script = await ytTranscript.getTranscript(this.language_code)
 
-    if (!script) throw new Error("No script found");
+    if (!script) throw new Error("No script found")
 
-    let text = "";
+    let text = ""
 
     script.forEach((item) => {
-      text += item.text + " ";
-    });
+      text += item.text + " "
+    })
 
     return [
       {
@@ -43,6 +43,6 @@ export class YoutubeTranscript
         },
         pageContent: text,
       },
-    ];
+    ]
   }
 }

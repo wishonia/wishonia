@@ -3,9 +3,11 @@ name: Resource Management System
 description: "Resource Management System\r\n    - Resource inventory management\r\n    - Resource allocation and tracking\r\n    - Resource request and approval workflows\r\n    - Resource utilization reporting\r\n    - Resource forecasting and planning\r\n\r"
 featuredImage: /docs/functional-components/resource-management-system.jpg
 ---
+
 # Wishocracy Resource Management System - Product Requirements Document
 
 ## Table of Contents
+
 1. [Introduction](#introduction)
 2. [Objective](#objective)
 3. [Functional Requirements](#functional-requirements)
@@ -30,6 +32,7 @@ The primary objective of the RMS is to provide a robust and scalable solution fo
 ## Functional Requirements
 
 ### Resource Inventory Management
+
 - **Description**: Maintain a comprehensive inventory of all resources available within the system.
   - **Features**:
     - Resource categorization (e.g., physical, digital, financial, human).
@@ -38,6 +41,7 @@ The primary objective of the RMS is to provide a robust and scalable solution fo
     - Resource status tracking (available, in use, under maintenance, retired).
 
 ### Resource Allocation and Tracking
+
 - **Description**: Allocate resources to users or projects and track their usage over time.
   - **Features**:
     - Resource assignment interface.
@@ -46,6 +50,7 @@ The primary objective of the RMS is to provide a robust and scalable solution fo
     - Historical allocation data and audit trails.
 
 ### Resource Request and Approval Workflows
+
 - **Description**: Facilitate the request and approval process for resource allocation.
   - **Features**:
     - User-friendly request submission form.
@@ -55,6 +60,7 @@ The primary objective of the RMS is to provide a robust and scalable solution fo
     - Configurable approval rules and exception handling.
 
 ### Resource Utilization Reporting
+
 - **Description**: Provide detailed reports on resource utilization to help in decision-making and optimization.
   - **Features**:
     - Real-time utilization dashboards.
@@ -63,6 +69,7 @@ The primary objective of the RMS is to provide a robust and scalable solution fo
     - Export options (CSV, PDF).
 
 ### Resource Forecasting and Planning
+
 - **Description**: Predict future resource needs and plan accordingly.
   - **Features**:
     - Demand forecasting using historical data and trends.
@@ -89,6 +96,7 @@ The primary objective of the RMS is to provide a robust and scalable solution fo
 ## Integration with Existing Systems
 
 The RMS may need to integrate with the following existing systems within the Wishocracy platform:
+
 - **User Management System**: For user authentication, role-based access control, and user data synchronization.
 - **Project Management System**: To align resource allocation with project timelines and requirements.
 - **Financial System**: For tracking financial resources and budgeting.

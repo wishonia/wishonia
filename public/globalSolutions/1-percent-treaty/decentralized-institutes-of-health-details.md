@@ -14,12 +14,13 @@ ogImage:
 absFilePath: >-
   C:\code\wishonia\public\globalSolutions\1-percent-treaty\decentralized-institutes-of-health-details.md
 ---
+
 # The Decentralized Institutes of Health
 
 Through decentralized science (DeSci), artificial intelligence (AI),
 and leveraging the Gitcoin Grants Stack,
 a Decentralized Institutes of Health (DIH)
-could facilitate a significant reallocation of resources and human capital from war to the development of medical breakthroughs. 
+could facilitate a significant reallocation of resources and human capital from war to the development of medical breakthroughs.
 
 ### Organizational Framework
 
@@ -36,7 +37,6 @@ DIH approach to healthcare research and development:
 
 - **Democratic Funding via Gitcoin Grants Stack**: This model dramatically shifts funding allocation towards projects with strong community backing.
 - **FDAi Integration**: By automating clinical research processes, the FDAi significantly enhances personalized healthcare, making cutting-edge research and treatment options more accessible.
-
 
 ### Technology
 
@@ -71,61 +71,74 @@ Decentralized Institutes of Health (DIH) Platform
 
 2. Functional Requirements
    2.1 User Roles
-    - Researchers: Submit project proposals and manage funded projects
-    - Funders: Contribute funds to projects and participate in governance
-    - Reviewers: Evaluate project proposals and provide feedback
+
+   - Researchers: Submit project proposals and manage funded projects
+   - Funders: Contribute funds to projects and participate in governance
+   - Reviewers: Evaluate project proposals and provide feedback
 
    2.2 Project Submission
-    - Researchers can submit project proposals with a description, funding goal, timeline, and regulatory compliance plan
-    - Proposals are stored on a decentralized storage solution (e.g., IPFS) and associated with a unique identifier and smart contract
+
+   - Researchers can submit project proposals with a description, funding goal, timeline, and regulatory compliance plan
+   - Proposals are stored on a decentralized storage solution (e.g., IPFS) and associated with a unique identifier and smart contract
 
    2.3 Quadratic Funding
-    - Funders can contribute to projects using cryptocurrency, stablecoins, or fiat currency
-    - Contributions are matched using the quadratic funding formula, with funds allocated from a diversified pool of sources
-    - Smart contracts automatically distribute funds to projects based on the funding round results
+
+   - Funders can contribute to projects using cryptocurrency, stablecoins, or fiat currency
+   - Contributions are matched using the quadratic funding formula, with funds allocated from a diversified pool of sources
+   - Smart contracts automatically distribute funds to projects based on the funding round results
 
    2.4 Community Governance
-    - Funders, stakeholders, and experts participate in platform governance through a DAO
-    - Governance decisions include funding priorities, platform upgrades, and dispute resolution
-    - Voting power is proportional to contributions, reputation scores, and expertise
+
+   - Funders, stakeholders, and experts participate in platform governance through a DAO
+   - Governance decisions include funding priorities, platform upgrades, and dispute resolution
+   - Voting power is proportional to contributions, reputation scores, and expertise
 
    2.5 Reputation System
-    - Researchers, funders, and reviewers have reputation scores based on their platform activity and external validation
-    - Reputation scores influence voting power, project visibility, and funding eligibility
+
+   - Researchers, funders, and reviewers have reputation scores based on their platform activity and external validation
+   - Reputation scores influence voting power, project visibility, and funding eligibility
 
    2.6 Project Management
-    - Funded projects are managed through a decentralized project management system with milestone tracking and reporting
-    - Funds are released in tranches based on milestone completion, regulatory compliance, and community approval
+
+   - Funded projects are managed through a decentralized project management system with milestone tracking and reporting
+   - Funds are released in tranches based on milestone completion, regulatory compliance, and community approval
 
    2.7 Intellectual Property Management
-    - A flexible IP framework balances open access with the need for limited protection to incentivize innovation
-    - The platform provides guidance and support for researchers navigating IP issues and technology transfer processes
+
+   - A flexible IP framework balances open access with the need for limited protection to incentivize innovation
+   - The platform provides guidance and support for researchers navigating IP issues and technology transfer processes
 
    2.8 Scientific Review and Validation
-    - A decentralized peer review system ensures the scientific merit and validity of proposed projects
-    - Expert committees oversee specific research areas and provide guidance on funding priorities
-    - Collaboration with established scientific institutions and journals helps validate and disseminate research findings
+
+   - A decentralized peer review system ensures the scientific merit and validity of proposed projects
+   - Expert committees oversee specific research areas and provide guidance on funding priorities
+   - Collaboration with established scientific institutions and journals helps validate and disseminate research findings
 
    2.9 Funding Diversification
-    - The platform seeks partnerships with governments, foundations, and corporations to diversify its funding sources
-    - Innovative funding models, such as impact investing and outcome-based financing, are explored
+
+   - The platform seeks partnerships with governments, foundations, and corporations to diversify its funding sources
+   - Innovative funding models, such as impact investing and outcome-based financing, are explored
 
    2.10 Collaboration and Partnerships
-    - The platform fosters collaboration among researchers, institutions, and stakeholders to maximize impact
-    - Partnerships with healthcare organizations, NGOs, and patient advocacy groups help identify research priorities and disseminate findings
+
+   - The platform fosters collaboration among researchers, institutions, and stakeholders to maximize impact
+   - Partnerships with healthcare organizations, NGOs, and patient advocacy groups help identify research priorities and disseminate findings
 
    2.11 Data Management and Sharing
-    - Robust data management and sharing protocols ensure the security, privacy, and interoperability of research data
-    - Decentralized storage solutions and privacy-preserving technologies are leveraged
+
+   - Robust data management and sharing protocols ensure the security, privacy, and interoperability of research data
+   - Decentralized storage solutions and privacy-preserving technologies are leveraged
 
    2.12 Education and Outreach
-    - The platform invests in education and outreach initiatives to raise awareness about decentralized healthcare research
-    - Partnerships with universities and educational institutions help train the next generation of decentralized healthcare researchers
+
+   - The platform invests in education and outreach initiatives to raise awareness about decentralized healthcare research
+   - Partnerships with universities and educational institutions help train the next generation of decentralized healthcare researchers
 
    2.13 Monitoring and Evaluation
-    - A comprehensive monitoring and evaluation framework assesses the impact and effectiveness of funded projects
-    - Key performance indicators (KPIs) are defined and tracked to measure progress towards the platform's goals
-    - Regular reporting and auditing processes ensure transparency and accountability
+
+   - A comprehensive monitoring and evaluation framework assesses the impact and effectiveness of funded projects
+   - Key performance indicators (KPIs) are defined and tracked to measure progress towards the platform's goals
+   - Regular reporting and auditing processes ensure transparency and accountability
 
 ## How the National Institutes of Health Works
 
@@ -197,58 +210,63 @@ graph TD
     D --> E(Project Submissions)
     E --> |Linked to GitHub Issues| F(Developer Compensation)
     F --> |Upon Completion and Merge| D
-    
+
     G(Nonprofits) --> |Pool Funds| A
     H(Government Agencies) --> |Pool Funds| A
     I(DAOs) --> |Pool Funds| A
-    
-```
 
+```
 
 3. Non-Functional Requirements
    3.1 Security
-    - The platform must be resistant to attacks, hacks, and unauthorized access
-    - All transactions and data storage must be encrypted and secure
-    - Regular security audits and bug bounties should be conducted
+
+   - The platform must be resistant to attacks, hacks, and unauthorized access
+   - All transactions and data storage must be encrypted and secure
+   - Regular security audits and bug bounties should be conducted
 
    3.2 Scalability
-    - The platform must be able to handle a large number of projects, funders, and transactions
-    - The architecture should be designed to scale horizontally as the platform grows
-    - Off-chain solutions and layer-2 scaling should be considered for high-volume activities
+
+   - The platform must be able to handle a large number of projects, funders, and transactions
+   - The architecture should be designed to scale horizontally as the platform grows
+   - Off-chain solutions and layer-2 scaling should be considered for high-volume activities
 
    3.3 Usability
-    - The platform should have a user-friendly interface for all user roles
-    - Clear documentation and tutorials should be provided
-    - The platform should be accessible to users with varying levels of technical expertise
+
+   - The platform should have a user-friendly interface for all user roles
+   - Clear documentation and tutorials should be provided
+   - The platform should be accessible to users with varying levels of technical expertise
 
    3.4 Compatibility
-    - The platform should be compatible with popular blockchain networks (e.g., Ethereum, Polygon)
-    - Integration with existing decentralized finance (DeFi) and decentralized identity (DID) solutions should be considered
-    - The platform should be interoperable with other decentralized science (DeSci) platforms and tools
+
+   - The platform should be compatible with popular blockchain networks (e.g., Ethereum, Polygon)
+   - Integration with existing decentralized finance (DeFi) and decentralized identity (DID) solutions should be considered
+   - The platform should be interoperable with other decentralized science (DeSci) platforms and tools
 
 4. Constraints
-    - The platform must be developed using open-source technologies
-    - The platform must comply with relevant regulations and legal frameworks
-    - The platform must be launched within a specified timeframe and budget
+
+   - The platform must be developed using open-source technologies
+   - The platform must comply with relevant regulations and legal frameworks
+   - The platform must be launched within a specified timeframe and budget
 
 5. Assumptions and Dependencies
-    - The platform assumes the availability of sufficient funding and resources for development and maintenance
-    - The platform depends on the continued growth and adoption of blockchain and decentralized technologies
-    - The platform assumes the willingness of researchers, funders, and stakeholders to participate in a decentralized model
+
+   - The platform assumes the availability of sufficient funding and resources for development and maintenance
+   - The platform depends on the continued growth and adoption of blockchain and decentralized technologies
+   - The platform assumes the willingness of researchers, funders, and stakeholders to participate in a decentralized model
 
 6. Glossary
-    - DAO: Decentralized Autonomous Organization
-    - DeSci: Decentralized Science
-    - DID: Decentralized Identity
-    - IPFS: InterPlanetary File System
-    - IP: Intellectual Property
-    - PRD: Product Requirements Document
+
+   - DAO: Decentralized Autonomous Organization
+   - DeSci: Decentralized Science
+   - DID: Decentralized Identity
+   - IPFS: InterPlanetary File System
+   - IP: Intellectual Property
+   - PRD: Product Requirements Document
 
 7. References
-    - Gitcoin Grants Stack: https://gitcoin.co/grants/
-    - Gitcoin Passport: https://passport.gitcoin.co/
-    - Quadratic Funding: https://wtfisqf.com/
-    - Decentralized Science (DeSci): https://desci.pub/
-    - Fortmatic: https://fortmatic.com/
-    - Torus: https://tor.us/
-
+   - Gitcoin Grants Stack: https://gitcoin.co/grants/
+   - Gitcoin Passport: https://passport.gitcoin.co/
+   - Quadratic Funding: https://wtfisqf.com/
+   - Decentralized Science (DeSci): https://desci.pub/
+   - Fortmatic: https://fortmatic.com/
+   - Torus: https://tor.us/

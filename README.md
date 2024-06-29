@@ -1,6 +1,6 @@
 # Wishocracy: A Decentralized To-Do List for Humanity
 
-**Wishocracy** is a decentralized, modular and interoperable protocol for optimally allocating societal resources to maximize universal wish fulfillment using collective intelligence.  It's meant to be a general-purpose system to be used by any organization like nonprofits, DAOs, businesses, etc.
+**Wishocracy** is a decentralized, modular and interoperable protocol for optimally allocating societal resources to maximize universal wish fulfillment using collective intelligence. It's meant to be a general-purpose system to be used by any organization like nonprofits, DAOs, businesses, etc.
 
 **Wishonia** is an imaginary magical kingdom meant to illustrate the concept of Wishocracy and test the idea in a simulated virtual world to see how it works.
 
@@ -31,10 +31,10 @@ pnpm install
 5. **Seed the Database**:
 
 Seed the database with default problems and wishes by running tests/seed.test.ts with the following command:
+
 ```sh
 jest tests/seed.test.ts
-``` 
-
+```
 
 # Why Are You Doing This?
 
@@ -68,7 +68,7 @@ This is visually represented in the graphs, where each additional person signifi
 
 ![](public/img/coordination-complexity-exponential-graph.jpeg)
 
-However, digital twin AI agents, which are AI representations of individuals with higher cognitive bandwidth perfectly aligned to their preferences, can mitigate this issue. These agents can process vast amounts of information and make decisions more efficiently, acting on behalf of their human counterparts. 
+However, digital twin AI agents, which are AI representations of individuals with higher cognitive bandwidth perfectly aligned to their preferences, can mitigate this issue. These agents can process vast amounts of information and make decisions more efficiently, acting on behalf of their human counterparts.
 
 By integrating these AI agents into a Global Todo List for humanity, we can streamline the coordination of efforts towards shared societal goals. These agents can continuously analyze data, predict outcomes, and suggest optimal actions, ensuring that resources are allocated effectively and that collaborative efforts are maximized. This approach can lead to more informed decision-making, reduced friction in communication, and accelerated progress towards achieving our collective objectives on a global scale.
 
@@ -127,7 +127,7 @@ The core components of a Wish Fulfillment System are:
 3. **Solutions**: A comprehensive list of proposed solutions to solve each problem or realize each wish.
    It's also necessary to consider the cost-effectiveness of each solution and unintended side effects.
    A solution may solve multiple problems or create new problems.
-4. **Tasks**: A list of SMART (Specific, Measurable, Achievable, Relevant, Time-bound) tasks that need to be completed to implement each solution.  Some tasks may contribute to multiple solutions.
+4. **Tasks**: A list of SMART (Specific, Measurable, Achievable, Relevant, Time-bound) tasks that need to be completed to implement each solution. Some tasks may contribute to multiple solutions.
 5. **Solvers**: People/organizations responsible for completing each task.
 6. **Progress**: Tracking the impact of each solution and adjusting resource allocation as needed.
 7. **Results**: The outcomes of each solution and the overall positive and negative impact on society.
@@ -144,8 +144,8 @@ Determine how much of our scarce resources should be allocated to solving each p
 
 There are a number of ways to do this like democracy and crowdfunding campaigns but they suffer from various limitations:
 
-- **Representative Democracy:** The interests of representatives do not match the interests of all citizens.  Additionally, representatives have limited knowledge and cognitive capacity to effectively weigh the relative importance of thousands of wishes.
-- **Crowdfunding Campaigns:** People vote with their dollars to determine the allocation of resources.  However, again humans have limited cognitive capacity to effectively weigh the relative importance of thousands of wishes.
+- **Representative Democracy:** The interests of representatives do not match the interests of all citizens. Additionally, representatives have limited knowledge and cognitive capacity to effectively weigh the relative importance of thousands of wishes.
+- **Crowdfunding Campaigns:** People vote with their dollars to determine the allocation of resources. However, again humans have limited cognitive capacity to effectively weigh the relative importance of thousands of wishes.
 
 ### Aggregated Pairwise Preference Allocation (APPA)
 
@@ -199,7 +199,7 @@ Evaluate the completed tasks to determine if they meet the criteria for completi
 Track the impact of each solution.
 Evaluate the outcomes of each solution and the overall positive and negative impact on society.
 
-## Step 8.  Feedback and Iterative Improvement
+## Step 8. Feedback and Iterative Improvement
 
 Provide impact data to people making pairwise allocations to help them make better decisions in the future.
 This will enable continuous improvement in the allocation of resources to maximize wish fulfillment.
@@ -317,7 +317,7 @@ By defining these common primitives and leveraging decentralized data networks, 
 2. **Budget Allocation System**: A system for determining how much of our scarce resources should be allocated to solving each problem or fulfilling each wish.
 3. **Solution Management System**: A system for creating, categorizing, and evaluating proposed solutions to solve each problem or fulfill each wish.
 4. **Task Management System**: A system for decomposing each solution into a list of atomic tasks that need to be completed.
-5. **Wisher Relationship Management (WRM) System**: A system for tracking the relationship between wishes, solutions, tasks, and wishers.  This is similar to a Customer Relationship Management (CRM) system but for global coordination between Wishers.
+5. **Wisher Relationship Management (WRM) System**: A system for tracking the relationship between wishes, solutions, tasks, and wishers. This is similar to a Customer Relationship Management (CRM) system but for global coordination between Wishers.
 
 # Digital Twins
 
@@ -362,7 +362,7 @@ The basic technical ingredients of a digital twin are:
 
 # Frequently Asked Questions
 
-## Q: Isn't this insanely over-ambitious?  Why not just focus on smaller focused goals?
+## Q: Isn't this insanely over-ambitious? Why not just focus on smaller focused goals?
 
 The goal is to minimize wasted duplication of effort to optimize societal resource allocation.
 By limiting its scope to small organizations, it would not be able to prevent duplication of effort on a global scale.
@@ -382,22 +382,22 @@ The key potential benefits of a global, decentralized todo list are:
 1. **Preventing Waste** - Minimizing duplicated effort by surfacing what problems/wishes people are already working on solving. This allows resources to be allocated more efficiently. Governments and charitable foundations spend billions on solving important problems, but lack of coordination often leads to significant duplication of effort. For instance, if two research organizations each spend $1 million doing animal trials on the same drug, that's effectively $1 million of funding wasted and lots of extra animals suffering for no reason.
 
 2. **Information** - In democracies, representatives are supposed to do what people want.  
-But how can they do that if we don't have a system to create a budget that illustrates what everyone wants?
-[Aggregated Pairwise Preference Allocation](#aggregated-pairwise-preference-allocation-appa) is a unique way to quantify what everyone wants.
-Thus, just having this information available to representatives would actually make it possible for representatives to do what people want.
+   But how can they do that if we don't have a system to create a budget that illustrates what everyone wants?
+   [Aggregated Pairwise Preference Allocation](#aggregated-pairwise-preference-allocation-appa) is a unique way to quantify what everyone wants.
+   Thus, just having this information available to representatives would actually make it possible for representatives to do what people want.
 
 3. **Coordination and Cost-Sharing** -
    By decomposing solutions into atomic tasks
    that anyone can contribute to, it enables cost-sharing between organizations that need the same thing.  
-This would enable all organizations to accomplish more with the same amount of resources.
+   This would enable all organizations to accomplish more with the same amount of resources.
 
-4. **Helping People Maximize Their Impact** - Say you're a charitable individual who wants to improve the world. How can you figure out what the most important thing you can do  A global decentralized to do list could help charitable people find the highest impact tasks to work on given their skills and resources.
+4. **Helping People Maximize Their Impact** - Say you're a charitable individual who wants to improve the world. How can you figure out what the most important thing you can do A global decentralized to do list could help charitable people find the highest impact tasks to work on given their skills and resources.
 
-5.  **Iterative Improvement through Impact Tracking** - Iteratively improving allocation of resources over time by feeding impact data back into the prioritization process. The system gets smarter.
+5. **Iterative Improvement through Impact Tracking** - Iteratively improving allocation of resources over time by feeding impact data back into the prioritization process. The system gets smarter.
 
-The key is to start with small-scale experiments and grow gradually, 
-while maintaining the north star of empowering individuals to self-organize to solve important problems, 
-augmenting rather than replacing existing institutions. 
+The key is to start with small-scale experiments and grow gradually,
+while maintaining the north star of empowering individuals to self-organize to solve important problems,
+augmenting rather than replacing existing institutions.
 
 ## Q: Even if we had a global to-do list, we need every organization to use it for it to be useful. How will we make it so that every organization decides to use it?
 

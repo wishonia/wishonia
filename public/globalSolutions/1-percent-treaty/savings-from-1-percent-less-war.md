@@ -9,6 +9,7 @@ description: >-
 absFilePath: >-
   C:\code\wishonia\public\globalSolutions\1-percent-treaty\savings-from-1-percent-less-war.md
 ---
+
 ## Cumulative Savings from Decreased Annual Cost of War
 
 Given the initial annual cost of war is approximately $7,238.25 billion, we explore the scenario where this cost decreases by 1% every year for 80 years. This decrease reflects potential efficiencies, peacekeeping successes, and the reallocation of resources towards more productive and peaceful endeavors. Here's how the calculations unfold:

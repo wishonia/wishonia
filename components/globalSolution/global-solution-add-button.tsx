@@ -8,7 +8,9 @@ import { Icons } from "@/components/icons"
 
 interface GlobalSolutionAddButtonProps extends ButtonProps {}
 
-export function GlobalSolutionAddButton({ ...props }: GlobalSolutionAddButtonProps) {
+export function GlobalSolutionAddButton({
+  ...props
+}: GlobalSolutionAddButtonProps) {
   const router = useRouter()
 
   async function onClick() {

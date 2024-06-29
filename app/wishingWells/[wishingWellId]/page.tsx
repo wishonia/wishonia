@@ -1,9 +1,9 @@
 import { Metadata } from "next"
 import { notFound } from "next/navigation"
 
-import {getGlobalWishingWell} from "@/lib/api/wishingWells"
+import { getGlobalWishingWell } from "@/lib/api/wishingWells"
 import { Shell } from "@/components/layout/shell"
-import MarkdownRendererForItem from "@/components/MarkdownRendererForItem";
+import MarkdownRendererForItem from "@/components/MarkdownRendererForItem"
 
 interface WishingWellPageProps {
   params: { wishingWellId: string }
@@ -12,7 +12,6 @@ interface WishingWellPageProps {
 export async function generateMetadata({
   params,
 }: WishingWellPageProps): Promise<Metadata> {
-
   const wishingWell = await getGlobalWishingWell(params.wishingWellId)
 
   return {
@@ -24,8 +23,6 @@ export async function generateMetadata({
 export default async function WishingWellPage({
   params,
 }: WishingWellPageProps) {
-
-
   const wishingWell = await getGlobalWishingWell(params.wishingWellId)
 
   if (!wishingWell) {
@@ -34,7 +31,7 @@ export default async function WishingWellPage({
 
   return (
     <Shell>
-{/*      <DashboardHeader
+      {/*      <DashboardHeader
         heading={`${wishingWell.name}`}
         text={wishingWell.description}
       >

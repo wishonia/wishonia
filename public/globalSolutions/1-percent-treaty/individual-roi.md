@@ -11,6 +11,7 @@ ogImage:
   url: individual-roi.png
 absFilePath: 'C:\code\wishonia\public\globalSolutions\1-percent-treaty\individual-roi.md'
 ---
+
 # Individual ROI on Getting Friends to Sign the Treaty
 
 $1,258,412 for 5 Hours of Your Time
@@ -45,4 +46,3 @@ Total Time in Hours = Total Time in Minutes / 60
 = 5 hours
 
 Based on this estimation, an average person would need to invest approximately 5 hours to individually reach out to all 150 of their friends via personal messages or emails about the treaty. This calculation assumes a brief but personalized communication method, emphasizing the importance of each conversation in promoting global initiatives.
-

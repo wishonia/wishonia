@@ -1,7 +1,9 @@
-import { useEffect, useState } from 'react'
-import { getDirContent } from '../chat/github/github'
-import { Directory } from '../types'
-import { useUserIdClient } from '@/lib/useUserIdClient'
+import { useEffect, useState } from "react"
+
+import { useUserIdClient } from "@/lib/useUserIdClient"
+
+import { getDirContent } from "../chat/github/github"
+import { Directory } from "../types"
 
 export function useGetDirectoryContent(url: string) {
   const [fetchedData, setFetchedData] = useState<Directory[]>([])

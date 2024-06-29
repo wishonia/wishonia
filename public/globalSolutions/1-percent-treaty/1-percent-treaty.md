@@ -27,8 +27,8 @@ Here is the logical proof that signing this accord is the most rational thing yo
 
 2. However, if every nation agreed to reallocate just 1% of their annual military expenditures to a global medical research fund:
 
-  * The relative balance of power would remain unchanged. So, despite spending less on the military, they would be at no greater relative risk of being murdered by another country.
-  * The entire world would benefit from the resulting health advances and cures for diseases.
+- The relative balance of power would remain unchanged. So, despite spending less on the military, they would be at no greater relative risk of being murdered by another country.
+- The entire world would benefit from the resulting health advances and cures for diseases.
 
 3. Therefore, it is clearly in your rational self-interest to sign this treaty requesting that all nations to cooperate in this endeavor. By contributing a infinitesimal portion of their military budgets, they can help unlock revolutionary health benefits for their own citizens and the world at large.
 
@@ -57,20 +57,18 @@ The [**$244 trillion**](globalSolutions/1-percent-treaty/cost-of-disease.mdperce
 
 # Redirecting 1% of Military Spending to Healthcare Innovation
 
- By redirecting just 1% of war spending each year to using AI to automate clinical research and personalized, preventive, precision medicine over 80 years, we would save lives, reduce disability, and significantly impact the global economy.  The monetary benefit of this shift would be approximately [$1,235,443](value-of-automating-research.md) per person over 80 years.
+By redirecting just 1% of war spending each year to using AI to automate clinical research and personalized, preventive, precision medicine over 80 years, we would save lives, reduce disability, and significantly impact the global economy. The monetary benefit of this shift would be approximately [$1,235,443](value-of-automating-research.md) per person over 80 years.
 
 # Total Net Benefit of Less War and More Cures
 
-The total combined per capita net benefit of redirecting 1% of military spending to healthcare innovation over 80 years would be [$1,258,412](value-of-automating-research.md). 
+The total combined per capita net benefit of redirecting 1% of military spending to healthcare innovation over 80 years would be [$1,258,412](value-of-automating-research.md).
 
 This is calculated by adding the [$22,969](savings-from-1-percent-less-war.md) savings from decreased annual cost of war to the [$1,235,443](value-of-automating-research.md) benefit of reducing the burden of chronic disease.
 
 # $1,258,412 for 5 Hours of Your Time
 
-Historical examples show that petitions with support from over **1% of the population** have a high likelihood of being adopted. 
+Historical examples show that petitions with support from over **1% of the population** have a high likelihood of being adopted.
 
 So all you have to do is convince a small fraction of your friends to sign this treaty and convince them to convince a small fraction of their friends to sign this treaty and so on.
 
 Given the average number of friends (150) and the estimated time per friend (2 minutes), an average person would need to invest approximately [5 hours](individual-roi.md) to individually reach out to all 150 of their friends via personal messages or emails about the treaty.
-
-

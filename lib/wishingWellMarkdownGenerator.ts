@@ -1,31 +1,35 @@
-import slugify from 'slugify';
-import fs from 'fs';
-import path from 'path';
-import {textCompletion} from "@/lib/llm";
-import {saveMarkdownPost} from "@/lib/markdownGenerator";
-import {MarkdownFile} from "@/interfaces/markdownFile";
-import {toTitleCase} from "@/lib/stringHelpers";
-import {generateAndUploadFeaturedImageJpg, generateFeaturedImagePngBuffer} from "@/lib/imageGenerator";
-import {uploadImageToVercel} from "@/lib/imageUploader";
+import fs from "fs"
+import path from "path"
+import { MarkdownFile } from "@/interfaces/markdownFile"
+import slugify from "slugify"
 
-const overwrite = false;
+import {
+  generateAndUploadFeaturedImageJpg,
+  generateFeaturedImagePngBuffer,
+} from "@/lib/imageGenerator"
+import { uploadImageToVercel } from "@/lib/imageUploader"
+import { textCompletion } from "@/lib/llm"
+import { saveMarkdownPost } from "@/lib/markdownGenerator"
+import { toTitleCase } from "@/lib/stringHelpers"
+
+const overwrite = false
 const wishingWellNames = [
-    'Cure Aging',
-    'Cure Cancer',
-    'Cure Depression',
-    'End Suffering of Factory Farmed Animals',
-    'Stop Global Warming',
-    "Cure Alzheimer's Disease",
-    'End Malaria',
-    'End Starvation',
-    'Universal Access to Clean Water',
-    'End War',
-    'War and Military',
-    'Cure Diseases',
-];
+  "Cure Aging",
+  "Cure Cancer",
+  "Cure Depression",
+  "End Suffering of Factory Farmed Animals",
+  "Stop Global Warming",
+  "Cure Alzheimer's Disease",
+  "End Malaria",
+  "End Starvation",
+  "Universal Access to Clean Water",
+  "End War",
+  "War and Military",
+  "Cure Diseases",
+]
 
 export function generateArticlePrompt(wishingWellName: string): string {
-    return `Please create the markdown content of an article about the goal of 
+  return `Please create the markdown content of an article about the goal of 
         "${wishingWellName}". in less than 30000 characters. Do not return anything other than the article.
         
 # REQUIREMENTS
@@ -77,45 +81,71 @@ Conclusion:
 - Provide a final assessment of the overall importance and priority of the goal, considering the various factors discussed
 - Offer guidance or recommendations for individuals or organizations considering donating or contributing to efforts to achieve the goal, compared to other potential goals or causes.
          
-         `;
+         `
 }
 
-async function generateWishingWellMarkdownFile(wishingWellName: string,
-                                               markdownPath: string,
-                                               imagePath: string): Promise<MarkdownFile> {
-    const description = await textCompletion(
-        `Please generate a sentence description of the goal of "${wishingWellName}" under 240 characters.  
-            Do not return anything other than the single sentence description.`, "text");
-    const prompt = generateArticlePrompt(wishingWellName);
-    const content = await textCompletion(prompt, "text");
-    const post = {
-        name: wishingWellName,
-        description: description,
-        content: content,
-        absFilePath: markdownPath,
-        featuredImage: imagePath
-    } as MarkdownFile;
-    await saveMarkdownPost(post);
-    return post;
+async function generateWishingWellMarkdownFile(
+  wishingWellName: string,
+  markdownPath: string,
+  imagePath: string
+): Promise<MarkdownFile> {
+  const description = await textCompletion(
+    `Please generate a sentence description of the goal of "${wishingWellName}" under 240 characters.  
+            Do not return anything other than the single sentence description.`,
+    "text"
+  )
+  const prompt = generateArticlePrompt(wishingWellName)
+  const content = await textCompletion(prompt, "text")
+  const post = {
+    name: wishingWellName,
+    description: description,
+    content: content,
+    absFilePath: markdownPath,
+    featuredImage: imagePath,
+  } as MarkdownFile
+  await saveMarkdownPost(post)
+  return post
 }
 
 export async function generateWishingWellMarkdown(): Promise<MarkdownFile[]> {
-    const posts: MarkdownFile[] = [];
-    for (let wishingWellName of wishingWellNames) {
-        let post: MarkdownFile | undefined;
-        wishingWellName = toTitleCase(wishingWellName);
-        const wishingWellSlug = slugify(wishingWellName, { lower: true, strict: true });
-        const imagePath = path.join(__dirname, '..', 'public', 'wishingWells', `${wishingWellSlug}.png`);
-        const markdownPath = path.join(__dirname, '..', 'public', 'wishingWells', `${wishingWellSlug}.md`);
-        if (overwrite || !fs.existsSync(markdownPath)) {
-            post = await generateWishingWellMarkdownFile(wishingWellName, markdownPath, imagePath);
-        }
-        if (overwrite || !fs.existsSync(imagePath)) {
-            await generateAndUploadFeaturedImageJpg(`Humanity's Goal of ${wishingWellName}`, imagePath);
-        }
-        if(post){
-            posts.push(post);
-        }
+  const posts: MarkdownFile[] = []
+  for (let wishingWellName of wishingWellNames) {
+    let post: MarkdownFile | undefined
+    wishingWellName = toTitleCase(wishingWellName)
+    const wishingWellSlug = slugify(wishingWellName, {
+      lower: true,
+      strict: true,
+    })
+    const imagePath = path.join(
+      __dirname,
+      "..",
+      "public",
+      "wishingWells",
+      `${wishingWellSlug}.png`
+    )
+    const markdownPath = path.join(
+      __dirname,
+      "..",
+      "public",
+      "wishingWells",
+      `${wishingWellSlug}.md`
+    )
+    if (overwrite || !fs.existsSync(markdownPath)) {
+      post = await generateWishingWellMarkdownFile(
+        wishingWellName,
+        markdownPath,
+        imagePath
+      )
     }
-    return posts;
+    if (overwrite || !fs.existsSync(imagePath)) {
+      await generateAndUploadFeaturedImageJpg(
+        `Humanity's Goal of ${wishingWellName}`,
+        imagePath
+      )
+    }
+    if (post) {
+      posts.push(post)
+    }
+  }
+  return posts
 }

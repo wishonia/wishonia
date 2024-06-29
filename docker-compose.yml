@@ -1,4 +1,4 @@
-version: '3.8'
+version: "3.8"
 services:
   db:
     image: ankane/pgvector:latest
@@ -29,7 +29,12 @@ services:
     volumes:
       - ./dumps:/dumps
       - ./scripts:/scripts
-    command: ["bash", "-c", "pg_dump -T '_prisma_migrations' -a -Fc -v --no-owner -d $$DATABASE_URL -f /dumps/dump_file_name"]
+    command:
+      [
+        "bash",
+        "-c",
+        "pg_dump -T '_prisma_migrations' -a -Fc -v --no-owner -d $$DATABASE_URL -f /dumps/dump_file_name",
+      ]
 
   pg_restore_data:
     image: postgres:latest
@@ -38,4 +43,9 @@ services:
     volumes:
       - ./dumps:/dumps
       - ./scripts:/scripts
-    command: ["bash", "-c", "pg_restore -a -v -O -d $$DATABASE_URL_DEST /dumps/dump_file_name"]
+    command:
+      [
+        "bash",
+        "-c",
+        "pg_restore -a -v -O -d $$DATABASE_URL_DEST /dumps/dump_file_name",
+      ]

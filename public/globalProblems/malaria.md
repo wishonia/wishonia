@@ -7,6 +7,7 @@ description: >-
   transmitted to humans through the bites of infected Anopheles mosquitoes,
   leading to severe fever, chills, and potentially fatal complications.
 ---
+
 # The Problem of Malaria
 
 ## Introduction
@@ -32,14 +33,17 @@ Efforts to address malaria have encountered unintended consequences, such as eco
 Malaria control strategies include vector control, chemoprevention, diagnosis, treatment, and infection surveillance.
 
 1. **Vector Control**: Utilizes insecticide-treated nets (ITNs) and indoor residual spraying (IRS) to reduce mosquito contact with humans.
+
    - Strengths: Proven to reduce incidence and mortality.
    - Weaknesses: Mosquito resistance to insecticides poses challenges.
 
 2. **Chemoprevention**: Includes Intermittent Preventive Treatment (IPT) for pregnant women and seasonally for children in high-transmission areas.
+
    - Strengths: Effective in reducing malaria episodes in target populations.
    - Weaknesses: Drug resistance is a rising concern.
 
 3. **Diagnosis and Treatment**: Rapid diagnostic tests (RDTs) and effective antimalarial drugs (e.g., artemisinin-based combination therapies [ACTs]) are essential.
+
    - Strengths: Timely treatment reduces complications and transmission.
    - Weaknesses: Resistance to drugs can limit efficacy.
 

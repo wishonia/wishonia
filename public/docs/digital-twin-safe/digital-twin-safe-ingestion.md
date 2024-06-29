@@ -8,19 +8,18 @@ The Digital Twin Safe Data Ingestion API is a RESTful API that allows you to ing
 
 Data sources should include:
 
-* Web Crawling
-* PDF
-* Docx
-* text
-* CSV
-* GitHub repository
-* mp3, mp4
-* Youtube
-* Sitemap Based Crawling
-
+- Web Crawling
+- PDF
+- Docx
+- text
+- CSV
+- GitHub repository
+- mp3, mp4
+- Youtube
+- Sitemap Based Crawling
 
 ## Methods of Ingestion
 
-1. Web Page Scraping - This should be done by allowing the user to input a URL and then scraping the data from the page.  Another option is a Chrome extension like this one https://github.com/aircloud/sync-to-github that converts the current page to markdown and pushes it to a GitHub repository.
+1. Web Page Scraping - This should be done by allowing the user to input a URL and then scraping the data from the page. Another option is a Chrome extension like this one https://github.com/aircloud/sync-to-github that converts the current page to markdown and pushes it to a GitHub repository.
 2. File Upload - This should be done by allowing the user to upload a file converting the text to markdown and pushing it to a GitHub repository.
-3. 
+3.

@@ -1,7 +1,8 @@
-import Chat from '@/components/Chat'
-import { nanoid } from '@/lib/utils'
-import { AI } from '@/lib/chat/actions'
-import { getMissingKeys } from '../actions'
+import { AI } from "@/lib/chat/actions"
+import { nanoid } from "@/lib/utils"
+import Chat from "@/components/Chat"
+
+import { getMissingKeys } from "../actions"
 
 export default async function IndexPage() {
   const missingKeys = await getMissingKeys()
@@ -9,10 +10,7 @@ export default async function IndexPage() {
 
   return (
     <AI initialAIState={{ chatId: id, messages: [] }}>
-      <Chat
-        id={id}
-        missingKeys={missingKeys}
-      />
+      <Chat id={id} missingKeys={missingKeys} />
     </AI>
   )
 }

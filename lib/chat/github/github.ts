@@ -1,21 +1,28 @@
-import {Directory, GithubUser, ListOfUsers, Readme, RepoFetchProps, RepoProps,} from '@/lib/types'
-import {getGithubAccessToken} from "@/lib/getOauthAccessToken";
-import {getUserIdServer} from "@/lib/api/getUserIdServer";
+import { getUserIdServer } from "@/lib/api/getUserIdServer"
+import { getGithubAccessToken } from "@/lib/getOauthAccessToken"
+import {
+  Directory,
+  GithubUser,
+  ListOfUsers,
+  Readme,
+  RepoFetchProps,
+  RepoProps,
+} from "@/lib/types"
 
 export const checkRateLimit = async () => {
-  const userId  = await getUserIdServer()
+  const userId = await getUserIdServer()
   let accessToken
   if (userId) {
     accessToken = await getGithubAccessToken(userId)
   }
-  if(!accessToken) {
-    console.error('No GitHub access token found')
-    return false;
+  if (!accessToken) {
+    console.error("No GitHub access token found")
+    return false
   }
   const headers = createHeaders(accessToken)
 
   const res = await fetch(`https://api.github.com/rate_limit`, {
-    method: 'GET',
+    method: "GET",
     headers,
   })
 
@@ -25,16 +32,16 @@ export const checkRateLimit = async () => {
 
 function createHeaders(accessToken?: string): {
   Accept: string
-  'X-GitHub-Api-Version': string
+  "X-GitHub-Api-Version": string
   Authorization?: string
 } {
   const headers: {
     Accept: string
-    'X-GitHub-Api-Version': string
+    "X-GitHub-Api-Version": string
     Authorization?: string
   } = {
-    Accept: 'application/vnd.github+json',
-    'X-GitHub-Api-Version': '2022-11-28',
+    Accept: "application/vnd.github+json",
+    "X-GitHub-Api-Version": "2022-11-28",
   }
 
   if (accessToken) {
@@ -52,7 +59,7 @@ function createHeaders(accessToken?: string): {
  * fetched from the GitHub API for the specified `username`.
  */
 export const getGithubProfile = async (username: string) => {
-  const userId  = await getUserIdServer()
+  const userId = await getUserIdServer()
   let accessToken
   if (userId) {
     accessToken = await getGithubAccessToken(userId)
@@ -60,7 +67,7 @@ export const getGithubProfile = async (username: string) => {
   const headers = createHeaders(accessToken)
 
   const res = await fetch(`https://api.github.com/users/${username}`, {
-    method: 'GET',
+    method: "GET",
     headers,
   })
 
@@ -80,7 +87,7 @@ export const getGithubProfile = async (username: string) => {
  * the function.
  */
 export const listUsers = async (query: string) => {
-  const userId  = await getUserIdServer()
+  const userId = await getUserIdServer()
   let accessToken
   if (userId) {
     accessToken = await getGithubAccessToken(userId)
@@ -90,9 +97,9 @@ export const listUsers = async (query: string) => {
   const res = await fetch(
     `https://api.github.com/search/users?q=${query}&per_page=4&page=1`,
     {
-      method: 'GET',
+      method: "GET",
       headers,
-    },
+    }
   )
 
   const githubUserList: ListOfUsers = await res.json()
@@ -134,7 +141,7 @@ export const convertUserType = async (query: string) => {
  * @returns The function `searchRepositories` is returning an array of `RepoProps` objects.
  */
 export const searchRepositories = async (query: string) => {
-  const userId  = await getUserIdServer()
+  const userId = await getUserIdServer()
   let accessToken
   if (userId) {
     accessToken = await getGithubAccessToken(userId)
@@ -144,9 +151,9 @@ export const searchRepositories = async (query: string) => {
   const res = await fetch(
     `https://api.github.com/search/repositories?q=${query}&per_page=4&page=1`,
     {
-      method: 'GET',
+      method: "GET",
       headers,
-    },
+    }
   )
 
   const githubRepositories: RepoFetchProps = await res.json()
@@ -170,9 +177,9 @@ export const searchRepositories = async (query: string) => {
  */
 export const getReadme = async (
   repo: string,
-  owner: string,
+  owner: string
 ): Promise<Readme> => {
-  const userId  = await getUserIdServer()
+  const userId = await getUserIdServer()
   let accessToken
   if (userId) {
     accessToken = await getGithubAccessToken(userId)
@@ -182,14 +189,14 @@ export const getReadme = async (
   const res = await fetch(
     `https://api.github.com/repos/${owner}/${repo}/contents/README.md`,
     {
-      method: 'GET',
+      method: "GET",
       headers,
-    },
+    }
   )
   const readme: Readme = await res.json()
 
   // Decode the content from base64
-  readme.content = Buffer.from(readme.content, 'base64').toString('utf8')
+  readme.content = Buffer.from(readme.content, "base64").toString("utf8")
   return readme
 }
 
@@ -202,7 +209,7 @@ export const getDir = async ({
   repo: string
   owner: string
 }): Promise<Directory[]> => {
-  const userId  = await getUserIdServer()
+  const userId = await getUserIdServer()
   let accessToken
   if (userId) {
     accessToken = await getGithubAccessToken(userId)
@@ -212,9 +219,9 @@ export const getDir = async ({
   const res = await fetch(
     `https://api.github.com/repos/${owner}/${repo}/contents/`,
     {
-      method: 'GET',
+      method: "GET",
       headers,
-    },
+    }
   )
   const dir: Directory[] = await res.json()
 
@@ -235,7 +242,7 @@ export const getDir = async ({
  */
 export const getDirContent = async (
   url: string,
-  userId: string | null,
+  userId: string | null
 ): Promise<Directory[]> => {
   let accessToken
   if (userId) {
@@ -244,7 +251,7 @@ export const getDirContent = async (
   const headers = createHeaders(accessToken)
 
   const res = await fetch(url, {
-    method: 'GET',
+    method: "GET",
     headers,
   })
   const content: Directory[] = await res.json()
@@ -264,7 +271,7 @@ export const getDirContent = async (
  */
 export const decodeContent = async (
   url: string,
-  userId: string | null,
+  userId: string | null
 ): Promise<string> => {
   let accessToken
   if (userId) {
@@ -273,7 +280,7 @@ export const decodeContent = async (
   const headers = createHeaders(accessToken)
 
   const res = await fetch(url, {
-    method: 'GET',
+    method: "GET",
     headers,
   })
   const { content }: Directory = await res.json()

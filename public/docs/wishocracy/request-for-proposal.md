@@ -1,6 +1,6 @@
 ---
 slug: request-for-proposal
-name: 'Request for Proposals: A Decentralized Resource Optimization System'
+name: "Request for Proposals: A Decentralized Resource Optimization System"
 featuredImage: /docs/wishocracy/request-for-proposal.jpg
 description: >-
   The Wishocracy project's call for proposals to design a decentralized,
@@ -8,6 +8,7 @@ description: >-
   and addressing global challenges. Learn about the project's comprehensive
   objectives, scope of work, and submission guidelines.
 ---
+
 # Request for Proposal (RFP)
 
 ## Objectives
@@ -37,6 +38,7 @@ The global objectives of the Wishocracy project are to create a comprehensive, d
 By aligning the design, development, and implementation of the Wish Fulfillment System with these global objectives, Wishocracy aims to create a transformative platform for global cooperation and progress towards universally shared goals.
 
 ## Project Overview
+
 Wishocracy seeks proposals for the design and development of a comprehensive, modular, and interoperable Wish Fulfillment System. The system should include detailed implementation of the following components:
 
 1. Wish Management System
@@ -53,11 +55,14 @@ Wishocracy seeks proposals for the design and development of a comprehensive, mo
 12. User Experience and Interface Layer
 
 The primary goals of this project are to:
+
 - Minimize development costs by leveraging existing open-source solutions and technologies
 - Maximize universal adoption through decentralized interoperability and seamless integration with existing systems and platforms
 
 ## Scope of Work
+
 The selected vendor will be responsible for:
+
 1. Conducting a comprehensive assessment of existing open-source solutions and technologies that can be leveraged for each component of the Wish Fulfillment System
 2. Designing a modular architecture that allows for seamless integration of existing solutions and custom-built components
 3. Developing custom components and modules where necessary to fill gaps in existing solutions
@@ -67,7 +72,9 @@ The selected vendor will be responsible for:
 7. Providing documentation, training, and support for the deployment, operation, and maintenance of the system
 
 ## Proposal Requirements
+
 Interested vendors should submit a proposal that includes:
+
 1. Company background and relevant experience in developing complex, decentralized systems
 2. Proposed approach and methodology for assessing existing solutions, designing the modular architecture, and developing custom components
 3. Detailed project plan with milestones, deliverables, and timelines
@@ -77,7 +84,9 @@ Interested vendors should submit a proposal that includes:
 7. Examples of previous work and references from similar projects
 
 ## Selection Criteria
+
 Proposals will be evaluated based on the following criteria:
+
 1. Understanding of project goals and requirements
 2. Feasibility and effectiveness of proposed approach and methodology
 3. Relevant experience and expertise of the vendor and key personnel
@@ -86,9 +95,11 @@ Proposals will be evaluated based on the following criteria:
 6. Quality and clarity of the proposal
 
 ## Submission Guidelines
+
 Proposals should be submitted electronically in PDF format to [insert email address] by [insert deadline]. Questions regarding this RFP should be directed to [insert contact person and contact details].
 
 ## Timeline
+
 - RFP Release Date: [insert date]
 - Deadline for Questions: [insert date]
 - Proposal Due Date: [insert date]
@@ -99,9 +110,11 @@ Proposals should be submitted electronically in PDF format to [insert email addr
 Wishocracy reserves the right to modify this timeline at its discretion.
 
 ## Budget
+
 The total budget for this project is [insert budget range]. Proposals that demonstrate cost-effectiveness and value for money will be given preference.
 
 ## Terms and Conditions
+
 [Insert any legal terms, conditions, or requirements for the project, such as intellectual property rights, confidentiality, or payment terms]
 
 By submitting a proposal, vendors acknowledge and agree to these terms and conditions.

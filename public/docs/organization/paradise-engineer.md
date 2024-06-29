@@ -8,6 +8,7 @@ description: >-
   Actor Agents in just three easy steps to maximize universal well-being while
   respecting human rights. Join us now and make a difference!
 ---
+
 ![Paradise Engineers Wanted](../../images/paradise-engineers-wanted-wide.png)
 
 ## Your Mission
@@ -20,13 +21,15 @@ Although this sounds like a daunting task, it can be broken down into three simp
 
 ### 1. Learn
 
-Fortunately, the Learn phase is fairly straightforward and technically feasible today.  We just need to create **Digital Twins** of real-world entities and populate them with data.
+Fortunately, the Learn phase is fairly straightforward and technically feasible today. We just need to create **Digital Twins** of real-world entities and populate them with data.
 
 These entities primarily fall into two categories:
+
 - **organizations** - nonprofits, governments, companies, etc.
 - **people** - scientists, employees, doctors, patients, etc.
 
-Each of these digital twins should have its own vector database of defining data.  The most fundamental components of each entity would be its:
+Each of these digital twins should have its own vector database of defining data. The most fundamental components of each entity would be its:
+
 - **wishes** - goals, desires, objectives, etc.
 - **resources** - data, humans, capital, etc. that can be allocated, pooled, or exchanged with other entities to fulfill wishes.
 
@@ -36,12 +39,13 @@ These digital twins serve primarily as an easy source of information for other a
 
 **Planning Agents** that create hypotheses about the most efficient ways to fulfill various wishes while respecting universal human rights. These **Decider Agents** then use semi-quantitative cost benefit analysis to decide which strategies seem most promising.
 
-Humans can then review these strategies and decide which ones to test.  Once a strategy is selected, the **Planning Agents** can then create **Actor Agents** to carry out the strategies.
+Humans can then review these strategies and decide which ones to test. Once a strategy is selected, the **Planning Agents** can then create **Actor Agents** to carry out the strategies.
 
 ## 3. Act
 
-**Actor Agents** then carry out plans and measure the results.  Given current their limitations, **Actor Agents** should:
-1. automate what they can, using tools 
+**Actor Agents** then carry out plans and measure the results. Given current their limitations, **Actor Agents** should:
+
+1. automate what they can, using tools
 2. outsource what they can't to humans by creating bounties
 
 ### Key Responsibilities
@@ -69,9 +73,9 @@ Your work will directly contribute to creating a world of abundance, peace, and 
 
 ## How to Apply
 
-Create a pro-social agent that improves the world using [an agent framework](../agent-frameworks.md) and [submit a pull request](https://github.com/wishocracy/positron). 
+Create a pro-social agent that improves the world using [an agent framework](../agent-frameworks.md) and [submit a pull request](https://github.com/wishocracy/positron).
 
-Since reasoning capabilities are still limited, you might want to focus on the first "Learn" phase and create a **Digital Twin** of an organization or person.  
+Since reasoning capabilities are still limited, you might want to focus on the first "Learn" phase and create a **Digital Twin** of an organization or person.
 
 More details and submission guidelines are available in the [Collabathon Instructions](../collabathons/collabathons.md).
 

@@ -1,4 +1,4 @@
-import { useCallback, useEffect, useRef, useState } from 'react'
+import { useCallback, useEffect, useRef, useState } from "react"
 
 export const useScrollAnchor = () => {
   const messagesRef = useRef<HTMLDivElement>(null)
@@ -11,8 +11,8 @@ export const useScrollAnchor = () => {
   const scrollToBottom = useCallback(() => {
     if (messagesRef.current) {
       messagesRef.current.scrollIntoView({
-        block: 'end',
-        behavior: 'smooth',
+        block: "end",
+        behavior: "smooth",
       })
     }
   }, [])
@@ -21,7 +21,7 @@ export const useScrollAnchor = () => {
     if (messagesRef.current) {
       if (isAtBottom && !isVisible) {
         messagesRef.current.scrollIntoView({
-          block: 'end',
+          block: "end",
         })
       }
     }
@@ -40,12 +40,12 @@ export const useScrollAnchor = () => {
         setIsAtBottom(isAtBottom)
       }
 
-      current.addEventListener('scroll', handleScroll, {
+      current.addEventListener("scroll", handleScroll, {
         passive: true,
       })
 
       return () => {
-        current.removeEventListener('scroll', handleScroll)
+        current.removeEventListener("scroll", handleScroll)
       }
     }
   }, [])
@@ -63,8 +63,8 @@ export const useScrollAnchor = () => {
           })
         },
         {
-          rootMargin: '0px 0px -150px 0px',
-        },
+          rootMargin: "0px 0px -150px 0px",
+        }
       )
 
       observer.observe(visibilityRef.current)

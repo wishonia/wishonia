@@ -1,32 +1,35 @@
-import 'server-only'
+import "server-only"
+
+import { createStreamableUI, getMutableAIState } from "ai/rsc"
+import { nanoid } from "nanoid"
+
+import { BotCard } from "@/components/assistant/Message"
+import { ProfileSkeleton } from "@/components/assistant/ProfileSkeleton"
+import { Readme } from "@/components/assistant/Readme"
+import Repositories from "@/components/assistant/Repositories"
+import RepositorySkeleton from "@/components/assistant/RepositorySkeleton"
+import { Spinner } from "@/components/assistant/Spinner"
+import RateLimited from "@/components/RateLimited"
+
+import { Readme as RM } from "../types"
+import { runAsyncFnWithoutBlocking, sleep } from "../utils"
+import { AI } from "./actions"
 import {
+  checkRateLimit,
   getDir,
   getReadme,
-  checkRateLimit,
   searchRepositories,
-} from './github/github'
-import { AI } from './actions'
-import { nanoid } from 'nanoid'
-import { Readme as RM } from '../types'
-import RateLimited from '@/components/RateLimited'
-import { runAsyncFnWithoutBlocking, sleep } from '../utils'
-import { Readme } from '@/components/assistant/Readme'
-import { BotCard } from '@/components/assistant/Message'
-import { Spinner } from '@/components/assistant/Spinner'
-import Repositories from '@/components/assistant/Repositories'
-import { createStreamableUI, getMutableAIState } from 'ai/rsc'
-import { ProfileSkeleton } from '@/components/assistant/ProfileSkeleton'
-import RepositorySkeleton from '@/components/assistant/RepositorySkeleton'
+} from "./github/github"
 
 export async function repoAction(username: string) {
-  'use server'
+  "use server"
 
   const aiState = getMutableAIState<typeof AI>()
 
   const loadingRepos = createStreamableUI(
     <BotCard>
       <RepositorySkeleton />
-    </BotCard>,
+    </BotCard>
   )
 
   const systemMessage = createStreamableUI(null)
@@ -35,7 +38,7 @@ export async function repoAction(username: string) {
     loadingRepos.update(
       <BotCard>
         <ProfileSkeleton />
-      </BotCard>,
+      </BotCard>
     )
     const rateLimitRemaining = await checkRateLimit()
     const repositories = await searchRepositories(`user:${username}`)
@@ -43,7 +46,7 @@ export async function repoAction(username: string) {
     loadingRepos.done(
       <BotCard>
         <ProfileSkeleton />
-      </BotCard>,
+      </BotCard>
     )
     sleep(1000)
 
@@ -54,7 +57,7 @@ export async function repoAction(username: string) {
         ) : (
           <RateLimited />
         )}
-      </BotCard>,
+      </BotCard>
     )
 
     aiState.done({
@@ -63,13 +66,13 @@ export async function repoAction(username: string) {
         ...aiState.get().messages,
         {
           id: nanoid(),
-          role: 'function',
-          name: 'show_repository_ui',
+          role: "function",
+          name: "show_repository_ui",
           content: JSON.stringify(repositories),
         },
         {
           id: nanoid(),
-          role: 'system',
+          role: "system",
           content: `[User has clicked on the 'Show Repositories' button]`,
         },
       ],
@@ -86,7 +89,7 @@ export async function repoAction(username: string) {
 }
 
 export async function readmeAction(repo: string, owner: string) {
-  'use server'
+  "use server"
 
   const aiState = getMutableAIState<typeof AI>()
 
@@ -98,7 +101,7 @@ export async function readmeAction(repo: string, owner: string) {
     loadingReadme.update(
       <BotCard>
         <ProfileSkeleton />
-      </BotCard>,
+      </BotCard>
     )
     const rateLimitRemaining = await checkRateLimit()
     const readme: RM = await getReadme(repo, owner)
@@ -106,7 +109,7 @@ export async function readmeAction(repo: string, owner: string) {
     loadingReadme.done(
       <BotCard>
         <ProfileSkeleton />
-      </BotCard>,
+      </BotCard>
     )
     sleep(1000)
     systemMessage.done(
@@ -116,7 +119,7 @@ export async function readmeAction(repo: string, owner: string) {
         ) : (
           <RateLimited />
         )}
-      </BotCard>,
+      </BotCard>
     )
 
     aiState.done({
@@ -125,13 +128,13 @@ export async function readmeAction(repo: string, owner: string) {
         ...aiState.get().messages,
         {
           id: nanoid(),
-          role: 'function',
-          name: 'show_readme_ui',
+          role: "function",
+          name: "show_readme_ui",
           content: JSON.stringify(readme.content),
         },
         {
           id: nanoid(),
-          role: 'system',
+          role: "system",
           content: `[User has clicked on the 'Show Readme' button]`,
         },
       ],

@@ -4,9 +4,9 @@ import { notFound, redirect } from "next/navigation"
 import { getUserWishingWell } from "@/lib/api/wishingWells"
 import { authOptions } from "@/lib/auth"
 import { getCurrentUser } from "@/lib/session"
-import { WishingWellEditForm } from "@/components/wishingWell/wishing-well-edit-form"
 import { Shell } from "@/components/layout/shell"
 import { DashboardHeader } from "@/components/pages/dashboard/dashboard-header"
+import { WishingWellEditForm } from "@/components/wishingWell/wishing-well-edit-form"
 
 export const metadata: Metadata = {
   title: "Wishing Well Settings",
@@ -16,7 +16,9 @@ interface WishingWellEditProps {
   params: { wishingWellId: string }
 }
 
-export default async function WishingWellEdit({ params }: WishingWellEditProps) {
+export default async function WishingWellEdit({
+  params,
+}: WishingWellEditProps) {
   const user = await getCurrentUser()
 
   if (!user) {

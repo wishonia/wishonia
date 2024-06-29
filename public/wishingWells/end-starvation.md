@@ -7,6 +7,7 @@ description: >-
   sufficient, safe, and nutritious food by eliminating hunger and addressing the
   root causes of food insecurity globally.
 ---
+
 # End Starvation: An In-depth Analysis of a Global Goal
 
 ## Introduction
@@ -28,6 +29,7 @@ The primary challenges leading to starvation include poverty, conflict, climate 
 ### Potential Benefits
 
 Achieving this goal would yield extensive benefits:
+
 - **Health**: Improved nutrition reduces preventable deaths and diseases, enhancing the quality of life.
 - **Economic Growth**: Healthier populations contribute more effectively to economies.
 - **Social Stability**: Reducing hunger alleviates social tensions and conflict fuels.
@@ -42,7 +44,7 @@ The potential net utility increase from ending starvation is vast. Health and ha
 - **Health**: Reduction in child mortality could save millions of lives annually. Mitigating malnutrition-linked diseases could decrease healthcare costs.
 - **Economic Indicators**: Improved worker productivity and reduced absenteeism translate to higher GDP contributions.
 
-### Scale and Scope 
+### Scale and Scope
 
 The World Food Programme estimates there are currently around 811 million people facing hunger. Ending starvation affects a substantial portion of the global population, fundamentally improving their lives and generating broader societal benefits.
 
@@ -51,14 +53,17 @@ The World Food Programme estimates there are currently around 811 million people
 ### Main Strategies and Interventions
 
 1. **Agricultural Development**: Increasing agricultural productivity through technology and sustainable practices.
+
    - Strengths: Boosts food production and resilience.
    - Weaknesses: Requires initial investments and education.
 
 2. **Food Distribution Systems**: Enhancing logistics and reducing waste.
+
    - Strengths: More efficient use of existing food stocks.
    - Weaknesses: Infrastructure and logistical complexities.
 
 3. **Economic Empowerment**: Microloans and financial tools for vulnerable communities.
+
    - Strengths: Directly alleviates poverty.
    - Weaknesses: Dependent on economic stability and sound implementation.
 

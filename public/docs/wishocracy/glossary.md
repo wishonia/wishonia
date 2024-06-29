@@ -1,6 +1,6 @@
 ---
 slug: glossary
-name: 'Understanding the Wishocratic Government: Key Terms and Concepts'
+name: "Understanding the Wishocratic Government: Key Terms and Concepts"
 featuredImage: /docs/wishocracy/glossary.jpg
 description: >-
   Discover the Wishocratic world, where daily $WISH tokens empower individuals,

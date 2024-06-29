@@ -2,7 +2,7 @@ import * as z from "zod"
 
 import { verifyWishingWell } from "@/lib/api/wishingWells"
 import { prisma as db } from "@/lib/db"
-import {handleError} from "@/lib/errorHandler";
+import { handleError } from "@/lib/errorHandler"
 
 const routeContextSchema = z.object({
   params: z.object({

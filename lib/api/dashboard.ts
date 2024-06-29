@@ -1,13 +1,13 @@
-import {getUserWishingWells} from "@/lib/api/wishingWells"
 import {
-  getWishingWellCountByDate,
   getDailyAverage,
-  getWishingWellContributions,
   getMostContributedWishingWell,
   getStreak,
   getTopWishingWells,
   getTotalWishingWellContributions,
+  getWishingWellContributions,
+  getWishingWellCountByDate,
 } from "@/lib/api/wishingWellContributions"
+import { getUserWishingWells } from "@/lib/api/wishingWells"
 
 type DateRangeType = {
   from: Date
@@ -51,7 +51,12 @@ export async function getStatsDashboardData(
   wishingWellId: string,
   dateRange: DateRangeType
 ) {
-  const [wishingWellContributions, streak, totalWishingWellContributions, dailyAverage] = await Promise.all([
+  const [
+    wishingWellContributions,
+    streak,
+    totalWishingWellContributions,
+    dailyAverage,
+  ] = await Promise.all([
     getWishingWellContributions(wishingWellId, dateRange, "wishingWell"),
     getStreak(wishingWellId, "wishingWell"),
     getTotalWishingWellContributions(wishingWellId, dateRange, "wishingWell"),
