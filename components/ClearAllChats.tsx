@@ -17,7 +17,7 @@ import { useToast } from './ui/use-toast'
 import { useRouter } from 'next/navigation'
 import { clearAllChats } from '@/app/actions'
 import LoadingSpinner from './LoadingSpinner'
-import { Trash } from '@phosphor-icons/react'
+import {Robot, Trash} from '@phosphor-icons/react'
 
 function ClearAllChats({ userId }: { userId: string }) {
   const [deleteDialogOpen, setDeleteDialogOpen] = React.useState(false)
@@ -26,6 +26,16 @@ function ClearAllChats({ userId }: { userId: string }) {
   const router = useRouter()
   return (
     <>
+      <Button
+          variant='outline'
+          className='flex items-center justify-between px-2 py-1'
+          onClick={() => router.push('/agents')}
+      >
+        <span>Agents</span>
+        <span>
+          <Robot size={18} />
+        </span>
+      </Button>
       <Button
         variant='outline'
         className='flex items-center justify-between px-2 py-1'
