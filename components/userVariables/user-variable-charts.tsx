@@ -109,7 +109,6 @@ export const UserVariableCharts: FC<UserVariableChartsProps> = ({ variableId }) 
                 className="flex h-8 w-8 items-center justify-center rounded-md border transition-colors hover:bg-muted"
                 variant="outline"
                 size="lg"
-                    text={"Record Measurement"}
             />
                 )}
             </CardFooter>
