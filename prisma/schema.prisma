@@ -316,7 +316,7 @@ model GlobalSolution {
   user                          User                           @relation(fields: [userId], references: [id])
   thatGlobalSolutionAllocations GlobalSolutionPairAllocation[] @relation("ThatGlobalSolutionRelation")
   thisGlobalSolutionAllocations GlobalSolutionPairAllocation[] @relation("ThisGlobalSolutionRelation")
-  globalTaskSolutions           GlobalTaskSolution[]           @relation("GlobalSolutionToTask")
+  globalSolutionTasks           GlobalSolutionTask[]           @relation("GlobalSolutionToTask")
 }
 
 model GlobalSolutionPairAllocation {
@@ -370,7 +370,7 @@ model GlobalProblemSolutionPairAllocation {
   @@unique([userId, thisGlobalProblemSolutionId, thatGlobalProblemSolutionId])
 }
 
-model GlobalTaskSolution {
+model GlobalSolutionTask {
   id               String         @id @default(cuid())
   globalTaskId     String
   globalSolutionId String
@@ -401,7 +401,7 @@ model GlobalTask {
   blockingTasks         GlobalTaskDependency[] @relation("BlockingTask")
   dependentTasks        GlobalTaskDependency[] @relation("DependentTask")
   skills                GlobalTaskSkill[]
-  globalTaskSolutions   GlobalTaskSolution[]   @relation("GlobalTaskToSolution")
+  globalSolutionTasks   GlobalSolutionTask[]   @relation("GlobalTaskToSolution")
   userTasks             UserTask[]
   globalTaskContextUrls GlobalTaskContextUrl[] @relation("GlobalTaskToGlobalTaskContextUrl")
 }
