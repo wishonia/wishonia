@@ -22,7 +22,7 @@ export default async function OpenSource() {
     <section className="container py-12 lg:py-20">
       <div className="flex flex-col items-center gap-4">
         <HeadingText
-          subtext="Pull requests and wish sumbmission via GitHub issues is appreciated!"
+          subtext="Pull requests and wish submission via GitHub issues is appreciated!"
           className="text-center"
         >
           Wishonia is Free and Open Source!

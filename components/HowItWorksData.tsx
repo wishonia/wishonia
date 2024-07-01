@@ -1,9 +1,9 @@
 import React from "react"
 
+import { GlobalProblemSolutionsList } from "@/components/global-problem-solutions-list"
+import { GlobalProblemsList } from "@/components/global-problems-list"
+import { PollRandomGlobalProblemSolutions } from "@/components/poll-random-global-problem-solutions"
 import { PollRandomGlobalProblems } from "@/components/poll-random-global-problems"
-import {GlobalProblemsList} from "@/components/global-problems-list";
-import {GlobalProblemSolutionsList} from "@/components/global-problem-solutions-list";
-import {PollRandomGlobalProblemSolutions} from "@/components/poll-random-global-problem-solutions";
 
 export interface QAItem {
   question: string
@@ -46,52 +46,51 @@ const HowItWorksData: QAItem[] = [
   {
     question: "Generate a Crowdsourced Budget",
     answer:
-        "By aggregating many of these pairwise comparisons across many people, we can derive a crowdsourced budget allocations.",
+      "By aggregating many of these pairwise comparisons across many people, we can derive a crowdsourced budget allocations.",
     visual: <GlobalProblemsList />,
   },
   {
     question: "Generate and Collect All Possible Solutions",
     answer:
       "Here are the current solutions for solving the problem of Aging, for example.",
-    visual: <GlobalProblemSolutionsList globalProblemId={'aging'} />,
+    visual: <GlobalProblemSolutionsList globalProblemId={"aging"} />,
   },
   {
     question: "How are the best solutions selected?",
     answer:
       "We use APPA again, but this time for solutions. People compare pairs of proposed solutions, considering factors like feasibility, impact, and cost-effectiveness. AI helps by providing data and analysis to inform these comparisons.",
-    visual: <PollRandomGlobalProblemSolutions globalProblemId={'aging'} />,
+    visual: <PollRandomGlobalProblemSolutions globalProblemId={"aging"} />,
     //visual: <APPADiagram />,
   },
   {
     question: "Once a solution is chosen, what happens next?",
     answer:
       "The chosen solutions are broken down into smaller, actionable tasks. " +
-        "Goal decomposition agents help in this process by identifying necessary steps, potential dependencies, and required skills for each task.",
+      "Goal decomposition agents help in this process by identifying necessary steps, potential dependencies, and required skills for each task.",
     //visual: <TaskBreakdownDiagram />,
   },
   {
     question: "Who carries out these tasks?",
     answer:
       "Tasks can be completed by anyone with the right skills – this includes " +
-        "both humans and AI. We use AI to match tasks with the most suitable " +
-        "people or teams based on their skills, experience, and interests.",
+      "both humans and AI. We use AI to match tasks with the most suitable " +
+      "people or teams based on their skills, experience, and interests.",
     //visual: <AIAgentDiagram />,
   },
   {
-    question:
-      "How does it avoid duplicating work that's already being done?",
+    question: "How does it avoid duplicating work that's already being done?",
     answer:
       "AI research agents to continuously scan and catalog existing efforts " +
-        "related to each problem and solution. This helps us identify " +
-        "opportunities for collaboration and avoid reinventing the wheel.",
+      "related to each problem and solution. This helps us identify " +
+      "opportunities for collaboration and avoid reinventing the wheel.",
     //visual: <AIAgentDiagram />,
   },
   {
     question: "How does it track progress and measure impact?",
     answer:
       "AI research agents also analyze data from various sources, tracking key metrics related " +
-        "to each problem and solution. This allows us to measure the " +
-        "real-world impact of our efforts and adjust strategies as needed.",
+      "to each problem and solution. This allows us to measure the " +
+      "real-world impact of our efforts and adjust strategies as needed.",
     //visual: <ExampleChart />,
   },
   {
