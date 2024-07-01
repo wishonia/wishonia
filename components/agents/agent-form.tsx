@@ -58,7 +58,7 @@ export default function AgentForm({
 
   const { fields, append, remove } = useFieldArray({
     control,
-    name: "metadata.conversationStarters",
+    name: "conversationStarters",
   })
 
   const navigateBack = () => window.history.back()
