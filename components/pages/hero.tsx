@@ -35,8 +35,8 @@ export default function HeroHeader() {
             WISHOCRACY
           </h1>
           <p className="max-w-[42rem] text-sm font-semibold leading-normal sm:text-base sm:leading-8">
-            Using human an artificial collective intelligence to optimize
-            resource allocation .
+            Using human and artificial collective intelligence to optimize
+            resource allocation.
           </p>
           {/*<Buttons/>*/}
         </div>

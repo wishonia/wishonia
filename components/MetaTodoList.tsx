@@ -60,13 +60,9 @@ const TodoItem: React.FC<{
   <div className="mb-4 border-4 border-black p-4">
     <h3 className="mb-2 text-2xl font-bold">{task.title}</h3>
     <p className="mb-4">{task.description}</p>
-import Button from './Button';
-
-...
-
-<Button onClick={onComplete} className="border-2 border-black bg-black px-4 py-2 text-white transition-colors hover:bg-white hover:text-black">
-  Complete Task
-</Button>
+    <button
+      onClick={onComplete}
+      className="border-2 border-black bg-black px-4 py-2 text-white transition-colors hover:bg-white hover:text-black"
     >
       Complete Task
     </button>
