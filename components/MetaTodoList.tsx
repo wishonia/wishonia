@@ -1,6 +1,7 @@
 "use client"
 
 import React, { useState } from "react"
+
 import { PollRandomGlobalProblems } from "./poll-random-global-problems"
 
 const tasks = [
@@ -8,7 +9,7 @@ const tasks = [
     id: 2,
     title: "Compare two problems",
     //description:  "We'll show you two problems. Decide which one you think is more important.",
-    component: <PollRandomGlobalProblems />
+    component: <PollRandomGlobalProblems />,
   },
   {
     id: 3,
@@ -82,13 +83,19 @@ const MetaTodoList: React.FC = () => {
         HOW IT WORKS
       </h2>
       <div>
-        {tasks.filter(task => !completedTasks.includes(task.id)).map((task) => ( // Filter out completed tasks
-          <TodoItem
-            key={task.id}
-            task={task}
-            onComplete={() => handleComplete(task.id)}
-          />
-        ))}
+        {tasks
+          .filter((task) => !completedTasks.includes(task.id))
+          .map(
+            (
+              task // Filter out completed tasks
+            ) => (
+              <TodoItem
+                key={task.id}
+                task={task}
+                onComplete={() => handleComplete(task.id)}
+              />
+            )
+          )}
       </div>
       <div className="mt-8 text-center">
         <p className="text-2xl font-bold">
