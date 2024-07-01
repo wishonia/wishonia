@@ -3,6 +3,7 @@ import { StringOutputParser } from "@langchain/core/output_parsers"
 import OpenAI from "openai"
 
 import { getChatOpenAIModel } from "@/lib/openai"
+import {convertToLocalDateTime} from "@/lib/dateTimeWithTimezone";
 
 // Create an OpenAI API client (that's edge-friendly!)
 export const openai = new OpenAI({
@@ -89,4 +90,21 @@ export async function askYesOrNoQuestion(question: string): Promise<boolean> {
     return answer === "YES"
   }
   throw new Error(`Invalid response: ${result} from question: ${question}`)
+}
+
+export async function getDateTimeFromStatementInUserTimezone(statement: string,
+                                                             utcDateTime: string,
+                                                             timeZoneOffset: number): Promise<string> {
+  const localDateTime = convertToLocalDateTime(utcDateTime, timeZoneOffset);
+  const promptText = `
+        estimate the date and time of the user statement based on the user's current date and time ${localDateTime}
+         and the following user statement:
+\`\`\`
+${statement}
+\`\`\`
+       Return a single string in the format "YYYY-MM-DDThh:mm:ss"`;
+  let result = await textCompletion(promptText, "text");
+  // Remove quote marks
+  result = result.replace(/['"]+/g, '');
+  return result;
 }
