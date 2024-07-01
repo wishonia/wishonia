@@ -16,16 +16,16 @@ export default async function OpenSource() {
     .then((res) => res.json())
     .catch((e) => console.error(e))
 
-  const buttonText = `Star on Github`
+  const buttonText = `Star and Fork on Github`
 
   return (
     <section className="container py-12 lg:py-20">
       <div className="flex flex-col items-center gap-4">
         <HeadingText
-          subtext="Feel free to view the codebase or contribute!"
+          subtext="Pull requests and wish submission via GitHub issues is appreciated!"
           className="text-center"
         >
-          Wishocracy is Free and Open Source!
+          Wishonia is Free and Open Source!
         </HeadingText>
         <Link
           href={siteConfig.links.github}

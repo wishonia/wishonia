@@ -80,7 +80,10 @@ export default function AgentList() {
         {loading && <SpinningLoader />}
         {agents.map((agent) => {
           return (
-            <div key={agent.id}  className="flex justify-between rounded-sm  p-4 hover:bg-secondary">
+            <div
+              key={agent.id}
+              className="flex justify-between rounded-sm  p-4 hover:bg-secondary"
+            >
               <Link
                 href={`/agents/${agent.id}/chat`}
                 className="flex w-full flex-col justify-between md:flex-row md:items-center"

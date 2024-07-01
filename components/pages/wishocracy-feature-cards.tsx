@@ -45,7 +45,7 @@ function Cards() {
   )
 }
 
-export default function FeatureCards() {
+export default function WishocracyFeatureCards() {
   return (
     <section className="bg-secondary" id="features">
       <div className="container space-y-8 py-12 text-center lg:py-20">

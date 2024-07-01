@@ -1,17 +1,20 @@
+import React from "react"
+
 import { getCurrentUser } from "@/lib/session"
-import FeatureCards from "@/components/pages/feature-cards"
-import Hero from "@/components/pages/hero"
+import ForkableWorldSection from "@/components/ForkableWorldSection"
+import HowItWorksSection from "@/components/HowItWorksSection"
 import OpenSource from "@/components/pages/opensource"
-import { PollRandomGlobalProblems } from "@/components/poll-random-global-problems"
 import { PWARedirect } from "@/components/pwa-redirect"
 
 export default async function Home() {
   const user = await getCurrentUser()
   return (
     <main>
-      <Hero />
-      <PollRandomGlobalProblems user={user} />
-      <FeatureCards />
+      {/*<Hero/>*/}
+      <ForkableWorldSection />
+      <HowItWorksSection user={user} />
+      {/*<MetaTodoList/>*/}
+      {/*<WishocracyFeatureCards/>*/}
       <OpenSource />
       <PWARedirect />
     </main>
