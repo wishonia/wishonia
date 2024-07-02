@@ -2,6 +2,7 @@
 // This is kind of hack to make the IDE stop complaining about:
 // TS2339: Property NEXT_PUBLIC_APP_URL does not exist on type Readonly<{}>.
 interface Env {
+  NODE_ENV: string
   // Add other environment variables as needed
   NEXT_PUBLIC_APP_URL: string
   NEXT_PUBLIC_API_KEY: string

@@ -20,9 +20,12 @@ import {
   BsSun,
 } from "react-icons/bs"
 import {
+  FaBell,
   FaBomb,
   FaBook,
   FaBookMedical,
+  FaCamera,
+  FaChartBar,
   FaChartPie,
   FaDisease,
   FaEdit,
@@ -38,11 +41,11 @@ import {
   FaUserAlt,
   FaVoteYea,
 } from "react-icons/fa"
-import { FaHand, FaRankingStar, FaSquarePollVertical } from "react-icons/fa6"
+import { FaHand, FaMessage, FaRankingStar, FaSquarePollVertical } from "react-icons/fa6"
 import { ImSpinner8, ImStatsBars } from "react-icons/im"
 import { LuSettings } from "react-icons/lu"
 import { MdDeleteForever, MdOutlineLogout } from "react-icons/md"
-import { RxDashboard, RxMixerHorizontal } from "react-icons/rx"
+import { RxDashboard, RxMixerHorizontal, RxPencil1 } from "react-icons/rx"
 
 export type IconKeys = keyof typeof icons
 
@@ -57,8 +60,12 @@ const icons = {
 
   // Dashboard Icons
   dashboard: RxDashboard,
-  wishingWell: BsActivity,
+  activity: BsActivity,
+  measurement: RxPencil1,
   settings: LuSettings,
+  camera: FaCamera,
+  write: FaMessage,
+  wishingWell: BsActivity,
   bomb: FaBomb,
   skull: FaSkull,
   vote: FaVoteYea,
@@ -92,7 +99,9 @@ const icons = {
   ellipsis: AiOutlineEllipsis,
   warning: AiOutlineWarning,
   add: AiOutlinePlus,
+  reminder: FaBell,
   history: BiHistory,
+  charts: FaChartBar,
   signout: MdOutlineLogout,
   calendar: BiCalendar,
   sort: FaSort,
