@@ -6,7 +6,7 @@ import { websiteParser } from "@/lib/utils/website-parser"
 
 describe("Test Website Loader", () => {
   it("should load and process website", async () => {
-    const parsed = await websiteParser(html)
+    const parsed = websiteParser(html)
     expect(parsed).toEqual(
       `# Supporting aging research, age reversal tech, & rejuvenation`
     )
