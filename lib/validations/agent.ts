@@ -6,8 +6,8 @@ export const agentSchema = z.object({
   prompt: z.string().optional(),
   initialMessage: z.string().optional(),
   avatar: z.string().optional(),
-  conversationStarters: z.array(z.string()).nonempty(),
-  metadata: z.record(z.string(), z.any()).optional().optional(),
+  conversationStarters: z.array(z.object({text:z.string()})).nonempty(),
+
 })
 
 export const agentCreateUpdateSchema = z.object({
