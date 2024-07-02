@@ -10,119 +10,121 @@
  * Do not edit the class manually.
  */
 
-
-
 export class Pair {
-    /**
-    * Ex: 101341.66666667
-    */
-    'causeMeasurement': number;
-    /**
-    * Ex: 101341.66666667
-    */
-    'causeMeasurementValue': number;
-    /**
-    * Ex: mg
-    */
-    'causeVariableUnitAbbreviatedName': string;
-    /**
-    * Ex: 7.98
-    */
-    'effectMeasurement': number;
-    /**
-    * Ex: 7.98
-    */
-    'effectMeasurementValue': number;
-    /**
-    * Ex: %
-    */
-    'effectVariableUnitAbbreviatedName': string;
-    /**
-    * Ex: 2015-08-06 15:49:02 UTC ISO 8601 YYYY-MM-DDThh:mm:ss
-    */
-    'eventAt'?: string;
-    /**
-    * Ex: 1438876142
-    */
-    'eventAtUnixTime'?: number;
-    /**
-    * Ex: 2015-08-06 15:49:02 UTC ISO 8601 YYYY-MM-DDThh:mm:ss
-    */
-    'startAt'?: string;
-    /**
-    * Ex: 1464937200
-    */
-    'timestamp': number;
+  /**
+   * Ex: 101341.66666667
+   */
+  "causeMeasurement": number
+  /**
+   * Ex: 101341.66666667
+   */
+  "causeMeasurementValue": number
+  /**
+   * Ex: mg
+   */
+  "causeVariableUnitAbbreviatedName": string
+  /**
+   * Ex: 7.98
+   */
+  "effectMeasurement": number
+  /**
+   * Ex: 7.98
+   */
+  "effectMeasurementValue": number
+  /**
+   * Ex: %
+   */
+  "effectVariableUnitAbbreviatedName": string
+  /**
+   * Ex: 2015-08-06 15:49:02 UTC ISO 8601 YYYY-MM-DDThh:mm:ss
+   */
+  "eventAt"?: string
+  /**
+   * Ex: 1438876142
+   */
+  "eventAtUnixTime"?: number
+  /**
+   * Ex: 2015-08-06 15:49:02 UTC ISO 8601 YYYY-MM-DDThh:mm:ss
+   */
+  "startAt"?: string
+  /**
+   * Ex: 1464937200
+   */
+  "timestamp": number
 
-    static readonly discriminator: string | undefined = undefined;
+  static readonly discriminator: string | undefined = undefined
 
-    static readonly attributeTypeMap: Array<{name: string, baseName: string, type: string, format: string}> = [
-        {
-            "name": "causeMeasurement",
-            "baseName": "causeMeasurement",
-            "type": "number",
-            "format": "double"
-        },
-        {
-            "name": "causeMeasurementValue",
-            "baseName": "causeMeasurementValue",
-            "type": "number",
-            "format": "double"
-        },
-        {
-            "name": "causeVariableUnitAbbreviatedName",
-            "baseName": "causeVariableUnitAbbreviatedName",
-            "type": "string",
-            "format": ""
-        },
-        {
-            "name": "effectMeasurement",
-            "baseName": "effectMeasurement",
-            "type": "number",
-            "format": "double"
-        },
-        {
-            "name": "effectMeasurementValue",
-            "baseName": "effectMeasurementValue",
-            "type": "number",
-            "format": "double"
-        },
-        {
-            "name": "effectVariableUnitAbbreviatedName",
-            "baseName": "effectVariableUnitAbbreviatedName",
-            "type": "string",
-            "format": ""
-        },
-        {
-            "name": "eventAt",
-            "baseName": "eventAt",
-            "type": "string",
-            "format": ""
-        },
-        {
-            "name": "eventAtUnixTime",
-            "baseName": "eventAtUnixTime",
-            "type": "number",
-            "format": ""
-        },
-        {
-            "name": "startAt",
-            "baseName": "startAt",
-            "type": "string",
-            "format": ""
-        },
-        {
-            "name": "timestamp",
-            "baseName": "timestamp",
-            "type": "number",
-            "format": ""
-        }    ];
+  static readonly attributeTypeMap: Array<{
+    name: string
+    baseName: string
+    type: string
+    format: string
+  }> = [
+    {
+      name: "causeMeasurement",
+      baseName: "causeMeasurement",
+      type: "number",
+      format: "double",
+    },
+    {
+      name: "causeMeasurementValue",
+      baseName: "causeMeasurementValue",
+      type: "number",
+      format: "double",
+    },
+    {
+      name: "causeVariableUnitAbbreviatedName",
+      baseName: "causeVariableUnitAbbreviatedName",
+      type: "string",
+      format: "",
+    },
+    {
+      name: "effectMeasurement",
+      baseName: "effectMeasurement",
+      type: "number",
+      format: "double",
+    },
+    {
+      name: "effectMeasurementValue",
+      baseName: "effectMeasurementValue",
+      type: "number",
+      format: "double",
+    },
+    {
+      name: "effectVariableUnitAbbreviatedName",
+      baseName: "effectVariableUnitAbbreviatedName",
+      type: "string",
+      format: "",
+    },
+    {
+      name: "eventAt",
+      baseName: "eventAt",
+      type: "string",
+      format: "",
+    },
+    {
+      name: "eventAtUnixTime",
+      baseName: "eventAtUnixTime",
+      type: "number",
+      format: "",
+    },
+    {
+      name: "startAt",
+      baseName: "startAt",
+      type: "string",
+      format: "",
+    },
+    {
+      name: "timestamp",
+      baseName: "timestamp",
+      type: "number",
+      format: "",
+    },
+  ]
 
-    static getAttributeTypeMap() {
-        return Pair.attributeTypeMap;
-    }
+  static getAttributeTypeMap() {
+    return Pair.attributeTypeMap
+  }
 
-    public constructor() {
-    }
+  public constructor() {}
 }
-

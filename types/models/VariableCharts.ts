@@ -10,65 +10,68 @@
  * Do not edit the class manually.
  */
 
-import { Chart } from '../models/Chart';
-
+import { Chart } from "../models/Chart"
 
 /**
-* An object with various chart properties each property contain and svg and Highcharts configuration
-*/
+ * An object with various chart properties each property contain and svg and Highcharts configuration
+ */
 export class VariableCharts {
-    'hourlyColumnChart'?: Chart;
-    'monthlyColumnChart'?: Chart;
-    'distributionColumnChart'?: Chart;
-    'weekdayColumnChart'?: Chart;
-    'lineChartWithoutSmoothing'?: Chart;
-    'lineChartWithSmoothing'?: Chart;
+  "hourlyColumnChart"?: Chart
+  "monthlyColumnChart"?: Chart
+  "distributionColumnChart"?: Chart
+  "weekdayColumnChart"?: Chart
+  "lineChartWithoutSmoothing"?: Chart
+  "lineChartWithSmoothing"?: Chart
 
-    static readonly discriminator: string | undefined = undefined;
+  static readonly discriminator: string | undefined = undefined
 
-    static readonly attributeTypeMap: Array<{name: string, baseName: string, type: string, format: string}> = [
-        {
-            "name": "hourlyColumnChart",
-            "baseName": "hourlyColumnChart",
-            "type": "Chart",
-            "format": ""
-        },
-        {
-            "name": "monthlyColumnChart",
-            "baseName": "monthlyColumnChart",
-            "type": "Chart",
-            "format": ""
-        },
-        {
-            "name": "distributionColumnChart",
-            "baseName": "distributionColumnChart",
-            "type": "Chart",
-            "format": ""
-        },
-        {
-            "name": "weekdayColumnChart",
-            "baseName": "weekdayColumnChart",
-            "type": "Chart",
-            "format": ""
-        },
-        {
-            "name": "lineChartWithoutSmoothing",
-            "baseName": "lineChartWithoutSmoothing",
-            "type": "Chart",
-            "format": ""
-        },
-        {
-            "name": "lineChartWithSmoothing",
-            "baseName": "lineChartWithSmoothing",
-            "type": "Chart",
-            "format": ""
-        }    ];
+  static readonly attributeTypeMap: Array<{
+    name: string
+    baseName: string
+    type: string
+    format: string
+  }> = [
+    {
+      name: "hourlyColumnChart",
+      baseName: "hourlyColumnChart",
+      type: "Chart",
+      format: "",
+    },
+    {
+      name: "monthlyColumnChart",
+      baseName: "monthlyColumnChart",
+      type: "Chart",
+      format: "",
+    },
+    {
+      name: "distributionColumnChart",
+      baseName: "distributionColumnChart",
+      type: "Chart",
+      format: "",
+    },
+    {
+      name: "weekdayColumnChart",
+      baseName: "weekdayColumnChart",
+      type: "Chart",
+      format: "",
+    },
+    {
+      name: "lineChartWithoutSmoothing",
+      baseName: "lineChartWithoutSmoothing",
+      type: "Chart",
+      format: "",
+    },
+    {
+      name: "lineChartWithSmoothing",
+      baseName: "lineChartWithSmoothing",
+      type: "Chart",
+      format: "",
+    },
+  ]
 
-    static getAttributeTypeMap() {
-        return VariableCharts.attributeTypeMap;
-    }
+  static getAttributeTypeMap() {
+    return VariableCharts.attributeTypeMap
+  }
 
-    public constructor() {
-    }
+  public constructor() {}
 }
-

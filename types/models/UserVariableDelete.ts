@@ -10,29 +10,31 @@
  * Do not edit the class manually.
  */
 
-
-
 export class UserVariableDelete {
-    /**
-    * Id of the variable whose measurements should be deleted
-    */
-    'variableId': number;
+  /**
+   * Id of the variable whose measurements should be deleted
+   */
+  "variableId": number
 
-    static readonly discriminator: string | undefined = undefined;
+  static readonly discriminator: string | undefined = undefined
 
-    static readonly attributeTypeMap: Array<{name: string, baseName: string, type: string, format: string}> = [
-        {
-            "name": "variableId",
-            "baseName": "variableId",
-            "type": "number",
-            "format": ""
-        }    ];
+  static readonly attributeTypeMap: Array<{
+    name: string
+    baseName: string
+    type: string
+    format: string
+  }> = [
+    {
+      name: "variableId",
+      baseName: "variableId",
+      type: "number",
+      format: "",
+    },
+  ]
 
-    static getAttributeTypeMap() {
-        return UserVariableDelete.attributeTypeMap;
-    }
+  static getAttributeTypeMap() {
+    return UserVariableDelete.attributeTypeMap
+  }
 
-    public constructor() {
-    }
+  public constructor() {}
 }
-

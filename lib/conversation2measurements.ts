@@ -1,20 +1,27 @@
-import {Measurement} from "@/types/models/Measurement";
-import {textCompletion} from "@/lib/llm";
-import {convertToLocalDateTime, getUtcDateTime} from "@/lib/dateTimeWithTimezone";
-import {text2measurements} from "@/lib/text2measurements";
+import { Measurement } from "@/types/models/Measurement"
+import {
+  convertToLocalDateTime,
+  getUtcDateTime,
+} from "@/lib/dateTimeWithTimezone"
+import { textCompletion } from "@/lib/llm"
+import { text2measurements } from "@/lib/text2measurements"
 
 // IMPORTANT! Set the runtime to edge
-export const runtime = 'edge';
+export const runtime = "edge"
 
-export function conversation2MeasurementsPrompt(statement: string,
-                                                utcDateTime: string | null | undefined,
-                                                timeZoneOffset: number | null | undefined,
-                                                previousStatements: string | null | undefined): string {
-
-
-  if(!utcDateTime) {utcDateTime = getUtcDateTime();}
-  let localDateTime = utcDateTime;
-  if(timeZoneOffset) {localDateTime = convertToLocalDateTime(utcDateTime, timeZoneOffset);}
+export function conversation2MeasurementsPrompt(
+  statement: string,
+  utcDateTime: string | null | undefined,
+  timeZoneOffset: number | null | undefined,
+  previousStatements: string | null | undefined
+): string {
+  if (!utcDateTime) {
+    utcDateTime = getUtcDateTime()
+  }
+  let localDateTime = utcDateTime
+  if (timeZoneOffset) {
+    localDateTime = convertToLocalDateTime(utcDateTime, timeZoneOffset)
+  }
   return `
 You are a robot designed to collect diet, treatment, and symptom data from the user.
 
@@ -46,8 +53,12 @@ Also, after asking each question and getting a response, check if there's anythi
 Your responses should be in JSON format and have 2 properties called data and message.  The message property should contain the message to the user.  The data property should contain an array of measurement objects created from the last user response.
 
 
-${previousStatements ? `The following are the previous statements:
-${previousStatements}` : ''}
+${
+  previousStatements
+    ? `The following are the previous statements:
+${previousStatements}`
+    : ""
+}
 
 // Use the current local datetime ${localDateTime} to determine startDateLocal. If specified, also determine startTimeLocal, endDateLocal, and endTimeLocal or just leave them null.\`\`\`
 The following is a user request:
@@ -55,30 +66,39 @@ The following is a user request:
 ${statement}
 """
 The following is the user request translated into a JSON object with 2 spaces of indentation and no properties with the value undefined:
-`;
+`
 }
 
-export async function conversation2measurements(statement: string,
-                                        utcDateTime: string | null | undefined,
-                                                timeZoneOffset: number | null | undefined,
-                                                previousStatements: string | null | undefined): Promise<Measurement[]> {
-  let promptText = conversation2MeasurementsPrompt(statement, utcDateTime, timeZoneOffset, previousStatements);
-  const maxTokenLength = 1500;
-  if(promptText.length > maxTokenLength) {
+export async function conversation2measurements(
+  statement: string,
+  utcDateTime: string | null | undefined,
+  timeZoneOffset: number | null | undefined,
+  previousStatements: string | null | undefined
+): Promise<Measurement[]> {
+  let promptText = conversation2MeasurementsPrompt(
+    statement,
+    utcDateTime,
+    timeZoneOffset,
+    previousStatements
+  )
+  const maxTokenLength = 1500
+  if (promptText.length > maxTokenLength) {
     // truncate to less than 1500 characters
-    promptText = promptText.slice(0, maxTokenLength);
-
+    promptText = promptText.slice(0, maxTokenLength)
   }
-  const str = await textCompletion(promptText, "json_object");
-  const measurements: Measurement[] = [];
-  let jsonArray = JSON.parse(str);
+  const str = await textCompletion(promptText, "json_object")
+  const measurements: Measurement[] = []
+  let jsonArray = JSON.parse(str)
   jsonArray.measurements.forEach((measurement: Measurement) => {
-    measurements.push(measurement);
-  });
-  return measurements;
+    measurements.push(measurement)
+  })
+  return measurements
 }
 
-export async function getNextQuestion(currentStatement: string, previousStatements: string | null | undefined): Promise<string> {
+export async function getNextQuestion(
+  currentStatement: string,
+  previousStatements: string | null | undefined
+): Promise<string> {
   let promptText = `
   You are a robot designed to collect diet, treatment, and symptom data from the user.
 
@@ -94,22 +114,28 @@ Here is the current user statement:
   ${currentStatement}
 
   Here are the previous statements in the conversation: ${previousStatements}
-  `;
+  `
 
-  return await textCompletion(promptText, "text");
+  return await textCompletion(promptText, "text")
 }
 
-export async function haveConversation(statement: string,
-                                       utcDateTime: string,
-                                       timeZoneOffset: number,
-                                       previousStatements: string | null | undefined): Promise<{
-  questionForUser: string;
+export async function haveConversation(
+  statement: string,
+  utcDateTime: string,
+  timeZoneOffset: number,
+  previousStatements: string | null | undefined
+): Promise<{
+  questionForUser: string
   measurements: Measurement[]
 }> {
-  let questionForUser = await getNextQuestion(statement,  previousStatements);
-  const measurements = await text2measurements(statement, utcDateTime, timeZoneOffset);
+  let questionForUser = await getNextQuestion(statement, previousStatements)
+  const measurements = await text2measurements(
+    statement,
+    utcDateTime,
+    timeZoneOffset
+  )
   return {
     questionForUser,
-    measurements
+    measurements,
   }
 }

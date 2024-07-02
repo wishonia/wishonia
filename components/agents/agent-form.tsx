@@ -52,7 +52,9 @@ export default function AgentForm({
         description: agentData?.description || "",
         prompt: agentData?.prompt || "",
         initialMessage: agentData?.initialMessage || "",
-        conversationStarters: agentData?.conversationStarters.map(text=>({text}))||[{text:''}],
+        conversationStarters: agentData?.conversationStarters.map((text) => ({
+          text,
+        })) || [{ text: "" }],
       },
     })
 
@@ -79,7 +81,7 @@ export default function AgentForm({
         prompt: data.prompt,
         initialMessage: data.initialMessage,
         avatar: data.avatar,
-        conversationStarters: data.conversationStarters.map(({text})=>text),
+        conversationStarters: data.conversationStarters.map(({ text }) => text),
       }),
     })
 
@@ -131,7 +133,7 @@ export default function AgentForm({
 
   useEffect(() => {
     if (fields.length === 0) {
-      append({text:""})
+      append({ text: "" })
     }
   }, [fields, append])
 
@@ -221,7 +223,7 @@ export default function AgentForm({
               >
                 Conversation Starters{" "}
                 <PlusCircle
-                  onClick={() => append({text:""})}
+                  onClick={() => append({ text: "" })}
                   className="ml-2 h-7 w-7 cursor-pointer rounded-full p-1 hover:shadow-md"
                 />
               </Label>

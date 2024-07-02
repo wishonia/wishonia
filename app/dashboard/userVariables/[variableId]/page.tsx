@@ -4,8 +4,7 @@ import { redirect } from "next/navigation"
 import { authOptions } from "@/lib/auth"
 import { getCurrentUser } from "@/lib/session"
 import { Shell } from "@/components/layout/shell"
-import { UserVariableOverview } from "@/components/userVariables/user-variable-overview";
-
+import { UserVariableOverview } from "@/components/userVariables/user-variable-overview"
 
 interface UserVariablePageProps {
   params: { variableId: number }
@@ -42,10 +41,14 @@ export default async function UserVariablePage({
 
   return (
     <Shell>
-      <UserVariableOverview variableId={params.variableId} user={user} measurementsDateRange={{
-        from: searchParams.from,
-        to: searchParams.to
-      }} />
+      <UserVariableOverview
+        variableId={params.variableId}
+        user={user}
+        measurementsDateRange={{
+          from: searchParams.from,
+          to: searchParams.to,
+        }}
+      />
     </Shell>
   )
 }

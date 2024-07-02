@@ -3,22 +3,32 @@
 import * as React from "react"
 import { useRouter } from "next/navigation"
 
+import { GlobalVariable } from "@/types/models/GlobalVariable"
+import { UserVariable } from "@/types/models/UserVariable"
 import { Button, ButtonProps } from "@/components/ui/button"
 import { toast } from "@/components/ui/use-toast"
 import { Icons } from "@/components/icons"
-import { UserVariable } from "@/types/models/UserVariable";
-import {GlobalVariable} from "@/types/models/GlobalVariable";
 
 interface QuickMeasurementButtonProps extends ButtonProps {
   genericVariable: Pick<
     UserVariable | GlobalVariable,
-    "id" | "name" | "description" | "createdAt" | "imageUrl" |
-    "combinationOperation" | "unitAbbreviatedName" | "variableCategoryName" |
-    "lastValue" | "unitName"
+    | "id"
+    | "name"
+    | "description"
+    | "createdAt"
+    | "imageUrl"
+    | "combinationOperation"
+    | "unitAbbreviatedName"
+    | "variableCategoryName"
+    | "lastValue"
+    | "unitName"
   >
 }
 
-export function QuickMeasurementButton({ genericVariable, ...props }: QuickMeasurementButtonProps) {
+export function QuickMeasurementButton({
+  genericVariable,
+  ...props
+}: QuickMeasurementButtonProps) {
   const router = useRouter()
   const [isLoading, setIsLoading] = React.useState<boolean>(false)
 
@@ -60,7 +70,7 @@ export function QuickMeasurementButton({ genericVariable, ...props }: QuickMeasu
     router.refresh()
   }
 
-  if(!genericVariable) {
+  if (!genericVariable) {
     debugger
   }
 
@@ -71,7 +81,9 @@ export function QuickMeasurementButton({ genericVariable, ...props }: QuickMeasu
       ) : (
         <>
           <Icons.add className="h-4 w-4" />
-          <span>{genericVariable.lastValue} {genericVariable.unitAbbreviatedName}</span>
+          <span>
+            {genericVariable.lastValue} {genericVariable.unitAbbreviatedName}
+          </span>
         </>
       )}
     </Button>

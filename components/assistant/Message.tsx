@@ -16,7 +16,7 @@ import { CodeBlock } from "../ui/code-block"
 import { Skeleton } from "../ui/skeleton"
 import { Spinner } from "./Spinner"
 
-export function SpinnerMessage({ avatar }: { avatar?: string|null }) {
+export function SpinnerMessage({ avatar }: { avatar?: string | null }) {
   return (
     <div className="group relative flex items-start md:-ml-12">
       <div

@@ -10,113 +10,114 @@
  * Do not edit the class manually.
  */
 
-
-
 export class Vote {
-    /**
-    * Cause variable id
-    */
-    'causeVariableId': number;
-    /**
-    * Your client id can be obtained by creating an app at https://builder.quantimo.do
-    */
-    'clientId': string;
-    /**
-    * When the record was first created. Use UTC ISO 8601 YYYY-MM-DDThh:mm:ss datetime format
-    */
-    'createdAt'?: string;
-    /**
-    * Effect variable id
-    */
-    'effectVariableId': number;
-    /**
-    * id
-    */
-    'id'?: number;
-    /**
-    * When the record in the database was last updated. Use UTC ISO 8601 YYYY-MM-DDThh:mm:ss datetime format
-    */
-    'updatedAt'?: string;
-    /**
-    * ID of User
-    */
-    'userId': number;
-    /**
-    * Vote down for implausible/not-useful or up for plausible/useful. Vote none to delete a previous vote.
-    */
-    'value': VoteValueEnum;
-    /**
-    * Your client id can be obtained by creating an app at https://builder.quantimo.do
-    */
-    'type'?: VoteTypeEnum;
+  /**
+   * Cause variable id
+   */
+  "causeVariableId": number
+  /**
+   * Your client id can be obtained by creating an app at https://builder.quantimo.do
+   */
+  "clientId": string
+  /**
+   * When the record was first created. Use UTC ISO 8601 YYYY-MM-DDThh:mm:ss datetime format
+   */
+  "createdAt"?: string
+  /**
+   * Effect variable id
+   */
+  "effectVariableId": number
+  /**
+   * id
+   */
+  "id"?: number
+  /**
+   * When the record in the database was last updated. Use UTC ISO 8601 YYYY-MM-DDThh:mm:ss datetime format
+   */
+  "updatedAt"?: string
+  /**
+   * ID of User
+   */
+  "userId": number
+  /**
+   * Vote down for implausible/not-useful or up for plausible/useful. Vote none to delete a previous vote.
+   */
+  "value": VoteValueEnum
+  /**
+   * Your client id can be obtained by creating an app at https://builder.quantimo.do
+   */
+  "type"?: VoteTypeEnum
 
-    static readonly discriminator: string | undefined = undefined;
+  static readonly discriminator: string | undefined = undefined
 
-    static readonly attributeTypeMap: Array<{name: string, baseName: string, type: string, format: string}> = [
-        {
-            "name": "causeVariableId",
-            "baseName": "causeVariableId",
-            "type": "number",
-            "format": ""
-        },
-        {
-            "name": "clientId",
-            "baseName": "clientId",
-            "type": "string",
-            "format": ""
-        },
-        {
-            "name": "createdAt",
-            "baseName": "createdAt",
-            "type": "string",
-            "format": ""
-        },
-        {
-            "name": "effectVariableId",
-            "baseName": "effectVariableId",
-            "type": "number",
-            "format": ""
-        },
-        {
-            "name": "id",
-            "baseName": "id",
-            "type": "number",
-            "format": "int32"
-        },
-        {
-            "name": "updatedAt",
-            "baseName": "updatedAt",
-            "type": "string",
-            "format": ""
-        },
-        {
-            "name": "userId",
-            "baseName": "userId",
-            "type": "number",
-            "format": "int32"
-        },
-        {
-            "name": "value",
-            "baseName": "value",
-            "type": "VoteValueEnum",
-            "format": ""
-        },
-        {
-            "name": "type",
-            "baseName": "type",
-            "type": "VoteTypeEnum",
-            "format": ""
-        }    ];
+  static readonly attributeTypeMap: Array<{
+    name: string
+    baseName: string
+    type: string
+    format: string
+  }> = [
+    {
+      name: "causeVariableId",
+      baseName: "causeVariableId",
+      type: "number",
+      format: "",
+    },
+    {
+      name: "clientId",
+      baseName: "clientId",
+      type: "string",
+      format: "",
+    },
+    {
+      name: "createdAt",
+      baseName: "createdAt",
+      type: "string",
+      format: "",
+    },
+    {
+      name: "effectVariableId",
+      baseName: "effectVariableId",
+      type: "number",
+      format: "",
+    },
+    {
+      name: "id",
+      baseName: "id",
+      type: "number",
+      format: "int32",
+    },
+    {
+      name: "updatedAt",
+      baseName: "updatedAt",
+      type: "string",
+      format: "",
+    },
+    {
+      name: "userId",
+      baseName: "userId",
+      type: "number",
+      format: "int32",
+    },
+    {
+      name: "value",
+      baseName: "value",
+      type: "VoteValueEnum",
+      format: "",
+    },
+    {
+      name: "type",
+      baseName: "type",
+      type: "VoteTypeEnum",
+      format: "",
+    },
+  ]
 
-    static getAttributeTypeMap() {
-        return Vote.attributeTypeMap;
-    }
+  static getAttributeTypeMap() {
+    return Vote.attributeTypeMap
+  }
 
-    public constructor() {
-    }
+  public constructor() {}
 }
 
-
-export type VoteValueEnum = "up" | "down" | "none" ;
-export type VoteTypeEnum = "causality" | "usefulness" ;
-
+export type VoteValueEnum = "up" | "down" | "none"
+export type VoteTypeEnum = "causality" | "usefulness"

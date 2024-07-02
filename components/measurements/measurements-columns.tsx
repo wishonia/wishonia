@@ -3,12 +3,12 @@
 import Link from "next/link"
 import { ColumnDef } from "@tanstack/react-table"
 
+import { Measurement } from "@/types/models/Measurement"
 import { cn } from "@/lib/utils"
 import { Button, buttonVariants } from "@/components/ui/button"
 import { Icons } from "@/components/icons"
 
 import { MeasurementDeleteButton } from "./measurement-delete-button"
-import { Measurement } from "@/types/models/Measurement";
 
 export const measurementColumns: ColumnDef<Measurement>[] = [
   {
@@ -49,8 +49,8 @@ export const measurementColumns: ColumnDef<Measurement>[] = [
       )
     },
     cell: (measurement) => {
-      const variableName =  measurement.row.original.variableName
-      const variableId =  measurement.row.original.variableId
+      const variableName = measurement.row.original.variableName
+      const variableId = measurement.row.original.variableId
 
       return (
         <Link

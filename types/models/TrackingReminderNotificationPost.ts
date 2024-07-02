@@ -10,52 +10,56 @@
  * Do not edit the class manually.
  */
 
-
-
 export class TrackingReminderNotificationPost {
-    /**
-    * track records a measurement for the notification.  snooze changes the notification to 1 hour from now. skip deletes the notification.
-    */
-    'action': TrackingReminderNotificationPostActionEnum;
-    /**
-    * Id of the TrackingReminderNotification
-    */
-    'id': number;
-    /**
-    * Optional value to be recorded instead of the tracking reminder default value
-    */
-    'modifiedValue'?: number;
+  /**
+   * track records a measurement for the notification.  snooze changes the notification to 1 hour from now. skip deletes the notification.
+   */
+  "action": TrackingReminderNotificationPostActionEnum
+  /**
+   * Id of the TrackingReminderNotification
+   */
+  "id": number
+  /**
+   * Optional value to be recorded instead of the tracking reminder default value
+   */
+  "modifiedValue"?: number
 
-    static readonly discriminator: string | undefined = undefined;
+  static readonly discriminator: string | undefined = undefined
 
-    static readonly attributeTypeMap: Array<{name: string, baseName: string, type: string, format: string}> = [
-        {
-            "name": "action",
-            "baseName": "action",
-            "type": "TrackingReminderNotificationPostActionEnum",
-            "format": ""
-        },
-        {
-            "name": "id",
-            "baseName": "id",
-            "type": "number",
-            "format": ""
-        },
-        {
-            "name": "modifiedValue",
-            "baseName": "modifiedValue",
-            "type": "number",
-            "format": ""
-        }    ];
+  static readonly attributeTypeMap: Array<{
+    name: string
+    baseName: string
+    type: string
+    format: string
+  }> = [
+    {
+      name: "action",
+      baseName: "action",
+      type: "TrackingReminderNotificationPostActionEnum",
+      format: "",
+    },
+    {
+      name: "id",
+      baseName: "id",
+      type: "number",
+      format: "",
+    },
+    {
+      name: "modifiedValue",
+      baseName: "modifiedValue",
+      type: "number",
+      format: "",
+    },
+  ]
 
-    static getAttributeTypeMap() {
-        return TrackingReminderNotificationPost.attributeTypeMap;
-    }
+  static getAttributeTypeMap() {
+    return TrackingReminderNotificationPost.attributeTypeMap
+  }
 
-    public constructor() {
-    }
+  public constructor() {}
 }
 
-
-export type TrackingReminderNotificationPostActionEnum = "skip" | "snooze" | "track" ;
-
+export type TrackingReminderNotificationPostActionEnum =
+  | "skip"
+  | "snooze"
+  | "track"

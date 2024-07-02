@@ -10,103 +10,106 @@
  * Do not edit the class manually.
  */
 
-import { ExplanationStartTracking } from '../models/ExplanationStartTracking';
-import { Image } from '../models/Image';
-import { Study } from '../models/Study';
-
+import { ExplanationStartTracking } from "../models/ExplanationStartTracking"
+import { Image } from "../models/Image"
+import { Study } from "../models/Study"
 
 export class GetStudiesResponse {
-    'studies'?: Array<Study>;
-    /**
-    * Ex: These factors are most predictive of Overall Mood based on your own data.
-    */
-    'description': string;
-    /**
-    * Can be used as title in help info popup
-    */
-    'summary': string;
-    'image'?: Image;
-    /**
-    * Square icon png url
-    */
-    'avatar'?: string;
-    /**
-    * Ex: ion-ios-person
-    */
-    'ionIcon'?: string;
-    'startTracking'?: ExplanationStartTracking;
-    /**
-    * Ex: Top Predictors of Overall Mood
-    */
-    'title'?: string;
-    /**
-    * Embeddable list of study summaries with explanation at the top
-    */
-    'html'?: string;
+  "studies"?: Array<Study>
+  /**
+   * Ex: These factors are most predictive of Overall Mood based on your own data.
+   */
+  "description": string
+  /**
+   * Can be used as title in help info popup
+   */
+  "summary": string
+  "image"?: Image
+  /**
+   * Square icon png url
+   */
+  "avatar"?: string
+  /**
+   * Ex: ion-ios-person
+   */
+  "ionIcon"?: string
+  "startTracking"?: ExplanationStartTracking
+  /**
+   * Ex: Top Predictors of Overall Mood
+   */
+  "title"?: string
+  /**
+   * Embeddable list of study summaries with explanation at the top
+   */
+  "html"?: string
 
-    static readonly discriminator: string | undefined = undefined;
+  static readonly discriminator: string | undefined = undefined
 
-    static readonly attributeTypeMap: Array<{name: string, baseName: string, type: string, format: string}> = [
-        {
-            "name": "studies",
-            "baseName": "studies",
-            "type": "Array<Study>",
-            "format": ""
-        },
-        {
-            "name": "description",
-            "baseName": "description",
-            "type": "string",
-            "format": ""
-        },
-        {
-            "name": "summary",
-            "baseName": "summary",
-            "type": "string",
-            "format": ""
-        },
-        {
-            "name": "image",
-            "baseName": "image",
-            "type": "Image",
-            "format": ""
-        },
-        {
-            "name": "avatar",
-            "baseName": "avatar",
-            "type": "string",
-            "format": ""
-        },
-        {
-            "name": "ionIcon",
-            "baseName": "ionIcon",
-            "type": "string",
-            "format": ""
-        },
-        {
-            "name": "startTracking",
-            "baseName": "startTracking",
-            "type": "ExplanationStartTracking",
-            "format": ""
-        },
-        {
-            "name": "title",
-            "baseName": "title",
-            "type": "string",
-            "format": ""
-        },
-        {
-            "name": "html",
-            "baseName": "html",
-            "type": "string",
-            "format": ""
-        }    ];
+  static readonly attributeTypeMap: Array<{
+    name: string
+    baseName: string
+    type: string
+    format: string
+  }> = [
+    {
+      name: "studies",
+      baseName: "studies",
+      type: "Array<Study>",
+      format: "",
+    },
+    {
+      name: "description",
+      baseName: "description",
+      type: "string",
+      format: "",
+    },
+    {
+      name: "summary",
+      baseName: "summary",
+      type: "string",
+      format: "",
+    },
+    {
+      name: "image",
+      baseName: "image",
+      type: "Image",
+      format: "",
+    },
+    {
+      name: "avatar",
+      baseName: "avatar",
+      type: "string",
+      format: "",
+    },
+    {
+      name: "ionIcon",
+      baseName: "ionIcon",
+      type: "string",
+      format: "",
+    },
+    {
+      name: "startTracking",
+      baseName: "startTracking",
+      type: "ExplanationStartTracking",
+      format: "",
+    },
+    {
+      name: "title",
+      baseName: "title",
+      type: "string",
+      format: "",
+    },
+    {
+      name: "html",
+      baseName: "html",
+      type: "string",
+      format: "",
+    },
+  ]
 
-    static getAttributeTypeMap() {
-        return GetStudiesResponse.attributeTypeMap;
-    }
+  static getAttributeTypeMap() {
+    return GetStudiesResponse.attributeTypeMap
+  }
 
-    public constructor() {
-    }
+  public constructor() {}
 }
-

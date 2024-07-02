@@ -4,10 +4,9 @@ import { redirect } from "next/navigation"
 import { authOptions } from "@/lib/auth"
 import { getCurrentUser } from "@/lib/session"
 import { GenericVariableAddButton } from "@/components/genericVariables/generic-variable-add-button"
+import { GlobalVariableSearch } from "@/components/globalVariables/global-variable-search"
 import { Shell } from "@/components/layout/shell"
 import { DashboardHeader } from "@/components/pages/dashboard/dashboard-header"
-import {GlobalVariableSearch} from "@/components/globalVariables/global-variable-search";
-
 
 export const metadata: Metadata = {
   title: "Search for a Variable",
@@ -23,8 +22,10 @@ export default async function GlobalVariablesPage() {
 
   return (
     <Shell>
-      <DashboardHeader heading="Global Variables" text="Search for a food, drug, symptom or anything else.">
-      </DashboardHeader>
+      <DashboardHeader
+        heading="Global Variables"
+        text="Search for a food, drug, symptom or anything else."
+      ></DashboardHeader>
       <GlobalVariableSearch user={user} />
     </Shell>
   )
