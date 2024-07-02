@@ -14,6 +14,7 @@ import {
 } from "@/tests/test-helpers"
 import { User } from "@prisma/client"
 
+import GlobalSolutionDecomposerAgent from "@/lib/agents/taskGenerationAgent"
 import {
   medicalResearchGlobalSolutionId,
   warGlobalSolutionId,
@@ -40,6 +41,58 @@ import { loadJsonToDatabase } from "@/lib/prisma/loadDatabaseFromJson"
 
 describe("Global Problem Solutions", () => {
   jest.setTimeout(6000000)
+  it("Decomposes a GlobalSolution to GlobalTasks", async () => {
+    const globalSolution = await prisma.globalSolution.findFirst({})
+    if (!globalSolution) throw new Error("Global Solution not found")
+    const user = await getOrCreateTestUser()
+
+    const agent = new GlobalSolutionDecomposerAgent()
+
+    console.log(
+      `Starting decomposition of Global Solution: "${globalSolution.name}"`
+    )
+
+    const result = await agent.decomposeAndStore(globalSolution.name, user.id)
+    console.log(result)
+
+    // Fetch and display the created tasks
+    const createdTasks = await prisma.globalTask.findMany({
+      where: {
+        globalSolutionTasks: {
+          some: {
+            globalSolution: {
+              name: globalSolution.name,
+            },
+          },
+        },
+      },
+      include: {
+        skills: {
+          include: {
+            skill: true,
+          },
+        },
+        globalTaskContextUrls: true,
+      },
+    })
+
+    console.log(`Created ${createdTasks.length} tasks:`)
+    for (const task of createdTasks) {
+      console.log(
+        `- ${task.name} (Priority: ${task.priority}, Status: ${task.status})`
+      )
+      if (task.skills.length > 0) {
+        console.log(
+          `  Skills: ${task.skills.map((s) => s.skill.name).join(", ")}`
+        )
+      }
+      if (task.globalTaskContextUrls.length > 0) {
+        console.log(
+          `  Context URLs: ${task.globalTaskContextUrls.map((u) => u.url).join(", ")}`
+        )
+      }
+    }
+  })
   it("Generates a global Solution", async () => {
     const user = await getOrCreateTestUser()
     await generateGlobalSolution("Military", null, user.id)
