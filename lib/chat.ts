@@ -53,7 +53,7 @@ async function getExistingMessageIds(chatId: string) {
         id: true,
       },
     })
-  ).map((m) => m.id)
+  ).map((m: { id: string }) => m.id)
 }
 
 async function createChatMessages(messages: Chat["messages"], chatId: string) {
