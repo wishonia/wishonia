@@ -52,7 +52,7 @@ export default function AgentForm({
         description: agentData?.description || "",
         prompt: agentData?.prompt || "",
         initialMessage: agentData?.initialMessage || "",
-        conversationStarters: agentData?.conversationStarters || [""],
+        conversationStarters: agentData?.conversationStarters.map(text=>({text}))||[{text:''}],
       },
     })
 
@@ -79,7 +79,7 @@ export default function AgentForm({
         prompt: data.prompt,
         initialMessage: data.initialMessage,
         avatar: data.avatar,
-        conversationStarters: data.conversationStarters,
+        conversationStarters: data.conversationStarters.map(({text})=>text),
       }),
     })
 
@@ -131,7 +131,7 @@ export default function AgentForm({
 
   useEffect(() => {
     if (fields.length === 0) {
-      append("")
+      append({text:""})
     }
   }, [fields, append])
 
@@ -221,14 +221,14 @@ export default function AgentForm({
               >
                 Conversation Starters{" "}
                 <PlusCircle
-                  onClick={() => append("")}
+                  onClick={() => append({text:""})}
                   className="ml-2 h-7 w-7 cursor-pointer rounded-full p-1 hover:shadow-md"
                 />
               </Label>
               {fields.map((item: any, index: number) => (
                 <div key={item.id} className="flex">
                   <Input
-                    {...register(`conversationStarters.${index}`, {
+                    {...register(`conversationStarters.${index}.text`, {
                       required: true,
                     })}
                     placeholder="Enter conversation starters"
