@@ -15,7 +15,7 @@ import {
 let prisma = new PrismaClient()
 beforeAll(async () => {
   process.env.DATABASE_URL =
-    "postgresql://user:pass@localhost:5432/wishonia_test?schema=public"
+    "postgresql://user:pass@localhost:5433/wishonia_test?schema=public"
   if (!prisma) {
     prisma = new PrismaClient()
   }
