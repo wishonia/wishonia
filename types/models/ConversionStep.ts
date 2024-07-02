@@ -10,42 +10,43 @@
  * Do not edit the class manually.
  */
 
-
-
 export class ConversionStep {
-    /**
-    * ADD or MULTIPLY
-    */
-    'operation': ConversionStepOperationEnum;
-    /**
-    * This specifies the order of conversion steps starting with 0
-    */
-    'value': number;
+  /**
+   * ADD or MULTIPLY
+   */
+  "operation": ConversionStepOperationEnum
+  /**
+   * This specifies the order of conversion steps starting with 0
+   */
+  "value": number
 
-    static readonly discriminator: string | undefined = undefined;
+  static readonly discriminator: string | undefined = undefined
 
-    static readonly attributeTypeMap: Array<{name: string, baseName: string, type: string, format: string}> = [
-        {
-            "name": "operation",
-            "baseName": "operation",
-            "type": "ConversionStepOperationEnum",
-            "format": ""
-        },
-        {
-            "name": "value",
-            "baseName": "value",
-            "type": "number",
-            "format": "double"
-        }    ];
+  static readonly attributeTypeMap: Array<{
+    name: string
+    baseName: string
+    type: string
+    format: string
+  }> = [
+    {
+      name: "operation",
+      baseName: "operation",
+      type: "ConversionStepOperationEnum",
+      format: "",
+    },
+    {
+      name: "value",
+      baseName: "value",
+      type: "number",
+      format: "double",
+    },
+  ]
 
-    static getAttributeTypeMap() {
-        return ConversionStep.attributeTypeMap;
-    }
+  static getAttributeTypeMap() {
+    return ConversionStep.attributeTypeMap
+  }
 
-    public constructor() {
-    }
+  public constructor() {}
 }
 
-
-export type ConversionStepOperationEnum = "ADD" | "MULTIPLY" ;
-
+export type ConversionStepOperationEnum = "ADD" | "MULTIPLY"

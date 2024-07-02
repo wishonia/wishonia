@@ -10,202 +10,215 @@
  * Do not edit the class manually.
  */
 
-import { Button } from '../models/Button';
-
+import { Button } from "../models/Button"
 
 export class InputField {
-    'displayName': string;
-    'helpText'?: string;
-    'hint'?: string;
-    'icon'?: string;
-    /**
-    * HTML element id
-    */
-    'id'?: string;
-    'image'?: string;
-    'key'?: string;
-    'labelLeft'?: string;
-    'labelRight'?: string;
-    'link'?: string;
-    'maxLength'?: number;
-    'maxValue'?: number;
-    'minLength'?: number;
-    'minValue'?: number;
-    /**
-    * Selector list options
-    */
-    'options'?: Array<string>;
-    /**
-    * Ex: Title
-    */
-    'placeholder'?: string;
-    'postUrl'?: string;
-    'required'?: boolean;
-    /**
-    * Ex: Title
-    */
-    'show'?: boolean;
-    'submitButton'?: Button;
-    /**
-    * Ex: Title
-    */
-    'type': InputFieldTypeEnum;
-    /**
-    * See https://html5pattern.com/ for examples
-    */
-    'validationPattern'?: string;
-    'value'?: string;
+  "displayName": string
+  "helpText"?: string
+  "hint"?: string
+  "icon"?: string
+  /**
+   * HTML element id
+   */
+  "id"?: string
+  "image"?: string
+  "key"?: string
+  "labelLeft"?: string
+  "labelRight"?: string
+  "link"?: string
+  "maxLength"?: number
+  "maxValue"?: number
+  "minLength"?: number
+  "minValue"?: number
+  /**
+   * Selector list options
+   */
+  "options"?: Array<string>
+  /**
+   * Ex: Title
+   */
+  "placeholder"?: string
+  "postUrl"?: string
+  "required"?: boolean
+  /**
+   * Ex: Title
+   */
+  "show"?: boolean
+  "submitButton"?: Button
+  /**
+   * Ex: Title
+   */
+  "type": InputFieldTypeEnum
+  /**
+   * See https://html5pattern.com/ for examples
+   */
+  "validationPattern"?: string
+  "value"?: string
 
-    static readonly discriminator: string | undefined = undefined;
+  static readonly discriminator: string | undefined = undefined
 
-    static readonly attributeTypeMap: Array<{name: string, baseName: string, type: string, format: string}> = [
-        {
-            "name": "displayName",
-            "baseName": "displayName",
-            "type": "string",
-            "format": ""
-        },
-        {
-            "name": "helpText",
-            "baseName": "helpText",
-            "type": "string",
-            "format": ""
-        },
-        {
-            "name": "hint",
-            "baseName": "hint",
-            "type": "string",
-            "format": ""
-        },
-        {
-            "name": "icon",
-            "baseName": "icon",
-            "type": "string",
-            "format": ""
-        },
-        {
-            "name": "id",
-            "baseName": "id",
-            "type": "string",
-            "format": ""
-        },
-        {
-            "name": "image",
-            "baseName": "image",
-            "type": "string",
-            "format": ""
-        },
-        {
-            "name": "key",
-            "baseName": "key",
-            "type": "string",
-            "format": ""
-        },
-        {
-            "name": "labelLeft",
-            "baseName": "labelLeft",
-            "type": "string",
-            "format": ""
-        },
-        {
-            "name": "labelRight",
-            "baseName": "labelRight",
-            "type": "string",
-            "format": ""
-        },
-        {
-            "name": "link",
-            "baseName": "link",
-            "type": "string",
-            "format": ""
-        },
-        {
-            "name": "maxLength",
-            "baseName": "maxLength",
-            "type": "number",
-            "format": ""
-        },
-        {
-            "name": "maxValue",
-            "baseName": "maxValue",
-            "type": "number",
-            "format": ""
-        },
-        {
-            "name": "minLength",
-            "baseName": "minLength",
-            "type": "number",
-            "format": ""
-        },
-        {
-            "name": "minValue",
-            "baseName": "minValue",
-            "type": "number",
-            "format": ""
-        },
-        {
-            "name": "options",
-            "baseName": "options",
-            "type": "Array<string>",
-            "format": ""
-        },
-        {
-            "name": "placeholder",
-            "baseName": "placeholder",
-            "type": "string",
-            "format": ""
-        },
-        {
-            "name": "postUrl",
-            "baseName": "postUrl",
-            "type": "string",
-            "format": ""
-        },
-        {
-            "name": "required",
-            "baseName": "required",
-            "type": "boolean",
-            "format": ""
-        },
-        {
-            "name": "show",
-            "baseName": "show",
-            "type": "boolean",
-            "format": ""
-        },
-        {
-            "name": "submitButton",
-            "baseName": "submitButton",
-            "type": "Button",
-            "format": ""
-        },
-        {
-            "name": "type",
-            "baseName": "type",
-            "type": "InputFieldTypeEnum",
-            "format": ""
-        },
-        {
-            "name": "validationPattern",
-            "baseName": "validationPattern",
-            "type": "string",
-            "format": ""
-        },
-        {
-            "name": "value",
-            "baseName": "value",
-            "type": "string",
-            "format": ""
-        }    ];
+  static readonly attributeTypeMap: Array<{
+    name: string
+    baseName: string
+    type: string
+    format: string
+  }> = [
+    {
+      name: "displayName",
+      baseName: "displayName",
+      type: "string",
+      format: "",
+    },
+    {
+      name: "helpText",
+      baseName: "helpText",
+      type: "string",
+      format: "",
+    },
+    {
+      name: "hint",
+      baseName: "hint",
+      type: "string",
+      format: "",
+    },
+    {
+      name: "icon",
+      baseName: "icon",
+      type: "string",
+      format: "",
+    },
+    {
+      name: "id",
+      baseName: "id",
+      type: "string",
+      format: "",
+    },
+    {
+      name: "image",
+      baseName: "image",
+      type: "string",
+      format: "",
+    },
+    {
+      name: "key",
+      baseName: "key",
+      type: "string",
+      format: "",
+    },
+    {
+      name: "labelLeft",
+      baseName: "labelLeft",
+      type: "string",
+      format: "",
+    },
+    {
+      name: "labelRight",
+      baseName: "labelRight",
+      type: "string",
+      format: "",
+    },
+    {
+      name: "link",
+      baseName: "link",
+      type: "string",
+      format: "",
+    },
+    {
+      name: "maxLength",
+      baseName: "maxLength",
+      type: "number",
+      format: "",
+    },
+    {
+      name: "maxValue",
+      baseName: "maxValue",
+      type: "number",
+      format: "",
+    },
+    {
+      name: "minLength",
+      baseName: "minLength",
+      type: "number",
+      format: "",
+    },
+    {
+      name: "minValue",
+      baseName: "minValue",
+      type: "number",
+      format: "",
+    },
+    {
+      name: "options",
+      baseName: "options",
+      type: "Array<string>",
+      format: "",
+    },
+    {
+      name: "placeholder",
+      baseName: "placeholder",
+      type: "string",
+      format: "",
+    },
+    {
+      name: "postUrl",
+      baseName: "postUrl",
+      type: "string",
+      format: "",
+    },
+    {
+      name: "required",
+      baseName: "required",
+      type: "boolean",
+      format: "",
+    },
+    {
+      name: "show",
+      baseName: "show",
+      type: "boolean",
+      format: "",
+    },
+    {
+      name: "submitButton",
+      baseName: "submitButton",
+      type: "Button",
+      format: "",
+    },
+    {
+      name: "type",
+      baseName: "type",
+      type: "InputFieldTypeEnum",
+      format: "",
+    },
+    {
+      name: "validationPattern",
+      baseName: "validationPattern",
+      type: "string",
+      format: "",
+    },
+    {
+      name: "value",
+      baseName: "value",
+      type: "string",
+      format: "",
+    },
+  ]
 
-    static getAttributeTypeMap() {
-        return InputField.attributeTypeMap;
-    }
+  static getAttributeTypeMap() {
+    return InputField.attributeTypeMap
+  }
 
-    public constructor() {
-    }
+  public constructor() {}
 }
 
-
-export type InputFieldTypeEnum = "check_box" | "date" | "email" | "number" | "postal_code" | "select_option" | "string" | "switch" | "text_area" | "unit" | "variable_category" ;
-
+export type InputFieldTypeEnum =
+  | "check_box"
+  | "date"
+  | "email"
+  | "number"
+  | "postal_code"
+  | "select_option"
+  | "string"
+  | "switch"
+  | "text_area"
+  | "unit"
+  | "variable_category"

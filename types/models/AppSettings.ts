@@ -10,169 +10,172 @@
  * Do not edit the class manually.
  */
 
-import { User } from '../models/User';
-
+import { User } from "../models/User"
 
 export class AppSettings {
-    'additionalSettings'?: any;
-    'appDescription'?: string;
-    'appDesign'?: any;
-    'appDisplayName'?: string;
-    'appStatus'?: any;
-    'appType'?: string;
-    'buildEnabled'?: string;
-    /**
-    * Get yours at https:://builder.quantimo.do
-    */
-    'clientId'?: string;
-    /**
-    * Get yours at https:://builder.quantimo.do
-    */
-    'clientSecret'?: string;
-    'collaborators'?: Array<User>;
-    'createdAt'?: string;
-    /**
-    * User id of the owner of the application
-    */
-    'userId'?: number;
-    'users'?: Array<User>;
-    'redirectUri'?: string;
-    'companyName'?: string;
-    'homepageUrl'?: string;
-    'iconUrl'?: string;
-    'longDescription'?: string;
-    'splashScreen'?: string;
-    'textLogo'?: string;
+  "additionalSettings"?: any
+  "appDescription"?: string
+  "appDesign"?: any
+  "appDisplayName"?: string
+  "appStatus"?: any
+  "appType"?: string
+  "buildEnabled"?: string
+  /**
+   * Get yours at https:://builder.quantimo.do
+   */
+  "clientId"?: string
+  /**
+   * Get yours at https:://builder.quantimo.do
+   */
+  "clientSecret"?: string
+  "collaborators"?: Array<User>
+  "createdAt"?: string
+  /**
+   * User id of the owner of the application
+   */
+  "userId"?: number
+  "users"?: Array<User>
+  "redirectUri"?: string
+  "companyName"?: string
+  "homepageUrl"?: string
+  "iconUrl"?: string
+  "longDescription"?: string
+  "splashScreen"?: string
+  "textLogo"?: string
 
-    static readonly discriminator: string | undefined = undefined;
+  static readonly discriminator: string | undefined = undefined
 
-    static readonly attributeTypeMap: Array<{name: string, baseName: string, type: string, format: string}> = [
-        {
-            "name": "additionalSettings",
-            "baseName": "additionalSettings",
-            "type": "any",
-            "format": ""
-        },
-        {
-            "name": "appDescription",
-            "baseName": "appDescription",
-            "type": "string",
-            "format": ""
-        },
-        {
-            "name": "appDesign",
-            "baseName": "appDesign",
-            "type": "any",
-            "format": ""
-        },
-        {
-            "name": "appDisplayName",
-            "baseName": "appDisplayName",
-            "type": "string",
-            "format": ""
-        },
-        {
-            "name": "appStatus",
-            "baseName": "appStatus",
-            "type": "any",
-            "format": ""
-        },
-        {
-            "name": "appType",
-            "baseName": "appType",
-            "type": "string",
-            "format": ""
-        },
-        {
-            "name": "buildEnabled",
-            "baseName": "buildEnabled",
-            "type": "string",
-            "format": ""
-        },
-        {
-            "name": "clientId",
-            "baseName": "clientId",
-            "type": "string",
-            "format": ""
-        },
-        {
-            "name": "clientSecret",
-            "baseName": "clientSecret",
-            "type": "string",
-            "format": ""
-        },
-        {
-            "name": "collaborators",
-            "baseName": "collaborators",
-            "type": "Array<User>",
-            "format": ""
-        },
-        {
-            "name": "createdAt",
-            "baseName": "createdAt",
-            "type": "string",
-            "format": ""
-        },
-        {
-            "name": "userId",
-            "baseName": "userId",
-            "type": "number",
-            "format": "int32"
-        },
-        {
-            "name": "users",
-            "baseName": "users",
-            "type": "Array<User>",
-            "format": ""
-        },
-        {
-            "name": "redirectUri",
-            "baseName": "redirectUri",
-            "type": "string",
-            "format": ""
-        },
-        {
-            "name": "companyName",
-            "baseName": "companyName",
-            "type": "string",
-            "format": ""
-        },
-        {
-            "name": "homepageUrl",
-            "baseName": "homepageUrl",
-            "type": "string",
-            "format": ""
-        },
-        {
-            "name": "iconUrl",
-            "baseName": "iconUrl",
-            "type": "string",
-            "format": ""
-        },
-        {
-            "name": "longDescription",
-            "baseName": "longDescription",
-            "type": "string",
-            "format": ""
-        },
-        {
-            "name": "splashScreen",
-            "baseName": "splashScreen",
-            "type": "string",
-            "format": ""
-        },
-        {
-            "name": "textLogo",
-            "baseName": "textLogo",
-            "type": "string",
-            "format": ""
-        }    ];
+  static readonly attributeTypeMap: Array<{
+    name: string
+    baseName: string
+    type: string
+    format: string
+  }> = [
+    {
+      name: "additionalSettings",
+      baseName: "additionalSettings",
+      type: "any",
+      format: "",
+    },
+    {
+      name: "appDescription",
+      baseName: "appDescription",
+      type: "string",
+      format: "",
+    },
+    {
+      name: "appDesign",
+      baseName: "appDesign",
+      type: "any",
+      format: "",
+    },
+    {
+      name: "appDisplayName",
+      baseName: "appDisplayName",
+      type: "string",
+      format: "",
+    },
+    {
+      name: "appStatus",
+      baseName: "appStatus",
+      type: "any",
+      format: "",
+    },
+    {
+      name: "appType",
+      baseName: "appType",
+      type: "string",
+      format: "",
+    },
+    {
+      name: "buildEnabled",
+      baseName: "buildEnabled",
+      type: "string",
+      format: "",
+    },
+    {
+      name: "clientId",
+      baseName: "clientId",
+      type: "string",
+      format: "",
+    },
+    {
+      name: "clientSecret",
+      baseName: "clientSecret",
+      type: "string",
+      format: "",
+    },
+    {
+      name: "collaborators",
+      baseName: "collaborators",
+      type: "Array<User>",
+      format: "",
+    },
+    {
+      name: "createdAt",
+      baseName: "createdAt",
+      type: "string",
+      format: "",
+    },
+    {
+      name: "userId",
+      baseName: "userId",
+      type: "number",
+      format: "int32",
+    },
+    {
+      name: "users",
+      baseName: "users",
+      type: "Array<User>",
+      format: "",
+    },
+    {
+      name: "redirectUri",
+      baseName: "redirectUri",
+      type: "string",
+      format: "",
+    },
+    {
+      name: "companyName",
+      baseName: "companyName",
+      type: "string",
+      format: "",
+    },
+    {
+      name: "homepageUrl",
+      baseName: "homepageUrl",
+      type: "string",
+      format: "",
+    },
+    {
+      name: "iconUrl",
+      baseName: "iconUrl",
+      type: "string",
+      format: "",
+    },
+    {
+      name: "longDescription",
+      baseName: "longDescription",
+      type: "string",
+      format: "",
+    },
+    {
+      name: "splashScreen",
+      baseName: "splashScreen",
+      type: "string",
+      format: "",
+    },
+    {
+      name: "textLogo",
+      baseName: "textLogo",
+      type: "string",
+      format: "",
+    },
+  ]
 
-    static getAttributeTypeMap() {
-        return AppSettings.attributeTypeMap;
-    }
+  static getAttributeTypeMap() {
+    return AppSettings.attributeTypeMap
+  }
 
-    public constructor() {
-    }
+  public constructor() {}
 }
-

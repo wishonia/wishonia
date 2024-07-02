@@ -10,49 +10,51 @@
  * Do not edit the class manually.
  */
 
-
-
 export class DeviceToken {
-    /**
-    * Client id
-    */
-    'clientId'?: string;
-    /**
-    * ios, android, or web
-    */
-    'platform': string;
-    /**
-    * The device token
-    */
-    'deviceToken': string;
+  /**
+   * Client id
+   */
+  "clientId"?: string
+  /**
+   * ios, android, or web
+   */
+  "platform": string
+  /**
+   * The device token
+   */
+  "deviceToken": string
 
-    static readonly discriminator: string | undefined = undefined;
+  static readonly discriminator: string | undefined = undefined
 
-    static readonly attributeTypeMap: Array<{name: string, baseName: string, type: string, format: string}> = [
-        {
-            "name": "clientId",
-            "baseName": "clientId",
-            "type": "string",
-            "format": ""
-        },
-        {
-            "name": "platform",
-            "baseName": "platform",
-            "type": "string",
-            "format": ""
-        },
-        {
-            "name": "deviceToken",
-            "baseName": "deviceToken",
-            "type": "string",
-            "format": ""
-        }    ];
+  static readonly attributeTypeMap: Array<{
+    name: string
+    baseName: string
+    type: string
+    format: string
+  }> = [
+    {
+      name: "clientId",
+      baseName: "clientId",
+      type: "string",
+      format: "",
+    },
+    {
+      name: "platform",
+      baseName: "platform",
+      type: "string",
+      format: "",
+    },
+    {
+      name: "deviceToken",
+      baseName: "deviceToken",
+      type: "string",
+      format: "",
+    },
+  ]
 
-    static getAttributeTypeMap() {
-        return DeviceToken.attributeTypeMap;
-    }
+  static getAttributeTypeMap() {
+    return DeviceToken.attributeTypeMap
+  }
 
-    public constructor() {
-    }
+  public constructor() {}
 }
-

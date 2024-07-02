@@ -1,14 +1,18 @@
-import React from 'react';
+import React from "react"
 
 interface AnalysisResultProps {
-  result: string;
+  result: string
 }
 
 export const AnalysisResult: React.FC<AnalysisResultProps> = ({ result }) => {
   return (
     <div className="mt-5">
       <strong>Analysis Result:</strong>
-      <textarea value={result} readOnly className="w-full h-36 p-2 mt-2 border border-gray-300 rounded-lg resize-y" />
+      <textarea
+        value={result}
+        readOnly
+        className="mt-2 h-36 w-full resize-y rounded-lg border border-gray-300 p-2"
+      />
     </div>
-  );
-};
+  )
+}

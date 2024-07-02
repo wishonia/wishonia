@@ -10,29 +10,31 @@
  * Do not edit the class manually.
  */
 
-
-
 export class ErrorResponse {
-    /**
-    * Error message
-    */
-    'message': string;
+  /**
+   * Error message
+   */
+  "message": string
 
-    static readonly discriminator: string | undefined = undefined;
+  static readonly discriminator: string | undefined = undefined
 
-    static readonly attributeTypeMap: Array<{name: string, baseName: string, type: string, format: string}> = [
-        {
-            "name": "message",
-            "baseName": "message",
-            "type": "string",
-            "format": ""
-        }    ];
+  static readonly attributeTypeMap: Array<{
+    name: string
+    baseName: string
+    type: string
+    format: string
+  }> = [
+    {
+      name: "message",
+      baseName: "message",
+      type: "string",
+      format: "",
+    },
+  ]
 
-    static getAttributeTypeMap() {
-        return ErrorResponse.attributeTypeMap;
-    }
+  static getAttributeTypeMap() {
+    return ErrorResponse.attributeTypeMap
+  }
 
-    public constructor() {
-    }
+  public constructor() {}
 }
-

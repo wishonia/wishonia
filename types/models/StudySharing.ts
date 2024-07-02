@@ -10,49 +10,51 @@
  * Do not edit the class manually.
  */
 
-
-
 export class StudySharing {
-    /**
-    * Would you like to make this study publicly visible?
-    */
-    'shareUserMeasurements': boolean;
-    /**
-    * Ex: N1 Study: Sleep Quality Predicts Higher Overall Mood
-    */
-    'sharingDescription': string;
-    /**
-    * Ex: N1 Study: Sleep Quality Predicts Higher Overall Mood
-    */
-    'sharingTitle': string;
+  /**
+   * Would you like to make this study publicly visible?
+   */
+  "shareUserMeasurements": boolean
+  /**
+   * Ex: N1 Study: Sleep Quality Predicts Higher Overall Mood
+   */
+  "sharingDescription": string
+  /**
+   * Ex: N1 Study: Sleep Quality Predicts Higher Overall Mood
+   */
+  "sharingTitle": string
 
-    static readonly discriminator: string | undefined = undefined;
+  static readonly discriminator: string | undefined = undefined
 
-    static readonly attributeTypeMap: Array<{name: string, baseName: string, type: string, format: string}> = [
-        {
-            "name": "shareUserMeasurements",
-            "baseName": "shareUserMeasurements",
-            "type": "boolean",
-            "format": ""
-        },
-        {
-            "name": "sharingDescription",
-            "baseName": "sharingDescription",
-            "type": "string",
-            "format": ""
-        },
-        {
-            "name": "sharingTitle",
-            "baseName": "sharingTitle",
-            "type": "string",
-            "format": ""
-        }    ];
+  static readonly attributeTypeMap: Array<{
+    name: string
+    baseName: string
+    type: string
+    format: string
+  }> = [
+    {
+      name: "shareUserMeasurements",
+      baseName: "shareUserMeasurements",
+      type: "boolean",
+      format: "",
+    },
+    {
+      name: "sharingDescription",
+      baseName: "sharingDescription",
+      type: "string",
+      format: "",
+    },
+    {
+      name: "sharingTitle",
+      baseName: "sharingTitle",
+      type: "string",
+      format: "",
+    },
+  ]
 
-    static getAttributeTypeMap() {
-        return StudySharing.attributeTypeMap;
-    }
+  static getAttributeTypeMap() {
+    return StudySharing.attributeTypeMap
+  }
 
-    public constructor() {
-    }
+  public constructor() {}
 }
-

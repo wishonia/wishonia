@@ -10,58 +10,61 @@
  * Do not edit the class manually.
  */
 
-import { Chart } from '../models/Chart';
-
+import { Chart } from "../models/Chart"
 
 /**
-* An object with various chart properties each property contain and svg and Highcharts configuration
-*/
+ * An object with various chart properties each property contain and svg and Highcharts configuration
+ */
 export class StudyCharts {
-    'populationTraitScatterPlot'?: Chart;
-    'outcomeDistributionColumnChart'?: Chart;
-    'predictorDistributionColumnChart'?: Chart;
-    'correlationScatterPlot'?: Chart;
-    'pairsOverTimeLineChart'?: Chart;
+  "populationTraitScatterPlot"?: Chart
+  "outcomeDistributionColumnChart"?: Chart
+  "predictorDistributionColumnChart"?: Chart
+  "correlationScatterPlot"?: Chart
+  "pairsOverTimeLineChart"?: Chart
 
-    static readonly discriminator: string | undefined = undefined;
+  static readonly discriminator: string | undefined = undefined
 
-    static readonly attributeTypeMap: Array<{name: string, baseName: string, type: string, format: string}> = [
-        {
-            "name": "populationTraitScatterPlot",
-            "baseName": "populationTraitScatterPlot",
-            "type": "Chart",
-            "format": ""
-        },
-        {
-            "name": "outcomeDistributionColumnChart",
-            "baseName": "outcomeDistributionColumnChart",
-            "type": "Chart",
-            "format": ""
-        },
-        {
-            "name": "predictorDistributionColumnChart",
-            "baseName": "predictorDistributionColumnChart",
-            "type": "Chart",
-            "format": ""
-        },
-        {
-            "name": "correlationScatterPlot",
-            "baseName": "correlationScatterPlot",
-            "type": "Chart",
-            "format": ""
-        },
-        {
-            "name": "pairsOverTimeLineChart",
-            "baseName": "pairsOverTimeLineChart",
-            "type": "Chart",
-            "format": ""
-        }    ];
+  static readonly attributeTypeMap: Array<{
+    name: string
+    baseName: string
+    type: string
+    format: string
+  }> = [
+    {
+      name: "populationTraitScatterPlot",
+      baseName: "populationTraitScatterPlot",
+      type: "Chart",
+      format: "",
+    },
+    {
+      name: "outcomeDistributionColumnChart",
+      baseName: "outcomeDistributionColumnChart",
+      type: "Chart",
+      format: "",
+    },
+    {
+      name: "predictorDistributionColumnChart",
+      baseName: "predictorDistributionColumnChart",
+      type: "Chart",
+      format: "",
+    },
+    {
+      name: "correlationScatterPlot",
+      baseName: "correlationScatterPlot",
+      type: "Chart",
+      format: "",
+    },
+    {
+      name: "pairsOverTimeLineChart",
+      baseName: "pairsOverTimeLineChart",
+      type: "Chart",
+      format: "",
+    },
+  ]
 
-    static getAttributeTypeMap() {
-        return StudyCharts.attributeTypeMap;
-    }
+  static getAttributeTypeMap() {
+    return StudyCharts.attributeTypeMap
+  }
 
-    public constructor() {
-    }
+  public constructor() {}
 }
-

@@ -3,6 +3,7 @@
 import * as React from "react"
 import { useRouter } from "next/navigation"
 
+import { Measurement } from "@/types/models/Measurement"
 import { formatDate } from "@/lib/utils"
 import { Button } from "@/components/ui/button"
 import {
@@ -16,14 +17,13 @@ import {
 } from "@/components/ui/credenza"
 import { toast } from "@/components/ui/use-toast"
 import { Icons } from "@/components/icons"
-import { Measurement } from "@/types/models/Measurement";
 
 interface MeasurementsDeleteButtonProps {
   measurement: Measurement
 }
 
 async function deleteMeasurement(measurementId: number | undefined) {
-  if(!measurementId) {
+  if (!measurementId) {
     console.error("Measurement ID is not defined for deleteMeasurement")
     return false
   }
@@ -46,7 +46,9 @@ async function deleteMeasurement(measurementId: number | undefined) {
   return true
 }
 
-export function MeasurementDeleteButton({ measurement }: MeasurementsDeleteButtonProps) {
+export function MeasurementDeleteButton({
+  measurement,
+}: MeasurementsDeleteButtonProps) {
   const router = useRouter()
   const [showDeleteAlert, setShowDeleteAlert] = React.useState<boolean>(false)
   const [isDeleteLoading, setIsDeleteLoading] = React.useState<boolean>(false)

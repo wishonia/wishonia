@@ -10,177 +10,180 @@
  * Do not edit the class manually.
  */
 
-import { Card } from '../models/Card';
-import { Correlation } from '../models/Correlation';
-import { ParticipantInstruction } from '../models/ParticipantInstruction';
-import { StudyCharts } from '../models/StudyCharts';
-import { StudyHtml } from '../models/StudyHtml';
-import { StudyImages } from '../models/StudyImages';
-import { StudyLinks } from '../models/StudyLinks';
-import { StudySharing } from '../models/StudySharing';
-import { StudyText } from '../models/StudyText';
-import { StudyVotes } from '../models/StudyVotes';
-import { GlobalVariable } from './GlobalVariable';
-
+import { Card } from "../models/Card"
+import { Correlation } from "../models/Correlation"
+import { ParticipantInstruction } from "../models/ParticipantInstruction"
+import { StudyCharts } from "../models/StudyCharts"
+import { StudyHtml } from "../models/StudyHtml"
+import { StudyImages } from "../models/StudyImages"
+import { StudyLinks } from "../models/StudyLinks"
+import { StudySharing } from "../models/StudySharing"
+import { StudyText } from "../models/StudyText"
+import { StudyVotes } from "../models/StudyVotes"
+import { GlobalVariable } from "./GlobalVariable"
 
 /**
-* A study analyzes the relationship between a predictor variable like gluten-intake and an outcome of interest such as overall mood.
-*/
+ * A study analyzes the relationship between a predictor variable like gluten-intake and an outcome of interest such as overall mood.
+ */
 export class Study {
-    /**
-    * Ex: population, cohort, or individual
-    */
-    'type': string;
-    /**
-    * The user id of the principal investigator or subject if an individual studies
-    */
-    'userId'?: number;
-    /**
-    * ID of the cohort study which is necessary to allow participants to join
-    */
-    'id'?: string;
-    'causeVariable'?: GlobalVariable;
-    /**
-    * Ex: Sleep Quality
-    */
-    'causeVariableName'?: string;
-    'studyCharts'?: StudyCharts;
-    'effectVariable'?: GlobalVariable;
-    /**
-    * Ex: Overall Mood
-    */
-    'effectVariableName'?: string;
-    'participantInstructions'?: ParticipantInstruction;
-    'statistics'?: Correlation;
-    'studyCard'?: Card;
-    'studyHtml'?: StudyHtml;
-    'studyImages'?: StudyImages;
-    'studyLinks'?: StudyLinks;
-    'studySharing'?: StudySharing;
-    'studyText'?: StudyText;
-    'studyVotes'?: StudyVotes;
-    /**
-    * True if you are sharing your data with this study
-    */
-    'joined'?: boolean;
+  /**
+   * Ex: population, cohort, or individual
+   */
+  "type": string
+  /**
+   * The user id of the principal investigator or subject if an individual studies
+   */
+  "userId"?: number
+  /**
+   * ID of the cohort study which is necessary to allow participants to join
+   */
+  "id"?: string
+  "causeVariable"?: GlobalVariable
+  /**
+   * Ex: Sleep Quality
+   */
+  "causeVariableName"?: string
+  "studyCharts"?: StudyCharts
+  "effectVariable"?: GlobalVariable
+  /**
+   * Ex: Overall Mood
+   */
+  "effectVariableName"?: string
+  "participantInstructions"?: ParticipantInstruction
+  "statistics"?: Correlation
+  "studyCard"?: Card
+  "studyHtml"?: StudyHtml
+  "studyImages"?: StudyImages
+  "studyLinks"?: StudyLinks
+  "studySharing"?: StudySharing
+  "studyText"?: StudyText
+  "studyVotes"?: StudyVotes
+  /**
+   * True if you are sharing your data with this study
+   */
+  "joined"?: boolean
 
-    static readonly discriminator: string | undefined = undefined;
+  static readonly discriminator: string | undefined = undefined
 
-    static readonly attributeTypeMap: Array<{name: string, baseName: string, type: string, format: string}> = [
-        {
-            "name": "type",
-            "baseName": "type",
-            "type": "string",
-            "format": ""
-        },
-        {
-            "name": "userId",
-            "baseName": "userId",
-            "type": "number",
-            "format": "int32"
-        },
-        {
-            "name": "id",
-            "baseName": "id",
-            "type": "string",
-            "format": ""
-        },
-        {
-            "name": "causeVariable",
-            "baseName": "causeVariable",
-            "type": "Variable",
-            "format": ""
-        },
-        {
-            "name": "causeVariableName",
-            "baseName": "causeVariableName",
-            "type": "string",
-            "format": ""
-        },
-        {
-            "name": "studyCharts",
-            "baseName": "studyCharts",
-            "type": "StudyCharts",
-            "format": ""
-        },
-        {
-            "name": "effectVariable",
-            "baseName": "effectVariable",
-            "type": "Variable",
-            "format": ""
-        },
-        {
-            "name": "effectVariableName",
-            "baseName": "effectVariableName",
-            "type": "string",
-            "format": ""
-        },
-        {
-            "name": "participantInstructions",
-            "baseName": "participantInstructions",
-            "type": "ParticipantInstruction",
-            "format": ""
-        },
-        {
-            "name": "statistics",
-            "baseName": "statistics",
-            "type": "Correlation",
-            "format": ""
-        },
-        {
-            "name": "studyCard",
-            "baseName": "studyCard",
-            "type": "Card",
-            "format": ""
-        },
-        {
-            "name": "studyHtml",
-            "baseName": "studyHtml",
-            "type": "StudyHtml",
-            "format": ""
-        },
-        {
-            "name": "studyImages",
-            "baseName": "studyImages",
-            "type": "StudyImages",
-            "format": ""
-        },
-        {
-            "name": "studyLinks",
-            "baseName": "studyLinks",
-            "type": "StudyLinks",
-            "format": ""
-        },
-        {
-            "name": "studySharing",
-            "baseName": "studySharing",
-            "type": "StudySharing",
-            "format": ""
-        },
-        {
-            "name": "studyText",
-            "baseName": "studyText",
-            "type": "StudyText",
-            "format": ""
-        },
-        {
-            "name": "studyVotes",
-            "baseName": "studyVotes",
-            "type": "StudyVotes",
-            "format": ""
-        },
-        {
-            "name": "joined",
-            "baseName": "joined",
-            "type": "boolean",
-            "format": ""
-        }    ];
+  static readonly attributeTypeMap: Array<{
+    name: string
+    baseName: string
+    type: string
+    format: string
+  }> = [
+    {
+      name: "type",
+      baseName: "type",
+      type: "string",
+      format: "",
+    },
+    {
+      name: "userId",
+      baseName: "userId",
+      type: "number",
+      format: "int32",
+    },
+    {
+      name: "id",
+      baseName: "id",
+      type: "string",
+      format: "",
+    },
+    {
+      name: "causeVariable",
+      baseName: "causeVariable",
+      type: "Variable",
+      format: "",
+    },
+    {
+      name: "causeVariableName",
+      baseName: "causeVariableName",
+      type: "string",
+      format: "",
+    },
+    {
+      name: "studyCharts",
+      baseName: "studyCharts",
+      type: "StudyCharts",
+      format: "",
+    },
+    {
+      name: "effectVariable",
+      baseName: "effectVariable",
+      type: "Variable",
+      format: "",
+    },
+    {
+      name: "effectVariableName",
+      baseName: "effectVariableName",
+      type: "string",
+      format: "",
+    },
+    {
+      name: "participantInstructions",
+      baseName: "participantInstructions",
+      type: "ParticipantInstruction",
+      format: "",
+    },
+    {
+      name: "statistics",
+      baseName: "statistics",
+      type: "Correlation",
+      format: "",
+    },
+    {
+      name: "studyCard",
+      baseName: "studyCard",
+      type: "Card",
+      format: "",
+    },
+    {
+      name: "studyHtml",
+      baseName: "studyHtml",
+      type: "StudyHtml",
+      format: "",
+    },
+    {
+      name: "studyImages",
+      baseName: "studyImages",
+      type: "StudyImages",
+      format: "",
+    },
+    {
+      name: "studyLinks",
+      baseName: "studyLinks",
+      type: "StudyLinks",
+      format: "",
+    },
+    {
+      name: "studySharing",
+      baseName: "studySharing",
+      type: "StudySharing",
+      format: "",
+    },
+    {
+      name: "studyText",
+      baseName: "studyText",
+      type: "StudyText",
+      format: "",
+    },
+    {
+      name: "studyVotes",
+      baseName: "studyVotes",
+      type: "StudyVotes",
+      format: "",
+    },
+    {
+      name: "joined",
+      baseName: "joined",
+      type: "boolean",
+      format: "",
+    },
+  ]
 
-    static getAttributeTypeMap() {
-        return Study.attributeTypeMap;
-    }
+  static getAttributeTypeMap() {
+    return Study.attributeTypeMap
+  }
 
-    public constructor() {
-    }
+  public constructor() {}
 }
-

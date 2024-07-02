@@ -10,49 +10,51 @@
  * Do not edit the class manually.
  */
 
-
-
 export class UserTag {
-    /**
-    * Number by which we multiply the tagged variable value to obtain the tag variable (ingredient) value
-    */
-    'conversionFactor': number;
-    /**
-    * This is the id of the variable being tagged with an ingredient or something.
-    */
-    'taggedVariableId': number;
-    /**
-    * This is the id of the ingredient variable whose value is determined based on the value of the tagged variable.
-    */
-    'tagVariableId': number;
+  /**
+   * Number by which we multiply the tagged variable value to obtain the tag variable (ingredient) value
+   */
+  "conversionFactor": number
+  /**
+   * This is the id of the variable being tagged with an ingredient or something.
+   */
+  "taggedVariableId": number
+  /**
+   * This is the id of the ingredient variable whose value is determined based on the value of the tagged variable.
+   */
+  "tagVariableId": number
 
-    static readonly discriminator: string | undefined = undefined;
+  static readonly discriminator: string | undefined = undefined
 
-    static readonly attributeTypeMap: Array<{name: string, baseName: string, type: string, format: string}> = [
-        {
-            "name": "conversionFactor",
-            "baseName": "conversionFactor",
-            "type": "number",
-            "format": ""
-        },
-        {
-            "name": "taggedVariableId",
-            "baseName": "taggedVariableId",
-            "type": "number",
-            "format": ""
-        },
-        {
-            "name": "tagVariableId",
-            "baseName": "tagVariableId",
-            "type": "number",
-            "format": ""
-        }    ];
+  static readonly attributeTypeMap: Array<{
+    name: string
+    baseName: string
+    type: string
+    format: string
+  }> = [
+    {
+      name: "conversionFactor",
+      baseName: "conversionFactor",
+      type: "number",
+      format: "",
+    },
+    {
+      name: "taggedVariableId",
+      baseName: "taggedVariableId",
+      type: "number",
+      format: "",
+    },
+    {
+      name: "tagVariableId",
+      baseName: "tagVariableId",
+      type: "number",
+      format: "",
+    },
+  ]
 
-    static getAttributeTypeMap() {
-        return UserTag.attributeTypeMap;
-    }
+  static getAttributeTypeMap() {
+    return UserTag.attributeTypeMap
+  }
 
-    public constructor() {
-    }
+  public constructor() {}
 }
-

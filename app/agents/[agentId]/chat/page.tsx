@@ -1,11 +1,11 @@
 import { Metadata } from "next"
+import { notFound } from "next/navigation"
 
 import { getAgent } from "@/lib/api/agents"
 import { AI } from "@/lib/chat/actions"
 import { nanoid } from "@/lib/utils"
 import Chat from "@/components/Chat"
 import { getMissingKeys } from "@/app/actions"
-import { notFound } from "next/navigation"
 
 interface AgentPageProps {
   params: { agentId: string }
@@ -26,11 +26,11 @@ export default async function AgentChatPage({ params }: AgentPageProps) {
   const missingKeys = await getMissingKeys()
   const id = nanoid()
   const agent = await getAgent(params.agentId)
-  if(!agent){
-    return notFound();
+  if (!agent) {
+    return notFound()
   }
   return (
-    <AI initialAIState={{ chatId: id, messages: [] ,agent:agent}}>
+    <AI initialAIState={{ chatId: id, messages: [], agent: agent }}>
       <Chat id={id} missingKeys={missingKeys} agentData={agent} />
     </AI>
   )

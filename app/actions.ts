@@ -22,7 +22,7 @@ export async function getChat(
     },
     include: {
       messages: true,
-      agent:true,
+      agent: true,
     },
   })
 
