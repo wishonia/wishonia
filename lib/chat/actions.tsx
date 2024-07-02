@@ -33,9 +33,10 @@ export type AIState = {
     id:string,
     name:string,
     userId?:string,
-    prompt?:string,
-    conversationStarters?:string[]
-  }
+    prompt?:string|null,
+    conversationStarters?:string[]|null,
+    avatar?:string|null
+  }|null
 }
 
 export type UIState = {

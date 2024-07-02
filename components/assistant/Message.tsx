@@ -16,7 +16,7 @@ import { CodeBlock } from "../ui/code-block"
 import { Skeleton } from "../ui/skeleton"
 import { Spinner } from "./Spinner"
 
-export function SpinnerMessage({ avatar }: { avatar?: string }) {
+export function SpinnerMessage({ avatar }: { avatar?: string|null }) {
   return (
     <div className="group relative flex items-start md:-ml-12">
       <div
@@ -40,7 +40,7 @@ export function BotMessage({
   content: string | StreamableValue<string>
   className?: string
   agentName?: string
-  avatar?: string
+  avatar?: string | null
 }) {
   const { rawContent, isLoading } = useStreamableText(content)
 
