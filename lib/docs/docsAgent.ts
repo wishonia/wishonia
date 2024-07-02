@@ -111,13 +111,7 @@ async function getPaths(pageSections: { page_id: any }[]) {
   return paths
 }
 
-export async function askSupabase(query: string, streaming: boolean) {
-  await moderateContent(query)
-  const embedding = await createEmbedding(query)
-  const pageSections = await matchPageSections(embedding)
-  const paths = await getPaths(pageSections)
-  const contextText = extractContextText(pageSections)
-
+function getPromptWithContext(contextText: string, query: string) {
   const prompt = codeBlock`
     ${oneLine`
       You are the king of Wishonia! Given the following sections from the Wishonia
@@ -137,6 +131,26 @@ export async function askSupabase(query: string, streaming: boolean) {
 
     Answer as markdown (including related code snippets if available):
   `
+  return prompt
+}
+
+export async function askSupabase(query: string, streaming: boolean) {
+  let paths: string[] = []
+  let contextText = ""
+  let prompt = `You are the king of Wishonia an simulated world designed to maximize universal health 
+    and happiness using AI agents governed by Wishocracy a system of collective intelligence! `
+  if (process.env.SUPABASE_URL) {
+    await moderateContent(query)
+    const embedding = await createEmbedding(query)
+    const pageSections = await matchPageSections(embedding)
+    paths = await getPaths(pageSections)
+    contextText = extractContextText(pageSections)
+    const prompt = getPromptWithContext(contextText, query)
+  } else {
+    console.error(
+      `process.env.SUPABASE_URL is not set for the current environment. Skipping moderation and context extraction.`
+    )
+  }
 
   const chatMessage: ChatCompletionRequestMessage = {
     role: "user",
