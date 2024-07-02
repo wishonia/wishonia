@@ -1,7 +1,7 @@
 'use client';
 
 import React, { useState, useEffect } from 'react';
-import { BarChart, Bar, XAxis, YAxis, Tooltip, Legend, ResponsiveContainer } from 'recharts';
+import { BarChart, Bar, XAxis, YAxis, Tooltip, Legend, ResponsiveContainer, Cell } from 'recharts';
 import { HelpCircle } from 'lucide-react';
 
 interface DrugImpactProfile {
@@ -146,7 +146,11 @@ const DrugImpactSimulator: React.FC = () => {
                             <YAxis />
                             <Tooltip />
                             <Legend />
-                            <Bar dataKey="value" fill={(entry) => entry.value > 0 ? '#4CAF50' : '#FF5252'} />
+                            <Bar dataKey="value">
+                                {chartData.map((entry, index) => (
+                                    <Cell key={`cell-${index}`} fill={entry.value > 0 ? '#4CAF50' : '#FF5252'} />
+                                ))}
+                            </Bar>
                         </BarChart>
                     </ResponsiveContainer>
                 </div>
