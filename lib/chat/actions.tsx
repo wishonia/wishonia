@@ -28,7 +28,15 @@ export type AIState = {
     content: string
     id: string
     name?: string
-  }[]
+  }[],
+  agent?:{
+    id:string,
+    name:string,
+    userId?:string,
+    prompt?:string|null,
+    conversationStarters?:string[]|null,
+    avatar?:string|null
+  }|null
 }
 
 export type UIState = {
@@ -63,8 +71,7 @@ export const AI = createAI<AIState, UIState>({
     "use server"
 
     const user = await getCurrentUser()
-    const { chatId, messages } = state
-
+    const { chatId, messages ,agent } = state
     if (user) {
       //debugger
 
@@ -80,6 +87,7 @@ export const AI = createAI<AIState, UIState>({
         createdAt: createdAt,
         messages: messages,
         path: path,
+        agent:agent,
       }
 
       await saveChat(savedChat)
@@ -128,7 +136,7 @@ export const getUIStateFromAIState = async (aiState: Chat) => {
         ) : m.role === "user" ? (
           <UserMessage>{m.content}</UserMessage>
         ) : (
-          <BotMessage agentName={m.name} content={m.content} />
+          <BotMessage avatar={aiState.agent?.avatar} agentName={aiState.agent?.name||m.name} content={m.content} />
         ),
     }))
 }
