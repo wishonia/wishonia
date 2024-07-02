@@ -22,6 +22,7 @@ export async function getChat(
     },
     include: {
       messages: true,
+      agent:true,
     },
   })
 
@@ -55,6 +56,7 @@ export async function getChats(userId?: string | null): Promise<GetChatResult> {
       },
       include: {
         messages: true, // Include related messages
+        agent: true, // Include related messages
       },
     })
 
