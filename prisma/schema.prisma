@@ -1030,3 +1030,44 @@ enum MessageRole {
   data
   tool
 }
+
+model DrugClassificationProfile {
+  id                       Int    @id @default(autoincrement())
+  name                     String @unique
+  efficacyRate             Float // Percentage (0-100)
+  adverseEventRate         Float // Percentage (0-100)
+  severeAdverseEventRate   Float // Percentage (0-100)
+  drugInteractionIndex     Float // Scale (0-10)
+  therapeuticIndex         Float // Ratio
+  abusePotentialScore      Float // Scale (0-100)
+  withdrawalSeverityIndex  Float // Scale (0-10)
+  overdoseRiskFactor       Float // Ratio
+  misuseProbability        Float // Percentage (0-100)
+  selfAdministrationSafety Float // Scale (0-10)
+  accessBenefitRatio       Float // Ratio
+  societalCostIndex        Float // Scale (0-100)
+
+  // Calculated fields (you may choose to store these or calculate on-the-fly)
+  otcScore                      Float?
+  prescriptionScore             Float?
+  schedulingScore               Float?
+  accessRestrictionBenefitScore Float?
+  finalClassificationScore      Float?
+
+  // Enum field for final classification
+  classification DrugClassification?
+
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+}
+
+enum DrugClassification {
+  OTC
+  PRESCRIPTION_ONLY
+  SCHEDULE_I
+  SCHEDULE_II
+  SCHEDULE_III
+  SCHEDULE_IV
+  SCHEDULE_V
+  UNSCHEDULED
+}

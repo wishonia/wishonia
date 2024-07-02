@@ -405,7 +405,7 @@ importers:
         specifier: ^15.5.0
         version: 15.5.0(react@18.2.0)
       recharts:
-        specifier: ^2.12.0
+        specifier: ^2.12.7
         version: 2.12.7(react-dom@18.2.0(react@18.2.0))(react@18.2.0)
       rehype-katex:
         specifier: ^7.0.0
