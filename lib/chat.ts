@@ -28,6 +28,7 @@ async function createNewChat(chat: Chat) {
         userId: chat.userId,
         createdAt: chat.createdAt,
         path: chat.path,
+        agentId:chat.agent?.id
       },
     })
     await createChatMessages(chat.messages, createdChat.id)
