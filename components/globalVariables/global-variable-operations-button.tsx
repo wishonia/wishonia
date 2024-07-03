@@ -4,6 +4,7 @@ import * as React from "react"
 import Link from "next/link"
 import { useRouter } from "next/navigation"
 
+import { GlobalVariable } from "@/types/models/GlobalVariable"
 import { Button } from "@/components/ui/button"
 import {
   Credenza,
@@ -23,9 +24,7 @@ import {
 } from "@/components/ui/dropdown-menu"
 import { toast } from "@/components/ui/use-toast"
 import { Icons } from "@/components/icons"
-
 import { MeasurementsAddForm } from "@/components/measurements/measurements-add-form"
-import { GlobalVariable as GlobalVariable } from "@/types/models/GlobalVariable";
 
 async function deleteGlobalVariable(globalVariableId: number) {
   const response = await fetch(`/api/globalVariables/${globalVariableId}`, {
@@ -48,7 +47,7 @@ async function deleteGlobalVariable(globalVariableId: number) {
 }
 
 interface GlobalVariableOperationsProps {
-  globalVariable: GlobalVariable;
+  globalVariable: GlobalVariable
   children?: React.ReactNode
 }
 
@@ -59,7 +58,8 @@ export function GlobalVariableOperationsButton({
   const router = useRouter()
   const [showDeleteAlert, setShowDeleteAlert] = React.useState<boolean>(false)
   const [isDeleteLoading, setIsDeleteLoading] = React.useState<boolean>(false)
-  const [showMeasurementAlert, setShowMeasurementAlert] = React.useState<boolean>(false)
+  const [showMeasurementAlert, setShowMeasurementAlert] =
+    React.useState<boolean>(false)
   const [showDropDown, setShowDropDown] = React.useState<boolean>(false)
 
   return (
@@ -111,7 +111,10 @@ export function GlobalVariableOperationsButton({
       </DropdownMenu>
 
       {/* Add Alert */}
-      <Credenza open={showMeasurementAlert} onOpenChange={setShowMeasurementAlert}>
+      <Credenza
+        open={showMeasurementAlert}
+        onOpenChange={setShowMeasurementAlert}
+      >
         <CredenzaContent>
           <CredenzaHeader>
             <CredenzaTitle>Record a Measurement</CredenzaTitle>

@@ -10,47 +10,50 @@
  * Do not edit the class manually.
  */
 
-import { Button } from '../models/Button';
-
+import { Button } from "../models/Button"
 
 export class ExplanationStartTracking {
-    'button': Button;
-    /**
-    * Ex: The more data I have the more accurate your results will be so track regularly!
-    */
-    'description': string;
-    /**
-    * Ex: Improve Accuracy
-    */
-    'title': string;
+  "button": Button
+  /**
+   * Ex: The more data I have the more accurate your results will be so track regularly!
+   */
+  "description": string
+  /**
+   * Ex: Improve Accuracy
+   */
+  "title": string
 
-    static readonly discriminator: string | undefined = undefined;
+  static readonly discriminator: string | undefined = undefined
 
-    static readonly attributeTypeMap: Array<{name: string, baseName: string, type: string, format: string}> = [
-        {
-            "name": "button",
-            "baseName": "button",
-            "type": "Button",
-            "format": ""
-        },
-        {
-            "name": "description",
-            "baseName": "description",
-            "type": "string",
-            "format": ""
-        },
-        {
-            "name": "title",
-            "baseName": "title",
-            "type": "string",
-            "format": ""
-        }    ];
+  static readonly attributeTypeMap: Array<{
+    name: string
+    baseName: string
+    type: string
+    format: string
+  }> = [
+    {
+      name: "button",
+      baseName: "button",
+      type: "Button",
+      format: "",
+    },
+    {
+      name: "description",
+      baseName: "description",
+      type: "string",
+      format: "",
+    },
+    {
+      name: "title",
+      baseName: "title",
+      type: "string",
+      format: "",
+    },
+  ]
 
-    static getAttributeTypeMap() {
-        return ExplanationStartTracking.attributeTypeMap;
-    }
+  static getAttributeTypeMap() {
+    return ExplanationStartTracking.attributeTypeMap
+  }
 
-    public constructor() {
-    }
+  public constructor() {}
 }
-

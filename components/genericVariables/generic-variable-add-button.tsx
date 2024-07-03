@@ -8,7 +8,9 @@ import { Icons } from "@/components/icons"
 
 interface GlobalVariableAddButtonProps extends ButtonProps {}
 
-export function GenericVariableAddButton({ ...props }: GlobalVariableAddButtonProps) {
+export function GenericVariableAddButton({
+  ...props
+}: GlobalVariableAddButtonProps) {
   const router = useRouter()
   async function onClick() {
     router.push(`/dashboard/globalVariables`)

@@ -10,302 +10,304 @@
  * Do not edit the class manually.
  */
 
-
-
 /**
-* The main thing you need here is the clientUserId that will be needed to fetch the user later.
-*/
+ * The main thing you need here is the clientUserId that will be needed to fetch the user later.
+ */
 export class UserPostBody {
-    /**
-    * The user id from your system so you can match the user in our system to the user in your system.
-    */
-    'clientUserId'?: string;
-    /**
-    * Whether to combine notifications for multiple variables into a single notification
-    */
-    'combineNotifications'?: boolean;
-    /**
-    * Your bio will be displayed on your published studies
-    */
-    'description'?: string;
-    /**
-    * User display name
-    */
-    'displayName'?: string;
-    /**
-    * Earliest time user should get notifications. Ex: 05:00:00
-    */
-    'earliestReminderTime'?: string;
-    /**
-    * User email
-    */
-    'email'?: string;
-    /**
-    * Ex: Mike
-    */
-    'firstName'?: string;
-    /**
-    * Whether the user should get preview builds of their custom app
-    */
-    'getPreviewBuilds'?: boolean;
-    /**
-    * Whether the user has the Android app installed
-    */
-    'hasAndroidApp'?: boolean;
-    /**
-    * Whether the user has the Chrome extension installed
-    */
-    'hasChromeExtension'?: boolean;
-    /**
-    * Whether the user has the iOS app installed
-    */
-    'hasIosApp'?: boolean;
-    /**
-    * Ex: Date the user last logged in
-    */
-    'lastActive'?: string;
-    /**
-    * Ex: Sinn
-    */
-    'lastName'?: string;
-    /**
-    * Latest time user should get notifications. Ex: 23:00:00
-    */
-    'latestReminderTime'?: string;
-    /**
-    * User login name
-    */
-    'loginName'?: string;
-    /**
-    * Ex: PASSWORD
-    */
-    'password'?: string;
-    /**
-    * Ex: +1-618-555-0002
-    */
-    'phoneNumber'?: string;
-    /**
-    * Ex: 1234
-    */
-    'phoneVerificationCode'?: string;
-    /**
-    * A good primary outcome variable is something that you want to improve and that changes inexplicably. For instance, if you have anxiety, back pain or arthritis which is worse on some days than others, these would be good candidates for primary outcome variables.  Recording their severity and potential factors will help you identify hidden factors exacerbating or improving them.
-    */
-    'primaryOutcomeVariableId'?: number;
-    /**
-    * A good primary outcome variable is something that you want to improve and that changes inexplicably. For instance, if you have anxiety, back pain or arthritis which is worse on some days than others, these would be good candidates for primary outcome variables.  Recording their severity and potential factors will help you identify hidden factors exacerbating or improving them.
-    */
-    'primaryOutcomeVariableName'?: string;
-    /**
-    * Whether the user should get push notifications
-    */
-    'pushNotificationsEnabled'?: boolean;
-    /**
-    * Whether the user should get weekly emails on the factors most predictive of their primary outcome to improve
-    */
-    'sendPredictorEmails'?: boolean;
-    /**
-    * Whether the user should get emails when they have tracking reminders
-    */
-    'sendReminderNotificationEmails'?: boolean;
-    /**
-    * Share all studies, charts, and measurement data with all other users
-    */
-    'shareAllData'?: boolean;
-    /**
-    * Whether the user should get SMS notifications
-    */
-    'smsNotificationsEnabled'?: boolean;
-    /**
-    * Minutes offset from UTC time
-    */
-    'timeZoneOffset'?: number;
-    /**
-    * Whether the user wants to automatically track their location with measurements
-    */
-    'trackLocation'?: boolean;
-    /**
-    * The URL the user wants to associate with their account
-    */
-    'userUrl'?: string;
+  /**
+   * The user id from your system so you can match the user in our system to the user in your system.
+   */
+  "clientUserId"?: string
+  /**
+   * Whether to combine notifications for multiple variables into a single notification
+   */
+  "combineNotifications"?: boolean
+  /**
+   * Your bio will be displayed on your published studies
+   */
+  "description"?: string
+  /**
+   * User display name
+   */
+  "displayName"?: string
+  /**
+   * Earliest time user should get notifications. Ex: 05:00:00
+   */
+  "earliestReminderTime"?: string
+  /**
+   * User email
+   */
+  "email"?: string
+  /**
+   * Ex: Mike
+   */
+  "firstName"?: string
+  /**
+   * Whether the user should get preview builds of their custom app
+   */
+  "getPreviewBuilds"?: boolean
+  /**
+   * Whether the user has the Android app installed
+   */
+  "hasAndroidApp"?: boolean
+  /**
+   * Whether the user has the Chrome extension installed
+   */
+  "hasChromeExtension"?: boolean
+  /**
+   * Whether the user has the iOS app installed
+   */
+  "hasIosApp"?: boolean
+  /**
+   * Ex: Date the user last logged in
+   */
+  "lastActive"?: string
+  /**
+   * Ex: Sinn
+   */
+  "lastName"?: string
+  /**
+   * Latest time user should get notifications. Ex: 23:00:00
+   */
+  "latestReminderTime"?: string
+  /**
+   * User login name
+   */
+  "loginName"?: string
+  /**
+   * Ex: PASSWORD
+   */
+  "password"?: string
+  /**
+   * Ex: +1-618-555-0002
+   */
+  "phoneNumber"?: string
+  /**
+   * Ex: 1234
+   */
+  "phoneVerificationCode"?: string
+  /**
+   * A good primary outcome variable is something that you want to improve and that changes inexplicably. For instance, if you have anxiety, back pain or arthritis which is worse on some days than others, these would be good candidates for primary outcome variables.  Recording their severity and potential factors will help you identify hidden factors exacerbating or improving them.
+   */
+  "primaryOutcomeVariableId"?: number
+  /**
+   * A good primary outcome variable is something that you want to improve and that changes inexplicably. For instance, if you have anxiety, back pain or arthritis which is worse on some days than others, these would be good candidates for primary outcome variables.  Recording their severity and potential factors will help you identify hidden factors exacerbating or improving them.
+   */
+  "primaryOutcomeVariableName"?: string
+  /**
+   * Whether the user should get push notifications
+   */
+  "pushNotificationsEnabled"?: boolean
+  /**
+   * Whether the user should get weekly emails on the factors most predictive of their primary outcome to improve
+   */
+  "sendPredictorEmails"?: boolean
+  /**
+   * Whether the user should get emails when they have tracking reminders
+   */
+  "sendReminderNotificationEmails"?: boolean
+  /**
+   * Share all studies, charts, and measurement data with all other users
+   */
+  "shareAllData"?: boolean
+  /**
+   * Whether the user should get SMS notifications
+   */
+  "smsNotificationsEnabled"?: boolean
+  /**
+   * Minutes offset from UTC time
+   */
+  "timeZoneOffset"?: number
+  /**
+   * Whether the user wants to automatically track their location with measurements
+   */
+  "trackLocation"?: boolean
+  /**
+   * The URL the user wants to associate with their account
+   */
+  "userUrl"?: string
 
-    static readonly discriminator: string | undefined = undefined;
+  static readonly discriminator: string | undefined = undefined
 
-    static readonly attributeTypeMap: Array<{name: string, baseName: string, type: string, format: string}> = [
-        {
-            "name": "clientUserId",
-            "baseName": "clientUserId",
-            "type": "string",
-            "format": ""
-        },
-        {
-            "name": "combineNotifications",
-            "baseName": "combineNotifications",
-            "type": "boolean",
-            "format": ""
-        },
-        {
-            "name": "description",
-            "baseName": "description",
-            "type": "string",
-            "format": ""
-        },
-        {
-            "name": "displayName",
-            "baseName": "displayName",
-            "type": "string",
-            "format": ""
-        },
-        {
-            "name": "earliestReminderTime",
-            "baseName": "earliestReminderTime",
-            "type": "string",
-            "format": ""
-        },
-        {
-            "name": "email",
-            "baseName": "email",
-            "type": "string",
-            "format": ""
-        },
-        {
-            "name": "firstName",
-            "baseName": "firstName",
-            "type": "string",
-            "format": ""
-        },
-        {
-            "name": "getPreviewBuilds",
-            "baseName": "getPreviewBuilds",
-            "type": "boolean",
-            "format": ""
-        },
-        {
-            "name": "hasAndroidApp",
-            "baseName": "hasAndroidApp",
-            "type": "boolean",
-            "format": ""
-        },
-        {
-            "name": "hasChromeExtension",
-            "baseName": "hasChromeExtension",
-            "type": "boolean",
-            "format": ""
-        },
-        {
-            "name": "hasIosApp",
-            "baseName": "hasIosApp",
-            "type": "boolean",
-            "format": ""
-        },
-        {
-            "name": "lastActive",
-            "baseName": "lastActive",
-            "type": "string",
-            "format": ""
-        },
-        {
-            "name": "lastName",
-            "baseName": "lastName",
-            "type": "string",
-            "format": ""
-        },
-        {
-            "name": "latestReminderTime",
-            "baseName": "latestReminderTime",
-            "type": "string",
-            "format": ""
-        },
-        {
-            "name": "loginName",
-            "baseName": "loginName",
-            "type": "string",
-            "format": ""
-        },
-        {
-            "name": "password",
-            "baseName": "password",
-            "type": "string",
-            "format": ""
-        },
-        {
-            "name": "phoneNumber",
-            "baseName": "phoneNumber",
-            "type": "string",
-            "format": ""
-        },
-        {
-            "name": "phoneVerificationCode",
-            "baseName": "phoneVerificationCode",
-            "type": "string",
-            "format": ""
-        },
-        {
-            "name": "primaryOutcomeVariableId",
-            "baseName": "primaryOutcomeVariableId",
-            "type": "number",
-            "format": ""
-        },
-        {
-            "name": "primaryOutcomeVariableName",
-            "baseName": "primaryOutcomeVariableName",
-            "type": "string",
-            "format": ""
-        },
-        {
-            "name": "pushNotificationsEnabled",
-            "baseName": "pushNotificationsEnabled",
-            "type": "boolean",
-            "format": ""
-        },
-        {
-            "name": "sendPredictorEmails",
-            "baseName": "sendPredictorEmails",
-            "type": "boolean",
-            "format": ""
-        },
-        {
-            "name": "sendReminderNotificationEmails",
-            "baseName": "sendReminderNotificationEmails",
-            "type": "boolean",
-            "format": ""
-        },
-        {
-            "name": "shareAllData",
-            "baseName": "shareAllData",
-            "type": "boolean",
-            "format": ""
-        },
-        {
-            "name": "smsNotificationsEnabled",
-            "baseName": "smsNotificationsEnabled",
-            "type": "boolean",
-            "format": ""
-        },
-        {
-            "name": "timeZoneOffset",
-            "baseName": "timeZoneOffset",
-            "type": "number",
-            "format": ""
-        },
-        {
-            "name": "trackLocation",
-            "baseName": "trackLocation",
-            "type": "boolean",
-            "format": ""
-        },
-        {
-            "name": "userUrl",
-            "baseName": "userUrl",
-            "type": "string",
-            "format": ""
-        }    ];
+  static readonly attributeTypeMap: Array<{
+    name: string
+    baseName: string
+    type: string
+    format: string
+  }> = [
+    {
+      name: "clientUserId",
+      baseName: "clientUserId",
+      type: "string",
+      format: "",
+    },
+    {
+      name: "combineNotifications",
+      baseName: "combineNotifications",
+      type: "boolean",
+      format: "",
+    },
+    {
+      name: "description",
+      baseName: "description",
+      type: "string",
+      format: "",
+    },
+    {
+      name: "displayName",
+      baseName: "displayName",
+      type: "string",
+      format: "",
+    },
+    {
+      name: "earliestReminderTime",
+      baseName: "earliestReminderTime",
+      type: "string",
+      format: "",
+    },
+    {
+      name: "email",
+      baseName: "email",
+      type: "string",
+      format: "",
+    },
+    {
+      name: "firstName",
+      baseName: "firstName",
+      type: "string",
+      format: "",
+    },
+    {
+      name: "getPreviewBuilds",
+      baseName: "getPreviewBuilds",
+      type: "boolean",
+      format: "",
+    },
+    {
+      name: "hasAndroidApp",
+      baseName: "hasAndroidApp",
+      type: "boolean",
+      format: "",
+    },
+    {
+      name: "hasChromeExtension",
+      baseName: "hasChromeExtension",
+      type: "boolean",
+      format: "",
+    },
+    {
+      name: "hasIosApp",
+      baseName: "hasIosApp",
+      type: "boolean",
+      format: "",
+    },
+    {
+      name: "lastActive",
+      baseName: "lastActive",
+      type: "string",
+      format: "",
+    },
+    {
+      name: "lastName",
+      baseName: "lastName",
+      type: "string",
+      format: "",
+    },
+    {
+      name: "latestReminderTime",
+      baseName: "latestReminderTime",
+      type: "string",
+      format: "",
+    },
+    {
+      name: "loginName",
+      baseName: "loginName",
+      type: "string",
+      format: "",
+    },
+    {
+      name: "password",
+      baseName: "password",
+      type: "string",
+      format: "",
+    },
+    {
+      name: "phoneNumber",
+      baseName: "phoneNumber",
+      type: "string",
+      format: "",
+    },
+    {
+      name: "phoneVerificationCode",
+      baseName: "phoneVerificationCode",
+      type: "string",
+      format: "",
+    },
+    {
+      name: "primaryOutcomeVariableId",
+      baseName: "primaryOutcomeVariableId",
+      type: "number",
+      format: "",
+    },
+    {
+      name: "primaryOutcomeVariableName",
+      baseName: "primaryOutcomeVariableName",
+      type: "string",
+      format: "",
+    },
+    {
+      name: "pushNotificationsEnabled",
+      baseName: "pushNotificationsEnabled",
+      type: "boolean",
+      format: "",
+    },
+    {
+      name: "sendPredictorEmails",
+      baseName: "sendPredictorEmails",
+      type: "boolean",
+      format: "",
+    },
+    {
+      name: "sendReminderNotificationEmails",
+      baseName: "sendReminderNotificationEmails",
+      type: "boolean",
+      format: "",
+    },
+    {
+      name: "shareAllData",
+      baseName: "shareAllData",
+      type: "boolean",
+      format: "",
+    },
+    {
+      name: "smsNotificationsEnabled",
+      baseName: "smsNotificationsEnabled",
+      type: "boolean",
+      format: "",
+    },
+    {
+      name: "timeZoneOffset",
+      baseName: "timeZoneOffset",
+      type: "number",
+      format: "",
+    },
+    {
+      name: "trackLocation",
+      baseName: "trackLocation",
+      type: "boolean",
+      format: "",
+    },
+    {
+      name: "userUrl",
+      baseName: "userUrl",
+      type: "string",
+      format: "",
+    },
+  ]
 
-    static getAttributeTypeMap() {
-        return UserPostBody.attributeTypeMap;
-    }
+  static getAttributeTypeMap() {
+    return UserPostBody.attributeTypeMap
+  }
 
-    public constructor() {
-    }
+  public constructor() {}
 }
-

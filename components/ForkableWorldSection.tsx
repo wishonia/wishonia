@@ -1,4 +1,4 @@
-import React from "react"
+import React, { useMemo } from "react"
 import Link from "next/link"
 import { Bot, LucideIcon, Network, Vote } from "lucide-react"
 
@@ -77,55 +77,58 @@ const fdaiVimeoComponent = (
   </>
 )
 
-const features: FeatureCardProps[] = [
-  {
-    Icon: Bot,
-    title: "DIGITAL TWINS",
-    description:
-      "AI agents aligned to your goals, automating tasks and coordinating with 8 billion other digital twins. ",
-    listItems: [
-      // "Trained on your data and preferences",
-      // "Work together to maximize health and happiness",
-      // "Collaborate with other digital twins"
-    ],
-    buttonText: "TRAIN YOUR DIGITAL TWIN",
-    //path: "/dashboard",
-    imageUrl:
-      "/assets/Digital Twin Knowledge Agent brains consuming existing data.jpg",
-  },
-  {
-    Icon: Network,
-    title: "POSITRON AGENTS",
-    description:
-      "Prosocial AI agents representing nonprofits, DAOs, and other institutions working to automate the production of public goods.",
-    // listItems: [
-    //     // "Represent organizations like FDAi",
-    //     // "Automate and crowdsource clinical research",
-    //     // "Maximize universal health and happiness"
-    // ],
-    buttonText: "EXPLORE POSITRON AGENTS",
-    //path: "/positron-nodes"
-    component: fdaiVimeoComponent,
-  },
-  {
-    Icon: Vote,
-    title: "WISHOCRACY",
-    description:
-      "Uses Aggregated Pairwise Preference Allocation (APPA) to " +
-      "optimize scarce resource allocation to maximize universal wish fulfillment.",
-    listItems: [
-      //"A new system of governance based on collective intelligence.  ",
-      //"Aggregated pairwise preference allocation",
-      // "Uses Aggregated Pairwise Preference Allocation (APPA) to optimize scarce resources and maximize universal wish fulfillment.",
-      //"Maximize universal wish fulfillment"
-    ],
-    buttonText: "PARTICIPATE IN WISHOCRACY",
-    //path: "/wishocracy"
-    imageUrl: "/assets/positron-city.jpg",
-  },
-]
-
 const ForkableWorldSection: React.FC = () => {
+  const features = useMemo(
+    () => [
+      {
+        Icon: Bot,
+        title: "DIGITAL TWINS",
+        description:
+          "AI agents aligned to your goals, automating tasks and coordinating with 8 billion other digital twins. ",
+        listItems: [
+          // "Trained on your data and preferences",
+          // "Work together to maximize health and happiness",
+          // "Collaborate with other digital twins"
+        ],
+        buttonText: "TRAIN YOUR DIGITAL TWIN",
+        //path: "/dashboard",
+        imageUrl:
+          "/assets/Digital Twin Knowledge Agent brains consuming existing data.jpg",
+      },
+      {
+        Icon: Network,
+        title: "POSITRON AGENTS",
+        description:
+          "Prosocial AI agents representing nonprofits, DAOs, and other institutions working to automate the production of public goods.",
+        // listItems: [
+        //     // "Represent organizations like FDAi",
+        //     // "Automate and crowdsource clinical research",
+        //     // "Maximize universal health and happiness"
+        // ],
+        buttonText: "EXPLORE POSITRON AGENTS",
+        //path: "/positron-nodes"
+        component: fdaiVimeoComponent,
+      },
+      {
+        Icon: Vote,
+        title: "WISHOCRACY",
+        description:
+          "Uses Aggregated Pairwise Preference Allocation (APPA) to " +
+          "optimize scarce resource allocation to maximize universal wish fulfillment.",
+        listItems: [
+          //"A new system of governance based on collective intelligence.  ",
+          //"Aggregated pairwise preference allocation",
+          // "Uses Aggregated Pairwise Preference Allocation (APPA) to optimize scarce resources and maximize universal wish fulfillment.",
+          //"Maximize universal wish fulfillment"
+        ],
+        buttonText: "PARTICIPATE IN WISHOCRACY",
+        //path: "/wishocracy"
+        imageUrl: "/assets/positron-city.jpg",
+      },
+    ],
+    []
+  )
+
   return (
     <div className="min-h-screen bg-white font-mono text-black">
       <header className="border-b-8 border-black p-8 text-center">

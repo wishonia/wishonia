@@ -6,7 +6,9 @@ import { zodResolver } from "@hookform/resolvers/zod"
 import { useForm } from "react-hook-form"
 import * as z from "zod"
 
+import { GlobalVariable } from "@/types/models/GlobalVariable"
 import { cn } from "@/lib/utils"
+import { globalVariablePatchSchema } from "@/lib/validations/globalVariable"
 import { buttonVariants } from "@/components/ui/button"
 import {
   Card,
@@ -21,10 +23,9 @@ import { Label } from "@/components/ui/label"
 import { Textarea } from "@/components/ui/textarea"
 import { toast } from "@/components/ui/use-toast"
 import { Icons } from "@/components/icons"
-import { GlobalVariable as GlobalVariable } from "@/types/models/GlobalVariable";
-import {globalVariablePatchSchema} from "@/lib/validations/globalVariable";
 
-interface GlobalVariableEditFormProps extends React.HTMLAttributes<HTMLFormElement> {
+interface GlobalVariableEditFormProps
+  extends React.HTMLAttributes<HTMLFormElement> {
   globalVariable: Pick<GlobalVariable, "id" | "name" | "description">
 }
 

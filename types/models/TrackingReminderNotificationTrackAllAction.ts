@@ -10,59 +10,61 @@
  * Do not edit the class manually.
  */
 
-
-
 export class TrackingReminderNotificationTrackAllAction {
-    /**
-    * Ex: trackAll
-    */
-    'action': string;
-    /**
-    * Ex: trackThreeRatingAction
-    */
-    'callback': string;
-    /**
-    * Ex: 3
-    */
-    'modifiedValue': number;
-    /**
-    * Ex: Rate 3/5 for all
-    */
-    'title': string;
+  /**
+   * Ex: trackAll
+   */
+  "action": string
+  /**
+   * Ex: trackThreeRatingAction
+   */
+  "callback": string
+  /**
+   * Ex: 3
+   */
+  "modifiedValue": number
+  /**
+   * Ex: Rate 3/5 for all
+   */
+  "title": string
 
-    static readonly discriminator: string | undefined = undefined;
+  static readonly discriminator: string | undefined = undefined
 
-    static readonly attributeTypeMap: Array<{name: string, baseName: string, type: string, format: string}> = [
-        {
-            "name": "action",
-            "baseName": "action",
-            "type": "string",
-            "format": ""
-        },
-        {
-            "name": "callback",
-            "baseName": "callback",
-            "type": "string",
-            "format": ""
-        },
-        {
-            "name": "modifiedValue",
-            "baseName": "modifiedValue",
-            "type": "number",
-            "format": ""
-        },
-        {
-            "name": "title",
-            "baseName": "title",
-            "type": "string",
-            "format": ""
-        }    ];
+  static readonly attributeTypeMap: Array<{
+    name: string
+    baseName: string
+    type: string
+    format: string
+  }> = [
+    {
+      name: "action",
+      baseName: "action",
+      type: "string",
+      format: "",
+    },
+    {
+      name: "callback",
+      baseName: "callback",
+      type: "string",
+      format: "",
+    },
+    {
+      name: "modifiedValue",
+      baseName: "modifiedValue",
+      type: "number",
+      format: "",
+    },
+    {
+      name: "title",
+      baseName: "title",
+      type: "string",
+      format: "",
+    },
+  ]
 
-    static getAttributeTypeMap() {
-        return TrackingReminderNotificationTrackAllAction.attributeTypeMap;
-    }
+  static getAttributeTypeMap() {
+    return TrackingReminderNotificationTrackAllAction.attributeTypeMap
+  }
 
-    public constructor() {
-    }
+  public constructor() {}
 }
-

@@ -43,15 +43,16 @@ describe("Global Problem Solutions", () => {
   jest.setTimeout(6000000)
   it("Decomposes a GlobalSolution to GlobalTasks", async () => {
     const globalProblemSolution = await prisma.globalProblemSolution.findFirst({
-        where: {
-            globalProblemId: "cancer",
-        },
-        })
-    if(!globalProblemSolution) throw new Error("Global Problem Solution not found")
+      where: {
+        globalProblemId: "cancer",
+      },
+    })
+    if (!globalProblemSolution)
+      throw new Error("Global Problem Solution not found")
     const globalSolution = await prisma.globalSolution.findFirst({
-        where: {
-            id: globalProblemSolution.globalSolutionId,
-        },
+      where: {
+        id: globalProblemSolution.globalSolutionId,
+      },
     })
     if (!globalSolution) throw new Error("Global Solution not found")
     const user = await getOrCreateTestUser()

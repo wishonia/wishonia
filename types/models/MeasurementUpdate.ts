@@ -10,59 +10,61 @@
  * Do not edit the class manually.
  */
 
-
-
 export class MeasurementUpdate {
-    /**
-    * Variable id of the measurement to be updated
-    */
-    'id': number;
-    /**
-    * The new note for the measurement (optional)
-    */
-    'note'?: string;
-    /**
-    * Start Time for the measurement event in UTC ISO 8601 YYYY-MM-DDThh:mm:ss
-    */
-    'startAt'?: string;
-    /**
-    * The new value of for the measurement (optional)
-    */
-    'value'?: number;
+  /**
+   * Variable id of the measurement to be updated
+   */
+  "id": number
+  /**
+   * The new note for the measurement (optional)
+   */
+  "note"?: string
+  /**
+   * Start Time for the measurement event in UTC ISO 8601 YYYY-MM-DDThh:mm:ss
+   */
+  "startAt"?: string
+  /**
+   * The new value of for the measurement (optional)
+   */
+  "value"?: number
 
-    static readonly discriminator: string | undefined = undefined;
+  static readonly discriminator: string | undefined = undefined
 
-    static readonly attributeTypeMap: Array<{name: string, baseName: string, type: string, format: string}> = [
-        {
-            "name": "id",
-            "baseName": "id",
-            "type": "number",
-            "format": ""
-        },
-        {
-            "name": "note",
-            "baseName": "note",
-            "type": "string",
-            "format": ""
-        },
-        {
-            "name": "startAt",
-            "baseName": "startAt",
-            "type": "string",
-            "format": ""
-        },
-        {
-            "name": "value",
-            "baseName": "value",
-            "type": "number",
-            "format": "double"
-        }    ];
+  static readonly attributeTypeMap: Array<{
+    name: string
+    baseName: string
+    type: string
+    format: string
+  }> = [
+    {
+      name: "id",
+      baseName: "id",
+      type: "number",
+      format: "",
+    },
+    {
+      name: "note",
+      baseName: "note",
+      type: "string",
+      format: "",
+    },
+    {
+      name: "startAt",
+      baseName: "startAt",
+      type: "string",
+      format: "",
+    },
+    {
+      name: "value",
+      baseName: "value",
+      type: "number",
+      format: "double",
+    },
+  ]
 
-    static getAttributeTypeMap() {
-        return MeasurementUpdate.attributeTypeMap;
-    }
+  static getAttributeTypeMap() {
+    return MeasurementUpdate.attributeTypeMap
+  }
 
-    public constructor() {
-    }
+  public constructor() {}
 }
-

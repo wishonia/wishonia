@@ -2,25 +2,28 @@
 
 import Link from "next/link"
 
+import { UserVariable } from "@/types/models/UserVariable"
 import { Skeleton } from "@/components/ui/skeleton"
+import { MeasurementButton } from "@/components/measurements/measurement-button"
+import { QuickMeasurementButton } from "@/components/measurements/quick-measurement-button"
 import { UserVariableOperationsButton } from "@/components/userVariables/user-variable-operations-button"
-import { QuickMeasurementButton } from '@/components/measurements/quick-measurement-button';
-import { MeasurementButton } from '@/components/measurements/measurement-button';
-import { UserVariable } from "@/types/models/UserVariable";
-import { Icons } from "../icons";
-import {Button} from "@/components/ui/button";
+
+import { Icons } from "../icons"
 
 interface UserVariableItemProps {
-  userVariable: UserVariable;
+  userVariable: UserVariable
 }
 export function UserVariableItem({ userVariable }: UserVariableItemProps) {
   return (
     <div className="flex items-center justify-between gap-2 p-4">
       <div className="flex flex-col gap-4">
-
         <div className="flex items-center gap-4 md:min-w-[8rem]">
           {userVariable.imageUrl && (
-            <img src={userVariable.imageUrl} alt={userVariable.name} style={{ maxWidth: '25%', width: '50px' }} />
+            <img
+              src={userVariable.imageUrl}
+              alt={userVariable.name}
+              style={{ maxWidth: "25%", width: "50px" }}
+            />
           )}
           <div>
             <Link
@@ -29,14 +32,14 @@ export function UserVariableItem({ userVariable }: UserVariableItemProps) {
             >
               {userVariable.name}
             </Link>
-{/*            <div>
+            {/*            <div>
               <p className="text-sm text-muted-foreground">
                 {formatDate(userVariable.createdAt?.toDateString())}
               </p>
             </div>*/}
           </div>
         </div>
-{/*        {userVariable.description ? (
+        {/*        {userVariable.description ? (
           <div className="text-sm text-muted-foreground">
             {userVariable.description}
           </div>
@@ -67,9 +70,7 @@ export function UserVariableItem({ userVariable }: UserVariableItemProps) {
         >
           <Icons.charts className="h-4 w-4" />
         </Link>
-        <UserVariableOperationsButton
-          userVariable={userVariable}
-        />
+        <UserVariableOperationsButton userVariable={userVariable} />
       </div>
     </div>
   )

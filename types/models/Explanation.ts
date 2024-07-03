@@ -10,75 +10,78 @@
  * Do not edit the class manually.
  */
 
-import { ExplanationStartTracking } from '../models/ExplanationStartTracking';
-import { Image } from '../models/Image';
-
+import { ExplanationStartTracking } from "../models/ExplanationStartTracking"
+import { Image } from "../models/Image"
 
 export class Explanation {
-    /**
-    * Ex: These factors are most predictive of Overall Mood based on your own data.
-    */
-    'description': string;
-    'image': Image;
-    /**
-    * Ex: ion-ios-person
-    */
-    'ionIcon': string;
-    'startTracking': ExplanationStartTracking;
-    /**
-    * Ex: Top Predictors of Overall Mood
-    */
-    'title': string;
-    /**
-    * Embeddable list of study summaries with explanation at the top
-    */
-    'html'?: string;
+  /**
+   * Ex: These factors are most predictive of Overall Mood based on your own data.
+   */
+  "description": string
+  "image": Image
+  /**
+   * Ex: ion-ios-person
+   */
+  "ionIcon": string
+  "startTracking": ExplanationStartTracking
+  /**
+   * Ex: Top Predictors of Overall Mood
+   */
+  "title": string
+  /**
+   * Embeddable list of study summaries with explanation at the top
+   */
+  "html"?: string
 
-    static readonly discriminator: string | undefined = undefined;
+  static readonly discriminator: string | undefined = undefined
 
-    static readonly attributeTypeMap: Array<{name: string, baseName: string, type: string, format: string}> = [
-        {
-            "name": "description",
-            "baseName": "description",
-            "type": "string",
-            "format": ""
-        },
-        {
-            "name": "image",
-            "baseName": "image",
-            "type": "Image",
-            "format": ""
-        },
-        {
-            "name": "ionIcon",
-            "baseName": "ionIcon",
-            "type": "string",
-            "format": ""
-        },
-        {
-            "name": "startTracking",
-            "baseName": "startTracking",
-            "type": "ExplanationStartTracking",
-            "format": ""
-        },
-        {
-            "name": "title",
-            "baseName": "title",
-            "type": "string",
-            "format": ""
-        },
-        {
-            "name": "html",
-            "baseName": "html",
-            "type": "string",
-            "format": ""
-        }    ];
+  static readonly attributeTypeMap: Array<{
+    name: string
+    baseName: string
+    type: string
+    format: string
+  }> = [
+    {
+      name: "description",
+      baseName: "description",
+      type: "string",
+      format: "",
+    },
+    {
+      name: "image",
+      baseName: "image",
+      type: "Image",
+      format: "",
+    },
+    {
+      name: "ionIcon",
+      baseName: "ionIcon",
+      type: "string",
+      format: "",
+    },
+    {
+      name: "startTracking",
+      baseName: "startTracking",
+      type: "ExplanationStartTracking",
+      format: "",
+    },
+    {
+      name: "title",
+      baseName: "title",
+      type: "string",
+      format: "",
+    },
+    {
+      name: "html",
+      baseName: "html",
+      type: "string",
+      format: "",
+    },
+  ]
 
-    static getAttributeTypeMap() {
-        return Explanation.attributeTypeMap;
-    }
+  static getAttributeTypeMap() {
+    return Explanation.attributeTypeMap
+  }
 
-    public constructor() {
-    }
+  public constructor() {}
 }
-

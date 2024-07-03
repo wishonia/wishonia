@@ -1,17 +1,25 @@
-import {Measurement} from "@/types/models/Measurement";
-import {getDateTimeFromStatementInUserTimezone, textCompletion} from "@/lib/llm";
-import {getUserId} from "@/lib/getUserId";
-import {postMeasurements} from "@/lib/dfda";
+import { Measurement } from "@/types/models/Measurement"
 import {
-  convertToLocalDateTime, convertToUTC,
-} from "@/lib/dateTimeWithTimezone";
+  convertToLocalDateTime,
+  convertToUTC,
+} from "@/lib/dateTimeWithTimezone"
+import { postMeasurements } from "@/lib/dfda"
+import { getUserId } from "@/lib/getUserId"
+import {
+  getDateTimeFromStatementInUserTimezone,
+  textCompletion,
+} from "@/lib/llm"
 
-export function generateText2MeasurementsPrompt(statement: string,
-                                                currentUtcDateTime: string,
-                                                timeZoneOffset: number): string {
-
-  const currentLocalDateTime = convertToLocalDateTime(currentUtcDateTime, timeZoneOffset);
-  const currentLocalDate = currentUtcDateTime.split('T')[0];
+export function generateText2MeasurementsPrompt(
+  statement: string,
+  currentUtcDateTime: string,
+  timeZoneOffset: number
+): string {
+  const currentLocalDateTime = convertToLocalDateTime(
+    currentUtcDateTime,
+    timeZoneOffset
+  )
+  const currentLocalDate = currentUtcDateTime.split("T")[0]
 
   return `
         You are a service that translates user requests into an array of JSON objects of type "Measurement" according to the following TypeScript definitions:
@@ -181,28 +189,38 @@ ${statement}
 """
 The following is the user request translated into a JSON object with 2 spaces of indentation and no properties with the value undefined:
 
-        `;
+        `
 }
 
-export async function text2measurements(statement: string,
-                                        currentUtcDateTime: string,
-                                        timeZoneOffset: number): Promise<Measurement[]> {
-  const promptText = generateText2MeasurementsPrompt(statement, currentUtcDateTime, timeZoneOffset);
-  const str = await textCompletion(promptText, "json_object");
-  const localDateTime = await getDateTimeFromStatementInUserTimezone(statement,
-    currentUtcDateTime, timeZoneOffset);
-  const utcDateTimeFromStatement = convertToUTC(localDateTime, timeZoneOffset);
-  let json = JSON.parse(str);
-  if(!Array.isArray(str)){json = [json];}
-  const measurements: Measurement[] = [];
-  json.forEach((measurement: Measurement) => {
-    measurement.startAt = utcDateTimeFromStatement;
-    measurements.push(measurement);
-  });
-  const userId = await getUserId();
-  if(userId){
-    const response  = await postMeasurements(measurements, userId);
+export async function text2measurements(
+  statement: string,
+  currentUtcDateTime: string,
+  timeZoneOffset: number
+): Promise<Measurement[]> {
+  const promptText = generateText2MeasurementsPrompt(
+    statement,
+    currentUtcDateTime,
+    timeZoneOffset
+  )
+  const str = await textCompletion(promptText, "json_object")
+  const localDateTime = await getDateTimeFromStatementInUserTimezone(
+    statement,
+    currentUtcDateTime,
+    timeZoneOffset
+  )
+  const utcDateTimeFromStatement = convertToUTC(localDateTime, timeZoneOffset)
+  let json = JSON.parse(str)
+  if (!Array.isArray(str)) {
+    json = [json]
   }
-  return measurements;
+  const measurements: Measurement[] = []
+  json.forEach((measurement: Measurement) => {
+    measurement.startAt = utcDateTimeFromStatement
+    measurements.push(measurement)
+  })
+  const userId = await getUserId()
+  if (userId) {
+    const response = await postMeasurements(measurements, userId)
+  }
+  return measurements
 }
-

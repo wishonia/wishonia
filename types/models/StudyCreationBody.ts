@@ -10,62 +10,63 @@
  * Do not edit the class manually.
  */
 
-
-
 export class StudyCreationBody {
-    /**
-    * Name of predictor variable
-    */
-    'causeVariableName': string;
-    /**
-    * Name of the outcome variable
-    */
-    'effectVariableName': string;
-    /**
-    * Title of your study (optional)
-    */
-    'studyTitle'?: string;
-    /**
-    * Individual studies are based on data of a single user. Group studies are based on data from a specific group of individuals who have joined.  Global studies are based on aggregated and anonymously shared data from all users.
-    */
-    'type': StudyCreationBodyTypeEnum;
+  /**
+   * Name of predictor variable
+   */
+  "causeVariableName": string
+  /**
+   * Name of the outcome variable
+   */
+  "effectVariableName": string
+  /**
+   * Title of your study (optional)
+   */
+  "studyTitle"?: string
+  /**
+   * Individual studies are based on data of a single user. Group studies are based on data from a specific group of individuals who have joined.  Global studies are based on aggregated and anonymously shared data from all users.
+   */
+  "type": StudyCreationBodyTypeEnum
 
-    static readonly discriminator: string | undefined = undefined;
+  static readonly discriminator: string | undefined = undefined
 
-    static readonly attributeTypeMap: Array<{name: string, baseName: string, type: string, format: string}> = [
-        {
-            "name": "causeVariableName",
-            "baseName": "causeVariableName",
-            "type": "string",
-            "format": ""
-        },
-        {
-            "name": "effectVariableName",
-            "baseName": "effectVariableName",
-            "type": "string",
-            "format": ""
-        },
-        {
-            "name": "studyTitle",
-            "baseName": "studyTitle",
-            "type": "string",
-            "format": ""
-        },
-        {
-            "name": "type",
-            "baseName": "type",
-            "type": "StudyCreationBodyTypeEnum",
-            "format": ""
-        }    ];
+  static readonly attributeTypeMap: Array<{
+    name: string
+    baseName: string
+    type: string
+    format: string
+  }> = [
+    {
+      name: "causeVariableName",
+      baseName: "causeVariableName",
+      type: "string",
+      format: "",
+    },
+    {
+      name: "effectVariableName",
+      baseName: "effectVariableName",
+      type: "string",
+      format: "",
+    },
+    {
+      name: "studyTitle",
+      baseName: "studyTitle",
+      type: "string",
+      format: "",
+    },
+    {
+      name: "type",
+      baseName: "type",
+      type: "StudyCreationBodyTypeEnum",
+      format: "",
+    },
+  ]
 
-    static getAttributeTypeMap() {
-        return StudyCreationBody.attributeTypeMap;
-    }
+  static getAttributeTypeMap() {
+    return StudyCreationBody.attributeTypeMap
+  }
 
-    public constructor() {
-    }
+  public constructor() {}
 }
 
-
-export type StudyCreationBodyTypeEnum = "individual" | "group" | "global" ;
-
+export type StudyCreationBodyTypeEnum = "individual" | "group" | "global"

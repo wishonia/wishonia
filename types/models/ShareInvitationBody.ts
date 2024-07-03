@@ -10,69 +10,71 @@
  * Do not edit the class manually.
  */
 
-
-
 export class ShareInvitationBody {
-    /**
-    * Enter the email address of the friend, family member, or health-care provider that you would like to give access to your measurements
-    */
-    'emailAddress': string;
-    /**
-    * Name of the individual that the user wishes to have access to their measurements
-    */
-    'name'?: string;
-    /**
-    * Ex: I would like to share my measurements with you!
-    */
-    'emailSubject'?: string;
-    /**
-    * Ex: I would like to share my data with you so you can help me identify find discover hidden causes of and new treatments for my illness.
-    */
-    'emailBody'?: string;
-    /**
-    * Space separated list of scopes to grant to the recipient (i.e. readmeasurements, writemeasurements, measurements:read
-    */
-    'scopes'?: string;
+  /**
+   * Enter the email address of the friend, family member, or health-care provider that you would like to give access to your measurements
+   */
+  "emailAddress": string
+  /**
+   * Name of the individual that the user wishes to have access to their measurements
+   */
+  "name"?: string
+  /**
+   * Ex: I would like to share my measurements with you!
+   */
+  "emailSubject"?: string
+  /**
+   * Ex: I would like to share my data with you so you can help me identify find discover hidden causes of and new treatments for my illness.
+   */
+  "emailBody"?: string
+  /**
+   * Space separated list of scopes to grant to the recipient (i.e. readmeasurements, writemeasurements, measurements:read
+   */
+  "scopes"?: string
 
-    static readonly discriminator: string | undefined = undefined;
+  static readonly discriminator: string | undefined = undefined
 
-    static readonly attributeTypeMap: Array<{name: string, baseName: string, type: string, format: string}> = [
-        {
-            "name": "emailAddress",
-            "baseName": "emailAddress",
-            "type": "string",
-            "format": ""
-        },
-        {
-            "name": "name",
-            "baseName": "name",
-            "type": "string",
-            "format": ""
-        },
-        {
-            "name": "emailSubject",
-            "baseName": "emailSubject",
-            "type": "string",
-            "format": ""
-        },
-        {
-            "name": "emailBody",
-            "baseName": "emailBody",
-            "type": "string",
-            "format": ""
-        },
-        {
-            "name": "scopes",
-            "baseName": "scopes",
-            "type": "string",
-            "format": ""
-        }    ];
+  static readonly attributeTypeMap: Array<{
+    name: string
+    baseName: string
+    type: string
+    format: string
+  }> = [
+    {
+      name: "emailAddress",
+      baseName: "emailAddress",
+      type: "string",
+      format: "",
+    },
+    {
+      name: "name",
+      baseName: "name",
+      type: "string",
+      format: "",
+    },
+    {
+      name: "emailSubject",
+      baseName: "emailSubject",
+      type: "string",
+      format: "",
+    },
+    {
+      name: "emailBody",
+      baseName: "emailBody",
+      type: "string",
+      format: "",
+    },
+    {
+      name: "scopes",
+      baseName: "scopes",
+      type: "string",
+      format: "",
+    },
+  ]
 
-    static getAttributeTypeMap() {
-        return ShareInvitationBody.attributeTypeMap;
-    }
+  static getAttributeTypeMap() {
+    return ShareInvitationBody.attributeTypeMap
+  }
 
-    public constructor() {
-    }
+  public constructor() {}
 }
-
