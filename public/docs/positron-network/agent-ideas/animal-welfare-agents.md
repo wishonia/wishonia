@@ -18,7 +18,7 @@ We need to create autonomous agents that can help us reduce this suffering.
 
 2. **Quantifying Suffering:** The agent could use this data to quantify the level of suffering, using metrics such as living space, health conditions, and behavioral signs of distress. This quantitative approach would provide a clearer picture of the situation.
 
-3. **Awareness and Advocacy:** The agent could then generate detailed reports or summaries highlighting key areas of concern. These reports could be used to inform the public, animal welfare organizations, and policy makers.
+3. **Awareness and Advocacy:** The agent could then generate detailed reports or summaries highlighting key areas of concern. These reports could be used to inform the public, animal welfare organizations, and policymakers.
 
 4. **Petition Creation:** The agent could automatically create and disseminate petitions for improved animal welfare standards. It could target these petitions to relevant authorities or organizations, making it easy for concerned individuals to take action.
 
