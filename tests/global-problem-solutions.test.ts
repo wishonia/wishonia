@@ -83,23 +83,20 @@ describe("Global Problem Solutions", () => {
             skill: true,
           },
         },
-        globalTaskContextUrls: true,
+        contextUrls: true,
       },
     })
 
     console.log(`Created ${createdTasks.length} tasks:`)
     for (const task of createdTasks) {
-      console.log(
-        `- ${task.name} (Priority: ${task.priority}, Status: ${task.status})`
-      )
       if (task.skills.length > 0) {
         console.log(
           `  Skills: ${task.skills.map((s) => s.skill.name).join(", ")}`
         )
       }
-      if (task.globalTaskContextUrls.length > 0) {
+      if (task.contextUrls.length > 0) {
         console.log(
-          `  Context URLs: ${task.globalTaskContextUrls.map((u) => u.url).join(", ")}`
+          `  Context URLs: ${task.contextUrls.map((u) => u.url).join(", ")}`
         )
       }
     }

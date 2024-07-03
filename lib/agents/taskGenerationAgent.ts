@@ -1,134 +1,146 @@
-import { openai } from "@ai-sdk/openai"
-import { GlobalSolution, PrismaClient, TaskStatus } from "@prisma/client"
-import { generateObject } from "ai"
-import { z } from "zod"
+import { GlobalSolution, TaskStatus } from '@prisma/client';
+import { generateObject } from 'ai';
+import { openai } from '@ai-sdk/openai';
+import {z, ZodSchema} from 'zod';
+import { prisma } from '@/lib/db';
+import {anthropic} from "@ai-sdk/anthropic";
 
-const prisma = new PrismaClient()
+const TaskSchema: ZodSchema = z.object({
+  name: z.string().describe('Unique, long, descriptive name for the task specific to its goal to avoid duplication with similar tasks for different goals.'),
+  description: z.string().describe('Detailed description of what needs to be done to complete the task.'),
+  estimatedHours: z.number().describe('Estimated time to complete the task in hours.'),
+  isAtomic: z.boolean().describe('True if this task cannot be meaningfully broken down into smaller tasks, false otherwise.'),
+  skills: z.array(z.string()).optional().describe('Array of specific skills required to complete this task.'),
+  complexity: z.enum(['Low', 'Medium', 'High']).describe("Assessment of the task's complexity level."),
+  deliverables: z.string().optional().describe('Brief description of the expected  outcome or deliverable of the task.'),
+});
 
-const TaskSchema = z.object({
-  name: z.string(),
-  description: z.string(),
-  content: z.string().optional(),
-  //featuredImage: z.string().optional(),
-  //priority: z.enum(['High', 'Medium', 'Low']),
-  //status: z.enum(['NOT_STARTED', 'IN_PROGRESS', 'COMPLETED']).default('NOT_STARTED'),
-  //dueDate: z.string().optional(),
-  budget: z.number().optional(),
-  //comments: z.array(z.string()).optional(),
-  skills: z.array(z.string()).optional(),
-  blockingTasks: z.array(z.string()).optional(),
-  contextUrls: z.array(z.string()).optional(),
-})
+type TaskInput = z.infer<typeof TaskSchema>;
 
-type TaskInput = z.infer<typeof TaskSchema>
+interface TaskWithHierarchy {
+  task: TaskInput;
+  parentChain: string[];
+}
 
 class GlobalSolutionDecomposerAgent {
-  async decomposeAndStore(
-    globalSolutionName: string,
-    userId: string
-  ): Promise<string> {
-    try {
-      const globalSolution = await prisma.globalSolution.findUnique({
-        where: { name: globalSolutionName },
-      })
+  private readonly breakdownThreshold: number;
 
-      if (!globalSolution) {
-        throw new Error(
-          `GlobalSolution with name "${globalSolutionName}" not found.`
-        )
-      }
-
-      const tasks = await this.decomposeIntoTasks(globalSolution)
-      await this.storeTasks(tasks, globalSolution.id, userId)
-
-      return `Successfully decomposed GlobalSolution "${globalSolutionName}" into ${tasks.length} tasks.`
-    } catch (error) {
-      console.error("Error in decomposeAndStore:", error)
-      throw error
-    }
+  constructor(breakdownThreshold: number = 8) {
+    this.breakdownThreshold = breakdownThreshold;
   }
 
-  private async decomposeIntoTasks(
-    globalSolution: GlobalSolution
-  ): Promise<TaskInput[]> {
-    const schema = z.object({
-      tasks: z.array(TaskSchema),
-    })
 
-    const prompt = `
-      Given the following Global Solution:
-      Name: ${globalSolution.name}
-      Description: ${globalSolution.description}
+  private async decomposeIntoTasks(globalSolution: GlobalSolution | null, taskHierarchy?: TaskWithHierarchy): Promise<TaskInput[]> {
 
-      Please decompose this solution into as many Specific, Measurable, Achievable, Relevant, and Time-Bound tasks
-      as you can. 
-      For each task, provide:
-      1. Name (unique)
-      2. Description (unique)
-      3. Content (optional, more detailed information about the task)
-      4. Budget (estimated cost to complete the task in dollars)
-      5. Required Skills (array of skills required to complete the task)
-      6. Blocking Tasks (optional, array of task names that must be completed before this task)
-      7. Context URLs (optional, array of relevant URL strings)
+    const hierarchyString = taskHierarchy
+        ? `\nTask Hierarchy: ${taskHierarchy.parentChain.join(' > ')} > ${taskHierarchy.task.name}`
+        : '';
 
-      Ensure that task names and descriptions are unique.
-    `
+    let prompt = `
+    We're recursively breaking down the goal of "${globalSolution?.name}" into atomic tasks.
+    
+Decompose the following ${taskHierarchy ? 'Parent Task' : 'Goal'}:
+${taskHierarchy ? 'Parent Task' : 'Goal'} Name: ${taskHierarchy ? taskHierarchy.task.name : globalSolution?.name}
+${taskHierarchy ? 'Parent Task' : 'Goal'} Description: ${taskHierarchy ? taskHierarchy.task.description : globalSolution?.description}${hierarchyString}
 
+into general, high-level tasks that collectively cover all tasks absolutely required and essential  to completing it.
+
+Important Notes:
+- We have a very limited budget, so imagine what this would look like if it was easy and we did the bare minimum work required.
+- DO NOT CREATE ANY TASK THAT IS NOT ABSOLUTELY NECESSARY TO COMPLETE THE ${taskHierarchy ? 'PARENT TASK' : 'GOAL'}.
+- Generate tasks that are general enough to ensure all necessary aspects of the ${taskHierarchy ? 'parent task' : 'goal'} are covered, even if it means the tasks are broader in scope.
+- Each generated task should be comprehensive and act as a parent task for further decomposition.
+- Consider the task hierarchy when creating subtasks, ensuring they are appropriately scoped and relevant to their parent tasks.
+- Ensure that the task breakdown is comprehensive and covers all aspects of the ${taskHierarchy ? 'parent task' : 'goal'}.
+`;
+    console.log(prompt);
     const result = await generateObject({
-      model: openai("gpt-4-turbo"),
-      schema,
+      //model: openai('gpt-4o'),
+      model: anthropic('claude-3-5-sonnet-20240620'),
+      schema: z.object({
+        tasks: z.array(TaskSchema).optional().describe('Array of tasks that must be completed to achieve the goal'),
+      }),
       prompt,
-    })
+    });
 
-    return result.object.tasks
+    if(!result.object.tasks) {
+      throw new Error('No tasks found in the decomposition.');
+    }
+    // Log the generated tasks in a bullet-point list
+    console.log(`Generated the following tasks::\n${result.object.tasks.map((task, index) => `${index + 1}. ${task.name}`).join('\n')}`);
+
+    return result.object.tasks;
   }
 
-  private async storeTasks(
-    tasks: TaskInput[],
-    globalSolutionId: string,
-    userId: string
-  ): Promise<void> {
-    const createdTasks: Record<string, string> = {}
 
-    for (const task of tasks) {
+  async decomposeAndStore(globalSolutionName: string, userId: string): Promise<string> {
+    const globalSolution = await prisma.globalSolution.findUnique({
+      where: { name: globalSolutionName },
+    });
+
+    if (!globalSolution) {
+      throw new Error(`GlobalSolution with name "${globalSolutionName}" not found.`);
+    }
+
+    const tasks = await this.decomposeIntoTasks(globalSolution);
+    await this.storeTasksRecursively(tasks.map(task => ({ task, parentChain: [] })), globalSolution.id, userId);
+
+    return `Successfully decomposed GlobalSolution "${globalSolutionName}" into atomic tasks.`;
+  }
+
+  private async storeTasksRecursively(tasks: TaskWithHierarchy[], globalSolutionId: string, userId: string, parentTaskId?: string): Promise<void> {
+    for (const { task, parentChain } of tasks) {
       let createdTask = await prisma.globalTask.findUnique({
         where: { name: task.name },
-      })
-      const alreadyExists = createdTask !== null
-      if (createdTask) {
-        console.log(`Task with name "${task.name}" already exists. Skipping...`)
-      } else {
+      });
+
+      if (!createdTask) {
         createdTask = await prisma.globalTask.create({
           data: {
             userId,
             name: task.name,
             description: task.description,
-            content: task.content,
-            budget: task.budget,
+            status: TaskStatus.NOT_STARTED,
+            estimatedHours: task.estimatedHours,
           },
-        })
+        });
+
+        await prisma.globalSolutionTask.create({
+          data: {
+            globalSolutionId: globalSolutionId,
+            globalTaskId: createdTask.id,
+          },
+        });
+
+        if (parentTaskId) {
+          await prisma.globalTaskRelation.create({
+            data: {
+              parentId: parentTaskId,
+              childId: createdTask.id,
+            },
+          });
+        }
+
+        if (task.skills) {
+          await this.createSkills(createdTask.id, task.skills);
+        }
+
+        if (task.blockingTasks && task.blockingTasks.length > 0) {
+          await this.createTaskDependencies(createdTask.id, task.blockingTasks);
+        }
       }
 
-      // Create the relationship between GlobalTask and GlobalSolution
-      await prisma.globalSolutionTask.create({
-        data: {
-          globalSolutionId: globalSolutionId,
-          globalTaskId: createdTask.id,
-        },
-      })
-
-      createdTasks[task.name] = createdTask.id
-
-      if (task.skills && task.skills.length > 0) {
-        await this.createSkills(createdTask.id, task.skills)
-      }
-
-      if (task.contextUrls && task.contextUrls.length > 0) {
-        await this.createContextUrls(createdTask.id, task.contextUrls)
+      if (!task.isAtomic && (task.estimatedHours > this.breakdownThreshold || task.complexity === 'High')) {
+        const newParentChain = [...parentChain, task.name];
+        const subtasks = await this.decomposeIntoTasks(null, { task, parentChain: newParentChain });
+        await this.storeTasksRecursively(
+            subtasks.map(subtask => ({ task: subtask, parentChain: newParentChain })),
+            globalSolutionId,
+            userId,
+            createdTask.id
+        );
       }
     }
-
-    await this.createTaskDependencies(tasks, createdTasks)
   }
 
   private async createSkills(taskId: string, skills: string[]): Promise<void> {
@@ -137,52 +149,33 @@ class GlobalSolutionDecomposerAgent {
         where: { name: skillName },
         update: {},
         create: { name: skillName },
-      })
+      });
 
       await prisma.globalTaskSkill.create({
         data: {
           globalTaskId: taskId,
           skillId: skill.id,
         },
-      })
+      });
     }
   }
 
-  private async createContextUrls(
-    taskId: string,
-    urls: string[]
-  ): Promise<void> {
-    for (const url of urls) {
-      await prisma.globalTaskContextUrl.create({
-        data: {
-          url,
-          globalTasks: {
-            connect: { id: taskId },
+  private async createTaskDependencies(taskId: string, blockingTaskNames: string[]): Promise<void> {
+    for (const blockingTaskName of blockingTaskNames) {
+      const blockingTask = await prisma.globalTask.findUnique({
+        where: { name: blockingTaskName },
+      });
+
+      if (blockingTask) {
+        await prisma.globalTaskDependency.create({
+          data: {
+            blockingTaskId: blockingTask.id,
+            dependentTaskId: taskId,
           },
-        },
-      })
-    }
-  }
-
-  private async createTaskDependencies(
-    tasks: TaskInput[],
-    createdTasks: Record<string, string>
-  ): Promise<void> {
-    for (const task of tasks) {
-      if (task.blockingTasks && task.blockingTasks.length > 0) {
-        for (const blockingTaskName of task.blockingTasks) {
-          if (createdTasks[blockingTaskName]) {
-            await prisma.globalTaskDependency.create({
-              data: {
-                blockingTaskId: createdTasks[blockingTaskName],
-                dependentTaskId: createdTasks[task.name],
-              },
-            })
-          }
-        }
+        });
       }
     }
   }
 }
 
-export default GlobalSolutionDecomposerAgent
+export default GlobalSolutionDecomposerAgent;
