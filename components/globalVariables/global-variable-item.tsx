@@ -2,25 +2,31 @@
 
 import Link from "next/link"
 
+import { GlobalVariable } from "@/types/models/GlobalVariable"
+import { Button } from "@/components/ui/button"
 import { Skeleton } from "@/components/ui/skeleton"
 import { GlobalVariableOperationsButton } from "@/components/globalVariables/global-variable-operations-button"
-import { QuickMeasurementButton } from '@/components/measurements/quick-measurement-button';
-import { MeasurementButton } from '@/components/measurements/measurement-button';
-import { GlobalVariable as GlobalVariable } from "@/types/models/GlobalVariable";
-import { Icons } from "../icons";
-import {Button} from "@/components/ui/button";
+import { MeasurementButton } from "@/components/measurements/measurement-button"
+import { QuickMeasurementButton } from "@/components/measurements/quick-measurement-button"
+
+import { Icons } from "../icons"
 
 interface GlobalVariableItemProps {
-  globalVariable: GlobalVariable;
+  globalVariable: GlobalVariable
 }
-export function GlobalVariableItem({ globalVariable }: GlobalVariableItemProps) {
+export function GlobalVariableItem({
+  globalVariable,
+}: GlobalVariableItemProps) {
   return (
     <div className="flex items-center justify-between gap-2 p-4">
       <div className="flex flex-col gap-4">
-
         <div className="flex items-center gap-4 md:min-w-[8rem]">
           {globalVariable.imageUrl && (
-            <img src={globalVariable.imageUrl} alt={globalVariable.name} style={{ maxWidth: '25%', width: '50px' }} />
+            <img
+              src={globalVariable.imageUrl}
+              alt={globalVariable.name}
+              style={{ maxWidth: "25%", width: "50px" }}
+            />
           )}
           <div>
             <Link
@@ -29,14 +35,14 @@ export function GlobalVariableItem({ globalVariable }: GlobalVariableItemProps) 
             >
               {globalVariable.name}
             </Link>
-{/*            <div>
+            {/*            <div>
               <p className="text-sm text-muted-foreground">
                 {formatDate(globalVariable.createdAt?.toDateString())}
               </p>
             </div>*/}
           </div>
         </div>
-{/*        {globalVariable.description ? (
+        {/*        {globalVariable.description ? (
           <div className="text-sm text-muted-foreground">
             {globalVariable.description}
           </div>
@@ -67,9 +73,7 @@ export function GlobalVariableItem({ globalVariable }: GlobalVariableItemProps) 
         >
           <Icons.charts className="h-4 w-4" />
         </Link>
-        <GlobalVariableOperationsButton
-          globalVariable={globalVariable}
-        />
+        <GlobalVariableOperationsButton globalVariable={globalVariable} />
       </div>
     </div>
   )

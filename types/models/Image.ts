@@ -10,49 +10,51 @@
  * Do not edit the class manually.
  */
 
-
-
 export class Image {
-    /**
-    * Ex: 240
-    */
-    'height': string;
-    /**
-    * Ex: https://www.filepicker.io/api/file/TjmeNWS5Q2SFmtJlUGLf
-    */
-    'imageUrl': string;
-    /**
-    * Ex: 224
-    */
-    'width': string;
+  /**
+   * Ex: 240
+   */
+  "height": string
+  /**
+   * Ex: https://www.filepicker.io/api/file/TjmeNWS5Q2SFmtJlUGLf
+   */
+  "imageUrl": string
+  /**
+   * Ex: 224
+   */
+  "width": string
 
-    static readonly discriminator: string | undefined = undefined;
+  static readonly discriminator: string | undefined = undefined
 
-    static readonly attributeTypeMap: Array<{name: string, baseName: string, type: string, format: string}> = [
-        {
-            "name": "height",
-            "baseName": "height",
-            "type": "string",
-            "format": ""
-        },
-        {
-            "name": "imageUrl",
-            "baseName": "imageUrl",
-            "type": "string",
-            "format": ""
-        },
-        {
-            "name": "width",
-            "baseName": "width",
-            "type": "string",
-            "format": ""
-        }    ];
+  static readonly attributeTypeMap: Array<{
+    name: string
+    baseName: string
+    type: string
+    format: string
+  }> = [
+    {
+      name: "height",
+      baseName: "height",
+      type: "string",
+      format: "",
+    },
+    {
+      name: "imageUrl",
+      baseName: "imageUrl",
+      type: "string",
+      format: "",
+    },
+    {
+      name: "width",
+      baseName: "width",
+      type: "string",
+      format: "",
+    },
+  ]
 
-    static getAttributeTypeMap() {
-        return Image.attributeTypeMap;
-    }
+  static getAttributeTypeMap() {
+    return Image.attributeTypeMap
+  }
 
-    public constructor() {
-    }
+  public constructor() {}
 }
-

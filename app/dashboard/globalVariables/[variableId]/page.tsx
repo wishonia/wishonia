@@ -3,9 +3,8 @@ import { redirect } from "next/navigation"
 
 import { authOptions } from "@/lib/auth"
 import { getCurrentUser } from "@/lib/session"
+import { GlobalVariableOverview } from "@/components/globalVariables/global-variable-overview"
 import { Shell } from "@/components/layout/shell"
-import { GlobalVariableOverview } from "@/components/globalVariables/global-variable-overview";
-
 
 interface GlobalVariablePageProps {
   params: { variableId: number }
@@ -42,10 +41,14 @@ export default async function GlobalVariablePage({
 
   return (
     <Shell>
-      <GlobalVariableOverview variableId={params.variableId} user={user} measurementsDateRange={{
-        from: searchParams.from,
-        to: searchParams.to
-      }} />
+      <GlobalVariableOverview
+        variableId={params.variableId}
+        user={user}
+        measurementsDateRange={{
+          from: searchParams.from,
+          to: searchParams.to,
+        }}
+      />
     </Shell>
   )
 }

@@ -41,7 +41,12 @@ import {
   FaUserAlt,
   FaVoteYea,
 } from "react-icons/fa"
-import { FaHand, FaMessage, FaRankingStar, FaSquarePollVertical } from "react-icons/fa6"
+import {
+  FaHand,
+  FaMessage,
+  FaRankingStar,
+  FaSquarePollVertical,
+} from "react-icons/fa6"
 import { ImSpinner8, ImStatsBars } from "react-icons/im"
 import { LuSettings } from "react-icons/lu"
 import { MdDeleteForever, MdOutlineLogout } from "react-icons/md"

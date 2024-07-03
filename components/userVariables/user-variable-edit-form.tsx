@@ -6,7 +6,9 @@ import { zodResolver } from "@hookform/resolvers/zod"
 import { useForm } from "react-hook-form"
 import * as z from "zod"
 
+import { UserVariable } from "@/types/models/UserVariable"
 import { cn } from "@/lib/utils"
+import { userVariablePatchSchema } from "@/lib/validations/userVariable"
 import { buttonVariants } from "@/components/ui/button"
 import {
   Card,
@@ -21,10 +23,9 @@ import { Label } from "@/components/ui/label"
 import { Textarea } from "@/components/ui/textarea"
 import { toast } from "@/components/ui/use-toast"
 import { Icons } from "@/components/icons"
-import {UserVariable} from "@/types/models/UserVariable";
-import {userVariablePatchSchema} from "@/lib/validations/userVariable";
 
-interface UserVariableEditFormProps extends React.HTMLAttributes<HTMLFormElement> {
+interface UserVariableEditFormProps
+  extends React.HTMLAttributes<HTMLFormElement> {
   userVariable: Pick<UserVariable, "id" | "name" | "description">
 }
 

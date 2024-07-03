@@ -15,7 +15,9 @@ interface GlobalVariableEditProps {
   params: { variableId: string }
 }
 
-export default async function GlobalVariableEdit({ params }: GlobalVariableEditProps) {
+export default async function GlobalVariableEdit({
+  params,
+}: GlobalVariableEditProps) {
   const user = await getCurrentUser()
 
   if (!user) {
@@ -23,7 +25,8 @@ export default async function GlobalVariableEdit({ params }: GlobalVariableEditP
   }
 
   const response = await fetch(
-    `/api/dfda/variables?variableId=${params.variableId}&includeCharts=0`)
+    `/api/dfda/variables?variableId=${params.variableId}&includeCharts=0`
+  )
   const globalVariables = await response.json()
   const globalVariable = globalVariables[0]
 
@@ -42,7 +45,7 @@ export default async function GlobalVariableEdit({ params }: GlobalVariableEditP
           globalVariable={{
             id: globalVariable.id,
             name: globalVariable.name,
-            description: globalVariable.description
+            description: globalVariable.description,
           }}
         />
       </div>

@@ -10,144 +10,147 @@
  * Do not edit the class manually.
  */
 
-import { Card } from '../models/Card';
-import { ErrorResponse } from '../models/ErrorResponse';
-import { Image } from '../models/Image';
-import { User } from '../models/User';
-
+import { Card } from "../models/Card"
+import { ErrorResponse } from "../models/ErrorResponse"
+import { Image } from "../models/Image"
+import { User } from "../models/User"
 
 export class UsersResponse {
-    'users': Array<User>;
-    /**
-    * Users who granted access to their data
-    */
-    'description'?: string;
-    /**
-    * Users who granted access to their data
-    */
-    'summary'?: string;
-    /**
-    * Array of error objects with message property
-    */
-    'errors'?: Array<ErrorResponse>;
-    /**
-    * ex. OK or ERROR
-    */
-    'status'?: string;
-    /**
-    * true or false
-    */
-    'success'?: boolean;
-    /**
-    * Response code such as 200
-    */
-    'code'?: number;
-    'image'?: Image;
-    /**
-    * Square icon png url
-    */
-    'avatar'?: string;
-    /**
-    * Ex: ion-ios-person
-    */
-    'ionIcon'?: string;
-    /**
-    * Users who granted access to their data
-    */
-    'html'?: string;
-    /**
-    * A super neat url you might want to share with your users!
-    */
-    'link'?: string;
-    'card'?: Card;
+  "users": Array<User>
+  /**
+   * Users who granted access to their data
+   */
+  "description"?: string
+  /**
+   * Users who granted access to their data
+   */
+  "summary"?: string
+  /**
+   * Array of error objects with message property
+   */
+  "errors"?: Array<ErrorResponse>
+  /**
+   * ex. OK or ERROR
+   */
+  "status"?: string
+  /**
+   * true or false
+   */
+  "success"?: boolean
+  /**
+   * Response code such as 200
+   */
+  "code"?: number
+  "image"?: Image
+  /**
+   * Square icon png url
+   */
+  "avatar"?: string
+  /**
+   * Ex: ion-ios-person
+   */
+  "ionIcon"?: string
+  /**
+   * Users who granted access to their data
+   */
+  "html"?: string
+  /**
+   * A super neat url you might want to share with your users!
+   */
+  "link"?: string
+  "card"?: Card
 
-    static readonly discriminator: string | undefined = undefined;
+  static readonly discriminator: string | undefined = undefined
 
-    static readonly attributeTypeMap: Array<{name: string, baseName: string, type: string, format: string}> = [
-        {
-            "name": "users",
-            "baseName": "users",
-            "type": "Array<User>",
-            "format": ""
-        },
-        {
-            "name": "description",
-            "baseName": "description",
-            "type": "string",
-            "format": ""
-        },
-        {
-            "name": "summary",
-            "baseName": "summary",
-            "type": "string",
-            "format": ""
-        },
-        {
-            "name": "errors",
-            "baseName": "errors",
-            "type": "Array<ErrorResponse>",
-            "format": ""
-        },
-        {
-            "name": "status",
-            "baseName": "status",
-            "type": "string",
-            "format": ""
-        },
-        {
-            "name": "success",
-            "baseName": "success",
-            "type": "boolean",
-            "format": ""
-        },
-        {
-            "name": "code",
-            "baseName": "code",
-            "type": "number",
-            "format": ""
-        },
-        {
-            "name": "image",
-            "baseName": "image",
-            "type": "Image",
-            "format": ""
-        },
-        {
-            "name": "avatar",
-            "baseName": "avatar",
-            "type": "string",
-            "format": ""
-        },
-        {
-            "name": "ionIcon",
-            "baseName": "ionIcon",
-            "type": "string",
-            "format": ""
-        },
-        {
-            "name": "html",
-            "baseName": "html",
-            "type": "string",
-            "format": ""
-        },
-        {
-            "name": "link",
-            "baseName": "link",
-            "type": "string",
-            "format": ""
-        },
-        {
-            "name": "card",
-            "baseName": "card",
-            "type": "Card",
-            "format": ""
-        }    ];
+  static readonly attributeTypeMap: Array<{
+    name: string
+    baseName: string
+    type: string
+    format: string
+  }> = [
+    {
+      name: "users",
+      baseName: "users",
+      type: "Array<User>",
+      format: "",
+    },
+    {
+      name: "description",
+      baseName: "description",
+      type: "string",
+      format: "",
+    },
+    {
+      name: "summary",
+      baseName: "summary",
+      type: "string",
+      format: "",
+    },
+    {
+      name: "errors",
+      baseName: "errors",
+      type: "Array<ErrorResponse>",
+      format: "",
+    },
+    {
+      name: "status",
+      baseName: "status",
+      type: "string",
+      format: "",
+    },
+    {
+      name: "success",
+      baseName: "success",
+      type: "boolean",
+      format: "",
+    },
+    {
+      name: "code",
+      baseName: "code",
+      type: "number",
+      format: "",
+    },
+    {
+      name: "image",
+      baseName: "image",
+      type: "Image",
+      format: "",
+    },
+    {
+      name: "avatar",
+      baseName: "avatar",
+      type: "string",
+      format: "",
+    },
+    {
+      name: "ionIcon",
+      baseName: "ionIcon",
+      type: "string",
+      format: "",
+    },
+    {
+      name: "html",
+      baseName: "html",
+      type: "string",
+      format: "",
+    },
+    {
+      name: "link",
+      baseName: "link",
+      type: "string",
+      format: "",
+    },
+    {
+      name: "card",
+      baseName: "card",
+      type: "Card",
+      format: "",
+    },
+  ]
 
-    static getAttributeTypeMap() {
-        return UsersResponse.attributeTypeMap;
-    }
+  static getAttributeTypeMap() {
+    return UsersResponse.attributeTypeMap
+  }
 
-    public constructor() {
-    }
+  public constructor() {}
 }
-

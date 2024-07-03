@@ -1,21 +1,22 @@
 /**
  * @jest-environment node
  */
+import { getOrCreateTestUser } from "@/tests/test-helpers"
+
+import { getOrCreateDfdaAccessToken } from "@/lib/dfda"
 import {
   foodOrDrugCostBenefitAnalysis,
   safeUnapprovedDrugs,
 } from "@/lib/fdaiAgent"
-import {getOrCreateTestUser} from "@/tests/test-helpers";
-import {getOrCreateDfdaAccessToken} from "@/lib/dfda";
 
 describe("FDAi Tests", () => {
   it("gets dfda access token", async () => {
-    const testUser = await getOrCreateTestUser();
+    const testUser = await getOrCreateTestUser()
     const result = await getOrCreateDfdaAccessToken(testUser.id)
-    console.log(result);
-    expect(result).not.toBeNull();
+    console.log(result)
+    expect(result).not.toBeNull()
     const result2 = await getOrCreateDfdaAccessToken(testUser.id)
-    expect(result2).toEqual(result);
+    expect(result2).toEqual(result)
   })
   it("Do cost-benefit analysis on a supplement", async () => {
     const result = await foodOrDrugCostBenefitAnalysis("NMN")

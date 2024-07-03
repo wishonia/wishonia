@@ -4,6 +4,7 @@ import * as React from "react"
 import Link from "next/link"
 import { useRouter } from "next/navigation"
 
+import { UserVariable } from "@/types/models/UserVariable"
 import { Button } from "@/components/ui/button"
 import {
   Credenza,
@@ -23,9 +24,7 @@ import {
 } from "@/components/ui/dropdown-menu"
 import { toast } from "@/components/ui/use-toast"
 import { Icons } from "@/components/icons"
-
 import { MeasurementsAddForm } from "@/components/measurements/measurements-add-form"
-import { UserVariable } from "@/types/models/UserVariable"
 
 async function deleteUserVariable(userVariableId: number) {
   const response = await fetch(`/api/userVariables/${userVariableId}`, {
@@ -48,7 +47,7 @@ async function deleteUserVariable(userVariableId: number) {
 }
 
 interface UserVariableOperationsProps {
-  userVariable: UserVariable;
+  userVariable: UserVariable
   children?: React.ReactNode
 }
 
@@ -60,7 +59,7 @@ export function UserVariableOperationsButton({
   const [showDeleteAlert, setShowDeleteAlert] = React.useState<boolean>(false)
   const [isDeleteLoading, setIsDeleteLoading] = React.useState<boolean>(false)
   const [showMeasurementAlert, setShowMeasurementAlert] =
-      React.useState<boolean>(false)
+    React.useState<boolean>(false)
   const [showDropDown, setShowDropDown] = React.useState<boolean>(false)
 
   return (
@@ -112,7 +111,10 @@ export function UserVariableOperationsButton({
       </DropdownMenu>
 
       {/* Add Alert */}
-      <Credenza open={showMeasurementAlert} onOpenChange={setShowMeasurementAlert}>
+      <Credenza
+        open={showMeasurementAlert}
+        onOpenChange={setShowMeasurementAlert}
+      >
         <CredenzaContent>
           <CredenzaHeader>
             <CredenzaTitle>Record a Measurement</CredenzaTitle>

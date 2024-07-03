@@ -10,113 +10,137 @@
  * Do not edit the class manually.
  */
 
-
-
 export class MeasurementItem {
-    /**
-    * Start Time for the measurement event in UTC ISO 8601 YYYY-MM-DDThh:mm:ss
-    */
-    'startAt': string;
-    /**
-    * Measurement value
-    */
-    'value': number;
-    /**
-    * Ex: Emotions, Treatments, Symptoms...
-    */
-    'variableCategoryName': MeasurementItemVariableCategoryNameEnum;
-    /**
-    * Name of the variable for which we are creating the measurement records
-    */
-    'variableName': string;
-    /**
-    * Unit of measurement
-    */
-    'unitAbbreviatedName': string;
-    /**
-    * Way to aggregate measurements over time. SUM should be used for things like minutes of exercise.  If you use MEAN for exercise, then a person might exercise more minutes in one day but add separate measurements that were smaller.  So when we are doing correlational analysis, we would think that the person exercised less that day even though they exercised more.  Conversely, we must use MEAN for things such as ratings which cannot be SUMMED.
-    */
-    'combinationOperation': MeasurementItemCombinationOperationEnum;
-    /**
-    * Name of the application or device used to record the measurement values
-    */
-    'sourceName'?: string;
-    /**
-    * UPC or other barcode scan result if you want to attach it to the variable name for recording measurements with a UPC scanner
-    */
-    'upc'?: string;
-    /**
-    * Optional note to include with the measurement
-    */
-    'note'?: string;
+  /**
+   * Start Time for the measurement event in UTC ISO 8601 YYYY-MM-DDThh:mm:ss
+   */
+  "startAt": string
+  /**
+   * Measurement value
+   */
+  "value": number
+  /**
+   * Ex: Emotions, Treatments, Symptoms...
+   */
+  "variableCategoryName": MeasurementItemVariableCategoryNameEnum
+  /**
+   * Name of the variable for which we are creating the measurement records
+   */
+  "variableName": string
+  /**
+   * Unit of measurement
+   */
+  "unitAbbreviatedName": string
+  /**
+   * Way to aggregate measurements over time. SUM should be used for things like minutes of exercise.  If you use MEAN for exercise, then a person might exercise more minutes in one day but add separate measurements that were smaller.  So when we are doing correlational analysis, we would think that the person exercised less that day even though they exercised more.  Conversely, we must use MEAN for things such as ratings which cannot be SUMMED.
+   */
+  "combinationOperation": MeasurementItemCombinationOperationEnum
+  /**
+   * Name of the application or device used to record the measurement values
+   */
+  "sourceName"?: string
+  /**
+   * UPC or other barcode scan result if you want to attach it to the variable name for recording measurements with a UPC scanner
+   */
+  "upc"?: string
+  /**
+   * Optional note to include with the measurement
+   */
+  "note"?: string
 
-    static readonly discriminator: string | undefined = undefined;
+  static readonly discriminator: string | undefined = undefined
 
-    static readonly attributeTypeMap: Array<{name: string, baseName: string, type: string, format: string}> = [
-        {
-            "name": "startAt",
-            "baseName": "startAt",
-            "type": "string",
-            "format": ""
-        },
-        {
-            "name": "value",
-            "baseName": "value",
-            "type": "number",
-            "format": "double"
-        },
-        {
-            "name": "variableCategoryName",
-            "baseName": "variableCategoryName",
-            "type": "MeasurementItemVariableCategoryNameEnum",
-            "format": ""
-        },
-        {
-            "name": "variableName",
-            "baseName": "variableName",
-            "type": "string",
-            "format": ""
-        },
-        {
-            "name": "unitAbbreviatedName",
-            "baseName": "unitAbbreviatedName",
-            "type": "string",
-            "format": ""
-        },
-        {
-            "name": "combinationOperation",
-            "baseName": "combinationOperation",
-            "type": "MeasurementItemCombinationOperationEnum",
-            "format": ""
-        },
-        {
-            "name": "sourceName",
-            "baseName": "sourceName",
-            "type": "string",
-            "format": ""
-        },
-        {
-            "name": "upc",
-            "baseName": "upc",
-            "type": "string",
-            "format": ""
-        },
-        {
-            "name": "note",
-            "baseName": "note",
-            "type": "string",
-            "format": ""
-        }    ];
+  static readonly attributeTypeMap: Array<{
+    name: string
+    baseName: string
+    type: string
+    format: string
+  }> = [
+    {
+      name: "startAt",
+      baseName: "startAt",
+      type: "string",
+      format: "",
+    },
+    {
+      name: "value",
+      baseName: "value",
+      type: "number",
+      format: "double",
+    },
+    {
+      name: "variableCategoryName",
+      baseName: "variableCategoryName",
+      type: "MeasurementItemVariableCategoryNameEnum",
+      format: "",
+    },
+    {
+      name: "variableName",
+      baseName: "variableName",
+      type: "string",
+      format: "",
+    },
+    {
+      name: "unitAbbreviatedName",
+      baseName: "unitAbbreviatedName",
+      type: "string",
+      format: "",
+    },
+    {
+      name: "combinationOperation",
+      baseName: "combinationOperation",
+      type: "MeasurementItemCombinationOperationEnum",
+      format: "",
+    },
+    {
+      name: "sourceName",
+      baseName: "sourceName",
+      type: "string",
+      format: "",
+    },
+    {
+      name: "upc",
+      baseName: "upc",
+      type: "string",
+      format: "",
+    },
+    {
+      name: "note",
+      baseName: "note",
+      type: "string",
+      format: "",
+    },
+  ]
 
-    static getAttributeTypeMap() {
-        return MeasurementItem.attributeTypeMap;
-    }
+  static getAttributeTypeMap() {
+    return MeasurementItem.attributeTypeMap
+  }
 
-    public constructor() {
-    }
+  public constructor() {}
 }
 
-
-export type MeasurementItemVariableCategoryNameEnum = "Activity" | "Books" | "Causes of Illness" | "Cognitive Performance" | "Conditions" | "Emotions" | "Environment" | "Foods" | "Goals" | "Locations" | "Miscellaneous" | "Movies and TV" | "Music" | "Nutrients" | "Payments" | "Physical Activities" | "Physique" | "Sleep" | "Social Interactions" | "Software" | "Symptoms" | "Treatments" | "Vital Signs" ;
-export type MeasurementItemCombinationOperationEnum = "MEAN" | "SUM" ;
-
+export type MeasurementItemVariableCategoryNameEnum =
+  | "Activity"
+  | "Books"
+  | "Causes of Illness"
+  | "Cognitive Performance"
+  | "Conditions"
+  | "Emotions"
+  | "Environment"
+  | "Foods"
+  | "Goals"
+  | "Locations"
+  | "Miscellaneous"
+  | "Movies and TV"
+  | "Music"
+  | "Nutrients"
+  | "Payments"
+  | "Physical Activities"
+  | "Physique"
+  | "Sleep"
+  | "Social Interactions"
+  | "Software"
+  | "Symptoms"
+  | "Treatments"
+  | "Vital Signs"
+export type MeasurementItemCombinationOperationEnum = "MEAN" | "SUM"
