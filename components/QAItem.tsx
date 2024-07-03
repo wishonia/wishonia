@@ -11,12 +11,12 @@ interface QAItemProps {
 
 export default function QAItem({ question, answer, visual }: QAItemProps) {
   return (
-    <div className="border-t-4 border-black pt-4">
-      <div className="border-4 border-black">
-        <div className="bg-black p-4 text-white">
+    <div className="border-t-4 pt-4">
+      <div className="border-4">
+        <div className="p-4">
           <p className="text-3xl font-bold">{question}</p>
         </div>
-        <div className="bg-white p-4 text-black">
+        <div className="p-4">
           <p className="text-2xl">{answer}</p>
         </div>
         {visual && (
@@ -27,7 +27,7 @@ export default function QAItem({ question, answer, visual }: QAItemProps) {
                 alt="Visual aid"
                 width={400}
                 height={300}
-                className="border-2 border-black"
+                className="border-2"
               />
             ) : (
               visual

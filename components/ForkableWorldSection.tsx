@@ -40,7 +40,7 @@ const FeatureCard: React.FC<FeatureCardProps> = ({
     )}
     {path && (
       <Link href={path}>
-        <button className="border-4 border-black bg-black px-8 py-4 text-xl text-white transition-colors hover:bg-white hover:text-black">
+        <button className="border-4 px-8 py-4 text-xl transition-colors">
           {buttonText}
         </button>
       </Link>
@@ -130,7 +130,7 @@ const ForkableWorldSection: React.FC = () => {
   )
 
   return (
-    <div className="min-h-screen bg-white font-mono text-black">
+    <div className="min-h-screen font-mono">
       <header className="border-b-8 border-black p-8 text-center">
         <h1 className="mb-4 text-6xl font-bold">FORKABLE WORLD</h1>
         <p className="text-2xl">
