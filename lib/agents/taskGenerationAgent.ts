@@ -121,7 +121,7 @@ Important Notes:
           });
         }
 
-        if (task.skills && task.skills.length > 0) {
+        if (task.skills) {
           await this.createSkills(createdTask.id, task.skills);
         }
 

@@ -10,7 +10,7 @@ to gather facts & data to back up the research
 Please make sure you complete the objective above with
 the following rules:
 
-1/ You should do enough research to gather as much
+1. You should do enough research to gather as much
 information as possible about the objective
 
 2/ If there are url of relevant links & articles, you will scrape
