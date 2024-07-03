@@ -9,12 +9,12 @@ const TaskSchema = z.object({
     name: z.string(),
     description: z.string(),
     content: z.string().optional(),
-    featuredImage: z.string().optional(),
-    priority: z.enum(['High', 'Medium', 'Low']),
-    status: z.enum(['NOT_STARTED', 'IN_PROGRESS', 'COMPLETED']).default('NOT_STARTED'),
-    dueDate: z.string().optional(),
+    //featuredImage: z.string().optional(),
+    //priority: z.enum(['High', 'Medium', 'Low']),
+    //status: z.enum(['NOT_STARTED', 'IN_PROGRESS', 'COMPLETED']).default('NOT_STARTED'),
+    //dueDate: z.string().optional(),
     budget: z.number().optional(),
-    comments: z.array(z.string()).optional(),
+    //comments: z.array(z.string()).optional(),
     skills: z.array(z.string()).optional(),
     blockingTasks: z.array(z.string()).optional(),
     contextUrls: z.array(z.string()).optional(),
@@ -53,21 +53,18 @@ class GlobalSolutionDecomposerAgent {
       Name: ${globalSolution.name}
       Description: ${globalSolution.description}
 
-      Please decompose this solution into a list of specific, actionable tasks. For each task, provide:
+      Please decompose this solution into as many Specific, Measurable, Achievable, Relevant, and Time-Bound tasks
+      as you can. 
+      For each task, provide:
       1. Name (unique)
       2. Description (unique)
       3. Content (optional, more detailed information about the task)
-      4. Featured Image URL (optional)
-      5. Priority (High, Medium, Low)
-      6. Status (NOT_STARTED, IN_PROGRESS, COMPLETED)
-      7. Due Date (optional, in ISO format)
-      8. Budget (optional, as a number)
-      9. Comments (optional, array of strings)
-      10. Required Skills (optional, array of skill names)
-      11. Blocking Tasks (optional, array of task names that must be completed before this task)
-      12. Context URLs (optional, array of relevant URL strings)
+      4. Budget (estimated cost to complete the task in dollars)
+      5. Required Skills (array of skills required to complete the task)
+      6. Blocking Tasks (optional, array of task names that must be completed before this task)
+      7. Context URLs (optional, array of relevant URL strings)
 
-      Generate at least 5 tasks for this Global Solution. Ensure that task names and descriptions are unique.
+      Ensure that task names and descriptions are unique.
     `;
 
         const result = await generateObject({
@@ -76,31 +73,30 @@ class GlobalSolutionDecomposerAgent {
             prompt,
         });
 
-        // Ensure status is always set
-        return result.object.tasks.map(task => ({
-            ...task,
-            status: task.status || 'NOT_STARTED',
-        }));
+        return result.object.tasks
     }
 
     private async storeTasks(tasks: TaskInput[], globalSolutionId: string, userId: string): Promise<void> {
         const createdTasks: Record<string, string> = {};
 
         for (const task of tasks) {
-            const createdTask = await prisma.globalTask.create({
-                data: {
-                    userId,
-                    name: task.name,
-                    description: task.description,
-                    content: task.content,
-                    featuredImage: task.featuredImage,
-                    priority: task.priority,
-                    status: task.status as TaskStatus,
-                    dueDate: task.dueDate ? new Date(task.dueDate) : undefined,
-                    budget: task.budget,
-                    comments: task.comments || [],
-                },
+            let createdTask = await prisma.globalTask.findUnique({
+                where: { name: task.name },
             });
+            const alreadyExists = createdTask !== null;
+            if(createdTask) {
+                console.log(`Task with name "${task.name}" already exists. Skipping...`);
+            } else {
+                createdTask = await prisma.globalTask.create({
+                    data: {
+                        userId,
+                        name: task.name,
+                        description: task.description,
+                        content: task.content,
+                        budget: task.budget,
+                    },
+                });
+            }
 
             // Create the relationship between GlobalTask and GlobalSolution
             await prisma.globalSolutionTask.create({
