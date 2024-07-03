@@ -140,6 +140,10 @@ model User {
   accounts                              Account[]
   sessions                              Session[]
   joinedGenieDAOs                       GenieDAO[]                            @relation("JoinedGenieDAOs")
+  GlobalTaskAttachment                  GlobalTaskAttachment[]
+  GlobalTaskComment                     GlobalTaskComment[]
+  UserTaskComment                       UserTaskComment[]
+  UserTaskAttachment                    UserTaskAttachment[]
 }
 
 model Education {
@@ -383,27 +387,69 @@ model GlobalSolutionTask {
 }
 
 model GlobalTask {
-  id                    String                 @id @default(cuid())
-  userId                String
-  name                  String                 @unique
-  description           String?                @unique
-  content               String?
-  featuredImage         String?
-  createdAt             DateTime               @default(now())
-  updatedAt             DateTime               @updatedAt
-  priority              String?
-  status                TaskStatus             @default(NOT_STARTED)
-  dueDate               DateTime?
-  budget                Float?
-  comments              String[]
-  embedding             Unsupported("vector")?
-  creator               User                   @relation(fields: [userId], references: [id])
-  blockingTasks         GlobalTaskDependency[] @relation("BlockingTask")
-  dependentTasks        GlobalTaskDependency[] @relation("DependentTask")
-  skills                GlobalTaskSkill[]
-  globalSolutionTasks   GlobalSolutionTask[]   @relation("GlobalTaskToSolution")
-  userTasks             UserTask[]
-  globalTaskContextUrls GlobalTaskContextUrl[] @relation("GlobalTaskToGlobalTaskContextUrl")
+  id                  String                 @id @default(cuid())
+  userId              String
+  name                String                 @unique
+  description         String?                @unique
+  content             String?
+  featuredImage       String?
+  createdAt           DateTime               @default(now())
+  updatedAt           DateTime               @updatedAt
+  priority            String?
+  status              TaskStatus             @default(NOT_STARTED)
+  dueDate             DateTime?
+  budget              Float?
+  comments            GlobalTaskComment[]
+  embedding           Unsupported("vector")?
+  creator             User                   @relation(fields: [userId], references: [id])
+  isAtomic            Boolean?
+  complexity          TaskComplexity?
+  tags                String[]
+  estimatedHours      Float?
+  actualHours         Float?
+  deliverable         String?
+  blockingTasks       GlobalTaskDependency[] @relation("BlockingTask")
+  dependentTasks      GlobalTaskDependency[] @relation("DependentTask")
+  skills              GlobalTaskSkill[]
+  globalSolutionTasks GlobalSolutionTask[]   @relation("GlobalTaskToSolution")
+  parentTasks         GlobalTaskRelation[]   @relation("ChildTasks")
+  childTasks          GlobalTaskRelation[]   @relation("ParentTasks")
+  userTasks           UserTask[]
+
+  attachments GlobalTaskAttachment[]
+  contextUrls GlobalTaskContextUrl[]
+}
+
+model GlobalTaskAttachment {
+  id        String     @id @default(cuid())
+  taskId    String
+  userId    String
+  fileName  String
+  fileUrl   String
+  createdAt DateTime   @default(now())
+  task      GlobalTask @relation(fields: [taskId], references: [id])
+  user      User       @relation(fields: [userId], references: [id])
+}
+
+model GlobalTaskComment {
+  id        String     @id @default(cuid())
+  taskId    String
+  userId    String
+  content   String
+  createdAt DateTime   @default(now())
+  updatedAt DateTime   @updatedAt
+  task      GlobalTask @relation(fields: [taskId], references: [id])
+  user      User       @relation(fields: [userId], references: [id])
+}
+
+model GlobalTaskRelation {
+  id       String     @id @default(cuid())
+  parentId String
+  childId  String
+  parent   GlobalTask @relation("ParentTasks", fields: [parentId], references: [id])
+  child    GlobalTask @relation("ChildTasks", fields: [childId], references: [id])
+
+  @@unique([parentId, childId])
 }
 
 model GlobalTaskSkill {
@@ -428,30 +474,61 @@ model GlobalTaskDependency {
   @@unique([blockingTaskId, dependentTaskId])
 }
 
+enum TaskComplexity {
+  LOW
+  MEDIUM
+  HIGH
+}
+
 model GlobalTaskContextUrl {
-  id          String       @id @default(cuid())
-  url         String       @unique
-  createdAt   DateTime     @default(now())
-  updatedAt   DateTime     @updatedAt
-  globalTasks GlobalTask[] @relation("GlobalTaskToGlobalTaskContextUrl")
+  id           String     @id @default(cuid())
+  url          String     @unique
+  createdAt    DateTime   @default(now())
+  updatedAt    DateTime   @updatedAt
+  globalTask   GlobalTask @relation(fields: [globalTaskId], references: [id])
+  globalTaskId String
 }
 
 model UserTask {
-  id             String       @id @default(cuid())
-  userId         String
-  globalTaskId   String
-  role           UserTaskRole @default(ASSIGNEE)
-  status         TaskStatus   @default(NOT_STARTED)
-  startDate      DateTime?
-  endDate        DateTime?
-  estimatedHours Float?
-  actualHours    Float?
-  comments       String?
-  assignedAt     DateTime     @default(now())
-  globalTask     GlobalTask   @relation(fields: [globalTaskId], references: [id])
-  user           User         @relation(fields: [userId], references: [id])
+  id                 String               @id @default(cuid())
+  userId             String
+  globalTaskId       String
+  role               UserTaskRole         @default(ASSIGNEE)
+  status             TaskStatus           @default(NOT_STARTED)
+  startDate          DateTime?
+  endDate            DateTime?
+  estimatedHours     Float?
+  actualHours        Float?
+  comments           String?
+  assignedAt         DateTime             @default(now())
+  globalTask         GlobalTask           @relation(fields: [globalTaskId], references: [id])
+  user               User                 @relation(fields: [userId], references: [id])
+  UserTaskComment    UserTaskComment[]
+  UserTaskAttachment UserTaskAttachment[]
 
   @@unique([userId, globalTaskId])
+}
+
+model UserTaskComment {
+  id         String   @id @default(cuid())
+  userTaskId String
+  userId     String
+  content    String
+  createdAt  DateTime @default(now())
+  updatedAt  DateTime @updatedAt
+  userTask   UserTask @relation(fields: [userTaskId], references: [id])
+  user       User     @relation(fields: [userId], references: [id])
+}
+
+model UserTaskAttachment {
+  id        String   @id @default(cuid())
+  taskId    String
+  userId    String
+  fileName  String
+  fileUrl   String
+  createdAt DateTime @default(now())
+  userTask  UserTask @relation(fields: [taskId], references: [id])
+  user      User     @relation(fields: [userId], references: [id])
 }
 
 model WishingWell {

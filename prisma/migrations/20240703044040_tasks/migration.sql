@@ -1,0 +1,6 @@
+-- AlterTable
+ALTER TABLE "GlobalTask" ADD COLUMN     "actualHours" DOUBLE PRECISION,
+ADD COLUMN     "estimatedHours" DOUBLE PRECISION,
+ADD COLUMN     "status" "TaskStatus" NOT NULL DEFAULT 'NOT_STARTED',
+ALTER COLUMN "isAtomic" DROP NOT NULL,
+ALTER COLUMN "isAtomic" DROP DEFAULT;
