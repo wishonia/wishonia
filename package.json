@@ -32,6 +32,7 @@
   },
   "dependencies": {
     "@agentic/stdlib": "^6.1.5",
+    "@ai-sdk/anthropic": "^0.0.27",
     "@ai-sdk/openai": "^0.0.14",
     "@ai-sdk/provider": "^0.0.8",
     "@copilotkit/backend": "^0.9.0",
