@@ -60,7 +60,7 @@ export function AppearanceForm() {
               render={({ field }) => (
                 <FormItem className="space-y-1">
                   <FormLabel>Theme</FormLabel>
-                  <FormDescription>Select your prefered theme.</FormDescription>
+                  <FormDescription>Select your preferred theme.</FormDescription>
                   <FormMessage />
                   <RadioGroup
                     onValueChange={field.onChange}
