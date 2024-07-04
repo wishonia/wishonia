@@ -18,4 +18,5 @@ export const agentCreateUpdateSchema = z.object({
   avatar: z.string().optional(),
   conversationStarters: z.array(z.string()).optional(),
   metadata: z.record(z.string(), z.any()).optional().optional(),
+  datasources: z.array(z.string()).optional()
 })

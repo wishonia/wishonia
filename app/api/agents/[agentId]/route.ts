@@ -1,10 +1,10 @@
 import * as z from "zod"
-
 import { getAgent } from "@/lib/api/agents"
 import { prisma } from "@/lib/db"
 import { handleError } from "@/lib/errorHandler"
 import { getCurrentUser } from "@/lib/session"
 import { agentCreateUpdateSchema } from "@/lib/validations/agent"
+import { createAgentDatasource } from "@/lib/agent"
 
 const routeContextSchema = z.object({
   params: z.object({
@@ -38,15 +38,28 @@ export async function PATCH(
     const { params } = routeContextSchema.parse(context)
     const json = await req.json()
     const body = agentCreateUpdateSchema.parse(json)
+    const datasources=body.datasources;
+    delete body.datasources;
     let agent = await prisma.agent.update({
       where: {
         id: params.agentId,
       },
       data: {
-        ...body,
+        name: body.name,
+        description: body.description,
+        initialMessage: body.initialMessage,
+        prompt: body.prompt,
+        avatar: body.avatar,
+        conversationStarters: body.conversationStarters,
+        metadata: body.metadata,
         updatedAt: new Date(),
       },
     })
+    if(datasources?.length){
+      for(let dataSourceID of datasources){
+        await createAgentDatasource(agent.id,dataSourceID)
+      }
+    }
     return new Response(JSON.stringify(agent), { status: 200 })
   } catch (error) {
     if (error instanceof z.ZodError) {
