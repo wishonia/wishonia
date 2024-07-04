@@ -70,9 +70,7 @@ export default function AgentForm({
         description: agentData?.description || "",
         prompt: agentData?.prompt || "",
         initialMessage: agentData?.initialMessage || "",
-        conversationStarters: agentData?.conversationStarters.map((text) => ({
-          text,
-        })) || [{ text: "" }],
+        conversationStarters: agentData?.conversationStarters?.map(text=>({text}))||[{text:''}],
       },
     })
 
@@ -81,7 +79,10 @@ export default function AgentForm({
     name: "conversationStarters",
   })
 
-  const navigateBack = () => window.history.back()
+  const navigateBack = () => {
+    router.refresh(); 
+    router.back()
+  }
 
   async function onSubmit(data: FormData) {
     setLoading(true)
@@ -118,8 +119,8 @@ export default function AgentForm({
       description: `Your Agent has been ${agentData ? "updated" : "created"}.`,
     })
 
-    router.back()
-    router.refresh()
+    router.refresh();
+    router.push('/agents');
   }
 
   const handleUpload = async (event: React.ChangeEvent<HTMLInputElement>) => {
