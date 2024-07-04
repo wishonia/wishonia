@@ -1,9 +1,9 @@
 import { NextResponse } from "next/server"
-
 import { prisma } from "@/lib/db"
 import { handleError } from "@/lib/errorHandler"
 import { getCurrentUser } from "@/lib/session"
 import { agentCreateUpdateSchema } from "@/lib/validations/agent"
+import { createAgentDatasource } from "@/lib/agent"
 
 export async function GET() {
   try {
@@ -42,6 +42,11 @@ export async function POST(req: Request) {
         id: true,
       },
     })
+    if(body.datasources?.length){
+      for(let dataSourceID of body.datasources){
+        await createAgentDatasource(agent.id,dataSourceID)
+      }
+    }
     return new Response(JSON.stringify(agent))
   } catch (error) {
     return handleError(error, "Could create agent because:", {
