@@ -8,5 +8,12 @@ export async function getAgent(agentId: Agent["id"]) {
     where: {
       id: agentId,
     },
+    include:{
+      datasources:{
+        include:{
+         datasource:true
+        }
+      }
+    }
   })
 }
