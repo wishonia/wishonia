@@ -3,36 +3,50 @@
 import React, { useEffect, useState } from "react"
 import { useRouter } from "next/navigation"
 import { zodResolver } from "@hookform/resolvers/zod"
-import { PlusCircle, Trash } from "@phosphor-icons/react"
-import { Agent } from "@prisma/client"
+import { PlusCircle, Trash ,X} from "@phosphor-icons/react"
 import axios from "axios"
 import { useFieldArray, useForm } from "react-hook-form"
 import * as z from "zod"
-
 import { useSidebar } from "@/lib/hooks/use-sidebar"
 import { agentSchema } from "@/lib/validations/agent"
+import { dataSourceSchema } from "@/lib/validations/dataSourceSchema"
 import { Button } from "@/components/ui/button"
 import { Input } from "@/components/ui/input"
 import { Label } from "@/components/ui/label"
 import { Textarea } from "@/components/ui/textarea"
 import { toast } from "@/components/ui/use-toast"
-
 import { Icons } from "../icons"
+import AddAgentDataSource from "./add-agent-data-source"
+import DataSourceIcon from "./data-source-icon"
+import {
+  AlertDialog,
+  AlertDialogAction,
+  AlertDialogCancel,
+  AlertDialogContent,
+  AlertDialogDescription,
+  AlertDialogFooter,
+  AlertDialogHeader,
+  AlertDialogTitle,
+} from "@/components/ui/alert-dialog"
+import LoadingSpinner from "@/components/LoadingSpinner";
 
 type FormData = z.infer<typeof agentSchema>
 
 interface AgentFormProps extends React.HTMLAttributes<HTMLFormElement> {
-  agentData?: Pick<
-    Agent,
-    | "id"
-    | "name"
-    | "description"
-    | "prompt"
-    | "initialMessage"
-    | "conversationStarters"
-    | "avatar"
-  >
+  agentData?: {
+    id: string
+    name: string
+    description?:string | null
+    prompt?:string | null
+    initialMessage?:string | null
+    conversationStarters?: string[] | null
+    avatar?:string | null,
+    datasources?: {
+      datasource?: dataSourceData | null |undefined
+    }[]|null|undefined
+  }
 }
+type dataSourceData=z.infer<typeof dataSourceSchema>
 
 export default function AgentForm({
   agentData,
@@ -43,6 +57,10 @@ export default function AgentForm({
   const { isSidebarOpen } = useSidebar()
   const [loading, setLoading] = useState(false)
   const [avatar, setAvatar] = useState<string | null>(agentData?.avatar || null)
+  const [isRemovePending, startRemoveTransition] = React.useTransition()
+  const [dsDialogOpen,setDsDialogOpen]=useState<boolean>(false);
+  const [selectedDatasource,setSelectedDatasource]=useState<dataSourceData|null>(null);
+  const [dataSource,setDataSource]=useState<dataSourceData[]>(agentData?.datasources?.map(obj=>obj.datasource||{name:''})||[]);
 
   const { handleSubmit, register, control, watch, setValue } =
     useForm<FormData>({
@@ -81,7 +99,8 @@ export default function AgentForm({
         prompt: data.prompt,
         initialMessage: data.initialMessage,
         avatar: data.avatar,
-        conversationStarters: data.conversationStarters.map(({ text }) => text),
+        conversationStarters: data.conversationStarters.map(({text})=>text),
+        datasources:dataSource.map((item)=>item.id)
       }),
     })
 
@@ -130,6 +149,35 @@ export default function AgentForm({
       setLoading(false)
     }
   }
+  
+  const deleteDatasource=(e:React.MouseEvent<HTMLButtonElement>)=>{
+      e.preventDefault()
+      startRemoveTransition(async () => {
+        const result=await axios.delete(`/api/datasource/${selectedDatasource?.id}`)
+        if (result.status!==200) {
+          toast({
+            title: "Error",
+            description: result.data?.error,
+            variant: "destructive",
+          })
+          return
+        }
+        setDataSource((prev)=>prev.filter(element=>element.id!==selectedDatasource?.id))
+        setSelectedDatasource(null);
+        toast({
+          title: "Datasource deleted",
+          description: "Your datasource has been successfully deleted.",
+          className: "bg-green-500 text-white",
+        })
+
+      })
+  }
+
+  const togleDataSourceDialog=()=>{
+    setDsDialogOpen(prev=>!prev);
+  }
+
+ 
 
   useEffect(() => {
     if (fields.length === 0) {
@@ -140,6 +188,8 @@ export default function AgentForm({
   const name = watch("name")
 
   return (
+    <>
+    <AddAgentDataSource open={dsDialogOpen} agentId={agentData?.id} dataSource={dataSource} setDataSource={setDataSource} onClose={togleDataSourceDialog}/>
     <div
       className={`mx-auto flex h-screen ${isSidebarOpen ? "lg:ml-[270px] lg:w-[calc(100%-270px)]" : "w-full lg:w-[96%]"}`}
     >
@@ -223,8 +273,8 @@ export default function AgentForm({
               >
                 Conversation Starters{" "}
                 <PlusCircle
-                  onClick={() => append({ text: "" })}
-                  className="ml-2 h-7 w-7 cursor-pointer rounded-full p-1 hover:shadow-md"
+                  onClick={() => append({text:""})}
+                  className="ml-2 h-7 w-7 cursor-pointer rounded-full p-1 shadow-md active:shadow-none  focus:ring"
                 />
               </Label>
               {fields.map((item: any, index: number) => (
@@ -245,6 +295,28 @@ export default function AgentForm({
                   </Button>
                 </div>
               ))}
+            </div>
+            <div className="space-y-2">
+            <Label
+                htmlFor="conversation-starters"
+                className="flex items-center text-sm font-medium"
+              >
+                Datasource
+                <PlusCircle
+                  onClick={togleDataSourceDialog}
+                  className="ml-2 h-7 w-7 cursor-pointer rounded-full p-1 shadow-md active:shadow-none  focus:ring"
+                />
+            </Label>
+            <div className="flex flex-wrap gap-2">
+              {dataSource.map((dsItem:dataSourceData)=>(
+               <div key={dsItem.id} className="bg-[#eeee] dark:bg-black dark:border dark:border-white text-sm py-1 flex items-center pl-2 rounded-sm">
+                <DataSourceIcon iconName={dsItem.type} className="mx-1"/>  {dsItem.name}
+                <Button type="button" onClick={()=>setSelectedDatasource(dsItem)} className="ml-2" variant='link'>
+                  <X/>
+                </Button>
+              </div>
+              ))}
+             </div>
             </div>
             <Button
               variant="outline"
@@ -275,6 +347,30 @@ export default function AgentForm({
         </div>
       </div>
     </div>
+    <AlertDialog open={selectedDatasource!==null} >
+        <AlertDialogContent>
+          <AlertDialogHeader>
+            <AlertDialogTitle>Are you absolutely sure?</AlertDialogTitle>
+            <AlertDialogDescription>
+              This action cannot be undone. This will permanently delete {selectedDatasource?.name} datasource.
+            </AlertDialogDescription>
+          </AlertDialogHeader>
+          <AlertDialogFooter>
+            <AlertDialogCancel onClick={()=>setSelectedDatasource(null)} disabled={isRemovePending}>
+              Cancel
+            </AlertDialogCancel>
+            <AlertDialogAction
+              disabled={isRemovePending}
+              onClick={deleteDatasource}
+              className="flex items-center gap-2 bg-red-500 text-white hover:bg-red-600"
+            >
+              {isRemovePending && <LoadingSpinner />}
+              Delete
+            </AlertDialogAction>
+          </AlertDialogFooter>
+        </AlertDialogContent>
+      </AlertDialog>
+    </>
   )
 }
 
