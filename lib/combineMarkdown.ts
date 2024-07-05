@@ -16,7 +16,7 @@ function combineMarkdownFiles(sourcePath: string, outputFileName: string = 'comb
         console.log(`Markdown files combined successfully into ${outputFile}`);
         return outputFile;
     } catch (error) {
-        console.error('Error combining Markdown files:', error);
+        console.error(`Error combining Markdown files from ${sourcePath} to ${outputFile}:`, error);
         throw error;
     }
 }
