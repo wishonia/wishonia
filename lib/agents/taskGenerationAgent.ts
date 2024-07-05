@@ -1,9 +1,9 @@
 import { GlobalSolution, TaskStatus } from '@prisma/client';
 import { generateObject } from 'ai';
-import { openai } from '@ai-sdk/openai';
 import {z, ZodSchema} from 'zod';
 import { prisma } from '@/lib/db';
 import {anthropic} from "@ai-sdk/anthropic";
+import {queryGeminiPro} from "@/lib/agents/geminiProClient";
 
 const TaskSchema: ZodSchema = z.object({
   name: z.string().describe('Unique, long, descriptive name for the task specific to its goal to avoid duplication with similar tasks for different goals.'),
@@ -23,12 +23,121 @@ interface TaskWithHierarchy {
 }
 
 class GlobalSolutionDecomposerAgent {
-  private readonly breakdownThreshold: number;
+  private readonly maximumHoursForTask: number;
+  private readonly temperature: number;
 
-  constructor(breakdownThreshold: number = 8) {
-    this.breakdownThreshold = breakdownThreshold;
+  constructor(maximumHoursForTask: number = 8, temperature: number = 0.4) {
+    this.maximumHoursForTask = maximumHoursForTask;
+    this.temperature = temperature;
   }
 
+  async decomposeWithGoogleAI(globalSolutionName: string, userId: string): Promise<string> {
+    const globalSolution = await prisma.globalSolution.findUnique({
+      where: { name: globalSolutionName },
+    });
+
+    if (!globalSolution) {
+      throw new Error(`GlobalSolution with name "${globalSolutionName}" not found.`);
+    }
+
+    const taskHierarchy = await this.getTaskHierarchyFromGoogleAI(globalSolution);
+    await this.storeTaskHierarchy(taskHierarchy, globalSolution.id, userId);
+
+    return `Successfully decomposed GlobalSolution "${globalSolutionName}" into atomic tasks using Google AI.`;
+  }
+
+  private async getTaskHierarchyFromGoogleAI(globalSolution: GlobalSolution): Promise<any> {
+    const prompt = `
+    Create a comprehensive, deeply nested hierarchical JSON object representing the task breakdown for the following goal:
+    
+    Goal Name: ${globalSolution.name}
+    Goal Description: ${globalSolution.description}
+
+    Important Notes:
+    - We have a very limited budget, so imagine what this would look like if it was easy and we did the bare minimum work required.
+    - DO NOT CREATE ANY TASK THAT IS NOT ABSOLUTELY NECESSARY TO COMPLETE THE GOAL.
+    - Ensure that the task breakdown is comprehensive and covers all aspects of the goal.
+    - Each task should have a 'task' property with its name and a 'subtasks' array containing its subtasks.
+    - Continue nesting subtasks until you reach atomic tasks that cannot be further broken down.
+
+    Return only the JSON object without any additional explanation.
+    `;
+
+    const result = await queryGeminiPro(prompt, this.temperature);
+    return JSON.parse(result);
+  }
+
+  private async storeTaskHierarchy(taskHierarchy: any, globalSolutionId: string, userId: string, parentTaskId?: string): Promise<void> {
+    const task = await this.createTask(taskHierarchy.task, globalSolutionId, userId, parentTaskId);
+
+    if (taskHierarchy.subtasks && taskHierarchy.subtasks.length > 0) {
+      for (const subtask of taskHierarchy.subtasks) {
+        await this.storeTaskHierarchy(subtask, globalSolutionId, userId, task.id);
+      }
+    }
+  }
+
+  private async createTask(taskName: string, globalSolutionId: string, userId: string, parentTaskId?: string): Promise<any> {
+    const taskDetails = await this.generateTaskDetails(taskName);
+
+    const createdTask = await prisma.globalTask.create({
+      data: {
+        userId,
+        name: taskName,
+        description: taskDetails.description,
+        status: TaskStatus.NOT_STARTED,
+        estimatedHours: taskDetails.estimatedHours,
+      },
+    });
+
+    await prisma.globalSolutionTask.create({
+      data: {
+        globalSolutionId: globalSolutionId,
+        globalTaskId: createdTask.id,
+      },
+    });
+
+    if (parentTaskId) {
+      await prisma.globalTaskRelation.create({
+        data: {
+          parentId: parentTaskId,
+          childId: createdTask.id,
+        },
+      });
+    }
+
+    if (taskDetails.skills) {
+      await this.createSkills(createdTask.id, taskDetails.skills);
+    }
+
+    return createdTask;
+  }
+
+  private async generateTaskDetails(taskName: string): Promise<TaskInput> {
+    const prompt = `
+    Generate detailed information for the following task:
+    
+    Task Name: ${taskName}
+
+    Provide the following details:
+    1. A detailed description of what needs to be done to complete the task.
+    2. Estimated time to complete the task in hours.
+    3. Whether this task is atomic (cannot be meaningfully broken down into smaller tasks).
+    4. An array of specific skills required to complete this task.
+    5. Assessment of the task's complexity level (Low, Medium, or High).
+    6. A brief description of the expected outcome or deliverable of the task.
+
+    Return the information in a JSON format that matches the TaskSchema.
+    `;
+
+    const result = await generateObject({
+      model: anthropic('claude-3-5-sonnet-20240620'),
+      schema: TaskSchema,
+      prompt,
+    });
+
+    return result.object;
+  }
 
   private async decomposeIntoTasks(globalSolution: GlobalSolution | null, taskHierarchy?: TaskWithHierarchy): Promise<TaskInput[]> {
 
@@ -130,7 +239,7 @@ Important Notes:
         }
       }
 
-      if (!task.isAtomic && (task.estimatedHours > this.breakdownThreshold || task.complexity === 'High')) {
+      if (!task.isAtomic && (task.estimatedHours > this.maximumHoursForTask || task.complexity === 'High')) {
         const newParentChain = [...parentChain, task.name];
         const subtasks = await this.decomposeIntoTasks(null, { task, parentChain: newParentChain });
         await this.storeTasksRecursively(
