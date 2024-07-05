@@ -63,7 +63,8 @@ describe("Global Problem Solutions", () => {
       `Starting decomposition of Global Solution: "${globalSolution.name}"`
     )
 
-    const result = await agent.decomposeAndStore(globalSolution.name, user.id)
+    const result = await agent.decomposeWithGoogleAI(globalSolution.name, user.id)
+    //const result = await agent.decomposeAndStore(globalSolution.name, user.id)
     console.log(result)
 
     // Fetch and display the created tasks
