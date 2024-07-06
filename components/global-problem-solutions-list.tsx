@@ -128,7 +128,7 @@ export const GlobalProblemSolutionsList: React.FC<PollProps> = ({
       accessorKey: "id",
       header: "Actions",
       cell: (row) => {
-        const id = row.row.original.id
+        const {id} = row.row.original
         return (
           <div className="flex items-center justify-center">
             <Link href={`/globalProblemSolutions/${id}/edit`}>

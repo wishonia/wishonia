@@ -1,6 +1,6 @@
 "use client"
 
-import { ArrowRight, GithubLogo, MagicWand } from "@phosphor-icons/react"
+import { ArrowRight, MagicWand } from "@phosphor-icons/react"
 import { Agent } from "@prisma/client"
 import { useActions, useAIState, useUIState } from "ai/rsc"
 import { nanoid } from "nanoid"
@@ -11,6 +11,7 @@ import { useUser } from "@/lib/useUser"
 import { exampleMessages } from "@/components/ChatExampleQuestions"
 
 import { UserMessage } from "./assistant/Message"
+import {useRouter} from "next/navigation";
 
 function ChatPanel({ agentData }: { agentData?: Agent | null }) {
   const [aiState] = useAIState()
@@ -18,6 +19,7 @@ function ChatPanel({ agentData }: { agentData?: Agent | null }) {
   const [messages, setMessages] = useUIState<typeof AI>()
   const { isSignedIn, user } = useUser()
   const { isSidebarOpen, isLoading, toggleSidebar } = useSidebar()
+const router = useRouter();
   if (agentData) {
     return (
       <div
@@ -35,6 +37,14 @@ function ChatPanel({ agentData }: { agentData?: Agent | null }) {
           <p className="block px-6 text-center text-xs tracking-normal text-zinc-600 md:text-sm">
             {agentData.description}
           </p>
+          {user?.id === agentData?.userId && (
+              <button
+                  className="mt-2 px-4 py-2"
+                  onClick={() => router.push(`/agents/${agentData.id}/edit`)}
+              >
+                Edit Agent
+              </button>
+          )}
         </div>
         <div
           className={`${messages.length > 0 ? "hidden" : "block"} mx-auto w-full`}

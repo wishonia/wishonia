@@ -14,10 +14,18 @@ import {
 } from "@/lib/markdownReader"
 import { generateMetadataWhereMissing } from "@/lib/metadataGenerator"
 import { generateWishingWellMarkdown } from "@/lib/wishingWellMarkdownGenerator"
+import {combineMarkdownFiles, MarkdownCombiner} from "@/lib/combineMarkdown";
 
-describe("Test Markdown Reader", () => {
+describe("Markdown Utilities", () => {
   // Set timeout to 10 minutes
   jest.setTimeout(600000)
+  it("combines markdown files", async () => {
+    const result = combineMarkdownFiles ( 'public/docs',
+      'combined_markdown_docs.md');
+    combineMarkdownFiles ( 'public/docs/positron-network',
+        'combined_markdown_positron.md');
+    expect(result).toBeDefined();
+  });
   it("gets markdown files without metadata", async () => {
     const mdFiles = await getMarkdownFilesWithoutMetaData(
       absPathFromRepo("public")

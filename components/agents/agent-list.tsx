@@ -113,7 +113,7 @@ export default function AgentList() {
                 </div>
               </Link>
               <div className="ml-1 flex items-center space-x-4">
-                <Link href={`/agents/edit/${agent.id}`}>
+                <Link href={`/agents/${agent.id}/edit`}>
                   <PencilIcon className="h-5 w-5" />
                 </Link>
                 <DropdownMenu>
