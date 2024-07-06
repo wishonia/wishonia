@@ -140,10 +140,12 @@ model User {
   accounts                              Account[]
   sessions                              Session[]
   joinedGenieDAOs                       GenieDAO[]                            @relation("JoinedGenieDAOs")
-  GlobalTaskAttachment                  GlobalTaskAttachment[]
-  GlobalTaskComment                     GlobalTaskComment[]
-  UserTaskComment                       UserTaskComment[]
-  UserTaskAttachment                    UserTaskAttachment[]
+  globalTaskAttachment                  GlobalTaskAttachment[]
+  globalTaskComment                     GlobalTaskComment[]
+  userTaskComment                       UserTaskComment[]
+  userTaskAttachment                    UserTaskAttachment[]
+  person                                Person?
+  personId                              String?
 }
 
 model Education {
@@ -899,30 +901,48 @@ model Library {
   updatedAt   DateTime @updatedAt
 }
 
+// Need this to create digital twins for organizations
 model Organization {
-  id            String   @id @default(cuid())
+  id            String                   @id @default(cuid())
   name          String
   alternateName String?
   description   String?
   url           String?
   logo          String?
-  createdAt     DateTime @default(now())
-  updatedAt     DateTime @updatedAt
+  createdAt     DateTime                 @default(now())
+  updatedAt     DateTime                 @updatedAt
   email         String?
   telephone     String?
-  member        Person[]
+  members       OrganizationMembership[]
 }
 
-model Person {
+model OrganizationMembership {
   id             String       @id @default(cuid())
-  name           String
-  email          String?
-  telephone      String?
-  jobTitle       String?
   organizationId String
-  createdAt      DateTime     @default(now())
-  updatedAt      DateTime     @updatedAt
+  personId       String
+  role           String? // Role of the person in the organization
+  startDate      DateTime? // When the membership started
+  endDate        DateTime? // When the membership ended (null if still active)
+  permissions    Json? // Specific permissions in JSON format
+  status         String? // Status of the membership (active, suspended, etc.)
   organization   Organization @relation(fields: [organizationId], references: [id])
+  person         Person       @relation(fields: [personId], references: [id])
+
+  @@unique([organizationId, personId])
+}
+
+// Need this to create digital twins for people that are not users
+model Person {
+  id          String                   @id @default(cuid())
+  name        String
+  email       String?
+  telephone   String?
+  jobTitle    String?
+  createdAt   DateTime                 @default(now())
+  updatedAt   DateTime                 @updatedAt
+  memberships OrganizationMembership[]
+  userId      String?                  @unique
+  user        User?                    @relation(fields: [userId], references: [id])
 }
 
 model Chat {
@@ -1085,6 +1105,7 @@ enum DatasourceType {
 }
 
 enum DatasourceStatus {
+  QUEUED
   IN_PROGRESS
   DONE
   FAILED
