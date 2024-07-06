@@ -48,14 +48,13 @@ class GlobalSolutionDecomposerAgent {
 
   private async getTaskHierarchyFromGoogleAI(globalSolution: GlobalSolution): Promise<any> {
     const prompt = `
-    Create a comprehensive, deeply nested hierarchical JSON object representing the task breakdown for the following goal:
+    Create a comprehensive, deeply nested hierarchical JSON object representing the task breakdown
+     for the following goal:
     
     Goal Name: ${globalSolution.name}
     Goal Description: ${globalSolution.description}
 
     Important Notes:
-    - We have a very limited budget, so imagine what this would look like if it was easy and we did the bare minimum work required.
-    - DO NOT CREATE ANY TASK THAT IS NOT ABSOLUTELY NECESSARY TO COMPLETE THE GOAL.
     - Ensure that the task breakdown is comprehensive and covers all aspects of the goal.
     - Each task should have a 'task' property with its name and a 'subtasks' array containing its subtasks.
     - Continue nesting subtasks until you reach atomic tasks that cannot be further broken down.
@@ -64,7 +63,13 @@ class GlobalSolutionDecomposerAgent {
     `;
 
     const result = await queryGeminiPro(prompt, this.temperature);
-    return JSON.parse(result);
+    const objectStart = result.indexOf('{');
+    const objectEnd = result.lastIndexOf('}');
+    const str = result.substring(objectStart, objectEnd + 1);
+    const obj = JSON.parse(str);
+    // if there's only one top-level property like "goal", return its value so we just get
+    // the recursive task hierarchy object
+    return Object.keys(obj).length === 1 ? obj[Object.keys(obj)[0]] : obj;
   }
 
   private async storeTaskHierarchy(taskHierarchy: any, globalSolutionId: string, userId: string, parentTaskId?: string): Promise<void> {
