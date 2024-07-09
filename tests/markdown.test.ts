@@ -14,7 +14,7 @@ import {
 } from "@/lib/markdownReader"
 import { generateMetadataWhereMissing } from "@/lib/metadataGenerator"
 import { generateWishingWellMarkdown } from "@/lib/wishingWellMarkdownGenerator"
-import {combineMarkdownFiles, MarkdownCombiner} from "@/lib/combineMarkdown";
+import {combineMarkdownFiles} from "@/lib/combineMarkdown";
 
 describe("Markdown Utilities", () => {
   // Set timeout to 10 minutes
