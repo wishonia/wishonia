@@ -8,7 +8,7 @@ export interface Chat extends Record<string, any> {
   path: string
   messages: Message[]
   sharedPath?: string
-  agent: Agent | null | undefined
+  agent?: Agent | null | undefined
 }
 
 export type ServerActionResult<Result> = Promise<

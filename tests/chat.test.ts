@@ -4,6 +4,8 @@
 import { saveChat } from "@/lib/chat"
 import { prisma } from "@/lib/db"
 import { Chat } from "@/lib/types"
+import {getOrCreateAgent} from "@/lib/agent";
+import {getOrCreateTestUser} from "@/tests/test-helpers";
 
 async function deleteChatsAndMessages() {
   await prisma.chatMessage.deleteMany({
@@ -17,6 +19,11 @@ async function deleteChatsAndMessages() {
 describe("saveChat", () => {
   it("should create a new chat and save messages if chat does not exist", async () => {
     await deleteChatsAndMessages()
+    const user = await getOrCreateTestUser();
+    const agent = await getOrCreateAgent({
+      name: "Digital Twin Safe Project Manger",
+      userId: user.id,
+    })
     const savedChat: Chat = {
       id: "1",
       title: "New Chat",
@@ -24,6 +31,7 @@ describe("saveChat", () => {
       createdAt: new Date(),
       path: "/chats/1",
       messages: [{ id: "1", content: "Message 1", role: "user" }],
+      agent: agent,
     }
 
     await saveChat(savedChat)
@@ -41,7 +49,8 @@ describe("saveChat", () => {
     })
     await saveChat(savedChat)
 
-    const createdChat = await prisma.chat.findUnique({
+    const createdChat =
+        await prisma.chat.findUnique({
       where: { id: "1" },
       include: { messages: true },
     })

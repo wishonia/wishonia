@@ -28,7 +28,7 @@ import {
   FaChartBar,
   FaChartPie,
   FaDisease,
-  FaEdit,
+  FaEdit, FaEye, FaEyeSlash,
   FaHome,
   FaLightbulb,
   FaPeace,
@@ -120,6 +120,8 @@ const icons = {
   volunteer: FaHand,
   lightbulb: FaLightbulb,
   edit: FaEdit,
+  eye: FaEye,
+  eyeOff: FaEyeSlash,
 }
 
 export const Icons: IconsType = icons
