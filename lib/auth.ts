@@ -7,6 +7,7 @@ import GoogleProvider from "next-auth/providers/google"
 
 import { env } from "@/env.mjs"
 import { prisma as db } from "@/lib/db"
+import {User} from "@/types/models/User";
 
 export const authOptions: NextAuthOptions = {
   adapter: PrismaAdapter(db),
@@ -30,12 +31,36 @@ export const authOptions: NextAuthOptions = {
       clientId: env.GITHUB_CLIENT_ID,
       clientSecret: env.GITHUB_CLIENT_SECRET,
     }),
+      // dFDA custom oauth provider
+    {
+      id: 'dfda',
+      name: 'The Decentralized FDA',
+      type: 'oauth',
+      version: '2.0',
+      authorization: {
+        url: 'https://safe.dfda.earth/oauth/authorize',
+        params: {
+          scope: 'readmeasurements writemeasurements',
+          grant_type: 'authorization_code',
+        },
+      },
+      accessTokenUrl: 'https://safe.dfda.earth/oauth/token',
+      profileUrl: 'https://safe.dfda.earth/api/v1/user',
+      profile: (profile: User) => ({
+        id: profile.id.toString(),
+        name: profile.displayName,
+        email: profile.email,
+        image: profile.avatar,
+      }),
+      clientId: process.env.DFDA_CLIENT_ID,
+      clientSecret: process.env.DFDA_CLIENT_SECRET,
+    }
   ],
   callbacks: {
     async session({ token, session }) {
       if (token) {
         session.user.id = token.id
-        let name = token.name
+        let {name} = token
         if (token.firstName && token.lastName) {
           name = `${token.firstName} ${token.lastName}`
         }

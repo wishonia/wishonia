@@ -18,7 +18,7 @@ export async function GET(
 ) {
   try {
     const { params } = routeContextSchema.parse(context)
-    const agentId = params.agentId
+    const {agentId} = params
     const agentData = await prisma.agent.findUnique({
       where: {
         id: agentId,
@@ -38,7 +38,7 @@ export async function PATCH(
     const { params } = routeContextSchema.parse(context)
     const json = await req.json()
     const body = agentCreateUpdateSchema.parse(json)
-    const datasources=body.datasources;
+    const {datasources} = body;
     delete body.datasources;
     let agent = await prisma.agent.update({
       where: {
@@ -78,7 +78,7 @@ export async function DELETE(
   }
   try {
     const { params } = routeContextSchema.parse(context)
-    const agentId = params.agentId
+    const {agentId} = params
     const agent = await getAgent(agentId)
     if (agent?.userId !== currentUser.id) {
       return new Response("Unauthorized", { status: 401 })

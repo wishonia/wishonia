@@ -1,6 +1,24 @@
-# Wishocracy: A Decentralized To-Do List for Humanity
+# A Decentralized To-Do List for Humanity
 
-**Wishocracy** is a decentralized, modular and interoperable protocol for optimally allocating societal resources to maximize universal wish fulfillment using collective intelligence. It's meant to be a general-purpose system to be used by any organization like nonprofits, DAOs, businesses, etc.
+Here's the theory. 
+
+If you:
+1. want to most quickly and efficiently solve a massive global problem
+2. have limited resources
+
+Then this is the most efficient way to go about it:
+1. Make a list of global problems
+2. collectively determine the share of resources that should be allocated to solve each problem using [Randomized Aggregated Pairwise Preference Allocation](#aggregated-pairwise-preference-allocation-appa) or something
+3. Use AI research agents + humans to research and compile an exhaustive list of potential solutions to each problem. 
+4. Use AI goal decomposition agents to recursively break each solution into every single atomic task that needs to be completed to implement the solution.
+5. Assign an AI agent to each task, so they can either:
+   - identify who's already working on the task or
+   - have an AI agent complete the task (if possible) or 
+   - have the agent identify the human or organization who can complete it as cheaply and quickly as possible
+
+# Definitions
+
+**Wishocracy** is a decentralized, modular, and interoperable protocol for optimally allocating societal resources to maximize universal wish fulfillment using collective intelligence. It's meant to be a general-purpose system to be used by any organization like nonprofits, DAOs, businesses, etc.
 
 **Wishonia** is an imaginary magical kingdom meant to illustrate the concept of Wishocracy and test the idea in a simulated virtual world to see how it works.
 
@@ -162,7 +180,7 @@ By aggregating lots of pairwise allocations from lots of people, we may be to de
 ## Step 3: Create a List of Solutions
 
 Allow people or AI agents to submit proposed solutions for each problem
-or wish to create a comprehensive list of proposed strategies to fullfill each wish or solve each problem.
+or wish to create a comprehensive list of proposed strategies to fulfill each wish or solve each problem.
 
 ## Step 4: Evaluate Solutions
 
