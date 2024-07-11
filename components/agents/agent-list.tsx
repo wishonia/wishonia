@@ -71,7 +71,7 @@ export default function AgentList() {
           <div>
             <div className="font-semibold">Create a Agent</div>
             <div className="text-[#BBBBBB]">
-              Customize a version of Agent for a specific purpose
+                Create a pro-social Positron agent to improve the world.
             </div>
           </div>
         </div>
