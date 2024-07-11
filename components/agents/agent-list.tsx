@@ -90,8 +90,12 @@ export default function AgentList() {
               >
                 <div className="flex w-full items-center p-0">
                   <div className="mr-2 flex h-full items-center">
-                    <HexagonIcon className="h-8 w-8 rounded-full bg-black p-2 text-white dark:bg-white dark:text-black" />
-                  </div>
+                    {agent.avatar ? (
+                        <img src={agent.avatar} alt="Agent Avatar" className="h-8 w-8 rounded-full object-cover" />
+                    ) : (
+                        <HexagonIcon className="h-8 w-8 rounded-full bg-black p-2 text-white dark:bg-white dark:text-black" />
+                    )}
+                   </div>
                   <div className="w-full overflow-hidden  text-ellipsis md:mx-4">
                     <div className="overflow-hidden  text-ellipsis font-semibold ">
                       {agent.name}

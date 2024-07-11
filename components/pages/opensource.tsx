@@ -22,7 +22,7 @@ export default async function OpenSource() {
     <section className="container py-12 lg:py-20">
       <div className="flex flex-col items-center gap-4">
         <HeadingText
-          subtext="Go ahead and steal it and create a better world!"
+          subtext="Fork it and create a better world!"
           className="text-center"
         >
           Think Wishonia Sucks?
