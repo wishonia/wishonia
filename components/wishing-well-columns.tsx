@@ -26,7 +26,7 @@ export const wishingWellColumns: ColumnDef<WishingWell>[] = [
     cell: (row) => {
       const name = row.row.original.name
       const id = row.row.original.id
-      const featuredImage = row.row.original.featuredImage || ""
+      const featuredImage = row.row.original.featuredImage || null
       const description = row.row.original.description
       return (
         <Link
@@ -34,13 +34,15 @@ export const wishingWellColumns: ColumnDef<WishingWell>[] = [
           className={cn(buttonVariants({ variant: "ghost" }))}
           title={description || ""}
         >
-          <Image
-            src={featuredImage}
-            className={"rounded-full object-cover p-2"}
-            alt="Global Wish"
-            width={50}
-            height={50}
-          />
+          {featuredImage && (
+            <Image
+              src={featuredImage}
+              className={"rounded-full object-cover p-2"}
+              alt="Global Wish"
+              width={50}
+              height={50}
+            />
+          )}
           {name}
         </Link>
       )

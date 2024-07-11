@@ -18,7 +18,7 @@ export async function POST(req: Request) {
 
     const json = await req.json()
     const body = wishingWellCreateSchema.parse(json)
-    const wish = body.wish
+    const {wish} = body
     const wishingWell = await saveWishToWishingWell(wish, userId)
     return new Response(JSON.stringify(wishingWell))
   } catch (error) {

@@ -47,7 +47,7 @@ export default async function Dashboard({ searchParams }: DashboardProps) {
   return (
     <Shell>
       <DrugClassificationFormGoogle />
-      <DrugClassificationForm></DrugClassificationForm>
+      {/*<DrugClassificationForm></DrugClassificationForm>*/}
     </Shell>
   )
 }

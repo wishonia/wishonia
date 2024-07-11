@@ -7,6 +7,7 @@ import { getCurrentUser } from "@/lib/session"
 import { Shell } from "@/components/layout/shell"
 import { DashboardHeader } from "@/components/pages/dashboard/dashboard-header"
 import { WishForm } from "@/components/wishingWell/wish-form"
+import {WishingWellsList} from "@/components/wishing-well-list";
 
 export const metadata: Metadata = {
   title: "Make a Wish",
@@ -30,6 +31,7 @@ export default async function WishingWellEdit({
       <DashboardHeader heading="Make a Wish" text="Choose wisely!" />
       <div className="grid grid-cols-1 gap-10">
         <WishForm></WishForm>
+          <WishingWellsList />
       </div>
     </Shell>
   )
