@@ -56,14 +56,6 @@ jest tests/seed.test.ts
 
 # Why Are You Doing This?
 
-How we currently allocate over 44% of societal resources:
-
-https://github.com/mikepsinn/wishonia/assets/2808553/f2d859ad-a24f-410d-b95a-05410bfcb063
-
-The result is that humanity spends 333 times more on fighting with each other than curing any disease.
-
-![spending-on-war-vs-cures-bar-chart](public/globalSolutions/1-percent-treaty/spending-on-war-vs-cures-bar-chart.png)
-
 **The most universal goal we all share is to
 maximize the median health and happiness for sentient beings.**
 
@@ -93,8 +85,7 @@ By integrating these AI agents into a Global Todo List for humanity, we can stre
 # Solution: Collective Intelligence and Coordination
 
 The best system we have for maximizing individual health and happiness is the free market.
-It's a decentralized system that uses collective intelligence
-to maximize wish fulfillment.
+It's a decentralized system that uses collective intelligence to maximize wish fulfillment.
 It works by letting everyone vote with their dollars to determine what everyone should be doing for 40 hours a week.
 It's able to coordinate thousands of people who don't even know each other exist to produce goods and services that are more complex than any one person could produce on their own.
 
@@ -162,7 +153,7 @@ Determine how much of our scarce resources should be allocated to solving each p
 
 There are a number of ways to do this like democracy and crowdfunding campaigns but they suffer from various limitations:
 
-- **Representative Democracy:** The interests of representatives do not match the interests of all citizens. Additionally, representatives have limited knowledge and cognitive capacity to effectively weigh the relative importance of thousands of wishes.
+- **Democracy:** Some interests of representatives do not match the interests of all citizens. Additionally, representatives have limited knowledge and cognitive capacity to effectively weigh the relative importance of thousands of wishes.
 - **Crowdfunding Campaigns:** People vote with their dollars to determine the allocation of resources. However, again humans have limited cognitive capacity to effectively weigh the relative importance of thousands of wishes.
 
 ### Aggregated Pairwise Preference Allocation (APPA)
@@ -228,16 +219,14 @@ This will enable continuous improvement in the allocation of resources to maximi
 - **Iterative Feedback Loops**: The system should incorporate continuous improvement of allocations based on impact data and participant input.
 - **Decentralized Task Allocation**: By decomposing solutions into atomic tasks and cost-sharing across multiple organizations, Wishocracy tries to minimize duplication of effort and maximize efficiency.
 
-# Wishocracy Protocol
+# Protocol
 
-Here is a proposed design for Wishocracy as a decentralized, interoperable protocol composed of primitives to enable global integration with existing systems for task management and resource allocation:
-
-## Wishocracy Protocol Primitives
+## Protocol Primitives
 
 The current models are available in the [Prisma schema here](prisma/schema.prisma).
 However, we'll ultimately want to define these as JSON schemas and switch to a decentralized data store for interoperability.
 
-1. **Wish/Problem Statement (WPS)**
+1. **Problem Statement (WPS)**
 
 - Globally unique identifier
 - Title (short description)
@@ -317,7 +306,7 @@ However, we'll ultimately want to define these as JSON schemas and switch to a d
 
 # Integration and Interoperability
 
-These primitives can be represented as standardized data schemas (e.g., JSON, XML, RDF) that can be stored, queried, and interlinked across disparate systems via decentralized data networks like IPFS, GUN, Ceramic, etc.
+These primitives can be represented as standardized data schemas that can be stored, queried, and interlinked across disparate systems via decentralized data networks like IPFS, GUN, Ceramic, etc.
 
 Existing task management or resource allocation platforms can map their internal data models to these common primitives, and publish/subscribe to relevant data streams. This allows different systems to coordinate on a global "task graph" without tight coupling.
 
@@ -351,10 +340,6 @@ A Digital Twin is a digital representation of a person that is defined by their:
 - **Resources**: What they have to offer
 - **Interests**: What they're interested in
 - **Time**: How much time they have to offer
-- **Reputation**: How trustworthy they are
-- **Network**: Who they know
-- **Location**: Where they are
-- **Language**: What languages they speak
 
 The basic technical ingredients of a digital twin are:
 
@@ -369,7 +354,7 @@ The basic technical ingredients of a digital twin are:
 3. **Governance Mechanisms**: Developing mechanisms for handling disputes, gaming behaviors, and bad actors to ensure system integrity.
 4. **Transparency and Explainability**: Incorporating features that allow participants to see how decisions were made and drill down from high-level priorities to specific tasks and vice versa.
 
-# Next Steps
+# What's Next?
 
 1. **Integrate Existing Public Goods Protocols and Platforms**:
    Identify and analyze existing projects and platforms that aim to optimize resource allocation such as Gitcoin Grants, HyperCerts, and others. Figure out how Wishocracy can complement or integrate with them.
@@ -380,42 +365,28 @@ The basic technical ingredients of a digital twin are:
 
 # Frequently Asked Questions
 
-## Q: Isn't this insanely over-ambitious? Why not just focus on smaller focused goals?
+## Q: Why not just focus on smaller focused goals?
 
 The goal is to minimize wasted duplication of effort to optimize societal resource allocation.
 By limiting its scope to small organizations, it would not be able to prevent duplication of effort on a global scale.
 
-Furthermore,
-research has shown that the quality of decisions made by groups is proportional to the diversity of the group. By focusing on a global scale, Wishocracy can tap into the wisdom of the crowd to make better decisions than any one person or small group of people could make.
+Research has shown that the quality of decisions made by groups is proportional to the diversity of the group. By focusing on a global scale, Wishocracy can tap into the wisdom of the crowd to make better decisions than any one person or small group of people could make.
 
-This requires that Wishocracy be more of a decentralized protocol that can integrate with any existing system rather than a standalone system.
+This requires a decentralized protocol that can integrate with any existing system rather than a standalone system.
 
-## Q: What's the benefit of a global todo list. How would an individual's vote matter? Doesn't the government make decisions on what problems are to be prioritized?
-
-The goal of Wishocracy isn't to replace existing governments, DAOs, nonprofits or other organizations but to
-help them coordinate and make optimal resource allocation decisions.
-
-The key potential benefits of a global, decentralized todo list are:
+## Q: What's the benefit of a global todo list?
 
 1. **Preventing Waste** - Minimizing duplicated effort by surfacing what problems/wishes people are already working on solving. This allows resources to be allocated more efficiently. Governments and charitable foundations spend billions on solving important problems, but lack of coordination often leads to significant duplication of effort. For instance, if two research organizations each spend $1 million doing animal trials on the same drug, that's effectively $1 million of funding wasted and lots of extra animals suffering for no reason.
 
-2. **Information** - In democracies, representatives are supposed to do what people want.  
-   But how can they do that if we don't have a system to create a budget that illustrates what everyone wants?
-   [Aggregated Pairwise Preference Allocation](#aggregated-pairwise-preference-allocation-appa) is a unique way to quantify what everyone wants.
-   Thus, just having this information available to representatives would actually make it possible for representatives to do what people want.
-
-3. **Coordination and Cost-Sharing** -
+2. **Coordination and Cost-Sharing** -
    By decomposing solutions into atomic tasks
    that anyone can contribute to, it enables cost-sharing between organizations that need the same thing.  
    This would enable all organizations to accomplish more with the same amount of resources.
 
-4. **Helping People Maximize Their Impact** - Say you're a charitable individual who wants to improve the world. How can you figure out what the most important thing you can do A global decentralized to do list could help charitable people find the highest impact tasks to work on given their skills and resources.
+3. **Helping People Maximize Their Impact** - Say you're a charitable individual who wants to improve the world. How can you figure out what the most important thing you can do A global decentralized to do list could help charitable people find the highest impact tasks to work on given their skills and resources.
 
-5. **Iterative Improvement through Impact Tracking** - Iteratively improving allocation of resources over time by feeding impact data back into the prioritization process. The system gets smarter.
+4. **Iterative Improvement through Impact Tracking** - Iteratively improving allocation of resources over time by feeding impact data back into the prioritization process.
 
-The key is to start with small-scale experiments and grow gradually,
-while maintaining the north star of empowering individuals to self-organize to solve important problems,
-augmenting rather than replacing existing institutions.
 
 ## Q: Even if we had a global to-do list, we need every organization to use it for it to be useful. How will we make it so that every organization decides to use it?
 
