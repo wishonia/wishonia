@@ -685,17 +685,19 @@ model Datasource {
   name        String
   content     String?
   description String?
-  url         String?
+  url         String?           @unique
   type        DatasourceType
   userId      String
   createdAt   DateTime          @default(now())
   updatedAt   DateTime          @updatedAt
   metadata    String?
-  status      DatasourceStatus  @default(IN_PROGRESS)
+  status      DatasourceStatus  @default(QUEUED)
   vectorDbId  String?
   datasources AgentDatasource[]
   user        User              @relation(fields: [userId], references: [id])
   vectorDb    VectorDb?         @relation(fields: [vectorDbId], references: [id])
+
+  @@unique([name, userId])
 }
 
 model AgentDatasource {

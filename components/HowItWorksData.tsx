@@ -4,11 +4,11 @@ import { GlobalProblemSolutionsList } from "@/components/global-problem-solution
 import { GlobalProblemsList } from "@/components/global-problems-list"
 import { PollRandomGlobalProblemSolutions } from "@/components/poll-random-global-problem-solutions"
 import { PollRandomGlobalProblems } from "@/components/poll-random-global-problems"
-import ActionableTaskStrategyVisualizer from "@/components/landing-page/TaskGalaxyVisualizerWithData";
-import TaskAllocationVisualizer from "@/components/landing-page/TaskAllocationVisualizer";
-import ResearchEffortCataloger from "@/components/landing-page/ResearchEffortCataloger";
-import ImpactTrackerVisualizer from "@/components/landing-page/ImpactTrackerVisualizer";
-import IdeaSubmissionHub from "@/components/landing-page/IdeaSubmissionHub";
+import ActionableTaskStrategyVisualizer from "@/components/landingPage/TaskGalaxyVisualizerWithData";
+import TaskAllocationVisualizer from "@/components/landingPage/TaskAllocationVisualizer";
+import ResearchEffortCataloger from "@/components/landingPage/ResearchEffortCataloger";
+import ImpactTrackerVisualizer from "@/components/landingPage/ImpactTrackerVisualizer";
+import IdeaSubmissionHub from "@/components/landingPage/IdeaSubmissionHub";
 
 export interface QAItem {
   question: string
