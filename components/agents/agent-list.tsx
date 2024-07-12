@@ -62,16 +62,16 @@ export default function AgentList() {
     <div
       className={`mx-auto h-screen scroll-m-1 overflow-auto p-2 pt-8 md:p-8 xl:max-w-[1000px]  ${isSidebarOpen ? "lg:ml-[270px] lg:w-[calc(100%-270px)]" : "w-full lg:w-[96%]"}`}
     >
-      <h1 className="mb-6 text-3xl font-semibold">My Agents</h1>
+      <h1 className="mb-6 text-3xl font-semibold">My Positron Agents</h1>
       <Link href="/agents/new">
         <div className="flex w-full items-center space-x-4 rounded-sm p-4 hover:bg-secondary">
           <div>
             <PlusIcon className="h-8 w-8 rounded-full bg-black p-2 text-white dark:bg-white dark:text-black" />
           </div>
           <div>
-            <div className="font-semibold">Create a Agent</div>
+            <div className="font-semibold">Create a Positron Agent</div>
             <div className="text-[#BBBBBB]">
-                Create a pro-social Positron agent to improve the world.
+                Create a pro-social AI agent to improve the world.
             </div>
           </div>
         </div>
