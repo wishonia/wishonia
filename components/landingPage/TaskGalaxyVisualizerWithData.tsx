@@ -4,7 +4,7 @@ import { ChevronDown, ChevronRight, Check, Clock, AlertTriangle, Plus, Users } f
 
 interface Task {
     id: string;
-    task: string;
+    name: string;
     description?: string;
     status: 'not-started' | 'in-progress' | 'completed' | 'blocked';
     subtasks?: Task[];
@@ -51,7 +51,7 @@ const TaskNode: React.FC<TaskNodeProps> = ({ task, level, onStatusChange, onAddS
         const formData = new FormData(e.currentTarget);
         const updatedTask: Task = {
             ...task,
-            task: formData.get('task') as string,
+            name: formData.get('task') as string,
             description: formData.get('description') as string,
             skills: (formData.get('skills') as string).split(',').map(skill => skill.trim()),
             dependencies: (formData.get('dependencies') as string).split(',').map(dep => dep.trim()),
@@ -71,7 +71,7 @@ const TaskNode: React.FC<TaskNodeProps> = ({ task, level, onStatusChange, onAddS
                     </button>
                 )}
                 <div className="mr-2">{getStatusIcon(task.status)}</div>
-                <div className="flex-grow font-medium">{task.task}</div>
+                <div className="flex-grow font-medium">{task.name}</div>
                 <select
                     value={task.status}
                     onChange={handleStatusChange}
@@ -87,7 +87,7 @@ const TaskNode: React.FC<TaskNodeProps> = ({ task, level, onStatusChange, onAddS
             </div>
             {isEditing ? (
                 <form onSubmit={handleSave} className="mt-2">
-                    <input name="task" defaultValue={task.task} className="w-full p-1 mb-2 border rounded" />
+                    <input name="task" defaultValue={task.name} className="w-full p-1 mb-2 border rounded" />
                     <textarea name="description" defaultValue={task.description} className="w-full p-1 mb-2 border rounded" placeholder="Description" />
                     <input name="skills" defaultValue={task.skills?.join(', ')} className="w-full p-1 mb-2 border rounded" placeholder="Required skills (comma-separated)" />
                     <input name="dependencies" defaultValue={task.dependencies?.join(', ')} className="w-full p-1 mb-2 border rounded" placeholder="Dependencies (comma-separated)" />
@@ -133,38 +133,38 @@ const TaskNode: React.FC<TaskNodeProps> = ({ task, level, onStatusChange, onAddS
 };
 
 const ActionableTaskStrategyVisualizer: React.FC = () => {
-    const [tasks, setTasks] = useState<Task>({
+    let taskHierarchy = {
         id: '1',
-        task: "Create AI Drug Discovery Platform",
+        name: "Create AI Drug Discovery Platform",
         status: 'in-progress',
         description: "Develop a comprehensive platform for AI-driven drug discovery",
         decompositionNotes: "Broken down by goal decomposition agents into main platform components",
         subtasks: [
             {
                 id: '1.1',
-                task: "Develop Platform Infrastructure",
+                name: "Develop Platform Infrastructure",
                 status: 'in-progress',
                 skills: ["Cloud Architecture", "Database Design", "Security"],
                 decompositionNotes: "Further decomposed based on technical requirements and best practices",
                 subtasks: [
                     {
                         id: '1.1.1',
-                        task: "Design Data Storage",
+                        name: "Design Data Storage",
                         status: 'completed',
                         description: "Create a scalable and secure data storage system",
                         skills: ["Database Design", "Data Modeling"],
                         dependencies: ["Technology Stack Decision"],
                         decompositionNotes: "Broken down into specific database tasks by data architecture specialist",
                         subtasks: [
-                            { id: '1.1.1.1', task: "Choose Technology", status: 'completed', skills: ["Database Comparison"] },
-                            { id: '1.1.1.2', task: "Design Schema", status: 'completed', skills: ["Data Modeling"] },
-                            { id: '1.1.1.3', task: "Set Up Security", status: 'completed', skills: ["Database Security"] },
-                            { id: '1.1.1.4', task: "Implement Backup", status: 'in-progress', skills: ["Disaster Recovery"] }
+                            { id: '1.1.1.1', name: "Choose Technology", status: 'completed', skills: ["Database Comparison"] },
+                            { id: '1.1.1.2', name: "Design Schema", status: 'completed', skills: ["Data Modeling"] },
+                            { id: '1.1.1.3', name: "Set Up Security", status: 'completed', skills: ["Database Security"] },
+                            { id: '1.1.1.4', name: "Implement Backup", status: 'in-progress', skills: ["Disaster Recovery"] }
                         ]
                     },
                     {
                         id: '1.1.2',
-                        task: "Build Computation Infrastructure",
+                        name: "Build Computation Infrastructure",
                         status: 'in-progress',
                         description: "Set up high-performance computing resources for AI model training",
                         skills: ["Cloud Computing", "HPC"],
@@ -174,35 +174,36 @@ const ActionableTaskStrategyVisualizer: React.FC = () => {
             },
             {
                 id: '1.2',
-                task: "Develop AI Models",
+                name: "Develop AI Models",
                 status: 'not-started',
                 description: "Create and train AI models for drug discovery",
                 skills: ["Machine Learning", "Bioinformatics"],
                 dependencies: ["Platform Infrastructure"],
                 decompositionNotes: "Tasks identified by AI research team and goal decomposition agents",
                 subtasks: [
-                    { id: '1.2.1', task: "Data Preprocessing", status: 'not-started', skills: ["Data Cleaning", "Feature Engineering"] },
-                    { id: '1.2.2', task: "Model Selection", status: 'not-started', skills: ["ML Algorithms"] },
-                    { id: '1.2.3', task: "Training Pipeline", status: 'not-started', skills: ["ML Ops"] },
-                    { id: '1.2.4', task: "Evaluation Metrics", status: 'not-started', skills: ["ML Evaluation"] }
+                    { id: '1.2.1', name: "Data Preprocessing", status: 'not-started', skills: ["Data Cleaning", "Feature Engineering"] },
+                    { id: '1.2.2', name: "Model Selection", status: 'not-started', skills: ["ML Algorithms"] },
+                    { id: '1.2.3', name: "Training Pipeline", status: 'not-started', skills: ["ML Ops"] },
+                    { id: '1.2.4', name: "Evaluation Metrics", status: 'not-started', skills: ["ML Evaluation"] }
                 ]
             },
             {
                 id: '1.3',
-                task: "Create User Interface",
+                name: "Create User Interface",
                 status: 'blocked',
                 description: "Develop an intuitive user interface for the platform",
                 skills: ["UI/UX Design", "Frontend Development"],
                 dependencies: ["AI Models", "Platform Infrastructure"],
                 decompositionNotes: "Broken down into design and implementation tasks by UX team and goal decomposition agents",
                 subtasks: [
-                    { id: '1.3.1', task: "Design UX/UI", status: 'in-progress', skills: ["UI/UX Design"] },
-                    { id: '1.3.2', task: "Implement Frontend", status: 'blocked', skills: ["Frontend Development"], dependencies: ["Design UX/UI"] },
-                    { id: '1.3.3', task: "Integrate Backend", status: 'not-started', skills: ["Full-stack Development"], dependencies: ["Implement Frontend", "Platform Infrastructure"] }
+                    { id: '1.3.1', name: "Design UX/UI", status: 'in-progress', skills: ["UI/UX Design"] },
+                    { id: '1.3.2', name: "Implement Frontend", status: 'blocked', skills: ["Frontend Development"], dependencies: ["Design UX/UI"] },
+                    { id: '1.3.3', name: "Integrate Backend", status: 'not-started', skills: ["Full-stack Development"], dependencies: ["Implement Frontend", "Platform Infrastructure"] }
                 ]
             }
         ]
-    });
+    } as Task;
+    const [tasks, setTasks] = useState<Task>(taskHierarchy);
 
     const handleStatusChange = (id: string, newStatus: Task['status']) => {
         const updateTaskStatus = (task: Task): Task => {
@@ -226,7 +227,7 @@ const ActionableTaskStrategyVisualizer: React.FC = () => {
             if (task.id === parentId) {
                 const newSubtask: Task = {
                     id: `${task.id}.${(task.subtasks?.length ?? 0) + 1}`,
-                    task: "New Subtask",
+                    name: "New Subtask",
                     status: 'not-started',
                 };
                 return {
