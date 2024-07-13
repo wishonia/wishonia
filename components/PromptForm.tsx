@@ -1,7 +1,6 @@
 "use client"
 
 import * as React from "react"
-import { usePathname } from "next/navigation"
 import {
   ArrowElbowDownLeft,
   BookBookmark,
@@ -61,23 +60,25 @@ const ChatFilters = [
     icon: <MagicWand />,
     status: "active",
   },
-  {
-    name: "Code Search",
-    value: "code_search",
-    role: "function",
-    icon: <Code />,
-    status: "disabled",
-  },
+  // {
+  //   name: "Code Search",
+  //   value: "code_search",
+  //   role: "function",
+  //   icon: <Code />,
+  //   status: "disabled",
+  // },
 ]
 
 export function PromptForm({
   input,
   setInput,
   agent,
+  pathname,
 }: {
   input: string
   setInput: (value: string) => void
   agent?: Agent | null
+  pathname: string
 }) {
   const [_, setMessages] = useUIState<typeof AI>()
   const [aiState, setAIState] = useAIState<typeof AI>()
@@ -87,10 +88,9 @@ export function PromptForm({
 
   // Unique identifier for this UI component.
   //const id = React.useId()
-  const id = nanoid() // Use a more random I'd for DB
+  const id = nanoid() // Use a more random id for DB
   const { formRef, onKeyDown } = useEnterSubmit()
   const inputRef = React.useRef<HTMLTextAreaElement>(null)
-  const pathname = usePathname()
 
   // Set the initial attribute to general
   const message = {
@@ -100,9 +100,12 @@ export function PromptForm({
     // Identifier of this UI component, so we don't insert it many times.
     id,
   }
-  if (!aiState.messages.length) {
-    setAIState({ ...aiState, messages: [...aiState.messages, message] })
-  }
+
+  React.useEffect(() => {
+    if (!aiState.messages.length) {
+      setAIState({ ...aiState, messages: [...aiState.messages, message] })
+    }
+  }, [aiState, message, setAIState])
 
   // Whenever the attribute changes, we need to update the local value state and the history
   // so LLM also knows what's going on.
@@ -138,12 +141,29 @@ export function PromptForm({
     }
   }, [])
 
+  const [rows, setRows] =
+      React.useState(1); // Start with 1 row
+
+  const handleInput = (e: React.ChangeEvent<HTMLTextAreaElement>) => {
+    const textareaLineHeight = 24; // Adjust based on your CSS
+    const previousRows = e.target.rows;
+    e.target.rows = 1; // Reset rows to calculate scrollHeight
+
+    const currentRows = Math.floor(e.target.scrollHeight / textareaLineHeight);
+
+    if (currentRows === previousRows) {
+      e.target.rows = currentRows;
+    }
+
+    setRows(currentRows);
+  };
+
   return (
     <form
       ref={formRef}
       onSubmit={async (e: any) => {
         e.preventDefault()
-
+        setRows(1);
         // Blur focus on mobile
         if (window.innerWidth < 600) {
           e.target["message"]?.blur()
@@ -213,6 +233,7 @@ export function PromptForm({
           ref={inputRef}
           tabIndex={0}
           onKeyDown={onKeyDown}
+          onInput={handleInput}
           placeholder="Send a message."
           className="min-h-[30px] w-full resize-none border-none px-4 focus-within:outline-none focus-visible:ring-0 sm:text-sm"
           autoFocus
@@ -220,7 +241,7 @@ export function PromptForm({
           autoComplete="off"
           autoCorrect="off"
           name="message"
-          rows={1}
+          rows={rows}
           value={input}
           onChange={(e) => setInput(e.target.value)}
         />
