@@ -10,7 +10,7 @@ interface HowItWorksSectionProps {
 
 const HowItWorksSection: React.FC<HowItWorksSectionProps> = ({ user }) => (
   <section className="mb-16 p-4">
-    <h2 className="mb-8 text-5xl font-bold uppercase">HOW WISHOCRACY WORKS</h2>
+    <h2 className="mb-8 text-5xl font-bold uppercase">HOW IT WORKS</h2>
     <div className="space-y-16">
       {qaData.map((item, index) => (
         <QAItem

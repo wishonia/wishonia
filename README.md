@@ -350,7 +350,7 @@ By defining these common primitives and leveraging decentralized data networks, 
 # Digital Twins
 
 We'd like to allow people to create Digital Twins of themselves in the simulated World of Wishonia.
-Digital Twins are meant to be autonomous agents to work together to find positive sum games,
+Digital Twins are meant to be autonomous agents to work together to find positive-sum games,
 figure out how their analog real-world counterparts can work together to maximize wish fulfillment.
 They should also be able to use tools and interact with the world to automate the production of public goods.
 
@@ -371,11 +371,9 @@ The basic technical ingredients of a digital twin are:
 # What's Next?
 
 1. **Integrate Existing Public Goods Protocols and Platforms**:
-   Identify and analyze existing projects and platforms that aim to optimize resource allocation such as Gitcoin Grants, HyperCerts, and others. Figure out how Wishocracy can complement or integrate with them.
-2. **Prototype Development**: Creating prototypes of the system, even if focused on a narrow domain, to validate and refine the core mechanics.
-3. **Domain Application**: Exploring applications of Wishocracy within various contexts such as organizations, DAOs, governments, or global scale initiatives.
-4. **Integration with Existing Task Management Systems**: Developing integrations with existing task management systems to facilitate task import, syncing, creation, assignment, and tracking.
-5. **Iterative Refinement**: Continuously gathering feedback and iterating on the system design to address challenges and incorporate new features.
+   Integrate protocols that aim to optimize resource allocation such as Gitcoin Grants, HyperCerts, and others.
+2. **Domain Application**: Exploring applications of Wishocracy within various contexts such as organizations, DAOs, governments, or global scale initiatives.
+3. **Integration with Existing Task Management Systems**: Developing integrations with existing task management systems to facilitate task import, syncing, creation, assignment, and tracking.
 
 # [Frequently Asked Questions](public/docs/faq.md)
 
