@@ -132,7 +132,7 @@ const ForkableWorldSection: React.FC = () => {
   return (
     <div className="min-h-screen font-mono">
       <header className="border-b-8 border-black p-8 text-center">
-        <h1 className="mb-4 text-6xl font-bold">FORKABLE WORLD</h1>
+        <h1 className="mb-4 text-6xl font-bold">An Autonomous Todo List For Humanity</h1>
         <p className="text-2xl">
           A system for coordinating human and artificial collective intelligence
           to maximize universal health and happiness!
