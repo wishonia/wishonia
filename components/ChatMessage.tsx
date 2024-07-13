@@ -13,6 +13,9 @@ export interface ChatList {
 
 export function ChatMessage({ messages, id }: ChatList) {
   const pathname = usePathname()
+  if(!pathname){
+    throw new Error("Pathname is not available")
+  }
   const { isSignedIn } = useUser()
 
   useEffect(() => {

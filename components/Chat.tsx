@@ -34,6 +34,9 @@ function Chat({ id, missingKeys, agentData }: ChatProps) {
 
   const router = useRouter()
   const pathname = usePathname()
+  if (!pathname) {
+    throw new Error("Pathname is not available")
+  }
 
   const { toast } = useToast()
 
@@ -96,7 +99,12 @@ function Chat({ id, missingKeys, agentData }: ChatProps) {
           isSidebarOpen && session ? "lg:translate-x-[100px]" : ""
         } fixed bottom-0 mx-auto w-full bg-gradient-to-t from-background via-background to-transparent transition-all duration-300`}
       >
-        <PromptForm input={input} setInput={setInput} agent={agentData} />
+        <PromptForm
+          input={input}
+          setInput={setInput}
+          agent={agentData}
+          pathname={pathname}
+        />
       </div>
     </div>
   )

@@ -35,7 +35,7 @@ Example Action: I will write a letter to the president of the United States aski
 
 # **How Wishocracy Works**
 
-Wishocracy is a unique platform that uses the power of collective intelligence to identify and prioritize the most important wishes for society. It then allocates resources to the most promising solutions using a novel approach called Aggregated Pairwise Preference Allocation.
+Wishocracy uses the power of collective intelligence to identify and prioritize the most important wishes for society. It then allocates resources to the most promising solutions using a novel approach called Aggregated Pairwise Preference Allocation.
 
 # **Discovering the Most Impactful Wishes**
 

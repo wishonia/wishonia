@@ -29,6 +29,7 @@ import {
   AlertDialogTitle,
 } from "@/components/ui/alert-dialog"
 import LoadingSpinner from "@/components/LoadingSpinner";
+import {PlusIcon} from "lucide-react";
 
 type FormData = z.infer<typeof agentSchema>
 
@@ -80,7 +81,7 @@ export default function AgentForm({
   })
 
   const navigateBack = () => {
-    router.refresh(); 
+    router.refresh();
     router.back()
   }
 
@@ -150,7 +151,7 @@ export default function AgentForm({
       setLoading(false)
     }
   }
-  
+
   const deleteDatasource=(e:React.MouseEvent<HTMLButtonElement>)=>{
       e.preventDefault()
       startRemoveTransition(async () => {
@@ -174,11 +175,11 @@ export default function AgentForm({
       })
   }
 
-  const togleDataSourceDialog=()=>{
+  const toggleDataSourceDialog=()=>{
     setDsDialogOpen(prev=>!prev);
   }
 
- 
+
 
   useEffect(() => {
     if (fields.length === 0) {
@@ -190,7 +191,7 @@ export default function AgentForm({
 
   return (
     <>
-    <AddAgentDataSource open={dsDialogOpen} agentId={agentData?.id} dataSource={dataSource} setDataSource={setDataSource} onClose={togleDataSourceDialog}/>
+    <AddAgentDataSource open={dsDialogOpen} agentId={agentData?.id} dataSource={dataSource} setDataSource={setDataSource} onClose={toggleDataSourceDialog}/>
     <div
       className={`mx-auto flex h-screen ${isSidebarOpen ? "lg:ml-[270px] lg:w-[calc(100%-270px)]" : "w-full lg:w-[96%]"}`}
     >
@@ -213,20 +214,22 @@ export default function AgentForm({
           <div className="space-y-4">
             <div className="space-y-2">
               <div className="relative mx-auto h-20 w-20 overflow-hidden rounded-full border border-gray-400 p-1">
-                <Input
-                  type="file"
-                  onChange={handleUpload}
-                  className="absolute z-10 h-full w-full opacity-0"
-                  accept="image/png, image/gif, image/jpeg"
-                />
-                {avatar && (
-                  <img
-                    className="h-full w-full"
-                    src={avatar}
-                    alt="Agent avatar"
-                  />
-                )}
-              </div>
+  <Input
+    type="file"
+    onChange={handleUpload}
+    className="absolute z-10 h-full w-full opacity-0"
+    accept="image/png, image/gif, image/jpeg"
+  />
+  {avatar ? (
+    <img
+      className="h-full w-full"
+      src={avatar}
+      alt="Agent avatar"
+    />
+  ) : (
+    <PlusIcon className="h-full w-full" />
+  )}
+</div>
             </div>
             <div className="space-y-2">
               <Label htmlFor="name" className="text-sm font-medium">
@@ -304,7 +307,7 @@ export default function AgentForm({
               >
                 Datasource
                 <PlusCircle
-                  onClick={togleDataSourceDialog}
+                  onClick={toggleDataSourceDialog}
                   className="ml-2 h-7 w-7 cursor-pointer rounded-full p-1 shadow-md active:shadow-none  focus:ring"
                 />
             </Label>

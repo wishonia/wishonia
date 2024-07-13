@@ -1,20 +1,35 @@
 # A Decentralized To-Do List for Humanity
 
-Here's the theory. 
+Say you want to solve a massive global problem like dementia, aging, animal suffering, etc.
 
-If you:
-1. want to most quickly and efficiently solve a massive global problem
-2. have limited resources
+**How can you determine the most efficient thing you can do with your time, energy, specific skills and resources to solve it?**
 
-Then this is the most efficient way to go about it:
-1. Make a list of global problems
-2. collectively determine the share of resources that should be allocated to solve each problem using [Randomized Aggregated Pairwise Preference Allocation](#aggregated-pairwise-preference-allocation-appa) or something
-3. Use AI research agents + humans to research and compile an exhaustive list of potential solutions to each problem. 
-4. Use AI goal decomposition agents to recursively break each solution into every single atomic task that needs to be completed to implement the solution.
+This is a serious question. 
+Given the amount of death and suffering, it's probably the most serious question in the world.
+So if you have an answer, 
+skip reading the rest of this and [share it here](https://github.com/wishonia/wishonia/issues).
+
+Otherwise, 
+consider the fact that:
+1. our brains have barely evolved since the time of the caveman 
+2. we can hold only seven things in our working memory at a time
+3. there are thousands of problems, with thousands of potential solutions, and ultimately billions of tasks that need to be completed to solve them
+
+This is the proposed approach to addressing these challenges 
+[(please update if you have a better idea)](https://github.com/wishonia/wishonia/edit/main/README.md):
+
+1. List Problems - First, we need a list of global problems we're trying to solve.
+
+2. Prioritize Problems - We don't have infinite resources, so we need a systematic way to determine the share of resources that should be allocated to solve each problem based on our values. This can be done using Randomized Aggregated Pairwise Preference Allocation (APPA) or a better mechanism.
+
+3. List All Possible Solutions - Use AI research agents and humans to research and compile an exhaustive list of potential solutions to each problem.
+
+4. Break Down Each Solution Into the Smallest Actionable Tasks - Use AI goal decomposition agents to recursively break each solution into every single atomic task that needs to be completed to implement the solution.
+
 5. Assign an AI agent to each task, so they can either:
-   - identify who's already working on the task or
-   - have an AI agent complete the task (if possible) or 
-   - have the agent identify the human or organization who can complete it as cheaply and quickly as possible
+   - **Identify** who's already working on the task or
+   - **Automate** - have an AI agent complete the task (if possible) or
+   - **Outsource** - have the agent identify the human or organization who can complete it as cheaply and quickly as possible
 
 # Definitions
 
@@ -70,17 +85,23 @@ Either:
 
 ## Coordination Failure
 
-The exponential coordination complexity problem illustrates how the number of potential lines of communication grows rapidly as more people are involved in a decision-making process.
+The exponential coordination complexity problem illustrates how the lines of communication grow rapidly as more people are involved in a decision-making process.
 
 ![](public/img/coordination-complexity-node-graph.jpeg)
 
-This is visually represented in the graphs, where each additional person significantly increases the total number of connections needed for effective communication. This complexity can hinder our ability to make decisions efficiently, especially as group sizes increase.
+Each additional person significantly increases the total number of connections needed for effective communication. 
+This complexity makes it impossible to make decisions efficiently, especially as group sizes increase.
 
 ![](public/img/coordination-complexity-exponential-graph.jpeg)
 
-However, digital twin AI agents, which are AI representations of individuals with higher cognitive bandwidth perfectly aligned to their preferences, can mitigate this issue. These agents can process vast amounts of information and make decisions more efficiently, acting on behalf of their human counterparts.
+However, digital twin agents,
+AI representations of individuals with higher cognitive bandwidth perfectly aligned to their preferences, 
+can overcome these human limitations.
 
-By integrating these AI agents into a Global Todo List for humanity, we can streamline the coordination of efforts towards shared societal goals. These agents can continuously analyze data, predict outcomes, and suggest optimal actions, ensuring that resources are allocated effectively and that collaborative efforts are maximized. This approach can lead to more informed decision-making, reduced friction in communication, and accelerated progress towards achieving our collective objectives on a global scale.
+Agents can continuously analyze data, predict outcomes, and suggest optimal actions, 
+ensuring that resources are allocated effectively and that collaborative efforts are maximized. 
+This can lead to more informed decision-making, reduced friction in communication, 
+and speed up progress towards our collective goals on a global scale.
 
 # Solution: Collective Intelligence and Coordination
 
@@ -329,7 +350,7 @@ By defining these common primitives and leveraging decentralized data networks, 
 # Digital Twins
 
 We'd like to allow people to create Digital Twins of themselves in the simulated World of Wishonia.
-Digital Twins are meant to be autonomous agents to work together to find positive sum games,
+Digital Twins are meant to be autonomous agents to work together to find positive-sum games,
 figure out how their analog real-world counterparts can work together to maximize wish fulfillment.
 They should also be able to use tools and interact with the world to automate the production of public goods.
 
@@ -347,57 +368,12 @@ The basic technical ingredients of a digital twin are:
 - **A Knowledge Graph**: To store and reason about the person's wishes, skills, resources, interests, time, reputation, network, location, and language
 - **A Vector Database**: To store and query the person's knowledge graph using retrieval
 
-## Additional Stuff to Consider
-
-1. **Dependency Specification**: Allowing specification of dependencies between wishes, problems, solutions, and tasks to create a network of links and surface efficiencies.
-2. **Matching Engine**: Adding a layer for matching tasks and solutions to people and teams based on skills, experience, resources, and interest.
-3. **Governance Mechanisms**: Developing mechanisms for handling disputes, gaming behaviors, and bad actors to ensure system integrity.
-4. **Transparency and Explainability**: Incorporating features that allow participants to see how decisions were made and drill down from high-level priorities to specific tasks and vice versa.
-
 # What's Next?
 
 1. **Integrate Existing Public Goods Protocols and Platforms**:
-   Identify and analyze existing projects and platforms that aim to optimize resource allocation such as Gitcoin Grants, HyperCerts, and others. Figure out how Wishocracy can complement or integrate with them.
-2. **Prototype Development**: Creating prototypes of the system, even if focused on a narrow domain, to validate and refine the core mechanics.
-3. **Domain Application**: Exploring applications of Wishocracy within various contexts such as organizations, DAOs, governments, or global scale initiatives.
-4. **Integration with Existing Task Management Systems**: Developing integrations with existing task management systems to facilitate task import, syncing, creation, assignment, and tracking.
-5. **Iterative Refinement**: Continuously gathering feedback and iterating on the system design to address challenges and incorporate new features.
+   Integrate protocols that aim to optimize resource allocation such as Gitcoin Grants, HyperCerts, and others.
+2. **Domain Application**: Exploring applications of Wishocracy within various contexts such as organizations, DAOs, governments, or global scale initiatives.
+3. **Integration with Existing Task Management Systems**: Developing integrations with existing task management systems to facilitate task import, syncing, creation, assignment, and tracking.
 
-# Frequently Asked Questions
+# [Frequently Asked Questions](public/docs/faq.md)
 
-## Q: Why not just focus on smaller focused goals?
-
-The goal is to minimize wasted duplication of effort to optimize societal resource allocation.
-By limiting its scope to small organizations, it would not be able to prevent duplication of effort on a global scale.
-
-Research has shown that the quality of decisions made by groups is proportional to the diversity of the group. By focusing on a global scale, Wishocracy can tap into the wisdom of the crowd to make better decisions than any one person or small group of people could make.
-
-This requires a decentralized protocol that can integrate with any existing system rather than a standalone system.
-
-## Q: What's the benefit of a global todo list?
-
-1. **Preventing Waste** - Minimizing duplicated effort by surfacing what problems/wishes people are already working on solving. This allows resources to be allocated more efficiently. Governments and charitable foundations spend billions on solving important problems, but lack of coordination often leads to significant duplication of effort. For instance, if two research organizations each spend $1 million doing animal trials on the same drug, that's effectively $1 million of funding wasted and lots of extra animals suffering for no reason.
-
-2. **Coordination and Cost-Sharing** -
-   By decomposing solutions into atomic tasks
-   that anyone can contribute to, it enables cost-sharing between organizations that need the same thing.  
-   This would enable all organizations to accomplish more with the same amount of resources.
-
-3. **Helping People Maximize Their Impact** - Say you're a charitable individual who wants to improve the world. How can you figure out what the most important thing you can do A global decentralized to do list could help charitable people find the highest impact tasks to work on given their skills and resources.
-
-4. **Iterative Improvement through Impact Tracking** - Iteratively improving allocation of resources over time by feeding impact data back into the prioritization process.
-
-
-## Q: Even if we had a global to-do list, we need every organization to use it for it to be useful. How will we make it so that every organization decides to use it?
-
-Widespread adoption of a global to-do list could be achieved by:
-
-1. **Demonstrating Cost Savings**: Even if only two organizations use it, it could theoretically cut their costs in half by reducing duplication of efforts.
-
-2. **Providing Competitive Advantage**: For businesses, ["coopetition"](https://en.wikipedia.org/wiki/Coopetition) would be a competitive advantage, as it increases efficiency and access to resources.
-
-3. **Multiplying Nonprofit Impact**: For nonprofits, it would multiply the impact of donations, attracting donors who want to maximize the effectiveness of their contributions.
-
-4. **Autonomous Agents**: As AI frontier models improve in reasoning, autonomous agents can take on more tasks, further reducing costs and increasing efficiency.
-
-5. **Ensuring Easy Integration**: Seamless integration with existing tools and workflows will minimize adoption friction.
