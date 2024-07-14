@@ -3,9 +3,9 @@
 import React, { useState } from "react"
 
 import { getTimeZoneOffset, getUtcDateTime } from "@/lib/dateTimeWithTimezone"
-import { Icons } from "@/components/icons"
 import { Shell } from "@/components/layout/shell"
 import { DashboardHeader } from "@/components/pages/dashboard/dashboard-header"
+import {SpinningLoader} from "@/components/spinningLoader";
 
 // Define a type for the message objects
 type Message = {
@@ -73,7 +73,7 @@ const App: React.FC = () => {
             >
               {msg.type === "loading" ? (
                 <div className="flex items-center justify-center">
-                  <Icons.spinner className="animate-spin text-4xl" />{" "}
+                  <SpinningLoader />{" "}
                 </div>
               ) : (
                 msg.text
