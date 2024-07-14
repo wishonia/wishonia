@@ -5,7 +5,6 @@ import { nanoid } from "nanoid"
 import OpenAI from "openai"
 import { z } from "zod"
 
-import { prisma } from "@/lib/db"
 import { askSupabase } from "@/lib/docs/docsAgent"
 import { getCurrentUser } from "@/lib/session"
 import { Agent } from "@/lib/types"
