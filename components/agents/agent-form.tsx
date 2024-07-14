@@ -205,7 +205,7 @@ export default function AgentForm({
             {name || (agentData ? "Edit Agent" : "New Agent")}
           </h1>
           {!agentData && (
-            <span className="ml-auto rounded-full bg-yellow-600 px-3 py-1 text-sm font-medium text-yellow-500">
+            <span className="ml-auto rounded-full bg-yellow-600 px-3 py-1 text-sm font-medium text-white-500">
               Draft
             </span>
           )}

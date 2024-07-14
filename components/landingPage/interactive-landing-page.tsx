@@ -4,16 +4,44 @@ import React, { useEffect, useState } from "react"
 import { ArrowDown } from "lucide-react"
 
 const sentences = [
-  "Say you want to solve a very large problem like dementia, aging, animal suffering, etc.",
-  "What's the most efficient thing YOU can do with your time, skills and resources to solve it?",
-  "There are thousands of problems, with thousands of potential solutions, and billions of tasks required to implement them",
-  "Our caveman brains can only seven things in working memory at a time",
-  "To have any hope of figuring out the optimal action to take, we need a better system.",
-  "This is the goal of Wishocracy",
-]
+  "<span class='uppercase font-bold'>SAY YOU WANT TO SOLVE</span> a<br>" +
+  "<span class='text-5xl md:text-7xl font-extrabold text-yellow-400 animate-pulse'>REALLY BIG</span>" +
+  "<br> problem like:<br><br>" +
+  "<ul class='list-none space-y-2 text-left'>" +
+  "<li>🧠 <em class='hover:text-red-500 transition-colors duration-300 cursor-pointer'>Dementia</em></li>" +
+  "<li>⏳ <em class='hover:text-green-500 transition-colors duration-300 cursor-pointer'>Aging</em></li>" +
+  "<li>🐾 <em class='hover:text-blue-500 transition-colors duration-300 cursor-pointer'>Chronic Pain</em></li>" +
+  "</ul>",
+
+  "🤔 What's the <strong class='text-yellow-300 animate-pulse'>MOST EFFICIENT</strong> thing <u class='hover:text-pink-400 transition-colors duration-300 cursor-pointer'>YOU</u> can do with your:<br><br>" +
+  "<ul class='list-none space-y-2 text-left'>" +
+  "<li>⏰ Time</li>" +
+  "<li>🔧 Skills</li>" +
+  "<li>💼 Resources</li>" +
+  "</ul><br>" +
+  "...to solve it?",
+
+  "It's IMPOSSIBLE to know because there are:<br><br>" +
+  "<ul class='list-none space-y-2 text-left'>" +
+  "<li>🌐 <span class='text-red-500 hover:animate-bounce inline-block'>THOUSANDS</span> of problems</li>" +
+  "<li>💡 <span class='text-green-500 hover:animate-bounce inline-block'>THOUSANDS</span> of potential solutions</li>" +
+  "<li>🔨 <span class='text-blue-500 hover:animate-bounce inline-block'>BILLIONS</span> of tasks to implement them</li>" +
+  "</ul>",
+
+  "🧠 Our caveman brains can only <strong class='text-purple-400 relative group'>REMEMBER SEVEN THINGS<span class='invisible group-hover:visible absolute -top-8 left-1/2 transform -translate-x-1/2 bg-purple-600 text-white text-xs rounded px-2 py-1'>Limited capacity!</span></strong> in working memory at a time.",
+
+  "To have a chance in hell of figuring out the " +
+  "<em class='text-orange-400 hover:underline cursor-pointer animate-bounce'>optimal action</em>" +
+  " to take to solve a <span class='text-yellow-400 font-extrabold animate-pulse'>MASSIVE GLOBAL PROBLEM</span>, we need...<br><br>",
+];
 
 const InteractiveLandingPage = () => {
   const [currentSentence, setCurrentSentence] = useState(0)
+  const [isClient, setIsClient] = useState(false)
+
+  useEffect(() => {
+    setIsClient(true)
+  }, [])
 
   useEffect(() => {
     const handleScroll = () => {
@@ -59,10 +87,16 @@ const InteractiveLandingPage = () => {
           <div className="absolute inset-0 opacity-10">
             <div className="bg-grid-pattern animate-grid h-full w-full"></div>
           </div>
-          <p className="glitch-text relative z-10 max-w-4xl font-mono text-3xl md:text-5xl">
-            {sentence}
-          </p>
-          {/* Conditionally render the button if it's not the last sentence */}
+          {isClient ? (
+            <p
+              className="glitch-text relative z-10 max-w-4xl font-mono text-3xl md:text-5xl"
+              dangerouslySetInnerHTML={{ __html: sentence }}
+            />
+          ) : (
+            <p className="glitch-text relative z-10 max-w-4xl font-mono text-3xl md:text-5xl">
+              Running societal optimization algorithm...  Please wait...
+            </p>
+          )}
             <button
               onClick={() => scrollToNext()}
               className="animate-pulse mt-8 rounded-full border-2 border-white p-3 transition-colors hover:bg-white hover:text-black"
