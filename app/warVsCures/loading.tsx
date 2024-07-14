@@ -1,9 +1,7 @@
-import { Icons } from "@/components/icons"
+import {SpinningLoader} from "@/components/spinningLoader";
 
 export default function HomeLoading() {
   return (
-    <main className="flex justify-center p-8">
-      <Icons.spinner className="animate-spin text-4xl" />
-    </main>
+      <SpinningLoader />
   )
 }

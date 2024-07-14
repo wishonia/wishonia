@@ -20,7 +20,7 @@ export default function QAItem({ question, answer, visual }: QAItemProps) {
           <p className="text-2xl">{answer}</p>
         </div>
         {visual && (
-          <div className="flex-1">
+          <div className="flex-1 overflow-x-auto">
             {typeof visual === "string" ? (
               <Image
                 src={visual}
