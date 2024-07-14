@@ -99,7 +99,7 @@ const ForkableWorldSection: React.FC = () => {
         Icon: Network,
         title: "POSITRON AGENTS",
         description:
-          "Prosocial AI agents representing nonprofits, DAOs, and other institutions working to automate the production of public goods.",
+          "Prosocial AI agents working to automate the production of public goods.",
         // listItems: [
         //     // "Represent organizations like FDAi",
         //     // "Automate and crowdsource clinical research",
@@ -132,10 +132,9 @@ const ForkableWorldSection: React.FC = () => {
   return (
     <div className="min-h-screen font-mono">
       <header className="border-b-8 border-black p-8 text-center">
-        <h1 className="mb-4 text-6xl font-bold">An Autonomous Todo List For Humanity</h1>
+        <h1 className="mb-4 text-6xl font-bold">A Decentralized Semi-Autonomous Todo List For Humanity</h1>
         <p className="text-2xl">
-          A system for coordinating human and artificial collective intelligence
-          to maximize universal health and happiness!
+          We want to optimize all human actions to maximize universal health and happiness of all sentient beings.
         </p>
       </header>
       <main className="flex flex-col p-8 md:flex-row md:flex-wrap">

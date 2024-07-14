@@ -1,7 +1,7 @@
 import React from "react"
 
 import { getCurrentUser } from "@/lib/session"
-import ForkableWorldSection from "@/components/ForkableWorldSection"
+import ForkableWorldSection from "@/components/landingPage/ForkableWorldSection"
 import HowItWorksSection from "@/components/HowItWorksSection"
 import OpenSource from "@/components/pages/opensource"
 import { PWARedirect } from "@/components/pwa-redirect"
