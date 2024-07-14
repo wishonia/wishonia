@@ -28,11 +28,16 @@ const sentences = [
   "<li>🔨 <span class='text-blue-500 hover:animate-bounce inline-block'>BILLIONS</span> of tasks to implement them</li>" +
   "</ul>",
 
-  "🧠 Our caveman brains can only <strong class='text-purple-400 relative group'>REMEMBER SEVEN THINGS<span class='invisible group-hover:visible absolute -top-8 left-1/2 transform -translate-x-1/2 bg-purple-600 text-white text-xs rounded px-2 py-1'>Limited capacity!</span></strong> in working memory at a time.",
+  "🧠 Our caveman brains can only <strong class='text-purple-400 relative group'>REMEMBER SEVEN THINGS" +
+  "<span class='invisible group-hover:visible absolute -top-8 left-1/2 transform -translate-x-1/2 bg-purple-600 text-white text-xs rounded px-2 py-1'>" +
+  "Limited capacity!</span></strong> in working memory at a time.",
 
   "To have a chance in hell of figuring out the " +
-  "<em class='text-orange-400 hover:underline cursor-pointer animate-bounce'>optimal action</em>" +
-  " to take to solve a <span class='text-yellow-400 font-extrabold animate-pulse'>MASSIVE GLOBAL PROBLEM</span>, we need...<br><br>",
+  "<em class='text-orange-400 hover:underline cursor-pointer animate-bounce'>" +
+  "optimal action</em> for solving" +
+  " a <span class='text-yellow-400 font-extrabold animate-pulse'>" +
+  "MASSIVE GLOBAL PROBLEM" +
+  "</span>, we need...<br><br>",
 ];
 
 const InteractiveLandingPage = () => {
