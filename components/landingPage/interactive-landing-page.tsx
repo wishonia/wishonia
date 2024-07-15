@@ -89,8 +89,8 @@ const InteractiveLandingPage = () => {
     }
   }
 
-  if(!isClient) {
-    return
+  if (!isClient) {
+    return null;
   }
 
   return (
