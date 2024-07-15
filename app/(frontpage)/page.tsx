@@ -35,7 +35,7 @@ export default async function Home() {
                   <div
                       className="absolute bottom-0 left-0 w-full h-1 bg-gradient-to-r from-cyan-400 via-blue-500 to-purple-600 animate-gradient-x"></div>
               </header>
-              <main className="flex flex-col p-8 md:flex-row md:flex-wrap justify-center">
+              <main className="flex flex-col p-4 md:flex-row md:flex-wrap justify-center">
                   <GlobalCoordinationAgent></GlobalCoordinationAgent>
                   <GlobalHealthOptimizationAgent></GlobalHealthOptimizationAgent>
               </main>
