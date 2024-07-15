@@ -47,8 +47,8 @@ const GlobalHealthOptimizationAgent = () => {
   }, []);
 
   return (
-    <div className="flex items-center justify-center p-8 text-cyan-300 overflow-hidden">
-      <div className="relative w-full max-w-4xl p-8 bg-black bg-opacity-50 border border-cyan-500 rounded-lg shadow-2xl">
+    <div className="flex items-center justify-center p-4 text-cyan-300 overflow-hidden">
+      <div className="relative w-full max-w-4xl p-4 bg-black bg-opacity-50 border border-cyan-500 rounded-lg shadow-2xl">
         <div className="absolute inset-0 bg-gradient-to-br from-purple-900 to-cyan-900 opacity-20 animate-pulse"></div>
         
         <h1 className="text-4xl font-bold text-cyan-400 mb-6 animate-glitch">
