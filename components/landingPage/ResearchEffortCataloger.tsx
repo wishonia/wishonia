@@ -44,7 +44,7 @@ const ResearchEffortCataloger: React.FC = () => {
     };
 
     return (
-        <div className="p-4 bg-white dark:bg-gray-800 rounded-lg shadow-md max-w-4xl mx-auto my-8">
+        <div className="p-4 rounded-lg shadow-md max-w-4xl mx-auto my-8">
             <h2 className="text-2xl font-bold mb-4 text-gray-800 dark:text-gray-200">AI Research Effort Cataloger</h2>
             <div className="mb-4 p-2 bg-blue-100 dark:bg-blue-900 rounded">
                 <h3 className="font-bold flex items-center"><Search size={16} className="mr-2" /> Continuous Research Scanning</h3>

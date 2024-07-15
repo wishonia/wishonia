@@ -16,16 +16,16 @@ export default async function OpenSource() {
     .then((res) => res.json())
     .catch((e) => console.error(e))
 
-  const buttonText = `Fork Me!`
+  const buttonText = `Fork The Project On GitHub!`
 
   return (
     <section className="container py-12 lg:py-20">
       <div className="flex flex-col items-center gap-4">
         <HeadingText
-          subtext="Fork it and create a better world!"
+          subtext="Fork it and make a better one!"
           className="text-center"
         >
-          Think Wishonia Sucks?
+          Want to improve the world?
         </HeadingText>
         <Link
           href={siteConfig.links.github}
