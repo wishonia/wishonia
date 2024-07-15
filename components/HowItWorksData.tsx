@@ -8,11 +8,10 @@ import ActionableTaskStrategyVisualizer from "@/components/landingPage/TaskGalax
 import TaskAllocationVisualizer from "@/components/landingPage/TaskAllocationVisualizer";
 import ResearchEffortCataloger from "@/components/landingPage/ResearchEffortCataloger";
 import ImpactTrackerVisualizer from "@/components/landingPage/ImpactTrackerVisualizer";
-import IdeaSubmissionHub from "@/components/landingPage/IdeaSubmissionHub";
 
 export interface QAItem {
   question: string
-  answer: string
+  answer?: string
   visual?: React.ReactNode
 }
 
@@ -98,12 +97,12 @@ const HowItWorksData: QAItem[] = [
       "real-world impact of our efforts and adjust strategies as needed.",
     visual: <ImpactTrackerVisualizer />,
   },
-  {
-    question: "What if someone has a new idea or solution?",
-    answer:
-      "New ideas are always welcome! Anyone can submit new problems, solutions, or tasks. ",
-    visual: <IdeaSubmissionHub />,
-  },
+  // {
+  //   question: "What if someone has a new idea or solution?",
+  //   answer:
+  //     "New ideas are always welcome! Anyone can submit new problems, solutions, or tasks. ",
+  //   visual: <IdeaSubmissionHub />,
+  // },
 ]
 
 export default HowItWorksData
