@@ -23,7 +23,9 @@ const CoolGlobalProblemsPieChart: React.FC<CoolGlobalProblemsPieChartProps> = ({
 
     return (
         <div className="w-full h-[400px] sm:h-[500px] rounded-lg shadow-lg p-2 sm:p-4 flex flex-col">
-            <h2 className="text-xl sm:text-2xl font-bold text-center mb-2 sm:mb-4 text-gray-200">Global Problems Allocation</h2>
+            <h2 className="text-xl sm:text-2xl font-bold text-center mb-2 sm:mb-4 text-gray-200">
+                Collective Budget for Each Problem
+            </h2>
             <div className="flex-grow">
                 <ResponsiveContainer width="100%" height="100%">
                     <PieChart>
