@@ -1,5 +1,6 @@
 "use client";
 import React, { useState, useEffect } from 'react';
+import GlobalBrainNetwork from "@/components/landingPage/global-brain-network";
 
 const GlobalHealthOptimizationAgent = () => {
   const [currentDisease, setCurrentDisease] = useState('');
@@ -48,13 +49,14 @@ const GlobalHealthOptimizationAgent = () => {
 
   return (
     <div className="flex items-center justify-center p-4 text-cyan-300 overflow-hidden">
-      <div className="relative w-full max-w-4xl p-4 bg-black bg-opacity-50 border border-cyan-500 rounded-lg shadow-2xl">
-        <div className="absolute inset-0 bg-gradient-to-br from-purple-900 to-cyan-900 opacity-20 animate-pulse"></div>
-        
+      <div
+          className="relative w-full max-w-4xl p-4 bg-black bg-opacity-50 border-4 border-cyan-500 rounded-lg shadow-2xl">
+
+
         <h1 className="text-4xl font-bold text-cyan-400 mb-6 animate-glitch">
           GLOBAL HEALTH OPTIMIZATION AGENT v3.0
         </h1>
-        
+
         <div className="mb-8">
           <p className="text-lg text-purple-400 mb-2">Current Disease Focus:</p>
           <p className="text-3xl font-bold text-white animate-neon">
@@ -64,9 +66,9 @@ const GlobalHealthOptimizationAgent = () => {
 
         <div className="mb-6 relative">
           <div className="w-full h-4 bg-gray-800 rounded-full overflow-hidden">
-            <div 
-              className="h-full bg-gradient-to-r from-purple-600 via-cyan-400 to-purple-600 animate-gradient"
-              style={{ width: `${taskProgress}%` }}
+            <div
+                className="h-full bg-gradient-to-r from-purple-600 via-cyan-400 to-purple-600 animate-gradient"
+                style={{width: `${taskProgress}%`}}
             ></div>
           </div>
           <p className="absolute top-full left-0 text-xs text-cyan-400 mt-1">
@@ -92,21 +94,21 @@ const GlobalHealthOptimizationAgent = () => {
         <div className="space-y-2">
           <p className="text-sm text-cyan-400 mb-1">Resource Allocation by Research Phase:</p>
           {['Data Analysis', 'Experimental Design', 'Clinical Trials', 'Treatment Development'].map((phase, index) => (
-            <div key={index} className="w-full">
-              <p className="text-xs text-purple-300 mb-1">{phase}</p>
-              <div className="w-full bg-gray-700 rounded-full h-2">
-                <div 
-                  className="bg-cyan-500 h-2 rounded-full animate-pulse"
-                  style={{ width: `${Math.random() * 100}%` }}
-                ></div>
+              <div key={index} className="w-full">
+                <p className="text-xs text-purple-300 mb-1">{phase}</p>
+                <div className="w-full bg-gray-700 rounded-full h-2">
+                  <div
+                      className="bg-cyan-500 h-2 rounded-full animate-pulse"
+                      style={{width: `${Math.random() * 100}%`}}
+                  ></div>
+                </div>
               </div>
-            </div>
           ))}
         </div>
 
-        <p className="text-sm text-gray-400 mt-6 animate-blink">
-          Optimizing global expertise to combat diseases causing immense suffering
-        </p>
+        <div className="p-4">
+          <GlobalBrainNetwork/>
+        </div>
       </div>
     </div>
   );

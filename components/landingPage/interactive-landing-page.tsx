@@ -25,7 +25,7 @@ export const Sentence1 = () => {
     useEffect(() => {
         const interval = setInterval(() => {
             setCurrentProblemIndex((prevIndex) => (prevIndex + 1) % globalProblems.length);
-        }, 700); // Change problem every 2 seconds
+        }, 700); 
 
         return () => clearInterval(interval);
     }, []);
@@ -39,7 +39,7 @@ export const Sentence1 = () => {
                 {globalProblems.map((problem, index) => (
                     <li
                         key={index}
-                        className={`transition-opacity duration-500 ${index === currentProblemIndex ? 'opacity-100' : 'opacity-0 absolute'}`}
+                        className={`transition-opacity duration-500 ${index === currentProblemIndex ? 'opacity-100' : 'opacity-0 hidden'}`}
                     >
                         {problem.emoji} <em className={`hover:text-${problem.color}-500 transition-colors duration-300 cursor-pointer`}>{problem.problem}</em>
                     </li>
@@ -154,9 +154,9 @@ const InteractiveLandingPage = () => {
           <div className="absolute inset-0 opacity-10">
             <div className="bg-grid-pattern animate-grid h-full w-full"></div>
           </div>
-          <p className="glitch-text relative z-10 max-w-4xl font-mono text-3xl md:text-5xl">
+          <div className="glitch-text relative z-10 max-w-4xl font-mono text-3xl md:text-5xl">
             <SentenceComponent />
-          </p>
+          </div>
           <button
             onClick={() => scrollToNext()}
             className="mt-8 animate-pulse rounded-full border-2 border-white p-3 transition-colors hover:bg-white hover:text-black"

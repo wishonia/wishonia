@@ -131,7 +131,7 @@ const ForkableWorldSection: React.FC = () => {
 
   return (
       <div className="min-h-screen font-mono">
-          <header className="border-b-8 border-black p-4 sm:p-8 text-center">
+          <header className="p-4 sm:p-8 text-center">
               <h1 className="mb-4 text-3xl sm:text-4xl md:text-5xl lg:text-6xl font-bold leading-tight">
                   A Decentralized Semi-Autonomous Todo List For Humanity
               </h1>
@@ -141,11 +141,11 @@ const ForkableWorldSection: React.FC = () => {
                   beings.
               </p>
           </header>
-          <header className="border-b-8 border-black p-4 sm:p-8 text-center">
+          <div className="p-4 sm:p-8 text-center">
               <h1 className="mb-4 text-3xl sm:text-4xl md:text-5xl lg:text-6xl font-bold leading-tight">
                   Here's the ingredients:
               </h1>
-          </header>
+          </div>
           <main className="flex flex-col p-8 md:flex-row md:flex-wrap">
               {features.map((feature, index) => (
                   <FeatureCard key={index} {...feature} className="md:w-1/2 lg:w-1/3"/>
