@@ -98,7 +98,7 @@ const GlobalCoordinationAgent = () => {
           </div>
         </div>
 
-        <div className="p-4">
+        <div className="p-4 w-3/5 mx-auto">
           <GlobalBrainNetwork/>
         </div>
       </div>
