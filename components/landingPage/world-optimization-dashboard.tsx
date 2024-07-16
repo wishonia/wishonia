@@ -4,25 +4,28 @@ import GlobalHealthOptimizationAgent from "@/components/landingPage/global-healt
 import React from "react";
 
 const WorldOptimizationHeader = () => {
-    return (
-        <header className="p-6 text-center relative overflow-hidden mx-4 sm:mx-8 md:mx-12 lg:mx-16">
-            <div className="relative bg-black bg-opacity-80 p-6 rounded-lg border-4 border-cyan-500 transform -skew-x-12">
-                <div className="transform skew-x-12">
-                    <h1 className="text-4xl sm:text-5xl md:text-6xl font-bold leading-tight text-cyan-400">
-                        World Optimization Monitoring Dashboard
-                    </h1>
-                </div>
-            </div>
-        </header>
-    );
-};
+  return (
+    <header className="relative mx-4 overflow-hidden p-6 text-center sm:mx-8 md:mx-12 lg:mx-16">
+      <div className="relative -skew-x-12 transform rounded-lg border-4 border-cyan-500 bg-black bg-opacity-80 p-6">
+        <div className="skew-x-12 transform">
+          <h1 className="text-4xl font-bold leading-tight text-cyan-400 sm:text-5xl md:text-6xl">
+            END GOAL:
+          </h1>
+          <h1 className="text-4xl font-bold leading-tight text-cyan-400 sm:text-5xl md:text-6xl">
+            Global Optimization
+          </h1>
+        </div>
+      </div>
+    </header>
+  )
+}
 
 const WorldOptimizationDashboard = () => {
   return (
     <div className="min-h-screen font-mono">
-      <WorldOptimizationHeader/>
+      <WorldOptimizationHeader />
 
-      <main className="flex flex-col p-2 md:flex-row md:flex-wrap justify-center">
+      <main className="flex flex-col justify-center p-2 md:flex-row md:flex-wrap">
         <GlobalCoordinationAgent></GlobalCoordinationAgent>
         <GlobalHealthOptimizationAgent></GlobalHealthOptimizationAgent>
       </main>
