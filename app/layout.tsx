@@ -75,7 +75,7 @@ export default async function RootLayout({ children }: RootLayoutProps) {
     <html lang="en" suppressHydrationWarning>
       <body className={cn("antialiased", inter.className)}>
         <CopilotKit url="/api/copilot/openai/">
-          <ThemeProvider attribute="class" defaultTheme="light" enableSystem>
+          <ThemeProvider attribute="class" defaultTheme="dark" enableSystem>
             <NextTopLoader color="#DC2645" height={2.5} showSpinner={false} />
             <div
               vaul-drawer-wrapper=""
