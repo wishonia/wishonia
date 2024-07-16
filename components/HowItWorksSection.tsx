@@ -2,27 +2,31 @@ import React from "react"
 import { User } from "next-auth"
 
 import qaData from "./HowItWorksData"
-import QAItem from "./QAItem"
+import HowItWorksItem from "./HowItWorksItem"
 
 interface HowItWorksSectionProps {
   user?: User
 }
 
 const HowItWorksSection: React.FC<HowItWorksSectionProps> = ({ user }) => (
-  <section className="mb-16 p-4">
-    <h2 className="mb-8 text-5xl font-bold uppercase">HOW IT WORKS</h2>
-    <div className="space-y-16">
-      {qaData.map((item, index) => (
-        <QAItem
-          key={index}
-          question={item.question}
-          answer={item.answer}
-          visual={item.visual}
-          user={user}
-        />
-      ))}
-    </div>
-  </section>
+    <section className="p-4">
+        <header className="p-4 sm:p-8 text-center">
+            <h1 className="mb-4 text-3xl sm:text-4xl md:text-5xl lg:text-6xl font-bold leading-tight">
+                HOW IT WORKS
+            </h1>
+        </header>
+        <div className="space-y-16">
+            {qaData.map((item, index) => (
+                <HowItWorksItem
+                    key={index}
+                    title={item.title}
+                    description={item.description}
+                    visual={item.visual}
+                    user={user}
+                />
+            ))}
+        </div>
+    </section>
 )
 
 export default HowItWorksSection

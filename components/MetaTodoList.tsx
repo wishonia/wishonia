@@ -78,7 +78,7 @@ const MetaTodoList: React.FC = () => {
   }
 
   return (
-    <div className="mb-16 border-8 border-black p-8">
+    <div className="border-8 border-black p-8">
       <h2 className="mb-8 bg-black p-4 text-center text-4xl font-bold uppercase text-white">
         HOW IT WORKS
       </h2>
