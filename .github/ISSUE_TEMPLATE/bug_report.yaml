@@ -1,0 +1,80 @@
+name: Bug Report
+description: I've found a problem with the project.
+labels: [bug]
+body:
+  - type: markdown
+    attributes:
+      value: |
+        Thanks for taking the time to fill out this bug report!
+  - type: textarea
+    id: current-behavior
+    attributes:
+      label: Current Behavior
+      description: Summarize the problem you continue to encounter
+      placeholder: A shark exploded after being sprayed with Shark-Repellent-Bat-Spray™
+    validations:
+      required: true
+  - type: checkboxes
+    id: reproducible
+    attributes:
+      label: We want to be sure this isn't a one-off problem.
+      options:
+        - label: This problem is something that I can consistently produce.
+  - type: textarea
+    id: expected-behavior
+    attributes:
+      label: Expected Behavior
+      description: Explain what SHOULD have happened, but didn't.
+      placeholder: Sharks resume normal life after being sprayed with Shark-Repellent-Bat-Spray™
+    validations:
+      required: true
+  - type: textarea
+    id: reproduce
+    attributes:
+      label: Steps To Reproduce
+      description: How do you trigger this bug? Please walk us through it step by step.
+      placeholder: |
+        1. A sidekick (ie Robin) positions the Bat-copter (with ladder extended) over large body of water.
+        2. Attempt to climb ladder.
+        3. A shark administers bite to lower leg.
+        4. Administer the Shark-Repellent-Bat-Spray™ to the aquatic predator.
+      render: bash
+    validations:
+      required: true
+  - type: textarea
+    id: more-info
+    attributes:
+      label: A picture is worth a thousand words
+      description: Please supply any screenshots or screen recordings of the bug.
+      placeholder: |
+        ![administering repellent](https://imgur.com/t35V2Bb.jpg)
+        See the below video on YouTube of where this incident takes place. Incident occurs at the 1:24 marker.
+        https://youtu.be/QnFOs7QlJSI?t=84
+  - type: textarea
+    id: environment
+    attributes:
+      label: Environment
+      description: Tell us about the environment where this bug is seen. Include pertinent software and version.
+      value: |
+        OS: Windows 11
+          Version:      22H2
+          OS build:     22621.1992
+          arch:         amd x64
+        Browser: Firefox 127.0.1 (64-bit)
+        Last repo commit: 895301f456dfac132c42eacb933e65bf7a192c77
+
+      render: shell
+    validations:
+      required: true
+  - type: checkboxes
+    attributes:
+      label: Code of Conduct
+      description: The Code of Conduct helps create a safe space for everyone. We require
+        that everyone agrees to it.
+      options:
+        - label: I agree to follow this project's [Code of Conduct](../blob/main/CODE_OF_CONDUCT.md)
+          required: true
+  - type: markdown
+    attributes:
+      value: |
+        Thanks for filling out the bug report!
