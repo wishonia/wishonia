@@ -1,13 +1,22 @@
-import fs from "fs"
-import path from "path"
-import { MarkdownFile } from "@/interfaces/markdownFile"
-import slugify from "slugify"
+import fs from "fs";
+import path from "path";
+import { MarkdownFile } from "@/interfaces/markdownFile";
+import slugify from "slugify";
 
-import { pathToMarkdownUrl } from "@/lib/fileHelper"
-import { generateAndUploadFeaturedImageJpg } from "@/lib/imageGenerator"
-import { textCompletion } from "@/lib/llm"
-import { saveMarkdownPost } from "@/lib/markdownGenerator"
-import { toTitleCase } from "@/lib/stringHelpers"
+
+
+import { prisma } from "@/lib/db";
+import { pathToMarkdownUrl } from "@/lib/fileHelper";
+import { createGlobalProblem } from "@/lib/globalProblems";
+import { generateAndUploadFeaturedImageJpg } from "@/lib/imageGenerator";
+import { textCompletion } from "@/lib/llm";
+import { saveMarkdownPost } from "@/lib/markdownGenerator";
+import { createSlug } from "@/lib/stringHelper";
+import { toTitleCase } from "@/lib/stringHelpers";
+
+
+
+
 
 const overwriteMarkdown = false
 const overwriteImages = false
@@ -35,6 +44,14 @@ const problemNames = [
   "Water Pollution",
 ]
 
+async function generateDescription(problemName: string) {
+  return await textCompletion(
+      `Please generate a sentence description of the problem of ${problemName} under 240 characters.  
+              Do not return anything other than the single sentence description.`,
+      "text"
+    );
+}
+
 async function generateMarkdown(
   problemName: string,
   markdownPath: string,
@@ -42,13 +59,8 @@ async function generateMarkdown(
 ): Promise<void> {
   problemName = toTitleCase(problemName)
   console.log(`Generating markdown for ${problemName}`)
-  const description = await textCompletion(
-    `Please generate a sentence description of the problem of ${problemName} under 240 characters.  
-            Do not return anything other than the single sentence description.`,
-    "text"
-  )
-  const prompt = generateArticlePrompt(problemName)
-  const content = await textCompletion(prompt, "text")
+  const description = await generateDescription(problemName)
+  const content = await generateArticleContent(problemName)
   const post = {
     name: problemName,
     description: description,
@@ -151,4 +163,25 @@ Conclusion:
 - Provide a final assessment of the overall importance and priority of addressing the problem, considering the various factors discussed
 - Offer guidance or recommendations for individuals or organizations considering donating or contributing to efforts to address the problem, compared to other potential causes or issues.
 `
+}
+
+
+async function generateArticleContent(name: string) {
+  const prompt = generateArticlePrompt(name)
+  return await textCompletion(prompt, "text");
+}
+
+export async function generateAndSaveGlobalProblem(name: string,
+                                                   userId: string,
+                                                   description?: string) {
+  try {
+    const content = await generateArticleContent(name)
+    if (!description) {
+      description = await generateDescription(name)
+    }
+    return await createGlobalProblem(name, description, content, undefined, userId)
+  } catch (error) {
+    console.error(`Error generating and saving global problem: ${error}`)
+    throw error
+  }
 }
