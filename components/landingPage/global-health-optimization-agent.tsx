@@ -27,6 +27,12 @@ const GlobalHealthOptimizationAgent = () => {
     'Treatment Protocol Optimization'
   ];
 
+  const [progressWidths, setProgressWidths] = useState<number[]>([]);  
+
+  useEffect(() => {  
+    setProgressWidths(['Data Analysis', 'Experimental Design', 'Clinical Trials', 'Treatment Development'].map(() => Math.random() * 100));  
+  }, []);  
+
   useEffect(() => {
     const diseaseInterval = setInterval(() => {
       setCurrentDisease(diseases[Math.floor(Math.random() * diseases.length)]);
@@ -99,14 +105,14 @@ const GlobalHealthOptimizationAgent = () => {
                 <div className="w-full bg-gray-700 rounded-full h-2">
                   <div
                       className="bg-cyan-500 h-2 rounded-full animate-pulse"
-                      style={{width: `${Math.random() * 100}%`}}
+                      style={{width: `${progressWidths[index]}%`}}
                   ></div>
                 </div>
               </div>
           ))}
         </div>
 
-        <div className="p-4">
+        <div className="p-4 w-3/5 mx-auto">
           <GlobalBrainNetwork/>
         </div>
       </div>

@@ -25,7 +25,7 @@ const FeatureCard: React.FC<FeatureCardProps> = ({
   imageUrl,
   component,
 }) => (
-  <section className={`mb-16 border-4 border-black p-8 ${className}`}>
+  <section className={`border-4 border-black p-8 ${className}`}>
     <h2 className="mb-8 flex items-center text-4xl font-bold">
       <Icon size={48} className="mr-4" />
       {title}
@@ -136,17 +136,15 @@ const ForkableWorldSection: React.FC = () => {
                   A Decentralized Semi-Autonomous Todo List For Humanity
               </h1>
               <p className="text-lg sm:text-xl md:text-2xl">
-                  We want a system to optimize all human actions to maximize universal health and happiness of all
-                  sentient
-                  beings.
+                  to optimize to maximize universal health and happiness.
               </p>
           </header>
-          <div className="p-4 sm:p-8 text-center">
-              <h1 className="mb-4 text-3xl sm:text-4xl md:text-5xl lg:text-6xl font-bold leading-tight">
-                  Here's the ingredients:
+          <div className="text-center">
+              <h1 className="text-4xl sm:text-4xl md:text-5xl lg:text-6xl font-bold leading-tight">
+                  Ingredients:
               </h1>
           </div>
-          <main className="flex flex-col p-8 md:flex-row md:flex-wrap">
+          <main className="flex flex-col p-4 md:flex-row md:flex-wrap">
               {features.map((feature, index) => (
                   <FeatureCard key={index} {...feature} className="md:w-1/2 lg:w-1/3"/>
               ))}
