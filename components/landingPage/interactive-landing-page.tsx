@@ -102,12 +102,12 @@ const WhatWeNeedToKnow = () => (
 
                 {/* Small circle - What We Know */}
                 <div
-                    className="absolute h-2 w-2 rounded-full bg-yellow-400 dark:bg-yellow-600"
+                    className="absolute"
                     style={{ top: "20%", left: "20%" }}
                 >
                     <div className="absolute left-5 -top-5 whitespace-nowrap">
                       <span className="text-sm">
-                        👈 What We Know
+                        🟡 👈 What We Know
                       </span>
                     </div>
                 </div>
@@ -165,18 +165,16 @@ const InteractiveLandingPage = () => {
 
   const scrollToNext = () => {
     const nextIndex = currentSentence + 1
-    const nextElement = document.getElementById(`sentence-${nextIndex}`)
-    if (nextElement) {
-      const nextPosition =
-        nextElement.getBoundingClientRect().top + window.scrollY
-      window.scrollTo({
-        top: nextPosition,
-        behavior: "smooth",
-      })
+    if (nextIndex < sentences.length) {
+      const nextElement = document.getElementById(`sentence-${nextIndex}`)
+      if (nextElement) {
+        nextElement.scrollIntoView({ behavior: "smooth" })
+      }
     } else {
-      window.scrollTo({
-        top: window.scrollY + window.innerHeight,
-        behavior: "smooth",
+      // For the last sentence, scroll down by a specific amount
+      window.scrollBy({
+        top: window.innerHeight, // Scroll by half the viewport height
+        behavior: 'smooth'
       })
     }
   }
@@ -238,54 +236,36 @@ const InteractiveLandingPage = () => {
 
         .glitch-text {
           text-shadow:
-            0.05em 0 0 rgba(255, 0, 0, 0.75),
-            -0.025em -0.05em 0 rgba(0, 255, 0, 0.75),
-            0.025em 0.05em 0 rgba(0, 0, 255, 0.75);
-          animation: glitch 500ms infinite;
+            0.03em 0 0 rgba(255, 0, 0, 0.5),
+            -0.02em -0.03em 0 rgba(0, 255, 0, 0.5),
+            0.02em 0.03em 0 rgba(0, 0, 255, 0.5);
+          animation: glitch 3s infinite;
         }
 
         @keyframes glitch {
-          0% {
+          0%, 100% {
             text-shadow:
-              0.05em 0 0 rgba(255, 0, 0, 0.75),
-              -0.05em -0.025em 0 rgba(0, 255, 0, 0.75),
-              0.025em 0.05em 0 rgba(0, 0, 255, 0.75);
+              0.03em 0 0 rgba(255, 0, 0, 0.5),
+              -0.02em -0.03em 0 rgba(0, 255, 0, 0.5),
+              0.02em 0.03em 0 rgba(0, 0, 255, 0.5);
           }
-          14% {
+          25% {
             text-shadow:
-              0.05em 0 0 rgba(255, 0, 0, 0.75),
-              -0.05em -0.025em 0 rgba(0, 255, 0, 0.75),
-              0.025em 0.05em 0 rgba(0, 0, 255, 0.75);
-          }
-          15% {
-            text-shadow:
-              -0.05em -0.025em 0 rgba(255, 0, 0, 0.75),
-              0.025em 0.025em 0 rgba(0, 255, 0, 0.75),
-              -0.05em -0.05em 0 rgba(0, 0, 255, 0.75);
-          }
-          49% {
-            text-shadow:
-              -0.05em -0.025em 0 rgba(255, 0, 0, 0.75),
-              0.025em 0.025em 0 rgba(0, 255, 0, 0.75),
-              -0.05em -0.05em 0 rgba(0, 0, 255, 0.75);
+              -0.03em 0.01em 0 rgba(255, 0, 0, 0.5),
+              0.02em -0.02em 0 rgba(0, 255, 0, 0.5),
+              -0.02em 0.03em 0 rgba(0, 0, 255, 0.5);
           }
           50% {
             text-shadow:
-              0.025em 0.05em 0 rgba(255, 0, 0, 0.75),
-              0.05em 0 0 rgba(0, 255, 0, 0.75),
-              0 -0.05em 0 rgba(0, 0, 255, 0.75);
+              0.02em 0.03em 0 rgba(255, 0, 0, 0.5),
+              0.03em 0 0 rgba(0, 255, 0, 0.5),
+              0 -0.03em 0 rgba(0, 0, 255, 0.5);
           }
-          99% {
+          75% {
             text-shadow:
-              0.025em 0.05em 0 rgba(255, 0, 0, 0.75),
-              0.05em 0 0 rgba(0, 255, 0, 0.75),
-              0 -0.05em 0 rgba(0, 0, 255, 0.75);
-          }
-          100% {
-            text-shadow:
-              -0.025em 0 0 rgba(255, 0, 0, 0.75),
-              -0.025em -0.025em 0 rgba(0, 255, 0, 0.75),
-              -0.025em -0.05em 0 rgba(0, 0, 255, 0.75);
+              -0.02em 0 0 rgba(255, 0, 0, 0.5),
+              -0.02em -0.02em 0 rgba(0, 255, 0, 0.5),
+              -0.02em -0.03em 0 rgba(0, 0, 255, 0.5);
           }
         }
       `}</style>
