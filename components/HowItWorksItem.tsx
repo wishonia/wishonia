@@ -3,21 +3,21 @@ import Image from "next/image"
 import { User } from "next-auth"
 
 interface QAItemProps {
-  question: string
-  answer?: string
+  title: string
+  description?: string
   visual?: string | React.ReactNode
   user?: User | undefined
 }
 
-export default function QAItem({ question, answer, visual }: QAItemProps) {
+export default function HowItWorksItem({ title, description, visual }: QAItemProps) {
   return (
       <div className="border-4">
         <div className="p-4">
-          <p className="text-3xl font-bold">{question}</p>
+          <p className="text-3xl font-bold">{title}</p>
         </div>
-        {answer && (
+        {description && (
             <div className="p-4">
-              <p className="text-2xl">{answer}</p>
+              <p className="text-2xl">{description}</p>
             </div>
         )}
         {visual && (

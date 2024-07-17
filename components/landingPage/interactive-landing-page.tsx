@@ -1,7 +1,8 @@
-"use client"
+"use client";
 
-import React, { useEffect, useState } from "react"
-import { ArrowDown } from "lucide-react"
+import React, { useEffect, useState } from "react";
+import { ArrowDown } from "lucide-react";
+
 
 const globalProblems = [
     { emoji: '🧠', problem: 'Dementia', color: 'red' },
@@ -73,31 +74,72 @@ const Sentence3 = () => (
 );
 
 const Sentence4 = () => (
-    <>
-      🧠 Our caveman brains can only <strong className='text-purple-400 relative group'>REMEMBER SEVEN THINGS
-      <span className='invisible group-hover:visible absolute -top-8 left-1/2 transform -translate-x-1/2 bg-purple-600 text-white text-xs rounded px-2 py-1'>
+  <>
+    🧠 Our caveman brains can only{" "}
+    <strong className="group relative text-purple-400">
+      REMEMBER SEVEN THINGS
+      <span className="invisible absolute -top-8 left-1/2 -translate-x-1/2 transform rounded bg-purple-600 px-2 py-1 text-xs text-white group-hover:visible">
         Limited capacity!
       </span>
-    </strong> in working memory at a time.<br /><br />
-      So we have much less than <span className='text-yellow-400 font-extrabold animate-pulse'>1% of the information</span> we need to know!
+    </strong>{" "}
+    in working memory at a time.
+  </>
+)
+
+const WhatWeNeedToKnow = () => (
+    <>
+        So we have much less than{" "}
+        <span className="animate-pulse font-extrabold text-yellow-400">
+      1% of the information
+    </span>{" "}
+        we need to know to figure out the best thing to do!
+        <div className="relative mx-auto h-64 w-64 mt-4">
+            {/* Large circle - Everything We Need to Know */}
+            <div className="absolute inset-0 flex items-center justify-center rounded-full bg-blue-500 dark:bg-blue-700">
+              <span className="text-3xl font-bold text-white dark:text-gray-200 text-center uppercase">
+                All Relevant Information
+              </span>
+
+                {/* Small circle - What We Know */}
+                <div
+                    className="absolute"
+                    style={{ top: "20%", left: "20%" }}
+                >
+                    <div className="absolute left-5 -top-5 whitespace-nowrap">
+                      <span className="text-sm">
+                        🟡 👈 What We Know
+                      </span>
+                    </div>
+                </div>
+            </div>
+        </div>
     </>
-);
+)
+
 
 const Sentence5 = () => (
-    <>
-      Even if we knew what to do, solving global problems requires that a <span className='text-green-400 hover:underline cursor-pointer animate-bounce'>LOT OF PEOPLE</span> know what to do and do it, too.<br /><br />
-      To have a chance in hell of actually solving <span className='text-yellow-400 font-extrabold animate-pulse'>MASSIVE GLOBAL PROBLEMS</span>, we need...<br /><br />
-    </>
-);
-
+  <>
+    Even if we knew what to do, solving global problems requires that a{" "}
+    <span className="animate-bounce cursor-pointer text-green-400 hover:underline">
+      LOT OF PEOPLE
+    </span>{" "}
+    know what to do and do it, too.
+    <br />
+    <br />
+    To have a chance in hell of actually solving{" "}
+    <span className="animate-pulse font-extrabold text-yellow-400">
+      MASSIVE GLOBAL PROBLEMS
+    </span>
+    , we need...
+    <br />
+    <br />
+  </>
+)
 
 const sentences = [
-  Sentence1,
-  Sentence2,
-  Sentence3,
-  Sentence4,
-  Sentence5
-]
+    Sentence1, Sentence2, Sentence3, Sentence4,
+    WhatWeNeedToKnow,
+    Sentence5]
 
 const InteractiveLandingPage = () => {
   const [currentSentence, setCurrentSentence] = useState(0)
@@ -123,24 +165,22 @@ const InteractiveLandingPage = () => {
 
   const scrollToNext = () => {
     const nextIndex = currentSentence + 1
-    const nextElement = document.getElementById(`sentence-${nextIndex}`)
-    if (nextElement) {
-      const nextPosition =
-        nextElement.getBoundingClientRect().top + window.scrollY
-      window.scrollTo({
-        top: nextPosition,
-        behavior: "smooth",
-      })
+    if (nextIndex < sentences.length) {
+      const nextElement = document.getElementById(`sentence-${nextIndex}`)
+      if (nextElement) {
+        nextElement.scrollIntoView({ behavior: "smooth" })
+      }
     } else {
-      window.scrollTo({
-        top: window.scrollY + window.innerHeight,
-        behavior: "smooth",
+      // For the last sentence, scroll down by a specific amount
+      window.scrollBy({
+        top: window.innerHeight, // Scroll by half the viewport height
+        behavior: 'smooth'
       })
     }
   }
 
   if (!isClient) {
-    return null;
+    return null
   }
 
   return (
@@ -196,54 +236,36 @@ const InteractiveLandingPage = () => {
 
         .glitch-text {
           text-shadow:
-            0.05em 0 0 rgba(255, 0, 0, 0.75),
-            -0.025em -0.05em 0 rgba(0, 255, 0, 0.75),
-            0.025em 0.05em 0 rgba(0, 0, 255, 0.75);
-          animation: glitch 500ms infinite;
+            0.03em 0 0 rgba(255, 0, 0, 0.5),
+            -0.02em -0.03em 0 rgba(0, 255, 0, 0.5),
+            0.02em 0.03em 0 rgba(0, 0, 255, 0.5);
+          animation: glitch 3s infinite;
         }
 
         @keyframes glitch {
-          0% {
+          0%, 100% {
             text-shadow:
-              0.05em 0 0 rgba(255, 0, 0, 0.75),
-              -0.05em -0.025em 0 rgba(0, 255, 0, 0.75),
-              0.025em 0.05em 0 rgba(0, 0, 255, 0.75);
+              0.03em 0 0 rgba(255, 0, 0, 0.5),
+              -0.02em -0.03em 0 rgba(0, 255, 0, 0.5),
+              0.02em 0.03em 0 rgba(0, 0, 255, 0.5);
           }
-          14% {
+          25% {
             text-shadow:
-              0.05em 0 0 rgba(255, 0, 0, 0.75),
-              -0.05em -0.025em 0 rgba(0, 255, 0, 0.75),
-              0.025em 0.05em 0 rgba(0, 0, 255, 0.75);
-          }
-          15% {
-            text-shadow:
-              -0.05em -0.025em 0 rgba(255, 0, 0, 0.75),
-              0.025em 0.025em 0 rgba(0, 255, 0, 0.75),
-              -0.05em -0.05em 0 rgba(0, 0, 255, 0.75);
-          }
-          49% {
-            text-shadow:
-              -0.05em -0.025em 0 rgba(255, 0, 0, 0.75),
-              0.025em 0.025em 0 rgba(0, 255, 0, 0.75),
-              -0.05em -0.05em 0 rgba(0, 0, 255, 0.75);
+              -0.03em 0.01em 0 rgba(255, 0, 0, 0.5),
+              0.02em -0.02em 0 rgba(0, 255, 0, 0.5),
+              -0.02em 0.03em 0 rgba(0, 0, 255, 0.5);
           }
           50% {
             text-shadow:
-              0.025em 0.05em 0 rgba(255, 0, 0, 0.75),
-              0.05em 0 0 rgba(0, 255, 0, 0.75),
-              0 -0.05em 0 rgba(0, 0, 255, 0.75);
+              0.02em 0.03em 0 rgba(255, 0, 0, 0.5),
+              0.03em 0 0 rgba(0, 255, 0, 0.5),
+              0 -0.03em 0 rgba(0, 0, 255, 0.5);
           }
-          99% {
+          75% {
             text-shadow:
-              0.025em 0.05em 0 rgba(255, 0, 0, 0.75),
-              0.05em 0 0 rgba(0, 255, 0, 0.75),
-              0 -0.05em 0 rgba(0, 0, 255, 0.75);
-          }
-          100% {
-            text-shadow:
-              -0.025em 0 0 rgba(255, 0, 0, 0.75),
-              -0.025em -0.025em 0 rgba(0, 255, 0, 0.75),
-              -0.025em -0.05em 0 rgba(0, 0, 255, 0.75);
+              -0.02em 0 0 rgba(255, 0, 0, 0.5),
+              -0.02em -0.02em 0 rgba(0, 255, 0, 0.5),
+              -0.02em -0.03em 0 rgba(0, 0, 255, 0.5);
           }
         }
       `}</style>

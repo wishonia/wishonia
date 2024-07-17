@@ -16,7 +16,7 @@ export default async function OpenSource() {
     .then((res) => res.json())
     .catch((e) => console.error(e))
 
-  const buttonText = `Fork The Project On GitHub!`
+  const buttonText = `Fork Me On GitHub!`
 
   return (
     <section className="container py-12 lg:py-20">
