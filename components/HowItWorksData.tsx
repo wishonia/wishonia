@@ -74,7 +74,7 @@ const HowItWorksData: HowItWorksStep[] = [
     visual: <ActionableTaskStrategyVisualizer />,
   },
   {
-    title: "6. Get it Done!",
+    title: "6. Find the Best People to Work on Each Task",
     description:
       "Tasks can be completed by anyone with the right skills – this includes " +
       "both humans and AI. We use AI to match tasks with the most suitable " +
