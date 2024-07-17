@@ -1,59 +1,83 @@
 name: Feature Request
-description: I have an idea! 
+description: Suggest a new feature using a user story format
 labels: [enhancement]
 body:
   - type: markdown
     attributes:
       value: |
-        Thanks for taking the time to fill out this feature request!
+        Thanks for taking the time to fill out this feature request! Please provide as much detail as you can to help our developers understand and evaluate your idea.
   - type: textarea
-    id: summary
+    id: user-story
     attributes:
-      label: Summary 
-      description: Summarize the what you want to see enabled in terms of an action. 
-      placeholder: I want to look right or left without turning my whole torso
+      label: User Story
+      description: Describe your feature request in the format of a user story. This helps us understand the feature from your perspective.
+      placeholder: |
+        As a [type of user],
+        I want [an action or feature],
+        So that [benefit/value].
+        
+        Example:
+        As a mobile user,
+        I want to be able to save articles for offline reading,
+        So that I can access content when I don't have an internet connection.
+    validations:
+      required: true
+  - type: textarea
+    id: acceptance-criteria
+    attributes:
+      label: Acceptance Criteria
+      description: List 2-5 specific, testable conditions that must be met for this feature to be considered complete.
+      placeholder: |
+        - [ ] Users can save articles with a single tap
+        - [ ] Saved articles are accessible from the 'Saved' tab
+        - [ ] Saved articles can be read without an internet connection
+        - [ ] Users can remove articles from their saved list
     validations:
       required: true
   - type: textarea
     id: proposed-solution
     attributes:
       label: Proposed Solution
-      description: What solution do you recommend?
-      placeholder: Place all the baddies I'm fighting directly in front of me.
+      description: Describe your idea for implementing this feature.
+      placeholder: |
+        I think this could be implemented by adding a 'Save' button to each article. When tapped, the article content could be stored locally on the device. A new 'Saved' tab in the navigation menu could list all saved articles.
     validations:
       required: true
   - type: textarea
-    id: explored-alternatives 
+    id: alternatives-considered
     attributes:
-      label: Alternative
-      description: What alternative solutions have you considered?
+      label: Alternatives Considered
+      description: Describe any alternative solutions or features you've considered. This could include existing products, services, or potential integrations that might meet the need.
       placeholder: |
-        I thought about getting a new bat suit where the neck could move freely, but I like my cowl as it is.
+        1. Pocket Integration: We could integrate with the Pocket app for article saving and offline reading. However, this would require users to have a Pocket account.
+        
+        2. Browser Reading Mode: Modern mobile browsers often have a 'Reading Mode' that can save articles for offline viewing. We could provide instructions on how to use this feature instead of building our own.
+        
+        3. RSS Feed Reader: We could recommend users employ an RSS feed reader app that supports offline caching. This wouldn't be as seamless but could fulfill the need without additional development on our part.
+  - type: dropdown
+    id: priority
+    attributes:
+      label: Perceived Priority
+      description: How important do you think this feature is?
+      options:
+        - High (This would significantly improve my experience)
+        - Medium (This would be a nice addition)
+        - Low (This is a minor enhancement)
+    validations:
+      required: true
   - type: textarea
-    id: Requirements
+    id: user-impact
     attributes:
-      label: Requirements
-      description: provide bullet points for what must be done in order for this request to be fulfilled
+      label: User Impact
+      description: Describe how this feature would impact users. Consider how many and what types of users would benefit.
       placeholder: |
-        - [ ] automated tests verify impact standards, in case I land on my face.
-        - [ ] it comes in black
-        - [ ] I can turn left and right while not moving my torso
-        - [ ] has cup holders
+        This feature would benefit mobile users who commute or travel frequently. It would allow them to read content during their commute, even in areas with poor internet connectivity. I estimate it could improve the experience for 30-40% of our user base, particularly those who use the app daily.
   - type: textarea
     id: additional-context
     attributes:
       label: Additional Context
-      description: Add any other context or screenshots about the feature request here.
-      placeholder: I'm Batman.
-  - type: checkboxes
-    attributes:
-      label: Code of Conduct
-      description: The Code of Conduct helps create a safe space for everyone. We require
-        that everyone agrees to it.
-      options:
-        - label: I agree to follow this project's [Code of Conduct](../blob/main/CODE_OF_CONDUCT.md)
-          required: true
+      description: Add any other context, mockups, or examples about the feature request here. If you have any ideas about how to measure the success of this feature, please include them.
   - type: markdown
     attributes:
       value: |
-        Thanks for filling out the feature request!
+        Thanks for filling out the feature request! Our development team will review your proposal and may reach out if we need any clarification.
