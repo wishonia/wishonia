@@ -40,7 +40,7 @@ const GlobalCoordinationAgent = () => {
   return (
     <div className="flex items-center justify-center p-4 overflow-hidden">
       <div
-          className="relative w-full max-w-4xl p-4 bg-gray-900 bg-opacity-50 border-4 border-cyan-500 rounded-lg shadow-2xl">
+          className="relative w-full max-w-4xl p-4 bg-black bg-opacity-50 border-4 border-cyan-500 rounded-lg shadow-2xl">
         <div className="absolute inset-0 opacity-10 animate-pulse"></div>
 
         <h1 className="text-4xl font-bold text-cyan-500 mb-6 animate-glitch">
@@ -98,7 +98,7 @@ const GlobalCoordinationAgent = () => {
           </div>
         </div>
 
-        <div className="p-4">
+        <div className="p-4 w-3/5 mx-auto">
           <GlobalBrainNetwork/>
         </div>
       </div>

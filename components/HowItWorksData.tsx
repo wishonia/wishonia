@@ -9,13 +9,13 @@ import TaskAllocationVisualizer from "@/components/landingPage/TaskAllocationVis
 import ResearchEffortCataloger from "@/components/landingPage/ResearchEffortCataloger";
 import ImpactTrackerVisualizer from "@/components/landingPage/ImpactTrackerVisualizer";
 
-export interface QAItem {
-  question: string
-  answer?: string
+export interface HowItWorksStep {
+  title: string
+  description?: string
   visual?: React.ReactNode
 }
 
-const HowItWorksData: QAItem[] = [
+const HowItWorksData: HowItWorksStep[] = [
   // {
   //   question: "Why are you doing this?",
   //   answer: `Because billions of people and animals are suffering from various global problems.
@@ -42,56 +42,56 @@ const HowItWorksData: QAItem[] = [
   //   //visual: <APPADiagram />,
   // },
   {
-    question: "Prioritize Problems",
-    answer:
-      "In Aggregated Pairwise Preference Allocation (APPA), we show everyone random pairs problems and asked to allocate between them based on relative importance.",
+    title: "1. Figure Out What Everyone Wants",
+    description:
+      "We show everyone random pairs problems and allow them to indicate how much they'd donate to each.  This is called  Pairwise Preference Allocation (PPA).  It's kind of stupid, but it's the least bad way we've found to quantify people's preferences so far.",
     visual: <PollRandomGlobalProblems />,
   },
   {
-    question: "Generate a Crowdsourced Budget",
-    answer:
-      "By aggregating many of these pairwise comparisons across many people, we can derive a crowdsourced budget allocations.",
+    title: "2. Create a Budget that Matches Everyone's Priorities",
+    description:
+      "By combining lots of pairwise allocations, we create a crowdsourced budget. This would enable us to allocate limited resources to solving the most urgent problems.",
     visual: <GlobalProblemsList />,
   },
   {
-    question: "Generate and Collect All Possible Solutions",
-    answer:
-      "Here are the current solutions for solving the problem of Aging, for example.",
+    title: "3. List All the Solutions for Each Problem",
+    description:
+      `We use AI agents to research and list all possible solutions for each problem. Here are the current solutions for solving the specific problem of "AGING", for example.`,
     visual: <GlobalProblemSolutionsList globalProblemId={"aging"} />,
   },
   {
-    question: "How are the best solutions selected?",
-    answer:
-      "We use APPA again, but this time for solutions. People compare pairs of proposed solutions, considering factors like feasibility, impact, and cost-effectiveness. AI helps by providing data and analysis to inform these comparisons.",
+    title: "4. Find the Best Solutions",
+    description:
+      "We use AI and human evaluators to compare and rank solutions based on their feasibility, impact, and cost-effectiveness. Here are some of the solutions for the problem of aging.",
     visual: <PollRandomGlobalProblemSolutions globalProblemId={"aging"} />,
     //visual: <APPADiagram />,
   },
   {
-    question: "Once a solution is chosen, what happens next?",
-    answer:
-      "The chosen solutions are broken down into smaller, actionable tasks. " +
+    title: "5. Break Down Solutions into the Smallest Actionable Tasks",
+    description:
+      "The best solutions are broken down into smaller, actionable tasks. " +
       "Goal decomposition agents help in this process by identifying necessary steps, potential dependencies, and required skills for each task.",
     visual: <ActionableTaskStrategyVisualizer />,
   },
   {
-    question: "Who carries out these tasks?",
-    answer:
+    title: "6. Find the Best People to Work on Each Task",
+    description:
       "Tasks can be completed by anyone with the right skills – this includes " +
       "both humans and AI. We use AI to match tasks with the most suitable " +
       "people or teams based on their skills, experience, and interests.",
     visual: <TaskAllocationVisualizer />,
   },
   {
-    question: "How does it avoid duplicating work that's already being done?",
-    answer:
+    title: "7. Avoid Wasteful Duplication of Effort",
+    description:
       "AI research agents to continuously scan and catalog existing efforts " +
       "related to each problem and solution. This helps us identify " +
       "opportunities for collaboration and avoid reinventing the wheel.",
     visual: <ResearchEffortCataloger />,
   },
   {
-    question: "How does it track progress and measure impact?",
-    answer:
+    title: "8. Track Progress and Measure Impact",
+    description:
       "AI research agents also analyze data from various sources, tracking key metrics related " +
       "to each problem and solution. This allows us to measure the " +
       "real-world impact of our efforts and adjust strategies as needed.",
