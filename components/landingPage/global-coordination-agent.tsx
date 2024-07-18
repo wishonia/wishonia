@@ -1,21 +1,15 @@
 "use client";
 import React, { useState, useEffect } from 'react';
 import GlobalBrainNetwork from "@/components/landingPage/global-brain-network";
+import {globalProblems} from "@/components/landingPage/interactive-landing-page";
 
 const GlobalCoordinationAgent = () => {
   const [currentIssue, setCurrentIssue] = useState('');
   const [aiProgress, setAiProgress] = useState(0);
   const [networkNodes, setNetworkNodes] = useState(0);
 
-  const globalIssues = [
-    'Extreme Poverty',
-    'Climate Disasters',
-    'Pandemic Outbreaks',
-    'Nuclear Proliferation',
-    'Mass Displacement',
-    'Ecosystem Collapse',
-    'AI Existential Risks'
-  ];
+  const globalIssues =
+    globalProblems.map(problem => `${problem.emoji} ${problem.name}`);
 
   useEffect(() => {
     const issueInterval = setInterval(() => {
@@ -60,7 +54,7 @@ const GlobalCoordinationAgent = () => {
         </div>
 
         <div className="mb-6">
-          <p className="text-lg text-cyan-300 mb-2">Current Crisis Focus:</p>
+          <p className="text-lg text-cyan-300 mb-2">Currently Mitigating:</p>
           <p className="text-3xl font-bold text-white animate-neon">
             {currentIssue}
           </p>

@@ -27,10 +27,12 @@ const GlobalHealthOptimizationAgent = () => {
     'Treatment Protocol Optimization'
   ];
 
-  const [progressWidths, setProgressWidths] = useState<number[]>([]);  
+  const [progressWidths, setProgressWidths] =
+      useState<number[]>([]);
 
   useEffect(() => {  
-    setProgressWidths(['Data Analysis', 'Experimental Design', 'Clinical Trials', 'Treatment Development'].map(() => Math.random() * 100));  
+    setProgressWidths(['Data Analysis', 'Experimental Design', 'Clinical Trials', 'Treatment Development']
+        .map(() => Math.random() * 100));
   }, []);  
 
   useEffect(() => {
