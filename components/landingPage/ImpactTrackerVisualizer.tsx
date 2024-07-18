@@ -84,7 +84,7 @@ const ImpactTrackerVisualizer: React.FC = () => {
 
     return (
         <div className="p-4 rounded-lg shadow-md max-w-4xl mx-auto my-8">
-            <h2 className="text-2xl font-bold mb-4 text-gray-800 dark:text-gray-200">AI Impact Tracker</h2>
+            <h2 className="text-2xl font-bold mb-4 text-gray-800 dark:text-gray-200">Impact Monitor Agents</h2>
             <div className="mb-4 p-2 bg-blue-100 dark:bg-blue-900 rounded">
                 <h3 className="font-bold flex items-center"><AlertTriangle size={16} className="mr-2" /> Real-time Impact Analysis</h3>
                 <p className="text-sm">Our AI agents continuously analyze data from various sources to track key metrics and measure the real-world impact of our efforts.</p>

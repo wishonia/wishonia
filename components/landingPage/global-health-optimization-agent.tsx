@@ -27,10 +27,12 @@ const GlobalHealthOptimizationAgent = () => {
     'Treatment Protocol Optimization'
   ];
 
-  const [progressWidths, setProgressWidths] = useState<number[]>([]);  
+  const [progressWidths, setProgressWidths] =
+      useState<number[]>([]);
 
   useEffect(() => {  
-    setProgressWidths(['Data Analysis', 'Experimental Design', 'Clinical Trials', 'Treatment Development'].map(() => Math.random() * 100));  
+    setProgressWidths(['Data Analysis', 'Experimental Design', 'Clinical Trials', 'Treatment Development']
+        .map(() => Math.random() * 100));
   }, []);  
 
   useEffect(() => {
@@ -56,7 +58,7 @@ const GlobalHealthOptimizationAgent = () => {
   return (
     <div className="flex items-center justify-center p-4 text-cyan-300 overflow-hidden">
       <div
-          className="relative w-full max-w-4xl p-4 bg-black bg-opacity-50 border-4 border-cyan-500 rounded-lg shadow-2xl">
+          className="relative w-full max-w-4xl p-4 bg-black border-4 border-cyan-500 rounded-lg shadow-2xl">
 
 
         <h1 className="text-4xl font-bold text-cyan-400 mb-6 animate-glitch">

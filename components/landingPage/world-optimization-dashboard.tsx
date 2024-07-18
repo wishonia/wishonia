@@ -6,7 +6,7 @@ import React from "react";
 const WorldOptimizationHeader = () => {
   return (
     <header className="relative mx-4 overflow-hidden p-6 text-center sm:mx-8 md:mx-12 lg:mx-16">
-      <div className="relative -skew-x-12 transform rounded-lg border-4 border-cyan-500 bg-black bg-opacity-80 p-6">
+      <div className="relative -skew-x-12 transform rounded-lg border-4 border-cyan-500 bg-black p-6">
         <div className="skew-x-12 transform">
           <h1 className="text-4xl font-bold leading-tight text-cyan-400 sm:text-5xl md:text-6xl">
             END GOAL:
