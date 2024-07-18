@@ -23,7 +23,7 @@ const CoolGlobalProblemsPieChart: React.FC<CoolGlobalProblemsPieChartProps> = ({
 
     return (
         <div className="w-full h-[400px] sm:h-[500px] rounded-lg shadow-lg p-2 sm:p-4 flex flex-col">
-            <h2 className="text-xl sm:text-2xl font-bold text-center mb-2 sm:mb-4 text-gray-200">
+            <h2 className="text-xl sm:text-2xl font-bold text-center mb-2 sm:mb-4">
                 Collective Budget for Each Problem
             </h2>
             <div className="flex-grow">
@@ -51,7 +51,7 @@ const CoolGlobalProblemsPieChart: React.FC<CoolGlobalProblemsPieChartProps> = ({
                             ))}
                         </Pie>
                         {data[activeIndex] && (
-                            <text x="50%" y="40%" textAnchor="middle" dominantBaseline="middle" fill="#e0e0e0">
+                            <text x="50%" y="40%" textAnchor="middle" dominantBaseline="middle">
                                 <tspan x="50%" dy="-1em" fontSize="16" fontWeight="bold" textAnchor="middle" wordSpacing="0.25em">
                                     {data[activeIndex].name.split(' ').map((word, index) => (
                                         <tspan key={index} x="50%" dy={index === 0 ? 0 : "1.2em"}>
