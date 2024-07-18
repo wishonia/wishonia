@@ -1,26 +1,20 @@
 "use client";
 import React, { useState, useEffect } from 'react';
 import GlobalBrainNetwork from "@/components/landingPage/global-brain-network";
+import {globalProblems} from "@/components/landingPage/interactive-landing-page";
 
 const GlobalCoordinationAgent = () => {
   const [currentIssue, setCurrentIssue] = useState('');
   const [aiProgress, setAiProgress] = useState(0);
   const [networkNodes, setNetworkNodes] = useState(0);
 
-  const globalIssues = [
-    'Extreme Poverty',
-    'Climate Disasters',
-    'Pandemic Outbreaks',
-    'Nuclear Proliferation',
-    'Mass Displacement',
-    'Ecosystem Collapse',
-    'AI Existential Risks'
-  ];
+  const globalIssues =
+    globalProblems.map(problem => `${problem.emoji} ${problem.name}`);
 
   useEffect(() => {
     const issueInterval = setInterval(() => {
       setCurrentIssue(globalIssues[Math.floor(Math.random() * globalIssues.length)]);
-    }, 3000);
+    }, 1000);
 
     const progressInterval = setInterval(() => {
       setAiProgress(prev => (prev < 100 ? prev + 1 : 0));
@@ -40,7 +34,7 @@ const GlobalCoordinationAgent = () => {
   return (
     <div className="flex items-center justify-center p-4 overflow-hidden">
       <div
-          className="relative w-full max-w-4xl p-4 bg-black bg-opacity-50 border-4 border-cyan-500 rounded-lg shadow-2xl">
+          className="relative w-full max-w-4xl p-4 bg-black border-4 border-cyan-500 rounded-lg shadow-2xl">
         <div className="absolute inset-0 opacity-10 animate-pulse"></div>
 
         <h1 className="text-4xl font-bold text-cyan-500 mb-6 animate-glitch">
@@ -60,7 +54,7 @@ const GlobalCoordinationAgent = () => {
         </div>
 
         <div className="mb-6">
-          <p className="text-lg text-cyan-300 mb-2">Current Crisis Focus:</p>
+          <p className="text-lg text-cyan-300 mb-2 p-2">Coordinating Effort to Solve:</p>
           <p className="text-3xl font-bold text-white animate-neon">
             {currentIssue}
           </p>

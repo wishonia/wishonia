@@ -32,7 +32,7 @@ const ResearchEffortCataloger: React.FC = () => {
         setTimeout(() => {
             const newEffort: ResearchEffort = {
                 id: `e${researchEfforts.length + 1}`,
-                title: `New research on ${searchTerm}`,
+                title: `New entity working on ${searchTerm}`,
                 organization: 'Recently Discovered Org',
                 relevance: Math.random() * 0.5 + 0.5, // Random relevance between 0.5 and 1
                 status: Math.random() > 0.5 ? 'ongoing' : 'completed',
@@ -45,17 +45,17 @@ const ResearchEffortCataloger: React.FC = () => {
 
     return (
         <div className="p-4 rounded-lg shadow-md max-w-4xl mx-auto my-8">
-            <h2 className="text-2xl font-bold mb-4 text-gray-800 dark:text-gray-200">AI Research Effort Cataloger</h2>
+            <h2 className="text-2xl font-bold mb-4 text-gray-800 dark:text-gray-200">Effort Cataloger</h2>
             <div className="mb-4 p-2 bg-blue-100 dark:bg-blue-900 rounded">
-                <h3 className="font-bold flex items-center"><Search size={16} className="mr-2" /> Continuous Research Scanning</h3>
-                <p className="text-sm">Our AI agents continuously scan and catalog existing research efforts to avoid duplication and identify collaboration opportunities.</p>
+                <h3 className="font-bold flex items-center"><Search size={16} className="mr-2" /> Continuous Effort Scanning</h3>
+                <p className="text-sm">AI agents continuously scan and catalog existing efforts to avoid duplication and identify collaboration opportunities.</p>
             </div>
             <div className="mb-4 flex">
                 <input
                     type="text"
                     value={searchTerm}
                     onChange={(e) => setSearchTerm(e.target.value)}
-                    placeholder="Enter research topic..."
+                    placeholder="Enter task..."
                     className="flex-grow p-2 border rounded-l dark:bg-gray-700 dark:border-gray-600 dark:text-white"
                 />
                 <button
@@ -63,11 +63,11 @@ const ResearchEffortCataloger: React.FC = () => {
                     disabled={scanning}
                     className="p-2 bg-blue-500 text-white rounded-r hover:bg-blue-600 disabled:bg-blue-300"
                 >
-                    {scanning ? 'Scanning...' : 'Scan for Research'}
+                    {scanning ? 'Scanning...' : 'Scan for Ongoing Work'}
                 </button>
             </div>
             <div>
-                <h3 className="font-bold mb-2">Cataloged Research Efforts</h3>
+                <h3 className="font-bold mb-2">Cataloged Ongoing Efforts</h3>
                 {researchEfforts.map(effort => (
                     <div key={effort.id} className="mb-4 p-3 bg-gray-100 dark:bg-gray-700 rounded">
                         <div className="font-medium">{effort.title}</div>

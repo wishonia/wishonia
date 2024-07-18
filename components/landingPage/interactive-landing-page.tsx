@@ -4,20 +4,20 @@ import React, { useEffect, useState } from "react";
 import { ArrowDown } from "lucide-react";
 
 
-const globalProblems = [
-    { emoji: '🧠', problem: 'Dementia', color: 'red' },
-    { emoji: '🦠', problem: 'Cancer', color: 'pink' },
-    { emoji: "🐭", problem: "Animal Suffering", color: "blue" },
-    { emoji: "😢", problem: "Mental Illness", color: "emerald" },
-    { emoji: '😖', problem: 'Chronic Pain', color: 'blue' },
-    { emoji: '💀', problem: 'Death', color: 'green' },
-    { emoji: '💊', problem: 'Drug Addiction', color: 'pink' },
-    { emoji: '🏚️', problem: 'Homelessness', color: 'brown' },
-    { emoji: '🍽️', problem: 'World Hunger', color: 'yellow' },
-    { emoji: '💣', problem: 'War', color: 'gray' },
-    { emoji: '🌊', problem: 'Water Scarcity', color: 'teal' },
-    { emoji: '🏭', problem: 'Pollution', color: 'lime' },
-    { emoji: '🧬', problem: 'Genetic Diseases', color: 'emerald' }
+export const globalProblems = [
+    { emoji: '🧠', name: 'Dementia', color: 'red' },
+    { emoji: '🦠', name: 'Cancer', color: 'pink' },
+    { emoji: "🐭", name: "Animal Suffering", color: "blue" },
+    { emoji: "😢", name: "Mental Illness", color: "emerald" },
+    { emoji: '😖', name: 'Chronic Pain', color: 'blue' },
+    { emoji: '💀', name: 'Death', color: 'green' },
+    { emoji: '💊', name: 'Drug Addiction', color: 'pink' },
+    { emoji: '🏚️', name: 'Homelessness', color: 'brown' },
+    { emoji: '🍽️', name: 'World Hunger', color: 'yellow' },
+    { emoji: '💣', name: 'War', color: 'gray' },
+    { emoji: '🌊', name: 'Water Scarcity', color: 'teal' },
+    { emoji: '🏭', name: 'Pollution', color: 'lime' },
+    { emoji: '🧬', name: 'Genetic Diseases', color: 'emerald' }
 ];
 
 export const Sentence1 = () => {
@@ -42,7 +42,7 @@ export const Sentence1 = () => {
                         key={index}
                         className={`transition-opacity duration-500 ${index === currentProblemIndex ? 'opacity-100' : 'opacity-0 hidden'}`}
                     >
-                        {problem.emoji} <em className={`hover:text-${problem.color}-500 transition-colors duration-300 cursor-pointer`}>{problem.problem}</em>
+                        {problem.emoji} <em className={`hover:text-${problem.color}-500 transition-colors duration-300 cursor-pointer`}>{problem.name}</em>
                     </li>
                 ))}
             </ul>
