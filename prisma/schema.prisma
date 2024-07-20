@@ -668,6 +668,7 @@ model Agent {
   outputSchema         String?
   prompt               String?           @default("You are a helpful AI Assistant")
   type                 AgentType         @default(SUPERAGENT)
+  sharingLevel         SharingLevel      @default(PRIVATE)
   updatedAt            DateTime          @updatedAt
   conversationStarters String[]          @default(["What can you do?"])
   user                 User              @relation(fields: [userId], references: [id])
@@ -1023,6 +1024,12 @@ enum AgentType {
   SUPERAGENT
   OPENAI_ASSISTANT
   LLM
+}
+
+enum SharingLevel {
+  LINK
+  PUBLISHED
+  PRIVATE
 }
 
 enum LLMProvider {
