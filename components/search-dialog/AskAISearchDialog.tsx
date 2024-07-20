@@ -84,7 +84,7 @@ export function AskAISearchDialog() {
         <span className="ml-4 inline-block">Ask AI...</span>
       </button>
       <Dialog open={open}>
-        <DialogContent className="max-h-[100vh] overflow-y-auto text-black sm:max-w-[850px]">
+        <DialogContent className="max-h-[90vh] w-[90vw] max-w-[500px] overflow-y-auto overflow-x-hidden text-black">
           <DialogHeader>
             <DialogTitle>Talk to Wishonia</DialogTitle>
             <DialogDescription>
@@ -135,9 +135,22 @@ export function AskAISearchDialog() {
                   <span className="flex h-8 w-8 items-center justify-center rounded-full bg-green-500 p-2 text-center">
                     <Wand width={18} className="text-white" />
                   </span>
-                  <ReactMarkdown rehypePlugins={[rehypeRaw as any]}>
-                    {completion}
-                  </ReactMarkdown>
+                  <div className="w-full">
+                    <ReactMarkdown
+                      rehypePlugins={[rehypeRaw as any]}
+                      className="prose dark:prose-invert max-w-full break-words [&_*]:break-words"
+                      components={{
+                        pre: ({ node, ...props }) => (
+                          <pre {...props} className="whitespace-pre-wrap" />
+                        ),
+                        code: ({ node, ...props }) => (
+                          <code {...props} className="whitespace-pre-wrap" />
+                        ),
+                      }}
+                    >
+                      {completion}
+                    </ReactMarkdown>
+                  </div>
                 </div>
               ) : null}
 
