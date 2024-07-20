@@ -34,7 +34,7 @@ const GlobalCoordinationAgent = () => {
   return (
     <div className="flex items-center justify-center p-4 overflow-hidden">
       <div
-          className="relative w-full max-w-4xl p-4 bg-black border-4 border-cyan-500 rounded-lg shadow-2xl">
+          className="relative w-full max-w-4xl p-4 bg-black border-4 border-cyan-500 rounded-lg">
         <div className="absolute inset-0 opacity-10 animate-pulse"></div>
 
         <h1 className="text-4xl font-bold text-cyan-500 mb-6 animate-glitch">

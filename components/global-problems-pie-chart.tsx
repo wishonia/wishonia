@@ -52,14 +52,14 @@ const CoolGlobalProblemsPieChart: React.FC<CoolGlobalProblemsPieChartProps> = ({
                         </Pie>
                         {data[activeIndex] && (
                             <text x="50%" y="40%" textAnchor="middle" dominantBaseline="middle">
-                                <tspan x="50%" dy="-1em" fontSize="16" fontWeight="bold" textAnchor="middle" wordSpacing="0.25em">
+                                <tspan x="50%" dy="-1em" fontSize="16" fontWeight="bold" textAnchor="middle" wordSpacing="0.25em" fill="white" stroke="black" strokeWidth="2px" paintOrder="stroke">
                                     {data[activeIndex].name.split(' ').map((word, index) => (
                                         <tspan key={index} x="50%" dy={index === 0 ? 0 : "1.2em"}>
                                             {word}
                                         </tspan>
                                     ))}
                                 </tspan>
-                                <tspan x="50%" dy="1.5em" fontSize="14">
+                                <tspan x="50%" dy="1.5em" fontSize="14" fill="white" stroke="black" strokeWidth="2px" paintOrder="stroke">
                                     {`${data[activeIndex]?.value?.toFixed(2) ?? 0}%`}
                                 </tspan>
                             </text>
