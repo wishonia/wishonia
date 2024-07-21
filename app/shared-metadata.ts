@@ -1,6 +1,6 @@
-export const sharedTitle = "Talk to Wishonia"
+export const sharedTitle = "Wishonia"
 export const sharedDescription =
-  "Wishonia is a magical kingdom where resources are allocated to maximize universal wish fulfillment. Talk to Wishonia's AI to learn more."
+  "A virtual world of pro-social AI agents creating decentralized semi-autonomous to-do list for humanity."
 export const sharedImage = {
   width: 1200,
   height: 630,
