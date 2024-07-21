@@ -42,36 +42,39 @@ const HowItWorksData: HowItWorksStep[] = [
   //   //visual: <APPADiagram />,
   // },
   {
-    title: "1. Figure Out What Everyone Wants",
+    title: "1. Quantify What Everyone Wants",
     description:
-      "We show everyone random pairs problems and allow them to indicate how much they'd donate to each.  This is called  Pairwise Preference Allocation (PPA).  It's kind of stupid, but it's the least bad way we've found to quantify people's preferences so far.",
+      "We show everyone random pairs problems and allow them to indicate how much they'd donate to each.  " +
+        "This is called Pairwise Preference Allocation (PPA).  ",
     visual: <PollRandomGlobalProblems />,
   },
   {
     title: "2. Create a Budget that Matches Everyone's Priorities",
     description:
-      "By combining lots of pairwise allocations, we create a crowdsourced budget. This would enable us to allocate limited resources to solving the most urgent problems.",
+      "By combining lots of pairwise allocations, we create a crowdsourced budget. " +
+        "This would enable us to allocate limited resources to solving the most urgent problems.",
     visual: <GlobalProblemsList />,
   },
   {
     title: "3. List All the Solutions for Each Problem",
     description:
-      `We use AI agents to research and list all possible solutions for each problem. Here are the current solutions for solving the specific problem of "AGING", for example.`,
+      `We use AI agents to research and list all possible solutions for each problem.
+       Here are the current solutions for solving the specific problem of "AGING", for example.`,
     visual: <GlobalProblemSolutionsList globalProblemId={"aging"} />,
   },
   {
     title: "4. Find the Best Solutions",
     description:
-      "We use AI and human evaluators to compare and rank solutions based on their feasibility, impact, and cost-effectiveness. Here are some of the solutions for the problem of aging.",
+      "We use AI and human evaluators to compare and rank solutions based on their feasibility, impact, and " +
+        `cost-effectiveness. Here we compare potential solutions for the problem of "AGING".`,
     visual: <PollRandomGlobalProblemSolutions globalProblemId={"aging"} />,
     //visual: <APPADiagram />,
   },
   {
     title: "5. Break Down Solutions into the Smallest Actionable Tasks",
     description:
-      "The best solutions are broken down into smaller, actionable tasks. " +
-      "Goal decomposition agents help in this process by identifying necessary steps, potential dependencies, and required skills for each task.",
-    visual: <ActionableTaskStrategyVisualizer />,
+      "",
+     visual: <ActionableTaskStrategyVisualizer />,
   },
   {
     title: "6. Find the Best People to Work on Each Task",
@@ -85,8 +88,7 @@ const HowItWorksData: HowItWorksStep[] = [
     title: "7. Avoid Wasteful Duplication of Effort",
     description:
       "AI research agents to continuously scan and catalog existing efforts " +
-      "related to each problem and solution. This helps us identify " +
-      "opportunities for collaboration and avoid reinventing the wheel.",
+      "related to each problem and solution.",
     visual: <ResearchEffortCataloger />,
   },
   {

@@ -135,7 +135,7 @@ const TaskNode: React.FC<TaskNodeProps> = ({ task, level, onStatusChange, onAddS
 const ActionableTaskStrategyVisualizer: React.FC = () => {
     let taskHierarchy = {
         id: '1',
-        name: "Create AI Drug Discovery Platform",
+        name: "GOAL: Create AI Drug Discovery Platform",
         status: 'in-progress',
         description: "Develop a comprehensive platform for AI-driven drug discovery",
         decompositionNotes: "Broken down by goal decomposition agents into main platform components",
@@ -266,10 +266,18 @@ const ActionableTaskStrategyVisualizer: React.FC = () => {
 
     return (
         <div className="p-4 rounded-lg shadow-md max-w-4xl mx-auto my-8">
-            <h2 className="text-2xl font-bold mb-4 text-gray-800 dark:text-gray-200">AI Drug Discovery Platform Strategy</h2>
+            <h2 className="text-2xl font-bold mb-4 text-gray-800 dark:text-gray-200">
+                Breaking Down Solution: "AI Drug Discovery Platform"
+            </h2>
             <div className="mb-4 p-2 bg-blue-100 dark:bg-blue-900 rounded">
-                <h3 className="font-bold flex items-center"><Users size={16} className="mr-2" /> Goal Decomposition Agents</h3>
-                <p className="text-sm">These agents help break down chosen solutions into smaller, actionable tasks by identifying necessary steps, potential dependencies, and required skills for each task.</p>
+                <h3 className="font-bold flex items-center"><Users size={16} className="mr-2" />
+                    Goal Decomposition Agents
+                </h3>
+                <p className="text-sm">
+                    AI agents help break down REALLY BIG GOALS into smaller,
+                    actionable tasks by identifying necessary steps, potential dependencies,
+                    and required skills for each task.
+                </p>
             </div>
             <TaskNode
                 task={tasks}
