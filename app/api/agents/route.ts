@@ -4,12 +4,22 @@ import { handleError } from "@/lib/errorHandler"
 import { getCurrentUser } from "@/lib/session"
 import { agentCreateUpdateSchema } from "@/lib/validations/agent"
 import { createAgentDatasource } from "@/lib/agent"
+import {SharingLevel} from "@prisma/client";
 
 export async function GET() {
   try {
+    const currentUser = await getCurrentUser()
+    if (!currentUser || !currentUser.id) {
+      return new NextResponse("Unauthorized", { status: 401 })
+    }
+
     const records = await prisma.agent.findMany({
       where: {
         isActive: true,
+        OR: [
+          { userId: currentUser.id },
+          { sharingLevel: SharingLevel.PUBLISHED }
+        ]
       },
     })
     return new Response(JSON.stringify(records))
@@ -37,6 +47,7 @@ export async function POST(req: Request) {
         conversationStarters: body.conversationStarters,
         metadata: body.metadata,
         isActive: true,
+        sharingLevel: body.sharingLevel,
       },
       select: {
         id: true,
