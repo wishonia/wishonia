@@ -1,3 +1,4 @@
+import { SharingLevel } from "@prisma/client"
 import * as z from "zod"
 
 export const agentSchema = z.object({
@@ -7,6 +8,8 @@ export const agentSchema = z.object({
   initialMessage: z.string().optional(),
   avatar: z.string().optional(),
   conversationStarters: z.array(z.object({ text: z.string() })).nonempty(),
+  sharingLevel: z.enum([SharingLevel.PRIVATE, 
+    SharingLevel.UNPUBLISHED_LINK, SharingLevel.PUBLISHED]).optional()
 })
 
 export const agentCreateUpdateSchema = z.object({
@@ -17,5 +20,7 @@ export const agentCreateUpdateSchema = z.object({
   avatar: z.string().optional(),
   conversationStarters: z.array(z.string()).optional(),
   metadata: z.record(z.string(), z.any()).optional().optional(),
-  datasources: z.array(z.string()).optional()
+  datasources: z.array(z.string()).optional(),
+  sharingLevel: z.enum([SharingLevel.PRIVATE, 
+    SharingLevel.UNPUBLISHED_LINK, SharingLevel.PUBLISHED]).optional()
 })
