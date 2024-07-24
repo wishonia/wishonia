@@ -30,6 +30,8 @@ import {
 } from "@/components/ui/alert-dialog"
 import LoadingSpinner from "@/components/LoadingSpinner";
 import {PlusIcon} from "lucide-react";
+import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@/components/ui/select"
+import {SharingLevel} from "@prisma/client"
 
 type FormData = z.infer<typeof agentSchema>
 
@@ -45,6 +47,7 @@ interface AgentFormProps extends React.HTMLAttributes<HTMLFormElement> {
     datasources?: {
       datasource?: dataSourceData | null |undefined
     }[]|null|undefined
+    sharingLevel?: SharingLevel | null
   }
 }
 type dataSourceData=z.infer<typeof dataSourceSchema>
@@ -72,6 +75,7 @@ export default function AgentForm({
         prompt: agentData?.prompt || "",
         initialMessage: agentData?.initialMessage || "",
         conversationStarters: agentData?.conversationStarters?.map(text=>({text}))||[{text:''}],
+        sharingLevel: agentData?.sharingLevel || SharingLevel.PRIVATE,
       },
     })
 
@@ -89,6 +93,7 @@ export default function AgentForm({
     setLoading(true)
     const url = agentData ? `/api/agents/${agentData.id}` : "/api/agents"
     const method = agentData ? "PATCH" : "POST"
+    debugger
 
     const response = await fetch(url, {
       method: method,
@@ -102,7 +107,8 @@ export default function AgentForm({
         initialMessage: data.initialMessage,
         avatar: data.avatar,
         conversationStarters: data.conversationStarters.map(({text})=>text),
-        datasources:dataSource.map((item)=>item.id)
+        datasources: dataSource.map((item)=>item.id),
+        sharingLevel: data.sharingLevel,
       }),
     })
 
@@ -322,6 +328,24 @@ export default function AgentForm({
               ))}
              </div>
             </div>
+            <div className="space-y-2">
+            <Label htmlFor="sharingLevel" className="text-sm font-medium">
+              Sharing Level
+            </Label>
+            <Select
+              onValueChange={(value) => setValue("sharingLevel", value as SharingLevel)}
+              defaultValue={watch("sharingLevel")}
+            >
+              <SelectTrigger>
+                <SelectValue placeholder="Select sharing level" />
+              </SelectTrigger>
+              <SelectContent>
+                <SelectItem value="PRIVATE">Private</SelectItem>
+                <SelectItem value="UNPUBLISHED_LINK">Unpublished Link</SelectItem>
+                <SelectItem value="PUBLISHED">Published</SelectItem>
+              </SelectContent>
+            </Select>
+          </div>
             <Button
               variant="outline"
               disabled={loading}
