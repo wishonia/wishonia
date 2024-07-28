@@ -135,9 +135,6 @@ const ForkableWorldSection: React.FC = () => {
               <h1 className="mb-4 text-3xl sm:text-4xl md:text-5xl lg:text-6xl font-bold leading-tight">
                   A Decentralized Semi-Autonomous Todo List For Humanity
               </h1>
-              <p className="text-lg sm:text-xl md:text-2xl">
-                  to maximize universal health and happiness.
-              </p>
           </header>
           <div className="text-center">
               <h1 className="text-4xl sm:text-4xl md:text-5xl lg:text-6xl font-bold leading-tight">
