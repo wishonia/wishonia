@@ -3,8 +3,8 @@ import { redirect } from "next/navigation"
 
 import { authOptions } from "@/lib/auth"
 import { getCurrentUser } from "@/lib/session"
+import AgentListMine from "@/components/agents/agent-list-mine"
 import { Shell } from "@/components/layout/shell"
-import AgentListPublished from "@/components/agents/agent-list-published";
 
 export default async function AgentListPage() {
   const user = await getCurrentUser()
@@ -13,7 +13,7 @@ export default async function AgentListPage() {
   }
   return (
     <Shell className="size-full">
-      <AgentListPublished></AgentListPublished>
+      <AgentListMine></AgentListMine>
     </Shell>
   )
 }
