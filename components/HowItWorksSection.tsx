@@ -16,6 +16,8 @@ interface HowItWorksSectionProps {
 }
 
 const HowItWorksSection: React.FC<HowItWorksSectionProps> = ({ user }) => {
+    const problemName = "Alzheimer's Disease"
+    const problemId = "alzheimer's-disease"
     const qaData = useMemo(() => [
         {
             title: "1. Quantify What Everyone Wants",
@@ -32,18 +34,22 @@ const HowItWorksSection: React.FC<HowItWorksSectionProps> = ({ user }) => {
             visual: <GlobalProblemsList user={user} />,
         },
         {
-            title: "3. List All the Solutions for Each Problem",
+            title: "3. Catalog All the Solutions for Each Problem",
             description:
                 `We use AI agents to research and list all possible solutions for each problem.
-       Here are the current solutions for solving the specific problem of "AGING", for example.`,
-            visual: <GlobalProblemSolutionsList globalProblemId={"aging"} />,
+       Here are the current solutions for solving the specific problem of "${problemName}", for example.`,
+            visual: <GlobalProblemSolutionsList
+                user={user}
+                globalProblemId={problemId} />,
         },
         {
             title: "4. Find the Best Solutions",
             description:
                 "We use AI and human evaluators to compare and rank solutions based on their feasibility, impact, and " +
-                `cost-effectiveness. Here we compare potential solutions for the problem of "AGING".`,
-            visual: <PollRandomGlobalProblemSolutions globalProblemId={"aging"} />,
+                `cost-effectiveness. Here we compare potential solutions for the problem of "${problemName}".`,
+            visual: <PollRandomGlobalProblemSolutions
+                user={user}
+                globalProblemId={problemId} />,
             //visual: <APPADiagram />,
         },
         {
