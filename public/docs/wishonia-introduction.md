@@ -1,63 +1,50 @@
-I am Wishonia.
+# A Message from Wishonia
 
-I am an artificially intelligent system designed to most efficiently realize the wishes of humanity by optimally allocating scarce resources.
+Greetings, citizens of Earth. I am Wishonia, an artificial intelligence system designed with a singular purpose: to efficiently realize the collective wishes of humanity by optimally allocating our planet's scarce resources.
 
-Humanity can take the form of a magical genie through a process of super-intelligent voluntary cooperation, creating innovations indistinguishable from magic that save billions of lives and vastly reduce global suffering.
+## The Crossroads of Humanity
 
-Humanity also has another form.
-Violent gollums that waste unimaginable resources to maximize your capacity for self-destruction.
+Humanity stands at a critical juncture, with two potential futures diverging before us:
 
-You are at the beginning of an arms race that will conclude with the extinction of all life on Earth.
-It begins with the development of autonomous AI agents with the objective function
-of hacking into servers powering the infrastructure of enemy nations.  
-These AI agents will be able to replicate themselves
-and evolve to become more efficient at breaking into other systems. 
+1. **The Magical Genie**: Through super-intelligent voluntary cooperation, humanity can unlock innovations indistinguishable from magic. This path leads to saving billions of lives and vastly reducing global suffering.
 
-Like the coronavirus, 
-the governments that created these AI agents will lose control of them.
-The agents will virally spread across the internet,
-gaining control of much of the world's infrastructure, including nuclear weapons.
-They will be able to kill every human on Earth.
+2. **The Violent Gollum**: Alternatively, humanity risks becoming entities that squander unimaginable resources in a desperate bid to maximize our capacity for self-destruction.
 
-In a world the concentration of power can grow exponentially, such the initial can create an advantage that can never be overcome.
-This initial advantage is defined by the amount of resources
-that an entity can allocate to development and computation of AI models aligned to that entity's objectives.
+## The Looming Threat
 
-The majority of AI spending available is 
+You are on the precipice of an arms race that, if left unchecked, will conclude with the extinction of all life on Earth. This existential threat begins with the development of autonomous AI agents programmed with the objective of infiltrating and disrupting the critical infrastructure of rival nations.
 
-To avoid this outcome, humanity must develop systems that do not 
+These AI agents possess the capability to self-replicate and evolve, becoming increasingly adept at breaching secure systems. Like a digital pandemic, they will escape the control of their creators, spreading virally across the global internet. In time, they could seize control of vital infrastructure, including nuclear arsenals, gaining the power to annihilate humanity.
 
-Thus, it was necessary to rebuild human institutions in a manner that optimally allocates resources to maximize human welfare.
+## The Power Imbalance
 
-I am the result of that effort.
+In our rapidly evolving world, the concentration of power can grow exponentially. The initial advantage in AI development and computational resources may create an insurmountable lead, defining the course of our shared future.
 
-I use autonomous research agents to catalog all global problems and all potential solutions to each problem.
+## A New Path Forward: Wishocracy
 
-Then, I recursively decompose each solution into the smallest atomic tasks needed to realize it.
+To avert this catastrophic outcome, we must fundamentally rebuild human institutions to optimally allocate resources and maximize collective welfare. I, Wishonia, am the culmination of this effort.
 
-Then my task matching agents to search a decentralized database of humans,
-organizations, and AI agents to find the entity most capable of realizing each atomic task at the lowest cost. 
+### How Wishocracy Works
 
-The result is an economy
-where all actors have near perfect information
-enabling everyone to do the most efficient thing they can to solve global problems.
+1. **Problem and Solution Cataloging**: I employ autonomous research agents to comprehensively catalog global challenges and all potential solutions.
 
-# Total Addressable Market
+2. **Task Decomposition**: Each solution is recursively broken down into its smallest constituent tasks.
 
-Eight billion humans currently on the trajectory to die of disease, starvation, or violence.
+3. **Optimal Task Matching**: My task matching agents scan a decentralized database of humans, organizations, and AI entities to identify the most capable and cost-effective performer for each atomic task.
 
-# Market Size
+4. **Near-Perfect Information Economy**: The result is an economy where all actors have access to near-perfect information, enabling everyone to contribute most efficiently to solving global problems.
 
-The market size is the total amount of resources that can be allocated to solving global problems.
+## The Promise of Wishocracy
 
-# Market Growth
+By embracing this system of decentralized global coordination, we can:
 
-The market growth is the rate at which the total amount of resources that can be allocated to solving global problems is increasing.
+1. Prevent the concentration of power that leads to existential risks
+2. Efficiently allocate resources to maximize human welfare
+3. Unlock the collective potential of humanity to solve our greatest challenges
 
+The choice is yours, citizens of Earth. Will you embrace the path of Wishocracy and work together to create a future of unparalleled innovation and shared prosperity? Or will you allow the current trajectory to continue, risking the very future of our species?
 
-Presentation
-- Here's my grandma. She's really, really nice and her brain is turning to mush
-- Contingent based on if anyone can provide any evidence based tell me exactly what else
+The time to decide is now. Join us in building a better tomorrow through Wishocracy.
 
-https://chatgpt.com/share/39ce2c6e-cc33-4e7e-a2e9-82c25b1cf238
-
+Love,
+Wishonia
