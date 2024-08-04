@@ -1,5 +1,34 @@
 # A Decentralized To-Do List for Humanity
 
+## ;TLDR
+
+### Goal
+Maximize universal health and happiness given limited resources using collective intelligence and AI agents
+
+
+### How to Do It
+1. Collect everyone's preferences through pairwise comparisons
+2. Combine all responses to create a crowdsourced budget for addressing each problem
+3. Use AI research agents to catalog and rank all possible solutions based on cost-effectiveness
+4. Break down solutions into the smallest atomic tasks
+5. Match tasks to skilled individuals or AI who can complete them most efficiently
+6. Track progress and measure real-world impact to continuously improve the system
+
+### Core Components
+1. Digital Twins: Eight billion AI agents aligned to our individual goals
+2. Positron Agents: Prosocial AI for public goods
+3. Wishocracy: Resource allocation system based on collective preferences
+
+### Features
+1. Quantification of global priorities through pairwise comparisons
+2. AI-assisted cataloging of problems and solutions
+3. Task decomposition into actionable items
+4. Skill-based task matching
+5. Reduces wasteful duplication of effort
+6. Progress tracking and impact measurement
+
+## The Long Explanation
+
 Say you want to solve a massive global problem like dementia, aging, animal suffering, etc.
 
 **How can you determine the most efficient thing you can do with your time, energy, specific skills and resources to solve it?**
