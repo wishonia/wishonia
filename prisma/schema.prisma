@@ -422,6 +422,16 @@ model GlobalTask {
   contextUrls GlobalTaskContextUrl[]
 }
 
+model GlobalTaskRelation {
+  id       String     @id @default(cuid())
+  parentId String
+  childId  String
+  parent   GlobalTask @relation("ParentTasks", fields: [parentId], references: [id])
+  child    GlobalTask @relation("ChildTasks", fields: [childId], references: [id])
+
+  @@unique([parentId, childId])
+}
+
 model GlobalTaskAttachment {
   id        String     @id @default(cuid())
   taskId    String
@@ -442,16 +452,6 @@ model GlobalTaskComment {
   updatedAt DateTime   @updatedAt
   task      GlobalTask @relation(fields: [taskId], references: [id])
   user      User       @relation(fields: [userId], references: [id])
-}
-
-model GlobalTaskRelation {
-  id       String     @id @default(cuid())
-  parentId String
-  childId  String
-  parent   GlobalTask @relation("ParentTasks", fields: [parentId], references: [id])
-  child    GlobalTask @relation("ChildTasks", fields: [childId], references: [id])
-
-  @@unique([parentId, childId])
 }
 
 model GlobalTaskSkill {

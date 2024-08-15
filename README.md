@@ -2,9 +2,14 @@
 
 ## ;TLDR
 
+We want decentralized semi-autonomous todo list for humanity that can:
+1. take a large global problem (like dementia)
+2. use AI research agents to catalog all possible solutions
+3. recursively break down each solution into the smallest atomic tasks
+4. complete the incomplete tasks or outsource them to the most efficient person
+
 ### Goal
 Maximize universal health and happiness given limited resources using collective intelligence and AI agents
-
 
 ### How to Do It
 1. Collect everyone's preferences through pairwise comparisons
@@ -49,15 +54,16 @@ This is the proposed approach to addressing these challenges
 
 1. List Problems - First, we need a list of global problems we're trying to solve.
 
-2. Prioritize Problems - We don't have infinite resources, so we need a systematic way to determine the share of resources that should be allocated to solve each problem based on our values. This can be done using Randomized Aggregated Pairwise Preference Allocation (APPA) or a better mechanism.
+2. Prioritize Problems - We don't have infinite resources, so we need a systematic way to determine the share of resources that should be allocated to solve each problem based on our values. 
+This can be done using [Randomized Aggregated Pairwise Preference Allocation (APPA)](#aggregated-pairwise-preference-allocation-appa) or a better mechanism.
 
-3. List All Possible Solutions - Use AI research agents and humans to research and compile an exhaustive list of potential solutions to each problem.
+3. List All Possible Solutions - Use AI **Solution Cataloger Research Agents** (and humans) to research and compile an exhaustive list of potential solutions to a given problem.
 
-4. Break Down Each Solution Into the Smallest Actionable Tasks - Use AI goal decomposition agents to recursively break each solution into every single atomic task that needs to be completed to implement the solution.
+4. Break Down Each Solution Into the Smallest Actionable Tasks - Use AI **Goal Decomposition Agents** to recursively break each solution into every single atomic task that needs to be completed to implement the solution.
 
-5. Assign an AI agent to each task, so they can either:
-   - **Identify** who's already working on the task or
-   - **Automate** - have an AI agent complete the task (if possible) or
+5. Assign an AI agent to each task, so they can do one of the following:
+   - **Identify** who's already working on the task 
+   - **Automate** - have an AI agent complete the task (if possible) 
    - **Outsource** - have the agent identify the human or organization who can complete it as cheaply and quickly as possible
 
 # Definitions
