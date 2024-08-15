@@ -1,10 +1,5 @@
 import { OpenAIStream, StreamingTextResponse } from 'ai';
-import OpenAI from 'openai';
-
-const perplexity = new OpenAI({
-    apiKey: process.env.PERPLEXITY_API_KEY || '',
-    baseURL: 'https://api.perplexity.ai',
-});
+import { perplexity } from '@/lib/chat/perplexity';
 
 export async function POST(req: Request) {
     // Extract the `messages` from the body of the request
@@ -12,7 +7,7 @@ export async function POST(req: Request) {
 
     // Request the OpenAI-compatible API for the response based on the prompt
     const response = await perplexity.chat.completions.create({
-        model: 'llama-3-sonar-large-32k-online',
+        model: 'llama-3.1-sonar-huge-128k-online',
         stream: true,
         messages: messages,
     });

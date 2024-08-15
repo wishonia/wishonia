@@ -5,11 +5,16 @@ import { getOrCreateTestUser } from "@/tests/test-helpers"
 
 import { getOrCreateDfdaAccessToken } from "@/lib/dfda"
 import {
+  doMetaAnalysis,
   foodOrDrugCostBenefitAnalysis,
   safeUnapprovedDrugs,
 } from "@/lib/fdaiAgent"
 
 describe("FDAi Tests", () => {
+  it("generates meta-analysis", async () => {
+    const result = await doMetaAnalysis("MDMA-Assisted Psychotherapy", "PTSD");
+    console.log(result)
+  })
   it("gets dfda access token", async () => {
     const testUser = await getOrCreateTestUser()
     const result = await getOrCreateDfdaAccessToken(testUser.id)
