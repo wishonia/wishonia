@@ -11,13 +11,14 @@ We want decentralized semi-autonomous todo list for humanity that can:
 ### Goal
 Maximize universal health and happiness given limited resources using collective intelligence and AI agents
 
-### How to Do It
-1. Collect everyone's preferences through pairwise comparisons
+
+### How It Works
+1. Collect everyone's preferences through [pairwise comparisons](#aggregated-pairwise-preference-allocation-appa)
 2. Combine all responses to create a crowdsourced budget for addressing each problem
-3. Use AI research agents to catalog and rank all possible solutions based on cost-effectiveness
-4. Break down solutions into the smallest atomic tasks
-5. Match tasks to skilled individuals or AI who can complete them most efficiently
-6. Track progress and measure real-world impact to continuously improve the system
+3. **AI Research Agents** catalog and rank all possible solutions based on cost-effectiveness
+4. **Goal Decomposition AI Agents** break down huge complex solutions into the smallest atomic tasks
+5. **Task Agents** identify skilled individuals or AI who can complete each task most efficiently
+6. **Monitor Agents** track progress and real-world impact to continuously improve the system
 
 ### Core Components
 1. Digital Twins: Eight billion AI agents aligned to our individual goals
