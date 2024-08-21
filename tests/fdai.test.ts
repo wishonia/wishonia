@@ -1,19 +1,31 @@
 /**
  * @jest-environment node
  */
-import { getOrCreateTestUser } from "@/tests/test-helpers"
+import { getOrCreateTestUser } from "@/tests/test-helpers";
+import {writeFileSync} from "fs";
+import { foodOrDrugCostBenefitAnalysis, safeUnapprovedDrugs } from "@/lib/agents/fdai/fdaiAgent";
+import { doMetaAnalysis } from "@/lib/agents/fdai/fdaiMetaAnalyzer";
+import { getOrCreateDfdaAccessToken } from "@/lib/dfda";
+import {generateSideEffects} from "@/lib/agents/fdai/sideEffectsAgent";
+import {generateSafetySummary} from "@/lib/agents/fdai/safetySummaryAgent";
 
-import { getOrCreateDfdaAccessToken } from "@/lib/dfda"
-import {
-  doMetaAnalysis,
-  foodOrDrugCostBenefitAnalysis,
-  safeUnapprovedDrugs,
-} from "@/lib/fdaiAgent"
 
 describe("FDAi Tests", () => {
+  it("generates safety-summary", async () => {
+    const result = await generateSafetySummary("MDMA-Assisted Psychotherapy");
+    expect(result).not.toBeNull()
+    console.log(result)
+  }, 60000)
+  it("generates side-effects", async () => {
+    const result = await generateSideEffects("MDMA-Assisted Psychotherapy");
+    expect(result).not.toBeNull()
+    expect(result.length).toBeGreaterThan(0)
+    console.log(result)
+  }, 60000)
   it("generates meta-analysis", async () => {
     const result = await doMetaAnalysis("MDMA-Assisted Psychotherapy", "PTSD");
     console.log(result)
+    writeFileSync("meta-analysis.json", JSON.stringify(result, null, 2))
   })
   it("gets dfda access token", async () => {
     const testUser = await getOrCreateTestUser()

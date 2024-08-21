@@ -1,5 +1,4 @@
 import { textCompletion } from "@/lib/llm";
-import {researcher} from "@/lib/chat/researcher";
 
 export async function foodOrDrugCostBenefitAnalysis(foodOrDrug: string) {
   const prompt = `Conduct a comprehensive cost-benefit analysis on the 
@@ -42,23 +41,4 @@ export async function safeUnapprovedDrugs() {
     
     `
   return await textCompletion(prompt, "json_object")
-}
-
-export async function doMetaAnalysis(drugName: string, conditionName: string) {
-  const prompt = `Meta-analysis on the safety and effectiveness of 
-  "${drugName}"
-   in treating the condition
-    "${conditionName}". `
-
-  return await researcher(prompt)
-  // const message: ChatCompletionMessageParam = {
-  //   role: 'user',
-  //   content: prompt
-  // }
-  // const response = await perplexity.chat.completions.create({
-  //   model: 'llama-3.1-sonar-huge-128k-online',
-  //   stream: false,
-  //   messages: [message],
-  // });
-  // return response.choices[0].message.content
 }
