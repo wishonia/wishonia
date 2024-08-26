@@ -1,0 +1,11 @@
+Provider,Model,Context Length,Input Price per 1K Tokens,Output Price per 1K Tokens
+OpenAI,GPT-4o,128K,0.0025,0.01
+OpenAI,GPT-4o Mini,128K,0.00015,0.0006
+OpenAI,GPT-4 Turbo,128K,0.01,0.03
+OpenAI,GPT-4,8K,0.03,0.06
+OpenAI,GPT-3.5 Turbo,16K,0.0005,0.0015
+Anthropic,Claude 3 Sonnet,200K,0.003,0.015
+Anthropic,Claude 3 Opus,200K,0.015,0.075
+Google,PaLM 2,8K,0.002,0.002
+Google,Gemini 1.5 Flash,1M,0.0007,0.0021
+Google,Gemini 1.5 Pro,1M,0.007,0.021
