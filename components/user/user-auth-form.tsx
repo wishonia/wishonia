@@ -24,6 +24,16 @@ export function UserAuthForm({
   if (!callbackUrl) {
     callbackUrl = "/dashboard"
   }
+
+    // Check for callbackUrl in the URL
+    React.useEffect(() => {
+      const urlParams = new URLSearchParams(window.location.search)
+      const urlCallbackUrl = urlParams.get('callbackUrl')
+      if (urlCallbackUrl) {
+        callbackUrl = urlCallbackUrl
+      }
+    }, [])
+
   const handleEmailSignIn = async () => {
     setIsEmailLoading(true)
     setIsLoading(true)
