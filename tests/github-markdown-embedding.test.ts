@@ -25,6 +25,9 @@ describe("Markdown Embedding", () => {
       userId: user.id,
     })
     await createAgentDatasource(agent.id, dataSource.id)
+    // simulate the process create URL datasource and mark QUEUED for processing
+      // Run job to fetch QUEUED data sources
+    // Query agent and it do vector search and include matched chunks in the query to the LLM model
     const results = await generateMarkdownEmbeddings(
       absPathFromPublic(relativePath),
       dataSource
