@@ -1,5 +1,40 @@
 # A Decentralized To-Do List for Humanity
 
+## ;TLDR
+
+We want decentralized semi-autonomous todo list for humanity that can:
+1. take a large global problem (like dementia)
+2. use AI research agents to catalog all possible solutions
+3. recursively break down each solution into the smallest atomic tasks
+4. complete the incomplete tasks or outsource them to the most efficient person
+
+### Goal
+Maximize universal health and happiness given limited resources using collective intelligence and AI agents
+
+
+### How It Works
+1. Collect everyone's preferences through [pairwise comparisons](#aggregated-pairwise-preference-allocation-appa)
+2. Combine all responses to create a crowdsourced budget for addressing each problem
+3. **AI Research Agents** catalog and rank all possible solutions based on cost-effectiveness
+4. **Goal Decomposition AI Agents** break down huge complex solutions into the smallest atomic tasks
+5. **Task Agents** identify skilled individuals or AI who can complete each task most efficiently
+6. **Monitor Agents** track progress and real-world impact to continuously improve the system
+
+### Core Components
+1. Digital Twins: Eight billion AI agents aligned to our individual goals
+2. Positron Agents: Prosocial AI for public goods
+3. Wishocracy: Resource allocation system based on collective preferences
+
+### Features
+1. Quantification of global priorities through pairwise comparisons
+2. AI-assisted cataloging of problems and solutions
+3. Task decomposition into actionable items
+4. Skill-based task matching
+5. Reduces wasteful duplication of effort
+6. Progress tracking and impact measurement
+
+## The Long Explanation
+
 Say you want to solve a massive global problem like dementia, aging, animal suffering, etc.
 
 **How can you determine the most efficient thing you can do with your time, energy, specific skills and resources to solve it?**
@@ -20,15 +55,16 @@ This is the proposed approach to addressing these challenges
 
 1. List Problems - First, we need a list of global problems we're trying to solve.
 
-2. Prioritize Problems - We don't have infinite resources, so we need a systematic way to determine the share of resources that should be allocated to solve each problem based on our values. This can be done using Randomized Aggregated Pairwise Preference Allocation (APPA) or a better mechanism.
+2. Prioritize Problems - We don't have infinite resources, so we need a systematic way to determine the share of resources that should be allocated to solve each problem based on our values. 
+This can be done using [Randomized Aggregated Pairwise Preference Allocation (APPA)](#aggregated-pairwise-preference-allocation-appa) or a better mechanism.
 
-3. List All Possible Solutions - Use AI research agents and humans to research and compile an exhaustive list of potential solutions to each problem.
+3. List All Possible Solutions - Use AI **Solution Cataloger Research Agents** (and humans) to research and compile an exhaustive list of potential solutions to a given problem.
 
-4. Break Down Each Solution Into the Smallest Actionable Tasks - Use AI goal decomposition agents to recursively break each solution into every single atomic task that needs to be completed to implement the solution.
+4. Break Down Each Solution Into the Smallest Actionable Tasks - Use AI **Goal Decomposition Agents** to recursively break each solution into every single atomic task that needs to be completed to implement the solution.
 
-5. Assign an AI agent to each task, so they can either:
-   - **Identify** who's already working on the task or
-   - **Automate** - have an AI agent complete the task (if possible) or
+5. Assign an AI agent to each task, so they can do one of the following:
+   - **Identify** who's already working on the task 
+   - **Automate** - have an AI agent complete the task (if possible) 
    - **Outsource** - have the agent identify the human or organization who can complete it as cheaply and quickly as possible
 
 # Definitions
