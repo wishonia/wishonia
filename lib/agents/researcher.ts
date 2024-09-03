@@ -1,7 +1,7 @@
 import dotenv from 'dotenv';
 import Exa from 'exa-js';
-import {generateSearchQueries} from "@/lib/agents/fdai/searchQueryGenerator";
-import {getLLMResponse} from "@/lib/agents/fdai/getLLMResponse";
+import {generateSearchQueries} from "@/lib/agents/searchQueryGenerator";
+import {getLLMResponse} from "@/lib/agents/getLLMResponse";
 
 dotenv.config();
 

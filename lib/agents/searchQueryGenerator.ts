@@ -1,4 +1,4 @@
-import {getLLMResponse} from "@/lib/agents/fdai/getLLMResponse";
+import {getLLMResponse} from "@/lib/agents/getLLMResponse";
 
 export async function generateSearchQueries(topic: string, n: number): Promise<string[]> {
     const userPrompt =
