@@ -1,7 +1,7 @@
 'use client'
 
 import { useState } from 'react'
-import { writeArticleAction } from '@/app/actions'
+import { writeArticleAction} from '@/app/actions'
 import ArticleRenderer from '@/components/ArticleRenderer'
 import { Button } from "@/components/ui/button"
 import { Input } from "@/components/ui/input"
@@ -36,11 +36,12 @@ export default function Home() {
 
     return (
         <main className="container mx-auto p-4">
-            <h1 className="text-3xl font-bold mb-6">Article Generator</h1>
             <Card className="mb-8">
                 <CardHeader>
-                    <CardTitle>Generate an Article</CardTitle>
-                    <CardDescription>Enter a topic to generate an article</CardDescription>
+                    <CardTitle>Autonomous Research Agent</CardTitle>
+                    <CardDescription>
+                        Enter a topic for me to research and I'll write an article with sources!
+                    </CardDescription>
                 </CardHeader>
                 <CardContent>
                     <form onSubmit={(e) => {
@@ -59,8 +60,11 @@ export default function Home() {
                     </CardFooter>
                 )}
             </Card>
-
-            {isGenerating && <GlobalBrainNetwork />}
+            {isGenerating && (
+                <div className="w-4/5 max-w-[600px] h-[600px] mx-auto">
+                    <GlobalBrainNetwork />
+                </div>
+            )}
             {!isGenerating && article && <ArticleRenderer {...article} />}
         </main>
     )

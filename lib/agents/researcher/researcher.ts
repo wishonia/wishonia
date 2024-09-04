@@ -7,7 +7,6 @@ import {openai} from "@ai-sdk/openai";
 import {google} from "@ai-sdk/google";
 import {LanguageModelV1} from "@ai-sdk/provider";
 import {SearchResult} from "exa-js";
-import { ModelName } from '@/types';
 const GeneratedReportSchema = z.object({
   title: z.string().describe('The title of the report'),
   description: z.string().describe('A brief description or summary of the report'),
@@ -26,6 +25,7 @@ type GeneratedReport = z.infer<typeof GeneratedReportSchema>;
 
 export type ReportOutput = GeneratedReport & {
   searchResults: SearchResult[];
+  featuredImage?: string;
 };
 
 function getModel(modelName: string): LanguageModelV1 {
@@ -80,7 +80,7 @@ export async function writeArticle(
     wordLimit,
     includeSummary = false,
     languageLevel = 'intermediate',
-    citationStyle = 'footnote',
+    citationStyle = 'hyperlinked-text',
     modelName = 'claude-3-5-sonnet-20240620',
   } = options;
 
@@ -123,7 +123,7 @@ export async function writeArticle(
     Purpose: ${purpose}
     Tone: ${tone}
     Language Level: ${languageLevel}
-    Citatation Style: ${citationInstructions}
+    Citation Style: ${citationInstructions}
     ${wordLimit ? `Word Limit: ${wordLimit} words` : ''}
     ${includeSummary ? 'Include a brief summary at the beginning.' : ''}
 
