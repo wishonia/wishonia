@@ -7,7 +7,7 @@ import { type Message as AIMessage } from "ai"
 import { prisma } from "@/lib/db"
 import { getCurrentUser } from "@/lib/session"
 import { type Chat } from "@/lib/types"
-
+import {type ReportOutput, writeArticle, type ModelName} from "@/lib/agents/researcher/researcher"
 type GetChatResult = Chat[] | null
 type SetChatResults = Chat[]
 
@@ -165,4 +165,11 @@ export const clearAllChats = async (userId: string) => {
     }
     return revalidatePath(deletedChats.map((chat) => chat.path).join(", "))
   }
+}
+
+export async function writeArticleAction(topic: string, modelName?: ModelName): Promise<ReportOutput> {
+  const article = await writeArticle(topic, { modelName: modelName })
+
+  revalidatePath('/')
+  return article
 }
