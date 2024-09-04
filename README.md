@@ -77,7 +77,7 @@ This can be done using [Randomized Aggregated Pairwise Preference Allocation (AP
 
 1. **Install Dependencies**:
 
-   - [Node.js](https://nodejs.org/en/) v18 or higher
+   - [Node.js](https://nodejs.org/en/) v18 or higher (I'd recommend using [NVM](https://github.com/coreybutler/nvm-windows?tab=readme-ov-file) instead so you can easily switch nodejs versions as needed)
    - [pnpm](https://pnpm.io/)
    - [Docker](https://www.docker.com/)
 
