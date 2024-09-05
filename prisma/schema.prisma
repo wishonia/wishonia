@@ -1339,6 +1339,8 @@ model DfdaUserConditionReport {
   createdAt   DateTime      @default(now())
   deletedAt   DateTime?
   severity    Severity
+
+  @@unique([userId, conditionId])
 }
 
 model DfdaUserSymptomReport {
@@ -1353,6 +1355,8 @@ model DfdaUserSymptomReport {
   createdAt   DateTime       @default(now())
   deletedAt   DateTime?
   severity    Severity
+
+  @@unique([userId, symptomId, conditionId])
 }
 
 model DfdaUserTreatmentReport {
@@ -1366,7 +1370,10 @@ model DfdaUserTreatmentReport {
   updatedAt     DateTime       @updatedAt
   createdAt     DateTime       @default(now())
   deletedAt     DateTime?
-  effectiveness Effectiveness
+  effectiveness Effectiveness?
+  tried         Boolean
+
+  @@unique([userId, treatmentId, conditionId])
 }
 
 model DfdaUserSideEffectReport {
@@ -1381,6 +1388,8 @@ model DfdaUserSideEffectReport {
   createdAt    DateTime       @default(now())
   deletedAt    DateTime?
   severity     Severity
+
+  @@unique([userId, sideEffectId, treatmentId])
 }
 
 enum Severity {
