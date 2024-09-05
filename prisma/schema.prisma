@@ -146,6 +146,10 @@ model User {
   userTaskAttachment                    UserTaskAttachment[]
   person                                Person?
   personId                              String?
+  conditionReports                      DfdaUserConditionReport[]
+  symptomReports                        DfdaUserSymptomReport[]
+  treatmentReports                      DfdaUserTreatmentReport[]
+  sideEffectReports                     DfdaUserSideEffectReport[]
 }
 
 model Education {
@@ -1177,4 +1181,229 @@ enum DrugClassification {
   SCHEDULE_IV
   SCHEDULE_V
   UNSCHEDULED
+}
+
+model DfdaCondition {
+  id                  Int                       @id @default(autoincrement())
+  name                String                    @unique
+  description         String?                   @unique
+  content             String?
+  featuredImage       String?
+  updatedAt           DateTime                  @updatedAt
+  createdAt           DateTime                  @default(now())
+  deletedAt           DateTime?
+  numberOfTreatments  Int
+  numberOfSymptoms    Int?
+  numberOfCauses      Int
+  conditionSymptoms   DfdaConditionSymptom[]
+  conditionTreatments DfdaConditionTreatment[]
+  conditionCauses     DfdaConditionCause[]
+  userReports         DfdaUserConditionReport[]
+  symptomReports      DfdaUserSymptomReport[]
+  treatmentReports    DfdaUserTreatmentReport[]
+}
+
+model DfdaSymptom {
+  id                 Int                     @id @default(autoincrement())
+  name               String                  @unique
+  description        String?                 @unique
+  content            String?
+  featuredImage      String?
+  updatedAt          DateTime                @updatedAt
+  createdAt          DateTime                @default(now())
+  deletedAt          DateTime?
+  numberOfConditions Int
+  conditionSymptoms  DfdaConditionSymptom[]
+  userReports        DfdaUserSymptomReport[]
+}
+
+model DfdaTreatment {
+  id                   Int                        @id @default(autoincrement())
+  name                 String                     @unique
+  description          String?                    @unique
+  content              String?
+  featuredImage        String?
+  updatedAt            DateTime                   @updatedAt
+  createdAt            DateTime                   @default(now())
+  deletedAt            DateTime?
+  numberOfConditions   Int?
+  numberOfSideEffects  Int
+  conditionTreatments  DfdaConditionTreatment[]
+  treatmentSideEffects DfdaTreatmentSideEffect[]
+  userReports          DfdaUserTreatmentReport[]
+  sideEffectReports    DfdaUserSideEffectReport[]
+}
+
+model DfdaSideEffect {
+  id                   Int                        @id @default(autoincrement())
+  name                 String                     @unique
+  description          String?                    @unique
+  content              String?
+  featuredImage        String?
+  updatedAt            DateTime                   @updatedAt
+  createdAt            DateTime                   @default(now())
+  deletedAt            DateTime?
+  numberOfTreatments   Int
+  treatmentSideEffects DfdaTreatmentSideEffect[]
+  userReports          DfdaUserSideEffectReport[]
+}
+
+model DfdaCause {
+  id                 Int                  @id @default(autoincrement())
+  name               String               @unique
+  description        String?              @unique
+  content            String?
+  featuredImage      String?
+  updatedAt          DateTime             @updatedAt
+  createdAt          DateTime             @default(now())
+  deletedAt          DateTime?
+  numberOfConditions Int
+  conditionCauses    DfdaConditionCause[]
+}
+
+model DfdaConditionSymptom {
+  id          Int           @id @default(autoincrement())
+  condition   DfdaCondition @relation(fields: [conditionId], references: [id])
+  conditionId Int
+  symptom     DfdaSymptom   @relation(fields: [symptomId], references: [id])
+  symptomId   Int
+  votes       Int
+  extreme     Int?
+  severe      Int?
+  moderate    Int?
+  mild        Int?
+  minimal     Int?
+  noSymptoms  Int?
+  updatedAt   DateTime      @updatedAt
+  deletedAt   DateTime?
+  createdAt   DateTime      @default(now())
+
+  @@unique([conditionId, symptomId])
+}
+
+model DfdaConditionTreatment {
+  id                  Int           @id @default(autoincrement())
+  condition           DfdaCondition @relation(fields: [conditionId], references: [id])
+  conditionId         Int
+  treatment           DfdaTreatment @relation(fields: [treatmentId], references: [id])
+  treatmentId         Int
+  majorImprovement    Int           @default(0)
+  moderateImprovement Int           @default(0)
+  noEffect            Int           @default(0)
+  worse               Int           @default(0)
+  muchWorse           Int           @default(0)
+  popularity          Int           @default(0)
+  averageEffect       Int           @default(0)
+  updatedAt           DateTime      @updatedAt
+  createdAt           DateTime      @default(now())
+  deletedAt           DateTime?
+
+  @@unique([treatmentId, conditionId])
+}
+
+model DfdaTreatmentSideEffect {
+  id           Int            @id @default(autoincrement())
+  treatment    DfdaTreatment  @relation(fields: [treatmentId], references: [id])
+  treatmentId  Int
+  sideEffect   DfdaSideEffect @relation(fields: [sideEffectId], references: [id])
+  sideEffectId Int
+  votesPercent Int
+  updatedAt    DateTime       @updatedAt
+  createdAt    DateTime       @default(now())
+  deletedAt    DateTime?
+
+  @@unique([treatmentId, sideEffectId])
+}
+
+model DfdaConditionCause {
+  id           Int           @id @default(autoincrement())
+  condition    DfdaCondition @relation(fields: [conditionId], references: [id])
+  conditionId  Int
+  cause        DfdaCause     @relation(fields: [causeId], references: [id])
+  causeId      Int
+  votesPercent Int
+  updatedAt    DateTime      @updatedAt
+  createdAt    DateTime      @default(now())
+  deletedAt    DateTime?
+
+  @@unique([causeId, conditionId])
+}
+
+model DfdaUserConditionReport {
+  id          Int           @id @default(autoincrement())
+  user        User          @relation(fields: [userId], references: [id])
+  userId      String
+  condition   DfdaCondition @relation(fields: [conditionId], references: [id])
+  conditionId Int
+  updatedAt   DateTime      @updatedAt
+  createdAt   DateTime      @default(now())
+  deletedAt   DateTime?
+  severity    Severity
+
+  @@unique([userId, conditionId])
+}
+
+model DfdaUserSymptomReport {
+  id          Int            @id @default(autoincrement())
+  user        User           @relation(fields: [userId], references: [id])
+  userId      String
+  symptom     DfdaSymptom    @relation(fields: [symptomId], references: [id])
+  symptomId   Int
+  condition   DfdaCondition? @relation(fields: [conditionId], references: [id])
+  conditionId Int?
+  updatedAt   DateTime       @updatedAt
+  createdAt   DateTime       @default(now())
+  deletedAt   DateTime?
+  severity    Severity
+
+  @@unique([userId, symptomId, conditionId])
+}
+
+model DfdaUserTreatmentReport {
+  id            Int            @id @default(autoincrement())
+  user          User           @relation(fields: [userId], references: [id])
+  userId        String
+  treatment     DfdaTreatment  @relation(fields: [treatmentId], references: [id])
+  treatmentId   Int
+  condition     DfdaCondition? @relation(fields: [conditionId], references: [id])
+  conditionId   Int?
+  updatedAt     DateTime       @updatedAt
+  createdAt     DateTime       @default(now())
+  deletedAt     DateTime?
+  effectiveness Effectiveness?
+  tried         Boolean
+
+  @@unique([userId, treatmentId, conditionId])
+}
+
+model DfdaUserSideEffectReport {
+  id           Int            @id @default(autoincrement())
+  user         User           @relation(fields: [userId], references: [id])
+  userId       String
+  sideEffect   DfdaSideEffect @relation(fields: [sideEffectId], references: [id])
+  sideEffectId Int
+  treatment    DfdaTreatment? @relation(fields: [treatmentId], references: [id])
+  treatmentId  Int?
+  updatedAt    DateTime       @updatedAt
+  createdAt    DateTime       @default(now())
+  deletedAt    DateTime?
+  severity     Severity
+
+  @@unique([userId, sideEffectId, treatmentId])
+}
+
+enum Severity {
+  MINIMAL
+  MILD
+  MODERATE
+  SEVERE
+  EXTREME
+}
+
+enum Effectiveness {
+  MUCH_WORSE
+  WORSE
+  NO_EFFECT
+  MODERATE_IMPROVEMENT
+  MAJOR_IMPROVEMENT
 }
