@@ -1,22 +1,28 @@
 /**
  * @jest-environment node
  */
+import { writeFileSync } from "fs";
 import { getOrCreateTestUser } from "@/tests/test-helpers";
-import {writeFileSync} from "fs";
+import {writeArticle} from "@/lib/agents/researcher/researcher";
 import { foodOrDrugCostBenefitAnalysis, safeUnapprovedDrugs } from "@/lib/agents/fdai/fdaiAgent";
 import { doMetaAnalysis } from "@/lib/agents/fdai/fdaiMetaAnalyzer";
+import { generateSafetySummary } from "@/lib/agents/fdai/safetySummaryAgent";
+import { generateSideEffects } from "@/lib/agents/fdai/sideEffectsAgent";
+import { generateMostEffectiveTreatments,
+  generateMostEffectiveUnapprovedTreatments,
+  generateTreatmentsStartingWith } from "@/lib/agents/fdai/treatmentsIndexer";
 import { getOrCreateDfdaAccessToken } from "@/lib/dfda";
-import {generateSideEffects} from "@/lib/agents/fdai/sideEffectsAgent";
-import {generateSafetySummary} from "@/lib/agents/fdai/safetySummaryAgent";
-import {
-  generateMostEffectiveTreatments, generateMostEffectiveUnapprovedTreatments,
-  generateTreatmentsByAlphabet,
-  generateTreatmentsStartingWith
-} from "@/lib/agents/fdai/treatmentsIndexer";
-import {aiModels} from "@/lib/models/aiModelRegistry";
-
+import { aiModels } from "@/lib/models/aiModelRegistry";
+import {dumpTypeDefinition} from "@/lib/utils/dumpTypeDefinition";
 
 describe("FDAi Tests", () => {
+  it("generates a report based on a study", async () => {
+      const article = await writeArticle("The most effective experimental treatments for long covid", {
+        modelName: "claude-3-5-sonnet-20240620",
+      })
+      console.log(dumpTypeDefinition(article))
+      expect(article).not.toBeNull()
+  });
   it("generates treatments by alphabet", async () => {
     const geminiProUnapproved = await generateMostEffectiveUnapprovedTreatments("PTSD", aiModels['gemini-pro']);
     console.log("geminiProUnapproved", geminiProUnapproved)

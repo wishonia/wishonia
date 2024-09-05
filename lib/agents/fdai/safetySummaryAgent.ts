@@ -2,7 +2,7 @@ import { anthropic } from "@ai-sdk/anthropic"
 import { generateObject } from "ai"
 import Exa from "exa-js"
 import { z } from "zod"
-import {generateSearchQueries} from "@/lib/agents/fdai/searchQueryGenerator";
+import {generateSearchQueries} from "@/lib/agents/researcher/searchQueryGenerator";
 
 const exa = new Exa(process.env.EXA_API_KEY);
 

@@ -3,7 +3,7 @@ import { Button } from "@/components/ui/button"
 import { Card, CardHeader, CardTitle, CardDescription, CardContent } from "@/components/ui/card"
 import { Clipboard, Database } from 'lucide-react'
 
-export default function HealthTracking() {
+export default function HealthTrackingLinkBoxes() {
     const handleStartLogging = () => {
         console.log('Start logging')
         // Implement logging functionality here
@@ -32,8 +32,12 @@ export default function HealthTracking() {
 
             <Card>
                 <CardHeader>
-                    <CardTitle>Import Your Health Data</CardTitle>
-                    <CardDescription>Securely import health data from various apps and devices</CardDescription>
+                    <CardTitle>
+                        Import Your Health Data
+                    </CardTitle>
+                    <CardDescription>
+                        Securely import health data from various apps and devices
+                    </CardDescription>
                 </CardHeader>
                 <CardContent>
                     <Button onClick={handleConnectData}>
