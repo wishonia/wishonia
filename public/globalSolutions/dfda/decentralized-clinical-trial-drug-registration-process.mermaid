@@ -1,0 +1,18 @@
+graph TD
+    A["Login to company account"] --> B["Click 'Register New Drug'"]
+    B --> C["Enter drug information"]
+    C --> D["Upload documentation"]
+    D --> E["AI generates study protocols"]
+    E --> F{"Review and approve protocols"}
+    F -->|"Approved"| G["System submits for regulatory review"]
+    F -->|"Needs adjustment"| E
+    G --> H["Begin participant recruitment"]
+    H --> I["Receive enrollment updates"]
+    I --> J["Ship drug to pharmacies/participants"]
+    J --> K["System manages trial logistics"]
+    K --> L["Monitor trial progress"]
+    L --> M{"Trial complete?"}
+    M -->|"No"| L
+    M -->|"Yes"| N["System generates final report"]
+    N --> O["Receive final report"]
+    O --> P["Make development decisions"]
