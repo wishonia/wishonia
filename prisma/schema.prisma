@@ -1411,7 +1411,7 @@ enum Effectiveness {
 }
 
 model Article {
-  id            Int                  @id @default(autoincrement())
+  id            String               @id @default(cuid())
   title         String
   slug          String               @unique
   description   String
@@ -1485,7 +1485,7 @@ model ArticleSource {
   url         String
   title       String
   description String?
-  articleId   Int
+  articleId   String
   article     Article   @relation(fields: [articleId], references: [id])
   updatedAt   DateTime  @updatedAt
   createdAt   DateTime  @default(now())
@@ -1500,7 +1500,7 @@ model ArticleSearchResult {
   publishedDate DateTime?
   author        String?
   text          String    @db.Text
-  articleId     Int
+  articleId     String
   article       Article   @relation(fields: [articleId], references: [id])
   updatedAt     DateTime  @updatedAt
   createdAt     DateTime  @default(now())
@@ -1516,7 +1516,7 @@ model ArticleGenerationOptions {
   maxCharactersOfSearchContentToUse Int
   tone                              String
   format                            String
-  articleId                         Int       @unique
+  articleId                         String    @unique
   article                           Article   @relation(fields: [articleId], references: [id])
   updatedAt                         DateTime  @updatedAt
   createdAt                         DateTime  @default(now())
@@ -1526,7 +1526,7 @@ model ArticleGenerationOptions {
 model ArticleComment {
   id        String    @id @default(cuid())
   content   String    @db.Text
-  articleId Int
+  articleId String
   article   Article   @relation(fields: [articleId], references: [id])
   userId    String
   user      User      @relation(fields: [userId], references: [id])
