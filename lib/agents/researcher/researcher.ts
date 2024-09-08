@@ -7,7 +7,7 @@ import {openai} from "@ai-sdk/openai";
 import {google} from "@ai-sdk/google";
 import {LanguageModelV1} from "@ai-sdk/provider";
 import {SearchResult} from "exa-js";
-import { PrismaClient, Article } from '@prisma/client';
+import { PrismaClient, Prisma } from '@prisma/client';
 import { slugify } from '@/lib/utils/slugify'; // Assuming you have a slugify utility
 
 const prisma = new PrismaClient();
@@ -77,7 +77,7 @@ export async function writeArticle(
         'gemini-1.5-flash-latest' | 'gemini-1.5-flash' | 'gemini-1.5-pro-latest' | 'gemini-1.5-pro' | 'gemini-1.0-pro'
         // doesn't work 'gemini-pro' ,
   } = {}
-): Promise<Article> {
+): Promise<ArticleWithRelations> {
   const {
     numberOfSearchQueryVariations = 1,
     numberOfWebResultsToInclude = 10,
@@ -164,7 +164,10 @@ export async function writeArticle(
   // find or create category
   let category = await prisma.articleCategory.findFirst({
     where: {
-      name: report.categoryName
+      name: {
+        equals: report.categoryName,
+        mode: 'insensitive'
+      }
     }
   });
 
@@ -178,11 +181,12 @@ export async function writeArticle(
         });
     }
 
+    const slug = slugify(report.title + '-prompt-' + topic);
   // Save the article to the database
   const savedArticle = await prisma.article.create({
     data: {
       title: report.title,
-      slug: slugify(report.title),
+      slug,
       description: report.description,
       content: report.content,
       status: 'DRAFT',
@@ -227,10 +231,13 @@ export async function writeArticle(
       }
     },
     include: {
+      user: true,
+      category: true,
       tags: true,
       sources: true,
       searchResults: true,
-      generationOptions: true
+      generationOptions: true,
+      comments: true
     }
   });
 
@@ -239,21 +246,53 @@ export async function writeArticle(
   return savedArticle;
 }
 
-export async function findOrCreateArticleByPromptedTopic(promptedTopic: string, userId: string = 'test-user'): Promise<Article> {
-  let article: Article | null = null;
+export type ArticleWithRelations = Prisma.ArticleGetPayload<{
+  include: {
+    user: true,
+    category: true,
+    tags: true,
+    sources: true,
+    searchResults: true,
+    generationOptions: true,
+    comments: true
+  }
+}>;
+
+export async function findOrCreateArticleByPromptedTopic(promptedTopic: string, 
+  userId: string = 'test-user'):
+ Promise<ArticleWithRelations> {
+  let article: ArticleWithRelations | null = null;
   if(userId){
     article = await prisma.article.findFirst({
       where: {
         promptedTopic: promptedTopic,
         userId: userId
+      },
+      include: {
+        user: true,
+        category: true,
+        tags: true,
+        sources: true,
+        searchResults: true,
+        generationOptions: true,
+        comments: true
       }
     });
   } else {
     article = await prisma.article.findFirst({
       where: {
-      promptedTopic: promptedTopic
-    }
-  });
+        promptedTopic: promptedTopic
+      },
+      include: {
+        user: true,
+        category: true,
+        tags: true,
+        sources: true,
+        searchResults: true,
+        generationOptions: true,
+        comments: true
+      }
+    });
   }
   if(article){
     return article;
@@ -264,10 +303,13 @@ export async function findOrCreateArticleByPromptedTopic(promptedTopic: string, 
       id: generatedReport.id
     },
     include: {
+      user: true,
+      category: true,
       tags: true,
       sources: true,
       searchResults: true,
-      generationOptions: true
+      generationOptions: true,
+      comments: true
     }
   });
   
@@ -298,6 +340,25 @@ export async function deleteArticleByPromptedTopic(promptedTopic: string, userId
 
       // Delete the article
       await tx.article.delete({ where: { id: article.id } });
+    }
+  });
+}
+
+export async function findArticleByTopic(promptedTopic: string, userId: string = 'test-user'):
+    Promise<ArticleWithRelations | null> {
+  return prisma.article.findFirst({
+    where: {
+      promptedTopic: promptedTopic,
+      userId: userId
+    },
+    include: {
+      user: true,
+      category: true,
+      tags: true,
+      sources: true,
+      searchResults: true,
+      generationOptions: true,
+      comments: true
     }
   });
 }

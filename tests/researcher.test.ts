@@ -11,7 +11,7 @@ describe("Database-seeder tests", () => {
   jest.setTimeout(6000000)
 
   it("Generates article", async () => {
-    const topic = 'Quantitative Estimate of QALYs Lost to Disease Each Year'
+    const topic = `IDO1 inhibitors for depression`
     await deleteArticleByPromptedTopic(topic)
     const generatedReport = await writeArticle(topic, 
       "test-user",
@@ -22,7 +22,8 @@ describe("Database-seeder tests", () => {
         purpose: 'research',
         maxCharactersOfSearchContentToUse: 5000,
         tone: 'neutral',
-        format: 'article'
+        format: 'article',
+        modelName: "claude-3-5-sonnet-20240620",
     })
     const article = await findOrCreateArticleByPromptedTopic(topic)
     expect(article).not.toBeNull()

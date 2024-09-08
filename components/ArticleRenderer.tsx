@@ -2,7 +2,7 @@ import { useState } from "react"
 import Image from "next/image"
 import { Check, Clock, Copy, Folder, Link2, Tag } from "lucide-react"
 
-import { ReportOutput } from "@/lib/agents/researcher/researcher"
+import {ArticleWithRelations} from "@/lib/agents/researcher/researcher"
 import { Badge } from "@/components/ui/badge"
 import { Button } from "@/components/ui/button"
 import {
@@ -17,6 +17,10 @@ import { Separator } from "@/components/ui/separator"
 import { toast } from "@/components/ui/use-toast"
 import { CustomReactMarkdown } from "@/components/CustomReactMarkdown"
 import { generateImage } from "@/app/actions"
+import {Article} from "@prisma/client"
+import { Prisma } from "@prisma/client"
+
+
 
 function GenerateImageButton({
   onClick,
@@ -32,7 +36,7 @@ function GenerateImageButton({
   )
 }
 
-export default function ArticleRenderer(props: ReportOutput) {
+export default function ArticleRenderer(props: ArticleWithRelations) {
   const [expandedResult, setExpandedResult] = useState<string | null>(null)
   const [isCopied, setIsCopied] = useState(false)
   const [isGeneratingImage, setIsGeneratingImage] = useState(false)
@@ -46,10 +50,11 @@ export default function ArticleRenderer(props: ReportOutput) {
     sources,
     tags,
     category,
-    readingTime,
     searchResults,
     featuredImage,
   } = props
+
+  const readingTime = Math.ceil(content.split(' ').length / 200)
 
   async function handleGenerateImage() {
     setIsGeneratingImage(true)
@@ -124,7 +129,7 @@ ${sources?.map((source) => `- [${source.title}](${source.url})`).join("\n")}
             <CardContent className="space-y-2">
               <div className="flex items-center space-x-2">
                 <Folder className="h-4 w-4"/>
-                <span>{category}</span>
+                <span>{category?.name}</span>
               </div>
               <div className="flex items-center space-x-2">
                 <Clock className="h-4 w-4"/>
@@ -134,7 +139,7 @@ ${sources?.map((source) => `- [${source.title}](${source.url})`).join("\n")}
                 <Tag className="h-4 w-4"/>
                 {tags?.map((tag, index) => (
                     <Badge key={index} variant="secondary">
-                      {tag}
+                      {tag.name}
                     </Badge>
                 ))}
               </div>
