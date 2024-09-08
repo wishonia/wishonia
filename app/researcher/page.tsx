@@ -1,22 +1,33 @@
 'use client'
 
-import { useState } from 'react'
+import { useState, useEffect } from 'react'
+import { useSearchParams, useRouter } from 'next/navigation'
 import { writeArticleAction} from '@/app/actions'
 import ArticleRenderer from '@/components/ArticleRenderer'
 import { Button } from "@/components/ui/button"
 import { Input } from "@/components/ui/input"
 import { Card, CardContent, CardDescription, CardFooter, CardHeader, CardTitle } from "@/components/ui/card"
-import { ReportOutput } from '@/lib/agents/researcher/researcher'
+import { ArticleWithRelations } from '@/lib/agents/researcher/researcher'
 import GlobalBrainNetwork from "@/components/landingPage/global-brain-network"
 
 export default function Home() {
-    const [article, setArticle] = useState<ReportOutput | null>(null)
+    const [article, setArticle] = useState<ArticleWithRelations | null>(null)
     const [error, setError] = useState('')
     const [isGenerating, setIsGenerating] = useState(false)
+    const [topic, setTopic] = useState('')
+    const searchParams = useSearchParams()
+    const router = useRouter()
 
-    async function handleSubmit(formData: FormData) {
-        const topic = formData.get('topic') as string
-        if (!topic) {
+    useEffect(() => {
+        const queryTopic = searchParams?.get('q')
+        if (queryTopic) {
+            setTopic(queryTopic)
+            handleSubmit(queryTopic)
+        }
+    }, [searchParams])
+
+    async function handleSubmit(submittedTopic: string) {
+        if (!submittedTopic) {
             setError('Please enter a topic')
             return
         }
@@ -25,8 +36,9 @@ export default function Home() {
         setError('')
 
         try {
-            const generatedArticle = await writeArticleAction(topic)
+            const generatedArticle = await writeArticleAction(submittedTopic)
             setArticle(generatedArticle)
+            router.push(`?q=${encodeURIComponent(submittedTopic)}`, { scroll: false })
         } catch (err) {
             setError('Failed to generate article. Please try again.')
         } finally {
@@ -46,9 +58,15 @@ export default function Home() {
                 <CardContent>
                     <form onSubmit={(e) => {
                         e.preventDefault()
-                        handleSubmit(new FormData(e.currentTarget))
+                        handleSubmit(topic)
                     }} className="flex gap-4">
-                        <Input type="text" name="topic" placeholder="Enter article topic" className="flex-grow" />
+                        <Input 
+                            type="text" 
+                            value={topic} 
+                            onChange={(e) => setTopic(e.target.value)}
+                            placeholder="Enter article topic" 
+                            className="flex-grow" 
+                        />
                         <Button type="submit" disabled={isGenerating}>
                             {isGenerating ? 'Generating...' : 'Generate Article'}
                         </Button>

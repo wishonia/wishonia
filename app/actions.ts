@@ -7,10 +7,15 @@ import { type Message as AIMessage } from "ai"
 import { prisma } from "@/lib/db"
 import { getCurrentUser } from "@/lib/session"
 import { type Chat } from "@/lib/types"
-import {type ReportOutput, writeArticle} from "@/lib/agents/researcher/researcher"
+import {
+  ArticleWithRelations,
+  findArticleByTopic,
+  writeArticle
+} from "@/lib/agents/researcher/researcher"
 type GetChatResult = Chat[] | null
 type SetChatResults = Chat[]
 import OpenAI from 'openai'
+import {Article} from "@prisma/client";
 const openai = new OpenAI({
   apiKey: process.env.OPENAI_API_KEY,
 })
@@ -170,9 +175,14 @@ export const clearAllChats = async (userId: string) => {
   }
 }
 
-export async function writeArticleAction(topic: string): Promise<ReportOutput> {
-  
-  const article = await writeArticle(topic)
+export async function writeArticleAction(topic: string): Promise<ArticleWithRelations> {
+
+  let article: ArticleWithRelations | null
+
+  article = await findArticleByTopic(topic)
+  if(!article) {
+    article = await writeArticle(topic)
+  }
 
   revalidatePath('/')
   return article
