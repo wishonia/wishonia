@@ -154,14 +154,13 @@ export async function writeArticle(
     prompt,
   });
 
-  debugger;
   console.log("Article generated successfully!", result.object);
 
   const report = result.object as unknown as ReportOutput;
   report.searchResults = searchResults;
   report.generationOptions = options;
 
-  // find or create category
+  // Find or create category
   let category = await prisma.articleCategory.findFirst({
     where: {
       name: {
@@ -171,17 +170,32 @@ export async function writeArticle(
     }
   });
 
-    if (!category) {
-        // Create the category if it doesn't exist
-        category = await prisma.articleCategory.create({
-            data: {
-                name: report.categoryName,
-                slug: slugify(report.categoryName)
-            }
-        });
-    }
+  if (!category) {
+    category = await prisma.articleCategory.create({
+      data: {
+        name: report.categoryName,
+        slug: slugify(report.categoryName)
+      }
+    });
+  }
 
-    const slug = slugify(report.title + '-prompt-' + topic);
+  // Get or create tags
+  const tagObjects = await Promise.all(report.tags.map(async (tagName) => {
+    const existingTag = await prisma.articleTag.findFirst({
+      where: { name: { equals: tagName, mode: 'insensitive' } }
+    });
+
+    if (existingTag) {
+      return existingTag;
+    } else {
+      return prisma.articleTag.create({
+        data: { name: tagName, slug: slugify(tagName) }
+      });
+    }
+  }));
+
+  const slug = slugify(report.title + '-prompt-' + topic);
+
   // Save the article to the database
   const savedArticle = await prisma.article.create({
     data: {
@@ -196,10 +210,7 @@ export async function writeArticle(
       userId: userId,
       categoryId: category.id,
       tags: {
-        connectOrCreate: report.tags.map(tag => ({
-          where: { name: tag },
-          create: { name: tag, slug: slugify(tag) }
-        }))
+        connect: tagObjects.map(tag => ({ id: tag.id }))
       },
       sources: {
         create: report.sources.map(source => ({
