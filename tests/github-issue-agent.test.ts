@@ -57,9 +57,9 @@ describe("IssueManager tests", () => {
 
     // Mock the Octokit issues.create method
     const mockCreate = jest.fn().mockResolvedValue({ data: { html_url: 'https://github.com/test-owner/test-repo/issues/1' } });
-    (Octokit as jest.Mock).mockImplementation(() => ({
+    (Octokit as jest.MockedClass<typeof Octokit>).mockImplementation(() => ({
       issues: { create: mockCreate }
-    }));
+    }) as unknown as InstanceType<typeof Octokit>);
 
     await saveIssuesToGitHub(mockIssues, repoOwner, repoName, githubToken);
 
