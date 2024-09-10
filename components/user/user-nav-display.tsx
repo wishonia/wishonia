@@ -17,6 +17,12 @@ export function UserNavDisplay({ user, avatarNavItems }: UserNavDisplayProps) {
   const [open, setOpen] = useState(false)
 
   if (user.email === null || user.email === undefined) {
+      let callbackUrl = undefined;
+        if (typeof window !== "undefined") {
+            callbackUrl = window.location.href;
+        } else {
+            console.error("window is not defined in UserNavDisplay");
+        }
     return (
       <Dialog open={open} onOpenChange={setOpen}>
         <DialogTrigger asChild>
@@ -28,7 +34,7 @@ export function UserNavDisplay({ user, avatarNavItems }: UserNavDisplayProps) {
           <VisuallyHidden>
             <DialogTitle>Sign In</DialogTitle>
           </VisuallyHidden>
-          <UserAuthForm callbackUrl={window.location.href} />
+          <UserAuthForm callbackUrl={callbackUrl} />
         </DialogContent>
       </Dialog>
     )
