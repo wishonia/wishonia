@@ -67,8 +67,14 @@ export function UserAccountNav({ user, avatarNavItems }: UserAccountNavProps) {
           className="cursor-pointer"
           onSelect={(event) => {
             event.preventDefault()
+            let callbackUrl = '/signin'
+            if (typeof window !== "undefined") {
+                callbackUrl = `${window.location.origin}/signin`
+            } else {
+                console.error("window is not defined in UserAccountNav");
+            }
             signOut({
-              callbackUrl: `${window.location.origin}/signin`,
+              callbackUrl: callbackUrl,
             })
           }}
         >
