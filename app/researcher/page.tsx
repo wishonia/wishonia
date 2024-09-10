@@ -2,15 +2,15 @@
 
 import { useState, useEffect } from 'react'
 import { useSearchParams, useRouter } from 'next/navigation'
-import { writeArticleAction} from '@/app/actions'
 import ArticleRenderer from '@/components/ArticleRenderer'
 import { Button } from "@/components/ui/button"
 import { Input } from "@/components/ui/input"
 import { Card, CardContent, CardDescription, CardFooter, CardHeader, CardTitle } from "@/components/ui/card"
 import { ArticleWithRelations } from '@/lib/agents/researcher/researcher'
 import GlobalBrainNetwork from "@/components/landingPage/global-brain-network"
+import {writeArticleAction} from "@/app/researcher/researcherActions";
 
-export default function Home() {
+export default function ResearcherPage() {
     const [article, setArticle] = useState<ArticleWithRelations | null>(null)
     const [error, setError] = useState('')
     const [isGenerating, setIsGenerating] = useState(false)

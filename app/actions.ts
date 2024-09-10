@@ -3,22 +3,15 @@
 import { revalidatePath } from "next/cache"
 import { QueryCache } from "@tanstack/react-query"
 import { type Message as AIMessage } from "ai"
+import OpenAI from "openai"
 
 import { prisma } from "@/lib/db"
 import { getCurrentUser } from "@/lib/session"
 import { type Chat } from "@/lib/types"
-import {
-  ArticleWithRelations,
-  findArticleByTopic,
-  writeArticle
-} from "@/lib/agents/researcher/researcher"
+
 type GetChatResult = Chat[] | null
 type SetChatResults = Chat[]
-import OpenAI from 'openai'
-import {Article} from "@prisma/client";
-const openai = new OpenAI({
-  apiKey: process.env.OPENAI_API_KEY,
-})
+
 export async function getChat(
   id: string,
   loggedInUserId: string
@@ -172,37 +165,5 @@ export const clearAllChats = async (userId: string) => {
       })
     }
     return revalidatePath(deletedChats.map((chat) => chat.path).join(", "))
-  }
-}
-
-export async function writeArticleAction(topic: string): Promise<ArticleWithRelations> {
-
-  let article: ArticleWithRelations | null
-
-  article = await findArticleByTopic(topic)
-  if(!article) {
-    article = await writeArticle(topic)
-  }
-
-  revalidatePath('/')
-  return article
-}
-
-export async function generateImage(topic: string) {
-  try {
-    const response = await openai.images.generate({
-      model: "dall-e-3",
-      prompt: `Create an image representing the topic: ${topic}`,
-      n: 1,
-      size: "1024x1024",
-    })
-
-    const imageUrl = response.data[0].url
-
-    revalidatePath('/')
-    return imageUrl
-  } catch (error) {
-    console.error('Error generating image:', error)
-    throw new Error('Failed to generate image')
   }
 }
