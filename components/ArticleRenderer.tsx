@@ -1,6 +1,6 @@
 import { useState } from "react"
 import Image from "next/image"
-import { Check, Clock, Copy, Folder, Link2, Tag } from "lucide-react"
+import { Check, Clock, Copy, Folder, Link2, Tag, Loader2 } from "lucide-react"
 
 import {ArticleWithRelations} from "@/lib/agents/researcher/researcher"
 import { Badge } from "@/components/ui/badge"
@@ -16,11 +16,8 @@ import {
 import { Separator } from "@/components/ui/separator"
 import { toast } from "@/components/ui/use-toast"
 import { CustomReactMarkdown } from "@/components/CustomReactMarkdown"
-import { generateImage } from "@/app/actions"
-import {Article} from "@prisma/client"
-import { Prisma } from "@prisma/client"
 
-
+import {generateImage} from "@/app/researcher/researcherActions";
 
 function GenerateImageButton({
   onClick,
@@ -31,12 +28,19 @@ function GenerateImageButton({
 }) {
   return (
     <Button onClick={onClick} disabled={disabled}>
-      Generate Image
+      {disabled ? (
+        <>
+          <Loader2 className="mr-2 h-4 w-4 animate-spin" />
+          Generating...
+        </>
+      ) : (
+        "Generate Image"
+      )}
     </Button>
   )
 }
 
-export default function ArticleRenderer(props: ArticleWithRelations) {
+export default function ArticleRenderer(article: ArticleWithRelations) {
   const [expandedResult, setExpandedResult] = useState<string | null>(null)
   const [isCopied, setIsCopied] = useState(false)
   const [isGeneratingImage, setIsGeneratingImage] = useState(false)
@@ -52,14 +56,14 @@ export default function ArticleRenderer(props: ArticleWithRelations) {
     category,
     searchResults,
     featuredImage,
-  } = props
+  } = article
 
   const readingTime = Math.ceil(content.split(' ').length / 200)
 
   async function handleGenerateImage() {
     setIsGeneratingImage(true)
     try {
-      const generatedImageUrl = await generateImage(title)
+      const generatedImageUrl = await generateImage(title, article.id)
       if (generatedImageUrl) {
         setImageUrl(generatedImageUrl)
       } else {
@@ -127,6 +131,18 @@ ${sources?.map((source) => `- [${source.title}](${source.url})`).join("\n")}
               <CardTitle>Article Info</CardTitle>
             </CardHeader>
             <CardContent className="space-y-2">
+              {featuredImage && (
+                <div className="mb-4">
+                  <Image
+                    src={featuredImage}
+                    alt={`Featured image for ${title}`}
+                    width={1024}
+                    height={1024}
+                    className="h-auto w-full rounded-lg"
+                  />
+                </div>
+              )}
+
               <div className="flex items-center space-x-2">
                 <Folder className="h-4 w-4"/>
                 <span>{category?.name}</span>
@@ -162,13 +178,13 @@ ${sources?.map((source) => `- [${source.title}](${source.url})`).join("\n")}
                   )}
                 </Button>
               </div>
-              <div className="flex items-center space-x-2">
+              <div className="flex flex-col space-y-2">
                 <GenerateImageButton
                     onClick={handleGenerateImage}
                     disabled={isGeneratingImage}
                 />
                 {imageUrl && (
-                    <div className="mb-4">
+                    <div className="mt-2">
                       <Image
                           src={imageUrl}
                           alt={title || "Generated image"}
