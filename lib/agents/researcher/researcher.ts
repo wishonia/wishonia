@@ -373,3 +373,20 @@ export async function findArticleByTopic(promptedTopic: string, userId: string =
     }
   });
 }
+
+export async function getArticleBySlug(slug: string) {
+  return prisma.article.findUnique({
+    where: {
+      slug: slug
+    },
+    include: {
+      user: true,
+      category: true,
+      tags: true,
+      sources: true,
+      searchResults: true,
+      generationOptions: true,
+      comments: true
+    }
+  });
+}
