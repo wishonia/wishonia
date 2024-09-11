@@ -7,6 +7,10 @@ export const useLocalStorage = <T>(
   const [storedValue, setStoredValue] = useState(initialValue)
 
   useEffect(() => {
+    if(!window) {
+      console.error('window is not defined in useLocalStorage')
+      return
+    }
     // Get from local storage by key
     const item = window.localStorage.getItem(key)
     if (item) {
@@ -17,6 +21,10 @@ export const useLocalStorage = <T>(
   // Set to local storage
   const setValue = (value: T) => {
     setStoredValue(value)
+    if(!window) {
+      console.log('window is not defined in setValue')
+      return
+    }
     window.localStorage.setItem(key, JSON.stringify(value))
   }
   return [storedValue, setValue]
