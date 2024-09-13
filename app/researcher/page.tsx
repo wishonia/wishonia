@@ -1,4 +1,5 @@
 'use client'
+export const maxDuration = 60;
 
 import { useState, useEffect } from 'react'
 import { useSearchParams, useRouter } from 'next/navigation'
