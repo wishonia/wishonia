@@ -16,7 +16,7 @@ export default async function DashboardLayout({
   const user = await getCurrentUser()
 
   return (
-    <div className="flex min-h-screen flex-col space-y-6">
+    <div className="flex min-h-screen flex-col">
       <TopNavbar
         user={{
           name: user?.name,
@@ -24,14 +24,11 @@ export default async function DashboardLayout({
           email: user?.email,
         }}
       />
-      <div className="container grid flex-1 gap-12 md:grid-cols-[200px_1fr]">
+      <div className="flex flex-1">
         <aside className="hidden w-[200px] flex-col md:flex">
           <SidebarNav items={generalSidebarNav.data} />
         </aside>
-        <main
-          className="flex w-full flex-1 flex-col"
-          style={{ maxWidth: "90%" }}
-        >
+        <main className="flex-1 px-4 py-6">
           {children}
         </main>
       </div>
