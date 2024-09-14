@@ -59,7 +59,7 @@ function getModel(modelName: string): LanguageModelV1 {
 
 export async function writeArticle(
   topic: string,
-  userId: string = 'test-user',
+  userId: string,
   options: {
     numberOfSearchQueryVariations?: number,
     numberOfWebResultsToInclude?: number,
@@ -120,7 +120,9 @@ export async function writeArticle(
   if (citationStyle === 'footnote') {
     citationInstructions = 'Provide citations in the text using markdown footnote notation like [^1].';
   } else if (citationStyle === 'hyperlinked-text') {
-    citationInstructions = 'Hyperlink the relevant text in the report to the source URLs used using markdown hyperlink notation like [text](https://link-where-you-got-the-information).';
+    citationInstructions = `'YOU MUST HYPERLINK THE RELEVANT text in the report to the source 
+    URLs used using markdown hyperlink notation 
+    like [text](https://link-where-you-got-the-information).';`
   }
 
   const prompt = `
@@ -331,7 +333,7 @@ export async function findOrCreateArticleByPromptedTopic(promptedTopic: string,
   return article;
 }
 
-export async function deleteArticleByPromptedTopic(promptedTopic: string, userId: string = 'test-user'): Promise<void> {
+export async function deleteArticleByPromptedTopic(promptedTopic: string, userId: string): Promise<void> {
   // Find the article(s) to delete
   const articlesToDelete = await prisma.article.findMany({
     where: {
@@ -355,12 +357,12 @@ export async function deleteArticleByPromptedTopic(promptedTopic: string, userId
   });
 }
 
-export async function findArticleByTopic(promptedTopic: string, userId: string = 'test-user'):
+export async function findArticleByTopic(promptedTopic: string, userId?: string):
     Promise<ArticleWithRelations | null> {
   return prisma.article.findFirst({
     where: {
       promptedTopic: promptedTopic,
-      userId: userId
+      ...(userId ? { userId } : {})
     },
     include: {
       user: true,

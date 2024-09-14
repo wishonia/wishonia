@@ -16,8 +16,11 @@ import {
 import { Separator } from "@/components/ui/separator"
 import { toast } from "@/components/ui/use-toast"
 import { CustomReactMarkdown } from "@/components/CustomReactMarkdown"
+import { deleteArticle } from "@/app/researcher/researcherActions"
+import { useRouter } from "next/navigation"
 
 import {generateImage} from "@/app/researcher/researcherActions";
+import { UrlDisplay } from "./article/UrlDisplay"
 
 function GenerateImageButton({
   onClick,
@@ -40,7 +43,14 @@ function GenerateImageButton({
   )
 }
 
-export default function ArticleRenderer(article: ArticleWithRelations) {
+export default function ArticleRenderer({
+  article,
+  currentUserId
+}: {
+  article: ArticleWithRelations,
+  currentUserId?: string
+}) {
+  const router = useRouter();
   const [expandedResult, setExpandedResult] = useState<string | null>(null)
   const [isCopied, setIsCopied] = useState(false)
   const [isGeneratingImage, setIsGeneratingImage] = useState(false)
@@ -56,6 +66,7 @@ export default function ArticleRenderer(article: ArticleWithRelations) {
     category,
     searchResults,
     featuredImage,
+    userId,
   } = article
 
   const readingTime = Math.ceil(content.split(' ').length / 200)
@@ -112,6 +123,35 @@ ${sources?.map((source) => `- [${source.title}](${source.url})`).join("\n")}
       })
   }
 
+  // Add this function to handle article deletion
+  async function handleDeleteArticle() {
+    if (!currentUserId) {
+      toast({
+        title: "Please login to delete articles",
+        description: "You must be logged in to delete articles.",
+        variant: "destructive",
+      });
+      return;
+    }
+    if (confirm("Are you sure you want to delete this article?")) {
+      try {
+        await deleteArticle(title, currentUserId);
+        toast({
+          title: "Article deleted",
+          description: "The article has been successfully deleted.",
+        });
+        router.push("/"); // Redirect to home page after deletion
+      } catch (error) {
+        console.error("Failed to delete article:", error);
+        toast({
+          title: "Failed to delete article",
+          description: "An error occurred while deleting the article.",
+          variant: "destructive",
+        });
+      }
+    }
+  }
+
   return (
     <div className="container mx-auto max-w-6xl p-4">
       <div className="grid grid-cols-1 gap-4 md:grid-cols-3">
@@ -124,6 +164,13 @@ ${sources?.map((source) => `- [${source.title}](${source.url})`).join("\n")}
           <CardContent>
             <CustomReactMarkdown>{content}</CustomReactMarkdown>
           </CardContent>
+          {currentUserId === userId && (
+            <CardFooter>
+              <Button variant="destructive" onClick={handleDeleteArticle}>
+                Delete Article
+              </Button>
+            </CardFooter>
+          )}
         </Card>
         <div className="space-y-4">
           <Card>
@@ -209,21 +256,25 @@ ${sources?.map((source) => `- [${source.title}](${source.url})`).join("\n")}
               <CardTitle>Sources</CardTitle>
             </CardHeader>
             <CardContent>
-              <ul className="space-y-2">
+              <div className="space-y-4">
                 {sources?.map((source, index) => (
-                  <li key={index}>
-                    <a
-                      href={source.url}
-                      target="_blank"
-                      rel="noopener noreferrer"
-                      className="flex items-center space-x-2 text-blue-500 hover:underline"
-                    >
-                      <Link2 className="h-4 w-4" />
-                      <span>{source.title}</span>
-                    </a>
-                  </li>
+                  <Card key={index} className="overflow-hidden">
+                    <CardContent className="p-4">
+                      <div className="flex flex-col space-y-2">
+                        <a
+                          href={source.url}
+                          target="_blank"
+                          rel="noopener noreferrer"
+                          className="text-blue-500 hover:underline font-medium break-words"
+                        >
+                          {source.title}
+                        </a>
+                        <UrlDisplay url={source.url} />
+                      </div>
+                    </CardContent>
+                  </Card>
                 ))}
-              </ul>
+              </div>
             </CardContent>
           </Card>
         </div>
@@ -241,11 +292,12 @@ ${sources?.map((source) => `- [${source.title}](${source.url})`).join("\n")}
                   href={result.url}
                   target="_blank"
                   rel="noopener noreferrer"
-                  className="text-blue-500 hover:underline"
+                  className="text-blue-500"
                 >
                   {result.title}
                 </a>
               </h3>
+              <UrlDisplay url={result.url} />
               {result.publishedDate && (
                 <p className="text-sm text-muted-foreground">
                   Published on:{" "}
@@ -263,7 +315,7 @@ ${sources?.map((source) => `- [${source.title}](${source.url})`).join("\n")}
                         expandedResult === result.id ? null : result.id
                       )
                     }
-                    className="ml-2 text-blue-500 hover:underline"
+                    className="ml-2"
                   >
                     {expandedResult === result.id ? "Show less" : "Show more"}
                   </button>
