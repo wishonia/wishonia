@@ -3,21 +3,27 @@ export const maxDuration = 60;
 
 import { useState, useEffect } from 'react'
 import { useSearchParams, useRouter } from 'next/navigation'
+import { useSession } from 'next-auth/react' // Import useSession from next-auth
 import ArticleRenderer from '@/components/ArticleRenderer'
 import { Button } from "@/components/ui/button"
 import { Input } from "@/components/ui/input"
 import { Card, CardContent, CardDescription, CardFooter, CardHeader, CardTitle } from "@/components/ui/card"
 import { ArticleWithRelations } from '@/lib/agents/researcher/researcher'
 import GlobalBrainNetwork from "@/components/landingPage/global-brain-network"
-import {writeArticleAction} from "@/app/researcher/researcherActions";
+import { findOrCreateArticleByTopic } from "@/app/researcher/researcherActions";
+import { UserAuthForm } from '@/components/user/user-auth-form'
 
 export default function ResearcherPage() {
+    const { data: session, status } = useSession() 
+    const loading = status === "loading"
+    const router = useRouter()
+    const searchParams = useSearchParams()
+
     const [article, setArticle] = useState<ArticleWithRelations | null>(null)
     const [error, setError] = useState('')
     const [isGenerating, setIsGenerating] = useState(false)
     const [topic, setTopic] = useState('')
-    const searchParams = useSearchParams()
-    const router = useRouter()
+
 
     useEffect(() => {
         const queryTopic = searchParams?.get('q')
@@ -28,6 +34,11 @@ export default function ResearcherPage() {
     }, [searchParams])
 
     async function handleSubmit(submittedTopic: string) {
+
+        if (!session?.user?.id) {
+            return <UserAuthForm />
+        }
+
         if (!submittedTopic) {
             setError('Please enter a topic')
             return
@@ -37,7 +48,7 @@ export default function ResearcherPage() {
         setError('')
 
         try {
-            const generatedArticle = await writeArticleAction(submittedTopic)
+            const generatedArticle = await findOrCreateArticleByTopic(submittedTopic, session?.user?.id)
             setArticle(generatedArticle)
             router.push(`?q=${encodeURIComponent(submittedTopic)}`, { scroll: false })
         } catch (err) {
@@ -45,6 +56,14 @@ export default function ResearcherPage() {
         } finally {
             setIsGenerating(false)
         }
+    }
+
+    if (loading) {
+        return <div>Loading...</div>
+    }
+
+    if (!session?.user?.id) {
+        return <UserAuthForm />
     }
 
     return (
@@ -84,7 +103,7 @@ export default function ResearcherPage() {
                     <GlobalBrainNetwork />
                 </div>
             )}
-            {!isGenerating && article && <ArticleRenderer {...article} />}
+            {!isGenerating && article && <ArticleRenderer article={article} currentUserId={session?.user?.id}  />}
         </main>
     )
 }
