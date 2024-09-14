@@ -44,6 +44,7 @@ import {
 import {
   FaHand,
   FaMessage,
+  FaPencil,
   FaRankingStar,
   FaSquarePollVertical,
 } from "react-icons/fa6"
@@ -122,6 +123,8 @@ const icons = {
   edit: FaEdit,
   eye: FaEye,
   eyeOff: FaEyeSlash,
+  book: FaBook,
+  pencil: FaPencil,
 }
 
 export const Icons: IconsType = icons
