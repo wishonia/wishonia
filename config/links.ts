@@ -77,7 +77,7 @@ export const githubLink: NavItem = {
 }
 
 export const researcherLink: NavItem = {
-  title: "Researcher",
+  title: "Research Agent",
   href: "/researcher",
   icon: "pencil",
   tooltip: "Your very own AI researcher",

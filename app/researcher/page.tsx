@@ -12,6 +12,7 @@ import { ArticleWithRelations } from '@/lib/agents/researcher/researcher'
 import GlobalBrainNetwork from "@/components/landingPage/global-brain-network"
 import { findOrCreateArticleByTopic } from "@/app/researcher/researcherActions";
 import { UserAuthForm } from '@/components/user/user-auth-form'
+import ArticleSearchAndGrid from '@/components/article/ArticleSearchAndGrid';
 
 export default function ResearcherPage() {
     const { data: session, status } = useSession() 
@@ -88,7 +89,7 @@ export default function ResearcherPage() {
                             className="flex-grow" 
                         />
                         <Button type="submit" disabled={isGenerating}>
-                            {isGenerating ? 'Generating...' : 'Generate Article'}
+                            {isGenerating ? 'Researching...' : 'Start Researching'}
                         </Button>
                     </form>
                 </CardContent>
@@ -104,6 +105,7 @@ export default function ResearcherPage() {
                 </div>
             )}
             {!isGenerating && article && <ArticleRenderer article={article} currentUserId={session?.user?.id}  />}
+            <ArticleSearchAndGrid />
         </main>
     )
 }

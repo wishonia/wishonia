@@ -158,5 +158,5 @@ export async function getMetaAnalysis(treatmentName: string, conditionName: stri
     return article;
   }
 
-    return writeArticle(topic);
+    return writeArticle(topic, "test-user");
 }

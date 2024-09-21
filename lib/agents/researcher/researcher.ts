@@ -1,14 +1,21 @@
-import { z } from 'zod';
+import { anthropic } from "@ai-sdk/anthropic";
+import { google } from "@ai-sdk/google";
+import { openai } from "@ai-sdk/openai";
+import { LanguageModelV1 } from "@ai-sdk/provider";
+import { Prisma, PrismaClient } from '@prisma/client';
 import { generateObject } from 'ai';
-import { getSearchResults } from "@/lib/agents/researcher/getSearchResults";
+import { SearchResult } from "exa-js";
+import { z } from 'zod';
+
+
+
+import { getSearchResults, getSearchResultsByUrl } from "@/lib/agents/researcher/getSearchResults";
 import { generateSearchQueries } from "@/lib/agents/researcher/searchQueryGenerator";
-import {anthropic} from "@ai-sdk/anthropic";
-import {openai} from "@ai-sdk/openai";
-import {google} from "@ai-sdk/google";
-import {LanguageModelV1} from "@ai-sdk/provider";
-import {SearchResult} from "exa-js";
-import { PrismaClient, Prisma } from '@prisma/client';
 import { slugify } from '@/lib/utils/slugify'; // Assuming you have a slugify utility
+
+
+
+
 
 const prisma = new PrismaClient();
 
@@ -38,23 +45,56 @@ export type ReportOutput = GeneratedReport & {
 
 function getModel(modelName: string): LanguageModelV1 {
   if (modelName.includes("claude")) {
-    return anthropic(modelName);
+    return anthropic(modelName)
   }
   if (modelName.includes("gpt")) {
-    return openai(modelName);
+    return openai(modelName)
   }
   if (modelName.includes("gemini")) {
-    return google('models/' + modelName, {
+    return google("models/" + modelName, {
       topK: 0,
       safetySettings: [
-        { category: 'HARM_CATEGORY_HATE_SPEECH', threshold: 'BLOCK_NONE' },
-        { category: 'HARM_CATEGORY_DANGEROUS_CONTENT', threshold: 'BLOCK_NONE' },
-        { category: 'HARM_CATEGORY_HARASSMENT', threshold: 'BLOCK_NONE' },
-        { category: 'HARM_CATEGORY_SEXUALLY_EXPLICIT', threshold: 'BLOCK_NONE' }
-      ]
-    });
+        { category: "HARM_CATEGORY_HATE_SPEECH", threshold: "BLOCK_NONE" },
+        {
+          category: "HARM_CATEGORY_DANGEROUS_CONTENT",
+          threshold: "BLOCK_NONE",
+        },
+        { category: "HARM_CATEGORY_HARASSMENT", threshold: "BLOCK_NONE" },
+        {
+          category: "HARM_CATEGORY_SEXUALLY_EXPLICIT",
+          threshold: "BLOCK_NONE",
+        },
+      ],
+    })
   }
-  return anthropic('claude-3-5-sonnet-20240620'); // Default model
+  return anthropic("claude-3-5-sonnet-20240620") // Default model
+}
+
+async function getSearchResultsByTopic(
+  topic: string,
+  numberOfSearchQueryVariations: number,
+  numberOfWebResultsToInclude: number
+) {
+  const searchQueries = await generateSearchQueries(
+    topic,
+    numberOfSearchQueryVariations
+  )
+  console.log("Generated search queries:", searchQueries)
+
+  const searchResults = await getSearchResults(searchQueries, {
+    numResults: numberOfWebResultsToInclude,
+  })
+
+  console.log(`Found ${searchResults.length} search results.`)
+  return searchResults
+}
+function isUrl(str: string) {
+  try {
+    new URL(str);
+    return true;
+  } catch (e) {
+    return false;
+  }
 }
 
 export async function writeArticle(
@@ -95,13 +135,22 @@ export async function writeArticle(
 
   console.log(`Starting research on topic: "${topic}"`);
 
-  const searchQueries = await generateSearchQueries(topic, numberOfSearchQueryVariations);
-  console.log("Generated search queries:", searchQueries);
+  let searchResults: SearchResult[];
+  if(isUrl(topic)){
+    searchResults = await getSearchResultsByUrl(
+        topic,
+        numberOfWebResultsToInclude
+    )
+  } else {
+    searchResults = await getSearchResultsByTopic(
+        topic,
+        numberOfSearchQueryVariations,
+        numberOfWebResultsToInclude
+    )
+  }
 
-  const searchResults = await getSearchResults(searchQueries, numberOfWebResultsToInclude);
-  console.log(`Found ${searchResults.length} search results.`);
 
-  console.log("Synthesizing report...");
+  console.log("Synthesizing report...")
 
   const model: LanguageModelV1 = getModel(modelName);
 
