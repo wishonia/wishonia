@@ -17,7 +17,9 @@ import {dumpTypeDefinition} from "@/lib/utils/dumpTypeDefinition";
 
 describe("FDAi Tests", () => {
   it("generates a report based on a study", async () => {
-      const article = await writeArticle("The most effective experimental treatments for long covid", {
+      const article = await writeArticle("The most effective experimental treatments for long covid",
+          "test-user",
+          {
         modelName: "claude-3-5-sonnet-20240620",
       })
       console.log(dumpTypeDefinition(article))

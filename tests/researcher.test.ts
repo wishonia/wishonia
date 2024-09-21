@@ -10,11 +10,32 @@ const prisma = new PrismaClient();
 describe("Database-seeder tests", () => {
   jest.setTimeout(6000000)
 
-  it("Generates article", async () => {
+    it("Generates article by URL", async () => {
+        const url = `https://www.thelancet.com/journals/laninf/article/PIIS1473-3099(23)00685-0/fulltext`
+        let userId = "test-user";
+        await deleteArticleByPromptedTopic(url, userId)
+        const generatedReport = await writeArticle(url,
+          userId,
+          {
+            numberOfSearchQueryVariations: 1,
+            numberOfWebResultsToInclude: 10,
+            audience: 'researchers',
+            purpose: 'research',
+            maxCharactersOfSearchContentToUse: 5000,
+            tone: 'neutral',
+            format: 'article',
+            modelName: "claude-3-5-sonnet-20240620",
+        })
+        const article = await findOrCreateArticleByPromptedTopic(url)
+        expect(article).not.toBeNull()
+    });
+
+  it("Generates article by topic", async () => {
     const topic = `IDO1 inhibitors for depression`
-    await deleteArticleByPromptedTopic(topic)
+      let userId = "test-user";
+      await deleteArticleByPromptedTopic(topic, userId)
     const generatedReport = await writeArticle(topic, 
-      "test-user",
+      userId,
       {
         numberOfSearchQueryVariations: 1,
         numberOfWebResultsToInclude: 10,

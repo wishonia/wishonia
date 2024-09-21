@@ -9,7 +9,7 @@ import NextTopLoader from "nextjs-toploader"
 import { siteConfig } from "@/config/site"
 import { cn } from "@/lib/utils"
 import { Toaster } from "@/components/ui/toaster"
-import { ThemeProvider } from "@/components/theme-provider"
+import { Providers } from "@/app/providers" // Import Providers
 
 const inter = Inter({ subsets: ["latin"] })
 
@@ -70,12 +70,12 @@ interface RootLayoutProps {
   children: React.ReactNode
 }
 
-export default async function RootLayout({ children }: RootLayoutProps) {
+export default function RootLayout({ children }: RootLayoutProps) {
   return (
     <html lang="en" suppressHydrationWarning>
       <body className={cn("antialiased", inter.className)}>
-        <CopilotKit url="/api/copilot/openai/">
-          <ThemeProvider attribute="class" defaultTheme="dark" enableSystem>
+        <Providers> {/* Wrap the application with Providers */}
+          <CopilotKit url="/api/copilot/openai/">
             <NextTopLoader color="#DC2645" height={2.5} showSpinner={false} />
             <div
               vaul-drawer-wrapper=""
@@ -84,9 +84,9 @@ export default async function RootLayout({ children }: RootLayoutProps) {
               {children}
             </div>
             <Toaster />
-          </ThemeProvider>
+          </CopilotKit>
           <Analytics />
-        </CopilotKit>
+        </Providers>
       </body>
     </html>
   )

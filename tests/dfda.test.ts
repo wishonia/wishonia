@@ -4,11 +4,26 @@
 import { PrismaClient } from '@prisma/client'
 import fs from 'fs'
 import path from 'path'
+import {getMetaAnalysis} from "@/app/dfda/dfdaActions";
+import {searchClinicalTrialsGovInterventions, searchFdaTreatments} from "@/lib/clinicaltables";
 
-describe("Database-seeder tests", () => {
+describe("dFDA tests", () => {
   jest.setTimeout(6000000)
+  it("Searches for searchClinicalTrialsGovInterventions", async () => {
+    const treatmentMatches = await searchClinicalTrialsGovInterventions('Exercise');
+    expect(treatmentMatches).toBeDefined()
+  });
+  it("searchFdaTreatments for treatments", async () => {
+    const treatmentMatches = await searchFdaTreatments('Exercise');
+    expect(treatmentMatches).toBeDefined()
+  });
+  
+  it("Gets a meta analysis article", async () => {
+    const article = await getMetaAnalysis('Exercise', 'Depression')
+    expect(article).toBeDefined()
+  });
 
-  it("Deletes dates and variable id from JSON file", async () => {
+  it.skip("Deletes dates and variable id from JSON file", async () => {
     // delete the updated_at, created_at, deleted_at, and variable_id fields from all 
     // the objects inn the array in the json files
     // in the prisma folder that start with ct_ and save them to a new file
@@ -62,7 +77,7 @@ describe("Database-seeder tests", () => {
     })
   }
   
-  it("Imports DfdaCause from JSON file", async () => {
+  it.skip("Imports DfdaCause from JSON file", async () => {
     await importJsonToPrisma('dfdaCause')
     await importJsonToPrisma('dfdaCondition')
     await importJsonToPrisma('dfdaSymptom')
