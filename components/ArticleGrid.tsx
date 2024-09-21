@@ -2,25 +2,10 @@ import Link from 'next/link'
 import Image from 'next/image'
 import { Card, CardContent, CardFooter, CardHeader, CardTitle } from "@/components/ui/card"
 import { Badge } from "@/components/ui/badge"
-
-type Article = {
-    id: string
-    title: string
-    slug: string
-    description: string
-    featuredImage: string | null
-    category: {
-        name: string
-        slug: string
-    }
-    tags: {
-        name: string
-        slug: string
-    }[]
-}
+import { ArticleWithRelations } from '@/lib/agents/researcher/researcher'
 
 type ArticleGridProps = {
-    articles: Article[]
+    articles: ArticleWithRelations[]
 }
 
 export default function ArticleGrid({ articles }: ArticleGridProps) {
