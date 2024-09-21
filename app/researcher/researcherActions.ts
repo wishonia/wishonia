@@ -4,6 +4,7 @@ import { revalidatePath } from "next/cache";
 import { PrismaClient } from "@prisma/client";
 import {
   ArticleWithRelations,
+  deleteArticleByPromptedTopic,
   findArticleByTopic,
   getArticleBySlug,
   writeArticle
@@ -63,14 +64,15 @@ export async function getArticleBySlugAction(slug: string): Promise<ArticleWithR
   return getArticleBySlug(slug)
 }
 
-export async function writeArticleAction(
-  topic: string
+export async function findOrCreateArticleByTopic(
+  topic: string,
+  userId: string
 ): Promise<ArticleWithRelations> {
   let article: ArticleWithRelations | null
 
   article = await findArticleByTopic(topic)
   if (!article) {
-    article = await writeArticle(topic)
+    article = await writeArticle(topic, userId)
   }
 
   revalidatePath("/")
@@ -106,4 +108,8 @@ export async function generateImage(topic: string, articleId: string) {
     console.error("Error generating image:", error)
     throw new Error("Failed to generate image")
   }
+}
+
+export async function deleteArticle(topic: string, userId: string) {
+  return await deleteArticleByPromptedTopic(topic, userId);
 }

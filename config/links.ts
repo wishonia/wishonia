@@ -76,6 +76,20 @@ export const githubLink: NavItem = {
   external: true,
 }
 
+export const researcherLink: NavItem = {
+  title: "Research Agent",
+  href: "/researcher",
+  icon: "pencil",
+  tooltip: "Your very own AI researcher",
+}
+
+export const dfdaLink: NavItem = {
+  title: "DFDA",
+  href: "/dfda",
+  icon: "health",
+  tooltip: "The Decentralized Food and Drug Administration",
+}
+
 export const profileSettingsLink: NavItem = {
   title: "Profile Settings",
   href: "/dashboard/settings",
@@ -134,6 +148,8 @@ export const avatarNav: Navigation = {
     //wishingWellsLink,
     //globalProblemsVoteLink,
     //createWish
+    researcherLink,
+    dfdaLink,
   ],
 }
 
@@ -152,6 +168,8 @@ export const generalSidebarNav: Navigation = {
     //globalSolutionsResultsLink,
     docsLink,
     githubLink,
+    researcherLink,
+    dfdaLink,
   ],
 }
 
@@ -163,5 +181,7 @@ export const generalFooterNav: Navigation = {
     globalProblemsResultsLink,
     docsLink,
     githubLink,
+    researcherLink,
+    dfdaLink,
   ],
 }

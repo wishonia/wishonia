@@ -21,23 +21,24 @@ export function UserAuthForm({
   const [isGithubLoading, setIsGithubLoading] = React.useState<boolean>(false)
   const [isEmailLoading, setIsEmailLoading] = React.useState<boolean>(false)
   const [email, setEmail] = React.useState<string>("")
-  if (!callbackUrl) {
-    callbackUrl = "/dashboard"
-  }
 
-    // Check for callbackUrl in the URL
-    React.useEffect(() => {
-      const urlParams = new URLSearchParams(window.location.search)
-      const urlCallbackUrl = urlParams.get('callbackUrl')
-      if (urlCallbackUrl) {
-        callbackUrl = urlCallbackUrl
-      }
-    }, [])
+  const [finalCallbackUrl, setFinalCallbackUrl] = React.useState<string | undefined>(callbackUrl)
+
+  // Check for callbackUrl in the URL and set default if not found
+  React.useEffect(() => {
+    const urlParams = new URLSearchParams(window.location.search)
+    const urlCallbackUrl = urlParams.get('callbackUrl')
+    if (urlCallbackUrl) {
+      setFinalCallbackUrl(urlCallbackUrl)
+    } else if (!finalCallbackUrl) {
+      setFinalCallbackUrl(window.location.href)
+    }
+  }, [finalCallbackUrl])
 
   const handleEmailSignIn = async () => {
     setIsEmailLoading(true)
     setIsLoading(true)
-    await signIn("email", { email, redirect: false, callbackUrl })
+    await signIn("email", { email, redirect: false, callbackUrl: finalCallbackUrl })
     setIsEmailLoading(false)
     setIsLoading(false)
   }
@@ -50,7 +51,7 @@ export function UserAuthForm({
         onClick={() => {
           setIsGoogleLoading(true)
           setIsLoading(true)
-          signIn("google", { redirect: false, callbackUrl })
+          signIn("google", { redirect: false, callbackUrl: finalCallbackUrl })
         }}
         disabled={isGoogleLoading || isLoading}
       >
@@ -67,7 +68,7 @@ export function UserAuthForm({
         onClick={() => {
           setIsGithubLoading(true)
           setIsLoading(true)
-          signIn("github", { redirect: false, callbackUrl })
+          signIn("github", { redirect: false, callbackUrl: finalCallbackUrl })
         }}
         disabled={isGithubLoading || isLoading}
       >

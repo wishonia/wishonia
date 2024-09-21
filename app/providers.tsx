@@ -2,7 +2,7 @@
 
 import { QueryClient, QueryClientProvider } from "@tanstack/react-query"
 import { SessionProvider } from "next-auth/react"
-import { ThemeProvider } from "next-themes"
+import { ThemeProvider } from "@/components/theme-provider"
 import { ThemeProviderProps } from "next-themes/dist/types"
 
 import { SidebarProvider } from "@/lib/hooks/use-sidebar"
@@ -12,7 +12,7 @@ const queryClient = new QueryClient()
 
 export function Providers({ children, ...props }: ThemeProviderProps) {
   return (
-    <ThemeProvider {...props}>
+  <ThemeProvider attribute="class" defaultTheme="dark" enableSystem>
       <SessionProvider>
         <QueryClientProvider client={queryClient}>
           <SidebarProvider>

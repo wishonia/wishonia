@@ -1439,6 +1439,9 @@ model Article {
   searchResults     ArticleSearchResult[]
   generationOptions ArticleGenerationOptions?
   comments          ArticleComment[]
+
+  @@unique([userId, promptedTopic])
+  @@unique([userId, title])
 }
 
 enum ArticleStatus {
@@ -1486,7 +1489,7 @@ model ArticleSource {
   title       String
   description String?
   articleId   String
-  article     Article   @relation(fields: [articleId], references: [id])
+  article     Article   @relation(fields: [articleId], references: [id], onDelete: Cascade)
   updatedAt   DateTime  @updatedAt
   createdAt   DateTime  @default(now())
   deletedAt   DateTime?
@@ -1501,7 +1504,7 @@ model ArticleSearchResult {
   author        String?
   text          String    @db.Text
   articleId     String
-  article       Article   @relation(fields: [articleId], references: [id])
+  article       Article   @relation(fields: [articleId], references: [id], onDelete: Cascade)
   updatedAt     DateTime  @updatedAt
   createdAt     DateTime  @default(now())
   deletedAt     DateTime?
@@ -1517,7 +1520,7 @@ model ArticleGenerationOptions {
   tone                              String
   format                            String
   articleId                         String    @unique
-  article                           Article   @relation(fields: [articleId], references: [id])
+  article                           Article   @relation(fields: [articleId], references: [id], onDelete: Cascade)
   updatedAt                         DateTime  @updatedAt
   createdAt                         DateTime  @default(now())
   deletedAt                         DateTime?

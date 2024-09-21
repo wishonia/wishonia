@@ -121,7 +121,7 @@ export default function TreatmentList({ condition }: TreatmentListProps) {
                                 <div className="flex-grow">
                                     <div className="text-primary font-bold">#{index + 1}</div>
                                     <Link
-                                        href={`/dfda/treatments/${encodeURIComponent(treatment.treatment.name)}`}
+                                        href={`/dfda/conditions/${encodeURIComponent(condition.name)}/treatments/${encodeURIComponent(treatment.treatment.name)}`}
                                         className="hover:underline"
                                     >
                                         <h3 className="font-bold">{toTitleCase(treatment.treatment.name)}</h3>
