@@ -8,18 +8,19 @@ import GlobalHealthOptimizationAgent from "@/components/landingPage/global-healt
 import { useSession } from 'next-auth/react'
 
 export default function TreatmentForConditionPage() {
-    const { data: session, status } = useSession() 
+    const { data: session, status } = useSession()
     const params = useParams()
     const [article, setArticle] = useState<ArticleWithRelations | null>(null)
-    const [loading, setLoading] = useState(status === "loading")
-
-    if (loading) {
-        return <div>Loading...</div>
-    }
+    const [loading, setLoading] = useState(true)
 
     useEffect(() => {
+        if (!params) return;
+
         async function fetchMetaAnalysis() {
-            debugger
+            if (!params) {
+                console.error('Params is null in fetchMetaAnalysis');
+                return;
+            }
             console.log("Fetching meta-analysis for", params.treatmentName, params.conditionName)
             if (typeof params.treatmentName === 'string' && typeof params.conditionName === 'string') {
                 try {
@@ -34,7 +35,16 @@ export default function TreatmentForConditionPage() {
         }
 
         fetchMetaAnalysis()
-    }, [params.treatmentName, params.conditionName])
+    }, [params])
+
+    if (loading) {
+        return <div>Loading...</div>
+    }
+
+    if(!params){
+        console.error('No URL params in TreatmentForConditionPage')
+        return <div>No URL params!</div>
+    }
 
     if (loading) {
         return <div className="container mx-auto px-4 py-8">
