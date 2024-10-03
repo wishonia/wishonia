@@ -10,6 +10,7 @@ import {
   writeArticle
 } from "@/lib/agents/researcher/researcher";
 import OpenAI from "openai";
+import {uploadImageToVercel} from "@/lib/imageUploader";
 const openai = new OpenAI({
     apiKey: process.env.OPENAI_API_KEY,
 })
@@ -98,13 +99,20 @@ export async function generateImage(topic: string, articleId: string) {
     })
 
     const imageUrl = response.data[0].url
+    if (!imageUrl) {
+      throw new Error("Failed to generate image")
+    }
+    const imgPath = 'articles/' + articleId + '/featured-image'
+    // get the buffer from the imageUrl
+    const buffer = await fetch(imageUrl).then(res => res.arrayBuffer())
+    const vercelUrl = await uploadImageToVercel(Buffer.from(buffer), imgPath)
     if (imageUrl && articleId) {
       await prisma.article.update({
         where: {
           id: articleId,
         },
         data: {
-          featuredImage: imageUrl,
+          featuredImage: vercelUrl,
         },
       })
     }
