@@ -43,7 +43,7 @@ export default function ArticleGrid({ articles }: ArticleGridProps) {
                     <CardFooter className="mt-auto pt-4 border-t">
                         <div className="flex flex-wrap gap-2">
                             {article.tags.map((tag) => (
-                                <Link key={tag.name} href={`/research/tags/${tag.name}`}>
+                                <Link key={tag.name} href={`/researcher/articles/tags/${tag.slug}`}>
                                     <Badge variant="outline" className="text-xs">{tag.name}</Badge>
                                 </Link>
                             ))}

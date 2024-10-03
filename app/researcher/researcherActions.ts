@@ -15,7 +15,7 @@ const openai = new OpenAI({
 })
 const prisma = new PrismaClient()
 
-export async function searchArticles(query: string, categorySlug?: string) {
+export async function searchArticles(query: string, categorySlug?: string, tagSlug?: string) {
   try {
     const whereClause: any = {
       OR: [
@@ -26,6 +26,13 @@ export async function searchArticles(query: string, categorySlug?: string) {
 
     if (categorySlug) {
       whereClause.category = { slug: categorySlug };
+    }
+
+    if (tagSlug) {
+      const tag = await prisma.articleTag.findUnique({ where: { slug: tagSlug } });
+      if (tag) {
+        whereClause.tags = { some: { id: tag.id } };
+      }
     }
 
     return await prisma.article.findMany({
