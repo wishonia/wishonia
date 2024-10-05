@@ -16,6 +16,10 @@ export function convertKeysToCamelCase(obj: any): any {
 
 export function toTitleCase(str: string): string {
   return str.replace(/\w\S*/g, function (txt: string): string {
-    return txt.charAt(0).toUpperCase() + txt.substr(1).toLowerCase()
+    // Only convert to title case if the word is all lowercase
+    if (txt === txt.toLowerCase()) {
+      return txt.charAt(0).toUpperCase() + txt.substr(1).toLowerCase()
+    }
+    return txt
   })
 }

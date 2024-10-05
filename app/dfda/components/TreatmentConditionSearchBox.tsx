@@ -79,7 +79,7 @@ export default function TreatmentConditionSearchBox() {
                             {results.map((result) => (
                                 <li key={`${result.type}-${result.id}`}>
                                     <Link
-                                        href={`/dfda//${result.type}s/${encodeURIComponent(result.name)}`}
+                                        href={`/dfda/${result.type}s/${encodeURIComponent(result.name)}`}
                                         className="block px-4 py-2 hover:bg-accent hover:text-accent-foreground text-sm"
                                     >
                                         {result.name} ({result.type})

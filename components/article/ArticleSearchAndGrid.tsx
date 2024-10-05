@@ -7,9 +7,10 @@ import { searchArticles } from '@/app/researcher/researcherActions'
 
 type ArticleSearchAndGridProps = {
   categorySlug?: string
+  tagSlug?: string
 }
 
-export default function ArticleSearchAndGrid({ categorySlug = '' }: ArticleSearchAndGridProps) {
+export default function ArticleSearchAndGrid({ categorySlug = '', tagSlug = '' }: ArticleSearchAndGridProps) {
   const [articles, setArticles] = useState<ArticleWithRelations[]>([])
   const [isLoading, setIsLoading] = useState(true)
   const [searchQuery, setSearchQuery] = useState('')
@@ -18,7 +19,7 @@ export default function ArticleSearchAndGrid({ categorySlug = '' }: ArticleSearc
     const fetchArticles = async () => {
         setIsLoading(true)
         try {
-            const results = await searchArticles(searchQuery, categorySlug)
+            const results = await searchArticles(searchQuery, categorySlug, tagSlug)
             setArticles(results as ArticleWithRelations[])
         } catch (error) {
             console.error('Error fetching articles:', error)
@@ -27,7 +28,7 @@ export default function ArticleSearchAndGrid({ categorySlug = '' }: ArticleSearc
         }
     }
     fetchArticles()
-}, [categorySlug, searchQuery])
+}, [categorySlug, tagSlug, searchQuery])
 
   const handleSearch = (query: string) => {
     setSearchQuery(query)

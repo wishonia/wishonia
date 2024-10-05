@@ -13,6 +13,10 @@ export default function TreatmentPage() {
     const params = useParams()
     const [article, setArticle] = useState<ArticleWithRelations | null>(null)
     const [loading, setLoading] = useState(true)
+    if(!params){
+        console.error('No URL params in TreatmentPage')
+        return <div>No URL params!</div>
+    }
     const treatmentName = typeof params.treatmentName === 'string' ? decodeURIComponent(params.treatmentName) : ''
 
     useEffect(() => {

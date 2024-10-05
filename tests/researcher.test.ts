@@ -7,7 +7,7 @@ import { findOrCreateArticleByPromptedTopic } from '@/lib/agents/researcher/rese
 
 const prisma = new PrismaClient();
 
-describe("Database-seeder tests", () => {
+describe("Research Agent tests", () => {
   jest.setTimeout(6000000)
 
     it("Generates article by URL", async () => {

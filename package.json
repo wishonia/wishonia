@@ -189,6 +189,7 @@
     "undici": "^6.18.2",
     "unist-builder": "^3.0.1",
     "unist-util-filter": "^5.0.1",
+    "use-debounce": "^10.0.3",
     "uuid": "^9.0.1",
     "vaul": "^0.9.0",
     "wavefile": "^11.0.0",
