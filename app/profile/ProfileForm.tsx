@@ -6,7 +6,7 @@ import { useForm } from 'react-hook-form'
 import { zodResolver } from '@hookform/resolvers/zod'
 import { userSchema } from './userSchema'
 import { updateUser } from './profileActions'
-import { User } from '@prisma/client'
+import {Skill, User} from '@prisma/client'
 import { Button } from "@/components/ui/button"
 import { Input } from "@/components/ui/input"
 import { Textarea } from "@/components/ui/textarea"
@@ -15,12 +15,19 @@ import { Label } from "@/components/ui/label"
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@/components/ui/select"
 import { toast } from "@/components/ui/use-toast"
 import { ChevronDown, ChevronUp, User as UserIcon, Mail, Phone, MapPin, Globe, Github, Twitter, Cake, UserCircle, Languages, Lock } from 'lucide-react' // Import icons
+import UserSkills from './UserSkills'
 
 type FormData = Omit<User, 'id' | 'createdAt' | 'updatedAt' | 'emailVerified' | 'lastSignInAt' | 'createdAtTwitter' | 'deletedAt' | 'favouritesCount' | 'followersCount' | 'followingCount' | 'likeCount' | 'listedCount' | 'points' | 'statusesCount' | 'tweetCount' | 'privateMetadata' | 'publicMetadata' | 'unsafeMetadata' | 'ipAddress' | 'signatureTimestamp' | 'referrerUserId'>
 
-type FormSection = 'personal' | 'contact' | 'online' | 'preferences'
+type FormSection = 'personal' | 'contact' | 'online' | 'preferences' | 'skills'
 
-export default function ProfileForm({ user }: { user: User }) {
+type UserSkillWithSkill = {
+    id: string;
+    skillId: string;
+    skill: Skill;
+}
+
+export default function ProfileForm({ user }: { user: User & { userSkills: UserSkillWithSkill[] } }) {
     const [isSubmitting, setIsSubmitting] = useState(false)
     const [openSections, setOpenSections] = useState<FormSection[]>([])
 
@@ -322,6 +329,10 @@ export default function ProfileForm({ user }: { user: User }) {
                         <Label htmlFor="protected">Protected account</Label>
                     </div>
                 </div>
+            ))}
+
+            {renderSection("Skills", "skills", (
+                <UserSkills user={user} />
             ))}
         </form>
     )
