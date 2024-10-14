@@ -1,6 +1,6 @@
 import { useState } from "react"
 import Image from "next/image"
-import { Check, Clock, Copy, Folder, Link2, Tag, Loader2 } from "lucide-react"
+import { Check, Clock, Copy, Folder, Tag, Loader2, Share2, Twitter, Facebook, Linkedin } from "lucide-react"
 
 import {ArticleWithRelations} from "@/lib/agents/researcher/researcher"
 import { Badge } from "@/components/ui/badge"
@@ -30,7 +30,7 @@ function GenerateImageButton({
   disabled: boolean
 }) {
   return (
-    <Button onClick={onClick} disabled={disabled}>
+    <Button onClick={onClick} disabled={disabled} variant="outline" >
       {disabled ? (
         <>
           <Loader2 className="mr-2 h-4 w-4 animate-spin" />
@@ -56,6 +56,7 @@ export default function ArticleRenderer({
   const [isGeneratingImage, setIsGeneratingImage] = useState(false)
   const [imageUrl, setImageUrl] = useState<string | null>(null)
   const [error, setError] = useState("")
+  const [isCopiedUrl, setIsCopiedUrl] = useState(false)
 
   const {
     title,
@@ -123,6 +124,47 @@ ${sources?.map((source) => `- [${source.title}](${source.url})`).join("\n")}
       })
   }
 
+  const copyUrlToClipboard = () => {
+    const url = window.location.href;
+    navigator.clipboard
+      .writeText(url)
+      .then(() => {
+        setIsCopiedUrl(true)
+        toast({
+          title: "Copied URL to clipboard",
+          description:
+            "The article URL has been copied to the clipboard.",
+        })
+        setTimeout(() => setIsCopiedUrl(false), 3000) // Reset after 3 seconds
+      })
+      .catch((err) => {
+        console.error("Failed to copy URL: ", err)
+        toast({
+          title: "Failed to copy URL",
+          description: "An error occurred while copying the URL.",
+          variant: "destructive",
+        })
+      })
+  }
+
+  const shareToTwitter = () => {
+    const url = window.location.href;
+    const twitterUrl = `https://twitter.com/intent/tweet?url=${encodeURIComponent(url)}&text=${encodeURIComponent(title)}`;
+    window.open(twitterUrl, "_blank");
+  }
+
+  const shareToFacebook = () => {
+    const url = window.location.href;
+    const facebookUrl = `https://www.facebook.com/sharer/sharer.php?u=${encodeURIComponent(url)}`;
+    window.open(facebookUrl, "_blank");
+  }
+
+  const shareToLinkedIn = () => {
+    const url = window.location.href;
+    const linkedInUrl = `https://www.linkedin.com/shareArticle?url=${encodeURIComponent(url)}&title=${encodeURIComponent(title)}`;
+    window.open(linkedInUrl, "_blank");
+  }
+
   // Add this function to handle article deletion
   async function handleDeleteArticle() {
     if (!currentUserId) {
@@ -160,6 +202,17 @@ ${sources?.map((source) => `- [${source.title}](${source.url})`).join("\n")}
             <CardTitle>{title}</CardTitle>
             <CardDescription>{description}</CardDescription>
           </CardHeader>
+          {featuredImage && (
+            <div className="mx-auto my-4 w-[90%]">
+              <Image
+                src={featuredImage}
+                alt={`Featured image for ${title}`}
+                width={1024}
+                height={1024}
+                className="h-auto w-full rounded-lg"
+              />
+            </div>
+          )}
           <Separator className="mx-auto my-4 w-[90%]" />
           <CardContent>
             <CustomReactMarkdown>{content}</CustomReactMarkdown>
@@ -178,18 +231,6 @@ ${sources?.map((source) => `- [${source.title}](${source.url})`).join("\n")}
               <CardTitle>Article Info</CardTitle>
             </CardHeader>
             <CardContent className="space-y-2">
-              {featuredImage && (
-                <div className="mb-4">
-                  <Image
-                    src={featuredImage}
-                    alt={`Featured image for ${title}`}
-                    width={1024}
-                    height={1024}
-                    className="h-auto w-full rounded-lg"
-                  />
-                </div>
-              )}
-
               <div className="flex items-center space-x-2">
                 <Folder className="h-4 w-4"/>
                 <span>{category?.name}</span>
@@ -208,6 +249,7 @@ ${sources?.map((source) => `- [${source.title}](${source.url})`).join("\n")}
               </div>
               <div className="flex items-center space-x-2">
                 <Button
+                    variant="outline" 
                     onClick={copyToClipboard}
                     className="mt-2"
                     disabled={isCopied}
@@ -223,6 +265,41 @@ ${sources?.map((source) => `- [${source.title}](${source.url})`).join("\n")}
                         Copy as Markdown
                       </>
                   )}
+                </Button>
+              </div>
+              <div className="flex items-center space-x-2">
+                <Button
+                    variant="outline" 
+                    onClick={copyUrlToClipboard}
+                    className="mt-2"
+                    disabled={isCopiedUrl}
+                >
+                  {isCopiedUrl ? (
+                      <>
+                        <Check className="mr-2 h-4 w-4"/>
+                        Copied URL!
+                      </>
+                  ) : (
+                      <>
+                        <Share2 className="mr-2 h-4 w-4"/>
+                        Copy Sharing URL
+                      </>
+                  )}
+                </Button>
+              </div>
+              <div className="flex space-x-4 mt-2">
+                <Button 
+                  variant="outline" 
+                  onClick={shareToTwitter}
+                  aria-label="Share to Twitter"
+                >
+                  <Twitter className="mr-2 h-4 w-4" />
+                </Button>
+                <Button variant="outline" onClick={shareToFacebook}>
+                  <Facebook className="mr-2 h-4 w-4" />  
+                </Button>
+                <Button variant="outline" onClick={shareToLinkedIn}>
+                  <Linkedin className="mr-2 h-4 w-4" />
                 </Button>
               </div>
               <div className="flex flex-col space-y-2">
