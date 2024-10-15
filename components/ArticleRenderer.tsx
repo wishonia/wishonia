@@ -288,7 +288,11 @@ ${sources?.map((source) => `- [${source.title}](${source.url})`).join("\n")}
                 </Button>
               </div>
               <div className="flex space-x-4 mt-2">
-                <Button variant="outline" onClick={shareToTwitter}>
+                <Button 
+                  variant="outline" 
+                  onClick={shareToTwitter}
+                  aria-label="Share to Twitter"
+                >
                   <Twitter className="mr-2 h-4 w-4" />
                 </Button>
                 <Button variant="outline" onClick={shareToFacebook}>
