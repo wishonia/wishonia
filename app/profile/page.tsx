@@ -12,6 +12,13 @@ export default async function ProfilePage() {
 
     const user = await prisma.user.findUnique({
         where: { email: session.user.email },
+        include: {
+            userSkills: {
+                include: {
+                    skill: true
+                }
+            }
+        }
     })
 
     if (!user) {
