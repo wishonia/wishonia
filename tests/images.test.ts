@@ -3,10 +3,7 @@
  */
 import { generateGlobalSolutionImages } from "@/lib/globalSolutionsGenerator"
 import { convertLargeImagesToJpg } from "@/lib/imageGenerator"
-import {
-  downloadAllBlobImages,
-  uploadPublicImagesToVercel,
-} from "@/lib/imageUploader"
+import {downloadAllBlobImages, uploadPublicImagesToVercel} from "@/lib/images/localImages";
 
 describe("Test Images", () => {
   it("should upload all images", async () => {
