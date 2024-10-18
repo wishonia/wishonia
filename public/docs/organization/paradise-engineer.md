@@ -1,84 +1,86 @@
 ---
 slug: paradise-engineer
-name: Join the Mission to Engineer a Utopian AI-Driven Virtual World
+name: Help Us Create a Semi-Autonomous Todo List For Humanity
 featuredImage: /docs/organization/paradise-engineer.jpg
 description: >-
-  Discover how to become a Paradise Engineer and create virtual worlds filled
-  with pro-social AI! Learn about crafting Digital Twins, Decider Agents, and
-  Actor Agents in just three easy steps to maximize universal well-being while
-  respecting human rights. Join us now and make a difference!
+  We're seeking a talented and passionate Full Stack Developer to join our remote team and help build the core infrastructure of Wishonia. This is a unique opportunity to work on cutting-edge technology that has the potential to make a significant positive impact on the world.
 ---
 
 ![Paradise Engineers Wanted](../../images/paradise-engineers-wanted-wide.png)
 
-## Your Mission
+# Full Stack NextJS Developer 
 
-Create a forkable virtual world filled with pro-social AI agents that maximize universal wish fulfillment while respecting the basic rights of meat.
+## About Wishonia
 
-## Just 3 Easy Steps!
+Wishonia is an ambitious open-source project aiming to create a decentralized, AI-powered system for global problem-solving and coordination. Our goal is to maximize universal health and happiness by leveraging collective intelligence, AI agents, and advanced coordination mechanisms.
 
-Although this sounds like a daunting task, it can be broken down into three simple steps:
+## The Role
 
-### 1. Learn
+We're seeking a talented and passionate Full Stack NextJS Developer to join our remote team and help build the core infrastructure of Wishonia. This is a unique opportunity to end suffering and create a utopian AI-driven virtual world.
 
-Fortunately, the Learn phase is fairly straightforward and technically feasible today. We just need to create **Digital Twins** of real-world entities and populate them with data.
+## Responsibilities
 
-These entities primarily fall into two categories:
+- Develop and maintain key components of the Wishonia platform, including the wish management system, budget allocation system, and task management system
+- Work with AI technologies to implement research agents, goal decomposition agents, and task agents
+- Implement and optimize the Aggregated Pairwise Preference Allocation (APPA) mechanism
+- Develop integrations with external systems and protocols
+- Contribute to the design and implementation of the digital twin system
+- Write clean, efficient, and well-documented code
+- Participate in code reviews and collaborate with team members to improve overall code quality
+- Stay up-to-date with emerging technologies and industry trends
 
-- **organizations** - nonprofits, governments, companies, etc.
-- **people** - scientists, employees, doctors, patients, etc.
+## Required Skills and Experience
 
-Each of these digital twins should have its own vector database of defining data. The most fundamental components of each entity would be its:
+- Strong proficiency in TypeScript and React
+- Experience with Next.js and Prisma ORM
+- Familiarity with AI/ML technologies, particularly large language models
+- Experience with database design and optimization (PostgreSQL)
+- Solid understanding of RESTful APIs and GraphQL
+- Familiarity with containerization (Docker) and cloud platforms (preferably Vercel)
+- Strong problem-solving skills and attention to detail
+- Excellent communication skills and ability to work in a collaborative environment
+- Passion for open-source development and global impact projects
 
-- **wishes** - goals, desires, objectives, etc.
-- **resources** - data, humans, capital, etc. that can be allocated, pooled, or exchanged with other entities to fulfill wishes.
+## Nice-to-Have
 
-These digital twins serve primarily as an easy source of information for other agents (deciders and actors).
+- Experience with AI frameworks like LangChain or similar
+- Knowledge of vector databases and knowledge graph technologies
+- Familiarity with decentralized technologies and systems
+- Experience with decentralized data storage solutions (IPFS, Ceramic, etc.)
 
-## 2. Plan
+## Work Schedule
 
-**Planning Agents** that create hypotheses about the most efficient ways to fulfill various wishes while respecting universal human rights. These **Decider Agents** then use semi-quantitative cost benefit analysis to decide which strategies seem most promising.
+- This is a remote position
+- Ability to work at least 4 hours daily within West Coast normal work hours (Pacific Time) is required
 
-Humans can then review these strategies and decide which ones to test. Once a strategy is selected, the **Planning Agents** can then create **Actor Agents** to carry out the strategies.
+## What We Offer
 
-## 3. Act
-
-**Actor Agents** then carry out plans and measure the results. Given current their limitations, **Actor Agents** should:
-
-1. automate what they can, using tools
-2. outsource what they can't to humans by creating bounties
-
-### Key Responsibilities
-
-- **AI Agent Development:** Create and refine proof-of-concept AI agents using existing [autonomous agent frameworks](../../knowledge/autonomous-agent-frameworks.md) (e.g., AutoGen, TaskWeaver, ChatDev, MetaGPT). Ensure these agents can simulate real-world scenarios and decisions for optimal societal outcomes.
-- **API & Framework Expertise:** Develop robust APIs and work with OpenAPI specifications. Utilize frameworks such as Next.js and React for scalable, efficient applications.
-- **Documentation & Support:** Produce comprehensive documentation to assist users and contributors in understanding and utilizing AI agents.
-- **Community Engagement:** Organize and lead supportive events and meetings for contributors, fostering a collaborative environment.
-- **Project Management:** Regularly update on project progress, strategize future developments, and navigate potential obstacles. Coordinate with various organizations and contributors for seamless integration and progress.
-- **Hackathon Coordination:** Plan and execute hackathons focusing on specific [autonomous agent frameworks](../../knowledge/autonomous-agent-frameworks.md), guiding participants in creating diverse AI agents for public good projects.
-
-### Skills and Experience
-
-- **Technical Expertise:** Proven experience in creating APIs, OpenAPI specifications, and working with frameworks like Next.js and React.
-- **AI and Machine Learning:** Experience in fine-tuning and deploying open-source AI models, including large language models. Familiarity with [autonomous agent frameworks](../../knowledge/autonomous-agent-frameworks.md) such as AutoGen, TaskWeaver, ChatDev, and MetaGPT.
-- **Open Source Contributions:** A history of significant open-source contributions, showcasing your skills and collaborative nature.
-- **Communication and Leadership:** Strong communication skills for effective documentation, meetings, and collaborative projects. Leadership experience in guiding teams and managing complex projects.
-- **Ethical AI and Data Privacy:** Knowledge of ethical AI practices and data privacy regulations to ensure responsible development and deployment.
-- **Problem-Solving and Adaptability:** Ability to navigate and solve complex technical challenges in a rapidly evolving field.
-- **Passion for Social Impact:** A deep interest in using technology for societal betterment, aligning with the vision outlined in [Gaming the Future](https://foresightinstitute.substack.com/p/start-here).
-
-**Why Join Us:**
-
-Your work will directly contribute to creating a world of abundance, peace, and universal well-being. You'll be at the forefront of AI development, working on groundbreaking technologies and concepts that could redefine our society. (If you like that kind of thing?)
+- The opportunity to work on a revolutionary project with global impact
+- A collaborative and innovative work environment
+- Flexible working hours and fully remote setup
+- Continuous learning and professional development opportunities
+- Competitive compensation package based on experience
 
 ## How to Apply
 
-Create a pro-social agent that improves the world using [an agent framework](../agent-frameworks.md) and [submit a pull request](https://github.com/wishocracy/positron).
+1. Submit your application by email to [contact email] including:
+   - Your resume
+   - A brief introduction about yourself
+   - Why you're interested in the Wishonia project
+   - Your relevant experience and skills
+   - Your GitHub profile link
 
-Since reasoning capabilities are still limited, you might want to focus on the first "Learn" phase and create a **Digital Twin** of an organization or person.
+2. (Optional) For bonus consideration, you may also:
+   - Fork the Wishonia repository on GitHub: [https://github.com/wishonia/wishonia](https://github.com/wishonia/wishonia)
+   - Create a new branch with a descriptive name related to your contribution
+   - Make a meaningful contribution to the project. This could be:
+     - Fixing a bug
+     - Implementing a small feature
+     - Improving documentation
+     - Optimizing existing code
+   - Create a pull request with your changes
+   - Include a link to your pull request in your application email
 
-More details and submission guidelines are available in the [Collabathon Instructions](../collabathons/collabathons.md).
-
-Here are some other [ideas for possible agents as well](../agent-ideas).
+We'll review all applications and get in touch if we'd like to move forward. If you choose to submit a pull request, we'll consider it as part of your application, but it's not required.
 
 Then email [hello@crowdsourcingcures.org](mailto:hello@crowdsourcingcures.org) with a link to your pull request and tell us why you have what it takes to become a paradise engineer!
