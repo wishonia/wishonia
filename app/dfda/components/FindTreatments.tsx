@@ -19,7 +19,9 @@ export default function FindTreatments() {
         <section>
             <Card>
                 <CardHeader>
-                    <CardTitle>Find Treatments & Join Trials</CardTitle>
+                    <CardTitle>
+                        Find Treatments & Join Trials
+                    </CardTitle>
                     <CardDescription>
                         Search for treatments and clinical trials related to your condition
                     </CardDescription>
