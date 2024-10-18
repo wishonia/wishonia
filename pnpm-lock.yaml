@@ -13,19 +13,19 @@ importers:
     dependencies:
       '@agentic/stdlib':
         specifier: ^6.1.5
-        version: 6.6.1(@e2b/code-interpreter@0.0.7(bufferutil@4.0.8)(utf-8-validate@6.0.4))(@langchain/core@0.2.31(langchain@0.2.18(@aws-sdk/credential-provider-node@3.645.0(@aws-sdk/client-sso-oidc@3.645.0(@aws-sdk/client-sts@3.645.0))(@aws-sdk/client-sts@3.645.0))(@langchain/anthropic@0.2.17(langchain@0.2.18)(openai@4.58.1(zod@3.23.8)))(@langchain/cohere@0.2.2(@aws-sdk/client-sso-oidc@3.645.0(@aws-sdk/client-sts@3.645.0))(langchain@0.2.18)(openai@4.58.1(zod@3.23.8)))(@langchain/community@0.2.32(@aws-crypto/sha256-js@5.2.0)(@aws-sdk/credential-provider-node@3.645.0(@aws-sdk/client-sso-oidc@3.645.0(@aws-sdk/client-sts@3.645.0))(@aws-sdk/client-sts@3.645.0))(@huggingface/inference@2.8.0)(@langchain/anthropic@0.2.17)(@langchain/cohere@0.2.2)(@langchain/google-genai@0.0.26)(@smithy/util-utf8@2.3.0)(@supabase/supabase-js@2.45.3(bufferutil@4.0.8)(utf-8-validate@6.0.4))(axios@1.7.7)(cheerio@1.0.0-rc.12)(cohere-ai@7.13.0(@aws-sdk/client-sso-oidc@3.645.0(@aws-sdk/client-sts@3.645.0)))(fast-xml-parser@4.5.0)(ignore@5.3.2)(ioredis@5.4.1(supports-color@8.1.1))(jsdom@20.0.3(bufferutil@4.0.8)(canvas@2.11.2(supports-color@8.1.1))(supports-color@8.1.1)(utf-8-validate@6.0.4))(lodash@4.17.21)(mammoth@1.8.0)(openai@4.58.1(zod@3.23.8))(pg@8.12.0)(playwright@1.47.0)(puppeteer@19.11.1(bufferutil@4.0.8)(supports-color@8.1.1)(typescript@5.3.3)(utf-8-validate@6.0.4))(ws@8.18.0(bufferutil@4.0.8)(utf-8-validate@6.0.4)))(@langchain/google-genai@0.0.26(langchain@0.2.18)(openai@4.58.1(zod@3.23.8))(zod@3.23.8))(@supabase/supabase-js@2.45.3(bufferutil@4.0.8)(utf-8-validate@6.0.4))(axios@1.7.7)(cheerio@1.0.0-rc.12)(fast-xml-parser@4.5.0)(ignore@5.3.2)(ioredis@5.4.1(supports-color@8.1.1))(jsdom@20.0.3(bufferutil@4.0.8)(canvas@2.11.2(supports-color@8.1.1))(supports-color@8.1.1)(utf-8-validate@6.0.4))(mammoth@1.8.0)(openai@4.58.1(zod@3.23.8))(playwright@1.47.0)(puppeteer@19.11.1(bufferutil@4.0.8)(supports-color@8.1.1)(typescript@5.3.3)(utf-8-validate@6.0.4))(ws@8.18.0(bufferutil@4.0.8)(utf-8-validate@6.0.4)))(openai@4.58.1(zod@3.23.8)))(ai@3.3.17(openai@4.58.1(zod@3.23.8))(react@18.2.0)(sswr@2.1.0(svelte@4.2.19))(svelte@4.2.19)(vue@3.5.3(typescript@5.3.3))(zod@3.23.8))(babel-plugin-macros@3.1.0)(mathjs@13.1.1)(octokit@4.0.2)
+        version: 6.6.1(@e2b/code-interpreter@0.0.7(bufferutil@4.0.8)(utf-8-validate@6.0.4))(@langchain/core@0.2.31(langchain@0.2.18(gtha5yglvf6stb6xkgferi7r7u))(openai@4.58.1(zod@3.23.8)))(ai@3.3.44(openai@4.58.1(zod@3.23.8))(react@18.2.0)(sswr@2.1.0(svelte@4.2.19))(svelte@4.2.19)(vue@3.5.3(typescript@5.3.3))(zod@3.23.8))(babel-plugin-macros@3.1.0)(mathjs@13.1.1)(octokit@4.0.2)
       '@ai-sdk/anthropic':
-        specifier: ^0.0.47
-        version: 0.0.47(zod@3.23.8)
+        specifier: 0.0.51
+        version: 0.0.51(zod@3.23.8)
       '@ai-sdk/google':
-        specifier: ^0.0.45
-        version: 0.0.45(zod@3.23.8)
+        specifier: 0.0.52
+        version: 0.0.52(zod@3.23.8)
       '@ai-sdk/openai':
-        specifier: ^0.0.53
-        version: 0.0.53(zod@3.23.8)
+        specifier: 0.0.68
+        version: 0.0.68(zod@3.23.8)
       '@ai-sdk/provider':
-        specifier: ^0.0.21
-        version: 0.0.21
+        specifier: 0.0.24
+        version: 0.0.24
       '@copilotkit/backend':
         specifier: ^0.9.0
         version: 0.9.0(@aws-crypto/sha256-js@5.2.0)(@aws-sdk/credential-provider-node@3.645.0(@aws-sdk/client-sso-oidc@3.645.0(@aws-sdk/client-sts@3.645.0))(@aws-sdk/client-sts@3.645.0))(@huggingface/inference@2.8.0)(@smithy/util-utf8@2.3.0)(@supabase/postgrest-js@1.15.8)(@supabase/supabase-js@2.45.3(bufferutil@4.0.8)(utf-8-validate@6.0.4))(axios@1.7.7)(cheerio@1.0.0-rc.12)(cohere-ai@7.13.0(@aws-sdk/client-sso-oidc@3.645.0(@aws-sdk/client-sts@3.645.0)))(fast-xml-parser@4.5.0)(ignore@5.3.2)(ioredis@5.4.1(supports-color@8.1.1))(jsdom@20.0.3(bufferutil@4.0.8)(canvas@2.11.2(supports-color@8.1.1))(supports-color@8.1.1)(utf-8-validate@6.0.4))(lodash@4.17.21)(mammoth@1.8.0)(pg@8.12.0)(playwright@1.47.0)(puppeteer@19.11.1(bufferutil@4.0.8)(supports-color@8.1.1)(typescript@5.3.3)(utf-8-validate@6.0.4))(ws@8.18.0(bufferutil@4.0.8)(utf-8-validate@6.0.4))
@@ -70,16 +70,16 @@ importers:
         version: 0.2.32(@aws-crypto/sha256-js@5.2.0)(@aws-sdk/credential-provider-node@3.645.0(@aws-sdk/client-sso-oidc@3.645.0(@aws-sdk/client-sts@3.645.0))(@aws-sdk/client-sts@3.645.0))(@huggingface/inference@2.8.0)(@langchain/anthropic@0.2.17)(@langchain/cohere@0.2.2)(@langchain/google-genai@0.0.26)(@smithy/util-utf8@2.3.0)(@supabase/supabase-js@2.45.3(bufferutil@4.0.8)(utf-8-validate@6.0.4))(axios@1.7.7)(cheerio@1.0.0-rc.12)(cohere-ai@7.13.0(@aws-sdk/client-sso-oidc@3.645.0(@aws-sdk/client-sts@3.645.0)))(fast-xml-parser@4.5.0)(ignore@5.3.2)(ioredis@5.4.1(supports-color@8.1.1))(jsdom@20.0.3(bufferutil@4.0.8)(canvas@2.11.2(supports-color@8.1.1))(supports-color@8.1.1)(utf-8-validate@6.0.4))(lodash@4.17.21)(mammoth@1.8.0)(openai@4.58.1(zod@3.23.8))(pg@8.12.0)(playwright@1.47.0)(puppeteer@19.11.1(bufferutil@4.0.8)(supports-color@8.1.1)(typescript@5.3.3)(utf-8-validate@6.0.4))(ws@8.18.0(bufferutil@4.0.8)(utf-8-validate@6.0.4))
       '@langchain/core':
         specifier: 0.2.31
-        version: 0.2.31(langchain@0.2.18(@aws-sdk/credential-provider-node@3.645.0(@aws-sdk/client-sso-oidc@3.645.0(@aws-sdk/client-sts@3.645.0))(@aws-sdk/client-sts@3.645.0))(@langchain/anthropic@0.2.17(langchain@0.2.18)(openai@4.58.1(zod@3.23.8)))(@langchain/cohere@0.2.2(@aws-sdk/client-sso-oidc@3.645.0(@aws-sdk/client-sts@3.645.0))(langchain@0.2.18)(openai@4.58.1(zod@3.23.8)))(@langchain/community@0.2.32(@aws-crypto/sha256-js@5.2.0)(@aws-sdk/credential-provider-node@3.645.0(@aws-sdk/client-sso-oidc@3.645.0(@aws-sdk/client-sts@3.645.0))(@aws-sdk/client-sts@3.645.0))(@huggingface/inference@2.8.0)(@langchain/anthropic@0.2.17)(@langchain/cohere@0.2.2)(@langchain/google-genai@0.0.26)(@smithy/util-utf8@2.3.0)(@supabase/supabase-js@2.45.3(bufferutil@4.0.8)(utf-8-validate@6.0.4))(axios@1.7.7)(cheerio@1.0.0-rc.12)(cohere-ai@7.13.0(@aws-sdk/client-sso-oidc@3.645.0(@aws-sdk/client-sts@3.645.0)))(fast-xml-parser@4.5.0)(ignore@5.3.2)(ioredis@5.4.1(supports-color@8.1.1))(jsdom@20.0.3(bufferutil@4.0.8)(canvas@2.11.2(supports-color@8.1.1))(supports-color@8.1.1)(utf-8-validate@6.0.4))(lodash@4.17.21)(mammoth@1.8.0)(openai@4.58.1(zod@3.23.8))(pg@8.12.0)(playwright@1.47.0)(puppeteer@19.11.1(bufferutil@4.0.8)(supports-color@8.1.1)(typescript@5.3.3)(utf-8-validate@6.0.4))(ws@8.18.0(bufferutil@4.0.8)(utf-8-validate@6.0.4)))(@langchain/google-genai@0.0.26(langchain@0.2.18)(openai@4.58.1(zod@3.23.8))(zod@3.23.8))(@supabase/supabase-js@2.45.3(bufferutil@4.0.8)(utf-8-validate@6.0.4))(axios@1.7.7)(cheerio@1.0.0-rc.12)(fast-xml-parser@4.5.0)(ignore@5.3.2)(ioredis@5.4.1(supports-color@8.1.1))(jsdom@20.0.3(bufferutil@4.0.8)(canvas@2.11.2(supports-color@8.1.1))(supports-color@8.1.1)(utf-8-validate@6.0.4))(mammoth@1.8.0)(openai@4.58.1(zod@3.23.8))(playwright@1.47.0)(puppeteer@19.11.1(bufferutil@4.0.8)(supports-color@8.1.1)(typescript@5.3.3)(utf-8-validate@6.0.4))(ws@8.18.0(bufferutil@4.0.8)(utf-8-validate@6.0.4)))(openai@4.58.1(zod@3.23.8))
+        version: 0.2.31(langchain@0.2.18(gtha5yglvf6stb6xkgferi7r7u))(openai@4.58.1(zod@3.23.8))
       '@langchain/google-genai':
         specifier: ^0.0.26
         version: 0.0.26(langchain@0.2.18)(openai@4.58.1(zod@3.23.8))(zod@3.23.8)
       '@langchain/openai':
         specifier: ^0.2.10
-        version: 0.2.10(langchain@0.2.18(@aws-sdk/credential-provider-node@3.645.0(@aws-sdk/client-sso-oidc@3.645.0(@aws-sdk/client-sts@3.645.0))(@aws-sdk/client-sts@3.645.0))(@langchain/anthropic@0.2.17(langchain@0.2.18)(openai@4.58.1(zod@3.23.8)))(@langchain/cohere@0.2.2(@aws-sdk/client-sso-oidc@3.645.0(@aws-sdk/client-sts@3.645.0))(langchain@0.2.18)(openai@4.58.1(zod@3.23.8)))(@langchain/community@0.2.32(@aws-crypto/sha256-js@5.2.0)(@aws-sdk/credential-provider-node@3.645.0(@aws-sdk/client-sso-oidc@3.645.0(@aws-sdk/client-sts@3.645.0))(@aws-sdk/client-sts@3.645.0))(@huggingface/inference@2.8.0)(@langchain/anthropic@0.2.17)(@langchain/cohere@0.2.2)(@langchain/google-genai@0.0.26)(@smithy/util-utf8@2.3.0)(@supabase/supabase-js@2.45.3(bufferutil@4.0.8)(utf-8-validate@6.0.4))(axios@1.7.7)(cheerio@1.0.0-rc.12)(cohere-ai@7.13.0(@aws-sdk/client-sso-oidc@3.645.0(@aws-sdk/client-sts@3.645.0)))(fast-xml-parser@4.5.0)(ignore@5.3.2)(ioredis@5.4.1(supports-color@8.1.1))(jsdom@20.0.3(bufferutil@4.0.8)(canvas@2.11.2(supports-color@8.1.1))(supports-color@8.1.1)(utf-8-validate@6.0.4))(lodash@4.17.21)(mammoth@1.8.0)(openai@4.58.1(zod@3.23.8))(pg@8.12.0)(playwright@1.47.0)(puppeteer@19.11.1(bufferutil@4.0.8)(supports-color@8.1.1)(typescript@5.3.3)(utf-8-validate@6.0.4))(ws@8.18.0(bufferutil@4.0.8)(utf-8-validate@6.0.4)))(@langchain/google-genai@0.0.26(langchain@0.2.18)(openai@4.58.1(zod@3.23.8))(zod@3.23.8))(@supabase/supabase-js@2.45.3(bufferutil@4.0.8)(utf-8-validate@6.0.4))(axios@1.7.7)(cheerio@1.0.0-rc.12)(fast-xml-parser@4.5.0)(ignore@5.3.2)(ioredis@5.4.1(supports-color@8.1.1))(jsdom@20.0.3(bufferutil@4.0.8)(canvas@2.11.2(supports-color@8.1.1))(supports-color@8.1.1)(utf-8-validate@6.0.4))(mammoth@1.8.0)(openai@4.58.1(zod@3.23.8))(playwright@1.47.0)(puppeteer@19.11.1(bufferutil@4.0.8)(supports-color@8.1.1)(typescript@5.3.3)(utf-8-validate@6.0.4))(ws@8.18.0(bufferutil@4.0.8)(utf-8-validate@6.0.4)))
+        version: 0.2.10(langchain@0.2.18(gtha5yglvf6stb6xkgferi7r7u))
       '@langchain/textsplitters':
         specifier: ^0.0.3
-        version: 0.0.3(langchain@0.2.18(@aws-sdk/credential-provider-node@3.645.0(@aws-sdk/client-sso-oidc@3.645.0(@aws-sdk/client-sts@3.645.0))(@aws-sdk/client-sts@3.645.0))(@langchain/anthropic@0.2.17(langchain@0.2.18)(openai@4.58.1(zod@3.23.8)))(@langchain/cohere@0.2.2(@aws-sdk/client-sso-oidc@3.645.0(@aws-sdk/client-sts@3.645.0))(langchain@0.2.18)(openai@4.58.1(zod@3.23.8)))(@langchain/community@0.2.32(@aws-crypto/sha256-js@5.2.0)(@aws-sdk/credential-provider-node@3.645.0(@aws-sdk/client-sso-oidc@3.645.0(@aws-sdk/client-sts@3.645.0))(@aws-sdk/client-sts@3.645.0))(@huggingface/inference@2.8.0)(@langchain/anthropic@0.2.17)(@langchain/cohere@0.2.2)(@langchain/google-genai@0.0.26)(@smithy/util-utf8@2.3.0)(@supabase/supabase-js@2.45.3(bufferutil@4.0.8)(utf-8-validate@6.0.4))(axios@1.7.7)(cheerio@1.0.0-rc.12)(cohere-ai@7.13.0(@aws-sdk/client-sso-oidc@3.645.0(@aws-sdk/client-sts@3.645.0)))(fast-xml-parser@4.5.0)(ignore@5.3.2)(ioredis@5.4.1(supports-color@8.1.1))(jsdom@20.0.3(bufferutil@4.0.8)(canvas@2.11.2(supports-color@8.1.1))(supports-color@8.1.1)(utf-8-validate@6.0.4))(lodash@4.17.21)(mammoth@1.8.0)(openai@4.58.1(zod@3.23.8))(pg@8.12.0)(playwright@1.47.0)(puppeteer@19.11.1(bufferutil@4.0.8)(supports-color@8.1.1)(typescript@5.3.3)(utf-8-validate@6.0.4))(ws@8.18.0(bufferutil@4.0.8)(utf-8-validate@6.0.4)))(@langchain/google-genai@0.0.26(langchain@0.2.18)(openai@4.58.1(zod@3.23.8))(zod@3.23.8))(@supabase/supabase-js@2.45.3(bufferutil@4.0.8)(utf-8-validate@6.0.4))(axios@1.7.7)(cheerio@1.0.0-rc.12)(fast-xml-parser@4.5.0)(ignore@5.3.2)(ioredis@5.4.1(supports-color@8.1.1))(jsdom@20.0.3(bufferutil@4.0.8)(canvas@2.11.2(supports-color@8.1.1))(supports-color@8.1.1)(utf-8-validate@6.0.4))(mammoth@1.8.0)(openai@4.58.1(zod@3.23.8))(playwright@1.47.0)(puppeteer@19.11.1(bufferutil@4.0.8)(supports-color@8.1.1)(typescript@5.3.3)(utf-8-validate@6.0.4))(ws@8.18.0(bufferutil@4.0.8)(utf-8-validate@6.0.4)))(openai@4.58.1(zod@3.23.8))
+        version: 0.0.3(langchain@0.2.18(gtha5yglvf6stb6xkgferi7r7u))(openai@4.58.1(zod@3.23.8))
       '@mdx-js/loader':
         specifier: ^3.0.1
         version: 3.0.1(supports-color@8.1.1)(webpack@5.94.0)
@@ -88,7 +88,7 @@ importers:
         version: 3.0.1(@types/react@18.2.55)(react@18.2.0)
       '@next-auth/prisma-adapter':
         specifier: ^1.0.7
-        version: 1.0.7(@prisma/client@5.19.1(prisma@5.19.1))(next-auth@4.24.7(next@14.2.0(@babel/core@7.25.2(supports-color@8.1.1))(@opentelemetry/api@1.9.0)(@playwright/test@1.47.0)(babel-plugin-macros@3.1.0)(react-dom@18.2.0(react@18.2.0))(react@18.2.0))(nodemailer@6.9.15)(react-dom@18.2.0(react@18.2.0))(react@18.2.0))
+        version: 1.0.7(@prisma/client@5.19.1(prisma@5.19.1))(next-auth@4.24.7(next@14.2.15(@babel/core@7.25.2(supports-color@8.1.1))(@opentelemetry/api@1.9.0)(@playwright/test@1.47.0)(babel-plugin-macros@3.1.0)(react-dom@18.2.0(react@18.2.0))(react@18.2.0))(nodemailer@6.9.15)(react-dom@18.2.0(react@18.2.0))(react@18.2.0))
       '@next/mdx':
         specifier: ^14.1.4
         version: 14.2.8(@mdx-js/loader@3.0.1(supports-color@8.1.1)(webpack@5.94.0))(@mdx-js/react@3.0.1(@types/react@18.2.55)(react@18.2.0))
@@ -169,7 +169,7 @@ importers:
         version: 3.1.3(@types/react-dom@18.2.19)(@types/react@18.2.55)(react-dom@18.2.0(react@18.2.0))(react@18.2.0)
       '@sentry/nextjs':
         specifier: ^8.9.2
-        version: 8.28.0(@opentelemetry/api@1.9.0)(@opentelemetry/core@1.26.0(@opentelemetry/api@1.9.0))(@opentelemetry/instrumentation@0.52.1(@opentelemetry/api@1.9.0)(supports-color@8.1.1))(@opentelemetry/sdk-trace-base@1.26.0(@opentelemetry/api@1.9.0))(next@14.2.0(@babel/core@7.25.2(supports-color@8.1.1))(@opentelemetry/api@1.9.0)(@playwright/test@1.47.0)(babel-plugin-macros@3.1.0)(react-dom@18.2.0(react@18.2.0))(react@18.2.0))(react@18.2.0)(supports-color@8.1.1)(webpack@5.94.0)
+        version: 8.28.0(@opentelemetry/api@1.9.0)(@opentelemetry/core@1.26.0(@opentelemetry/api@1.9.0))(@opentelemetry/instrumentation@0.52.1(@opentelemetry/api@1.9.0)(supports-color@8.1.1))(@opentelemetry/sdk-trace-base@1.26.0(@opentelemetry/api@1.9.0))(next@14.2.15(@babel/core@7.25.2(supports-color@8.1.1))(@opentelemetry/api@1.9.0)(@playwright/test@1.47.0)(babel-plugin-macros@3.1.0)(react-dom@18.2.0(react@18.2.0))(react@18.2.0))(react@18.2.0)(supports-color@8.1.1)(webpack@5.94.0)
       '@sentry/profiling-node':
         specifier: ^8.9.2
         version: 8.28.0(supports-color@8.1.1)
@@ -187,7 +187,7 @@ importers:
         version: 8.20.5(react-dom@18.2.0(react@18.2.0))(react@18.2.0)
       '@trigger.dev/nextjs':
         specifier: 3.0.0-beta.56
-        version: 3.0.0-beta.56(@trigger.dev/sdk@3.0.0-beta.56(bufferutil@4.0.8)(supports-color@8.1.1)(typescript@5.3.3)(utf-8-validate@6.0.4))(next@14.2.0(@babel/core@7.25.2(supports-color@8.1.1))(@opentelemetry/api@1.9.0)(@playwright/test@1.47.0)(babel-plugin-macros@3.1.0)(react-dom@18.2.0(react@18.2.0))(react@18.2.0))(supports-color@8.1.1)
+        version: 3.0.0-beta.56(@trigger.dev/sdk@3.0.0-beta.56(bufferutil@4.0.8)(supports-color@8.1.1)(typescript@5.3.3)(utf-8-validate@6.0.4))(next@14.2.15(@babel/core@7.25.2(supports-color@8.1.1))(@opentelemetry/api@1.9.0)(@playwright/test@1.47.0)(babel-plugin-macros@3.1.0)(react-dom@18.2.0(react@18.2.0))(react@18.2.0))(supports-color@8.1.1)
       '@trigger.dev/react':
         specifier: 3.0.0-beta.56
         version: 3.0.0-beta.56(bufferutil@4.0.8)(react-dom@18.2.0(react@18.2.0))(react@18.2.0)(supports-color@8.1.1)(utf-8-validate@6.0.4)
@@ -208,13 +208,13 @@ importers:
         version: 18.2.19
       '@vercel/analytics':
         specifier: ^1.2.2
-        version: 1.3.1(next@14.2.0(@babel/core@7.25.2(supports-color@8.1.1))(@opentelemetry/api@1.9.0)(@playwright/test@1.47.0)(babel-plugin-macros@3.1.0)(react-dom@18.2.0(react@18.2.0))(react@18.2.0))(react@18.2.0)
+        version: 1.3.1(next@14.2.15(@babel/core@7.25.2(supports-color@8.1.1))(@opentelemetry/api@1.9.0)(@playwright/test@1.47.0)(babel-plugin-macros@3.1.0)(react-dom@18.2.0(react@18.2.0))(react@18.2.0))(react@18.2.0)
       '@vercel/blob':
         specifier: ^0.23.2
         version: 0.23.4
       ai:
-        specifier: 3.3.17
-        version: 3.3.17(openai@4.58.1(zod@3.23.8))(react@18.2.0)(sswr@2.1.0(svelte@4.2.19))(svelte@4.2.19)(vue@3.5.3(typescript@5.3.3))(zod@3.23.8)
+        specifier: 3.3.44
+        version: 3.3.44(openai@4.58.1(zod@3.23.8))(react@18.2.0)(sswr@2.1.0(svelte@4.2.19))(svelte@4.2.19)(vue@3.5.3(typescript@5.3.3))(zod@3.23.8)
       ajv:
         specifier: ^8.12.0
         version: 8.17.1
@@ -304,7 +304,7 @@ importers:
         version: 0.16.11
       langchain:
         specifier: 0.2.18
-        version: 0.2.18(@aws-sdk/credential-provider-node@3.645.0(@aws-sdk/client-sso-oidc@3.645.0(@aws-sdk/client-sts@3.645.0))(@aws-sdk/client-sts@3.645.0))(@langchain/anthropic@0.2.17(langchain@0.2.18)(openai@4.58.1(zod@3.23.8)))(@langchain/cohere@0.2.2(@aws-sdk/client-sso-oidc@3.645.0(@aws-sdk/client-sts@3.645.0))(langchain@0.2.18)(openai@4.58.1(zod@3.23.8)))(@langchain/community@0.2.32(@aws-crypto/sha256-js@5.2.0)(@aws-sdk/credential-provider-node@3.645.0(@aws-sdk/client-sso-oidc@3.645.0(@aws-sdk/client-sts@3.645.0))(@aws-sdk/client-sts@3.645.0))(@huggingface/inference@2.8.0)(@langchain/anthropic@0.2.17)(@langchain/cohere@0.2.2)(@langchain/google-genai@0.0.26)(@smithy/util-utf8@2.3.0)(@supabase/supabase-js@2.45.3(bufferutil@4.0.8)(utf-8-validate@6.0.4))(axios@1.7.7)(cheerio@1.0.0-rc.12)(cohere-ai@7.13.0(@aws-sdk/client-sso-oidc@3.645.0(@aws-sdk/client-sts@3.645.0)))(fast-xml-parser@4.5.0)(ignore@5.3.2)(ioredis@5.4.1(supports-color@8.1.1))(jsdom@20.0.3(bufferutil@4.0.8)(canvas@2.11.2(supports-color@8.1.1))(supports-color@8.1.1)(utf-8-validate@6.0.4))(lodash@4.17.21)(mammoth@1.8.0)(openai@4.58.1(zod@3.23.8))(pg@8.12.0)(playwright@1.47.0)(puppeteer@19.11.1(bufferutil@4.0.8)(supports-color@8.1.1)(typescript@5.3.3)(utf-8-validate@6.0.4))(ws@8.18.0(bufferutil@4.0.8)(utf-8-validate@6.0.4)))(@langchain/google-genai@0.0.26(langchain@0.2.18)(openai@4.58.1(zod@3.23.8))(zod@3.23.8))(@supabase/supabase-js@2.45.3(bufferutil@4.0.8)(utf-8-validate@6.0.4))(axios@1.7.7)(cheerio@1.0.0-rc.12)(fast-xml-parser@4.5.0)(ignore@5.3.2)(ioredis@5.4.1(supports-color@8.1.1))(jsdom@20.0.3(bufferutil@4.0.8)(canvas@2.11.2(supports-color@8.1.1))(supports-color@8.1.1)(utf-8-validate@6.0.4))(mammoth@1.8.0)(openai@4.58.1(zod@3.23.8))(playwright@1.47.0)(puppeteer@19.11.1(bufferutil@4.0.8)(supports-color@8.1.1)(typescript@5.3.3)(utf-8-validate@6.0.4))(ws@8.18.0(bufferutil@4.0.8)(utf-8-validate@6.0.4))
+        version: 0.2.18(gtha5yglvf6stb6xkgferi7r7u)
       llmclient:
         specifier: ^8.1.19
         version: 8.1.22
@@ -339,20 +339,20 @@ importers:
         specifier: ^5.0.7
         version: 5.0.7
       next:
-        specifier: 14.2.0
-        version: 14.2.0(@babel/core@7.25.2(supports-color@8.1.1))(@opentelemetry/api@1.9.0)(@playwright/test@1.47.0)(babel-plugin-macros@3.1.0)(react-dom@18.2.0(react@18.2.0))(react@18.2.0)
+        specifier: 14.2.15
+        version: 14.2.15(@babel/core@7.25.2(supports-color@8.1.1))(@opentelemetry/api@1.9.0)(@playwright/test@1.47.0)(babel-plugin-macros@3.1.0)(react-dom@18.2.0(react@18.2.0))(react@18.2.0)
       next-auth:
         specifier: ^4.24.7
-        version: 4.24.7(next@14.2.0(@babel/core@7.25.2(supports-color@8.1.1))(@opentelemetry/api@1.9.0)(@playwright/test@1.47.0)(babel-plugin-macros@3.1.0)(react-dom@18.2.0(react@18.2.0))(react@18.2.0))(nodemailer@6.9.15)(react-dom@18.2.0(react@18.2.0))(react@18.2.0)
+        version: 4.24.7(next@14.2.15(@babel/core@7.25.2(supports-color@8.1.1))(@opentelemetry/api@1.9.0)(@playwright/test@1.47.0)(babel-plugin-macros@3.1.0)(react-dom@18.2.0(react@18.2.0))(react@18.2.0))(nodemailer@6.9.15)(react-dom@18.2.0(react@18.2.0))(react@18.2.0)
       next-mdx-remote:
         specifier: ^4.4.1
         version: 4.4.1(react-dom@18.2.0(react@18.2.0))(react@18.2.0)(supports-color@8.1.1)
       next-themes:
         specifier: ^0.2.1
-        version: 0.2.1(next@14.2.0(@babel/core@7.25.2(supports-color@8.1.1))(@opentelemetry/api@1.9.0)(@playwright/test@1.47.0)(babel-plugin-macros@3.1.0)(react-dom@18.2.0(react@18.2.0))(react@18.2.0))(react-dom@18.2.0(react@18.2.0))(react@18.2.0)
+        version: 0.2.1(next@14.2.15(@babel/core@7.25.2(supports-color@8.1.1))(@opentelemetry/api@1.9.0)(@playwright/test@1.47.0)(babel-plugin-macros@3.1.0)(react-dom@18.2.0(react@18.2.0))(react@18.2.0))(react-dom@18.2.0(react@18.2.0))(react@18.2.0)
       nextjs-toploader:
         specifier: ^1.6.6
-        version: 1.6.12(next@14.2.0(@babel/core@7.25.2(supports-color@8.1.1))(@opentelemetry/api@1.9.0)(@playwright/test@1.47.0)(babel-plugin-macros@3.1.0)(react-dom@18.2.0(react@18.2.0))(react@18.2.0))(react-dom@18.2.0(react@18.2.0))(react@18.2.0)
+        version: 1.6.12(next@14.2.15(@babel/core@7.25.2(supports-color@8.1.1))(@opentelemetry/api@1.9.0)(@playwright/test@1.47.0)(babel-plugin-macros@3.1.0)(react-dom@18.2.0(react@18.2.0))(react@18.2.0))(react-dom@18.2.0(react@18.2.0))(react@18.2.0)
       node-fetch:
         specifier: 2.7.0
         version: 2.7.0
@@ -527,7 +527,7 @@ importers:
         version: 1.47.0
       '@react-buddy/ide-toolbox-next':
         specifier: '*'
-        version: 2.4.1(next@14.2.0(@babel/core@7.25.2(supports-color@8.1.1))(@opentelemetry/api@1.9.0)(@playwright/test@1.47.0)(babel-plugin-macros@3.1.0)(react-dom@18.2.0(react@18.2.0))(react@18.2.0))(react@18.2.0)
+        version: 2.4.1(next@14.2.15(@babel/core@7.25.2(supports-color@8.1.1))(@opentelemetry/api@1.9.0)(@playwright/test@1.47.0)(babel-plugin-macros@3.1.0)(react-dom@18.2.0(react@18.2.0))(react@18.2.0))(react@18.2.0)
       '@testing-library/jest-dom':
         specifier: ^6.4.2
         version: 6.5.0
@@ -666,26 +666,26 @@ packages:
       wikibase-sdk:
         optional: true
 
-  '@ai-sdk/anthropic@0.0.47':
-    resolution: {integrity: sha512-CYwo4Bu5lwZ/KdLQ2ORJ1g1QPywBjcb1//Y6858nUAVK7A76o1qJAbYfF0RT6OQOhrbPxvbmqAbfGSs8RJlxWQ==}
+  '@ai-sdk/anthropic@0.0.51':
+    resolution: {integrity: sha512-XPLBvdwdMlNAvGMyfsDgrCDXN2Wz7M+wfCJthqiwdiKHmq2jDLGdt0ZCAozgxxW28HVzMfJlFjuyECiA5Le3YA==}
     engines: {node: '>=18'}
     peerDependencies:
       zod: ^3.0.0
 
-  '@ai-sdk/google@0.0.45':
-    resolution: {integrity: sha512-18WPQ5xmNtUhWjhLeY+aZ+rHtmLn+ls9olaRJ2eWNX9V2npbgTCEx6AloQRquZ06Mtle/GlpARrs/KpTZ6yUig==}
+  '@ai-sdk/google@0.0.52':
+    resolution: {integrity: sha512-bfsA/1Ae0SQ6NfLwWKs5SU4MBwlzJjVhK6bTVBicYFjUxg9liK/W76P1Tq/qK9OlrODACz3i1STOIWsFPpIOuQ==}
     engines: {node: '>=18'}
     peerDependencies:
       zod: ^3.0.0
 
-  '@ai-sdk/openai@0.0.53':
-    resolution: {integrity: sha512-Wm4+EYG2Zl5WmhvZJrLhrBY+C46FEQmDjQ9ZB5h2DvRoJZNKtNiVNFMEQuyBK7QwivvlCSMJkPRBfFcbJgNLMQ==}
+  '@ai-sdk/openai@0.0.68':
+    resolution: {integrity: sha512-WSzB7qpBTrnYvFbnBBmIsw1G8GM04JRMr+I7B5T7msgZfleG4cTvVrn9A1HeHHw9TmbKiaCKJrEZH4V0lb7jNQ==}
     engines: {node: '>=18'}
     peerDependencies:
       zod: ^3.0.0
 
-  '@ai-sdk/provider-utils@1.0.16':
-    resolution: {integrity: sha512-8Nd8vIkGTIthhfgJEdP9KyMlykehBNP/1J47eMC3vQqYgJV6r5Bgvl3LFVfWi9KzamiD8tp9nU2NJKTeo4MH/A==}
+  '@ai-sdk/provider-utils@1.0.19':
+    resolution: {integrity: sha512-p02Fq5Mnc8T6nwRBN1Iaou8YXvN1sDS6hbmJaD5UaRbXjizbh+8rpFS/o7jqAHTwf3uHCDitP3pnODyHdc/CDQ==}
     engines: {node: '>=18'}
     peerDependencies:
       zod: ^3.0.0
@@ -693,12 +693,25 @@ packages:
       zod:
         optional: true
 
-  '@ai-sdk/provider@0.0.21':
-    resolution: {integrity: sha512-9j95uaPRxwYkzQdkl4XO/MmWWW5c5vcVSXtqvALpD9SMB9fzH46dO3UN4VbOJR2J3Z84CZAqgZu5tNlkptT9qQ==}
+  '@ai-sdk/provider-utils@1.0.20':
+    resolution: {integrity: sha512-ngg/RGpnA00eNOWEtXHenpX1MsM2QshQh4QJFjUfwcqHpM5kTfG7je7Rc3HcEDP+OkRVv2GF+X4fC1Vfcnl8Ow==}
+    engines: {node: '>=18'}
+    peerDependencies:
+      zod: ^3.0.0
+    peerDependenciesMeta:
+      zod:
+        optional: true
+
+  '@ai-sdk/provider@0.0.23':
+    resolution: {integrity: sha512-oAc49O5+xypVrKM7EUU5P/Y4DUL4JZUWVxhejoAVOTOl3WZUEWsMbP3QZR+TrimQIsS0WR/n9UuF6U0jPdp0tQ==}
     engines: {node: '>=18'}
 
-  '@ai-sdk/react@0.0.51':
-    resolution: {integrity: sha512-Hq5splFSB6OVovHamXvpnd1S7jfIz/CXWjaLo9sr90jd/W370NA8GhBd6oSLfqMeKrPosV4qRBH5S8lv2bauqA==}
+  '@ai-sdk/provider@0.0.24':
+    resolution: {integrity: sha512-XMsNGJdGO+L0cxhhegtqZ8+T6nn4EoShS819OvCgI2kLbYTIvk0GWFGD0AXJmxkxs3DrpsJxKAFukFR7bvTkgQ==}
+    engines: {node: '>=18'}
+
+  '@ai-sdk/react@0.0.59':
+    resolution: {integrity: sha512-1WbgO3J2/OoheMuNMxy5itJ3NVqOpqpAQxFNp7AoXgnDv4wDF4kTif61rTlKh7dCPvBHj2HXLmob+TrVFaWhYw==}
     engines: {node: '>=18'}
     peerDependencies:
       react: ^18 || ^19
@@ -709,8 +722,8 @@ packages:
       zod:
         optional: true
 
-  '@ai-sdk/solid@0.0.41':
-    resolution: {integrity: sha512-w4vSkd2388FJMnKPALP8SL4p3XAR70FAPj0qrd5AoYyQMMjX/E6zQGc8YAhAAnGSwiQwq/DZaE4y0lorwFVyOw==}
+  '@ai-sdk/solid@0.0.47':
+    resolution: {integrity: sha512-lVMxIxtuNqoo/TObSFGflEP2dUeJv7bfPQbS4jHTZGBNlyhgBRY2Xc19yNjA3QKRfvQNDVoQusqxn+18MiHJJQ==}
     engines: {node: '>=18'}
     peerDependencies:
       solid-js: ^1.7.7
@@ -718,8 +731,8 @@ packages:
       solid-js:
         optional: true
 
-  '@ai-sdk/svelte@0.0.43':
-    resolution: {integrity: sha512-lUve6AGc3dtue14LLGiZs7J7L/3jEHh6SGXwuG/nDygeicKPzmG9drWZlhTdpNHN9wKtBgrCdJxQ96HKswLDNA==}
+  '@ai-sdk/svelte@0.0.49':
+    resolution: {integrity: sha512-gV0MhaWxkatjf7uJrCAHO3bWrihokNUwGhuMCgyG+y53lwJKAYhR0zCoDRM2HnTJ89fdnx/PVe3R9fOWEVY5qA==}
     engines: {node: '>=18'}
     peerDependencies:
       svelte: ^3.0.0 || ^4.0.0
@@ -727,8 +740,8 @@ packages:
       svelte:
         optional: true
 
-  '@ai-sdk/ui-utils@0.0.38':
-    resolution: {integrity: sha512-SyyfqBu7xnsfUuq3kSxzP+fxGCTMqaSL5WYGiBJpr/yLWySjBJCg/k7WueO440AqVpZBzCd3nWoCpPmjfMK8Yg==}
+  '@ai-sdk/ui-utils@0.0.44':
+    resolution: {integrity: sha512-0qiyun/n5zqJzQs/WfQT86dZE5DiDhSHJc7b7ZGLYvNMztHkRQmak2zUCZP4IyGVZEicyEPQK6NEEpBgkmd3Dg==}
     engines: {node: '>=18'}
     peerDependencies:
       zod: ^3.0.0
@@ -736,8 +749,8 @@ packages:
       zod:
         optional: true
 
-  '@ai-sdk/vue@0.0.43':
-    resolution: {integrity: sha512-bJB7muMpmP/wPKbDU8GCmDpI1HSkuTWz9DsQ4ZlBaCk5wqRLKxRtzM9NxfeQ15RojSLxYhKf/lDwW10RPtjcaw==}
+  '@ai-sdk/vue@0.0.51':
+    resolution: {integrity: sha512-6RjuuRGf749EjnsfbETJpF0fmq6a1lF6qUUUnd/Q1Ojf0tX8fI4qwvNykbECZHWuIj42EqZ3HDuNNR9c8oG4rA==}
     engines: {node: '>=18'}
     peerDependencies:
       vue: ^3.3.4
@@ -2340,8 +2353,8 @@ packages:
       '@prisma/client': '>=2.26.0 || >=3'
       next-auth: ^4
 
-  '@next/env@14.2.0':
-    resolution: {integrity: sha512-4+70ELtSbRtYUuyRpAJmKC8NHBW2x1HMje9KO2Xd7IkoyucmV9SjgO+qeWMC0JWkRQXgydv1O7yKOK8nu/rITQ==}
+  '@next/env@14.2.15':
+    resolution: {integrity: sha512-S1qaj25Wru2dUpcIZMjxeMVSwkt8BK4dmWHHiBuRstcIyOsMapqT4A4jSB6onvqeygkSSmOkyny9VVx8JIGamQ==}
 
   '@next/eslint-plugin-next@14.1.0':
     resolution: {integrity: sha512-x4FavbNEeXx/baD/zC/SdrvkjSby8nBn8KcCREqk6UuwvwoAPZmaV8TFCAuo/cpovBRTIY67mHhe86MQQm/68Q==}
@@ -2357,56 +2370,56 @@ packages:
       '@mdx-js/react':
         optional: true
 
-  '@next/swc-darwin-arm64@14.2.0':
-    resolution: {integrity: sha512-kHktLlw0AceuDnkVljJ/4lTJagLzDiO3klR1Fzl2APDFZ8r+aTxNaNcPmpp0xLMkgRwwk6sggYeqq0Rz9K4zzA==}
+  '@next/swc-darwin-arm64@14.2.15':
+    resolution: {integrity: sha512-Rvh7KU9hOUBnZ9TJ28n2Oa7dD9cvDBKua9IKx7cfQQ0GoYUwg9ig31O2oMwH3wm+pE3IkAQ67ZobPfEgurPZIA==}
     engines: {node: '>= 10'}
     cpu: [arm64]
     os: [darwin]
 
-  '@next/swc-darwin-x64@14.2.0':
-    resolution: {integrity: sha512-HFSDu7lb1U3RDxXNeKH3NGRR5KyTPBSUTuIOr9jXoAso7i76gNYvnTjbuzGVWt2X5izpH908gmOYWtI7un+JrA==}
+  '@next/swc-darwin-x64@14.2.15':
+    resolution: {integrity: sha512-5TGyjFcf8ampZP3e+FyCax5zFVHi+Oe7sZyaKOngsqyaNEpOgkKB3sqmymkZfowy3ufGA/tUgDPPxpQx931lHg==}
     engines: {node: '>= 10'}
     cpu: [x64]
     os: [darwin]
 
-  '@next/swc-linux-arm64-gnu@14.2.0':
-    resolution: {integrity: sha512-iQsoWziO5ZMxDWZ4ZTCAc7hbJ1C9UDj/gATSqTaMjW2bJFwAsvf9UM79AKnljBl73uPZ+V0kH4rvnHTco4Ps2w==}
+  '@next/swc-linux-arm64-gnu@14.2.15':
+    resolution: {integrity: sha512-3Bwv4oc08ONiQ3FiOLKT72Q+ndEMyLNsc/D3qnLMbtUYTQAmkx9E/JRu0DBpHxNddBmNT5hxz1mYBphJ3mfrrw==}
     engines: {node: '>= 10'}
     cpu: [arm64]
     os: [linux]
 
-  '@next/swc-linux-arm64-musl@14.2.0':
-    resolution: {integrity: sha512-0JOk2uzLUt8fJK5LpsKKZa74zAch7bJjjgJzR9aOMs231AlE4gPYzsSm430ckZitjPGKeH5bgDZjqwqJQKIS2w==}
+  '@next/swc-linux-arm64-musl@14.2.15':
+    resolution: {integrity: sha512-k5xf/tg1FBv/M4CMd8S+JL3uV9BnnRmoe7F+GWC3DxkTCD9aewFRH1s5rJ1zkzDa+Do4zyN8qD0N8c84Hu96FQ==}
     engines: {node: '>= 10'}
     cpu: [arm64]
     os: [linux]
 
-  '@next/swc-linux-x64-gnu@14.2.0':
-    resolution: {integrity: sha512-uYHkuTzX0NM6biKNp7hdKTf+BF0iMV254SxO0B8PgrQkxUBKGmk5ysHKB+FYBfdf9xei/t8OIKlXJs9ckD943A==}
+  '@next/swc-linux-x64-gnu@14.2.15':
+    resolution: {integrity: sha512-kE6q38hbrRbKEkkVn62reLXhThLRh6/TvgSP56GkFNhU22TbIrQDEMrO7j0IcQHcew2wfykq8lZyHFabz0oBrA==}
     engines: {node: '>= 10'}
     cpu: [x64]
     os: [linux]
 
-  '@next/swc-linux-x64-musl@14.2.0':
-    resolution: {integrity: sha512-paN89nLs2dTBDtfXWty1/NVPit+q6ldwdktixYSVwiiAz647QDCd+EIYqoiS+/rPG3oXs/A7rWcJK9HVqfnMVg==}
+  '@next/swc-linux-x64-musl@14.2.15':
+    resolution: {integrity: sha512-PZ5YE9ouy/IdO7QVJeIcyLn/Rc4ml9M2G4y3kCM9MNf1YKvFY4heg3pVa/jQbMro+tP6yc4G2o9LjAz1zxD7tQ==}
     engines: {node: '>= 10'}
     cpu: [x64]
     os: [linux]
 
-  '@next/swc-win32-arm64-msvc@14.2.0':
-    resolution: {integrity: sha512-j1oiidZisnymYjawFqEfeGNcE22ZQ7lGUaa4pGOCVWrWeIDkPSj8zYgS9TzMNlg17Q3wSWCQC/F5uJAhSh7qcA==}
+  '@next/swc-win32-arm64-msvc@14.2.15':
+    resolution: {integrity: sha512-2raR16703kBvYEQD9HNLyb0/394yfqzmIeyp2nDzcPV4yPjqNUG3ohX6jX00WryXz6s1FXpVhsCo3i+g4RUX+g==}
     engines: {node: '>= 10'}
     cpu: [arm64]
     os: [win32]
 
-  '@next/swc-win32-ia32-msvc@14.2.0':
-    resolution: {integrity: sha512-6ff6F4xb+QGD1jhx/dOT9Ot7PQ/GAYekV9ykwEh2EFS/cLTyU4Y3cXkX5cNtNIhpctS5NvyjW9gIksRNErYE0A==}
+  '@next/swc-win32-ia32-msvc@14.2.15':
+    resolution: {integrity: sha512-fyTE8cklgkyR1p03kJa5zXEaZ9El+kDNM5A+66+8evQS5e/6v0Gk28LqA0Jet8gKSOyP+OTm/tJHzMlGdQerdQ==}
     engines: {node: '>= 10'}
     cpu: [ia32]
     os: [win32]
 
-  '@next/swc-win32-x64-msvc@14.2.0':
-    resolution: {integrity: sha512-09DbG5vXAxz0eTFSf1uebWD36GF3D5toynRkgo2AlSrxwGZkWtJ1RhmrczRYQ17eD5bdo4FZ0ibiffdq5kc4vg==}
+  '@next/swc-win32-x64-msvc@14.2.15':
+    resolution: {integrity: sha512-SzqGbsLsP9OwKNUG9nekShTwhj6JSB9ZLMWQ8g1gG6hdE5gQLncbnbymrwy2yVmH9nikSLYRYxYMFu78Ggp7/g==}
     engines: {node: '>= 10'}
     cpu: [x64]
     os: [win32]
@@ -5085,8 +5098,8 @@ packages:
     resolution: {integrity: sha512-5GG/5IbQQpC9FpkRGsSvZI5QYeSCzlJHdpBQntCsuTOxhKD8lqKhrleg2Yi7yvMIf82Ycmmqln9U8V9qwEiJew==}
     engines: {node: '>= 8.0.0'}
 
-  ai@3.3.17:
-    resolution: {integrity: sha512-Z3cPRImctE8GMZV0e15ZlO+bqfLlVWqO+JiShJT20l3iYlZYwsQMQXjt5hiF3m7+VvbzIq+ORdp1Ai11GxzBVQ==}
+  ai@3.3.44:
+    resolution: {integrity: sha512-2/UBwzLZP8nyVFN4aB9chhnFYTxiGwNOVSK7Auipkc5cb0ZCwYOAV55uQlI/V/1yyQow4p5uQow71H0Po2vjUA==}
     engines: {node: '>=18'}
     peerDependencies:
       openai: ^4.42.0
@@ -8738,8 +8751,8 @@ packages:
       react: '*'
       react-dom: '*'
 
-  next@14.2.0:
-    resolution: {integrity: sha512-2T41HqJdKPqheR27ll7MFZ3gtTYvGew7cUc0PwPSyK9Ao5vvwpf9bYfP4V5YBGLckHF2kEGvrLte5BqLSv0s8g==}
+  next@14.2.15:
+    resolution: {integrity: sha512-h9ctmOokpoDphRvMGnwOJAedT6zKhwqyZML9mDtspgf4Rh3Pn7UTYKqePNoDvhsWBAO5GoPNYshnAUGIazVGmw==}
     engines: {node: '>=18.17.0'}
     hasBin: true
     peerDependencies:
@@ -11151,8 +11164,8 @@ snapshots:
 
   '@adobe/css-tools@4.4.0': {}
 
-  ? '@agentic/stdlib@6.6.1(@e2b/code-interpreter@0.0.7(bufferutil@4.0.8)(utf-8-validate@6.0.4))(@langchain/core@0.2.31(langchain@0.2.18(@aws-sdk/credential-provider-node@3.645.0(@aws-sdk/client-sso-oidc@3.645.0(@aws-sdk/client-sts@3.645.0))(@aws-sdk/client-sts@3.645.0))(@langchain/anthropic@0.2.17(langchain@0.2.18)(openai@4.58.1(zod@3.23.8)))(@langchain/cohere@0.2.2(@aws-sdk/client-sso-oidc@3.645.0(@aws-sdk/client-sts@3.645.0))(langchain@0.2.18)(openai@4.58.1(zod@3.23.8)))(@langchain/community@0.2.32(@aws-crypto/sha256-js@5.2.0)(@aws-sdk/credential-provider-node@3.645.0(@aws-sdk/client-sso-oidc@3.645.0(@aws-sdk/client-sts@3.645.0))(@aws-sdk/client-sts@3.645.0))(@huggingface/inference@2.8.0)(@langchain/anthropic@0.2.17)(@langchain/cohere@0.2.2)(@langchain/google-genai@0.0.26)(@smithy/util-utf8@2.3.0)(@supabase/supabase-js@2.45.3(bufferutil@4.0.8)(utf-8-validate@6.0.4))(axios@1.7.7)(cheerio@1.0.0-rc.12)(cohere-ai@7.13.0(@aws-sdk/client-sso-oidc@3.645.0(@aws-sdk/client-sts@3.645.0)))(fast-xml-parser@4.5.0)(ignore@5.3.2)(ioredis@5.4.1(supports-color@8.1.1))(jsdom@20.0.3(bufferutil@4.0.8)(canvas@2.11.2(supports-color@8.1.1))(supports-color@8.1.1)(utf-8-validate@6.0.4))(lodash@4.17.21)(mammoth@1.8.0)(openai@4.58.1(zod@3.23.8))(pg@8.12.0)(playwright@1.47.0)(puppeteer@19.11.1(bufferutil@4.0.8)(supports-color@8.1.1)(typescript@5.3.3)(utf-8-validate@6.0.4))(ws@8.18.0(bufferutil@4.0.8)(utf-8-validate@6.0.4)))(@langchain/google-genai@0.0.26(langchain@0.2.18)(openai@4.58.1(zod@3.23.8))(zod@3.23.8))(@supabase/supabase-js@2.45.3(bufferutil@4.0.8)(utf-8-validate@6.0.4))(axios@1.7.7)(cheerio@1.0.0-rc.12)(fast-xml-parser@4.5.0)(ignore@5.3.2)(ioredis@5.4.1(supports-color@8.1.1))(jsdom@20.0.3(bufferutil@4.0.8)(canvas@2.11.2(supports-color@8.1.1))(supports-color@8.1.1)(utf-8-validate@6.0.4))(mammoth@1.8.0)(openai@4.58.1(zod@3.23.8))(playwright@1.47.0)(puppeteer@19.11.1(bufferutil@4.0.8)(supports-color@8.1.1)(typescript@5.3.3)(utf-8-validate@6.0.4))(ws@8.18.0(bufferutil@4.0.8)(utf-8-validate@6.0.4)))(openai@4.58.1(zod@3.23.8)))(ai@3.3.17(openai@4.58.1(zod@3.23.8))(react@18.2.0)(sswr@2.1.0(svelte@4.2.19))(svelte@4.2.19)(vue@3.5.3(typescript@5.3.3))(zod@3.23.8))(babel-plugin-macros@3.1.0)(mathjs@13.1.1)(octokit@4.0.2)'
-  : dependencies:
+  '@agentic/stdlib@6.6.1(@e2b/code-interpreter@0.0.7(bufferutil@4.0.8)(utf-8-validate@6.0.4))(@langchain/core@0.2.31(langchain@0.2.18(gtha5yglvf6stb6xkgferi7r7u))(openai@4.58.1(zod@3.23.8)))(ai@3.3.44(openai@4.58.1(zod@3.23.8))(react@18.2.0)(sswr@2.1.0(svelte@4.2.19))(svelte@4.2.19)(vue@3.5.3(typescript@5.3.3))(zod@3.23.8))(babel-plugin-macros@3.1.0)(mathjs@13.1.1)(octokit@4.0.2)':
+    dependencies:
       dedent: 1.5.3(babel-plugin-macros@3.1.0)
       delay: 6.0.0
       hash-object: 5.0.1
@@ -11169,85 +11182,98 @@ snapshots:
       zod-validation-error: 3.3.1(zod@3.23.8)
     optionalDependencies:
       '@e2b/code-interpreter': 0.0.7(bufferutil@4.0.8)(utf-8-validate@6.0.4)
-      '@langchain/core': 0.2.31(langchain@0.2.18(@aws-sdk/credential-provider-node@3.645.0(@aws-sdk/client-sso-oidc@3.645.0(@aws-sdk/client-sts@3.645.0))(@aws-sdk/client-sts@3.645.0))(@langchain/anthropic@0.2.17(langchain@0.2.18)(openai@4.58.1(zod@3.23.8)))(@langchain/cohere@0.2.2(@aws-sdk/client-sso-oidc@3.645.0(@aws-sdk/client-sts@3.645.0))(langchain@0.2.18)(openai@4.58.1(zod@3.23.8)))(@langchain/community@0.2.32(@aws-crypto/sha256-js@5.2.0)(@aws-sdk/credential-provider-node@3.645.0(@aws-sdk/client-sso-oidc@3.645.0(@aws-sdk/client-sts@3.645.0))(@aws-sdk/client-sts@3.645.0))(@huggingface/inference@2.8.0)(@langchain/anthropic@0.2.17)(@langchain/cohere@0.2.2)(@langchain/google-genai@0.0.26)(@smithy/util-utf8@2.3.0)(@supabase/supabase-js@2.45.3(bufferutil@4.0.8)(utf-8-validate@6.0.4))(axios@1.7.7)(cheerio@1.0.0-rc.12)(cohere-ai@7.13.0(@aws-sdk/client-sso-oidc@3.645.0(@aws-sdk/client-sts@3.645.0)))(fast-xml-parser@4.5.0)(ignore@5.3.2)(ioredis@5.4.1(supports-color@8.1.1))(jsdom@20.0.3(bufferutil@4.0.8)(canvas@2.11.2(supports-color@8.1.1))(supports-color@8.1.1)(utf-8-validate@6.0.4))(lodash@4.17.21)(mammoth@1.8.0)(openai@4.58.1(zod@3.23.8))(pg@8.12.0)(playwright@1.47.0)(puppeteer@19.11.1(bufferutil@4.0.8)(supports-color@8.1.1)(typescript@5.3.3)(utf-8-validate@6.0.4))(ws@8.18.0(bufferutil@4.0.8)(utf-8-validate@6.0.4)))(@langchain/google-genai@0.0.26(langchain@0.2.18)(openai@4.58.1(zod@3.23.8))(zod@3.23.8))(@supabase/supabase-js@2.45.3(bufferutil@4.0.8)(utf-8-validate@6.0.4))(axios@1.7.7)(cheerio@1.0.0-rc.12)(fast-xml-parser@4.5.0)(ignore@5.3.2)(ioredis@5.4.1(supports-color@8.1.1))(jsdom@20.0.3(bufferutil@4.0.8)(canvas@2.11.2(supports-color@8.1.1))(supports-color@8.1.1)(utf-8-validate@6.0.4))(mammoth@1.8.0)(openai@4.58.1(zod@3.23.8))(playwright@1.47.0)(puppeteer@19.11.1(bufferutil@4.0.8)(supports-color@8.1.1)(typescript@5.3.3)(utf-8-validate@6.0.4))(ws@8.18.0(bufferutil@4.0.8)(utf-8-validate@6.0.4)))(openai@4.58.1(zod@3.23.8))
-      ai: 3.3.17(openai@4.58.1(zod@3.23.8))(react@18.2.0)(sswr@2.1.0(svelte@4.2.19))(svelte@4.2.19)(vue@3.5.3(typescript@5.3.3))(zod@3.23.8)
+      '@langchain/core': 0.2.31(langchain@0.2.18(gtha5yglvf6stb6xkgferi7r7u))(openai@4.58.1(zod@3.23.8))
+      ai: 3.3.44(openai@4.58.1(zod@3.23.8))(react@18.2.0)(sswr@2.1.0(svelte@4.2.19))(svelte@4.2.19)(vue@3.5.3(typescript@5.3.3))(zod@3.23.8)
       mathjs: 13.1.1
       octokit: 4.0.2
     transitivePeerDependencies:
       - babel-plugin-macros
 
-  '@ai-sdk/anthropic@0.0.47(zod@3.23.8)':
+  '@ai-sdk/anthropic@0.0.51(zod@3.23.8)':
     dependencies:
-      '@ai-sdk/provider': 0.0.21
-      '@ai-sdk/provider-utils': 1.0.16(zod@3.23.8)
+      '@ai-sdk/provider': 0.0.24
+      '@ai-sdk/provider-utils': 1.0.20(zod@3.23.8)
       zod: 3.23.8
 
-  '@ai-sdk/google@0.0.45(zod@3.23.8)':
+  '@ai-sdk/google@0.0.52(zod@3.23.8)':
     dependencies:
-      '@ai-sdk/provider': 0.0.21
-      '@ai-sdk/provider-utils': 1.0.16(zod@3.23.8)
+      '@ai-sdk/provider': 0.0.24
+      '@ai-sdk/provider-utils': 1.0.20(zod@3.23.8)
       json-schema: 0.4.0
       zod: 3.23.8
 
-  '@ai-sdk/openai@0.0.53(zod@3.23.8)':
+  '@ai-sdk/openai@0.0.68(zod@3.23.8)':
     dependencies:
-      '@ai-sdk/provider': 0.0.21
-      '@ai-sdk/provider-utils': 1.0.16(zod@3.23.8)
+      '@ai-sdk/provider': 0.0.24
+      '@ai-sdk/provider-utils': 1.0.20(zod@3.23.8)
       zod: 3.23.8
 
-  '@ai-sdk/provider-utils@1.0.16(zod@3.23.8)':
+  '@ai-sdk/provider-utils@1.0.19(zod@3.23.8)':
     dependencies:
-      '@ai-sdk/provider': 0.0.21
+      '@ai-sdk/provider': 0.0.23
       eventsource-parser: 1.1.2
       nanoid: 3.3.6
       secure-json-parse: 2.7.0
     optionalDependencies:
       zod: 3.23.8
 
-  '@ai-sdk/provider@0.0.21':
+  '@ai-sdk/provider-utils@1.0.20(zod@3.23.8)':
+    dependencies:
+      '@ai-sdk/provider': 0.0.24
+      eventsource-parser: 1.1.2
+      nanoid: 3.3.6
+      secure-json-parse: 2.7.0
+    optionalDependencies:
+      zod: 3.23.8
+
+  '@ai-sdk/provider@0.0.23':
     dependencies:
       json-schema: 0.4.0
 
-  '@ai-sdk/react@0.0.51(react@18.2.0)(zod@3.23.8)':
+  '@ai-sdk/provider@0.0.24':
     dependencies:
-      '@ai-sdk/provider-utils': 1.0.16(zod@3.23.8)
-      '@ai-sdk/ui-utils': 0.0.38(zod@3.23.8)
+      json-schema: 0.4.0
+
+  '@ai-sdk/react@0.0.59(react@18.2.0)(zod@3.23.8)':
+    dependencies:
+      '@ai-sdk/provider-utils': 1.0.19(zod@3.23.8)
+      '@ai-sdk/ui-utils': 0.0.44(zod@3.23.8)
       swr: 2.2.5(react@18.2.0)
     optionalDependencies:
       react: 18.2.0
       zod: 3.23.8
 
-  '@ai-sdk/solid@0.0.41(zod@3.23.8)':
+  '@ai-sdk/solid@0.0.47(zod@3.23.8)':
     dependencies:
-      '@ai-sdk/provider-utils': 1.0.16(zod@3.23.8)
-      '@ai-sdk/ui-utils': 0.0.38(zod@3.23.8)
+      '@ai-sdk/provider-utils': 1.0.19(zod@3.23.8)
+      '@ai-sdk/ui-utils': 0.0.44(zod@3.23.8)
     transitivePeerDependencies:
       - zod
 
-  '@ai-sdk/svelte@0.0.43(svelte@4.2.19)(zod@3.23.8)':
+  '@ai-sdk/svelte@0.0.49(svelte@4.2.19)(zod@3.23.8)':
     dependencies:
-      '@ai-sdk/provider-utils': 1.0.16(zod@3.23.8)
-      '@ai-sdk/ui-utils': 0.0.38(zod@3.23.8)
+      '@ai-sdk/provider-utils': 1.0.19(zod@3.23.8)
+      '@ai-sdk/ui-utils': 0.0.44(zod@3.23.8)
       sswr: 2.1.0(svelte@4.2.19)
     optionalDependencies:
       svelte: 4.2.19
     transitivePeerDependencies:
       - zod
 
-  '@ai-sdk/ui-utils@0.0.38(zod@3.23.8)':
+  '@ai-sdk/ui-utils@0.0.44(zod@3.23.8)':
     dependencies:
-      '@ai-sdk/provider': 0.0.21
-      '@ai-sdk/provider-utils': 1.0.16(zod@3.23.8)
+      '@ai-sdk/provider': 0.0.23
+      '@ai-sdk/provider-utils': 1.0.19(zod@3.23.8)
       json-schema: 0.4.0
       secure-json-parse: 2.7.0
       zod-to-json-schema: 3.23.2(zod@3.23.8)
     optionalDependencies:
       zod: 3.23.8
 
-  '@ai-sdk/vue@0.0.43(vue@3.5.3(typescript@5.3.3))(zod@3.23.8)':
+  '@ai-sdk/vue@0.0.51(vue@3.5.3(typescript@5.3.3))(zod@3.23.8)':
     dependencies:
-      '@ai-sdk/provider-utils': 1.0.16(zod@3.23.8)
-      '@ai-sdk/ui-utils': 0.0.38(zod@3.23.8)
+      '@ai-sdk/provider-utils': 1.0.19(zod@3.23.8)
+      '@ai-sdk/ui-utils': 0.0.44(zod@3.23.8)
       swrv: 1.0.4(vue@3.5.3(typescript@5.3.3))
     optionalDependencies:
       vue: 3.5.3(typescript@5.3.3)
@@ -12729,7 +12755,7 @@ snapshots:
   '@langchain/anthropic@0.2.17(langchain@0.2.18)(openai@4.58.1(zod@3.23.8))':
     dependencies:
       '@anthropic-ai/sdk': 0.25.2
-      '@langchain/core': 0.2.31(langchain@0.2.18(@aws-sdk/credential-provider-node@3.645.0(@aws-sdk/client-sso-oidc@3.645.0(@aws-sdk/client-sts@3.645.0))(@aws-sdk/client-sts@3.645.0))(@langchain/anthropic@0.2.17(langchain@0.2.18)(openai@4.58.1(zod@3.23.8)))(@langchain/cohere@0.2.2(@aws-sdk/client-sso-oidc@3.645.0(@aws-sdk/client-sts@3.645.0))(langchain@0.2.18)(openai@4.58.1(zod@3.23.8)))(@langchain/community@0.2.32(@aws-crypto/sha256-js@5.2.0)(@aws-sdk/credential-provider-node@3.645.0(@aws-sdk/client-sso-oidc@3.645.0(@aws-sdk/client-sts@3.645.0))(@aws-sdk/client-sts@3.645.0))(@huggingface/inference@2.8.0)(@langchain/anthropic@0.2.17)(@langchain/cohere@0.2.2)(@langchain/google-genai@0.0.26)(@smithy/util-utf8@2.3.0)(@supabase/supabase-js@2.45.3(bufferutil@4.0.8)(utf-8-validate@6.0.4))(axios@1.7.7)(cheerio@1.0.0-rc.12)(cohere-ai@7.13.0(@aws-sdk/client-sso-oidc@3.645.0(@aws-sdk/client-sts@3.645.0)))(fast-xml-parser@4.5.0)(ignore@5.3.2)(ioredis@5.4.1(supports-color@8.1.1))(jsdom@20.0.3(bufferutil@4.0.8)(canvas@2.11.2(supports-color@8.1.1))(supports-color@8.1.1)(utf-8-validate@6.0.4))(lodash@4.17.21)(mammoth@1.8.0)(openai@4.58.1(zod@3.23.8))(pg@8.12.0)(playwright@1.47.0)(puppeteer@19.11.1(bufferutil@4.0.8)(supports-color@8.1.1)(typescript@5.3.3)(utf-8-validate@6.0.4))(ws@8.18.0(bufferutil@4.0.8)(utf-8-validate@6.0.4)))(@langchain/google-genai@0.0.26(langchain@0.2.18)(openai@4.58.1(zod@3.23.8))(zod@3.23.8))(@supabase/supabase-js@2.45.3(bufferutil@4.0.8)(utf-8-validate@6.0.4))(axios@1.7.7)(cheerio@1.0.0-rc.12)(fast-xml-parser@4.5.0)(ignore@5.3.2)(ioredis@5.4.1(supports-color@8.1.1))(jsdom@20.0.3(bufferutil@4.0.8)(canvas@2.11.2(supports-color@8.1.1))(supports-color@8.1.1)(utf-8-validate@6.0.4))(mammoth@1.8.0)(openai@4.58.1(zod@3.23.8))(playwright@1.47.0)(puppeteer@19.11.1(bufferutil@4.0.8)(supports-color@8.1.1)(typescript@5.3.3)(utf-8-validate@6.0.4))(ws@8.18.0(bufferutil@4.0.8)(utf-8-validate@6.0.4)))(openai@4.58.1(zod@3.23.8))
+      '@langchain/core': 0.2.31(langchain@0.2.18(gtha5yglvf6stb6xkgferi7r7u))(openai@4.58.1(zod@3.23.8))
       fast-xml-parser: 4.5.0
       zod: 3.23.8
       zod-to-json-schema: 3.23.2(zod@3.23.8)
@@ -12740,7 +12766,7 @@ snapshots:
 
   '@langchain/cohere@0.2.2(@aws-sdk/client-sso-oidc@3.645.0(@aws-sdk/client-sts@3.645.0))(langchain@0.2.18)(openai@4.58.1(zod@3.23.8))':
     dependencies:
-      '@langchain/core': 0.2.31(langchain@0.2.18(@aws-sdk/credential-provider-node@3.645.0(@aws-sdk/client-sso-oidc@3.645.0(@aws-sdk/client-sts@3.645.0))(@aws-sdk/client-sts@3.645.0))(@langchain/anthropic@0.2.17(langchain@0.2.18)(openai@4.58.1(zod@3.23.8)))(@langchain/cohere@0.2.2(@aws-sdk/client-sso-oidc@3.645.0(@aws-sdk/client-sts@3.645.0))(langchain@0.2.18)(openai@4.58.1(zod@3.23.8)))(@langchain/community@0.2.32(@aws-crypto/sha256-js@5.2.0)(@aws-sdk/credential-provider-node@3.645.0(@aws-sdk/client-sso-oidc@3.645.0(@aws-sdk/client-sts@3.645.0))(@aws-sdk/client-sts@3.645.0))(@huggingface/inference@2.8.0)(@langchain/anthropic@0.2.17)(@langchain/cohere@0.2.2)(@langchain/google-genai@0.0.26)(@smithy/util-utf8@2.3.0)(@supabase/supabase-js@2.45.3(bufferutil@4.0.8)(utf-8-validate@6.0.4))(axios@1.7.7)(cheerio@1.0.0-rc.12)(cohere-ai@7.13.0(@aws-sdk/client-sso-oidc@3.645.0(@aws-sdk/client-sts@3.645.0)))(fast-xml-parser@4.5.0)(ignore@5.3.2)(ioredis@5.4.1(supports-color@8.1.1))(jsdom@20.0.3(bufferutil@4.0.8)(canvas@2.11.2(supports-color@8.1.1))(supports-color@8.1.1)(utf-8-validate@6.0.4))(lodash@4.17.21)(mammoth@1.8.0)(openai@4.58.1(zod@3.23.8))(pg@8.12.0)(playwright@1.47.0)(puppeteer@19.11.1(bufferutil@4.0.8)(supports-color@8.1.1)(typescript@5.3.3)(utf-8-validate@6.0.4))(ws@8.18.0(bufferutil@4.0.8)(utf-8-validate@6.0.4)))(@langchain/google-genai@0.0.26(langchain@0.2.18)(openai@4.58.1(zod@3.23.8))(zod@3.23.8))(@supabase/supabase-js@2.45.3(bufferutil@4.0.8)(utf-8-validate@6.0.4))(axios@1.7.7)(cheerio@1.0.0-rc.12)(fast-xml-parser@4.5.0)(ignore@5.3.2)(ioredis@5.4.1(supports-color@8.1.1))(jsdom@20.0.3(bufferutil@4.0.8)(canvas@2.11.2(supports-color@8.1.1))(supports-color@8.1.1)(utf-8-validate@6.0.4))(mammoth@1.8.0)(openai@4.58.1(zod@3.23.8))(playwright@1.47.0)(puppeteer@19.11.1(bufferutil@4.0.8)(supports-color@8.1.1)(typescript@5.3.3)(utf-8-validate@6.0.4))(ws@8.18.0(bufferutil@4.0.8)(utf-8-validate@6.0.4)))(openai@4.58.1(zod@3.23.8))
+      '@langchain/core': 0.2.31(langchain@0.2.18(gtha5yglvf6stb6xkgferi7r7u))(openai@4.58.1(zod@3.23.8))
       cohere-ai: 7.13.0(@aws-sdk/client-sso-oidc@3.645.0(@aws-sdk/client-sts@3.645.0))
       uuid: 10.0.0
       zod: 3.23.8
@@ -12752,13 +12778,13 @@ snapshots:
       - langchain
       - openai
 
-  ? '@langchain/community@0.0.57(@aws-crypto/sha256-js@5.2.0)(@aws-sdk/credential-provider-node@3.645.0(@aws-sdk/client-sso-oidc@3.645.0(@aws-sdk/client-sts@3.645.0))(@aws-sdk/client-sts@3.645.0))(@huggingface/inference@2.8.0)(@smithy/util-utf8@2.3.0)(@supabase/postgrest-js@1.15.8)(@supabase/supabase-js@2.45.3(bufferutil@4.0.8)(utf-8-validate@6.0.4))(cohere-ai@7.13.0(@aws-sdk/client-sso-oidc@3.645.0(@aws-sdk/client-sts@3.645.0)))(ioredis@5.4.1(supports-color@8.1.1))(jsdom@20.0.3(bufferutil@4.0.8)(canvas@2.11.2(supports-color@8.1.1))(supports-color@8.1.1)(utf-8-validate@6.0.4))(langchain@0.1.37(@aws-crypto/sha256-js@5.2.0)(@aws-sdk/credential-provider-node@3.645.0(@aws-sdk/client-sso-oidc@3.645.0(@aws-sdk/client-sts@3.645.0))(@aws-sdk/client-sts@3.645.0))(@huggingface/inference@2.8.0)(@smithy/util-utf8@2.3.0)(@supabase/postgrest-js@1.15.8)(@supabase/supabase-js@2.45.3(bufferutil@4.0.8)(utf-8-validate@6.0.4))(axios@1.7.7)(cheerio@1.0.0-rc.12)(cohere-ai@7.13.0(@aws-sdk/client-sso-oidc@3.645.0(@aws-sdk/client-sts@3.645.0)))(fast-xml-parser@4.5.0)(ignore@5.3.2)(ioredis@5.4.1(supports-color@8.1.1))(jsdom@20.0.3(bufferutil@4.0.8)(canvas@2.11.2(supports-color@8.1.1))(supports-color@8.1.1)(utf-8-validate@6.0.4))(lodash@4.17.21)(mammoth@1.8.0)(openai@4.58.1(zod@3.23.8))(pg@8.12.0)(playwright@1.47.0)(puppeteer@19.11.1(bufferutil@4.0.8)(supports-color@8.1.1)(typescript@5.3.3)(utf-8-validate@6.0.4))(ws@8.18.0(bufferutil@4.0.8)(utf-8-validate@6.0.4)))(lodash@4.17.21)(openai@4.58.1(zod@3.23.8))(pg@8.12.0)(ws@8.18.0(bufferutil@4.0.8)(utf-8-validate@6.0.4))'
-  : dependencies:
+  '@langchain/community@0.0.57(szwg7uqicxasvuzkjachuyxm7i)':
+    dependencies:
       '@langchain/core': 0.2.31(langchain@0.1.37(@aws-crypto/sha256-js@5.2.0)(@aws-sdk/credential-provider-node@3.645.0(@aws-sdk/client-sso-oidc@3.645.0(@aws-sdk/client-sts@3.645.0))(@aws-sdk/client-sts@3.645.0))(@huggingface/inference@2.8.0)(@smithy/util-utf8@2.3.0)(@supabase/postgrest-js@1.15.8)(@supabase/supabase-js@2.45.3(bufferutil@4.0.8)(utf-8-validate@6.0.4))(axios@1.7.7)(cheerio@1.0.0-rc.12)(cohere-ai@7.13.0(@aws-sdk/client-sso-oidc@3.645.0(@aws-sdk/client-sts@3.645.0)))(fast-xml-parser@4.5.0)(ignore@5.3.2)(ioredis@5.4.1(supports-color@8.1.1))(jsdom@20.0.3(bufferutil@4.0.8)(canvas@2.11.2(supports-color@8.1.1))(supports-color@8.1.1)(utf-8-validate@6.0.4))(lodash@4.17.21)(mammoth@1.8.0)(openai@4.58.1(zod@3.23.8))(pg@8.12.0)(playwright@1.47.0)(puppeteer@19.11.1(bufferutil@4.0.8)(supports-color@8.1.1)(typescript@5.3.3)(utf-8-validate@6.0.4))(ws@8.18.0(bufferutil@4.0.8)(utf-8-validate@6.0.4)))(openai@4.58.1(zod@3.23.8))
       '@langchain/openai': 0.0.28(langchain@0.1.37(@aws-crypto/sha256-js@5.2.0)(@aws-sdk/credential-provider-node@3.645.0(@aws-sdk/client-sso-oidc@3.645.0(@aws-sdk/client-sts@3.645.0))(@aws-sdk/client-sts@3.645.0))(@huggingface/inference@2.8.0)(@smithy/util-utf8@2.3.0)(@supabase/postgrest-js@1.15.8)(@supabase/supabase-js@2.45.3(bufferutil@4.0.8)(utf-8-validate@6.0.4))(axios@1.7.7)(cheerio@1.0.0-rc.12)(cohere-ai@7.13.0(@aws-sdk/client-sso-oidc@3.645.0(@aws-sdk/client-sts@3.645.0)))(fast-xml-parser@4.5.0)(ignore@5.3.2)(ioredis@5.4.1(supports-color@8.1.1))(jsdom@20.0.3(bufferutil@4.0.8)(canvas@2.11.2(supports-color@8.1.1))(supports-color@8.1.1)(utf-8-validate@6.0.4))(lodash@4.17.21)(mammoth@1.8.0)(openai@4.58.1(zod@3.23.8))(pg@8.12.0)(playwright@1.47.0)(puppeteer@19.11.1(bufferutil@4.0.8)(supports-color@8.1.1)(typescript@5.3.3)(utf-8-validate@6.0.4))(ws@8.18.0(bufferutil@4.0.8)(utf-8-validate@6.0.4)))
       expr-eval: 2.0.2
       flat: 5.0.2
-      langsmith: 0.1.51(@langchain/core@0.2.31(langchain@0.1.37(@aws-crypto/sha256-js@5.2.0)(@aws-sdk/credential-provider-node@3.645.0(@aws-sdk/client-sso-oidc@3.645.0(@aws-sdk/client-sts@3.645.0))(@aws-sdk/client-sts@3.645.0))(@huggingface/inference@2.8.0)(@smithy/util-utf8@2.3.0)(@supabase/postgrest-js@1.15.8)(@supabase/supabase-js@2.45.3(bufferutil@4.0.8)(utf-8-validate@6.0.4))(axios@1.7.7)(cheerio@1.0.0-rc.12)(cohere-ai@7.13.0(@aws-sdk/client-sso-oidc@3.645.0(@aws-sdk/client-sts@3.645.0)))(fast-xml-parser@4.5.0)(ignore@5.3.2)(ioredis@5.4.1(supports-color@8.1.1))(jsdom@20.0.3(bufferutil@4.0.8)(canvas@2.11.2(supports-color@8.1.1))(supports-color@8.1.1)(utf-8-validate@6.0.4))(lodash@4.17.21)(mammoth@1.8.0)(openai@4.58.1(zod@3.23.8))(pg@8.12.0)(playwright@1.47.0)(puppeteer@19.11.1(bufferutil@4.0.8)(supports-color@8.1.1)(typescript@5.3.3)(utf-8-validate@6.0.4))(ws@8.18.0(bufferutil@4.0.8)(utf-8-validate@6.0.4)))(openai@4.58.1(zod@3.23.8)))(langchain@0.1.37(@aws-crypto/sha256-js@5.2.0)(@aws-sdk/credential-provider-node@3.645.0(@aws-sdk/client-sso-oidc@3.645.0(@aws-sdk/client-sts@3.645.0))(@aws-sdk/client-sts@3.645.0))(@huggingface/inference@2.8.0)(@smithy/util-utf8@2.3.0)(@supabase/postgrest-js@1.15.8)(@supabase/supabase-js@2.45.3(bufferutil@4.0.8)(utf-8-validate@6.0.4))(axios@1.7.7)(cheerio@1.0.0-rc.12)(cohere-ai@7.13.0(@aws-sdk/client-sso-oidc@3.645.0(@aws-sdk/client-sts@3.645.0)))(fast-xml-parser@4.5.0)(ignore@5.3.2)(ioredis@5.4.1(supports-color@8.1.1))(jsdom@20.0.3(bufferutil@4.0.8)(canvas@2.11.2(supports-color@8.1.1))(supports-color@8.1.1)(utf-8-validate@6.0.4))(lodash@4.17.21)(mammoth@1.8.0)(openai@4.58.1(zod@3.23.8))(pg@8.12.0)(playwright@1.47.0)(puppeteer@19.11.1(bufferutil@4.0.8)(supports-color@8.1.1)(typescript@5.3.3)(utf-8-validate@6.0.4))(ws@8.18.0(bufferutil@4.0.8)(utf-8-validate@6.0.4)))(openai@4.58.1(zod@3.23.8))
+      langsmith: 0.1.51(@langchain/core@0.2.31(langchain@0.2.18(gtha5yglvf6stb6xkgferi7r7u))(openai@4.58.1(zod@3.23.8)))(langchain@0.1.37(@aws-crypto/sha256-js@5.2.0)(@aws-sdk/credential-provider-node@3.645.0(@aws-sdk/client-sso-oidc@3.645.0(@aws-sdk/client-sts@3.645.0))(@aws-sdk/client-sts@3.645.0))(@huggingface/inference@2.8.0)(@smithy/util-utf8@2.3.0)(@supabase/postgrest-js@1.15.8)(@supabase/supabase-js@2.45.3(bufferutil@4.0.8)(utf-8-validate@6.0.4))(axios@1.7.7)(cheerio@1.0.0-rc.12)(cohere-ai@7.13.0(@aws-sdk/client-sso-oidc@3.645.0(@aws-sdk/client-sts@3.645.0)))(fast-xml-parser@4.5.0)(ignore@5.3.2)(ioredis@5.4.1(supports-color@8.1.1))(jsdom@20.0.3(bufferutil@4.0.8)(canvas@2.11.2(supports-color@8.1.1))(supports-color@8.1.1)(utf-8-validate@6.0.4))(lodash@4.17.21)(mammoth@1.8.0)(openai@4.58.1(zod@3.23.8))(pg@8.12.0)(playwright@1.47.0)(puppeteer@19.11.1(bufferutil@4.0.8)(supports-color@8.1.1)(typescript@5.3.3)(utf-8-validate@6.0.4))(ws@8.18.0(bufferutil@4.0.8)(utf-8-validate@6.0.4)))(openai@4.58.1(zod@3.23.8))
       uuid: 9.0.1
       zod: 3.23.8
       zod-to-json-schema: 3.23.2(zod@3.23.8)
@@ -12782,14 +12808,14 @@ snapshots:
 
   '@langchain/community@0.2.32(@aws-crypto/sha256-js@5.2.0)(@aws-sdk/credential-provider-node@3.645.0(@aws-sdk/client-sso-oidc@3.645.0(@aws-sdk/client-sts@3.645.0))(@aws-sdk/client-sts@3.645.0))(@huggingface/inference@2.8.0)(@langchain/anthropic@0.2.17)(@langchain/cohere@0.2.2)(@langchain/google-genai@0.0.26)(@smithy/util-utf8@2.3.0)(@supabase/supabase-js@2.45.3(bufferutil@4.0.8)(utf-8-validate@6.0.4))(axios@1.7.7)(cheerio@1.0.0-rc.12)(cohere-ai@7.13.0(@aws-sdk/client-sso-oidc@3.645.0(@aws-sdk/client-sts@3.645.0)))(fast-xml-parser@4.5.0)(ignore@5.3.2)(ioredis@5.4.1(supports-color@8.1.1))(jsdom@20.0.3(bufferutil@4.0.8)(canvas@2.11.2(supports-color@8.1.1))(supports-color@8.1.1)(utf-8-validate@6.0.4))(lodash@4.17.21)(mammoth@1.8.0)(openai@4.58.1(zod@3.23.8))(pg@8.12.0)(playwright@1.47.0)(puppeteer@19.11.1(bufferutil@4.0.8)(supports-color@8.1.1)(typescript@5.3.3)(utf-8-validate@6.0.4))(ws@8.18.0(bufferutil@4.0.8)(utf-8-validate@6.0.4))':
     dependencies:
-      '@langchain/core': 0.2.31(langchain@0.2.18(@aws-sdk/credential-provider-node@3.645.0(@aws-sdk/client-sso-oidc@3.645.0(@aws-sdk/client-sts@3.645.0))(@aws-sdk/client-sts@3.645.0))(@langchain/anthropic@0.2.17(langchain@0.2.18)(openai@4.58.1(zod@3.23.8)))(@langchain/cohere@0.2.2(@aws-sdk/client-sso-oidc@3.645.0(@aws-sdk/client-sts@3.645.0))(langchain@0.2.18)(openai@4.58.1(zod@3.23.8)))(@langchain/community@0.2.32(@aws-crypto/sha256-js@5.2.0)(@aws-sdk/credential-provider-node@3.645.0(@aws-sdk/client-sso-oidc@3.645.0(@aws-sdk/client-sts@3.645.0))(@aws-sdk/client-sts@3.645.0))(@huggingface/inference@2.8.0)(@langchain/anthropic@0.2.17)(@langchain/cohere@0.2.2)(@langchain/google-genai@0.0.26)(@smithy/util-utf8@2.3.0)(@supabase/supabase-js@2.45.3(bufferutil@4.0.8)(utf-8-validate@6.0.4))(axios@1.7.7)(cheerio@1.0.0-rc.12)(cohere-ai@7.13.0(@aws-sdk/client-sso-oidc@3.645.0(@aws-sdk/client-sts@3.645.0)))(fast-xml-parser@4.5.0)(ignore@5.3.2)(ioredis@5.4.1(supports-color@8.1.1))(jsdom@20.0.3(bufferutil@4.0.8)(canvas@2.11.2(supports-color@8.1.1))(supports-color@8.1.1)(utf-8-validate@6.0.4))(lodash@4.17.21)(mammoth@1.8.0)(openai@4.58.1(zod@3.23.8))(pg@8.12.0)(playwright@1.47.0)(puppeteer@19.11.1(bufferutil@4.0.8)(supports-color@8.1.1)(typescript@5.3.3)(utf-8-validate@6.0.4))(ws@8.18.0(bufferutil@4.0.8)(utf-8-validate@6.0.4)))(@langchain/google-genai@0.0.26(langchain@0.2.18)(openai@4.58.1(zod@3.23.8))(zod@3.23.8))(@supabase/supabase-js@2.45.3(bufferutil@4.0.8)(utf-8-validate@6.0.4))(axios@1.7.7)(cheerio@1.0.0-rc.12)(fast-xml-parser@4.5.0)(ignore@5.3.2)(ioredis@5.4.1(supports-color@8.1.1))(jsdom@20.0.3(bufferutil@4.0.8)(canvas@2.11.2(supports-color@8.1.1))(supports-color@8.1.1)(utf-8-validate@6.0.4))(mammoth@1.8.0)(openai@4.58.1(zod@3.23.8))(playwright@1.47.0)(puppeteer@19.11.1(bufferutil@4.0.8)(supports-color@8.1.1)(typescript@5.3.3)(utf-8-validate@6.0.4))(ws@8.18.0(bufferutil@4.0.8)(utf-8-validate@6.0.4)))(openai@4.58.1(zod@3.23.8))
-      '@langchain/openai': 0.2.10(langchain@0.2.18(@aws-sdk/credential-provider-node@3.645.0(@aws-sdk/client-sso-oidc@3.645.0(@aws-sdk/client-sts@3.645.0))(@aws-sdk/client-sts@3.645.0))(@langchain/anthropic@0.2.17(langchain@0.2.18)(openai@4.58.1(zod@3.23.8)))(@langchain/cohere@0.2.2(@aws-sdk/client-sso-oidc@3.645.0(@aws-sdk/client-sts@3.645.0))(langchain@0.2.18)(openai@4.58.1(zod@3.23.8)))(@langchain/community@0.2.32(@aws-crypto/sha256-js@5.2.0)(@aws-sdk/credential-provider-node@3.645.0(@aws-sdk/client-sso-oidc@3.645.0(@aws-sdk/client-sts@3.645.0))(@aws-sdk/client-sts@3.645.0))(@huggingface/inference@2.8.0)(@langchain/anthropic@0.2.17)(@langchain/cohere@0.2.2)(@langchain/google-genai@0.0.26)(@smithy/util-utf8@2.3.0)(@supabase/supabase-js@2.45.3(bufferutil@4.0.8)(utf-8-validate@6.0.4))(axios@1.7.7)(cheerio@1.0.0-rc.12)(cohere-ai@7.13.0(@aws-sdk/client-sso-oidc@3.645.0(@aws-sdk/client-sts@3.645.0)))(fast-xml-parser@4.5.0)(ignore@5.3.2)(ioredis@5.4.1(supports-color@8.1.1))(jsdom@20.0.3(bufferutil@4.0.8)(canvas@2.11.2(supports-color@8.1.1))(supports-color@8.1.1)(utf-8-validate@6.0.4))(lodash@4.17.21)(mammoth@1.8.0)(openai@4.58.1(zod@3.23.8))(pg@8.12.0)(playwright@1.47.0)(puppeteer@19.11.1(bufferutil@4.0.8)(supports-color@8.1.1)(typescript@5.3.3)(utf-8-validate@6.0.4))(ws@8.18.0(bufferutil@4.0.8)(utf-8-validate@6.0.4)))(@langchain/google-genai@0.0.26(langchain@0.2.18)(openai@4.58.1(zod@3.23.8))(zod@3.23.8))(@supabase/supabase-js@2.45.3(bufferutil@4.0.8)(utf-8-validate@6.0.4))(axios@1.7.7)(cheerio@1.0.0-rc.12)(fast-xml-parser@4.5.0)(ignore@5.3.2)(ioredis@5.4.1(supports-color@8.1.1))(jsdom@20.0.3(bufferutil@4.0.8)(canvas@2.11.2(supports-color@8.1.1))(supports-color@8.1.1)(utf-8-validate@6.0.4))(mammoth@1.8.0)(openai@4.58.1(zod@3.23.8))(playwright@1.47.0)(puppeteer@19.11.1(bufferutil@4.0.8)(supports-color@8.1.1)(typescript@5.3.3)(utf-8-validate@6.0.4))(ws@8.18.0(bufferutil@4.0.8)(utf-8-validate@6.0.4)))
+      '@langchain/core': 0.2.31(langchain@0.2.18(gtha5yglvf6stb6xkgferi7r7u))(openai@4.58.1(zod@3.23.8))
+      '@langchain/openai': 0.2.10(langchain@0.2.18(gtha5yglvf6stb6xkgferi7r7u))
       binary-extensions: 2.3.0
       expr-eval: 2.0.2
       flat: 5.0.2
       js-yaml: 4.1.0
-      langchain: 0.2.18(@aws-sdk/credential-provider-node@3.645.0(@aws-sdk/client-sso-oidc@3.645.0(@aws-sdk/client-sts@3.645.0))(@aws-sdk/client-sts@3.645.0))(@langchain/anthropic@0.2.17(langchain@0.2.18)(openai@4.58.1(zod@3.23.8)))(@langchain/cohere@0.2.2(@aws-sdk/client-sso-oidc@3.645.0(@aws-sdk/client-sts@3.645.0))(langchain@0.2.18)(openai@4.58.1(zod@3.23.8)))(@langchain/community@0.2.32(@aws-crypto/sha256-js@5.2.0)(@aws-sdk/credential-provider-node@3.645.0(@aws-sdk/client-sso-oidc@3.645.0(@aws-sdk/client-sts@3.645.0))(@aws-sdk/client-sts@3.645.0))(@huggingface/inference@2.8.0)(@langchain/anthropic@0.2.17)(@langchain/cohere@0.2.2)(@langchain/google-genai@0.0.26)(@smithy/util-utf8@2.3.0)(@supabase/supabase-js@2.45.3(bufferutil@4.0.8)(utf-8-validate@6.0.4))(axios@1.7.7)(cheerio@1.0.0-rc.12)(cohere-ai@7.13.0(@aws-sdk/client-sso-oidc@3.645.0(@aws-sdk/client-sts@3.645.0)))(fast-xml-parser@4.5.0)(ignore@5.3.2)(ioredis@5.4.1(supports-color@8.1.1))(jsdom@20.0.3(bufferutil@4.0.8)(canvas@2.11.2(supports-color@8.1.1))(supports-color@8.1.1)(utf-8-validate@6.0.4))(lodash@4.17.21)(mammoth@1.8.0)(openai@4.58.1(zod@3.23.8))(pg@8.12.0)(playwright@1.47.0)(puppeteer@19.11.1(bufferutil@4.0.8)(supports-color@8.1.1)(typescript@5.3.3)(utf-8-validate@6.0.4))(ws@8.18.0(bufferutil@4.0.8)(utf-8-validate@6.0.4)))(@langchain/google-genai@0.0.26(langchain@0.2.18)(openai@4.58.1(zod@3.23.8))(zod@3.23.8))(@supabase/supabase-js@2.45.3(bufferutil@4.0.8)(utf-8-validate@6.0.4))(axios@1.7.7)(cheerio@1.0.0-rc.12)(fast-xml-parser@4.5.0)(ignore@5.3.2)(ioredis@5.4.1(supports-color@8.1.1))(jsdom@20.0.3(bufferutil@4.0.8)(canvas@2.11.2(supports-color@8.1.1))(supports-color@8.1.1)(utf-8-validate@6.0.4))(mammoth@1.8.0)(openai@4.58.1(zod@3.23.8))(playwright@1.47.0)(puppeteer@19.11.1(bufferutil@4.0.8)(supports-color@8.1.1)(typescript@5.3.3)(utf-8-validate@6.0.4))(ws@8.18.0(bufferutil@4.0.8)(utf-8-validate@6.0.4))
-      langsmith: 0.1.51(@langchain/core@0.2.31(langchain@0.2.18(@aws-sdk/credential-provider-node@3.645.0(@aws-sdk/client-sso-oidc@3.645.0(@aws-sdk/client-sts@3.645.0))(@aws-sdk/client-sts@3.645.0))(@langchain/anthropic@0.2.17(langchain@0.2.18)(openai@4.58.1(zod@3.23.8)))(@langchain/cohere@0.2.2(@aws-sdk/client-sso-oidc@3.645.0(@aws-sdk/client-sts@3.645.0))(langchain@0.2.18)(openai@4.58.1(zod@3.23.8)))(@langchain/community@0.2.32(@aws-crypto/sha256-js@5.2.0)(@aws-sdk/credential-provider-node@3.645.0(@aws-sdk/client-sso-oidc@3.645.0(@aws-sdk/client-sts@3.645.0))(@aws-sdk/client-sts@3.645.0))(@huggingface/inference@2.8.0)(@langchain/anthropic@0.2.17)(@langchain/cohere@0.2.2)(@langchain/google-genai@0.0.26)(@smithy/util-utf8@2.3.0)(@supabase/supabase-js@2.45.3(bufferutil@4.0.8)(utf-8-validate@6.0.4))(axios@1.7.7)(cheerio@1.0.0-rc.12)(cohere-ai@7.13.0(@aws-sdk/client-sso-oidc@3.645.0(@aws-sdk/client-sts@3.645.0)))(fast-xml-parser@4.5.0)(ignore@5.3.2)(ioredis@5.4.1(supports-color@8.1.1))(jsdom@20.0.3(bufferutil@4.0.8)(canvas@2.11.2(supports-color@8.1.1))(supports-color@8.1.1)(utf-8-validate@6.0.4))(lodash@4.17.21)(mammoth@1.8.0)(openai@4.58.1(zod@3.23.8))(pg@8.12.0)(playwright@1.47.0)(puppeteer@19.11.1(bufferutil@4.0.8)(supports-color@8.1.1)(typescript@5.3.3)(utf-8-validate@6.0.4))(ws@8.18.0(bufferutil@4.0.8)(utf-8-validate@6.0.4)))(@langchain/google-genai@0.0.26(langchain@0.2.18)(openai@4.58.1(zod@3.23.8))(zod@3.23.8))(@supabase/supabase-js@2.45.3(bufferutil@4.0.8)(utf-8-validate@6.0.4))(axios@1.7.7)(cheerio@1.0.0-rc.12)(fast-xml-parser@4.5.0)(ignore@5.3.2)(ioredis@5.4.1(supports-color@8.1.1))(jsdom@20.0.3(bufferutil@4.0.8)(canvas@2.11.2(supports-color@8.1.1))(supports-color@8.1.1)(utf-8-validate@6.0.4))(mammoth@1.8.0)(openai@4.58.1(zod@3.23.8))(playwright@1.47.0)(puppeteer@19.11.1(bufferutil@4.0.8)(supports-color@8.1.1)(typescript@5.3.3)(utf-8-validate@6.0.4))(ws@8.18.0(bufferutil@4.0.8)(utf-8-validate@6.0.4)))(openai@4.58.1(zod@3.23.8)))(langchain@0.2.18(@aws-sdk/credential-provider-node@3.645.0(@aws-sdk/client-sso-oidc@3.645.0(@aws-sdk/client-sts@3.645.0))(@aws-sdk/client-sts@3.645.0))(@langchain/anthropic@0.2.17(langchain@0.2.18)(openai@4.58.1(zod@3.23.8)))(@langchain/cohere@0.2.2(@aws-sdk/client-sso-oidc@3.645.0(@aws-sdk/client-sts@3.645.0))(langchain@0.2.18)(openai@4.58.1(zod@3.23.8)))(@langchain/community@0.2.32(@aws-crypto/sha256-js@5.2.0)(@aws-sdk/credential-provider-node@3.645.0(@aws-sdk/client-sso-oidc@3.645.0(@aws-sdk/client-sts@3.645.0))(@aws-sdk/client-sts@3.645.0))(@huggingface/inference@2.8.0)(@langchain/anthropic@0.2.17)(@langchain/cohere@0.2.2)(@langchain/google-genai@0.0.26)(@smithy/util-utf8@2.3.0)(@supabase/supabase-js@2.45.3(bufferutil@4.0.8)(utf-8-validate@6.0.4))(axios@1.7.7)(cheerio@1.0.0-rc.12)(cohere-ai@7.13.0(@aws-sdk/client-sso-oidc@3.645.0(@aws-sdk/client-sts@3.645.0)))(fast-xml-parser@4.5.0)(ignore@5.3.2)(ioredis@5.4.1(supports-color@8.1.1))(jsdom@20.0.3(bufferutil@4.0.8)(canvas@2.11.2(supports-color@8.1.1))(supports-color@8.1.1)(utf-8-validate@6.0.4))(lodash@4.17.21)(mammoth@1.8.0)(openai@4.58.1(zod@3.23.8))(pg@8.12.0)(playwright@1.47.0)(puppeteer@19.11.1(bufferutil@4.0.8)(supports-color@8.1.1)(typescript@5.3.3)(utf-8-validate@6.0.4))(ws@8.18.0(bufferutil@4.0.8)(utf-8-validate@6.0.4)))(@langchain/google-genai@0.0.26(langchain@0.2.18)(openai@4.58.1(zod@3.23.8))(zod@3.23.8))(@supabase/supabase-js@2.45.3(bufferutil@4.0.8)(utf-8-validate@6.0.4))(axios@1.7.7)(cheerio@1.0.0-rc.12)(fast-xml-parser@4.5.0)(ignore@5.3.2)(ioredis@5.4.1(supports-color@8.1.1))(jsdom@20.0.3(bufferutil@4.0.8)(canvas@2.11.2(supports-color@8.1.1))(supports-color@8.1.1)(utf-8-validate@6.0.4))(mammoth@1.8.0)(openai@4.58.1(zod@3.23.8))(playwright@1.47.0)(puppeteer@19.11.1(bufferutil@4.0.8)(supports-color@8.1.1)(typescript@5.3.3)(utf-8-validate@6.0.4))(ws@8.18.0(bufferutil@4.0.8)(utf-8-validate@6.0.4)))(openai@4.58.1(zod@3.23.8))
+      langchain: 0.2.18(gtha5yglvf6stb6xkgferi7r7u)
+      langsmith: 0.1.51(@langchain/core@0.2.31(langchain@0.2.18(gtha5yglvf6stb6xkgferi7r7u))(openai@4.58.1(zod@3.23.8)))(langchain@0.2.18(gtha5yglvf6stb6xkgferi7r7u))(openai@4.58.1(zod@3.23.8))
       uuid: 10.0.0
       zod: 3.23.8
       zod-to-json-schema: 3.23.2(zod@3.23.8)
@@ -12834,7 +12860,7 @@ snapshots:
       camelcase: 6.3.0
       decamelize: 1.2.0
       js-tiktoken: 1.0.14
-      langsmith: 0.1.51(@langchain/core@0.2.31(langchain@0.1.37(@aws-crypto/sha256-js@5.2.0)(@aws-sdk/credential-provider-node@3.645.0(@aws-sdk/client-sso-oidc@3.645.0(@aws-sdk/client-sts@3.645.0))(@aws-sdk/client-sts@3.645.0))(@huggingface/inference@2.8.0)(@smithy/util-utf8@2.3.0)(@supabase/postgrest-js@1.15.8)(@supabase/supabase-js@2.45.3(bufferutil@4.0.8)(utf-8-validate@6.0.4))(axios@1.7.7)(cheerio@1.0.0-rc.12)(cohere-ai@7.13.0(@aws-sdk/client-sso-oidc@3.645.0(@aws-sdk/client-sts@3.645.0)))(fast-xml-parser@4.5.0)(ignore@5.3.2)(ioredis@5.4.1(supports-color@8.1.1))(jsdom@20.0.3(bufferutil@4.0.8)(canvas@2.11.2(supports-color@8.1.1))(supports-color@8.1.1)(utf-8-validate@6.0.4))(lodash@4.17.21)(mammoth@1.8.0)(openai@4.58.1(zod@3.23.8))(pg@8.12.0)(playwright@1.47.0)(puppeteer@19.11.1(bufferutil@4.0.8)(supports-color@8.1.1)(typescript@5.3.3)(utf-8-validate@6.0.4))(ws@8.18.0(bufferutil@4.0.8)(utf-8-validate@6.0.4)))(openai@4.58.1(zod@3.23.8)))(langchain@0.1.37(@aws-crypto/sha256-js@5.2.0)(@aws-sdk/credential-provider-node@3.645.0(@aws-sdk/client-sso-oidc@3.645.0(@aws-sdk/client-sts@3.645.0))(@aws-sdk/client-sts@3.645.0))(@huggingface/inference@2.8.0)(@smithy/util-utf8@2.3.0)(@supabase/postgrest-js@1.15.8)(@supabase/supabase-js@2.45.3(bufferutil@4.0.8)(utf-8-validate@6.0.4))(axios@1.7.7)(cheerio@1.0.0-rc.12)(cohere-ai@7.13.0(@aws-sdk/client-sso-oidc@3.645.0(@aws-sdk/client-sts@3.645.0)))(fast-xml-parser@4.5.0)(ignore@5.3.2)(ioredis@5.4.1(supports-color@8.1.1))(jsdom@20.0.3(bufferutil@4.0.8)(canvas@2.11.2(supports-color@8.1.1))(supports-color@8.1.1)(utf-8-validate@6.0.4))(lodash@4.17.21)(mammoth@1.8.0)(openai@4.58.1(zod@3.23.8))(pg@8.12.0)(playwright@1.47.0)(puppeteer@19.11.1(bufferutil@4.0.8)(supports-color@8.1.1)(typescript@5.3.3)(utf-8-validate@6.0.4))(ws@8.18.0(bufferutil@4.0.8)(utf-8-validate@6.0.4)))(openai@4.58.1(zod@3.23.8))
+      langsmith: 0.1.51(@langchain/core@0.2.31(langchain@0.2.18(gtha5yglvf6stb6xkgferi7r7u))(openai@4.58.1(zod@3.23.8)))(langchain@0.1.37(@aws-crypto/sha256-js@5.2.0)(@aws-sdk/credential-provider-node@3.645.0(@aws-sdk/client-sso-oidc@3.645.0(@aws-sdk/client-sts@3.645.0))(@aws-sdk/client-sts@3.645.0))(@huggingface/inference@2.8.0)(@smithy/util-utf8@2.3.0)(@supabase/postgrest-js@1.15.8)(@supabase/supabase-js@2.45.3(bufferutil@4.0.8)(utf-8-validate@6.0.4))(axios@1.7.7)(cheerio@1.0.0-rc.12)(cohere-ai@7.13.0(@aws-sdk/client-sso-oidc@3.645.0(@aws-sdk/client-sts@3.645.0)))(fast-xml-parser@4.5.0)(ignore@5.3.2)(ioredis@5.4.1(supports-color@8.1.1))(jsdom@20.0.3(bufferutil@4.0.8)(canvas@2.11.2(supports-color@8.1.1))(supports-color@8.1.1)(utf-8-validate@6.0.4))(lodash@4.17.21)(mammoth@1.8.0)(openai@4.58.1(zod@3.23.8))(pg@8.12.0)(playwright@1.47.0)(puppeteer@19.11.1(bufferutil@4.0.8)(supports-color@8.1.1)(typescript@5.3.3)(utf-8-validate@6.0.4))(ws@8.18.0(bufferutil@4.0.8)(utf-8-validate@6.0.4)))(openai@4.58.1(zod@3.23.8))
       mustache: 4.2.0
       p-queue: 6.6.2
       p-retry: 4.6.2
@@ -12845,13 +12871,13 @@ snapshots:
       - langchain
       - openai
 
-  ? '@langchain/core@0.2.31(langchain@0.2.18(@aws-sdk/credential-provider-node@3.645.0(@aws-sdk/client-sso-oidc@3.645.0(@aws-sdk/client-sts@3.645.0))(@aws-sdk/client-sts@3.645.0))(@langchain/anthropic@0.2.17(langchain@0.2.18)(openai@4.58.1(zod@3.23.8)))(@langchain/cohere@0.2.2(@aws-sdk/client-sso-oidc@3.645.0(@aws-sdk/client-sts@3.645.0))(langchain@0.2.18)(openai@4.58.1(zod@3.23.8)))(@langchain/community@0.2.32(@aws-crypto/sha256-js@5.2.0)(@aws-sdk/credential-provider-node@3.645.0(@aws-sdk/client-sso-oidc@3.645.0(@aws-sdk/client-sts@3.645.0))(@aws-sdk/client-sts@3.645.0))(@huggingface/inference@2.8.0)(@langchain/anthropic@0.2.17)(@langchain/cohere@0.2.2)(@langchain/google-genai@0.0.26)(@smithy/util-utf8@2.3.0)(@supabase/supabase-js@2.45.3(bufferutil@4.0.8)(utf-8-validate@6.0.4))(axios@1.7.7)(cheerio@1.0.0-rc.12)(cohere-ai@7.13.0(@aws-sdk/client-sso-oidc@3.645.0(@aws-sdk/client-sts@3.645.0)))(fast-xml-parser@4.5.0)(ignore@5.3.2)(ioredis@5.4.1(supports-color@8.1.1))(jsdom@20.0.3(bufferutil@4.0.8)(canvas@2.11.2(supports-color@8.1.1))(supports-color@8.1.1)(utf-8-validate@6.0.4))(lodash@4.17.21)(mammoth@1.8.0)(openai@4.58.1(zod@3.23.8))(pg@8.12.0)(playwright@1.47.0)(puppeteer@19.11.1(bufferutil@4.0.8)(supports-color@8.1.1)(typescript@5.3.3)(utf-8-validate@6.0.4))(ws@8.18.0(bufferutil@4.0.8)(utf-8-validate@6.0.4)))(@langchain/google-genai@0.0.26(langchain@0.2.18)(openai@4.58.1(zod@3.23.8))(zod@3.23.8))(@supabase/supabase-js@2.45.3(bufferutil@4.0.8)(utf-8-validate@6.0.4))(axios@1.7.7)(cheerio@1.0.0-rc.12)(fast-xml-parser@4.5.0)(ignore@5.3.2)(ioredis@5.4.1(supports-color@8.1.1))(jsdom@20.0.3(bufferutil@4.0.8)(canvas@2.11.2(supports-color@8.1.1))(supports-color@8.1.1)(utf-8-validate@6.0.4))(mammoth@1.8.0)(openai@4.58.1(zod@3.23.8))(playwright@1.47.0)(puppeteer@19.11.1(bufferutil@4.0.8)(supports-color@8.1.1)(typescript@5.3.3)(utf-8-validate@6.0.4))(ws@8.18.0(bufferutil@4.0.8)(utf-8-validate@6.0.4)))(openai@4.58.1(zod@3.23.8))'
-  : dependencies:
+  '@langchain/core@0.2.31(langchain@0.2.18(gtha5yglvf6stb6xkgferi7r7u))(openai@4.58.1(zod@3.23.8))':
+    dependencies:
       ansi-styles: 5.2.0
       camelcase: 6.3.0
       decamelize: 1.2.0
       js-tiktoken: 1.0.14
-      langsmith: 0.1.51(@langchain/core@0.2.31(langchain@0.2.18(@aws-sdk/credential-provider-node@3.645.0(@aws-sdk/client-sso-oidc@3.645.0(@aws-sdk/client-sts@3.645.0))(@aws-sdk/client-sts@3.645.0))(@langchain/anthropic@0.2.17(langchain@0.2.18)(openai@4.58.1(zod@3.23.8)))(@langchain/cohere@0.2.2(@aws-sdk/client-sso-oidc@3.645.0(@aws-sdk/client-sts@3.645.0))(langchain@0.2.18)(openai@4.58.1(zod@3.23.8)))(@langchain/community@0.2.32(@aws-crypto/sha256-js@5.2.0)(@aws-sdk/credential-provider-node@3.645.0(@aws-sdk/client-sso-oidc@3.645.0(@aws-sdk/client-sts@3.645.0))(@aws-sdk/client-sts@3.645.0))(@huggingface/inference@2.8.0)(@langchain/anthropic@0.2.17)(@langchain/cohere@0.2.2)(@langchain/google-genai@0.0.26)(@smithy/util-utf8@2.3.0)(@supabase/supabase-js@2.45.3(bufferutil@4.0.8)(utf-8-validate@6.0.4))(axios@1.7.7)(cheerio@1.0.0-rc.12)(cohere-ai@7.13.0(@aws-sdk/client-sso-oidc@3.645.0(@aws-sdk/client-sts@3.645.0)))(fast-xml-parser@4.5.0)(ignore@5.3.2)(ioredis@5.4.1(supports-color@8.1.1))(jsdom@20.0.3(bufferutil@4.0.8)(canvas@2.11.2(supports-color@8.1.1))(supports-color@8.1.1)(utf-8-validate@6.0.4))(lodash@4.17.21)(mammoth@1.8.0)(openai@4.58.1(zod@3.23.8))(pg@8.12.0)(playwright@1.47.0)(puppeteer@19.11.1(bufferutil@4.0.8)(supports-color@8.1.1)(typescript@5.3.3)(utf-8-validate@6.0.4))(ws@8.18.0(bufferutil@4.0.8)(utf-8-validate@6.0.4)))(@langchain/google-genai@0.0.26(langchain@0.2.18)(openai@4.58.1(zod@3.23.8))(zod@3.23.8))(@supabase/supabase-js@2.45.3(bufferutil@4.0.8)(utf-8-validate@6.0.4))(axios@1.7.7)(cheerio@1.0.0-rc.12)(fast-xml-parser@4.5.0)(ignore@5.3.2)(ioredis@5.4.1(supports-color@8.1.1))(jsdom@20.0.3(bufferutil@4.0.8)(canvas@2.11.2(supports-color@8.1.1))(supports-color@8.1.1)(utf-8-validate@6.0.4))(mammoth@1.8.0)(openai@4.58.1(zod@3.23.8))(playwright@1.47.0)(puppeteer@19.11.1(bufferutil@4.0.8)(supports-color@8.1.1)(typescript@5.3.3)(utf-8-validate@6.0.4))(ws@8.18.0(bufferutil@4.0.8)(utf-8-validate@6.0.4)))(openai@4.58.1(zod@3.23.8)))(langchain@0.2.18(@aws-sdk/credential-provider-node@3.645.0(@aws-sdk/client-sso-oidc@3.645.0(@aws-sdk/client-sts@3.645.0))(@aws-sdk/client-sts@3.645.0))(@langchain/anthropic@0.2.17(langchain@0.2.18)(openai@4.58.1(zod@3.23.8)))(@langchain/cohere@0.2.2(@aws-sdk/client-sso-oidc@3.645.0(@aws-sdk/client-sts@3.645.0))(langchain@0.2.18)(openai@4.58.1(zod@3.23.8)))(@langchain/community@0.2.32(@aws-crypto/sha256-js@5.2.0)(@aws-sdk/credential-provider-node@3.645.0(@aws-sdk/client-sso-oidc@3.645.0(@aws-sdk/client-sts@3.645.0))(@aws-sdk/client-sts@3.645.0))(@huggingface/inference@2.8.0)(@langchain/anthropic@0.2.17)(@langchain/cohere@0.2.2)(@langchain/google-genai@0.0.26)(@smithy/util-utf8@2.3.0)(@supabase/supabase-js@2.45.3(bufferutil@4.0.8)(utf-8-validate@6.0.4))(axios@1.7.7)(cheerio@1.0.0-rc.12)(cohere-ai@7.13.0(@aws-sdk/client-sso-oidc@3.645.0(@aws-sdk/client-sts@3.645.0)))(fast-xml-parser@4.5.0)(ignore@5.3.2)(ioredis@5.4.1(supports-color@8.1.1))(jsdom@20.0.3(bufferutil@4.0.8)(canvas@2.11.2(supports-color@8.1.1))(supports-color@8.1.1)(utf-8-validate@6.0.4))(lodash@4.17.21)(mammoth@1.8.0)(openai@4.58.1(zod@3.23.8))(pg@8.12.0)(playwright@1.47.0)(puppeteer@19.11.1(bufferutil@4.0.8)(supports-color@8.1.1)(typescript@5.3.3)(utf-8-validate@6.0.4))(ws@8.18.0(bufferutil@4.0.8)(utf-8-validate@6.0.4)))(@langchain/google-genai@0.0.26(langchain@0.2.18)(openai@4.58.1(zod@3.23.8))(zod@3.23.8))(@supabase/supabase-js@2.45.3(bufferutil@4.0.8)(utf-8-validate@6.0.4))(axios@1.7.7)(cheerio@1.0.0-rc.12)(fast-xml-parser@4.5.0)(ignore@5.3.2)(ioredis@5.4.1(supports-color@8.1.1))(jsdom@20.0.3(bufferutil@4.0.8)(canvas@2.11.2(supports-color@8.1.1))(supports-color@8.1.1)(utf-8-validate@6.0.4))(mammoth@1.8.0)(openai@4.58.1(zod@3.23.8))(playwright@1.47.0)(puppeteer@19.11.1(bufferutil@4.0.8)(supports-color@8.1.1)(typescript@5.3.3)(utf-8-validate@6.0.4))(ws@8.18.0(bufferutil@4.0.8)(utf-8-validate@6.0.4)))(openai@4.58.1(zod@3.23.8))
+      langsmith: 0.1.51(@langchain/core@0.2.31(langchain@0.2.18(gtha5yglvf6stb6xkgferi7r7u))(openai@4.58.1(zod@3.23.8)))(langchain@0.2.18(gtha5yglvf6stb6xkgferi7r7u))(openai@4.58.1(zod@3.23.8))
       mustache: 4.2.0
       p-queue: 6.6.2
       p-retry: 4.6.2
@@ -12865,7 +12891,7 @@ snapshots:
   '@langchain/google-genai@0.0.26(langchain@0.2.18)(openai@4.58.1(zod@3.23.8))(zod@3.23.8)':
     dependencies:
       '@google/generative-ai': 0.7.1
-      '@langchain/core': 0.2.31(langchain@0.2.18(@aws-sdk/credential-provider-node@3.645.0(@aws-sdk/client-sso-oidc@3.645.0(@aws-sdk/client-sts@3.645.0))(@aws-sdk/client-sts@3.645.0))(@langchain/anthropic@0.2.17(langchain@0.2.18)(openai@4.58.1(zod@3.23.8)))(@langchain/cohere@0.2.2(@aws-sdk/client-sso-oidc@3.645.0(@aws-sdk/client-sts@3.645.0))(langchain@0.2.18)(openai@4.58.1(zod@3.23.8)))(@langchain/community@0.2.32(@aws-crypto/sha256-js@5.2.0)(@aws-sdk/credential-provider-node@3.645.0(@aws-sdk/client-sso-oidc@3.645.0(@aws-sdk/client-sts@3.645.0))(@aws-sdk/client-sts@3.645.0))(@huggingface/inference@2.8.0)(@langchain/anthropic@0.2.17)(@langchain/cohere@0.2.2)(@langchain/google-genai@0.0.26)(@smithy/util-utf8@2.3.0)(@supabase/supabase-js@2.45.3(bufferutil@4.0.8)(utf-8-validate@6.0.4))(axios@1.7.7)(cheerio@1.0.0-rc.12)(cohere-ai@7.13.0(@aws-sdk/client-sso-oidc@3.645.0(@aws-sdk/client-sts@3.645.0)))(fast-xml-parser@4.5.0)(ignore@5.3.2)(ioredis@5.4.1(supports-color@8.1.1))(jsdom@20.0.3(bufferutil@4.0.8)(canvas@2.11.2(supports-color@8.1.1))(supports-color@8.1.1)(utf-8-validate@6.0.4))(lodash@4.17.21)(mammoth@1.8.0)(openai@4.58.1(zod@3.23.8))(pg@8.12.0)(playwright@1.47.0)(puppeteer@19.11.1(bufferutil@4.0.8)(supports-color@8.1.1)(typescript@5.3.3)(utf-8-validate@6.0.4))(ws@8.18.0(bufferutil@4.0.8)(utf-8-validate@6.0.4)))(@langchain/google-genai@0.0.26(langchain@0.2.18)(openai@4.58.1(zod@3.23.8))(zod@3.23.8))(@supabase/supabase-js@2.45.3(bufferutil@4.0.8)(utf-8-validate@6.0.4))(axios@1.7.7)(cheerio@1.0.0-rc.12)(fast-xml-parser@4.5.0)(ignore@5.3.2)(ioredis@5.4.1(supports-color@8.1.1))(jsdom@20.0.3(bufferutil@4.0.8)(canvas@2.11.2(supports-color@8.1.1))(supports-color@8.1.1)(utf-8-validate@6.0.4))(mammoth@1.8.0)(openai@4.58.1(zod@3.23.8))(playwright@1.47.0)(puppeteer@19.11.1(bufferutil@4.0.8)(supports-color@8.1.1)(typescript@5.3.3)(utf-8-validate@6.0.4))(ws@8.18.0(bufferutil@4.0.8)(utf-8-validate@6.0.4)))(openai@4.58.1(zod@3.23.8))
+      '@langchain/core': 0.2.31(langchain@0.2.18(gtha5yglvf6stb6xkgferi7r7u))(openai@4.58.1(zod@3.23.8))
       zod-to-json-schema: 3.23.2(zod@3.23.8)
     transitivePeerDependencies:
       - langchain
@@ -12883,9 +12909,9 @@ snapshots:
       - encoding
       - langchain
 
-  ? '@langchain/openai@0.2.10(langchain@0.2.18(@aws-sdk/credential-provider-node@3.645.0(@aws-sdk/client-sso-oidc@3.645.0(@aws-sdk/client-sts@3.645.0))(@aws-sdk/client-sts@3.645.0))(@langchain/anthropic@0.2.17(langchain@0.2.18)(openai@4.58.1(zod@3.23.8)))(@langchain/cohere@0.2.2(@aws-sdk/client-sso-oidc@3.645.0(@aws-sdk/client-sts@3.645.0))(langchain@0.2.18)(openai@4.58.1(zod@3.23.8)))(@langchain/community@0.2.32(@aws-crypto/sha256-js@5.2.0)(@aws-sdk/credential-provider-node@3.645.0(@aws-sdk/client-sso-oidc@3.645.0(@aws-sdk/client-sts@3.645.0))(@aws-sdk/client-sts@3.645.0))(@huggingface/inference@2.8.0)(@langchain/anthropic@0.2.17)(@langchain/cohere@0.2.2)(@langchain/google-genai@0.0.26)(@smithy/util-utf8@2.3.0)(@supabase/supabase-js@2.45.3(bufferutil@4.0.8)(utf-8-validate@6.0.4))(axios@1.7.7)(cheerio@1.0.0-rc.12)(cohere-ai@7.13.0(@aws-sdk/client-sso-oidc@3.645.0(@aws-sdk/client-sts@3.645.0)))(fast-xml-parser@4.5.0)(ignore@5.3.2)(ioredis@5.4.1(supports-color@8.1.1))(jsdom@20.0.3(bufferutil@4.0.8)(canvas@2.11.2(supports-color@8.1.1))(supports-color@8.1.1)(utf-8-validate@6.0.4))(lodash@4.17.21)(mammoth@1.8.0)(openai@4.58.1(zod@3.23.8))(pg@8.12.0)(playwright@1.47.0)(puppeteer@19.11.1(bufferutil@4.0.8)(supports-color@8.1.1)(typescript@5.3.3)(utf-8-validate@6.0.4))(ws@8.18.0(bufferutil@4.0.8)(utf-8-validate@6.0.4)))(@langchain/google-genai@0.0.26(langchain@0.2.18)(openai@4.58.1(zod@3.23.8))(zod@3.23.8))(@supabase/supabase-js@2.45.3(bufferutil@4.0.8)(utf-8-validate@6.0.4))(axios@1.7.7)(cheerio@1.0.0-rc.12)(fast-xml-parser@4.5.0)(ignore@5.3.2)(ioredis@5.4.1(supports-color@8.1.1))(jsdom@20.0.3(bufferutil@4.0.8)(canvas@2.11.2(supports-color@8.1.1))(supports-color@8.1.1)(utf-8-validate@6.0.4))(mammoth@1.8.0)(openai@4.58.1(zod@3.23.8))(playwright@1.47.0)(puppeteer@19.11.1(bufferutil@4.0.8)(supports-color@8.1.1)(typescript@5.3.3)(utf-8-validate@6.0.4))(ws@8.18.0(bufferutil@4.0.8)(utf-8-validate@6.0.4)))'
-  : dependencies:
-      '@langchain/core': 0.2.31(langchain@0.2.18(@aws-sdk/credential-provider-node@3.645.0(@aws-sdk/client-sso-oidc@3.645.0(@aws-sdk/client-sts@3.645.0))(@aws-sdk/client-sts@3.645.0))(@langchain/anthropic@0.2.17(langchain@0.2.18)(openai@4.58.1(zod@3.23.8)))(@langchain/cohere@0.2.2(@aws-sdk/client-sso-oidc@3.645.0(@aws-sdk/client-sts@3.645.0))(langchain@0.2.18)(openai@4.58.1(zod@3.23.8)))(@langchain/community@0.2.32(@aws-crypto/sha256-js@5.2.0)(@aws-sdk/credential-provider-node@3.645.0(@aws-sdk/client-sso-oidc@3.645.0(@aws-sdk/client-sts@3.645.0))(@aws-sdk/client-sts@3.645.0))(@huggingface/inference@2.8.0)(@langchain/anthropic@0.2.17)(@langchain/cohere@0.2.2)(@langchain/google-genai@0.0.26)(@smithy/util-utf8@2.3.0)(@supabase/supabase-js@2.45.3(bufferutil@4.0.8)(utf-8-validate@6.0.4))(axios@1.7.7)(cheerio@1.0.0-rc.12)(cohere-ai@7.13.0(@aws-sdk/client-sso-oidc@3.645.0(@aws-sdk/client-sts@3.645.0)))(fast-xml-parser@4.5.0)(ignore@5.3.2)(ioredis@5.4.1(supports-color@8.1.1))(jsdom@20.0.3(bufferutil@4.0.8)(canvas@2.11.2(supports-color@8.1.1))(supports-color@8.1.1)(utf-8-validate@6.0.4))(lodash@4.17.21)(mammoth@1.8.0)(openai@4.58.1(zod@3.23.8))(pg@8.12.0)(playwright@1.47.0)(puppeteer@19.11.1(bufferutil@4.0.8)(supports-color@8.1.1)(typescript@5.3.3)(utf-8-validate@6.0.4))(ws@8.18.0(bufferutil@4.0.8)(utf-8-validate@6.0.4)))(@langchain/google-genai@0.0.26(langchain@0.2.18)(openai@4.58.1(zod@3.23.8))(zod@3.23.8))(@supabase/supabase-js@2.45.3(bufferutil@4.0.8)(utf-8-validate@6.0.4))(axios@1.7.7)(cheerio@1.0.0-rc.12)(fast-xml-parser@4.5.0)(ignore@5.3.2)(ioredis@5.4.1(supports-color@8.1.1))(jsdom@20.0.3(bufferutil@4.0.8)(canvas@2.11.2(supports-color@8.1.1))(supports-color@8.1.1)(utf-8-validate@6.0.4))(mammoth@1.8.0)(openai@4.58.1(zod@3.23.8))(playwright@1.47.0)(puppeteer@19.11.1(bufferutil@4.0.8)(supports-color@8.1.1)(typescript@5.3.3)(utf-8-validate@6.0.4))(ws@8.18.0(bufferutil@4.0.8)(utf-8-validate@6.0.4)))(openai@4.58.1(zod@3.23.8))
+  '@langchain/openai@0.2.10(langchain@0.2.18(gtha5yglvf6stb6xkgferi7r7u))':
+    dependencies:
+      '@langchain/core': 0.2.31(langchain@0.2.18(gtha5yglvf6stb6xkgferi7r7u))(openai@4.58.1(zod@3.23.8))
       js-tiktoken: 1.0.14
       openai: 4.58.1(zod@3.23.8)
       zod: 3.23.8
@@ -12902,9 +12928,9 @@ snapshots:
       - langchain
       - openai
 
-  ? '@langchain/textsplitters@0.0.3(langchain@0.2.18(@aws-sdk/credential-provider-node@3.645.0(@aws-sdk/client-sso-oidc@3.645.0(@aws-sdk/client-sts@3.645.0))(@aws-sdk/client-sts@3.645.0))(@langchain/anthropic@0.2.17(langchain@0.2.18)(openai@4.58.1(zod@3.23.8)))(@langchain/cohere@0.2.2(@aws-sdk/client-sso-oidc@3.645.0(@aws-sdk/client-sts@3.645.0))(langchain@0.2.18)(openai@4.58.1(zod@3.23.8)))(@langchain/community@0.2.32(@aws-crypto/sha256-js@5.2.0)(@aws-sdk/credential-provider-node@3.645.0(@aws-sdk/client-sso-oidc@3.645.0(@aws-sdk/client-sts@3.645.0))(@aws-sdk/client-sts@3.645.0))(@huggingface/inference@2.8.0)(@langchain/anthropic@0.2.17)(@langchain/cohere@0.2.2)(@langchain/google-genai@0.0.26)(@smithy/util-utf8@2.3.0)(@supabase/supabase-js@2.45.3(bufferutil@4.0.8)(utf-8-validate@6.0.4))(axios@1.7.7)(cheerio@1.0.0-rc.12)(cohere-ai@7.13.0(@aws-sdk/client-sso-oidc@3.645.0(@aws-sdk/client-sts@3.645.0)))(fast-xml-parser@4.5.0)(ignore@5.3.2)(ioredis@5.4.1(supports-color@8.1.1))(jsdom@20.0.3(bufferutil@4.0.8)(canvas@2.11.2(supports-color@8.1.1))(supports-color@8.1.1)(utf-8-validate@6.0.4))(lodash@4.17.21)(mammoth@1.8.0)(openai@4.58.1(zod@3.23.8))(pg@8.12.0)(playwright@1.47.0)(puppeteer@19.11.1(bufferutil@4.0.8)(supports-color@8.1.1)(typescript@5.3.3)(utf-8-validate@6.0.4))(ws@8.18.0(bufferutil@4.0.8)(utf-8-validate@6.0.4)))(@langchain/google-genai@0.0.26(langchain@0.2.18)(openai@4.58.1(zod@3.23.8))(zod@3.23.8))(@supabase/supabase-js@2.45.3(bufferutil@4.0.8)(utf-8-validate@6.0.4))(axios@1.7.7)(cheerio@1.0.0-rc.12)(fast-xml-parser@4.5.0)(ignore@5.3.2)(ioredis@5.4.1(supports-color@8.1.1))(jsdom@20.0.3(bufferutil@4.0.8)(canvas@2.11.2(supports-color@8.1.1))(supports-color@8.1.1)(utf-8-validate@6.0.4))(mammoth@1.8.0)(openai@4.58.1(zod@3.23.8))(playwright@1.47.0)(puppeteer@19.11.1(bufferutil@4.0.8)(supports-color@8.1.1)(typescript@5.3.3)(utf-8-validate@6.0.4))(ws@8.18.0(bufferutil@4.0.8)(utf-8-validate@6.0.4)))(openai@4.58.1(zod@3.23.8))'
-  : dependencies:
-      '@langchain/core': 0.2.31(langchain@0.2.18(@aws-sdk/credential-provider-node@3.645.0(@aws-sdk/client-sso-oidc@3.645.0(@aws-sdk/client-sts@3.645.0))(@aws-sdk/client-sts@3.645.0))(@langchain/anthropic@0.2.17(langchain@0.2.18)(openai@4.58.1(zod@3.23.8)))(@langchain/cohere@0.2.2(@aws-sdk/client-sso-oidc@3.645.0(@aws-sdk/client-sts@3.645.0))(langchain@0.2.18)(openai@4.58.1(zod@3.23.8)))(@langchain/community@0.2.32(@aws-crypto/sha256-js@5.2.0)(@aws-sdk/credential-provider-node@3.645.0(@aws-sdk/client-sso-oidc@3.645.0(@aws-sdk/client-sts@3.645.0))(@aws-sdk/client-sts@3.645.0))(@huggingface/inference@2.8.0)(@langchain/anthropic@0.2.17)(@langchain/cohere@0.2.2)(@langchain/google-genai@0.0.26)(@smithy/util-utf8@2.3.0)(@supabase/supabase-js@2.45.3(bufferutil@4.0.8)(utf-8-validate@6.0.4))(axios@1.7.7)(cheerio@1.0.0-rc.12)(cohere-ai@7.13.0(@aws-sdk/client-sso-oidc@3.645.0(@aws-sdk/client-sts@3.645.0)))(fast-xml-parser@4.5.0)(ignore@5.3.2)(ioredis@5.4.1(supports-color@8.1.1))(jsdom@20.0.3(bufferutil@4.0.8)(canvas@2.11.2(supports-color@8.1.1))(supports-color@8.1.1)(utf-8-validate@6.0.4))(lodash@4.17.21)(mammoth@1.8.0)(openai@4.58.1(zod@3.23.8))(pg@8.12.0)(playwright@1.47.0)(puppeteer@19.11.1(bufferutil@4.0.8)(supports-color@8.1.1)(typescript@5.3.3)(utf-8-validate@6.0.4))(ws@8.18.0(bufferutil@4.0.8)(utf-8-validate@6.0.4)))(@langchain/google-genai@0.0.26(langchain@0.2.18)(openai@4.58.1(zod@3.23.8))(zod@3.23.8))(@supabase/supabase-js@2.45.3(bufferutil@4.0.8)(utf-8-validate@6.0.4))(axios@1.7.7)(cheerio@1.0.0-rc.12)(fast-xml-parser@4.5.0)(ignore@5.3.2)(ioredis@5.4.1(supports-color@8.1.1))(jsdom@20.0.3(bufferutil@4.0.8)(canvas@2.11.2(supports-color@8.1.1))(supports-color@8.1.1)(utf-8-validate@6.0.4))(mammoth@1.8.0)(openai@4.58.1(zod@3.23.8))(playwright@1.47.0)(puppeteer@19.11.1(bufferutil@4.0.8)(supports-color@8.1.1)(typescript@5.3.3)(utf-8-validate@6.0.4))(ws@8.18.0(bufferutil@4.0.8)(utf-8-validate@6.0.4)))(openai@4.58.1(zod@3.23.8))
+  '@langchain/textsplitters@0.0.3(langchain@0.2.18(gtha5yglvf6stb6xkgferi7r7u))(openai@4.58.1(zod@3.23.8))':
+    dependencies:
+      '@langchain/core': 0.2.31(langchain@0.2.18(gtha5yglvf6stb6xkgferi7r7u))(openai@4.58.1(zod@3.23.8))
       js-tiktoken: 1.0.14
     transitivePeerDependencies:
       - langchain
@@ -13101,12 +13127,12 @@ snapshots:
     optionalDependencies:
       '@types/react': 18.2.55
 
-  '@next-auth/prisma-adapter@1.0.7(@prisma/client@5.19.1(prisma@5.19.1))(next-auth@4.24.7(next@14.2.0(@babel/core@7.25.2(supports-color@8.1.1))(@opentelemetry/api@1.9.0)(@playwright/test@1.47.0)(babel-plugin-macros@3.1.0)(react-dom@18.2.0(react@18.2.0))(react@18.2.0))(nodemailer@6.9.15)(react-dom@18.2.0(react@18.2.0))(react@18.2.0))':
+  '@next-auth/prisma-adapter@1.0.7(@prisma/client@5.19.1(prisma@5.19.1))(next-auth@4.24.7(next@14.2.15(@babel/core@7.25.2(supports-color@8.1.1))(@opentelemetry/api@1.9.0)(@playwright/test@1.47.0)(babel-plugin-macros@3.1.0)(react-dom@18.2.0(react@18.2.0))(react@18.2.0))(nodemailer@6.9.15)(react-dom@18.2.0(react@18.2.0))(react@18.2.0))':
     dependencies:
       '@prisma/client': 5.19.1(prisma@5.19.1)
-      next-auth: 4.24.7(next@14.2.0(@babel/core@7.25.2(supports-color@8.1.1))(@opentelemetry/api@1.9.0)(@playwright/test@1.47.0)(babel-plugin-macros@3.1.0)(react-dom@18.2.0(react@18.2.0))(react@18.2.0))(nodemailer@6.9.15)(react-dom@18.2.0(react@18.2.0))(react@18.2.0)
+      next-auth: 4.24.7(next@14.2.15(@babel/core@7.25.2(supports-color@8.1.1))(@opentelemetry/api@1.9.0)(@playwright/test@1.47.0)(babel-plugin-macros@3.1.0)(react-dom@18.2.0(react@18.2.0))(react@18.2.0))(nodemailer@6.9.15)(react-dom@18.2.0(react@18.2.0))(react@18.2.0)
 
-  '@next/env@14.2.0': {}
+  '@next/env@14.2.15': {}
 
   '@next/eslint-plugin-next@14.1.0':
     dependencies:
@@ -13119,31 +13145,31 @@ snapshots:
       '@mdx-js/loader': 3.0.1(supports-color@8.1.1)(webpack@5.94.0)
       '@mdx-js/react': 3.0.1(@types/react@18.2.55)(react@18.2.0)
 
-  '@next/swc-darwin-arm64@14.2.0':
+  '@next/swc-darwin-arm64@14.2.15':
     optional: true
 
-  '@next/swc-darwin-x64@14.2.0':
+  '@next/swc-darwin-x64@14.2.15':
     optional: true
 
-  '@next/swc-linux-arm64-gnu@14.2.0':
+  '@next/swc-linux-arm64-gnu@14.2.15':
     optional: true
 
-  '@next/swc-linux-arm64-musl@14.2.0':
+  '@next/swc-linux-arm64-musl@14.2.15':
     optional: true
 
-  '@next/swc-linux-x64-gnu@14.2.0':
+  '@next/swc-linux-x64-gnu@14.2.15':
     optional: true
 
-  '@next/swc-linux-x64-musl@14.2.0':
+  '@next/swc-linux-x64-musl@14.2.15':
     optional: true
 
-  '@next/swc-win32-arm64-msvc@14.2.0':
+  '@next/swc-win32-arm64-msvc@14.2.15':
     optional: true
 
-  '@next/swc-win32-ia32-msvc@14.2.0':
+  '@next/swc-win32-ia32-msvc@14.2.15':
     optional: true
 
-  '@next/swc-win32-x64-msvc@14.2.0':
+  '@next/swc-win32-x64-msvc@14.2.15':
     optional: true
 
   '@nodelib/fs.scandir@2.1.5':
@@ -15200,10 +15226,10 @@ snapshots:
       '@types/react': 18.2.55
       '@types/react-dom': 18.2.19
 
-  '@react-buddy/ide-toolbox-next@2.4.1(next@14.2.0(@babel/core@7.25.2(supports-color@8.1.1))(@opentelemetry/api@1.9.0)(@playwright/test@1.47.0)(babel-plugin-macros@3.1.0)(react-dom@18.2.0(react@18.2.0))(react@18.2.0))(react@18.2.0)':
+  '@react-buddy/ide-toolbox-next@2.4.1(next@14.2.15(@babel/core@7.25.2(supports-color@8.1.1))(@opentelemetry/api@1.9.0)(@playwright/test@1.47.0)(babel-plugin-macros@3.1.0)(react-dom@18.2.0(react@18.2.0))(react@18.2.0))(react@18.2.0)':
     dependencies:
       '@react-buddy/ide-toolbox': 2.4.0(react@18.2.0)
-      next: 14.2.0(@babel/core@7.25.2(supports-color@8.1.1))(@opentelemetry/api@1.9.0)(@playwright/test@1.47.0)(babel-plugin-macros@3.1.0)(react-dom@18.2.0(react@18.2.0))(react@18.2.0)
+      next: 14.2.15(@babel/core@7.25.2(supports-color@8.1.1))(@opentelemetry/api@1.9.0)(@playwright/test@1.47.0)(babel-plugin-macros@3.1.0)(react-dom@18.2.0(react@18.2.0))(react@18.2.0)
       react: 18.2.0
 
   '@react-buddy/ide-toolbox@2.4.0(react@18.2.0)':
@@ -15330,7 +15356,7 @@ snapshots:
       '@sentry/types': 8.28.0
       '@sentry/utils': 8.28.0
 
-  '@sentry/nextjs@8.28.0(@opentelemetry/api@1.9.0)(@opentelemetry/core@1.26.0(@opentelemetry/api@1.9.0))(@opentelemetry/instrumentation@0.52.1(@opentelemetry/api@1.9.0)(supports-color@8.1.1))(@opentelemetry/sdk-trace-base@1.26.0(@opentelemetry/api@1.9.0))(next@14.2.0(@babel/core@7.25.2(supports-color@8.1.1))(@opentelemetry/api@1.9.0)(@playwright/test@1.47.0)(babel-plugin-macros@3.1.0)(react-dom@18.2.0(react@18.2.0))(react@18.2.0))(react@18.2.0)(supports-color@8.1.1)(webpack@5.94.0)':
+  '@sentry/nextjs@8.28.0(@opentelemetry/api@1.9.0)(@opentelemetry/core@1.26.0(@opentelemetry/api@1.9.0))(@opentelemetry/instrumentation@0.52.1(@opentelemetry/api@1.9.0)(supports-color@8.1.1))(@opentelemetry/sdk-trace-base@1.26.0(@opentelemetry/api@1.9.0))(next@14.2.15(@babel/core@7.25.2(supports-color@8.1.1))(@opentelemetry/api@1.9.0)(@playwright/test@1.47.0)(babel-plugin-macros@3.1.0)(react-dom@18.2.0(react@18.2.0))(react@18.2.0))(react@18.2.0)(supports-color@8.1.1)(webpack@5.94.0)':
     dependencies:
       '@opentelemetry/instrumentation-http': 0.52.1(@opentelemetry/api@1.9.0)(supports-color@8.1.1)
       '@opentelemetry/semantic-conventions': 1.27.0
@@ -15344,7 +15370,7 @@ snapshots:
       '@sentry/vercel-edge': 8.28.0
       '@sentry/webpack-plugin': 2.22.3(supports-color@8.1.1)(webpack@5.94.0)
       chalk: 3.0.0
-      next: 14.2.0(@babel/core@7.25.2(supports-color@8.1.1))(@opentelemetry/api@1.9.0)(@playwright/test@1.47.0)(babel-plugin-macros@3.1.0)(react-dom@18.2.0(react@18.2.0))(react@18.2.0)
+      next: 14.2.15(@babel/core@7.25.2(supports-color@8.1.1))(@opentelemetry/api@1.9.0)(@playwright/test@1.47.0)(babel-plugin-macros@3.1.0)(react-dom@18.2.0(react@18.2.0))(react@18.2.0)
       resolve: 1.22.8
       rollup: 3.29.4
       stacktrace-parser: 0.1.10
@@ -15949,11 +15975,11 @@ snapshots:
       - supports-color
       - utf-8-validate
 
-  '@trigger.dev/nextjs@3.0.0-beta.56(@trigger.dev/sdk@3.0.0-beta.56(bufferutil@4.0.8)(supports-color@8.1.1)(typescript@5.3.3)(utf-8-validate@6.0.4))(next@14.2.0(@babel/core@7.25.2(supports-color@8.1.1))(@opentelemetry/api@1.9.0)(@playwright/test@1.47.0)(babel-plugin-macros@3.1.0)(react-dom@18.2.0(react@18.2.0))(react@18.2.0))(supports-color@8.1.1)':
+  '@trigger.dev/nextjs@3.0.0-beta.56(@trigger.dev/sdk@3.0.0-beta.56(bufferutil@4.0.8)(supports-color@8.1.1)(typescript@5.3.3)(utf-8-validate@6.0.4))(next@14.2.15(@babel/core@7.25.2(supports-color@8.1.1))(@opentelemetry/api@1.9.0)(@playwright/test@1.47.0)(babel-plugin-macros@3.1.0)(react-dom@18.2.0(react@18.2.0))(react@18.2.0))(supports-color@8.1.1)':
     dependencies:
       '@trigger.dev/sdk': 3.0.0-beta.56(bufferutil@4.0.8)(supports-color@8.1.1)(typescript@5.3.3)(utf-8-validate@6.0.4)
       debug: 4.3.7(supports-color@8.1.1)
-      next: 14.2.0(@babel/core@7.25.2(supports-color@8.1.1))(@opentelemetry/api@1.9.0)(@playwright/test@1.47.0)(babel-plugin-macros@3.1.0)(react-dom@18.2.0(react@18.2.0))(react@18.2.0)
+      next: 14.2.15(@babel/core@7.25.2(supports-color@8.1.1))(@opentelemetry/api@1.9.0)(@playwright/test@1.47.0)(babel-plugin-macros@3.1.0)(react-dom@18.2.0(react@18.2.0))(react@18.2.0)
     transitivePeerDependencies:
       - supports-color
 
@@ -16336,11 +16362,11 @@ snapshots:
 
   '@ungap/structured-clone@1.2.0': {}
 
-  '@vercel/analytics@1.3.1(next@14.2.0(@babel/core@7.25.2(supports-color@8.1.1))(@opentelemetry/api@1.9.0)(@playwright/test@1.47.0)(babel-plugin-macros@3.1.0)(react-dom@18.2.0(react@18.2.0))(react@18.2.0))(react@18.2.0)':
+  '@vercel/analytics@1.3.1(next@14.2.15(@babel/core@7.25.2(supports-color@8.1.1))(@opentelemetry/api@1.9.0)(@playwright/test@1.47.0)(babel-plugin-macros@3.1.0)(react-dom@18.2.0(react@18.2.0))(react@18.2.0))(react@18.2.0)':
     dependencies:
       server-only: 0.0.1
     optionalDependencies:
-      next: 14.2.0(@babel/core@7.25.2(supports-color@8.1.1))(@opentelemetry/api@1.9.0)(@playwright/test@1.47.0)(babel-plugin-macros@3.1.0)(react-dom@18.2.0(react@18.2.0))(react@18.2.0)
+      next: 14.2.15(@babel/core@7.25.2(supports-color@8.1.1))(@opentelemetry/api@1.9.0)(@playwright/test@1.47.0)(babel-plugin-macros@3.1.0)(react-dom@18.2.0(react@18.2.0))(react@18.2.0)
       react: 18.2.0
 
   '@vercel/blob@0.23.4':
@@ -16533,15 +16559,15 @@ snapshots:
     dependencies:
       humanize-ms: 1.2.1
 
-  ai@3.3.17(openai@4.58.1(zod@3.23.8))(react@18.2.0)(sswr@2.1.0(svelte@4.2.19))(svelte@4.2.19)(vue@3.5.3(typescript@5.3.3))(zod@3.23.8):
+  ai@3.3.44(openai@4.58.1(zod@3.23.8))(react@18.2.0)(sswr@2.1.0(svelte@4.2.19))(svelte@4.2.19)(vue@3.5.3(typescript@5.3.3))(zod@3.23.8):
     dependencies:
-      '@ai-sdk/provider': 0.0.21
-      '@ai-sdk/provider-utils': 1.0.16(zod@3.23.8)
-      '@ai-sdk/react': 0.0.51(react@18.2.0)(zod@3.23.8)
-      '@ai-sdk/solid': 0.0.41(zod@3.23.8)
-      '@ai-sdk/svelte': 0.0.43(svelte@4.2.19)(zod@3.23.8)
-      '@ai-sdk/ui-utils': 0.0.38(zod@3.23.8)
-      '@ai-sdk/vue': 0.0.43(vue@3.5.3(typescript@5.3.3))(zod@3.23.8)
+      '@ai-sdk/provider': 0.0.23
+      '@ai-sdk/provider-utils': 1.0.19(zod@3.23.8)
+      '@ai-sdk/react': 0.0.59(react@18.2.0)(zod@3.23.8)
+      '@ai-sdk/solid': 0.0.47(zod@3.23.8)
+      '@ai-sdk/svelte': 0.0.49(svelte@4.2.19)(zod@3.23.8)
+      '@ai-sdk/ui-utils': 0.0.44(zod@3.23.8)
+      '@ai-sdk/vue': 0.0.51(vue@3.5.3(typescript@5.3.3))(zod@3.23.8)
       '@opentelemetry/api': 1.9.0
       eventsource-parser: 1.1.2
       json-schema: 0.4.0
@@ -19784,7 +19810,7 @@ snapshots:
   langchain@0.1.37(@aws-crypto/sha256-js@5.2.0)(@aws-sdk/credential-provider-node@3.645.0(@aws-sdk/client-sso-oidc@3.645.0(@aws-sdk/client-sts@3.645.0))(@aws-sdk/client-sts@3.645.0))(@huggingface/inference@2.8.0)(@smithy/util-utf8@2.3.0)(@supabase/postgrest-js@1.15.8)(@supabase/supabase-js@2.45.3(bufferutil@4.0.8)(utf-8-validate@6.0.4))(axios@1.7.7)(cheerio@1.0.0-rc.12)(cohere-ai@7.13.0(@aws-sdk/client-sso-oidc@3.645.0(@aws-sdk/client-sts@3.645.0)))(fast-xml-parser@4.5.0)(ignore@5.3.2)(ioredis@5.4.1(supports-color@8.1.1))(jsdom@20.0.3(bufferutil@4.0.8)(canvas@2.11.2(supports-color@8.1.1))(supports-color@8.1.1)(utf-8-validate@6.0.4))(lodash@4.17.21)(mammoth@1.8.0)(openai@4.58.1(zod@3.23.8))(pg@8.12.0)(playwright@1.47.0)(puppeteer@19.11.1(bufferutil@4.0.8)(supports-color@8.1.1)(typescript@5.3.3)(utf-8-validate@6.0.4))(ws@8.18.0(bufferutil@4.0.8)(utf-8-validate@6.0.4)):
     dependencies:
       '@anthropic-ai/sdk': 0.9.1
-      '@langchain/community': 0.0.57(@aws-crypto/sha256-js@5.2.0)(@aws-sdk/credential-provider-node@3.645.0(@aws-sdk/client-sso-oidc@3.645.0(@aws-sdk/client-sts@3.645.0))(@aws-sdk/client-sts@3.645.0))(@huggingface/inference@2.8.0)(@smithy/util-utf8@2.3.0)(@supabase/postgrest-js@1.15.8)(@supabase/supabase-js@2.45.3(bufferutil@4.0.8)(utf-8-validate@6.0.4))(cohere-ai@7.13.0(@aws-sdk/client-sso-oidc@3.645.0(@aws-sdk/client-sts@3.645.0)))(ioredis@5.4.1(supports-color@8.1.1))(jsdom@20.0.3(bufferutil@4.0.8)(canvas@2.11.2(supports-color@8.1.1))(supports-color@8.1.1)(utf-8-validate@6.0.4))(langchain@0.1.37(@aws-crypto/sha256-js@5.2.0)(@aws-sdk/credential-provider-node@3.645.0(@aws-sdk/client-sso-oidc@3.645.0(@aws-sdk/client-sts@3.645.0))(@aws-sdk/client-sts@3.645.0))(@huggingface/inference@2.8.0)(@smithy/util-utf8@2.3.0)(@supabase/postgrest-js@1.15.8)(@supabase/supabase-js@2.45.3(bufferutil@4.0.8)(utf-8-validate@6.0.4))(axios@1.7.7)(cheerio@1.0.0-rc.12)(cohere-ai@7.13.0(@aws-sdk/client-sso-oidc@3.645.0(@aws-sdk/client-sts@3.645.0)))(fast-xml-parser@4.5.0)(ignore@5.3.2)(ioredis@5.4.1(supports-color@8.1.1))(jsdom@20.0.3(bufferutil@4.0.8)(canvas@2.11.2(supports-color@8.1.1))(supports-color@8.1.1)(utf-8-validate@6.0.4))(lodash@4.17.21)(mammoth@1.8.0)(openai@4.58.1(zod@3.23.8))(pg@8.12.0)(playwright@1.47.0)(puppeteer@19.11.1(bufferutil@4.0.8)(supports-color@8.1.1)(typescript@5.3.3)(utf-8-validate@6.0.4))(ws@8.18.0(bufferutil@4.0.8)(utf-8-validate@6.0.4)))(lodash@4.17.21)(openai@4.58.1(zod@3.23.8))(pg@8.12.0)(ws@8.18.0(bufferutil@4.0.8)(utf-8-validate@6.0.4))
+      '@langchain/community': 0.0.57(szwg7uqicxasvuzkjachuyxm7i)
       '@langchain/core': 0.2.31(langchain@0.1.37(@aws-crypto/sha256-js@5.2.0)(@aws-sdk/credential-provider-node@3.645.0(@aws-sdk/client-sso-oidc@3.645.0(@aws-sdk/client-sts@3.645.0))(@aws-sdk/client-sts@3.645.0))(@huggingface/inference@2.8.0)(@smithy/util-utf8@2.3.0)(@supabase/postgrest-js@1.15.8)(@supabase/supabase-js@2.45.3(bufferutil@4.0.8)(utf-8-validate@6.0.4))(axios@1.7.7)(cheerio@1.0.0-rc.12)(cohere-ai@7.13.0(@aws-sdk/client-sso-oidc@3.645.0(@aws-sdk/client-sts@3.645.0)))(fast-xml-parser@4.5.0)(ignore@5.3.2)(ioredis@5.4.1(supports-color@8.1.1))(jsdom@20.0.3(bufferutil@4.0.8)(canvas@2.11.2(supports-color@8.1.1))(supports-color@8.1.1)(utf-8-validate@6.0.4))(lodash@4.17.21)(mammoth@1.8.0)(openai@4.58.1(zod@3.23.8))(pg@8.12.0)(playwright@1.47.0)(puppeteer@19.11.1(bufferutil@4.0.8)(supports-color@8.1.1)(typescript@5.3.3)(utf-8-validate@6.0.4))(ws@8.18.0(bufferutil@4.0.8)(utf-8-validate@6.0.4)))(openai@4.58.1(zod@3.23.8))
       '@langchain/openai': 0.0.28(langchain@0.1.37(@aws-crypto/sha256-js@5.2.0)(@aws-sdk/credential-provider-node@3.645.0(@aws-sdk/client-sso-oidc@3.645.0(@aws-sdk/client-sts@3.645.0))(@aws-sdk/client-sts@3.645.0))(@huggingface/inference@2.8.0)(@smithy/util-utf8@2.3.0)(@supabase/postgrest-js@1.15.8)(@supabase/supabase-js@2.45.3(bufferutil@4.0.8)(utf-8-validate@6.0.4))(axios@1.7.7)(cheerio@1.0.0-rc.12)(cohere-ai@7.13.0(@aws-sdk/client-sso-oidc@3.645.0(@aws-sdk/client-sts@3.645.0)))(fast-xml-parser@4.5.0)(ignore@5.3.2)(ioredis@5.4.1(supports-color@8.1.1))(jsdom@20.0.3(bufferutil@4.0.8)(canvas@2.11.2(supports-color@8.1.1))(supports-color@8.1.1)(utf-8-validate@6.0.4))(lodash@4.17.21)(mammoth@1.8.0)(openai@4.58.1(zod@3.23.8))(pg@8.12.0)(playwright@1.47.0)(puppeteer@19.11.1(bufferutil@4.0.8)(supports-color@8.1.1)(typescript@5.3.3)(utf-8-validate@6.0.4))(ws@8.18.0(bufferutil@4.0.8)(utf-8-validate@6.0.4)))
       '@langchain/textsplitters': 0.0.3(langchain@0.1.37(@aws-crypto/sha256-js@5.2.0)(@aws-sdk/credential-provider-node@3.645.0(@aws-sdk/client-sso-oidc@3.645.0(@aws-sdk/client-sts@3.645.0))(@aws-sdk/client-sts@3.645.0))(@huggingface/inference@2.8.0)(@smithy/util-utf8@2.3.0)(@supabase/postgrest-js@1.15.8)(@supabase/supabase-js@2.45.3(bufferutil@4.0.8)(utf-8-validate@6.0.4))(axios@1.7.7)(cheerio@1.0.0-rc.12)(cohere-ai@7.13.0(@aws-sdk/client-sso-oidc@3.645.0(@aws-sdk/client-sts@3.645.0)))(fast-xml-parser@4.5.0)(ignore@5.3.2)(ioredis@5.4.1(supports-color@8.1.1))(jsdom@20.0.3(bufferutil@4.0.8)(canvas@2.11.2(supports-color@8.1.1))(supports-color@8.1.1)(utf-8-validate@6.0.4))(lodash@4.17.21)(mammoth@1.8.0)(openai@4.58.1(zod@3.23.8))(pg@8.12.0)(playwright@1.47.0)(puppeteer@19.11.1(bufferutil@4.0.8)(supports-color@8.1.1)(typescript@5.3.3)(utf-8-validate@6.0.4))(ws@8.18.0(bufferutil@4.0.8)(utf-8-validate@6.0.4)))(openai@4.58.1(zod@3.23.8))
@@ -19793,7 +19819,7 @@ snapshots:
       js-yaml: 4.1.0
       jsonpointer: 5.0.1
       langchainhub: 0.0.11
-      langsmith: 0.1.51(@langchain/core@0.2.31(langchain@0.1.37(@aws-crypto/sha256-js@5.2.0)(@aws-sdk/credential-provider-node@3.645.0(@aws-sdk/client-sso-oidc@3.645.0(@aws-sdk/client-sts@3.645.0))(@aws-sdk/client-sts@3.645.0))(@huggingface/inference@2.8.0)(@smithy/util-utf8@2.3.0)(@supabase/postgrest-js@1.15.8)(@supabase/supabase-js@2.45.3(bufferutil@4.0.8)(utf-8-validate@6.0.4))(axios@1.7.7)(cheerio@1.0.0-rc.12)(cohere-ai@7.13.0(@aws-sdk/client-sso-oidc@3.645.0(@aws-sdk/client-sts@3.645.0)))(fast-xml-parser@4.5.0)(ignore@5.3.2)(ioredis@5.4.1(supports-color@8.1.1))(jsdom@20.0.3(bufferutil@4.0.8)(canvas@2.11.2(supports-color@8.1.1))(supports-color@8.1.1)(utf-8-validate@6.0.4))(lodash@4.17.21)(mammoth@1.8.0)(openai@4.58.1(zod@3.23.8))(pg@8.12.0)(playwright@1.47.0)(puppeteer@19.11.1(bufferutil@4.0.8)(supports-color@8.1.1)(typescript@5.3.3)(utf-8-validate@6.0.4))(ws@8.18.0(bufferutil@4.0.8)(utf-8-validate@6.0.4)))(openai@4.58.1(zod@3.23.8)))(langchain@0.1.37(@aws-crypto/sha256-js@5.2.0)(@aws-sdk/credential-provider-node@3.645.0(@aws-sdk/client-sso-oidc@3.645.0(@aws-sdk/client-sts@3.645.0))(@aws-sdk/client-sts@3.645.0))(@huggingface/inference@2.8.0)(@smithy/util-utf8@2.3.0)(@supabase/postgrest-js@1.15.8)(@supabase/supabase-js@2.45.3(bufferutil@4.0.8)(utf-8-validate@6.0.4))(axios@1.7.7)(cheerio@1.0.0-rc.12)(cohere-ai@7.13.0(@aws-sdk/client-sso-oidc@3.645.0(@aws-sdk/client-sts@3.645.0)))(fast-xml-parser@4.5.0)(ignore@5.3.2)(ioredis@5.4.1(supports-color@8.1.1))(jsdom@20.0.3(bufferutil@4.0.8)(canvas@2.11.2(supports-color@8.1.1))(supports-color@8.1.1)(utf-8-validate@6.0.4))(lodash@4.17.21)(mammoth@1.8.0)(openai@4.58.1(zod@3.23.8))(pg@8.12.0)(playwright@1.47.0)(puppeteer@19.11.1(bufferutil@4.0.8)(supports-color@8.1.1)(typescript@5.3.3)(utf-8-validate@6.0.4))(ws@8.18.0(bufferutil@4.0.8)(utf-8-validate@6.0.4)))(openai@4.58.1(zod@3.23.8))
+      langsmith: 0.1.51(@langchain/core@0.2.31(langchain@0.2.18(gtha5yglvf6stb6xkgferi7r7u))(openai@4.58.1(zod@3.23.8)))(langchain@0.1.37(@aws-crypto/sha256-js@5.2.0)(@aws-sdk/credential-provider-node@3.645.0(@aws-sdk/client-sso-oidc@3.645.0(@aws-sdk/client-sts@3.645.0))(@aws-sdk/client-sts@3.645.0))(@huggingface/inference@2.8.0)(@smithy/util-utf8@2.3.0)(@supabase/postgrest-js@1.15.8)(@supabase/supabase-js@2.45.3(bufferutil@4.0.8)(utf-8-validate@6.0.4))(axios@1.7.7)(cheerio@1.0.0-rc.12)(cohere-ai@7.13.0(@aws-sdk/client-sso-oidc@3.645.0(@aws-sdk/client-sts@3.645.0)))(fast-xml-parser@4.5.0)(ignore@5.3.2)(ioredis@5.4.1(supports-color@8.1.1))(jsdom@20.0.3(bufferutil@4.0.8)(canvas@2.11.2(supports-color@8.1.1))(supports-color@8.1.1)(utf-8-validate@6.0.4))(lodash@4.17.21)(mammoth@1.8.0)(openai@4.58.1(zod@3.23.8))(pg@8.12.0)(playwright@1.47.0)(puppeteer@19.11.1(bufferutil@4.0.8)(supports-color@8.1.1)(typescript@5.3.3)(utf-8-validate@6.0.4))(ws@8.18.0(bufferutil@4.0.8)(utf-8-validate@6.0.4)))(openai@4.58.1(zod@3.23.8))
       ml-distance: 4.0.1
       openapi-types: 12.1.3
       p-retry: 4.6.2
@@ -19886,16 +19912,16 @@ snapshots:
       - vectordb
       - voy-search
 
-  ? langchain@0.2.18(@aws-sdk/credential-provider-node@3.645.0(@aws-sdk/client-sso-oidc@3.645.0(@aws-sdk/client-sts@3.645.0))(@aws-sdk/client-sts@3.645.0))(@langchain/anthropic@0.2.17(langchain@0.2.18)(openai@4.58.1(zod@3.23.8)))(@langchain/cohere@0.2.2(@aws-sdk/client-sso-oidc@3.645.0(@aws-sdk/client-sts@3.645.0))(langchain@0.2.18)(openai@4.58.1(zod@3.23.8)))(@langchain/community@0.2.32(@aws-crypto/sha256-js@5.2.0)(@aws-sdk/credential-provider-node@3.645.0(@aws-sdk/client-sso-oidc@3.645.0(@aws-sdk/client-sts@3.645.0))(@aws-sdk/client-sts@3.645.0))(@huggingface/inference@2.8.0)(@langchain/anthropic@0.2.17)(@langchain/cohere@0.2.2)(@langchain/google-genai@0.0.26)(@smithy/util-utf8@2.3.0)(@supabase/supabase-js@2.45.3(bufferutil@4.0.8)(utf-8-validate@6.0.4))(axios@1.7.7)(cheerio@1.0.0-rc.12)(cohere-ai@7.13.0(@aws-sdk/client-sso-oidc@3.645.0(@aws-sdk/client-sts@3.645.0)))(fast-xml-parser@4.5.0)(ignore@5.3.2)(ioredis@5.4.1(supports-color@8.1.1))(jsdom@20.0.3(bufferutil@4.0.8)(canvas@2.11.2(supports-color@8.1.1))(supports-color@8.1.1)(utf-8-validate@6.0.4))(lodash@4.17.21)(mammoth@1.8.0)(openai@4.58.1(zod@3.23.8))(pg@8.12.0)(playwright@1.47.0)(puppeteer@19.11.1(bufferutil@4.0.8)(supports-color@8.1.1)(typescript@5.3.3)(utf-8-validate@6.0.4))(ws@8.18.0(bufferutil@4.0.8)(utf-8-validate@6.0.4)))(@langchain/google-genai@0.0.26(langchain@0.2.18)(openai@4.58.1(zod@3.23.8))(zod@3.23.8))(@supabase/supabase-js@2.45.3(bufferutil@4.0.8)(utf-8-validate@6.0.4))(axios@1.7.7)(cheerio@1.0.0-rc.12)(fast-xml-parser@4.5.0)(ignore@5.3.2)(ioredis@5.4.1(supports-color@8.1.1))(jsdom@20.0.3(bufferutil@4.0.8)(canvas@2.11.2(supports-color@8.1.1))(supports-color@8.1.1)(utf-8-validate@6.0.4))(mammoth@1.8.0)(openai@4.58.1(zod@3.23.8))(playwright@1.47.0)(puppeteer@19.11.1(bufferutil@4.0.8)(supports-color@8.1.1)(typescript@5.3.3)(utf-8-validate@6.0.4))(ws@8.18.0(bufferutil@4.0.8)(utf-8-validate@6.0.4))
-  : dependencies:
-      '@langchain/core': 0.2.31(langchain@0.2.18(@aws-sdk/credential-provider-node@3.645.0(@aws-sdk/client-sso-oidc@3.645.0(@aws-sdk/client-sts@3.645.0))(@aws-sdk/client-sts@3.645.0))(@langchain/anthropic@0.2.17(langchain@0.2.18)(openai@4.58.1(zod@3.23.8)))(@langchain/cohere@0.2.2(@aws-sdk/client-sso-oidc@3.645.0(@aws-sdk/client-sts@3.645.0))(langchain@0.2.18)(openai@4.58.1(zod@3.23.8)))(@langchain/community@0.2.32(@aws-crypto/sha256-js@5.2.0)(@aws-sdk/credential-provider-node@3.645.0(@aws-sdk/client-sso-oidc@3.645.0(@aws-sdk/client-sts@3.645.0))(@aws-sdk/client-sts@3.645.0))(@huggingface/inference@2.8.0)(@langchain/anthropic@0.2.17)(@langchain/cohere@0.2.2)(@langchain/google-genai@0.0.26)(@smithy/util-utf8@2.3.0)(@supabase/supabase-js@2.45.3(bufferutil@4.0.8)(utf-8-validate@6.0.4))(axios@1.7.7)(cheerio@1.0.0-rc.12)(cohere-ai@7.13.0(@aws-sdk/client-sso-oidc@3.645.0(@aws-sdk/client-sts@3.645.0)))(fast-xml-parser@4.5.0)(ignore@5.3.2)(ioredis@5.4.1(supports-color@8.1.1))(jsdom@20.0.3(bufferutil@4.0.8)(canvas@2.11.2(supports-color@8.1.1))(supports-color@8.1.1)(utf-8-validate@6.0.4))(lodash@4.17.21)(mammoth@1.8.0)(openai@4.58.1(zod@3.23.8))(pg@8.12.0)(playwright@1.47.0)(puppeteer@19.11.1(bufferutil@4.0.8)(supports-color@8.1.1)(typescript@5.3.3)(utf-8-validate@6.0.4))(ws@8.18.0(bufferutil@4.0.8)(utf-8-validate@6.0.4)))(@langchain/google-genai@0.0.26(langchain@0.2.18)(openai@4.58.1(zod@3.23.8))(zod@3.23.8))(@supabase/supabase-js@2.45.3(bufferutil@4.0.8)(utf-8-validate@6.0.4))(axios@1.7.7)(cheerio@1.0.0-rc.12)(fast-xml-parser@4.5.0)(ignore@5.3.2)(ioredis@5.4.1(supports-color@8.1.1))(jsdom@20.0.3(bufferutil@4.0.8)(canvas@2.11.2(supports-color@8.1.1))(supports-color@8.1.1)(utf-8-validate@6.0.4))(mammoth@1.8.0)(openai@4.58.1(zod@3.23.8))(playwright@1.47.0)(puppeteer@19.11.1(bufferutil@4.0.8)(supports-color@8.1.1)(typescript@5.3.3)(utf-8-validate@6.0.4))(ws@8.18.0(bufferutil@4.0.8)(utf-8-validate@6.0.4)))(openai@4.58.1(zod@3.23.8))
-      '@langchain/openai': 0.2.10(langchain@0.2.18(@aws-sdk/credential-provider-node@3.645.0(@aws-sdk/client-sso-oidc@3.645.0(@aws-sdk/client-sts@3.645.0))(@aws-sdk/client-sts@3.645.0))(@langchain/anthropic@0.2.17(langchain@0.2.18)(openai@4.58.1(zod@3.23.8)))(@langchain/cohere@0.2.2(@aws-sdk/client-sso-oidc@3.645.0(@aws-sdk/client-sts@3.645.0))(langchain@0.2.18)(openai@4.58.1(zod@3.23.8)))(@langchain/community@0.2.32(@aws-crypto/sha256-js@5.2.0)(@aws-sdk/credential-provider-node@3.645.0(@aws-sdk/client-sso-oidc@3.645.0(@aws-sdk/client-sts@3.645.0))(@aws-sdk/client-sts@3.645.0))(@huggingface/inference@2.8.0)(@langchain/anthropic@0.2.17)(@langchain/cohere@0.2.2)(@langchain/google-genai@0.0.26)(@smithy/util-utf8@2.3.0)(@supabase/supabase-js@2.45.3(bufferutil@4.0.8)(utf-8-validate@6.0.4))(axios@1.7.7)(cheerio@1.0.0-rc.12)(cohere-ai@7.13.0(@aws-sdk/client-sso-oidc@3.645.0(@aws-sdk/client-sts@3.645.0)))(fast-xml-parser@4.5.0)(ignore@5.3.2)(ioredis@5.4.1(supports-color@8.1.1))(jsdom@20.0.3(bufferutil@4.0.8)(canvas@2.11.2(supports-color@8.1.1))(supports-color@8.1.1)(utf-8-validate@6.0.4))(lodash@4.17.21)(mammoth@1.8.0)(openai@4.58.1(zod@3.23.8))(pg@8.12.0)(playwright@1.47.0)(puppeteer@19.11.1(bufferutil@4.0.8)(supports-color@8.1.1)(typescript@5.3.3)(utf-8-validate@6.0.4))(ws@8.18.0(bufferutil@4.0.8)(utf-8-validate@6.0.4)))(@langchain/google-genai@0.0.26(langchain@0.2.18)(openai@4.58.1(zod@3.23.8))(zod@3.23.8))(@supabase/supabase-js@2.45.3(bufferutil@4.0.8)(utf-8-validate@6.0.4))(axios@1.7.7)(cheerio@1.0.0-rc.12)(fast-xml-parser@4.5.0)(ignore@5.3.2)(ioredis@5.4.1(supports-color@8.1.1))(jsdom@20.0.3(bufferutil@4.0.8)(canvas@2.11.2(supports-color@8.1.1))(supports-color@8.1.1)(utf-8-validate@6.0.4))(mammoth@1.8.0)(openai@4.58.1(zod@3.23.8))(playwright@1.47.0)(puppeteer@19.11.1(bufferutil@4.0.8)(supports-color@8.1.1)(typescript@5.3.3)(utf-8-validate@6.0.4))(ws@8.18.0(bufferutil@4.0.8)(utf-8-validate@6.0.4)))
-      '@langchain/textsplitters': 0.0.3(langchain@0.2.18(@aws-sdk/credential-provider-node@3.645.0(@aws-sdk/client-sso-oidc@3.645.0(@aws-sdk/client-sts@3.645.0))(@aws-sdk/client-sts@3.645.0))(@langchain/anthropic@0.2.17(langchain@0.2.18)(openai@4.58.1(zod@3.23.8)))(@langchain/cohere@0.2.2(@aws-sdk/client-sso-oidc@3.645.0(@aws-sdk/client-sts@3.645.0))(langchain@0.2.18)(openai@4.58.1(zod@3.23.8)))(@langchain/community@0.2.32(@aws-crypto/sha256-js@5.2.0)(@aws-sdk/credential-provider-node@3.645.0(@aws-sdk/client-sso-oidc@3.645.0(@aws-sdk/client-sts@3.645.0))(@aws-sdk/client-sts@3.645.0))(@huggingface/inference@2.8.0)(@langchain/anthropic@0.2.17)(@langchain/cohere@0.2.2)(@langchain/google-genai@0.0.26)(@smithy/util-utf8@2.3.0)(@supabase/supabase-js@2.45.3(bufferutil@4.0.8)(utf-8-validate@6.0.4))(axios@1.7.7)(cheerio@1.0.0-rc.12)(cohere-ai@7.13.0(@aws-sdk/client-sso-oidc@3.645.0(@aws-sdk/client-sts@3.645.0)))(fast-xml-parser@4.5.0)(ignore@5.3.2)(ioredis@5.4.1(supports-color@8.1.1))(jsdom@20.0.3(bufferutil@4.0.8)(canvas@2.11.2(supports-color@8.1.1))(supports-color@8.1.1)(utf-8-validate@6.0.4))(lodash@4.17.21)(mammoth@1.8.0)(openai@4.58.1(zod@3.23.8))(pg@8.12.0)(playwright@1.47.0)(puppeteer@19.11.1(bufferutil@4.0.8)(supports-color@8.1.1)(typescript@5.3.3)(utf-8-validate@6.0.4))(ws@8.18.0(bufferutil@4.0.8)(utf-8-validate@6.0.4)))(@langchain/google-genai@0.0.26(langchain@0.2.18)(openai@4.58.1(zod@3.23.8))(zod@3.23.8))(@supabase/supabase-js@2.45.3(bufferutil@4.0.8)(utf-8-validate@6.0.4))(axios@1.7.7)(cheerio@1.0.0-rc.12)(fast-xml-parser@4.5.0)(ignore@5.3.2)(ioredis@5.4.1(supports-color@8.1.1))(jsdom@20.0.3(bufferutil@4.0.8)(canvas@2.11.2(supports-color@8.1.1))(supports-color@8.1.1)(utf-8-validate@6.0.4))(mammoth@1.8.0)(openai@4.58.1(zod@3.23.8))(playwright@1.47.0)(puppeteer@19.11.1(bufferutil@4.0.8)(supports-color@8.1.1)(typescript@5.3.3)(utf-8-validate@6.0.4))(ws@8.18.0(bufferutil@4.0.8)(utf-8-validate@6.0.4)))(openai@4.58.1(zod@3.23.8))
+  langchain@0.2.18(gtha5yglvf6stb6xkgferi7r7u):
+    dependencies:
+      '@langchain/core': 0.2.31(langchain@0.2.18(gtha5yglvf6stb6xkgferi7r7u))(openai@4.58.1(zod@3.23.8))
+      '@langchain/openai': 0.2.10(langchain@0.2.18(gtha5yglvf6stb6xkgferi7r7u))
+      '@langchain/textsplitters': 0.0.3(langchain@0.2.18(gtha5yglvf6stb6xkgferi7r7u))(openai@4.58.1(zod@3.23.8))
       binary-extensions: 2.3.0
       js-tiktoken: 1.0.14
       js-yaml: 4.1.0
       jsonpointer: 5.0.1
-      langsmith: 0.1.51(@langchain/core@0.2.31(langchain@0.2.18(@aws-sdk/credential-provider-node@3.645.0(@aws-sdk/client-sso-oidc@3.645.0(@aws-sdk/client-sts@3.645.0))(@aws-sdk/client-sts@3.645.0))(@langchain/anthropic@0.2.17(langchain@0.2.18)(openai@4.58.1(zod@3.23.8)))(@langchain/cohere@0.2.2(@aws-sdk/client-sso-oidc@3.645.0(@aws-sdk/client-sts@3.645.0))(langchain@0.2.18)(openai@4.58.1(zod@3.23.8)))(@langchain/community@0.2.32(@aws-crypto/sha256-js@5.2.0)(@aws-sdk/credential-provider-node@3.645.0(@aws-sdk/client-sso-oidc@3.645.0(@aws-sdk/client-sts@3.645.0))(@aws-sdk/client-sts@3.645.0))(@huggingface/inference@2.8.0)(@langchain/anthropic@0.2.17)(@langchain/cohere@0.2.2)(@langchain/google-genai@0.0.26)(@smithy/util-utf8@2.3.0)(@supabase/supabase-js@2.45.3(bufferutil@4.0.8)(utf-8-validate@6.0.4))(axios@1.7.7)(cheerio@1.0.0-rc.12)(cohere-ai@7.13.0(@aws-sdk/client-sso-oidc@3.645.0(@aws-sdk/client-sts@3.645.0)))(fast-xml-parser@4.5.0)(ignore@5.3.2)(ioredis@5.4.1(supports-color@8.1.1))(jsdom@20.0.3(bufferutil@4.0.8)(canvas@2.11.2(supports-color@8.1.1))(supports-color@8.1.1)(utf-8-validate@6.0.4))(lodash@4.17.21)(mammoth@1.8.0)(openai@4.58.1(zod@3.23.8))(pg@8.12.0)(playwright@1.47.0)(puppeteer@19.11.1(bufferutil@4.0.8)(supports-color@8.1.1)(typescript@5.3.3)(utf-8-validate@6.0.4))(ws@8.18.0(bufferutil@4.0.8)(utf-8-validate@6.0.4)))(@langchain/google-genai@0.0.26(langchain@0.2.18)(openai@4.58.1(zod@3.23.8))(zod@3.23.8))(@supabase/supabase-js@2.45.3(bufferutil@4.0.8)(utf-8-validate@6.0.4))(axios@1.7.7)(cheerio@1.0.0-rc.12)(fast-xml-parser@4.5.0)(ignore@5.3.2)(ioredis@5.4.1(supports-color@8.1.1))(jsdom@20.0.3(bufferutil@4.0.8)(canvas@2.11.2(supports-color@8.1.1))(supports-color@8.1.1)(utf-8-validate@6.0.4))(mammoth@1.8.0)(openai@4.58.1(zod@3.23.8))(playwright@1.47.0)(puppeteer@19.11.1(bufferutil@4.0.8)(supports-color@8.1.1)(typescript@5.3.3)(utf-8-validate@6.0.4))(ws@8.18.0(bufferutil@4.0.8)(utf-8-validate@6.0.4)))(openai@4.58.1(zod@3.23.8)))(langchain@0.2.18(@aws-sdk/credential-provider-node@3.645.0(@aws-sdk/client-sso-oidc@3.645.0(@aws-sdk/client-sts@3.645.0))(@aws-sdk/client-sts@3.645.0))(@langchain/anthropic@0.2.17(langchain@0.2.18)(openai@4.58.1(zod@3.23.8)))(@langchain/cohere@0.2.2(@aws-sdk/client-sso-oidc@3.645.0(@aws-sdk/client-sts@3.645.0))(langchain@0.2.18)(openai@4.58.1(zod@3.23.8)))(@langchain/community@0.2.32(@aws-crypto/sha256-js@5.2.0)(@aws-sdk/credential-provider-node@3.645.0(@aws-sdk/client-sso-oidc@3.645.0(@aws-sdk/client-sts@3.645.0))(@aws-sdk/client-sts@3.645.0))(@huggingface/inference@2.8.0)(@langchain/anthropic@0.2.17)(@langchain/cohere@0.2.2)(@langchain/google-genai@0.0.26)(@smithy/util-utf8@2.3.0)(@supabase/supabase-js@2.45.3(bufferutil@4.0.8)(utf-8-validate@6.0.4))(axios@1.7.7)(cheerio@1.0.0-rc.12)(cohere-ai@7.13.0(@aws-sdk/client-sso-oidc@3.645.0(@aws-sdk/client-sts@3.645.0)))(fast-xml-parser@4.5.0)(ignore@5.3.2)(ioredis@5.4.1(supports-color@8.1.1))(jsdom@20.0.3(bufferutil@4.0.8)(canvas@2.11.2(supports-color@8.1.1))(supports-color@8.1.1)(utf-8-validate@6.0.4))(lodash@4.17.21)(mammoth@1.8.0)(openai@4.58.1(zod@3.23.8))(pg@8.12.0)(playwright@1.47.0)(puppeteer@19.11.1(bufferutil@4.0.8)(supports-color@8.1.1)(typescript@5.3.3)(utf-8-validate@6.0.4))(ws@8.18.0(bufferutil@4.0.8)(utf-8-validate@6.0.4)))(@langchain/google-genai@0.0.26(langchain@0.2.18)(openai@4.58.1(zod@3.23.8))(zod@3.23.8))(@supabase/supabase-js@2.45.3(bufferutil@4.0.8)(utf-8-validate@6.0.4))(axios@1.7.7)(cheerio@1.0.0-rc.12)(fast-xml-parser@4.5.0)(ignore@5.3.2)(ioredis@5.4.1(supports-color@8.1.1))(jsdom@20.0.3(bufferutil@4.0.8)(canvas@2.11.2(supports-color@8.1.1))(supports-color@8.1.1)(utf-8-validate@6.0.4))(mammoth@1.8.0)(openai@4.58.1(zod@3.23.8))(playwright@1.47.0)(puppeteer@19.11.1(bufferutil@4.0.8)(supports-color@8.1.1)(typescript@5.3.3)(utf-8-validate@6.0.4))(ws@8.18.0(bufferutil@4.0.8)(utf-8-validate@6.0.4)))(openai@4.58.1(zod@3.23.8))
+      langsmith: 0.1.51(@langchain/core@0.2.31(langchain@0.2.18(gtha5yglvf6stb6xkgferi7r7u))(openai@4.58.1(zod@3.23.8)))(langchain@0.2.18(gtha5yglvf6stb6xkgferi7r7u))(openai@4.58.1(zod@3.23.8))
       openapi-types: 12.1.3
       p-retry: 4.6.2
       uuid: 10.0.0
@@ -19925,8 +19951,8 @@ snapshots:
 
   langchainhub@0.0.11: {}
 
-  ? langsmith@0.1.51(@langchain/core@0.2.31(langchain@0.1.37(@aws-crypto/sha256-js@5.2.0)(@aws-sdk/credential-provider-node@3.645.0(@aws-sdk/client-sso-oidc@3.645.0(@aws-sdk/client-sts@3.645.0))(@aws-sdk/client-sts@3.645.0))(@huggingface/inference@2.8.0)(@smithy/util-utf8@2.3.0)(@supabase/postgrest-js@1.15.8)(@supabase/supabase-js@2.45.3(bufferutil@4.0.8)(utf-8-validate@6.0.4))(axios@1.7.7)(cheerio@1.0.0-rc.12)(cohere-ai@7.13.0(@aws-sdk/client-sso-oidc@3.645.0(@aws-sdk/client-sts@3.645.0)))(fast-xml-parser@4.5.0)(ignore@5.3.2)(ioredis@5.4.1(supports-color@8.1.1))(jsdom@20.0.3(bufferutil@4.0.8)(canvas@2.11.2(supports-color@8.1.1))(supports-color@8.1.1)(utf-8-validate@6.0.4))(lodash@4.17.21)(mammoth@1.8.0)(openai@4.58.1(zod@3.23.8))(pg@8.12.0)(playwright@1.47.0)(puppeteer@19.11.1(bufferutil@4.0.8)(supports-color@8.1.1)(typescript@5.3.3)(utf-8-validate@6.0.4))(ws@8.18.0(bufferutil@4.0.8)(utf-8-validate@6.0.4)))(openai@4.58.1(zod@3.23.8)))(langchain@0.1.37(@aws-crypto/sha256-js@5.2.0)(@aws-sdk/credential-provider-node@3.645.0(@aws-sdk/client-sso-oidc@3.645.0(@aws-sdk/client-sts@3.645.0))(@aws-sdk/client-sts@3.645.0))(@huggingface/inference@2.8.0)(@smithy/util-utf8@2.3.0)(@supabase/postgrest-js@1.15.8)(@supabase/supabase-js@2.45.3(bufferutil@4.0.8)(utf-8-validate@6.0.4))(axios@1.7.7)(cheerio@1.0.0-rc.12)(cohere-ai@7.13.0(@aws-sdk/client-sso-oidc@3.645.0(@aws-sdk/client-sts@3.645.0)))(fast-xml-parser@4.5.0)(ignore@5.3.2)(ioredis@5.4.1(supports-color@8.1.1))(jsdom@20.0.3(bufferutil@4.0.8)(canvas@2.11.2(supports-color@8.1.1))(supports-color@8.1.1)(utf-8-validate@6.0.4))(lodash@4.17.21)(mammoth@1.8.0)(openai@4.58.1(zod@3.23.8))(pg@8.12.0)(playwright@1.47.0)(puppeteer@19.11.1(bufferutil@4.0.8)(supports-color@8.1.1)(typescript@5.3.3)(utf-8-validate@6.0.4))(ws@8.18.0(bufferutil@4.0.8)(utf-8-validate@6.0.4)))(openai@4.58.1(zod@3.23.8))
-  : dependencies:
+  langsmith@0.1.51(@langchain/core@0.2.31(langchain@0.2.18(gtha5yglvf6stb6xkgferi7r7u))(openai@4.58.1(zod@3.23.8)))(langchain@0.1.37(@aws-crypto/sha256-js@5.2.0)(@aws-sdk/credential-provider-node@3.645.0(@aws-sdk/client-sso-oidc@3.645.0(@aws-sdk/client-sts@3.645.0))(@aws-sdk/client-sts@3.645.0))(@huggingface/inference@2.8.0)(@smithy/util-utf8@2.3.0)(@supabase/postgrest-js@1.15.8)(@supabase/supabase-js@2.45.3(bufferutil@4.0.8)(utf-8-validate@6.0.4))(axios@1.7.7)(cheerio@1.0.0-rc.12)(cohere-ai@7.13.0(@aws-sdk/client-sso-oidc@3.645.0(@aws-sdk/client-sts@3.645.0)))(fast-xml-parser@4.5.0)(ignore@5.3.2)(ioredis@5.4.1(supports-color@8.1.1))(jsdom@20.0.3(bufferutil@4.0.8)(canvas@2.11.2(supports-color@8.1.1))(supports-color@8.1.1)(utf-8-validate@6.0.4))(lodash@4.17.21)(mammoth@1.8.0)(openai@4.58.1(zod@3.23.8))(pg@8.12.0)(playwright@1.47.0)(puppeteer@19.11.1(bufferutil@4.0.8)(supports-color@8.1.1)(typescript@5.3.3)(utf-8-validate@6.0.4))(ws@8.18.0(bufferutil@4.0.8)(utf-8-validate@6.0.4)))(openai@4.58.1(zod@3.23.8)):
+    dependencies:
       '@types/uuid': 10.0.0
       commander: 10.0.1
       p-queue: 6.6.2
@@ -19934,12 +19960,12 @@ snapshots:
       semver: 7.6.3
       uuid: 10.0.0
     optionalDependencies:
-      '@langchain/core': 0.2.31(langchain@0.1.37(@aws-crypto/sha256-js@5.2.0)(@aws-sdk/credential-provider-node@3.645.0(@aws-sdk/client-sso-oidc@3.645.0(@aws-sdk/client-sts@3.645.0))(@aws-sdk/client-sts@3.645.0))(@huggingface/inference@2.8.0)(@smithy/util-utf8@2.3.0)(@supabase/postgrest-js@1.15.8)(@supabase/supabase-js@2.45.3(bufferutil@4.0.8)(utf-8-validate@6.0.4))(axios@1.7.7)(cheerio@1.0.0-rc.12)(cohere-ai@7.13.0(@aws-sdk/client-sso-oidc@3.645.0(@aws-sdk/client-sts@3.645.0)))(fast-xml-parser@4.5.0)(ignore@5.3.2)(ioredis@5.4.1(supports-color@8.1.1))(jsdom@20.0.3(bufferutil@4.0.8)(canvas@2.11.2(supports-color@8.1.1))(supports-color@8.1.1)(utf-8-validate@6.0.4))(lodash@4.17.21)(mammoth@1.8.0)(openai@4.58.1(zod@3.23.8))(pg@8.12.0)(playwright@1.47.0)(puppeteer@19.11.1(bufferutil@4.0.8)(supports-color@8.1.1)(typescript@5.3.3)(utf-8-validate@6.0.4))(ws@8.18.0(bufferutil@4.0.8)(utf-8-validate@6.0.4)))(openai@4.58.1(zod@3.23.8))
+      '@langchain/core': 0.2.31(langchain@0.2.18(gtha5yglvf6stb6xkgferi7r7u))(openai@4.58.1(zod@3.23.8))
       langchain: 0.1.37(@aws-crypto/sha256-js@5.2.0)(@aws-sdk/credential-provider-node@3.645.0(@aws-sdk/client-sso-oidc@3.645.0(@aws-sdk/client-sts@3.645.0))(@aws-sdk/client-sts@3.645.0))(@huggingface/inference@2.8.0)(@smithy/util-utf8@2.3.0)(@supabase/postgrest-js@1.15.8)(@supabase/supabase-js@2.45.3(bufferutil@4.0.8)(utf-8-validate@6.0.4))(axios@1.7.7)(cheerio@1.0.0-rc.12)(cohere-ai@7.13.0(@aws-sdk/client-sso-oidc@3.645.0(@aws-sdk/client-sts@3.645.0)))(fast-xml-parser@4.5.0)(ignore@5.3.2)(ioredis@5.4.1(supports-color@8.1.1))(jsdom@20.0.3(bufferutil@4.0.8)(canvas@2.11.2(supports-color@8.1.1))(supports-color@8.1.1)(utf-8-validate@6.0.4))(lodash@4.17.21)(mammoth@1.8.0)(openai@4.58.1(zod@3.23.8))(pg@8.12.0)(playwright@1.47.0)(puppeteer@19.11.1(bufferutil@4.0.8)(supports-color@8.1.1)(typescript@5.3.3)(utf-8-validate@6.0.4))(ws@8.18.0(bufferutil@4.0.8)(utf-8-validate@6.0.4))
       openai: 4.58.1(zod@3.23.8)
 
-  ? langsmith@0.1.51(@langchain/core@0.2.31(langchain@0.2.18(@aws-sdk/credential-provider-node@3.645.0(@aws-sdk/client-sso-oidc@3.645.0(@aws-sdk/client-sts@3.645.0))(@aws-sdk/client-sts@3.645.0))(@langchain/anthropic@0.2.17(langchain@0.2.18)(openai@4.58.1(zod@3.23.8)))(@langchain/cohere@0.2.2(@aws-sdk/client-sso-oidc@3.645.0(@aws-sdk/client-sts@3.645.0))(langchain@0.2.18)(openai@4.58.1(zod@3.23.8)))(@langchain/community@0.2.32(@aws-crypto/sha256-js@5.2.0)(@aws-sdk/credential-provider-node@3.645.0(@aws-sdk/client-sso-oidc@3.645.0(@aws-sdk/client-sts@3.645.0))(@aws-sdk/client-sts@3.645.0))(@huggingface/inference@2.8.0)(@langchain/anthropic@0.2.17)(@langchain/cohere@0.2.2)(@langchain/google-genai@0.0.26)(@smithy/util-utf8@2.3.0)(@supabase/supabase-js@2.45.3(bufferutil@4.0.8)(utf-8-validate@6.0.4))(axios@1.7.7)(cheerio@1.0.0-rc.12)(cohere-ai@7.13.0(@aws-sdk/client-sso-oidc@3.645.0(@aws-sdk/client-sts@3.645.0)))(fast-xml-parser@4.5.0)(ignore@5.3.2)(ioredis@5.4.1(supports-color@8.1.1))(jsdom@20.0.3(bufferutil@4.0.8)(canvas@2.11.2(supports-color@8.1.1))(supports-color@8.1.1)(utf-8-validate@6.0.4))(lodash@4.17.21)(mammoth@1.8.0)(openai@4.58.1(zod@3.23.8))(pg@8.12.0)(playwright@1.47.0)(puppeteer@19.11.1(bufferutil@4.0.8)(supports-color@8.1.1)(typescript@5.3.3)(utf-8-validate@6.0.4))(ws@8.18.0(bufferutil@4.0.8)(utf-8-validate@6.0.4)))(@langchain/google-genai@0.0.26(langchain@0.2.18)(openai@4.58.1(zod@3.23.8))(zod@3.23.8))(@supabase/supabase-js@2.45.3(bufferutil@4.0.8)(utf-8-validate@6.0.4))(axios@1.7.7)(cheerio@1.0.0-rc.12)(fast-xml-parser@4.5.0)(ignore@5.3.2)(ioredis@5.4.1(supports-color@8.1.1))(jsdom@20.0.3(bufferutil@4.0.8)(canvas@2.11.2(supports-color@8.1.1))(supports-color@8.1.1)(utf-8-validate@6.0.4))(mammoth@1.8.0)(openai@4.58.1(zod@3.23.8))(playwright@1.47.0)(puppeteer@19.11.1(bufferutil@4.0.8)(supports-color@8.1.1)(typescript@5.3.3)(utf-8-validate@6.0.4))(ws@8.18.0(bufferutil@4.0.8)(utf-8-validate@6.0.4)))(openai@4.58.1(zod@3.23.8)))(langchain@0.2.18(@aws-sdk/credential-provider-node@3.645.0(@aws-sdk/client-sso-oidc@3.645.0(@aws-sdk/client-sts@3.645.0))(@aws-sdk/client-sts@3.645.0))(@langchain/anthropic@0.2.17(langchain@0.2.18)(openai@4.58.1(zod@3.23.8)))(@langchain/cohere@0.2.2(@aws-sdk/client-sso-oidc@3.645.0(@aws-sdk/client-sts@3.645.0))(langchain@0.2.18)(openai@4.58.1(zod@3.23.8)))(@langchain/community@0.2.32(@aws-crypto/sha256-js@5.2.0)(@aws-sdk/credential-provider-node@3.645.0(@aws-sdk/client-sso-oidc@3.645.0(@aws-sdk/client-sts@3.645.0))(@aws-sdk/client-sts@3.645.0))(@huggingface/inference@2.8.0)(@langchain/anthropic@0.2.17)(@langchain/cohere@0.2.2)(@langchain/google-genai@0.0.26)(@smithy/util-utf8@2.3.0)(@supabase/supabase-js@2.45.3(bufferutil@4.0.8)(utf-8-validate@6.0.4))(axios@1.7.7)(cheerio@1.0.0-rc.12)(cohere-ai@7.13.0(@aws-sdk/client-sso-oidc@3.645.0(@aws-sdk/client-sts@3.645.0)))(fast-xml-parser@4.5.0)(ignore@5.3.2)(ioredis@5.4.1(supports-color@8.1.1))(jsdom@20.0.3(bufferutil@4.0.8)(canvas@2.11.2(supports-color@8.1.1))(supports-color@8.1.1)(utf-8-validate@6.0.4))(lodash@4.17.21)(mammoth@1.8.0)(openai@4.58.1(zod@3.23.8))(pg@8.12.0)(playwright@1.47.0)(puppeteer@19.11.1(bufferutil@4.0.8)(supports-color@8.1.1)(typescript@5.3.3)(utf-8-validate@6.0.4))(ws@8.18.0(bufferutil@4.0.8)(utf-8-validate@6.0.4)))(@langchain/google-genai@0.0.26(langchain@0.2.18)(openai@4.58.1(zod@3.23.8))(zod@3.23.8))(@supabase/supabase-js@2.45.3(bufferutil@4.0.8)(utf-8-validate@6.0.4))(axios@1.7.7)(cheerio@1.0.0-rc.12)(fast-xml-parser@4.5.0)(ignore@5.3.2)(ioredis@5.4.1(supports-color@8.1.1))(jsdom@20.0.3(bufferutil@4.0.8)(canvas@2.11.2(supports-color@8.1.1))(supports-color@8.1.1)(utf-8-validate@6.0.4))(mammoth@1.8.0)(openai@4.58.1(zod@3.23.8))(playwright@1.47.0)(puppeteer@19.11.1(bufferutil@4.0.8)(supports-color@8.1.1)(typescript@5.3.3)(utf-8-validate@6.0.4))(ws@8.18.0(bufferutil@4.0.8)(utf-8-validate@6.0.4)))(openai@4.58.1(zod@3.23.8))
-  : dependencies:
+  langsmith@0.1.51(@langchain/core@0.2.31(langchain@0.2.18(gtha5yglvf6stb6xkgferi7r7u))(openai@4.58.1(zod@3.23.8)))(langchain@0.2.18(gtha5yglvf6stb6xkgferi7r7u))(openai@4.58.1(zod@3.23.8)):
+    dependencies:
       '@types/uuid': 10.0.0
       commander: 10.0.1
       p-queue: 6.6.2
@@ -19947,8 +19973,8 @@ snapshots:
       semver: 7.6.3
       uuid: 10.0.0
     optionalDependencies:
-      '@langchain/core': 0.2.31(langchain@0.2.18(@aws-sdk/credential-provider-node@3.645.0(@aws-sdk/client-sso-oidc@3.645.0(@aws-sdk/client-sts@3.645.0))(@aws-sdk/client-sts@3.645.0))(@langchain/anthropic@0.2.17(langchain@0.2.18)(openai@4.58.1(zod@3.23.8)))(@langchain/cohere@0.2.2(@aws-sdk/client-sso-oidc@3.645.0(@aws-sdk/client-sts@3.645.0))(langchain@0.2.18)(openai@4.58.1(zod@3.23.8)))(@langchain/community@0.2.32(@aws-crypto/sha256-js@5.2.0)(@aws-sdk/credential-provider-node@3.645.0(@aws-sdk/client-sso-oidc@3.645.0(@aws-sdk/client-sts@3.645.0))(@aws-sdk/client-sts@3.645.0))(@huggingface/inference@2.8.0)(@langchain/anthropic@0.2.17)(@langchain/cohere@0.2.2)(@langchain/google-genai@0.0.26)(@smithy/util-utf8@2.3.0)(@supabase/supabase-js@2.45.3(bufferutil@4.0.8)(utf-8-validate@6.0.4))(axios@1.7.7)(cheerio@1.0.0-rc.12)(cohere-ai@7.13.0(@aws-sdk/client-sso-oidc@3.645.0(@aws-sdk/client-sts@3.645.0)))(fast-xml-parser@4.5.0)(ignore@5.3.2)(ioredis@5.4.1(supports-color@8.1.1))(jsdom@20.0.3(bufferutil@4.0.8)(canvas@2.11.2(supports-color@8.1.1))(supports-color@8.1.1)(utf-8-validate@6.0.4))(lodash@4.17.21)(mammoth@1.8.0)(openai@4.58.1(zod@3.23.8))(pg@8.12.0)(playwright@1.47.0)(puppeteer@19.11.1(bufferutil@4.0.8)(supports-color@8.1.1)(typescript@5.3.3)(utf-8-validate@6.0.4))(ws@8.18.0(bufferutil@4.0.8)(utf-8-validate@6.0.4)))(@langchain/google-genai@0.0.26(langchain@0.2.18)(openai@4.58.1(zod@3.23.8))(zod@3.23.8))(@supabase/supabase-js@2.45.3(bufferutil@4.0.8)(utf-8-validate@6.0.4))(axios@1.7.7)(cheerio@1.0.0-rc.12)(fast-xml-parser@4.5.0)(ignore@5.3.2)(ioredis@5.4.1(supports-color@8.1.1))(jsdom@20.0.3(bufferutil@4.0.8)(canvas@2.11.2(supports-color@8.1.1))(supports-color@8.1.1)(utf-8-validate@6.0.4))(mammoth@1.8.0)(openai@4.58.1(zod@3.23.8))(playwright@1.47.0)(puppeteer@19.11.1(bufferutil@4.0.8)(supports-color@8.1.1)(typescript@5.3.3)(utf-8-validate@6.0.4))(ws@8.18.0(bufferutil@4.0.8)(utf-8-validate@6.0.4)))(openai@4.58.1(zod@3.23.8))
-      langchain: 0.2.18(@aws-sdk/credential-provider-node@3.645.0(@aws-sdk/client-sso-oidc@3.645.0(@aws-sdk/client-sts@3.645.0))(@aws-sdk/client-sts@3.645.0))(@langchain/anthropic@0.2.17(langchain@0.2.18)(openai@4.58.1(zod@3.23.8)))(@langchain/cohere@0.2.2(@aws-sdk/client-sso-oidc@3.645.0(@aws-sdk/client-sts@3.645.0))(langchain@0.2.18)(openai@4.58.1(zod@3.23.8)))(@langchain/community@0.2.32(@aws-crypto/sha256-js@5.2.0)(@aws-sdk/credential-provider-node@3.645.0(@aws-sdk/client-sso-oidc@3.645.0(@aws-sdk/client-sts@3.645.0))(@aws-sdk/client-sts@3.645.0))(@huggingface/inference@2.8.0)(@langchain/anthropic@0.2.17)(@langchain/cohere@0.2.2)(@langchain/google-genai@0.0.26)(@smithy/util-utf8@2.3.0)(@supabase/supabase-js@2.45.3(bufferutil@4.0.8)(utf-8-validate@6.0.4))(axios@1.7.7)(cheerio@1.0.0-rc.12)(cohere-ai@7.13.0(@aws-sdk/client-sso-oidc@3.645.0(@aws-sdk/client-sts@3.645.0)))(fast-xml-parser@4.5.0)(ignore@5.3.2)(ioredis@5.4.1(supports-color@8.1.1))(jsdom@20.0.3(bufferutil@4.0.8)(canvas@2.11.2(supports-color@8.1.1))(supports-color@8.1.1)(utf-8-validate@6.0.4))(lodash@4.17.21)(mammoth@1.8.0)(openai@4.58.1(zod@3.23.8))(pg@8.12.0)(playwright@1.47.0)(puppeteer@19.11.1(bufferutil@4.0.8)(supports-color@8.1.1)(typescript@5.3.3)(utf-8-validate@6.0.4))(ws@8.18.0(bufferutil@4.0.8)(utf-8-validate@6.0.4)))(@langchain/google-genai@0.0.26(langchain@0.2.18)(openai@4.58.1(zod@3.23.8))(zod@3.23.8))(@supabase/supabase-js@2.45.3(bufferutil@4.0.8)(utf-8-validate@6.0.4))(axios@1.7.7)(cheerio@1.0.0-rc.12)(fast-xml-parser@4.5.0)(ignore@5.3.2)(ioredis@5.4.1(supports-color@8.1.1))(jsdom@20.0.3(bufferutil@4.0.8)(canvas@2.11.2(supports-color@8.1.1))(supports-color@8.1.1)(utf-8-validate@6.0.4))(mammoth@1.8.0)(openai@4.58.1(zod@3.23.8))(playwright@1.47.0)(puppeteer@19.11.1(bufferutil@4.0.8)(supports-color@8.1.1)(typescript@5.3.3)(utf-8-validate@6.0.4))(ws@8.18.0(bufferutil@4.0.8)(utf-8-validate@6.0.4))
+      '@langchain/core': 0.2.31(langchain@0.2.18(gtha5yglvf6stb6xkgferi7r7u))(openai@4.58.1(zod@3.23.8))
+      langchain: 0.2.18(gtha5yglvf6stb6xkgferi7r7u)
       openai: 4.58.1(zod@3.23.8)
 
   language-subtag-registry@0.3.23: {}
@@ -21109,13 +21135,13 @@ snapshots:
 
   neo-async@2.6.2: {}
 
-  next-auth@4.24.7(next@14.2.0(@babel/core@7.25.2(supports-color@8.1.1))(@opentelemetry/api@1.9.0)(@playwright/test@1.47.0)(babel-plugin-macros@3.1.0)(react-dom@18.2.0(react@18.2.0))(react@18.2.0))(nodemailer@6.9.15)(react-dom@18.2.0(react@18.2.0))(react@18.2.0):
+  next-auth@4.24.7(next@14.2.15(@babel/core@7.25.2(supports-color@8.1.1))(@opentelemetry/api@1.9.0)(@playwright/test@1.47.0)(babel-plugin-macros@3.1.0)(react-dom@18.2.0(react@18.2.0))(react@18.2.0))(nodemailer@6.9.15)(react-dom@18.2.0(react@18.2.0))(react@18.2.0):
     dependencies:
       '@babel/runtime': 7.25.6
       '@panva/hkdf': 1.2.1
       cookie: 0.5.0
       jose: 4.15.9
-      next: 14.2.0(@babel/core@7.25.2(supports-color@8.1.1))(@opentelemetry/api@1.9.0)(@playwright/test@1.47.0)(babel-plugin-macros@3.1.0)(react-dom@18.2.0(react@18.2.0))(react@18.2.0)
+      next: 14.2.15(@babel/core@7.25.2(supports-color@8.1.1))(@opentelemetry/api@1.9.0)(@playwright/test@1.47.0)(babel-plugin-macros@3.1.0)(react-dom@18.2.0(react@18.2.0))(react@18.2.0)
       oauth: 0.9.15
       openid-client: 5.6.5
       preact: 10.23.2
@@ -21137,15 +21163,15 @@ snapshots:
     transitivePeerDependencies:
       - supports-color
 
-  next-themes@0.2.1(next@14.2.0(@babel/core@7.25.2(supports-color@8.1.1))(@opentelemetry/api@1.9.0)(@playwright/test@1.47.0)(babel-plugin-macros@3.1.0)(react-dom@18.2.0(react@18.2.0))(react@18.2.0))(react-dom@18.2.0(react@18.2.0))(react@18.2.0):
+  next-themes@0.2.1(next@14.2.15(@babel/core@7.25.2(supports-color@8.1.1))(@opentelemetry/api@1.9.0)(@playwright/test@1.47.0)(babel-plugin-macros@3.1.0)(react-dom@18.2.0(react@18.2.0))(react@18.2.0))(react-dom@18.2.0(react@18.2.0))(react@18.2.0):
     dependencies:
-      next: 14.2.0(@babel/core@7.25.2(supports-color@8.1.1))(@opentelemetry/api@1.9.0)(@playwright/test@1.47.0)(babel-plugin-macros@3.1.0)(react-dom@18.2.0(react@18.2.0))(react@18.2.0)
+      next: 14.2.15(@babel/core@7.25.2(supports-color@8.1.1))(@opentelemetry/api@1.9.0)(@playwright/test@1.47.0)(babel-plugin-macros@3.1.0)(react-dom@18.2.0(react@18.2.0))(react@18.2.0)
       react: 18.2.0
       react-dom: 18.2.0(react@18.2.0)
 
-  next@14.2.0(@babel/core@7.25.2(supports-color@8.1.1))(@opentelemetry/api@1.9.0)(@playwright/test@1.47.0)(babel-plugin-macros@3.1.0)(react-dom@18.2.0(react@18.2.0))(react@18.2.0):
+  next@14.2.15(@babel/core@7.25.2(supports-color@8.1.1))(@opentelemetry/api@1.9.0)(@playwright/test@1.47.0)(babel-plugin-macros@3.1.0)(react-dom@18.2.0(react@18.2.0))(react@18.2.0):
     dependencies:
-      '@next/env': 14.2.0
+      '@next/env': 14.2.15
       '@swc/helpers': 0.5.5
       busboy: 1.6.0
       caniuse-lite: 1.0.30001659
@@ -21155,24 +21181,24 @@ snapshots:
       react-dom: 18.2.0(react@18.2.0)
       styled-jsx: 5.1.1(@babel/core@7.25.2(supports-color@8.1.1))(babel-plugin-macros@3.1.0)(react@18.2.0)
     optionalDependencies:
-      '@next/swc-darwin-arm64': 14.2.0
-      '@next/swc-darwin-x64': 14.2.0
-      '@next/swc-linux-arm64-gnu': 14.2.0
-      '@next/swc-linux-arm64-musl': 14.2.0
-      '@next/swc-linux-x64-gnu': 14.2.0
-      '@next/swc-linux-x64-musl': 14.2.0
-      '@next/swc-win32-arm64-msvc': 14.2.0
-      '@next/swc-win32-ia32-msvc': 14.2.0
-      '@next/swc-win32-x64-msvc': 14.2.0
+      '@next/swc-darwin-arm64': 14.2.15
+      '@next/swc-darwin-x64': 14.2.15
+      '@next/swc-linux-arm64-gnu': 14.2.15
+      '@next/swc-linux-arm64-musl': 14.2.15
+      '@next/swc-linux-x64-gnu': 14.2.15
+      '@next/swc-linux-x64-musl': 14.2.15
+      '@next/swc-win32-arm64-msvc': 14.2.15
+      '@next/swc-win32-ia32-msvc': 14.2.15
+      '@next/swc-win32-x64-msvc': 14.2.15
       '@opentelemetry/api': 1.9.0
       '@playwright/test': 1.47.0
     transitivePeerDependencies:
       - '@babel/core'
       - babel-plugin-macros
 
-  nextjs-toploader@1.6.12(next@14.2.0(@babel/core@7.25.2(supports-color@8.1.1))(@opentelemetry/api@1.9.0)(@playwright/test@1.47.0)(babel-plugin-macros@3.1.0)(react-dom@18.2.0(react@18.2.0))(react@18.2.0))(react-dom@18.2.0(react@18.2.0))(react@18.2.0):
+  nextjs-toploader@1.6.12(next@14.2.15(@babel/core@7.25.2(supports-color@8.1.1))(@opentelemetry/api@1.9.0)(@playwright/test@1.47.0)(babel-plugin-macros@3.1.0)(react-dom@18.2.0(react@18.2.0))(react@18.2.0))(react-dom@18.2.0(react@18.2.0))(react@18.2.0):
     dependencies:
-      next: 14.2.0(@babel/core@7.25.2(supports-color@8.1.1))(@opentelemetry/api@1.9.0)(@playwright/test@1.47.0)(babel-plugin-macros@3.1.0)(react-dom@18.2.0(react@18.2.0))(react@18.2.0)
+      next: 14.2.15(@babel/core@7.25.2(supports-color@8.1.1))(@opentelemetry/api@1.9.0)(@playwright/test@1.47.0)(babel-plugin-macros@3.1.0)(react-dom@18.2.0(react@18.2.0))(react@18.2.0)
       nprogress: 0.2.0
       prop-types: 15.8.1
       react: 18.2.0
