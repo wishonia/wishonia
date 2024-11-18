@@ -6,6 +6,7 @@ import { DateRangePicker } from "@/components/date-range-picker"
 import { Shell } from "@/components/layout/shell"
 import { MeasurementsList } from "@/components/measurements/measurements-list"
 import { DashboardHeader } from "@/components/pages/dashboard/dashboard-header"
+import { FloatingActionButton } from "@/components/ui/floating-action-button"
 
 interface MeasurementsPageProps {
   params: { variableId: number }
@@ -40,6 +41,7 @@ export default async function MeasurementsPage({
             to: searchParams.to,
           }}
         ></MeasurementsList>
+        <FloatingActionButton />
       </>
     </Shell>
   )
