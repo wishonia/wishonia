@@ -18,6 +18,7 @@ import {
   BsFire,
   BsMoonStars,
   BsSun,
+  BsWikipedia,
 } from "react-icons/bs"
 import {
   FaBell,
@@ -46,12 +47,14 @@ import {
   FaMessage,
   FaPencil,
   FaRankingStar,
+  FaShieldHalved,
   FaSquarePollVertical,
 } from "react-icons/fa6"
 import { ImSpinner8, ImStatsBars } from "react-icons/im"
 import { LuSettings } from "react-icons/lu"
 import { MdDeleteForever, MdOutlineLogout } from "react-icons/md"
 import { RxDashboard, RxMixerHorizontal, RxPencil1 } from "react-icons/rx"
+import { ChevronLeft as LucideChevronLeft } from "lucide-react"
 
 export type IconKeys = keyof typeof icons
 
@@ -125,6 +128,9 @@ const icons = {
   eyeOff: FaEyeSlash,
   book: FaBook,
   pencil: FaPencil,
+  chevronLeft: LucideChevronLeft,
+  safe: FaShieldHalved,
+  wiki: BsWikipedia,
 }
 
 export const Icons: IconsType = icons

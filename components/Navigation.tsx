@@ -20,18 +20,23 @@ import {
   NavigationMenuTrigger,
   navigationMenuTriggerStyle,
 } from "@/components/ui/navigation-menu"
+import { siteConfig } from "@/config/site"
 
 const components: { title: string; href: string; icon: any }[] = [
   {
-    title: "Wishonia.love",
-    href: "https://wishonia.love",
+    title: siteConfig.name,
+    href: siteConfig.url.base || "",
     icon: <Globe size={18} />,
   },
-  {
-    title: "GitHub",
-    href: "https://github.com/wishonia/wishonia",
-    icon: <GithubLogo size={18} />,
-  },
+  ...(siteConfig.links.github
+    ? [
+        {
+          title: "GitHub",
+          href: siteConfig.links.github,
+          icon: <GithubLogo size={18} />,
+        },
+      ]
+    : []),
 ]
 
 export default function Navigation() {

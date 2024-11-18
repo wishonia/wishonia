@@ -12,6 +12,7 @@ import { exampleMessages } from "@/components/ChatExampleQuestions"
 
 import { UserMessage } from "./assistant/Message"
 import {useRouter} from "next/navigation";
+import { siteConfig } from "@/config/site"
 
 function ChatPanel({ agentData }: { agentData?: Agent | null }) {
   const [aiState] = useAIState()
@@ -105,7 +106,7 @@ const router = useRouter();
             className="
           bg-gradient-to-t from-black/50 to-black bg-clip-text text-transparent dark:from-white/50 dark:to-white"
           >
-            Talk to Wishonia
+            Talk to {siteConfig.name}
           </span>
         </h1>
         <p
