@@ -20,7 +20,7 @@ describe("FDAi Tests", () => {
       const article = await writeArticle("The most effective experimental treatments for long covid",
           "test-user",
           {
-        modelName: "claude-3-5-sonnet-20240620",
+        //modelName: "claude-3-5-sonnet-20240620",
       })
       console.log(dumpTypeDefinition(article))
       expect(article).not.toBeNull()
@@ -56,7 +56,7 @@ describe("FDAi Tests", () => {
     const result = await doMetaAnalysis("MDMA-Assisted Psychotherapy", "PTSD");
     console.log(result)
     writeFileSync("meta-analysis.json", JSON.stringify(result, null, 2))
-  })
+  }, 60000)
   it("gets dfda access token", async () => {
     const testUser = await getOrCreateTestUser()
     const result = await getOrCreateDfdaAccessToken(testUser.id)
