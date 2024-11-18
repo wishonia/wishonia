@@ -1,7 +1,7 @@
 "use server";
 
 import { revalidatePath } from "next/cache";
-import { PrismaClient } from "@prisma/client";
+import { PrismaClient, ArticleStatus } from "@prisma/client";
 import {
   ArticleWithRelations,
   deleteArticleByPromptedTopic,
@@ -16,55 +16,123 @@ const openai = new OpenAI({
 })
 const prisma = new PrismaClient()
 
-export async function searchArticles(query: string, categorySlug?: string, tagSlug?: string) {
+type SortField = 'createdAt' | 'updatedAt' | 'publishedAt' | 'title'
+type SortOrder = 'asc' | 'desc'
+
+export async function searchArticles(
+  searchQuery: string,
+  categorySlug?: string,
+  tagSlug?: string,
+  authorUsername?: string,
+  status: ArticleStatus = ArticleStatus.PUBLISH,
+  sortField: SortField = 'publishedAt',
+  sortOrder: SortOrder = 'desc',
+  page: number = 1,
+  pageSize: number = 12
+) {
   try {
-    const whereClause: any = {
-      OR: [
-        { title: { contains: query, mode: "insensitive" } },
-        { description: { contains: query, mode: "insensitive" } },
-      ],
+    const skip = (page - 1) * pageSize;
+
+    const [articles, totalCount] = await Promise.all([
+      prisma.article.findMany({
+        where: {
+          AND: [
+            { status: status },
+            { deletedAt: null },
+            searchQuery ? {
+              OR: [
+                { title: { contains: searchQuery, mode: 'insensitive' } },
+                { description: { contains: searchQuery, mode: 'insensitive' } },
+                { content: { contains: searchQuery, mode: 'insensitive' } },
+              ],
+            } : {},
+            categorySlug ? {
+              category: {
+                slug: categorySlug
+              }
+            } : {},
+            tagSlug ? {
+              tags: {
+                some: {
+                  slug: tagSlug
+                }
+              }
+            } : {},
+            authorUsername ? {
+              user: {
+                username: authorUsername
+              }
+            } : {},
+          ],
+        },
+        include: {
+          user: {
+            select: {
+              name: true,
+              username: true,
+            },
+          },
+          category: {
+            select: {
+              name: true,
+              slug: true,
+            },
+          },
+          tags: {
+            select: {
+              name: true,
+              slug: true,
+            },
+          },
+        },
+        orderBy: {
+          [sortField]: sortOrder,
+        },
+        skip,
+        take: pageSize,
+      }),
+      prisma.article.count({
+        where: {
+          AND: [
+            { status: status },
+            { deletedAt: null },
+            searchQuery ? {
+              OR: [
+                { title: { contains: searchQuery, mode: 'insensitive' } },
+                { description: { contains: searchQuery, mode: 'insensitive' } },
+                { content: { contains: searchQuery, mode: 'insensitive' } },
+              ],
+            } : {},
+            categorySlug ? {
+              category: {
+                slug: categorySlug
+              }
+            } : {},
+            tagSlug ? {
+              tags: {
+                some: {
+                  slug: tagSlug
+                }
+              }
+            } : {},
+            authorUsername ? {
+              user: {
+                username: authorUsername
+              }
+            } : {},
+          ],
+        },
+      })
+    ]);
+
+    return {
+      articles,
+      totalCount,
+      totalPages: Math.ceil(totalCount / pageSize)
     };
-
-    if (categorySlug) {
-      whereClause.category = { slug: categorySlug };
-    }
-
-    if (tagSlug) {
-      const tag = await prisma.articleTag.findUnique({ where: { slug: tagSlug } });
-      if (tag) {
-        whereClause.tags = { some: { id: tag.id } };
-      }
-    }
-
-    return await prisma.article.findMany({
-      where: whereClause,
-      select: {
-        id: true,
-        title: true,
-        slug: true,
-        description: true,
-        featuredImage: true,
-        category: {
-          select: {
-            name: true,
-            slug: true,
-          },
-        },
-        tags: {
-          select: {
-            name: true,
-            slug: true,
-          },
-        },
-      },
-      orderBy: {
-        publishedAt: "desc",
-      },
-      take: 20, // Limit the number of results
-    })
   } catch (error) {
-    console.error("Failed to fetch articles:", error)
-    throw new Error("Failed to fetch articles")
+    console.error('Error searching articles:', error)
+    throw error
   }
 }
 
