@@ -5,8 +5,15 @@ interface Env {
   NODE_ENV: string
   // Add other environment variables as needed
   NEXT_PUBLIC_APP_URL: string
+  NEXT_PUBLIC_SITE_NAME: string
+  NEXT_PUBLIC_SITE_DESCRIPTION: string
+  NEXT_PUBLIC_SITE_AUTHOR: string
+  NEXT_PUBLIC_SITE_KEYWORDS: string
+  NEXT_PUBLIC_SITE_OG_IMAGE: string
   NEXT_PUBLIC_API_KEY: string
   NEXT_PUBLIC_API_URL: string
+  NEXT_PUBLIC_DEFAULT_HOMEPAGE: string
+  NEXT_PUBLIC_DEFAULT_AFTER_LOGIN_PATH: string
   NEXTAUTH_URL: string
   NEXTAUTH_SECRET: string
   GOOGLE_CLIENT_ID: string
