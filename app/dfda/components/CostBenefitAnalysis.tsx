@@ -4,10 +4,15 @@ import { Card, CardHeader, CardTitle, CardDescription, CardContent } from "@/com
 import { Stethoscope, Pill, BarChart } from "lucide-react"
 import ConditionSearchAutocomplete from './ConditionSearchAutocomplete'
 import TreatmentSearchAutocomplete from './TreatmentSearchAutocomplete'
+import { GlobalVariable } from '@/types/models/GlobalVariable'
 
 export default function CostBenefitAnalysis() {
     const [condition, setCondition] = useState('')
     const [treatment, setTreatment] = useState('')
+
+    const handleTreatmentSelect = (treatmentVariable: GlobalVariable) => {
+        setTreatment(treatmentVariable.name)
+    }
 
     const handleAnalyze = (e: React.FormEvent) => {
         e.preventDefault()
@@ -36,8 +41,7 @@ export default function CostBenefitAnalysis() {
                         <div className="flex items-center space-x-2">
                             <Pill className="text-gray-500" />
                             <TreatmentSearchAutocomplete
-                                onTreatmentSelect={setTreatment}
-                                placeholder="Enter treatment"
+                                onVariableSelect={handleTreatmentSelect}
                             />
                         </div>
                         <div className="flex justify-center">
