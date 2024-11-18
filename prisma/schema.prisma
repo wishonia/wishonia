@@ -1,13 +1,15 @@
 generator client {
-  provider        = "prisma-client-js"
-  previewFeatures = ["postgresqlExtensions"]
-  extensions      = ["(function)"]
+  provider = "prisma-client-js"
+  // Had to comment because I keep getting the error:
+  // Changed the `vector` extension. need to reset the "public" schema
+  // previewFeatures = ["postgresqlExtensions"]
+  // extensions      = ["(function)"]
 }
 
 datasource db {
-  provider   = "postgresql"
-  url        = env("DATABASE_URL")
-  extensions = [uuid_ossp(map: "uuid-ossp", schema: "public")]
+  provider = "postgresql"
+  url      = env("DATABASE_URL")
+  // extensions = [uuid_ossp(map: "uuid-ossp", schema: "public")]
 }
 
 model Account {
@@ -150,8 +152,46 @@ model User {
   symptomReports                        DfdaUserSymptomReport[]
   treatmentReports                      DfdaUserTreatmentReport[]
   sideEffectReports                     DfdaUserSideEffectReport[]
-  Article                               Article[]
-  ArticleComment                        ArticleComment[]
+  authoredArticles                      Article[]
+  articleComments                       ArticleComment[]
+  ownedOrganizations                    Organization[]
+  organizationFollows                   OrganizationFollower[]
+  StripeCustomer                        StripeCustomer?
+}
+
+// Need this to create digital twins for people that are not users
+model Person {
+  id               String                   @id @default(cuid())
+  bio              String?
+  birthday         DateTime?
+  blog             String?
+  city             String?
+  company          String?
+  createdAt        DateTime                 @default(now())
+  createdAtTwitter DateTime?
+  email            String?
+  firstName        String?
+  gender           String?
+  githubUsername   String?
+  hireable         Boolean?
+  image            String?
+  jobTitle         String?
+  lastName         String?
+  location         String?
+  memberships      OrganizationMembership[]
+  name             String
+  phoneNumber      String?
+  postalCode       String?
+  profileBannerUrl String?
+  stateProvince    String?
+  telephone        String?
+  timeZone         String?
+  twitterHandle    String?
+  updatedAt        DateTime                 @updatedAt
+  user             User?                    @relation(fields: [userId], references: [id])
+  userId           String?                  @unique
+  web3Wallet       String?
+  website          String?
 }
 
 model Education {
@@ -187,11 +227,35 @@ model UserSkill {
   @@unique([userId, skillId])
 }
 
+model OrganizationSkill {
+  id             String       @id @default(cuid())
+  organizationId String
+  skillId        String
+  organization   Organization @relation(fields: [organizationId], references: [id], onDelete: Cascade)
+  skill          Skill        @relation(fields: [skillId], references: [id])
+
+  @@unique([organizationId, skillId])
+}
+
+model GrantSkill {
+  id        String   @id @default(cuid())
+  grantId   String
+  skillId   String
+  grant     Grant    @relation(fields: [grantId], references: [id])
+  skill     Skill    @relation(fields: [skillId], references: [id])
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+
+  @@unique([grantId, skillId])
+}
+
 model Skill {
-  id          String            @id @default(cuid())
-  name        String            @unique
-  globalTasks GlobalTaskSkill[]
-  users       UserSkill[]
+  id                 String              @id @default(cuid())
+  name               String              @unique
+  globalTasks        GlobalTaskSkill[]
+  userSkills         UserSkill[]
+  organizationSkills OrganizationSkill[]
+  grantSkills        GrantSkill[]
 }
 
 model Endorsement {
@@ -910,19 +974,101 @@ model Library {
   updatedAt   DateTime @updatedAt
 }
 
-// Need this to create digital twins for organizations
 model Organization {
-  id            String                   @id @default(cuid())
-  name          String
+  id            String   @id @default(cuid())
+  name          String   @unique
+  slug          String   @unique
   alternateName String?
-  description   String?
-  url           String?
+  description   String?  @db.Text
+  url           String?  @unique
+  alternateUrls String[]
   logo          String?
-  createdAt     DateTime                 @default(now())
-  updatedAt     DateTime                 @updatedAt
-  email         String?
-  telephone     String?
-  members       OrganizationMembership[]
+  createdAt     DateTime @default(now())
+  updatedAt     DateTime @updatedAt
+  email         String?  @unique
+  telephone     String?  @unique
+
+  // Additional LinkedIn-like fields
+  industry             String?
+  companySize          CompanySize?
+  headquartersLocation String?
+  foundedYear          Int?
+  specialties          String[]
+  tagline              String?
+
+  // Social media and professional networking
+  linkedinUrl     String? @unique
+  twitterHandle   String? @unique
+  facebookPage    String? @unique
+  instagramHandle String? @unique
+  youtubeChannel  String? @unique
+
+  // Business details
+  companyType    CompanyType?
+  stockSymbol    String?      @unique
+  publiclyTraded Boolean?     @default(false)
+  revenue        String?
+  employeeCount  Int?
+
+  // Additional fields
+  mission String? @db.Text
+
+  // Existing relations
+  organizationMemberships OrganizationMembership[]
+  grantProposals          GrantProposal[]
+  organizationSkills      OrganizationSkill[]
+  ownerId                 String?
+  owner                   User?                    @relation(fields: [ownerId], references: [id])
+
+  // Additional relations
+  locations   OrganizationLocation[]
+  followers   OrganizationFollower[]
+  Product     Product[]
+  Service     Service[]
+  Event       Event[]
+  Partnership Partnership[]
+
+  @@unique([name, foundedYear])
+}
+
+enum CompanySize {
+  STARTUP
+  SMALL
+  MEDIUM
+  LARGE
+  ENTERPRISE
+}
+
+enum CompanyType {
+  PUBLIC
+  PRIVATE
+  NONPROFIT
+  GOVERNMENT
+  EDUCATIONAL
+}
+
+// New models to support additional LinkedIn-like features
+
+model OrganizationLocation {
+  id             String       @id @default(cuid())
+  organizationId String
+  organization   Organization @relation(fields: [organizationId], references: [id])
+  address        String
+  city           String
+  state          String?
+  country        String
+  isHeadquarters Boolean      @default(false)
+}
+
+model OrganizationFollower {
+  id             String       @id @default(cuid())
+  organizationId String
+  organization   Organization @relation(fields: [organizationId], references: [id])
+  userId         String
+  user           User         @relation(fields: [userId], references: [id])
+  followedAt     DateTime     @default(now())
+
+  @@unique([organizationId, userId])
 }
 
 model OrganizationMembership {
@@ -938,20 +1084,6 @@ model OrganizationMembership {
   person         Person       @relation(fields: [personId], references: [id])
 
   @@unique([organizationId, personId])
-}
-
-// Need this to create digital twins for people that are not users
-model Person {
-  id          String                   @id @default(cuid())
-  name        String
-  email       String?
-  telephone   String?
-  jobTitle    String?
-  createdAt   DateTime                 @default(now())
-  updatedAt   DateTime                 @updatedAt
-  memberships OrganizationMembership[]
-  userId      String?                  @unique
-  user        User?                    @relation(fields: [userId], references: [id])
 }
 
 model Chat {
@@ -1511,7 +1643,7 @@ model ArticleSearchResult {
 }
 
 model ArticleGenerationOptions {
-  id                                String    @id @default(cuid())
+  id                                String  @id @default(cuid())
   numberOfSearchQueryVariations     Int
   numberOfWebResultsToInclude       Int
   audience                          String
@@ -1519,11 +1651,38 @@ model ArticleGenerationOptions {
   maxCharactersOfSearchContentToUse Int
   tone                              String
   format                            String
-  articleId                         String    @unique
-  article                           Article   @relation(fields: [articleId], references: [id], onDelete: Cascade)
-  updatedAt                         DateTime  @updatedAt
-  createdAt                         DateTime  @default(now())
-  deletedAt                         DateTime?
+  modelName                         String?
+
+  // New fields for tracking model settings
+  temperature      Float? // Controls randomness (0-1)
+  topP             Float? // Alternative to temperature
+  maxTokens        Int? // Maximum length of generated content
+  presencePenalty  Float? // Penalize new topics (-2.0 to 2.0)
+  frequencyPenalty Float? // Penalize repeated tokens (-2.0 to 2.0)
+
+  // Quality metrics
+  generationTimeMs Int? // How long the generation took
+  tokenCount       Int? // Number of tokens in generated content
+  estimatedCost    Float? // Cost of generation
+  qualityScore     Float? // Could be used for user ratings/feedback
+
+  // Search-related settings
+  searchStrategy String? // e.g., "broad", "focused", "recent"
+  dateRangeStart DateTime? // For time-bounded searches
+  dateRangeEnd   DateTime? // For time-bounded searches
+  minSourceRank  Int? // Minimum authority/ranking of sources
+
+  // Content structure
+  citationStyle  String? // How citations are formatted
+  languageLevel  String? // e.g., "beginner", "expert"
+  wordLimit      Int? // Target word count
+  includeSummary Boolean? // Whether to include summary
+
+  articleId String    @unique
+  article   Article   @relation(fields: [articleId], references: [id], onDelete: Cascade)
+  updatedAt DateTime  @updatedAt
+  createdAt DateTime  @default(now())
+  deletedAt DateTime?
 }
 
 model ArticleComment {
@@ -1536,4 +1695,168 @@ model ArticleComment {
   updatedAt DateTime  @updatedAt
   createdAt DateTime  @default(now())
   deletedAt DateTime?
+}
+
+model Grant {
+  id                 String          @id @default(cuid())
+  title              String          @unique
+  description        String?
+  funder             String
+  eligibility        String?
+  amount             String?
+  deadline           DateTime?
+  focusAreas         String[]
+  applicationProcess String?
+  requirements       String[]
+  url                String?         @unique
+  contactEmail       String?
+  createdAt          DateTime        @default(now())
+  updatedAt          DateTime        @updatedAt
+  deletedAt          DateTime?
+  grantProposals     GrantProposal[]
+  grantSkills        GrantSkill[]
+}
+
+model GrantProposal {
+  id                     String         @id @default(cuid())
+  title                  String
+  executiveSummary       String         @db.Text
+  organizationBackground String         @db.Text
+  projectDescription     String         @db.Text
+  goals                  String[] // Stored as a JSON array
+  methodology            String         @db.Text
+  timeline               String         @db.Text
+  budget                 String         @db.Text
+  evaluation             String         @db.Text
+  sustainability         String         @db.Text
+  conclusion             String         @db.Text
+  status                 ProposalStatus @default(DRAFT)
+  createdAt              DateTime       @default(now())
+  updatedAt              DateTime       @updatedAt
+
+  organizationId String
+  organization   Organization @relation(fields: [organizationId], references: [id])
+
+  grantId String?
+  grant   Grant?  @relation(fields: [grantId], references: [id])
+
+  @@unique([grantId, organizationId])
+  @@index([organizationId])
+  @@index([grantId])
+}
+
+enum ProposalStatus {
+  DRAFT
+  SUBMITTED
+  UNDER_REVIEW
+  APPROVED
+  REJECTED
+}
+
+model Product {
+  id             String       @id @default(cuid())
+  name           String
+  description    String?      @db.Text
+  price          Float
+  currency       String
+  available      Boolean      @default(true)
+  referralUrl    String?
+  organizationId String
+  organization   Organization @relation(fields: [organizationId], references: [id])
+
+  @@unique([name, organizationId])
+}
+
+model Service {
+  id             String       @id @default(cuid())
+  name           String
+  description    String?      @db.Text
+  price          Float
+  currency       String
+  available      Boolean      @default(true)
+  referralUrl    String?
+  organizationId String
+  organization   Organization @relation(fields: [organizationId], references: [id])
+
+  @@unique([name, organizationId])
+}
+
+model Event {
+  id                   String       @id @default(cuid())
+  name                 String
+  description          String?      @db.Text
+  startDate            DateTime
+  endDate              DateTime?
+  location             String?
+  organizationId       String
+  organization         Organization @relation(fields: [organizationId], references: [id])
+  url                  String? // URL of the online event
+  isOnline             Boolean      @default(false) // Indicates if the event is online
+  maxParticipants      Int? // Maximum number of participants
+  registrationRequired Boolean      @default(false) // Indicates if registration is required
+  registrationUrl      String? // URL for registration
+
+  @@unique([name, organizationId, startDate])
+}
+
+model Partnership {
+  id             String       @id @default(cuid())
+  partnerName    String
+  description    String?      @db.Text
+  startDate      DateTime
+  endDate        DateTime?
+  organizationId String
+  organization   Organization @relation(fields: [organizationId], references: [id])
+
+  @@unique([partnerName, organizationId, startDate])
+}
+
+model StripeCustomer {
+  id            String         @id
+  userId        String         @unique
+  user          User           @relation(fields: [userId], references: [id])
+  subscriptions Subscription[]
+}
+
+model Subscription {
+  id               String         @id
+  status           String
+  currentPeriodEnd DateTime
+  createdAt        DateTime       @default(now())
+  stripeCustomerId String
+  stripeCustomer   StripeCustomer @relation(fields: [stripeCustomerId], references: [id])
+}
+
+model ApiEndpointPricing {
+  id              String   @id @default(cuid())
+  endpoint        String
+  method          String
+  pricePerRequest Float
+  active          Boolean  @default(true)
+  createdAt       DateTime @default(now())
+  updatedAt       DateTime @updatedAt
+}
+
+model ApiEndpointUsage {
+  endpointPricingId String
+  subscriptionId    String
+  period            String // YYYY-MM format
+  requestCount      Int    @default(0)
+  billableAmount    Float  @default(0)
+
+  @@id([endpointPricingId, subscriptionId, period])
+}
+
+model ApiRequest {
+  id                String   @id @default(cuid())
+  apiKeyId          String
+  endpoint          String
+  method            String
+  status            Int
+  duration          Int
+  endpointPricingId String?
+  billedAmount      Float?
+  error             String?
+  billable          Boolean  @default(true)
+  createdAt         DateTime @default(now())
 }
