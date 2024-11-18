@@ -1,17 +1,28 @@
-import {getLLMResponse} from "@/lib/agents/getLLMResponse";
+import { z } from "zod";
+import { generateObject } from "ai";
+import { getModel } from "@/lib/utils/modelUtils";
+
+const SearchQueriesSchema = z.object({
+    queries: z.array(z.string())
+        .describe("An array of search queries, each optimized for research effectiveness")
+});
 
 export async function generateSearchQueries(topic: string, n: number): Promise<string[]> {
-    const userPrompt =
-        `Generate ${n} search queries for researching: ${topic}. 
-        Provide only the queries, each on a new line, without any additional text or numbering.`;
 
-    const completion = await getLLMResponse({
-        system: "You are a research assistant specializing in creating effective search queries.",
-        user: userPrompt,
-        temperature: 0.7,
+    if(n < 2) {
+       return [topic];
+    }
+
+    const userPrompt = 
+        `Generate ${n} search queries for researching: ${topic}. 
+        Each query should be optimized for finding high-quality, relevant information.`;
+
+    const result = await generateObject({
+        model: getModel(),
+        schema: SearchQueriesSchema,
+        prompt: userPrompt,
     });
-    return completion
-        .split("\n")
-        .filter((s) => s.trim().length > 0)
-        .slice(0, n);
+
+    // Take only the first n queries
+    return (result.object as { queries: string[] }).queries.slice(0, n);
 }
