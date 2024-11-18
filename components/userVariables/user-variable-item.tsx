@@ -27,7 +27,7 @@ export function UserVariableItem({ userVariable }: UserVariableItemProps) {
           )}
           <div>
             <Link
-              href={`/dashboard/userVariables/${userVariable.variableId}`}
+              href={`/dfda/userVariables/${userVariable.variableId}`}
               className="font-semibold hover:underline"
             >
               {userVariable.name}
@@ -59,13 +59,13 @@ export function UserVariableItem({ userVariable }: UserVariableItemProps) {
           size="icon"
         />
         <Link
-          href={`/dashboard/userVariables/${userVariable.variableId}`}
+          href={`/dfda/userVariables/${userVariable.variableId}`}
           className="flex h-8 w-8 items-center justify-center rounded-md border transition-colors hover:bg-muted"
         >
           <Icons.history className="h-4 w-4" />
         </Link>
         <Link
-          href={`/dashboard/userVariables/${userVariable.variableId}/charts`}
+          href={`/dfda/userVariables/${userVariable.variableId}/charts`}
           className="flex h-8 w-8 items-center justify-center rounded-md border transition-colors hover:bg-muted"
         >
           <Icons.charts className="h-4 w-4" />

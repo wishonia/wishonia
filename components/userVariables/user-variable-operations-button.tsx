@@ -89,7 +89,7 @@ export function UserVariableOperationsButton({
           <DropdownMenuSeparator />
           <DropdownMenuItem>
             <Link
-              href={`/dashboard/userVariables/${userVariable.id}/settings`}
+              href={`/dfda/userVariables/${userVariable.id}/settings`}
               className="flex w-full"
             >
               <Icons.settings className="mr-2 h-4 w-4" />
