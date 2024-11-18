@@ -1,10 +1,59 @@
 import { GlobalVariable } from "@/types/models/GlobalVariable";
 
 export async function searchConditions(condition: string): Promise<string[]> {
-    const response = await fetch(`https://clinicaltables.nlm.nih.gov/api/conditions/v3/search?terms=${condition}&ef=name`);
-    const data = await response.json();
-    // Extract the suggestions from the fourth element of the array
-    return data[3].map((item: string[]) => item[0]);
+    try {
+        const response = await fetch(`https://clinicaltrials.gov/api/int/suggest?input=${encodeURIComponent(condition)}&dictionary=Condition`);
+        if (!response.ok) {
+            throw new Error('Failed to fetch condition suggestions');
+        }
+        const data = await response.json();
+        return Array.isArray(data) ? data : [];
+    } catch (error) {
+        console.error('Error fetching condition suggestions:', error);
+        return [];
+    }
+}
+
+export async function searchInterventions(intervention: string): Promise<string[]> {
+    try {
+        const response = await fetch(`https://clinicaltrials.gov/api/int/suggest?input=${encodeURIComponent(intervention)}&dictionary=InterventionName`);
+        if (!response.ok) {
+            throw new Error('Failed to fetch intervention suggestions');
+        }
+        const data = await response.json();
+        return Array.isArray(data) ? data : [];
+    } catch (error) {
+        console.error('Error fetching intervention suggestions:', error);
+        return [];
+    }
+}
+
+export async function searchSponsors(sponsor: string): Promise<string[]> {
+    try {
+        const response = await fetch(`https://clinicaltrials.gov/api/int/suggest?input=${encodeURIComponent(sponsor)}&dictionary=LeadSponsorName`);
+        if (!response.ok) {
+            throw new Error('Failed to fetch sponsor suggestions');
+        }
+        const data = await response.json();
+        return Array.isArray(data) ? data : [];
+    } catch (error) {
+        console.error('Error fetching sponsor suggestions:', error);
+        return [];
+    }
+}
+
+export async function searchLocations(facility: string): Promise<string[]> {
+    try {
+        const response = await fetch(`https://clinicaltrials.gov/api/int/suggest?input=${encodeURIComponent(facility)}&dictionary=LocationFacility`);
+        if (!response.ok) {
+            throw new Error('Failed to fetch location suggestions');
+        }
+        const data = await response.json();
+        return Array.isArray(data) ? data : [];
+    } catch (error) {
+        console.error('Error fetching location suggestions:', error);
+        return [];
+    }
 }
 
 export async function searchClinicalTrialsGovInterventions(intervention: string): Promise<string[]> {
@@ -43,16 +92,16 @@ export async function searchFdaTreatments(treatment: string): Promise<string[]> 
     }
 }
 
-export async function searchDfdaTreatments(treatment: string): Promise<string[]> {
+export async function searchDfdaVariables(searchPhrase: string, additionalParams: Record<string, string> = {}): Promise<GlobalVariable[]> {
     try {
         const baseUrl = 'https://safe.fdai.earth/api/v3/variables';
         const params = new URLSearchParams({
             appName: 'Wishonia',
-            clientId: 'oauth_test_client',
+            clientId: 'oauth_test_client', 
             limit: '10',
             includePublic: 'true',
-            variableCategoryName: 'Treatments',
-            searchPhrase: treatment,
+            searchPhrase,
+            ...additionalParams
         });
 
         const url = `${baseUrl}?${params.toString()}`;
@@ -72,12 +121,12 @@ export async function searchDfdaTreatments(treatment: string): Promise<string[]>
             throw new Error("Unexpected response format: 'data' field is missing or not an array");
         }
         
-        const treatments = data.map((item: GlobalVariable) => item.name);
+        const variables = data;
         
-        console.log(`Found ${treatments.length} treatments`);
-        return treatments;
+        console.log(`Found ${variables.length} variables`);
+        return variables;
     } catch (error) {
-        console.error("Error in searchTreatments:", error);
+        console.error("Error in searchDfdaVariables:", error);
         if (error instanceof Error) {
             console.error("Error message:", error.message);
             console.error("Error stack:", error.stack);
@@ -86,3 +135,21 @@ export async function searchDfdaTreatments(treatment: string): Promise<string[]>
     }
 }
 
+export async function searchDfdaTreatments(query: string): Promise<GlobalVariable[]> {
+    return searchDfdaVariables(query, {
+        variableCategoryName: 'Treatments'
+    });
+}
+
+export async function searchDfdaOutcomes(query: string): Promise<GlobalVariable[]> {
+    return searchDfdaVariables(query, {
+        outcome: 'true',
+        sort: '-numberOfCorrelationsAsEffect'
+    });
+}
+
+export async function searchDfdaPredictors(query: string): Promise<GlobalVariable[]> {
+    return searchDfdaVariables(query, {
+        sort: '-numberOfCorrelationsAsCause'
+    });
+}
