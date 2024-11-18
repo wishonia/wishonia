@@ -1510,7 +1510,7 @@ export class GlobalVariable {
 }
 
 export type VariableCombinationOperationEnum = "MEAN" | "SUM"
-export type VariableFillingTypeEnum = "none" | "zero-filling" | "value-filling"
+export type VariableFillingTypeEnum = "none" | "zero" | "value"
 export type VariableVariableCategoryNameEnum =
   | "Activity"
   | "Books"
