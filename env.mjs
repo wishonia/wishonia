@@ -15,6 +15,13 @@ export const env = createEnv({
   },
   client: {
     NEXT_PUBLIC_APP_URL: z.string().min(1),
+    NEXT_PUBLIC_SITE_NAME: z.string().optional(),
+    NEXT_PUBLIC_SITE_DESCRIPTION: z.string().optional(),
+    NEXT_PUBLIC_SITE_AUTHOR: z.string().optional(),
+    NEXT_PUBLIC_SITE_KEYWORDS: z.string().optional(),
+    NEXT_PUBLIC_SITE_OG_IMAGE: z.string().url().optional(),
+    NEXT_PUBLIC_DEFAULT_HOMEPAGE: z.string().optional(),
+    NEXT_PUBLIC_DEFAULT_AFTER_LOGIN_PATH: z.string().optional(),
   },
   runtimeEnv: {
     NEXTAUTH_URL: process.env.NEXTAUTH_URL,
@@ -25,7 +32,14 @@ export const env = createEnv({
     GITHUB_CLIENT_SECRET: process.env.GITHUB_CLIENT_SECRET,
     DATABASE_URL: process.env.DATABASE_URL,
     NEXT_PUBLIC_APP_URL: process.env.NEXT_PUBLIC_APP_URL,
+    NEXT_PUBLIC_SITE_NAME: process.env.NEXT_PUBLIC_SITE_NAME,
+    NEXT_PUBLIC_SITE_DESCRIPTION: process.env.NEXT_PUBLIC_SITE_DESCRIPTION,
+    NEXT_PUBLIC_SITE_AUTHOR: process.env.NEXT_PUBLIC_SITE_AUTHOR,
+    NEXT_PUBLIC_SITE_KEYWORDS: process.env.NEXT_PUBLIC_SITE_KEYWORDS,
+    NEXT_PUBLIC_SITE_OG_IMAGE: process.env.NEXT_PUBLIC_SITE_OG_IMAGE,
     EMAIL_SERVER: process.env.EMAIL_SERVER,
     EMAIL_FROM: process.env.EMAIL_FROM,
+    NEXT_PUBLIC_DEFAULT_HOMEPAGE: process.env.NEXT_PUBLIC_DEFAULT_HOMEPAGE,
+    NEXT_PUBLIC_DEFAULT_AFTER_LOGIN_PATH: process.env.NEXT_PUBLIC_DEFAULT_AFTER_LOGIN_PATH,
   },
 })

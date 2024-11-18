@@ -56,3 +56,8 @@ next-env.d.ts
 
 .trigger
 /.vscode
+
+.vercel
+/.env.vercel
+/run_anthropic_docker.ps1
+/logs
