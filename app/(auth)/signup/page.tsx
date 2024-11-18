@@ -5,6 +5,7 @@ import { cn } from "@/lib/utils"
 import { buttonVariants } from "@/components/ui/button"
 import { Icons } from "@/components/icons"
 import { UserAuthForm } from "@/components/user/user-auth-form"
+import { siteConfig } from "@/config/site"
 
 export const metadata: Metadata = {
   title: "Sign up",
@@ -29,7 +30,7 @@ export default function Signup() {
       <div className="mx-auto flex w-full flex-col justify-center space-y-6 sm:w-[350px]">
         <div className="flex flex-col space-y-2 text-center">
           <h1 className="text-2xl font-semibold tracking-tight">
-            Become a Citizen of Wishonia
+            Join {siteConfig.name}
           </h1>
           <p className="text-sm text-muted-foreground">
             Select a provider to verify your identity
