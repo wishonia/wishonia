@@ -9,6 +9,7 @@ import {
   CardHeader,
   CardTitle,
 } from "@/components/ui/card"
+import { siteConfig } from "@/config/site"
 
 export const getInitials = (name: string) => {
   const words = name.split(" ")
@@ -45,7 +46,7 @@ export async function VotersList() {
     <Card>
       <CardHeader>
         <CardTitle>Voter Leaderboard</CardTitle>
-        <CardDescription>Meet the fine citizens of Wishonia</CardDescription>
+        <CardDescription>Meet the fine citizens of {siteConfig.name}</CardDescription>
       </CardHeader>
       <CardContent>
         <div className="grid grid-cols-1 gap-3 sm:grid-cols-2 md:grid-cols-3">
