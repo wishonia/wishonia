@@ -1,5 +1,3 @@
-'use client'
-
 import ArticleSearchAndGrid from "@/components/article/ArticleSearchAndGrid";
 
 export default function ArticleList() {
