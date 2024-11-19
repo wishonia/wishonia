@@ -1,17 +1,18 @@
-import SearchAutocomplete from './SearchAutocomplete'
-import { searchDfdaTreatments } from "@/lib/clinicaltables"
+'use client'
+
+import { GlobalVariable } from '@/types/models/GlobalVariable'
+import VariableSearchAutocomplete from './VariableSearchAutocomplete'
 
 interface TreatmentSearchAutocompleteProps {
-  onTreatmentSelect: (treatment: string) => void
-  placeholder?: string
+  onVariableSelect: (treatment: GlobalVariable) => void
 }
 
-export default function TreatmentSearchAutocomplete({ onTreatmentSelect, placeholder = "Enter treatment" }: TreatmentSearchAutocompleteProps) {
+export default function TreatmentSearchAutocomplete({ onVariableSelect }: TreatmentSearchAutocompleteProps) {
   return (
-    <SearchAutocomplete
-      onSelect={onTreatmentSelect}
-      placeholder={placeholder}
-      searchFunction={searchDfdaTreatments}
+    <VariableSearchAutocomplete
+      onVariableSelect={onVariableSelect}
+      searchParams={{ variableCategoryName: 'Treatments' }}
+      placeholder="Enter a treatment 💊"
     />
   )
 }

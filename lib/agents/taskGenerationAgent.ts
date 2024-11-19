@@ -2,8 +2,8 @@ import { GlobalSolution, TaskStatus } from '@prisma/client';
 import { generateObject } from 'ai';
 import {z, ZodSchema} from 'zod';
 import { prisma } from '@/lib/db';
-import {anthropic} from "@ai-sdk/anthropic";
 import {queryGeminiPro} from "@/lib/agents/geminiProClient";
+import {getModel} from "@/lib/utils/modelUtils";
 
 const TaskSchema: ZodSchema = z.object({
   name: z.string().describe('Unique, long, descriptive name for the task specific to its goal to avoid duplication with similar tasks for different goals.'),
@@ -136,7 +136,7 @@ class GlobalSolutionDecomposerAgent {
     `;
 
     const result = await generateObject({
-      model: anthropic('claude-3-5-sonnet-20240620'),
+      model: getModel(),
       schema: TaskSchema,
       prompt,
     });
@@ -170,7 +170,7 @@ Important Notes:
     console.log(prompt);
     const result = await generateObject({
       //model: openai('gpt-4o'),
-      model: anthropic('claude-3-5-sonnet-20240620'),
+      model: getModel(),
       schema: z.object({
         tasks: z.array(TaskSchema).optional().describe('Array of tasks that must be completed to achieve the goal'),
       }),

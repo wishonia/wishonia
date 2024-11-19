@@ -3,7 +3,7 @@ import { NextAuthOptions } from "next-auth"
 import GithubProvider from "next-auth/providers/github"
 import GoogleProvider from "next-auth/providers/google"
 
-//import EmailProvider from "next-auth/providers/email";
+import EmailProvider from "next-auth/providers/email";
 
 import { env } from "@/env.mjs"
 import { prisma as db } from "@/lib/db"
@@ -18,11 +18,11 @@ export const authOptions: NextAuthOptions = {
     signIn: "/signin",
   },
   providers: [
-    // EmailProvider({
-    //   server: env.EMAIL_SERVER, // Configure your email server credentials
-    //   from: env.EMAIL_FROM, // The email address to send magic link emails from
-    //   // You can add more EmailProvider options here
-    // }),
+    EmailProvider({
+      server: env.EMAIL_SERVER, // Configure your email server credentials
+      from: env.EMAIL_FROM, // The email address to send magic link emails from
+      // You can add more EmailProvider options here
+    }),
     GoogleProvider({
       clientId: env.GOOGLE_CLIENT_ID,
       clientSecret: env.GOOGLE_CLIENT_SECRET,
@@ -30,6 +30,11 @@ export const authOptions: NextAuthOptions = {
     GithubProvider({
       clientId: env.GITHUB_CLIENT_ID,
       clientSecret: env.GITHUB_CLIENT_SECRET,
+      authorization: {
+        params: {
+          scope: 'read:org repo user read:user user:email',
+        },
+      },
     }),
       // dFDA custom oauth provider
     {
@@ -58,8 +63,9 @@ export const authOptions: NextAuthOptions = {
   ],
   callbacks: {
     async session({ token, session }) {
+      //console.log('Session callback - token:', token) // Debug log
       if (token) {
-        session.user.id = token.id
+        session.user.id = token.id as string
         let {name} = token
         if (token.firstName && token.lastName) {
           name = `${token.firstName} ${token.lastName}`
@@ -74,7 +80,7 @@ export const authOptions: NextAuthOptions = {
           | undefined
         session.user.admin = token.admin as boolean | undefined
       }
-
+      //console.log('Session callback - modified session:', session) // Debug log
       return session
     },
     async jwt({ token, user }) {
@@ -106,6 +112,44 @@ export const authOptions: NextAuthOptions = {
         web3Wallet: dbUser.web3Wallet,
         admin: dbUser.admin,
       }
+    },
+    // I think we might need this to add additional GitHub scopes
+    // for getting files from GitHub repos
+    async signIn({ user, account, profile, email, credentials }) {
+      // Allow linking multiple providers to one account
+      if (account?.provider) {
+        const existingUser = await db.user.findFirst({
+          where: {
+            email: user.email,
+          },
+          include: {
+            accounts: true,
+          },
+        })
+
+        if (existingUser) {
+          // If we're adding a new provider, link it to the existing user
+          if (!existingUser.accounts.some(acc => acc.provider === account.provider)) {
+            await db.account.create({
+              data: {
+                userId: existingUser.id,
+                type: account.type,
+                provider: account.provider,
+                providerAccountId: account.providerAccountId,
+                access_token: account.access_token,
+                token_type: account.token_type,
+                scope: account.scope,
+                expires_at: account.expires_at,
+                refresh_token: account.refresh_token,
+                id_token: account.id_token,
+                session_state: account.session_state,
+              },
+            })
+          }
+          return true
+        }
+      }
+      return true
     },
   },
 }

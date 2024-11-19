@@ -30,9 +30,15 @@ export async function getSearchResultsByDomain(domain: string, queries: string[]
 
 export async function getSearchResultsByUrl(url: string, linksPerQuery: number = 5): Promise<SearchResult[]> {
     let results: SearchResult[] = [];
-    const searchResponse = await exa.findSimilarAndContents(url, {
-        numResults: linksPerQuery,
-    });
+    const searchResponse = await exa.getContents(
+        [url],
+        {
+          text: {
+            maxCharacters: 10000,
+            includeHtmlTags: false
+          }
+        }
+      )
     results.push(...searchResponse.results);
     return results;
 }

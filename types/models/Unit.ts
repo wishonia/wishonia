@@ -12,6 +12,7 @@
 
 import { ConversionStep } from "../models/ConversionStep"
 import { UnitCategory } from "../models/UnitCategory"
+import { VariableCombinationOperationEnum, VariableFillingTypeEnum } from "./GlobalVariable"
 
 export class Unit {
   /**
@@ -23,54 +24,88 @@ export class Unit {
    */
   "advanced"?: number
   /**
-   * Unit category
+   * Unit category name
    */
-  "category": UnitCategoryEnum
+  "categoryName": string
   /**
-   * Ex: 6
+   * Unit category ID
    */
-  "categoryId"?: number
+  "unitCategoryId": number
   /**
-   * Ex: Miscellany
+   * How measurements should be combined
    */
-  "categoryName"?: string
+  combinationOperation?: VariableCombinationOperationEnum | null
   /**
    * Conversion steps list
    */
   "conversionSteps": Array<ConversionStep>
   /**
-   * Ex: 29
+   * How missing values should be handled
    */
-  "id"?: number
+  "fillingType": VariableFillingTypeEnum
   /**
-   * Ex: https://static.quantimo.do/img/medical/png/pill.png
+   * Value to use when filling missing data
+   */
+  "fillingValue": number | null
+  /**
+   * Hint text for input
+   */
+  "hint"?: string | null
+  /**
+   * Unit ID
+   */
+  "id": number
+  /**
+   * Icon image URL
    */
   "image"?: string
   /**
-   * Ex: 0
+   * Whether unit can be tracked manually
    */
-  "manualTracking"?: number
+  "manualTracking": number
   /**
-   * The maximum allowed value for measurements. While you can record a value above this maximum, it will be excluded from the correlation analysis.
+   * Maximum allowed value
    */
-  "maximumAllowedValue"?: number
+  "maximumValue": number | null
   /**
-   * Ex: 4
+   * Minimum allowed value
    */
-  "maximumValue": number
-  /**
-   * The minimum allowed value for measurements. While you can record a value below this minimum, it will be excluded from the correlation analysis.
-   */
-  "minimumAllowedValue"?: number
-  /**
-   * Ex: 0
-   */
-  "minimumValue"?: number
+  "minimumValue": number | null
   /**
    * Unit name
    */
   "name": string
-  "unitCategory": UnitCategory
+  /**
+   * Measurement scale type
+   */
+  "scale"?: "ratio" | "interval" | "ordinal"
+  /**
+   * Unit suffix
+   */
+  "suffix"?: string | null
+  /**
+   * Alternative names for the unit
+   */
+  "synonyms"?: string[]
+  /**
+   * Font Awesome icon name
+   */
+  "fontAwesome"?: string | null
+  /**
+   * Input type for form fields
+   */
+  "inputType"?: string | null
+  /**
+   * Maximum daily value allowed
+   */
+  "maximumDailyValue"?: number | null
+  /**
+   * Default value
+   */
+  "defaultValue"?: number | null
+
+  "add"?: number | null
+  "multiply"?: number | null
 
   static readonly discriminator: string | undefined = undefined
 
@@ -93,27 +128,39 @@ export class Unit {
       format: "",
     },
     {
-      name: "category",
-      baseName: "category",
-      type: "UnitCategoryEnum",
-      format: "",
-    },
-    {
-      name: "categoryId",
-      baseName: "categoryId",
-      type: "number",
-      format: "",
-    },
-    {
       name: "categoryName",
       baseName: "categoryName",
       type: "string",
       format: "",
     },
     {
+      name: "unitCategoryId",
+      baseName: "unitCategoryId",
+      type: "number",
+      format: "",
+    },
+    {
       name: "conversionSteps",
       baseName: "conversionSteps",
       type: "Array<ConversionStep>",
+      format: "",
+    },
+    {
+      name: "fillingType",
+      baseName: "fillingType",
+      type: "VariableFillingTypeEnum",
+      format: "",
+    },
+    {
+      name: "fillingValue",
+      baseName: "fillingValue",
+      type: "number",
+      format: "",
+    },
+    {
+      name: "hint",
+      baseName: "hint",
+      type: "string",
       format: "",
     },
     {
@@ -135,22 +182,10 @@ export class Unit {
       format: "",
     },
     {
-      name: "maximumAllowedValue",
-      baseName: "maximumAllowedValue",
-      type: "number",
-      format: "double",
-    },
-    {
       name: "maximumValue",
       baseName: "maximumValue",
       type: "number",
       format: "",
-    },
-    {
-      name: "minimumAllowedValue",
-      baseName: "minimumAllowedValue",
-      type: "number",
-      format: "double",
     },
     {
       name: "minimumValue",
@@ -165,9 +200,45 @@ export class Unit {
       format: "",
     },
     {
-      name: "unitCategory",
-      baseName: "unitCategory",
-      type: "UnitCategory",
+      name: "scale",
+      baseName: "scale",
+      type: "string",
+      format: "",
+    },
+    {
+      name: "suffix",
+      baseName: "suffix",
+      type: "string",
+      format: "",
+    },
+    {
+      name: "synonyms",
+      baseName: "synonyms",
+      type: "Array<string>",
+      format: "",
+    },
+    {
+      name: "fontAwesome",
+      baseName: "fontAwesome",
+      type: "string",
+      format: "",
+    },
+    {
+      name: "inputType",
+      baseName: "inputType",
+      type: "string",
+      format: "",
+    },
+    {
+      name: "maximumDailyValue",
+      baseName: "maximumDailyValue",
+      type: "number",
+      format: "",
+    },
+    {
+      name: "defaultValue",
+      baseName: "defaultValue",
+      type: "number",
       format: "",
     },
   ]

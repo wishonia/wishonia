@@ -1,4 +1,5 @@
 import nodemailer from "nodemailer"
+import { siteConfig } from "@/config/site"
 
 export async function sendEmail(
   to: string,
@@ -22,7 +23,7 @@ export async function sendEmail(
   })
   // send mail with defined transport object
   const info = await transporter.sendMail({
-    from: '"Wishonia" <hello@wishonia.love>', // sender address
+    from: `"${siteConfig.name}" <${siteConfig.url.author}>`, // sender address
     to: to, // list of receivers
     subject: subject, // Subject line
     text: text, // plain text body

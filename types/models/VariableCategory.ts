@@ -11,10 +11,16 @@
  */
 
 export class VariableCategory {
+  amazonProductCategory?: string|null
   /**
    * Ex: mood
    */
   "appType"?: string
+  boring?: boolean|null
+  common?: boolean|null
+  defaultUnitAbbreviatedName?: string|null
+  defaultUnitId?: number|null
+  defaultValueLabel?: string|null
   /**
    * Ex: false
    */
@@ -27,6 +33,7 @@ export class VariableCategory {
    * UTC ISO 8601 YYYY-MM-DDThh:mm:ss
    */
   "createdTime"?: string
+  effectOnly?: boolean|null
   /**
    * Ex: /5
    */
@@ -42,7 +49,7 @@ export class VariableCategory {
   /**
    * Ex: -1. Unit: Variable category default unit.
    */
-  "fillingValue"?: number
+  "fillingValue"?: number|null
   /**
    * Ex: What emotion do you want to rate?
    */
@@ -62,11 +69,11 @@ export class VariableCategory {
   /**
    * Ex: true
    */
-  "manualTracking"?: boolean
+  "manualTracking"?: boolean|null
   /**
    * Unit: Variable category default unit.
    */
-  "maximumAllowedValue"?: string
+  "maximumAllowedValue"?: number|null
   /**
    * Ex: rating
    */
@@ -74,7 +81,7 @@ export class VariableCategory {
   /**
    * Unit: Variable category default unit.
    */
-  "minimumAllowedValue"?: string
+  "minimumAllowedValue"?: number|null
   /**
    * Ex: Do you have any emotions that fluctuate regularly?  If so, add them so I can try to determine which factors are influencing them.
    */
@@ -90,7 +97,7 @@ export class VariableCategory {
   /**
    * Ex: true
    */
-  "outcome"?: boolean
+  "outcome"?: boolean|null
   /**
    * Ex: img/variable_categories/emotions.png
    */
@@ -126,7 +133,30 @@ export class VariableCategory {
   /**
    * Ex: Emotion
    */
-  "variableCategoryNameSingular"?: string
+  "variableCategoryNameSingular"?: string|null
+  fillingType?: string|null
+  fontAwesome?: string|null
+  minimumAllowedSecondsBetweenMeasurements?: number|null
+  predictor?: boolean|null
+  setupQuestion?: string|null
+  studyImageFileName?: string|null
+  public?: boolean|null
+  suffix?: string|null
+  synonyms?: string[]
+  valence?: string|null
+  averageSecondsBetweenMeasurements?: number|null
+  isPublic?: boolean|null
+  medianSecondsBetweenMeasurements?: number|null
+  nameSingular?: string|null
+  numberOfMeasurements?: number|null
+  numberOfOutcomeCaseStudies?: number|null
+  numberOfOutcomePopulationStudies?: number|null
+  numberOfPredictorCaseStudies?: number|null
+  numberOfPredictorPopulationStudies?: number|null
+  numberOfUserVariables?: number|null
+  numberOfVariables?: number|null
+  wpPostId?: number|null
+  defaultValuePlaceholderText?: string|null
 
   static readonly discriminator: string | undefined = undefined
 
@@ -310,6 +340,132 @@ export class VariableCategory {
       type: "string",
       format: "",
     },
+    {
+      name: "fillingType",
+      baseName: "fillingType",
+      type: "string",
+      format: ""
+    },
+    {
+      name: "fontAwesome",
+      baseName: "fontAwesome",
+      type: "string",
+      format: ""
+    },
+    {
+      name: "minimumAllowedSecondsBetweenMeasurements",
+      baseName: "minimumAllowedSecondsBetweenMeasurements",
+      type: "number",
+      format: ""
+    },
+    {
+      name: "predictor",
+      baseName: "predictor",
+      type: "boolean",
+      format: ""
+    },
+    {
+      name: "setupQuestion",
+      baseName: "setupQuestion",
+      type: "string",
+      format: ""
+    },
+    {
+      name: "studyImageFileName",
+      baseName: "studyImageFileName",
+      type: "string",
+      format: ""
+    },
+    {
+      name: "suffix",
+      baseName: "suffix",
+      type: "string",
+      format: ""
+    },
+    {
+      name: "synonyms",
+      baseName: "synonyms",
+      type: "Array<string>",
+      format: ""
+    },
+    {
+      name: "valence",
+      baseName: "valence",
+      type: "string",
+      format: ""
+    },
+    {
+      name: "averageSecondsBetweenMeasurements",
+      baseName: "averageSecondsBetweenMeasurements",
+      type: "number",
+      format: ""
+    },
+    {
+      name: "isPublic",
+      baseName: "isPublic",
+      type: "boolean",
+      format: ""
+    },
+    {
+      name: "medianSecondsBetweenMeasurements",
+      baseName: "medianSecondsBetweenMeasurements",
+      type: "number",
+      format: ""
+    },
+    {
+      name: "nameSingular",
+      baseName: "nameSingular",
+      type: "string",
+      format: ""
+    },
+    {
+      name: "numberOfMeasurements",
+      baseName: "numberOfMeasurements",
+      type: "number",
+      format: ""
+    },
+    {
+      name: "numberOfOutcomeCaseStudies",
+      baseName: "numberOfOutcomeCaseStudies",
+      type: "number",
+      format: ""
+    },
+    {
+      name: "numberOfOutcomePopulationStudies",
+      baseName: "numberOfOutcomePopulationStudies",
+      type: "number",
+      format: ""
+    },
+    {
+      name: "numberOfPredictorCaseStudies",
+      baseName: "numberOfPredictorCaseStudies",
+      type: "number",
+      format: ""
+    },
+    {
+      name: "numberOfPredictorPopulationStudies",
+      baseName: "numberOfPredictorPopulationStudies",
+      type: "number",
+      format: ""
+    },
+    {
+      name: "numberOfUserVariables",
+      baseName: "numberOfUserVariables",
+      type: "number",
+      format: ""
+    },
+    {
+      name: "numberOfVariables",
+      baseName: "numberOfVariables",
+      type: "number",
+      format: ""
+    },
+    {
+      name: "wpPostId",
+      baseName: "wpPostId",
+      type: "number",
+      format: ""
+    }
   ]
 
   static getAttributeTypeMap() {
@@ -325,6 +481,7 @@ export type VariableCategoryVariableCategoryNameEnum =
   | "Causes of Illness"
   | "Cognitive Performance"
   | "Conditions"
+  | "Electronics"
   | "Emotions"
   | "Environment"
   | "Foods"

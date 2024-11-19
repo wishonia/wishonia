@@ -27,11 +27,11 @@ export default function ArticleGrid({ articles }: ArticleGridProps) {
                         </Link>
                     )}
                     <CardHeader className="pb-2">
-                        <Link href={`/researcher/articles/categories/${article.category.slug}`}>
+                        <Link href={`/articles/category/${article.category.slug}`}>
                             <Badge variant="secondary" className="mb-2">{article.category.name}</Badge>
                         </Link>
                         <CardTitle className="text-xl">
-                            <Link href={`/researcher/article/${article.slug}`}
+                            <Link href={`/article/${article.slug}`}
                             className="hover:underline">
                                 {article.title}
                             </Link>
@@ -43,7 +43,7 @@ export default function ArticleGrid({ articles }: ArticleGridProps) {
                     <CardFooter className="mt-auto pt-4 border-t">
                         <div className="flex flex-wrap gap-2">
                             {article.tags.map((tag) => (
-                                <Link key={tag.name} href={`/researcher/articles/tags/${tag.slug}`}>
+                                <Link key={tag.name} href={`/articles/tag/${tag.slug}`}>
                                     <Badge variant="outline" className="text-xs">{tag.name}</Badge>
                                 </Link>
                             ))}

@@ -1,10 +1,15 @@
-import { Account } from "@prisma/client"
+import { Account, User } from "@prisma/client"
 
 import { UserVariable } from "@/types/models/UserVariable"
 import { prisma } from "@/lib/db"
+import { GlobalVariable } from "@/types/models/GlobalVariable"
 
-async function getYourUser(yourUserId: any) {
-  let user = await prisma.user.findUnique({
+async function getYourUser(yourUserId: string): Promise<User | null> {
+  if (!yourUserId) {
+    throw new Error("User ID is required")
+  }
+
+  const user = await prisma.user.findUnique({
     where: {
       id: yourUserId,
     },
@@ -20,33 +25,59 @@ async function getYourUser(yourUserId: any) {
 }
 
 // Function to get or create a user
-export async function getOrCreateDfdaUser(yourUserId: any): Promise<Account> {
-  let your_user = await getYourUser(yourUserId)
-  let provider = "dfda"
-  if (your_user) {
-    const account = await prisma.account.findFirst({
-      where: {
-        userId: yourUserId,
-        provider: provider,
-      },
-    })
-    if (account) {
-      return account
-    }
+export async function getOrCreateDfdaUser(yourUserId: string): Promise<Account> {
+  if (!yourUserId || yourUserId.trim() === '') {
+    throw new Error("Valid user ID string is required")
   }
 
-  let response = await fetch(`https://safe.dfda.earth/api/v1/user`, {
+  const your_user = await getYourUser(yourUserId)
+  const provider = "dfda"
+
+  if (!your_user) {
+    throw new Error("Failed to get or create user")
+  }
+
+  const existingAccount = await prisma.account.findFirst({
+    where: {
+      userId: yourUserId,
+      provider: provider,
+    },
+  })
+
+  if (existingAccount) {
+    return existingAccount
+  }
+
+  // Validate required environment variables
+  if (!process.env.DFDA_CLIENT_ID || !process.env.DFDA_CLIENT_SECRET) {
+    throw new Error("DFDA client credentials are not configured")
+  }
+
+  console.log('🔑 Creating DFDA user for:', yourUserId);
+  const response = await fetch(`https://safe.dfda.earth/api/v1/user`, {
     method: "POST",
     headers: {
       "Content-type": "application/json",
-      "X-Client-ID": process.env.DFDA_CLIENT_ID!,
-      "X-Client-Secret": process.env.DFDA_CLIENT_SECRET!,
+      "X-Client-ID": process.env.DFDA_CLIENT_ID,
+      "X-Client-Secret": process.env.DFDA_CLIENT_SECRET,
     },
     body: JSON.stringify({
       clientUserId: yourUserId,
+      clientId: process.env.DFDA_CLIENT_ID, // TODO: Make this unnecessary
     }),
   })
-  let jsonResponse = await response.json()
+  console.log('🔍 Creating DFDA user API Response Status:', response.status, response.statusText)
+
+  if (!response.ok) {
+    const errorText = await response.text()
+    throw new Error(`Failed to create DFDA user: ${response.status} ${response.statusText} - ${errorText}`)
+  }
+
+  const jsonResponse = await response.json()
+  if (!jsonResponse.user || !jsonResponse.user.id) {
+    throw new Error("Invalid response from DFDA API")
+  }
+
   const dfdaUser = jsonResponse.user
   const providerAccountId = dfdaUser.id.toString()
   const expiresAt = new Date(dfdaUser.accessTokenExpires).getTime() / 1000
@@ -64,8 +95,16 @@ export async function getOrCreateDfdaUser(yourUserId: any): Promise<Account> {
   })
 }
 
-export async function getOrCreateDfdaAccessToken(yourUserId: any) {
+export async function getOrCreateDfdaAccessToken(yourUserId: string): Promise<string> {
+  //return "demo"
+  if (!yourUserId) {
+    throw new Error("User ID is required")
+  }
+
   const account = await getOrCreateDfdaUser(yourUserId)
+  if (!account.access_token) {
+    throw new Error("No access token available")
+  }
   return account.access_token
 }
 
@@ -80,6 +119,12 @@ export async function getUserVariable(
   let response = await fetch(path)
   let jsonResponse = await response.json()
   return jsonResponse[0]
+}
+
+export async function getGlobalVariable(
+  variableId: number
+): Promise<GlobalVariable> {
+  return await dfdaGET(`variables/${variableId}`)
 }
 
 export async function getUserVariableWithCharts(
@@ -121,6 +166,13 @@ async function dfdaFetch(
 
   console.log(`Making ${method} request to ${dfdaUrl}`)
   const response = await fetch(dfdaUrl, init)
+  if (!response.ok) {
+    console.error(`DFDA API Error: ${response.status} ${response.statusText}`)
+    console.error('URL:', dfdaUrl)
+    const errorText = await response.text()
+    console.error('Response:', errorText)
+    throw new Error(`HTTP error! status: ${response.status}`)
+  }
   const json = await response.json()
   if (json.error) {
     console.error("Error in dfdaFetch to ${dfdaUrl}", json.error)
@@ -156,4 +208,57 @@ export async function dfdaPOST(
 
 export async function postMeasurements(measurements: any, yourUserId: any) {
   return dfdaPOST("measurements", measurements, yourUserId)
+}
+
+export async function searchGlobalVariables(
+  name: string,
+  limit: number = 10
+): Promise<GlobalVariable[]> {
+  return await dfdaGET('variables', {
+    name,
+    limit: limit.toString()
+  })
+}
+
+export async function searchUserVariables(
+  name: string,
+  limit: number = 10
+): Promise<UserVariable[]> {
+  return await dfdaGET('userVariables', {
+    name,
+    limit: limit.toString()
+  })
+}
+
+export async function getVariable(params: {
+  id?: number | string,
+  name?: string,
+  type?: 'global' | 'user'
+}): Promise<GlobalVariable | UserVariable | undefined> {
+  const { id, name, type = 'user' } = params
+
+  try {
+    // If ID is provided, use direct fetch methods
+    if (id) {
+      const numericId = typeof id === 'string' ? parseInt(id) : id
+      if (!isNaN(numericId)) {
+        return type === 'global' 
+          ? await getGlobalVariable(numericId)
+          : await getUserVariable(numericId)
+      }
+    }
+    
+    // If name is provided, use search methods
+    if (name) {
+      const results = type === 'global'
+        ? await searchGlobalVariables(name, 1)
+        : await searchUserVariables(name, 1)
+      return results?.[0]
+    }
+
+    return undefined
+  } catch (error) {
+    console.error(`Error fetching ${type} variable:`, error)
+    return undefined
+  }
 }

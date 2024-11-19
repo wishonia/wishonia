@@ -1,7 +1,8 @@
 import { z } from "zod";
-import { anthropic } from "@ai-sdk/anthropic";
 import { generateObject } from "ai";
 import Exa from 'exa-js';
+import {getModel} from "@/lib/utils/modelUtils";
+import { generateMetaAnalysisQuery } from '@/lib/meta-analysis/metaAnalysisQueries';
 
 const exa = new Exa(process.env.EXA_API_KEY);
 
@@ -56,16 +57,16 @@ const MetaAnalysisReportSchema = z.object({
   effectivenessComparison: z.array(z.object({
     intervention: z.string().describe('Name of the compared intervention'),
     relativeEffectiveness: z.string().describe('Relative effectiveness compared to the main drug'),
-    dalysAvoided: z.number().optional().describe('Estimated Disability-Adjusted Life Years (DALYs) avoided per patient'),
-    qalysIncreased: z.number().optional().describe('Estimated Quality-Adjusted Life Years (QALYs) increased per patient'),
-    numberNeededToHarm: z.number().optional().describe('Number Needed to Harm (NNH) to cause a negative health outcome'),
-    numberNeededToTreat: z.number().optional().describe('Number Needed to Treat (NNT) to achieve a positive health outcome'),
+    dalysAvoided: z.union([z.number(), z.string()]).optional().describe('Estimated Disability-Adjusted Life Years (DALYs) avoided per patient'),
+    qalysIncreased: z.union([z.number(), z.string()]).optional().describe('Estimated Quality-Adjusted Life Years (QALYs) increased per patient'),
+    numberNeededToHarm: z.union([z.number(), z.string()]).optional().describe('Number Needed to Harm (NNH) to cause a negative health outcome'),
+    numberNeededToTreat: z.union([z.number(), z.string()]).optional().describe('Number Needed to Treat (NNT) to achieve a positive health outcome'),
   })).describe('Comparison of effectiveness with other treatments'),
-  dalysAvoided: z.number().optional().describe('Estimated Disability-Adjusted Life Years (DALYs) avoided per patient'),
-  qalysIncreased: z.number().optional().describe('Estimated Quality-Adjusted Life Years (QALYs) increased per patient'),
-  numberNeededToHarm: z.number().optional().describe('Number Needed to Harm (NNH) to cause a negative health outcome'),
-  numberOfPatients: z.number().optional().describe('Number of patients globally who would benefit from the drug'),
-  numberNeededToTreat: z.number().optional().describe('Number Needed to Treat (NNT) to achieve a positive health outcome'),
+  dalysAvoided: z.union([z.number(), z.string()]).optional().describe('Estimated Disability-Adjusted Life Years (DALYs) avoided per patient'),
+  qalysIncreased: z.union([z.number(), z.string()]).optional().describe('Estimated Quality-Adjusted Life Years (QALYs) increased per patient'),
+  numberNeededToHarm: z.union([z.number(), z.string()]).optional().describe('Number Needed to Harm (NNH) to cause a negative health outcome'),
+  numberOfPatients: z.union([z.number(), z.string()]).optional().describe('Number of patients globally who would benefit from the drug'),
+  numberNeededToTreat: z.union([z.number(), z.string()]).optional().describe('Number Needed to Treat (NNT) to achieve a positive health outcome'),
   //referenceSources: z.array(articleSchema).describe('Sources of information used in compiling this report')
 });
 
@@ -73,7 +74,7 @@ export type MetaAnalysisReportType = z.infer<typeof MetaAnalysisReportSchema>;
 
 
 async function getWebResults(drugName: string, conditionName: string, numResults: number = 10): Promise<Article[]> {
-  const query = `${drugName} for ${conditionName} meta-analysis safety efficacy "clinical trials" "systematic review"`;
+  const query = generateMetaAnalysisQuery(drugName, conditionName);
   const searchResponse = await exa.searchAndContents(query, {
     numResults,
     useAutoprompt: false,
@@ -111,8 +112,11 @@ export async function doMetaAnalysis(drugName: string, conditionName: string): P
   Web search results:
   ${webResultsText}`;
 
+  //const model = getModel("gemini-1.5-flash")
+  const model = getModel()
+
   const result = await generateObject({
-    model: anthropic('claude-3-5-sonnet-20240620'),
+    model,
     schema: MetaAnalysisReportSchema,
     prompt,
   });

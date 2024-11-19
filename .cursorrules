@@ -1,0 +1,176 @@
+# Project-specific rules for Cursor AI
+[project]
+name = "wishonia"
+framework = "next.js"
+version = "15.0"
+router = "app"
+style = "tailwind"
+typescript = true
+
+# Define the project's architecture and conventions
+[architecture]
+# All page.tsx files are server components by default
+server_components = [
+    "app/**/page.tsx",
+    "app/**/layout.tsx",
+    "app/**/template.tsx"
+]
+client_components = [
+    "components/**/*.tsx",
+    "app/**/components/*.tsx"
+]
+hooks = ["lib/hooks/**/*.ts"]
+utils = ["lib/**/*.ts"]
+config = ["config/**/*.ts"]
+types = ["types/**/*.ts"]
+
+# Authentication patterns
+[auth]
+server_components = """
+Import server-side auth:
+import { getServerSession } from "next-auth/next"
+
+Usage:
+const session = await getServerSession()
+"""
+
+client_components = """
+Import client-side auth:
+import { useSession } from 'next-auth/react'
+
+Usage:
+const { data: session } = useSession()
+"""
+
+# Next.js App Router conventions
+[next]
+routing = """
+- Use app directory for all routes
+- page.tsx files are automatically server components
+- loading.tsx for loading states
+- error.tsx for error handling
+- layout.tsx for shared layouts
+"""
+
+server_components = """
+IMPORTANT: Never add 'use client' to page.tsx files
+- Pages are server components by default
+- Create separate client components for interactive elements
+- Import client components into server components as needed
+"""
+
+data_fetching = """
+- Use server components for data fetching when possible
+- Leverage React Server Components for better performance
+- Use route handlers (route.ts) for API endpoints
+"""
+
+# Database and type safety
+[database]
+prisma = """
+- Import types directly from Prisma client
+- Use Prisma-generated types for all database operations
+- Always prefer schema.prisma types over creating new ones
+Example:
+import { Post, User } from '@prisma/client'
+"""
+
+# Component structure rules
+[components]
+organization = """
+For interactive features:
+1. Create client component in separate file:
+   components/MyInteractiveComponent.tsx
+2. Import into server component page:
+   app/my-page/page.tsx
+"""
+
+client_components = """
+Only add 'use client' when component:
+- Uses hooks (useState, useEffect, etc.)
+- Needs browser APIs
+- Has user interactions
+- Uses client-side libraries
+
+Example location:
+app/my-feature/components/InteractiveComponent.tsx
+"""
+
+server_components = """
+Keep pages as server components:
+- No 'use client' directive
+- No hooks or browser APIs
+- Import client components as needed
+- Fetch data server-side when possible
+
+Example:
+app/my-feature/page.tsx
+"""
+
+# File patterns to ignore
+[ignore]
+patterns = [
+    "node_modules",
+    ".next",
+    "build",
+    "dist",
+    "public/assets",
+    ".git"
+]
+
+# Custom rules for the project
+[rules]
+component_patterns = """
+✅ DO:
+- Keep pages as server components
+- Create separate client components for interactivity
+- Use Prisma types for database operations
+- Use proper auth imports based on component type
+- Use self-documenting names for variables, fields, and models
+- Always choose the simplest implementation to minimize complexity
+
+❌ DON'T:
+- Add 'use client' to page.tsx
+- Mix client and server code in same component
+- Use wrong auth import for component type
+- Create new types when Prisma schema types are available
+- Use cryptic or abbreviated names
+"""
+
+auth_patterns = """
+Server Components:
+import { getServerSession } from "next-auth/next"
+const session = await getServerSession()
+
+Client Components:
+import { useSession } from 'next-auth/react'
+const { data: session } = useSession()
+"""
+
+# Type safety rules
+types = """
+- Use TypeScript strict mode
+- Import Prisma types directly from @prisma/client
+- Create interfaces for component props
+- Avoid 'any' type
+"""
+
+# Performance guidelines
+performance = """
+- Keep pages as server components when possible
+- Use client components only when necessary
+- Implement proper code splitting
+- Use React Suspense boundaries wisely
+"""
+
+# Testing guidelines
+[testing]
+jest = """
+- Always set @jest-environment node at the top of test files
+- Write tests that can safely run against production (so don't delete data or do cleanup)
+- Use real implementations instead of mocks where possible
+Example test header:
+/**
+ * @jest-environment node
+ */
+"""
