@@ -32,7 +32,7 @@ export default function HomePage() {
 
   const handleDigitalTwinSafeClick = async (path: string) => {
     //setIsLoading(true)
-    const url = await getSafeUrlWithToken('')
+    const url = await getSafeUrlWithToken(path)
     window.open(url, '_blank')
   }
 
@@ -67,7 +67,9 @@ export default function HomePage() {
       color: "bg-purple-400",
       icon: Pill,
       media: "https://user-images.githubusercontent.com/2808553/180306571-ac9cc741-6f34-4059-a814-6f8a72ed8322.png",
-      onClick: handleDigitalTwinSafeClick
+      onClick: () => {
+        handleDigitalTwinSafeClick('intro')
+      }
     },
     {
       title: "Clinipedia",

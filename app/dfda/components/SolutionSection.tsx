@@ -11,7 +11,7 @@ export default function SolutionSection() {
 
   const handleDigitalTwinSafeClick = async (path: string) => {
     setIsLoading(true)
-    const url = await getSafeUrlWithToken('')
+    const url = await getSafeUrlWithToken(path)
     window.open(url, '_blank')
   }
   const features = [
