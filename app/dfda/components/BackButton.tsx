@@ -4,11 +4,12 @@ import { ArrowLeft } from 'lucide-react'
 import Link from 'next/link'
 
 interface BackButtonProps {
-  href: string;
+  href?: string;
   label?: string;
 }
 
-export default function BackButton({ href, label = 'Back to dFDA' }: BackButtonProps) {
+export default function BackButton({ href='/dfda', label = 'Back' }: BackButtonProps) {
+  if(!href) {href = '/dfda'}
   return (
     <Link 
       href={href}
