@@ -21,7 +21,7 @@ export default async function RightToTrialPage() {
       <FloatingPetitionButton />
 
       {/* Constitutional Style Act Content */}
-      <section className="p-4 bg-[#f4e4bc]">
+      <section className="p-4 bg-[#f4e4bc] border-t-4 border-[#8B4513]/20 mt-16">
         <div className="max-w-4xl mx-auto">
           {/* Petition Sign Section */}
           <PetitionSection />
@@ -34,10 +34,7 @@ export default async function RightToTrialPage() {
                        prose-li:text-black prose-li:font-serif
                        bg-[#f4e4bc] p-4"
           >
-            {/* Updated GitHub edit button */}
-            <div className="flex justify-end mb-8">
-              <GitHubEditButton />
-            </div>
+
 
             {/* Act Content with Constitutional Styling */}
             <div 
@@ -53,10 +50,7 @@ export default async function RightToTrialPage() {
             {/* Bottom Petition Section */}
             <div className="mt-16 text-center border-t-4 pt-12">
               <h3 className="text-2xl font-serif mb-6">Add Your Name to Support This Act</h3>
-              <SignPetitionButton />
-              <div className="flex justify-end mb-8">
-              <GitHubEditButton />
-            </div>
+              <SignPetitionButton /> <GitHubEditButton />
             </div>
           </div>
         </div>

@@ -64,7 +64,7 @@ export default function CostSavingsTable() {
         initial={{ opacity: 0, y: -20 }}
         animate={{ opacity: 1, y: 0 }}
       >
-        Clinical Trial Cost Savings 💰
+        Savings from a Decentralized Autonomous FDA 💰
       </motion.h2>
       
       <div className="-mx-6 sm:mx-0">
