@@ -3,8 +3,17 @@
 import { motion } from 'framer-motion'
 import { Database, Brain, Bell } from 'lucide-react'
 import { FeatureBox } from './FeatureBox'
+import { getSafeUrlWithToken } from '../dfdaActions'
+import { useState } from 'react'
 
 export default function SolutionSection() {
+  const [isLoading, setIsLoading] = useState(false)
+
+  const handleDigitalTwinSafeClick = async (path: string) => {
+    setIsLoading(true)
+    const url = await getSafeUrlWithToken('')
+    window.open(url, '_blank')
+  }
   const features = [
     {
       title: "Automated Data Collection",
@@ -12,7 +21,10 @@ export default function SolutionSection() {
       color: "bg-green-400",
       icon: Database,
       media: "https://fdai.earth/wp-content/uploads/2024/03/import.gif",
-      onClick: () => console.log("Data Collection clicked")
+      onClick: () => {
+        // go to https://safe.dfda.earth/import in new tab
+        handleDigitalTwinSafeClick('/import')
+      }
     },
     {
       title: "Automated Analysis",
@@ -20,7 +32,10 @@ export default function SolutionSection() {
       color: "bg-teal-400",
       icon: Brain,
       media: "https://fdai.earth/wp-content/uploads/2024/03/root-cause-analysis-4x-small.gif",
-      onClick: () => console.log("Analysis clicked")
+      onClick: () => {
+        // go to https://safe.dfda.earth/app/public/#/app/studies in new tab
+        handleDigitalTwinSafeClick('/studies')
+      }
     },
     {
       title: "Real-Time Decision Support",
@@ -28,7 +43,10 @@ export default function SolutionSection() {
       color: "bg-emerald-400",
       icon: Bell,
       media: "https://fdai.earth/wp-content/uploads/2024/03/real-time-decision-support-notifications-personalized-app-image.png",
-      onClick: () => console.log("Decision Support clicked")
+      onClick: () => {
+        // go to https://safe.dfda.earth/app/public/#/app/studies
+        window.open('https://safe.dfda.earth/app/public/#/app/studies', '_blank')
+      }
     }
   ]
 
@@ -39,7 +57,7 @@ export default function SolutionSection() {
       <motion.div 
         initial={{ opacity: 0, y: 20 }}
         animate={{ opacity: 1, y: 0 }}
-        className="space-y-8"
+        className="grid grid-cols-1 md:grid-cols-3 gap-8"
       >
         {features.map((feature, index) => (
           <FeatureBox
