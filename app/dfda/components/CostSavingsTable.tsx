@@ -59,12 +59,19 @@ export default function CostSavingsTable() {
 
   return (
     <div className="relative overflow-hidden rounded-xl border-4 border-black bg-white p-6 shadow-[8px_8px_0px_0px_rgba(0,0,0,1)]">
-      <motion.h2 
-        className="mb-6 text-2xl md:text-4xl font-black uppercase"
+            <motion.h1 
+        className="mb-6 text-4xl md:text-4xl font-black uppercase"
         initial={{ opacity: 0, y: -20 }}
         animate={{ opacity: 1, y: 0 }}
       >
-        Savings from a Decentralized Autonomous FDA 💰
+        👀Look at those savings! 🤑
+      </motion.h1>
+      <motion.h2 
+        className="mb-6 md:text-2xl font-black uppercase"
+        initial={{ opacity: 0, y: -20 }}
+        animate={{ opacity: 1, y: 0 }}
+      >
+        Savings from a Decentralized Autonomous FDA 
       </motion.h2>
       
       <div className="-mx-6 sm:mx-0">

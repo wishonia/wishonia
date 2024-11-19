@@ -1,6 +1,6 @@
 'use client'
 
-import { useState, useEffect } from 'react'
+import { useState, useEffect, useRef } from 'react'
 import { Input } from '@/components/ui/input'
 import { GlobalVariable } from '@/types/models/GlobalVariable'
 import { searchDfdaVariables } from '@/lib/clinicaltables'
@@ -9,6 +9,45 @@ interface VariableSearchAutocompleteProps {
   onVariableSelect: (variable: GlobalVariable) => void
   searchParams?: Record<string, string>
   placeholder: string
+}
+
+// Add cache interface
+interface SearchCache {
+  timestamp: number
+  results: GlobalVariable[]
+}
+
+// Add cache duration constant (e.g., 1 hour)
+const CACHE_DURATION = 60 * 60 * 1000
+
+function getCachedResults(key: string): GlobalVariable[] | null {
+  try {
+    const cached = localStorage.getItem(key)
+    if (!cached) return null
+
+    const { timestamp, results } = JSON.parse(cached) as SearchCache
+    if (Date.now() - timestamp > CACHE_DURATION) {
+      localStorage.removeItem(key)
+      return null
+    }
+
+    return results
+  } catch (error) {
+    console.error('Error reading from cache:', error)
+    return null
+  }
+}
+
+function setCachedResults(key: string, results: GlobalVariable[]) {
+  try {
+    const cacheData: SearchCache = {
+      timestamp: Date.now(),
+      results
+    }
+    localStorage.setItem(key, JSON.stringify(cacheData))
+  } catch (error) {
+    console.error('Error writing to cache:', error)
+  }
 }
 
 export default function VariableSearchAutocomplete({ 
@@ -20,14 +59,44 @@ export default function VariableSearchAutocomplete({
   const [variables, setVariables] = useState<GlobalVariable[]>([])
   const [isLoading, setIsLoading] = useState(false)
   const [showDropdown, setShowDropdown] = useState(false)
+  const componentRef = useRef<HTMLDivElement>(null)
+
+  useEffect(() => {
+    function handleClickOutside(event: MouseEvent) {
+      if (componentRef.current && !componentRef.current.contains(event.target as Node)) {
+        setShowDropdown(false)
+      }
+    }
+
+    document.addEventListener('mousedown', handleClickOutside)
+    return () => {
+      document.removeEventListener('mousedown', handleClickOutside)
+    }
+  }, [])
 
   useEffect(() => {
     const search = async () => {
       console.log('Searching for:', searchTerm ? `"${searchTerm}"` : '(empty string)')
       setIsLoading(true)
       try {
+        // Create a cache key based on search term and params
+        const cacheKey = `dfda-variable-search:${searchTerm}:${JSON.stringify(searchParams)}`
+        
+        // Check cache first
+        const cachedResults = getCachedResults(cacheKey)
+        if (cachedResults) {
+          console.log(`Using cached results for ${cacheKey}`)
+          setVariables(cachedResults)
+          setIsLoading(false)
+          return
+        }
+
+        // If not in cache, perform the search
         const results = await searchDfdaVariables(searchTerm, searchParams)
-        console.log('Search results:', results.length, 'items found')
+        console.log(`Search results for ${cacheKey}:`, results.length, 'items found')
+        
+        // Cache the results
+        setCachedResults(cacheKey, results)
         setVariables(results)
       } catch (error) {
         console.error('Error searching:', error)
@@ -41,7 +110,7 @@ export default function VariableSearchAutocomplete({
   }, [searchTerm, searchParams])
 
   return (
-    <div className="relative flex-grow">
+    <div ref={componentRef} className="relative flex-grow">
       <Input
         type="search"
         value={searchTerm}

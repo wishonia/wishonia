@@ -1,9 +1,35 @@
 "use server"
 
-import { Effectiveness } from "@prisma/client"
+import {Effectiveness} from "@prisma/client"
+import {authOptions} from "@/lib/auth"
 
-import { prisma } from "@/lib/db"
+import {prisma} from "@/lib/db"
 import {findArticleByTopic, writeArticle} from "@/lib/agents/researcher/researcher";
+import {dfdaGET, getOrCreateDfdaAccessToken} from '@/lib/dfda'
+import {getServerSession} from 'next-auth/next'
+
+export async function getSafeUrlWithToken(url: string) {
+  if(!url.includes('https')) {
+    url = 'https://safe.dfda.earth/app/public/#/app/' + url;
+  }
+  const token = await getDfdaAccessToken();
+  return `${url}?access_token=${token}`;
+}
+
+export async function getDfdaAccessToken() {
+  const session = await getServerSession(authOptions)
+  if (!session?.user?.id) {
+    console.log('No user ID found in session:', session)
+    return null
+  }
+  
+  try {
+    return await getOrCreateDfdaAccessToken(session.user.id)
+  } catch (error) {
+    console.error('Error getting DFDA access token:', error)
+    return null
+  }
+} 
 
 export async function fetchConditions() {
   return prisma.dfdaCondition.findMany()
@@ -159,4 +185,8 @@ export async function getMetaAnalysis(treatmentName: string, conditionName: stri
   }
 
     return writeArticle(topic, "test-user");
+}
+
+export const getDataSources = async (): Promise<any> => {
+  return dfdaGET('connectors/list', { final_callback_url: window.location.href })
 }

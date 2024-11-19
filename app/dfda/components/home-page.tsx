@@ -11,11 +11,11 @@ import OutcomeSearchAutocomplete from './OutcomeSearchAutocomplete'
 import AdvancedTrialSearch from './AdvancedTrialSearch'
 import { Robot } from '@phosphor-icons/react'
 import { FeatureBox } from './FeatureBox'
-import ProblemSection from './ProblemSection'
 import SolutionSection from './SolutionSection'
-import GoodNewsSection from './GoodNewsSection'
 import CitizenScienceSection from './CitizenScienceSection'
 import { useRouter } from 'next/navigation'
+import { useState } from 'react'
+import { getSafeUrlWithToken } from '../dfdaActions'
 
 const SquigglyPattern = () => (
   <svg className="absolute inset-0 h-full w-full" xmlns="http://www.w3.org/2000/svg">
@@ -28,21 +28,29 @@ const SquigglyPattern = () => (
 
 export default function HomePage() {
   const router = useRouter()
+  const [isLoading, setIsLoading] = useState(false)
+
+  const handleDigitalTwinSafeClick = async (path: string) => {
+    //setIsLoading(true)
+    const url = await getSafeUrlWithToken('')
+    window.open(url, '_blank')
+  }
 
   const features = [
     {
-      title: "Right to Trial Act",
-      desc: "Help us create this groundbreaking legislation",
+      title: "The Cure Acceleration Act",
+      desc: "Help us give people suffering access to the most promising treatments",
       color: "bg-blue-400",
       icon: Scroll,
-      media: "https://example.com/right-to-trial.jpg",
-      onClick: () => {
+      media: "https://wiki.dfda.earth/right_to_trial_act_image.jpg",
+      onClick: async () => {
         console.log("Right to Trial Act clicked")
+        setIsLoading(true)
         router.push("/dfda/right-to-trial-act")
       }
     },
     {
-      title: "FDAi Agent",
+      title: "Your Personal FDAi Agent",
       desc: "Help us give everyone a free superintelligent doctor",
       color: "bg-green-400",
       icon: Robot,
@@ -50,19 +58,16 @@ export default function HomePage() {
       onClick: () => {
         console.log("FDAi Agent clicked")
         // Add specific behavior here, e.g., open a modal with AI tool demo
+        window.open("https://fdai.earth", "_blank")
       }
     },
     {
-      title: "Digital Twin Safe",
+      title: "Your Digital Twin Safe",
       desc: "Securely store and control your health data",
       color: "bg-purple-400",
       icon: Pill,
       media: "https://user-images.githubusercontent.com/2808553/180306571-ac9cc741-6f34-4059-a814-6f8a72ed8322.png",
-      onClick: () => {
-        console.log("Digital Twin Safe clicked")
-        // get a dfda access token and append it to safe.dfda.earth and open it in a new tab
-        window.open("https://safe/dfda.earth", "_blank")
-      }
+      onClick: handleDigitalTwinSafeClick
     },
     {
       title: "Clinipedia",
@@ -93,6 +98,7 @@ export default function HomePage() {
       desc: "Learn about the historical context and need for decentralization",
       color: "bg-yellow-400",
       icon: Info,
+      media: "https://thinkbynumbers.org/wp-content/uploads/2021/03/news-story-headline-1-1024x563.png",
       href: "/dfda/why",
       onClick: () => {
         // open https://dfda.earth in a new tab
@@ -133,6 +139,11 @@ export default function HomePage() {
 
   return (
     <div className="">
+      {isLoading && (
+        <div className="fixed inset-0 bg-black/50 z-50 flex items-center justify-center">
+          <div className="animate-spin rounded-full h-16 w-16 border-t-4 border-white"></div>
+        </div>
+      )}
       <SquigglyPattern />
       <header className="relative mb-12 overflow-hidden rounded-xl border-4 border-black bg-white p-6 text-center shadow-[8px_8px_0px_0px_rgba(0,0,0,1)]">
         <motion.h1 
