@@ -10,6 +10,8 @@ import {getServerSession} from 'next-auth/next'
 
 export async function getSafeUrlWithToken(url: string) {
   if(!url.includes('https')) {
+    //remove leading slash if it exists
+    url = url.startsWith('/') ? url.slice(1) : url;
     url = 'https://safe.dfda.earth/app/public/#/app/' + url;
   }
   const token = await getDfdaAccessToken();
