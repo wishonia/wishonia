@@ -80,8 +80,12 @@ export default function VariableSearchAutocomplete({
       setIsLoading(true)
       try {
         // Create a cache key based on search term and params
-        const cacheKey = `dfda-variable-search:${searchTerm}:${JSON.stringify(searchParams)}`
-        
+        const cacheKey = `dfda-variable-search:${searchTerm}:${
+          JSON.stringify(Object.keys(searchParams).sort().reduce((obj, key) => {
+            obj[key] = searchParams[key]
+            return obj
+          }, {}))
+        }`
         // Check cache first
         const cachedResults = getCachedResults(cacheKey)
         if (cachedResults) {
