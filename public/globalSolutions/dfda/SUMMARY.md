@@ -1,0 +1,23 @@
+# Table of contents
+
+* [💊 The Decentralized FDA](README.md)
+* [📘 Historical Evidence Supporting Decentralized Efficacy Trials](historical-evidence-supporting-decentralized-efficacy-trials.md)
+* ☠️ Problems With the Current Model
+  * [🥫 No Data on Unpatentable Molecules](problems/no-data-on-unpatentable-molecules.md)
+  * [💰 Clinical Research is Expensive](problems/clinical-research-is-expensive.md)
+  * [🥸 Trials Often Aren't Representative of Real Patients](problems/trials-often-arent-representative-of-real-patients.md)
+  * [❓ We Know Next to Nothing](problems/page-1.md)
+  * [⏱️ Deaths Due to US Regulatory "Drug Lag"](problems/deaths-due-to-us-regulatory-drug-lag.md)
+  * [🙈 Negative Results are Never Published](problems/negative-results-are-never-published.md)
+  * [🎭 Conflicts of Interest](problems/conflicts-of-interest.md)
+  * [🗓️ No Long-Term Outcome Data](problems/no-long-term-outcome-data.md)
+  * [📃 Lack of Incentive to Discover the Full Range of Applications for Off-Patent Treatments](problems/lack-of-incentive-to-discover-the-full-range-of-applications-for-off-patent-treatments.md)
+  * [🤒 People With Rare Disease are Severely Punished](problems/people-with-rare-disease-are-severely-punished.md)
+  * [🔮 Pre-Determining Clinical Endpoints Requires Psychic Powers](pre-determining-clinical-endpoints-requires-psychic-powers.md)
+* [🎯 Benefits of a Decentralized Model](2-solution.md)
+  * [🎭 More Cures and Less Lifelong Attempts at Masking Symptoms](more-cures-and-less-lifelong-attempts-at-masking-symptoms.md)
+  * [🧐 Greater Competitive Innovation and Fewer Monopolies](greater-competitive-innovation-and-fewer-monopolies.md)
+  * [👀 Lower Costs of Validated Observational Research for Efficacy](lower-costs-of-validated-observational-research-for-efficacy.md)
+  * [📈 Impact of Innovative Medicines on Life Expectancy](2-solution/impact-of-innovative-medicines-on-life-expectancy.md)
+  * [🌎 Cost Savings from Decentralized Clinical Trials](cost-savings-from-decentralized-clinical-trials.md)
+* [📖 References](12-references.md)

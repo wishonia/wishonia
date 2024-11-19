@@ -1365,8 +1365,8 @@ export class TagVariable {
 export type TagVariableCombinationOperationEnum = "MEAN" | "SUM"
 export type TagVariableFillingTypeEnum =
   | "none"
-  | "zero-filling"
-  | "value-filling"
+  | "zero"
+  | "value"
 export type TagVariableVariableCategoryNameEnum =
   | "Activity"
   | "Books"

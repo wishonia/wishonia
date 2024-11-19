@@ -5,7 +5,6 @@ import { authOptions } from "@/lib/auth"
 import { getCurrentUser } from "@/lib/session"
 import { GlobalVariableCharts } from "@/components/globalVariables/global-variable-charts"
 import { Shell } from "@/components/layout/shell"
-import { DashboardHeader } from "@/components/pages/dashboard/dashboard-header"
 
 export const metadata: Metadata = {
   title: "Global Variable Charts",

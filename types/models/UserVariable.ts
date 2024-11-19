@@ -1522,8 +1522,8 @@ export class UserVariable {
 export type UserVariableCombinationOperationEnum = "MEAN" | "SUM"
 export type UserVariableFillingTypeEnum =
   | "none"
-  | "zero-filling"
-  | "value-filling"
+  | "zero"
+  | "value"
 export type UserVariableVariableCategoryNameEnum =
   | "Activity"
   | "Books"

@@ -3,17 +3,16 @@ import { SiteConfig } from "@/types"
 import { env } from "@/env.mjs"
 
 export const siteConfig: SiteConfig = {
-  name: "Wishonia",
-  author: "mikepsinn",
-  description:
-    "Using collective intelligence to maximize median health and happiness.",
-  keywords: [],
+  name: env.NEXT_PUBLIC_SITE_NAME,
+  author: env.NEXT_PUBLIC_SITE_AUTHOR || "mikepsinn",
+  description: env.NEXT_PUBLIC_SITE_DESCRIPTION || "Using collective intelligence to maximize median health and happiness.",
+  keywords: env.NEXT_PUBLIC_SITE_KEYWORDS ? env.NEXT_PUBLIC_SITE_KEYWORDS.split(',') : [],
   url: {
     base: env.NEXT_PUBLIC_APP_URL,
-    author: "https://wishonia.love",
+    author: env.NEXT_PUBLIC_SITE_AUTHOR || "mikepsinn",
   },
   links: {
     github: "https://github.com/wishonia/wishonia",
   },
-  ogImage: `${env.NEXT_PUBLIC_APP_URL}/og.png`,
+  ogImage: env.NEXT_PUBLIC_SITE_OG_IMAGE || `${env.NEXT_PUBLIC_APP_URL}/og.png`,
 }

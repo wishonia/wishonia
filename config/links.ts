@@ -1,4 +1,5 @@
 import { Navigation, NavItem } from "@/types"
+import { siteConfig } from "./site"
 
 export const dashboardLink: NavItem = {
   title: "Dashboard",
@@ -70,7 +71,7 @@ export const docsLink: NavItem = {
 
 export const githubLink: NavItem = {
   title: "Github",
-  href: "https://github.com/wishonia/wishonia",
+  href: siteConfig.links.github,
   icon: "github",
   tooltip: "Contribute to the project on Github",
   external: true,
@@ -88,6 +89,27 @@ export const dfdaLink: NavItem = {
   href: "/dfda",
   icon: "health",
   tooltip: "The Decentralized Food and Drug Administration",
+}
+
+export const digitalTwinSafeLink: NavItem = {
+  title: "Digital Twin Safe",
+  href: "https://safe.dfda.earth",
+  icon: "safe",
+  tooltip: "Import, record and analyze your medical data",
+}
+
+export const clinipediaLink: NavItem = {
+  title: "Studies",
+  href: "https://studies.dfda.earth",
+  icon: "health",
+  tooltip: "The Wikipedia of Clinical Research",
+}
+
+export const fdaiLink: NavItem = {
+  title: "FDAi",
+  href: "https://fdai.earth",
+  icon: "robot",
+  tooltip: "An autonomous AI Food and Drug Administration",
 }
 
 export const profileSettingsLink: NavItem = {
@@ -110,7 +132,7 @@ export const featuresLink: NavItem = {
 }
 
 export const homeLink: NavItem = {
-  title: "Home",
+  title: siteConfig.name,
   href: "/",
   icon: "home",
 }
@@ -153,6 +175,23 @@ export const avatarNav: Navigation = {
   ],
 }
 
+export const dfdaAvatarNav: Navigation = {
+  data: [
+    //profileSettingsLink,
+    //dashboardLink,
+    //agentsLink,
+    //yourWishesLink,
+    //wishingWellsLink,
+    //globalProblemsVoteLink,
+    //createWish
+    //researcherLink,
+    dfdaLink,
+    digitalTwinSafeLink,
+    clinipediaLink,
+    fdaiLink,
+  ],
+}
+
 export const landingPageLinks: Navigation = {
   data: [featuresLink, overviewLink],
 }
@@ -170,6 +209,25 @@ export const generalSidebarNav: Navigation = {
     githubLink,
     researcherLink,
     dfdaLink,
+  ],
+}
+
+export const dfdaSidebarNav: Navigation = {
+  data: [
+    //dashboardLink,
+    //wishingWellsLink,
+    //wishingWellsResultsLink,
+    //globalProblemsVoteLink,
+    //globalProblemsResultsLink,
+    //globalSolutionsVoteLink,
+    //globalSolutionsResultsLink,
+    //docsLink,
+    //githubLink,
+    //researcherLink,
+    dfdaLink,
+    digitalTwinSafeLink,
+    clinipediaLink,
+    fdaiLink,
   ],
 }
 

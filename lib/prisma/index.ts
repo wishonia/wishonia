@@ -8,3 +8,6 @@ const client = globalThis.prisma || new PrismaClient()
 if (process.env.NODE_ENV !== "production") globalThis.prisma = client
 
 export default client
+
+// also export prisma as the variable name prisma for backwards compatibility
+export const prisma = client

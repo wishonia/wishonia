@@ -54,7 +54,7 @@ export const measurementColumns: ColumnDef<Measurement>[] = [
 
       return (
         <Link
-          href={`/dashboard/userVariables/${variableId}`}
+          href={`/dfda/userVariables/${variableId}`}
           className={cn(buttonVariants({ variant: "ghost" }))}
         >
           {variableName}
