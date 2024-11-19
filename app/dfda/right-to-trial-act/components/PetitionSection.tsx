@@ -1,5 +1,6 @@
 'use client'
 
+import { GitHubEditButton } from './GitHubEditButton'
 import { SignPetitionButton } from './SignPetitionButton'
 
 export function PetitionSection() {
@@ -9,7 +10,10 @@ export function PetitionSection() {
       <p className="text-xl mb-8 text-black">
         Sign the petition to support the Right to Trial Act and help end the suffering of billions of people.
       </p>
-      <SignPetitionButton />
+      <div className="flex flex-col sm:flex-row gap-4 justify-center">
+        <SignPetitionButton />
+        <GitHubEditButton />
+      </div>
     </div>
   )
 } 

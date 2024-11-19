@@ -13,7 +13,7 @@ export default function PredictorSearchAutocomplete({ onVariableSelect }: Predic
       onVariableSelect={onVariableSelect}
       searchParams={{ 
         sort: '-numberOfCorrelationsAsCause',
-        public: '1'
+        //public: '1'
       }}
       placeholder="Enter food or drug 💊"
     />

@@ -1,6 +1,6 @@
 'use server'
 
-import { MarkdownEnhancer, MarkdownEnhancementResult } from '@/lib/content/markdownEnhancer'
+import { MarkdownEnhancer } from '@/lib/content/markdownEnhancer'
 
 interface EnhanceResponse {
   enhancedContent: string;

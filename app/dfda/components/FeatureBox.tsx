@@ -8,7 +8,7 @@ interface FeatureBoxProps {
   desc: string
   color: string
   icon: React.ElementType
-  media: string
+  media?: string
   index: number
   onClick: () => void
 }
@@ -76,7 +76,7 @@ export const FeatureBox: React.FC<FeatureBoxProps> = ({ title, desc, color, icon
         className={`group relative overflow-hidden rounded-xl border-4 border-black ${color} p-6 shadow-[8px_8px_0px_0px_rgba(0,0,0,1)] transition-all hover:translate-x-1 hover:translate-y-1 hover:shadow-none block w-full text-left`}
       >
         <div className="absolute inset-0 bg-black opacity-0 transition-opacity group-hover:opacity-10" />
-        <MediaContent media={media} />
+        {media && <MediaContent media={media} />}
         <Icon className="mb-4 h-12 w-12" />
         <h3 className="mb-2 text-2xl font-black">{title}</h3>
         <p className="font-bold">{desc}</p>

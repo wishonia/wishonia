@@ -1,7 +1,7 @@
 'use client'
 
 import { useSession, signIn } from 'next-auth/react'
-import { Button } from '@/components/ui/button'
+import { NeoBrutalistButton } from '@/components/ui/neo-brutalist-button'
 
 export function SignPetitionButton() {
   const { data: session } = useSession()
@@ -16,14 +16,11 @@ export function SignPetitionButton() {
   }
 
   return (
-    <Button 
+    <NeoBrutalistButton 
       onClick={handleClick}
-      className="bg-black hover:bg-gray-800 text-white font-bold py-4 px-8 text-xl
-                border-[4px] border-black shadow-[4px_4px_0px_0px_rgba(0,0,0,1)]
-                hover:translate-x-[3px] hover:translate-y-[3px] hover:shadow-none 
-                transition-all duration-200"
+      variant="secondary"
     >
-      {session ? 'Sign the Petition' : 'Sign in to Sign Petition'}
-    </Button>
+      ✒️ Sign Petition
+    </NeoBrutalistButton>
   )
 } 
