@@ -17,8 +17,8 @@ interface SearchCache {
   results: GlobalVariable[]
 }
 
-// Add cache duration constant (e.g., 1 hour)
-const CACHE_DURATION = 60 * 60 * 1000
+// Add cache duration constant (e.g., 24 hours)
+const CACHE_DURATION = 24 * 60 * 60 * 1000
 
 function getCachedResults(key: string): GlobalVariable[] | null {
   try {
@@ -81,7 +81,7 @@ export default function VariableSearchAutocomplete({
       try {
         // Create a cache key based on search term and params
         const cacheKey = `dfda-variable-search:${searchTerm}:${
-          JSON.stringify(Object.keys(searchParams).sort().reduce((obj, key) => {
+          JSON.stringify(Object.keys(searchParams).sort().reduce<Record<string, string>>((obj, key) => {
             obj[key] = searchParams[key]
             return obj
           }, {}))
