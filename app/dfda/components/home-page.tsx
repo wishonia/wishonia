@@ -60,6 +60,8 @@ export default function HomePage() {
       media: "https://user-images.githubusercontent.com/2808553/180306571-ac9cc741-6f34-4059-a814-6f8a72ed8322.png",
       onClick: () => {
         console.log("Digital Twin Safe clicked")
+        // get a dfda access token and append it to safe.dfda.earth and open it in a new tab
+        window.open("https://safe/dfda.earth", "_blank")
       }
     },
     {
@@ -70,6 +72,8 @@ export default function HomePage() {
       media: "https://fdai.earth/wp-content/uploads/2024/03/clinipedia-inflammatory-pain-small.gif",
       onClick: () => {
         console.log("Clinipedia clicked")
+        // open studies.dfda.earth in a new tab
+        window.open("https://studies.dfda.earth", "_blank")
       }
     },
     {
@@ -80,26 +84,19 @@ export default function HomePage() {
       media: "https://wiki.dfda.earth/assets/outcome-labels.PNG",
       onClick: () => {
         console.log("Outcome Labels clicked")
+        // open studies.dfda.earth in a new tab
+        window.open("https://studies.dfda.earth", "_blank")
       }
     },
     {
-      title: "About dFDA",
-      desc: "Learn about our mission and impact",
-      color: "bg-indigo-400",
-      icon: Info,
-      media: "https://example.com/about-dfda.webp",
-      onClick: () => {
-        console.log("About dFDA clicked")
-        // Add specific behavior here, e.g., open a modal with dFDA information
-      }
-    },
-    {
-      title: "Why dFDA?",
+      title: "Why Decentralize the FDA?",
       desc: "Learn about the historical context and need for decentralization",
       color: "bg-yellow-400",
       icon: Info,
       href: "/dfda/why",
       onClick: () => {
+        // open https://dfda.earth in a new tab
+        window.open("https://dfda.earth", "_blank")
         console.log("Why dFDA clicked")
       }
     }
@@ -191,8 +188,8 @@ export default function HomePage() {
           </div>
         </section>
 
-        <ProblemSection />
-        <GoodNewsSection />
+        {/* <ProblemSection />
+        <GoodNewsSection /> */}
         <SolutionSection />
         <CitizenScienceSection />
 
