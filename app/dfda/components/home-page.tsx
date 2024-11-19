@@ -2,7 +2,7 @@
 
 import React from 'react'
 import Link from 'next/link'
-import { ArrowRight, Dna, Pill, Users, Activity, Info } from 'lucide-react'
+import { ArrowRight, Dna, Pill, Users, Activity, Info, Scroll } from 'lucide-react'
 import { motion } from 'framer-motion'
 import CostSavingsTable from './CostSavingsTable'
 import PredictorSearchAutocomplete from './PredictorSearchAutocomplete'
@@ -11,75 +11,11 @@ import OutcomeSearchAutocomplete from './OutcomeSearchAutocomplete'
 import AdvancedTrialSearch from './AdvancedTrialSearch'
 import { Robot } from '@phosphor-icons/react'
 import { FeatureBox } from './FeatureBox'
-
-const features = [
-  {
-    title: "Right to Trial Act",
-    desc: "Learn about the groundbreaking legislation",
-    color: "bg-blue-400",
-    icon: Dna,
-    media: "https://example.com/right-to-trial.jpg",
-    onClick: () => {
-      console.log("Right to Trial Act clicked")
-      // Add specific behavior here, e.g., navigate to a detailed page
-    }
-  },
-  {
-    title: "FDAi Agent",
-    desc: "Help us give everyone a free superintelligent doctor",
-    color: "bg-green-400",
-    icon: Robot,
-    media: "https://player.vimeo.com/video/930843979?badge=0&amp;autopause=0&amp;player_id=0&amp;app_id=58479",
-    onClick: () => {
-      console.log("FDAi Agent clicked")
-      // Add specific behavior here, e.g., open a modal with AI tool demo
-    }
-  },
-  {
-    title: "Treatment Database",
-    desc: "Explore our comprehensive database",
-    color: "bg-purple-400",
-    icon: Pill,
-    media: "https://vimeo.com/148751763",
-    onClick: () => {
-      console.log("Treatment Database clicked")
-      // Add specific behavior here, e.g., redirect to database search page
-    }
-  },
-  {
-    title: "Community Studies",
-    desc: "Join ongoing research initiatives",
-    color: "bg-red-400",
-    icon: Users,
-    media: "https://www.dailymotion.com/video/x7tgd2f",
-    onClick: () => {
-      console.log("Community Studies clicked")
-      // Add specific behavior here, e.g., show a list of active studies
-    }
-  },
-  {
-    title: "Personal Health Tracking",
-    desc: "Monitor your health journey",
-    color: "bg-orange-400",
-    icon: Activity,
-    media: "https://example.com/health-tracking.gif",
-    onClick: () => {
-      console.log("Personal Health Tracking clicked")
-      // Add specific behavior here, e.g., navigate to user's health dashboard
-    }
-  },
-  {
-    title: "About dFDA",
-    desc: "Learn about our mission and impact",
-    color: "bg-indigo-400",
-    icon: Info,
-    media: "https://example.com/about-dfda.webp",
-    onClick: () => {
-      console.log("About dFDA clicked")
-      // Add specific behavior here, e.g., open a modal with dFDA information
-    }
-  }
-]
+import ProblemSection from './ProblemSection'
+import SolutionSection from './SolutionSection'
+import GoodNewsSection from './GoodNewsSection'
+import CitizenScienceSection from './CitizenScienceSection'
+import { useRouter } from 'next/navigation'
 
 const SquigglyPattern = () => (
   <svg className="absolute inset-0 h-full w-full" xmlns="http://www.w3.org/2000/svg">
@@ -91,6 +27,84 @@ const SquigglyPattern = () => (
 )
 
 export default function HomePage() {
+  const router = useRouter()
+
+  const features = [
+    {
+      title: "Right to Trial Act",
+      desc: "Help us create this groundbreaking legislation",
+      color: "bg-blue-400",
+      icon: Scroll,
+      media: "https://example.com/right-to-trial.jpg",
+      onClick: () => {
+        console.log("Right to Trial Act clicked")
+        router.push("/dfda/right-to-trial-act")
+      }
+    },
+    {
+      title: "FDAi Agent",
+      desc: "Help us give everyone a free superintelligent doctor",
+      color: "bg-green-400",
+      icon: Robot,
+      media: "https://player.vimeo.com/video/930843979?badge=0&amp;autopause=0&amp;player_id=0&amp;app_id=58479",
+      onClick: () => {
+        console.log("FDAi Agent clicked")
+        // Add specific behavior here, e.g., open a modal with AI tool demo
+      }
+    },
+    {
+      title: "Digital Twin Safe",
+      desc: "Securely store and control your health data",
+      color: "bg-purple-400",
+      icon: Pill,
+      media: "https://user-images.githubusercontent.com/2808553/180306571-ac9cc741-6f34-4059-a814-6f8a72ed8322.png",
+      onClick: () => {
+        console.log("Digital Twin Safe clicked")
+      }
+    },
+    {
+      title: "Clinipedia",
+      desc: "The Wikipedia of Clinical Research",
+      color: "bg-red-400",
+      icon: Users,
+      media: "https://fdai.earth/wp-content/uploads/2024/03/clinipedia-inflammatory-pain-small.gif",
+      onClick: () => {
+        console.log("Clinipedia clicked")
+      }
+    },
+    {
+      title: "Outcome Labels",
+      desc: "See how treatments affect specific health outcomes",
+      color: "bg-orange-400",
+      icon: Activity,
+      media: "https://wiki.dfda.earth/assets/outcome-labels.PNG",
+      onClick: () => {
+        console.log("Outcome Labels clicked")
+      }
+    },
+    {
+      title: "About dFDA",
+      desc: "Learn about our mission and impact",
+      color: "bg-indigo-400",
+      icon: Info,
+      media: "https://example.com/about-dfda.webp",
+      onClick: () => {
+        console.log("About dFDA clicked")
+        // Add specific behavior here, e.g., open a modal with dFDA information
+      }
+    },
+    {
+      title: "Why dFDA?",
+      desc: "Learn about the historical context and need for decentralization",
+      color: "bg-yellow-400",
+      icon: Info,
+      href: "/dfda/why",
+      onClick: () => {
+        console.log("Why dFDA clicked")
+      }
+    }
+  ]
+
   const onVariableSelect = (variable: GlobalVariable) => {
     const iframe = document.createElement('div')
     iframe.style.position = 'fixed'
@@ -176,6 +190,11 @@ export default function HomePage() {
             </Link>
           </div>
         </section>
+
+        <ProblemSection />
+        <GoodNewsSection />
+        <SolutionSection />
+        <CitizenScienceSection />
 
         <section className="grid gap-6 md:grid-cols-2 lg:grid-cols-3">
           {features.map((feature, index) => (

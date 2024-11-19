@@ -285,14 +285,16 @@ const FinancialIncentives = () => (
         <p className="mb-2 font-bold text-lg">Win-Win: Manufacturers and Society Split Healthcare Savings 50/50</p>
         
         <div className="mb-4 p-3 bg-white rounded-lg border-2 border-black">
-          <p className="font-bold mb-2">Example: Age Reversal Treatment 🧬</p>
+          <p className="font-bold mb-2">Example: Age-Related Disease Prevention 🧬</p>
           <ul className="list-inside list-disc space-y-1">
-            <li>Treatment reduces healthcare costs by $50k per person annually 📉</li>
-            <li>At $1k per treatment, 1 million people can afford it 👥</li>
-            <li>Total savings: $50 billion per year 💰</li>
-            <li>Society keeps: $25 billion in savings 🏥</li>
-            <li>Manufacturer receives: $25 billion in rewards 🎯</li>
-            <li>More affordable price = more users = more savings for everyone 📈</li>
+            <li>Average lifetime healthcare costs: $1.2M per person 📊</li>
+            <li>~80% of costs are from age-related diseases ($960k) 👴</li>
+            <li>Treatment reduces lifetime costs by $750k per person 📉</li>
+            <li>At $10k per treatment, 1 million people can afford it 👥</li>
+            <li>Total lifetime savings: $750 billion 💰</li>
+            <li>Society keeps: $375 billion in savings 🏥</li>
+            <li>Manufacturer receives: $375 billion in rewards 🎯</li>
+            <li>Additional savings from increased productivity and reduced care needs 📈</li>
           </ul>
         </div>
 
