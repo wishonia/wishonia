@@ -23,14 +23,11 @@ export default function VariableSearchAutocomplete({
 
   useEffect(() => {
     const search = async () => {
-      if (searchTerm.length < 2) {
-        setVariables([])
-        return
-      }
-
+      console.log('Searching for:', searchTerm ? `"${searchTerm}"` : '(empty string)')
       setIsLoading(true)
       try {
         const results = await searchDfdaVariables(searchTerm, searchParams)
+        console.log('Search results:', results.length, 'items found')
         setVariables(results)
       } catch (error) {
         console.error('Error searching:', error)
@@ -52,12 +49,25 @@ export default function VariableSearchAutocomplete({
           setSearchTerm(e.target.value)
           setShowDropdown(true)
         }}
+        onFocus={() => {
+          setShowDropdown(true)
+          if (!searchTerm) {
+            setSearchTerm('')
+          }
+        }}
         placeholder={placeholder}
         className="rounded-xl border-4 border-black bg-white p-4 text-xl placeholder:text-gray-500 focus:ring-4 focus:ring-blue-500"
       />
       
-      {showDropdown && variables.length > 0 && (
+      {showDropdown && (isLoading || variables.length > 0) && (
         <div className="absolute z-10 mt-2 w-full rounded-xl border-4 border-black bg-white shadow-lg">
+          {isLoading && (
+            <div className="flex items-center gap-2 px-4 py-2 text-gray-500">
+              <div className="h-4 w-4 animate-spin rounded-full border-2 border-gray-300 border-t-blue-500"></div>
+              <span>Searching...</span>
+            </div>
+          )}
+          
           {variables.map((variable, index) => (
             <button
               key={index}
@@ -76,12 +86,6 @@ export default function VariableSearchAutocomplete({
               </div>
             </button>
           ))}
-        </div>
-      )}
-      
-      {isLoading && (
-        <div className="absolute right-4 top-4">
-          <div className="h-6 w-6 animate-spin rounded-full border-4 border-gray-300 border-t-blue-500"></div>
         </div>
       )}
     </div>

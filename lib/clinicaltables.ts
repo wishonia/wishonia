@@ -92,7 +92,7 @@ export async function searchFdaTreatments(treatment: string): Promise<string[]> 
     }
 }
 
-export async function searchDfdaVariables(searchPhrase: string, additionalParams: Record<string, string> = {}): Promise<GlobalVariable[]> {
+export async function searchDfdaVariables(searchPhrase?: string, additionalParams: Record<string, string> = {}): Promise<GlobalVariable[]> {
     try {
         const baseUrl = 'https://safe.fdai.earth/api/v3/variables';
         const params = new URLSearchParams({
@@ -100,7 +100,7 @@ export async function searchDfdaVariables(searchPhrase: string, additionalParams
             clientId: 'oauth_test_client', 
             limit: '10',
             includePublic: 'true',
-            searchPhrase,
+            ...(searchPhrase ? { searchPhrase } : {}),
             ...additionalParams
         });
 

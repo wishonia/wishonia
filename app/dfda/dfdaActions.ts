@@ -153,7 +153,7 @@ export async function getConditionByName(name: string) {
 export async function getMetaAnalysis(treatmentName: string, conditionName: string) {
   const topic = `Meta-analysis on the safety and effectiveness of ${treatmentName} for ${conditionName}`;
   const article = await findArticleByTopic(topic);
-  debugger
+
   if(article) {
     return article;
   }
