@@ -23,7 +23,6 @@ export default async function GlobalVariableEdit({
   if (!user) {
     redirect(authOptions?.pages?.signIn || "/signin")
   }
-  debugger
 
   const response = await fetch(
     `${process.env.NEXT_PUBLIC_APP_URL}/api/dfda/variables?variableId=${params.variableId}&includeCharts=0`

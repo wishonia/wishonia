@@ -1,6 +1,7 @@
 import React from 'react';
 import { ExtendedMetaAnalysisReport} from "@/lib/agents/fdai/fdaiMetaAnalyzer";
 import MetaAnalysisReport from "@/app/dfda/components/MetaAnalysisReport";
+import BackButton from '../components/BackButton';
 
 // Example report data
 const exampleReport: ExtendedMetaAnalysisReport = {
@@ -107,12 +108,12 @@ const exampleReport: ExtendedMetaAnalysisReport = {
   ]
 };
 
-
 const App = () => {
   return (
-      <div className="container mx-auto p-4">
-        <MetaAnalysisReport report={exampleReport} />
-      </div>
+    <div className="container mx-auto p-4">
+      <BackButton />
+      <MetaAnalysisReport report={exampleReport} />
+    </div>
   );
 };
 

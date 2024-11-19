@@ -2,7 +2,7 @@
 
 import React from 'react'
 import Link from 'next/link'
-import { ArrowRight, Dna, Pill, Users, Activity, Info } from 'lucide-react'
+import { ArrowRight, Dna, Pill, Users, Activity, Info, Scroll } from 'lucide-react'
 import { motion } from 'framer-motion'
 import CostSavingsTable from './CostSavingsTable'
 import PredictorSearchAutocomplete from './PredictorSearchAutocomplete'
@@ -11,75 +11,11 @@ import OutcomeSearchAutocomplete from './OutcomeSearchAutocomplete'
 import AdvancedTrialSearch from './AdvancedTrialSearch'
 import { Robot } from '@phosphor-icons/react'
 import { FeatureBox } from './FeatureBox'
-
-const features = [
-  {
-    title: "Right to Trial Act",
-    desc: "Learn about the groundbreaking legislation",
-    color: "bg-blue-400",
-    icon: Dna,
-    media: "https://example.com/right-to-trial.jpg",
-    onClick: () => {
-      console.log("Right to Trial Act clicked")
-      // Add specific behavior here, e.g., navigate to a detailed page
-    }
-  },
-  {
-    title: "FDAi Agent",
-    desc: "Help us give everyone a free superintelligent doctor",
-    color: "bg-green-400",
-    icon: Robot,
-    media: "https://player.vimeo.com/video/930843979?badge=0&amp;autopause=0&amp;player_id=0&amp;app_id=58479",
-    onClick: () => {
-      console.log("FDAi Agent clicked")
-      // Add specific behavior here, e.g., open a modal with AI tool demo
-    }
-  },
-  {
-    title: "Treatment Database",
-    desc: "Explore our comprehensive database",
-    color: "bg-purple-400",
-    icon: Pill,
-    media: "https://vimeo.com/148751763",
-    onClick: () => {
-      console.log("Treatment Database clicked")
-      // Add specific behavior here, e.g., redirect to database search page
-    }
-  },
-  {
-    title: "Community Studies",
-    desc: "Join ongoing research initiatives",
-    color: "bg-red-400",
-    icon: Users,
-    media: "https://www.dailymotion.com/video/x7tgd2f",
-    onClick: () => {
-      console.log("Community Studies clicked")
-      // Add specific behavior here, e.g., show a list of active studies
-    }
-  },
-  {
-    title: "Personal Health Tracking",
-    desc: "Monitor your health journey",
-    color: "bg-orange-400",
-    icon: Activity,
-    media: "https://example.com/health-tracking.gif",
-    onClick: () => {
-      console.log("Personal Health Tracking clicked")
-      // Add specific behavior here, e.g., navigate to user's health dashboard
-    }
-  },
-  {
-    title: "About dFDA",
-    desc: "Learn about our mission and impact",
-    color: "bg-indigo-400",
-    icon: Info,
-    media: "https://example.com/about-dfda.webp",
-    onClick: () => {
-      console.log("About dFDA clicked")
-      // Add specific behavior here, e.g., open a modal with dFDA information
-    }
-  }
-]
+import SolutionSection from './SolutionSection'
+import CitizenScienceSection from './CitizenScienceSection'
+import { useRouter } from 'next/navigation'
+import { useState } from 'react'
+import { getSafeUrlWithToken } from '../dfdaActions'
 
 const SquigglyPattern = () => (
   <svg className="absolute inset-0 h-full w-full" xmlns="http://www.w3.org/2000/svg">
@@ -91,6 +27,89 @@ const SquigglyPattern = () => (
 )
 
 export default function HomePage() {
+  const router = useRouter()
+  const [isLoading, setIsLoading] = useState(false)
+
+  const handleDigitalTwinSafeClick = async (path: string) => {
+    //setIsLoading(true)
+    const url = await getSafeUrlWithToken(path)
+    window.open(url, '_blank')
+  }
+
+  const features = [
+    {
+      title: "The Cure Acceleration Act",
+      desc: "Help us give people suffering access to the most promising treatments",
+      color: "bg-blue-400",
+      icon: Scroll,
+      media: "https://wiki.dfda.earth/right_to_trial_act_image.jpg",
+      onClick: async () => {
+        console.log("Right to Trial Act clicked")
+        setIsLoading(true)
+        router.push("/dfda/right-to-trial-act")
+      }
+    },
+    {
+      title: "Your Personal FDAi Agent",
+      desc: "Help us give everyone a free superintelligent doctor",
+      color: "bg-green-400",
+      icon: Robot,
+      media: "https://player.vimeo.com/video/930843979?badge=0&amp;autopause=0&amp;player_id=0&amp;app_id=58479",
+      onClick: () => {
+        console.log("FDAi Agent clicked")
+        // Add specific behavior here, e.g., open a modal with AI tool demo
+        window.open("https://fdai.earth", "_blank")
+      }
+    },
+    {
+      title: "Your Digital Twin Safe",
+      desc: "Securely store and control your health data",
+      color: "bg-purple-400",
+      icon: Pill,
+      media: "https://user-images.githubusercontent.com/2808553/180306571-ac9cc741-6f34-4059-a814-6f8a72ed8322.png",
+      onClick: () => {
+        handleDigitalTwinSafeClick('intro')
+      }
+    },
+    {
+      title: "Clinipedia",
+      desc: "The Wikipedia of Clinical Research",
+      color: "bg-red-400",
+      icon: Users,
+      media: "https://fdai.earth/wp-content/uploads/2024/03/clinipedia-inflammatory-pain-small.gif",
+      onClick: () => {
+        console.log("Clinipedia clicked")
+        // open studies.dfda.earth in a new tab
+        window.open("https://studies.dfda.earth", "_blank")
+      }
+    },
+    {
+      title: "Outcome Labels",
+      desc: "See how treatments affect specific health outcomes",
+      color: "bg-orange-400",
+      icon: Activity,
+      media: "https://wiki.dfda.earth/assets/outcome-labels.PNG",
+      onClick: () => {
+        console.log("Outcome Labels clicked")
+        // open studies.dfda.earth in a new tab
+        window.open("https://studies.dfda.earth", "_blank")
+      }
+    },
+    {
+      title: "Why Decentralize the FDA?",
+      desc: "Learn about the historical context and need for decentralization",
+      color: "bg-yellow-400",
+      icon: Info,
+      media: "https://thinkbynumbers.org/wp-content/uploads/2021/03/news-story-headline-1-1024x563.png",
+      href: "/dfda/why",
+      onClick: () => {
+        // open https://dfda.earth in a new tab
+        window.open("https://dfda.earth", "_blank")
+        console.log("Why dFDA clicked")
+      }
+    }
+  ]
+
   const onVariableSelect = (variable: GlobalVariable) => {
     const iframe = document.createElement('div')
     iframe.style.position = 'fixed'
@@ -122,6 +141,11 @@ export default function HomePage() {
 
   return (
     <div className="">
+      {isLoading && (
+        <div className="fixed inset-0 bg-black/50 z-50 flex items-center justify-center">
+          <div className="animate-spin rounded-full h-16 w-16 border-t-4 border-white"></div>
+        </div>
+      )}
       <SquigglyPattern />
       <header className="relative mb-12 overflow-hidden rounded-xl border-4 border-black bg-white p-6 text-center shadow-[8px_8px_0px_0px_rgba(0,0,0,1)]">
         <motion.h1 
@@ -176,6 +200,11 @@ export default function HomePage() {
             </Link>
           </div>
         </section>
+
+        {/* <ProblemSection />
+        <GoodNewsSection /> */}
+        <SolutionSection />
+        <CitizenScienceSection />
 
         <section className="grid gap-6 md:grid-cols-2 lg:grid-cols-3">
           {features.map((feature, index) => (

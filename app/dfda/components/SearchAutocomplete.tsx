@@ -26,7 +26,6 @@ export default function SearchAutocomplete({ onSelect, placeholder, searchFuncti
   }, [query, searchFunction])
 
   const handleSuggestionClick = (suggestion: string) => {
-    debugger
     setQuery(suggestion)
     setShowDropdown(false)
     onSelect(suggestion)
