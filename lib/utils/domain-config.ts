@@ -13,8 +13,11 @@ export function getDomainConfig(hostname?: string | null): DomainConfigType {
     try {
       const headersList = headers()
       hostname = headersList.get('host')
+      if (!hostname) {
+        console.warn('No host header found, falling back to default domain');
+      }
     } catch (e) {
-      // Fallback to default if headers() fails
+      console.error('Failed to access headers:', e);
       return domainConfigs["wishonia.love"]
     }
   }

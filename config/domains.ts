@@ -1,12 +1,12 @@
 import { z } from "zod"
 
 export const DomainConfig = z.object({
-  name: z.string(),
-  description: z.string(),
+  name: z.string().min(1).max(50),
+  description: z.string().min(10).max(200),
   author: z.string().optional(),
-  keywords: z.string().optional(),
-  defaultHomepage: z.string(),
-  afterLoginPath: z.string(),
+  keywords: z.array(z.string()).optional(),
+  defaultHomepage: z.string().startsWith("/"),
+  afterLoginPath: z.string().startsWith("/"),
   ogImage: z.string().url().optional(),
 })
 

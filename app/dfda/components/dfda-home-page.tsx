@@ -211,7 +211,7 @@ export default function DFDAHomePage() {
               variableCategoryName: 'Symptoms',
               limit: '25'
             }}
-            placeholder="Enter treatment 💊"
+            placeholder="Enter symptom 🤒"
           />
           </div>
         </section>
