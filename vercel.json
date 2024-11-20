@@ -1,0 +1,12 @@
+{
+  "crons": [
+    {
+      "path": "/api/cron/petition-summaries?type=daily",
+      "schedule": "0 9 * * *"
+    },
+    {
+      "path": "/api/cron/petition-summaries?type=weekly",
+      "schedule": "0 9 * * 1"
+    }
+  ]
+} 

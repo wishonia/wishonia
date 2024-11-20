@@ -59,3 +59,66 @@ export interface QSource extends AgentSource {
   chunkSize: number
   chunkOverlap: number
 }
+
+
+export interface PetitionSignatureEmailProps {
+  petitionTitle: string
+  petitionId: string
+  userId: string
+  baseUrl: string
+}
+
+export interface PetitionWithDetails {
+  id: string
+  title: string
+  content: string
+  status: 'ACTIVE' | 'CLOSED' | 'SUCCESSFUL'
+  _count: {
+    signatures: number
+  }
+  statusUpdates: {
+    id: string
+    content: string
+    createdAt: Date
+  }[]
+  milestones: {
+    id: string
+    title: string
+    description: string
+    threshold: number
+    reached: boolean
+    reachedAt: Date | null
+  }[]
+}
+
+export interface CivicApiOfficial {
+  name: string
+  party: string
+  phones: string[]
+  emails: string[]
+  photoUrl: string
+  urls: string[]
+  channels: Array<{
+    type: string
+    id: string
+  }>
+  address: Array<{
+    line1: string
+    city: string
+    state: string
+    zip: string
+  }>
+}
+
+export interface CivicApiOffice {
+  name: string
+  divisionId: string
+  levels: string[]
+  roles: string[]
+  officialIndices: number[]
+}
+
+export interface CivicApiResponse {
+  offices: CivicApiOffice[]
+  officials: CivicApiOfficial[]
+}

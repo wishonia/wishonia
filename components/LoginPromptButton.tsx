@@ -1,3 +1,5 @@
+'use client'
+
 import React, { useState, useEffect } from "react"
 import { Dialog, DialogContent, DialogTrigger, DialogTitle } from "@/components/ui/dialog"
 import { UserAuthForm } from "@/components/user/user-auth-form"

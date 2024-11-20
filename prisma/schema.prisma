@@ -157,6 +157,12 @@ model User {
   ownedOrganizations                    Organization[]
   organizationFollows                   OrganizationFollower[]
   StripeCustomer                        StripeCustomer?
+  createdPetitions                      Petition[]                            @relation("CreatedPetitions")
+  petitionSignatures                    PetitionSignature[]
+  referredSignatures                    PetitionSignature[]                   @relation("ReferredSignatures")
+  petitionComments                      PetitionComment[]
+  petitionFollows                       PetitionFollow[]
+  repMessages                           PetitionRepMessage[]
 }
 
 // Need this to create digital twins for people that are not users
@@ -1859,4 +1865,158 @@ model ApiRequest {
   error             String?
   billable          Boolean  @default(true)
   createdAt         DateTime @default(now())
+}
+
+model Petition {
+  id                String                 @id @default(cuid())
+  title             String
+  content           String                 @db.Text
+  summary           String
+  imageUrl          String?
+  targetCount       Int                    @default(1000)
+  status            PetitionStatus         @default(ACTIVE)
+  createdAt         DateTime               @default(now())
+  updatedAt         DateTime               @updatedAt
+  creatorId         String
+  creator           User                   @relation("CreatedPetitions", fields: [creatorId], references: [id])
+  signatures        PetitionSignature[]
+  comments          PetitionComment[]
+  followers         PetitionFollow[]
+  notifyOnComment   Boolean                @default(true)
+  notifyOnMilestone Boolean                @default(true)
+  statusUpdates     PetitionStatusUpdate[]
+  milestones        PetitionMilestone[]
+  categoryId        String?
+  category          PetitionCategory?      @relation(fields: [categoryId], references: [id])
+  tags              PetitionTag[]          @relation("PetitionToTags")
+  repMessages       PetitionRepMessage[]
+  targetLocation    String? // e.g., "state", "federal"
+  messageTemplate   String?                @db.Text // Default message template
+  callScript        String?                @db.Text // Default call script
+}
+
+model PetitionSignature {
+  id             String   @id @default(cuid())
+  petitionId     String
+  userId         String
+  referrerId     String?
+  signedAt       DateTime @default(now())
+  comment        String?  @db.Text
+  // Track where the referral came from
+  referralSource String? // e.g., 'email', 'twitter', 'facebook', 'copy_link'
+  petition       Petition @relation(fields: [petitionId], references: [id])
+  user           User     @relation(fields: [userId], references: [id])
+  referrer       User?    @relation("ReferredSignatures", fields: [referrerId], references: [id])
+
+  @@unique([petitionId, userId])
+}
+
+model PetitionComment {
+  id         String   @id @default(cuid())
+  content    String   @db.Text
+  createdAt  DateTime @default(now())
+  updatedAt  DateTime @updatedAt
+  petitionId String
+  userId     String
+  petition   Petition @relation(fields: [petitionId], references: [id])
+  user       User     @relation(fields: [userId], references: [id])
+
+  @@unique([petitionId, userId])
+}
+
+model PetitionFollow {
+  id         String   @id @default(cuid())
+  petitionId String
+  userId     String
+  createdAt  DateTime @default(now())
+
+  // Notification preferences
+  notifyOnComment   Boolean @default(true)
+  notifyOnMilestone Boolean @default(true)
+  notifyOnUpdate    Boolean @default(true)
+  notifyOnSignature Boolean @default(false) // Default false since could be noisy
+
+  // Email frequency preferences
+  emailFrequency EmailFrequency @default(INSTANT)
+  lastEmailSent  DateTime?
+
+  petition Petition @relation(fields: [petitionId], references: [id])
+  user     User     @relation(fields: [userId], references: [id])
+
+  @@unique([petitionId, userId])
+}
+
+model PetitionStatusUpdate {
+  id         String   @id @default(cuid())
+  petitionId String
+  content    String   @db.Text
+  createdAt  DateTime @default(now())
+  petition   Petition @relation(fields: [petitionId], references: [id])
+}
+
+model PetitionMilestone {
+  id          String    @id @default(cuid())
+  petitionId  String
+  title       String
+  description String    @db.Text
+  threshold   Int // Number of signatures needed
+  reached     Boolean   @default(false)
+  reachedAt   DateTime?
+  createdAt   DateTime  @default(now())
+  petition    Petition  @relation(fields: [petitionId], references: [id])
+}
+
+enum PetitionStatus {
+  ACTIVE
+  CLOSED
+  SUCCESSFUL
+}
+
+enum EmailFrequency {
+  INSTANT
+  DAILY
+  WEEKLY
+  NEVER
+}
+
+model PetitionCategory {
+  id        String     @id @default(cuid())
+  name      String     @unique
+  slug      String     @unique
+  petitions Petition[]
+}
+
+model PetitionTag {
+  id        String     @id @default(cuid())
+  name      String     @unique
+  slug      String     @unique
+  petitions Petition[] @relation("PetitionToTags")
+}
+
+model Representative {
+  id       String   @id @default(cuid())
+  name     String
+  office   String
+  division String // e.g., "country", "state", "district"
+  party    String?
+  phones   String[]
+  emails   String[]
+  photoUrl String?
+  urls     String[] // Official websites
+  address  Json? // Structured address
+  channels Json? // Social media channels
+
+  petitionMessages PetitionRepMessage[]
+}
+
+model PetitionRepMessage {
+  id               String         @id @default(cuid())
+  petitionId       String
+  representativeId String
+  messageTemplate  String         @db.Text
+  callScript       String         @db.Text
+  petition         Petition       @relation(fields: [petitionId], references: [id])
+  representative   Representative @relation(fields: [representativeId], references: [id])
+  User             User?          @relation(fields: [userId], references: [id])
+  userId           String?
 }
