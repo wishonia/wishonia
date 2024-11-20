@@ -173,6 +173,7 @@ export class GlobalVariable {
    */
   "id": number
   "imageUrl"?: string
+  "url"?: string
   /**
    * Ex: https://google.com
    */

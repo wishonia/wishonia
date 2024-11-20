@@ -3,7 +3,7 @@
 import React, { useState } from 'react'
 import { Search, ArrowRight, ChevronDown } from 'lucide-react'
 import { useRouter } from 'next/navigation'
-import { searchConditions, searchInterventions } from '@/lib/clinicaltables'
+import { searchConditions } from '@/lib/clinicaltables'
 import { motion, AnimatePresence } from 'framer-motion'
 interface SearchFilters {
   // Basic Search
@@ -229,18 +229,14 @@ export default function AdvancedTrialSearch({ initialFilters }: AdvancedTrialSea
     setCondition(value)
     
     // Removed the character length limitation
-    if (true) {
-      setLoading(true)
-      try {
-        const results = await searchConditions(value)
-        setSuggestions(results.slice(0, 5))
-      } catch (error) {
-        console.error('Error fetching suggestions:', error)
-      }
-      setLoading(false)
-    } else {
-      setSuggestions([])
+    setLoading(true)
+    try {
+      const results = await searchConditions(value)
+      setSuggestions(results.slice(0, 5))
+    } catch (error) {
+      console.error('Error fetching suggestions:', error)
     }
+    setLoading(false)
   }
 
   const handleInputFocus = async () => {
