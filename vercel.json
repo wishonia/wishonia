@@ -2,11 +2,17 @@
   "crons": [
     {
       "path": "/api/cron/petition-summaries?type=daily",
-      "schedule": "0 9 * * *"
+      "schedule": "0 9 * * *",
+      "headers": {
+        "x-cron-secret": "${CRON_SECRET}"
+      }
     },
     {
       "path": "/api/cron/petition-summaries?type=weekly",
-      "schedule": "0 9 * * 1"
+      "schedule": "0 9 * * 1",
+      "headers": {
+        "x-cron-secret": "${CRON_SECRET}"
+      }
     }
   ]
 } 
