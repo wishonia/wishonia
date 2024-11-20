@@ -40,9 +40,21 @@ function getCachedResults(key: string): GlobalVariable[] | null {
 
 function setCachedResults(key: string, results: GlobalVariable[]) {
   try {
+    // shrink the variables and just keep the name, url, and pngUrl
+    const smallerResults = results.map(variable => ({
+      name: variable.name,
+      url: variable.url,
+      pngUrl: variable.pngUrl,
+      id: variable.id,
+      userId: variable.userId,
+      variableId: variable.variableId,
+      displayName: variable.displayName,
+      description: variable.description,
+      variableCategoryName: variable.variableCategoryName
+    }))
     const cacheData: SearchCache = {
       timestamp: Date.now(),
-      results
+      results: smallerResults
     }
     localStorage.setItem(key, JSON.stringify(cacheData))
   } catch (error) {
@@ -60,6 +72,14 @@ export default function VariableSearchAutocomplete({
   const [isLoading, setIsLoading] = useState(false)
   const [showDropdown, setShowDropdown] = useState(false)
   const componentRef = useRef<HTMLDivElement>(null)
+  const [cachedVariables, setCachedVariables] = useState<GlobalVariable[]>([])
+  // Create a cache key based on search term and params
+  const cacheKey = `dfda-variable-search:${searchTerm}:${
+    JSON.stringify(Object.keys(searchParams).sort().reduce<Record<string, string>>((obj, key) => {
+      obj[key] = searchParams[key]
+      return obj
+    }, {}))
+  }`
 
   useEffect(() => {
     function handleClickOutside(event: MouseEvent) {
@@ -75,17 +95,16 @@ export default function VariableSearchAutocomplete({
   }, [])
 
   useEffect(() => {
+      const cachedVariables = getCachedResults(cacheKey)
+    if (cachedVariables) {
+      setCachedVariables(cachedVariables)
+    }
+
     const search = async () => {
       console.log('Searching for:', searchTerm ? `"${searchTerm}"` : '(empty string)')
       setIsLoading(true)
       try {
-        // Create a cache key based on search term and params
-        const cacheKey = `dfda-variable-search:${searchTerm}:${
-          JSON.stringify(Object.keys(searchParams).sort().reduce<Record<string, string>>((obj, key) => {
-            obj[key] = searchParams[key]
-            return obj
-          }, {}))
-        }`
+
         // Check cache first
         const cachedResults = getCachedResults(cacheKey)
         if (cachedResults) {
@@ -161,6 +180,26 @@ export default function VariableSearchAutocomplete({
           ))}
         </div>
       )}
+
+      {/* Cached variables section */}
+      <div className="mt-4 flex flex-wrap gap-2">
+        {cachedVariables.map((variable, index) => (
+          <button
+            key={`${cacheKey}-${index}`}
+            onClick={() => onVariableSelect(variable)}
+            className="flex items-center gap-2 rounded-full border border-gray-200 bg-white px-3 py-1 text-sm hover:bg-gray-50"
+          >
+            {variable.pngUrl && (
+              <img 
+                src={variable.pngUrl} 
+                alt="" 
+                className="h-4 w-4 object-contain"
+              />
+            )}
+            <span>{variable.displayName || variable.name}</span>
+          </button>
+        ))}
+      </div>
     </div>
   )
 } 
