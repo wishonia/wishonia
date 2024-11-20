@@ -1,11 +1,9 @@
-'use client';
+"use client"
 
-import React, { useState } from 'react';
-import { motion } from 'framer-motion';
+import React, { useState } from "react"
+import { motion } from "framer-motion"
 
-
-
-
+import CostSavingsTable from "../../components/CostSavingsTable"
 
 // First, let's define the interfaces
 interface Section {
@@ -47,11 +45,17 @@ const Header = () => (
     <h1 className="mb-4 text-5xl font-black uppercase tracking-tight">
       RIGHT TO TRIAL ACT 🧪💊
     </h1>
-    <p className="text-xl font-bold">Faster Cures, Lower Costs, Universal Access 🚀🏥</p>
+    <p className="text-xl font-bold">
+      Faster Cures, Lower Costs, Universal Access 🚀🏥
+    </p>
   </header>
 )
 
-const Navigation = ({ sections, activeSection, setActiveSection }: NavigationProps) => (
+const Navigation = ({
+  sections,
+  activeSection,
+  setActiveSection,
+}: NavigationProps) => (
   <nav className="mb-8 flex flex-wrap justify-center gap-4">
     {sections.map((section) => (
       <button
@@ -70,12 +74,14 @@ const Navigation = ({ sections, activeSection, setActiveSection }: NavigationPro
 )
 
 const Card = ({ title, items, bgColor }: CardProps) => (
-  <div className={`rounded-lg border-2 border-black ${bgColor} p-4 shadow-[4px_4px_0px_0px_rgba(0,0,0,1)]`}>
+  <div
+    className={`rounded-lg border-2 border-black ${bgColor} p-4 shadow-[4px_4px_0px_0px_rgba(0,0,0,1)]`}
+  >
     <h3 className="mb-4 text-xl font-bold">{title}</h3>
     <div className="grid gap-4 sm:grid-cols-2 lg:grid-cols-4">
       {items.map((item, index) => (
-        <div 
-          key={index} 
+        <div
+          key={index}
           className="rounded-lg border-2 border-black bg-white p-4 shadow-[2px_2px_0px_0px_rgba(0,0,0,1)] transition-transform hover:translate-x-[1px] hover:translate-y-[1px] hover:shadow-none"
         >
           <div className="text-center">
@@ -89,7 +95,9 @@ const Card = ({ title, items, bgColor }: CardProps) => (
 )
 
 const ListCard = ({ title, items, bgColor }: ListCardProps) => (
-  <div className={`rounded-lg border-2 border-black ${bgColor} p-4 shadow-[4px_4px_0px_0px_rgba(0,0,0,1)]`}>
+  <div
+    className={`rounded-lg border-2 border-black ${bgColor} p-4 shadow-[4px_4px_0px_0px_rgba(0,0,0,1)]`}
+  >
     <h3 className="mb-4 text-xl font-bold">{title}</h3>
     <div className="grid gap-3 sm:grid-cols-2 lg:grid-cols-3">
       {items.map((item, index) => (
@@ -113,8 +121,14 @@ const Overview = ({ problems, solutions }: OverviewProps) => (
   >
     <h2 className="mb-4 text-3xl font-black">Overview & Findings 📜</h2>
     <h3 className="mb-2 text-xl font-bold">Title 🏷️</h3>
-    <p className="mb-4 text-lg">This Act may be cited as the "Right to Trial Act" 📋</p>
-    <Card title="Core Problems This Act Solves 🛠️" items={problems} bgColor="bg-red-200" />
+    <p className="mb-4 text-lg">
+      This Act may be cited as the "Right to Trial Act" 📋
+    </p>
+    <Card
+      title="Core Problems This Act Solves 🛠️"
+      items={problems}
+      bgColor="bg-red-200"
+    />
     <Card title="The Solution 💡" items={solutions} bgColor="bg-green-200" />
     <ListCard
       title="Economic Impact 📈"
@@ -137,7 +151,9 @@ const OpenTrialPlatform = () => (
     transition={{ duration: 0.5 }}
     className="rounded-lg border-4 border-black bg-white p-6 shadow-[8px_8px_0px_0px_rgba(0,0,0,1)]"
   >
-    <h2 className="mb-4 text-3xl font-black">Open Source Global Decentralized Trial Platform 🌐💻</h2>
+    <h2 className="mb-4 text-3xl font-black">
+      Open Source Global Decentralized Trial Platform 🌐💻
+    </h2>
     <div className="space-y-4">
       <ListCard
         title="Revolutionary Safety & Efficacy Testing 🔬"
@@ -210,6 +226,9 @@ const OpenTrialPlatform = () => (
         ]}
         bgColor="bg-blue-200"
       />
+      <section className="mt-12">
+        <CostSavingsTable />
+      </section>
     </div>
   </motion.section>
 )
@@ -221,7 +240,9 @@ const UniversalAccess = () => (
     transition={{ duration: 0.5 }}
     className="rounded-lg border-4 border-black bg-white p-6 shadow-[8px_8px_0px_0px_rgba(0,0,0,1)]"
   >
-    <h2 className="mb-4 text-3xl font-black">Universal Access to Treatments 🚪</h2>
+    <h2 className="mb-4 text-3xl font-black">
+      Universal Access to Treatments 🚪
+    </h2>
     <div className="space-y-4">
       <ListCard
         title="Breaking Down All Barriers 🧱💥"
@@ -281,11 +302,17 @@ const FinancialIncentives = () => (
         bgColor="bg-green-200"
       />
       <div className="rounded-lg border-2 border-black bg-yellow-200 p-4 shadow-[4px_4px_0px_0px_rgba(0,0,0,1)]">
-        <h3 className="mb-2 text-xl font-bold">Healthcare Savings Sharing Program 💰🤝</h3>
-        <p className="mb-2 font-bold text-lg">Win-Win: Manufacturers and Society Split Healthcare Savings 50/50</p>
-        
-        <div className="mb-4 p-3 bg-white rounded-lg border-2 border-black">
-          <p className="font-bold mb-2">Example: Age-Related Disease Prevention 🧬</p>
+        <h3 className="mb-2 text-xl font-bold">
+          Healthcare Savings Sharing Program 💰🤝
+        </h3>
+        <p className="mb-2 text-lg font-bold">
+          Win-Win: Manufacturers and Society Split Healthcare Savings 50/50
+        </p>
+
+        <div className="mb-4 rounded-lg border-2 border-black bg-white p-3">
+          <p className="mb-2 font-bold">
+            Example: Age-Related Disease Prevention 🧬
+          </p>
           <ul className="list-inside list-disc space-y-1">
             <li>Average lifetime healthcare costs: $1.2M per person 📊</li>
             <li>~80% of costs are from age-related diseases ($960k) 👴</li>
@@ -294,12 +321,15 @@ const FinancialIncentives = () => (
             <li>Total lifetime savings: $750 billion 💰</li>
             <li>Society keeps: $375 billion in savings 🏥</li>
             <li>Manufacturer receives: $375 billion in rewards 🎯</li>
-            <li>Additional savings from increased productivity and reduced care needs 📈</li>
+            <li>
+              Additional savings from increased productivity and reduced care
+              needs 📈
+            </li>
           </ul>
         </div>
 
-        <div className="mb-4 p-3 bg-white rounded-lg border-2 border-black">
-          <p className="font-bold mb-2">Massive Economic Benefits 📊</p>
+        <div className="mb-4 rounded-lg border-2 border-black bg-white p-3">
+          <p className="mb-2 font-bold">Massive Economic Benefits 📊</p>
           <ul className="list-inside list-disc space-y-1">
             <li>Government healthcare costs cut in half 📉</li>
             <li>Patients save thousands on treatment costs 💰</li>
@@ -310,7 +340,7 @@ const FinancialIncentives = () => (
         </div>
 
         <p className="mb-2 font-bold">This creates a virtuous cycle:</p>
-        <ul className="list-inside list-disc space-y-1 mb-4">
+        <ul className="mb-4 list-inside list-disc space-y-1">
           <li>Lower prices → More patients can afford treatment 💫</li>
           <li>More patients → Higher total savings generated 📈</li>
           <li>Higher savings → Bigger rewards for manufacturers 🎯</li>
@@ -319,7 +349,7 @@ const FinancialIncentives = () => (
         </ul>
 
         <p className="mb-2 font-bold">Eligible Treatments Include:</p>
-        <ul className="list-inside list-disc space-y-1 mb-4">
+        <ul className="mb-4 list-inside list-disc space-y-1">
           <li>Age reversal therapies 🧬</li>
           <li>Gene therapies 🧬</li>
           <li>Disease prevention treatments 🛡️</li>

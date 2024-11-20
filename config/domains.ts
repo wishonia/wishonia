@@ -15,20 +15,21 @@ export type DomainConfigType = z.infer<typeof DomainConfig>
 export const domainConfigs: Record<string, DomainConfigType> = {
   "wishonia.love": {
     name: "Wishonia",
-    description: "Using collective intelligence to maximize median health and happiness.",
+    description:
+      "Using collective intelligence to maximize median health and happiness.",
     author: "mikepsinn",
-    keywords: "collective intelligence, health, happiness",
+    keywords: ["collective intelligence", "health", "happiness"],
     defaultHomepage: "/",
     afterLoginPath: "/dashboard",
-    ogImage: "https://wishonia.love/og.png"
+    ogImage: "https://wishonia.love/og.png",
   },
   "dfda.earth": {
     name: "The Decentralized FDA",
     description: "Crowdsourcing clinical research",
     author: "mikepsinn",
-    keywords: "clinical research, health data",
+    keywords: ["clinical research", "health data", "desci"],
     defaultHomepage: "/dfda",
     afterLoginPath: "/dfda",
-    ogImage: "/globalSolutions/dfda/dfda-og.png"
-  }
-} 
+    ogImage: "/globalSolutions/dfda/dfda-og.png",
+  },
+}
