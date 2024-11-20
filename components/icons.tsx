@@ -1,3 +1,4 @@
+import { ChevronLeft as LucideChevronLeft } from "lucide-react"
 import {
   AiFillGithub,
   AiFillGoogleCircle,
@@ -29,7 +30,9 @@ import {
   FaChartBar,
   FaChartPie,
   FaDisease,
-  FaEdit, FaEye, FaEyeSlash,
+  FaEdit,
+  FaEye,
+  FaEyeSlash,
   FaHome,
   FaLightbulb,
   FaPeace,
@@ -37,6 +40,7 @@ import {
   FaRegStar,
   FaRobot,
   FaSadCry,
+  FaScroll,
   FaSkull,
   FaSort,
   FaUserAlt,
@@ -54,7 +58,6 @@ import { ImSpinner8, ImStatsBars } from "react-icons/im"
 import { LuSettings } from "react-icons/lu"
 import { MdDeleteForever, MdOutlineLogout } from "react-icons/md"
 import { RxDashboard, RxMixerHorizontal, RxPencil1 } from "react-icons/rx"
-import { ChevronLeft as LucideChevronLeft } from "lucide-react"
 
 export type IconKeys = keyof typeof icons
 
@@ -87,6 +90,7 @@ const icons = {
   pieChart: FaChartPie,
   docs: FaBook,
   robot: FaRobot,
+  scroll: FaScroll,
 
   clipboard: AiOutlineCopy,
 

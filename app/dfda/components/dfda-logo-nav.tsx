@@ -1,11 +1,11 @@
 "use client"
 
 import { Key } from "react"
+import Image from "next/image"
 import Link from "next/link"
 import { NavItem } from "@/types"
-import Image from "next/image"
 
-import { dfdaSidebarNav } from "@/config/links"
+import { dfdaNavigation } from "@/config/navigation/domains/dfda"
 import {
   DropdownMenu,
   DropdownMenuContent,
@@ -21,7 +21,7 @@ interface LogoNavMenuProps {
 
 export function DfdaLogoNavMenu({ navItems }: LogoNavMenuProps) {
   if (!navItems) {
-    navItems = dfdaSidebarNav.data
+    navItems = dfdaNavigation.sidebarNav
   }
   return (
     <DropdownMenu>

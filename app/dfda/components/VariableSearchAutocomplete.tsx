@@ -73,7 +73,9 @@ export default function VariableSearchAutocomplete({
   const [showDropdown, setShowDropdown] = useState(false)
   const componentRef = useRef<HTMLDivElement>(null)
   const [cachedVariables, setCachedVariables] = useState<GlobalVariable[]>([])
-  // Create a cache key based on search term and params
+  const initialLoadComplete = useRef(false)
+
+  // Single cache key function for both empty and search terms
   const cacheKey = `dfda-variable-search:${searchTerm}:${
     JSON.stringify(Object.keys(searchParams).sort().reduce<Record<string, string>>((obj, key) => {
       obj[key] = searchParams[key]
@@ -95,16 +97,28 @@ export default function VariableSearchAutocomplete({
   }, [])
 
   useEffect(() => {
-      const cachedVariables = getCachedResults(cacheKey)
-    if (cachedVariables) {
-      setCachedVariables(cachedVariables)
+    const cachedResults = getCachedResults(cacheKey)
+    if (cachedResults) {
+      setCachedVariables(cachedResults)
+    } else if (!initialLoadComplete.current && !searchTerm) {
+      // Only do initial load if no cache and no search term
+      const loadInitialResults = async () => {
+        try {
+          const results = await searchDfdaVariables('', searchParams)
+          setCachedResults(cacheKey, results)
+          setCachedVariables(results)
+        } catch (error) {
+          console.error('Error loading initial results:', error)
+        }
+      }
+      loadInitialResults()
+      initialLoadComplete.current = true
     }
 
     const search = async () => {
       console.log('Searching for:', searchTerm ? `"${searchTerm}"` : '(empty string)')
       setIsLoading(true)
       try {
-
         // Check cache first
         const cachedResults = getCachedResults(cacheKey)
         if (cachedResults) {
@@ -130,7 +144,7 @@ export default function VariableSearchAutocomplete({
 
     const debounce = setTimeout(search, 300)
     return () => clearTimeout(debounce)
-  }, [searchTerm, searchParams])
+  }, [searchTerm, searchParams, cacheKey])
 
   return (
     <div ref={componentRef} className="relative flex-grow">

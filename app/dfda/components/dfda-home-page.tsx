@@ -175,7 +175,7 @@ export default function DFDAHomePage() {
               sort: '-numberOfCorrelationsAsCause',
               isPublic: '1',
               variableCategoryName: 'Foods',
-              limit: '50'
+              limit: '25'
             }}
             placeholder="Enter Foods🍟"
           />
@@ -192,7 +192,7 @@ export default function DFDAHomePage() {
               sort: '-numberOfCorrelationsAsCause',
               isPublic: '1',
               variableCategoryName: 'Treatments',
-              limit: '50'
+              limit: '25'
             }}
             placeholder="Enter treatment 💊"
           />
@@ -209,9 +209,9 @@ export default function DFDAHomePage() {
               sort: '-numberOfCorrelationsAsCause',
               isPublic: '1',
               variableCategoryName: 'Symptoms',
-              limit: '50'
+              limit: '25'
             }}
-            placeholder="Enter treatment 💊"
+            placeholder="Enter symptom 🤒"
           />
           </div>
         </section>

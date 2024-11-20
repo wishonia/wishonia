@@ -2,6 +2,7 @@
 // This is kind of hack to make the IDE stop complaining about:
 // TS2339: Property NEXT_PUBLIC_APP_URL does not exist on type Readonly<{}>.
 interface Env {
+  TEST_DOMAIN: string
   NODE_ENV: string
   // Add other environment variables as needed
   NEXT_PUBLIC_APP_URL: string
@@ -12,8 +13,6 @@ interface Env {
   NEXT_PUBLIC_SITE_OG_IMAGE: string
   NEXT_PUBLIC_API_KEY: string
   NEXT_PUBLIC_API_URL: string
-  NEXT_PUBLIC_DEFAULT_HOMEPAGE: string
-  NEXT_PUBLIC_DEFAULT_AFTER_LOGIN_PATH: string
   NEXTAUTH_URL: string
   NEXTAUTH_SECRET: string
   GOOGLE_CLIENT_ID: string

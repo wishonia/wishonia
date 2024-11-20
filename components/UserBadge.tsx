@@ -3,31 +3,27 @@
 import React from "react"
 import Image from "next/image"
 import Link from "next/link"
-import { useRouter } from "next/navigation"
 import { Gear, SignOut } from "@phosphor-icons/react"
 import { DropdownMenuItem } from "@radix-ui/react-dropdown-menu"
 import { signIn, signOut, useSession } from "next-auth/react"
 
-import { avatarNav } from "@/config/links"
+import { avatarNav } from "@/config/navigation/general"
 import {
   DropdownMenu,
   DropdownMenuContent,
   DropdownMenuLabel,
   DropdownMenuRadioGroup,
-  DropdownMenuRadioItem,
   DropdownMenuSeparator,
   DropdownMenuTrigger,
 } from "@/components/ui/dropdown-menu"
 import { Icons } from "@/components/icons"
 
-import LoadingSpinner from "./LoadingSpinner"
 import { Button } from "./ui/button"
 import { Skeleton } from "./ui/skeleton"
 
 function UserBadge() {
   const [position, setPosition] = React.useState("bottom")
   const { data: session, status } = useSession()
-  const router = useRouter()
 
   if (status === "loading") {
     return (
