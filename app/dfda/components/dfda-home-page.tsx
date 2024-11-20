@@ -14,6 +14,7 @@ import CitizenScienceSection from './CitizenScienceSection'
 import { useRouter } from 'next/navigation'
 import { useState } from 'react'
 import { getSafeUrlWithToken } from '../dfdaActions'
+import VariableSearchAutocomplete from "@/app/dfda/components/VariableSearchAutocomplete";
 
 const SquigglyPattern = () => (
   <svg className="absolute inset-0 h-full w-full" xmlns="http://www.w3.org/2000/svg">
