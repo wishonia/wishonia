@@ -5,12 +5,14 @@ import Link from "next/link"
 import { NavItem } from "@/types"
 import { User } from "next-auth"
 
-import { dfdaAvatarNav, generalDashboardTopNav } from "@/config/links"
+import { getNavigationForDomain } from "@/config/navigation"
 import { UserNavDisplay } from "@/components/user/user-nav-display"
+
 import { DfdaLogoNavMenu } from "./dfda-logo-nav"
 
 interface NavbarProps extends React.HTMLAttributes<HTMLDivElement> {
   user: Pick<User, "name" | "image" | "email">
+  domain?: string
   logoNavItems?: NavItem[]
   topNavItems?: NavItem[]
   avatarNavItems?: NavItem[]
@@ -18,15 +20,18 @@ interface NavbarProps extends React.HTMLAttributes<HTMLDivElement> {
 
 export default function DfdaTopNavbar({
   user,
+  domain = "dfda.earth",
   logoNavItems,
   topNavItems,
   avatarNavItems,
 }: NavbarProps) {
+  const navigation = getNavigationForDomain(domain)
+
   if (!topNavItems) {
-    topNavItems = generalDashboardTopNav.data
+    topNavItems = navigation.topNav
   }
-  if(!avatarNavItems) {
-    avatarNavItems = dfdaAvatarNav.data
+  if (!avatarNavItems) {
+    avatarNavItems = navigation.avatarNav
   }
   return (
     <header className="select-none">
