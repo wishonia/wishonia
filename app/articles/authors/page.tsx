@@ -1,28 +1,9 @@
-import { prisma } from "@/lib/prisma"
 import AuthorsList from "@/components/authors/AuthorsList"
+import { getAuthors } from "../articleActions"
 
 export const metadata = {
   title: 'Article Authors',
   description: 'Browse all article authors'
-}
-
-async function getAuthors() {
-  const authors = await prisma.user.findMany({
-    where: {
-      authoredArticles: {
-        some: {}
-      }
-    },
-    include: {
-      _count: {
-        select: { authoredArticles: true }
-      }
-    },
-    orderBy: {
-      name: 'asc'
-    }
-  })
-  return authors
 }
 
 export default async function AuthorsPage() {
