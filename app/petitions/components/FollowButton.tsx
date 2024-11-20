@@ -4,7 +4,7 @@ import { useState } from 'react'
 import { useSession } from 'next-auth/react'
 import { LoginPromptButton } from '@/components/LoginPromptButton'
 import { Button } from '@/components/ui/button'
-import { followPetition, unfollowPetition } from '../actions'
+import { followPetition, unfollowPetition } from '../petitionActions'
 
 export function FollowButton({ 
   petitionId, 

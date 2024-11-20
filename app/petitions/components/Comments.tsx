@@ -3,7 +3,7 @@
 import { useState } from 'react'
 import { useSession } from 'next-auth/react'
 import { LoginPromptButton } from '@/components/LoginPromptButton'
-import { addComment } from '../actions'
+import { addComment } from '../petitionActions'
 import { Button } from '@/components/ui/button'
 import { Textarea } from '@/components/ui/textarea'
 import { PetitionComment, User } from "@prisma/client"

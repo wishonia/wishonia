@@ -2,7 +2,7 @@
 
 import { useState } from 'react'
 import { Button } from "@/components/ui/button"
-import { uploadImage } from '../actions'
+import { uploadImage } from '../petitionActions'
 
 interface ImageUploadProps {
   onUploadComplete: (url: string) => void
