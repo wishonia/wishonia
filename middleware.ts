@@ -1,6 +1,7 @@
 import { NextResponse } from "next/server"
 import { getToken } from "next-auth/jwt"
 import { withAuth } from "next-auth/middleware"
+
 import { getDomainConfig } from "@/lib/utils/domain-config"
 
 export default withAuth(
@@ -11,21 +12,31 @@ export default withAuth(
       req.nextUrl.pathname.startsWith("/signin") ||
       req.nextUrl.pathname.startsWith("/signup")
 
-    const hostname = req.headers.get('host')
+    const hostname = req.headers.get("host")
     const domainConfig = getDomainConfig(hostname)
 
     // Check if we're on the root path
     if (req.nextUrl.pathname === "/") {
-      return NextResponse.redirect(new URL(domainConfig.defaultHomepage, req.url))
+      // Only redirect if defaultHomepage is not root path
+      if (domainConfig.defaultHomepage !== "/") {
+        return NextResponse.redirect(
+          new URL(domainConfig.defaultHomepage, req.url)
+        )
+      }
+      return null
     }
 
     // Handle auth pages
     if (isAuthPage) {
       if (isAuth) {
-        return NextResponse.redirect(new URL(domainConfig.afterLoginPath, req.url))
+        return NextResponse.redirect(
+          new URL(domainConfig.afterLoginPath, req.url)
+        )
       }
       return null
     }
+
+    return null
   },
   {
     callbacks: {

@@ -1,6 +1,7 @@
-import { headers } from 'next/headers'
-import { domainConfigs, DomainConfigType } from '@/config/domains'
-import { env } from '@/env.mjs'
+import { headers } from "next/headers"
+
+import { env } from "@/env.mjs"
+import { domainConfigs, DomainConfigType } from "@/config/domains"
 
 export function getDomainConfig(hostname?: string | null): DomainConfigType {
   // Use TEST_DOMAIN from env if set (for local development)
@@ -12,19 +13,19 @@ export function getDomainConfig(hostname?: string | null): DomainConfigType {
   if (!hostname) {
     try {
       const headersList = headers()
-      hostname = headersList.get('host')
+      hostname = headersList.get("host")
       if (!hostname) {
-        console.warn('No host header found, falling back to default domain');
+        console.warn("No host header found, falling back to default domain")
       }
     } catch (e) {
-      console.error('Failed to access headers:', e);
+      console.error("Failed to access headers:", e)
       return domainConfigs["wishonia.love"]
     }
   }
 
   // Clean the hostname (remove port and www.)
-  const cleanHostname = hostname?.replace(/:\d+$/, '').replace(/^www\./, '')
+  const cleanHostname = hostname?.replace(/:\d+$/, "").replace(/^www\./, "")
 
-  // Return config for domain or default
+  // Return config for domain or default to wishonia.love config
   return domainConfigs[cleanHostname || ""] || domainConfigs["wishonia.love"]
-} 
+}
