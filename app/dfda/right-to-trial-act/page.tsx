@@ -2,7 +2,7 @@ import { Metadata } from 'next'
 import { getMarkdownContent } from '@/lib/content/getMarkdownContent'
 import { PetitionSection } from './components/PetitionSection'
 import { FloatingPetitionButton } from './components/FloatingPetitionButton'
-import { SignPetitionButton } from './components/SignPetitionButton'
+import { DFDASignPetitionButton } from './components/DFDASignPetitionButton'
 import CureAccelerationAct from './components/right-to-trial-act'
 import { GitHubEditButton } from './components/GitHubEditButton'
 
@@ -50,7 +50,7 @@ export default async function RightToTrialPage() {
             {/* Bottom Petition Section */}
             <div className="mt-16 text-center border-t-4 pt-12">
               <h3 className="text-2xl font-serif mb-6">Add Your Name to Support This Act</h3>
-              <SignPetitionButton /> <GitHubEditButton />
+              <DFDASignPetitionButton /> <GitHubEditButton />
             </div>
           </div>
         </div>

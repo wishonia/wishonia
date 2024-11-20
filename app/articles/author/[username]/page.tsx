@@ -1,12 +1,10 @@
-import { prisma } from "@/lib/prisma"
 import { notFound } from "next/navigation"
 import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar"
 import ArticleSearchAndGrid from "@/components/article/ArticleSearchAndGrid"
+import { getAuthorByUsername, getAuthorForMetadata } from "../../articleActions"
 
 export async function generateMetadata({ params }: { params: { username: string } }) {
-  const author = await prisma.user.findUnique({
-    where: { username: params.username }
-  })
+  const author = await getAuthorForMetadata(params.username)
 
   if (!author) {
     return {
@@ -21,14 +19,7 @@ export async function generateMetadata({ params }: { params: { username: string 
 }
 
 export default async function AuthorPage({ params }: { params: { username: string } }) {
-  const author = await prisma.user.findUnique({
-    where: { username: params.username },
-    include: {
-      _count: {
-        select: { authoredArticles: true }
-      }
-    }
-  })
+  const author = await getAuthorByUsername(params.username)
 
   if (!author) {
     notFound()

@@ -59,3 +59,35 @@
     @apply bg-background text-foreground;
   }
 }
+
+@import '@mdxeditor/editor/style.css';
+
+/* Add dark mode styles for the editor */
+.dark .mdxeditor {
+  --mdxeditor-bg: hsl(var(--background));
+  --mdxeditor-text: hsl(var(--foreground));
+  --mdxeditor-border: hsl(var(--border));
+  --mdxeditor-toolbar-bg: hsl(var(--card));
+  --mdxeditor-toolbar-border: hsl(var(--border));
+  --mdxeditor-button-bg: transparent;
+  --mdxeditor-button-border: hsl(var(--border));
+  --mdxeditor-button-hover-bg: hsl(var(--accent));
+  --mdxeditor-button-hover-text: hsl(var(--accent-foreground));
+  --mdxeditor-button-active-bg: hsl(var(--accent));
+  --mdxeditor-button-active-text: hsl(var(--accent-foreground));
+  --mdxeditor-button-active-border: hsl(var(--border));
+}
+
+.dark .mdxeditor-toolbar {
+  background-color: hsl(var(--card));
+  border-color: hsl(var(--border));
+}
+
+.dark .mdxeditor-button {
+  color: hsl(var(--foreground));
+}
+
+.dark .mdxeditor-button:hover {
+  background-color: hsl(var(--accent));
+  color: hsl(var(--accent-foreground));
+}
