@@ -1,7 +1,7 @@
 import { Suspense } from 'react'
 import { ArrowLeft } from 'lucide-react'
 import Link from 'next/link'
-import { searchTrials } from '../actions'
+import { searchTrials } from '../trialActions'
 import TrialsList from '../components/TrialsList'
 import AdvancedTrialSearch from '../../components/AdvancedTrialSearch'
 
