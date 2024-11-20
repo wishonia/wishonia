@@ -3,7 +3,7 @@
 import { useState } from 'react'
 import { Switch } from "@/components/ui/switch"
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@/components/ui/select"
-import { updateFollowSettings } from '../actions'
+import { updateFollowSettings } from '../petitionActions'
 import { EmailFrequency } from "@prisma/client"
 
 interface FollowSettings {

@@ -3,7 +3,7 @@
 import { useState } from "react"
 import { Button } from "@/components/ui/button"
 import { Textarea } from "@/components/ui/textarea"
-import { createPetitionUpdate } from "../actions"
+import { createPetitionUpdate } from "../petitionActions"
 import { UpdatesTimeline } from "./UpdatesTimeline"
 import { Petition, PetitionStatusUpdate } from "@prisma/client"
 

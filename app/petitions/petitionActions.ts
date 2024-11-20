@@ -9,7 +9,6 @@ import { notifyPetitionMilestone, notifyPetitionStatusUpdate, notifySignatureThr
 import { headers } from "next/headers"
 import { z } from 'zod'
 import { getModel } from "@/lib/utils/modelUtils"
-import { ModelName } from "@/lib/utils/modelUtils"
 import { generateObject } from "ai"
 import { uploadImageToVercel } from '@/lib/imageUploader'
 import { authOptions } from "@/lib/auth"
@@ -382,4 +381,49 @@ export async function uploadImage(formData: FormData) {
     console.error('Server: Failed to upload image:', error)
     throw new Error('Failed to upload image')
   }
+}
+
+export async function checkPetitionSignature(petitionId: string) {
+  const session = await getServerSession(authOptions)
+  if (!session?.user?.id) {
+    console.log('No session user id')
+    return false
+  } else {
+    console.log('Session user id:', session.user.id)
+  }
+
+  const signature = await prisma.petitionSignature.findUnique({
+    where: {
+      petitionId_userId: {
+        petitionId,
+        userId: session.user.id,
+      }
+    }
+  })
+
+  if (!signature) {
+    console.log('No signature found')
+  } else {
+    console.log('Signature found')
+  }
+
+  return !!signature
+}
+
+export async function unsignPetition(petitionId: string) {
+  const session = await getServerSession(authOptions)
+  if (!session?.user?.id) {
+    throw new Error("Must be signed in to unsign petitions")
+  }
+
+  await prisma.petitionSignature.delete({
+    where: {
+      petitionId_userId: {
+        petitionId,
+        userId: session.user.id,
+      }
+    }
+  })
+
+  revalidatePath(`/petitions/${petitionId}`)
 } 

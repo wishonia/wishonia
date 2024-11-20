@@ -3,11 +3,36 @@ import { google } from "@ai-sdk/google";
 import { openai } from "@ai-sdk/openai";
 import { LanguageModelV1 } from "@ai-sdk/provider";
 
-export const DEFAULT_MODEL_NAME =
-    //'gpt-4o-mini';
-    //'gpt-4-turbo';
-    //'gemini-1.5-pro';
-    'claude-3-5-sonnet-20240620';
+function getDefaultModelName(): ModelName {
+  const envModel = process.env.DEFAULT_AI_MODEL;
+  if (!envModel) return 'gpt-4o-mini';
+  
+  // Validate that the env value is a valid ModelName
+  if (isValidModelName(envModel)) {
+    return envModel as ModelName;
+  }
+  
+  console.warn(`Invalid model name in DEFAULT_AI_MODEL: ${envModel}, falling back to gpt-4o-mini`);
+  return 'gpt-4o-mini';
+}
+
+// Type guard to validate model names
+function isValidModelName(model: string): model is ModelName {
+  const validModels = [
+    'claude-3-5-sonnet-20240620', 'claude-3-opus-20240229', 'claude-3-sonnet-20240229',
+    'claude-3-haiku-20240307', 'gpt-4o', 'gpt-4o-2024-05-13', 'gpt-4o-2024-08-06',
+    'gpt-4o-mini', 'gpt-4o-mini-2024-07-18', 'gpt-4-turbo', 'gpt-4-turbo-2024-04-09',
+    'gpt-4-turbo-preview', 'gpt-4-0125-preview', 'gpt-4-1106-preview', 'gpt-4',
+    'gpt-4-0613', 'gpt-3.5-turbo-0125', 'gpt-3.5-turbo', 'gpt-3.5-turbo-1106',
+    'gemini-1.5-flash-latest', 'gemini-1.5-flash', 'gemini-1.5-pro-latest',
+    'gemini-1.5-pro', 'gemini-1.0-pro'
+  ] as const;
+  
+  return validModels.includes(model as ModelName);
+}
+
+export const DEFAULT_MODEL_NAME = getDefaultModelName();
+
 export type ModelName = 'claude-3-5-sonnet-20240620' | 'claude-3-opus-20240229' | 'claude-3-sonnet-20240229' | 'claude-3-haiku-20240307' |
     'gpt-4o' | 'gpt-4o-2024-05-13' | 'gpt-4o-2024-08-06' | 'gpt-4o-mini' | 'gpt-4o-mini-2024-07-18' | 'gpt-4-turbo' | 'gpt-4-turbo-2024-04-09' | 'gpt-4-turbo-preview' | 'gpt-4-0125-preview' | 'gpt-4-1106-preview' | 'gpt-4' | 'gpt-4-0613' | 'gpt-3.5-turbo-0125' | 'gpt-3.5-turbo' | 'gpt-3.5-turbo-1106' |
     'gemini-1.5-flash-latest' | 'gemini-1.5-flash' | 'gemini-1.5-pro-latest' | 'gemini-1.5-pro' | 'gemini-1.0-pro';

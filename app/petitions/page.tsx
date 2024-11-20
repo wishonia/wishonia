@@ -2,7 +2,7 @@ import { getServerSession } from "next-auth/next"
 import { prisma } from "@/lib/prisma"
 import Link from "next/link"
 import { Button } from "@/components/ui/button"
-import { PlusIcon } from "lucide-react"
+import { PlusIcon, PencilIcon } from "lucide-react"
 import { LoginPromptButton } from "@/components/LoginPromptButton"
 import { Card, CardContent } from "@/components/ui/card"
 
@@ -14,7 +14,10 @@ export default async function PetitionsPage() {
         select: { signatures: true }
       },
       creator: {
-        select: { name: true }
+        select: { 
+          name: true,
+          email: true 
+        }
       }
     },
     orderBy: { createdAt: 'desc' }
@@ -41,10 +44,7 @@ export default async function PetitionsPage() {
       
       <div className="space-y-6">
         {petitions.map((petition) => (
-          <Link 
-            key={petition.id} 
-            href={`/petitions/${petition.id}`}
-          >
+          <div key={petition.id} className="group">
             <Card className="hover:bg-muted/50 transition-colors">
               <div className="flex flex-col md:flex-row">
                 {petition.imageUrl && (
@@ -57,7 +57,19 @@ export default async function PetitionsPage() {
                   </div>
                 )}
                 <CardContent className={`flex-1 ${petition.imageUrl ? "pt-4 md:pt-6" : "pt-6"}`}>
-                  <h2 className="text-2xl font-semibold mb-3">{petition.title}</h2>
+                  <div className="flex justify-between items-start gap-4">
+                    <Link href={`/petitions/${petition.id}`}>
+                      <h2 className="text-2xl font-semibold mb-3 hover:underline">{petition.title}</h2>
+                    </Link>
+                    {session?.user?.email === petition.creator.email && (
+                      <Link href={`/petitions/${petition.id}/edit`}>
+                        <Button variant="ghost" size="sm" className="opacity-0 group-hover:opacity-100 transition-opacity">
+                          <PencilIcon className="h-4 w-4 mr-2" />
+                          Edit
+                        </Button>
+                      </Link>
+                    )}
+                  </div>
                   <p className="text-muted-foreground mb-4 line-clamp-2">{petition.summary}</p>
                   <div className="flex justify-between items-center text-sm text-muted-foreground">
                     <span>{petition._count.signatures} signatures</span>
@@ -66,7 +78,7 @@ export default async function PetitionsPage() {
                 </CardContent>
               </div>
             </Card>
-          </Link>
+          </div>
         ))}
       </div>
     </div>
