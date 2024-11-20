@@ -5,7 +5,7 @@ import Link from "next/link"
 import { NavItem } from "@/types"
 import { WandIcon } from "lucide-react"
 
-import { generalSidebarNav } from "@/config/links"
+import { generalSidebarNav } from "@/config/navigation/general"
 import { siteConfig } from "@/config/site"
 import {
   DropdownMenu,

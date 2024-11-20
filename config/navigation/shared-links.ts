@@ -1,11 +1,6 @@
 import { siteConfig } from "../site"
 
 export const commonLinks = {
-  dashboard: {
-    title: "Dashboard",
-    href: "/dashboard",
-    icon: "dashboard",
-  },
   docs: {
     title: "Docs",
     href: "/docs",
@@ -19,5 +14,28 @@ export const commonLinks = {
     tooltip: "Contribute to the project on Github",
     external: true,
   },
-  // ... other common links
+  home: {
+    title: siteConfig.name,
+    href: "/",
+    icon: "home",
+  },
+  features: {
+    title: "Features",
+    href: "/#features",
+  },
+  overview: {
+    title: "Overview",
+    href: "/#overview",
+  },
+  profileSettings: {
+    title: "Profile Settings",
+    href: "/dashboard/settings",
+    icon: "settings",
+    tooltip: "Update your profile settings",
+  },
+  dashboard: {
+    title: "Dashboard",
+    href: "/dashboard",
+    icon: "dashboard",
+  },
 } as const

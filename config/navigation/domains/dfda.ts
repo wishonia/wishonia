@@ -2,6 +2,12 @@ import { commonLinks } from "../shared-links"
 import { DomainNavigation } from "../types"
 
 export const dfdaLinks = {
+  dfda: {
+    title: "DFDA",
+    href: "/dfda",
+    icon: "health",
+    tooltip: "The Decentralized Food and Drug Administration",
+  },
   digitalTwinSafe: {
     title: "Digital Twin Safe",
     href: "https://safe.dfda.earth",
@@ -14,20 +20,40 @@ export const dfdaLinks = {
     icon: "health",
     tooltip: "The Wikipedia of Clinical Research",
   },
-  // ... other DFDA-specific links
+  fdai: {
+    title: "FDAi",
+    href: "https://fdai.earth",
+    icon: "robot",
+    tooltip: "An autonomous AI Food and Drug Administration",
+  },
 } as const
 
 export const dfdaNavigation: DomainNavigation = {
-  topNav: [dfdaLinks.clinipedia, dfdaLinks.digitalTwinSafe],
-  sidebarNav: [
+  topNav: [
+    dfdaLinks.dfda,
     dfdaLinks.clinipedia,
     dfdaLinks.digitalTwinSafe,
+    dfdaLinks.fdai,
+  ],
+  sidebarNav: [
+    dfdaLinks.dfda,
+    dfdaLinks.clinipedia,
+    dfdaLinks.digitalTwinSafe,
+    dfdaLinks.fdai,
     commonLinks.docs,
   ],
-  avatarNav: [dfdaLinks.clinipedia, dfdaLinks.digitalTwinSafe],
-  footerNav: [
+  avatarNav: [
+    commonLinks.profileSettings,
+    dfdaLinks.dfda,
     dfdaLinks.clinipedia,
     dfdaLinks.digitalTwinSafe,
+    dfdaLinks.fdai,
+  ],
+  footerNav: [
+    dfdaLinks.dfda,
+    dfdaLinks.clinipedia,
+    dfdaLinks.digitalTwinSafe,
+    dfdaLinks.fdai,
     commonLinks.github,
   ],
 }
