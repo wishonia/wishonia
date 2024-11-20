@@ -1,7 +1,8 @@
 import { NextResponse } from "next/server"
 import { getToken } from "next-auth/jwt"
 import { withAuth } from "next-auth/middleware"
-import { env } from "./env.mjs"
+
+import { getDomainConfig } from "@/lib/utils/domain-config"
 
 export default withAuth(
   async function middleware(req) {
@@ -11,25 +12,31 @@ export default withAuth(
       req.nextUrl.pathname.startsWith("/signin") ||
       req.nextUrl.pathname.startsWith("/signup")
 
-    // Use the environment variable for the default redirect, fallback to "/dashboard"
-    const defaultRedirect = env.NEXT_PUBLIC_DEFAULT_AFTER_LOGIN_PATH || "/dashboard"
+    const hostname = req.headers.get("host")
+    const domainConfig = getDomainConfig(hostname)
 
-    // Check for the custom homepage
-    const customHomepage = env.NEXT_PUBLIC_DEFAULT_HOMEPAGE
-
-      console.log(`customHomepage is: ${customHomepage}  and current url is: ${req.nextUrl.pathname}`)
-
-    if (isAuthPage) {
-      if (isAuth) {
-        return NextResponse.redirect(new URL(defaultRedirect, req.url))
+    // Check if we're on the root path
+    if (req.nextUrl.pathname === "/") {
+      // Only redirect if defaultHomepage is not root path
+      if (domainConfig.defaultHomepage !== "/") {
+        return NextResponse.redirect(
+          new URL(domainConfig.defaultHomepage, req.url)
+        )
       }
       return null
     }
 
-    // Redirect to custom homepage if set and on root path
-    if (req.nextUrl.pathname === "/" && customHomepage) {
-      return NextResponse.redirect(new URL(customHomepage, req.url))
+    // Handle auth pages
+    if (isAuthPage) {
+      if (isAuth) {
+        return NextResponse.redirect(
+          new URL(domainConfig.afterLoginPath, req.url)
+        )
+      }
+      return null
     }
+
+    return null
   },
   {
     callbacks: {

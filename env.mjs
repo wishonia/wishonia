@@ -12,6 +12,7 @@ export const env = createEnv({
     DATABASE_URL: z.string().min(1),
     EMAIL_SERVER: z.string().min(1),
     EMAIL_FROM: z.string().min(1),
+    TEST_DOMAIN: z.string().optional(),
   },
   client: {
     NEXT_PUBLIC_APP_URL: z.string().min(1),
@@ -20,8 +21,7 @@ export const env = createEnv({
     NEXT_PUBLIC_SITE_AUTHOR: z.string().optional(),
     NEXT_PUBLIC_SITE_KEYWORDS: z.string().optional(),
     NEXT_PUBLIC_SITE_OG_IMAGE: z.string().url().optional(),
-    NEXT_PUBLIC_DEFAULT_HOMEPAGE: z.string().optional(),
-    NEXT_PUBLIC_DEFAULT_AFTER_LOGIN_PATH: z.string().optional(),
+    NEXT_PUBLIC_TEST_DOMAIN: z.string().optional(),
   },
   runtimeEnv: {
     NEXTAUTH_URL: process.env.NEXTAUTH_URL,
@@ -39,7 +39,7 @@ export const env = createEnv({
     NEXT_PUBLIC_SITE_OG_IMAGE: process.env.NEXT_PUBLIC_SITE_OG_IMAGE,
     EMAIL_SERVER: process.env.EMAIL_SERVER,
     EMAIL_FROM: process.env.EMAIL_FROM,
-    NEXT_PUBLIC_DEFAULT_HOMEPAGE: process.env.NEXT_PUBLIC_DEFAULT_HOMEPAGE,
-    NEXT_PUBLIC_DEFAULT_AFTER_LOGIN_PATH: process.env.NEXT_PUBLIC_DEFAULT_AFTER_LOGIN_PATH,
+    TEST_DOMAIN: process.env.TEST_DOMAIN,
+    NEXT_PUBLIC_TEST_DOMAIN: process.env.NEXT_PUBLIC_TEST_DOMAIN,
   },
 })

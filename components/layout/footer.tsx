@@ -2,16 +2,16 @@ import { Key } from "react"
 import Link from "next/link"
 import { NavItem } from "@/types"
 
-import { generalFooterNav } from "@/config/links"
-import { Icons } from "@/components/icons"
+import { generalFooterNav } from "@/config/navigation/general"
 import { siteConfig } from "@/config/site"
+import { Icons } from "@/components/icons"
 
 interface FooterProps {
   footerNavItems?: NavItem[]
 }
 
 export default function Footer({ footerNavItems }: FooterProps) {
-  const footerLinks = footerNavItems || generalFooterNav.data
+  const footerLinks = footerNavItems || generalFooterNav
 
   return (
     <footer className="mx-auto  mt-auto">

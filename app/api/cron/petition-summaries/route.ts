@@ -1,22 +1,32 @@
-import { NextResponse } from 'next/server'
-import { sendDailySummaries, sendWeeklySummaries } from '@/lib/notifications/petition-summary'
+import { logger } from "@/lib/logger"
+import {
+  sendDailySummaries,
+  sendWeeklySummaries,
+} from "@/lib/notifications/petition-notifications"
 
-export const runtime = 'edge'
+const log = logger.forService("cron-petition-summaries")
 
-export async function GET(request: Request) {
+export async function GET() {
   try {
-    const { searchParams } = new URL(request.url)
-    const type = searchParams.get('type')
+    log.info("Starting petition summary notifications")
 
-    if (type === 'daily') {
-      await sendDailySummaries()
-    } else if (type === 'weekly') {
-      await sendWeeklySummaries()
-    }
+    await Promise.all([sendDailySummaries(), sendWeeklySummaries()])
 
-    return NextResponse.json({ success: true })
+    log.info("Completed petition summary notifications")
+
+    return new Response("OK", { status: 200 })
   } catch (error) {
-    console.error('Cron job failed:', error)
-    return NextResponse.json({ error: 'Failed to process summaries' }, { status: 500 })
+    log.error("Failed to send petition summaries", {
+      error:
+        error instanceof Error
+          ? {
+              name: error.name,
+              message: error.message,
+              stack: error.stack,
+            }
+          : { message: String(error) },
+    })
+
+    return new Response("Internal Server Error", { status: 500 })
   }
-} 
+}

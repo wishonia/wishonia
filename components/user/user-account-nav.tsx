@@ -6,7 +6,7 @@ import { NavItem } from "@/types"
 import { User } from "next-auth"
 import { signOut } from "next-auth/react"
 
-import { avatarNav } from "@/config/links"
+import { avatarNav } from "@/config/navigation/general"
 import {
   DropdownMenu,
   DropdownMenuContent,
@@ -67,11 +67,11 @@ export function UserAccountNav({ user, avatarNavItems }: UserAccountNavProps) {
           className="cursor-pointer"
           onSelect={(event) => {
             event.preventDefault()
-            let callbackUrl = '/signin'
+            let callbackUrl = "/signin"
             if (typeof window !== "undefined") {
-                callbackUrl = `${window.location.origin}/signin`
+              callbackUrl = `${window.location.origin}/signin`
             } else {
-                console.error("window is not defined in UserAccountNav");
+              console.error("window is not defined in UserAccountNav")
             }
             signOut({
               callbackUrl: callbackUrl,

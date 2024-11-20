@@ -2,14 +2,8 @@
 
 import { SearchParams } from "@/types"
 
-import {
-  globalProblemsResultsLink,
-  globalProblemsVoteLink,
-  globalSolutionsResultsLink,
-  globalSolutionsVoteLink,
-  wishingWellsLink,
-  wishingWellsResultsLink,
-} from "@/config/links"
+import { globalProblemsResultsLink } from "@/config/navigation/domains/wishonia"
+import { globalProblemsVoteLink } from "@/config/navigation/general"
 import { LinkCard } from "@/components/link-card"
 
 interface DashboardCardsProps {

@@ -163,6 +163,9 @@ model User {
   petitionComments                      PetitionComment[]
   petitionFollows                       PetitionFollow[]
   repMessages                           PetitionRepMessage[]
+  marketingEmails                       Boolean                               @default(false)
+  newsletterEmails                      Boolean                               @default(false)
+  unsubscribeFromAll                    Boolean                               @default(false)
 }
 
 // Need this to create digital twins for people that are not users
