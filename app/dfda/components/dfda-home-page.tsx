@@ -2,12 +2,10 @@
 
 import React from 'react'
 import Link from 'next/link'
-import { ArrowRight, Dna, Pill, Users, Activity, Info, Scroll } from 'lucide-react'
+import { ArrowRight, Pill, Users, Activity, Info, Scroll } from 'lucide-react'
 import { motion } from 'framer-motion'
 import CostSavingsTable from './CostSavingsTable'
-import PredictorSearchAutocomplete from './PredictorSearchAutocomplete'
 import { GlobalVariable } from '@/types/models/all'
-import OutcomeSearchAutocomplete from './OutcomeSearchAutocomplete'
 import AdvancedTrialSearch from './AdvancedTrialSearch'
 import { Robot } from '@phosphor-icons/react'
 import { FeatureBox } from './FeatureBox'
@@ -26,7 +24,7 @@ const SquigglyPattern = () => (
   </svg>
 )
 
-export default function HomePage() {
+export default function DFDAHomePage() {
   const router = useRouter()
   const [isLoading, setIsLoading] = useState(false)
 
@@ -168,16 +166,52 @@ export default function HomePage() {
 
       <main className="space-y-12">
         <section className="relative overflow-visible rounded-xl border-4 border-black bg-gradient-to-r from-pink-400 to-purple-400 p-6 shadow-[8px_8px_0px_0px_rgba(0,0,0,1)]">
-          <h2 className="mb-6 text-4xl font-black uppercase">See Effects of Foods🍟 or Drugs💊</h2>
+          <h2 className="mb-6 text-4xl font-black uppercase">See Effects of Foods🍟</h2>
           <div className="flex flex-col gap-4 md:flex-row">
-            <PredictorSearchAutocomplete onVariableSelect={onVariableSelect} />
+          <VariableSearchAutocomplete
+            onVariableSelect={onVariableSelect}
+            searchParams={{ 
+              sort: '-numberOfCorrelationsAsCause',
+              isPublic: '1',
+              variableCategoryName: 'Foods',
+              limit: '50'
+            }}
+            placeholder="Enter Foods🍟"
+          />
+            
+          </div>
+        </section>
+
+        <section className="relative overflow-visible rounded-xl border-4 border-black bg-gradient-to-r from-pink-400 to-purple-400 p-6 shadow-[8px_8px_0px_0px_rgba(0,0,0,1)]">
+          <h2 className="mb-6 text-4xl font-black uppercase">See Effects of Treatments💊</h2>
+          <div className="flex flex-col gap-4 md:flex-row">
+          <VariableSearchAutocomplete
+            onVariableSelect={onVariableSelect}
+            searchParams={{ 
+              sort: '-numberOfCorrelationsAsCause',
+              isPublic: '1',
+              variableCategoryName: 'Treatments',
+              limit: '50'
+            }}
+            placeholder="Enter treatment 💊"
+          />
+            
           </div>
         </section>
 
         <section className="relative overflow-visible rounded-xl border-4 border-black bg-gradient-to-r from-pink-400 to-purple-400 p-6 shadow-[8px_8px_0px_0px_rgba(0,0,0,1)]">
           <h2 className="mb-6 text-4xl font-black uppercase">See Most Effective Treatments for your Condition</h2>
           <div className="flex flex-col gap-4 md:flex-row">
-            <OutcomeSearchAutocomplete onVariableSelect={onVariableSelect} />
+          <VariableSearchAutocomplete
+            onVariableSelect={onVariableSelect}
+            searchParams={{ 
+              sort: '-numberOfCorrelationsAsCause',
+              isPublic: '1',
+              variableCategoryName: 'Symptoms',
+              limit: '50'
+            }}
+            placeholder="Enter treatment 💊"
+          />
           </div>
         </section>
 
