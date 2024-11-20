@@ -1,3 +1,5 @@
+import { NextRequest } from "next/server"
+
 import { logger } from "@/lib/logger"
 import {
   sendDailySummaries,
@@ -6,13 +8,27 @@ import {
 
 const log = logger.forService("cron-petition-summaries")
 
-export async function GET() {
+export async function GET(request: NextRequest) {
+  const cronSecret = request.headers.get("x-cron-secret")
+  if (process.env.CRON_SECRET && cronSecret !== process.env.CRON_SECRET) {
+    return new Response("Unauthorized", { status: 401 })
+  }
+
+  const type = request.nextUrl.searchParams.get("type")
+  if (!type || !["daily", "weekly"].includes(type)) {
+    return new Response("Invalid type parameter", { status: 400 })
+  }
+
   try {
-    log.info("Starting petition summary notifications")
+    log.info(`Starting ${type} petition summary notifications`)
 
-    await Promise.all([sendDailySummaries(), sendWeeklySummaries()])
+    if (type === "daily") {
+      await sendDailySummaries()
+    } else {
+      await sendWeeklySummaries()
+    }
 
-    log.info("Completed petition summary notifications")
+    log.info(`Completed ${type} petition summary notifications`)
 
     return new Response("OK", { status: 200 })
   } catch (error) {
@@ -27,6 +43,13 @@ export async function GET() {
           : { message: String(error) },
     })
 
-    return new Response("Internal Server Error", { status: 500 })
+    // Return a more specific error response
+    return new Response(
+      JSON.stringify({ error: "Failed to process petition summaries" }),
+      {
+        status: 500,
+        headers: { "Content-Type": "application/json" },
+      }
+    )
   }
 }
