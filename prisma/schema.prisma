@@ -163,9 +163,6 @@ model User {
   petitionComments                      PetitionComment[]
   petitionFollows                       PetitionFollow[]
   repMessages                           PetitionRepMessage[]
-  targetLocation                        String? // e.g., "state", "federal"
-  messageTemplate                       String?                               @db.Text // Default message template
-  callScript                            String?                               @db.Text // Default call script
 }
 
 // Need this to create digital twins for people that are not users
