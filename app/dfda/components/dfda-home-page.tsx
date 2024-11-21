@@ -14,6 +14,7 @@ import { getSafeUrlWithToken } from "../dfdaActions"
 import AdvancedTrialSearch from "../trials/components/AdvancedTrialSearch"
 import CitizenScienceSection from "./CitizenScienceSection"
 import CostSavingsTable from "./CostSavingsTable"
+import DFDAComparisonTable from "./DFDAComparisonTable"
 import { FeatureBox } from "./FeatureBox"
 import SolutionSection from "./SolutionSection"
 
@@ -148,7 +149,7 @@ export default function DFDAHomePage() {
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.5 }}
         >
-          fda.gov v2
+          Let's Upgrade FDA.gov!
         </motion.h1>
         <motion.p
           className="text-xl font-bold"
@@ -156,7 +157,8 @@ export default function DFDAHomePage() {
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.5, delay: 0.2 }}
         >
-          🚀Accelerating Discovery Through the Precision Health of the Future 💊
+          🚀 Decentralizing and automating clinical research to determine the
+          positive and negative effects of every food and drug in the world! 💊
         </motion.p>
       </header>
 
@@ -172,7 +174,7 @@ export default function DFDAHomePage() {
                 sort: "-numberOfCorrelationsAsCause",
                 isPublic: "1",
                 variableCategoryName: "Foods",
-                limit: "25",
+                limit: "10",
               }}
               placeholder="Enter Foods🍟"
             />
@@ -190,7 +192,7 @@ export default function DFDAHomePage() {
                 sort: "-numberOfCorrelationsAsCause",
                 isPublic: "1",
                 variableCategoryName: "Treatments",
-                limit: "25",
+                limit: "10",
               }}
               placeholder="Enter treatment 💊"
             />
@@ -208,7 +210,7 @@ export default function DFDAHomePage() {
                 sort: "-numberOfCorrelationsAsCause",
                 isPublic: "1",
                 variableCategoryName: "Symptoms",
-                limit: "25",
+                limit: "10",
               }}
               placeholder="Enter symptom 🤒"
             />
@@ -227,11 +229,13 @@ export default function DFDAHomePage() {
 
         <section className="relative overflow-visible rounded-xl border-4 border-black bg-gradient-to-r from-pink-400 to-purple-400 p-6 shadow-[8px_8px_0px_0px_rgba(0,0,0,1)]">
           <h2 className="mb-6 text-4xl font-black uppercase">
-            Drug Companies: Register Your Treatment 🏢
+            🏢 Drug Companies: Create Your Trial 📝
           </h2>
           <div className="flex flex-col gap-4">
             <p className="text-xl font-bold">
-              Instantly register your treatment and create a study
+              See how easy it could be to instantly register your treatment and
+              create a study 📝, automate recruitment 🤖, data collection 📊,
+              analysis 🔬, and get your drug to patients ASAP!
             </p>
             <Link
               href="/dfda/drug-companies/register-drug"
@@ -243,16 +247,18 @@ export default function DFDAHomePage() {
           </div>
         </section>
 
-        {/* <ProblemSection />
-        <GoodNewsSection /> */}
-        <SolutionSection />
-        <CitizenScienceSection />
+        <DFDAComparisonTable />
 
         <section className="grid gap-6 md:grid-cols-2 lg:grid-cols-3">
           {features.map((feature, index) => (
             <FeatureBox key={feature.title} {...feature} index={index} />
           ))}
         </section>
+
+        {/* <ProblemSection />
+        <GoodNewsSection /> */}
+        <SolutionSection />
+        <CitizenScienceSection />
 
         <section className="mt-12">
           <CostSavingsTable />
