@@ -1,35 +1,54 @@
-'use client'
+"use client"
 
-import React, { useState } from 'react'
-import { Search, ArrowRight } from 'lucide-react'
-import { useRouter } from 'next/navigation'
-import { searchConditions } from '@/lib/clinicaltables'
-import { motion, AnimatePresence } from 'framer-motion'
+import React, { useState } from "react"
+import { useRouter } from "next/navigation"
+import { ArrowRight, Search } from "lucide-react"
+
+import { searchConditions } from "@/lib/clinicaltables"
 
 export default function ClinicalTrialSearch() {
   const router = useRouter()
-  const [condition, setCondition] = useState('')
+  const [condition, setCondition] = useState("")
   const [suggestions, setSuggestions] = useState<string[]>([])
   const [loading, setLoading] = useState(false)
+  const [isSearching, setIsSearching] = useState(false)
+  const [searchError, setSearchError] = useState<string | null>(null)
 
   const handleSearch = async (e: React.FormEvent) => {
     e.preventDefault()
     if (condition.trim()) {
-      router.push(`/trials/${encodeURIComponent(condition.trim())}`)
+      setIsSearching(true)
+      setSearchError(null)
+
+      try {
+        console.log("Starting search with condition:", condition.trim())
+        const params = new URLSearchParams()
+        params.set("queryCond", condition.trim())
+
+        const searchUrl = `/dfda/trials/search?${params.toString()}`
+        console.log("Navigating to:", searchUrl)
+
+        router.push(searchUrl)
+      } catch (error) {
+        console.error("Search error:", error)
+        setSearchError("Failed to perform search. Please try again.")
+      } finally {
+        setIsSearching(false)
+      }
     }
   }
 
   const handleInputChange = async (e: React.ChangeEvent<HTMLInputElement>) => {
     const value = e.target.value
     setCondition(value)
-    
+
     if (value.trim().length > 2) {
       setLoading(true)
       try {
         const results = await searchConditions(value)
         setSuggestions(results.slice(0, 5))
       } catch (error) {
-        console.error('Error fetching suggestions:', error)
+        console.error("Error fetching suggestions:", error)
       }
       setLoading(false)
     } else {
@@ -59,9 +78,14 @@ export default function ClinicalTrialSearch() {
           </div>
           <button
             type="submit"
-            className="group flex items-center gap-2 rounded-xl border-4 border-black bg-white px-6 py-4 font-bold shadow-[4px_4px_0px_0px_rgba(0,0,0,1)] transition-all hover:translate-x-1 hover:translate-y-1 hover:shadow-none"
+            disabled={isSearching}
+            className={`group flex items-center gap-2 rounded-xl border-4 border-black ${
+              isSearching
+                ? "cursor-not-allowed bg-gray-200"
+                : "bg-white hover:translate-x-1 hover:translate-y-1 hover:shadow-none"
+            } px-6 py-4 font-bold shadow-[4px_4px_0px_0px_rgba(0,0,0,1)] transition-all`}
           >
-            Find Trials
+            {isSearching ? "Searching..." : "Find Trials"}
             <ArrowRight className="transition-transform group-hover:translate-x-1" />
           </button>
         </div>
@@ -73,7 +97,7 @@ export default function ClinicalTrialSearch() {
               <button
                 key={index}
                 onClick={() => handleSuggestionClick(suggestion)}
-                className="w-full border-b border-gray-200 px-4 py-3 text-left font-bold hover:bg-gray-100 last:border-none"
+                className="w-full border-b border-gray-200 px-4 py-3 text-left font-bold last:border-none hover:bg-gray-100"
                 type="button"
               >
                 {suggestion}
@@ -81,7 +105,14 @@ export default function ClinicalTrialSearch() {
             ))}
           </div>
         )}
+
+        {/* Add error message */}
+        {searchError && (
+          <div className="mt-2 rounded-lg border-2 border-red-500 bg-red-100 p-2 text-red-700">
+            {searchError}
+          </div>
+        )}
       </form>
     </div>
   )
-} 
+}
