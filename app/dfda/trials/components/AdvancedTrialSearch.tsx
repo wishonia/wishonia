@@ -114,8 +114,9 @@ export default function AdvancedTrialSearch({
     { key: "studyCompletion", label: "Study Completion" },
   ]
 
-  const handleSearch = async (e: React.FormEvent) => {
-    e.preventDefault()
+  const handleSearch = async (e?: React.FormEvent) => {
+    e?.preventDefault()
+
     setIsSearching(true)
     setSearchError(null)
 
@@ -262,8 +263,27 @@ export default function AdvancedTrialSearch({
     setLoading(false)
   }
 
-  const handleFilterChange = (key: keyof SearchFilters, value: any) => {
+  const handleFilterChange = async (key: keyof SearchFilters, value: any) => {
+    // First update the filters
     setFilters((prev) => ({ ...prev, [key]: value }))
+
+    // Add a small delay to ensure state is updated before searching
+    setTimeout(() => {
+      handleSearch()
+    }, 0)
+  }
+
+  const handleSuggestionClick = async (suggestion: string) => {
+    // First update both condition and filters
+    setCondition(suggestion)
+    setFilters((prev) => ({
+      ...prev,
+      queryCond: suggestion,
+    }))
+    setSuggestions([])
+
+    // Then trigger the search
+    handleSearch()
   }
 
   return (
@@ -286,10 +306,7 @@ export default function AdvancedTrialSearch({
                 {suggestions.map((suggestion, index) => (
                   <button
                     key={index}
-                    onClick={() => {
-                      setCondition(suggestion)
-                      setSuggestions([])
-                    }}
+                    onClick={() => handleSuggestionClick(suggestion)}
                     className={suggestionButtonStyles}
                     type="button"
                   >

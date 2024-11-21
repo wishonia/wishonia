@@ -1,30 +1,35 @@
-'use client'
+"use client"
 
-import React, { useState } from 'react'
-import { motion, AnimatePresence } from 'framer-motion'
-import { clinicalTrialCostData, TOTAL_CURRENT_COST, TOTAL_NEW_COST } from '@/app/dfda/components/cost-savings-data'
-import type { CostItem } from '@/app/dfda/cost-savings'
-import { ChevronDown, ChevronUp } from 'lucide-react'
+import React, { useState } from "react"
+import { AnimatePresence, motion } from "framer-motion"
+import { ChevronDown, ChevronUp } from "lucide-react"
+
+import {
+  clinicalTrialCostData,
+  TOTAL_CURRENT_COST,
+  TOTAL_NEW_COST,
+} from "@/app/dfda/components/cost-savings-data"
+import type { CostItem } from "@/app/dfda/cost-savings"
 
 export default function CostSavingsTable() {
   const [expandedItem, setExpandedItem] = useState<string | null>(null)
 
   const formatCurrency = (amount: number) => {
-    return new Intl.NumberFormat('en-US', {
-      style: 'currency',
-      currency: 'USD',
-      maximumFractionDigits: 0
+    return new Intl.NumberFormat("en-US", {
+      style: "currency",
+      currency: "USD",
+      maximumFractionDigits: 0,
     }).format(amount)
   }
 
   const calculateSavings = (current: number, new_: number) => {
-    return ((current - new_) / current * 100).toFixed(1)
+    return (((current - new_) / current) * 100).toFixed(1)
   }
 
   const DetailPanel = ({ item }: { item: CostItem }) => (
     <motion.div
       initial={{ height: 0, opacity: 0 }}
-      animate={{ height: 'auto', opacity: 1 }}
+      animate={{ height: "auto", opacity: 1 }}
       exit={{ height: 0, opacity: 0 }}
       transition={{ duration: 0.3 }}
       className="overflow-hidden bg-gray-50 px-4 py-6"
@@ -37,7 +42,7 @@ export default function CostSavingsTable() {
             Cost: {formatCurrency(item.currentCost)}
           </p>
         </div>
-        
+
         <div className="rounded-xl border-2 border-black bg-green-100 p-4">
           <h4 className="mb-2 font-black">Cost Reduction Strategy 📉</h4>
           <p>{item.reductionExplanation}</p>
@@ -45,7 +50,7 @@ export default function CostSavingsTable() {
             New Cost: {formatCurrency(item.newCost)}
           </p>
         </div>
-        
+
         <div className="rounded-xl border-2 border-black bg-blue-100 p-4">
           <h4 className="mb-2 font-black">Remaining Expenses 💡</h4>
           <p>{item.remainingExplanation}</p>
@@ -59,46 +64,55 @@ export default function CostSavingsTable() {
 
   return (
     <div className="relative overflow-hidden rounded-xl border-4 border-black bg-white p-6 shadow-[8px_8px_0px_0px_rgba(0,0,0,1)]">
-            <motion.h1 
-        className="mb-6 text-4xl md:text-4xl font-black uppercase"
+      <motion.h1
+        className="mb-6 text-4xl font-black uppercase md:text-4xl"
         initial={{ opacity: 0, y: -20 }}
         animate={{ opacity: 1, y: 0 }}
       >
         👀Look at those savings! 🤑
       </motion.h1>
-      <motion.h2 
-        className="mb-6 md:text-2xl font-black uppercase"
+      <motion.h2
+        className="mb-6 font-black uppercase md:text-2xl"
         initial={{ opacity: 0, y: -20 }}
         animate={{ opacity: 1, y: 0 }}
       >
-        Savings from a Decentralized Autonomous FDA 
+        By decentralizing and automating clinical research, we could reduce the
+        cost of new treatments by 95%!
       </motion.h2>
-      
+
       <div className="-mx-6 sm:mx-0">
-        <div className="min-w-full inline-block align-middle">
+        <div className="inline-block min-w-full align-middle">
           <div className="overflow-x-auto">
             <table className="min-w-full border-collapse">
               <thead>
                 <tr className="border-b-4 border-black bg-yellow-300">
-                  <th className="p-2 sm:p-4 text-left font-black">Cost Item</th>
-                  <th className="p-2 sm:p-4 text-right font-black hidden sm:table-cell">Current Cost</th>
-                  <th className="p-2 sm:p-4 text-right font-black hidden sm:table-cell">New Cost</th>
-                  <th className="p-2 sm:p-4 text-right font-black">Savings</th>
+                  <th className="p-2 text-left font-black sm:p-4">Cost Item</th>
+                  <th className="hidden p-2 text-right font-black sm:table-cell sm:p-4">
+                    Current Cost
+                  </th>
+                  <th className="hidden p-2 text-right font-black sm:table-cell sm:p-4">
+                    New Cost
+                  </th>
+                  <th className="p-2 text-right font-black sm:p-4">Savings</th>
                 </tr>
               </thead>
               <tbody>
                 {clinicalTrialCostData.map((item, index) => (
                   <React.Fragment key={item.name}>
-                    <motion.tr 
+                    <motion.tr
                       className={`cursor-pointer border-b-2 border-black hover:bg-gray-50 ${
-                        expandedItem === item.name ? 'bg-gray-50' : ''
+                        expandedItem === item.name ? "bg-gray-50" : ""
                       }`}
                       initial={{ opacity: 0, x: -20 }}
                       animate={{ opacity: 1, x: 0 }}
                       transition={{ delay: index * 0.1 }}
-                      onClick={() => setExpandedItem(expandedItem === item.name ? null : item.name)}
+                      onClick={() =>
+                        setExpandedItem(
+                          expandedItem === item.name ? null : item.name
+                        )
+                      }
                     >
-                      <td className="p-2 sm:p-4 font-bold">
+                      <td className="p-2 font-bold sm:p-4">
                         <div className="flex items-center gap-2">
                           {item.emoji} {item.name}
                           {expandedItem === item.name ? (
@@ -108,13 +122,18 @@ export default function CostSavingsTable() {
                           )}
                         </div>
                         <div className="mt-1 text-sm text-gray-600 sm:hidden">
-                          {formatCurrency(item.currentCost)} → {formatCurrency(item.newCost)}
+                          {formatCurrency(item.currentCost)} →{" "}
+                          {formatCurrency(item.newCost)}
                         </div>
                       </td>
-                      <td className="p-2 sm:p-4 text-right font-mono hidden sm:table-cell">{formatCurrency(item.currentCost)}</td>
-                      <td className="p-2 sm:p-4 text-right font-mono hidden sm:table-cell">{formatCurrency(item.newCost)}</td>
-                      <td className="p-2 sm:p-4 text-right">
-                        <span className="rounded-full bg-green-400 px-2 sm:px-3 py-1 font-bold text-sm sm:text-base">
+                      <td className="hidden p-2 text-right font-mono sm:table-cell sm:p-4">
+                        {formatCurrency(item.currentCost)}
+                      </td>
+                      <td className="hidden p-2 text-right font-mono sm:table-cell sm:p-4">
+                        {formatCurrency(item.newCost)}
+                      </td>
+                      <td className="p-2 text-right sm:p-4">
+                        <span className="rounded-full bg-green-400 px-2 py-1 text-sm font-bold sm:px-3 sm:text-base">
                           {calculateSavings(item.currentCost, item.newCost)}%
                         </span>
                       </td>
@@ -122,13 +141,15 @@ export default function CostSavingsTable() {
                     <tr>
                       <td colSpan={4} className="p-0">
                         <AnimatePresence>
-                          {expandedItem === item.name && <DetailPanel item={item} />}
+                          {expandedItem === item.name && (
+                            <DetailPanel item={item} />
+                          )}
                         </AnimatePresence>
                       </td>
                     </tr>
                   </React.Fragment>
                 ))}
-                <motion.tr 
+                <motion.tr
                   className="border-t-4 border-black bg-green-300 font-black"
                   initial={{ opacity: 0, y: 20 }}
                   animate={{ opacity: 1, y: 0 }}
@@ -136,14 +157,19 @@ export default function CostSavingsTable() {
                 >
                   <td className="p-2 sm:p-4">
                     TOTAL SAVINGS 🎉
-                    <div className="text-sm mt-1 sm:hidden">
-                      {formatCurrency(TOTAL_CURRENT_COST)} → {formatCurrency(TOTAL_NEW_COST)}
+                    <div className="mt-1 text-sm sm:hidden">
+                      {formatCurrency(TOTAL_CURRENT_COST)} →{" "}
+                      {formatCurrency(TOTAL_NEW_COST)}
                     </div>
                   </td>
-                  <td className="p-2 sm:p-4 text-right hidden sm:table-cell">{formatCurrency(TOTAL_CURRENT_COST)}</td>
-                  <td className="p-2 sm:p-4 text-right hidden sm:table-cell">{formatCurrency(TOTAL_NEW_COST)}</td>
-                  <td className="p-2 sm:p-4 text-right">
-                    <span className="rounded-full bg-black px-2 sm:px-3 py-1 text-white text-sm sm:text-base">
+                  <td className="hidden p-2 text-right sm:table-cell sm:p-4">
+                    {formatCurrency(TOTAL_CURRENT_COST)}
+                  </td>
+                  <td className="hidden p-2 text-right sm:table-cell sm:p-4">
+                    {formatCurrency(TOTAL_NEW_COST)}
+                  </td>
+                  <td className="p-2 text-right sm:p-4">
+                    <span className="rounded-full bg-black px-2 py-1 text-sm text-white sm:px-3 sm:text-base">
                       95.7%
                     </span>
                   </td>
@@ -165,4 +191,4 @@ export default function CostSavingsTable() {
       </div>
     </div>
   )
-} 
+}
