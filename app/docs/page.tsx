@@ -1,10 +1,5 @@
-import { Shell } from "@/components/layout/shell"
-import MarkdownPagesList from "@/components/markdown-list"
+import DocsPage from "./[org]/[repo]/page"
 
 export default function MarkdownPageListPage() {
-  return (
-    <Shell>
-      <MarkdownPagesList></MarkdownPagesList>
-    </Shell>
-  )
+  return <DocsPage params={{ org: "wishonia", repo: "wishonia" }} />
 }
