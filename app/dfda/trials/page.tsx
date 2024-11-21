@@ -2,34 +2,9 @@ import { Clock, MapPin, Microscope, Search } from "lucide-react"
 
 import AdvancedTrialSearch from "./components/AdvancedTrialSearch"
 
-const SquigglyPattern = () => (
-  <svg
-    className="absolute inset-0 h-full w-full"
-    xmlns="http://www.w3.org/2000/svg"
-  >
-    <pattern
-      id="squiggly"
-      x="0"
-      y="0"
-      width="20"
-      height="20"
-      patternUnits="userSpaceOnUse"
-    >
-      <path
-        d="M0 10C5 10 5 0 10 0S15 10 20 10 25 0 30 0 35 10 40 10"
-        stroke="rgba(0,0,0,0.1)"
-        fill="none"
-      />
-    </pattern>
-    <rect width="100%" height="100%" fill="url(#squiggly)" />
-  </svg>
-)
-
 export default function TrialsSearchPage() {
   return (
     <div className="">
-      <SquigglyPattern />
-
       <header className="relative mb-12 overflow-hidden rounded-xl border-4 border-black bg-white p-6 text-center shadow-[8px_8px_0px_0px_rgba(0,0,0,1)]">
         <h1 className="mb-4 text-6xl font-black uppercase tracking-tight">
           Clinical Trials Search 🔬
