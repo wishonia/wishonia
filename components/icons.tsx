@@ -2,6 +2,7 @@ import { ChevronLeft as LucideChevronLeft } from "lucide-react"
 import {
   AiFillGithub,
   AiFillGoogleCircle,
+  AiOutlineBug,
   AiOutlineClose,
   AiOutlineCopy,
   AiOutlineEllipsis,
@@ -71,6 +72,7 @@ const icons = {
   // Providers
   google: AiFillGoogleCircle,
   github: AiFillGithub,
+  bug: AiOutlineBug,
 
   // Dashboard Icons
   dashboard: RxDashboard,

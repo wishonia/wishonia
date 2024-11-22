@@ -2,7 +2,7 @@ import { Key } from "react"
 import Link from "next/link"
 import { NavItem } from "@/types"
 
-import { generalFooterNav } from "@/config/navigation/general"
+import { generalFooterNav } from "@/config/navigation/general-nav"
 import { siteConfig } from "@/config/site"
 import { Icons } from "@/components/icons"
 

@@ -7,7 +7,7 @@ import { Gear, SignOut } from "@phosphor-icons/react"
 import { DropdownMenuItem } from "@radix-ui/react-dropdown-menu"
 import { signIn, signOut, useSession } from "next-auth/react"
 
-import { avatarNav } from "@/config/navigation/general"
+import { avatarNav } from "@/config/navigation/general-nav"
 import {
   DropdownMenu,
   DropdownMenuContent,

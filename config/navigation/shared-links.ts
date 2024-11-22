@@ -38,4 +38,25 @@ export const commonLinks = {
     href: "/dashboard",
     icon: "dashboard",
   },
+  reportBug: {
+    title: "Report Bug",
+    href: `${siteConfig.links.github}/issues/new?template=bug_report.yaml`,
+    icon: "bug",
+    tooltip: "Report a bug or issue",
+    external: true,
+  },
+  requestFeature: {
+    title: "Request Feature",
+    href: `${siteConfig.links.github}/issues/new?template=feature_request.yaml`,
+    icon: "lightbulb",
+    tooltip: "Suggest a new feature",
+    external: true,
+  },
+  github: {
+    title: "Contribute",
+    href: siteConfig.links.github,
+    icon: "github",
+    tooltip: "Help improve the project on GitHub",
+    external: true,
+  },
 } as const

@@ -6,7 +6,7 @@ import { NavItem } from "@/types"
 import { User } from "next-auth"
 import { signOut } from "next-auth/react"
 
-import { avatarNav } from "@/config/navigation/general"
+import { avatarNav } from "@/config/navigation/general-nav"
 import {
   DropdownMenu,
   DropdownMenuContent,
