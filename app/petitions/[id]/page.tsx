@@ -1,16 +1,18 @@
+import { Suspense } from "react"
+import { Metadata } from "next"
+import { notFound } from "next/navigation"
 import { getServerSession } from "next-auth/next"
+import { MDXRemote } from "next-mdx-remote/rsc"
+
 import { authOptions } from "@/lib/auth"
 import { prisma } from "@/lib/prisma"
-import { SignPetitionButton } from "../components/SignPetitionButton"
-import { ShareButtons } from "../components/ShareButtons"
+import { LoadingSpinner } from "@/components/ui/loading-spinner"
+
 import { Comments } from "../components/Comments"
 import { FollowButton } from "../components/FollowButton"
-import { notFound } from "next/navigation"
+import { PetitionShareButtons } from "../components/PetitionShareButtons"
 import { RepresentativeMessaging } from "../components/RepresentativeMessaging"
-import { Suspense } from 'react'
-import { LoadingSpinner } from '@/components/ui/loading-spinner'
-import { Metadata } from 'next'
-import { MDXRemote } from 'next-mdx-remote/rsc'
+import { SignPetitionButton } from "../components/SignPetitionButton"
 
 const defaultMessageTemplate = `Dear [REP_NAME],
 
@@ -29,7 +31,11 @@ This matters to me because it affects our community directly.
 
 Thank you for your time and for passing along my message.`
 
-export default async function PetitionPage({ params }: { params: { id: string } }) {
+export default async function PetitionPage({
+  params,
+}: {
+  params: { id: string }
+}) {
   const session = await getServerSession(authOptions)
   const petition = await prisma.petition.findUnique({
     where: { id: params.id },
@@ -37,14 +43,14 @@ export default async function PetitionPage({ params }: { params: { id: string } 
       _count: { select: { signatures: true } },
       creator: { select: { name: true } },
       comments: {
-        orderBy: { createdAt: 'desc' },
+        orderBy: { createdAt: "desc" },
         include: {
           user: {
-            select: { name: true, image: true }
-          }
-        }
-      }
-    }
+            select: { name: true, image: true },
+          },
+        },
+      },
+    },
   })
 
   if (!petition) {
@@ -52,47 +58,51 @@ export default async function PetitionPage({ params }: { params: { id: string } 
   }
 
   const [hasUserSigned, isFollowing] = await Promise.all([
-    session?.user?.id ? prisma.petitionSignature.findUnique({
-      where: {
-        petitionId_userId: {
-          petitionId: petition.id,
-          userId: session.user.id,
-        }
-      }
-    }) : null,
-    session?.user?.id ? prisma.petitionFollow.findUnique({
-      where: {
-        petitionId_userId: {
-          petitionId: petition.id,
-          userId: session.user.id,
-        }
-      }
-    }) : null
+    session?.user?.id
+      ? prisma.petitionSignature.findUnique({
+          where: {
+            petitionId_userId: {
+              petitionId: petition.id,
+              userId: session.user.id,
+            },
+          },
+        })
+      : null,
+    session?.user?.id
+      ? prisma.petitionFollow.findUnique({
+          where: {
+            petitionId_userId: {
+              petitionId: petition.id,
+              userId: session.user.id,
+            },
+          },
+        })
+      : null,
   ])
 
   return (
     <div className="container mx-auto px-4 py-8">
-      <div className="max-w-3xl mx-auto">
+      <div className="mx-auto max-w-3xl">
         {petition.imageUrl && (
-          <img 
-            src={petition.imageUrl} 
+          <img
+            src={petition.imageUrl}
             alt={petition.title}
-            className="w-full h-64 object-cover rounded-lg mb-6"
+            className="mb-6 h-64 w-full rounded-lg object-cover"
           />
         )}
-        
-        <h1 className="text-4xl font-bold mb-4">{petition.title}</h1>
-        <div className="flex items-center gap-4 text-gray-600 mb-8">
+
+        <h1 className="mb-4 text-4xl font-bold">{petition.title}</h1>
+        <div className="mb-8 flex items-center gap-4 text-gray-600">
           <span>Created by {petition.creator.name}</span>
           <span>{petition._count.signatures} signatures</span>
         </div>
 
-        <div className="prose max-w-none dark:prose-invert mb-8">
+        <div className="prose mb-8 max-w-none dark:prose-invert">
           <MDXRemote source={petition.content} />
         </div>
 
-        <div className="flex items-center gap-4 mb-8">
-          <SignPetitionButton 
+        <div className="mb-8 flex items-center gap-4">
+          <SignPetitionButton
             petitionId={petition.id}
             hasSigned={!!hasUserSigned}
           />
@@ -104,15 +114,17 @@ export default async function PetitionPage({ params }: { params: { id: string } 
 
         {hasUserSigned && (
           <>
-            <ShareButtons 
+            <PetitionShareButtons
               petitionId={petition.id}
               userId={session!.user.id}
             />
-            
+
             <div className="mt-8">
               <RepresentativeMessaging
                 petitionTitle={petition.title}
-                defaultMessageTemplate={petition.messageTemplate || defaultMessageTemplate}
+                defaultMessageTemplate={
+                  petition.messageTemplate || defaultMessageTemplate
+                }
                 defaultCallScript={petition.callScript || defaultCallScript}
               />
             </div>
@@ -128,15 +140,19 @@ export default async function PetitionPage({ params }: { params: { id: string } 
       </div>
     </div>
   )
-} 
+}
 
-export async function generateMetadata({ params }: { params: { id: string } }): Promise<Metadata> {
+export async function generateMetadata({
+  params,
+}: {
+  params: { id: string }
+}): Promise<Metadata> {
   const petition = await prisma.petition.findUnique({
     where: { id: params.id },
-    select: { 
-      title: true, 
-      summary: true 
-    }
+    select: {
+      title: true,
+      summary: true,
+    },
   })
 
   if (!petition) return {}
@@ -147,7 +163,7 @@ export async function generateMetadata({ params }: { params: { id: string } }): 
     openGraph: {
       title: petition.title,
       description: petition.summary,
-      type: 'website'
-    }
+      type: "website",
+    },
   }
-} 
+}
