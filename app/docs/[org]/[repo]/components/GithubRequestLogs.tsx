@@ -1,8 +1,9 @@
 "use client"
 
 import { useEffect, useState } from "react"
-import { Loader2, Trash2 } from "lucide-react"
+import { Loader2, RefreshCw, Trash2 } from "lucide-react"
 
+import { cn } from "@/lib/utils"
 import { Button } from "@/components/ui/button"
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card"
 
@@ -21,10 +22,18 @@ export default function GithubRequestLogs() {
   const [logs, setLogs] = useState<GithubRequestLog[]>([])
   const [isOpen, setIsOpen] = useState(false)
   const [isClearing, setIsClearing] = useState(false)
+  const [isRefreshing, setIsRefreshing] = useState(false)
 
   const fetchLogs = async () => {
-    const newLogs = await getGithubRequestLogs()
-    setLogs(newLogs)
+    try {
+      setIsRefreshing(true)
+      const newLogs = await getGithubRequestLogs()
+      setLogs(newLogs)
+    } catch (error) {
+      console.error("Failed to fetch logs:", error)
+    } finally {
+      setIsRefreshing(false)
+    }
   }
 
   const clearLogs = async () => {
@@ -42,8 +51,6 @@ export default function GithubRequestLogs() {
   useEffect(() => {
     if (isOpen) {
       fetchLogs()
-      const interval = setInterval(fetchLogs, 5000) // Update every 5 seconds
-      return () => clearInterval(interval)
     }
   }, [isOpen])
 
@@ -65,6 +72,17 @@ export default function GithubRequestLogs() {
       <CardHeader className="flex flex-row items-center justify-between space-y-0 pb-2">
         <CardTitle>GitHub API Requests</CardTitle>
         <div className="flex gap-2">
+          <Button
+            variant="ghost"
+            size="sm"
+            onClick={fetchLogs}
+            disabled={isRefreshing}
+            className="h-8 px-2"
+          >
+            <RefreshCw
+              className={cn("h-4 w-4", isRefreshing && "animate-spin")}
+            />
+          </Button>
           <Button
             variant="ghost"
             size="sm"

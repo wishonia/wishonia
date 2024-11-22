@@ -6,6 +6,8 @@ import { getServerSession } from "next-auth/next"
 import { authOptions } from "@/lib/auth"
 import { getGithubAccessToken } from "@/lib/getOauthAccessToken"
 
+import { getCachedData } from "./lib/cache"
+
 export type RepoContent = {
   path: string
   type: "file" | "dir"
@@ -78,42 +80,46 @@ export async function getGithubContent(
       throw new Error("No GitHub token available")
     }
 
-    await checkRateLimitBeforeRequest()
+    const cacheKey = `github:content:${org}:${repo}:${path}`
 
-    console.log(`Fetching content for ${org}/${repo}/${path}...`)
-    const octokit = new Octokit({
-      auth: githubToken,
-      retry: {
-        enabled: true,
-        retries: 3,
-      },
+    return getCachedData(cacheKey, async () => {
+      await checkRateLimitBeforeRequest()
+
+      console.log(`Cache miss - Fetching content for ${org}/${repo}/${path}...`)
+      const octokit = new Octokit({
+        auth: githubToken,
+        retry: {
+          enabled: true,
+          retries: 3,
+        },
+      })
+
+      await logGithubRequest(
+        octokit,
+        `GET /repos/${org}/${repo}/contents/${path}`
+      )
+
+      const response = await octokit.repos
+        .getContent({
+          owner: org,
+          repo,
+          path,
+        })
+        .catch((error) => {
+          console.error(`GitHub API error for ${path}:`, error.message)
+          throw new Error(`Failed to fetch ${path}: ${error.message}`)
+        })
+
+      if (
+        "content" in response.data &&
+        typeof response.data.content === "string"
+      ) {
+        return Buffer.from(response.data.content, "base64").toString()
+      } else {
+        console.error(`Invalid content format for ${path}:`, response.data)
+        throw new Error(`Invalid content format for ${path}`)
+      }
     })
-
-    await logGithubRequest(
-      octokit,
-      `GET /repos/${org}/${repo}/contents/${path}`
-    )
-
-    const response = await octokit.repos
-      .getContent({
-        owner: org,
-        repo,
-        path,
-      })
-      .catch((error) => {
-        console.error(`GitHub API error for ${path}:`, error.message)
-        throw new Error(`Failed to fetch ${path}: ${error.message}`)
-      })
-
-    if (
-      "content" in response.data &&
-      typeof response.data.content === "string"
-    ) {
-      return Buffer.from(response.data.content, "base64").toString()
-    } else {
-      console.error(`Invalid content format for ${path}:`, response.data)
-      throw new Error(`Invalid content format for ${path}`)
-    }
   } catch (error) {
     if (error instanceof Error && error.message.includes("rate limit")) {
       throw new Error("GitHub API rate limit exceeded. Please try again later.")
@@ -151,109 +157,110 @@ export async function getRepoContents(
       throw new Error("No GitHub token available")
     }
 
-    await checkRateLimitBeforeRequest()
+    const cacheKey = `github:tree:${org}:${repo}`
 
-    const octokit = new Octokit({
-      auth: githubToken,
-      retry: {
-        enabled: true,
-        retries: 3,
-      },
-    })
+    return getCachedData(cacheKey, async () => {
+      await checkRateLimitBeforeRequest()
 
-    // First, get the default branch
-    const { data: repoData } = await octokit.repos.get({
-      owner: org,
-      repo,
-    })
-    const defaultBranch = repoData.default_branch
-
-    // Get the tree with recursive flag
-    await logGithubRequest(
-      octokit,
-      `GET /repos/${org}/${repo}/git/trees/${defaultBranch}?recursive=1`
-    )
-
-    const { data: treeData } = await octokit.git.getTree({
-      owner: org,
-      repo,
-      tree_sha: defaultBranch,
-      recursive: "1",
-    })
-
-    // Convert flat tree to hierarchical structure
-    const root: { [key: string]: RepoContent } = {}
-
-    // First pass: create all directories and files
-    treeData.tree
-      .filter((item) => {
-        // Skip items without paths
-        if (!item.path) return false
-
-        if (item.type === "blob") {
-          return isDocFile(item.path)
-        }
-        return item.type === "tree"
+      const octokit = new Octokit({
+        auth: githubToken,
+        retry: {
+          enabled: true,
+          retries: 3,
+        },
       })
-      .forEach((item) => {
-        // We can safely assert path exists because we filtered out undefined paths
-        const itemPath = item.path!
-        const parts = itemPath.split("/")
-        let currentPath = ""
 
-        parts.forEach((part, index) => {
-          const parentPath = currentPath
-          currentPath = currentPath ? `${currentPath}/${part}` : part
+      // First, get the default branch
+      const { data: repoData } = await octokit.repos.get({
+        owner: org,
+        repo,
+      })
+      const defaultBranch = repoData.default_branch
 
-          if (!root[currentPath]) {
-            root[currentPath] = {
-              path: currentPath,
-              name: part,
-              type:
-                item.type === "tree" || index < parts.length - 1
-                  ? "dir"
-                  : "file",
-              children:
-                item.type === "tree" || index < parts.length - 1
-                  ? []
-                  : undefined,
-            }
+      // Get the tree with recursive flag
+      await logGithubRequest(
+        octokit,
+        `GET /repos/${org}/${repo}/git/trees/${defaultBranch}?recursive=1`
+      )
 
-            if (parentPath && root[parentPath]) {
-              root[parentPath].children?.push(root[currentPath])
-            }
+      const { data: treeData } = await octokit.git.getTree({
+        owner: org,
+        repo,
+        tree_sha: defaultBranch,
+        recursive: "1",
+      })
+
+      // Convert flat tree to hierarchical structure
+      const root: { [key: string]: RepoContent } = {}
+
+      // First pass: create all directories and files
+      treeData.tree
+        .filter((item) => {
+          // Skip items without paths
+          if (!item.path) return false
+
+          if (item.type === "blob") {
+            return isDocFile(item.path)
           }
+          return item.type === "tree"
         })
-      })
+        .forEach((item) => {
+          // We can safely assert path exists because we filtered out undefined paths
+          const itemPath = item.path!
+          const parts = itemPath.split("/")
+          let currentPath = ""
 
-    // Convert to array and sort
-    const result = Object.values(root)
-      .filter((item) => !item.path.includes("/")) // Get only root level items
-      .sort((a, b) => {
-        // Sort directories first, then files
-        if (a.type === "dir" && b.type === "file") return -1
-        if (a.type === "file" && b.type === "dir") return 1
-        // Sort alphabetically within same type
-        return a.name.localeCompare(b.name)
-      })
+          parts.forEach((part, index) => {
+            const parentPath = currentPath
+            currentPath = currentPath ? `${currentPath}/${part}` : part
 
-    // Remove empty directories
-    const filterEmptyDirs = (items: RepoContent[]): RepoContent[] => {
-      return items.filter((item) => {
-        if (item.type === "dir" && item.children) {
-          item.children = filterEmptyDirs(item.children)
-          return item.children.length > 0
-        }
-        return true
-      })
-    }
+            if (!root[currentPath]) {
+              root[currentPath] = {
+                path: currentPath,
+                name: part,
+                type:
+                  item.type === "tree" || index < parts.length - 1
+                    ? "dir"
+                    : "file",
+                children:
+                  item.type === "tree" || index < parts.length - 1
+                    ? []
+                    : undefined,
+              }
 
-    return filterEmptyDirs(result)
+              if (parentPath && root[parentPath]) {
+                root[parentPath].children?.push(root[currentPath])
+              }
+            }
+          })
+        })
+
+      // Convert to array and sort
+      const result = Object.values(root)
+        .filter((item) => !item.path.includes("/")) // Get only root level items
+        .sort((a, b) => {
+          // Sort directories first, then files
+          if (a.type === "dir" && b.type === "file") return -1
+          if (a.type === "file" && b.type === "dir") return 1
+          // Sort alphabetically within same type
+          return a.name.localeCompare(b.name)
+        })
+
+      // Remove empty directories
+      const filterEmptyDirs = (items: RepoContent[]): RepoContent[] => {
+        return items.filter((item) => {
+          if (item.type === "dir" && item.children) {
+            item.children = filterEmptyDirs(item.children)
+            return item.children.length > 0
+          }
+          return true
+        })
+      }
+
+      return filterEmptyDirs(result)
+    })
   } catch (error) {
     console.error("Error fetching repo contents:", error)
-    if (error instanceof Error && error.message.includes("rate limit")) {
-      throw new Error("GitHub API rate limit exceeded. Please try again later.")
-    }
     throw error
   }
 }
@@ -488,49 +495,59 @@ export async function searchRepoContent(
       throw new Error("No GitHub token available")
     }
 
-    await checkRateLimitBeforeRequest()
+    const cacheKey = `github:search:${org}:${repo}:${query}`
+    const SEARCH_CACHE_TTL = 60 * 60 // Cache search results for 1 hour
 
-    const octokit = new Octokit({
-      auth: githubToken,
-    })
+    return getCachedData(
+      cacheKey,
+      async () => {
+        await checkRateLimitBeforeRequest()
 
-    await logGithubRequest(
-      octokit,
-      `GET /search/code q=${query}+repo:${org}/${repo}`
+        const octokit = new Octokit({
+          auth: githubToken,
+        })
+
+        await logGithubRequest(
+          octokit,
+          `GET /search/code q=${query}+repo:${org}/${repo}`
+        )
+
+        const { data } = await octokit.rest.search.code({
+          q: `${query} repo:${org}/${repo} extension:md`,
+          per_page: 10,
+        })
+
+        const results: SearchResult[] = await Promise.all(
+          data.items.map(async (item) => {
+            // Get the file content to extract title and excerpt
+            const content = await getGithubContent(org, repo, item.path)
+            const lines = content.split("\n")
+
+            // Try to find the title from frontmatter or first heading
+            const titleMatch =
+              content.match(/^#\s+(.+)$/m) ||
+              content.match(/title:\s*["'](.+)["']/m)
+            const title = titleMatch ? titleMatch[1] : item.path
+
+            // Find the matching context for the excerpt
+            const lowerQuery = query.toLowerCase()
+            const matchingLine =
+              lines.find((line) => line.toLowerCase().includes(lowerQuery)) ||
+              ""
+
+            return {
+              title,
+              path: item.path,
+              excerpt: matchingLine.trim(),
+              score: item.score,
+            }
+          })
+        )
+
+        return results.sort((a, b) => b.score - a.score)
+      },
+      SEARCH_CACHE_TTL
     )
-
-    const { data } = await octokit.rest.search.code({
-      q: `${query} repo:${org}/${repo} extension:md`,
-      per_page: 10,
-    })
-
-    const results: SearchResult[] = await Promise.all(
-      data.items.map(async (item) => {
-        // Get the file content to extract title and excerpt
-        const content = await getGithubContent(org, repo, item.path)
-        const lines = content.split("\n")
-
-        // Try to find the title from frontmatter or first heading
-        const titleMatch =
-          content.match(/^#\s+(.+)$/m) ||
-          content.match(/title:\s*["'](.+)["']/m)
-        const title = titleMatch ? titleMatch[1] : item.path
-
-        // Find the matching context for the excerpt
-        const lowerQuery = query.toLowerCase()
-        const matchingLine =
-          lines.find((line) => line.toLowerCase().includes(lowerQuery)) || ""
-
-        return {
-          title,
-          path: item.path,
-          excerpt: matchingLine.trim(),
-          score: item.score,
-        }
-      })
-    )
-
-    return results.sort((a, b) => b.score - a.score)
   } catch (error) {
     console.error("GitHub search error:", error)
     if (error instanceof Error && error.message.includes("rate limit")) {
