@@ -25,7 +25,7 @@ export const generalNavigation = {
       wishoniaLinks.globalProblemsVote,
       wishoniaLinks.globalSolutionsVote,
       commonLinks.docs,
-      commonLinks.github,
+      commonLinks.contributeOnGithub,
       wishoniaLinks.researcher,
       dfdaLinks.dfda,
     ],

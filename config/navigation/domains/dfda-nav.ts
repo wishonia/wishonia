@@ -42,7 +42,7 @@ export const dfdaNavigation: DomainNavigation = {
     dfdaLinks.digitalTwinSafe,
     dfdaLinks.fdai,
     dfdaLinks.petition,
-    commonLinks.github,
+    commonLinks.contributeOnGithub,
     commonLinks.reportBug,
     commonLinks.requestFeature,
   ],
@@ -54,7 +54,7 @@ export const dfdaNavigation: DomainNavigation = {
     dfdaLinks.petition,
     commonLinks.reportBug,
     commonLinks.requestFeature,
-    commonLinks.github,
+    commonLinks.contributeOnGithub,
   ],
   footerNav: [
     dfdaLinks.dfda,
@@ -64,6 +64,6 @@ export const dfdaNavigation: DomainNavigation = {
     dfdaLinks.petition,
     commonLinks.reportBug,
     commonLinks.requestFeature,
-    commonLinks.github,
+    commonLinks.contributeOnGithub,
   ],
 }
