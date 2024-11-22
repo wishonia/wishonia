@@ -46,7 +46,7 @@ export function LoginPromptButton({
           {buttonText}
         </button>
       </DialogTrigger>
-      <DialogContent>
+      <DialogContent className="mx-auto w-[95%] rounded-lg sm:max-w-[425px]">
         <VisuallyHidden>
           <DialogTitle>Sign In</DialogTitle>
         </VisuallyHidden>
