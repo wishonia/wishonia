@@ -1,19 +1,16 @@
 "use client"
 
-import React, { useState } from "react"
+import React from "react"
 import { motion } from "framer-motion"
 
 import CostSavingsTable from "../../components/CostSavingsTable"
+import ProblemsWithCurrentSystem from "./problems-with-the-current-system"
+import Solutions from "./right-to-trial-act-solutions"
 
 // First, let's define the interfaces
 interface Section {
   id: string
   title: string
-  emoji: string
-}
-
-interface CardItem {
-  text: string
   emoji: string
 }
 
@@ -23,21 +20,10 @@ interface NavigationProps {
   setActiveSection: (id: string) => void
 }
 
-interface CardProps {
-  title: string
-  items: CardItem[]
-  bgColor: string
-}
-
 interface ListCardProps {
   title: string
   items: string[]
   bgColor: string
-}
-
-interface OverviewProps {
-  problems: CardItem[]
-  solutions: CardItem[]
 }
 
 const Header = () => (
@@ -73,33 +59,26 @@ const Navigation = ({
   </nav>
 )
 
-const Card = ({ title, items, bgColor }: CardProps) => (
-  <div
-    className={`rounded-lg border-2 border-black ${bgColor} p-4 shadow-[4px_4px_0px_0px_rgba(0,0,0,1)]`}
-  >
-    <h3 className="mb-4 text-xl font-bold">{title}</h3>
-    <div className="grid gap-4 sm:grid-cols-2 lg:grid-cols-4">
-      {items.map((item, index) => (
-        <div
-          key={index}
-          className="rounded-lg border-2 border-black bg-white p-4 shadow-[2px_2px_0px_0px_rgba(0,0,0,1)] transition-transform hover:translate-x-[1px] hover:translate-y-[1px] hover:shadow-none"
-        >
-          <div className="text-center">
-            <span className="text-4xl">{item.emoji}</span>
-            <p className="mt-2 font-bold">{item.text}</p>
-          </div>
-        </div>
-      ))}
-    </div>
-  </div>
-)
-
 const ListCard = ({ title, items, bgColor }: ListCardProps) => (
-  <div
-    className={`rounded-lg border-2 border-black ${bgColor} p-4 shadow-[4px_4px_0px_0px_rgba(0,0,0,1)]`}
+  <details
+    className={`group rounded-lg border-2 border-black ${bgColor} p-4 shadow-[4px_4px_0px_0px_rgba(0,0,0,1)]`}
   >
-    <h3 className="mb-4 text-xl font-bold">{title}</h3>
-    <div className="grid gap-3 sm:grid-cols-2 lg:grid-cols-3">
+    <summary className="cursor-pointer list-none">
+      <div className="flex items-center justify-between">
+        <h3 className="text-xl font-bold">{title}</h3>
+        <span className="transform text-xl transition-transform duration-200 group-open:rotate-180">
+          ▼
+        </span>
+      </div>
+    </summary>
+
+    <motion.div
+      initial={{ height: 0, opacity: 0 }}
+      animate={{ height: "auto", opacity: 1 }}
+      exit={{ height: 0, opacity: 0 }}
+      transition={{ duration: 0.2 }}
+      className="mt-4 grid gap-3 sm:grid-cols-2 lg:grid-cols-3"
+    >
       {items.map((item, index) => (
         <div
           key={index}
@@ -108,39 +87,24 @@ const ListCard = ({ title, items, bgColor }: ListCardProps) => (
           <p className="font-bold">{item}</p>
         </div>
       ))}
-    </div>
-  </div>
+    </motion.div>
+  </details>
 )
 
-const Overview = ({ problems, solutions }: OverviewProps) => (
+const Overview = () => (
   <motion.section
     initial={{ opacity: 0, y: 50 }}
     animate={{ opacity: 1, y: 0 }}
     transition={{ duration: 0.5 }}
-    className="rounded-lg border-4 border-black bg-white p-6 shadow-[8px_8px_0px_0px_rgba(0,0,0,1)]"
+    className="rounded-lg border-4 border-black bg-white p-4 shadow-[8px_8px_0px_0px_rgba(0,0,0,1)]"
   >
     <h2 className="mb-4 text-3xl font-black">Overview & Findings 📜</h2>
     <h3 className="mb-2 text-xl font-bold">Title 🏷️</h3>
     <p className="mb-4 text-lg">
       This Act may be cited as the "Right to Trial Act" 📋
     </p>
-    <Card
-      title="Core Problems This Act Solves 🛠️"
-      items={problems}
-      bgColor="bg-red-200"
-    />
-    <Card title="The Solution 💡" items={solutions} bgColor="bg-green-200" />
-    <ListCard
-      title="Economic Impact 📈"
-      items={[
-        "Cut trial costs by 90% 💰",
-        "Save $2 trillion annually 💵",
-        "Reduce time-to-market 🏃‍♂️",
-        "Multi-billion dollar cure rewards 🎁",
-        "Enable real price competition 🏆",
-      ]}
-      bgColor="bg-blue-200"
-    />
+    <ProblemsWithCurrentSystem />
+    <Solutions />
   </motion.section>
 )
 
@@ -156,73 +120,12 @@ const OpenTrialPlatform = () => (
     </h2>
     <div className="space-y-4">
       <ListCard
-        title="Revolutionary Safety & Efficacy Testing 🔬"
+        title="Global Open Science Revolution 🌍✨"
         items={[
-          "Real-world evidence replaces outdated trials 📊",
-          "24/7 automated safety monitoring 📡",
-          "Continuous effectiveness tracking across all healthcare 🏥",
-          "10x faster evidence generation 🚀",
-          "AI-powered treatment optimization 🎯",
-        ]}
-        bgColor="bg-purple-200"
-      />
-      <ListCard
-        title="Universal Participation 🌍"
-        items={[
-          "Broader testing with diverse participants 🧑‍🤝‍🧑",
-          "Any patient can participate 🙋‍♂️🙋‍♀️",
-          "Home and remote participation via telemedicine 🏠📱",
-          "Patient monitoring through mobile devices 📲",
-          "Automated outcome tracking 🤖",
-          "Direct patient reporting 🗣️",
-          "Continuous real-world evidence collection 🔄",
-        ]}
-        bgColor="bg-orange-200"
-      />
-      <ListCard
-        title="FDAi: Autonomous Agent 🤖"
-        items={[
-          "Analyzes all available research and patient data 🔍",
-          "Quantifies effects of drugs, food, and treatments 📊",
-          "Provides early warning of safety issues ⚠️",
-          "Identifies optimal treatments for patients 🎯",
-          "Monitors population-level health outcomes 📈",
-          "Tracks food-drug interactions 🍎💊",
-        ]}
-        bgColor="bg-cyan-200"
-      />
-      <ListCard
-        title="Cost-Effective System 💰➡️🆓"
-        items={[
-          "Handle all trial data collection 📊",
-          "Track real-world outcomes 📈",
-          "Monitor safety automatically 🛡️",
-          "Analyze what works best 🔍",
-          "Connect patients and doctors 🤝",
-          "Share results globally 🌐",
-          "Automate trial processes 🤖",
-        ]}
-        bgColor="bg-green-200"
-      />
-      <ListCard
-        title="Open To Everyone 🌐"
-        items={[
-          "Access trial data 🔓",
-          "Build new analysis tools 🛠️",
-          "Create patient apps 📱",
-          "Improve the platform 🔧",
-          "Add new features ➕",
-        ]}
-        bgColor="bg-yellow-200"
-      />
-      <ListCard
-        title="Global Collaboration 🌍🤝"
-        items={[
-          "International safety data recognition 🔐",
-          "Harmonized global reporting standards 📋",
-          "Cross-border research collaboration 🧪",
-          "Transparent pricing across regions 💲",
-          "International treatment access 🏥",
+          "World's largest medical database: 8B+ patients, 100K+ researchers, 1M+ doctors united 🚀",
+          "AI processes more trial data in 1 hour than all medical journals in history 🤖",
+          "From $2.6B trials to $100M cures - 96% cost reduction transforms medicine 💰",
+          "Real-time global safety monitoring across 195 countries catches risks instantly 🛡️",
         ]}
         bgColor="bg-blue-200"
       />
@@ -233,27 +136,24 @@ const OpenTrialPlatform = () => (
   </motion.section>
 )
 
-const UniversalAccess = () => (
+const PatientRights = () => (
   <motion.section
     initial={{ opacity: 0, y: 50 }}
     animate={{ opacity: 1, y: 0 }}
     transition={{ duration: 0.5 }}
     className="rounded-lg border-4 border-black bg-white p-6 shadow-[8px_8px_0px_0px_rgba(0,0,0,1)]"
   >
-    <h2 className="mb-4 text-3xl font-black">
-      Universal Access to Treatments 🚪
-    </h2>
+    <h2 className="mb-4 text-3xl font-black">Patient Rights 🚪</h2>
     <div className="space-y-4">
       <ListCard
-        title="Breaking Down All Barriers 🧱💥"
+        title="Universal Access to Treatments 🌟"
         items={[
-          "Access breakthrough treatments immediately 🔬",
-          "Participate from anywhere in the world 🌍",
-          "Choose any proven global treatment 🌐",
-          "Use local doctors or telemedicine 👨‍⚕️📱",
-          "Help others by sharing your results 🤝",
+          "From 3% to 100% treatment access - first system that leaves no one behind 🌍",
+          "Access breakthrough cures instantly - no more decade-long waits ⚡",
+          "Choose any doctor, any clinic, anywhere - true medical freedom 🏥",
+          "Your data, your choice - full control of your health destiny 🔐",
         ]}
-        bgColor="bg-green-200"
+        bgColor="bg-purple-200"
       />
       <ListCard
         title="No More Artificial Restrictions 🚫"
@@ -290,17 +190,8 @@ const FinancialIncentives = () => (
     transition={{ duration: 0.5 }}
     className="rounded-lg border-4 border-black bg-white p-6 shadow-[8px_8px_0px_0px_rgba(0,0,0,1)]"
   >
-    <h2 className="mb-4 text-3xl font-black">Financial Incentives 💰</h2>
+    <h2 className="mb-4 text-3xl font-black">Incentivized Cures 💰</h2>
     <div className="space-y-4">
-      <ListCard
-        title="Removing Barriers 🚧➡️🆓"
-        items={[
-          "No user fees for treatment development 🚫💰",
-          "Congressional funding for platform 🏛️💵",
-          "Free importation of lower-cost treatments 🌐💊",
-        ]}
-        bgColor="bg-green-200"
-      />
       <div className="rounded-lg border-2 border-black bg-yellow-200 p-4 shadow-[4px_4px_0px_0px_rgba(0,0,0,1)]">
         <h3 className="mb-2 text-xl font-bold">
           Healthcare Savings Sharing Program 💰🤝
@@ -370,50 +261,14 @@ const FinancialIncentives = () => (
 )
 
 export default function CureAccelerationAct() {
-  const [activeSection, setActiveSection] = useState<string>("overview")
-
-  const sections: Section[] = [
-    { id: "overview", title: "Overview & Findings", emoji: "📜" },
-    { id: "platform", title: "Decentralized Autonomous Trials", emoji: "🌐" },
-    { id: "access", title: "Patient Rights", emoji: "🚪" },
-    { id: "incentives", title: "Incentivized Cures", emoji: "💰" },
-  ]
-
-  const problems: CardItem[] = [
-    { text: "Life-saving treatments delayed 7-12 years", emoji: "⏳" },
-    { text: "97% of patients denied trial access", emoji: "🚫" },
-    { text: "Crushing $2.6B development costs", emoji: "💸" },
-    { text: "Focus on expensive drugs, not cures", emoji: "💊" },
-    { text: "Years of waiting for breakthrough treatments", emoji: "⌛" },
-    { text: "US patients last to access new therapies", emoji: "🐢" },
-    { text: "Prevention and cures ignored for profits", emoji: "🏥" },
-    { text: "Real-world evidence is ignored", emoji: "🙈" },
-  ]
-
-  const solutions: CardItem[] = [
-    { text: "Immediate access to safe treatments", emoji: "✅" },
-    { text: "Free global trial platform", emoji: "🆓" },
-    { text: "Billion-dollar rewards for true cures", emoji: "🏆" },
-    { text: "Universal treatment access", emoji: "🚀" },
-    { text: "Data-driven treatment decisions", emoji: "📊" },
-    { text: "AI-powered safety monitoring", emoji: "🤖" },
-  ]
-
   return (
     <div className="min-h-screen font-mono text-black">
       <Header />
-      <Navigation
-        sections={sections}
-        activeSection={activeSection}
-        setActiveSection={setActiveSection}
-      />
       <main className="space-y-8">
-        {activeSection === "overview" && (
-          <Overview problems={problems} solutions={solutions} />
-        )}
-        {activeSection === "platform" && <OpenTrialPlatform />}
-        {activeSection === "access" && <UniversalAccess />}
-        {activeSection === "incentives" && <FinancialIncentives />}
+        <Overview />
+        <OpenTrialPlatform />
+        <PatientRights />
+        <FinancialIncentives />
       </main>
     </div>
   )
