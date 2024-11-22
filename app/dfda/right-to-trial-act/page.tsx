@@ -21,7 +21,6 @@ export default async function RightToTrialPage() {
   return (
     <main className="">
       <CureAccelerationAct />
-
       <FloatingPetitionButton />
 
       {/* Constitutional Style Act Content */}
@@ -54,7 +53,10 @@ export default async function RightToTrialPage() {
               <h3 className="mb-6 font-serif text-2xl">
                 Add Your Name to Support This Act
               </h3>
-              <DFDASignPetitionButton /> <GitHubEditButton />
+              <div className="flex flex-col items-center gap-4">
+                <DFDASignPetitionButton />
+                <GitHubEditButton />
+              </div>
             </div>
           </div>
         </div>

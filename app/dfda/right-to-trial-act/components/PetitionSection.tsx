@@ -1,19 +1,22 @@
-'use client'
+"use client"
 
-import { GitHubEditButton } from './GitHubEditButton'
-import { DFDASignPetitionButton } from './DFDASignPetitionButton'
+import { DFDASignPetitionButton } from "./DFDASignPetitionButton"
+import { GitHubEditButton } from "./GitHubEditButton"
 
 export function PetitionSection() {
   return (
     <div className="mb-16 text-center">
-      <h2 className="text-4xl font-black mb-6 font-mono text-black">Show Your Support</h2>
-      <p className="text-xl mb-8 text-black">
-        Sign the petition to support the Right to Trial Act and help end the suffering of billions of people.
+      <h2 className="mb-6 font-mono text-4xl font-black text-black">
+        Show Your Support
+      </h2>
+      <p className="mb-8 text-xl text-black">
+        Sign the petition to support the Right to Trial Act and help end the
+        suffering of billions of people.
       </p>
-      <div className="inline-flex gap-4 justify-center">
+      <div className="flex flex-col items-center gap-4">
         <DFDASignPetitionButton />
         <GitHubEditButton />
       </div>
     </div>
   )
-} 
+}

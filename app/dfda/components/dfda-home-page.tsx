@@ -15,6 +15,7 @@ import AdvancedTrialSearch from "../trials/components/AdvancedTrialSearch"
 import CitizenScienceSection from "./CitizenScienceSection"
 import CostSavingsTable from "./CostSavingsTable"
 import DFDAComparisonTable from "./DFDAComparisonTable"
+import { DFDADisclaimer } from "./DFDADisclaimer"
 import { FeatureBox } from "./FeatureBox"
 import SolutionSection from "./SolutionSection"
 
@@ -100,7 +101,7 @@ export default function DFDAHomePage() {
       href: "/dfda/why",
       onClick: () => {
         // open https://dfda.earth in a new tab
-        window.open("https://dfda.earth", "_blank")
+        window.open("https://why.dfda.earth", "_blank")
         console.log("Why dFDA clicked")
       },
     },
@@ -163,6 +164,7 @@ export default function DFDAHomePage() {
       </header>
 
       <main className="space-y-12">
+        <DFDADisclaimer />
         <section className="relative overflow-visible rounded-xl border-4 border-black bg-gradient-to-r from-pink-400 to-purple-400 p-6 shadow-[8px_8px_0px_0px_rgba(0,0,0,1)]">
           <h2 className="mb-6 text-4xl font-black uppercase">
             See Effects of Foods🍟
