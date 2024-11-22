@@ -1,5 +1,5 @@
+import { DomainNavigation } from "../nav-types"
 import { commonLinks } from "../shared-links"
-import { DomainNavigation } from "../types"
 
 export const wishoniaLinks = {
   dashboard: commonLinks.dashboard,
@@ -92,19 +92,26 @@ export const wishoniaNavigation: DomainNavigation = {
     wishoniaLinks.globalSolutionsVote,
     wishoniaLinks.researcher,
     commonLinks.docs,
-    commonLinks.github,
+    commonLinks.contributeOnGithub,
+    commonLinks.reportBug,
+    commonLinks.requestFeature,
   ],
   avatarNav: [
     commonLinks.profileSettings,
     wishoniaLinks.dashboard,
     wishoniaLinks.agents,
     wishoniaLinks.researcher,
+    commonLinks.reportBug,
+    commonLinks.requestFeature,
+    commonLinks.contributeOnGithub,
   ],
   footerNav: [
     wishoniaLinks.globalProblemsVote,
     wishoniaLinks.globalProblemsResults,
     commonLinks.docs,
-    commonLinks.github,
+    commonLinks.reportBug,
+    commonLinks.requestFeature,
+    commonLinks.contributeOnGithub,
     wishoniaLinks.researcher,
   ],
 }

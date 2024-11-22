@@ -6,7 +6,7 @@ import { NavItem } from "@/types"
 import { User } from "next-auth"
 import { signOut } from "next-auth/react"
 
-import { avatarNav } from "@/config/navigation/general"
+import { avatarNav } from "@/config/navigation/general-nav"
 import {
   DropdownMenu,
   DropdownMenuContent,
@@ -54,7 +54,15 @@ export function UserAccountNav({ user, avatarNavItems }: UserAccountNavProps) {
           return (
             item.href && (
               <DropdownMenuItem key={index} className="cursor-pointer" asChild>
-                <Link href={item.href}>
+                <Link
+                  href={item.href}
+                  target={item.href.startsWith("http") ? "_blank" : undefined}
+                  rel={
+                    item.href.startsWith("http")
+                      ? "noopener noreferrer"
+                      : undefined
+                  }
+                >
                   <Icon className="mr-2 h-4 w-4" />
                   <span>{item.title}</span>
                 </Link>

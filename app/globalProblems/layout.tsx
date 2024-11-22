@@ -1,4 +1,4 @@
-import { generalNavigation } from "@/config/navigation/general"
+import { generalNavigation } from "@/config/navigation/general-nav"
 import { getCurrentUser } from "@/lib/session"
 import Footer from "@/components/layout/footer"
 import TopNavbar from "@/components/layout/topNavbar"

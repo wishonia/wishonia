@@ -33,9 +33,14 @@ export default function DfdaTopNavbar({
   if (!avatarNavItems) {
     avatarNavItems = navigation.avatarNav
   }
+
+  const isExternalLink = (href: string) => {
+    return href.startsWith("http://") || href.startsWith("https://")
+  }
+
   return (
     <header className="select-none">
-      <nav className="mx-auto flex items-center justify-between px-4 md:px-8 lg:max-w-7xl">
+      <nav className="mx-auto flex items-center justify-between lg:max-w-7xl">
         <div>
           <div className="flex items-center justify-between py-3 md:block md:py-5">
             <DfdaLogoNavMenu navItems={logoNavItems}></DfdaLogoNavMenu>
@@ -54,6 +59,12 @@ export default function DfdaTopNavbar({
                       key={index}
                       href={item.disabled ? "/" : item.href}
                       className="hover:underline"
+                      {...(isExternalLink(item.href)
+                        ? {
+                            target: "_blank",
+                            rel: "noopener noreferrer",
+                          }
+                        : {})}
                     >
                       {item.title}
                     </Link>
@@ -70,6 +81,7 @@ export default function DfdaTopNavbar({
             email: user?.email,
           }}
           avatarNavItems={avatarNavItems}
+          buttonVariant="neobrutalist"
         />
       </nav>
     </header>

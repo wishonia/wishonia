@@ -7,8 +7,8 @@ export const commonLinks = {
     icon: "docs",
     tooltip: "View the documentation",
   },
-  github: {
-    title: "Github",
+  contributeOnGithub: {
+    title: "GitHub",
     href: siteConfig.links.github,
     icon: "github",
     tooltip: "Contribute to the project on Github",
@@ -37,5 +37,19 @@ export const commonLinks = {
     title: "Dashboard",
     href: "/dashboard",
     icon: "dashboard",
+  },
+  reportBug: {
+    title: "Report Bug",
+    href: `${siteConfig.links.github}/issues/new?template=bug_report.yaml`,
+    icon: "bug",
+    tooltip: "Report a bug or issue",
+    external: true,
+  },
+  requestFeature: {
+    title: "Request Feature",
+    href: `${siteConfig.links.github}/issues/new?template=feature_request.yaml`,
+    icon: "lightbulb",
+    tooltip: "Suggest a new feature",
+    external: true,
   },
 } as const
