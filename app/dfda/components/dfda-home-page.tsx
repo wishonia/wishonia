@@ -100,7 +100,7 @@ export default function DFDAHomePage() {
       href: "/dfda/why",
       onClick: () => {
         // open https://dfda.earth in a new tab
-        window.open("https://dfda.earth", "_blank")
+        window.open("https://why.dfda.earth", "_blank")
         console.log("Why dFDA clicked")
       },
     },
