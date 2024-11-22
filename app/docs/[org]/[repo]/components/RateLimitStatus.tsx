@@ -5,53 +5,71 @@ import { AlertCircle } from "lucide-react"
 
 import { cn } from "@/lib/utils"
 import { Alert, AlertDescription } from "@/components/ui/alert"
-import { Card, CardContent } from "@/components/ui/card"
+import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card"
 import { Progress } from "@/components/ui/progress"
 
-import { getGithubRateLimit } from "../actions"
+import { getDetailedRateLimit } from "../actions"
 
-interface RateLimit {
-  remaining: number
-  limit: number
-  reset: Date
-  used: number
+interface DetailedRateLimit {
+  resources: {
+    core: RateLimitResource
+    search: RateLimitResource
+    graphql: RateLimitResource
+  }
 }
 
-const CACHE_KEY = "github-rate-limit"
-const CACHE_DURATION = 30000 // 30 seconds
-const UPDATE_INTERVAL = 60000 // 1 minute
+interface RateLimitResource {
+  limit: number
+  used: number
+  remaining: number
+  reset: Date
+}
+
+function RateLimitSection({
+  title,
+  data,
+}: {
+  title: string
+  data: RateLimitResource
+}) {
+  const percentage = (data.remaining / data.limit) * 100
+  const isLow = percentage < 20
+  const resetTime = new Date(data.reset).toLocaleTimeString()
+
+  return (
+    <div className="space-y-2">
+      <div className="flex justify-between text-sm">
+        <div className="text-muted-foreground">{title}</div>
+      </div>
+      <div className={cn("font-medium", isLow && "text-red-500")}>
+        {data.remaining}/{data.limit} remaining
+      </div>
+      <div className="text-sm text-muted-foreground">Used: {data.used}</div>
+      <div className="relative w-full">
+        <Progress
+          value={percentage}
+          className={cn("h-2", isLow && "[&>div]:bg-red-500")}
+        />
+      </div>
+      <div className="text-xs text-muted-foreground">Resets at {resetTime}</div>
+    </div>
+  )
+}
 
 export default function RateLimitStatus() {
-  const [rateLimit, setRateLimit] = useState<RateLimit | null>(null)
+  if (process.env.NODE_ENV !== "development") {
+    return null
+  }
+
+  const [rateLimit, setRateLimit] = useState<DetailedRateLimit | null>(null)
   const [error, setError] = useState<string | null>(null)
   const [loading, setLoading] = useState(true)
+  const [isExpanded, setIsExpanded] = useState(false)
 
   const fetchRateLimit = useCallback(async () => {
     try {
-      // Check cache first
-      const cached = localStorage.getItem(CACHE_KEY)
-      if (cached) {
-        const { data, timestamp } = JSON.parse(cached)
-        if (Date.now() - timestamp < CACHE_DURATION) {
-          setRateLimit({
-            ...data,
-            reset: new Date(data.reset),
-          })
-          setLoading(false)
-          return
-        }
-      }
-
-      const data = await getGithubRateLimit()
+      const data = await getDetailedRateLimit()
       if (data) {
-        // Update cache
-        localStorage.setItem(
-          CACHE_KEY,
-          JSON.stringify({
-            data,
-            timestamp: Date.now(),
-          })
-        )
         setRateLimit(data)
         setError(null)
       }
@@ -59,7 +77,6 @@ export default function RateLimitStatus() {
       const message =
         err instanceof Error ? err.message : "Failed to fetch rate limit"
       setError(message)
-      console.error("Rate limit error:", err)
     } finally {
       setLoading(false)
     }
@@ -67,30 +84,8 @@ export default function RateLimitStatus() {
 
   useEffect(() => {
     fetchRateLimit()
-
-    // Only set up interval if we successfully got initial data
-    const interval = setInterval(() => {
-      // Don't update if the user isn't viewing the page
-      if (document.visibilityState === "visible") {
-        fetchRateLimit()
-      }
-    }, UPDATE_INTERVAL)
-
-    // Clean up interval
+    const interval = setInterval(fetchRateLimit, 30000) // Update every 30 seconds
     return () => clearInterval(interval)
-  }, [fetchRateLimit])
-
-  // Add visibility change listener to update when tab becomes visible
-  useEffect(() => {
-    const handleVisibilityChange = () => {
-      if (document.visibilityState === "visible") {
-        fetchRateLimit()
-      }
-    }
-
-    document.addEventListener("visibilitychange", handleVisibilityChange)
-    return () =>
-      document.removeEventListener("visibilitychange", handleVisibilityChange)
   }, [fetchRateLimit])
 
   if (loading) return null
@@ -106,30 +101,51 @@ export default function RateLimitStatus() {
 
   if (!rateLimit) return null
 
-  const percentage = (rateLimit.remaining / rateLimit.limit) * 100
-  const resetTime = new Date(rateLimit.reset).toLocaleTimeString()
-  const isLow = percentage < 20
+  if (!isExpanded) {
+    const corePercentage =
+      (rateLimit.resources.core.remaining / rateLimit.resources.core.limit) *
+      100
+    const isLow = corePercentage < 20
+
+    return (
+      <Card
+        className={cn(
+          "w-full max-w-xs cursor-pointer",
+          isLow && "border-red-500"
+        )}
+        onClick={() => setIsExpanded(true)}
+      >
+        <CardContent className="pt-4">
+          <RateLimitSection
+            title="API Rate Limit"
+            data={rateLimit.resources.core}
+          />
+        </CardContent>
+      </Card>
+    )
+  }
 
   return (
-    <Card className={cn("w-full max-w-xs", isLow && "border-red-500")}>
-      <CardContent className="pt-4">
-        <div className="space-y-2">
-          <div className="flex justify-between text-sm">
-            <div className="text-muted-foreground">GitHub API Rate Limit</div>
-          </div>
-          <div className={cn("font-medium", isLow && "text-red-500")}>
-            {rateLimit.remaining}/{rateLimit.limit} remaining
-          </div>
-          <div className="relative w-full">
-            <Progress
-              value={percentage}
-              className={cn("h-2", isLow && "[&>div]:bg-red-500")}
-            />
-          </div>
-          <div className="text-xs text-muted-foreground">
-            Resets at {resetTime}
-          </div>
-        </div>
+    <Card className="w-full max-w-md">
+      <CardHeader className="flex flex-row items-center justify-between">
+        <CardTitle>GitHub API Rate Limits</CardTitle>
+        <button
+          className="text-sm text-muted-foreground hover:text-foreground"
+          onClick={() => setIsExpanded(false)}
+        >
+          Collapse
+        </button>
+      </CardHeader>
+      <CardContent className="space-y-6">
+        <RateLimitSection title="REST API" data={rateLimit.resources.core} />
+        <RateLimitSection
+          title="Search API"
+          data={rateLimit.resources.search}
+        />
+        <RateLimitSection
+          title="GraphQL API"
+          data={rateLimit.resources.graphql}
+        />
       </CardContent>
     </Card>
   )
