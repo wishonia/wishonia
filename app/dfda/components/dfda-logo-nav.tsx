@@ -5,7 +5,7 @@ import Image from "next/image"
 import Link from "next/link"
 import { NavItem } from "@/types"
 
-import { dfdaNavigation } from "@/config/navigation/domains/dfda"
+import { dfdaNavigation } from "@/config/navigation/domains/dfda-nav"
 import {
   DropdownMenu,
   DropdownMenuContent,

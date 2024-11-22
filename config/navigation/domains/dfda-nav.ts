@@ -1,5 +1,5 @@
+import { DomainNavigation } from "../nav-types"
 import { commonLinks } from "../shared-links"
-import { DomainNavigation } from "../types"
 
 export const dfdaLinks = {
   dfda: {
@@ -35,35 +35,35 @@ export const dfdaLinks = {
 } as const
 
 export const dfdaNavigation: DomainNavigation = {
-  topNav: [
-    //dfdaLinks.dfda,
-    dfdaLinks.clinipedia,
-    dfdaLinks.digitalTwinSafe,
-    //dfdaLinks.fdai,
-    dfdaLinks.petition,
-  ],
+  topNav: [dfdaLinks.clinipedia, dfdaLinks.digitalTwinSafe, dfdaLinks.petition],
   sidebarNav: [
     dfdaLinks.dfda,
     dfdaLinks.clinipedia,
     dfdaLinks.digitalTwinSafe,
     dfdaLinks.fdai,
     dfdaLinks.petition,
-    //commonLinks.docs,
+    commonLinks.github,
+    commonLinks.reportBug,
+    commonLinks.requestFeature,
   ],
   avatarNav: [
-    //commonLinks.profileSettings,
     dfdaLinks.dfda,
     dfdaLinks.clinipedia,
     dfdaLinks.digitalTwinSafe,
     dfdaLinks.fdai,
     dfdaLinks.petition,
+    commonLinks.reportBug,
+    commonLinks.requestFeature,
+    commonLinks.github,
   ],
   footerNav: [
     dfdaLinks.dfda,
     dfdaLinks.clinipedia,
     dfdaLinks.digitalTwinSafe,
     dfdaLinks.fdai,
-    commonLinks.github,
     dfdaLinks.petition,
+    commonLinks.reportBug,
+    commonLinks.requestFeature,
+    commonLinks.github,
   ],
 }

@@ -5,7 +5,7 @@ import Link from "next/link"
 import { NavItem } from "@/types"
 import { User } from "next-auth"
 
-import { generalDashboardTopNav } from "@/config/navigation/general"
+import { generalDashboardTopNav } from "@/config/navigation/general-nav"
 import { LogoNavMenu } from "@/components/layout/logo-nav"
 import { UserNavDisplay } from "@/components/user/user-nav-display"
 
