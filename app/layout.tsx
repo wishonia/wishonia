@@ -1,15 +1,26 @@
-import "./globals.css"
 
-import { Metadata, Viewport } from "next"
-import { Inter } from "next/font/google"
-import { CopilotKit } from "@copilotkit/react-core"
-import { Analytics } from "@vercel/analytics/react"
-import NextTopLoader from "nextjs-toploader"
 
-import { siteConfig } from "@/config/site"
-import { cn } from "@/lib/utils"
-import { Toaster } from "@/components/ui/toaster"
-import { Providers } from "@/app/providers" // Import Providers
+
+import "./globals.css";
+
+
+
+import { Metadata, Viewport } from "next";
+import { Inter } from "next/font/google";
+import { CopilotKit } from "@copilotkit/react-core";
+import { Analytics } from "@vercel/analytics/react";
+import NextTopLoader from "nextjs-toploader";
+
+
+
+import { siteConfig } from "@/config/site";
+import { cn } from "@/lib/utils";
+import { Toaster } from "@/components/ui/toaster";
+import { Providers } from "@/app/providers"; // Import Providers
+
+
+
+
 
 const inter = Inter({ subsets: ["latin"] })
 
@@ -49,7 +60,7 @@ export const metadata: Metadata = {
     title: siteConfig.name,
     description: siteConfig.description,
     images: [siteConfig.ogImage],
-    creator: "@_rdev7",
+    creator: "@FDADAO",
   },
   icons: {
     icon: "/favicon.ico",
