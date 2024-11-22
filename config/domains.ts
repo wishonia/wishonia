@@ -1,18 +1,6 @@
-import { z } from "zod"
+import { SiteConfig } from "@/types"
 
-export const DomainConfig = z.object({
-  name: z.string().min(1).max(50),
-  description: z.string().min(10).max(200),
-  author: z.string().optional(),
-  keywords: z.array(z.string()).optional(),
-  defaultHomepage: z.string().startsWith("/"),
-  afterLoginPath: z.string().startsWith("/"),
-  ogImage: z.string().url().optional(),
-})
-
-export type DomainConfigType = z.infer<typeof DomainConfig>
-
-export const domainConfigs: Record<string, DomainConfigType> = {
+export const domainConfigs: Record<string, SiteConfig> = {
   "wishonia.love": {
     name: "Wishonia",
     description:
@@ -22,6 +10,13 @@ export const domainConfigs: Record<string, DomainConfigType> = {
     defaultHomepage: "/",
     afterLoginPath: "/dashboard",
     ogImage: "https://wishonia.love/og.png",
+    url: {
+      base: "https://wishonia.love",
+      author: "mikepsinn",
+    },
+    links: {
+      github: "https://github.com/wishonia/wishonia",
+    },
   },
   "dfda.earth": {
     name: "The Decentralized FDA",
@@ -31,5 +26,12 @@ export const domainConfigs: Record<string, DomainConfigType> = {
     defaultHomepage: "/dfda",
     afterLoginPath: "/dfda",
     ogImage: "/globalSolutions/dfda/dfda-og.png",
+    url: {
+      base: "https://dfda.earth",
+      author: "mikepsinn",
+    },
+    links: {
+      github: "https://github.com/wishonia/wishonia",
+    },
   },
 }

@@ -1,9 +1,10 @@
 import { headers } from "next/headers"
+import { SiteConfig } from "@/types"
 
 import { env } from "@/env.mjs"
-import { domainConfigs, DomainConfigType } from "@/config/domains"
+import { domainConfigs } from "@/config/domains"
 
-export function getDomainConfig(hostname?: string | null): DomainConfigType {
+export function getDomainConfig(hostname?: string | null): SiteConfig {
   // Use TEST_DOMAIN from env if set (for local development)
   if (env.TEST_DOMAIN) {
     return domainConfigs[env.TEST_DOMAIN] || domainConfigs["wishonia.love"]
@@ -26,6 +27,21 @@ export function getDomainConfig(hostname?: string | null): DomainConfigType {
   // Clean the hostname (remove port and www.)
   const cleanHostname = hostname?.replace(/:\d+$/, "").replace(/^www\./, "")
 
-  // Return config for domain or default to wishonia.love config
-  return domainConfigs[cleanHostname || ""] || domainConfigs["wishonia.love"]
+  if (!cleanHostname) {
+    return domainConfigs["wishonia.love"]
+  }
+
+  // Check for exact domain match first
+  if (domainConfigs[cleanHostname]) {
+    return domainConfigs[cleanHostname]
+  }
+
+  // Check if the hostname is a subdomain of any configured domain
+  const parentDomain = Object.keys(domainConfigs).find((domain) =>
+    cleanHostname.endsWith(`.${domain}`)
+  )
+
+  return parentDomain
+    ? domainConfigs[parentDomain]
+    : domainConfigs["wishonia.love"]
 }
