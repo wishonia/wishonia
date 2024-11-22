@@ -462,3 +462,91 @@ export async function getDetailedRateLimit(): Promise<DetailedRateLimit | null> 
     return null
   }
 }
+
+// Add this new type near the top with other types
+export interface SearchResult {
+  title: string
+  path: string
+  excerpt: string
+  score: number
+}
+
+// Add this new function
+export async function searchRepoContent(
+  org: string,
+  repo: string,
+  query: string
+): Promise<SearchResult[]> {
+  try {
+    const session = await getServerSession(authOptions)
+    if (!session?.user?.id) {
+      throw new Error("Unauthorized")
+    }
+
+    const githubToken = await getGithubAccessToken(session.user.id)
+    if (!githubToken) {
+      throw new Error("No GitHub token available")
+    }
+
+    await checkRateLimitBeforeRequest()
+
+    const octokit = new Octokit({
+      auth: githubToken,
+    })
+
+    await logGithubRequest(
+      octokit,
+      `GET /search/code q=${query}+repo:${org}/${repo}`
+    )
+
+    const { data } = await octokit.rest.search.code({
+      q: `${query} repo:${org}/${repo} extension:md`,
+      per_page: 10,
+    })
+
+    const results: SearchResult[] = await Promise.all(
+      data.items.map(async (item) => {
+        // Get the file content to extract title and excerpt
+        const content = await getGithubContent(org, repo, item.path)
+        const lines = content.split("\n")
+
+        // Try to find the title from frontmatter or first heading
+        const titleMatch =
+          content.match(/^#\s+(.+)$/m) ||
+          content.match(/title:\s*["'](.+)["']/m)
+        const title = titleMatch ? titleMatch[1] : item.path
+
+        // Find the matching context for the excerpt
+        const lowerQuery = query.toLowerCase()
+        const matchingLine =
+          lines.find((line) => line.toLowerCase().includes(lowerQuery)) || ""
+
+        return {
+          title,
+          path: item.path,
+          excerpt: matchingLine.trim(),
+          score: item.score,
+        }
+      })
+    )
+
+    return results.sort((a, b) => b.score - a.score)
+  } catch (error) {
+    console.error("GitHub search error:", error)
+    if (error instanceof Error && error.message.includes("rate limit")) {
+      throw new Error("GitHub API rate limit exceeded. Please try again later.")
+    }
+    throw error
+  }
+}
+
+export async function clearGithubRequestLogs() {
+  const session = await getServerSession(authOptions)
+  if (!session?.user?.id) {
+    throw new Error("Unauthorized")
+  }
+
+  // Clear the logs array
+  requestLogs = []
+  return true
+}
