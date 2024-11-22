@@ -33,7 +33,8 @@ export default function DFDAFooter({ navItems = [] }: DFDAFooterProps) {
         </ul>
       </div>
       <p>
-        &copy; 2023 dFDA - Empowering patients, revolutionizing healthcare 🚀
+        &copy; 2023 dFDA - Accelerating discovery to minimize suffering in the
+        universe! 🚀
       </p>
     </footer>
   )
