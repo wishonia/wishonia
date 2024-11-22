@@ -73,8 +73,14 @@ function findReadmeFile(contents: RepoContent[]): string | null {
   return readmeFile ? readmeFile.path : null
 }
 
+export const revalidate = false // Disable automatic revalidation
+
+console.log("Rendering DocsPage:", new Date().toISOString())
+
 export default async function DocsPage({ params, searchParams }: PageProps) {
   const { org, repo } = params
+
+  console.log("Page params:", { org, repo, searchParams })
 
   const session = await getServerSession(authOptions)
   if (!session?.user) {
