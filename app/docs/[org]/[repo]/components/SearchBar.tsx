@@ -1,20 +1,24 @@
 "use client"
 
-import { useCallback, useEffect, useState } from "react"
+import { useCallback, useEffect, useRef, useState } from "react"
 import { usePathname, useRouter, useSearchParams } from "next/navigation"
 import { Command } from "cmdk"
-import { Search, X } from "lucide-react"
+import debounce from "lodash/debounce"
+import { Loader2, Search, X } from "lucide-react"
 
+import { useDetailedRateLimit } from "@/lib/hooks/useDetailedRateLimit"
 import { cn } from "@/lib/utils"
 import { Button } from "@/components/ui/button"
 import { Dialog, DialogContent, DialogTrigger } from "@/components/ui/dialog"
 
+import { searchRepoContent } from "../actions"
 import { MenuItem } from "../lib/parseSummary"
 
 interface SearchResult {
   title: string
   path: string
   excerpt: string
+  score?: number
   emoji?: string
 }
 
@@ -24,13 +28,27 @@ interface SearchBarProps {
   mobile?: boolean
 }
 
+interface SearchCache {
+  query: string
+  results: SearchResult[]
+  timestamp: number
+}
+
+const CACHE_DURATION = 5 * 60 * 1000 // 5 minutes
+const DEBOUNCE_DELAY = 300 // 300ms
+
 export default function SearchBar({ menu, onClose, mobile }: SearchBarProps) {
   const [open, setOpen] = useState(false)
   const [query, setQuery] = useState("")
   const [results, setResults] = useState<SearchResult[]>([])
+  const [isLoading, setIsLoading] = useState(false)
+  const [error, setError] = useState<string | null>(null)
+  const searchCache = useRef<SearchCache[]>([])
   const router = useRouter()
   const pathname = usePathname()
   const searchParams = useSearchParams()
+
+  const { data: rateLimit, error: rateLimitError } = useDetailedRateLimit()
 
   const getAllFiles = useCallback(() => {
     const allItems = flattenMenuItems(menu)
@@ -76,19 +94,89 @@ export default function SearchBar({ menu, onClose, mobile }: SearchBarProps) {
     return results
   }
 
-  const searchItems = async (searchQuery: string) => {
-    if (!searchQuery.trim()) {
-      setResults(getAllFiles())
-      return
+  const checkSearchRateLimit = useCallback(() => {
+    if (!rateLimit) return true
+
+    const searchLimit = rateLimit.resources.search
+    if (searchLimit.remaining < 5) {
+      const resetTime = new Date(searchLimit.reset)
+      throw new Error(
+        `Search rate limit nearly exceeded. Resets at ${resetTime.toLocaleTimeString()}`
+      )
     }
+    return true
+  }, [rateLimit])
 
-    const allItems = flattenMenuItems(menu)
-    const searchResults = allItems.filter((item) =>
-      item.title.toLowerCase().includes(searchQuery.toLowerCase())
+  const getCachedResults = (searchQuery: string): SearchResult[] | null => {
+    const cached = searchCache.current.find(
+      (cache) =>
+        cache.query === searchQuery &&
+        Date.now() - cache.timestamp < CACHE_DURATION
     )
-
-    setResults(searchResults)
+    return cached?.results || null
   }
+
+  const cacheResults = (searchQuery: string, searchResults: SearchResult[]) => {
+    searchCache.current = [
+      { query: searchQuery, results: searchResults, timestamp: Date.now() },
+      ...searchCache.current.slice(0, 9), // Keep last 10 searches
+    ]
+  }
+
+  const searchItems = useCallback(
+    debounce(async (searchQuery: string) => {
+      if (!searchQuery.trim()) {
+        setResults(getAllFiles())
+        setIsLoading(false)
+        return
+      }
+
+      try {
+        setError(null)
+
+        // Check cache first
+        const cachedResults = getCachedResults(searchQuery)
+        if (cachedResults) {
+          setResults(cachedResults)
+          setIsLoading(false)
+          return
+        }
+
+        // Check rate limit
+        checkSearchRateLimit()
+
+        const pathParts = pathname.split("/")
+        const org = pathParts[2]
+        const repo = pathParts[3]
+
+        if (!org || !repo) return
+
+        const searchResults = await searchRepoContent(org, repo, searchQuery)
+        cacheResults(searchQuery, searchResults)
+        setResults(searchResults)
+      } catch (error) {
+        console.error("Search error:", error)
+        setError(error instanceof Error ? error.message : "Search failed")
+
+        // Fallback to local search
+        const allItems = flattenMenuItems(menu)
+        const searchResults = allItems.filter((item) =>
+          item.title.toLowerCase().includes(searchQuery.toLowerCase())
+        )
+        setResults(searchResults)
+      } finally {
+        setIsLoading(false)
+      }
+    }, DEBOUNCE_DELAY),
+    [pathname, menu, checkSearchRateLimit, getAllFiles]
+  )
+
+  // Cleanup debounce on unmount
+  useEffect(() => {
+    return () => {
+      searchItems.cancel()
+    }
+  }, [searchItems])
 
   const handleSelect = (result: SearchResult) => {
     const params = new URLSearchParams(searchParams)
@@ -112,8 +200,12 @@ export default function SearchBar({ menu, onClose, mobile }: SearchBarProps) {
           placeholder="Search documentation..."
           value={query}
           onChange={(e) => {
-            setQuery(e.target.value)
-            searchItems(e.target.value)
+            const newQuery = e.target.value
+            setQuery(newQuery)
+            if (newQuery.trim()) {
+              setIsLoading(true)
+            }
+            searchItems(newQuery)
           }}
         />
         {query && (
@@ -129,8 +221,12 @@ export default function SearchBar({ menu, onClose, mobile }: SearchBarProps) {
             <X className="h-4 w-4" />
           </Button>
         )}
+        {isLoading && (
+          <Loader2 className="h-4 w-4 animate-spin text-muted-foreground" />
+        )}
       </div>
       <div className="max-h-[300px] overflow-y-auto p-2">
+        {error && <div className="p-4 text-sm text-destructive">{error}</div>}
         {results.map((result) => (
           <button
             key={result.path}
@@ -141,13 +237,27 @@ export default function SearchBar({ menu, onClose, mobile }: SearchBarProps) {
             )}
             onClick={() => handleSelect(result)}
           >
-            <div className="flex items-center">
-              {result.emoji && <span className="mr-2">{result.emoji}</span>}
-              <span className="font-medium">{result.title}</span>
+            <div className="flex flex-col gap-1">
+              <div className="flex items-center justify-between">
+                <div className="flex items-center">
+                  {result.emoji && <span className="mr-2">{result.emoji}</span>}
+                  <span className="font-medium">{result.title}</span>
+                </div>
+                {result.score && (
+                  <span className="text-xs text-muted-foreground">
+                    Score: {result.score.toFixed(2)}
+                  </span>
+                )}
+              </div>
+              {result.excerpt && (
+                <p className="line-clamp-2 text-xs text-muted-foreground">
+                  {result.excerpt}
+                </p>
+              )}
             </div>
           </button>
         ))}
-        {query && results.length === 0 && (
+        {query && results.length === 0 && !isLoading && (
           <div className="p-4 text-sm text-muted-foreground">
             No results found.
           </div>
