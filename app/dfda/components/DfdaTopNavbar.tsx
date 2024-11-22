@@ -33,6 +33,11 @@ export default function DfdaTopNavbar({
   if (!avatarNavItems) {
     avatarNavItems = navigation.avatarNav
   }
+
+  const isExternalLink = (href: string) => {
+    return href.startsWith("http://") || href.startsWith("https://")
+  }
+
   return (
     <header className="select-none">
       <nav className="mx-auto flex items-center justify-between px-4 md:px-8 lg:max-w-7xl">
@@ -54,6 +59,12 @@ export default function DfdaTopNavbar({
                       key={index}
                       href={item.disabled ? "/" : item.href}
                       className="hover:underline"
+                      {...(isExternalLink(item.href)
+                        ? {
+                            target: "_blank",
+                            rel: "noopener noreferrer",
+                          }
+                        : {})}
                     >
                       {item.title}
                     </Link>
