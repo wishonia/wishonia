@@ -16,6 +16,39 @@ export type RepoContent = {
 
 const RATE_LIMIT_THRESHOLD = 100 // Minimum remaining calls before we start warning
 
+interface GithubRequestLog {
+  endpoint: string
+  timestamp: Date
+  rateLimit?: {
+    remaining: number
+    limit: number
+  }
+}
+
+let requestLogs: GithubRequestLog[] = []
+
+async function logGithubRequest(octokit: Octokit, endpoint: string) {
+  const rateLimit = await octokit.rateLimit.get().catch(() => null)
+  const log: GithubRequestLog = {
+    endpoint,
+    timestamp: new Date(),
+    rateLimit: rateLimit
+      ? {
+          remaining: rateLimit.data.rate.remaining,
+          limit: rateLimit.data.rate.limit,
+        }
+      : undefined,
+  }
+
+  requestLogs.push(log)
+  console.log(`GitHub Request: ${endpoint}`, log)
+
+  // Keep only last 100 requests in memory
+  if (requestLogs.length > 100) {
+    requestLogs = requestLogs.slice(-100)
+  }
+}
+
 async function checkRateLimitBeforeRequest() {
   const rateLimit = await getGithubRateLimit()
   if (!rateLimit) return true // If we can't check rate limit, proceed anyway
@@ -56,6 +89,11 @@ export async function getGithubContent(
       },
     })
 
+    await logGithubRequest(
+      octokit,
+      `GET /repos/${org}/${repo}/contents/${path}`
+    )
+
     const response = await octokit.repos
       .getContent({
         owner: org,
@@ -85,6 +123,18 @@ export async function getGithubContent(
   }
 }
 
+// Add a helper function to filter relevant documentation files
+function isDocFile(path: string): boolean {
+  // Add or modify extensions based on what you want to include
+  const validExtensions = [".md", ".mdx"]
+  const excludedPaths = [".git", "node_modules"]
+
+  const extension = path.substring(path.lastIndexOf("."))
+  const isExcluded = excludedPaths.some((excluded) => path.includes(excluded))
+
+  return validExtensions.includes(extension) && !isExcluded
+}
+
 export async function getRepoContents(
   org: string,
   repo: string,
@@ -101,40 +151,110 @@ export async function getRepoContents(
       throw new Error("No GitHub token available")
     }
 
+    await checkRateLimitBeforeRequest()
+
     const octokit = new Octokit({
       auth: githubToken,
+      retry: {
+        enabled: true,
+        retries: 3,
+      },
     })
 
-    const response = await octokit.repos.getContent({
+    // First, get the default branch
+    const { data: repoData } = await octokit.repos.get({
       owner: org,
       repo,
-      path,
     })
+    const defaultBranch = repoData.default_branch
 
-    const contents = Array.isArray(response.data)
-      ? response.data
-      : [response.data]
-
-    const processedContents: RepoContent[] = await Promise.all(
-      contents.map(async (item: any) => {
-        const result: RepoContent = {
-          path: item.path,
-          type: item.type,
-          name: item.name,
-        }
-
-        if (item.type === "dir") {
-          result.children = await getRepoContents(org, repo, item.path)
-        }
-
-        return result
-      })
+    // Get the tree with recursive flag
+    await logGithubRequest(
+      octokit,
+      `GET /repos/${org}/${repo}/git/trees/${defaultBranch}?recursive=1`
     )
 
-    return processedContents
+    const { data: treeData } = await octokit.git.getTree({
+      owner: org,
+      repo,
+      tree_sha: defaultBranch,
+      recursive: "1",
+    })
+
+    // Convert flat tree to hierarchical structure
+    const root: { [key: string]: RepoContent } = {}
+
+    // First pass: create all directories and files
+    treeData.tree
+      .filter((item) => {
+        // Skip items without paths
+        if (!item.path) return false
+
+        if (item.type === "blob") {
+          return isDocFile(item.path)
+        }
+        return item.type === "tree"
+      })
+      .forEach((item) => {
+        // We can safely assert path exists because we filtered out undefined paths
+        const itemPath = item.path!
+        const parts = itemPath.split("/")
+        let currentPath = ""
+
+        parts.forEach((part, index) => {
+          const parentPath = currentPath
+          currentPath = currentPath ? `${currentPath}/${part}` : part
+
+          if (!root[currentPath]) {
+            root[currentPath] = {
+              path: currentPath,
+              name: part,
+              type:
+                item.type === "tree" || index < parts.length - 1
+                  ? "dir"
+                  : "file",
+              children:
+                item.type === "tree" || index < parts.length - 1
+                  ? []
+                  : undefined,
+            }
+
+            if (parentPath && root[parentPath]) {
+              root[parentPath].children?.push(root[currentPath])
+            }
+          }
+        })
+      })
+
+    // Convert to array and sort
+    const result = Object.values(root)
+      .filter((item) => !item.path.includes("/")) // Get only root level items
+      .sort((a, b) => {
+        // Sort directories first, then files
+        if (a.type === "dir" && b.type === "file") return -1
+        if (a.type === "file" && b.type === "dir") return 1
+        // Sort alphabetically within same type
+        return a.name.localeCompare(b.name)
+      })
+
+    // Remove empty directories
+    const filterEmptyDirs = (items: RepoContent[]): RepoContent[] => {
+      return items.filter((item) => {
+        if (item.type === "dir" && item.children) {
+          item.children = filterEmptyDirs(item.children)
+          return item.children.length > 0
+        }
+        return true
+      })
+    }
+
+    return filterEmptyDirs(result)
   } catch (error) {
     console.error("Error fetching repo contents:", error)
-    return []
+    if (error instanceof Error && error.message.includes("rate limit")) {
+      throw new Error("GitHub API rate limit exceeded. Please try again later.")
+    }
+    throw error
   }
 }
 
@@ -254,6 +374,91 @@ export async function getGithubRateLimit() {
     return rateLimit
   } catch (error) {
     console.error("Error fetching rate limit:", error)
+    return null
+  }
+}
+
+export async function getGithubRequestLogs(): Promise<GithubRequestLog[]> {
+  const session = await getServerSession(authOptions)
+  if (!session?.user?.id) {
+    throw new Error("Unauthorized")
+  }
+  return requestLogs
+}
+
+interface DetailedRateLimit {
+  resources: {
+    core: {
+      limit: number
+      used: number
+      remaining: number
+      reset: Date
+    }
+    search: {
+      limit: number
+      used: number
+      remaining: number
+      reset: Date
+    }
+    graphql: {
+      limit: number
+      used: number
+      remaining: number
+      reset: Date
+    }
+  }
+}
+
+export async function getDetailedRateLimit(): Promise<DetailedRateLimit | null> {
+  try {
+    const session = await getServerSession(authOptions)
+    if (!session?.user?.id) {
+      return null
+    }
+
+    const githubToken = await getGithubAccessToken(session.user.id)
+    if (!githubToken) {
+      return null
+    }
+
+    const octokit = new Octokit({
+      auth: githubToken,
+    })
+
+    const { data } = await octokit.rateLimit.get()
+
+    // Add null checks for graphql resource
+    const graphql = data.resources.graphql ?? {
+      limit: 0,
+      used: 0,
+      remaining: 0,
+      reset: 0,
+    }
+
+    return {
+      resources: {
+        core: {
+          limit: data.resources.core.limit,
+          used: data.resources.core.used,
+          remaining: data.resources.core.remaining,
+          reset: new Date(data.resources.core.reset * 1000),
+        },
+        search: {
+          limit: data.resources.search.limit,
+          used: data.resources.search.used,
+          remaining: data.resources.search.remaining,
+          reset: new Date(data.resources.search.reset * 1000),
+        },
+        graphql: {
+          limit: graphql.limit,
+          used: graphql.used,
+          remaining: graphql.remaining,
+          reset: new Date(graphql.reset * 1000),
+        },
+      },
+    }
+  } catch (error) {
+    console.error("Error fetching detailed rate limit:", error)
     return null
   }
 }
