@@ -2,7 +2,7 @@ import { AgentSource } from "@prisma/client"
 
 import { IconKeys } from "@/components/icons"
 
-export type SiteConfig = {
+export type SiteConfig = Metadata & {
   name: string
   author: string
   description: string
@@ -15,6 +15,8 @@ export type SiteConfig = {
     github: string
   }
   ogImage: string
+  defaultHomepage: string
+  afterLoginPath: string
 }
 
 export type NavItem = {
@@ -60,7 +62,6 @@ export interface QSource extends AgentSource {
   chunkOverlap: number
 }
 
-
 export interface PetitionSignatureEmailProps {
   petitionTitle: string
   petitionId: string
@@ -72,7 +73,7 @@ export interface PetitionWithDetails {
   id: string
   title: string
   content: string
-  status: 'ACTIVE' | 'CLOSED' | 'SUCCESSFUL'
+  status: "ACTIVE" | "CLOSED" | "SUCCESSFUL"
   _count: {
     signatures: number
   }

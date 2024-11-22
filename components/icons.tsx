@@ -47,7 +47,9 @@ import {
   FaVoteYea,
 } from "react-icons/fa"
 import {
+  FaGoogleScholar,
   FaHand,
+  FaHouseLock,
   FaMessage,
   FaPencil,
   FaRankingStar,
@@ -91,6 +93,7 @@ const icons = {
   docs: FaBook,
   robot: FaRobot,
   scroll: FaScroll,
+  safe: FaHouseLock,
 
   clipboard: AiOutlineCopy,
 
@@ -133,8 +136,10 @@ const icons = {
   book: FaBook,
   pencil: FaPencil,
   chevronLeft: LucideChevronLeft,
-  safe: FaShieldHalved,
+  shield: FaShieldHalved,
   wiki: BsWikipedia,
+  studies: FaGoogleScholar,
+  petition: FaScroll,
 }
 
 export const Icons: IconsType = icons

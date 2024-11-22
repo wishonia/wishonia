@@ -1,9 +1,10 @@
-'use client'
+"use client"
 
-import { useState, useEffect, useRef } from 'react'
-import { Input } from '@/components/ui/input'
-import { GlobalVariable } from '@/types/models/GlobalVariable'
-import { searchDfdaVariables } from '@/lib/clinicaltables'
+import { useEffect, useRef, useState } from "react"
+
+import { GlobalVariable } from "@/types/models/GlobalVariable"
+import { searchDfdaVariables } from "@/lib/clinicaltables"
+import { Input } from "@/components/ui/input"
 
 interface VariableSearchAutocompleteProps {
   onVariableSelect: (variable: GlobalVariable) => void
@@ -33,7 +34,7 @@ function getCachedResults(key: string): GlobalVariable[] | null {
 
     return results
   } catch (error) {
-    console.error('Error reading from cache:', error)
+    console.error("Error reading from cache:", error)
     return null
   }
 }
@@ -41,7 +42,7 @@ function getCachedResults(key: string): GlobalVariable[] | null {
 function setCachedResults(key: string, results: GlobalVariable[]) {
   try {
     // shrink the variables and just keep the name, url, and pngUrl
-    const smallerResults = results.map(variable => ({
+    const smallerResults = results.map((variable) => ({
       name: variable.name,
       url: variable.url,
       pngUrl: variable.pngUrl,
@@ -50,24 +51,24 @@ function setCachedResults(key: string, results: GlobalVariable[]) {
       variableId: variable.variableId,
       displayName: variable.displayName,
       description: variable.description,
-      variableCategoryName: variable.variableCategoryName
+      variableCategoryName: variable.variableCategoryName,
     }))
     const cacheData: SearchCache = {
       timestamp: Date.now(),
-      results: smallerResults
+      results: smallerResults,
     }
     localStorage.setItem(key, JSON.stringify(cacheData))
   } catch (error) {
-    console.error('Error writing to cache:', error)
+    console.error("Error writing to cache:", error)
   }
 }
 
-export default function VariableSearchAutocomplete({ 
-  onVariableSelect, 
+export default function VariableSearchAutocomplete({
+  onVariableSelect,
   searchParams = {},
-  placeholder 
+  placeholder,
 }: VariableSearchAutocompleteProps) {
-  const [searchTerm, setSearchTerm] = useState('')
+  const [searchTerm, setSearchTerm] = useState("")
   const [variables, setVariables] = useState<GlobalVariable[]>([])
   const [isLoading, setIsLoading] = useState(false)
   const [showDropdown, setShowDropdown] = useState(false)
@@ -76,23 +77,28 @@ export default function VariableSearchAutocomplete({
   const initialLoadComplete = useRef(false)
 
   // Single cache key function for both empty and search terms
-  const cacheKey = `dfda-variable-search:${searchTerm}:${
-    JSON.stringify(Object.keys(searchParams).sort().reduce<Record<string, string>>((obj, key) => {
-      obj[key] = searchParams[key]
-      return obj
-    }, {}))
-  }`
+  const cacheKey = `dfda-variable-search:${searchTerm}:${JSON.stringify(
+    Object.keys(searchParams)
+      .sort()
+      .reduce<Record<string, string>>((obj, key) => {
+        obj[key] = searchParams[key]
+        return obj
+      }, {})
+  )}`
 
   useEffect(() => {
     function handleClickOutside(event: MouseEvent) {
-      if (componentRef.current && !componentRef.current.contains(event.target as Node)) {
+      if (
+        componentRef.current &&
+        !componentRef.current.contains(event.target as Node)
+      ) {
         setShowDropdown(false)
       }
     }
 
-    document.addEventListener('mousedown', handleClickOutside)
+    document.addEventListener("mousedown", handleClickOutside)
     return () => {
-      document.removeEventListener('mousedown', handleClickOutside)
+      document.removeEventListener("mousedown", handleClickOutside)
     }
   }, [])
 
@@ -104,11 +110,11 @@ export default function VariableSearchAutocomplete({
       // Only do initial load if no cache and no search term
       const loadInitialResults = async () => {
         try {
-          const results = await searchDfdaVariables('', searchParams)
+          const results = await searchDfdaVariables("", searchParams)
           setCachedResults(cacheKey, results)
           setCachedVariables(results)
         } catch (error) {
-          console.error('Error loading initial results:', error)
+          console.error("Error loading initial results:", error)
         }
       }
       loadInitialResults()
@@ -116,7 +122,10 @@ export default function VariableSearchAutocomplete({
     }
 
     const search = async () => {
-      console.log('Searching for:', searchTerm ? `"${searchTerm}"` : '(empty string)')
+      console.log(
+        "Searching for:",
+        searchTerm ? `"${searchTerm}"` : "(empty string)"
+      )
       setIsLoading(true)
       try {
         // Check cache first
@@ -130,13 +139,17 @@ export default function VariableSearchAutocomplete({
 
         // If not in cache, perform the search
         const results = await searchDfdaVariables(searchTerm, searchParams)
-        console.log(`Search results for ${cacheKey}:`, results.length, 'items found')
-        
+        console.log(
+          `Search results for ${cacheKey}:`,
+          results.length,
+          "items found"
+        )
+
         // Cache the results
         setCachedResults(cacheKey, results)
         setVariables(results)
       } catch (error) {
-        console.error('Error searching:', error)
+        console.error("Error searching:", error)
       } finally {
         setIsLoading(false)
       }
@@ -158,13 +171,13 @@ export default function VariableSearchAutocomplete({
         onFocus={() => {
           setShowDropdown(true)
           if (!searchTerm) {
-            setSearchTerm('')
+            setSearchTerm("")
           }
         }}
         placeholder={placeholder}
         className="rounded-xl border-4 border-black bg-white p-4 text-xl placeholder:text-gray-500 focus:ring-4 focus:ring-blue-500"
       />
-      
+
       {showDropdown && (isLoading || variables.length > 0) && (
         <div className="absolute z-10 mt-2 w-full rounded-xl border-4 border-black bg-white shadow-lg">
           {isLoading && (
@@ -173,14 +186,14 @@ export default function VariableSearchAutocomplete({
               <span>Searching...</span>
             </div>
           )}
-          
+
           {variables.map((variable, index) => (
             <button
               key={index}
               className="w-full px-4 py-2 text-left hover:bg-gray-100 focus:bg-gray-100 focus:outline-none"
               onClick={() => {
                 onVariableSelect(variable)
-                setSearchTerm('')
+                setSearchTerm("")
                 setShowDropdown(false)
               }}
             >
@@ -201,19 +214,21 @@ export default function VariableSearchAutocomplete({
           <button
             key={`${cacheKey}-${index}`}
             onClick={() => onVariableSelect(variable)}
-            className="flex items-center gap-2 rounded-full border border-gray-200 bg-white px-3 py-1 text-sm hover:bg-gray-50"
+            className="flex transform items-center gap-2 rounded-full border-2 border-black bg-white px-3 py-1 text-sm shadow-none transition-transform hover:translate-y-0.5 hover:bg-gray-200"
           >
             {variable.pngUrl && (
-              <img 
-                src={variable.pngUrl} 
-                alt="" 
+              <img
+                src={variable.pngUrl}
+                alt=""
                 className="h-4 w-4 object-contain"
               />
             )}
-            <span>{variable.displayName || variable.name}</span>
+            <span className="font-bold">
+              {variable.displayName || variable.name}
+            </span>
           </button>
         ))}
       </div>
     </div>
   )
-} 
+}
