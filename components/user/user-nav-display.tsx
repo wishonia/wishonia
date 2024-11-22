@@ -1,25 +1,30 @@
 import React from "react"
-import { User } from "next-auth"
 import { NavItem } from "@/types"
-import { UserAccountNav } from "./user-account-nav"
+import { User } from "next-auth"
+
 import { LoginPromptButton } from "../LoginPromptButton"
+import { UserAccountNav } from "./user-account-nav"
 
 interface UserNavDisplayProps extends React.HTMLAttributes<HTMLDivElement> {
   user: Pick<User, "name" | "image" | "email">
   avatarNavItems?: NavItem[]
+  buttonVariant?: "outline" | "neobrutalist"
 }
 
-export function UserNavDisplay({ user, avatarNavItems }: UserNavDisplayProps) {
+export function UserNavDisplay({
+  user,
+  avatarNavItems,
+  buttonVariant,
+}: UserNavDisplayProps) {
   if (!user.email) {
     return (
       <LoginPromptButton
         buttonText="Sign in"
-        buttonVariant="outline"
+        buttonVariant={buttonVariant}
         buttonSize="sm"
       />
     )
   }
-
 
   return (
     <UserAccountNav

@@ -1,15 +1,21 @@
-'use client'
+"use client"
 
-import React, { useState, useEffect } from "react"
-import { Dialog, DialogContent, DialogTrigger, DialogTitle } from "@/components/ui/dialog"
-import { UserAuthForm } from "@/components/user/user-auth-form"
+import React, { useEffect, useState } from "react"
 import { VisuallyHidden } from "@radix-ui/themes"
+
 import { cn } from "@/lib/utils"
 import { buttonVariants } from "@/components/ui/button"
+import {
+  Dialog,
+  DialogContent,
+  DialogTitle,
+  DialogTrigger,
+} from "@/components/ui/dialog"
+import { UserAuthForm } from "@/components/user/user-auth-form"
 
 interface LoginPromptProps {
   buttonText?: string
-  buttonVariant?: "outline" | "default"
+  buttonVariant?: "outline" | "default" | "neobrutalist"
   buttonSize?: "default" | "sm" | "lg" | "icon"
 }
 
@@ -32,7 +38,11 @@ export function LoginPromptButton({
   return (
     <Dialog open={open} onOpenChange={setOpen}>
       <DialogTrigger asChild>
-        <button className={cn(buttonVariants({ variant: buttonVariant, size: buttonSize }))}>
+        <button
+          className={cn(
+            buttonVariants({ variant: buttonVariant, size: buttonSize })
+          )}
+        >
           {buttonText}
         </button>
       </DialogTrigger>
