@@ -92,7 +92,7 @@ export const wishoniaNavigation: DomainNavigation = {
     wishoniaLinks.globalSolutionsVote,
     wishoniaLinks.researcher,
     commonLinks.docs,
-    commonLinks.github,
+    commonLinks.contributeOnGithub,
     commonLinks.reportBug,
     commonLinks.requestFeature,
   ],
@@ -103,7 +103,7 @@ export const wishoniaNavigation: DomainNavigation = {
     wishoniaLinks.researcher,
     commonLinks.reportBug,
     commonLinks.requestFeature,
-    commonLinks.github,
+    commonLinks.contributeOnGithub,
   ],
   footerNav: [
     wishoniaLinks.globalProblemsVote,
@@ -111,7 +111,7 @@ export const wishoniaNavigation: DomainNavigation = {
     commonLinks.docs,
     commonLinks.reportBug,
     commonLinks.requestFeature,
-    commonLinks.github,
+    commonLinks.contributeOnGithub,
     wishoniaLinks.researcher,
   ],
 }

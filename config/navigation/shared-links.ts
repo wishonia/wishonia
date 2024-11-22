@@ -7,8 +7,8 @@ export const commonLinks = {
     icon: "docs",
     tooltip: "View the documentation",
   },
-  github: {
-    title: "Github",
+  contributeOnGithub: {
+    title: "GitHub",
     href: siteConfig.links.github,
     icon: "github",
     tooltip: "Contribute to the project on Github",
@@ -50,13 +50,6 @@ export const commonLinks = {
     href: `${siteConfig.links.github}/issues/new?template=feature_request.yaml`,
     icon: "lightbulb",
     tooltip: "Suggest a new feature",
-    external: true,
-  },
-  github: {
-    title: "Contribute",
-    href: siteConfig.links.github,
-    icon: "github",
-    tooltip: "Help improve the project on GitHub",
     external: true,
   },
 } as const
