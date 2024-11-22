@@ -393,7 +393,8 @@ export async function getGithubRequestLogs(): Promise<GithubRequestLog[]> {
   return requestLogs
 }
 
-interface DetailedRateLimit {
+// Update the type definition to match the actual structure
+export type DetailedRateLimit = {
   resources: {
     core: {
       limit: number

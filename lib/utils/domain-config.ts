@@ -1,9 +1,10 @@
 import { headers } from "next/headers"
+import { SiteConfig } from "@/types"
 
 import { env } from "@/env.mjs"
-import { domainConfigs, DomainConfigType } from "@/config/domains"
+import { domainConfigs } from "@/config/domains"
 
-export function getDomainConfig(hostname?: string | null): DomainConfigType {
+export function getDomainConfig(hostname?: string | null): SiteConfig {
   // Use TEST_DOMAIN from env if set (for local development)
   if (env.TEST_DOMAIN) {
     return domainConfigs[env.TEST_DOMAIN] || domainConfigs["wishonia.love"]
