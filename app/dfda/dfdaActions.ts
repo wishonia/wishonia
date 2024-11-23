@@ -158,18 +158,28 @@ export async function getMetaAnalysis(
   treatmentName: string,
   conditionName: string
 ) {
-  const topic = `Meta-analysis on the safety and effectiveness of ${treatmentName} for ${conditionName}`
-  const article = await findArticleByTopic(topic)
-
-  if (article) {
-    return article
+  if (!treatmentName?.trim() || !conditionName?.trim()) {
+    throw new Error("Treatment name and condition name are required")
   }
 
-  return writeArticle(topic, "test-user")
+  const topic = `Meta-analysis on the safety and effectiveness of ${treatmentName} for ${conditionName}`
+
+  try {
+    const article = await findArticleByTopic(topic)
+    if (article) {
+      return article
+    }
+    return writeArticle(topic, "test-user")
+  } catch (error) {
+    console.error("Failed to generate meta-analysis:", error)
+    throw new Error("Failed to generate meta-analysis. Please try again later.")
+  }
 }
 
-export const getDataSources = async (): Promise<any> => {
+export const getDataSources = async (
+  final_callback_url: string
+): Promise<any> => {
   return dfdaGET("connectors/list", {
-    final_callback_url: window.location.href,
+    final_callback_url,
   })
 }
