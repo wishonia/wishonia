@@ -65,7 +65,7 @@ export default function RightToTrialActSolutions() {
       ],
     },
     {
-      title: "Patient Rights",
+      title: "Medical Freedom",
       description:
         "Universal access to clinical trials and treatments for all patients",
       icon: "⚖️",
