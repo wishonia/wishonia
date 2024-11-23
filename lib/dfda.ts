@@ -1,8 +1,8 @@
 import { Account, User } from "@prisma/client"
 
+import { GlobalVariable } from "@/types/models/GlobalVariable"
 import { UserVariable } from "@/types/models/UserVariable"
 import { prisma } from "@/lib/db"
-import { GlobalVariable } from "@/types/models/GlobalVariable"
 
 async function getYourUser(yourUserId: string): Promise<User | null> {
   if (!yourUserId) {
@@ -25,8 +25,10 @@ async function getYourUser(yourUserId: string): Promise<User | null> {
 }
 
 // Function to get or create a user
-export async function getOrCreateDfdaUser(yourUserId: string): Promise<Account> {
-  if (!yourUserId || yourUserId.trim() === '') {
+export async function getOrCreateDfdaUser(
+  yourUserId: string
+): Promise<Account> {
+  if (!yourUserId || yourUserId.trim() === "") {
     throw new Error("Valid user ID string is required")
   }
 
@@ -53,7 +55,7 @@ export async function getOrCreateDfdaUser(yourUserId: string): Promise<Account> 
     throw new Error("DFDA client credentials are not configured")
   }
 
-  console.log('🔑 Creating DFDA user for:', yourUserId);
+  console.log("🔑 Creating DFDA user.")
   const response = await fetch(`https://safe.dfda.earth/api/v1/user`, {
     method: "POST",
     headers: {
@@ -66,11 +68,17 @@ export async function getOrCreateDfdaUser(yourUserId: string): Promise<Account> 
       clientId: process.env.DFDA_CLIENT_ID, // TODO: Make this unnecessary
     }),
   })
-  console.log('🔍 Creating DFDA user API Response Status:', response.status, response.statusText)
+  console.log(
+    "🔍 Creating DFDA user API Response Status:",
+    response.status,
+    response.statusText
+  )
 
   if (!response.ok) {
     const errorText = await response.text()
-    throw new Error(`Failed to create DFDA user: ${response.status} ${response.statusText} - ${errorText}`)
+    throw new Error(
+      `Failed to create DFDA user: ${response.status} ${response.statusText} - ${errorText}`
+    )
   }
 
   const jsonResponse = await response.json()
@@ -95,7 +103,21 @@ export async function getOrCreateDfdaUser(yourUserId: string): Promise<Account> 
   })
 }
 
-export async function getOrCreateDfdaAccessToken(yourUserId: string): Promise<string> {
+export async function getDfdaAccessTokenIfExists(
+  yourUserId: string
+): Promise<string | null> {
+  const account = await prisma.account.findFirst({
+    where: {
+      userId: yourUserId,
+      provider: "dfda",
+    },
+  })
+  return account && account.access_token ? account.access_token : null
+}
+
+export async function getOrCreateDfdaAccessToken(
+  yourUserId: string
+): Promise<string> {
   //return "demo"
   if (!yourUserId) {
     throw new Error("User ID is required")
@@ -142,7 +164,7 @@ async function dfdaFetch(
   additionalHeaders?: Record<string, string>
 ) {
   const dfdaParams = new URLSearchParams(urlParams)
-  const dfdaUrl = `https://safe.dfda.earth/api/v3/${path}?${dfdaParams}`
+  const dfdaApiUrl = `https://safe.dfda.earth/api/v3/${path}?${dfdaParams}`
   const headers: HeadersInit = {
     accept: "application/json",
     "Content-Type": method === "POST" ? "application/json" : "",
@@ -164,13 +186,13 @@ async function dfdaFetch(
     init.body = JSON.stringify(body)
   }
 
-  console.log(`Making ${method} request to ${dfdaUrl}`)
-  const response = await fetch(dfdaUrl, init)
+  console.log(`Making ${method} request to ${dfdaApiUrl}`)
+  const response = await fetch(dfdaApiUrl, init)
   if (!response.ok) {
     console.error(`DFDA API Error: ${response.status} ${response.statusText}`)
-    console.error('URL:', dfdaUrl)
+    console.error("URL:", dfdaApiUrl)
     const errorText = await response.text()
-    console.error('Response:', errorText)
+    console.error("Response:", errorText)
     throw new Error(`HTTP error! status: ${response.status}`)
   }
   const json = await response.json()
@@ -214,9 +236,9 @@ export async function searchGlobalVariables(
   name: string,
   limit: number = 10
 ): Promise<GlobalVariable[]> {
-  return await dfdaGET('variables', {
+  return await dfdaGET("variables", {
     name,
-    limit: limit.toString()
+    limit: limit.toString(),
   })
 }
 
@@ -224,35 +246,36 @@ export async function searchUserVariables(
   name: string,
   limit: number = 10
 ): Promise<UserVariable[]> {
-  return await dfdaGET('userVariables', {
+  return await dfdaGET("userVariables", {
     name,
-    limit: limit.toString()
+    limit: limit.toString(),
   })
 }
 
 export async function getVariable(params: {
-  id?: number | string,
-  name?: string,
-  type?: 'global' | 'user'
+  id?: number | string
+  name?: string
+  type?: "global" | "user"
 }): Promise<GlobalVariable | UserVariable | undefined> {
-  const { id, name, type = 'user' } = params
+  const { id, name, type = "user" } = params
 
   try {
     // If ID is provided, use direct fetch methods
     if (id) {
-      const numericId = typeof id === 'string' ? parseInt(id) : id
-      if (!isNaN(numericId)) {
-        return type === 'global' 
+      const numericId = typeof id === "string" ? parseInt(id) : id
+      if (!Number.isNaN(numericId)) {
+        return type === "global"
           ? await getGlobalVariable(numericId)
           : await getUserVariable(numericId)
       }
     }
-    
+
     // If name is provided, use search methods
     if (name) {
-      const results = type === 'global'
-        ? await searchGlobalVariables(name, 1)
-        : await searchUserVariables(name, 1)
+      const results =
+        type === "global"
+          ? await searchGlobalVariables(name, 1)
+          : await searchUserVariables(name, 1)
       return results?.[0]
     }
 
@@ -260,5 +283,25 @@ export async function getVariable(params: {
   } catch (error) {
     console.error(`Error fetching ${type} variable:`, error)
     return undefined
+  }
+}
+
+export async function getSafeRedirectUrl(
+  userId: string,
+  path?: string
+): Promise<string | null> {
+  const dfdaToken = await getDfdaAccessTokenIfExists(userId)
+  const baseUrl = "https://safe.dfda.earth/app/public/#/app"
+  if (dfdaToken) {
+    if (!path) {
+      path = "/reminders-inbox"
+    }
+    if (!path.startsWith("/")) {
+      path = "/" + path
+    }
+    return `${baseUrl}${path}?access_token=${dfdaToken}`
+  } else {
+    const newToken = await getOrCreateDfdaAccessToken(userId)
+    return `${baseUrl}/intro?access_token=${newToken}`
   }
 }

@@ -3,7 +3,7 @@ import { SiteConfig } from "@/types"
 import { env } from "@/env.mjs"
 
 export const siteConfig: SiteConfig = {
-  name: env.NEXT_PUBLIC_SITE_NAME,
+  name: env.NEXT_PUBLIC_SITE_NAME || "Wishonia",
   author: env.NEXT_PUBLIC_SITE_AUTHOR || "mikepsinn",
   description:
     env.NEXT_PUBLIC_SITE_DESCRIPTION ||

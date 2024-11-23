@@ -51,7 +51,7 @@ export default function DFDAComparisonTable() {
   )
 
   return (
-    <div className="relative mx-auto max-w-7xl px-4 py-8 sm:px-6 lg:px-8">
+    <div className="relative mx-auto max-w-7xl">
       <div className="overflow-hidden rounded-xl border-4 border-black bg-white p-4 shadow-[8px_8px_0px_0px_rgba(0,0,0,1)] sm:p-6">
         <motion.h1
           className="mb-4 text-center text-2xl font-black sm:text-3xl md:text-4xl"
