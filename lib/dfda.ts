@@ -164,7 +164,7 @@ async function dfdaFetch(
   additionalHeaders?: Record<string, string>
 ) {
   const dfdaParams = new URLSearchParams(urlParams)
-  const dfdaUrl = `https://safe.dfda.earth/api/v3/${path}?${dfdaParams}`
+  const dfdaApiUrl = `https://safe.dfda.earth/api/v3/${path}?${dfdaParams}`
   const headers: HeadersInit = {
     accept: "application/json",
     "Content-Type": method === "POST" ? "application/json" : "",
@@ -186,11 +186,11 @@ async function dfdaFetch(
     init.body = JSON.stringify(body)
   }
 
-  console.log(`Making ${method} request to ${dfdaUrl}`)
-  const response = await fetch(dfdaUrl, init)
+  console.log(`Making ${method} request to ${dfdaApiUrl}`)
+  const response = await fetch(dfdaApiUrl, init)
   if (!response.ok) {
     console.error(`DFDA API Error: ${response.status} ${response.statusText}`)
-    console.error("URL:", dfdaUrl)
+    console.error("URL:", dfdaApiUrl)
     const errorText = await response.text()
     console.error("Response:", errorText)
     throw new Error(`HTTP error! status: ${response.status}`)
@@ -286,13 +286,20 @@ export async function getVariable(params: {
   }
 }
 
-export async function getDfdaRedirectUrl(
-  userId: string
+export async function getSafeRedirectUrl(
+  userId: string,
+  path?: string
 ): Promise<string | null> {
   const dfdaToken = await getDfdaAccessTokenIfExists(userId)
   const baseUrl = "https://safe.dfda.earth/app/public/#/app"
   if (dfdaToken) {
-    return `${baseUrl}|/reminders-inbox?access_token=${dfdaToken}`
+    if (!path) {
+      path = "/reminders-inbox"
+    }
+    if (!path.startsWith("/")) {
+      path = "/" + path
+    }
+    return `${baseUrl}${path}?access_token=${dfdaToken}`
   } else {
     const newToken = await getOrCreateDfdaAccessToken(userId)
     return `${baseUrl}/intro?access_token=${newToken}`
