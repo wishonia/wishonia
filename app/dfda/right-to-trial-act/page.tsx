@@ -1,34 +1,37 @@
 import { Metadata } from "next"
 
+import { DFDA_PETITION_ID } from "@/lib/constants"
 import { getMarkdownContent } from "@/lib/content/getMarkdownContent"
+import { getUserId } from "@/lib/getUserId"
+import { checkPetitionSignature } from "@/app/petitions/petitionActions"
 
-import { DFDASignPetitionButton } from "./components/DFDASignPetitionButton"
+import { DFDAPetitionButtons } from "./components/DFDAPetitionButtons"
 import { FloatingPetitionButton } from "./components/FloatingPetitionButton"
-import { GitHubEditButton } from "./components/GitHubEditButton"
-import { PetitionSection } from "./components/PetitionSection"
 import CureAccelerationAct from "./components/right-to-trial-act"
 
 export const metadata: Metadata = {
   title: "Right to Trial Act | DFDA",
   description: "Faster Cures, Lower Costs, Universal Access 🚀",
 }
-
 export default async function RightToTrialPage() {
   const { html, data } = await getMarkdownContent(
     "globalSolutions/dfda/right-to-trial-act-1.md"
   )
 
+  const hasSigned = await checkPetitionSignature(DFDA_PETITION_ID)
+
+  const userId = await getUserId()
+
   return (
     <main className="">
       <CureAccelerationAct />
       <FloatingPetitionButton />
+      {/* Petition Sign Section */}
+      <DFDAPetitionButtons hasSigned={hasSigned} userId={userId} />
 
       {/* Constitutional Style Act Content */}
-      <section className="mt-16 border-t-4 border-[#8B4513]/20 bg-[#f4e4bc] p-4">
+      <section className="mt-8 border-t-4 border-[#8B4513]/20 bg-[#f4e4bc] p-4">
         <div className="mx-auto max-w-4xl">
-          {/* Petition Sign Section */}
-          <PetitionSection />
-
           {/* Constitutional Style Content */}
           <div
             className="prose prose-lg max-w-none
@@ -49,15 +52,7 @@ export default async function RightToTrialPage() {
             />
 
             {/* Bottom Petition Section */}
-            <div className="mt-16 border-t-4 pt-12 text-center">
-              <h3 className="mb-6 font-serif text-2xl">
-                Add Your Name to Support This Act
-              </h3>
-              <div className="flex flex-col items-center gap-4">
-                <DFDASignPetitionButton />
-                <GitHubEditButton />
-              </div>
-            </div>
+            <DFDAPetitionButtons hasSigned={hasSigned} userId={userId} />
           </div>
         </div>
       </section>

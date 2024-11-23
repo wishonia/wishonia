@@ -1,3 +1,5 @@
+export const DFDA_PETITION_ID = "right-to-trial-act"
+
 export const COLOURS = {
   "1C Enterprise": {
     color: "#814CCC",
