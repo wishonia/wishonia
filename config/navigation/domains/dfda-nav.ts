@@ -10,7 +10,7 @@ export const dfdaLinks = {
   },
   digitalTwinSafe: {
     title: "Digital Twin Safe",
-    href: "https://safe.dfda.earth",
+    href: "/dfda/safe/redirect",
     icon: "safe",
     tooltip: "Import, record and analyze your medical data",
   },
