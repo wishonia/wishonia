@@ -135,7 +135,9 @@ const ProblemsWithCurrentSystem = () => {
       </div>
 
       <div className="rounded-lg border-4 border-black bg-black p-8 text-center text-white shadow-[8px_8px_0px_0px_rgba(255,0,0,1)]">
-        <h3 className="mb-4 text-2xl font-black uppercase">The Real Cost</h3>
+        <h3 className="mb-4 text-2xl font-black uppercase">
+          ☠️ The Real Cost ☠️
+        </h3>
         <p className="text-xl font-bold">
           Every year we wait costs{" "}
           <span className="text-red-500">60 million lives</span>. We can't

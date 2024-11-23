@@ -17,6 +17,7 @@ interface SignPetitionButtonProps {
   className?: string
   signedClassName?: string
   onSignatureChange?: () => void
+  buttonVariant?: "default" | "neobrutalist"
 }
 
 export function SignPetitionButton({
@@ -26,6 +27,7 @@ export function SignPetitionButton({
   className,
   signedClassName,
   onSignatureChange,
+  buttonVariant = "default",
 }: SignPetitionButtonProps) {
   const { data: session } = useSession()
   const [signing, setSigning] = useState(false)
@@ -36,7 +38,7 @@ export function SignPetitionButton({
     return (
       <LoginPromptButton
         buttonText="Sign in to sign this petition"
-        buttonVariant="neobrutalist"
+        buttonVariant={buttonVariant}
       />
     )
   }
@@ -89,7 +91,7 @@ export function SignPetitionButton({
     <Button
       size="lg"
       disabled={signing}
-      variant={hasSigned ? "outline" : "default"}
+      variant={buttonVariant}
       className={cn(className, hasSigned && signedClassName)}
       onClick={handleClick}
     >
