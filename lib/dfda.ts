@@ -263,7 +263,7 @@ export async function getVariable(params: {
     // If ID is provided, use direct fetch methods
     if (id) {
       const numericId = typeof id === "string" ? parseInt(id) : id
-      if (!isNaN(numericId)) {
+      if (!Number.isNaN(numericId)) {
         return type === "global"
           ? await getGlobalVariable(numericId)
           : await getUserVariable(numericId)
