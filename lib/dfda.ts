@@ -55,7 +55,7 @@ export async function getOrCreateDfdaUser(
     throw new Error("DFDA client credentials are not configured")
   }
 
-  console.log("🔑 Creating DFDA user for:", yourUserId)
+  console.log("🔑 Creating DFDA user.")
   const response = await fetch(`https://safe.dfda.earth/api/v1/user`, {
     method: "POST",
     headers: {
