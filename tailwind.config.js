@@ -18,7 +18,8 @@ module.exports = {
     },
     extend: {
       fontFamily: {
-        sans: ["IM Fell English", "serif"],
+        sans: ["Space Grotesk", "system-ui", "sans-serif"],
+        mono: ["Space Mono", "monospace"],
       },
       colors: {
         border: "hsl(var(--border))",
@@ -64,6 +65,10 @@ module.exports = {
           border: "hsl(var(--sidebar-border))",
           ring: "hsl(var(--sidebar-ring))",
         },
+        "neo-pink": "#FF007F",
+        "neo-yellow": "#FFD700",
+        "neo-blue": "#0055FF",
+        "neo-green": "#00FF55",
       },
       borderRadius: {
         lg: "var(--radius)",
@@ -91,6 +96,7 @@ module.exports = {
       animation: {
         "accordion-down": "accordion-down 0.2s ease-out",
         "accordion-up": "accordion-up 0.2s ease-out",
+        "spin-slow": "spin 40s linear infinite",
       },
       typography: {
         DEFAULT: {
@@ -98,6 +104,10 @@ module.exports = {
             maxWidth: "none",
           },
         },
+      },
+      boxShadow: {
+        brutal: "4px 4px 0 0 #000000",
+        "brutal-lg": "8px 8px 0 0 #000000",
       },
     },
   },

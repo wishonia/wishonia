@@ -6,7 +6,7 @@ import "./globals.css";
 
 
 import { Metadata, Viewport } from "next";
-import { Inter } from "next/font/google";
+import { Space_Grotesk } from "next/font/google";
 import { CopilotKit } from "@copilotkit/react-core";
 import { Analytics } from "@vercel/analytics/react";
 import NextTopLoader from "nextjs-toploader";
@@ -22,7 +22,10 @@ import { Providers } from "@/app/providers"; // Import Providers
 
 
 
-const inter = Inter({ subsets: ["latin"] })
+const spaceGrotesk = Space_Grotesk({
+  subsets: ["latin"],
+  weight: ["400", "500", "700"]
+})
 
 export const metadata: Metadata = {
   metadataBase: new URL(siteConfig.url.base),
@@ -84,7 +87,7 @@ interface RootLayoutProps {
 export default function RootLayout({ children }: RootLayoutProps) {
   return (
     <html lang="en" suppressHydrationWarning>
-      <body className={cn("antialiased", inter.className)}>
+    <body className={cn("antialiased", spaceGrotesk.className)}>
         <Providers> {/* Wrap the application with Providers */}
           <CopilotKit url="/api/copilot/openai/">
             <NextTopLoader color="#DC2645" height={2.5} showSpinner={false} />
