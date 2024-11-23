@@ -10,7 +10,6 @@ import { Activity, ArrowRight, Info, Pill, Scroll, Users } from "lucide-react"
 import { GlobalVariable } from "@/types/models/all"
 import VariableSearchAutocomplete from "@/app/dfda/components/VariableSearchAutocomplete"
 
-import { getSafeUrlWithToken } from "../dfdaActions"
 import AdvancedTrialSearch from "../trials/components/AdvancedTrialSearch"
 import CitizenScienceSection from "./CitizenScienceSection"
 import CostSavingsTable from "./CostSavingsTable"
@@ -24,9 +23,9 @@ export default function DFDAHomePage() {
   const [isLoading, setIsLoading] = useState(false)
 
   const handleDigitalTwinSafeClick = async (path: string) => {
-    //setIsLoading(true)
-    const url = await getSafeUrlWithToken(path)
-    window.open(url, "_blank")
+    setIsLoading(true)
+    // send to /safe/redirect/[path]
+    router.push(`/dfda/safe/redirect/${path}`)
   }
 
   const features = [

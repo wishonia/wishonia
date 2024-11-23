@@ -1,37 +1,13 @@
 "use server"
 
-import {Effectiveness} from "@prisma/client"
-import {authOptions} from "@/lib/auth"
+import { Effectiveness } from "@prisma/client"
 
-import {prisma} from "@/lib/db"
-import {findArticleByTopic, writeArticle} from "@/lib/agents/researcher/researcher";
-import {dfdaGET, getOrCreateDfdaAccessToken} from '@/lib/dfda'
-import {getServerSession} from 'next-auth/next'
-
-export async function getSafeUrlWithToken(url: string) {
-  if(!url.includes('https')) {
-    //remove leading slash if it exists
-    url = url.startsWith('/') ? url.slice(1) : url;
-    url = 'https://safe.dfda.earth/app/public/#/app/' + url;
-  }
-  const token = await getDfdaAccessToken();
-  return `${url}?access_token=${token}`;
-}
-
-export async function getDfdaAccessToken() {
-  const session = await getServerSession(authOptions)
-  if (!session?.user?.id) {
-    console.log('No user ID found in session:', session)
-    return null
-  }
-  
-  try {
-    return await getOrCreateDfdaAccessToken(session.user.id)
-  } catch (error) {
-    console.error('Error getting DFDA access token:', error)
-    return null
-  }
-} 
+import {
+  findArticleByTopic,
+  writeArticle,
+} from "@/lib/agents/researcher/researcher"
+import { prisma } from "@/lib/db"
+import { dfdaGET } from "@/lib/dfda"
 
 export async function fetchConditions() {
   return prisma.dfdaCondition.findMany()
@@ -155,40 +131,45 @@ export async function searchTreatmentsAndConditions(query: string) {
 }
 
 export async function getConditionByName(name: string) {
-    return prisma.dfdaCondition.findFirst({
+  return prisma.dfdaCondition.findFirst({
+    where: {
+      name: {
+        equals: name,
+        mode: "insensitive",
+      },
+    },
+    include: {
+      conditionTreatments: {
         where: {
-            name: {
-                equals: name,
-                mode: 'insensitive'
-            }
+          popularity: {
+            gt: 10,
+          },
         },
         include: {
-            conditionTreatments: {
-                where: {
-                    popularity: {
-                        gt: 10
-                    }
-                },
-                include: {
-                    treatment: true,
-                },
-                orderBy: [{popularity: "desc"}, {averageEffect: "desc"}],
-            },
+          treatment: true,
         },
-    });
+        orderBy: [{ popularity: "desc" }, { averageEffect: "desc" }],
+      },
+    },
+  })
 }
 
-export async function getMetaAnalysis(treatmentName: string, conditionName: string) {
-  const topic = `Meta-analysis on the safety and effectiveness of ${treatmentName} for ${conditionName}`;
-  const article = await findArticleByTopic(topic);
+export async function getMetaAnalysis(
+  treatmentName: string,
+  conditionName: string
+) {
+  const topic = `Meta-analysis on the safety and effectiveness of ${treatmentName} for ${conditionName}`
+  const article = await findArticleByTopic(topic)
 
-  if(article) {
-    return article;
+  if (article) {
+    return article
   }
 
-    return writeArticle(topic, "test-user");
+  return writeArticle(topic, "test-user")
 }
 
 export const getDataSources = async (): Promise<any> => {
-  return dfdaGET('connectors/list', { final_callback_url: window.location.href })
+  return dfdaGET("connectors/list", {
+    final_callback_url: window.location.href,
+  })
 }

@@ -4,12 +4,18 @@ import { getSafeRedirectUrl } from "@/lib/dfda"
 import { getCurrentUser } from "@/lib/session"
 import { LoginPromptButton } from "@/components/LoginPromptButton"
 
-export default async function DfdaSafePage() {
+// Add Props interface for the page component
+interface DfdaSafePageProps {
+  params: {
+    path: string
+  }
+}
+
+export default async function DfdaSafePage({ params }: DfdaSafePageProps) {
   const session = await getCurrentUser()
 
   if (session) {
-    const redirectUrl = await getSafeRedirectUrl(session.id)
-
+    const redirectUrl = await getSafeRedirectUrl(session.id, params.path)
     if (redirectUrl) {
       redirect(redirectUrl)
     }
