@@ -3,7 +3,7 @@
 import React, { useState } from "react"
 import { useRouter } from "next/navigation"
 import { AnimatePresence, motion } from "framer-motion"
-import { ArrowRight, ChevronDown, Search } from "lucide-react"
+import { ArrowRight, ChevronDown, Loader2, Search } from "lucide-react"
 
 import { searchConditions } from "@/lib/clinicaltables"
 
@@ -75,8 +75,8 @@ export default function AdvancedTrialSearch({
   const [suggestions, setSuggestions] = useState<string[]>([])
   const [showFilters, setShowFilters] = useState(false)
   const [loading, setLoading] = useState(false)
-  const [isSearching, setIsSearching] = useState(false)
   const [searchError, setSearchError] = useState<string | null>(null)
+  const [isNavigating, setIsNavigating] = useState(false)
 
   // Initialize all filter fields with default values
   const [filters, setFilters] = useState<SearchFilters>({
@@ -114,58 +114,71 @@ export default function AdvancedTrialSearch({
     { key: "studyCompletion", label: "Study Completion" },
   ]
 
-  const handleSearch = async (e?: React.FormEvent) => {
+  const handleSearch = async (
+    e?: React.FormEvent,
+    searchFilters?: SearchFilters
+  ) => {
     e?.preventDefault()
 
-    setIsSearching(true)
+    // Hide suggestions when search is triggered
+    setSuggestions([])
+
+    setIsNavigating(true)
     setSearchError(null)
 
     try {
-      console.log("Starting search with filters:", filters)
+      // Use searchFilters if provided, otherwise use the state filters
+      const filtersToUse = searchFilters || filters
+      console.log("Starting search with filters:", filtersToUse)
 
       const queryParams = new URLSearchParams()
 
-      // Basic search parameters
+      // Use filtersToUse instead of filters throughout the function
       if (condition) queryParams.set("queryCond", condition)
-      if (filters.queryTerm) queryParams.set("queryTerm", filters.queryTerm)
-      if (filters.queryIntr) queryParams.set("queryIntr", filters.queryIntr)
-      if (filters.queryTitles)
-        queryParams.set("queryTitles", filters.queryTitles)
-      if (filters.queryOutc) queryParams.set("queryOutc", filters.queryOutc)
-      if (filters.querySpons) queryParams.set("querySpons", filters.querySpons)
-      if (filters.queryLead) queryParams.set("queryLead", filters.queryLead)
-      if (filters.queryId) queryParams.set("queryId", filters.queryId)
+      if (filtersToUse.queryTerm)
+        queryParams.set("queryTerm", filtersToUse.queryTerm)
+      if (filtersToUse.queryIntr)
+        queryParams.set("queryIntr", filtersToUse.queryIntr)
+      if (filtersToUse.queryTitles)
+        queryParams.set("queryTitles", filtersToUse.queryTitles)
+      if (filtersToUse.queryOutc)
+        queryParams.set("queryOutc", filtersToUse.queryOutc)
+      if (filtersToUse.querySpons)
+        queryParams.set("querySpons", filtersToUse.querySpons)
+      if (filtersToUse.queryLead)
+        queryParams.set("queryLead", filtersToUse.queryLead)
+      if (filtersToUse.queryId) queryParams.set("queryId", filtersToUse.queryId)
 
       // Build advanced filters string
       const advancedFilters: string[] = []
 
       // Sex filter
-      if (filters.sex && filters.sex !== "all") {
-        advancedFilters.push(`sex:${filters.sex}`)
+      if (filtersToUse.sex && filtersToUse.sex !== "all") {
+        advancedFilters.push(`sex:${filtersToUse.sex}`)
       }
 
       // Phase filter
-      if (filters.phase?.length) {
+      if (filtersToUse.phase?.length) {
         advancedFilters.push(
-          `phase:${filters.phase.map((p) => p.replace("Phase ", "")).join(",")}`
+          `phase:${filtersToUse.phase.map((p) => p.replace("Phase ", "")).join(",")}`
         )
       }
 
       // Study type filter
-      if (filters.studyType?.length) {
+      if (filtersToUse.studyType?.length) {
         const typeMap: Record<string, string> = {
           Interventional: "int",
           Observational: "obs",
           "Patient Registry": "pat_reg",
         }
-        const types = filters.studyType
+        const types = filtersToUse.studyType
           .map((t) => typeMap[t] || t.toLowerCase())
           .join(",")
         advancedFilters.push(`studyType:${types}`)
       }
 
       // Status filter
-      if (filters.status && filters.status !== "All studies") {
+      if (filtersToUse.status && filtersToUse.status !== "All studies") {
         const statusMap: Record<string, string> = {
           Recruiting: "RECRUITING",
           "Not yet recruiting": "NOT_YET_RECRUITING",
@@ -173,27 +186,28 @@ export default function AdvancedTrialSearch({
           Completed: "COMPLETED",
           "Enrolling by invitation": "ENROLLING_BY_INVITATION",
         }
-        const status = statusMap[filters.status] || filters.status.toUpperCase()
+        const status =
+          statusMap[filtersToUse.status] || filtersToUse.status.toUpperCase()
         queryParams.set("filterOverallStatus", status)
       }
 
       // Location filter
-      if (filters.zipCode && filters.distance) {
-        queryParams.set("locStr", filters.zipCode)
-        queryParams.set("distance", filters.distance)
+      if (filtersToUse.zipCode && filtersToUse.distance) {
+        queryParams.set("locStr", filtersToUse.zipCode)
+        queryParams.set("distance", filtersToUse.distance)
       }
 
       // Age range filter
-      if (filters.ageRange?.min || filters.ageRange?.max) {
+      if (filtersToUse.ageRange?.min || filtersToUse.ageRange?.max) {
         queryParams.set(
           "ageRange",
-          `${filters.ageRange.min || ""}y_${filters.ageRange.max || ""}y`
+          `${filtersToUse.ageRange.min || ""}y_${filtersToUse.ageRange.max || ""}y`
         )
       }
 
       // Date ranges
-      if (filters.dateRanges) {
-        Object.entries(filters.dateRanges).forEach(([key, range]) => {
+      if (filtersToUse.dateRanges) {
+        Object.entries(filtersToUse.dateRanges).forEach(([key, range]) => {
           if (range?.from || range?.to) {
             const paramKey = (() => {
               switch (key) {
@@ -226,13 +240,13 @@ export default function AdvancedTrialSearch({
       const searchUrl = `/dfda/trials/search?${queryParams.toString()}`
       console.log("Navigating to:", searchUrl)
 
-      router.push(searchUrl)
-      setShowFilters(false) // Close advanced filters after search
+      await router.push(searchUrl)
+      setShowFilters(false)
     } catch (error) {
       console.error("Search error:", error)
       setSearchError("Failed to perform search. Please try again.")
     } finally {
-      setIsSearching(false)
+      setIsNavigating(false)
     }
   }
 
@@ -264,16 +278,17 @@ export default function AdvancedTrialSearch({
   }
 
   const handleFilterChange = async (key: keyof SearchFilters, value: any) => {
-    // First update the filters
-    setFilters((prev) => ({ ...prev, [key]: value }))
-
-    // Add a small delay to ensure state is updated before searching
-    setTimeout(() => {
-      handleSearch()
-    }, 0)
+    // Update filters and immediately trigger search with the new values
+    setFilters((prev) => {
+      const newFilters = { ...prev, [key]: value }
+      // Trigger search with the new filters
+      handleSearch(undefined, newFilters)
+      return newFilters
+    })
   }
 
   const handleSuggestionClick = async (suggestion: string) => {
+    setIsNavigating(true)
     // First update both condition and filters
     setCondition(suggestion)
     setFilters((prev) => ({
@@ -319,15 +334,24 @@ export default function AdvancedTrialSearch({
 
           <button
             type="submit"
-            disabled={isSearching}
+            disabled={isNavigating}
             className={`group flex items-center gap-2 rounded-xl border-4 border-black ${
-              isSearching
+              isNavigating
                 ? "cursor-not-allowed bg-gray-200"
                 : "bg-gradient-to-r from-green-400 to-emerald-400 hover:translate-x-[2px] hover:translate-y-[2px] hover:shadow-none"
             } px-6 py-4 font-bold shadow-[4px_4px_0px_0px_rgba(0,0,0,1)] transition-all`}
           >
-            {isSearching ? "Searching..." : "Find Trials"}
-            <ArrowRight className="transition-transform group-hover:translate-x-1" />
+            {isNavigating ? (
+              <>
+                <Loader2 className="h-5 w-5 animate-spin" />
+                <span>Searching...</span>
+              </>
+            ) : (
+              <>
+                <span>Find Trials</span>
+                <ArrowRight className="transition-transform group-hover:translate-x-1" />
+              </>
+            )}
           </button>
         </div>
 
