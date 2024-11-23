@@ -1,21 +1,26 @@
-'use client'
+"use client"
 
-import { useState, useEffect } from 'react'
-import { useSession, signIn, signOut } from 'next-auth/react'
-import { Button } from '@/components/ui/button'
-import { Loader2, Github, AlertCircle } from 'lucide-react'
-import { Organization, Repository, FileItem, ExistingArticle } from './types'
-import { OrganizationSelector } from './OrganizationSelector'
-import { RepositorySelector } from './RepositorySelector'
-import { FileBrowser } from './FileBrowser'
-import { 
-  fetchGithubOrganizations, fetchGithubRepositories, fetchGithubFiles, 
-  fetchExistingArticles, createArticle, deleteGithubAccount
-} from '@/app/github/githubActions'
+import { useEffect, useState } from "react"
+import { AlertCircle, Github, Loader2 } from "lucide-react"
+import { signIn, useSession } from "next-auth/react"
+
+import { Button } from "@/components/ui/button"
+import {
+  createArticle,
+  fetchExistingArticles,
+  fetchGithubFiles,
+  fetchGithubOrganizations,
+  fetchGithubRepositories,
+} from "@/app/github/githubActions"
+
+import { FileBrowser } from "./FileBrowser"
+import { OrganizationSelector } from "./OrganizationSelector"
+import { RepositorySelector } from "./RepositorySelector"
+import { ExistingArticle, FileItem, Organization, Repository } from "./types"
 
 const STORAGE_KEYS = {
-  ORG: 'github-explorer-org',
-  REPO: 'github-explorer-repo'
+  ORG: "github-explorer-org",
+  REPO: "github-explorer-repo",
 } as const
 
 interface GitHubExplorerProps {
@@ -24,16 +29,16 @@ interface GitHubExplorerProps {
 
 function LoadingState() {
   return (
-    <div className="p-6 space-y-4">
+    <div className="space-y-4 p-6">
       <div className="flex items-center gap-2">
         <Loader2 className="h-4 w-4 animate-spin" />
         <span>Fetching Repos from GitHub...</span>
       </div>
       <div className="space-y-3">
         <div className="space-y-2">
-          <div className="h-12 bg-muted/50 animate-pulse rounded-md" />
-          <div className="h-12 bg-muted/50 animate-pulse rounded-md" />
-          <div className="h-12 bg-muted/50 animate-pulse rounded-md" />
+          <div className="h-12 animate-pulse rounded-md bg-muted/50" />
+          <div className="h-12 animate-pulse rounded-md bg-muted/50" />
+          <div className="h-12 animate-pulse rounded-md bg-muted/50" />
         </div>
       </div>
     </div>
@@ -43,23 +48,25 @@ function LoadingState() {
 export function GitHubExplorer({ accessToken }: GitHubExplorerProps) {
   const { data: session, status: sessionStatus } = useSession()
   const [organizations, setOrganizations] = useState<Organization[]>([])
-  const [selectedOrg, setSelectedOrg] = useState<string>('')
+  const [selectedOrg, setSelectedOrg] = useState<string>("")
   const [repositories, setRepositories] = useState<Repository[]>([])
-  const [selectedRepo, setSelectedRepo] = useState<string>('')
+  const [selectedRepo, setSelectedRepo] = useState<string>("")
   const [files, setFiles] = useState<FileItem[]>([])
   const [currentPath, setCurrentPath] = useState<string[]>([])
   const [loading, setLoading] = useState<boolean>(true)
   const [authError, setAuthError] = useState<boolean>(false)
-  const [existingArticles, setExistingArticles] = useState<ExistingArticle[]>([])
+  const [existingArticles, setExistingArticles] = useState<ExistingArticle[]>(
+    []
+  )
   const [error, setError] = useState<string | null>(null)
   const [scopeError, setScopeError] = useState<boolean>(false)
-  const requiredScopes = ['read:org', 'repo', 'user', 'read:user', 'user:email']
+  const requiredScopes = ["read:org", "repo", "user", "read:user", "user:email"]
 
   const [initializing, setInitializing] = useState(true)
 
   const handleReconnectGithub = async () => {
     if (!session?.user?.id) {
-      console.error('No user session found')
+      console.error("No user session found")
       return
     }
 
@@ -67,15 +74,15 @@ export function GitHubExplorer({ accessToken }: GitHubExplorerProps) {
       // Clear stored preferences but don't delete the account
       localStorage.removeItem(STORAGE_KEYS.ORG)
       localStorage.removeItem(STORAGE_KEYS.REPO)
-      
-      console.log('Initiating new GitHub sign in with additional scopes...')
-      await signIn('github', { 
+
+      console.log("Initiating new GitHub sign in with additional scopes...")
+      await signIn("github", {
         callbackUrl: window.location.href,
-        scope: 'read:org repo user read:user user:email' 
+        scope: "read:org repo user read:user user:email",
       })
     } catch (error) {
-      console.error('Error during GitHub reconnection:', error)
-      setError('Failed to reconnect GitHub account. Please try again.')
+      console.error("Error during GitHub reconnection:", error)
+      setError("Failed to reconnect GitHub account. Please try again.")
     }
   }
 
@@ -88,24 +95,30 @@ export function GitHubExplorer({ accessToken }: GitHubExplorerProps) {
       }
 
       try {
-        console.log('GitHubExplorer: Fetching organizations...')
+        console.log("GitHubExplorer: Fetching organizations...")
         const orgs = await fetchGithubOrganizations(accessToken)
-        console.log('GitHubExplorer: Fetched organizations count:', orgs?.length)
+        console.log(
+          "GitHubExplorer: Fetched organizations count:",
+          orgs?.length
+        )
         setOrganizations(orgs)
 
         const savedOrg = localStorage.getItem(STORAGE_KEYS.ORG)
         const savedRepo = localStorage.getItem(STORAGE_KEYS.REPO)
 
-        if (savedOrg && orgs.some(org => org.login === savedOrg)) {
+        if (savedOrg && orgs.some((org) => org.login === savedOrg)) {
           setSelectedOrg(savedOrg)
           const repos = await fetchGithubRepositories(accessToken, savedOrg)
           setRepositories(repos)
 
-          if (savedRepo && repos.some((repo: Repository) => repo.name === savedRepo)) {
+          if (
+            savedRepo &&
+            repos.some((repo: Repository) => repo.name === savedRepo)
+          ) {
             setSelectedRepo(savedRepo)
             const [filesResult, existingArticlesResult] = await Promise.all([
               fetchGithubFiles(accessToken, savedOrg, savedRepo),
-              fetchExistingArticles(savedOrg, savedRepo)
+              fetchExistingArticles(savedOrg, savedRepo),
             ])
             setFiles(filesResult)
             setExistingArticles(existingArticlesResult)
@@ -117,13 +130,16 @@ export function GitHubExplorer({ accessToken }: GitHubExplorerProps) {
           setRepositories(repos)
         }
       } catch (err) {
-        console.error('GitHubExplorer Error:', err)
-        const errorMessage = err instanceof Error ? err.message : 'Unknown error'
-        
+        console.error("GitHubExplorer Error:", err)
+        const errorMessage =
+          err instanceof Error ? err.message : "Unknown error"
+
         // Check if error is related to authentication or scopes
-        if (errorMessage.includes('authentication failed') || 
-            errorMessage.includes('invalid') || 
-            errorMessage.includes('expired')) {
+        if (
+          errorMessage.includes("authentication failed") ||
+          errorMessage.includes("invalid") ||
+          errorMessage.includes("expired")
+        ) {
           setAuthError(true)
           setScopeError(true)
         } else {
@@ -135,9 +151,9 @@ export function GitHubExplorer({ accessToken }: GitHubExplorerProps) {
       }
     }
 
-    if (sessionStatus === 'authenticated' && initializing) {
+    if (sessionStatus === "authenticated" && initializing) {
       loadSavedPreferences()
-    } else if (sessionStatus !== 'loading') {
+    } else if (sessionStatus !== "loading") {
       setInitializing(false)
     }
   }, [accessToken, sessionStatus])
@@ -156,7 +172,7 @@ export function GitHubExplorer({ accessToken }: GitHubExplorerProps) {
 
   const handleOrgSelect = async (org: string) => {
     setSelectedOrg(org)
-    setSelectedRepo('')
+    setSelectedRepo("")
     setFiles([])
     setCurrentPath([])
     setExistingArticles([])
@@ -165,7 +181,7 @@ export function GitHubExplorer({ accessToken }: GitHubExplorerProps) {
       const repos = await fetchGithubRepositories(accessToken, org)
       setRepositories(repos)
     } catch (err) {
-      setError(err instanceof Error ? err.message : 'Unknown error')
+      setError(err instanceof Error ? err.message : "Unknown error")
     } finally {
       setLoading(false)
     }
@@ -180,25 +196,30 @@ export function GitHubExplorer({ accessToken }: GitHubExplorerProps) {
     try {
       const [filesResult, existingArticlesResult] = await Promise.all([
         fetchGithubFiles(accessToken, selectedOrg, repo),
-        fetchExistingArticles(selectedOrg, repo)
+        fetchExistingArticles(selectedOrg, repo),
       ])
       setFiles(filesResult)
       setExistingArticles(existingArticlesResult)
     } catch (err) {
-      setError(err instanceof Error ? err.message : 'Unknown error')
+      setError(err instanceof Error ? err.message : "Unknown error")
     } finally {
       setLoading(false)
     }
   }
 
   const handleFileNavigation = async (path: string) => {
-    setCurrentPath(path.split('/').filter(Boolean))
+    setCurrentPath(path.split("/").filter(Boolean))
     setLoading(true)
     try {
-      const filesResult = await fetchGithubFiles(accessToken, selectedOrg, selectedRepo, path)
+      const filesResult = await fetchGithubFiles(
+        accessToken,
+        selectedOrg,
+        selectedRepo,
+        path
+      )
       setFiles(filesResult)
     } catch (err) {
-      setError(err instanceof Error ? err.message : 'Unknown error')
+      setError(err instanceof Error ? err.message : "Unknown error")
     } finally {
       setLoading(false)
     }
@@ -209,12 +230,15 @@ export function GitHubExplorer({ accessToken }: GitHubExplorerProps) {
       setLoading(true)
       await createArticle(accessToken, session, selectedOrg, selectedRepo, file)
       // Fetch updated articles after creation
-      const updatedArticles = await fetchExistingArticles(selectedOrg, selectedRepo)
+      const updatedArticles = await fetchExistingArticles(
+        selectedOrg,
+        selectedRepo
+      )
       setExistingArticles(updatedArticles)
-      alert('Article created successfully!')
+      alert("Article created successfully!")
     } catch (error) {
-      console.error('Error creating article:', error)
-      setError(error instanceof Error ? error.message : 'Unknown error')
+      console.error("Error creating article:", error)
+      setError(error instanceof Error ? error.message : "Unknown error")
     } finally {
       setLoading(false)
     }
@@ -226,17 +250,23 @@ export function GitHubExplorer({ accessToken }: GitHubExplorerProps) {
     }
   }, [session])
 
-  if (sessionStatus === 'loading' || initializing) {
+  if (sessionStatus === "loading" || initializing) {
     return <LoadingState />
   }
 
   if (!session) {
     return (
       <div className="p-6">
-        <h2 className="text-xl font-semibold mb-4">GitHub Explorer</h2>
-        <p className="mb-4">Please sign in to access your GitHub repositories.</p>
-        <Button onClick={() => signIn('github')} className="flex items-center gap-2">
-          <Github className="w-5 h-5" />
+        <h2 className="mb-4 text-xl font-semibold">GitHub Explorer</h2>
+        <p className="mb-4">
+          Please sign in to access your GitHub repositories.
+        </p>
+        <Button
+          variant="neobrutalist"
+          onClick={() => signIn("github")}
+          className="flex items-center gap-2"
+        >
+          <Github className="h-5 w-5" />
           Sign in with GitHub
         </Button>
       </div>
@@ -249,25 +279,28 @@ export function GitHubExplorer({ accessToken }: GitHubExplorerProps) {
 
   if (authError || scopeError) {
     return (
-      <div className="p-6 border rounded-lg bg-background">
+      <div className="rounded-lg border bg-background p-6">
         <div className="flex items-start gap-4">
-          <AlertCircle className="w-6 h-6 text-yellow-500" />
+          <AlertCircle className="h-6 w-6 text-yellow-500" />
           <div className="space-y-2">
-            <h2 className="text-xl font-semibold">GitHub Access Update Required</h2>
+            <h2 className="text-xl font-semibold">
+              GitHub Access Update Required
+            </h2>
             <p className="text-muted-foreground">
-              We need additional permissions to access your GitHub repositories. 
-              Please reconnect your GitHub account to grant the following permissions:
+              We need additional permissions to access your GitHub repositories.
+              Please reconnect your GitHub account to grant the following
+              permissions:
             </p>
-            <ul className="list-disc list-inside text-sm text-muted-foreground ml-4 space-y-1">
-              {requiredScopes.map(scope => (
+            <ul className="ml-4 list-inside list-disc space-y-1 text-sm text-muted-foreground">
+              {requiredScopes.map((scope) => (
                 <li key={scope}>{scope}</li>
               ))}
             </ul>
-            <Button 
+            <Button
               onClick={handleReconnectGithub}
               className="mt-4 flex items-center gap-2"
             >
-              <Github className="w-5 h-5" />
+              <Github className="h-5 w-5" />
               Reconnect GitHub Account
             </Button>
           </div>
@@ -279,16 +312,21 @@ export function GitHubExplorer({ accessToken }: GitHubExplorerProps) {
   if (authError || error) {
     return (
       <div className="p-6">
-        <h2 className="text-xl font-semibold mb-4">GitHub Explorer</h2>
+        <h2 className="mb-4 text-xl font-semibold">GitHub Explorer</h2>
         <p className="mb-4">
-          {authError ? 'Your GitHub access token has expired or is invalid. Please sign in again with GitHub to refresh your access.' : error}
+          {authError
+            ? "Your GitHub access token has expired or is invalid. Please sign in again with GitHub to refresh your access."
+            : error}
         </p>
-        <Button onClick={() => {
-          localStorage.removeItem(STORAGE_KEYS.ORG)
-          localStorage.removeItem(STORAGE_KEYS.REPO)
-          signIn('github')
-        }} className="flex items-center gap-2">
-          <Github className="w-5 h-5" />
+        <Button
+          onClick={() => {
+            localStorage.removeItem(STORAGE_KEYS.ORG)
+            localStorage.removeItem(STORAGE_KEYS.REPO)
+            signIn("github")
+          }}
+          className="flex items-center gap-2"
+        >
+          <Github className="h-5 w-5" />
           Reconnect GitHub Account
         </Button>
       </div>
@@ -296,9 +334,9 @@ export function GitHubExplorer({ accessToken }: GitHubExplorerProps) {
   }
 
   return (
-    <div className="space-y-4 p-6 max-w-4xl mx-auto">
+    <div className="mx-auto max-w-4xl space-y-4 p-6">
       {/* Header Section with Dropdowns */}
-      <div className="flex items-center gap-4 mb-6">
+      <div className="mb-6 flex items-center gap-4">
         <div className="flex-1 space-y-4">
           <div className="flex items-center gap-4">
             <OrganizationSelector

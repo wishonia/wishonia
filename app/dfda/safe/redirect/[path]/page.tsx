@@ -26,7 +26,7 @@ export default async function DfdaSafePage({ params }: DfdaSafePageProps) {
     <div className="flex min-h-[50vh] items-center justify-center">
       <LoginPromptButton
         buttonText="Sign in to access your Digital Twin Safe"
-        buttonVariant="default"
+        buttonVariant="neobrutalist"
         buttonSize="lg"
       />
     </div>
