@@ -1,16 +1,17 @@
-'use client'
+"use client"
 
-import { NeoBrutalistButton } from '@/components/ui/neo-brutalist-button'
+import { Button } from "@/components/ui/button"
 
 export function GitHubEditButton() {
   return (
-    <NeoBrutalistButton
+    <a
       href="https://github.com/wishonia/wishonia/edit/main/public/globalSolutions/dfda/right-to-trial-act-1.md"
-      external
-      variant="secondary"
-      className=""
+      target="_blank"
+      rel="noopener noreferrer"
     >
-    ✏️ Improve the Bill!
-    </NeoBrutalistButton>
+      <Button variant="neobrutalist" className="">
+        ✏️ Improve the Bill!
+      </Button>
+    </a>
   )
 }

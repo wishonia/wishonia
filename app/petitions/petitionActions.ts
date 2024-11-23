@@ -466,31 +466,34 @@ export async function uploadImage(formData: FormData) {
   }
 }
 
-export async function checkPetitionSignature(petitionId: string) {
+export async function checkPetitionSignature(
+  petitionId: string
+): Promise<boolean> {
+  "use server"
+
   const session = await getServerSession(authOptions)
   if (!session?.user?.id) {
-    console.log("No session user id")
     return false
-  } else {
-    console.log("Session user id:", session.user.id)
   }
 
-  const signature = await prisma.petitionSignature.findUnique({
-    where: {
-      petitionId_userId: {
-        petitionId,
-        userId: session.user.id,
+  try {
+    const signature = await prisma.petitionSignature.findUnique({
+      where: {
+        petitionId_userId: {
+          petitionId,
+          userId: session.user.id,
+        },
       },
-    },
-  })
+    })
 
-  if (!signature) {
-    console.log("No signature found")
-  } else {
-    console.log("Signature found")
+    return Boolean(signature)
+  } catch (error) {
+    console.error(
+      "Error checking petition signature:",
+      error instanceof Error ? error.message : error
+    )
+    return false
   }
-
-  return !!signature
 }
 
 export async function unsignPetition(petitionId: string) {

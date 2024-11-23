@@ -10,18 +10,30 @@ import {
 } from "lucide-react"
 
 import { Button } from "@/components/ui/button"
+import {
+  Tooltip,
+  TooltipContent,
+  TooltipProvider,
+  TooltipTrigger,
+} from "@/components/ui/tooltip"
 
 interface ShareButtonsProps {
   petitionId: string
-  userId: string
+  userId?: string
+  iconsOnly?: boolean
 }
 
 export function PetitionShareButtons({
   petitionId,
   userId,
+  iconsOnly = false,
 }: ShareButtonsProps) {
   const [copied, setCopied] = useState(false)
-  const referralUrl = `${process.env.NEXT_PUBLIC_APP_URL}/petitions/${petitionId}?ref=${userId}`
+
+  let referralUrl = `${process.env.NEXT_PUBLIC_APP_URL}/petitions/${petitionId}`
+  if (userId) {
+    referralUrl += `?ref=${userId}`
+  }
 
   const handleCopy = async () => {
     await navigator.clipboard.writeText(referralUrl)
@@ -35,48 +47,63 @@ export function PetitionShareButtons({
     linkedin: `https://www.linkedin.com/sharing/share-offsite/?url=${encodeURIComponent(referralUrl)}`,
   }
 
+  const shareButtons = [
+    {
+      icon: <TwitterIcon className="h-4 w-4" />,
+      text: "Twitter",
+      tooltip: "Share on Twitter",
+      onClick: () => window.open(shareLinks.twitter, "_blank"),
+    },
+    {
+      icon: <FacebookIcon className="h-4 w-4" />,
+      text: "Facebook",
+      tooltip: "Share on Facebook",
+      onClick: () => window.open(shareLinks.facebook, "_blank"),
+    },
+    {
+      icon: <LinkedinIcon className="h-4 w-4" />,
+      text: "LinkedIn",
+      tooltip: "Share on LinkedIn",
+      onClick: () => window.open(shareLinks.linkedin, "_blank"),
+    },
+    {
+      icon: copied ? (
+        <CheckIcon className="h-4 w-4" />
+      ) : (
+        <CopyIcon className="h-4 w-4" />
+      ),
+      text: copied ? "Copied!" : "Copy Link",
+      tooltip: "Copy link to clipboard",
+      onClick: handleCopy,
+    },
+  ]
+
   return (
     <div className="flex flex-col items-center gap-4">
-      <p className="text-center text-sm text-gray-600">
-        Share this petition to help it succeed
+      <p className="text-center">
+        Share to help us end the suffering of billions of people
       </p>
 
-      <div className="flex gap-2">
-        <Button
-          variant="outline"
-          size="sm"
-          onClick={() => window.open(shareLinks.twitter, "_blank")}
-        >
-          <TwitterIcon className="mr-2 h-4 w-4" />
-          Twitter
-        </Button>
-
-        <Button
-          variant="outline"
-          size="sm"
-          onClick={() => window.open(shareLinks.facebook, "_blank")}
-        >
-          <FacebookIcon className="mr-2 h-4 w-4" />
-          Facebook
-        </Button>
-
-        <Button
-          variant="outline"
-          size="sm"
-          onClick={() => window.open(shareLinks.linkedin, "_blank")}
-        >
-          <LinkedinIcon className="mr-2 h-4 w-4" />
-          LinkedIn
-        </Button>
-
-        <Button variant="outline" size="sm" onClick={handleCopy}>
-          {copied ? (
-            <CheckIcon className="mr-2 h-4 w-4" />
-          ) : (
-            <CopyIcon className="mr-2 h-4 w-4" />
-          )}
-          {copied ? "Copied!" : "Copy Link"}
-        </Button>
+      <div className="inline-flex flex-wrap justify-center gap-2">
+        <TooltipProvider>
+          {shareButtons.map((button, index) => (
+            <Tooltip key={index}>
+              <TooltipTrigger asChild>
+                <Button
+                  variant="neobrutalist"
+                  size="sm"
+                  onClick={button.onClick}
+                >
+                  <span className={iconsOnly ? "" : "mr-2"}>{button.icon}</span>
+                  {!iconsOnly && button.text}
+                </Button>
+              </TooltipTrigger>
+              <TooltipContent>
+                <p>{button.tooltip}</p>
+              </TooltipContent>
+            </Tooltip>
+          ))}
+        </TooltipProvider>
       </div>
     </div>
   )
