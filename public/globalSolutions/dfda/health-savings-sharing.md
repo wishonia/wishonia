@@ -1,4 +1,6 @@
-# 🌟 The Health Savings Sharing Program: Cutting Healthcare Costs in Half By Incentivizing Cures and Preventative Therapies 🚀
+# 🌟 The Health Savings Sharing Program
+
+Cutting Healthcare Costs in **HALF** By Incentivizing Cures and Preventative Therapies 🚀
 
 ---
 
