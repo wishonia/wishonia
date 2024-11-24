@@ -36,6 +36,7 @@ import {
   FaEyeSlash,
   FaHome,
   FaLightbulb,
+  FaMoneyBill,
   FaPeace,
   FaQuestionCircle,
   FaRegStar,
@@ -142,6 +143,7 @@ const icons = {
   wiki: BsWikipedia,
   studies: FaGoogleScholar,
   petition: FaScroll,
+  savings: FaMoneyBill,
 }
 
 export const Icons: IconsType = icons
