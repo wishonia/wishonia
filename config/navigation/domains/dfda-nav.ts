@@ -32,6 +32,12 @@ export const dfdaLinks = {
     icon: "petition",
     tooltip: "Help us transform healthcare by signing the Right to Trial Act",
   },
+  healthSavingsSharing: {
+    title: "Health Savings Sharing",
+    href: "/dfda/health-savings-sharing",
+    icon: "savings",
+    tooltip: "Learn about the innovative Health Savings Sharing program",
+  },
 } as const
 
 export const dfdaNavigation: DomainNavigation = {
@@ -42,6 +48,7 @@ export const dfdaNavigation: DomainNavigation = {
     dfdaLinks.digitalTwinSafe,
     dfdaLinks.fdai,
     dfdaLinks.petition,
+    dfdaLinks.healthSavingsSharing,
     commonLinks.contributeOnGithub,
     commonLinks.reportBug,
     commonLinks.requestFeature,
@@ -52,6 +59,7 @@ export const dfdaNavigation: DomainNavigation = {
     dfdaLinks.digitalTwinSafe,
     dfdaLinks.fdai,
     dfdaLinks.petition,
+    dfdaLinks.healthSavingsSharing,
     commonLinks.reportBug,
     commonLinks.requestFeature,
     commonLinks.contributeOnGithub,
@@ -62,6 +70,7 @@ export const dfdaNavigation: DomainNavigation = {
     dfdaLinks.digitalTwinSafe,
     dfdaLinks.fdai,
     dfdaLinks.petition,
+    dfdaLinks.healthSavingsSharing,
     commonLinks.reportBug,
     commonLinks.requestFeature,
     commonLinks.contributeOnGithub,
