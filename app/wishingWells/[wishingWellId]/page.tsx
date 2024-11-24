@@ -3,7 +3,7 @@ import { notFound } from "next/navigation"
 
 import { getGlobalWishingWell } from "@/lib/api/wishingWells"
 import { Shell } from "@/components/layout/shell"
-import MarkdownRendererForItem from "@/components/MarkdownRendererForItem"
+import MarkdownRendererForItem from "@/components/markdown/MarkdownRendererForItem"
 
 interface WishingWellPageProps {
   params: { wishingWellId: string }

@@ -3,7 +3,7 @@ import { notFound } from "next/navigation"
 
 import { getGlobalSolution } from "@/lib/api/globalSolutions"
 import { Shell } from "@/components/layout/shell"
-import MarkdownRenderer from "@/components/MarkdownRenderer"
+import MarkdownRenderer from "@/components/markdown/MarkdownRenderer"
 
 interface GlobalSolutionPageProps {
   params: { globalSolutionId: string }
