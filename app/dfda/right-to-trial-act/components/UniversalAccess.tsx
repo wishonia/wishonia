@@ -56,7 +56,7 @@ export default function UniversalAccess() {
       transition={{ duration: 0.5 }}
       className="rounded-lg border-4 border-black bg-white p-6 shadow-[8px_8px_0px_0px_rgba(0,0,0,1)]"
     >
-      <h2 className="mb-4 text-3xl font-black">Patient Rights 🚪</h2>
+      <h2 className="mb-4 text-3xl font-black">Medical Freedom 🚪</h2>
       <div className="grid grid-cols-1 gap-4 md:grid-cols-3">
         {sections.map((section, i) => (
           <motion.div
