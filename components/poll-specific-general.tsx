@@ -14,7 +14,7 @@ import { AnonymousVoteButton } from "@/components/anonymous-vote-button"
 import BarChartGeneral from "@/components/bar-chart-general"
 import { Icons } from "@/components/icons"
 import { LoggedInVoteButton } from "@/components/logged-in-vote-button"
-import MarkdownRendererForItem from "@/components/MarkdownRendererForItem"
+import MarkdownRendererForItem from "@/components/markdown/MarkdownRendererForItem"
 
 interface PollProps<T> {
   thisItem: WishingWell | GlobalProblem | GlobalProblemSolution

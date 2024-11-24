@@ -5,7 +5,7 @@ import { getGlobalProblem } from "@/lib/api/globalProblems"
 import { getCurrentUser } from "@/lib/session"
 import { GlobalProblemSolutionsList } from "@/components/global-problem-solutions-list"
 import { Shell } from "@/components/layout/shell"
-import MarkdownRenderer from "@/components/MarkdownRenderer"
+import MarkdownRenderer from "@/components/markdown/MarkdownRenderer"
 import { PollRandomGlobalProblemSolutions } from "@/components/poll-random-global-problem-solutions"
 
 interface GlobalProblemPageProps {

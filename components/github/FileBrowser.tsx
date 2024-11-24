@@ -1,13 +1,27 @@
-import { useState, useMemo, useEffect } from 'react'
-import { Card } from '@/components/ui/card'
-import { Button } from '@/components/ui/button'
-import { Input } from '@/components/ui/input'
-import Link from 'next/link'
-import { 
-  Search, File, Folder, ChevronRight, FileText, 
-  FileCode, FileJson, Image, ExternalLink 
-} from 'lucide-react'
-import { FileItem, ExistingArticle } from './types'
+import { useEffect, useMemo, useState } from "react"
+import Link from "next/link"
+import {
+  ChevronRight,
+  ExternalLink,
+  File,
+  FileCode,
+  FileJson,
+  FileText,
+  Folder,
+  Image,
+  Search,
+} from "lucide-react"
+
+import { useDebounce } from "@/lib/hooks/useDebounce"
+import { Button } from "@/components/ui/button"
+import { Card } from "@/components/ui/card"
+import {
+  Dialog,
+  DialogContent,
+  DialogHeader,
+  DialogTitle,
+} from "@/components/ui/dialog"
+import { Input } from "@/components/ui/input"
 import {
   Select,
   SelectContent,
@@ -15,10 +29,13 @@ import {
   SelectTrigger,
   SelectValue,
 } from "@/components/ui/select"
-import { useDebounce } from '@/lib/hooks/useDebounce'
-import { searchGithubRepository, fetchFileContent } from '@/app/github/githubActions'
-import { Dialog, DialogContent, DialogHeader, DialogTitle } from "@/components/ui/dialog"
-import MarkdownRenderer from "@/components/MarkdownRenderer"
+import MarkdownRenderer from "@/components/markdown/MarkdownRenderer"
+import {
+  fetchFileContent,
+  searchGithubRepository,
+} from "@/app/github/githubActions"
+
+import { ExistingArticle, FileItem } from "./types"
 
 interface Props {
   files: FileItem[]
@@ -38,46 +55,49 @@ interface FileType {
 
 function truncateFileName(name: string, maxLength: number = 40) {
   if (name.length <= maxLength) return name
-  
-  const extension = name.split('.').pop()
-  const nameWithoutExt = name.slice(0, name.lastIndexOf('.'))
-  
+
+  const extension = name.split(".").pop()
+  const nameWithoutExt = name.slice(0, name.lastIndexOf("."))
+
   if (!extension) return `${name.slice(0, maxLength)}...`
-  
-  const truncatedName = nameWithoutExt.slice(0, maxLength - extension.length - 4) // -4 for "..." and "."
+
+  const truncatedName = nameWithoutExt.slice(
+    0,
+    maxLength - extension.length - 4
+  ) // -4 for "..." and "."
   return `${truncatedName}...${extension}`
 }
 
 const getFileIcon = (fileName: string) => {
-  const ext = fileName.split('.').pop()?.toLowerCase()
-  switch(ext) {
-    case 'md':
-    case 'txt':
-      return <FileText className="w-4 h-4" />
-    case 'json':
-      return <FileJson className="w-4 h-4" />
-    case 'js':
-    case 'ts':
-    case 'jsx':
-    case 'tsx':
-    case 'py':
-    case 'rb':
-    case 'php':
-      return <FileCode className="w-4 h-4" />
-    case 'jpg':
-    case 'jpeg':
-    case 'png':
-    case 'gif':
-    case 'svg':
-      return <Image className="w-4 h-4" />
+  const ext = fileName.split(".").pop()?.toLowerCase()
+  switch (ext) {
+    case "md":
+    case "txt":
+      return <FileText className="h-4 w-4" />
+    case "json":
+      return <FileJson className="h-4 w-4" />
+    case "js":
+    case "ts":
+    case "jsx":
+    case "tsx":
+    case "py":
+    case "rb":
+    case "php":
+      return <FileCode className="h-4 w-4" />
+    case "jpg":
+    case "jpeg":
+    case "png":
+    case "gif":
+    case "svg":
+      return <Image className="h-4 w-4" />
     default:
-      return <File className="w-4 h-4" />
+      return <File className="h-4 w-4" />
   }
 }
 
 const formatSize = (bytes?: number) => {
-  if (!bytes) return '0 B'
-  const units = ['B', 'KB', 'MB', 'GB']
+  if (!bytes) return "0 B"
+  const units = ["B", "KB", "MB", "GB"]
   let size = bytes
   let unitIndex = 0
   while (size >= 1024 && unitIndex < units.length - 1) {
@@ -88,10 +108,10 @@ const formatSize = (bytes?: number) => {
 }
 
 const getFileType = (file: FileItem) => {
-  if (file.type === 'dir') return 'folder'
-  const extension = file.name.split('.').pop()?.toLowerCase()
-  if (extension === 'md') return 'md'
-  return 'other'
+  if (file.type === "dir") return "folder"
+  const extension = file.name.split(".").pop()?.toLowerCase()
+  if (extension === "md") return "md"
+  return "other"
 }
 
 const STORAGE_KEYS = {
@@ -106,8 +126,8 @@ const fixMarkdownPaths = (
   filePath: string
 ): string => {
   // Get the directory path of the current file
-  const currentDir = filePath.split('/').slice(0, -1).join('/')
-  
+  const currentDir = filePath.split("/").slice(0, -1).join("/")
+
   // Base URL for raw GitHub content
   const rawGitHubBase = `https://raw.githubusercontent.com/${orgName}/${repoName}/main`
 
@@ -117,15 +137,15 @@ const fixMarkdownPaths = (
     (match, altText, path) => {
       // Handle different types of relative paths
       let absolutePath
-      if (path.startsWith('./')) {
+      if (path.startsWith("./")) {
         // Handle ./path/to/image.png
-        absolutePath = path.replace('./', `${currentDir}/`)
-      } else if (path.startsWith('../')) {
+        absolutePath = path.replace("./", `${currentDir}/`)
+      } else if (path.startsWith("../")) {
         // Handle ../path/to/image.png
-        const dirs = currentDir.split('/')
+        const dirs = currentDir.split("/")
         const upDirs = path.match(/\.\.\//g)?.length || 0
-        const remainingPath = path.replace(/\.\.\//g, '')
-        const newBasePath = dirs.slice(0, -upDirs).join('/')
+        const remainingPath = path.replace(/\.\.\//g, "")
+        const newBasePath = dirs.slice(0, -upDirs).join("/")
         absolutePath = `${newBasePath}/${remainingPath}`
       } else {
         // Handle relative path without ./ or ../
@@ -133,34 +153,34 @@ const fixMarkdownPaths = (
       }
 
       // Clean up any double slashes and create the full URL
-      const cleanPath = absolutePath.replace(/\/+/g, '/')
+      const cleanPath = absolutePath.replace(/\/+/g, "/")
       return `![${altText}](${rawGitHubBase}${cleanPath})`
     }
   )
 }
 
-export function FileBrowser({ 
-  files, 
-  repoName, 
+export function FileBrowser({
+  files,
+  repoName,
   orgName,
   accessToken,
-  currentPath, 
-  existingArticles, 
-  onNavigate, 
-  onCreateArticle 
+  currentPath,
+  existingArticles,
+  onNavigate,
+  onCreateArticle,
 }: Props) {
   const [searchTerm, setSearchTerm] = useState(() => {
-    if (typeof window !== 'undefined') {
-      return localStorage.getItem(STORAGE_KEYS.SEARCH(repoName)) || ''
+    if (typeof window !== "undefined") {
+      return localStorage.getItem(STORAGE_KEYS.SEARCH(repoName)) || ""
     }
-    return ''
+    return ""
   })
-  
+
   const [selectedFileType, setSelectedFileType] = useState<string>(() => {
-    if (typeof window !== 'undefined') {
-      return localStorage.getItem(STORAGE_KEYS.FILE_TYPE(repoName)) || 'all'
+    if (typeof window !== "undefined") {
+      return localStorage.getItem(STORAGE_KEYS.FILE_TYPE(repoName)) || "all"
     }
-    return 'all'
+    return "all"
   })
 
   const [isSearching, setIsSearching] = useState(false)
@@ -172,10 +192,10 @@ export function FileBrowser({
   const debouncedSearch = useDebounce(searchTerm, 500)
 
   const fileTypes: FileType[] = [
-    { value: 'all', label: 'All Files' },
-    { value: 'md', label: 'Markdown' },
-    { value: 'folder', label: 'Folders' },
-    { value: 'other', label: 'Other Files' },
+    { value: "all", label: "All Files" },
+    { value: "md", label: "Markdown" },
+    { value: "folder", label: "Folders" },
+    { value: "other", label: "Other Files" },
   ]
 
   useEffect(() => {
@@ -202,22 +222,21 @@ export function FileBrowser({
     // If we're searching and have search results, use those
     const filesToFilter = searchTerm.length >= 3 ? searchResults : files
 
-    const filtered = filesToFilter.filter(file => {
-      const matchesType = selectedFileType === 'all' || getFileType(file) === selectedFileType
+    const filtered = filesToFilter.filter((file) => {
+      const matchesType =
+        selectedFileType === "all" || getFileType(file) === selectedFileType
       return matchesType
     })
-    
+
     return filtered.sort((a, b) => {
-      if (a.type === 'dir' && b.type !== 'dir') return -1
-      if (a.type !== 'dir' && b.type === 'dir') return 1
+      if (a.type === "dir" && b.type !== "dir") return -1
+      if (a.type !== "dir" && b.type === "dir") return 1
       return a.name.localeCompare(b.name)
     })
   }, [files, searchResults, searchTerm, selectedFileType])
 
   const getExistingArticle = (filePath: string) => {
-    return existingArticles.find(article => 
-      article.source.endsWith(filePath)
-    )
+    return existingArticles.find((article) => article.source.endsWith(filePath))
   }
 
   const renderFileName = (file: FileItem) => {
@@ -225,26 +244,24 @@ export function FileBrowser({
     if (searchTerm.length >= 3) {
       return (
         <div className="flex flex-col">
-          <span className="truncate">
-            {truncateFileName(file.name)}
-          </span>
-          <span className="text-xs text-muted-foreground truncate">
+          <span className="truncate">{truncateFileName(file.name)}</span>
+          <span className="truncate text-xs text-muted-foreground">
             {file.path}
           </span>
         </div>
       )
     }
-    
+
     // In regular browsing, just show the name
     return (
-      <span className={`truncate ${file.type === 'dir' ? 'font-medium' : ''}`}>
+      <span className={`truncate ${file.type === "dir" ? "font-medium" : ""}`}>
         {truncateFileName(file.name)}
       </span>
     )
   }
 
   const handleFileClick = async (file: FileItem) => {
-    if (file.type === 'dir') {
+    if (file.type === "dir") {
       onNavigate(searchTerm.length >= 3 ? file.path : file.name)
       return
     }
@@ -252,16 +269,21 @@ export function FileBrowser({
     try {
       setSelectedFile(file)
       setIsLoading(true)
-      let content = await fetchFileContent(accessToken, orgName, repoName, file.path)
-      
+      let content = await fetchFileContent(
+        accessToken,
+        orgName,
+        repoName,
+        file.path
+      )
+
       // Fix markdown paths if it's a markdown file
       if (isMarkdown(file.name)) {
         content = fixMarkdownPaths(content, orgName, repoName, file.path)
       }
-      
+
       setFileContent(content)
     } catch (error) {
-      console.error('Error fetching file content:', error)
+      console.error("Error fetching file content:", error)
     } finally {
       setIsLoading(false)
     }
@@ -272,7 +294,8 @@ export function FileBrowser({
     setFileContent(null)
   }
 
-  const isMarkdown = (filename: string) => filename.toLowerCase().endsWith('.md')
+  const isMarkdown = (filename: string) =>
+    filename.toLowerCase().endsWith(".md")
 
   // Save search term to localStorage when it changes
   useEffect(() => {
@@ -300,17 +323,19 @@ export function FileBrowser({
           <Button
             variant="ghost"
             className="h-8 px-2"
-            onClick={() => onNavigate('')}
+            onClick={() => onNavigate("")}
           >
             {repoName}
           </Button>
           {currentPath.map((part, index) => (
             <div key={index} className="flex items-center">
-              <ChevronRight className="w-4 h-4 mx-1" />
+              <ChevronRight className="mx-1 h-4 w-4" />
               <Button
                 variant="ghost"
                 className="h-8 px-2"
-                onClick={() => onNavigate(currentPath.slice(0, index + 1).join('/'))}
+                onClick={() =>
+                  onNavigate(currentPath.slice(0, index + 1).join("/"))
+                }
               >
                 {part}
               </Button>
@@ -346,7 +371,9 @@ export function FileBrowser({
         {/* Loading State */}
         {isSearching && (
           <div className="flex items-center justify-center py-4">
-            <span className="text-sm text-muted-foreground">Searching repository...</span>
+            <span className="text-sm text-muted-foreground">
+              Searching repository...
+            </span>
           </div>
         )}
 
@@ -354,47 +381,47 @@ export function FileBrowser({
         <div className="space-y-1">
           {sortedFiles.map((file) => {
             const existingArticle = getExistingArticle(file.path)
-            
+
             return (
               <div
                 key={file.path}
-                className={`flex items-center justify-between p-2 rounded-lg ${
-                  file.type === 'dir' 
-                    ? 'bg-muted/50 hover:bg-muted' 
-                    : 'hover:bg-muted/50'
+                className={`flex items-center justify-between rounded-lg p-2 ${
+                  file.type === "dir"
+                    ? "bg-muted/50 hover:bg-muted"
+                    : "hover:bg-muted/50"
                 }`}
               >
-                <div 
-                  className="flex items-center gap-2 flex-1 min-w-0 cursor-pointer"
+                <div
+                  className="flex min-w-0 flex-1 cursor-pointer items-center gap-2"
                   onClick={() => handleFileClick(file)}
                 >
-                  {file.type === 'dir' ? (
-                    <Folder className="w-4 h-4 shrink-0 text-blue-500" />
+                  {file.type === "dir" ? (
+                    <Folder className="h-4 w-4 shrink-0 text-blue-500" />
                   ) : (
                     <span className="shrink-0">{getFileIcon(file.name)}</span>
                   )}
                   {renderFileName(file)}
                   {file.size !== undefined && (
-                    <span className="text-sm text-muted-foreground shrink-0">
+                    <span className="shrink-0 text-sm text-muted-foreground">
                       {formatSize(file.size)}
                     </span>
                   )}
                 </div>
-                {file.type === 'file' && (
-                  <div className="flex items-center gap-2 shrink-0">
+                {file.type === "file" && (
+                  <div className="flex shrink-0 items-center gap-2">
                     {existingArticle ? (
-                      <Link 
+                      <Link
                         href={`/articles/${existingArticle.slug}`}
                         className="flex items-center gap-1"
                       >
                         <Button variant="secondary" size="sm">
-                          <ExternalLink className="w-4 h-4 mr-1" />
+                          <ExternalLink className="mr-1 h-4 w-4" />
                           View Article
                         </Button>
                       </Link>
                     ) : (
-                      <Button 
-                        variant="outline" 
+                      <Button
+                        variant="outline"
                         size="sm"
                         onClick={() => onCreateArticle(file)}
                       >
@@ -406,30 +433,38 @@ export function FileBrowser({
               </div>
             )
           })}
-          
-          {searchTerm.length >= 2 && sortedFiles.length === 0 && !isSearching && (
-            <div className="text-center py-4 text-sm text-muted-foreground">
-              No files found matching your search
-            </div>
-          )}
+
+          {searchTerm.length >= 2 &&
+            sortedFiles.length === 0 &&
+            !isSearching && (
+              <div className="py-4 text-center text-sm text-muted-foreground">
+                No files found matching your search
+              </div>
+            )}
         </div>
       </div>
 
       {/* File Viewer Modal */}
-      <Dialog open={selectedFile !== null} onOpenChange={() => closeFileViewer()}>
-        <DialogContent className="max-w-4xl max-h-[80vh] overflow-y-auto">
+      <Dialog
+        open={selectedFile !== null}
+        onOpenChange={() => closeFileViewer()}
+      >
+        <DialogContent className="max-h-[80vh] max-w-4xl overflow-y-auto">
           <DialogHeader>
             <DialogTitle>{selectedFile?.name}</DialogTitle>
           </DialogHeader>
-          
+
           {isLoading ? (
             <div className="flex items-center justify-center py-8">
-              <span className="text-sm text-muted-foreground">Loading file content...</span>
+              <span className="text-sm text-muted-foreground">
+                Loading file content...
+              </span>
             </div>
           ) : (
             <div className="mt-4">
-              {fileContent && selectedFile && (
-                isMarkdown(selectedFile.name) ? (
+              {fileContent &&
+                selectedFile &&
+                (isMarkdown(selectedFile.name) ? (
                   <MarkdownRenderer
                     name={selectedFile.name}
                     description={null}
@@ -437,11 +472,10 @@ export function FileBrowser({
                     content={fileContent}
                   />
                 ) : (
-                  <pre className="p-4 bg-muted rounded-lg overflow-x-auto">
+                  <pre className="overflow-x-auto rounded-lg bg-muted p-4">
                     <code>{fileContent}</code>
                   </pre>
-                )
-              )}
+                ))}
             </div>
           )}
         </DialogContent>
