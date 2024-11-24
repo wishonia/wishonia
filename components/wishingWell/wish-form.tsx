@@ -1,26 +1,13 @@
 "use client"
 
 import * as React from "react"
-import { useEffect, useState } from "react"
 import { useRouter } from "next/navigation"
 import { zodResolver } from "@hookform/resolvers/zod"
 import { useForm } from "react-hook-form"
 import * as z from "zod"
 
-import { cn } from "@/lib/utils"
 import { wishSchema } from "@/lib/validations/wish"
-import { buttonVariants } from "@/components/ui/button"
-import {
-  Card,
-  CardContent,
-  CardFooter,
-  CardHeader,
-  CardTitle,
-} from "@/components/ui/card"
-import { Input } from "@/components/ui/input"
-import { Label } from "@/components/ui/label"
 import { toast } from "@/components/ui/use-toast"
-import { Icons } from "@/components/icons"
 
 interface WishFormProps extends React.HTMLAttributes<HTMLFormElement> {}
 
@@ -28,7 +15,7 @@ type FormData = z.infer<typeof wishSchema>
 
 export function WishForm({ className, ...props }: WishFormProps) {
   const router = useRouter()
-  const [wishInput, setWishInput] = useState("")
+  const [isRedirecting, setIsRedirecting] = React.useState(false)
   const {
     handleSubmit,
     register,
@@ -41,76 +28,88 @@ export function WishForm({ className, ...props }: WishFormProps) {
     },
   })
 
-  // Watch for changes in the wish input
   const wish = watch("wish")
 
-  // Update the wishInput state whenever the wish changes
-  useEffect(() => {
-    setWishInput(wish)
-  }, [wish])
-
   async function onSubmit(data: FormData) {
-    const response = await fetch(`/api/wish`, {
-      method: "POST",
-      headers: {
-        "Content-Type": "application/json",
-      },
-      body: JSON.stringify({
-        wish: data.wish,
-      }),
-    })
+    try {
+      const response = await fetch(`/api/wish`, {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify({
+          wish: data.wish,
+        }),
+      })
 
-    if (!response?.ok) {
-      return toast({
+      if (response.status === 409) {
+        toast({
+          title: "Already have a wish",
+          description: "You already have an active wish in the wishing well.",
+          variant: "destructive",
+        })
+        return
+      }
+
+      if (!response?.ok) {
+        throw new Error("Failed to submit wish")
+      }
+
+      toast({
+        description: "Your Wish has been updated.",
+      })
+
+      setIsRedirecting(true)
+      router.push(`/dashboard/wishingWells`)
+      router.refresh()
+    } catch (error) {
+      setIsRedirecting(false)
+      toast({
         title: "Something went wrong.",
         description: "Your Wish was not updated. Please try again.",
         variant: "destructive",
       })
     }
+  }
 
-    toast({
-      description: "Your Wish has been updated.",
-    })
-
-    router.push(`/dashboard/wishingWells`)
-    router.refresh()
+  if (isRedirecting) {
+    return (
+      <div className="w-full space-y-4 text-center">
+        <div
+          className="flex h-32 w-full items-center justify-center border-[6px]
+                     border-black bg-white p-4 font-mono text-2xl font-black"
+        >
+          ✨ Making your wish come true... ✨
+        </div>
+        <div
+          className="w-full border-[6px] border-black bg-black p-4 font-mono text-2xl
+                     font-black text-white"
+        >
+          GRANTING...
+        </div>
+      </div>
+    )
   }
 
   return (
-    <form
-      className={cn(className)}
-      onSubmit={handleSubmit(onSubmit)}
-      {...props}
-    >
-      <Card>
-        <CardContent className="space-y-4">
-          <div className="grid gap-3">
-            <Label htmlFor="wish">I wish...</Label>
-            <Input
-              id="wish"
-              className="w-full lg:w-[400px]"
-              size={32}
-              placeholder="ex. everyone had a free superintelligent robot doctor"
-              {...register("wish")}
-            />
-            {errors?.wish && (
-              <p className="px-1 text-xs text-red-600">{errors.wish.message}</p>
-            )}
-          </div>
-        </CardContent>
-        <CardFooter style={{ display: "flex", justifyContent: "flex-end" }}>
-          <button
-            type="submit"
-            className={cn(buttonVariants(), className)}
-            disabled={isSubmitting}
-          >
-            {isSubmitting && (
-              <Icons.spinner className="mr-2 h-4 w-4 animate-spin" />
-            )}
-            <span>Make Wish</span>
-          </button>
-        </CardFooter>
-      </Card>
+    <form onSubmit={handleSubmit(onSubmit)} className="w-full">
+      <textarea
+        {...register("wish")}
+        className="mb-4 h-32 w-full resize-none border-[6px] border-black
+                 bg-white p-4 font-mono text-2xl
+                 font-black placeholder-black focus:outline-none"
+        placeholder="TYPE WISH"
+      />
+
+      <button
+        type="submit"
+        disabled={isSubmitting}
+        className="w-full border-[6px] border-black bg-black p-4 font-mono text-2xl
+                 font-black text-white transition-colors hover:bg-white
+                 hover:text-black"
+      >
+        {isSubmitting ? "..." : "GRANT"}
+      </button>
     </form>
   )
 }
