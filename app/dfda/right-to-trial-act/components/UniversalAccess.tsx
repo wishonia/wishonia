@@ -26,7 +26,7 @@ export default function UniversalAccess() {
       ],
     },
     {
-      title: "🚫 No More Artificial Restrictions",
+      title: "🚫 NO ENTITY HAS THE RIGHT TO:",
       items: [
         { icon: "❌", text: "Block informed patient access" },
         { icon: "✈️", text: "Force travel for treatment" },
@@ -37,14 +37,16 @@ export default function UniversalAccess() {
       ],
     },
     {
-      title: "💪 Empowering Doctors",
+      title: "💪 DOCTORS HAVE THE RIGHT TO:",
       items: [
         { icon: "🌍", text: "Offer proven treatments anywhere" },
         { icon: "🧳", text: "Import treatments for patients" },
-        { icon: "🏠", text: "Provide care at home" },
         { icon: "📡", text: "Use remote monitoring" },
         { icon: "🛣", text: "Cross state lines to help patients" },
-        { icon: "📊", text: "Share results through the platform" },
+        {
+          icon: "📊",
+          text: "Share results through the Decentralized FDA with patient consent",
+        },
       ],
     },
   ]

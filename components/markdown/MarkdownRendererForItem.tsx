@@ -7,7 +7,7 @@ import {
   WishingWell,
 } from "@prisma/client"
 
-import MarkdownRenderer from "@/components/MarkdownRenderer"
+import MarkdownRenderer from "@/components/markdown/MarkdownRenderer"
 
 interface MarkdownRendererProps {
   item: WishingWell | GlobalProblem | GlobalProblemSolution

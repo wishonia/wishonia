@@ -1,11 +1,14 @@
-'use client'
+"use client"
 
-import { useState } from 'react'
-import dynamic from 'next/dynamic'
+import { useState } from "react"
+import dynamic from "next/dynamic"
 
-const MarkdownModal = dynamic(() => import('@/components/markdown-modal'), {
-  ssr: false
-})
+const MarkdownModal = dynamic(
+  () => import("@/components/markdown/markdown-modal"),
+  {
+    ssr: false,
+  }
+)
 
 interface MarkdownFile {
   path: string
@@ -18,10 +21,10 @@ export function FileLink({ file }: { file: MarkdownFile }) {
 
   return (
     <>
-      <div className="hover:bg-neutral-50 rounded p-2">
+      <div className="rounded p-2 hover:bg-neutral-50">
         <button
           onClick={() => setIsModalOpen(true)}
-          className="text-primary hover:text-primary/80 text-left w-full"
+          className="w-full text-left text-primary hover:text-primary/80"
         >
           {file.title}
         </button>
@@ -34,4 +37,4 @@ export function FileLink({ file }: { file: MarkdownFile }) {
       />
     </>
   )
-} 
+}

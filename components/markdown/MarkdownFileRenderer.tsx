@@ -12,7 +12,7 @@ import rehypeRaw from "rehype-raw"
 import { siteConfig } from "@/config/site"
 import { SpinningLoader } from "@/components/spinningLoader"
 
-import { Button } from "./ui/button"
+import { Button } from "../ui/button"
 
 interface MarkdownRendererProps {
   url: string

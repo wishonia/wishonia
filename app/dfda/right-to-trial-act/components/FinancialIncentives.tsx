@@ -65,7 +65,7 @@ export default function FinancialIncentives() {
         <div className="border-2 border-black bg-white p-4 transition-colors hover:bg-green-100">
           <h4 className="mb-2 font-bold">Implementation</h4>
           <ul className="list-none space-y-1">
-            <li>📊 AI tracks long-term health outcomes</li>
+            <li>📊 The Decentralized FDA tracks long-term health outcomes</li>
             <li>🧮 Transparent savings calculations</li>
             <li>✅ Independent verification of results</li>
             <li>💸 Automated payment distribution</li>
