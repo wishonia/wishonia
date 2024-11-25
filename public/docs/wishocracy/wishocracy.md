@@ -43,7 +43,8 @@ Wishocracy allows people to submit wishes they believe would have the greatest p
 
 # **GenieDAOs: Teams United by a Common Wish**
 
-GenieDAOs are special teams formed within Wishocracy where people with shared passions and skills come together to work on a specific wish. These teams collaborate to develop innovative solutions and strategies to make their chosen wish a reality.
+GenieDAOs are special teams formed within Wishocracy where people with shared passions and skills come together to work
+on a specific wish. These teams collaborate to develop solutions and strategies to make their chosen wish a reality.
 
 # **WishTokens: Funding Solutions through Proposals**
 

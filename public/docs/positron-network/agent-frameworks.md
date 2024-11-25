@@ -5,7 +5,7 @@ featuredImage: /docs/positron-network/agent-frameworks.jpg
 description: >-
   Discover cutting-edge agent frameworks like SuperAGI and Autogen for
   developing robust AI applications. Explore tools for data analysis, seamless
-  task execution, and innovative code generation like MetaGPT and Sweep.ai.
+  task execution, and code generation like MetaGPT and Sweep.ai.
   Unveil the future of intelligent software development!
 ---
 

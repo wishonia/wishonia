@@ -5,7 +5,7 @@ featuredImage: /docs/organization/prize.jpg
 description: >-
   Contribute to the future of wish fulfillment with Wishonia! Discover how
   developers, designers, project managers, and community managers can help build
-  this innovative virtual world, and learn about our daily $100 prize for the
+  this virtual world, and learn about our daily $100 prize for the
   best pull request. Join us today!
 ---
 
@@ -106,7 +106,7 @@ We are excited to announce a daily $100 prize for the best pull request to the W
 2. **Adherence to Guidelines**: Follow the project’s coding standards and contribution guidelines.
 3. **Impact**: Contributions that have a significant positive impact on the project, such as major bug fixes or new features, will be favored.
 4. **Complexity**: Solving complex problems or implementing sophisticated solutions will be highly regarded.
-5. **Innovation**: Creative and innovative solutions that enhance the project in unique ways are encouraged.
+5. **Innovation**: Creative and solutions that enhance the project in unique ways are encouraged.
 
 #### **Submission Process:**
 

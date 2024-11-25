@@ -85,7 +85,7 @@ Technological advancements and growing knowledge about the disease improve the f
 ### Potential Solutions
 
 - **Collaborative Research**: International consortia and public-private partnerships.
-- **Innovative Funding**: Leveraging both traditional funding and innovative models like prize funds.
+- **Innovative Funding**: Leveraging both traditional funding and models like prize funds.
 - **Public Policy**: Promote policies for healthful aging and support for affected families.
 
 ## Costs and Resource Requirements

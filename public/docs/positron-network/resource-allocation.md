@@ -35,4 +35,5 @@ description: >-
 - **Transparent Process:** Using these methods requires a transparent, well-documented process, ensuring all members understand how decisions are made and funds are allocated.
 - **Technology Utilization:** The Positron Network’s technology, especially its data analysis and performance monitoring capabilities, can be leveraged to support these funding methods, ensuring accurate tracking of contributions, impact, and member preferences.
 
-By combining these innovative funding mechanisms, the Positron Network can create a more equitable, effective, and community-driven system for allocating resources, thereby enhancing the collective impact of its non-profit members.
+By combining these funding mechanisms, the Positron Network can create a more equitable, effective, and community-driven
+system for allocating resources, thereby enhancing the collective impact of its non-profit members.

@@ -91,7 +91,7 @@ export default function RightToTrialActSolutions() {
       ],
     },
     {
-      title: "Health Savings Sharing Fund",
+      title: "50/50 Health Savings Sharing Program",
       description: "Incentivizing cures through shared healthcare cost savings",
       icon: "💰",
       details: [
