@@ -2,6 +2,7 @@
 
 
 import "./globals.css";
+import "@/app/styles/neobrutalist.css";
 
 
 
