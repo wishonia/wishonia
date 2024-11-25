@@ -138,13 +138,13 @@ export default function DFDAHomePage() {
   return (
     <div className="">
       {isLoading && (
-        <div className="fixed inset-0 z-50 flex items-center justify-center bg-black/50">
-          <div className="h-16 w-16 animate-spin rounded-full border-t-4 border-white"></div>
+        <div className="neobrutalist-loading">
+          <div className="neobrutalist-loading-spinner"></div>
         </div>
       )}
-      <header className="relative mb-12 overflow-hidden rounded-xl border-4 border-black bg-white p-6 text-center shadow-[8px_8px_0px_0px_rgba(0,0,0,1)]">
+      <header className="neobrutalist-container mb-12">
         <motion.h1
-          className="mb-4 text-6xl font-black uppercase tracking-tight"
+          className="neobrutalist-hero-title"
           initial={{ opacity: 0, y: -50 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.5 }}
@@ -152,7 +152,7 @@ export default function DFDAHomePage() {
           Let's Upgrade FDA.gov!
         </motion.h1>
         <motion.p
-          className="text-xl font-bold"
+          className="neobrutalist-description"
           initial={{ opacity: 0, y: 50 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.5, delay: 0.2 }}
@@ -164,10 +164,8 @@ export default function DFDAHomePage() {
 
       <main className="space-y-12">
         <DFDADisclaimer />
-        <section className="relative overflow-visible rounded-xl border-4 border-black bg-gradient-to-r from-pink-400 to-purple-400 p-6 shadow-[8px_8px_0px_0px_rgba(0,0,0,1)]">
-          <h2 className="mb-6 text-4xl font-black uppercase">
-            See Effects of Foods🍟
-          </h2>
+        <section className="neobrutalist-gradient-container neobrutalist-gradient-pink">
+          <h2 className="neobrutalist-title">See Effects of Foods🍟</h2>
           <div className="flex flex-col gap-4 md:flex-row">
             <VariableSearchAutocomplete
               onVariableSelect={onVariableSelect}
@@ -182,10 +180,8 @@ export default function DFDAHomePage() {
           </div>
         </section>
 
-        <section className="relative overflow-visible rounded-xl border-4 border-black bg-gradient-to-r from-pink-400 to-purple-400 p-6 shadow-[8px_8px_0px_0px_rgba(0,0,0,1)]">
-          <h2 className="mb-6 text-4xl font-black uppercase">
-            See Effects of Treatments💊
-          </h2>
+        <section className="neobrutalist-gradient-container neobrutalist-gradient-pink">
+          <h2 className="neobrutalist-title">See Effects of Treatments💊</h2>
           <div className="flex flex-col gap-4 md:flex-row">
             <VariableSearchAutocomplete
               onVariableSelect={onVariableSelect}
@@ -200,8 +196,8 @@ export default function DFDAHomePage() {
           </div>
         </section>
 
-        <section className="relative overflow-visible rounded-xl border-4 border-black bg-gradient-to-r from-pink-400 to-purple-400 p-6 shadow-[8px_8px_0px_0px_rgba(0,0,0,1)]">
-          <h2 className="mb-6 text-4xl font-black uppercase">
+        <section className="neobrutalist-gradient-container neobrutalist-gradient-pink">
+          <h2 className="neobrutalist-title">
             See Most Effective Treatments for your Condition
           </h2>
           <div className="flex flex-col gap-4 md:flex-row">
@@ -218,29 +214,27 @@ export default function DFDAHomePage() {
           </div>
         </section>
 
-        <section className="relative overflow-visible rounded-xl border-4 border-black bg-gradient-to-r from-green-400 to-emerald-400 p-6 shadow-[8px_8px_0px_0px_rgba(0,0,0,1)]">
-          <h2 className="mb-6 text-4xl font-black uppercase">
-            Join Clinical Trials 🔬
-          </h2>
-          <p className="mb-6 text-xl font-bold">
+        <section className="neobrutalist-gradient-container neobrutalist-gradient-green">
+          <h2 className="neobrutalist-title">Join Clinical Trials 🔬</h2>
+          <p className="neobrutalist-description mb-6">
             Find and instantly join trials for the most promising treatments
           </p>
           <AdvancedTrialSearch />
         </section>
 
-        <section className="relative overflow-visible rounded-xl border-4 border-black bg-gradient-to-r from-pink-400 to-purple-400 p-6 shadow-[8px_8px_0px_0px_rgba(0,0,0,1)]">
-          <h2 className="mb-6 text-4xl font-black uppercase">
+        <section className="neobrutalist-gradient-container neobrutalist-gradient-pink">
+          <h2 className="neobrutalist-title">
             🏢 Drug Companies: Create Your Trial 📝
           </h2>
           <div className="flex flex-col gap-4">
-            <p className="text-xl font-bold">
+            <p className="neobrutalist-description">
               See how easy it could be to instantly register your treatment and
               create a study 📝, automate recruitment 🤖, data collection 📊,
               analysis 🔬, and get your drug to patients ASAP!
             </p>
             <Link
               href="/dfda/drug-companies/register-drug"
-              className="group inline-flex w-fit items-center gap-2 rounded-xl border-4 border-black bg-white px-6 py-3 font-bold shadow-[4px_4px_0px_0px_rgba(0,0,0,1)] transition-all hover:translate-x-1 hover:translate-y-1 hover:shadow-none"
+              className="neobrutalist-button group"
             >
               Register Now
               <ArrowRight className="transition-transform group-hover:translate-x-1" />

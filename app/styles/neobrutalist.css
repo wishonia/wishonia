@@ -1,0 +1,160 @@
+/* Base neobrutalist styles */
+.neobrutalist-container {
+    @apply rounded-xl border-4 border-black bg-white p-6 shadow-[8px_8px_0px_0px_rgba(0,0,0,1)];
+}
+
+.neobrutalist-gradient-container {
+    @apply rounded-xl border-4 border-black p-6 shadow-[8px_8px_0px_0px_rgba(0,0,0,1)] relative overflow-visible;
+}
+
+.neobrutalist-gradient-pink {
+    @apply bg-gradient-to-r from-[#FF3366] to-[#FF1493];
+}
+
+.neobrutalist-gradient-green {
+    @apply bg-gradient-to-r from-[#00CC66] to-[#00FF00];
+}
+
+.neobrutalist-title {
+    @apply text-4xl font-black uppercase mb-6;
+}
+
+.neobrutalist-hero-title {
+    @apply mb-4 text-6xl font-black uppercase tracking-tight;
+}
+
+.neobrutalist-description {
+    @apply text-xl font-bold;
+}
+
+.group.neobrutalist-button {
+    @apply inline-flex w-fit items-center gap-2 rounded-xl border-4 border-black
+    bg-white px-6 py-3 font-bold shadow-[4px_4px_0px_0px_rgba(0,0,0,1)]
+    transition-all hover:translate-x-1 hover:translate-y-1 hover:shadow-none;
+}
+
+.neobrutalist-loading {
+    @apply fixed inset-0 z-50 flex items-center justify-center bg-black/50;
+}
+
+.neobrutalist-loading-spinner {
+    @apply h-16 w-16 animate-spin rounded-full border-t-4 border-white;
+}
+
+/* Markdown styles */
+.neobrutalist-h1 {
+    @apply mb-8 mt-12 rounded-xl border-4 border-black bg-gradient-to-r from-[#FF3366] to-[#FF1493]
+    p-6 text-4xl font-black text-white shadow-[8px_8px_0px_0px_rgba(0,0,0,1)]
+    transition-all hover:translate-x-1 hover:translate-y-1 hover:shadow-none;
+}
+
+.neobrutalist-h2 {
+    @apply mb-4 text-3xl font-black;
+}
+
+.neobrutalist-h3 {
+    @apply mb-2 text-xl font-bold;
+}
+
+.neobrutalist-h4 {
+    @apply mb-3 mt-6 text-xl font-bold ;
+}
+
+.neobrutalist-h5 {
+    @apply mb-2 mt-4 text-xl font-bold;
+}
+
+.neobrutalist-ul {
+    @apply mb-6 list-none space-y-2;
+}
+
+/* Top level ul only */
+.neobrutalist-ul:not(.neobrutalist-ul .neobrutalist-ul) {
+    @apply rounded-xl border-4 border-black bg-white p-4
+    shadow-[8px_8px_0px_0px_rgba(0,0,0,1)] transition-all
+    hover:translate-x-1 hover:translate-y-1 hover:shadow-none;
+}
+
+.neobrutalist-ol {
+    @apply mb-6 list-decimal space-y-2;
+}
+
+/* Top level ol only */
+.neobrutalist-ol:not(.neobrutalist-ol .neobrutalist-ol) {
+    @apply rounded-xl border-4 border-black
+    bg-gradient-to-r from-[#FF3366] to-[#FF1493] p-4 text-white
+    shadow-[8px_8px_0px_0px_rgba(0,0,0,1)] transition-all
+    hover:translate-x-1 hover:translate-y-1 hover:shadow-none;
+}
+
+/* Add padding for nested lists */
+.neobrutalist-ul .neobrutalist-ul,
+.neobrutalist-ul .neobrutalist-ol,
+.neobrutalist-ol .neobrutalist-ul,
+.neobrutalist-ol .neobrutalist-ol {
+    @apply pl-4 mt-2;
+}
+
+.neobrutalist-li {
+    @apply rounded-xl p-2 transition-colors;
+}
+
+.neobrutalist-p {
+    @apply mb-4 rounded-xl border-4 border-black bg-white p-4 leading-relaxed text-black
+    shadow-[4px_4px_0px_0px_rgba(0,0,0,1)] transition-all
+    hover:translate-x-1 hover:translate-y-1 hover:shadow-none;
+}
+
+.neobrutalist-strong {
+    @apply font-black text-[#FF3366];
+}
+
+.neobrutalist-em {
+    @apply not-italic font-semibold text-[#00CC66];
+}
+
+.neobrutalist-hr {
+    @apply my-8 border-4 border-black rounded-full;
+}
+
+.neobrutalist-blockquote {
+    @apply mb-6 rounded-xl border-4 border-black bg-gradient-to-r from-[#6633FF] to-[#0066FF]
+    p-4 text-white shadow-[8px_8px_0px_0px_rgba(0,0,0,1)] transition-all
+    hover:translate-x-1 hover:translate-y-1 hover:shadow-none;
+}
+
+.neobrutalist-table-container {
+    @apply mb-6 overflow-x-auto rounded-xl border-4 border-black bg-white
+    shadow-[8px_8px_0px_0px_rgba(0,0,0,1)] transition-all
+    hover:translate-x-1 hover:translate-y-1 hover:shadow-none;
+}
+
+.neobrutalist-table {
+    @apply w-full table-auto border-collapse text-sm md:text-base;
+}
+
+.neobrutalist-thead {
+    @apply border-b-4 border-black bg-gradient-to-r from-[#FF3366] to-[#FF1493] text-white;
+}
+
+.neobrutalist-tbody {
+    @apply divide-y-2 divide-black;
+}
+
+.neobrutalist-tr {
+    @apply transition-colors;
+}
+
+.neobrutalist-th {
+    @apply break-words p-3 text-left font-black md:p-4;
+}
+
+.neobrutalist-td {
+    @apply break-words p-3 md:p-4;
+}
+
+.neobrutalist-link {
+    @apply inline-flex items-center gap-2 rounded-xl border-b-4 border-[#FF3366]
+    font-bold px-2 transition-all hover:bg-[#FF3366] hover:text-white
+    hover:translate-y-1;
+} 
