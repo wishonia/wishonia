@@ -33,10 +33,11 @@ export const dfdaLinks = {
     tooltip: "Help us transform healthcare by signing the Right to Trial Act",
   },
   healthSavingsSharing: {
-    title: "Health Savings Sharing",
+    title: "50/50 Health Savings Sharing Program",
     href: "/dfda/health-savings-sharing",
     icon: "savings",
-    tooltip: "Learn about the innovative Health Savings Sharing program",
+    tooltip:
+      "Incentivizing Cures With 50% of Long Term Healthcare Savings from Curative or Preventative Treatments",
   },
 } as const
 

@@ -95,4 +95,10 @@ Addressing mental health issues comprehensively can also benefit society at larg
 
 ## Conclusion
 
-Mental illness poses a significant challenge to global health and well-being. Addressing this issue requires a multifaceted approach, including medical treatment, psychotherapy, community support, and policy advocacy. Despite progress made by key players, substantial obstacles remain, particularly stigma, resource limitations, and access to care. Effective solutions will demand increased funding, innovative research, and a holistic approach to mental health. Prioritizing mental health can lead to far-reaching benefits, highlighting the importance of concerted efforts in this critical area. Individuals and organizations looking to contribute can make a profound impact by supporting mental health initiatives, advocating for policy changes, and reducing stigma.
+Mental illness poses a significant challenge to global health and well-being. Addressing this issue requires a
+multifaceted approach, including medical treatment, psychotherapy, community support, and policy advocacy. Despite
+progress made by key players, substantial obstacles remain, particularly stigma, resource limitations, and access to
+care. Effective solutions will demand increased funding, research, and a holistic approach to mental health.
+Prioritizing mental health can lead to far-reaching benefits, highlighting the importance of concerted efforts in this
+critical area. Individuals and organizations looking to contribute can make a profound impact by supporting mental
+health initiatives, advocating for policy changes, and reducing stigma.

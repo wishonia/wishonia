@@ -57,7 +57,8 @@ Several key players are at the forefront of the fight against cybercrime:
 3. **Private Sector**: Companies like Microsoft, Cisco, and Symantec develop cybersecurity solutions and collaborate with law enforcement.
 4. **Non-Profit Organizations**: Entities such as the Cyber Threat Alliance and the Electronic Frontier Foundation advocate for stronger cybersecurity measures and provide resources for victims.
 
-These contributors play pivotal roles in improving cybersecurity standards, developing innovative defenses, and fostering international cooperation, achieving notable milestones in reducing the prevalence and impact of cybercrime.
+These contributors play pivotal roles in improving cybersecurity standards, developing defenses, and fostering
+international cooperation, achieving notable milestones in reducing the prevalence and impact of cybercrime.
 
 ## Challenges and Obstacles
 

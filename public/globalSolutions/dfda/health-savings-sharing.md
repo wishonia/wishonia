@@ -1,13 +1,15 @@
-# 🌟 The Health Savings Sharing Program
+# 🌟 The 50/50 Health Savings Sharing Program
 
 Cutting Healthcare Costs in **HALF** By Incentivizing Cures and Preventative Therapies 🚀
 
 ---
 
-✨ Imagine a world where diseases like heart disease, cancer, and Alzheimer's are not just managed but cured! 🎯 A world
-where
-healthcare costs decrease, and life-changing treatments are accessible to everyone! 🌈 This vision can become a reality
-with an innovative plan that aligns the interests of pharmaceutical companies, patients, and healthcare systems. 🤝
+✨ Imagine a world where diseases like heart disease, cancer, and Alzheimer's are not just managed but cured!
+
+🎯 A world where healthcare costs decrease, and life-changing treatments are accessible to everyone!
+
+🌈 This vision can become a reality with a plan that aligns the interests of pharmaceutical companies, patients, and
+healthcare systems. 🤝
 
 ---
 
@@ -164,7 +166,7 @@ Let's consider the impact of curing common age-related diseases collectively.
 
 ## **🎉 Conclusion: Transforming Healthcare Together**
 
-This innovative incentive model has the potential to revolutionize healthcare by shifting the focus from managing
+This incentive model has the potential to revolutionize healthcare by shifting the focus from managing
 diseases to curing them! 🌟 By aligning financial rewards with health outcomes, we create a system where:
 
 - **🎯 Patients receive the best possible care without financial barriers!**
