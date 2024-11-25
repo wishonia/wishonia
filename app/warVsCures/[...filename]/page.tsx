@@ -1,6 +1,6 @@
 import { Metadata } from "next"
 
-import MarkdownFileRenderer from "@/components/MarkdownFileRenderer"
+import MarkdownFileRenderer from "@/components/markdown/MarkdownFileRenderer"
 
 export const metadata: Metadata = {
   title: "Docs",

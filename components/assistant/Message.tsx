@@ -11,9 +11,8 @@ import { useStreamableText } from "@/lib/hooks/use-streamable-text"
 import { useUser } from "@/lib/useUser"
 import { cn } from "@/lib/utils"
 
-import { MemoizedReactMarkdown } from "../Markdown"
+import { MemoizedReactMarkdown } from "../markdown/Markdown"
 import { CodeBlock } from "../ui/code-block"
-import { Skeleton } from "../ui/skeleton"
 import { Spinner } from "./Spinner"
 
 export function SpinnerMessage({ avatar }: { avatar?: string | null }) {
@@ -54,7 +53,7 @@ export function BotMessage({
       <div className="ml-4 flex-1 space-y-2 overflow-hidden px-1">
         <span className="font-semibold">{agentName || "Talk to Wishonia"}</span>
         <MemoizedReactMarkdown
-          className="prose dark:prose-invert prose-p:leading-relaxed prose-pre:p-0 break-words"
+          className="prose break-words dark:prose-invert prose-p:leading-relaxed prose-pre:p-0"
           remarkPlugins={[remarkGfm, remarkMath]}
           components={{
             p({ children }) {
