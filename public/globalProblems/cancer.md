@@ -44,7 +44,9 @@ Efforts to mitigate cancer often lead to unintended consequences, such as the fi
    - **Chemotherapy**: Involves drugs to target cancer cells.
    - **Immunotherapy and Targeted Therapy**: Newer treatments that harness the immune system or target specific genetic mutations.
 
-Each approach has strengths: prevention and early detection can significantly reduce mortality; treatments increasingly offer targeted and personalized options. Weaknesses include limited accessibility, side effects, and the high cost of innovative therapies.
+Each approach has strengths: prevention and early detection can significantly reduce mortality; treatments increasingly
+offer targeted and personalized options. Weaknesses include limited accessibility, side effects, and the high cost of
+therapies.
 
 ## Key Players and Organizations
 
@@ -102,4 +104,9 @@ Potential adverse impacts could include the high cost of new treatments, potenti
 
 ## Conclusion
 
-Cancer remains a critical global issue with significant health, economic, and social implications. Addressing it involves a multi-faceted approach encompassing prevention, early detection, innovative treatments, and equitable healthcare access. Prioritizing cancer research, enhancing public awareness, and ensuring resource allocation will be crucial. For those considering contributions, efforts towards cancer prevention and treatment can yield substantial, quantifiable improvements in global health compared to many other causes. Prudent investments in this area promise considerable returns in human health and well-being.
+Cancer remains a critical global issue with significant health, economic, and social implications. Addressing it
+involves a multi-faceted approach encompassing prevention, early detection, treatments, and equitable healthcare access.
+Prioritizing cancer research, enhancing public awareness, and ensuring resource allocation will be crucial. For those
+considering contributions, efforts towards cancer prevention and treatment can yield substantial, quantifiable
+improvements in global health compared to many other causes. Prudent investments in this area promise considerable
+returns in human health and well-being.

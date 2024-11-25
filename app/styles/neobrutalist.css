@@ -69,8 +69,8 @@
 }
 
 /* Top level ul only */
-.neobrutalist-ul:not(.neobrutalist-ul .neobrutalist-ul) {
-    @apply rounded-xl border-4 border-black bg-white p-4
+.neobrutalist-ul:not(.neobrutalist-ul .neobrutalist-ul):not(.neobrutalist-li .neobrutalist-ul) {
+    @apply rounded-xl border-4 border-black bg-white p-2 md:p-4 text-black
     shadow-[8px_8px_0px_0px_rgba(0,0,0,1)] transition-all
     hover:translate-x-1 hover:translate-y-1 hover:shadow-none;
 }
@@ -79,28 +79,26 @@
     @apply mb-6 list-decimal space-y-2;
 }
 
-/* Top level ol only */
+/* Top level ol only - add container box */
 .neobrutalist-ol:not(.neobrutalist-ol .neobrutalist-ol) {
-    @apply rounded-xl border-4 border-black
-    bg-gradient-to-r from-[#FF3366] to-[#FF1493] p-4 text-white
+    @apply rounded-xl border-4 border-black bg-white
+    p-4 pl-8 md:p-8 md:pl-12 text-black
     shadow-[8px_8px_0px_0px_rgba(0,0,0,1)] transition-all
     hover:translate-x-1 hover:translate-y-1 hover:shadow-none;
 }
 
-/* Add padding for nested lists */
-.neobrutalist-ul .neobrutalist-ul,
-.neobrutalist-ul .neobrutalist-ol,
-.neobrutalist-ol .neobrutalist-ul,
-.neobrutalist-ol .neobrutalist-ol {
-    @apply pl-4 mt-2;
+/* Keep nested lists without boxes */
+.neobrutalist-li .neobrutalist-ol {
+    @apply border-0 shadow-none bg-transparent p-0
+    hover:translate-x-0 hover:translate-y-0 hover:shadow-none;
 }
 
 .neobrutalist-li {
-    @apply rounded-xl p-2 transition-colors;
+    @apply p-2 transition-colors text-black;
 }
 
 .neobrutalist-p {
-    @apply mb-4 rounded-xl border-4 border-black bg-white p-4 leading-relaxed text-black
+    @apply mb-4 rounded-xl border-4 border-black bg-white p-2 md:p-4 leading-relaxed text-black
     shadow-[4px_4px_0px_0px_rgba(0,0,0,1)] transition-all
     hover:translate-x-1 hover:translate-y-1 hover:shadow-none;
 }
@@ -157,4 +155,36 @@
     @apply inline-flex items-center gap-2 rounded-xl border-b-4 border-[#FF3366]
     font-bold px-2 transition-all hover:bg-[#FF3366] hover:text-white
     hover:translate-y-1;
-} 
+}
+
+/* Update paragraph styles within list items */
+.neobrutalist-li .neobrutalist-p {
+    @apply mb-2 border-0 shadow-none p-0 bg-transparent
+    hover:translate-x-0 hover:translate-y-0 hover:shadow-none;
+}
+
+/* Ensure nested lists don't have boxes */
+.neobrutalist-li .neobrutalist-ul,
+.neobrutalist-li .neobrutalist-ol {
+    @apply border-0 shadow-none bg-transparent p-0
+    hover:translate-x-0 hover:translate-y-0 hover:shadow-none;
+}
+
+/* Add container style for the entire markdown content */
+.neobrutalist-markdown-container {
+    @apply m-2 rounded-xl border-4 border-black bg-white p-3
+    md:m-4 md:p-6 lg:m-6 lg:p-8
+    shadow-[8px_8px_0px_0px_rgba(0,0,0,1)] transition-all
+    hover:translate-x-1 hover:translate-y-1 hover:shadow-none;
+}
+
+/* Adjust top margin of first element */
+.neobrutalist-markdown-container > *:first-child {
+    @apply mt-0;
+}
+
+/* Adjust bottom margin of last element */
+.neobrutalist-markdown-container > *:last-child {
+    @apply mb-0;
+}
+ 

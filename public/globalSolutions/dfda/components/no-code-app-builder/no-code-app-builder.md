@@ -2,7 +2,9 @@
 
 ## Overview
 
-The No-Code Health Data App Builder is an innovative platform designed to simplify and streamline the process of creating health data collection, aggregation, and analysis applications. This powerful tool allows users, regardless of their technical background, to build custom apps tailored to their health data management needs.
+The No-Code Health Data App Builder is a platform designed to simplify and streamline the process of creating health
+data collection, aggregation, and analysis applications. This powerful tool allows users, regardless of their technical
+background, to build custom apps tailored to their health data management needs.
 
 ## Features
 

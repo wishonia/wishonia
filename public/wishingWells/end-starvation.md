@@ -102,7 +102,8 @@ The feasibility of ending starvation depends on tackling multiple interrelated f
 
 ### Main Obstacles
 
-Challenges include political instability, climate change, and adequate funding. Potential solutions involve international treaties, climate resilience projects, and innovative financing mechanisms.
+Challenges include political instability, climate change, and adequate funding. Potential solutions involve
+international treaties, climate resilience projects, and financing mechanisms.
 
 ## Costs and Resource Requirements
 
