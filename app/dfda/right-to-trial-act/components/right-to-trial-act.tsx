@@ -21,11 +21,11 @@ export default function CureAccelerationAct() {
           initial={{ opacity: 0, y: 50 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.5 }}
-          className="rounded-lg border-4 border-black bg-white p-4 shadow-[8px_8px_0px_0px_rgba(0,0,0,1)]"
+          className="neobrutalist-container"
         >
-          <h2 className="mb-4 text-3xl font-black">Overview & Findings 📜</h2>
-          <h3 className="mb-2 text-xl font-bold">Title 🏷️</h3>
-          <p className="mb-4 text-lg">
+          <h2 className="neobrutalist-h2">Overview & Findings 📜</h2>
+          <h3 className="neobrutalist-h3">Title 🏷️</h3>
+          <p className="neobrutalist-p">
             This Act may be cited as the "Right to Trial Act" 📋
           </p>
           <ProblemsWithCurrentSystem />

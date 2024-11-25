@@ -13,9 +13,11 @@ import { siteConfig } from "@/config/site"
 import { SpinningLoader } from "@/components/spinningLoader"
 
 import { Button } from "../ui/button"
+import { NeoBrutalMarkdown } from "./neo-brutal-markdown"
 
 interface MarkdownRendererProps {
   url: string
+  variant?: "default" | "neobrutalist"
 }
 
 interface Metadata {
@@ -29,7 +31,10 @@ interface Metadata {
   date?: string // Ensure this matches the type you expect, e.g., string
 }
 
-const MarkdownFileRenderer: FC<MarkdownRendererProps> = ({ url }) => {
+const MarkdownFileRenderer: FC<MarkdownRendererProps> = ({
+  url,
+  variant = "default",
+}) => {
   const [content, setContent] = useState("")
   const [isLoading, setIsLoading] = useState(true)
   const [metadata, setMetadata] = useState<Metadata | null>(null)
@@ -128,43 +133,50 @@ const MarkdownFileRenderer: FC<MarkdownRendererProps> = ({ url }) => {
               )}
             </div>
           )}
-          <ReactMarkdown
-            rehypePlugins={[rehypeRaw as any]}
-            components={{
-              p: ({ node, ...props }) => <p className="mb-4" {...props} />,
-              h1: ({ node, ...props }) => (
-                <h1 className="mb-4 mt-4 text-3xl font-bold" {...props} />
-              ),
-              h2: ({ node, ...props }) => (
-                <h2 className="mb-4 mt-4 text-2xl font-bold" {...props} />
-              ),
-              h3: ({ node, ...props }) => (
-                <h3 className="mb-4 mt-4 text-xl font-bold" {...props} />
-              ),
-              // Add custom rendering for lists
-              ul: ({ node, ...props }) => (
-                <ul className="mb-4 list-disc pl-5" {...props} />
-              ),
-              ol: ({ node, ...props }) => (
-                <ol className="mb-4 list-decimal pl-5" {...props} />
-              ),
-              li: ({ node, ...props }) => <li className="mb-2" {...props} />,
-              // Ensure links are underlined
-              a: ({ node, ...props }) => (
-                <a
-                  className="text-blue-600 underline hover:text-blue-800"
-                  {...props}
-                />
-              ),
-            }}
-          >
-            {content}
-          </ReactMarkdown>
+
+          {/* Conditional rendering based on variant */}
+          {variant === "neobrutalist" ? (
+            <NeoBrutalMarkdown>{content}</NeoBrutalMarkdown>
+          ) : (
+            <ReactMarkdown
+              rehypePlugins={[rehypeRaw as any]}
+              components={{
+                p: ({ node, ...props }) => <p className="mb-4" {...props} />,
+                h1: ({ node, ...props }) => (
+                  <h1 className="mb-4 mt-4 text-3xl font-bold" {...props} />
+                ),
+                h2: ({ node, ...props }) => (
+                  <h2 className="mb-4 mt-4 text-2xl font-bold" {...props} />
+                ),
+                h3: ({ node, ...props }) => (
+                  <h3 className="mb-4 mt-4 text-xl font-bold" {...props} />
+                ),
+                // Add custom rendering for lists
+                ul: ({ node, ...props }) => (
+                  <ul className="mb-4 list-disc pl-5" {...props} />
+                ),
+                ol: ({ node, ...props }) => (
+                  <ol className="mb-4 list-decimal pl-5" {...props} />
+                ),
+                li: ({ node, ...props }) => <li className="mb-2" {...props} />,
+                // Ensure links are underlined
+                a: ({ node, ...props }) => (
+                  <a
+                    className="text-blue-600 underline hover:text-blue-800"
+                    {...props}
+                  />
+                ),
+              }}
+            >
+              {content}
+            </ReactMarkdown>
+          )}
+
           <div className="flex items-center justify-end gap-x-2">
             <Link href={githubEditUrl} target={"_blank"}>
-              <Button variant="outline" className="rounded-full">
+              <Button variant={variant}>
                 <AiFillGithub className="mr-2"></AiFillGithub>
-                Edit Me
+                Edit Me on GitHub
               </Button>
             </Link>
           </div>

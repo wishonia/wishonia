@@ -15,7 +15,7 @@ export const metadata: Metadata = {
 }
 export default async function RightToTrialPage() {
   const { html, data } = await getMarkdownContent(
-    "globalSolutions/dfda/right-to-trial-act-1.md"
+    "globalSolutions/dfda/right-to-trial-act.md"
   )
 
   const hasSigned = await checkPetitionSignature(DFDA_PETITION_ID)
