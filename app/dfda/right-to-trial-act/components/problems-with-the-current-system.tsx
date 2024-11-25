@@ -139,7 +139,7 @@ const ProblemsWithCurrentSystem = () => {
       transition={{ duration: 0.5 }}
       className="space-y-8 p-2"
     >
-      <div className="mb-6 rounded-lg border-4 border-black bg-red-200 p-4 text-center shadow-[8px_8px_0px_0px_rgba(0,0,0,1)]">
+      <div className="mb-6 rounded-lg border-4 border-black bg-red-500 p-4 text-center shadow-[8px_8px_0px_0px_rgba(0,0,0,1)]">
         <h2 className="mb-4 text-4xl font-black uppercase tracking-tight">
           Problems With The Current System 🏥
         </h2>
