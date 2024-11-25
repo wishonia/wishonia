@@ -4,7 +4,7 @@ import MarkdownFileRenderer from "@/components/markdown/MarkdownFileRenderer"
 
 export const metadata: Metadata = {
   title: "Docs",
-  description: "Info about the project",
+  description: "Info about the Decentralized FDA",
 }
 
 interface DocsProps {
@@ -13,11 +13,17 @@ interface DocsProps {
 
 export default async function Docs({ params }: DocsProps) {
   let { filename } = params
+  console.log("Initial params:", params)
+
   // implode filename to string if it's an array
   if (Array.isArray(filename)) {
+    console.log("Filename is array:", filename)
     filename = filename.join("/")
   }
-  console.log(`filename: ${filename}`)
-  filename = filename.replace(/\.md$/, "")
-  return <MarkdownFileRenderer url={`/${filename}.md`} />
+
+  // Update the path to point to the correct directory
+  const mdPath = `/globalSolutions/dfda/${filename}.md`
+  console.log("Final markdown path:", mdPath)
+
+  return <MarkdownFileRenderer url={mdPath} variant="neobrutalist" />
 }

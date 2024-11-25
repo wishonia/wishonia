@@ -53,6 +53,7 @@ A free public decentralized trial platform will:
 * 🧬 Identify optimal treatments for specific patient profiles swiftly
 
 ### 2.2 🌍 Universal Participation
+
 The platform enables:
 
 * 👥 **Broader testing** with diverse participants
@@ -64,14 +65,15 @@ The platform enables:
 * 📚 **Continuous real-world evidence** collection
 
 ### 2.3 🤖 FDAi: Autonomous Agent
+
 The FDAi continuously:
 
 * 🧠 **Analyzes** all available research and patient data
 * 📊 **Quantifies** positive and negative effects of:
-  * 💊 Pharmaceutical drugs
-  * 🍎 Food products and ingredients
-  * 🥗 Dietary patterns
-  * 🧪 Treatment combinations
+    * 💊 Pharmaceutical drugs
+    * 🍎 Food products and ingredients
+    * 🥗 Dietary patterns
+    * 🧪 Treatment combinations
 * 🚨 **Provides early warnings** of potential safety issues
 * 🔍 **Identifies optimal treatments** for specific patient profiles
 * 📈 **Monitors population-level health outcomes**
@@ -111,6 +113,7 @@ Every patient outcome:
 ## 💻 SECTION 4. FREE OPEN SOURCE TRIAL PLATFORM
 
 ### 4.1 💸 Replacing Expensive Systems
+
 A decentralized trial platform will:
 
 * 🗃️ **Handle all trial data collection**
@@ -122,6 +125,7 @@ A decentralized trial platform will:
 * ⚙️ **Automate trial recruitment, monitoring, and analysis**
 
 ### 4.2 🏷️ Eliminating Unnecessary Costs
+
 The platform eliminates expenses for:
 
 * 💾 **Trial software and systems**
@@ -132,6 +136,7 @@ The platform eliminates expenses for:
 * 🔐 **Security infrastructure**
 
 ### 4.3 📈 Better Data, Better Decisions
+
 The platform automatically:
 
 * 🧩 **Matches similar patients**
@@ -142,6 +147,7 @@ The platform automatically:
 * 🔍 **Helps patients find optimal care**
 
 ### 4.4 🌐 Open To Everyone
+
 Anyone can:
 
 * 📚 **Access aggregated and anonymized trial data**
@@ -151,6 +157,7 @@ Anyone can:
 * ➕ **Add new features**
 
 ### 4.5 🌍 Global Collaboration
+
 The platform supports:
 
 * 🌐 **Recognition of international safety data**
@@ -166,47 +173,47 @@ The platform supports:
 #### 5.1.1 💸 Current Fee Barriers
 
 * 🏢 **Government-imposed fees block innovation:**
-  * 💊 $4M fee for new drug applications
-  * 📊 $2M fee for applications without clinical data
-  * 💉 $1.4M annual program fee per approved drug
-  * 🚫 Impact on innovation:
-    * 🌱 Blocks small biotech startups
-    * 🔬 Prevents university research commercialization
-    * 🏥 Excludes non-profit organizations
-    * 👥 Stops patient-driven initiatives
+    * 💊 $4M fee for new drug applications
+    * 📊 $2M fee for applications without clinical data
+    * 💉 $1.4M annual program fee per approved drug
+    * 🚫 Impact on innovation:
+        * 🌱 Blocks small biotech startups
+        * 🔬 Prevents university research commercialization
+        * 🏥 Excludes non-profit organizations
+        * 👥 Stops patient-driven initiatives
 
 #### 5.1.2 🌍 International Access Barriers
 
 * 🚫 **Current import restrictions:**
-  * ❌ Individual import largely illegal
-  * 🏥 No pharmacy imports for resale
-  * 🔄 Duplicate approval requirements
-    * ✅ Must repeat process even for proven treatments
-    * 🏭 Redundant facility inspections
-    * 📊 Duplicate clinical trials
+    * ❌ Individual import largely illegal
+    * 🏥 No pharmacy imports for resale
+    * 🔄 Duplicate approval requirements
+        * ✅ Must repeat process even for proven treatments
+        * 🏭 Redundant facility inspections
+        * 📊 Duplicate clinical trials
 
 #### 5.1.3 💰 Cost Impact
 
 * 📈 **Price inflation factors:**
-  * 💸 Duplicate regulatory costs passed to patients
-  * 🚫 Lack of international competition
-  * 🏢 Regional monopolies
-  * 📊 50-90% higher prices than other countries
+    * 💸 Duplicate regulatory costs passed to patients
+    * 🚫 Lack of international competition
+    * 🏢 Regional monopolies
+    * 📊 50-90% higher prices than other countries
 
 #### 5.1.4 🌟 Proposed Solutions
 
 * 💸 **Eliminate government-imposed fees**
 * 🌍 **Enable free importation** from trusted sources:
-  * 🇪🇺 European Medicines Agency (EMA)
-  * 🇬🇧 UK's MHRA
-  * 🇯🇵 Japan's PMDA
-  * 🇨🇭 Swiss Medic
+    * 🇪🇺 European Medicines Agency (EMA)
+    * 🇬🇧 UK's MHRA
+    * 🇯🇵 Japan's PMDA
+    * 🇨🇭 Swiss Medic
 * 📊 **Benefits:**
-  * 💰 Lower treatment costs
-  * ⚡ Faster access to proven treatments
-  * 🏆 True price competition
-  * 🌐 Global price parity
-  * 🚫 Prevention of price gouging
+    * 💰 Lower treatment costs
+    * ⚡ Faster access to proven treatments
+    * 🏆 True price competition
+    * 🌐 Global price parity
+    * 🚫 Prevention of price gouging
 
 ### 5.2 🩺 Healthcare Savings Sharing Program
 
@@ -219,8 +226,8 @@ The platform supports:
 - **Treatment reduces lifetime costs by:** $750k per person 📉
 - **At $10k per treatment, 1 million people can afford it** 👥
 - **Total lifetime savings:** $750 billion 💰
-  - **Society keeps:** $375 billion in savings 🏥
-  - **Manufacturer receives:** $375 billion in rewards 🎯
+    - **Society keeps:** $375 billion in savings 🏥
+    - **Manufacturer receives:** $375 billion in rewards 🎯
 - **Additional savings from increased productivity and reduced care needs** 📈
 
 #### Massive Economic Benefits 📊

@@ -4,6 +4,7 @@ import React from "react"
 import { motion } from "framer-motion"
 import type { Components } from "react-markdown"
 import Markdown from "react-markdown"
+import remarkGfm from "remark-gfm"
 
 interface MarkdownProps {
   children: React.ReactNode
@@ -79,7 +80,51 @@ export function NeoBrutalMarkdown({ children }: NeoBrutalMarkdownProps) {
         {children}
       </blockquote>
     ),
+
+    // Updated table components with responsive styles
+    table: ({ children }: MarkdownProps) => (
+      <div className="mb-6 overflow-x-auto border-4 border-black bg-white shadow-[4px_4px_0px_0px_rgba(0,0,0,1)]">
+        <table className="w-full table-auto border-collapse text-sm md:text-base">
+          {children}
+        </table>
+      </div>
+    ),
+    thead: ({ children }: MarkdownProps) => (
+      <thead className="border-b-4 border-black bg-[#FF3366] text-white">
+        {children}
+      </thead>
+    ),
+    tbody: ({ children }: MarkdownProps) => (
+      <tbody className="divide-y-2 divide-black">{children}</tbody>
+    ),
+    tr: ({ children }: MarkdownProps) => (
+      <tr className="hover:bg-black/5">{children}</tr>
+    ),
+    th: ({ children }: MarkdownProps) => (
+      <th className="break-words p-3 text-left font-black md:p-4">
+        {children}
+      </th>
+    ),
+    td: ({ children }: MarkdownProps) => (
+      <td className="break-words p-3 md:p-4">{children}</td>
+    ),
+
+    // Add link component
+    a: ({ children, href }: { children: React.ReactNode; href?: string }) => (
+      <a
+        href={href}
+        className="border-b-4 border-[#FF3366] font-bold hover:bg-[#FF3366] hover:text-white"
+        target={href?.startsWith("http") ? "_blank" : undefined}
+        rel={href?.startsWith("http") ? "noopener noreferrer" : undefined}
+      >
+        {children}
+      </a>
+    ),
   }
 
-  return <Markdown components={components}>{children}</Markdown>
+  return (
+    <Markdown remarkPlugins={[remarkGfm]} components={components}>
+      {children}
+    </Markdown>
+  )
 }
