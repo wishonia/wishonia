@@ -1,13 +1,15 @@
-# 🌟 The Health Savings Sharing Program
+# 🌟 The 50/50 Health Savings Sharing Program
 
 Cutting Healthcare Costs in **HALF** By Incentivizing Cures and Preventative Therapies 🚀
 
 ---
 
-✨ Imagine a world where diseases like heart disease, cancer, and Alzheimer's are not just managed but cured! 🎯 A world
-where
-healthcare costs decrease, and life-changing treatments are accessible to everyone! 🌈 This vision can become a reality
-with an plan that aligns the interests of pharmaceutical companies, patients, and healthcare systems. 🤝
+✨ Imagine a world where diseases like heart disease, cancer, and Alzheimer's are not just managed but cured!
+
+🎯 A world where healthcare costs decrease, and life-changing treatments are accessible to everyone!
+
+🌈 This vision can become a reality with an plan that aligns the interests of pharmaceutical companies, patients, and
+healthcare systems. 🤝
 
 ---
 
