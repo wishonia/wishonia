@@ -104,7 +104,9 @@ Economic constraints, regulatory policies, and unequal healthcare access remain 
 
 ### Main Obstacles and Solutions
 
-Critical challenges include cancer's genetic diversity, potential for resistance, and high costs of innovative therapies. Collaborative global efforts, public-private partnerships, and technological innovations are potential mitigating strategies.
+Critical challenges include cancer's genetic diversity, potential for resistance, and high costs of therapies.
+Collaborative global efforts, public-private partnerships, and technological innovations are potential mitigating
+strategies.
 
 ## Costs and Resource Requirements
 

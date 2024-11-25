@@ -5,7 +5,7 @@ featuredImage: /docs/positron-network/competition.jpg
 description: >-
   Discover how high-resolution agent competition can transform industries,
   addressing the drawbacks of traditional competition by focusing on
-  task-specific KPIs. Learn how this innovative approach leads to increased
+  task-specific KPIs. Learn how this approach leads to increased
   efficiency, reduced risk, and encourages constant improvement and
   transparency.
 ---

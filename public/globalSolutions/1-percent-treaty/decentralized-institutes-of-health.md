@@ -31,7 +31,9 @@ The [1% Treaty](globalSolutions/1-percent-treaty/1-percent-treaty.mdercent-treat
 
 2. **Democratic Governance**: Our decentralized, trustless platform ensures that everyone has an equal say in decision-making, preventing any single entity from dominating the agenda.
 
-3. **Collective Intelligence**: We employ an innovative funding allocation mechanism that harnesses the wisdom of the crowd to identify the most promising research projects. By randomly presenting participants with pairs of projects and aggregating their preferences, we overcome the information overload associated with traditional crowdfunding.
+3. **Collective Intelligence**: We employ an funding allocation mechanism that harnesses the wisdom of the crowd to
+   identify the most promising research projects. By randomly presenting participants with pairs of projects and
+   aggregating their preferences, we overcome the information overload associated with traditional crowdfunding.
 
 4. **Transparent and Accountable**: Built on blockchain technology, the DIH maintains a transparent and immutable record of all transactions and decisions, ensuring the highest levels of accountability and trust.
 

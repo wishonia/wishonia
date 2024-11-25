@@ -102,4 +102,6 @@ Potential negative impacts include job losses in sectors related to disease trea
 
 Curing diseases represents a critical goal with profound implications for humanity. The potential benefits, including increased life expectancy, improved quality of life, and economic savings, underscore its importance. However, achieving this goal requires overcoming significant technological, economic, political, and social challenges.
 
-For individuals and organizations considering contributing to this goal, prioritizing funding for innovative research, supporting equitable healthcare policies, and promoting public education are key areas of focus. While the road to curing diseases is complex, the potential rewards make it a priority worth pursuing.
+For individuals and organizations considering contributing to this goal, prioritizing funding for research, supporting
+equitable healthcare policies, and promoting public education are key areas of focus. While the road to curing diseases
+is complex, the potential rewards make it a priority worth pursuing.

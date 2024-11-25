@@ -98,4 +98,5 @@ Potential negative impacts might arise for small farmers and industries reliant 
 
 Ending the suffering of factory-farmed animals holds substantial ethical, environmental, and health benefits. While challenging, the goal is achievable through combined legislative, corporate, and consumer actions alongside technological innovations. This remains a crucial endeavor for a more humane and sustainable future.
 
-For individuals and organizations considering contributions, prioritizing initiatives with high potential impact like legislative advocacy and support for innovative alternatives might offer the most significant returns on investment.
+For individuals and organizations considering contributions, prioritizing initiatives with high potential impact like
+legislative advocacy and support for alternatives might offer the most significant returns on investment.

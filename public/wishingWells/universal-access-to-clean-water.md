@@ -104,7 +104,8 @@ Skilled professionals in engineering, environmental science, public health, and 
 
 ### Funding Sources
 
-Potential funding may come from international aid, public-private partnerships, and innovative financing mechanisms like impact bonds.
+Potential funding may come from international aid, public-private partnerships, and financing mechanisms like impact
+bonds.
 
 ### Trade-offs
 

@@ -93,4 +93,6 @@ The purpose of this document is to outline the functional requirements for the A
 
 ## Conclusion
 
-The API Documentation and Developer Portal is a crucial component of the Wishocracy platform. By providing comprehensive resources, seamless onboarding, and robust support, we can empower developers to build innovative applications and foster a vibrant developer community around Wishocracy.
+The API Documentation and Developer Portal is a crucial component of the Wishocracy platform. By providing comprehensive
+resources, seamless onboarding, and robust support, we can empower developers to build applications and foster a vibrant
+developer community around Wishocracy.

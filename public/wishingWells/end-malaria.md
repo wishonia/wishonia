@@ -154,6 +154,11 @@ Prioritizing malaria eradication may divert resources from other health initiati
 
 ## Conclusion
 
-Ending malaria is a challenging but immensely beneficial goal with the potential to save lives, enhance economic productivity, and improve global health. Sustained investment, international collaboration, and innovative approaches are essential to overcoming the persistent challenges. Given the clear benefits, support for malaria eradication is a high-priority investment with substantial returns, both human and economic. Individuals and organizations considering contributions should weigh the profound positive impacts against the significant resources required, relative to other health priorities.
+Ending malaria is a challenging but immensely beneficial goal with the potential to save lives, enhance economic
+productivity, and improve global health. Sustained investment, international collaboration, and approaches are essential
+to overcoming the persistent challenges. Given the clear benefits, support for malaria eradication is a high-priority
+investment with substantial returns, both human and economic. Individuals and organizations considering contributions
+should weigh the profound positive impacts against the significant resources required, relative to other health
+priorities.
 
 By ensuring targeted, efficient, and adaptive strategies, the global community can move closer to a future free of malaria.

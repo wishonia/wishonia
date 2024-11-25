@@ -98,8 +98,10 @@ export function NeoBrutalMarkdown({ children }: NeoBrutalMarkdownProps) {
   }
 
   return (
-    <Markdown remarkPlugins={[remarkGfm]} components={components}>
-      {children}
-    </Markdown>
+    <div className="neobrutalist-markdown-container">
+      <Markdown remarkPlugins={[remarkGfm]} components={components}>
+        {children}
+      </Markdown>
+    </div>
   )
 }
