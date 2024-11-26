@@ -20,10 +20,12 @@ export function ConnectionsList({ connectedAccounts }: ConnectionsListProps) {
   const [isLoading, setIsLoading] = useState<string | null>(null)
   const { toast } = useToast()
 
-  console.log("ConnectionsList received accounts:", {
-    connectedAccounts,
-    providers: connectedAccounts.map((acc) => acc.provider),
-  })
+  if (process.env.NODE_ENV === 'development') {
+    console.log("ConnectionsList received accounts:", {
+      connectedAccounts,
+      providers: connectedAccounts.map((acc) => acc.provider),
+    })
+  }
 
   useEffect(() => {
     const loadProviders = async () => {
