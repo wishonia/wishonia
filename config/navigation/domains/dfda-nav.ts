@@ -39,6 +39,12 @@ export const dfdaLinks = {
     tooltip:
       "Incentivizing Cures With 50% of Long Term Healthcare Savings from Curative or Preventative Treatments",
   },
+  dfdaDocs: {
+    title: "Docs",
+    href: "/dfda/docs",
+    icon: "book",
+    tooltip: "Documentation for the Decentralized FDA",
+  },
 } as const
 
 export const dfdaNavigation: DomainNavigation = {
@@ -53,6 +59,7 @@ export const dfdaNavigation: DomainNavigation = {
     commonLinks.contributeOnGithub,
     commonLinks.reportBug,
     commonLinks.requestFeature,
+    dfdaLinks.dfdaDocs,
   ],
   avatarNav: [
     dfdaLinks.dfda,
@@ -64,6 +71,7 @@ export const dfdaNavigation: DomainNavigation = {
     commonLinks.reportBug,
     commonLinks.requestFeature,
     commonLinks.contributeOnGithub,
+    dfdaLinks.dfdaDocs,
   ],
   footerNav: [
     dfdaLinks.dfda,
@@ -75,5 +83,6 @@ export const dfdaNavigation: DomainNavigation = {
     commonLinks.reportBug,
     commonLinks.requestFeature,
     commonLinks.contributeOnGithub,
+    dfdaLinks.dfdaDocs,
   ],
 }

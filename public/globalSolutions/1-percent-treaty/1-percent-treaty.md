@@ -17,7 +17,8 @@ absFilePath: 'C:\code\wishonia\public\globalSolutions\1-percent-treaty\1-percent
 1. **2 billion people suffer** from chronic diseases including cancer, diabetes, heart disease, autoimmune disorders, and many others. This causes immense human anguish as well as crippling economic costs.
 2. **Medical research** to find cures for these diseases remains far **too slow** to meet the desperate needs of patients.
 3. **Artificial intelligence** can radically accelerate the clinical research process by automating analysis of medical data, identifying promising drug targets, optimizing clinical trial designs, and more.
-4. A global collaborative effort to deploy AI to automate clinical research, coordinated and governed by the people, could produce revolutionary breakthroughs against chronic diseases and **alleviate the suffering of billions of people.**
+4. A global collaborative effort to deploy AI to automate clinical research, coordinated and governed by the people,
+   could produce breakthroughs against chronic diseases and **alleviate the suffering of billions of people.**
 
 ## Logical Proof:
 
@@ -30,7 +31,9 @@ Here is the logical proof that signing this accord is the most rational thing yo
 - The relative balance of power would remain unchanged. So, despite spending less on the military, they would be at no greater relative risk of being murdered by another country.
 - The entire world would benefit from the resulting health advances and cures for diseases.
 
-3. Therefore, it is clearly in your rational self-interest to sign this treaty requesting that all nations to cooperate in this endeavor. By contributing a infinitesimal portion of their military budgets, they can help unlock revolutionary health benefits for their own citizens and the world at large.
+1. Therefore, it is clearly in your rational self-interest to sign this treaty requesting that all nations to cooperate
+   in this endeavor. By contributing a infinitesimal portion of their military budgets, they can help unlock health
+   benefits for their own citizens and the world at large.
 
 ## How it Works:
 
