@@ -62,7 +62,7 @@ export default async function WishingWellPage({
     <Shell>
       <DashboardHeader
         heading={`${wishingWell.name} Stats`}
-        text={wishingWell.description}
+        text={wishingWell.description || ""}
       >
         <div className="flex flex-col items-stretch gap-2 md:items-end">
           <DateRangePicker />
