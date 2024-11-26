@@ -2,7 +2,7 @@
 
 import { motion } from "framer-motion"
 
-import CostSavingsTable from "../../components/CostSavingsTable"
+import DFDACostSavingsTable from "../../components/DFDACostSavingsTable"
 import ListCard from "./ListCard"
 
 export default function OpenTrialPlatform() {
@@ -84,7 +84,7 @@ export default function OpenTrialPlatform() {
           />
         ))}
         <section className="mt-12">
-          <CostSavingsTable />
+          <DFDACostSavingsTable />
         </section>
       </div>
     </motion.section>

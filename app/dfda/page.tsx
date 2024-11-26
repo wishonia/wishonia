@@ -1,16 +1,18 @@
 "use client"
-import React from 'react'
-import HomePage from './components/dfda-home-page'
+
+import React from "react"
+
+import DFDAHomePage from "./components/dfda-home-page"
 
 export default function DFDAPage() {
-    return (
-        <div className="">
-            <HomePage />
-            {/* <TreatmentConditionSearchBox />
+  return (
+    <div className="">
+      <DFDAHomePage />
+      {/* <TreatmentConditionSearchBox />
             <FindTreatments />
             <HealthTrackingLinkBoxes />
             <CostBenefitAnalysis />
             <TopTreatments /> */}
-        </div>
-    )
+    </div>
+  )
 }
