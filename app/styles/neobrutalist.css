@@ -65,14 +65,12 @@
 }
 
 .neobrutalist-ul {
-    @apply mb-6 list-none space-y-2;
+    @apply mb-6 list-disc space-y-2 pl-6;
 }
 
-/* Top level ul only */
+/* Remove the box styling for ul elements */
 .neobrutalist-ul:not(.neobrutalist-ul .neobrutalist-ul):not(.neobrutalist-li .neobrutalist-ul) {
-    @apply rounded-xl border-4 border-black bg-white p-2 md:p-4 text-black
-    shadow-[8px_8px_0px_0px_rgba(0,0,0,1)] transition-all
-    hover:translate-x-1 hover:translate-y-1 hover:shadow-none;
+    @apply p-2 md:p-4 text-black;
 }
 
 .neobrutalist-ol {
@@ -98,9 +96,7 @@
 }
 
 .neobrutalist-p {
-    @apply mb-4 rounded-xl border-4 border-black bg-white p-2 md:p-4 leading-relaxed text-black
-    shadow-[4px_4px_0px_0px_rgba(0,0,0,1)] transition-all
-    hover:translate-x-1 hover:translate-y-1 hover:shadow-none;
+    @apply mb-4 text-black
 }
 
 .neobrutalist-strong {

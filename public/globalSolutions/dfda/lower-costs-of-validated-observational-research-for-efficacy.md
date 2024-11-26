@@ -17,10 +17,10 @@ However, [meta-analyses](https://www.nejm.org/doi/full/10.1056/NEJM2000062234225
 
 **Mortality Observational Studies**
 
-![Mortality Observational Studies](.gitbook/assets/observational-vs-randomized-effect-sizes.png)
+![Mortality Observational Studies](https://static.crowdsourcingcures.org/dfda/assets/observational-vs-randomized-effect-sizes.png)
 
 **Observational Studies for Various Outcomes**
 
-![Observational Studies for Various Outcomes](.gitbook/assets/observational-vs-randomized-trial-effect-sizes.png)
+![Observational Studies for Various Outcomes](https://static.crowdsourcingcures.org/dfda/assets/observational-vs-randomized-trial-effect-sizes.png)
 
 ****

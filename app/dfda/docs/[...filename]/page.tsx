@@ -21,6 +21,11 @@ export default async function Docs({ params }: DocsProps) {
     filename = filename.join("/")
   }
 
+  // remove trailing .md if it exists
+  if (filename.endsWith(".md")) {
+    filename = filename.slice(0, -3)
+  }
+
   // Update the path to point to the correct directory
   const mdPath = `/globalSolutions/dfda/${filename}.md`
   console.log("Final markdown path:", mdPath)

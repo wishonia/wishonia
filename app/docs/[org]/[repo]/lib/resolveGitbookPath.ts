@@ -3,10 +3,10 @@ export function resolveGitbookPath(path: string, currentPath: string): string {
   path = decodeURIComponent(path)
   
   // Handle .gitbook paths
-  if (path.includes('.gitbook/assets/')) {
+  if (path.includes('https://static.crowdsourcingcures.org/dfda/assets/')) {
     // Extract just the filename from the path
     const filename = path.split('/').pop()
-    return `.gitbook/assets/${filename}`
+    return `https://static.crowdsourcingcures.org/dfda/assets/${filename}`
   }
 
   // Handle relative paths
