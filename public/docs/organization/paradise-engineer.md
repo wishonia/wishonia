@@ -55,7 +55,7 @@ We're seeking a talented and passionate Full Stack NextJS Developer to join our 
 
 ## What We Offer
 
-- The opportunity to work on a revolutionary project with global impact
+- The opportunity to work on a project with global impact
 - A collaborative and innovative work environment
 - Flexible working hours and fully remote setup
 - Continuous learning and professional development opportunities
