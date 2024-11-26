@@ -16,21 +16,22 @@ export default async function SettingsPage() {
         </p>
       </div>
 
-      {/* Debug info */}
-      <div className="rounded-lg border p-4">
-        <h4 className="mb-2 font-medium">Debug Info</h4>
-        <pre className="overflow-auto text-xs">
-          {JSON.stringify(
-            {
-              userId: user?.id,
-              email: user?.email,
-              sessionId: session?.user?.id,
-              sessionEmail: session?.user?.email,
-            },
-            null,
-            2
-          )}
-        </pre>
+      {process.env.NODE_ENV === 'development' && (
+         {/* Debug info */}
+         <div className="rounded-lg border p-4">
+           <h4 className="mb-2 font-medium">Debug Info</h4>
+           <pre className="overflow-auto text-xs">
+             {JSON.stringify(
+               {
+                 sessionId: session?.user?.id,
+                 sessionEmail: session?.user?.email,
+               },
+               null,
+               2
+             )}
+           </pre>
+         </div>
+      )}
       </div>
     </div>
   )
