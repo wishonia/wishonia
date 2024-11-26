@@ -11,7 +11,7 @@ There is compelling historical evidence suggesting that large scale efficacy-tri
 
 For over 99% of recorded human history, the average human life expectancy has been around 30 years.
 
-![historical life expectancy](.gitbook/assets/life-expectancy-historical.jpg)
+![historical life expectancy](https://static.crowdsourcingcures.org/dfda/assets/life-expectancy-historical.jpg)
 
 **1893 – The Advent of Safety and Efficacy Trials**
 
@@ -31,7 +31,7 @@ These requirements evolved to what is now called the [Phase 1 Safety Trial](http
 
 This consistent four-year/year increase in life expectancy remained unchanged before and after the new safety regulations.
 
-![Fda safety trials life expectancy](.gitbook/assets/fda-safety-trials-life-expectancy.png)
+![Fda safety trials life expectancy](https://static.crowdsourcingcures.org/dfda/assets/fda-safety-trials-life-expectancy.png)
 
 This suggests that the regulations did not have a large-scale positive or negative impact on the development of life-saving interventions.
 
@@ -41,7 +41,7 @@ Thalidomide was first marketed in Europe in [1957](https://en.wikipedia.org/wiki
 
 Fortunately, the existing FDA safety regulations prevented any birth defects in the US. Despite the effectiveness of the existing US regulatory framework in protecting Americans, newspaper stories such as the one below created a strong public outcry for increased regulation.
 
-![Thalidomide](.gitbook/assets/thalidomide.jpg)
+![Thalidomide](https://static.crowdsourcingcures.org/dfda/assets/thalidomide.jpg)
 
 #### 1962 – New **Efficacy Regulations Reduce the Amount and Quality of Efficacy Data Collected**
 
@@ -59,29 +59,24 @@ The 1962 regulations made these large real-world efficacy trials illegal. Ironic
 
 The new regulatory clampdown on approvals immediately reduced the production of new treatments by 70%.
 
-![](.gitbook/assets/new-treatments-per-year-2.png)
+![](https://static.crowdsourcingcures.org/dfda/assets/new-treatments-per-year-2.png)
 
 **Explosion in Costs**
 
 Since the abandonment of the former efficacy trial model, costs have exploded. Since 1962, the cost of bringing a new treatment to market has gone from [$74 million](https://publications.parliament.uk/pa/cm200405/cmselect/cmhealth/42/4207.htm) to over [$1 billion](https://publications.parliament.uk/pa/cm200405/cmselect/cmhealth/42/4207.htm) US dollars (2020 inflation-adjusted).
 
-![Cost to Get a New Drug to Market](.gitbook/assets/cost-to-develop-a-new-drug.png)
+![Cost to Get a New Drug to Market](https://static.crowdsourcingcures.org/dfda/assets/cost-to-develop-a-new-drug.png)
 
-{% content-ref url="greater-competitive-innovation-and-fewer-monopolies.md" %}
 [greater-competitive-innovation-and-fewer-monopolies.md](greater-competitive-innovation-and-fewer-monopolies.md)
-{% endcontent-ref %}
 
-{% content-ref url="more-cures-and-less-lifelong-attempts-at-masking-symptoms.md" %}
 [more-cures-and-less-lifelong-attempts-at-masking-symptoms.md](more-cures-and-less-lifelong-attempts-at-masking-symptoms.md)
-{% endcontent-ref %}
 
-{% content-ref url="1-introduction-and-challenges/people-with-rare-disease-are-severely-punished.md" %}
+
 [people-with-rare-disease-are-severely-punished.md](problems/people-with-rare-disease-are-severely-punished.md)
-{% endcontent-ref %}
 
-{% content-ref url="1-introduction-and-challenges/deaths-due-to-us-regulatory-drug-lag.md" %}
+
 [deaths-due-to-us-regulatory-drug-lag.md](problems/deaths-due-to-us-regulatory-drug-lag.md)
-{% endcontent-ref %}
+
 
 **Increase in Patent Monopoly**
 
@@ -95,18 +90,18 @@ The placebo-controlled, randomized controlled trial helped researchers gauge the
 
 From 1890 to 1960, there was a linear 4-year increase in human lifespan every year. This amazingly linear growth rate had followed millennia with a flat human lifespan of around 28 years. Following this new 70% reduction in the pace of medical progress, the growth in human lifespan was immediately cut in half to an increase of 2 years per year.
 
-![Average Life Expectancy Over Time](.gitbook/assets/real-world-evidence-in-efficacy-clinical-trials-vs-rcts.png)
+![Average Life Expectancy Over Time](https://static.crowdsourcingcures.org/dfda/assets/real-world-evidence-in-efficacy-clinical-trials-vs-rcts.png)
 
 **Diminishing Returns?**
 
 One might say, “It seems more likely — or as likely — to me that drug development provides diminishing returns to life expectancy.” However, diminishing returns produce a slope of exponential decay. It may be partially responsible, but it’s not going to produce a sudden change in the linear slope of a curve a linear as life expectancy was before and after the 1962 regulations.
 
-![What diminishing returns would look like](.gitbook/assets/diminishing-returns.png)
+![What diminishing returns would look like](https://static.crowdsourcingcures.org/dfda/assets/diminishing-returns.png)
 
 **Correlation is Not Causation**
 
 You might say, "I don't know how much the efficacy regulations contribute to or hampers public health. I do know that correlation does not necessarily imply causation." However, a correlation plus a logical mechanism of action is the least bad method we have for inferring the most likely significant causal factor for an outcome (i.e., life expectancy). Assuming most likely causality based on temporal correlation is the entire basis of a clinical research study and the scientific method generally.
 
-{% content-ref url="2-solution/impact-of-innovative-medicines-on-life-expectancy.md" %}
+
 [impact-of-innovative-medicines-on-life-expectancy.md](2-solution/impact-of-innovative-medicines-on-life-expectancy.md)
-{% endcontent-ref %}
+
