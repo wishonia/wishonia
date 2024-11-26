@@ -1,6 +1,6 @@
 "use client"
 
-import React, { useState } from "react"
+import React, { useEffect, useState } from "react"
 import { AnimatePresence, motion } from "framer-motion"
 import { ChevronDown, ChevronUp } from "lucide-react"
 
@@ -11,8 +11,17 @@ import {
 } from "@/app/dfda/components/cost-savings-data"
 import type { CostItem } from "@/app/dfda/cost-savings"
 
-export default function CostSavingsTable() {
+export default function DFDACostSavingsTable() {
   const [expandedItem, setExpandedItem] = useState<string | null>(null)
+
+  useEffect(() => {
+    if (window.location.hash === "#cost-savings") {
+      const element = document.getElementById("cost-savings")
+      if (element) {
+        element.scrollIntoView({ behavior: "smooth", block: "start" })
+      }
+    }
+  }, [])
 
   const formatCurrency = (amount: number) => {
     return new Intl.NumberFormat("en-US", {
@@ -63,7 +72,10 @@ export default function CostSavingsTable() {
   )
 
   return (
-    <div className="relative overflow-hidden rounded-xl border-4 border-black bg-white p-6 shadow-[8px_8px_0px_0px_rgba(0,0,0,1)]">
+    <div
+      id="cost-savings"
+      className="relative scroll-mt-24 overflow-hidden rounded-xl border-4 border-black bg-white p-6 shadow-[8px_8px_0px_0px_rgba(0,0,0,1)]"
+    >
       <motion.h1
         className="mb-6 text-4xl font-black uppercase md:text-4xl"
         initial={{ opacity: 0, y: -20 }}
@@ -180,6 +192,23 @@ export default function CostSavingsTable() {
         </div>
       </div>
 
+      <div className="mt-6 text-sm italic text-gray-600">
+        <p>
+          Cost analysis based on data from:{" "}
+          <a
+            href="https://aspe.hhs.gov/reports/examination-clinical-trial-costs-barriers-drug-development-0"
+            target="_blank"
+            rel="noopener noreferrer"
+            className="text-blue-600 hover:underline"
+          >
+            "Examination of Clinical Trial Costs and Barriers for Drug
+            Development"
+          </a>{" "}
+          by the U.S. Department of Health and Human Services, Office of the
+          Assistant Secretary for Planning and Evaluation (ASPE).
+        </p>
+      </div>
+
       <div className="mt-6 rounded-xl border-2 border-black bg-blue-100 p-4">
         <h3 className="mb-2 font-black">💡 Key Benefits</h3>
         <ul className="list-inside list-disc space-y-2">
@@ -188,6 +217,13 @@ export default function CostSavingsTable() {
           <li>Decentralized approach eliminates site-related expenses</li>
           <li>Blockchain technology ensures data integrity</li>
         </ul>
+
+        <p className="mt-4 text-sm text-gray-700">
+          Our cost reduction estimates are derived from the ASPE study's
+          analysis of clinical trial costs across different therapeutic areas
+          and phases, incorporating potential savings from electronic data
+          capture, simplified protocols, and decentralized trial approaches.
+        </p>
       </div>
     </div>
   )
