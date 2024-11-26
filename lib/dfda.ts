@@ -317,13 +317,7 @@ export async function createDfdaApplication(
     homepageUrl: redirectUri,
     qmClientId: name.toLowerCase().replace(/[^a-z0-9]/g, "-"),
   })
-  if (!response.ok) {
-    const errorText = await response.text()
-    throw new Error(
-      `Failed to create DFDA application: ${response.status} ${response.statusText} - ${errorText}`
-    )
-  }
-  const data = await response.json()
+  const data = response
   return data.clientId || data.qmClientId
 }
 
