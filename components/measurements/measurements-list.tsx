@@ -1,18 +1,15 @@
 "use client"
 
 import { FC, useEffect, useState } from "react"
-import * as React from "react"
+import Image from "next/image"
+import { format } from "date-fns"
+import { Activity, Loader2, MoreVertical } from "lucide-react"
+import { User } from "next-auth"
 
 import { Measurement } from "@/types/models/Measurement"
-import { DataTable } from "@/components/data-table"
-import { Icons } from "@/components/icons"
-import { measurementColumns } from "@/components/measurements/measurements-columns"
 
-type MeasurementsListProps = {
-  user: {
-    id: string
-  }
-  variableId?: number // Make variableId optional
+interface MeasurementsListProps {
+  user: User
   measurementsDateRange: {
     from: string
     to: string
@@ -21,24 +18,19 @@ type MeasurementsListProps = {
 
 export const MeasurementsList: FC<MeasurementsListProps> = ({
   user,
-  variableId,
   measurementsDateRange,
 }) => {
   const [measurements, setMeasurements] = useState<Measurement[]>()
-  const [isLoading, setIsLoading] = useState(true) // Add a loading state
+  const [isLoading, setIsLoading] = useState(true)
 
   useEffect(() => {
-    setIsLoading(true) // Set loading to true when starting to fetch
+    setIsLoading(true)
     let url = `/api/dfda/measurements`
-    if (variableId) {
-      // Check if variableId is provided
-      url += `?variableId=${variableId}`
-    }
     if (measurementsDateRange.from) {
-      url += `${variableId ? "&" : "?"}earliestMeasurementTime=${measurementsDateRange.from}`
+      url += `?earliestMeasurementTime=${measurementsDateRange.from}`
     }
     if (measurementsDateRange.to) {
-      url += `${variableId || measurementsDateRange.from ? "&" : "?"}latestMeasurementTime=${measurementsDateRange.to}`
+      url += `?latestMeasurementTime=${measurementsDateRange.to}`
     }
 
     fetch(url)
@@ -60,32 +52,69 @@ export const MeasurementsList: FC<MeasurementsListProps> = ({
         }
         setMeasurements(measurements)
 
-        setIsLoading(false) // Set loading to false once data is fetched
+        setIsLoading(false)
       })
       .catch((error) => {
         console.error("Error fetching user variables:", error)
-        setIsLoading(false) // Ensure loading is set to false even if there's an error
+        setIsLoading(false)
       })
-  }, [user, variableId, measurementsDateRange.from, measurementsDateRange.to])
+  }, [user, measurementsDateRange.from, measurementsDateRange.to])
 
   if (isLoading) {
     return (
       <div className="flex justify-center p-8">
-        <Icons.spinner className="animate-spin text-4xl" />
+        <Loader2 className="animate-spin text-4xl" />
       </div>
     )
   }
 
-  // Ensure measurements are defined before trying to access its properties
-  if (!measurements) {
-    return <div>No data found.</div> // Handle the case where measurements are undefined
+  if (!measurements?.length) {
+    return <div className="p-8 text-center">No measurements found.</div>
   }
 
   return (
-    <>
-      <DataTable columns={measurementColumns} data={measurements ?? []}>
-        Measurements
-      </DataTable>
-    </>
+    <div className="space-y-4">
+      {measurements.map((measurement, index) => (
+        <div
+          key={index}
+          className="flex items-center gap-4 rounded-lg border bg-white p-4 shadow-sm"
+        >
+          <div className="flex-shrink-0">
+            <div className="flex items-center justify-center overflow-hidden">
+              {measurement.pngPath ? (
+                <Image
+                  src={measurement.pngPath}
+                  alt={measurement.variableName}
+                  width={20}
+                  height={20}
+                  className="h-10 w-10 object-contain"
+                />
+              ) : (
+                <Activity className="h-5 w-5 text-blue-600" />
+              )}
+            </div>
+          </div>
+          <div className="min-w-0 flex-grow">
+            <div className="flex items-baseline gap-2">
+              <div className="flex min-w-[100px] items-baseline gap-1 text-lg font-semibold">
+                {measurement.displayValueAndUnitString}{" "}
+                {measurement.variableName}
+              </div>
+            </div>
+            <div className="mt-1 text-sm text-gray-500">
+              {format(new Date(measurement.startAt), "MMM d, yyyy h:mm a")}
+            </div>
+            {measurement.note && (
+              <div className="mt-1 truncate text-sm text-gray-600">
+                {measurement.note}
+              </div>
+            )}
+          </div>
+          <button className="flex-shrink-0 text-gray-400 hover:text-gray-500">
+            <MoreVertical className="h-5 w-5" />
+          </button>
+        </div>
+      ))}
+    </div>
   )
 }

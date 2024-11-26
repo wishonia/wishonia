@@ -12,24 +12,6 @@ import {
   VisibilityState,
 } from "@tanstack/react-table"
 
-import { Button } from "@/components/ui/button"
-import {
-  DropdownMenu,
-  DropdownMenuCheckboxItem,
-  DropdownMenuContent,
-  DropdownMenuTrigger,
-} from "@/components/ui/dropdown-menu"
-import {
-  Table,
-  TableBody,
-  TableCell,
-  TableHead,
-  TableHeader,
-  TableRow,
-} from "@/components/ui/table"
-
-import { Icons } from "./icons"
-
 interface DataTableProps<TData, TValue> {
   columns: ColumnDef<TData, TValue>[]
   data: TData[]
@@ -60,105 +42,42 @@ export function DataTable<TData, TValue>({
   })
 
   return (
-    <div className="w-full overflow-x-auto">
-      <div className="mb-4 flex items-center px-2 pt-1">
-        {children ? <p className="text-lg font-medium">{children}</p> : null}
-        <DropdownMenu>
-          <DropdownMenuTrigger asChild>
-            <Button variant="outline" className="ml-auto">
-              <Icons.mixer className="mr-2 h-4 w-4" />
-              View
-            </Button>
-          </DropdownMenuTrigger>
-          <DropdownMenuContent align="end">
-            {table
-              .getAllColumns()
-              .filter((column) => column.getCanHide())
-              .map((column) => {
-                return (
-                  <DropdownMenuCheckboxItem
-                    key={column.id}
-                    className="capitalize"
-                    checked={column.getIsVisible()}
-                    onCheckedChange={(value) =>
-                      column.toggleVisibility(!!value)
-                    }
-                  >
-                    {column.id.split("_")[0]}
-                  </DropdownMenuCheckboxItem>
-                )
-              })}
-          </DropdownMenuContent>
-        </DropdownMenu>
-      </div>
-      <div className="rounded-md border">
-        <Table>
-          <TableHeader>
-            {table.getHeaderGroups().map((headerGroup) => (
-              <TableRow key={headerGroup.id}>
-                {headerGroup.headers.map((header) => {
-                  return (
-                    <TableHead key={header.id}>
-                      {header.isPlaceholder
-                        ? null
-                        : flexRender(
-                            header.column.columnDef.header,
-                            header.getContext()
-                          )}
-                    </TableHead>
-                  )
-                })}
-              </TableRow>
-            ))}
-          </TableHeader>
-          <TableBody>
-            {table.getRowModel().rows?.length ? (
-              table.getRowModel().rows.map((row) => (
-                <TableRow
-                  key={row.id}
-                  data-state={row.getIsSelected() && "selected"}
-                >
-                  {row.getVisibleCells().map((cell) => (
-                    <TableCell key={cell.id}>
-                      {flexRender(
-                        cell.column.columnDef.cell,
-                        cell.getContext()
-                      )}
-                    </TableCell>
-                  ))}
-                </TableRow>
-              ))
-            ) : (
-              <TableRow>
-                <TableCell
-                  colSpan={columns.length}
-                  className="h-24 text-center"
-                >
-                  No results.
-                </TableCell>
-              </TableRow>
-            )}
-          </TableBody>
-        </Table>
-      </div>
-      <div className="flex items-center justify-end space-x-2 py-4">
-        <Button
-          variant="outline"
-          size="sm"
-          onClick={() => table.previousPage()}
-          disabled={!table.getCanPreviousPage()}
-        >
-          Previous
-        </Button>
-        <Button
-          variant="outline"
-          size="sm"
-          onClick={() => table.nextPage()}
-          disabled={!table.getCanNextPage()}
-        >
-          Next
-        </Button>
-      </div>
+      <div className="w-full">
+          <table className="w-full divide-y divide-gray-200">
+              <thead className="bg-gray-50">
+              {table.getHeaderGroups().map((headerGroup) => (
+                  <tr key={headerGroup.id}>
+                      {headerGroup.headers.map((header) => (
+                          <th
+                              key={header.id}
+                              className="px-4 py-3 text-left text-sm font-semibold text-gray-900"
+                          >
+                              {header.isPlaceholder
+                                  ? null
+                                  : flexRender(
+                                      header.column.columnDef.header,
+                                      header.getContext()
+                                  )}
+                          </th>
+                      ))}
+                  </tr>
+              ))}
+              </thead>
+              <tbody className="divide-y divide-gray-200 bg-white">
+              {table.getRowModel().rows.map((row) => (
+                  <tr key={row.id}>
+                      {row.getVisibleCells().map((cell) => (
+                          <td
+                              key={cell.id}
+                              className="whitespace-nowrap px-4 py-3 text-sm"
+                          >
+                              {flexRender(cell.column.columnDef.cell, cell.getContext())}
+                          </td>
+                      ))}
+                  </tr>
+              ))}
+              </tbody>
+          </table>
     </div>
   )
 }

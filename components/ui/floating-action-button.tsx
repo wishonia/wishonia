@@ -1,8 +1,9 @@
 "use client"
 
 import { useState } from "react"
-import { Bell, PlusCircle, Upload, HelpCircle, Minus, X } from "lucide-react"
 import Link from "next/link"
+import { Bell, HelpCircle, PlusCircle, Upload, X } from "lucide-react"
+
 import { cn } from "@/lib/utils"
 
 interface ActionItem {
@@ -34,11 +35,20 @@ const actionItems: ActionItem[] = [
   },
 ]
 
-export function FloatingActionButton() {
+interface FloatingActionButtonProps {
+  className?: string
+}
+
+export function FloatingActionButton({ className }: FloatingActionButtonProps) {
   const [isExpanded, setIsExpanded] = useState(false)
 
   return (
-    <div className="fixed bottom-4 right-4 z-50 flex flex-col-reverse items-end gap-2">
+    <div
+      className={cn(
+        "fixed bottom-4 right-4 z-50 flex flex-col-reverse items-end gap-2",
+        className
+      )}
+    >
       {isExpanded && (
         <div className="flex flex-col gap-2">
           {actionItems.map((item, index) => (
@@ -73,4 +83,4 @@ export function FloatingActionButton() {
       </button>
     </div>
   )
-} 
+}
