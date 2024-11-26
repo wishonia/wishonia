@@ -375,7 +375,7 @@ export async function searchDfdaVariables(
       console.error("Error message:", error.message)
       console.error("Error stack:", error.stack)
     }
-    return []
+    throw new Error(`Failed to search DFDA variables: ${error instanceof Error ? error.message : 'Unknown error'}`)
   }
 }
 
