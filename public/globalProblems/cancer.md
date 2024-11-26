@@ -106,7 +106,8 @@ Potential adverse impacts could include the high cost of new treatments, potenti
 
 Cancer remains a critical global issue with significant health, economic, and social implications. Addressing it
 involves a multi-faceted approach encompassing prevention, early detection, treatments, and equitable healthcare access.
-Prioritizing cancer research, enhancing public awareness, and ensuring resource allocation will be crucial. For those
-considering contributions, efforts towards cancer prevention and treatment can yield substantial, quantifiable
-improvements in global health compared to many other causes. Prudent investments in this area promise considerable
-returns in human health and well-being.
+
+Prioritizing cancer research, enhancing public awareness, and ensuring resource allocation will be crucial. Through
+initiatives like the 50/50 Health Savings Sharing Program, individuals can directly contribute to cancer prevention
+and treatment efforts. Such contributions can yield substantial, quantifiable improvements in global health compared
+to many other causes, promising considerable returns in human health and well-being.

@@ -8,7 +8,7 @@ Cutting Healthcare Costs in **HALF** By Incentivizing Cures and Preventative The
 
 🎯 A world where healthcare costs decrease, and life-changing treatments are accessible to everyone!
 
-🌈 This vision can become a reality with an plan that aligns the interests of pharmaceutical companies, patients, and
+🌈 This vision can become a reality with a plan that aligns the interests of pharmaceutical companies, patients, and
 healthcare systems. 🤝
 
 ---
