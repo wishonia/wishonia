@@ -1,4 +1,3 @@
-import { GlobalVariable } from "@/types/models/GlobalVariable";
 
 export async function searchConditions(condition: string): Promise<string[]> {
     try {
@@ -92,64 +91,4 @@ export async function searchFdaTreatments(treatment: string): Promise<string[]> 
     }
 }
 
-export async function searchDfdaVariables(searchPhrase?: string, additionalParams: Record<string, string> = {}): Promise<GlobalVariable[]> {
-    try {
-        const baseUrl = 'https://safe.fdai.earth/api/v3/variables';
-        const params = new URLSearchParams({
-            appName: 'Wishonia',
-            clientId: 'oauth_test_client', 
-            limit: '10',
-            includePublic: 'true',
-            ...(searchPhrase ? { searchPhrase } : {}),
-            ...additionalParams
-        });
 
-        const url = `${baseUrl}?${params.toString()}`;
-        console.log(`Fetching from URL: ${url}`);
-
-        const response = await fetch(url);
-        
-        if (!response.ok) {
-            const errorBody = await response.text();
-            throw new Error(`HTTP error! status: ${response.status}, statusText: ${response.statusText}, body: ${errorBody}`);
-        }
-        
-        const data = await response.json();
-        
-        if (!Array.isArray(data)) {
-            console.error('Unexpected response structure:', JSON.stringify(data, null, 2));
-            throw new Error("Unexpected response format: 'data' field is missing or not an array");
-        }
-        
-        const variables = data;
-        
-        console.log(`Found ${variables.length} variables`);
-        return variables;
-    } catch (error) {
-        console.error("Error in searchDfdaVariables:", error);
-        if (error instanceof Error) {
-            console.error("Error message:", error.message);
-            console.error("Error stack:", error.stack);
-        }
-        return [];
-    }
-}
-
-export async function searchDfdaTreatments(query: string): Promise<GlobalVariable[]> {
-    return searchDfdaVariables(query, {
-        variableCategoryName: 'Treatments'
-    });
-}
-
-export async function searchDfdaOutcomes(query: string): Promise<GlobalVariable[]> {
-    return searchDfdaVariables(query, {
-        outcome: 'true',
-        sort: '-numberOfCorrelationsAsEffect'
-    });
-}
-
-export async function searchDfdaPredictors(query: string): Promise<GlobalVariable[]> {
-    return searchDfdaVariables(query, {
-        sort: '-numberOfCorrelationsAsCause'
-    });
-}

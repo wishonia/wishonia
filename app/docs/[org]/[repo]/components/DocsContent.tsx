@@ -91,12 +91,6 @@ function resolveRelativePath(
   return resultParts.join("/")
 }
 
-function isGitHubUrl(url: string): boolean {
-  return (
-    url.startsWith("https://github.com") ||
-    url.startsWith("https://raw.githubusercontent.com")
-  )
-}
 
 function getImageUrl(
   src: string,

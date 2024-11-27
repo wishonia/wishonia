@@ -12,8 +12,8 @@ import VariableSearchAutocomplete from "@/app/dfda/components/VariableSearchAuto
 
 import AdvancedTrialSearch from "../trials/components/AdvancedTrialSearch"
 import CitizenScienceSection from "./CitizenScienceSection"
-import CostSavingsTable from "./CostSavingsTable"
 import DFDAComparisonTable from "./DFDAComparisonTable"
+import DFDACostSavingsTable from "./DFDACostSavingsTable"
 import { DFDADisclaimer } from "./DFDADisclaimer"
 import { FeatureBox } from "./FeatureBox"
 import SolutionSection from "./SolutionSection"
@@ -256,7 +256,7 @@ export default function DFDAHomePage() {
         <CitizenScienceSection />
 
         <section className="mt-12">
-          <CostSavingsTable />
+          <DFDACostSavingsTable />
         </section>
       </main>
     </div>
