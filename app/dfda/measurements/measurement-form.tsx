@@ -40,7 +40,7 @@ import { Textarea } from "@/components/ui/textarea"
 import { toast } from "@/components/ui/use-toast"
 import { variableCategories } from "@/app/dfda/lib/variableCategories"
 
-import { createMeasurement } from "../../../measurements/measurementActions"
+import { createMeasurement } from "./measurementActions"
 
 const measurementFormSchema = z.object({
   variableName: z.string().min(1, "Variable name is required"),
