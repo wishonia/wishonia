@@ -1,9 +1,10 @@
 "use server"
 
-import { z } from "zod"
 import { revalidatePath } from "next/cache"
-import { postMeasurements } from "@/lib/dfda"
+import { z } from "zod"
+
 import { getUserIdServer } from "@/lib/api/getUserIdServer"
+import { postMeasurements } from "@/lib/dfda"
 
 const measurementSchema = z.object({
   variableName: z.string(),
@@ -15,7 +16,9 @@ const measurementSchema = z.object({
   variableId: z.number().optional(),
 })
 
-export async function createMeasurement(data: z.infer<typeof measurementSchema>) {
+export async function createMeasurement(
+  data: z.infer<typeof measurementSchema>
+) {
   try {
     const userId = await getUserIdServer()
     if (!userId) {
@@ -23,7 +26,7 @@ export async function createMeasurement(data: z.infer<typeof measurementSchema>)
     }
 
     const validated = measurementSchema.parse(data)
-    
+
     // Format the measurement for the DFDA API
     const measurement = {
       variableId: validated.variableId,
@@ -37,7 +40,7 @@ export async function createMeasurement(data: z.infer<typeof measurementSchema>)
     }
 
     await postMeasurements(measurement, userId)
-    
+
     revalidatePath("/measurements")
     return { success: true }
   } catch (error) {
@@ -47,4 +50,4 @@ export async function createMeasurement(data: z.infer<typeof measurementSchema>)
     }
     return { success: false, error: "Failed to save measurement" }
   }
-} 
+}
