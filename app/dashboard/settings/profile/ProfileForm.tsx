@@ -2,7 +2,7 @@
 
 import React, { useState } from "react"
 import { zodResolver } from "@hookform/resolvers/zod"
-import { Skill, User } from "@prisma/client"
+import { Prisma, Skill, User } from "@prisma/client"
 import {
   Cake,
   ChevronDown,
@@ -40,8 +40,7 @@ import { userSchema } from "./userSchema"
 import UserSkills from "./UserSkills"
 
 type FormData = Omit<
-  User,
-  | "id"
+  Prisma.UserUpdateInput,
   | "createdAt"
   | "updatedAt"
   | "emailVerified"
@@ -102,14 +101,27 @@ export default function ProfileForm({
     try {
       // Create an object with only the modified fields
       const modifiedData = Object.keys(dirtyFields).reduce((acc, key) => {
-        ;(acc as any)[key] = data[key as keyof FormData]
-        return acc
-      }, {} as Partial<FormData>)
+        const value = data[key as keyof FormData]
+        // Handle null values for JSON fields
+        if (key === "badges") {
+          return {
+            ...acc,
+            [key]: value === null ? Prisma.JsonNull : value,
+          }
+        }
+        return {
+          ...acc,
+          [key]: value,
+        }
+      }, {} as Prisma.UserUpdateInput)
 
-      const userId = user.id
-      const dataWithUserId = { ...modifiedData, id: userId }
+      // Prepare the update data with proper typing
+      const updateData: UpdateUserData = {
+        id: user.id,
+        ...modifiedData,
+      }
 
-      await updateUser(dataWithUserId)
+      await updateUser(updateData)
       toast({
         title: "Section updated",
         description: `Your ${section} information has been successfully updated.`,

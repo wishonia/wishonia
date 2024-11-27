@@ -1,40 +1,36 @@
 "use server"
 
 import { revalidatePath } from "next/cache"
-import type { Prisma } from "@prisma/client"
+import { Prisma } from "@prisma/client"
 
 import prisma from "@/lib/prisma"
 
 import { userSchema } from "./userSchema"
 
+// Define a type that properly handles JSON fields
 type UpdateUserData = {
   id: string
-} & Prisma.UserUpdateInput
+  badges?: Prisma.InputJsonValue | Prisma.NullableJsonNullValueInput
+} & Omit<Prisma.UserUpdateInput, "badges">
 
 export async function updateUser(data: UpdateUserData) {
-  // First get the id before validation
-  const { id, ...dataToValidate } = data
+  try {
+    const { id, ...updateData } = data
 
-  // Validate the update data (excluding id)
-  const validatedData = userSchema.parse(dataToValidate)
+    const validatedData = userSchema.parse(updateData)
 
-  // Convert the data to match Prisma's expected format
-  const updateData: Prisma.UserUpdateInput = Object.entries(
-    validatedData
-  ).reduce(
-    (acc, [key, value]) => ({
-      ...acc,
-      [key]: value === null ? undefined : value,
-    }),
-    {}
-  )
+    const updatedUser = await prisma.user.update({
+      where: { id },
+      data: validatedData,
+    })
 
-  const updatedUser = await prisma.user.update({
-    where: { id },
-    data: updateData,
-  })
-
-  revalidatePath("/profile")
-
-  return updatedUser
+    revalidatePath("/dashboard/settings/profile")
+    return { success: true, data: updatedUser }
+  } catch (error) {
+    // Handle validation errors separately
+    if (error instanceof Prisma.PrismaClientKnownRequestError) {
+      return { success: false, error: "Database error occurred" }
+    }
+    return { success: false, error: "Failed to update user" }
+  }
 }
