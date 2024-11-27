@@ -1,4 +1,3 @@
-import { Metadata } from "next"
 import { redirect } from "next/navigation"
 
 import { authOptions } from "@/lib/auth"
@@ -31,7 +30,6 @@ interface GlobalVariablePageProps {
 
 export default async function GlobalVariablePage({
   params,
-  searchParams,
 }: GlobalVariablePageProps) {
   const user = await getCurrentUser()
 
@@ -43,11 +41,6 @@ export default async function GlobalVariablePage({
     <Shell>
       <GlobalVariableOverview
         variableId={params.variableId}
-        user={user}
-        measurementsDateRange={{
-          from: searchParams.from,
-          to: searchParams.to,
-        }}
       />
     </Shell>
   )

@@ -3,7 +3,6 @@
 import Link from "next/link"
 
 import { GlobalVariable } from "@/types/models/GlobalVariable"
-import { Button } from "@/components/ui/button"
 import { Skeleton } from "@/components/ui/skeleton"
 import { GlobalVariableOperationsButton } from "@/components/globalVariables/global-variable-operations-button"
 import { MeasurementButton } from "@/components/measurements/measurement-button"

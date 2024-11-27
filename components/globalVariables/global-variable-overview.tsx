@@ -1,39 +1,31 @@
 "use client"
 
-import { FC, useEffect, useState } from "react"
 import * as React from "react"
+import { FC, useEffect, useState } from "react"
 
+import type { GlobalVariable } from "@/types/models/GlobalVariable"
 import { cn } from "@/lib/utils"
 import { buttonVariants } from "@/components/ui/button"
 import { Icons } from "@/components/icons"
-import { MeasurementsList } from "@/components/measurements/measurements-list"
 import { DashboardHeader } from "@/components/pages/dashboard/dashboard-header"
-import type { GlobalVariable } from "@/types/models/GlobalVariable"
 
 type GlobalVariableOverviewProps = {
-  user: {
-    id: string
-  }
   variableId: number
-  measurementsDateRange: {
-    from: string
-    to: string
-  }
 }
 
 export const GlobalVariableOverview: FC<GlobalVariableOverviewProps> = ({
-  user,
   variableId,
-  measurementsDateRange,
 }) => {
-  const [globalVariable, setGlobalVariable] = useState<GlobalVariable | null>(null)
+  const [globalVariable, setGlobalVariable] = useState<GlobalVariable | null>(
+    null
+  )
   const [isLoading, setIsLoading] = useState(true)
 
   useEffect(() => {
     setIsLoading(true)
     fetch(`/api/dfda/variables?id=${variableId}&includeCharts=1`)
-      .then(r => r.json())
-      .then(variables => {
+      .then((r) => r.json())
+      .then((variables) => {
         setGlobalVariable(variables[0])
         setIsLoading(false)
       })
@@ -53,7 +45,10 @@ export const GlobalVariableOverview: FC<GlobalVariableOverviewProps> = ({
 
   return (
     <>
-      <DashboardHeader heading={`${globalVariable?.name} Measurements`}>
+      <DashboardHeader
+        heading={`${globalVariable?.name} Measurements`}
+        text="View and manage measurements for this variable"
+      >
         <div className="flex items-center gap-4">
           <a
             href="/dfda/globalVariables"
@@ -65,19 +60,13 @@ export const GlobalVariableOverview: FC<GlobalVariableOverviewProps> = ({
         </div>
       </DashboardHeader>
 
-      <div className="w-full bg-white h-[calc(100vh-12rem)]">
+      <div className="h-[calc(100vh-12rem)] w-full bg-white">
         <iframe
           src={`https://studies.dfda.earth/variables/${variableId}`}
-          className="w-full h-full border-0"
+          className="h-full w-full border-0"
           title={globalVariable?.name || "Variable Details"}
         />
       </div>
-      
-      <MeasurementsList
-        user={user}
-        variableId={variableId}
-        measurementsDateRange={measurementsDateRange}
-      />
     </>
   )
 }
