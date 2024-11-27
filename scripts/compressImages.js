@@ -63,5 +63,5 @@ function compressImage(imagePath) {
 }
 
 // Start the script with the directory you want to traverse
-traverseDir("../public/wishingWells")
-traverseDir("../public/globalProblems")
+traverseDir("public/docs/positron-network/agent-ideas")
+//traverseDir("../public/globalProblems")
