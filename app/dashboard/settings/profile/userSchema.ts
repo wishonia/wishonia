@@ -1,14 +1,23 @@
-import { z } from 'zod'
+import { z } from "zod"
 
-export const userSchema = z.object({
+
+
+
+
+export const userSchema = z
+  .object({
     address: z.string().optional().nullable(),
     badges: z.any().optional().nullable(), // Json type
     banned: z.boolean().optional().nullable(),
     bio: z.string().optional().nullable(),
-    birthday: z.string().optional().nullable().refine((date) => !date || !isNaN(Date.parse(date)), {
+    birthday: z
+      .string()
+      .optional()
+      .nullable()
+      .refine((date) => !date || !isNaN(Date.parse(date)), {
         message: "Invalid date format",
-    }),
-    blog: z.string().url("Invalid URL").optional().nullable().or(z.literal('')),
+      }),
+    blog: z.string().url("Invalid URL").optional().nullable().or(z.literal("")),
     city: z.string().optional().nullable(),
     company: z.string().optional().nullable(),
     contributorsEnabled: z.boolean().optional().nullable(),
@@ -19,7 +28,12 @@ export const userSchema = z.object({
     geoEnabled: z.boolean().optional().nullable(),
     githubUsername: z.string().optional().nullable(),
     hireable: z.boolean().optional().nullable(),
-    image: z.string().url("Invalid URL").optional().nullable().or(z.literal('')),
+    image: z
+      .string()
+      .url("Invalid URL")
+      .optional()
+      .nullable()
+      .or(z.literal("")),
     language: z.string().optional().nullable(),
     lastName: z.string().optional().nullable(),
     location: z.string().optional().nullable(),
@@ -27,7 +41,12 @@ export const userSchema = z.object({
     newsletterSubscribed: z.boolean().optional(),
     phoneNumber: z.string().optional().nullable(),
     postalCode: z.string().optional().nullable(),
-    profileBannerUrl: z.string().url("Invalid URL").optional().nullable().or(z.literal('')),
+    profileBannerUrl: z
+      .string()
+      .url("Invalid URL")
+      .optional()
+      .nullable()
+      .or(z.literal("")),
     protected: z.boolean().optional().nullable(),
     signedPetition: z.boolean().optional(),
     stateProvince: z.string().optional().nullable(),
@@ -39,7 +58,13 @@ export const userSchema = z.object({
     warPercentageDesired: z.number().min(0).max(100).optional().nullable(),
     warPercentageGuessed: z.number().min(0).max(100).optional().nullable(),
     web3Wallet: z.string().optional().nullable(),
-    website: z.string().url("Invalid URL").optional().nullable().or(z.literal('')),
-}).partial()
+    website: z
+      .string()
+      .url("Invalid URL")
+      .optional()
+      .nullable()
+      .or(z.literal("")),
+  })
+  .partial()
 
-export type UserUpdateInput = z.infer<typeof userSchema>;
+export type UserUpdateInput = z.infer<typeof userSchema>

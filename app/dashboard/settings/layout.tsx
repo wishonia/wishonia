@@ -16,6 +16,10 @@ const sidebarNavItems = [
     title: "Notifications",
     href: "/dashboard/settings/notifications",
   },
+  {
+    title: "Profile",
+    href: "/dashboard/settings/profile",
+  },
 ]
 
 interface SettingsLayoutProps {

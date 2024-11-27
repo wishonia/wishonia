@@ -1,37 +1,38 @@
-import { getServerSession } from "next-auth/next"
+import { Metadata } from "next"
+import { redirect } from "next/navigation"
 
 import { authOptions } from "@/lib/auth"
 import { getCurrentUser } from "@/lib/session"
+import { Shell } from "@/components/layout/shell"
+import { DashboardHeader } from "@/components/pages/dashboard/dashboard-header"
+import { AppearanceForm } from "@/components/settings/appearance-form"
+import { DFDATokenForm } from "@/components/settings/dfda-access-token-form"
+import { UserNameForm } from "@/components/user/user-name-form"
+
+export const metadata: Metadata = {
+  title: "Settings",
+  description: "Manage your account and settings.",
+}
 
 export default async function SettingsPage() {
   const user = await getCurrentUser()
-  const session = await getServerSession(authOptions)
+
+  if (!user) {
+    redirect(authOptions?.pages?.signIn || "/signin")
+  }
 
   return (
-    <div className="space-y-6">
-      <div>
-        <h3 className="text-lg font-medium">Account Settings</h3>
-        <p className="text-sm text-muted-foreground">
-          Manage your account settings and preferences.
-        </p>
+    <Shell>
+      <DashboardHeader
+        heading="Settings"
+        text="Manage account and app settings."
+      />
+      <div className="grid grid-cols-1 gap-6">
+        <UserNameForm user={{ id: user.id, username: user.username || "" }} />
+        <DFDATokenForm userId={user.id} />
+        {/*<DFDAEmailForm />*/}
+        <AppearanceForm />
       </div>
-
-      {/* Debug info */}
-      <div className="rounded-lg border p-4">
-        <h4 className="mb-2 font-medium">Debug Info</h4>
-        <pre className="overflow-auto text-xs">
-          {JSON.stringify(
-            {
-              userId: user?.id,
-              email: user?.email,
-              sessionId: session?.user?.id,
-              sessionEmail: session?.user?.email,
-            },
-            null,
-            2
-          )}
-        </pre>
-      </div>
-    </div>
+    </Shell>
   )
 }
