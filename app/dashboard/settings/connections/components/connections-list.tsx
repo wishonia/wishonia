@@ -20,10 +20,12 @@ export function ConnectionsList({ connectedAccounts }: ConnectionsListProps) {
   const [isLoading, setIsLoading] = useState<string | null>(null)
   const { toast } = useToast()
 
-  console.log("ConnectionsList received accounts:", {
-    connectedAccounts,
-    providers: connectedAccounts.map((acc) => acc.provider),
-  })
+  if (process.env.NODE_ENV === 'development') {
+    console.log("ConnectionsList received accounts:", {
+      connectedAccounts,
+      providers: connectedAccounts.map((acc) => acc.provider),
+    })
+  }
 
   useEffect(() => {
     const loadProviders = async () => {
@@ -50,8 +52,8 @@ export function ConnectionsList({ connectedAccounts }: ConnectionsListProps) {
   if (!providers) return null
 
   const handleConnect = async (providerId: string) => {
+    if (isLoading) return; // Prevent rapid repeated clicks
     if (!session) {
-      console.log("No session found, showing error")
       toast({
         variant: "destructive",
         title: "Authentication Required",
@@ -63,11 +65,6 @@ export function ConnectionsList({ connectedAccounts }: ConnectionsListProps) {
     try {
       setIsLoading(providerId)
 
-      console.log("Starting connection attempt:", {
-        provider: providerId,
-        currentLocation: window.location.href,
-      })
-
       localStorage.setItem("afterLoginRedirect", window.location.href)
 
       const result = await signIn(providerId, {
@@ -76,7 +73,6 @@ export function ConnectionsList({ connectedAccounts }: ConnectionsListProps) {
         error: "/auth/error",
       })
 
-      console.log("SignIn result:", result)
     } catch (error) {
       console.error(`Failed to connect ${providerId}:`, error)
       toast({
