@@ -2,12 +2,15 @@
 
 import { Effectiveness } from "@prisma/client"
 
+import type { GetStudiesResponse } from "@/types/models/GetStudiesResponse"
+import { GetTrackingReminderNotificationsResponse } from "@/types/models/GetTrackingReminderNotificationsResponse"
+import { TrackingReminderNotification } from "@/types/models/TrackingReminderNotification"
 import {
   findArticleByTopic,
   writeArticle,
 } from "@/lib/agents/researcher/researcher"
 import { prisma } from "@/lib/db"
-import { dfdaGET } from "@/lib/dfda"
+import { dfdaGET, dfdaPOST } from "@/lib/dfda"
 
 export async function fetchConditions() {
   return prisma.dfdaCondition.findMany()
@@ -182,4 +185,230 @@ export const getDataSources = async (
   return dfdaGET("connectors/list", {
     final_callback_url,
   })
+}
+
+export type SortParam =
+  | "-qmScore"
+  | "correlationCoefficient"
+  | "-correlationCoefficient"
+  | "-numberOfUsers"
+  | "pValue"
+
+export async function searchPredictors(params: {
+  query?: string
+  sort?: SortParam
+  limit?: number
+  offset?: number
+  effectVariableName?: string
+  causeVariableName?: string
+  correlationCoefficient?: string
+}) {
+  try {
+    const apiParams: Record<string, string> = {
+      limit: (params.limit || 10).toString(),
+      offset: (params.offset || 0).toString(),
+    }
+
+    if (params.effectVariableName) {
+      apiParams.effectVariableName = params.effectVariableName
+    }
+
+    if (params.sort) {
+      apiParams.sort = params.sort
+    }
+
+    if (params.correlationCoefficient) {
+      apiParams.correlationCoefficient = params.correlationCoefficient
+    }
+
+    const response = (await dfdaGET("studies", apiParams)) as GetStudiesResponse
+
+    return response.studies || []
+  } catch (error) {
+    console.error("Error searching studies:", error)
+    throw new Error("Failed to search studies")
+  }
+}
+
+export async function searchVariables(searchPhrase: string) {
+  try {
+    const results = await dfdaGET("variables", {
+      includePublic: "true",
+      fallbackToAggregatedCorrelations: "true",
+      numberOfCorrelationsAsEffect: "(gt)1",
+      sort: "-numberOfCorrelationsAsEffect",
+      outcome: "true",
+      limit: "10",
+      searchPhrase,
+    })
+    return results
+  } catch (error) {
+    console.error("Error searching variables:", error)
+    throw new Error("Failed to search variables")
+  }
+}
+
+export async function joinStudy(studyId: string, userId: string) {
+  console.log("Starting joinStudy with:", { studyId, userId })
+
+  if (!studyId) {
+    throw new Error("Study ID is required")
+  }
+
+  if (!userId) {
+    console.error("Missing userId in session:", userId)
+    throw new Error("User ID is required")
+  }
+
+  try {
+    console.log("Making POST request to join study with params:", {
+      studyId,
+      clientId: process.env.DFDA_CLIENT_ID,
+    })
+
+    const response = await dfdaPOST(
+      "study/join",
+      {
+        studyId,
+        clientId: process.env.DFDA_CLIENT_ID,
+      },
+      userId
+    )
+
+    console.log("Join study response:", response)
+
+    // Return the URL instead of redirecting
+    return "/dfda/inbox"
+  } catch (error) {
+    console.error("Error joining study:", {
+      error,
+      studyId,
+      clientId: process.env.DFDA_CLIENT_ID,
+      errorMessage: error instanceof Error ? error.message : "Unknown error",
+      errorStack: error instanceof Error ? error.stack : undefined,
+    })
+    throw new Error("Failed to join study")
+  }
+}
+
+function getDFDAClientId(): string {
+  if (!process.env.DFDA_CLIENT_ID) {
+    throw new Error("DFDA_CLIENT_ID is not set")
+  }
+  return process.env.DFDA_CLIENT_ID
+}
+
+export async function getTrackingReminderNotifications(
+  userId: string
+): Promise<TrackingReminderNotification[]> {
+  try {
+    const response = (await dfdaGET(
+      "trackingReminderNotifications",
+      { clientId: getDFDAClientId() },
+      userId
+    )) as GetTrackingReminderNotificationsResponse
+
+    if (!response.data) {
+      console.log("No notifications in response:", response)
+      return []
+    }
+
+    return response.data
+  } catch (error) {
+    console.error("Error fetching tracking reminder notifications:", error)
+    throw new Error("Failed to fetch notifications")
+  }
+}
+
+export async function trackNotification(
+  notification: TrackingReminderNotification,
+  ourUserId: string,
+  value?: number
+) {
+  try {
+    const response = await dfdaPOST(
+      "trackingReminderNotifications/track",
+      {
+        id: notification.id,
+        modifiedValue: value !== undefined ? value : notification.modifiedValue,
+      },
+      ourUserId // Pass our userId for auth
+    )
+    return response
+  } catch (error) {
+    console.error("Error tracking notification:", error)
+    throw new Error("Failed to track notification")
+  }
+}
+
+export async function skipNotification(
+  notification: TrackingReminderNotification,
+  ourUserId: string
+) {
+  try {
+    const response = await dfdaPOST(
+      "trackingReminderNotifications/skip",
+      { id: notification.id },
+      ourUserId // Pass our userId for auth
+    )
+    return response
+  } catch (error) {
+    console.error("Error skipping notification:", error)
+    throw new Error("Failed to skip notification")
+  }
+}
+
+export async function snoozeNotification(
+  notification: TrackingReminderNotification,
+  ourUserId: string
+) {
+  try {
+    const response = await dfdaPOST(
+      "trackingReminderNotifications/snooze",
+      { id: notification.id },
+      ourUserId // Pass our userId for auth
+    )
+    return response
+  } catch (error) {
+    console.error("Error snoozing notification:", error)
+    throw new Error("Failed to snooze notification")
+  }
+}
+
+export async function trackAllNotifications(
+  notification: TrackingReminderNotification,
+  ourUserId: string,
+  value: number
+) {
+  try {
+    const response = await dfdaPOST(
+      "trackingReminderNotifications/trackAll",
+      {
+        variableId: notification.variableId,
+        modifiedValue: value,
+      },
+      ourUserId // Pass our userId for auth
+    )
+    return response
+  } catch (error) {
+    console.error("Error tracking all notifications:", error)
+    throw new Error("Failed to track all notifications")
+  }
+}
+
+export async function skipAllNotifications(
+  notification: TrackingReminderNotification,
+  ourUserId: string
+) {
+  try {
+    const response = await dfdaPOST(
+      "trackingReminderNotifications/skipAll",
+      { variableId: notification.variableId },
+      ourUserId // Pass our userId for auth
+    )
+    return response
+  } catch (error) {
+    console.error("Error skipping all notifications:", error)
+    throw new Error("Failed to skip all notifications")
+  }
 }

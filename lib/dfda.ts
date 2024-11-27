@@ -305,3 +305,101 @@ export async function getSafeRedirectUrl(
     return `${baseUrl}/intro?access_token=${newToken}`
   }
 }
+
+export async function createDfdaApplication(
+  name: string,
+  description: string,
+  redirectUri: string
+): Promise<string> {
+  const response = await dfdaPOST("apps/create", {
+    appDisplayName: name,
+    appDescription: description,
+    homepageUrl: redirectUri,
+    qmClientId: name.toLowerCase().replace(/[^a-z0-9]/g, "-"),
+  })
+  const data = response
+  return data.clientId || data.qmClientId
+}
+
+export async function searchDfdaVariables(
+  searchPhrase?: string,
+  additionalParams: Record<string, string> = {}
+): Promise<GlobalVariable[]> {
+  try {
+    const baseUrl = "https://safe.fdai.earth/api/v3/variables"
+    if (!process.env.DFDA_CLIENT_ID) {
+      throw new Error(
+        "DFDA_CLIENT_ID environment variable is not set. Get one at https://builder.dfda.earth/"
+      )
+    }
+    const params = new URLSearchParams({
+      appName: "Wishonia",
+      clientId: process.env.DFDA_CLIENT_ID,
+      limit: "10",
+      includePublic: "true",
+      ...(searchPhrase ? { searchPhrase } : {}),
+      ...additionalParams,
+    })
+
+    const url = `${baseUrl}?${params.toString()}`
+    console.log(`Fetching from URL: ${url}`)
+
+    const response = await fetch(url)
+
+    if (!response.ok) {
+      const errorBody = await response.text()
+      throw new Error(
+        `HTTP error! status: ${response.status}, statusText: ${response.statusText}, body: ${errorBody}`
+      )
+    }
+
+    const data = await response.json()
+
+    if (!Array.isArray(data)) {
+      console.error(
+        "Unexpected response structure:",
+        JSON.stringify(data, null, 2)
+      )
+      throw new Error(
+        "Unexpected response format: 'data' field is missing or not an array"
+      )
+    }
+
+    const variables = data
+
+    console.log(`Found ${variables.length} variables`)
+    return variables
+  } catch (error) {
+    console.error("Error in searchDfdaVariables:", error)
+    if (error instanceof Error) {
+      console.error("Error message:", error.message)
+      console.error("Error stack:", error.stack)
+    }
+    throw new Error(`Failed to search DFDA variables: ${error instanceof Error ? error.message : 'Unknown error'}`)
+  }
+}
+
+export async function searchDfdaTreatments(
+  query: string
+): Promise<GlobalVariable[]> {
+  return searchDfdaVariables(query, {
+    variableCategoryName: "Treatments",
+  })
+}
+
+export async function searchDfdaOutcomes(
+  query: string
+): Promise<GlobalVariable[]> {
+  return searchDfdaVariables(query, {
+    outcome: "true",
+    sort: "-numberOfCorrelationsAsEffect",
+  })
+}
+
+export async function searchDfdaPredictors(
+  query: string
+): Promise<GlobalVariable[]> {
+  return searchDfdaVariables(query, {
+    sort: "-numberOfCorrelationsAsCause",
+  })
+}
