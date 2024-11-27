@@ -5,4 +5,4 @@ export default function NotFound() {
       <p className="mt-4">Could not find the requested variable.</p>
     </div>
   )
-} 
+}

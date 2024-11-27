@@ -3,26 +3,32 @@
 import { useState } from "react"
 import { useRouter, useSearchParams } from "next/navigation"
 import { zodResolver } from "@hookform/resolvers/zod"
-import { useForm } from "react-hook-form"
-import * as z from "zod"
 import { format } from "date-fns"
 import { CalendarIcon } from "lucide-react"
-import { cn } from "@/lib/utils"
-import { variableCategories } from "@/app/dfda/lib/variableCategories"
+import { useForm } from "react-hook-form"
+import * as z from "zod"
+
 import { GlobalVariable } from "@/types/models/GlobalVariable"
 import { UserVariable } from "@/types/models/UserVariable"
-
+import { ratingButtons, Valence } from "@/lib/constants/ratings"
+import { cn } from "@/lib/utils"
 import { Button } from "@/components/ui/button"
 import { Calendar } from "@/components/ui/calendar"
 import {
   Form,
   FormControl,
+  FormDescription,
   FormField,
   FormItem,
   FormLabel,
   FormMessage,
-  FormDescription,
 } from "@/components/ui/form"
+import { Input } from "@/components/ui/input"
+import {
+  Popover,
+  PopoverContent,
+  PopoverTrigger,
+} from "@/components/ui/popover"
 import {
   Select,
   SelectContent,
@@ -30,16 +36,11 @@ import {
   SelectTrigger,
   SelectValue,
 } from "@/components/ui/select"
-import { Input } from "@/components/ui/input"
-import {
-  Popover,
-  PopoverContent,
-  PopoverTrigger,
-} from "@/components/ui/popover"
 import { Textarea } from "@/components/ui/textarea"
 import { toast } from "@/components/ui/use-toast"
+import { variableCategories } from "@/app/dfda/lib/variableCategories"
+
 import { createMeasurement } from "./measurementActions"
-import { Valence, ratingButtons } from "@/lib/constants/ratings"
 
 const measurementFormSchema = z.object({
   variableName: z.string().min(1, "Variable name is required"),
@@ -68,7 +69,7 @@ export function MeasurementForm({ variable }: MeasurementFormProps) {
       variableCategoryName: variable.variableCategoryName,
       unitAbbreviatedName: variable.unitAbbreviatedName,
       value: variable.mostCommonValue,
-    })
+    }),
   }
 
   const form = useForm<MeasurementFormValues>({
@@ -83,7 +84,7 @@ export function MeasurementForm({ variable }: MeasurementFormProps) {
   async function onSubmit(data: MeasurementFormValues) {
     try {
       setLoading(true)
-      
+
       const result = await createMeasurement({
         ...data,
         variableId: variable?.variableId,
@@ -100,7 +101,8 @@ export function MeasurementForm({ variable }: MeasurementFormProps) {
     } catch (error) {
       toast({
         title: "Error",
-        description: error instanceof Error ? error.message : "Failed to save measurement",
+        description:
+          error instanceof Error ? error.message : "Failed to save measurement",
         variant: "destructive",
       })
     } finally {
@@ -109,8 +111,11 @@ export function MeasurementForm({ variable }: MeasurementFormProps) {
   }
 
   // Determine if we should show rating buttons
-  const showRatingButtons = variable?.unitAbbreviatedName === "/5" && variable?.valence
-  const buttons = showRatingButtons ? ratingButtons[variable.valence as Valence] : null
+  const showRatingButtons =
+    variable?.unitAbbreviatedName === "/5" && variable?.valence
+  const buttons = showRatingButtons
+    ? ratingButtons[variable.valence as Valence]
+    : null
 
   // Check if we have an existing variable
   const isExistingVariable = Boolean(variable?.variableId)
@@ -125,12 +130,14 @@ export function MeasurementForm({ variable }: MeasurementFormProps) {
               name="variableName"
               render={({ field }) => (
                 <FormItem>
-                  <FormLabel className="text-black font-bold">Variable Name</FormLabel>
+                  <FormLabel className="font-bold text-black">
+                    Variable Name
+                  </FormLabel>
                   <FormControl>
-                    <Input 
-                      placeholder="Enter variable name" 
+                    <Input
+                      placeholder="Enter variable name"
                       {...field}
-                      className="border-2 border-black bg-white text-black placeholder:text-gray-500 shadow-[2px_2px_0px_0px_rgba(0,0,0,1)]"
+                      className="border-2 border-black bg-white text-black shadow-[2px_2px_0px_0px_rgba(0,0,0,1)] placeholder:text-gray-500"
                     />
                   </FormControl>
                   <FormMessage className="text-red-500" />
@@ -143,8 +150,13 @@ export function MeasurementForm({ variable }: MeasurementFormProps) {
               name="variableCategoryName"
               render={({ field }) => (
                 <FormItem>
-                  <FormLabel className="text-black font-bold">Category</FormLabel>
-                  <Select onValueChange={field.onChange} defaultValue={field.value}>
+                  <FormLabel className="font-bold text-black">
+                    Category
+                  </FormLabel>
+                  <Select
+                    onValueChange={field.onChange}
+                    defaultValue={field.value}
+                  >
                     <FormControl>
                       <SelectTrigger className="border-2 border-black bg-white text-black shadow-[2px_2px_0px_0px_rgba(0,0,0,1)]">
                         <SelectValue placeholder="Select category" />
@@ -152,8 +164,8 @@ export function MeasurementForm({ variable }: MeasurementFormProps) {
                     </FormControl>
                     <SelectContent className="border-2 border-black bg-white">
                       {variableCategories.map((category) => (
-                        <SelectItem 
-                          key={category.name} 
+                        <SelectItem
+                          key={category.name}
                           value={category.name}
                           className="hover:bg-gray-100"
                         >
@@ -174,19 +186,19 @@ export function MeasurementForm({ variable }: MeasurementFormProps) {
           name="value"
           render={({ field }) => (
             <FormItem>
-              <FormLabel className="text-black font-bold">Value</FormLabel>
+              <FormLabel className="font-bold text-black">Value</FormLabel>
               {buttons ? (
-                <div className="flex w-full justify-around items-center">
+                <div className="flex w-full items-center justify-around">
                   {buttons.map((option) => (
                     <img
                       key={option.numericValue}
                       src={option.src}
                       title={option.title}
                       className={`cursor-pointer ${
-                        form.watch("value") === option.numericValue 
-                          ? "brightness-110 scale-110 drop-shadow-[0_0_8px_rgba(59,130,246,0.5)]"
-                          : "brightness-90 hover:brightness-100 scale-75 hover:scale-90"
-                      } w-auto max-w-[20%] transition-all duration-200 rounded-full`}
+                        form.watch("value") === option.numericValue
+                          ? "scale-110 brightness-110 drop-shadow-[0_0_8px_rgba(59,130,246,0.5)]"
+                          : "scale-75 brightness-90 hover:scale-90 hover:brightness-100"
+                      } w-auto max-w-[20%] rounded-full transition-all duration-200`}
                       onClick={() => handleFaceButtonClick(option.numericValue)}
                       alt={`Rating ${option.numericValue}`}
                     />
@@ -195,14 +207,14 @@ export function MeasurementForm({ variable }: MeasurementFormProps) {
               ) : (
                 <FormControl>
                   <div className="flex items-center gap-2">
-                    <Input 
-                      type="number" 
+                    <Input
+                      type="number"
                       placeholder="Enter value"
                       min={variable?.minimumAllowedValue}
                       max={variable?.maximumAllowedValue}
                       {...field}
-                      onChange={e => field.onChange(e.target.valueAsNumber)}
-                      className="border-2 border-black bg-white text-black placeholder:text-gray-500 shadow-[2px_2px_0px_0px_rgba(0,0,0,1)]"
+                      onChange={(e) => field.onChange(e.target.valueAsNumber)}
+                      className="border-2 border-black bg-white text-black shadow-[2px_2px_0px_0px_rgba(0,0,0,1)] placeholder:text-gray-500"
                     />
                     <span className="text-sm font-bold text-black">
                       {variable?.unitAbbreviatedName}
@@ -220,14 +232,16 @@ export function MeasurementForm({ variable }: MeasurementFormProps) {
           name="startAt"
           render={({ field }) => (
             <FormItem className="flex flex-col">
-              <FormLabel className="text-black font-bold">Date & Time</FormLabel>
+              <FormLabel className="font-bold text-black">
+                Date & Time
+              </FormLabel>
               <Popover>
                 <PopoverTrigger asChild>
                   <FormControl>
                     <Button
                       variant={"outline"}
                       className={cn(
-                        "w-full pl-3 text-left font-normal border-2 border-black bg-white text-black shadow-[2px_2px_0px_0px_rgba(0,0,0,1)] hover:shadow-none hover:translate-x-[2px] hover:translate-y-[2px] transition-all",
+                        "w-full border-2 border-black bg-white pl-3 text-left font-normal text-black shadow-[2px_2px_0px_0px_rgba(0,0,0,1)] transition-all hover:translate-x-[2px] hover:translate-y-[2px] hover:shadow-none",
                         !field.value && "text-gray-500"
                       )}
                     >
@@ -240,7 +254,10 @@ export function MeasurementForm({ variable }: MeasurementFormProps) {
                     </Button>
                   </FormControl>
                 </PopoverTrigger>
-                <PopoverContent className="border-2 border-black bg-white p-0" align="start">
+                <PopoverContent
+                  className="border-2 border-black bg-white p-0"
+                  align="start"
+                >
                   <Calendar
                     mode="single"
                     selected={field.value}
@@ -251,7 +268,7 @@ export function MeasurementForm({ variable }: MeasurementFormProps) {
                     initialFocus
                     className="bg-white"
                   />
-                  <div className="p-3 border-t-2 border-black">
+                  <div className="border-t-2 border-black p-3">
                     <Input
                       type="time"
                       value={format(field.value || new Date(), "HH:mm")}
@@ -267,7 +284,9 @@ export function MeasurementForm({ variable }: MeasurementFormProps) {
                   </div>
                 </PopoverContent>
               </Popover>
-              <FormDescription className="text-gray-600">When this measurement was taken</FormDescription>
+              <FormDescription className="text-gray-600">
+                When this measurement was taken
+              </FormDescription>
               <FormMessage className="text-red-500" />
             </FormItem>
           )}
@@ -278,11 +297,11 @@ export function MeasurementForm({ variable }: MeasurementFormProps) {
           name="note"
           render={({ field }) => (
             <FormItem>
-              <FormLabel className="text-black font-bold">Note</FormLabel>
+              <FormLabel className="font-bold text-black">Note</FormLabel>
               <FormControl>
-                <Textarea 
+                <Textarea
                   placeholder="Add any additional notes..."
-                  className="resize-none border-2 border-black bg-white text-black placeholder:text-gray-500 shadow-[2px_2px_0px_0px_rgba(0,0,0,1)]"
+                  className="resize-none border-2 border-black bg-white text-black shadow-[2px_2px_0px_0px_rgba(0,0,0,1)] placeholder:text-gray-500"
                   {...field}
                 />
               </FormControl>
@@ -292,18 +311,18 @@ export function MeasurementForm({ variable }: MeasurementFormProps) {
         />
 
         <div className="flex gap-4">
-          <Button 
-            type="button" 
+          <Button
+            type="button"
             variant="outline"
             onClick={() => router.back()}
-            className="border-2 border-black bg-white text-black shadow-[4px_4px_0px_0px_rgba(0,0,0,1)] hover:shadow-none hover:translate-x-[4px] hover:translate-y-[4px] transition-all"
+            className="border-2 border-black bg-white text-black shadow-[4px_4px_0px_0px_rgba(0,0,0,1)] transition-all hover:translate-x-[4px] hover:translate-y-[4px] hover:shadow-none"
           >
             Cancel
           </Button>
-          <Button 
-            type="submit" 
+          <Button
+            type="submit"
             disabled={loading}
-            className="border-2 border-black bg-blue-500 text-white shadow-[4px_4px_0px_0px_rgba(0,0,0,1)] hover:shadow-none hover:translate-x-[4px] hover:translate-y-[4px] transition-all disabled:opacity-50"
+            className="border-2 border-black bg-blue-500 text-white shadow-[4px_4px_0px_0px_rgba(0,0,0,1)] transition-all hover:translate-x-[4px] hover:translate-y-[4px] hover:shadow-none disabled:opacity-50"
           >
             {loading ? "Saving..." : "Record Measurement"}
           </Button>
@@ -311,4 +330,4 @@ export function MeasurementForm({ variable }: MeasurementFormProps) {
       </form>
     </Form>
   )
-} 
+}

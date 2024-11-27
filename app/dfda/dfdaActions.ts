@@ -281,11 +281,9 @@ export async function joinStudy(studyId: string, userId: string) {
     return "/dfda/inbox"
   } catch (error) {
     console.error("Error joining study:", {
-      error,
       studyId,
-      clientId: process.env.DFDA_CLIENT_ID,
+      clientId: getDFDAClientId(),
       errorMessage: error instanceof Error ? error.message : "Unknown error",
-      errorStack: error instanceof Error ? error.stack : undefined,
     })
     throw new Error("Failed to join study")
   }

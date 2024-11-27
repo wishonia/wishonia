@@ -1,13 +1,17 @@
 interface DashboardHeaderProps {
   heading: string
-  text?: string | null
+  text: string
   children?: React.ReactNode
+  className?: string
+  textClassName?: string
 }
 
 export function DashboardHeader({
   heading,
   text,
   children,
+  className,
+  textClassName,
 }: DashboardHeaderProps) {
   return (
     <div className="flex flex-col items-center justify-between gap-4 px-2 text-center md:flex-row md:text-left">
