@@ -14,11 +14,13 @@ interface MeasurementsListProps {
     from: string
     to: string
   }
+  variableId: number
 }
 
 export const MeasurementsList: FC<MeasurementsListProps> = ({
   user,
   measurementsDateRange,
+  variableId,
 }) => {
   const [measurements, setMeasurements] = useState<Measurement[]>()
   const [isLoading, setIsLoading] = useState(true)
@@ -31,6 +33,9 @@ export const MeasurementsList: FC<MeasurementsListProps> = ({
     }
     if (measurementsDateRange.to) {
       url += `?latestMeasurementTime=${measurementsDateRange.to}`
+    }
+    if (variableId) {
+      url += `&variableId=${variableId}`
     }
 
     fetch(url)
@@ -58,7 +63,7 @@ export const MeasurementsList: FC<MeasurementsListProps> = ({
         console.error("Error fetching user variables:", error)
         setIsLoading(false)
       })
-  }, [user, measurementsDateRange.from, measurementsDateRange.to])
+  }, [user, measurementsDateRange.from, measurementsDateRange.to, variableId])
 
   if (isLoading) {
     return (
