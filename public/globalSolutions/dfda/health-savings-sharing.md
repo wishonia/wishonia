@@ -202,3 +202,110 @@ savings for each patient treated. Independent audits ensure accuracy and fairnes
 
 **A:** While the model is most impactful for common, costly diseases, it can be adapted for rare diseases by adjusting
 the profit-sharing percentage or combining efforts across multiple conditions.
+
+### **How the System Benefits Preventative and Longevity Therapies**
+
+#### **1. Savings are Based on Reduced Average Healthcare Costs**
+
+- **For Preventative Therapies**:
+    - Savings are calculated based on reduction in average per capita healthcare costs across the treated population.
+    - Example: If average annual healthcare costs
+      are $12,000 per person, and a preventative therapy reduces this by 15%, the annual savings are $1,800 per person.
+      Over a 10-year period, this amounts to $18,000 in savings, with the manufacturer earning $9,000 per patient.
+
+- **For Longevity Therapies**:
+    - Savings are measured by comparing healthcare costs of treated populations against baseline per capita costs for
+      their age group.
+    - Example: If a longevity therapy reduces average healthcare costs for people aged 65-75 from $18,000 to $13,000 per
+      year, the annual savings are $5,000. Over a 10-year period, this generates $50,000 in savings, with the
+      manufacturer earning $25,000 per patient.
+
+---
+
+#### **2. No Need for Specific Endpoints**
+
+- Traditional drug trials often require **specific endpoints** (e.g., "Does the drug cure or improve this condition?"),
+  which can be hard to define for preventative or longevity therapies. Under this system:
+    - The **endpoint is cost savings**, not specific clinical results.
+    - Real-world data measures the reduction in healthcare spending over time, making the system inherently adaptable to
+      therapies that work across multiple conditions or improve overall health.
+
+---
+
+#### **3. Incentivizing Long-Term Benefits**
+
+- Therapies with compounding benefits (e.g., reducing disease risk over decades or extending healthy lifespan) would
+  still qualify for savings-sharing payments as long as real-world data shows reduced costs over time.
+- Longevity therapies that target multiple conditions simultaneously—like cellular reprogramming or gene editing—can
+  generate savings across a broad spectrum of healthcare expenses, increasing rewards for manufacturers.
+
+---
+
+### **How the System Handles Long-Term Impact**
+
+1. **Ongoing Savings Calculation**:
+    - For preventative and longevity therapies, savings are calculated over a long period using real-world data.
+    - Example: If a therapy reduces annual healthcare costs by $10,000 for 20 years, the total savings are $200,000,
+      with the manufacturer earning $100,000.
+
+2. **Continuous Monitoring**:
+    - The decentralized FDA platform tracks patient health outcomes and healthcare costs over time to measure the
+      therapy's impact.
+    - Payments to manufacturers are adjusted dynamically based on actual savings achieved.
+
+3. **Broad Application**:
+    - Preventative and longevity therapies that provide diffuse or long-term benefits still qualify for rewards, even
+      without targeting a single disease or condition.
+    - Example: A therapy that slows aging could reduce the incidence of heart disease, diabetes, cancer, and dementia,
+      generating savings across multiple categories.
+
+---
+
+### **Specific Changes to Traditional Requirements**
+
+#### **1. No Single Disease Endpoint**:
+
+- Preventative and longevity therapies are rewarded based on **multi-condition savings** rather than curing or
+  preventing one specific disease.
+
+#### **2. Long-Term Real-World Data Collection**:
+
+- The system relies on **anonymized, decentralized data** to measure healthcare cost reductions over decades, making it
+  feasible to track the impact of longevity therapies.
+
+#### **3. Incentivizing Early Adoption**:
+
+- Manufacturers are incentivized to make therapies widely available early, as larger populations and longer treatment
+  durations maximize savings-sharing rewards.
+
+---
+
+### **Example Applications**
+
+#### **Preventative Therapy**: A Universal Cancer Vaccine
+
+- **Scenario**: A vaccine prevents common cancers, saving $500,000 per patient in lifetime treatment costs.
+- **Savings Sharing**: The manufacturer earns $250,000 per patient.
+- **Impact**: Large-scale adoption reduces the global cancer burden and generates sustainable rewards for the developer.
+
+#### **Longevity Therapy**: Epigenetic Reprogramming
+
+- **Scenario**: A therapy extends healthy lifespan by 10 years, delaying age-related diseases and saving $10,000/year in
+  healthcare costs.
+- **Savings Sharing**: The manufacturer earns $5,000/year per patient for 10 years, or $50,000 total.
+- **Impact**: By delaying multiple diseases, the therapy generates rewards from aggregate cost reductions.
+
+---
+
+### **Key Benefits for Preventative and Longevity Therapies**
+
+1. **Eliminates the Endpoint Problem**:
+    - Success is measured in cost savings, not disease-specific outcomes, making the system ideal for broad-impact
+      therapies.
+2. **Encourages Long-Term Thinking**:
+    - Manufacturers are incentivized to develop therapies with long-lasting benefits.
+3. **Accelerates Adoption**:
+    - Patients benefit sooner from preventative and longevity therapies without waiting for traditional trial endpoints.
+4. **Systemic Savings**:
+    - Healthcare systems save billions as chronic disease burdens decline and healthy lifespans increase.
+
