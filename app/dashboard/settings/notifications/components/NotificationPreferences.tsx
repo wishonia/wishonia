@@ -79,8 +79,8 @@ export function NotificationPreferences({
 
   if (!userEmail) {
     return (
-      <div className="rounded-lg bg-yellow-50 p-4">
-        <p className="text-yellow-800">
+      <div className="rounded-lg p-4">
+        <p className="">
           Add an email address to your account to receive notifications.
         </p>
       </div>
@@ -89,8 +89,8 @@ export function NotificationPreferences({
 
   if (settings.unsubscribeFromAll) {
     return (
-      <div className="rounded-lg bg-gray-50 p-4">
-        <p className="text-gray-800">
+      <div className="rounded-lg  p-4">
+        <p className="">
           You are currently unsubscribed from all emails. Contact support if
           you'd like to resubscribe.
         </p>
