@@ -183,4 +183,29 @@
 .neobrutalist-markdown-container > *:last-child {
     @apply mb-0;
 }
+
+/* Add these new styles */
+.neobrutalist-content {
+    @apply space-y-6;
+}
+
+.neobrutalist-content .dashboard-header {
+    @apply neobrutalist-title;
+}
+
+.neobrutalist-content .dashboard-text {
+    @apply neobrutalist-description;
+}
+
+.neobrutalist-content .date-range-picker {
+    @apply neobrutalist-gradient-container neobrutalist-gradient-pink;
+}
+
+.neobrutalist-content .measurements-list {
+    @apply neobrutalist-gradient-container;
+}
+
+.neobrutalist-content .floating-action-button {
+    @apply neobrutalist-button;
+}
  
