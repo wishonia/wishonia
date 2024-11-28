@@ -11,9 +11,9 @@ import { generateSideEffects } from "@/lib/agents/fdai/sideEffectsAgent";
 import { generateMostEffectiveTreatments,
   generateMostEffectiveUnapprovedTreatments,
   generateTreatmentsStartingWith } from "@/lib/agents/fdai/treatmentsIndexer";
-import { getOrCreateDfdaAccessToken } from "@/lib/dfda";
 import { aiModels } from "@/lib/models/aiModelRegistry";
 import {dumpTypeDefinition} from "@/lib/utils/dumpTypeDefinition";
+import {getOrCreateDfdaAccessToken} from "@/app/dfda/dfdaActions";
 
 describe("FDAi Tests", () => {
   it("generates a report based on a study", async () => {

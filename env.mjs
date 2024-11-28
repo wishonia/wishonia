@@ -13,6 +13,8 @@ export const env = createEnv({
     EMAIL_SERVER: z.string().min(1),
     EMAIL_FROM: z.string().min(1),
     TEST_DOMAIN: z.string().optional(),
+    DFDA_CLIENT_ID: z.string().min(1),
+    DFDA_CLIENT_SECRET: z.string().min(1),
   },
   client: {
     NEXT_PUBLIC_APP_URL: z.string().min(1),
@@ -41,5 +43,7 @@ export const env = createEnv({
     EMAIL_FROM: process.env.EMAIL_FROM,
     TEST_DOMAIN: process.env.TEST_DOMAIN,
     NEXT_PUBLIC_TEST_DOMAIN: process.env.NEXT_PUBLIC_TEST_DOMAIN,
+    DFDA_CLIENT_ID: process.env.DFDA_CLIENT_ID,
+    DFDA_CLIENT_SECRET: process.env.DFDA_CLIENT_SECRET,
   },
 })

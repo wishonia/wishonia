@@ -1,8 +1,8 @@
 import { z } from "zod"
 
 import { getUserIdServer } from "@/lib/api/getUserIdServer"
-import { dfdaGET, dfdaPOST } from "@/lib/dfda"
 import { handleError } from "@/lib/errorHandler"
+import {dfdaGET, dfdaPOST} from "@/app/dfda/dfdaActions";
 
 const routeContextSchema = z.object({
   params: z.object({
