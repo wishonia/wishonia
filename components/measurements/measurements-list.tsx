@@ -28,9 +28,9 @@ export const MeasurementsList: FC<MeasurementsListProps> = ({
   useEffect(() => {
     setIsLoading(true)
     const params = new URLSearchParams()
-    
+
     params.append('sort', '-updatedAt')
-    
+
     if (measurementsDateRange?.from) {
       params.append('earliestMeasurementTime', measurementsDateRange.from)
     }
@@ -42,7 +42,7 @@ export const MeasurementsList: FC<MeasurementsListProps> = ({
     }
 
     const url = `/api/dfda/measurements${params.toString() ? `?${params.toString()}` : ''}`
-    
+
     fetch(url)
       .then((response) => response.json())
       .then((measurements) => {

@@ -2,8 +2,8 @@ import { NextRequest, NextResponse } from "next/server"
 
 import { getUserIdServer } from "@/lib/api/getUserIdServer"
 import { conversation2measurements } from "@/lib/conversation2measurements"
-import { postMeasurements } from "@/lib/dfda"
 import { handleError } from "@/lib/errorHandler"
+import {postMeasurements} from "@/app/dfda/dfdaActions";
 
 export async function POST(request: NextRequest) {
   let { statement, utcDateTime, timeZoneOffset, previousStatements } =
