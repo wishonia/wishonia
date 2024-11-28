@@ -37,7 +37,7 @@ export function SignPetitionButton({
   if (!session) {
     return (
       <LoginPromptButton
-        buttonText="Sign in to sign this petition"
+        buttonText="Sign in to Show your support"
         buttonVariant={buttonVariant}
       />
     )
@@ -101,7 +101,7 @@ export function SignPetitionButton({
           : "Signing..."
         : hasSigned
           ? "✓ Remove signature"
-          : "Sign this petition"}
+          : "Show your support"}
     </Button>
   )
 }
