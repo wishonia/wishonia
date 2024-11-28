@@ -3,12 +3,12 @@ import {
   convertToLocalDateTime,
   convertToUTC,
 } from "@/lib/dateTimeWithTimezone"
-import { postMeasurements } from "@/lib/dfda"
 import { getUserId } from "@/lib/getUserId"
 import {
   getDateTimeFromStatementInUserTimezone,
   textCompletion,
 } from "@/lib/llm"
+import {postMeasurements} from "@/app/dfda/dfdaActions";
 
 export function generateText2MeasurementsPrompt(
   statement: string,
