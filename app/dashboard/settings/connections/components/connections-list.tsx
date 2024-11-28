@@ -67,7 +67,7 @@ export function ConnectionsList({ connectedAccounts }: ConnectionsListProps) {
 
       localStorage.setItem("afterLoginRedirect", window.location.href)
 
-      const result = await signIn(providerId, {
+      await signIn(providerId, {
         callbackUrl: window.location.href,
         redirect: true,
         error: "/auth/error",

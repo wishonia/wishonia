@@ -15,28 +15,12 @@ export default async function ConnectionsPage() {
     redirect(authOptions?.pages?.signIn || "/signin")
   }
 
-  console.log("Fetching connected accounts for user:", {
-    userId: user.id,
-    userEmail: user.email,
-    sessionUser: session?.user?.email,
-    sessionId: session?.user?.id,
-  })
-
   try {
-    console.log("About to query database with user ID:", user.id)
 
     const connectedAccounts = await prisma.account.findMany({
       where: {
         userId: user.id,
       },
-    })
-
-    console.log("Raw database query result:", {
-      query: `SELECT *
-                    FROM accounts
-                    WHERE user_id = '${user.id}'`,
-      results: connectedAccounts,
-      foundProviders: connectedAccounts.map((acc) => acc.provider).join(", "),
     })
 
     const accountSummary = {

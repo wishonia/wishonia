@@ -10,40 +10,50 @@ import { Measurement } from "@/types/models/Measurement"
 
 interface MeasurementsListProps {
   user: User
-  measurementsDateRange: {
+  measurementsDateRange?: {
     from: string
     to: string
   }
+  variableId?: number | null
 }
 
 export const MeasurementsList: FC<MeasurementsListProps> = ({
   user,
   measurementsDateRange,
+  variableId,
 }) => {
   const [measurements, setMeasurements] = useState<Measurement[]>()
   const [isLoading, setIsLoading] = useState(true)
 
   useEffect(() => {
     setIsLoading(true)
-    let url = `/api/dfda/measurements`
-    if (measurementsDateRange.from) {
-      url += `?earliestMeasurementTime=${measurementsDateRange.from}`
+    const params = new URLSearchParams()
+
+    params.append('sort', '-updatedAt')
+
+    if (measurementsDateRange?.from) {
+      params.append('earliestMeasurementTime', measurementsDateRange.from)
     }
-    if (measurementsDateRange.to) {
-      url += `?latestMeasurementTime=${measurementsDateRange.to}`
+    if (measurementsDateRange?.to) {
+      params.append('latestMeasurementTime', measurementsDateRange.to)
     }
+    if (variableId) {
+      params.append('variableId', variableId.toString())
+    }
+
+    const url = `/api/dfda/measurements${params.toString() ? `?${params.toString()}` : ''}`
 
     fetch(url)
       .then((response) => response.json())
       .then((measurements) => {
-        if (measurementsDateRange.from) {
+        if (measurementsDateRange?.from) {
           measurements = measurements.filter((measurement: Measurement) => {
             const measurementTime = new Date(measurement.startAt)
             const fromDate = new Date(measurementsDateRange.from)
             return measurementTime >= fromDate
           })
         }
-        if (measurementsDateRange.to) {
+        if (measurementsDateRange?.to) {
           measurements = measurements.filter((measurement: Measurement) => {
             const measurementTime = new Date(measurement.startAt)
             const toDate = new Date(measurementsDateRange.to)
@@ -58,7 +68,7 @@ export const MeasurementsList: FC<MeasurementsListProps> = ({
         console.error("Error fetching user variables:", error)
         setIsLoading(false)
       })
-  }, [user, measurementsDateRange.from, measurementsDateRange.to])
+  }, [user, measurementsDateRange?.from, measurementsDateRange?.to, variableId])
 
   if (isLoading) {
     return (
@@ -74,9 +84,9 @@ export const MeasurementsList: FC<MeasurementsListProps> = ({
 
   return (
     <div className="space-y-4">
-      {measurements.map((measurement, index) => (
+      {measurements.map((measurement) => (
         <div
-          key={index}
+          key={measurement.id}
           className="flex items-center gap-4 rounded-lg border bg-white p-4 shadow-sm"
         >
           <div className="flex-shrink-0">
