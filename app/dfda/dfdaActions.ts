@@ -384,7 +384,12 @@ export async function dfdaGET(
   yourUserId?: string,
   additionalHeaders?: Record<string, string>
 ) {
-  return dfdaFetch(
+  console.log('📡 dfdaGET Request:', {
+    path,
+    urlParams,
+  })
+
+  const result = await dfdaFetch(
     "GET",
     path,
     urlParams,
@@ -392,6 +397,13 @@ export async function dfdaGET(
     yourUserId,
     additionalHeaders
   )
+
+  console.log('✅ dfdaGET Response:', {
+    path,
+    responseStatus: 'success',
+  })
+
+  return result
 }
 
 export async function dfdaPOST(
@@ -779,5 +791,47 @@ export async function getSafeRedirectUrl(
   } else {
     const newToken = await getOrCreateDfdaAccessToken(userId)
     return `${baseUrl}/intro?access_token=${newToken}`
+  }
+}
+
+
+export async function createStudy(causeVariableName: string,
+  effectVariableName: string,
+   type: string,
+   userId: string
+  ) {
+  return dfdaPOST("study/create", {
+    causeVariableName,
+    effectVariableName,
+    type,
+  }, userId)
+}
+
+export async function getStudies(limit: number = 10) {
+  return dfdaGET(`studies`, { limit: limit.toString() })
+}
+
+export async function getStudy(studyId: string, userId?: string) {
+  console.log('🔍 Fetching study with ID:', studyId)
+  try {
+    const response = await dfdaGET(`study`, {
+      studyId,
+      includeCharts: "true",
+    }, userId)
+    //console.log('📊 Study response:', JSON.stringify(response, null, 2))
+    // check if charts are included
+    const study = response
+    if (!study.studyCharts) {
+      throw new Error('Study charts not found')
+      debugger
+    }
+    return study
+  } catch (error) {
+    console.error('❌ Error fetching study:', {
+      studyId,
+      error: error instanceof Error ? error.message : 'Unknown error',
+      fullError: error
+    })
+    throw error
   }
 }
