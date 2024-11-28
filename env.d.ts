@@ -22,6 +22,8 @@ interface Env {
   DATABASE_URL: string
   EMAIL_SERVER: string
   EMAIL_FROM: string
+  DFDA_CLIENT_ID: string
+  DFDA_CLIENT_SECRET: string
 }
 
 declare module "@t3-oss/env-nextjs" {
