@@ -71,8 +71,6 @@ export default function RightToTrialActSolutions() {
       icon: "⚖️",
       details: [
         "✅ Guarantees right to try any treatment that passes basic safety testing",
-        "🔓 Creates a free, open platform eliminating billions in trial costs",
-        "🎁 Rewards companies for developing actual cures and prevention",
         "🚪 Removes barriers blocking access to effective treatments",
         "👤 Patient autonomy in treatment decisions",
       ],
