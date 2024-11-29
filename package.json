@@ -26,7 +26,9 @@
     "format:check": "pnpm prettier . --check",
     "seed": "jest tests/seed.test.ts",
     "json-to-prisma": "json-to-prisma-schema-convertor convert --inputPath='./prisma/schema.json' --outputPath='./prisma/schema.prisma'",
-    "analyze": "cross-env ANALYZE=true next build"
+    "analyze": "cross-env ANALYZE=true next build",
+    "deps:check": "depcheck",
+    "deps:unused-exports": "ts-prune"
   },
   "prisma": {
     "seed": "ts-node --compiler-options {\"module\":\"CommonJS\"} prisma/seed.ts"
@@ -266,8 +268,10 @@
     "@types/yargs": "^17.0.24",
     "checkly": "latest",
     "cross-env": "^7.0.3",
+    "depcheck": "^1.4.7",
     "eslint": "8.56.0",
     "eslint-config-next": "14.1.0",
+    "heapdump": "^0.3.15",
     "jest": "^29.7.0",
     "jest-environment-jsdom": "^29.7.0",
     "js-yaml": "^4.1.0",
