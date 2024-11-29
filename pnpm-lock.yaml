@@ -350,6 +350,9 @@ importers:
       ioredis:
         specifier: ^5.4.1
         version: 5.4.1(supports-color@8.1.1)
+      isomorphic-dompurify:
+        specifier: ^2.17.0
+        version: 2.17.0(bufferutil@4.0.8)(canvas@2.11.2(supports-color@8.1.1))(supports-color@8.1.1)(utf-8-validate@6.0.4)
       jsdom:
         specifier: ^25.0.1
         version: 25.0.1(bufferutil@4.0.8)(canvas@2.11.2(supports-color@8.1.1))(supports-color@8.1.1)(utf-8-validate@6.0.4)
@@ -5721,6 +5724,9 @@ packages:
   '@types/tough-cookie@4.0.5':
     resolution: {integrity: sha512-/Ad8+nIOV7Rl++6f1BdKxFSMgmoqEoYbHRpPcx3JEfv8VRsQe9Z4mCXeJBzxs7mbHY/XOZZuXlRNfhpVPbs6ZA==}
 
+  '@types/trusted-types@2.0.7':
+    resolution: {integrity: sha512-ScaPdn1dQczgbl0QFTeTOmVHFULt394XJgOQNoyVhZ6r2vLnMLJfBPd53SB52T/3G36VI1/g2MZaX0cwDuXsfw==}
+
   '@types/turndown@5.0.5':
     resolution: {integrity: sha512-TL2IgGgc7B5j78rIccBtlYAnkuv8nUQqhQc+DSYV5j9Be9XOcm/SKOVRuA47xAVI3680Tk9B1d8flK2GWT2+4w==}
 
@@ -7147,6 +7153,9 @@ packages:
   dompurify@3.1.6:
     resolution: {integrity: sha512-cTOAhc36AalkjtBpfG6O8JimdTMWNXjiePT2xQH/ppBGi/4uIpmj8eKyIkMJErXWARyINV/sB38yf8JCLF5pbQ==}
 
+  dompurify@3.2.1:
+    resolution: {integrity: sha512-NBHEsc0/kzRYQd+AY6HR6B/IgsqzBABrqJbpCDQII/OK6h7B7LXzweZTDsqSW2LkTRpoxf18YUP+YjGySk6B3w==}
+
   domutils@3.1.0:
     resolution: {integrity: sha512-H78uMmQtI2AhgDJjWeQmHwJJ2bLPD3GMmO7Zja/ZZh84wkm+4ut+IUnUdRa8uCGX88DiVx1j6FRe1XfxEgjEZA==}
 
@@ -8398,6 +8407,10 @@ packages:
   isexe@3.1.1:
     resolution: {integrity: sha512-LpB/54B+/2J5hqQ7imZHfdU31OlgQqx7ZicVlkm9kzg9/w8GKLEcFfJl/t7DCEDueOyBAD6zCCwTO6Fzs0NoEQ==}
     engines: {node: '>=16'}
+
+  isomorphic-dompurify@2.17.0:
+    resolution: {integrity: sha512-W9RC9aPgEAFF55VMo/9AUQ+GYkQ68gTRMLqS8fP9rw1VoYCsI7RdrRMAePhhqyCLfZS3JNjA4ahFi1L4aczUUg==}
+    engines: {node: '>=18'}
 
   isomorphic-ws@5.0.0:
     resolution: {integrity: sha512-muId7Zzn9ywDsyXgTIafTry2sV3nySZeUDe6YedVd1Hvuuep5AsIlqK+XefWpYTyJG5e503F2xIuT2lcU6rCSw==}
@@ -19358,6 +19371,9 @@ snapshots:
 
   '@types/tough-cookie@4.0.5': {}
 
+  '@types/trusted-types@2.0.7':
+    optional: true
+
   '@types/turndown@5.0.5': {}
 
   '@types/unist@2.0.11': {}
@@ -20988,6 +21004,10 @@ snapshots:
 
   dompurify@3.1.6: {}
 
+  dompurify@3.2.1:
+    optionalDependencies:
+      '@types/trusted-types': 2.0.7
+
   domutils@3.1.0:
     dependencies:
       dom-serializer: 2.0.0
@@ -22530,6 +22550,16 @@ snapshots:
   isexe@2.0.0: {}
 
   isexe@3.1.1: {}
+
+  isomorphic-dompurify@2.17.0(bufferutil@4.0.8)(canvas@2.11.2(supports-color@8.1.1))(supports-color@8.1.1)(utf-8-validate@6.0.4):
+    dependencies:
+      dompurify: 3.2.1
+      jsdom: 25.0.1(bufferutil@4.0.8)(canvas@2.11.2(supports-color@8.1.1))(supports-color@8.1.1)(utf-8-validate@6.0.4)
+    transitivePeerDependencies:
+      - bufferutil
+      - canvas
+      - supports-color
+      - utf-8-validate
 
   isomorphic-ws@5.0.0(ws@8.18.0(bufferutil@4.0.8)(utf-8-validate@6.0.4)):
     dependencies:
