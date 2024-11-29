@@ -1,6 +1,8 @@
 "use server"
 
 import { Account, Effectiveness, User } from "@prisma/client"
+import { getMarkdownFiles } from "@/lib/markdown/get-markdown-files"
+import type { ProcessedMarkdownFile } from "@/lib/markdown/get-markdown-files"
 
 import type { GetStudiesResponse } from "@/types/models/GetStudiesResponse"
 import { GetTrackingReminderNotificationsResponse } from "@/types/models/GetTrackingReminderNotificationsResponse"
@@ -392,7 +394,8 @@ export async function dfdaGET(
   yourUserId?: string,
   additionalHeaders?: Record<string, string>
 ) {
-  console.log('📡 dfdaGET Request:', {
+  if (process.env.NODE_ENV === 'development') {
+    console.log('📡 dfdaGET Request:', {
     path,
     urlParams,
   })
@@ -720,6 +723,10 @@ export async function skipAllNotifications(
     console.error("Error skipping all notifications:", error)
     throw new Error("Failed to skip all notifications")
   }
+}
+
+export async function getProblems(): Promise<ProcessedMarkdownFile[]> {
+  return getMarkdownFiles("public/globalSolutions/dfda/problems")
 }
 export async function searchDfdaVariables(
   searchPhrase?: string,
