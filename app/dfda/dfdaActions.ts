@@ -13,6 +13,14 @@ import {
 } from "@/lib/agents/researcher/researcher"
 import { prisma } from "@/lib/db"
 
+// Helper function to get DFDA client ID
+function getDFDAClientId(): string {
+  if (!process.env.DFDA_CLIENT_ID) {
+    throw new Error("DFDA_CLIENT_ID is not set")
+  }
+  return process.env.DFDA_CLIENT_ID
+}
+
 export async function fetchConditions() {
   return prisma.dfdaCondition.findMany()
 }
@@ -487,13 +495,6 @@ export async function createDfdaApplication(
   })
   const data = response
   return data.clientId || data.qmClientId
-}
-
-function getDFDAClientId(): string {
-  if (!process.env.DFDA_CLIENT_ID) {
-    throw new Error("DFDA_CLIENT_ID is not set")
-  }
-  return process.env.DFDA_CLIENT_ID
 }
 
 export const getDataSources = async (
