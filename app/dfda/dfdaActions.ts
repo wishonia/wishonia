@@ -396,9 +396,10 @@ export async function dfdaGET(
 ) {
   if (process.env.NODE_ENV === 'development') {
     console.log('📡 dfdaGET Request:', {
-    path,
-    urlParams,
-  })
+      path,
+      urlParams,
+    })
+  }
 
   const result = await dfdaFetch(
     "GET",
@@ -826,13 +827,7 @@ export async function getStudy(studyId: string, userId?: string) {
       studyId,
       includeCharts: "true",
     }, userId)
-    //console.log('📊 Study response:', JSON.stringify(response, null, 2))
-    // check if charts are included
     const study = response
-    if (!study.studyCharts) {
-      throw new Error('Study charts not found')
-      debugger
-    }
     return study
   } catch (error) {
     console.error('❌ Error fetching study:', {
