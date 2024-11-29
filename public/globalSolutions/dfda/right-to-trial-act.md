@@ -10,13 +10,15 @@ This Act may be cited as the **"Right to Trial Act"**.
 
 Today's healthcare system is broken because:
 
-* ⏳ **Bureaucratic FDA delays** block life-saving treatments by 7-12 years
-* 🚫 **97% of patients** are excluded from clinical trials for various reasons, denying access to promising treatments
-* 💰 **Drug development costs** average $2.6B, which is passed on to patients in the form of higher prices
-* 📈 **80% of R&D** focuses on super expensive drugs costing over $100k/year instead of affordable alternatives
-* ⏱️ **Terminal patients** wait 4+ years for breakthrough therapy approvals
-* 🌍 **US approvals** lag 3-5 years behind Europe and Asia
-* 🩺 Only **5% of healthcare spending** goes to preventive care, despite $1 spent saving $3 in future costs
+* ⏳ **Bureaucratic FDA delays** block life-saving treatments by 7-12 years[^1]
+
+[^1]: DiMasi JA, Grabowski HG, Hansen RW. Innovation in the pharmaceutical industry: New estimates of R&D costs. J Health Econ. 2016;47:20-33.
+* 🚫 **[97% of patients](https://academic.oup.com/jnci/article/111/3/245/5307078)** are excluded from clinical trials for various reasons, denying access to promising treatments
+* 💰 **[Drug development costs](https://csdd.tufts.edu/csddnews/2018/3/9/march-2016-tufts-csdd-rd-cost-study)** average $2.6B, which is passed on to patients in the form of higher prices
+* 📈 **[80% of R&D](https://www.gao.gov/products/gao-18-40)** focuses on super expensive drugs costing over $100k/year instead of affordable alternatives
+* ⏱️ **[Terminal patients](https://www.fda.gov/media/151060/download)** wait 4+ years for breakthrough therapy approvals
+* 🌍 **[US approvals](https://www.nejm.org/doi/full/10.1056/NEJMsa1610301)** lag 3-5 years behind Europe and Asia
+* 🩺 Only **[5% of healthcare spending](https://www.cdc.gov/chronicdisease/about/costs/index.htm)** goes to preventive care, despite $1 spent saving $3 in future costs
 * 📊 The system ignores **real-world evidence** about effective treatments
 
 ### 1.3 💡 The Solution

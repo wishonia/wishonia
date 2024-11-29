@@ -2,7 +2,6 @@
 
 import * as React from "react"
 import { FC } from "react"
-import { useEffect, useState } from "react"
 import Highcharts from "highcharts"
 import HighchartsReact from "highcharts-react-official"
 
@@ -26,37 +25,12 @@ import { Icons } from "../icons"
 
 interface GlobalVariableChartsProps
   extends React.HTMLAttributes<HTMLFormElement> {
-  variableId: number
+  globalVariable: GlobalVariable
 }
 
 export const GlobalVariableCharts: FC<GlobalVariableChartsProps> = ({
-  variableId,
+  globalVariable,
 }) => {
-  const [globalVariable, setGlobalVariable] = useState<GlobalVariable>()
-  const [isLoading, setIsLoading] = useState(true) // Add a loading state
-
-  useEffect(() => {
-    const url = `/api/dfda/variables?variableId=${variableId}&includeCharts=1`
-
-    setIsLoading(true) // Set loading to true when the fetch starts
-    fetch(url)
-      .then((response) => response.json())
-      .then((globalVariables) => {
-        const globalVariable = globalVariables[0]
-        delete globalVariable.charts.lineChartWithSmoothing.highchartConfig
-          .tooltip.formatter
-        delete globalVariable.charts.weekdayColumnChart.highchartConfig.tooltip
-          .formatter
-        delete globalVariable.charts.monthlyColumnChart.highchartConfig.tooltip
-          .formatter
-        setGlobalVariable(globalVariable)
-        setIsLoading(false) // Set loading to false when the fetch completes
-      })
-      .catch((error) => {
-        console.error("Error fetching user variables:", error)
-        setIsLoading(false) // Ensure loading is set to false on error as well
-      })
-  }, [variableId])
 
   return (
     <Card>
@@ -66,11 +40,6 @@ export const GlobalVariableCharts: FC<GlobalVariableChartsProps> = ({
           <CardDescription>{globalVariable.description}</CardDescription>
         )}
       </CardHeader>
-      {isLoading ? (
-        <div className="flex items-center justify-center">
-          <Icons.spinner className="animate-spin text-4xl" />
-        </div>
-      ) : (
         <CardContent id="chart-card" className="space-y-4">
           <div className="card transparent-bg highcharts-container">
             <HighchartsReact
@@ -93,7 +62,6 @@ export const GlobalVariableCharts: FC<GlobalVariableChartsProps> = ({
             />
           </div>
         </CardContent>
-      )}
       <CardFooter></CardFooter>
     </Card>
   )
