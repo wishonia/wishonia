@@ -15,6 +15,14 @@ import {
 } from "@/lib/agents/researcher/researcher"
 import { prisma } from "@/lib/db"
 
+// Helper function to get DFDA client ID
+function getDFDAClientId(): string {
+  if (!process.env.DFDA_CLIENT_ID) {
+    throw new Error("DFDA_CLIENT_ID is not set")
+  }
+  return process.env.DFDA_CLIENT_ID
+}
+
 export async function fetchConditions() {
   return prisma.dfdaCondition.findMany()
 }
@@ -386,7 +394,14 @@ export async function dfdaGET(
   yourUserId?: string,
   additionalHeaders?: Record<string, string>
 ) {
-  return dfdaFetch(
+  if (process.env.NODE_ENV === 'development') {
+    console.log('📡 dfdaGET Request:', {
+      path,
+      urlParams,
+    })
+  }
+
+  const result = await dfdaFetch(
     "GET",
     path,
     urlParams,
@@ -394,6 +409,13 @@ export async function dfdaGET(
     yourUserId,
     additionalHeaders
   )
+
+  console.log('✅ dfdaGET Response:', {
+    path,
+    responseStatus: 'success',
+  })
+
+  return result
 }
 
 export async function dfdaPOST(
@@ -477,13 +499,6 @@ export async function createDfdaApplication(
   })
   const data = response
   return data.clientId || data.qmClientId
-}
-
-function getDFDAClientId(): string {
-  if (!process.env.DFDA_CLIENT_ID) {
-    throw new Error("DFDA_CLIENT_ID is not set")
-  }
-  return process.env.DFDA_CLIENT_ID
 }
 
 export const getDataSources = async (
@@ -785,5 +800,41 @@ export async function getSafeRedirectUrl(
   } else {
     const newToken = await getOrCreateDfdaAccessToken(userId)
     return `${baseUrl}/intro?access_token=${newToken}`
+  }
+}
+
+
+export async function createStudy(causeVariableName: string,
+  effectVariableName: string,
+   type: string,
+   userId: string
+  ) {
+  return dfdaPOST("study/create", {
+    causeVariableName,
+    effectVariableName,
+    type,
+  }, userId)
+}
+
+export async function getStudies(limit: number = 10) {
+  return dfdaGET(`studies`, { limit: limit.toString() })
+}
+
+export async function getStudy(studyId: string, userId?: string) {
+  console.log('🔍 Fetching study with ID:', studyId)
+  try {
+    const response = await dfdaGET(`study`, {
+      studyId,
+      includeCharts: "true",
+    }, userId)
+    const study = response
+    return study
+  } catch (error) {
+    console.error('❌ Error fetching study:', {
+      studyId,
+      error: error instanceof Error ? error.message : 'Unknown error',
+      fullError: error
+    })
+    throw error
   }
 }
