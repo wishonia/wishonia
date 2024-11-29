@@ -386,7 +386,8 @@ export async function dfdaGET(
   yourUserId?: string,
   additionalHeaders?: Record<string, string>
 ) {
-  console.log('📡 dfdaGET Request:', {
+  if (process.env.NODE_ENV === 'development') {
+    console.log('📡 dfdaGET Request:', {
     path,
     urlParams,
   })
