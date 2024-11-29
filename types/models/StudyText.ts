@@ -111,10 +111,6 @@ export class StudyText {
    * Ex: Sleep Quality Predicts Higher Overall Mood
    */
   "tagLine"?: string
-  /**
-   * Ex: Sleep Quality Predicts Higher Overall Mood
-   */
-  "description"?: string
 
   static readonly discriminator: string | undefined = undefined
 
