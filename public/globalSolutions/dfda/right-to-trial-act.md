@@ -10,7 +10,9 @@ This Act may be cited as the **"Right to Trial Act"**.
 
 Today's healthcare system is broken because:
 
-* ⏳ **Bureaucratic FDA delays** block life-saving treatments by 7-12 years
+* ⏳ **Bureaucratic FDA delays** block life-saving treatments by 7-12 years[^1]
+
+[^1]: DiMasi JA, Grabowski HG, Hansen RW. Innovation in the pharmaceutical industry: New estimates of R&D costs. J Health Econ. 2016;47:20-33.
 * 🚫 **[97% of patients](https://academic.oup.com/jnci/article/111/3/245/5307078)** are excluded from clinical trials for various reasons, denying access to promising treatments
 * 💰 **[Drug development costs](https://csdd.tufts.edu/csddnews/2018/3/9/march-2016-tufts-csdd-rd-cost-study)** average $2.6B, which is passed on to patients in the form of higher prices
 * 📈 **[80% of R&D](https://www.gao.gov/products/gao-18-40)** focuses on super expensive drugs costing over $100k/year instead of affordable alternatives
