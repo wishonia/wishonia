@@ -107,6 +107,10 @@ export class StudyText {
    * In order to reduce suffering through the advancement of human knowledge...
    */
   "studyBackground"?: string
+  /**
+   * Ex: Sleep Quality Predicts Higher Overall Mood
+   */
+  "tagLine"?: string
 
   static readonly discriminator: string | undefined = undefined
 
@@ -257,6 +261,18 @@ export class StudyText {
     {
       name: "studyBackground",
       baseName: "studyBackground",
+      type: "string",
+      format: "",
+    },
+    {
+      name: "tagLine",
+      baseName: "tagLine",
+      type: "string",
+      format: "",
+    },
+    {
+      name: "description",
+      baseName: "description",
       type: "string",
       format: "",
     },
