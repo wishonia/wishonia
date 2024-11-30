@@ -61,3 +61,9 @@ next-env.d.ts
 /.env.vercel
 /run_anthropic_docker.ps1
 /logs
+
+*.heapsnapshot
+*.heaptimeline
+*.heapdump
+node_modules_bak
+/scripts/dep-analysis/unused-deps_20241129_191341.txt

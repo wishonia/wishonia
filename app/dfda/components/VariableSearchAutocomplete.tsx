@@ -3,7 +3,7 @@
 import { useEffect, useRef, useState } from "react"
 
 import { GlobalVariable } from "@/types/models/GlobalVariable"
-import { searchDfdaVariables } from "@/lib/dfda"
+import { searchDfdaVariables } from "../dfdaActions"
 import { Input } from "@/components/ui/input"
 
 interface VariableSearchAutocompleteProps {
