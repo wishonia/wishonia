@@ -29,7 +29,7 @@ export function DFDAPetitionButtons({
             iconsOnly={true}
           />
           <div className="text-center">
-            Just do something for god's sakes! 150,000 people are dying today!
+            Just do something! 150,000 people are dying today!
             ☠️
           </div>
         </div>
