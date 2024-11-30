@@ -1,36 +1,31 @@
-import { HumanMessage, SystemMessage } from "@langchain/core/messages"
-import { StringOutputParser } from "@langchain/core/output_parsers"
 import OpenAI from "openai"
-
 import { convertToLocalDateTime } from "@/lib/dateTimeWithTimezone"
-import { getChatOpenAIModel } from "@/lib/openai"
 
 // Create an OpenAI API client (that's edge-friendly!)
 export const openai = new OpenAI({
   apiKey: process.env.OPENAI_API_KEY || "",
 })
-let model = process.env.OPENAI_MODEL || "gpt-4o"
 
+const defaultModel = process.env.OPENAI_MODEL || "gpt-4"
 export async function textCompletion(
   promptText: string,
   returnType: "text" | "json_object"
 ): Promise<string> {
-  // Ask OpenAI for a streaming chat completion given the prompt
+  // Ask OpenAI for a chat completion given the prompt
   const response = await openai.chat.completions.create({
-    model: model,
+    model: defaultModel,
     stream: false,
-    //max_tokens: 150,
     messages: [
       {
         role: "system",
         content: `You are a helpful assistant`,
       },
       {
-        role: "user", // user = the dFDA app
+        role: "user",
         content: promptText,
       },
     ],
-    response_format: { type: returnType },
+    ...(returnType === "json_object" && { response_format: { type: "json_object" } })
   })
 
   if (!response.choices[0].message.content) {
@@ -73,23 +68,26 @@ function replaceStupidWords(text: string): string {
 }
 
 export async function askYesOrNoQuestion(question: string): Promise<boolean> {
-  const model = getChatOpenAIModel("gpt-3.5-turbo-0125")
-  const messages = [
-    new SystemMessage(
-      `Accurately answer the following question with a 'YES' or 'NO'.`
-    ),
-    new HumanMessage(question),
-  ]
+  const response = await openai.chat.completions.create({
+    model: "gpt-3.5-turbo-0125",
+    messages: [
+      {
+        role: "system",
+        content: "Accurately answer the following question with a 'YES' or 'NO'."
+      },
+      {
+        role: "user",
+        content: question
+      }
+    ]
+  })
 
-  const result = await model.invoke(messages)
-  const parser = new StringOutputParser()
-  let answer = await parser.invoke(result)
-  answer = answer.replace(/['"]+/g, "")
-  answer = answer.trim().toUpperCase()
+  const answer = response.choices[0].message.content?.trim().toUpperCase() ?? ""
+  
   if (answer === "YES" || answer === "NO") {
     return answer === "YES"
   }
-  throw new Error(`Invalid response: ${result} from question: ${question}`)
+  throw new Error(`Invalid response: ${answer} from question: ${question}`)
 }
 
 export async function getDateTimeFromStatementInUserTimezone(

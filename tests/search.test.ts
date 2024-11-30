@@ -1,10 +1,9 @@
 /**
  * @jest-environment node
  */
-import { advancedSearchXNGSearch } from "@/app/api/advanced-search/route"
-import { SearXNGSearchResults } from "@/lib/types/index"
 import path from 'path'
 import { config } from 'dotenv'
+import {advancedSearchXNGSearch} from "@/lib/search/searxng";
 // Load environment variables from .env.local
 config({ path: path.resolve(process.cwd(), '.env.local') })
 

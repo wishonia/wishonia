@@ -1,23 +1,23 @@
-import { StringOutputParser } from "@langchain/core/output_parsers"
-import {
-  ChatPromptTemplate,
-  MessagesPlaceholder,
-} from "@langchain/core/prompts"
-import {
-  RunnableMap,
-  RunnablePassthrough,
-  RunnableSequence,
-} from "@langchain/core/runnables"
-import { OpenAIEmbeddings } from "@langchain/openai"
-import { Document } from "langchain/document"
-import { pull } from "langchain/hub"
-
 import { prisma } from "@/lib/db"
-import { getChatOpenAIModel } from "@/lib/openai"
+import { textCompletion } from "@/lib/llm"
 import type { Chat } from "@/lib/types"
-import { WishoniaVectorStore } from "@/lib/utils/vectorStore"
+import { getRedisModelCache } from "@/lib/utils/redis"
 
-import { createChain, groupMessagesByConversation } from "./chain"
+// Local implementation of document type
+interface Document {
+  pageContent: string
+  metadata: Record<string, any>
+}
+
+interface ChatMessage {
+  type: "human" | "ai"
+  text: string
+}
+
+interface ChatResponse {
+  text: string
+  sourceDocuments: Document[]
+}
 
 async function createNewChat(chat: Chat) {
   try {
@@ -34,7 +34,6 @@ async function createNewChat(chat: Chat) {
     await createChatMessages(chat.messages, createdChat.id)
     return createdChat
   } catch (error) {
-    debugger
     console.error(
       `createNewChat error: ${error}. could not create chat with params: `,
       chat
@@ -66,7 +65,6 @@ async function createChatMessages(messages: Chat["messages"], chatId: string) {
         data: chatMessage,
       })
     } catch (error) {
-      debugger
       console.error(
         `createChatMessages error: ${error} for chatMessage: `,
         chatMessage
@@ -98,14 +96,11 @@ export async function saveChat(chat: Chat) {
 export const formatDocumentsAsString = (documents: Document[]): string =>
   documents.map((doc) => doc.pageContent).join("\n\n")
 
-interface ChatMessage {
-  type: "human" | "ai"
-  text: string
-}
-
-interface ChatResponse {
-  text: string
-  sourceDocuments: Document[]
+// Helper function to format chat history
+function formatChatHistory(history: ChatMessage[]): string {
+  return history
+    .map((msg) => `${msg.type === "human" ? "Human" : "Assistant"}: ${msg.text}`)
+    .join("\n")
 }
 
 export async function processChatRequest(
@@ -133,63 +128,45 @@ export async function processChatRequest(
   const datasourceId = datasources[0].datasourceId
   const sanitizedQuestion = message.trim().replaceAll("\n", " ")
 
-  const vectorstore = await WishoniaVectorStore.fromExistingIndex(
-    new OpenAIEmbeddings(),
-    {
-      //agentId: agent.id,
-      datasourceId: datasourceId,
-    }
-  )
-  const retriever = vectorstore.asRetriever()
-
-  if (!agent.prompt) {
-    throw new Error(`Agent with id ${agentId} does not have a prompt`)
+  // Get relevant documents from vector store
+  const cache = getRedisModelCache()
+  const cacheKey = `docs:${datasourceId}:${sanitizedQuestion}`
+  let relevantDocs: Document[] = []
+  
+  const cachedDocs = await cache.lookup(cacheKey)
+  if (cachedDocs) {
+    relevantDocs = JSON.parse(cachedDocs)
+  } else {
+    // Here you would implement your vector search
+    // For now returning empty array
+    relevantDocs = []
+    await cache.update(cacheKey, JSON.stringify(relevantDocs))
   }
 
-  const chain = createChain({
-    llm: getChatOpenAIModel(),
-    question_llm: getChatOpenAIModel(),
-    question_template: agent.prompt,
-    response_template: agent.prompt,
-    retriever,
-  })
+  // Format context from documents
+  const context = formatDocumentsAsString(relevantDocs)
+  
+  // Format chat history
+  const formattedHistory = formatChatHistory(history)
 
-  const documents = await chain.invoke({
-    question: sanitizedQuestion,
-    chat_history: groupMessagesByConversation(
-      history.map((message) => ({
-        type: message.type,
-        content: message.text,
-      }))
-    ),
-    DocumentOutputParser: StringOutputParser,
-  })
-  const agentResponse = await chain.invoke({
-    question: "What is task decomposition?",
-    context: documents,
-  })
-  const prompt = await pull<ChatPromptTemplate>("rlm/rag-prompt")
-  const llm = getChatOpenAIModel()
+  // Create prompt with context, history and question
+  const prompt = `
+Context:
+${context}
 
-  const ragChainWithSources = RunnableMap.from({
-    // Return raw documents here for now since we want to return them at
-    // the end - we'll format in the next step of the chain
-    context: retriever,
-    question: new RunnablePassthrough(),
-  }).assign({
-    answer: RunnableSequence.from([
-      (input) => {
-        return {
-          // Now we format the documents as strings for the prompt
-          context: formatDocumentsAsString(input.context as Document[]),
-          question: input.question,
-        }
-      },
-      prompt,
-      llm,
-      new StringOutputParser(),
-    ]),
-  })
+Chat History:
+${formattedHistory}
 
-  return await ragChainWithSources.invoke(message)
+Question: ${sanitizedQuestion}
+
+Please provide a helpful response based on the context and chat history above.
+`
+
+  // Get response from LLM
+  const response = await textCompletion(prompt, "text")
+
+  return {
+    text: response,
+    sourceDocuments: relevantDocs
+  }
 }

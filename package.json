@@ -28,7 +28,8 @@
     "json-to-prisma": "json-to-prisma-schema-convertor convert --inputPath='./prisma/schema.json' --outputPath='./prisma/schema.prisma'",
     "analyze": "cross-env ANALYZE=true next build",
     "deps:check": "depcheck",
-    "deps:unused-exports": "ts-prune"
+    "deps:unused-exports": "ts-prune",
+    "type-check": "tsc --noEmit"
   },
   "prisma": {
     "seed": "ts-node --compiler-options {\"module\":\"CommonJS\"} prisma/seed.ts"
@@ -52,13 +53,6 @@
     "@fortawesome/react-fontawesome": "^0.2.0",
     "@hookform/resolvers": "^3.3.4",
     "@huggingface/inference": "^2.7.0",
-    "@langchain/anthropic": "^0.2.17",
-    "@langchain/cohere": "^0.2.2",
-    "@langchain/community": "0.2.32",
-    "@langchain/core": "0.2.31",
-    "@langchain/google-genai": "^0.0.26",
-    "@langchain/openai": "^0.2.10",
-    "@langchain/textsplitters": "^0.0.3",
     "@mdx-js/loader": "^3.0.1",
     "@mdx-js/react": "^3.0.1",
     "@mdxeditor/editor": "^3.19.0",
@@ -105,7 +99,6 @@
     "@trigger.dev/nextjs": "3.0.0-beta.56",
     "@trigger.dev/react": "3.0.0-beta.56",
     "@trigger.dev/sdk": "3.0.0-beta.56",
-    "@types/dotenv": "^8.2.3",
     "@types/jsdom": "^21.1.7",
     "@types/lodash": "^4.17.13",
     "@types/mdx": "^2.0.12",
@@ -151,7 +144,6 @@
     "jsdom": "^25.0.1",
     "json-to-prisma-schema-convertor": "^0.1.0",
     "katex": "^0.16.10",
-    "langchain": "0.2.18",
     "langfuse-vercel": "^3.29.0",
     "llmclient": "^8.1.19",
     "lodash": "^4.17.21",
@@ -251,7 +243,6 @@
     "@types/fs-extra": "^9.0.12",
     "@types/jest": "^29.5.12",
     "@types/jsdom": "^21.1.7",
-    "@types/marked": "^6.0.0",
     "@types/mdast": "^4.0.4",
     "@types/mime-types": "^2.1.4",
     "@types/node": "^20",
@@ -285,14 +276,6 @@
     "ts-node": "latest",
     "ts-prune": "^0.10.3",
     "typescript": "5.3.3"
-  },
-  "overrides": {
-    "@langchain/core": "0.2.31"
-  },
-  "pnpm": {
-    "overrides": {
-      "@langchain/core": "0.2.31"
-    }
   },
   "trigger.dev": {
     "endpointId": "wishonia-RmKR"
