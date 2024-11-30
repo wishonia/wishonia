@@ -1,7 +1,7 @@
-import { ChatPromptTemplate } from "@langchain/core/prompts"
 import { z } from "zod"
-
 import { getChatOpenAIModel } from "@/lib/openai"
+import { Message } from "@/types/chat"
+import { MessageRole } from "@prisma/client"
 
 /**
  * Classify a given text based on provided enumerated options
@@ -22,23 +22,37 @@ export async function classifyText(
       .enum(options as [string, ...string[]])
       .describe(description),
   })
-  const taggingPrompt = ChatPromptTemplate.fromTemplate(
-    `Extract the desired information from the following passage.
 
-Only extract the properties mentioned in the 'Classification' function.
+  const systemPrompt = `You are a classification assistant. Your task is to classify the given text into one of the following options: ${options.join(", ")}.
 
-Text to Classify:
-{input}
-`
-  )
-  const llm = getChatOpenAIModel()
-  const llmWihStructuredOutput = llm.withStructuredOutput(
-    classificationSchema,
-    {
-      name: "extractor",
-    }
-  )
-  const chain = taggingPrompt.pipe(llmWihStructuredOutput)
-  const obj = await chain.invoke({ input })
-  return obj.classification
+Rules:
+- Only respond with a JSON object containing a single "classification" field
+- The classification must be one of the allowed options
+- ${description}
+
+Example response format:
+{ "classification": "option1" }`;
+
+  const userPrompt = `Text to classify:
+${input}
+
+Respond only with the JSON classification.`;
+
+  const messages: Message[] = [
+    { role: MessageRole.system, content: systemPrompt },
+    { role: MessageRole.user, content: userPrompt }
+  ];
+
+  const llm = getChatOpenAIModel();
+  const response = await llm.call(messages);
+  
+  try {
+    // Parse the response as JSON
+    const result = JSON.parse(response);
+    // Validate against our schema
+    const validated = classificationSchema.parse(result);
+    return validated.classification;
+  } catch (error) {
+    throw new Error(`Failed to parse classification response: ${error}`);
+  }
 }
