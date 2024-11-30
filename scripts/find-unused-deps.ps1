@@ -145,11 +145,25 @@ async function findUnusedDependencies() {
                 try {
                     let totalSize = 0;
                     const packageDir = path.join(pnpmDir, dir);
-                    const files = fs.readdirSync(packageDir, { recursive: true });
-                    
-                    files.forEach(file => {
+                    function getAllFiles(dirPath, arrayOfFiles) {
+                        const files = fs.readdirSync(dirPath);
+                        arrayOfFiles = arrayOfFiles || [];
+
+                        files.forEach(file => {
+                            const fullPath = path.join(dirPath, file);
+                            if (fs.statSync(fullPath).isDirectory()) {
+                                arrayOfFiles = getAllFiles(fullPath, arrayOfFiles);
+                            } else {
+                                arrayOfFiles.push(fullPath);
+                            }
+                        });
+                        return arrayOfFiles;
+                    }
+
+                    const files = getAllFiles(packageDir);
+
+                    files.forEach(filePath => {
                         try {
-                            const filePath = path.join(packageDir, file);
                             const stats = fs.statSync(filePath);
                             if (stats.isFile()) {
                                 totalSize += stats.size;
