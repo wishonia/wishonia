@@ -1,9 +1,5 @@
 import { getRedisClient } from "@/lib/utils/redis"
 
-
-
-
-
 const CACHE_TTL = 5 * 60 // 5 minutes in seconds
 
 export async function getCachedData<T>(
