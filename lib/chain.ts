@@ -1,174 +1,117 @@
-import { Document } from "@langchain/core/documents"
-import { BaseLanguageModel } from "@langchain/core/language_models/base"
-import { BaseChatModel } from "@langchain/core/language_models/chat_models"
-import { AIMessage, BaseMessage, HumanMessage } from "@langchain/core/messages"
-import { StringOutputParser } from "@langchain/core/output_parsers"
-import {
-  ChatPromptTemplate,
-  MessagesPlaceholder,
-  PromptTemplate,
-} from "@langchain/core/prompts"
-import {
-  Runnable,
-  RunnableBranch,
-  RunnableLambda,
-  RunnableMap,
-  RunnableSequence,
-} from "@langchain/core/runnables"
-
-type RetrievalChainInput = {
-  chat_history: string
-  question: string
+// Local type definitions
+type Message = {
+  content: string;
+  role: 'human' | 'ai' | 'system';
 }
 
-export function groupMessagesByConversation(messages: any[]) {
-  // check if messages are in even numbers if not remove the last message
+type RetrievalChainInput = {
+  chat_history: Message[];
+  question: string;
+}
+
+type Document = {
+  pageContent: string;
+  metadata?: Record<string, any>;
+}
+
+interface LLMInterface {
+  call: (messages: Message[]) => Promise<string>;
+}
+
+interface RetrieverInterface {
+  getRelevantDocs: (query: string) => Promise<Document[]>;
+}
+
+export function groupMessagesByConversation(messages: Message[]) {
   if (messages.length % 2 !== 0) {
-    messages.pop()
+    messages.pop();
   }
 
-  const groupedMessages = []
-  // [ { human: "", ai: "" } ]
+  const groupedMessages = [];
   for (let i = 0; i < messages.length; i += 2) {
     groupedMessages.push({
       human: messages[i].content,
       ai: messages[i + 1].content,
-    })
+    });
   }
 
-  return groupedMessages
+  return groupedMessages;
 }
 
-const formatChatHistoryAsString = (history: BaseMessage[]) => {
+const formatChatHistory = (history: Message[]): string => {
   return history
-    .map((message) => `${message._getType()}: ${message.content}`)
-    .join("\n")
+    .map((message) => `${message.role}: ${message.content}`)
+    .join('\n');
 }
 
-const formatDocs = (docs: Document[]) => {
+const formatDocs = (docs: Document[]): string => {
   return docs
     .map((doc, i) => `<doc id='${i}'>${doc.pageContent}</doc>`)
-    .join("\n")
+    .join('\n');
 }
 
-const serializeHistory = (input: any) => {
-  const chatHistory = input.chat_history || []
-  const convertedChatHistory = []
-  for (const message of chatHistory) {
-    if (message.human !== undefined) {
-      convertedChatHistory.push(new HumanMessage({ content: message.human }))
-    }
-    if (message["ai"] !== undefined) {
-      convertedChatHistory.push(new AIMessage({ content: message.ai }))
-    }
-  }
-  return convertedChatHistory
+const serializeHistory = (input: any): Message[] => {
+  const chatHistory = input.chat_history || [];
+  return chatHistory.map((msg: any) => ({
+    content: msg.human ? msg.human : msg.ai,
+    role: msg.human ? 'human' : 'ai'
+  }));
 }
 
-const createRetrieverChain = (
-  llm: BaseLanguageModel,
-  retriever: Runnable,
-  question_template: string
-) => {
-  const CONDENSE_QUESTION_PROMPT =
-    PromptTemplate.fromTemplate(question_template)
-  const condenseQuestionChain = RunnableSequence.from([
-    CONDENSE_QUESTION_PROMPT,
-    llm,
-    new StringOutputParser(),
-  ]).withConfig({
-    runName: "CondenseQuestion",
-  })
-  const hasHistoryCheckFn = RunnableLambda.from(
-    (input: RetrievalChainInput) => input.chat_history.length > 0
-  ).withConfig({ runName: "HasChatHistoryCheck" })
-  const conversationChain = condenseQuestionChain.pipe(retriever).withConfig({
-    runName: "RetrievalChainWithHistory",
-  })
-  const basicRetrievalChain = RunnableLambda.from(
-    (input: RetrievalChainInput) => input.question
-  )
-    .withConfig({
-      runName: "Itemgetter:question",
-    })
-    .pipe(retriever)
-    .withConfig({ runName: "RetrievalChainWithNoHistory" })
-
-  return RunnableBranch.from([
-    [hasHistoryCheckFn, conversationChain],
-    basicRetrievalChain,
-  ]).withConfig({
-    runName: "FindDocs",
-  })
+async function createCondensedQuestion(
+  llm: LLMInterface,
+  question: string,
+  chatHistory: string,
+  template: string
+): Promise<string> {
+  const prompt = template
+    .replace('{chat_history}', chatHistory)
+    .replace('{question}', question);
+  
+  return await llm.call([{ role: 'human', content: prompt }]);
 }
 
-export const createChain = ({
+export async function createChain({
   llm,
   question_template,
   question_llm,
   retriever,
   response_template,
 }: {
-  llm: BaseLanguageModel<any> | BaseChatModel<any>
-  question_llm: BaseLanguageModel<any> | BaseChatModel<any>
-  retriever: Runnable
-  question_template: string
-  response_template: string
-}) => {
-  const retrieverChain = createRetrieverChain(
-    question_llm,
-    retriever,
-    question_template
-  )
-  const context = RunnableMap.from({
-    context: RunnableSequence.from([
-      ({ question, chat_history }) => {
-        return {
-          question: question,
-          chat_history: formatChatHistoryAsString(chat_history),
-        }
-      },
-      retrieverChain,
-      RunnableLambda.from(formatDocs).withConfig({
-        runName: "FormatDocumentChunks",
-      }),
-    ]),
-    question: RunnableLambda.from(
-      (input: RetrievalChainInput) => input.question
-    ).withConfig({
-      runName: "Itemgetter:question",
-    }),
-    chat_history: RunnableLambda.from(
-      (input: RetrievalChainInput) => input.chat_history
-    ).withConfig({
-      runName: "Itemgetter:chat_history",
-    }),
-  }).withConfig({ tags: ["RetrieveDocs"] })
-  const prompt = ChatPromptTemplate.fromMessages([
-    ["system", response_template],
-    new MessagesPlaceholder("chat_history"),
-    ["human", "{question}"],
-  ])
+  llm: LLMInterface;
+  question_llm: LLMInterface;
+  retriever: RetrieverInterface;
+  question_template: string;
+  response_template: string;
+}) {
+  return async function(input: RetrievalChainInput): Promise<string> {
+    // Convert chat history to proper format
+    const formattedHistory = formatChatHistory(input.chat_history);
+    
+    // Get condensed question if there's chat history
+    let searchQuery = input.question;
+    if (input.chat_history.length > 0) {
+      searchQuery = await createCondensedQuestion(
+        question_llm,
+        input.question,
+        formattedHistory,
+        question_template
+      );
+    }
 
-  const responseSynthesizerChain = RunnableSequence.from([
-    prompt,
-    llm,
-    new StringOutputParser(),
-  ]).withConfig({
-    tags: ["GenerateResponse"],
-  })
-  return RunnableSequence.from([
-    {
-      question: RunnableLambda.from(
-        (input: RetrievalChainInput) => input.question
-      ).withConfig({
-        runName: "Itemgetter:question",
-      }),
-      chat_history: RunnableLambda.from(serializeHistory).withConfig({
-        runName: "SerializeHistory",
-      }),
-    },
-    context,
-    responseSynthesizerChain,
-  ])
+    // Retrieve relevant documents
+    const docs = await retriever.getRelevantDocs(searchQuery);
+    const formattedDocs = formatDocs(docs);
+
+    // Prepare final prompt
+    const messages: Message[] = [
+      { role: 'system', content: response_template },
+      ...input.chat_history,
+      { role: 'human', content: input.question }
+    ];
+
+    // Get final response
+    const response = await llm.call(messages);
+    return response;
+  };
 }

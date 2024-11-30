@@ -9,25 +9,54 @@ import {
   RepoProps,
 } from "@/lib/types"
 
+type GitHubApiError = {
+  message: string;
+  documentation_url: string;
+  status?: string;
+}
+
+const debugLog = (message: string, data?: any) => {
+  if (process.env.NODE_ENV === 'development') {
+    console.log(`[GitHub API] ${message}`, data || '')
+  }
+}
+
 export const checkRateLimit = async () => {
-  const userId = await getUserIdServer()
-  let accessToken
-  if (userId) {
-    accessToken = await getGithubAccessToken(userId)
-  }
-  if (!accessToken) {
-    console.error("No GitHub access token found")
-    return false
-  }
-  const headers = createHeaders(accessToken)
+  try {
+    debugLog('Checking rate limit')
+    const userId = await getUserIdServer()
+    let accessToken
+    if (userId) {
+      accessToken = await getGithubAccessToken(userId)
+    }
+    if (!accessToken) {
+      throw new Error("No GitHub access token found")
+    }
+    const headers = createHeaders(accessToken)
 
-  const res = await fetch(`https://api.github.com/rate_limit`, {
-    method: "GET",
-    headers,
-  })
+    const res = await fetch(`https://api.github.com/rate_limit`, {
+      method: "GET",
+      headers,
+    })
 
-  const rateLimitData = await res.json()
-  return rateLimitData.resources.core.remaining
+    if (!res.ok) {
+      const error = await res.json() as GitHubApiError
+      debugLog('Rate limit error:', error)
+      throw new Error(`GitHub API error: ${error.message}`)
+    }
+
+    const rateLimitData = await res.json()
+    debugLog('Rate limit response:', rateLimitData)
+    
+    if (!rateLimitData?.resources?.core?.remaining) {
+      throw new Error('Invalid rate limit response format')
+    }
+
+    return rateLimitData.resources.core.remaining
+  } catch (error) {
+    console.error('Rate limit check failed:', error)
+    return 0 // Return 0 to indicate no remaining calls
+  }
 }
 
 function createHeaders(accessToken?: string): {
@@ -51,6 +80,14 @@ function createHeaders(accessToken?: string): {
   return headers
 }
 
+// Add at the top of the file
+class GitHubAuthError extends Error {
+  constructor(message: string) {
+    super(message);
+    this.name = 'GitHubAuthError';
+  }
+}
+
 /**
  * This TypeScript function fetches and returns a GitHub user's profile data using the GitHub API.
  * @param {string} username - The `username` parameter in the `getGithubProfile` function is a string
@@ -59,20 +96,40 @@ function createHeaders(accessToken?: string): {
  * fetched from the GitHub API for the specified `username`.
  */
 export const getGithubProfile = async (username: string) => {
-  const userId = await getUserIdServer()
-  let accessToken
-  if (userId) {
-    accessToken = await getGithubAccessToken(userId)
+  try {
+    debugLog(`Fetching profile for user: ${username}`)
+    const userId = await getUserIdServer()
+    let accessToken
+    if (userId) {
+      accessToken = await getGithubAccessToken(userId)
+      if (!accessToken) {
+        throw new GitHubAuthError('GitHub authentication required')
+      }
+    }
+    const headers = createHeaders(accessToken)
+
+    const res = await fetch(`https://api.github.com/users/${username}`, {
+      method: "GET",
+      headers,
+    })
+
+    if (res.status === 401 || res.status === 403) {
+      throw new GitHubAuthError('GitHub authentication expired')
+    }
+
+    if (!res.ok) {
+      const error = await res.json() as GitHubApiError
+      debugLog('Profile fetch error:', error)
+      throw new Error(`GitHub API error: ${error.message}`)
+    }
+
+    const githubUserData: GithubUser = await res.json()
+    debugLog('Profile response:', githubUserData)
+    return githubUserData
+  } catch (error) {
+    console.error(`Failed to fetch GitHub profile for ${username}:`, error)
+    throw error // Re-throw to handle in the UI layer
   }
-  const headers = createHeaders(accessToken)
-
-  const res = await fetch(`https://api.github.com/users/${username}`, {
-    method: "GET",
-    headers,
-  })
-
-  const githubUserData: GithubUser = await res.json()
-  return githubUserData as GithubUser
 }
 
 /**
@@ -87,6 +144,7 @@ export const getGithubProfile = async (username: string) => {
  * the function.
  */
 export const listUsers = async (query: string) => {
+  debugLog(`Searching users with query: ${query}`)
   const userId = await getUserIdServer()
   let accessToken
   if (userId) {
@@ -103,6 +161,7 @@ export const listUsers = async (query: string) => {
   )
 
   const githubUserList: ListOfUsers = await res.json()
+  debugLog('Users search response:', githubUserList)
   return githubUserList as ListOfUsers
 }
 
@@ -141,6 +200,7 @@ export const convertUserType = async (query: string) => {
  * @returns The function `searchRepositories` is returning an array of `RepoProps` objects.
  */
 export const searchRepositories = async (query: string) => {
+  debugLog(`Searching repositories with query: ${query}`)
   const userId = await getUserIdServer()
   let accessToken
   if (userId) {
@@ -159,6 +219,7 @@ export const searchRepositories = async (query: string) => {
   const githubRepositories: RepoFetchProps = await res.json()
   const { items } = githubRepositories
 
+  debugLog('Repository search response:', items)
   return items as RepoProps[]
 }
 
@@ -179,6 +240,7 @@ export const getReadme = async (
   repo: string,
   owner: string
 ): Promise<Readme> => {
+  debugLog(`Fetching README for ${owner}/${repo}`)
   const userId = await getUserIdServer()
   let accessToken
   if (userId) {
@@ -197,6 +259,7 @@ export const getReadme = async (
 
   // Decode the content from base64
   readme.content = Buffer.from(readme.content, "base64").toString("utf8")
+  debugLog('README response:', readme)
   return readme
 }
 
@@ -209,6 +272,7 @@ export const getDir = async ({
   repo: string
   owner: string
 }): Promise<Directory[]> => {
+  debugLog(`Fetching directory contents for ${owner}/${repo}`)
   const userId = await getUserIdServer()
   let accessToken
   if (userId) {
@@ -225,6 +289,7 @@ export const getDir = async ({
   )
   const dir: Directory[] = await res.json()
 
+  debugLog('Directory contents response:', dir)
   return dir
 }
 

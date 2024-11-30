@@ -68,6 +68,38 @@ export async function submitUserMessage(
     agentPrompt = agent.prompt
   }
 
+  const handleGitHubError = (error: any): JSX.Element => {
+    if (error.name === 'GitHubAuthError') {
+      return (
+        <BotCard>
+          <BotMessage
+            agentName={agent?.name}
+            avatar={agent?.avatar}
+            content={`I need access to your GitHub account to help with that. Please go to Settings > Connections to connect your GitHub account.`}
+          />
+          <div className="mt-4">
+            <a 
+              href="/dashboard/settings/connections"
+              className="inline-flex items-center justify-center rounded-md text-sm font-medium ring-offset-background transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 disabled:pointer-events-none disabled:opacity-50 bg-primary text-primary-foreground hover:bg-primary/90 h-10 px-4 py-2"
+            >
+              Connect GitHub Account
+            </a>
+          </div>
+        </BotCard>
+      )
+    }
+    
+    return (
+      <BotCard>
+        <BotMessage
+          agentName={agent?.name}
+          avatar={agent?.avatar}
+          content={`Sorry, there was an error: ${error.message}`}
+        />
+      </BotCard>
+    )
+  }
+
   const ui = render({
     model: "gpt-3.5-turbo",
     provider: openai,
@@ -122,38 +154,42 @@ export async function submitUserMessage(
             .string()
             .describe("The username of the user to search for"),
         }),
-        render: async function* ({ username }) {
-          yield (
-            <BotCard>
-              <ProfileSkeleton />
-            </BotCard>
-          )
-          const rateLimitRemaining = await checkRateLimit()
-          const profile = await getGithubProfile(username)
-          sleep(1000)
+        render: async function* ({ username }): AsyncGenerator<JSX.Element, JSX.Element, unknown> {
+          try {
+            yield (
+              <BotCard>
+                <ProfileSkeleton />
+              </BotCard>
+            )
+            const rateLimitRemaining = await checkRateLimit()
+            const profile = await getGithubProfile(username)
+            await sleep(1000)
 
-          aiState.done({
-            ...aiState.get(),
-            messages: [
-              ...aiState.get().messages,
-              {
-                id: nanoid(),
-                role: "function",
-                name: "show_user_profile_ui",
-                content: JSON.stringify(profile),
-              },
-            ],
-          })
+            aiState.done({
+              ...aiState.get(),
+              messages: [
+                ...aiState.get().messages,
+                {
+                  id: nanoid(),
+                  role: "function",
+                  name: "show_user_profile_ui",
+                  content: JSON.stringify(profile),
+                },
+              ],
+            })
 
-          return (
-            <BotCard>
-              {rateLimitRemaining !== 0 ? (
-                <Profile props={profile} />
-              ) : (
-                <RateLimited />
-              )}
-            </BotCard>
-          )
+            return (
+              <BotCard>
+                {rateLimitRemaining !== 0 ? (
+                  <Profile props={profile} />
+                ) : (
+                  <RateLimited />
+                )}
+              </BotCard>
+            )
+          } catch (error) {
+            return handleGitHubError(error)
+          }
         },
       },
       show_user_list_ui: {
@@ -169,7 +205,7 @@ export async function submitUserMessage(
           )
           const rateLimitRemaining = await checkRateLimit()
           const profiles = await convertUserType(query)
-          sleep(1000)
+          await sleep(1000)
           aiState.done({
             ...aiState.get(),
             messages: [
@@ -206,7 +242,7 @@ export async function submitUserMessage(
           )
           const rateLimitRemaining = await checkRateLimit()
           const repositories = await searchRepositories(query)
-          sleep(1000)
+          await sleep(1000)
 
           aiState.done({
             ...aiState.get(),
@@ -284,7 +320,7 @@ export async function submitUserMessage(
           )
           const rateLimitRemaining = await checkRateLimit()
           const response = await getReadme(repo, owner)
-          sleep(1000)
+          await sleep(1000)
 
           aiState.done({
             ...aiState.get(),
@@ -333,7 +369,7 @@ export async function submitUserMessage(
             )
           }
           const content = await askSupabase(question, false)
-          sleep(1000)
+          await sleep(1000)
 
           aiState.done({
             ...aiState.get(),
