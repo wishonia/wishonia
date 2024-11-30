@@ -144,7 +144,10 @@ export async function processChatRequest(
     return JSON.parse(cachedResponse)
   }
 
-  let prompt = messages[messages.length - 1].content
+  if (messages.length === 0) {
+    throw new Error('Messages array is empty.');
+  }
+  let prompt = messages[messages.length - 1].content;
   if (context) {
     prompt = `Context:\n${context}\n\nQuestion: ${prompt}`
   }
