@@ -1,10 +1,10 @@
-# Right to Trial Act
+# Cure Acceleration Act
 
 ## Section 1. Short Title and Findings
 
 ### 1.1 Title
 
-Cited as the "Right to Trial Act."
+Cited as the "Cure Acceleration Act."
 
 ### 1.2 Core Findings
 

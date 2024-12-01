@@ -80,9 +80,6 @@ const ProblemsWithCurrentSystem = () => {
         <h2 className="mb-4 text-4xl font-black uppercase tracking-tight">
           Problems With The Current System 🏥
         </h2>
-        <p className="text-xl font-bold">
-          Our healthcare system is failing billions of people. Here's why:
-        </p>
       </div>
 
       <div className="grid gap-4 md:grid-cols-2 lg:grid-cols-3">
