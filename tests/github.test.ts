@@ -12,8 +12,8 @@ import { octokit } from "@/lib/github/octokit"
 import { scoreRepoDeveloper } from "@/lib/github/repoContributorScore"
 
 describe("Github API Test", () => {
-  it("should find github developers with @langchain/community experience", async () => {
-    const devs = await searchDevelopersByLibraries(["@langchain/community"])
+  it("should find github developers with cheerio experience", async () => {
+    const devs = await searchDevelopersByLibraries(["cheerio"])
     expect(devs).toBeDefined()
   })
   it("should generate the Prisma schema for a GitHub user", async () => {
@@ -41,8 +41,6 @@ describe("Github API Test", () => {
     let repo
     const libraries = [
       "cheerio",
-      "@langchain/community",
-      //"@llamaindex/pdf-viewer"
     ]
     for (const library of libraries) {
       repo = await getOwnerRepoFromNpm(library)
