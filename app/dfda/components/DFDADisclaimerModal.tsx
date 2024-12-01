@@ -19,7 +19,7 @@ export function DFDADisclaimerModal({
             highest standards of safety and efficacy.
           </p>
           <p>
-            Help us transform healthcare by signing the Right to Trial Act
+            Help us transform healthcare by signing the Cure Acceleration Act
             petition, which aims to update FDA.gov to support automated and
             decentralized clinical trials.
           </p>

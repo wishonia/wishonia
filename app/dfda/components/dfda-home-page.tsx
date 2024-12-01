@@ -36,7 +36,7 @@ export default function DFDAHomePage() {
       icon: Scroll,
       media: "https://wiki.dfda.earth/right_to_trial_act_image.jpg",
       onClick: async () => {
-        console.log("Right to Trial Act clicked")
+        console.log("Cure Acceleration Act clicked")
         setIsLoading(true)
         router.push("/dfda/right-to-trial-act")
       },

@@ -1,7 +1,6 @@
 ---
 description: >-
-  In the case of rare diseases, increasing the cost of treatment development to
-  over a billion makes it impossible to recover your investment from a small
+  It's impossible to recover a billion dollars of drug development from a small
   number of patients.
 ---
 
