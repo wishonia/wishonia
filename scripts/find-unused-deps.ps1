@@ -7,7 +7,7 @@ $outputFile = ".\dep-analysis\unused-deps_$timestamp.txt"
 
 # Install depcheck locally if not already installed
 Write-Host "Installing depcheck locally..."
-#pnpm add -D depcheck
+pnpm add -D depcheck
 
 # Create the analysis script
 $analysisScript = @'

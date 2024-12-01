@@ -1,4 +1,4 @@
-# 💖 RIGHT TO TRIAL ACT: Executive Summary
+# 💖 CURE ACCELERATION ACT: Executive Summary
 
 This Act guarantees patient rights to participate in decentralized trials for the most promising treatment. It achieves
 this through a free, open-source, decentralized trial platform that eliminates billions in trial costs, rewards
@@ -7,7 +7,7 @@ companies for developing cures and prevention, and removes barriers to accessing
 ## 📜 SECTION 1. Core Problems & Solutions
 
 Today's healthcare system suffers from bureaucratic FDA delays, limited clinical trial access, exorbitant drug
-development costs, and a focus on expensive treatments. The Right to Trial Act solves these problems by:
+development costs, and a focus on expensive treatments. The Cure Acceleration Act solves these problems by:
 
 * **Guaranteeing universal access:** Every person has the right to try treatments after basic safety testing.
 * **Creating a free, open platform:** Eliminates billions in trial costs and accelerates development.
@@ -37,7 +37,7 @@ enables importation of treatments, fostering true price competition and preventi
 
 ## 🌟 SECTION 4. Benefits Over the Current System
 
-The Right to Trial Act offers significant advantages:
+The Cure Acceleration Act offers significant advantages:
 
 * **Cheaper:** Eliminates billions in costs, enables global price competition, and shares savings.
 * **Faster:** Removes years of delays, automates processes, and enables real-time monitoring.

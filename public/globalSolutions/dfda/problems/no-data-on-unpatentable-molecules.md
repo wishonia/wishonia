@@ -5,7 +5,7 @@ description: >-
   every day.
 ---
 
-# 🥫 No Data on Unpatentable Molecules
+# 🥫 No Data on Unpatentable Treatments
 
 Under the current system of research, it costs [$41k](https://www.clinicalleader.com/doc/getting-a-handle-on-clinical-trial-costs-0001) per subject in Phase III clinical trials. As a result, there is not a sufficient profit incentive for anyone to research the effects of any factor besides a molecule that can be patented.
 
