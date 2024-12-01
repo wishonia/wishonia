@@ -356,21 +356,6 @@ importers:
       mathjs:
         specifier: ^13.0.0
         version: 13.1.1
-      mdast:
-        specifier: ^3.0.0
-        version: 3.0.0
-      mdast-util-from-markdown:
-        specifier: ^1.3.0
-        version: 1.3.1(supports-color@8.1.1)
-      mdast-util-mdx:
-        specifier: ^2.0.1
-        version: 2.0.1(supports-color@8.1.1)
-      mdast-util-to-markdown:
-        specifier: ^1.5.0
-        version: 1.5.0
-      mdast-util-to-string:
-        specifier: ^3.2.0
-        version: 3.2.0
       micromark-extension-mdxjs:
         specifier: ^1.0.0
         version: 1.0.1
@@ -422,9 +407,6 @@ importers:
       pdf2json:
         specifier: 3.0.5
         version: 3.0.5
-      pdfjs-dist:
-        specifier: ^4.2.67
-        version: 4.6.82(supports-color@8.1.1)
       pg:
         specifier: ^8.12.0
         version: 8.12.0
@@ -9016,10 +8998,6 @@ packages:
   mdast-util-to-string@4.0.0:
     resolution: {integrity: sha512-0H44vDimn51F0YwvxSJSm0eCDOJTRlmN0R1yBh4HLj9wiV1Dn0QoXGbvFAWj2hSItVTlCmBF1hqKlIyUBVFLPg==}
 
-  mdast@3.0.0:
-    resolution: {integrity: sha512-xySmf8g4fPKMeC07jXGz971EkLbWAJ83s4US2Tj9lEdnZ142UP5grN73H1Xd3HzrdbU5o9GYYP/y8F9ZSwLE9g==}
-    deprecated: '`mdast` was renamed to `remark`'
-
   mdn-data@2.0.30:
     resolution: {integrity: sha512-GaqWWShW4kv/G9IEucWScBx9G1/vsFZZJUO+tD26M8J8z3Kw5RDQjaoZe03YAClgeS/SWPOcb4nkFBTEi5DUEA==}
 
@@ -9987,10 +9965,6 @@ packages:
     resolution: {integrity: sha512-gDKb8aZMDeD/tZWs9P6+q0J9Mwkdl6xMV8TjnGP3qJVJ06bdMgkbBlLU8IdfOsIsFz2BW1rNVT3XuNEl8zPAvw==}
     engines: {node: '>=8'}
 
-  path2d@0.2.1:
-    resolution: {integrity: sha512-Fl2z/BHvkTNvkuBzYTpTuirHZg6wW9z8+4SND/3mDTEcYbbNKWAy21dz9D3ePNNwrrK8pqZO5vLPZ1hLF6T7XA==}
-    engines: {node: '>=6'}
-
   pdf-parse@1.1.1:
     resolution: {integrity: sha512-v6ZJ/efsBpGrGGknjtq9J/oC8tZWq0KWL5vQrk2GlzLEQPUDB1ex+13Rmidl1neNN358Jn9EHZw5y07FFtaC7A==}
     engines: {node: '>=6.8.1'}
@@ -10001,10 +9975,6 @@ packages:
     hasBin: true
     bundledDependencies:
       - '@xmldom/xmldom'
-
-  pdfjs-dist@4.6.82:
-    resolution: {integrity: sha512-BUOryeRFwvbLe0lOU6NhkJNuVQUp06WxlJVVCsxdmJ4y5cU3O3s3/0DunVdK1PMm7v2MUw52qKYaidhDH1Z9+w==}
-    engines: {node: '>=18'}
 
   peberminta@0.9.0:
     resolution: {integrity: sha512-XIxfHpEuSJbITd1H3EeQwpcZbTLHc+VVr8ANI9t5sit565tsI4/xK3KWTUFE2e6QiangUkh3B0jihzmGnNrRsQ==}
@@ -23536,8 +23506,6 @@ snapshots:
     dependencies:
       '@types/mdast': 4.0.4
 
-  mdast@3.0.0: {}
-
   mdn-data@2.0.30: {}
 
   memoize-one@5.2.1: {}
@@ -24833,9 +24801,6 @@ snapshots:
 
   path-type@4.0.0: {}
 
-  path2d@0.2.1:
-    optional: true
-
   pdf-parse@1.1.1(supports-color@8.1.1):
     dependencies:
       debug: 3.2.7(supports-color@8.1.1)
@@ -24844,14 +24809,6 @@ snapshots:
       - supports-color
 
   pdf2json@3.0.5: {}
-
-  pdfjs-dist@4.6.82(supports-color@8.1.1):
-    optionalDependencies:
-      canvas: 2.11.2(supports-color@8.1.1)
-      path2d: 0.2.1
-    transitivePeerDependencies:
-      - encoding
-      - supports-color
 
   peberminta@0.9.0: {}
 
