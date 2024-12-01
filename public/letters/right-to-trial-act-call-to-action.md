@@ -10,9 +10,9 @@ So here's the deal - our current system for developing new treatments is complet
 - 😢 60M people die each year because we don't have adequate treatments
 - 🤒 2.5B people suffer from chronic diseases we can't cure yet
 
-## 💡 The Solution: The Right to Trial Act
+## 💡 The Solution: The Cure Acceleration Act
 
-We've designed legislation called the Right to Trial Act that would:
+We've designed legislation called the Cure Acceleration Act that would:
 
 1. ✅ **Guarantee Universal Access** - Let any patient try treatments after basic safety testing
 2. 💻 **Free Open Decentralized Trials** - Eliminate billions in trial costs with decentralized infrastructure
@@ -59,4 +59,4 @@ The potential impact is massive - we could:
 - 💝 Help billions of suffering people
 - 🧬 Transform how we develop new cures
 
-P.S. Check out the details and sign our petition at [Right to Trial Act](https://wishonia.love/dfda/right-to-trial-act) 
+P.S. Check out the details and sign our petition at [Cure Acceleration Act](https://wishonia.love/dfda/right-to-trial-act) 

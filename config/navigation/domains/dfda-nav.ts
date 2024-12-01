@@ -27,10 +27,10 @@ export const dfdaLinks = {
     tooltip: "An autonomous AI Food and Drug Administration",
   },
   petition: {
-    title: "Right to Trial Act",
+    title: "Cure Acceleration Act",
     href: "/dfda/right-to-trial-act",
     icon: "petition",
-    tooltip: "Help us transform healthcare by signing the Right to Trial Act",
+    tooltip: "Help us transform healthcare by signing the Cure Acceleration Act",
   },
   healthSavingsSharing: {
     title: "50/50 Health Savings Sharing Program",

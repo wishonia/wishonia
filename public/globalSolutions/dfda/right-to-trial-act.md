@@ -1,10 +1,10 @@
-# 💖 RIGHT TO TRIAL ACT
+# 💖 CURE ACCELERATION ACT
 
 ## 📜 SECTION 1. SHORT TITLE AND FINDINGS
 
 ### 1.1 📛 Title
 
-This Act may be cited as the **"Right to Trial Act"**.
+This Act may be cited as the **"Cure Acceleration Act"**.
 
 ### 1.2 🏥 Core Problems This Act Solves
 
