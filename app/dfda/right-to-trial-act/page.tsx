@@ -10,7 +10,7 @@ import { FloatingPetitionButton } from "./components/FloatingPetitionButton"
 import CureAccelerationAct from "./components/right-to-trial-act"
 
 export const metadata: Metadata = {
-  title: "Right to Trial Act | DFDA",
+  title: "Cure Acceleration Act | DFDA",
   description: "Faster Cures, Lower Costs, Universal Access 🚀",
 }
 export default async function RightToTrialPage() {

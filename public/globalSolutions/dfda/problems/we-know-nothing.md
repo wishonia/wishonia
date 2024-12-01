@@ -1,10 +1,10 @@
 ---
-description: We only know 0.000000002% of what is left to be known.
+description: We've only studied 0.000000002% of potential treatments.
 ---
 
 # ❓ We Know Next to Nothing
 
-We’re only 2 lifetimes from the use of the modern scientific method in medicine. Thus, it's only been applied for 0.0001% of human history. The more clinical research studies we read, the more we realize we don’t know. Nearly every study ends with the phrase "more research is needed". We know basically nothing at this point compared to what will eventually be known about the human body.
+We’re only 2 lifetimes from the use of the modern scientific method in medicine. Thus, it's only been applied for 0.0001% of human history. The more clinical research studies we read, the more we realize we don’t know. Nearly every study ends with the phrase, "More research is needed." We know basically nothing at this point compared to what will eventually be known about the human body.
 
 There are over [7,000](https://www.washingtonpost.com/news/fact-checker/wp/2016/11/17/are-there-really-10000-diseases-and-500-cures/) known diseases afflicting humans.
 

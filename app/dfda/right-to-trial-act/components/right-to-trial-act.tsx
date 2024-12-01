@@ -26,7 +26,7 @@ export default function CureAccelerationAct() {
           <h2 className="neobrutalist-h2">Overview & Findings 📜</h2>
           <h3 className="neobrutalist-h3">Title 🏷️</h3>
           <p className="neobrutalist-p">
-            This Act may be cited as the "Right to Trial Act" 📋
+            This Act may be cited as the "Cure Acceleration Act" 📋
           </p>
           <ProblemsWithCurrentSystem />
           <RightToTrialActSolutions />
