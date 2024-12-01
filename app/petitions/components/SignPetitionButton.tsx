@@ -25,7 +25,7 @@ export function SignPetitionButton({
   hasSigned: initialHasSigned,
   status = "ACTIVE",
   className,
-  signedClassName,
+  signedClassName, 
   onSignatureChange,
   buttonVariant = "default",
 }: SignPetitionButtonProps) {

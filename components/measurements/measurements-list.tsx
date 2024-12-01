@@ -3,10 +3,11 @@
 import { FC, useEffect, useState } from "react"
 import Image from "next/image"
 import { format } from "date-fns"
-import { Activity, Loader2, MoreVertical } from "lucide-react"
+import { Activity, Loader2 } from "lucide-react"
 import { User } from "next-auth"
 
 import { Measurement } from "@/types/models/Measurement"
+import { MeasurementMenu } from "./measurement-menu"
 
 interface MeasurementsListProps {
   user: User
@@ -70,6 +71,16 @@ export const MeasurementsList: FC<MeasurementsListProps> = ({
       })
   }, [user, measurementsDateRange?.from, measurementsDateRange?.to, variableId])
 
+  const handleEditMeasurement = (measurement: Measurement) => {
+    // TODO: Implement edit functionality
+    console.log('Edit measurement:', measurement)
+  }
+
+  const handleDeleteMeasurement = (measurement: Measurement) => {
+    // TODO: Implement delete functionality
+    console.log('Delete measurement:', measurement)
+  }
+
   if (isLoading) {
     return (
       <div className="flex justify-center p-8">
@@ -120,9 +131,11 @@ export const MeasurementsList: FC<MeasurementsListProps> = ({
               </div>
             )}
           </div>
-          <button className="flex-shrink-0 text-gray-400 hover:text-gray-500">
-            <MoreVertical className="h-5 w-5" />
-          </button>
+          <MeasurementMenu
+            measurement={measurement}
+            onEdit={handleEditMeasurement}
+            onDelete={handleDeleteMeasurement}
+          />
         </div>
       ))}
     </div>

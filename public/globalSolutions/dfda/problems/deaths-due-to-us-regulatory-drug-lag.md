@@ -1,10 +1,9 @@
 ---
 description: >-
-  A comparative analysis between countries suggests that delays in new
-  interventions cost anywhere from 21,000 to 120, 000 US lives per decade.
+  Delays in new interventions cost anywhere from 21,000 to 120,000 US lives per decade.
 ---
 
-# ⏱ Deaths Due to US Regulatory "Drug Lag"
+# ⏱ Deaths Due to Regulatory "Drug Lag"
 
 **Delayed Life-Saving Treatments**
 
