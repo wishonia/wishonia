@@ -1,4 +1,4 @@
-export default function RightToTrialLayout({
+export default function CureAccelerationLayout({
   children,
 }: {
   children: React.ReactNode
