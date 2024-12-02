@@ -3,14 +3,14 @@
 import React from "react"
 import { motion } from "framer-motion"
 
-import Benefits from "@/app/dfda/right-to-trial-act/components/Benefits"
-import FinancialIncentives from "@/app/dfda/right-to-trial-act/components/FinancialIncentives"
-import UniversalAccess from "@/app/dfda/right-to-trial-act/components/UniversalAccess"
+import Benefits from "@/app/dfda/cure-acceleration-act/components/Benefits"
+import FinancialIncentives from "@/app/dfda/cure-acceleration-act/components/FinancialIncentives"
+import UniversalAccess from "@/app/dfda/cure-acceleration-act/components/UniversalAccess"
 
 import Header from "./Header"
 import OpenTrialPlatform from "./OpenTrialPlatform"
 import ProblemsWithCurrentSystem from "./problems-with-the-current-system"
-import RightToTrialActSolutions from "./right-to-trial-act-solutions"
+import RightToTrialActSolutions from "./cure-acceleration-act-solutions"
 
 export default function CureAccelerationAct() {
   return (

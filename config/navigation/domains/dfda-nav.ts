@@ -28,7 +28,7 @@ export const dfdaLinks = {
   },
   petition: {
     title: "Cure Acceleration Act",
-    href: "/dfda/right-to-trial-act",
+    href: "/dfda/cure-acceleration-act",
     icon: "petition",
     tooltip: "Help us transform healthcare by signing the Cure Acceleration Act",
   },
