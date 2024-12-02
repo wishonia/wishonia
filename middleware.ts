@@ -2,8 +2,19 @@ import { NextResponse } from "next/server"
 import { getToken } from "next-auth/jwt"
 import { withAuth } from "next-auth/middleware"
 
-import { redirects } from "@/config/redirects"
 import { getDomainConfig } from "@/lib/utils/domain-config"
+
+// Define redirects with string literals
+const redirects = [
+  {
+    source: "/dfda/right-to-trial",
+    destination: "/dfda/cure-acceleration-act",
+    permanent: true,
+    description: "Redirect to new name of the Right to Trial Act",
+  },
+  // Add more redirects here
+  // Make sure to add the source path to the matcher array below 👇
+] as const
 
 export default withAuth(
   async function middleware(req) {
@@ -14,7 +25,6 @@ export default withAuth(
     // Check redirects first
     const redirect = redirects.find(r => r.source === pathname)
     if (redirect) {
-      // Create new URL with the destination
       const newUrl = new URL(redirect.destination, req.url)
       
       // Preserve query parameters
@@ -73,13 +83,13 @@ export default withAuth(
   }
 )
 
-// Update matcher to include all redirect sources
+// IMPORTANT: When adding new redirects above☝️, add the source path here too 👇
 export const config = {
   matcher: [
     "/",
     "/dashboard/:path*",
     "/signin",
     "/signup",
-    ...redirects.map(r => r.source),
+    "/dfda/right-to-trial",
   ],
 }
