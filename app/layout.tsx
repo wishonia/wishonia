@@ -11,7 +11,6 @@ import { siteConfig } from "@/config/site";
 import { cn } from "@/lib/utils";
 import { Toaster } from "@/components/ui/toaster";
 import { Providers } from "@/app/providers"; // Import Providers
-import TawkToChat from '@/components/TawkToChat'
 
 const spaceGrotesk = Space_Grotesk({
   subsets: ["latin"],
@@ -89,7 +88,6 @@ export default function RootLayout({ children }: RootLayoutProps) {
               {children}
             </div>
             <Toaster />
-            <TawkToChat />
           </CopilotKit>
           <Analytics />
         </Providers>
