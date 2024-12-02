@@ -49,7 +49,7 @@ const SolutionCard = ({
   )
 }
 
-export default function RightToTrialActSolutions() {
+export default function CureAccelerationActSolutions() {
   const solutions = [
     {
       title: "Decentralized FDA",

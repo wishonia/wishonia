@@ -13,7 +13,7 @@ export const metadata: Metadata = {
   title: "Cure Acceleration Act | DFDA",
   description: "Faster Cures, Lower Costs, Universal Access 🚀",
 }
-export default async function RightToTrialPage() {
+export default async function CureAccelerationPage() {
   const { html, data } = await getMarkdownContent(
     "globalSolutions/dfda/cure-acceleration-act.md"
   )
