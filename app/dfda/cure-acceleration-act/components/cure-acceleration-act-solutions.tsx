@@ -62,10 +62,13 @@ export default function CureAccelerationActSolutions() {
         "📊 Continuous monitoring and analysis of treatment outcomes",
         "🌍 Global collaboration and data sharing",
         "🛡️ Automated safety monitoring and signal detection",
+        "💰 Cut clinical trial costs by over 90% with free open infrastructure",
+        "⚡ Reduce time-to-market by years through universal trial participation",
+        "🌐 Enable real price competition through global access and transparent outcomes",
       ],
     },
     {
-      title: "Medical Freedom",
+      title: "Right to Trial",
       description:
         "Universal access to clinical trials and treatments for all patients",
       icon: "⚖️",
@@ -73,19 +76,6 @@ export default function CureAccelerationActSolutions() {
         "✅ Guarantees right to try any treatment that passes basic safety testing",
         "🚪 Removes barriers blocking access to effective treatments",
         "👤 Patient autonomy in treatment decisions",
-      ],
-    },
-    {
-      title: "Economic Impact",
-      description:
-        "Revolutionary changes to healthcare economics and incentives",
-      icon: "📈",
-      details: [
-        "💰 Cut clinical trial costs by over 90% with free open infrastructure",
-        "💎 Save over $2 trillion annually by incentivizing disease prevention",
-        "⚡ Reduce time-to-market by years through universal trial participation",
-        "🏆 Create multi-billion dollar rewards for companies developing actual cures",
-        "🌐 Enable real price competition through global access and transparent outcomes",
       ],
     },
     {
@@ -98,6 +88,8 @@ export default function CureAccelerationActSolutions() {
         "🎁 Encourages $0 cost treatments to maximize adoption",
         "📊 Data-driven savings calculations",
         "🤝 Win-win for society and manufacturers",
+        "💎 Save over $2 trillion annually by incentivizing disease prevention",
+        "🏆 Create multi-billion dollar rewards for companies developing actual cures",
       ],
     },
   ]
@@ -105,7 +97,7 @@ export default function CureAccelerationActSolutions() {
   return (
     <div className="space-y-8 py-8">
       <h2 className="mb-6 text-3xl font-black">💡 Solutions</h2>
-      <div className="grid gap-6 md:grid-cols-2">
+      <div className="grid gap-6 md:grid-cols-3">
         {solutions.map((solution, index) => (
           <SolutionCard
             key={index}
