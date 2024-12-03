@@ -26,7 +26,7 @@ export function DFDADisclaimerModal({
         </div>
       }
       primaryText="Sign Petition"
-      primaryHref="/dfda/right-to-trial-act"
+      primaryHref="/dfda/cure-acceleration-act"
       secondaryText="Got it!"
       secondaryHref={null}
       persistKey="dfda-disclaimer-shown"

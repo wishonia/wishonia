@@ -38,7 +38,7 @@ export default function DFDAHomePage() {
       onClick: async () => {
         console.log("Cure Acceleration Act clicked")
         setIsLoading(true)
-        router.push("/dfda/right-to-trial-act")
+        router.push("/dfda/cure-acceleration-act")
       },
     },
     {

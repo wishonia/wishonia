@@ -7,15 +7,15 @@ import { checkPetitionSignature } from "@/app/petitions/petitionActions"
 
 import { DFDAPetitionButtons } from "./components/DFDAPetitionButtons"
 import { FloatingPetitionButton } from "./components/FloatingPetitionButton"
-import CureAccelerationAct from "./components/right-to-trial-act"
+import CureAccelerationAct from "./components/cure-acceleration-act"
 
 export const metadata: Metadata = {
   title: "Cure Acceleration Act | DFDA",
   description: "Faster Cures, Lower Costs, Universal Access 🚀",
 }
-export default async function RightToTrialPage() {
+export default async function CureAccelerationPage() {
   const { html, data } = await getMarkdownContent(
-    "globalSolutions/dfda/right-to-trial-act.md"
+    "globalSolutions/dfda/cure-acceleration-act.md"
   )
 
   const hasSigned = await checkPetitionSignature(DFDA_PETITION_ID)

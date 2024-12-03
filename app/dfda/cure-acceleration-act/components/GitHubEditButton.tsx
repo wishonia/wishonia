@@ -5,7 +5,7 @@ import { Button } from "@/components/ui/button"
 export function GitHubEditButton() {
   return (
     <a
-      href="https://github.com/wishonia/wishonia/edit/main/public/globalSolutions/dfda/right-to-trial-act.md"
+      href="https://github.com/wishonia/wishonia/edit/main/public/globalSolutions/dfda/cure-acceleration-act.md"
       target="_blank"
       rel="noopener noreferrer"
     >

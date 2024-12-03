@@ -59,4 +59,4 @@ The potential impact is massive - we could:
 - 💝 Help billions of suffering people
 - 🧬 Transform how we develop new cures
 
-P.S. Check out the details and sign our petition at [Cure Acceleration Act](https://wishonia.love/dfda/right-to-trial-act) 
+P.S. Check out the details and sign our petition at [Cure Acceleration Act](https://wishonia.love/dfda/cure-acceleration-act) 

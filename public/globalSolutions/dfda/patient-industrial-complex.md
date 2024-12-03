@@ -3,7 +3,7 @@
 ## 📜 Overview
 
 The Patient Industrial Complex (PIC) uses tokens to reward actions that advance
-the [Cure Acceleration Act](https://wishonia.love/dfda/right-to-trial-act) and reduce patient suffering. The token has no
+the [Cure Acceleration Act](https://wishonia.love/dfda/cure-acceleration-act) and reduce patient suffering. The token has no
 intrinsic value - it's simply a point system to incentivize and coordinate collective action.
 
 ## 🎁 Rewarded Actions & Impact
