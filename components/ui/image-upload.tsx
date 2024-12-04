@@ -3,13 +3,14 @@
 import * as React from "react"
 
 export interface ImageUploadProps {
-  label: string
   value: string | string[]
-  multiple?: boolean
   onChange: (value: string | string[]) => void
+  onRemove?: (index?: number) => void
+  multiple?: boolean
+  label?: string
 }
 
-export function ImageUpload({ label, value, multiple, onChange }: ImageUploadProps) {
+export function ImageUpload({ label, value, multiple, onChange, onRemove }: ImageUploadProps) {
   const inputId = React.useId()
   
   return (
