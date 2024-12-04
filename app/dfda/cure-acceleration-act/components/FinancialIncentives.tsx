@@ -16,8 +16,12 @@ export default function FinancialIncentives() {
       className="border-4 border-black bg-green-400 p-6 shadow-[8px_8px_0px_0px_rgba(0,0,0,1)]"
       whileHover={{ scale: 1.02 }}
     >
-      <h2 className="mb-4 text-3xl font-black">💰 Financial Incentives</h2>
-
+      <h2 className="mb-4 text-3xl font-black">
+        💰 50/50 Health Savings Sharing Program
+      </h2>
+      <p className="mb-6 text-xl">
+        Incentivizing cures instead of lifelong subscriptions to drugs that mask symptoms of disease
+      </p>
       <div className="mb-4 border-2 border-black bg-white p-4">
         <h3 className="mb-3 text-xl font-bold">
           Healthcare Savings Sharing Program

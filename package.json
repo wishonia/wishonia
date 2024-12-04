@@ -5,6 +5,7 @@
   "scripts": {
     "dev": "next dev",
     "build": "next build",
+    "type-check": "tsc --noEmit",
     "turbo": "next dev --turbo",
     "start": "next start",
     "lint": "next lint",
@@ -30,8 +31,7 @@
     "deps:check": "depcheck",
     "deps:check:size": "npm-check",
     "deps:check:comprehensive": "cost-of-modules",
-    "deps:unused-exports": "ts-prune",
-    "type-check": "tsc --noEmit"
+    "deps:unused-exports": "ts-prune"
   },
   "prisma": {
     "seed": "ts-node --compiler-options {\"module\":\"CommonJS\"} prisma/seed.ts"

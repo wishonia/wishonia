@@ -12,19 +12,37 @@ const insights = [
     text: `It's sad that a family can be torn apart by something as simple as wild dogs.`,
   },
   {
-    text: "War is stupid.",
+    text: "The US spends 20X more on war and the military than on clinical research",
   },
+  {
+    text: "There is nearly 0 correlation between public support for a bill and its likelihood of passage.",
+  },
+  {
+    text: "For every $1 spent on prevention, we save $5.60 in treatment costs. Yet only 3% of healthcare spending goes to prevention.",
+  },
+  {
+    text: "The U.S. spends twice as much on healthcare as other developed nations, but ranks 38th in health outcomes globally.",
+  },
+  {
+    text: "Fossil fuel subsidies globally amount to $5.9 trillion annually.",
+  },
+  {
+    text: "The U.S. has 5% of the world's population, but 25% of the world's prisoners.",
+  },
+  {
+    text: "In the U.S., $6 in corporate welfare is spent for every $1 spent on food assistance.",
+  }
 ]
 
 export default function Loading() {
   const randomQuote = insights[Math.floor(Math.random() * insights.length)]
 
   return (
-    <div className="flex min-h-screen items-center justify-center bg-gradient-to-b from-slate-900 to-slate-800 p-4">
+    <div className="flex min-h-screen items-center justify-center p-4">
       <div className="flex max-w-xl flex-col items-center gap-8 text-center">
-        <div className="h-12 w-12 animate-spin rounded-full border-4 border-indigo-500 border-t-transparent" />
+        <div className="h-12 w-12 animate-spin rounded-full border-4 border-t-transparent" />
         <div className="space-y-3">
-          <p className="font-serif text-xl italic text-slate-100">
+          <p className="text-3xl">
             {randomQuote.text}
           </p>
         </div>

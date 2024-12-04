@@ -1,15 +1,17 @@
 import { PrismaClient } from "@prisma/client"
+import { seedCureAccelerationAct } from "./seeders/globalSolutions/cure-acceleration-act"
 
 const prisma = new PrismaClient()
 
-const main = async () => {}
+async function main() {
+  await seedCureAccelerationAct()
+}
 
 main()
-  .then(async () => {
-    await prisma.$disconnect()
-  })
-  .catch(async (e) => {
+  .catch((e) => {
     console.error(e)
-    await prisma.$disconnect()
     process.exit(1)
+  })
+  .finally(async () => {
+    await prisma.$disconnect()
   })

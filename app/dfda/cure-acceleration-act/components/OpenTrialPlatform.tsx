@@ -72,8 +72,11 @@ export default function OpenTrialPlatform() {
       className="rounded-lg border-4 border-black bg-white p-6 shadow-[8px_8px_0px_0px_rgba(0,0,0,1)]"
     >
       <h2 className="mb-6 text-3xl font-black">
-        Open Source Global Decentralized Trial Platform 🌐💻
+        Decentralized FDA 🌐💻
       </h2>
+      <p className="mb-6 text-xl">
+        Global, Open, Decentralized, & Automated Clinical Trials
+      </p>
       <div className="space-y-6">
         {sections.map((section, index) => (
           <ListCard

@@ -8,6 +8,7 @@ import * as z from "zod"
 
 import { wishSchema } from "@/lib/validations/wish"
 import { toast } from "@/components/ui/use-toast"
+import { submitWish } from "@/app/actions/wish"
 
 interface WishFormProps extends React.HTMLAttributes<HTMLFormElement> {}
 
@@ -32,31 +33,10 @@ export function WishForm({ className, ...props }: WishFormProps) {
 
   async function onSubmit(data: FormData) {
     try {
-      const response = await fetch(`/api/wish`, {
-        method: "POST",
-        headers: {
-          "Content-Type": "application/json",
-        },
-        body: JSON.stringify({
-          wish: data.wish,
-        }),
-      })
-
-      if (response.status === 409) {
-        toast({
-          title: "Already have a wish",
-          description: "You already have an active wish in the wishing well.",
-          variant: "destructive",
-        })
-        return
-      }
-
-      if (!response?.ok) {
-        throw new Error("Failed to submit wish")
-      }
+      await submitWish(data.wish)
 
       toast({
-        description: "Your Wish has been updated.",
+        description: "Your Wish has been created along with related problems, solutions, and a petition.",
       })
 
       setIsRedirecting(true)
@@ -66,7 +46,7 @@ export function WishForm({ className, ...props }: WishFormProps) {
       setIsRedirecting(false)
       toast({
         title: "Something went wrong.",
-        description: "Your Wish was not updated. Please try again.",
+        description: error instanceof Error ? error.message : "Your Wish was not created. Please try again.",
         variant: "destructive",
       })
     }
@@ -77,13 +57,14 @@ export function WishForm({ className, ...props }: WishFormProps) {
       <div className="w-full space-y-4 text-center">
         <div
           className="flex h-32 w-full items-center justify-center border-[6px]
-                     border-black bg-white p-4 font-mono text-2xl font-black"
+                     border-foreground bg-background p-4 font-mono text-2xl 
+                     font-black text-foreground"
         >
           ✨ Making your wish come true... ✨
         </div>
         <div
-          className="w-full border-[6px] border-black bg-black p-4 font-mono text-2xl
-                     font-black text-white"
+          className="w-full border-[6px] border-foreground bg-foreground p-4 
+                     font-mono text-2xl font-black text-background"
         >
           GRANTING...
         </div>
@@ -95,18 +76,19 @@ export function WishForm({ className, ...props }: WishFormProps) {
     <form onSubmit={handleSubmit(onSubmit)} className="w-full">
       <textarea
         {...register("wish")}
-        className="mb-4 h-32 w-full resize-none border-[6px] border-black
-                 bg-white p-4 font-mono text-2xl
-                 font-black placeholder-black focus:outline-none"
+        className="mb-4 h-32 w-full resize-none border-[6px] border-foreground
+                 bg-background p-4 font-mono text-2xl
+                 font-black text-foreground placeholder-foreground/70 focus:outline-none
+                 focus:caret-foreground caret-transparent animate-caret"
         placeholder="TYPE WISH"
       />
 
       <button
         type="submit"
         disabled={isSubmitting}
-        className="w-full border-[6px] border-black bg-black p-4 font-mono text-2xl
-                 font-black text-white transition-colors hover:bg-white
-                 hover:text-black"
+        className="w-full border-[6px] border-foreground bg-foreground p-4 
+                 font-mono text-2xl font-black text-background transition-colors 
+                 hover:bg-background hover:text-foreground disabled:opacity-50"
       >
         {isSubmitting ? "..." : "GRANT"}
       </button>
