@@ -81,9 +81,7 @@ This analysis provides a quantitative evaluation of the Act's potential economic
 - **Estimated New Drugs Annually**: 50.
 - **Total Annual Savings**:
 
-  \[
-  \$1.404\text{ billion/drug} \times 50\text{ drugs} = \$70.2\text{ billion}
-  \]
+  $1.404 billion/drug × 50 drugs = $70.2 billion
 
 ### 2. Savings from Disease Prevention
 
@@ -99,9 +97,7 @@ This analysis provides a quantitative evaluation of the Act's potential economic
 - **Increased Preventive Spending**: Doubling to 10% (\$410 billion).
 - **Additional Savings**:
 
-  \[
-  (\$410\text{ billion} - \$205\text{ billion}) \times 3 = \$615\text{ billion}
-  \]
+  ($410 billion - $205 billion) × 3 = $615 billion
 
 - **Total Annual Savings**: **Up to \$615 billion**
 
@@ -117,9 +113,7 @@ This analysis provides a quantitative evaluation of the Act's potential economic
 - **Average Price Reduction**: 50%.
 - **Annual Savings**:
 
-  \[
   \$360\text{ billion} \times 50\% = \$180\text{ billion}
-  \]
 
 ### 4. Economic Benefits from Faster Time-to-Market
 
@@ -136,15 +130,11 @@ This analysis provides a quantitative evaluation of the Act's potential economic
   - **Lives Potentially Saved Annually**: Assume treatments affect 100,000 patients.
   - **Total Economic Benefit**:
 
-    \[
-    100,000\text{ patients} \times \$10\text{ million} = \$1\text{ trillion}
-    \]
+    100,000 patients × $10 million = $1 trillion
 
 - **Annualized Benefit Over 4 Years**:
 
-  \[
-  \$1\text{ trillion} / 4 = \$250\text{ billion}
-  \]
+  $1 trillion ÷ 4 = $250 billion
 
 ### 5. Financial Incentives for Cures
 
@@ -154,26 +144,18 @@ This analysis provides a quantitative evaluation of the Act's potential economic
 - **Patients Receiving Treatment**: 1 million.
 - **Total Lifetime Savings**:
 
-  \[
-  1\text{ million} \times \$750,000 = \$750\text{ billion}
-  \]
+  $1 million × $750,000 = $750 billion
 
 - **Manufacturer's Reward (50%)**:
 
-  \[
-  \$750\text{ billion} \times 50\% = \$375\text{ billion}
-  \]
+  $750 billion × 50% = $375 billion
 
 - **Annualized Savings and Rewards**:
 
   - **Assuming Savings Realized Over 30 Years**:
-    \[
-    \$750\text{ billion} / 30 = \$25\text{ billion per year}
-    \]
+    $750 billion ÷ 30 = $25 billion per year
   - **Annual Reward to Manufacturer**:
-    \[
-    \$25\text{ billion} \times 50\% = \$12.5\text{ billion}
-    \]
+    $25 billion × 50% = $12.5 billion
 
 ---
 
@@ -205,15 +187,11 @@ This analysis provides a quantitative evaluation of the Act's potential economic
 
 #### Total Initial Costs:
 
-\[
-\$5\text{ billion (development)} + \$2\text{ billion (training)} + \$1\text{ billion (regulatory)} = \$8\text{ billion}
-\]
+$5 billion (development) + $2 billion (training) + $1 billion (regulatory) = $8 billion
 
 #### Total Annual Costs:
 
-\[
-\$1\text{ billion (operation)}
-\]
+$1 billion (operation)
 
 ### 2. Potential Risks and Mitigation Costs
 
@@ -224,9 +202,7 @@ This analysis provides a quantitative evaluation of the Act's potential economic
 
 #### Total Annual Risk Mitigation Costs:
 
-\[
-\$500\text{ million} + \$500\text{ million} = \$1\text{ billion}
-\]
+$500 million + $500 million = $1 billion
 
 ### 3. Impact on Existing Stakeholders
 
@@ -247,9 +223,7 @@ This analysis provides a quantitative evaluation of the Act's potential economic
 - **Total Estimated Annual Costs**: **Approximately \$2 billion**
 - **Net Annual Benefit**:
 
-  \[
-  \$1.1277\text{ trillion} - \$2\text{ billion} = \$1.1257\text{ trillion}
-  \]
+  $1.1277 trillion - $2 billion = $1.1257 trillion
 
 - **Initial One-Time Costs**: **\$10 billion**
 

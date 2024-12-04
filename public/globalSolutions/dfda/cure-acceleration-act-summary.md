@@ -28,9 +28,9 @@ continuous real-world evidence collection. Key features include:
   of safety issues.
 * **Open Source and Global:**  The platform is open-source, enabling global collaboration and continuous improvement.
 
-## 🔓 SECTION 3. Financial Incentives for Cures
+## 🔓 SECTION 3. 50/50 Healthcare Savings Sharing Program
 
-The Act introduces a Healthcare Savings Sharing Program where manufacturers and society split healthcare savings (e.g.,
+The Act introduces a 50/50 Healthcare Savings Sharing Program where manufacturers and society split healthcare savings (e.g.,
 from age-related disease prevention) 50/50. This incentivizes the development of cures and preventative treatments,
 leading to lower costs, faster access, and better health outcomes. The program eliminates government-imposed fees and
 enables importation of treatments, fostering true price competition and preventing price gouging.
