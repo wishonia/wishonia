@@ -65,7 +65,7 @@ export default function UniversalAccess() {
         The right of patients to participate in clinical trials and access treatments should be a human right. 
       </p>
       <p className="mb-6 text-xl">
-        This provision garuntees:
+        This provision guarantees:
       </p>
       <div className="grid grid-cols-1 gap-4 md:grid-cols-3">
         {sections.map((section, i) => (
