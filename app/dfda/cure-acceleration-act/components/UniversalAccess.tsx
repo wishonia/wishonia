@@ -58,7 +58,15 @@ export default function UniversalAccess() {
       transition={{ duration: 0.5 }}
       className="rounded-lg border-4 border-black bg-white p-6 shadow-[8px_8px_0px_0px_rgba(0,0,0,1)]"
     >
-      <h2 className="mb-4 text-3xl font-black">Medical Freedom 🚪</h2>
+      <h2 className="mb-4 text-3xl font-black">
+        ⚖️ Right to Trial ✊
+      </h2>
+      <p className="mb-6 text-xl">
+        The right of patients to participate in clinical trials and access treatments should be a human right. 
+      </p>
+      <p className="mb-6 text-xl">
+        This provision garuntees:
+      </p>
       <div className="grid grid-cols-1 gap-4 md:grid-cols-3">
         {sections.map((section, i) => (
           <motion.div
