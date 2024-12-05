@@ -16,18 +16,30 @@ export function ConditionTreatmentContent({ treatmentName, conditionName }: Cond
     const [loading, setLoading] = useState(true)
 
     useEffect(() => {
+        let isSubscribed = true
         async function fetchMetaAnalysis() {
             try {
                 const metaAnalysis = await getMetaAnalysis(treatmentName, conditionName)
-                setArticle(metaAnalysis)
+                if (isSubscribed) {
+                    setArticle(metaAnalysis)
+                }
             } catch (error) {
-                console.error('Error fetching meta-analysis:', error)
+                if (isSubscribed) {
+                    setArticle(null)
+                    // Consider using a toast notification or error state
+                    console.error('Error fetching meta-analysis:', error)
+                }
             } finally {
-                setLoading(false)
+                if (isSubscribed) {
+                    setLoading(false)
+                }
             }
         }
 
         fetchMetaAnalysis()
+        return () => {
+            isSubscribed = false
+        }
     }, [treatmentName, conditionName])
 
     if (loading) {
