@@ -17,18 +17,28 @@ export function ArticleContent({ articleSlug }: ArticleContentProps) {
     const [isLoading, setIsLoading] = useState(true)
 
     useEffect(() => {
+        let isSubscribed = true;
         async function fetchArticle() {
             try {
                 const fetchedArticle = await getArticleBySlugAction(articleSlug)
-                setArticle(fetchedArticle)
+                if (isSubscribed) {
+                    setArticle(fetchedArticle)
+                }
             } catch (err) {
-                setError('Failed to fetch article. Please try again.')
+                if (isSubscribed) {
+                    setError('Failed to fetch article. Please try again.')
+                }
             } finally {
-                setIsLoading(false)
+                if (isSubscribed) {
+                    setIsLoading(false)
+                }
             }
         }
 
         fetchArticle()
+        return () => {
+            isSubscribed = false
+        }
     }, [articleSlug])
 
     return (
