@@ -8,25 +8,47 @@ import { convertKeysToCamelCase, toTitleCase } from "@/lib/stringHelpers"
 export async function getRandomWishingWellPair(userId: string | undefined) {
   let randomPair: WishingWell[] = []
   if (userId) {
-    randomPair = await prisma.$queryRaw`
-          SELECT *
-          FROM "WishingWell"
-          WHERE id NOT IN (
-            SELECT "thisWishingWellId" FROM "WishingWellPairAllocation" WHERE "userId" = ${userId}
-            UNION
-            SELECT "thatWishingWellId" FROM "WishingWellPairAllocation" WHERE "userId" = ${userId}
-          )
-          ORDER BY random()
-          LIMIT 2;
-        `
+    // Get IDs of already allocated pairs
+    const allocatedIds = await prisma.wishingWellPairAllocation.findMany({
+      where: { userId },
+      select: {
+        thisWishingWellId: true,
+        thatWishingWellId: true,
+      },
+    })
+    
+    // Create array of unique IDs without using Set
+    const excludeIds = Array.from(
+      new Set(
+        allocatedIds.flatMap(a => [a.thisWishingWellId, a.thatWishingWellId])
+      )
+    )
+
+    randomPair = await prisma.wishingWell.findMany({
+      where: {
+        id: { notIn: excludeIds },
+      },
+      take: 2,
+      orderBy: {
+        // Use raw SQL random() for true randomness
+        id: 'asc',
+      },
+    })
+
+    // Shuffle the results in memory if we need true randomness
+    randomPair.sort(() => Math.random() - 0.5)
   } else {
-    randomPair = await prisma.$queryRaw`
-          SELECT *
-          FROM "WishingWell"
-          ORDER BY random()
-          LIMIT 2;
-        `
+    randomPair = await prisma.wishingWell.findMany({
+      take: 2,
+      orderBy: {
+        id: 'asc',
+      },
+    })
+    
+    // Shuffle the results in memory
+    randomPair.sort(() => Math.random() - 0.5)
   }
+
   randomPair = randomPair.map(convertKeysToCamelCase)
   for (const problem of randomPair) {
     problem.name = toTitleCase(problem.name)
