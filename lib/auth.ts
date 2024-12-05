@@ -5,6 +5,7 @@ import EmailProvider from "next-auth/providers/email"
 import GithubProvider from "next-auth/providers/github"
 import GoogleProvider from "next-auth/providers/google"
 import type { OAuthConfig } from "next-auth/providers/oauth"
+import { redirect } from "next/navigation"
 
 import { env } from "@/env.mjs"
 import { prisma as db } from "@/lib/db"
@@ -201,4 +202,16 @@ export const authOptions: NextAuthOptions = {
       return true
     },
   },
+}
+
+export async function requireAuth(redirectTo: string) {
+  const session = await getServerSession(authOptions)
+  
+  if (!session?.user) {
+    const signInPath = authOptions?.pages?.signIn || "/signin"
+    const redirectUrl = `${signInPath}?callbackUrl=${encodeURIComponent(redirectTo)}`
+    redirect(redirectUrl)
+  }
+  
+  return session
 }
