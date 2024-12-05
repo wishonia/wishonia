@@ -14,7 +14,7 @@ export function ArticleContent({ articleSlug }: ArticleContentProps) {
     const { data: session, status } = useSession() 
     const [article, setArticle] = useState<ArticleWithRelations | null>(null)
     const [error, setError] = useState('')
-    const [isLoading, setIsLoading] = useState(status === "loading")
+    const [isLoading, setIsLoading] = useState(true)
 
     useEffect(() => {
         async function fetchArticle() {
