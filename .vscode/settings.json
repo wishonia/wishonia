@@ -3,5 +3,6 @@
   "WillLuke.nextjs.hasPrompted": true,
   "files.associations": {
     "*.mdx": "markdown"
-  }
+  },
+  "npm-scripts.showStartNotification": false
 }
