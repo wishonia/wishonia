@@ -9,7 +9,6 @@ typescript = true
 
 # Define the project's architecture and conventions
 [architecture]
-# All page.tsx files are server components by default
 server_components = [
     "app/**/page.tsx",
     "app/**/layout.tsx",
@@ -24,21 +23,31 @@ utils = ["lib/**/*.ts"]
 config = ["config/**/*.ts"]
 types = ["types/**/*.ts"]
 
-# Authentication patterns
-[auth]
-server_components = """
-Import server-side auth:
-import { getServerSession } from "next-auth/next"
+# Component and Authentication Guidelines
+[components]
+server = """
+IMPORTANT: Server Components (pages)
+- Never add 'use client' to page.tsx files
+- No hooks or browser APIs
+- Fetch data server-side when possible
+- Import client components as needed
 
-Usage:
-const session = await getServerSession()
+Auth Usage:
+import { requireAuth } from "@/lib/auth"
+const session = await requireAuth(`/my-page`)
 """
 
-client_components = """
-Import client-side auth:
-import { useSession } from 'next-auth/react'
+client = """
+When to use client components:
+- Uses hooks (useState, useEffect, etc.)
+- Needs browser APIs
+- Has user interactions
+- Uses client-side libraries
 
-Usage:
+Location: app/my-feature/components/InteractiveComponent.tsx
+
+Auth Usage:
+import { useSession } from 'next-auth/react'
 const { data: session } = useSession()
 """
 
@@ -52,59 +61,45 @@ routing = """
 - layout.tsx for shared layouts
 """
 
-server_components = """
-IMPORTANT: Never add 'use client' to page.tsx files
-- Pages are server components by default
-- Create separate client components for interactive elements
-- Import client components into server components as needed
-"""
-
 data_fetching = """
 - Use server components for data fetching when possible
 - Leverage React Server Components for better performance
 - Use route handlers (route.ts) for API endpoints
 """
 
-# Database and type safety
-[database]
-prisma = """
-- Import types directly from Prisma client
-- Use Prisma-generated types for all database operations
+# Type Safety and Database
+[code_quality]
+types = """
+- Use TypeScript strict mode
+- Import Prisma types directly from @prisma/client
+- Create interfaces for component props
+- Avoid 'any' type
 - Always prefer schema.prisma types over creating new ones
+
 Example:
 import { Post, User } from '@prisma/client'
 """
 
-# Component structure rules
-[components]
-organization = """
-For interactive features:
-1. Create client component in separate file:
-   components/MyInteractiveComponent.tsx
-2. Import into server component page:
-   app/my-page/page.tsx
+best_practices = """
+✅ DO:
+- Keep pages as server components
+- Create separate client components for interactivity
+- Use self-documenting names
+- Choose simple implementations
+- Use proper auth imports based on component type
+
+❌ DON'T:
+- Mix client and server code in same component
+- Create new types when Prisma types exist
+- Use cryptic or abbreviated names
 """
 
-client_components = """
-Only add 'use client' when component:
-- Uses hooks (useState, useEffect, etc.)
-- Needs browser APIs
-- Has user interactions
-- Uses client-side libraries
-
-Example location:
-app/my-feature/components/InteractiveComponent.tsx
-"""
-
-server_components = """
-Keep pages as server components:
-- No 'use client' directive
-- No hooks or browser APIs
-- Import client components as needed
-- Fetch data server-side when possible
-
-Example:
-app/my-feature/page.tsx
+# Performance guidelines
+performance = """
+- Keep pages as server components when possible
+- Use client components only when necessary
+- Implement proper code splitting
+- Use React Suspense boundaries wisely
 """
 
 # File patterns to ignore
@@ -118,58 +113,14 @@ patterns = [
     ".git"
 ]
 
-# Custom rules for the project
-[rules]
-component_patterns = """
-✅ DO:
-- Keep pages as server components
-- Create separate client components for interactivity
-- Use Prisma types for database operations
-- Use proper auth imports based on component type
-- Use self-documenting names for variables, fields, and models
-- Always choose the simplest implementation to minimize complexity
-
-❌ DON'T:
-- Add 'use client' to page.tsx
-- Mix client and server code in same component
-- Use wrong auth import for component type
-- Create new types when Prisma schema types are available
-- Use cryptic or abbreviated names
-"""
-
-auth_patterns = """
-Server Components:
-import { getServerSession } from "next-auth/next"
-const session = await getServerSession()
-
-Client Components:
-import { useSession } from 'next-auth/react'
-const { data: session } = useSession()
-"""
-
-# Type safety rules
-types = """
-- Use TypeScript strict mode
-- Import Prisma types directly from @prisma/client
-- Create interfaces for component props
-- Avoid 'any' type
-"""
-
-# Performance guidelines
-performance = """
-- Keep pages as server components when possible
-- Use client components only when necessary
-- Implement proper code splitting
-- Use React Suspense boundaries wisely
-"""
-
 # Testing guidelines
 [testing]
 jest = """
 - Always set @jest-environment node at the top of test files
-- Write tests that can safely run against production (so don't delete data or do cleanup)
+- Write tests that can safely run against production
 - Use real implementations instead of mocks where possible
-Example test header:
+
+Example header:
 /**
  * @jest-environment node
  */
