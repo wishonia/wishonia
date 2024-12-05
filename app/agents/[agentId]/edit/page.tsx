@@ -1,10 +1,9 @@
 import React from "react"
 import { Metadata } from "next"
-import { notFound, redirect } from "next/navigation"
+import { notFound } from "next/navigation"
 
 import { getAgent } from "@/lib/api/agents"
-import { authOptions } from "@/lib/auth"
-import { getCurrentUser } from "@/lib/session"
+import {  requireAuth } from "@/lib/auth"
 import AgentForm from "@/components/agents/agent-form"
 import { Shell } from "@/components/layout/shell"
 
@@ -17,11 +16,7 @@ interface AgentEditProps {
 }
 
 export default async function EditAgentPage({ params }: AgentEditProps) {
-  const user = await getCurrentUser()
-
-  if (!user) {
-    redirect(authOptions?.pages?.signIn || "/signin")
-  }
+  await requireAuth(`/agents/${params.agentId}/edit`)
 
   const agent = await getAgent(params.agentId)
 
