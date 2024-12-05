@@ -11,7 +11,9 @@ export async function GET() {
     let randomPair: WishingWell[] = []
     if (userId) {
       randomPair = await prisma.$queryRaw`
-          SELECT *
+          SELECT 
+            id, name, description, content, images, "featuredImage",
+            "createdAt", "updatedAt", "userId", "averageAllocation"
           FROM "WishingWell"
           WHERE id NOT IN (
             SELECT "thisWishingWellId" FROM "WishingWellPairAllocation" WHERE "userId" = ${userId}
@@ -23,7 +25,9 @@ export async function GET() {
         `
     } else {
       randomPair = await prisma.$queryRaw`
-          SELECT *
+          SELECT 
+            id, name, description, content, images, "featuredImage",
+            "createdAt", "updatedAt", "userId", "averageAllocation"
           FROM "WishingWell"
           ORDER BY random()
           LIMIT 2;
