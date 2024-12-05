@@ -3,6 +3,7 @@ import { Metadata } from "next"
 import { getCurrentUser } from "@/lib/session"
 import { Shell } from "@/components/layout/shell"
 import { PollRandomGlobalSolutions } from "@/components/poll-random-global-solutions"
+import { GlobalSolutionsList } from "@/components/global-solutions-list"
 
 export const metadata: Metadata = {
   title: "Global Problems",
@@ -24,6 +25,7 @@ export default async function GlobalSolutionsPage({
   return (
     <Shell>
       <PollRandomGlobalSolutions user={user}></PollRandomGlobalSolutions>
+      <GlobalSolutionsList user={user}></GlobalSolutionsList>
     </Shell>
   )
 }
