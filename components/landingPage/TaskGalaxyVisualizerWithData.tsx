@@ -66,7 +66,7 @@ const TaskNode: React.FC<TaskNodeProps> = ({ task, level, onStatusChange, onAddS
             <div className="flex items-center">
                 <div style={{ width: `${level * 20}px` }} />
                 {task.subtasks && task.subtasks.length > 0 && (
-                    <button onClick={() => setIsExpanded(!isExpanded)} className="mr-2 focus:outline-none">
+                    <button onClick={() => setIsExpanded(!isExpanded)} className="mr-2 focus:outline-none" aria-label={`Toggle ${task.name} details`}>
                         {isExpanded ? <ChevronDown size={16} /> : <ChevronRight size={16} />}
                     </button>
                 )}
@@ -76,21 +76,47 @@ const TaskNode: React.FC<TaskNodeProps> = ({ task, level, onStatusChange, onAddS
                     value={task.status}
                     onChange={handleStatusChange}
                     className="ml-2 p-1 text-sm border rounded bg-transparent dark:bg-gray-700 border-gray-300 dark:border-gray-600"
+                    aria-label={`Change status for task ${task.name}`}
+                    title={`Change status for task ${task.name}`}
                 >
                     <option value="not-started">Not Started</option>
                     <option value="in-progress">In Progress</option>
                     <option value="completed">Completed</option>
                     <option value="blocked">Blocked</option>
                 </select>
-                <button onClick={handleEdit} className="ml-2 p-1 text-sm border rounded">Edit</button>
-                <button onClick={() => onAddSubtask(task.id)} className="ml-2 p-1 text-sm border rounded"><Plus size={16} /></button>
+                <button onClick={handleEdit} className="ml-2 p-1 text-sm border rounded" aria-label="Edit task">Edit</button>
+                <button onClick={() => onAddSubtask(task.id)} className="ml-2 p-1 text-sm border rounded" aria-label="Add subtask"><Plus size={16} /></button>
             </div>
             {isEditing ? (
                 <form onSubmit={handleSave} className="mt-2">
-                    <input name="task" defaultValue={task.name} className="w-full p-1 mb-2 border rounded" />
-                    <textarea name="description" defaultValue={task.description} className="w-full p-1 mb-2 border rounded" placeholder="Description" />
-                    <input name="skills" defaultValue={task.skills?.join(', ')} className="w-full p-1 mb-2 border rounded" placeholder="Required skills (comma-separated)" />
-                    <input name="dependencies" defaultValue={task.dependencies?.join(', ')} className="w-full p-1 mb-2 border rounded" placeholder="Dependencies (comma-separated)" />
+                    <input 
+                        name="task" 
+                        defaultValue={task.name} 
+                        className="w-full p-1 mb-2 border rounded"
+                        aria-label="Task name"
+                        placeholder="Task name"
+                    />
+                    <textarea 
+                        name="description" 
+                        defaultValue={task.description} 
+                        className="w-full p-1 mb-2 border rounded" 
+                        placeholder="Description" 
+                        aria-label="Task description"
+                    />
+                    <input 
+                        name="skills" 
+                        defaultValue={task.skills?.join(', ')} 
+                        className="w-full p-1 mb-2 border rounded" 
+                        placeholder="Required skills (comma-separated)"
+                        aria-label="Required skills"
+                    />
+                    <input 
+                        name="dependencies" 
+                        defaultValue={task.dependencies?.join(', ')} 
+                        className="w-full p-1 mb-2 border rounded" 
+                        placeholder="Dependencies (comma-separated)"
+                        aria-label="Task dependencies"
+                    />
                     <textarea name="decompositionNotes" defaultValue={task.decompositionNotes} className="w-full p-1 mb-2 border rounded" placeholder="Decomposition notes" />
                     <button type="submit" className="p-1 text-sm border rounded">Save</button>
                 </form>
