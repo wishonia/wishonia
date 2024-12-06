@@ -14,11 +14,11 @@ const sidebarNavItems = [
   },
   {
     title: "Notifications",
-    href: "/settings/notifications",
+    href: "/dashboard/settings/notifications",
   },
   {
     title: "Profile",
-    href: "/profile",
+    href: "/dashboard/settings/profile",
   },
 ]
 

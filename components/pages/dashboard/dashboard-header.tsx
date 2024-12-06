@@ -1,6 +1,6 @@
 interface DashboardHeaderProps {
   heading: string
-  text?: string | null
+  text: string
   children?: React.ReactNode
   className?: string
   textClassName?: string
