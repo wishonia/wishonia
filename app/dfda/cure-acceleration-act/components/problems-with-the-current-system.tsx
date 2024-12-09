@@ -15,8 +15,6 @@ interface ProblemCardProps {
 }
 
 const ProblemCard = ({ name, description, icon, onClick }: ProblemCardProps) => {
-  // render description as markdown
-  const descriptionHtml = 
 
   return (
     <div
