@@ -1,44 +1,44 @@
-namespace GenerateTree {
-  const fs = require('fs');
-  const path = require('path');
+interface TreeNode {
+  name: string;
+  children?: TreeNode[];
+}
 
-  function generateTree(dir: string, prefix: string = ''): string {
-    let tree = '';
-    const items = fs.readdirSync(dir);
+export function generateTree(paths: string[]): TreeNode[] {
+  const root: TreeNode[] = [];
 
-    items.forEach((item: string, index: number) => {
-      const fullPath = path.join(dir, item);
-      const isLast = index === items.length - 1;
-      const isDirectory = fs.statSync(fullPath).isDirectory();
-      
-      // Skip node_modules, .next, and other common excludes
-      if (item === 'node_modules' || item === '.next' || item.startsWith('.')) {
-        return;
+  for (const path of paths) {
+    const parts = path.split('/');
+    let current = root;
+
+    for (const part of parts) {
+      let node = current.find(n => n.name === part);
+      if (!node) {
+        node = { name: part };
+        current.push(node);
       }
-
-      // Add the current item to the tree
-      tree += `${prefix}${isLast ? '└── ' : '├── '}${item}\n`;
-
-      // If it's a directory, recursively process its contents
-      if (isDirectory) {
-        const newPrefix = prefix + (isLast ? '    ' : '│   ');
-        tree += generateTree(fullPath, newPrefix);
+      if (!node.children) {
+        node.children = [];
       }
-    });
-
-    return tree;
+      current = node.children;
+    }
   }
 
-  // Generate the tree starting from the app directory
-  const appDir = path.join(process.cwd(), 'app');
-  const tree = `# App Directory Structure\n\n\`\`\`\n${generateTree(appDir)}\`\`\`\n`;
+  return root;
+}
 
-  // Save to docs/app-tree.md
-  const docsDir = path.join(process.cwd(), 'docs');
-  if (!fs.existsSync(docsDir)) {
-    fs.mkdirSync(docsDir);
+export function printTree(node: TreeNode, prefix = ''): void {
+  console.log(prefix + '├── ' + node.name);
+  if (node.children) {
+    for (let i = 0; i < node.children.length; i++) {
+      const isLast = i === node.children.length - 1;
+      printTree(node.children[i], prefix + (isLast ? '    ' : '│   '));
+    }
   }
+}
 
-  fs.writeFileSync(path.join(docsDir, 'app-tree.md'), tree);
-  console.log('Directory tree has been generated in docs/app-tree.md');
+export function generateTreeFromPaths(paths: string[]): void {
+  const tree = generateTree(paths);
+  for (const node of tree) {
+    printTree(node);
+  }
 } 
