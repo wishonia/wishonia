@@ -1,7 +1,6 @@
 ---
 description: >-
-  A global database of treatments and outcomes could provide information that
-  could avoid massive waste on failed trials.
+  We waste billions of dollars repeating failed drug trials because companies only publish the positive results.
 ---
 
 # 🙈 Negative Results are Never Published

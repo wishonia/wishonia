@@ -1,5 +1,5 @@
 ---
-description: We've only studied 0.000000002% of potential treatments.
+description: There are thousands of diseases and trillions of compounds with drug-like properties, but we've only studied 0.000000002% of potential treatments so far.
 ---
 
 # ❓ We Know Next to Nothing

@@ -1,5 +1,5 @@
 ---
-description: It costs $2.6 billion to bring a drug to market (including failed attempts).
+description: It costs $2.6 billion to bring a drug to market (including failed attempts) and trials currently cost over $36k per participant.
 ---
 
 # 💰 Clinical Research is Expensive
@@ -10,9 +10,13 @@ description: It costs $2.6 billion to bring a drug to market (including failed a
 * The process takes over 10 years.
 * It costs [$36k](https://www.clinicalleader.com/doc/getting-a-handle-on-clinical-trial-costs-0001) per subject in Phase III clinical trials.
 
-&#x20;
 
 ![clinicalresearch.io](https://static.crowdsourcingcures.org/dfda/assets/cost-of-clinical-trials.png)
 
 
+## 💡 Solution: Decentralized Automated Clinical Trials
+
+With a decentralized autonomous FDA, we can automate clinical trials, reducing the cost and time it takes to bring new drugs to market.
+
+This could reduce the cost of clinical trials by [90% from $56 million to under $2.4 million](../cost-savings-from-decentralized-clinical-trials.md) per treatment.
 
