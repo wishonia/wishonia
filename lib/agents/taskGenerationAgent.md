@@ -21,7 +21,7 @@ For task decomposition and generating structured hierarchical data, it's general
     - Better for open-ended, creative tasks
     - May lead to more diverse but potentially less relevant outputs
 
-For task decomposition purpose, I'd recommend using a temperature in the range of 0.1 to 0.3. This lower setting will help ensure that:
+For task decomposition purposes, I'd recommend using a temperature in the range of 0.1 to 0.3. This lower setting will help ensure that:
 
 1. The task hierarchy remains logical and well-structured
 2. Tasks are relevant and focused on the goal
