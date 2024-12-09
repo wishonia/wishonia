@@ -1,7 +1,6 @@
 ---
 description: >-
-  Phase III clinical trials are often designed to exclude a vast majority of the
-  population of interest.
+  Clinical trials often exclude as much as 85% of patients so they don't tell us if the drug will work for the majority of patients.
 ---
 
 # 🥸 Trials Often Aren't Representative of Real Patients
