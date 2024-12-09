@@ -2,13 +2,13 @@
 
 import { revalidatePath } from "next/cache"
 import { QueryCache } from "@tanstack/react-query"
-import { type Message as AIMessage } from "ai"
+import { Message } from "ai"
 import { prisma } from "@/lib/db"
 import { getCurrentUser } from "@/lib/session"
-import { type Chat } from "@/lib/types"
+import type { Chat, ChatMessage, Agent } from "@prisma/client"
 
-type GetChatResult = Chat[] | null
-type SetChatResults = Chat[]
+type GetChatResult = (Chat & { messages: ChatMessage[]; agent: Agent | null })[] | null
+type SetChatResults = (Chat & { messages: ChatMessage[]; agent: Agent | null })[]
 
 export async function getChat(
   id: string,
@@ -31,7 +31,7 @@ export async function getChat(
 
   // Cast each message to AIMessage type
   const castedMessages = receivedChat.messages.map(
-    (message: AIMessage) => message
+    (message: ChatMessage) => message
   )
 
   // Return the chat with the casted messages
@@ -60,9 +60,9 @@ export async function getChats(userId?: string | null): Promise<GetChatResult> {
     })
 
     // Cast messages in each chat to AIMessage type
-    const castedChats = receivedChats.map((chat: Chat) => ({
+    const castedChats = receivedChats.map((chat: Chat & { messages: ChatMessage[]; agent: Agent | null }) => ({
       ...chat,
-      messages: chat.messages.map((message) => message as AIMessage),
+      messages: chat.messages.map((message: ChatMessage) => message),
     }))
 
     return castedChats
