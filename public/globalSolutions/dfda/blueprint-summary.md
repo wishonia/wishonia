@@ -1,4 +1,4 @@
-# CureDAO: Journey to a World Without Disease
+# How to Create a World Without Disease
 
 ## The Preventable Hell We Live In
 Right now:
@@ -30,7 +30,7 @@ We have the capability RIGHT NOW to:
 ## Act Now: Join the Movement to End Preventable Suffering
 
 ### Immediate Actions
-1. Join CureDAO
+1. Contribute
    - Contribute $1 or more to join millions fighting for change
    - Every dollar helps counter the $700M/year spent maintaining the current system
    - Get your unique referral link to grow the movement
@@ -57,7 +57,7 @@ Every day we wait:
 - More families go bankrupt from treatable conditions
 - More cures stay locked behind regulatory barriers
 
-Don't wait. Join at [CureDAO website link] with your $1 contribution and get your referral link to start making change happen today.
+Don't wait. With your $1 contribution and get your referral link to start making change happen today.
 
 Remember: The cures exist. The technology exists. All we need is enough people standing together to demand access to them.
 
@@ -66,4 +66,22 @@ This isn't just possible - we have the technology and knowledge to build it toda
 ## The Solution
 Three essential components to transform healthcare:
 
-[Continue with existing Blueprint, Roadmap, Gas Money sections...]
+### 1. Global Decentralized Autonomous Algorithmic FDA
+- Automated clinical trials
+- Real-time treatment effect tracking
+- Ranked lists of effective treatments
+- Global data sharing network
+- Algorithmic cost benefit analysis to determine the number of Quality Adjusted Life Years (QALYs) a treatment is worth
+
+### 2. Right to Trial Act
+- Universal clinical trial access
+- Elimination of barriers to trial participation
+- Patient empowerment and choice
+
+### 3. Incentiving Cures Instead of Chronic Disease
+- 50/50 Health Savings Sharing Program
+- Rewards for prevention and cures
+- Affordable access to breakthrough treatments
+- Long-term savings tracking
+
+[Learn more about the Blueprint for a World Without Disease](blueprint.md)

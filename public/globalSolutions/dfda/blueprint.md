@@ -96,7 +96,7 @@ Resources and funding strategy to fuel the transformation:
 
 This three-part structure provides a clear vision (Blueprint), practical implementation plan (Roadmap), and sustainable funding mechanism (Gas Money) to achieve a world without disease.
 
-# CureDAO: Incentivized Actions for Collective Intelligence
+# Incentivized Actions for Collective Intelligence
 
 ## Growth & Network Building
 | Action | Impact | Estimated Reward |
