@@ -1,6 +1,6 @@
 ---
 description: >-
-  Pharmaceutical company-funded studies are [4 times more likely to produce favorable results](https://www.bmj.com/content/326/7400/1167) compared to independently funded studies
+  Pharmaceutical company-funded studies are 4 times more likely to produce favorable results compared to independently funded studies
 ---
 
 # 🎭 Conflicts of Interest
