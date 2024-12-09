@@ -1,5 +1,5 @@
 ---
-description: It costs $2.6 billion to bring a drug to market (including failed attempts).
+description: It costs $2.6 billion to bring a drug to market (including failed attempts) and trials currently cost over $36k per participant.
 ---
 
 # 💰 Clinical Research is Expensive
