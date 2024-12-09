@@ -41,7 +41,7 @@ This Act will:
 * 🎁 **Create multi-billion dollar rewards** for companies developing actual cures
 * 🌐 **Enable real price competition** through global access and transparent outcomes
 
-## 🌐 SECTION 2. OPEN SOURCE GLOBAL DECENTRALIZED TRIAL PLATFORM
+## 🌐 SECTION 2. GLOBAL DECENTRALIZED AUTONOMOUS ALGORITHMIC FOOD AND DRUG ADMINISTRATION
 
 ### 2.1 🛡️ Transforming Safety and Efficacy Testing
 
@@ -86,13 +86,13 @@ The FDAi continuously:
 
 Any patient can:
 
-* 📱 **Access the FDA platform** showing ranked treatments for their condition
+* 📱 **Access the dFDA platform** showing ranked treatments for their condition
 * 🔍 **See real-world success rates** from other patients with similar conditions
 * ✅ **Try treatments sequentially** from most to least promising
 * 🏡 **Participate from home** through telemedicine and remote monitoring
 * 📊 **Automatically contribute their results** to help rank treatments better
 
-### 3.2 🚫 Removing Red Tape
+### 3.2 🚫 Effortless Patient Participation
 
 The system:
 
@@ -109,7 +109,7 @@ Every patient outcome:
 * 📱 **Updates treatment rankings** automatically
 * 🎯 **Refines matching** of treatments to patient profiles
 * 💡 **Identifies promising combinations** that work better
-* ⚡ **Speeds up discovery** of what works for whom
+* ⚡ **Speeds up discovery** of what works for who
 
 ## 💻 SECTION 4. FREE OPEN SOURCE TRIAL PLATFORM
 
