@@ -3,8 +3,6 @@
 import { revalidatePath } from "next/cache"
 import { QueryCache } from "@tanstack/react-query"
 import { type Message as AIMessage } from "ai"
-import OpenAI from "openai"
-
 import { prisma } from "@/lib/db"
 import { getCurrentUser } from "@/lib/session"
 import { type Chat } from "@/lib/types"
@@ -33,7 +31,7 @@ export async function getChat(
 
   // Cast each message to AIMessage type
   const castedMessages = receivedChat.messages.map(
-    (message) => message as AIMessage
+    (message: AIMessage) => message
   )
 
   // Return the chat with the casted messages
@@ -62,7 +60,7 @@ export async function getChats(userId?: string | null): Promise<GetChatResult> {
     })
 
     // Cast messages in each chat to AIMessage type
-    const castedChats = receivedChats.map((chat) => ({
+    const castedChats = receivedChats.map((chat: Chat) => ({
       ...chat,
       messages: chat.messages.map((message) => message as AIMessage),
     }))
@@ -154,7 +152,7 @@ export const clearAllChats = async (userId: string) => {
       await prisma.chatMessage.deleteMany({
         where: {
           chatId: {
-            in: deletedChats.map((chat) => chat.id),
+            in: deletedChats.map((chat: Chat) => chat.id),
           },
         },
       })
@@ -164,6 +162,6 @@ export const clearAllChats = async (userId: string) => {
         },
       })
     }
-    return revalidatePath(deletedChats.map((chat) => chat.path).join(", "))
+    return revalidatePath(deletedChats.map((chat: Chat) => chat.path).join(", "))
   }
 }
