@@ -12,6 +12,12 @@ const redirects = [
     permanent: true,
     description: "Redirect to new name of the Right to Trial Act",
   },
+  {
+    source: "/dfda/right-to-trial-act",
+    destination: "/dfda/cure-acceleration-act",
+    permanent: true,
+    description: "Redirect to new name of the Right to Trial Act",
+  },
   // Add more redirects here
   // Make sure to add the source path to the matcher array below 👇
 ] as const
@@ -91,5 +97,6 @@ export const config = {
     "/signin",
     "/signup",
     "/dfda/right-to-trial",
+    "/dfda/right-to-trial-act",
   ],
 }
