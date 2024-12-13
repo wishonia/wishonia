@@ -36,7 +36,7 @@ This Act:
 This Act will:
 
 * 💰 **Cut clinical trial costs** by over 90% with free open infrastructure
-* 💵 **Save over $2 trillion annually** by incentivizing disease prevention
+* 💵 **Save over [$2 trillion annually](https://milkeninstitute.org/report/costs-chronic-disease-us)** by incentivizing disease prevention
 * ⏩ **Reduce time-to-market** by years through universal trial participation
 * 🎁 **Create multi-billion dollar rewards** for companies developing actual cures
 * 🌐 **Enable real price competition** through global access and transparent outcomes
