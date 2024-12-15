@@ -4,6 +4,7 @@ import { createStreamableValue, getMutableAIState, render } from "ai/rsc"
 import { nanoid } from "nanoid"
 import OpenAI from "openai"
 import { z } from "zod"
+import { prisma } from "@/lib/prisma"
 
 import { askSupabase } from "@/lib/docs/docsAgent"
 import { getCurrentUser } from "@/lib/session"
@@ -28,7 +29,6 @@ import RateLimited from "@/components/RateLimited"
 
 import { cn, sleep } from "../utils"
 import { AI } from "./actions"
-import { githubSystemPrompt } from "./github-system-prompt"
 import {
   checkRateLimit,
   convertUserType,
@@ -53,6 +53,22 @@ export async function submitUserMessage(
   console.log(`submitUserMessage: ${content}`)
   const aiState = getMutableAIState<typeof AI>()
 
+  // Get the agent's full configuration including tools
+  const agentWithTools = await prisma.agent.findUnique({
+    where: { id: agent.id },
+    include: {
+      tools: {
+        include: {
+          tool: true
+        }
+      }
+    }
+  })
+
+  if (!agentWithTools) {
+    throw new Error('Agent not found')
+  }
+
   const newState = aiState.get()
   newState.messages.push({
     id: nanoid(),
@@ -63,10 +79,9 @@ export async function submitUserMessage(
 
   let textStream: undefined | ReturnType<typeof createStreamableValue<string>>
   let textNode: undefined | React.ReactNode
-  let agentPrompt = githubSystemPrompt
-  if (agent && agent.prompt) {
-    agentPrompt = agent.prompt
-  }
+  
+  // Use the agent's prompt from the database
+  const agentPrompt = agentWithTools.prompt || 'You are a helpful AI assistant.'
 
   const handleGitHubError = (error: any): JSX.Element => {
     if (error.name === 'GitHubAuthError') {
