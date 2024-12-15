@@ -1,14 +1,22 @@
 "use client"
 
 import * as React from "react"
-import { ArrowElbowDownLeft, Plus } from "@phosphor-icons/react"
-import { Agent, Tool, ToolType } from "@prisma/client"
+import {
+  ArrowElbowDownLeft,
+  BookBookmark,
+  Code,
+  MagicWand,
+  Plus,
+  Sparkle,
+  User,
+} from "@phosphor-icons/react"
+import { Agent } from "@prisma/client"
 import { useActions, useAIState, useUIState } from "ai/rsc"
 import { nanoid } from "nanoid"
 
 import { AI, UIState } from "@/lib/chat/actions"
 import { useEnterSubmit } from "@/lib/hooks/use-enter-submit"
-import { DEFAULT_TOOLS, toolFunctions } from "@/lib/tools/functions"
+import { AttributeTypes } from "@/lib/types"
 import {
   DropdownMenu,
   DropdownMenuContent,
@@ -23,11 +31,43 @@ import { UserMessage } from "./assistant/Message"
 import { Button } from "./ui/button"
 import { Textarea } from "./ui/textarea"
 
-type ToolWithConfig = Tool & {
-  toolConfig: {
-    functions: string[] 
-  }
-}
+const ChatFilters = [
+  {
+    name: "General",
+    value: "general",
+    role: "assistant",
+    icon: <Sparkle />,
+    status: "active",
+  },
+  {
+    name: "User Search",
+    value: "user-search",
+    role: "function",
+    icon: <User />,
+    status: "active",
+  },
+  {
+    name: "Repository Search",
+    value: "repository_search",
+    role: "function",
+    icon: <BookBookmark />,
+    status: "active",
+  },
+  {
+    name: "Ask About Wishonia",
+    value: "ask_about_wishonia",
+    role: "function",
+    icon: <MagicWand />,
+    status: "active",
+  },
+  // {
+  //   name: "Code Search",
+  //   value: "code_search",
+  //   role: "function",
+  //   icon: <Code />,
+  //   status: "disabled",
+  // },
+]
 
 export function PromptForm({
   input,
@@ -37,51 +77,52 @@ export function PromptForm({
 }: {
   input: string
   setInput: (value: string) => void
-  agent?: Agent & { tools?: ToolWithConfig[] } | null
+  agent?: Agent | null
   pathname: string
 }) {
   const [_, setMessages] = useUIState<typeof AI>()
   const [aiState, setAIState] = useAIState<typeof AI>()
   const { submitUserMessage } = useActions()
-  const [selectedTool, setSelectedTool] = React.useState<string>("")
-  const [newTool, setNewTool] = React.useState(null)
+  const [attribute, setAttribute] = React.useState("general")
+  const [newAttribute, setNewAttribute] = React.useState(null)
 
-  const id = nanoid()
+  // Unique identifier for this UI component.
+  //const id = React.useId()
+  const id = nanoid() // Use a more random id for DB
   const { formRef, onKeyDown } = useEnterSubmit()
   const inputRef = React.useRef<HTMLTextAreaElement>(null)
 
-  // Get available tools - either from agent or defaults
-  const availableTools = React.useMemo(() => {
-    return agent?.tools?.length ? agent.tools : DEFAULT_TOOLS
-  }, [agent?.tools])
+  // Set the initial attribute to general
+  const message = {
+    role: "system" as const,
+    content: `[User has changed the attribute to general]`,
 
-  // Set the initial tool to the first available tool
+    // Identifier of this UI component, so we don't insert it many times.
+    id,
+  }
+
   React.useEffect(() => {
-    if (availableTools.length && !selectedTool) {
-      setSelectedTool(availableTools[0].id)
-      const message = {
-        role: "system" as const,
-        content: `[User has selected tool ${availableTools[0].name}]`,
-        id,
-      }
+    if (!aiState.messages.length) {
       setAIState({ ...aiState, messages: [...aiState.messages, message] })
     }
-  }, [availableTools, selectedTool, aiState, setAIState])
+  }, [aiState, message, setAIState])
 
-  // Update AI state when tool changes
-  function onToolChange(toolId: string) {
-    const tool = agent?.tools?.find(t => t.id === toolId)
-    if (!tool || !toolFunctions[tool.type]) {
-      console.warn(`Tool ${tool?.type} not implemented`)
-      return
-    }
+  // Whenever the attribute changes, we need to update the local value state and the history
+  // so LLM also knows what's going on.
+  function onAttributeChange(e: any) {
+    const newValue = e
 
+    if (newAttribute === null) return // if newAttribute is null, don't run the effect
+
+    // Insert a hidden history info to the list.
     const message = {
       role: "system" as const,
-      content: `[User has selected tool ${tool.name}]`,
+      content: `[User has changed the attribute to ${newValue}]`,
       id,
     }
 
+    // If last history state is already this info, update it. This is to avoid
+    // adding every attribute change to the history.
     if (aiState.messages[aiState.messages.length - 1]?.id === id) {
       setAIState({
         ...aiState,
@@ -90,6 +131,7 @@ export function PromptForm({
       return
     }
 
+    // If it doesn't exist, append it to history.
     setAIState({ ...aiState, messages: [...aiState.messages, message] })
   }
 
@@ -157,26 +199,33 @@ export function PromptForm({
               variant="outline"
               className="flex items-center gap-1 font-normal"
             >
-              {availableTools.find(t => t.id === selectedTool)?.name || "Select Tool"}
+              {ChatFilters.find((f) => f.value === attribute)?.icon}
+              {ChatFilters.find((f) => f.value === attribute)?.name}
             </Button>
           </DropdownMenuTrigger>
           <DropdownMenuContent className="w-56">
-            <DropdownMenuLabel>Choose Tool</DropdownMenuLabel>
+            <DropdownMenuLabel>Choose Attribute</DropdownMenuLabel>
             <DropdownMenuSeparator />
             <DropdownMenuRadioGroup
-              value={selectedTool}
-              onValueChange={setSelectedTool}
+              value={attribute}
+              onValueChange={setAttribute}
             >
-              {availableTools.map((tool) => (
-                <DropdownMenuRadioItem
-                  key={tool.id}
-                  value={tool.id}
-                  className="flex items-center gap-1"
-                  onSelect={() => onToolChange(tool.id)}
-                >
-                  <span>{tool.name}</span>
-                </DropdownMenuRadioItem>
-              ))}
+              {ChatFilters.map((attribute: AttributeTypes) => {
+                return (
+                  <DropdownMenuRadioItem
+                    key={attribute.value}
+                    disabled={attribute.status === "disabled"}
+                    value={attribute.value}
+                    className="flex items-center gap-1"
+                    onSelect={() => onAttributeChange(attribute.value)}
+                  >
+                    <span className="absolute left-2 flex size-3.5 items-center justify-center">
+                      <span>{attribute.icon && attribute.icon}</span>
+                    </span>
+                    <span>{attribute.name}</span>
+                  </DropdownMenuRadioItem>
+                )
+              })}
             </DropdownMenuRadioGroup>
           </DropdownMenuContent>
         </DropdownMenu>
