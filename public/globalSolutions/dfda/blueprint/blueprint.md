@@ -99,77 +99,77 @@ This three-part structure provides a clear vision (Blueprint), practical impleme
 # Incentivized Actions for Collective Intelligence
 
 ## Growth & Network Building
-| Action | Impact | Estimated Reward |
-|--------|---------|-----------------|
-| Refer new member who contributes $1+ | Grows movement | $0.50/referral |
-| Get medical professional to join | Adds credibility | $50 |
-| Get researcher to join | Expands knowledge base | $100 |
-| Get institution to partner | Increases reach | $1,000 |
-| Get politician/policymaker to support | Advances policy goals | $5,000 |
+| Action                                | Impact                 | Estimated Reward |
+|---------------------------------------|------------------------|------------------|
+| Refer new member who contributes $1+  | Grows movement         | $0.50/referral   |
+| Get medical professional to join      | Adds credibility       | $50              |
+| Get researcher to join                | Expands knowledge base | $100             |
+| Get institution to partner            | Increases reach        | $1,000           |
+| Get politician/policymaker to support | Advances policy goals  | $5,000           |
 
 ## Knowledge Building & Research
-| Action | Impact | Estimated Reward |
-|--------|---------|-----------------|
-| Document a regulatory barrier | Identifies obstacles | $10 |
-| Submit research paper analysis | Expands evidence base | $50 |
-| Identify promising treatment blocked by regulations | Highlights opportunities | $100 |
-| Create case study of preventable suffering | Builds evidence base | $25 |
-| Submit cost analysis of blocked treatment | Economic evidence | $200 |
-| Document successful treatment from another country | Shows alternatives | $150 |
+| Action                                              | Impact                   | Estimated Reward |
+|-----------------------------------------------------|--------------------------|------------------|
+| Document a regulatory barrier                       | Identifies obstacles     | $10              |
+| Submit research paper analysis                      | Expands evidence base    | $50              |
+| Identify promising treatment blocked by regulations | Highlights opportunities | $100             |
+| Create case study of preventable suffering          | Builds evidence base     | $25              |
+| Submit cost analysis of blocked treatment           | Economic evidence        | $200             |
+| Document successful treatment from another country  | Shows alternatives       | $150             |
 
 ## Technical Development
-| Action | Impact | Estimated Reward |
-|--------|---------|-----------------|
-| Fix bug in platform | Improves system | $50-500 |
-| Add new feature | Enhances capabilities | $100-1000 |
-| Create integration with existing health system | Expands reach | $500-5000 |
-| Improve data analysis algorithms | Better insights | $200-2000 |
-| Deploy smart contract improvement | Better automation | $300-3000 |
+| Action                                         | Impact                | Estimated Reward |
+|------------------------------------------------|-----------------------|------------------|
+| Fix bug in platform                            | Improves system       | $50-500          |
+| Add new feature                                | Enhances capabilities | $100-1000        |
+| Create integration with existing health system | Expands reach         | $500-5000        |
+| Improve data analysis algorithms               | Better insights       | $200-2000        |
+| Deploy smart contract improvement              | Better automation     | $300-3000        |
 
 ## Content Creation & Education
-| Action | Impact | Estimated Reward |
-|--------|---------|-----------------|
-| Create educational content | Spreads awareness | $25-250 |
-| Translate content to new language | Expands reach | $50/1000 words |
-| Create visualization of problems/solutions | Improves understanding | $100 |
-| Document success story | Builds momentum | $50 |
-| Create policy brief | Influences decision makers | $500 |
+| Action                                     | Impact                     | Estimated Reward |
+|--------------------------------------------|----------------------------|------------------|
+| Create educational content                 | Spreads awareness          | $25-250          |
+| Translate content to new language          | Expands reach              | $50/1000 words   |
+| Create visualization of problems/solutions | Improves understanding     | $100             |
+| Document success story                     | Builds momentum            | $50              |
+| Create policy brief                        | Influences decision makers | $500             |
 
 ## Community Building & Governance
-| Action | Impact | Estimated Reward |
-|--------|---------|-----------------|
-| Moderate community discussion | Maintains quality | $20/hour |
-| Organize local meetup | Builds grassroots | $100/event |
-| Lead working group | Drives progress | $200/month |
-| Draft governance proposal | Improves system | $300 |
-| Get proposal approved | Advances mission | $1000 |
+| Action                        | Impact            | Estimated Reward |
+|-------------------------------|-------------------|------------------|
+| Moderate community discussion | Maintains quality | $20/hour         |
+| Organize local meetup         | Builds grassroots | $100/event       |
+| Lead working group            | Drives progress   | $200/month       |
+| Draft governance proposal     | Improves system   | $300             |
+| Get proposal approved         | Advances mission  | $1000            |
 
 ## Data Collection & Analysis
-| Action | Impact | Estimated Reward |
-|--------|---------|-----------------|
-| Submit personal health data | Expands database | $10/month |
-| Validate treatment outcome data | Improves accuracy | $1/validation |
-| Identify treatment correlation | New insights | $100 |
-| Create predictive model | Better decisions | $500 |
-| Complete comparative analysis | Better understanding | $300 |
+| Action                          | Impact               | Estimated Reward |
+|---------------------------------|----------------------|------------------|
+| Submit personal health data     | Expands database     | $10/month        |
+| Validate treatment outcome data | Improves accuracy    | $1/validation    |
+| Identify treatment correlation  | New insights         | $100             |
+| Create predictive model         | Better decisions     | $500             |
+| Complete comparative analysis   | Better understanding | $300             |
 
 ## Policy & Advocacy
-| Action | Impact | Estimated Reward |
-|--------|---------|-----------------|
-| Contact representative | Builds pressure | $10/contact |
-| Get media coverage | Spreads message | $100-1000 |
-| Organize advocacy campaign | Drives change | $500-5000 |
-| Draft policy proposal | Advances goals | $1000 |
-| Get policy adopted | Creates change | $10000 |
+| Action                     | Impact          | Estimated Reward |
+|----------------------------|-----------------|------------------|
+| Contact representative     | Builds pressure | $10/contact      |
+| Get media coverage         | Spreads message | $100-1000        |
+| Organize advocacy campaign | Drives change   | $500-5000        |
+| Draft policy proposal      | Advances goals  | $1000            |
+| Get policy adopted         | Creates change  | $10000           |
 
 ## System Development
-| Action | Impact | Estimated Reward |
-|--------|---------|-----------------|
-| Identify system improvement | Better process | $50 |
-| Document new use case | Expands utility | $100 |
-| Create automation tool | Increases efficiency | $500 |
-| Build new platform feature | Enhances capability | $1000 |
-| Design system integration | Expands reach | $2000 |
+| Action                      | Impact               | Estimated Reward |
+|-----------------------------|----------------------|------------------|
+| Identify system improvement | Better process       | $50              |
+| Document new use case       | Expands utility      | $100             |
+| Create automation tool      | Increases efficiency | $500             |
+| Build new platform feature  | Enhances capability  | $1000            |
+| Design system integration   | Expands reach        | $2000            |
 
 ## Metrics & Tracking
 - All actions verified through platform
