@@ -20,7 +20,7 @@ export function PredictorSearchResults({
   session: Session | null
   userId: string | undefined
 }) {
-  console.log("Session data:", session)
+  //console.log("Session data:", session)
   const searchParams = useSearchParams()
   const effectVariableName = searchParams.get("effectVariableName")
   const [results, setResults] = useState<Study[]>([])
