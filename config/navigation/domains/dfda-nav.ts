@@ -8,6 +8,60 @@ export const dfdaLinks = {
     icon: "home",
     tooltip: "The Decentralized Food and Drug Administration",
   },
+  conditions: {
+    title: "Conditions",
+    href: "/dfda/conditions",
+    icon: "conditions",
+    tooltip: "Explore the most common conditions and their most effective treatments",
+  },
+  treatments: {
+    title: "Treatments",
+    href: "/dfda/treatments",
+    icon: "treatments",
+    tooltip: "See the positive and negative effects of treatments",
+  },
+  search: {
+    title: "Search",
+    href: "/dfda/search",
+    icon: "search",
+    tooltip: "Search for the most effective treatments for your condition and more",
+  },
+  registerDrug: {
+    title: "Register Drug",
+    href: "/dfda/drug-companies",
+    icon: "register-drug",
+    tooltip: "Instantly register your drug and start trials today",
+  },
+  inbox: {
+    title: "Inbox",
+    href: "/dfda/inbox",
+    icon: "inbox",
+    tooltip: "Record your diet, treatments, symptoms, and more",
+  },
+  trials: {
+    title: "Trials",
+    href: "/dfda/trials",
+    icon: "trials",
+    tooltip: "Participate in clinical trials and help us find cures",
+  },
+  userVariables: {
+    title: "Your Data",
+    href: "/dfda/userVariables",
+    icon: "userVariables",
+    tooltip: "Explore your data",
+  },
+  predictorSearch: {
+    title: "Predictor Search",
+    href: "/dfda/predictor-search",
+    icon: "predictorSearch",
+    tooltip: "See the factors that most affect your condition",
+  },
+  measurements: {
+    title: "Measurement History",
+    href: "/dfda/measurements",
+    icon: "measurements",
+    tooltip: "See a history of all your diet, treatments, symptom measurements, and more",
+  },
   digitalTwinSafe: {
     title: "Digital Twin Safe",
     href: "/dfda/safe/redirect",
@@ -48,41 +102,43 @@ export const dfdaLinks = {
 } as const
 
 export const dfdaNavigation: DomainNavigation = {
-  topNav: [dfdaLinks.clinipedia, dfdaLinks.digitalTwinSafe, dfdaLinks.petition],
+  topNav: [
+    dfdaLinks.search,          // Most important action - searching
+    dfdaLinks.conditions,      // Core content
+    dfdaLinks.treatments,      // Core content
+    dfdaLinks.digitalTwinSafe, // Important personal tool
+    dfdaLinks.clinipedia,      // External knowledge base
+  ],
   sidebarNav: [
-    dfdaLinks.dfda,
-    dfdaLinks.clinipedia,
-    dfdaLinks.digitalTwinSafe,
-    dfdaLinks.fdai,
-    dfdaLinks.petition,
-    dfdaLinks.healthSavingsSharing,
-    commonLinks.contributeOnGithub,
-    commonLinks.reportBug,
-    commonLinks.requestFeature,
-    dfdaLinks.dfdaDocs,
+    dfdaLinks.dfda,            // Home/Overview
+    dfdaLinks.search,          // Primary action
+    dfdaLinks.conditions,      // Core navigation
+    dfdaLinks.treatments,      // Core navigation
+    dfdaLinks.trials,          // User participation
+    dfdaLinks.userVariables,   // Personal data
+    dfdaLinks.measurements,    // Personal tracking
+    dfdaLinks.predictorSearch, // Analysis tool
+    dfdaLinks.digitalTwinSafe, // Important personal tool
+    dfdaLinks.clinipedia,      // Knowledge base
+    dfdaLinks.fdai,            // AI tool
+    dfdaLinks.petition,        // Community action
   ],
   avatarNav: [
-    dfdaLinks.dfda,
-    dfdaLinks.clinipedia,
-    dfdaLinks.digitalTwinSafe,
-    dfdaLinks.fdai,
-    dfdaLinks.petition,
-    dfdaLinks.healthSavingsSharing,
-    commonLinks.reportBug,
-    commonLinks.requestFeature,
-    commonLinks.contributeOnGithub,
-    dfdaLinks.dfdaDocs,
+    dfdaLinks.inbox,           // Personal messages
+    dfdaLinks.userVariables,   // Personal data
+    dfdaLinks.measurements,    // Personal tracking
+    dfdaLinks.digitalTwinSafe, // Personal data safe
+    dfdaLinks.trials,          // User participation
+    dfdaLinks.dfdaDocs,        // Documentation
   ],
   footerNav: [
-    dfdaLinks.dfda,
-    dfdaLinks.clinipedia,
-    dfdaLinks.digitalTwinSafe,
-    dfdaLinks.fdai,
-    dfdaLinks.petition,
-    dfdaLinks.healthSavingsSharing,
-    commonLinks.reportBug,
-    commonLinks.requestFeature,
-    commonLinks.contributeOnGithub,
-    dfdaLinks.dfdaDocs,
+    dfdaLinks.dfda,            // Home/Overview
+    dfdaLinks.clinipedia,      // Knowledge base
+    dfdaLinks.fdai,            // AI tool
+    dfdaLinks.petition,        // Community action
+    dfdaLinks.healthSavingsSharing, // Program info
+    dfdaLinks.dfdaDocs,        // Documentation
+    commonLinks.reportBug,     // Support
+    commonLinks.requestFeature, // Support
   ],
 }
