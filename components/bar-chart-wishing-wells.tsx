@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react"
+import React from "react"
 import { WishingWell } from "@prisma/client"
 
 import BarChartGeneral from "@/components/bar-chart-general"
@@ -14,9 +14,10 @@ const BarChartWishingWells: React.FC<BarChartProps> = ({
   thatWishingWell,
   thisPercentageDesired,
 }) => {
-  const getWishingWellName = (wishingWell: WishingWell) => wishingWell.name
-  const getWishingWellImage = (wishingWell: WishingWell) =>
-    wishingWell.featuredImage || ""
+  const getWishingWellName = (item: { name: string }) => item.name
+  
+  const getWishingWellImage = (item: { featuredImage: string | null }) =>
+    item.featuredImage || ""
 
   return (
     <BarChartGeneral
