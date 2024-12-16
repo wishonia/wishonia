@@ -5,9 +5,9 @@ import { getGlobalProblem } from "@/lib/api/globalProblems"
 import { getCurrentUser } from "@/lib/session"
 import { GlobalProblemSolutionsList } from "@/components/global-problem-solutions-list"
 import { Shell } from "@/components/layout/shell"
-import MarkdownRenderer from "@/components/markdown/MarkdownRenderer"
+import { GlobalProblemRenderer } from "@/components/globalProblem/GlobalProblemRenderer"
 import { PollRandomGlobalProblemSolutions } from "@/components/poll-random-global-problem-solutions"
-
+import GlobalProblemDashboard from "@/components/globalProblem/global-problem-dashboard";
 interface GlobalProblemPageProps {
   params: { globalProblemId: string }
 }
@@ -35,20 +35,13 @@ export default async function GlobalProblemPage({
 
   return (
     <Shell>
+      <GlobalProblemDashboard globalProblem={globalProblem} />
       <PollRandomGlobalProblemSolutions
         globalProblemId={globalProblem.id}
         user={user}
-      ></PollRandomGlobalProblemSolutions>
-      <MarkdownRenderer
-        name={globalProblem.name}
-        featuredImage={globalProblem.featuredImage}
-        description={globalProblem.description}
-        content={globalProblem.content}
       />
-      <GlobalProblemSolutionsList
-        user={user}
-        globalProblemId={globalProblem.id}
-      ></GlobalProblemSolutionsList>
+      <GlobalProblemRenderer globalProblem={globalProblem} />
+      
     </Shell>
   )
 }
