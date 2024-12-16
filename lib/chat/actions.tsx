@@ -38,6 +38,11 @@ export type AIState = {
     conversationStarters?: string[] | null
     avatar?: string | null
   } | null
+  measurements?: {
+    variableName: string
+    value: number
+    unitName: string
+  }[]
 }
 
 export type UIState = {
@@ -45,7 +50,7 @@ export type UIState = {
   display: React.ReactNode
 }[]
 
-export async function measurementAction(content: string) {
+export async function recordMeasurement(content: string) {
   "use server"
   
   const aiState = getMutableAIState<typeof AI>()
@@ -61,7 +66,7 @@ export async function measurementAction(content: string) {
       {
         id: nanoid(),
         role: "function",
-        name: "measurement_action",
+        name: "record_measurement",
         content: JSON.stringify(measurements),
       },
       {
@@ -85,7 +90,7 @@ export async function measurementAction(content: string) {
 }
 
 export const AI = createAI<AIState, UIState>({
-  actions: { submitUserMessage, repoAction, readmeAction, measurementAction },
+  actions: { submitUserMessage, repoAction, readmeAction, recordMeasurement },
   initialAIState: {
     chatId: nanoid(),
     messages: [],
@@ -172,7 +177,7 @@ export const getUIStateFromAIState = async (aiState: Chat) => {
             <BotCard>
               <PollRandomGlobalProblems user={user}></PollRandomGlobalProblems>
             </BotCard>
-          ) : m.name === "measurement_action" ? (
+          ) : m.name === "record_measurement" ? (
             <BotCard>
               <BotMessage
                 content={`Recorded measurements: ${JSON.parse(m.content).map((measurement: any) => 
