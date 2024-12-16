@@ -1,226 +1,131 @@
 import { Measurement } from "@/types/models/Measurement"
 import {
   convertToLocalDateTime,
-  convertToUTC,
 } from "@/lib/dateTimeWithTimezone"
 import { getUserId } from "@/lib/getUserId"
-import {
-  getDateTimeFromStatementInUserTimezone,
-  textCompletion,
-} from "@/lib/llm"
-import {postMeasurements} from "@/app/dfda/dfdaActions";
+import { postMeasurements } from "@/app/dfda/dfdaActions"
+import { z } from 'zod'
+import { generateObject } from 'ai'
+import { getModel } from '@/lib/utils/modelUtils'
+import { VariableCategoryNames, UnitNames } from '@/app/api/text2measurements/measurementSchema'
 
-export function generateText2MeasurementsPrompt(
-  statement: string,
-  currentUtcDateTime: string,
-  timeZoneOffset: number
-): string {
-  const currentLocalDateTime = convertToLocalDateTime(
-    currentUtcDateTime,
-    timeZoneOffset
-  )
-  const currentLocalDate = currentUtcDateTime.split("T")[0]
+// Define the enums as Zod enums using the imported arrays
+const VariableCategoryEnum = z.enum(VariableCategoryNames)
+const UnitEnum = z.enum(UnitNames)
 
-  return `
-        You are a service that translates user requests into an array of JSON objects of type "Measurement" according to the following TypeScript definitions:
-\`\`\`
-export const VariableCategoryNames = [
-  'Emotions',
-  'Physique',
-  'Physical Activity',
-  'Locations',
-  'Miscellaneous',
-  'Sleep',
-  'Social Interactions',
-  'Vital Signs',
-  'Cognitive Performance',
-  'Symptoms',
-  'Nutrients',
-  'Goals',
-  'Treatments',
-  'Activities',
-  'Foods',
-  'Conditions',
-  'Environment',
-  'Causes of Illness',
-  'Books',
-  'Software',
-  'Payments',
-  'Movies and TV',
-  'Music',
-  'Electronics',
-  'IT Metrics',
-  'Economic Indicators',
-  'Investment Strategies'
-] as const;  // 'as const' makes it a readonly array
-
-// Then you can use this array to define your type:
-export type VariableCategoryName = typeof VariableCategoryNames[number];  // This will be a union of the array values
-
-export const UnitNames = [
-  'per Minute',
-  'Yes/No',
-  'Units',
-  'Torr',
-  'Tablets',
-  'Sprays',
-  'Serving',
-  'Seconds',
-  'Quarts',
-  'Puffs',
-  'Pounds',
-  'Pills',
-  'Percent',
-  'Pascal',
-  'Parts per Million',
-  'Ounces',
-  'Minutes',
-  'Milliseconds',
-  'Millimeters Merc',
-  'Millimeters',
-  'Milliliters',
-  'Milligrams',
-  'Millibar',
-  'Miles per Hour',
-  'Miles',
-  'Micrograms per decilitre',
-  'Micrograms',
-  'Meters per Second',
-  'Meters',
-  'Liters',
-  'Kilometers',
-  'Kilograms',
-  'Kilocalories',
-  'International Units',
-  'Index',
-  'Inches',
-  'Hours',
-  'Hectopascal',
-  'Grams',
-  'Gigabecquerel',
-  'Feet',
-  'Event',
-  'Drops',
-  'Doses',
-  'Dollars',
-  'Degrees North',
-  'Degrees Fahrenheit',
-  'Degrees East',
-  'Degrees Celsius',
-  'Decibels',
-  'Count',
-  'Centimeters',
-  'Capsules',
-  'Calories',
-  'Beats per Minute',
-  'Applications',
-  '1 to 5 Rating',
-  '1 to 3 Rating',
-  '1 to 10 Rating',
-  '0 to 5 Rating',
-  '0 to 1 Rating',
-  '-4 to 4 Rating',
-  '% Recommended Daily Allowance'
-] as const;  // 'as const' makes it a readonly array
-
-// Then you can use this array to define your type:
-export type UnitName = typeof UnitNames[number];  // This will be a union of the array values
-
-export interface Measurement {
-  itemType: 'measurement',
-  variableName: string;  // variableName is the name of the treatment, symptom, food, drink, etc.
-  // For example, if the answer is "I took 5 mg of NMN", then this variableName is "NMN".
-  // For example, if the answer is "I have been having trouble concentrating today", then this variableName is "Concentration".
-  value: number; // value is the number of units of the treatment, symptom, food, drink, etc.
-  // For example, if the answer is "I took 5 mg of NMN", then this value is 5.
-  // For example, if the answer is "I have been feeling very tired and fatigued today", you would return two measurements
-  // with the value 5 like this:
-  // {variableName: "Tiredness", value: 5, unitName: "1 to 5 Rating", startAt: "${currentLocalDate}T00:00:00", endAt: "${currentLocalDate}T23:59:59", combinationOperation: "MEAN", variableCategoryName: "Symptoms"}
-  // {variableName: "Fatigue", value: 5, unitName: "1 to 5 Rating", startAt: "${currentLocalDate}T00:00:00", endAt: "${currentLocalDate}T23:59:59", combinationOperation: "MEAN", variableCategoryName: "Symptoms"}
-  // For example, if the answer is "I have been having trouble concentrating today", then this value is 1 and the object
-  // would be {variableName: "Concentration", value: 1, unitName: "1 to 5 Rating", startAt: "${currentLocalDate}T00:00:00", endAt: "${currentLocalDate}T23:59:59", combinationOperation: "MEAN", variableCategoryName: "Symptoms"}
-  // For example, if the answer is "I also took magnesium 200mg, Omega3 one capsule 500mg", then the measurements would be:
-  // {variableName: "Magnesium", value: 200, unitName: "Milligrams", startAt: "${currentLocalDate}T00:00:00", endAt: "${currentLocalDate}T23:59:59", combinationOperation: "SUM", variableCategoryName: "Treatments"}
-  // {variableName: "Omega3", value: 500, unitName: "Milligrams", startAt: "${currentLocalDate}T00:00:00", endAt: "${currentLocalDate}T23:59:59", combinationOperation: "SUM", variableCategoryName: "Treatments"}
-  // (I just used the current date in those examples, but you should use the correct date if the user specifies a different date or time range.)
-  unitName: UnitName;
-  // unitName is the unit of the treatment, symptom, food, drink, etc.
-  // For example, if the answer is "I took 5 mg of NMN", then this unitName is "Milligrams".
-  startAt: string;  // startAt should be the local datetime the measurement was taken in the format "YYYY-MM-DDThh:mm:ss" inferred from the USER STATEMENT relative to and sometime before the current local datetime ${currentLocalDateTime}.
-  endAt: string|null; // If a time range is suggested, then endAt should be the end of that period. It should also be in the format "YYYY-MM-DDThh:mm:ss" and should not be in the future relative to the current time ${currentLocalDateTime} .
-  combinationOperation: "SUM" | "MEAN"; // combinationOperation is the operation used to combine multiple measurements of the same variableName
-  variableCategoryName: VariableCategoryName; // variableCategoryName is the category of the variableName
-  // For example, if the answer is "I took 5 mg of NMN", then this variableCategoryName is "Treatments".
-  note: string; // the text fragment that was used to create this measurement
+// Helper function to validate ISO datetime
+const isValidISODateTime = (date: string) => {
+  try {
+    return Boolean(new Date(date).toISOString())
+  } catch {
+    return false
+  }
 }
 
-// Use this type for measurement items that match nothing else
-export interface UnknownText {
-  itemType: 'unknown',
-  text: string; // The text that wasn't understood
-}
+// Define the Measurement schema
+const MeasurementSchema = z.object({
+  variableName: z.string().describe('Name of the treatment, symptom, food, etc.'),
+  value: z.number().describe('Numerical value of the measurement'),
+  unitName: UnitEnum.describe('Unit of measurement'),
+  startAt: z.string()
+    .refine(isValidISODateTime, 'Must be a valid ISO datetime string')
+    .describe('Start time of the measurement in ISO format (YYYY-MM-DDTHH:mm:ss.sssZ). For ongoing conditions or recent events without specific time, use current time. For past events with duration (e.g., "for the past year"), set this to the start of that period.'),
+  endAt: z.string()
+    .refine(isValidISODateTime, 'Must be a valid ISO datetime string')
+    .describe('End time of the measurement in ISO format. For ongoing conditions, use current time. For past events with duration, this should be current time if still ongoing, or the end of the mentioned period if ended.'),
+  combinationOperation: z.enum(['SUM', 'MEAN']).describe('How to combine multiple measurements. Use SUM for cumulative things like food/medicine intake, MEAN for conditions/symptoms'),
+  variableCategoryName: VariableCategoryEnum.describe('Category of the variable being measured'),
+  note: z.string().describe('The original text fragment that was used to create this measurement'),
+  unitAbbreviatedName: z.string().optional().describe('Abbreviated unit name')
+})
 
-export type Food = Measurement & {
-  variableCategoryName: "Foods";
-  combinationOperation: "SUM";
-};
-
-export type Drink = Measurement & {
-  variableCategoryName: "Foods";
-  combinationOperation: "SUM";
-};
-
-export type Treatment = Measurement & {
-  variableCategoryName: "Treatments";
-  combinationOperation: "SUM";
-};
-
-export type Symptom = Measurement & {
-  variableCategoryName: "Symptoms";
-  combinationOperation: "MEAN";
-  unitName: '/5';
-};
-
-Remember, startAt and endAt should be in the format "YYYY-MM-DDThh:mm:ss" and should not be in the future relative to the current time ${currentLocalDateTime}.
-
-USER STATEMENT TO CONVERT TO AN ARRAY OF MEASUREMENTS:
-"""
-${statement}
-"""
-The following is the user request translated into a JSON object with 2 spaces of indentation and no properties with the value undefined:
-
-        `
-}
+// Define a wrapper schema for the array
+const MeasurementsWrapperSchema = z.object({
+  measurements: z.array(MeasurementSchema).describe('Array of measurements parsed from the text')
+})
 
 export async function text2measurements(
   statement: string,
   currentUtcDateTime: string,
   timeZoneOffset: number
 ): Promise<Measurement[]> {
-  const promptText = generateText2MeasurementsPrompt(
-    statement,
-    currentUtcDateTime,
-    timeZoneOffset
-  )
-  const str = await textCompletion(promptText, "json_object")
-  const localDateTime = await getDateTimeFromStatementInUserTimezone(
-    statement,
-    currentUtcDateTime,
-    timeZoneOffset
-  )
-  const utcDateTimeFromStatement = convertToUTC(localDateTime, timeZoneOffset)
-  let json = JSON.parse(str)
-  if (!Array.isArray(str)) {
-    json = [json]
+  try {
+    console.log('Input parameters:', {
+      statement,
+      currentUtcDateTime,
+      timeZoneOffset
+    })
+
+    const currentLocalDateTime = convertToLocalDateTime(
+      currentUtcDateTime,
+      timeZoneOffset
+    )
+
+    const prompt = `Convert the following statement into measurements, paying special attention to time context:
+
+Current local time: ${currentLocalDateTime}
+
+Guidelines for temporal interpretation:
+1. If no specific time is mentioned, assume the event just happened (use current time)
+2. For ongoing conditions (e.g., "I've been having back pain for a year"):
+   - startAt should be one year ago from current time
+   - endAt should be current time
+3. For completed events with duration (e.g., "I had a headache yesterday from 2pm to 4pm"):
+   - Set precise startAt and endAt times
+4. For point-in-time events (e.g., "I took an aspirin"):
+   - Both startAt and endAt should be the same time
+5. All times must be in ISO format (YYYY-MM-DDTHH:mm:ss.sssZ)
+
+Statement to analyze: "${statement}"
+
+Please convert this into measurements, ensuring all dates are valid ISO strings and properly account for any mentioned durations or time periods.`
+
+    const result = await generateObject({
+      model: getModel(),
+      schema: MeasurementsWrapperSchema,
+      prompt,
+    })
+
+    console.log('AI response:', result.object)
+
+    const measurements = result.object.measurements.map(measurement => {
+      try {
+        const processed = {
+          ...measurement,
+          sourceName: 'text2measurements',
+          unitAbbreviatedName: measurement.unitAbbreviatedName || measurement.unitName
+        }
+        console.log('Processed measurement:', processed)
+        return processed
+      } catch (error) {
+        console.error('Error processing measurement:', {
+          measurement,
+          error: error instanceof Error ? error.message : String(error)
+        })
+        throw error
+      }
+    }) as Measurement[]
+
+    console.log('Final measurements:', measurements)
+
+    const userId = await getUserId()
+    if (userId) {
+      await postMeasurements(measurements, userId)
+    }
+
+    return measurements
+  } catch (error) {
+    console.error('Error in text2measurements:', {
+      error: error instanceof Error ? {
+        message: error.message,
+        stack: error.stack
+      } : String(error),
+      inputs: {
+        statement,
+        currentUtcDateTime,
+        timeZoneOffset
+      }
+    })
+    throw error
   }
-  const measurements: Measurement[] = []
-  json.forEach((measurement: Measurement) => {
-    measurement.startAt = utcDateTimeFromStatement
-    measurements.push(measurement)
-  })
-  const userId = await getUserId()
-  if (userId) {
-    const response = await postMeasurements(measurements, userId)
-  }
-  return measurements
 }
