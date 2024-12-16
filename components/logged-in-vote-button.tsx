@@ -19,10 +19,14 @@ export const LoggedInVoteButton: React.FC<PollProps> = ({
   if (!user) {
     return null
   }
-  const handleClick = () => {
-    postVoteData()
-    if (onButtonClick) {
-      onButtonClick()
+  const handleClick = async () => {
+    try {
+      await postVoteData()
+      if (onButtonClick) {
+        onButtonClick()
+      }
+    } catch (error) {
+      console.error("Error posting vote:", error)
     }
   }
   return (
