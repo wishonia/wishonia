@@ -41,6 +41,7 @@ export const PollSpecificGeneral = <T,>({
 }: PollProps<T>) => {
   const [thatPercentageDesired, setThatPercentageDesired] = useState(50)
   const [thisPercentageDesired, setThisPercentageDesired] = useState(50)
+  const [isVoting, setIsVoting] = useState(false)
 
   const handleSliderChange = (event: React.ChangeEvent<HTMLInputElement>) => {
     const thatPercentageDesired = parseInt(event.target.value, 10)
@@ -51,12 +52,14 @@ export const PollSpecificGeneral = <T,>({
     createAllocation(thisItem.id, thatItem.id, thisPercentageDesired)
   }
 
-  function onButtonClick() {
-    if (updatePair) {
+  const onButtonClick = () => {
+    if (updatePair && !isVoting) {
+      setIsVoting(true)
       updatePair()
+      setThatPercentageDesired(50)
+      setThisPercentageDesired(50)
+      setIsVoting(false)
     }
-    setThatPercentageDesired(50)
-    setThisPercentageDesired(50)
   }
 
   return (
