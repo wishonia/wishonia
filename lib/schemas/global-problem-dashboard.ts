@@ -16,11 +16,6 @@ export const GlobalProblemDashboardSchema = z.object({
     event: z.string().describe("Description of a significant milestone, discovery, or development in addressing this problem")
   })).describe("Chronological list of important historical events and breakthroughs"),
 
-  newsItems: z.array(z.object({
-    title: z.string().describe("Headline for recent news or development in the field"),
-    summary: z.string().describe("Brief summary of the news item's key points and significance")
-  })).describe("Recent news and updates about progress, breakthroughs, or developments"),
-
   discussionTopics: z.array(z.object({
     title: z.string().describe("Title of a current debate or discussion topic in the field"),
     replies: z.number().describe("Number of community responses/replies to this topic")

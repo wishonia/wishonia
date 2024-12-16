@@ -2,7 +2,7 @@
 
 import { useEffect, useState } from 'react';
 import { GlobalProblem } from '@prisma/client';
-import { BarChart, Book, ChevronDown, ChevronUp, Clock, FlaskRoundIcon as Flask, MessageSquare, Newspaper, Trophy, Users } from 'lucide-react';
+import { BarChart, Book, ChevronDown, ChevronUp, Clock, FlaskRoundIcon as Flask, MessageSquare, Trophy, Users } from 'lucide-react';
 import { GlobalProblemDashboardData } from "@/lib/schemas/global-problem-dashboard";
 import { Accordion, AccordionContent, AccordionItem, AccordionTrigger } from '@/components/ui/accordion';
 import { BarChart as BarChartComponent } from '@/components/ui/bar-chart';
@@ -185,26 +185,6 @@ export default function GlobalProblemDashboard({ globalProblem, user }: GlobalPr
                 />
               ))}
             </Timeline>
-          </CardContent>
-        </Card>
-
-        {/* Latest News */}
-        <Card>
-          <CardHeader>
-            <CardTitle className="flex items-center gap-2">
-              <Newspaper className="w-5 h-5" />
-              Latest News and Updates
-            </CardTitle>
-          </CardHeader>
-          <CardContent>
-            <ul className="space-y-4">
-              {dashboardData.newsItems.map((item, index) => (
-                <li key={index} className="border-b pb-4 last:border-b-0 last:pb-0">
-                  <h3 className="font-semibold">{item.title}</h3>
-                  <p className="text-sm text-muted-foreground">{item.summary}</p>
-                </li>
-              ))}
-            </ul>
           </CardContent>
         </Card>
 
