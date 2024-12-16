@@ -37,7 +37,7 @@ export default async function GlobalProblemPage({
     <Shell>
       <GlobalProblemDashboard globalProblem={globalProblem} user={user} />
 
-      <GlobalProblemRenderer globalProblem={globalProblem} />
+
       
     </Shell>
   )

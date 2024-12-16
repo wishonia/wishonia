@@ -15,6 +15,7 @@ import { GlobalProblemSolutionsList } from '../global-problem-solutions-list';
 import GlobalCoordinationAgent from '../landingPage/global-coordination-agent';
 import { ExtendedUser } from '@/types/auth';
 import { PollRandomGlobalProblemSolutions } from '../poll-random-global-problem-solutions';
+import { GlobalProblemRenderer } from './GlobalProblemRenderer';
 
 interface GlobalProblemDashboardProps {
   globalProblem: GlobalProblem;
@@ -81,7 +82,7 @@ export default function GlobalProblemDashboard({ globalProblem, user }: GlobalPr
   }
 
   return (
-    <div className="container mx-auto p-4 max-w-6xl">
+    <div className="container mx-auto px-2 sm:px-4 max-w-6xl">
       <div className="grid gap-6">
         {/* Header Section */}
         <div className="space-y-2">
@@ -132,31 +133,39 @@ export default function GlobalProblemDashboard({ globalProblem, user }: GlobalPr
         </div>
 
         {/* Detailed Content */}
-        <Card>
-          <CardContent className="p-6">
-            <Accordion type="single" collapsible>
-              {dashboardData.sections.map((section, index) => (
-                <AccordionItem key={`${section.title}-${index}`} value={section.title}>
-                  <AccordionTrigger>{section.title}</AccordionTrigger>
-                  <AccordionContent>
-                    {section.title === 'Current Solutions' ? (
-                      <GlobalProblemSolutionsList
-                        user={user}
-                        globalProblemId={globalProblem.id}
-                      />
-                    ) : (
-                      <ScrollArea className="h-[300px] w-full rounded-md border p-4">
-                        <div className="prose prose-sm dark:prose-invert">
-                          {section.content}
-                        </div>
-                      </ScrollArea>
-                    )}
-                  </AccordionContent>
-                </AccordionItem>
-              ))}
-            </Accordion>
-          </CardContent>
-        </Card>
+        <Accordion type="single" collapsible>
+          <AccordionItem value="overview">
+            <AccordionTrigger className="justify-start">Overview</AccordionTrigger>
+            <AccordionContent>
+              <ScrollArea className="h-[300px] w-full rounded-md border p-4">
+                <div className="prose prose-sm dark:prose-invert">
+                  <GlobalProblemRenderer globalProblem={globalProblem} />
+                </div>
+              </ScrollArea>
+            </AccordionContent>
+          </AccordionItem>
+
+          <AccordionItem value="current-solutions">
+            <AccordionTrigger className="justify-start">Current Solutions</AccordionTrigger>
+            <AccordionContent>
+              <GlobalProblemSolutionsList
+                user={user}
+                globalProblemId={globalProblem.id}
+              />
+            </AccordionContent>
+          </AccordionItem>
+
+          <AccordionItem value="key-players">
+            <AccordionTrigger className="justify-start">Key Players</AccordionTrigger>
+            <AccordionContent>
+              <ScrollArea className="h-[300px] w-full rounded-md border p-4">
+                <div className="prose prose-sm dark:prose-invert">
+                  {dashboardData.sections.find(s => s.title === 'Key Players')?.content}
+                </div>
+              </ScrollArea>
+            </AccordionContent>
+          </AccordionItem>
+        </Accordion>
 
         {/* Timeline */}
         <Card>
@@ -240,14 +249,13 @@ export default function GlobalProblemDashboard({ globalProblem, user }: GlobalPr
               <Trophy className="w-5 h-5" />
               Vote on Solutions
             </CardTitle>
-            <CardDescription>Help prioritize research directions and interventions</CardDescription>
+            <CardDescription>
+              Help use use collective intelligence through Aggregated
+              Pairwise Preference Allocation to prioritize research directions and interventions
+            </CardDescription>
           </CardHeader>
           <CardContent>
             <div className="space-y-2">
-              {/* Voting options would go here */}
-              <p className="text-sm text-muted-foreground">
-                Voting interface will be implemented here...
-              </p>
               <PollRandomGlobalProblemSolutions
                 globalProblemId={globalProblem.id}
                 user={user}
