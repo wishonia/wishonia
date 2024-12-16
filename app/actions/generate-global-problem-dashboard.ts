@@ -2,10 +2,25 @@
 
 import { generateObject } from 'ai'
 import { getModel } from '@/lib/utils/modelUtils'
-import {GlobalProblemDashboardData, GlobalProblemDashboardSchema} from "@/lib/schemas/global-problem-dashboard";
+import { GlobalProblemDashboardData, GlobalProblemDashboardSchema } from "@/lib/schemas/global-problem-dashboard"
+import { getRedisModelCache } from '@/lib/utils/redis'
+
+const CACHE_TTL = 60 * 60 * 24 // 24 hours in seconds
+const CACHE_KEY_PREFIX = 'global-problem-dashboard:'
 
 export async function generateGlobalProblemDashboard(problemName: string): Promise<GlobalProblemDashboardData> {
   try {
+    // Initialize Redis cache with TTL
+    const cache = getRedisModelCache(CACHE_TTL)
+    const cacheKey = `${CACHE_KEY_PREFIX}${problemName.toLowerCase()}`
+
+    // Try to get from cache first
+    const cachedData = await cache.lookup(cacheKey)
+    if (cachedData) {
+      return JSON.parse(cachedData) as GlobalProblemDashboardData
+    }
+
+    // If not in cache, generate new data
     const prompt = `Generate comprehensive dashboard data about the global problem of ${problemName}. 
       Include factual, well-researched information for:
       
@@ -23,6 +38,9 @@ export async function generateGlobalProblemDashboard(problemName: string): Promi
       schema: GlobalProblemDashboardSchema,
       prompt: prompt,
     })
+
+    // Cache the result
+    await cache.update(cacheKey, JSON.stringify(result.object))
 
     return result.object
   } catch (error) {
