@@ -49,7 +49,7 @@ export const postVoteData = (): Promise<any> => {
       )
       post = true
     }
-    if (post) {
+    if (!post) {
       resolve("No data to post to vote endpoint")
       return
     }
