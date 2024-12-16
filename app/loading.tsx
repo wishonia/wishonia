@@ -1,3 +1,5 @@
+import GlobalCoordinationAgent from "@/components/landingPage/global-coordination-agent"
+
 const insights = [
   {
     text: "If a child asks 'Why does it rain?', tell them 'It's because God is crying'. And if the child asks 'Why is God crying?', tell them 'Probably because of something you did.'",
@@ -42,9 +44,10 @@ export default function Loading() {
       <div className="flex max-w-xl flex-col items-center gap-8 text-center">
         <div className="h-12 w-12 animate-spin rounded-full border-4 border-t-transparent" />
         <div className="space-y-3">
-          <p className="text-3xl">
+          <GlobalCoordinationAgent />
+{/*          <p className="text-3xl">
             {randomQuote.text}
-          </p>
+          </p>*/}
         </div>
       </div>
     </div>

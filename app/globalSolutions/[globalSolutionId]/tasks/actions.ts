@@ -124,4 +124,22 @@ export async function getGlobalSolutionTasks(globalSolutionId: string): Promise<
       tasks: [] 
     }
   }
+}
+
+export async function getGlobalSolution(id: string) {
+  // Implementation here using your preferred data fetching method
+  // (Prisma, API call, etc.)
+  try {
+    const solution = await prisma.globalSolution.findUnique({
+      where: { id },
+      select: {
+        id: true,
+        name: true,
+      },
+    })
+    return solution
+  } catch (error) {
+    console.error('Error fetching global solution:', error)
+    return null
+  }
 } 
