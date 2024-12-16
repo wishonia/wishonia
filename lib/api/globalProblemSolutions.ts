@@ -1,15 +1,19 @@
 import { GlobalProblemSolution } from "@prisma/client"
 
-import { prisma as db } from "@/lib/db"
+import { prisma } from "@/lib/prisma"
 
 export async function getGlobalProblemSolution(
-  globalProblemId: GlobalProblemSolution["globalProblemId"],
-  globalSolutionId: GlobalProblemSolution["globalSolutionId"]
+  globalProblemId: string,
+  globalSolutionId: string,
 ) {
-  return db.globalProblemSolution.findFirst({
+  return await prisma.globalProblemSolution.findFirst({
     where: {
-      globalProblemId: globalProblemId,
-      globalSolutionId: globalSolutionId,
+      globalProblemId,
+      globalSolutionId,
+    },
+    include: {
+      globalProblem: true,
+      globalSolution: true,
     },
   })
 }
@@ -17,9 +21,13 @@ export async function getGlobalProblemSolution(
 export async function getGlobalProblemSolutionById(
   globalProblemSolutionId: GlobalProblemSolution["id"]
 ) {
-  return db.globalProblemSolution.findFirst({
+  return prisma.globalProblemSolution.findFirst({
     where: {
       id: globalProblemSolutionId,
+    },
+    include: {
+      globalProblem: true,
+      globalSolution: true,
     },
   })
 }
