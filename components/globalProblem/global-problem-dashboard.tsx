@@ -11,9 +11,14 @@ import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '@/com
 import { ScrollArea } from '@/components/ui/scroll-area';
 import { Timeline, TimelineItem } from '@/components/ui/timeline';
 import { generateGlobalProblemDashboard } from "@/app/actions/generate-global-problem-dashboard"
+import { GlobalProblemSolutionsList } from '../global-problem-solutions-list';
+import GlobalCoordinationAgent from '../landingPage/global-coordination-agent';
+import { ExtendedUser } from '@/types/auth';
+import { PollRandomGlobalProblemSolutions } from '../poll-random-global-problem-solutions';
 
 interface GlobalProblemDashboardProps {
-  globalProblem: GlobalProblem
+  globalProblem: GlobalProblem;
+  user: ExtendedUser;
 }
 
 type SectionTitle = 'Overview' | 'Current Solutions' | 'Key Players'
@@ -24,7 +29,7 @@ const ICONS: Record<SectionTitle, JSX.Element> = {
   "Key Players": <Users className="w-5 h-5" />
 }
 
-export default function GlobalProblemDashboard({ globalProblem }: GlobalProblemDashboardProps) {
+export default function GlobalProblemDashboard({ globalProblem, user }: GlobalProblemDashboardProps) {
   const [expandedSection, setExpandedSection] = useState<string | null>(null)
   const [dashboardData, setDashboardData] = useState<GlobalProblemDashboardData | null>(null)
   const [loading, setLoading] = useState(true)
@@ -51,7 +56,10 @@ export default function GlobalProblemDashboard({ globalProblem }: GlobalProblemD
   if (loading) {
     return (
       <div className="flex justify-center items-center min-h-[400px]">
-        <div className="animate-pulse">Loading dashboard data...</div>
+         <GlobalCoordinationAgent 
+         title={`Initializing ${globalProblem.name} Solving Agent`}
+         initialIssue={globalProblem.name}
+         ></GlobalCoordinationAgent>
       </div>
     )
   }
@@ -131,11 +139,18 @@ export default function GlobalProblemDashboard({ globalProblem }: GlobalProblemD
                 <AccordionItem key={`${section.title}-${index}`} value={section.title}>
                   <AccordionTrigger>{section.title}</AccordionTrigger>
                   <AccordionContent>
-                    <ScrollArea className="h-[300px] w-full rounded-md border p-4">
-                      <div className="prose prose-sm dark:prose-invert">
-                        {section.content}
-                      </div>
-                    </ScrollArea>
+                    {section.title === 'Current Solutions' ? (
+                      <GlobalProblemSolutionsList
+                        user={user}
+                        globalProblemId={globalProblem.id}
+                      />
+                    ) : (
+                      <ScrollArea className="h-[300px] w-full rounded-md border p-4">
+                        <div className="prose prose-sm dark:prose-invert">
+                          {section.content}
+                        </div>
+                      </ScrollArea>
+                    )}
                   </AccordionContent>
                 </AccordionItem>
               ))}
@@ -233,6 +248,10 @@ export default function GlobalProblemDashboard({ globalProblem }: GlobalProblemD
               <p className="text-sm text-muted-foreground">
                 Voting interface will be implemented here...
               </p>
+              <PollRandomGlobalProblemSolutions
+                globalProblemId={globalProblem.id}
+                user={user}
+              />
             </div>
           </CardContent>
         </Card>

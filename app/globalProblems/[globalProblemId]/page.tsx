@@ -35,11 +35,8 @@ export default async function GlobalProblemPage({
 
   return (
     <Shell>
-      <GlobalProblemDashboard globalProblem={globalProblem} />
-      <PollRandomGlobalProblemSolutions
-        globalProblemId={globalProblem.id}
-        user={user}
-      />
+      <GlobalProblemDashboard globalProblem={globalProblem} user={user} />
+
       <GlobalProblemRenderer globalProblem={globalProblem} />
       
     </Shell>
