@@ -14,28 +14,13 @@ export interface ChatPageProps {
 }
 
 function convertToAIMessage(message: ChatMessage): Message {
-  const validRoles = ['user', 'assistant', 'system', 'function'] as const;
-  if (!validRoles.includes(message.role as any)) {
-    throw new Error(`Invalid message role: ${message.role}`);
-  }
-
-  let parsedToolCalls;
-  if (message.tool_calls) {
-    try {
-      parsedToolCalls = JSON.parse(message.tool_calls);
-    } catch (e) {
-      console.error('Failed to parse tool_calls:', e);
-      parsedToolCalls = undefined;
-    }
-  }
-
   return {
     id: message.id,
     content: message.content,
     role: message.role as Message['role'],
     name: message.name ?? undefined,
     function_call: message.function_call ?? undefined,
-    tool_calls: parsedToolCalls,
+    tool_calls: message.tool_calls ? JSON.parse(message.tool_calls) : undefined,
   }
 }
 
