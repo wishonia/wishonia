@@ -1,7 +1,6 @@
 import { z } from "zod"
-import { getChatOpenAIModel } from "@/lib/openai"
-import { Message } from "@/types/chat"
-import { MessageRole } from "@prisma/client"
+import { generateObject } from "ai"
+import { getModel } from "@/lib/utils/modelUtils"
 
 /**
  * Classify a given text based on provided enumerated options
@@ -23,36 +22,17 @@ export async function classifyText(
       .describe(description),
   })
 
-  const systemPrompt = `You are a classification assistant. Your task is to classify the given text into one of the following options: ${options.join(", ")}.
-
-Rules:
-- Only respond with a JSON object containing a single "classification" field
-- The classification must be one of the allowed options
-- ${description}
-
-Example response format:
-{ "classification": "option1" }`;
-
   const userPrompt = `Text to classify:
 ${input}
 
-Respond only with the JSON classification.`;
+Classify this text into one of these options: ${options.join(", ")}.
+${description}`;
 
-  const messages: Message[] = [
-    { role: MessageRole.system, content: systemPrompt },
-    { role: MessageRole.user, content: userPrompt }
-  ];
+  const result = await generateObject({
+    model: getModel(),
+    schema: classificationSchema,
+    prompt: userPrompt,
+  });
 
-  const llm = getChatOpenAIModel();
-  const response = await llm.call(messages);
-  
-  try {
-    // Parse the response as JSON
-    const result = JSON.parse(response);
-    // Validate against our schema
-    const validated = classificationSchema.parse(result);
-    return validated.classification;
-  } catch (error) {
-    throw new Error(`Failed to parse classification response: ${error}`);
-  }
+  return result.object.classification;
 }
