@@ -1,6 +1,6 @@
-import { cache } from "react"
-import { Message } from "ai"
-import { ChatMessage } from "@prisma/client"
+import { cache } from "react";
+import { Chat, ChatMessage } from "@prisma/client"
+import { Message } from "ai";
 
 import { getChats } from "@/app/actions"
 
@@ -22,12 +22,9 @@ function convertToAIMessage(message: ChatMessage): Message {
   }
 }
 
-const loadChats = cache(async (userId: string) => {
+const loadChats = cache(async (userId: string):  Promise<Chat[]> => {
   const chats = await getChats(userId)
-  return chats?.map(chat => ({
-    ...chat,
-    messages: chat.messages.map(convertToAIMessage)
-  }))
+  return chats
 })
 
 export async function ChatSidebarList({ userId }: SidebarListProps) {

@@ -1,6 +1,6 @@
 import { notFound, redirect } from 'next/navigation'
 import { Chat } from '@/app/search/components/chat'
-import { getChat } from '@/lib/actions/chat'
+import { getSearchChat } from '@/lib/actions/searchChat'
 import { AI } from '@/app/search/actions'
 
 export const maxDuration = 60
@@ -12,7 +12,7 @@ export interface SearchPageProps {
 }
 
 export async function generateMetadata({ params }: SearchPageProps) {
-  const chat = await getChat(params.id, 'anonymous')
+  const chat = await getSearchChat(params.id, 'anonymous')
   return {
     title: chat?.title.toString().slice(0, 50) || 'Search'
   }
@@ -20,7 +20,7 @@ export async function generateMetadata({ params }: SearchPageProps) {
 
 export default async function SearchPage({ params }: SearchPageProps) {
   const userId = 'anonymous'
-  const chat = await getChat(params.id, userId)
+  const chat = await getSearchChat(params.id, userId)
 
   if (!chat) {
     redirect('/')

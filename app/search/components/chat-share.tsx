@@ -12,7 +12,7 @@ import {
   DialogDescription,
   DialogTitle
 } from '@/components/ui/dialog'
-import { shareChat } from '@/lib/actions/chat'
+import { shareSearchChat } from '@/lib/actions/searchChat'
 import { toast } from 'sonner'
 import { useCopyToClipboard } from '@/lib/hooks/use-copy-to-clipboard'
 import { Spinner } from '@/components/ui/spinner'
@@ -32,7 +32,7 @@ export function ChatShare({ chatId, className }: ChatShareProps) {
     startTransition(() => {
       setOpen(true)
     })
-    const result = await shareChat(chatId)
+    const result = await shareSearchChat(chatId)
     if (!result) {
       toast.error('Failed to share chat')
       return

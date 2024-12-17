@@ -4,7 +4,7 @@ import * as React from "react"
 import { useRouter } from "next/navigation"
 import { Trash } from "@phosphor-icons/react"
 
-import { Chat, ServerActionResult } from "@/lib/types"
+import { ServerActionResult } from "@/lib/types"
 import {
   AlertDialog,
   AlertDialogAction,
@@ -24,6 +24,7 @@ import {
 
 import LoadingSpinner from "./LoadingSpinner"
 import { useToast } from "./ui/use-toast"
+import {Chat} from "@prisma/client";
 
 interface SidebarActionsProps {
   chat: Chat
