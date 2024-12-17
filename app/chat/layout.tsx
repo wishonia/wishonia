@@ -1,4 +1,4 @@
-import { ChatHistory } from "@/components/ChatHistory"
+import { ChatSidebar } from "@/components/ChatSidebar"
 import ChatSidebarDesktop from "@/components/ChatSidebarDesktop"
 import ChatSidebarMobile from "@/components/ChatSidebarMobile"
 import ChatSidebarToggle from "@/components/ChatSidebarToggle"
@@ -13,7 +13,7 @@ export default async function ChatLayout({ children }: ChatLayoutProps) {
     <Providers>
       <div className="flex h-screen w-full">
         <ChatSidebarMobile>
-          <ChatHistory />
+          <ChatSidebar />
         </ChatSidebarMobile>
         <ChatSidebarToggle />
         <ChatSidebarDesktop />
