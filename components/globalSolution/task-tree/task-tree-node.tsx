@@ -11,19 +11,11 @@ import {
 import { Card } from "@/components/ui/card"
 import { Badge } from "@/components/ui/badge"
 import { Button } from "@/components/ui/button"
-
-interface GlobalTask {
-  id: string
-  name: string
-  description?: string | null
-  status: string
-  estimatedHours?: number | null
-  complexity?: 'LOW' | 'MEDIUM' | 'HIGH' | null
-  childTasks: { child: GlobalTask }[]
-}
+import { GlobalTaskWithChildren } from '@/types/globalTask'
+import { TaskStatus, TaskComplexity } from '@prisma/client'
 
 interface Props {
-  task: GlobalTask
+  task: GlobalTaskWithChildren
   level: number
 }
 
@@ -31,7 +23,7 @@ export function TaskTreeNode({ task, level }: Props) {
   const [isExpanded, setIsExpanded] = useState(true)
   const hasChildren = task.childTasks.length > 0
 
-  const getStatusColor = (status: string) => {
+  const getStatusColor = (status: TaskStatus) => {
     switch (status) {
       case 'COMPLETED':
         return 'bg-green-100 dark:bg-green-900 text-green-800 dark:text-green-100'
@@ -44,7 +36,7 @@ export function TaskTreeNode({ task, level }: Props) {
     }
   }
 
-  const getComplexityColor = (complexity?: 'LOW' | 'MEDIUM' | 'HIGH' | null) => {
+  const getComplexityColor = (complexity: TaskComplexity) => {
     switch (complexity) {
       case 'LOW':
         return 'bg-green-100 dark:bg-green-900 text-green-800 dark:text-green-100'
@@ -111,10 +103,53 @@ export function TaskTreeNode({ task, level }: Props) {
                   {task.complexity}
                 </Badge>
               )}
-              {task.estimatedHours && (
-                <span className="text-sm text-muted-foreground">
-                  ~{task.estimatedHours}h
+              {task.priority && (
+                <Badge variant="outline" className="font-normal">
+                  {task.priority}
+                </Badge>
+              )}
+              {task.isAtomic && (
+                <Badge variant="secondary" className="font-normal bg-purple-100 dark:bg-purple-900 text-purple-800 dark:text-purple-100">
+                  Atomic
+                </Badge>
+              )}
+              {task.tags && task.tags.length > 0 && (
+                <div className="flex gap-1 flex-wrap">
+                  {task.tags.map(tag => (
+                    <Badge key={tag} variant="outline" className="font-normal text-xs">
+                      {tag}
+                    </Badge>
+                  ))}
+                </div>
+              )}
+              <div className="flex items-center gap-2 text-sm text-muted-foreground">
+                {task.estimatedHours && (
+                  <span title="Estimated hours">~{task.estimatedHours}h</span>
+                )}
+                {task.actualHours && (
+                  <span title="Actual hours">{task.actualHours}h</span>
+                )}
+              </div>
+              {task.budget && (
+                <span className="text-sm text-muted-foreground" title="Budget">
+                  ${task.budget}
                 </span>
+              )}
+              {task.deliverable && (
+                <Popover>
+                  <PopoverTrigger asChild>
+                    <Button
+                      variant="outline"
+                      size="sm"
+                      className="h-6 px-2 text-xs"
+                    >
+                      Deliverable
+                    </Button>
+                  </PopoverTrigger>
+                  <PopoverContent className="w-80">
+                    <p className="text-sm text-foreground">{task.deliverable}</p>
+                  </PopoverContent>
+                </Popover>
               )}
             </div>
           </div>

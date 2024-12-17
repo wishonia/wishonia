@@ -203,13 +203,6 @@ model Person {
   web3Wallet       String?                  @unique
   website          String?
   callSchedules    CallSchedule[]
-
-  // Add compound index for first name + last name + email
-  @@unique([firstName, lastName, email], name: "name_email_unique")
-  
-  // New compound unique indexes
-  @@unique([phoneNumber, lastName, firstName], name: "phone_name_unique")
-  @@unique([twitterHandle, githubUsername], name: "social_handles_unique")
   
   // Add index for common queries
   @@index([name])

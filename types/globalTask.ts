@@ -1,14 +1,13 @@
-import { Prisma } from '@prisma/client'
-
-// Raw task type from Prisma
-export type PrismaTask = Prisma.GlobalTaskGetPayload<{}>
+import { GlobalTask as PrismaGlobalTask } from '@prisma/client'
 
 // Our enhanced task type with childTasks
-export interface GlobalTask extends PrismaTask {
-  childTasks: { child: GlobalTask }[]
+export type GlobalTaskWithChildren = PrismaGlobalTask & {
+  childTasks: {
+    child: GlobalTaskWithChildren
+  }[]
 }
 
-export interface GlobalTaskResponse {
-  tasks: GlobalTask[]
+export type GlobalTaskResponse = {
+  tasks: GlobalTaskWithChildren[]
   error?: string
 } 
