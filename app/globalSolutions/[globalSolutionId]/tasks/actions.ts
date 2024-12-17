@@ -3,10 +3,11 @@
 import GlobalSolutionDecomposerAgent from '@/lib/agents/taskGenerationAgent'
 import { getUserIdServer } from '@/lib/api/getUserIdServer'
 import { prisma } from '@/lib/db'
-import { GlobalTask, GlobalTaskResponse, PrismaTask } from '@/types/globalTask'
+import { GlobalTaskWithChildren, GlobalTaskResponse } from '@/types/globalTask'
+import { GlobalTask as PrismaGlobalTask } from '@prisma/client'
 
 // Helper to build tree structure from flat data
-function buildTaskTree(tasks: PrismaTask[], relationships: { parentId: string; childId: string }[]): GlobalTask[] {
+function buildTaskTree(tasks: PrismaGlobalTask[], relationships: { parentId: string; childId: string }[]): GlobalTaskWithChildren[] {
   // Create a map of child tasks for each parent
   const childrenMap = relationships.reduce((acc, { parentId, childId }) => {
     if (!acc[parentId]) {
@@ -17,11 +18,11 @@ function buildTaskTree(tasks: PrismaTask[], relationships: { parentId: string; c
   }, {} as Record<string, string[]>)
 
   // Recursive function to build task with all its descendants
-  function buildTaskWithChildren(task: PrismaTask): GlobalTask {
+  function buildTaskWithChildren(task: PrismaGlobalTask): GlobalTaskWithChildren {
     const childIds = childrenMap[task.id] || []
     const children = childIds
       .map(childId => tasks.find(t => t.id === childId))
-      .filter((child): child is PrismaTask => child !== undefined)
+      .filter((child): child is PrismaGlobalTask => child !== undefined)
       .map(child => ({
         child: buildTaskWithChildren(child)
       }))
@@ -72,7 +73,7 @@ export async function getGlobalSolutionTasks(globalSolutionId: string): Promise<
       }
     }
 
-    // If no tasks exist, generate them
+    // If no tasks exist, generate only the first level
     const userId = await getUserIdServer()
     if (!userId) {
       throw new Error('Authentication required to generate tasks')
@@ -86,9 +87,9 @@ export async function getGlobalSolutionTasks(globalSolutionId: string): Promise<
       throw new Error('Global Solution not found')
     }
 
-    // Generate tasks using the agent
+    // Generate only first level tasks using the agent
     const agent = new GlobalSolutionDecomposerAgent()
-    await agent.decomposeWithGoogleAI(globalSolution.name, userId)
+    await agent.decomposeAndStore(globalSolution.name, userId, 'single-level')
 
     // Fetch newly generated tasks and relationships
     const generatedTasks = await prisma.globalTask.findMany({
@@ -141,5 +142,22 @@ export async function getGlobalSolution(id: string) {
   } catch (error) {
     console.error('Error fetching global solution:', error)
     return null
+  }
+}
+
+export async function generateSubtasks(taskId: string, globalSolutionId: string) {
+  try {
+    const userId = await getUserIdServer()
+    if (!userId) {
+      throw new Error('Authentication required to generate tasks')
+    }
+
+    const agent = new GlobalSolutionDecomposerAgent()
+    await agent.decomposeTaskAndStore(taskId, userId, globalSolutionId)
+
+    return { success: true }
+  } catch (error) {
+    console.error('Error generating subtasks:', error)
+    throw error
   }
 } 

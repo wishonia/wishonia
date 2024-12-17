@@ -4,7 +4,7 @@ import { useEffect, useState } from 'react'
 import { TaskTreeNode } from '@/components/globalSolution/task-tree/task-tree-node'
 import GlobalBrainNetwork from '@/components/landingPage/global-brain-network'
 import { getGlobalSolutionTasks, getGlobalSolution } from '@/app/globalSolutions/[globalSolutionId]/tasks/actions'
-import { GlobalTask } from '@/types/globalTask'
+import { GlobalTaskWithChildren } from '@/types/globalTask'
 import { Card, CardHeader, CardTitle, CardContent } from "@/components/ui/card"
 import Link from 'next/link'
 import { Button } from "@/components/ui/button"
@@ -21,14 +21,13 @@ interface Props {
 
 export default function GlobalSolutionTaskTree({ globalSolutionId }: Props) {
   const [loading, setLoading] = useState(true)
-  const [tasks, setTasks] = useState<GlobalTask[]>([])
+  const [tasks, setTasks] = useState<GlobalTaskWithChildren[]>([])
   const [solution, setSolution] = useState<GlobalSolution | null>(null)
   const [error, setError] = useState<string | null>(null)
 
   useEffect(() => {
     const fetchData = async () => {
       try {
-        // Fetch both solution and tasks in parallel
         const [solutionResult, tasksResult] = await Promise.all([
           getGlobalSolution(globalSolutionId),
           getGlobalSolutionTasks(globalSolutionId)
@@ -43,21 +42,7 @@ export default function GlobalSolutionTaskTree({ globalSolutionId }: Props) {
         }
 
         setSolution(solutionResult)
-        
-        // Transform the data to match the GlobalTask interface
-        const transformedTasks = tasksResult.tasks.map((task: any): GlobalTask => ({
-          ...task,
-          childTasks: task.childTasks.map((relation: any) => ({
-            child: {
-              ...relation.child,
-              childTasks: relation.child.childTasks?.map((childRelation: any) => ({
-                child: childRelation.child
-              })) || []
-            }
-          }))
-        }))
-        
-        setTasks(transformedTasks)
+        setTasks(tasksResult.tasks)
       } catch (err) {
         setError(err instanceof Error ? err.message : 'Failed to load data')
       } finally {
@@ -103,11 +88,6 @@ export default function GlobalSolutionTaskTree({ globalSolutionId }: Props) {
     )
   }
 
-  // Filter to only show root tasks (tasks with no parents)
-  const rootTasks = tasks.filter(task => 
-    !tasks.some(t => t.childTasks.some(c => c.child.id === task.id))
-  )
-
   return (
     <Card className="mx-auto max-w-4xl">
       <CardHeader>
@@ -129,8 +109,13 @@ export default function GlobalSolutionTaskTree({ globalSolutionId }: Props) {
       </CardHeader>
       <CardContent className="p-6">
         <div className="space-y-3">
-          {rootTasks.map(task => (
-            <TaskTreeNode key={task.id} task={task} level={0} />
+          {tasks.map(task => (
+            <TaskTreeNode 
+              key={task.id} 
+              task={task} 
+              level={0}
+              globalSolutionId={globalSolutionId}
+            />
           ))}
         </div>
       </CardContent>
