@@ -30,7 +30,7 @@ const loadChats = cache(async (userId: string):  Promise<Chat[]> => {
 export async function ChatSidebarList({ userId }: SidebarListProps) {
   const chats = await loadChats(userId)
   return (
-    <div className="size-full">
+    <div className="h-[calc(100vh-8rem)] overflow-y-auto">
       {chats?.length ? (
         <SidebarItems chats={chats} />
       ) : (
