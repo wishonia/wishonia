@@ -10,8 +10,7 @@ import { AppStateProvider } from '@/lib/utils/app-state'
 
 
 const title = 'Search'
-const description =
-  'AI-powered answer engine with a generative UI.'
+const description = 'Search'
 
 export const metadata: Metadata = {
   metadataBase: new URL('https://wishonia.love'),
