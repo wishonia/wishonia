@@ -7,7 +7,6 @@ import { prisma } from "@/lib/db"
 import { getCurrentUser } from "@/lib/session"
 import type { Chat, ChatMessage, Agent } from "@prisma/client"
 
-type GetChatResult = (Chat & { messages: ChatMessage[]; agent: Agent | null })[] | null
 type SetChatResults = (Chat & { messages: ChatMessage[]; agent: Agent | null })[]
 
 export async function getChat(
@@ -43,7 +42,7 @@ export async function getChat(
   ]
 }
 
-export async function getChats(userId?: string | null): Promise<GetChatResult> {
+export async function getChats(userId?: string | null) {
   if (!userId) {
     return []
   }
@@ -54,18 +53,13 @@ export async function getChats(userId?: string | null): Promise<GetChatResult> {
         userId: userId,
       },
       include: {
-        messages: true, // Include related messages
-        agent: true, // Include related messages
+        //messages: true, // Include related messages
+        //agent: true, // Include related messages
       },
     })
 
-    // Cast messages in each chat to AIMessage type
-    const castedChats = receivedChats.map((chat: Chat & { messages: ChatMessage[]; agent: Agent | null }) => ({
-      ...chat,
-      messages: chat.messages.map((message: ChatMessage) => message),
-    }))
 
-    return castedChats
+    return receivedChats
   } catch (e) {
     console.error(`getChats error: ${e}`)
     return []
@@ -84,7 +78,7 @@ export async function removeChat({ id, path }: { id: string; path: string }) {
 
   if (!user) {
     return {
-      error: "UnuserIdized",
+      error: "Please sign in",
     }
   }
 
@@ -98,7 +92,7 @@ export async function removeChat({ id, path }: { id: string; path: string }) {
 
     if (!chat) {
       return {
-        error: "Chat not found or unuserIdized",
+        error: "Chat not found!",
       }
     }
   }

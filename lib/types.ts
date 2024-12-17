@@ -1,6 +1,6 @@
 import { type Message } from "ai"
 
-export interface Chat extends Record<string, any> {
+export interface ChatWithMessagesAndAgent extends Record<string, any> {
   id: string
   title: string
   userId: string
@@ -18,13 +18,6 @@ export type ServerActionResult<Result> = Promise<
     }
 >
 
-export interface Session {
-  id: string
-  email: string
-  family_name: string
-  given_name: string
-  createdAt: Date
-}
 
 export interface GithubUser {
   name?: string

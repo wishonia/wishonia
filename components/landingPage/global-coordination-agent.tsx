@@ -3,8 +3,16 @@ import React, { useState, useEffect } from 'react';
 import GlobalBrainNetwork from "@/components/landingPage/global-brain-network";
 import {globalProblems} from "@/components/landingPage/interactive-landing-page";
 
-const GlobalCoordinationAgent = () => {
-  const [currentIssue, setCurrentIssue] = useState('');
+interface GlobalCoordinationAgentProps {
+  initialIssue?: string;
+  title?: string;
+}
+
+const GlobalCoordinationAgent: React.FC<GlobalCoordinationAgentProps> = ({ 
+  initialIssue,
+  title = "GLOBAL COORDINATION AGENT" // Default title if none provided
+}) => {
+  const [currentIssue, setCurrentIssue] = useState(initialIssue || '');
   const [aiProgress, setAiProgress] = useState(0);
   const [networkNodes, setNetworkNodes] = useState(0);
 
@@ -12,9 +20,13 @@ const GlobalCoordinationAgent = () => {
     globalProblems.map(problem => `${problem.emoji} ${problem.name}`);
 
   useEffect(() => {
-    const issueInterval = setInterval(() => {
-      setCurrentIssue(globalIssues[Math.floor(Math.random() * globalIssues.length)]);
-    }, 1000);
+    let issueInterval: NodeJS.Timeout | undefined;
+    
+    if (!initialIssue) {
+      issueInterval = setInterval(() => {
+        setCurrentIssue(globalIssues[Math.floor(Math.random() * globalIssues.length)]);
+      }, 1000);
+    }
 
     const progressInterval = setInterval(() => {
       setAiProgress(prev => (prev < 100 ? prev + 1 : 0));
@@ -25,11 +37,11 @@ const GlobalCoordinationAgent = () => {
     }, 100);
 
     return () => {
-      clearInterval(issueInterval);
+      if (issueInterval) clearInterval(issueInterval);
       clearInterval(progressInterval);
       clearInterval(nodeInterval);
     };
-  }, []);
+  }, [initialIssue]);
 
   return (
     <div className="flex items-center justify-center p-4 overflow-hidden">
@@ -38,7 +50,7 @@ const GlobalCoordinationAgent = () => {
         <div className="absolute inset-0 opacity-10 animate-pulse"></div>
 
         <h1 className="text-4xl font-bold text-cyan-500 mb-6 animate-glitch">
-          GLOBAL COORDINATION AGENT
+          {title}
         </h1>
 
         <div className="mb-8 relative">

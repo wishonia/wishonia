@@ -10,7 +10,7 @@ interface SidebarMobileProps {
   children: React.ReactNode
 }
 
-function SidebarMobile({ children }: SidebarMobileProps) {
+function ChatSidebarMobile({ children }: SidebarMobileProps) {
   const { theme } = useTheme()
 
   return (
@@ -36,4 +36,4 @@ function SidebarMobile({ children }: SidebarMobileProps) {
   )
 }
 
-export default SidebarMobile
+export default ChatSidebarMobile

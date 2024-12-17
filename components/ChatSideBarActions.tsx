@@ -4,7 +4,7 @@ import * as React from "react"
 import { useRouter } from "next/navigation"
 import { Trash } from "@phosphor-icons/react"
 
-import { Chat, ServerActionResult } from "@/lib/types"
+import { ServerActionResult } from "@/lib/types"
 import {
   AlertDialog,
   AlertDialogAction,
@@ -24,13 +24,14 @@ import {
 
 import LoadingSpinner from "./LoadingSpinner"
 import { useToast } from "./ui/use-toast"
+import {Chat} from "@prisma/client";
 
 interface SidebarActionsProps {
   chat: Chat
   removeChat: (args: { id: string; path: string }) => ServerActionResult<void>
 }
 
-function SideBarActions({ chat, removeChat }: SidebarActionsProps) {
+function ChatSideBarActions({ chat, removeChat }: SidebarActionsProps) {
   const { toast } = useToast()
   const router = useRouter()
   const [deleteDialogOpen, setDeleteDialogOpen] = React.useState(false)
@@ -106,4 +107,4 @@ function SideBarActions({ chat, removeChat }: SidebarActionsProps) {
   )
 }
 
-export default SideBarActions
+export default ChatSideBarActions

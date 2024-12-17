@@ -6,7 +6,7 @@ import { Chat as ChatIcon } from "@phosphor-icons/react"
 import { motion } from "framer-motion"
 
 import { useLocalStorage } from "@/lib/hooks/use-local-storage"
-import { type Chat } from "@/lib/types"
+import {Chat} from "@prisma/client";
 
 interface SidebarItemProps {
   index: number
@@ -14,7 +14,7 @@ interface SidebarItemProps {
   children: React.ReactNode
 }
 
-function SidebarItem({ index, chat, children }: SidebarItemProps) {
+function ChatSidebarItem({ index, chat, children }: SidebarItemProps) {
   const pathname = usePathname()
   const isActive = pathname === chat.path
   const [newChatId, setNewChatId] = useLocalStorage("newChatId", null)
@@ -96,4 +96,4 @@ function SidebarItem({ index, chat, children }: SidebarItemProps) {
   )
 }
 
-export default SidebarItem
+export default ChatSidebarItem
