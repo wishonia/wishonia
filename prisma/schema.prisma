@@ -166,6 +166,7 @@ model User {
   marketingEmails                       Boolean                               @default(false)
   newsletterEmails                      Boolean                               @default(false)
   unsubscribeFromAll                    Boolean                               @default(false)
+  callSchedulesCreated                      CallSchedule[]
 }
 
 // Need this to create digital twins for people that are not users
@@ -201,6 +202,7 @@ model Person {
   userId           String?                  @unique
   web3Wallet       String?
   website          String?
+  callSchedules    CallSchedule[]
 }
 
 model Education {
@@ -756,6 +758,7 @@ model Agent {
   tools                AgentTool[]
   workflowSteps        WorkflowStep[]
   Chat                 Chat[]
+  callSchedules        CallSchedule[]
 
   @@unique([userId, name])
 }
@@ -1101,6 +1104,7 @@ model Chat {
   userId    String
   agentId   String?
   createdAt DateTime      @default(now())
+  updatedAt DateTime      @updatedAt
   path      String
   user      User          @relation(fields: [userId], references: [id])
   messages  ChatMessage[]
@@ -1112,6 +1116,7 @@ model ChatMessage {
   chatId        String
   tool_call_id  String?
   createdAt     DateTime    @default(now())
+  updatedAt     DateTime    @updatedAt
   content       String
   ui            String?
   role          MessageRole
@@ -2022,4 +2027,63 @@ model PetitionRepMessage {
   representative   Representative @relation(fields: [representativeId], references: [id])
   User             User?          @relation(fields: [userId], references: [id])
   userId           String?
+}
+
+model CallSchedule {
+  id        String   @id @default(cuid())
+  name      String // e.g. "Daily Health Check", "Medication Reminder"
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+  enabled   Boolean  @default(true)
+
+  // Who created/owns this schedule
+  userId String
+  user   User   @relation(fields: [userId], references: [id])
+
+  // Who is being called
+  personId String
+  person   Person @relation(fields: [personId], references: [id])
+
+  // Which agent makes the call
+  agentId String
+  agent   Agent  @relation(fields: [agentId], references: [id])
+
+  // Schedule configuration using cron syntax
+  cronExpression String // e.g. "0 9 * * *" for daily at 9am
+
+  // Optional end date for temporary schedules
+  endDate DateTime?
+
+  // Track call history
+  calls ScheduledCall[]
+
+  @@index([userId])
+  @@index([personId])
+  @@index([agentId])
+}
+
+model ScheduledCall {
+  id           String       @id @default(cuid())
+  scheduleId   String
+  schedule     CallSchedule @relation(fields: [scheduleId], references: [id])
+  scheduledFor DateTime // When the call was scheduled for
+  status       CallStatus   @default(SCHEDULED)
+  retellCallId String? // ID returned by Retell API
+  errorMessage String? // If the call failed
+  createdAt    DateTime     @default(now())
+  updatedAt    DateTime     @updatedAt
+  completedAt  DateTime? // When call was completed/failed/cancelled
+
+  @@index([scheduleId])
+  @@index([status])
+  @@index([scheduledFor])
+}
+
+enum CallStatus {
+  SCHEDULED
+  IN_PROGRESS
+  COMPLETED
+  FAILED
+  CANCELLED
+  NO_ANSWER
 }

@@ -4,14 +4,24 @@ import { triggerCall } from '@/lib/calls/retell'
 import { requireAuth } from '@/lib/auth'
 import prisma from '@/lib/prisma'
 import { revalidatePath } from 'next/cache'
+import { getOrCreatePersonForUser } from '@/lib/models/person'
 
 export async function savePhoneNumber(formData: FormData) {
   const session = await requireAuth('/phone-friend')
   const phone = formData.get('phone') as string
 
   // Save phone number to user profile
-  await prisma.user.update({
+  const user = await prisma.user.update({
     where: { id: session.user.id },
+    data: { phoneNumber: phone }
+  })
+
+  // get or create a Person for the User
+  const person = await getOrCreatePersonForUser(user)
+
+  // Add the phone number to the person
+  await prisma.person.update({
+    where: { id: person.id },
     data: { phoneNumber: phone }
   })
 
@@ -27,14 +37,17 @@ export async function initiateCall() {
     where: { id: session.user.id }
   })
 
-  console.log('Found user:', {
-    userId: user?.id,
-    hasPhoneNumber: !!user?.phoneNumber
-  })
-
   if (!user) {
     throw new Error('User not found')
   }
+
+  // get or create a Person for the User
+  const person = await getOrCreatePersonForUser(user)
+
+  console.log('Found user:', {
+    userId: user.id,
+    hasPhoneNumber: !!person.phoneNumber
+  })
 
   try {
     console.log('Calling Retell with config:', {
@@ -42,7 +55,7 @@ export async function initiateCall() {
       hasAgentId: !!process.env.RETELL_DEFAULT_AGENT_ID
     })
 
-    const callResponse = await triggerCall(user, {
+    const callResponse = await triggerCall(person, {
       fromNumber: process.env.RETELL_FROM_NUMBER || '',
       overrideAgentId: process.env.RETELL_DEFAULT_AGENT_ID,
       dropIfMachine: true,
