@@ -30,7 +30,7 @@ interface SidebarActionsProps {
   removeChat: (args: { id: string; path: string }) => ServerActionResult<void>
 }
 
-function SideBarActions({ chat, removeChat }: SidebarActionsProps) {
+function ChatSideBarActions({ chat, removeChat }: SidebarActionsProps) {
   const { toast } = useToast()
   const router = useRouter()
   const [deleteDialogOpen, setDeleteDialogOpen] = React.useState(false)
@@ -106,4 +106,4 @@ function SideBarActions({ chat, removeChat }: SidebarActionsProps) {
   )
 }
 
-export default SideBarActions
+export default ChatSideBarActions

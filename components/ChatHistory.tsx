@@ -4,7 +4,7 @@ import { Plus } from "@phosphor-icons/react/dist/ssr"
 import { getCurrentUser } from "@/lib/session"
 
 import ClearAllChats from "./ClearAllChats"
-import { SidebarList } from "./SidebarList"
+import { ChatSidebarList } from "./ChatSidebarList"
 import ThemeToggle from "./ThemeToggle"
 import UserBadge from "./UserBadge"
 
@@ -27,7 +27,7 @@ export async function ChatHistory() {
       </Link>
 
       <div className="size-full">
-        <SidebarList userId={loggedInUser ? loggedInUser.id : ""} />
+        <ChatSidebarList userId={loggedInUser ? loggedInUser.id : ""} />
       </div>
 
       <div className="flex flex-col gap-2">

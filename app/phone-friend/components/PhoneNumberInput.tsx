@@ -11,7 +11,7 @@ interface PhoneNumberInputProps {
   isLoggedIn: boolean
 }
 
-function formatPhoneNumber(value: string): string {
+export function formatPhoneNumber(value: string): string {
   // Remove all non-digit characters
   const digits = value.replace(/\D/g, '')
   
@@ -28,7 +28,7 @@ function formatPhoneNumber(value: string): string {
   return digits
 }
 
-function formatPhoneNumberForDisplay(value: string): string {
+export function formatPhoneNumberForDisplay(value: string): string {
   const digits = value.replace(/\D/g, '')
   
   if (digits.length <= 3) {
