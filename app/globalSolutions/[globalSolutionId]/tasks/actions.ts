@@ -3,10 +3,11 @@
 import GlobalSolutionDecomposerAgent from '@/lib/agents/taskGenerationAgent'
 import { getUserIdServer } from '@/lib/api/getUserIdServer'
 import { prisma } from '@/lib/db'
-import { GlobalTask, GlobalTaskResponse, PrismaTask } from '@/types/globalTask'
+import { GlobalTaskWithChildren, GlobalTaskResponse } from '@/types/globalTask'
+import { GlobalTask as PrismaGlobalTask } from '@prisma/client'
 
 // Helper to build tree structure from flat data
-function buildTaskTree(tasks: PrismaTask[], relationships: { parentId: string; childId: string }[]): GlobalTask[] {
+function buildTaskTree(tasks: PrismaGlobalTask[], relationships: { parentId: string; childId: string }[]): GlobalTaskWithChildren[] {
   // Create a map of child tasks for each parent
   const childrenMap = relationships.reduce((acc, { parentId, childId }) => {
     if (!acc[parentId]) {
@@ -17,11 +18,11 @@ function buildTaskTree(tasks: PrismaTask[], relationships: { parentId: string; c
   }, {} as Record<string, string[]>)
 
   // Recursive function to build task with all its descendants
-  function buildTaskWithChildren(task: PrismaTask): GlobalTask {
+  function buildTaskWithChildren(task: PrismaGlobalTask): GlobalTaskWithChildren {
     const childIds = childrenMap[task.id] || []
     const children = childIds
       .map(childId => tasks.find(t => t.id === childId))
-      .filter((child): child is PrismaTask => child !== undefined)
+      .filter((child): child is PrismaGlobalTask => child !== undefined)
       .map(child => ({
         child: buildTaskWithChildren(child)
       }))
