@@ -179,10 +179,10 @@ model Person {
   company          String?
   createdAt        DateTime                 @default(now())
   createdAtTwitter DateTime?
-  email            String?
+  email            String?                  @unique
   firstName        String?
   gender           String?
-  githubUsername   String?
+  githubUsername   String?                  @unique
   hireable         Boolean?
   image            String?
   jobTitle         String?
@@ -190,19 +190,31 @@ model Person {
   location         String?
   memberships      OrganizationMembership[]
   name             String
-  phoneNumber      String?
+  phoneNumber      String?                  @unique
   postalCode       String?
   profileBannerUrl String?
   stateProvince    String?
   telephone        String?
   timeZone         String?
-  twitterHandle    String?
+  twitterHandle    String?                  @unique
   updatedAt        DateTime                 @updatedAt
   user             User?                    @relation(fields: [userId], references: [id])
   userId           String?                  @unique
-  web3Wallet       String?
+  web3Wallet       String?                  @unique
   website          String?
   callSchedules    CallSchedule[]
+
+  // Add compound index for first name + last name + email
+  @@unique([firstName, lastName, email], name: "name_email_unique")
+  
+  // New compound unique indexes
+  @@unique([phoneNumber, lastName, firstName], name: "phone_name_unique")
+  @@unique([twitterHandle, githubUsername], name: "social_handles_unique")
+  
+  // Add index for common queries
+  @@index([name])
+  @@index([email])
+  @@index([phoneNumber])
 }
 
 model Education {

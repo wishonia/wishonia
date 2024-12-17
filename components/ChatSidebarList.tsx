@@ -4,7 +4,7 @@ import { Message } from "ai";
 
 import { getChats } from "@/app/actions"
 
-import SidebarItems from "./ChatSidebarItems"
+import ChatSidebarItems from "./ChatSidebarItems"
 
 interface SidebarListProps {
   userId: string
@@ -32,7 +32,7 @@ export async function ChatSidebarList({ userId }: SidebarListProps) {
   return (
     <div className="h-[calc(100vh-8rem)] overflow-y-auto">
       {chats?.length ? (
-        <SidebarItems chats={chats} />
+        <ChatSidebarItems chats={chats} />
       ) : (
         <div className="p-8 text-center">
           <p className="text-sm text-muted-foreground">No chat history</p>
