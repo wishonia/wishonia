@@ -5,6 +5,18 @@ import { prisma } from '@/lib/db';
 import {getModel} from "@/lib/utils/modelUtils";
 import { TaskSchema, TaskHierarchySchema, TaskInput, TaskHierarchy, TaskWithHierarchy } from '@/types/globalTask'
 
+interface DecomposeOptions {
+  mode: 'complete' | 'single-level';
+  parentTask?: {
+    task: {
+      id: string;
+      name: string;
+      description: string;
+    };
+    parentChain: string[];
+  };
+}
+
 class GlobalSolutionDecomposerAgent {
   private readonly maximumHoursForTask: number;
   private readonly temperature: number;
@@ -173,29 +185,34 @@ class GlobalSolutionDecomposerAgent {
     return result.object;
   }
 
-  private async decomposeIntoTasks(globalSolution: GlobalSolution | null, taskHierarchy?: TaskWithHierarchy): Promise<TaskInput[]> {
-
-    const hierarchyString = taskHierarchy
-        ? `\nTask Hierarchy: ${taskHierarchy.parentChain.join(' > ')} > ${taskHierarchy.task.name}`
-        : '';
+  private async decomposeIntoTasks(
+    globalSolution: GlobalSolution | null, 
+    options: DecomposeOptions
+  ): Promise<TaskInput[]> {
+    const { mode, parentTask } = options;
+    const hierarchyString = parentTask
+      ? `\nTask Hierarchy: ${parentTask.parentChain.join(' > ')} > ${parentTask.task.name}`
+      : '';
 
     let prompt = `
-    We're recursively breaking down the goal of "${globalSolution?.name}" into atomic tasks.
+    We're ${mode === 'complete' ? 'recursively' : ''} breaking down the ${parentTask ? 'task' : 'goal'} of "${parentTask ? parentTask.task.name : globalSolution?.name}" into ${mode === 'single-level' ? 'immediate subtasks' : 'atomic tasks'}.
     
-Decompose the following ${taskHierarchy ? 'Parent Task' : 'Goal'}:
-${taskHierarchy ? 'Parent Task' : 'Goal'} Name: ${taskHierarchy ? taskHierarchy.task.name : globalSolution?.name}
-${taskHierarchy ? 'Parent Task' : 'Goal'} Description: ${taskHierarchy ? taskHierarchy.task.description : globalSolution?.description}${hierarchyString}
+    ${parentTask ? 'Parent Task' : 'Goal'} Name: ${parentTask ? parentTask.task.name : globalSolution?.name}
+    ${parentTask ? 'Parent Task' : 'Goal'} Description: ${parentTask ? parentTask.task.description : globalSolution?.description}${hierarchyString}
 
-into general, high-level tasks that collectively cover all tasks absolutely required and essential  to completing it.
+    ${mode === 'single-level' 
+      ? 'Create only the immediate, direct subtasks needed for this specific task.' 
+      : 'Break this down into general, high-level tasks that collectively cover all required tasks.'}
 
-Important Notes:
-- We have a very limited budget, so imagine what this would look like if it was easy and we did the bare minimum work required.
-- DO NOT CREATE ANY TASK THAT IS NOT ABSOLUTELY NECESSARY TO COMPLETE THE ${taskHierarchy ? 'PARENT TASK' : 'GOAL'}.
-- Generate tasks that are general enough to ensure all necessary aspects of the ${taskHierarchy ? 'parent task' : 'goal'} are covered, even if it means the tasks are broader in scope.
-- Each generated task should be comprehensive and act as a parent task for further decomposition.
-- Consider the task hierarchy when creating subtasks, ensuring they are appropriately scoped and relevant to their parent tasks.
-- Ensure that the task breakdown is comprehensive and covers all aspects of the ${taskHierarchy ? 'parent task' : 'goal'}.
-`;
+    Important Notes:
+    - We have a very limited budget, so imagine what this would look like if it was easy and we did the bare minimum work required.
+    - DO NOT CREATE ANY TASK THAT IS NOT ABSOLUTELY NECESSARY.
+    - ${mode === 'single-level' 
+        ? 'Focus only on the immediate next level of subtasks.' 
+        : 'Generate tasks that are general enough to ensure all necessary aspects are covered.'}
+    - Each task should be clear, actionable, and well-defined.
+    - Consider the task hierarchy for proper scoping and relevance.
+    `;
     console.log(prompt);
     const result = await generateObject({
       //model: openai('gpt-4o'),
@@ -215,8 +232,7 @@ Important Notes:
     return result.object.tasks;
   }
 
-
-  async decomposeAndStore(globalSolutionName: string, userId: string): Promise<string> {
+  async decomposeAndStore(globalSolutionName: string, userId: string, mode: 'complete' | 'single-level' = 'complete'): Promise<string> {
     const globalSolution = await prisma.globalSolution.findUnique({
       where: { name: globalSolutionName },
     });
@@ -225,13 +241,98 @@ Important Notes:
       throw new Error(`GlobalSolution with name "${globalSolutionName}" not found.`);
     }
 
-    const tasks = await this.decomposeIntoTasks(globalSolution);
-    await this.storeTasksRecursively(tasks.map(task => ({ task, parentChain: [] })), globalSolution.id, userId);
+    const tasks = await this.decomposeIntoTasks(globalSolution, { mode });
+    await this.storeTasksRecursively(
+      tasks.map(task => ({ task, parentChain: [] })), 
+      globalSolution.id, 
+      userId,
+      undefined,
+      mode
+    );
 
-    return `Successfully decomposed GlobalSolution "${globalSolutionName}" into atomic tasks.`;
+    return `Successfully decomposed GlobalSolution "${globalSolutionName}" into ${mode === 'complete' ? 'atomic' : 'immediate'} tasks.`;
   }
 
-  private async storeTasksRecursively(tasks: TaskWithHierarchy[], globalSolutionId: string, userId: string, parentTaskId?: string): Promise<void> {
+  async decomposeTaskAndStore(
+    taskId: string,
+    userId: string,
+    globalSolutionId: string
+  ): Promise<string> {
+    // Fetch the task with its relations
+    const task = await prisma.globalTask.findUnique({
+      where: { id: taskId },
+      include: {
+        // Get child tasks through the relation table
+        childTasks: {
+          include: {
+            child: true
+          }
+        },
+        // Get parent tasks through the relation table
+        parentTasks: {
+          include: {
+            parent: true
+          }
+        }
+      }
+    });
+
+    if (!task) {
+      throw new Error('Task not found');
+    }
+
+    // Build parent chain
+    const parentChain = await this.buildParentChain(taskId);
+
+    const subtasks = await this.decomposeIntoTasks(null, {
+      mode: 'single-level',
+      parentTask: {
+        task: {
+          id: task.id,
+          name: task.name,
+          description: task.description || ''
+        },
+        parentChain
+      }
+    });
+
+    await this.storeTasksRecursively(
+      subtasks.map(subtask => ({ task: subtask, parentChain: [...parentChain, task.name] })),
+      globalSolutionId,
+      userId,
+      taskId,
+      'single-level'
+    );
+
+    return `Successfully decomposed task "${task.name}" into immediate subtasks.`;
+  }
+
+  private async buildParentChain(taskId: string): Promise<string[]> {
+    const parentChain: string[] = [];
+    let currentTaskId = taskId;
+
+    while (true) {
+      const parentRelation = await prisma.globalTaskRelation.findFirst({
+        where: { childId: currentTaskId },
+        include: { parent: true }
+      });
+
+      if (!parentRelation) break;
+
+      parentChain.unshift(parentRelation.parent.name);
+      currentTaskId = parentRelation.parentId;
+    }
+
+    return parentChain;
+  }
+
+  private async storeTasksRecursively(
+    tasks: TaskWithHierarchy[], 
+    globalSolutionId: string, 
+    userId: string, 
+    parentTaskId?: string,
+    mode: 'complete' | 'single-level' = 'complete'
+  ): Promise<void> {
     for (const { task, parentChain } of tasks) {
       let createdTask = await prisma.globalTask.findUnique({
         where: { name: task.name },
@@ -273,14 +374,26 @@ Important Notes:
         }
       }
 
-      if (!task.isAtomic && (task.estimatedHours > this.maximumHoursForTask || task.complexity === TaskComplexity.HIGH)) {
+      if (mode === 'complete' && !task.isAtomic && 
+          (task.estimatedHours > this.maximumHoursForTask || task.complexity === TaskComplexity.HIGH)) {
         const newParentChain = [...parentChain, task.name];
-        const subtasks = await this.decomposeIntoTasks(null, { task, parentChain: newParentChain });
+        const subtasks = await this.decomposeIntoTasks(null, {
+          mode: 'complete',
+          parentTask: { 
+            task: {
+              id: createdTask.id,
+              name: createdTask.name,
+              description: createdTask.description || ''
+            }, 
+            parentChain: newParentChain 
+          }
+        });
         await this.storeTasksRecursively(
-            subtasks.map(subtask => ({ task: subtask, parentChain: newParentChain })),
-            globalSolutionId,
-            userId,
-            createdTask.id
+          subtasks.map(subtask => ({ task: subtask, parentChain: newParentChain })),
+          globalSolutionId,
+          userId,
+          createdTask.id,
+          mode
         );
       }
     }
