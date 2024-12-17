@@ -1,4 +1,14 @@
-import { User } from '@prisma/client'
+import { Person } from '@prisma/client'
+import Retell from 'retell-sdk';
+import type { CallResponse } from 'retell-sdk/resources/call';
+
+function getRetellClient() {
+  const apiKey = process.env.RETELL_API_KEY
+  if (!apiKey) {
+    throw new RetellError('RETELL_API_KEY environment variable is not set')
+  }
+  return new Retell({ apiKey })
+}
 
 interface RetellCallOptions {
   fromNumber: string
@@ -8,12 +18,7 @@ interface RetellCallOptions {
   dropIfMachine?: boolean
 }
 
-interface RetellCallResponse {
-  call_id: string
-  status: string
-  created_at: string
-  // Add other response fields as needed
-}
+type RetellCallResponse = CallResponse
 
 export class RetellError extends Error {
   constructor(
@@ -27,74 +32,40 @@ export class RetellError extends Error {
 }
 
 export async function triggerCall(
-  user: User,
+  person: Person,
   options: RetellCallOptions
 ): Promise<RetellCallResponse> {
   console.log('Attempting to trigger call for user:', {
-    userId: user.id,
-    hasPhoneNumber: !!user.phoneNumber,
+    userId: person.id,
+    hasPhoneNumber: !!person.phoneNumber,
     options
   })
 
-  if (!user.phoneNumber) {
+  if (!person.phoneNumber) {
     throw new RetellError('User has no phone number')
   }
 
-  const apiKey = process.env.RETELL_API_KEY
-  if (!apiKey) {
-    throw new RetellError('RETELL_API_KEY environment variable is not set')
-  }
-
   try {
-    const requestBody = {
+    const client = getRetellClient()
+    
+    const response = await client.call.createPhoneCall({
       from_number: options.fromNumber,
-      to_number: user.phoneNumber,
+      to_number: person.phoneNumber,
       override_agent_id: options.overrideAgentId,
       metadata: {
-        userId: user.id,
-        userName: user.name,
+        personId: person.id,
+        name: person.name,
         ...options.metadata,
       },
       retell_llm_dynamic_variables: {
-        customer_name: user.name,
+        customer_name: person.name,
         ...options.dynamicVariables,
       },
-      drop_call_if_machine_detected: options.dropIfMachine ?? true,
-    }
-
-    console.log('Making Retell API request:', {
-      url: 'https://api.retellai.com/create-phone-call',
-      body: requestBody,
-      hasApiKey: !!apiKey
+      //drop_if_machine_detected: options.dropIfMachine ?? true,
     })
 
-    const response = await fetch('https://api.retellai.com/create-phone-call', {
-      method: 'POST',
-      headers: {
-        'Authorization': `Bearer ${apiKey}`,
-        'Content-Type': 'application/json',
-      },
-      body: JSON.stringify(requestBody),
-    })
-
-    console.log('Retell API response:', {
-      status: response.status,
-      ok: response.ok,
-    })
-
-    if (!response.ok) {
-      const errorData = await response.json()
-      console.error('Retell API error details:', errorData)
-      throw new RetellError(
-        'Failed to create call',
-        response.status,
-        errorData
-      )
-    }
-
-    const responseData = await response.json()
-    console.log('Retell API success response:', responseData)
-    return responseData
+    console.log('Retell API success response:', response)
+    return response
   } catch (error) {
     console.error('Error in triggerCall:', error)
     if (error instanceof RetellError) {
@@ -107,27 +78,10 @@ export async function triggerCall(
 }
 
 export async function getCallStatus(callId: string): Promise<RetellCallResponse> {
-  const apiKey = process.env.RETELL_API_KEY
-  if (!apiKey) {
-    throw new RetellError('RETELL_API_KEY environment variable is not set')
-  }
-
   try {
-    const response = await fetch(`https://api.retellai.com/calls/${callId}`, {
-      headers: {
-        'Authorization': `Bearer ${apiKey}`,
-      },
-    })
-
-    if (!response.ok) {
-      throw new RetellError(
-        'Failed to get call status',
-        response.status,
-        await response.json()
-      )
-    }
-
-    return response.json()
+    const client = getRetellClient()
+    const response = await client.call.retrieve(callId)
+    return response
   } catch (error) {
     if (error instanceof RetellError) {
       throw error
