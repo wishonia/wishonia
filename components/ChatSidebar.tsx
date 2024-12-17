@@ -26,7 +26,7 @@ export async function ChatSidebar() {
         <Plus /> <span>New Chat</span>
       </Link>
 
-      <div className="flex-1 min-h-0 overflow-hidden">
+      <div className="flex-1 min-h-0">
         <ChatSidebarList userId={loggedInUser ? loggedInUser.id : ""} />
       </div>
 
