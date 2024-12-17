@@ -3,13 +3,13 @@
 import { Chat } from "@/lib/types"
 import { removeChat } from "@/app/actions"
 
-import SideBarActions from "./SideBarActions"
-import SidebarItem from "./SidebarItem"
+import ChatSideBarActions from "./ChatSideBarActions"
+import ChatSidebarItem from "./ChatSidebarItem"
 
 interface SidebarItemsProps {
   chats?: Chat[]
 }
-function SidebarItems({ chats }: SidebarItemsProps) {
+function ChatSidebarItems({ chats }: SidebarItemsProps) {
   if (!chats?.length) return null
 
   return (
@@ -23,13 +23,13 @@ function SidebarItems({ chats }: SidebarItemsProps) {
           (chat, index) =>
             chat && (
               <div key={chat.id} className="w-full">
-                <SidebarItem index={index} chat={chat}>
-                  <SideBarActions
+                <ChatSidebarItem index={index} chat={chat}>
+                  <ChatSideBarActions
                     chat={chat}
                     removeChat={removeChat}
                     // shareChat={shareChat}
                   />
-                </SidebarItem>
+                </ChatSidebarItem>
               </div>
             )
         )
@@ -38,4 +38,4 @@ function SidebarItems({ chats }: SidebarItemsProps) {
   )
 }
 
-export default SidebarItems
+export default ChatSidebarItems

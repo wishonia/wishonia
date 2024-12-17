@@ -4,7 +4,7 @@ import { ChatMessage } from "@prisma/client"
 
 import { getChats } from "@/app/actions"
 
-import SidebarItems from "./SidebarItems"
+import SidebarItems from "./ChatSidebarItems"
 
 interface SidebarListProps {
   userId: string
@@ -30,7 +30,7 @@ const loadChats = cache(async (userId: string) => {
   }))
 })
 
-export async function SidebarList({ userId }: SidebarListProps) {
+export async function ChatSidebarList({ userId }: SidebarListProps) {
   const chats = await loadChats(userId)
   return (
     <div className="size-full">

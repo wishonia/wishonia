@@ -14,7 +14,7 @@ interface SidebarItemProps {
   children: React.ReactNode
 }
 
-function SidebarItem({ index, chat, children }: SidebarItemProps) {
+function ChatSidebarItem({ index, chat, children }: SidebarItemProps) {
   const pathname = usePathname()
   const isActive = pathname === chat.path
   const [newChatId, setNewChatId] = useLocalStorage("newChatId", null)
@@ -96,4 +96,4 @@ function SidebarItem({ index, chat, children }: SidebarItemProps) {
   )
 }
 
-export default SidebarItem
+export default ChatSidebarItem
