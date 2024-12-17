@@ -1,39 +1,9 @@
-import { GlobalSolution, TaskStatus } from '@prisma/client';
+import { GlobalSolution, TaskStatus, TaskComplexity } from '@prisma/client';
 import { generateObject } from 'ai';
-import {z, ZodSchema} from 'zod';
+import {z} from 'zod';
 import { prisma } from '@/lib/db';
 import {getModel} from "@/lib/utils/modelUtils";
-
-const TaskSchema: ZodSchema = z.object({
-  name: z.string().describe('Unique, long, descriptive name for the task specific to its goal to avoid duplication with similar tasks for different goals.'),
-  description: z.string().describe('Detailed description of what needs to be done to complete the task.'),
-  estimatedHours: z.number().describe('Estimated time to complete the task in hours.'),
-  isAtomic: z.boolean().describe('True if this task cannot be meaningfully broken down into smaller tasks, false otherwise.'),
-  skills: z.array(z.string()).optional().describe('Array of specific skills required to complete this task.'),
-  complexity: z.enum(['Low', 'Medium', 'High']).describe("Assessment of the task's complexity level."),
-  deliverables: z.string().optional().describe('Brief description of the expected  outcome or deliverable of the task.'),
-});
-
-type TaskInput = z.infer<typeof TaskSchema>;
-
-// Define a recursive schema for task hierarchy
-const TaskHierarchySchema: z.ZodType<{
-  name: string;
-  subtasks?: Array<{
-    name: string;
-    subtasks?: any[];
-  }>;
-}> = z.object({
-  name: z.string().describe('The name of the task'),
-  subtasks: z.array(z.lazy(() => TaskHierarchySchema)).optional().describe('Array of subtasks'),
-});
-
-type TaskHierarchy = z.infer<typeof TaskHierarchySchema>;
-
-interface TaskWithHierarchy {
-  task: TaskInput;
-  parentChain: string[];
-}
+import { TaskSchema, TaskHierarchySchema, TaskInput, TaskHierarchy, TaskWithHierarchy } from '@/types/globalTask'
 
 class GlobalSolutionDecomposerAgent {
   private readonly maximumHoursForTask: number;
@@ -303,7 +273,7 @@ Important Notes:
         }
       }
 
-      if (!task.isAtomic && (task.estimatedHours > this.maximumHoursForTask || task.complexity === 'High')) {
+      if (!task.isAtomic && (task.estimatedHours > this.maximumHoursForTask || task.complexity === TaskComplexity.HIGH)) {
         const newParentChain = [...parentChain, task.name];
         const subtasks = await this.decomposeIntoTasks(null, { task, parentChain: newParentChain });
         await this.storeTasksRecursively(
