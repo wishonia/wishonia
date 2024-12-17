@@ -7,7 +7,7 @@ import { useSidebar } from "@/lib/hooks/use-sidebar"
 
 import { Button } from "./ui/button"
 
-function SidebarToggle() {
+function ChatSidebarToggle() {
   const { theme } = useTheme()
   const { isSidebarOpen, toggleSidebar } = useSidebar()
   return (
@@ -25,4 +25,4 @@ function SidebarToggle() {
   )
 }
 
-export default SidebarToggle
+export default ChatSidebarToggle

@@ -1,10 +1,10 @@
-import { cache } from "react"
-import { Message } from "ai"
-import { ChatMessage } from "@prisma/client"
+import { cache } from "react";
+import { Chat, ChatMessage } from "@prisma/client"
+import { Message } from "ai";
 
 import { getChats } from "@/app/actions"
 
-import SidebarItems from "./SidebarItems"
+import ChatSidebarItems from "./ChatSidebarItems"
 
 interface SidebarListProps {
   userId: string
@@ -22,20 +22,17 @@ function convertToAIMessage(message: ChatMessage): Message {
   }
 }
 
-const loadChats = cache(async (userId: string) => {
+const loadChats = cache(async (userId: string):  Promise<Chat[]> => {
   const chats = await getChats(userId)
-  return chats?.map(chat => ({
-    ...chat,
-    messages: chat.messages.map(convertToAIMessage)
-  }))
+  return chats
 })
 
-export async function SidebarList({ userId }: SidebarListProps) {
+export async function ChatSidebarList({ userId }: SidebarListProps) {
   const chats = await loadChats(userId)
   return (
-    <div className="size-full">
+    <div className="h-[calc(100vh-8rem)] overflow-y-auto">
       {chats?.length ? (
-        <SidebarItems chats={chats} />
+        <ChatSidebarItems chats={chats} />
       ) : (
         <div className="p-8 text-center">
           <p className="text-sm text-muted-foreground">No chat history</p>

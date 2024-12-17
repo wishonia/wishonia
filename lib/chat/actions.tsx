@@ -17,7 +17,7 @@ import Repositories from "@/components/assistant/Repositories"
 import { PollRandomGlobalProblems } from "@/components/poll-random-global-problems"
 import { text2measurements } from "@/lib/text2measurements"
 
-import { Chat } from "../types"
+import { ChatWithMessagesAndAgent } from "../types"
 import { nanoid } from "../utils"
 import { readmeAction, repoAction } from "./submit-user-action"
 import { submitUserMessage } from "./submit-user-message"
@@ -105,7 +105,7 @@ export const AI = createAI<AIState, UIState>({
     if (user) {
       const aiState = getAIState()
       if (aiState) {
-        return getUIStateFromAIState(aiState as Chat)
+        return getUIStateFromAIState(aiState as ChatWithMessagesAndAgent)
       }
     } else {
       return
@@ -125,7 +125,7 @@ export const AI = createAI<AIState, UIState>({
       const path = `/chat/${chatId}`
       const title = messages[1].content.substring(0, 100)
 
-      const savedChat: Chat = {
+      const savedChat: ChatWithMessagesAndAgent = {
         id: chatId,
         title: title,
         userId: userId,
@@ -145,7 +145,7 @@ export const AI = createAI<AIState, UIState>({
 
 // Parses the previously rendered content and returns the UI state.
 // (Useful for chat history to rerender the UI components again when switching between the chats)
-export const getUIStateFromAIState = async (aiState: Chat) => {
+export const getUIStateFromAIState = async (aiState: ChatWithMessagesAndAgent) => {
   const user = await getCurrentUser()
   return aiState.messages
     .filter((message: Message) => message.role !== "system")

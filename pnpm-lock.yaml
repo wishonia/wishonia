@@ -494,6 +494,9 @@ importers:
       resend:
         specifier: ^4.0.1
         version: 4.0.1(react-dom@18.2.0(react@18.2.0))(react@18.2.0)
+      retell-sdk:
+        specifier: ^4.11.0
+        version: 4.11.0
       sharp:
         specifier: ^0.33.4
         version: 0.33.5
@@ -10773,6 +10776,9 @@ packages:
   restore-cursor@3.1.0:
     resolution: {integrity: sha512-l+sSefzHpj5qimhFSE5a8nufZYAM3sBSVMAPtYkmC+4EH2anSGaEMXSD0izRQbu9nfyQ9y5JrVmp7E8oZrUjvA==}
     engines: {node: '>=8'}
+
+  retell-sdk@4.11.0:
+    resolution: {integrity: sha512-kYurmntPiEwk4jSOYt5TdGbdJGiGbqpKhbH+IUImweyPnOYgslTo4c87XjZkOGV3FAtmnBBOQw9zLGN9gU1NJg==}
 
   retry@0.13.1:
     resolution: {integrity: sha512-XQBQ3I8W1Cge0Seh+6gjj03LbmRFWuoszgK9ooCpwYIrhhoO80pfq4cUkU5DkknwfOfFteRwlZ56PYOGYyFWdg==}
@@ -25715,6 +25721,18 @@ snapshots:
     dependencies:
       onetime: 5.1.2
       signal-exit: 3.0.7
+
+  retell-sdk@4.11.0:
+    dependencies:
+      '@types/node': 18.19.50
+      '@types/node-fetch': 2.6.11
+      abort-controller: 3.0.0
+      agentkeepalive: 4.5.0
+      form-data-encoder: 1.7.2
+      formdata-node: 4.4.1
+      node-fetch: 2.7.0
+    transitivePeerDependencies:
+      - encoding
 
   retry@0.13.1: {}
 

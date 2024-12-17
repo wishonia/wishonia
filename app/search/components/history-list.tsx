@@ -1,7 +1,7 @@
 import React, { cache } from 'react'
 import HistoryItem from './history-item'
 import { Chat } from '@/lib/types/index'
-import { getChats } from '@/lib/actions/chat'
+import { getSearchChats } from '@/lib/actions/searchChat'
 import { ClearHistory } from './clear-history'
 
 type HistoryListProps = {
@@ -9,7 +9,7 @@ type HistoryListProps = {
 }
 
 const loadChats = cache(async (userId?: string) => {
-  return await getChats(userId)
+  return await getSearchChats(userId)
 })
 
 // Start of Selection
