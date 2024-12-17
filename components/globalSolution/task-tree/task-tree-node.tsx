@@ -13,15 +13,33 @@ import { Badge } from "@/components/ui/badge"
 import { Button } from "@/components/ui/button"
 import { GlobalTaskWithChildren } from '@/types/globalTask'
 import { TaskStatus, TaskComplexity } from '@prisma/client'
+import { generateSubtasks } from '@/app/globalSolutions/[globalSolutionId]/tasks/actions'
 
 interface Props {
   task: GlobalTaskWithChildren
   level: number
+  globalSolutionId: string
 }
 
-export function TaskTreeNode({ task, level }: Props) {
+export function TaskTreeNode({ task, level, globalSolutionId }: Props) {
   const [isExpanded, setIsExpanded] = useState(true)
+  const [isLoading, setIsLoading] = useState(false)
+  const [error, setError] = useState<string | null>(null)
   const hasChildren = task.childTasks.length > 0
+
+  const handleGenerateSubtasks = async () => {
+    try {
+      setIsLoading(true)
+      setError(null)
+      await generateSubtasks(task.id, globalSolutionId)
+      // Refresh the page to show new tasks
+      window.location.reload()
+    } catch (err) {
+      setError(err instanceof Error ? err.message : 'Failed to generate subtasks')
+    } finally {
+      setIsLoading(false)
+    }
+  }
 
   const getStatusColor = (status: TaskStatus) => {
     switch (status) {
@@ -56,7 +74,7 @@ export function TaskTreeNode({ task, level }: Props) {
         level > 0 && "ml-6 mt-3 first:mt-0"
       )}>
         <div className="flex items-start p-3">
-          <Button
+          <Button 
             variant="ghost"
             size="sm"
             onClick={() => setIsExpanded(!isExpanded)}
@@ -71,6 +89,19 @@ export function TaskTreeNode({ task, level }: Props) {
           <div className="flex-1 ml-2">
             <div className="flex items-center flex-wrap gap-2">
               <h3 className="font-medium text-foreground">{task.name}</h3>
+              
+              {/* Generate Subtasks Button */}
+              {!hasChildren && (
+                <Button 
+                  variant="outline" 
+                  size="sm"
+                  onClick={handleGenerateSubtasks}
+                  disabled={isLoading}
+                >
+                  {isLoading ? 'Generating...' : 'Generate Subtasks'}
+                </Button>
+              )}
+
               {task.description && (
                 <Popover>
                   <PopoverTrigger asChild>
@@ -156,13 +187,18 @@ export function TaskTreeNode({ task, level }: Props) {
         </div>
       </Card>
 
+      {error && (
+        <p className="text-sm text-destructive mt-1 ml-6">{error}</p>
+      )}
+
       {isExpanded && hasChildren && (
         <div className="pl-4 border-l border-border ml-4 mt-1">
           {task.childTasks.map(({ child }) => (
             <TaskTreeNode 
               key={child.id} 
               task={child} 
-              level={level + 1} 
+              level={level + 1}
+              globalSolutionId={globalSolutionId}
             />
           ))}
         </div>
