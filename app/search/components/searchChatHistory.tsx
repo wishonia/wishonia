@@ -22,7 +22,7 @@ type HistoryProps = {
   children?: React.ReactNode
 }
 
-export function History({ location, children }: HistoryProps) {
+export function SearchChatHistory({ location, children }: HistoryProps) {
   const router = useRouter()
   const [isPending, startTransition] = useTransition()
   const { isGenerating, setIsGenerating } = useAppState()
