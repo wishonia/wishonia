@@ -62,6 +62,8 @@ import { ImSpinner8, ImStatsBars } from "react-icons/im"
 import { LuSettings } from "react-icons/lu"
 import { MdDeleteForever, MdOutlineLogout } from "react-icons/md"
 import { RxDashboard, RxMixerHorizontal, RxPencil1 } from "react-icons/rx"
+import { FaBuilding, FaScaleBalanced, FaFileLines } from "react-icons/fa6"
+import { BsPencilSquare } from "react-icons/bs"
 
 export type IconKeys = keyof typeof icons
 
@@ -152,6 +154,12 @@ const icons = {
   studies: FaGoogleScholar,
   petition: FaScroll,
   savings: FaMoneyBill,
+
+  // Add these new icons
+  document: FaFileLines,      // For articles
+  building: FaBuilding,       // For organizations
+  pencilSquare: BsPencilSquare, // For petitions
+  scale: FaScaleBalanced,     // For warVsCures comparison
 }
 
 export const Icons: IconsType = icons

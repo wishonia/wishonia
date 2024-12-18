@@ -20,15 +20,7 @@ export const generalNavigation = {
   } as Navigation,
 
   sidebarNav: {
-    data: [
-      commonLinks.dashboard,
-      wishoniaLinks.globalProblemsVote,
-      wishoniaLinks.globalSolutionsVote,
-      commonLinks.docs,
-      commonLinks.contributeOnGithub,
-      wishoniaLinks.researcher,
-      dfdaLinks.dfda,
-    ],
+    data: wishoniaNavigation.sidebarNav,
   } as Navigation,
 }
 export const globalProblemsVoteLink = wishoniaLinks.globalProblemsVote
