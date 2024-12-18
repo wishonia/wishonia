@@ -13,7 +13,7 @@ const loadChats = cache(async (userId?: string) => {
 })
 
 // Start of Selection
-export async function HistoryList({ userId }: HistoryListProps) {
+export async function SearchChatHistoryList({ userId }: HistoryListProps) {
   const chats = await loadChats(userId)
 
   return (
