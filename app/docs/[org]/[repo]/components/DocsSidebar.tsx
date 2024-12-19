@@ -6,6 +6,7 @@ import { usePathname, useRouter, useSearchParams } from "next/navigation"
 import { cn } from "@/lib/utils"
 
 import { type MenuItem } from "../lib/parseSummary"
+import SearchBar from "./SearchBar"
 
 interface DocsSidebarProps {
   menu: MenuItem[]
@@ -70,8 +71,13 @@ export default function DocsSidebar({ menu, onClose }: DocsSidebarProps) {
   }
 
   return (
-    <div className="h-[calc(100vh-10rem)] overflow-y-auto text-foreground">
-      {menu.map((item) => renderMenuItem(item))}
-    </div>
+    <>
+      <div className="p-4">
+        <SearchBar menu={menu} />
+      </div>
+      <div className="h-[calc(100vh-10rem)] overflow-y-auto text-foreground p-4">
+        {menu.map((item) => renderMenuItem(item))}
+      </div>
+    </>
   )
 }
