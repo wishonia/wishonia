@@ -346,7 +346,7 @@ async function generateAndSavePeople(
 
         const saved = await prisma.person.upsert({
           where: {
-            name: person.name // Use name as unique identifier
+            id: `${person.name.toLowerCase().replace(/\s+/g, '-')}-${Date.now()}`
           },
           update: {
             bio: person.bio || undefined,
@@ -378,6 +378,7 @@ async function generateAndSavePeople(
             }
           },
           create: {
+            id: `${person.name.toLowerCase().replace(/\s+/g, '-')}-${Date.now()}`,
             name: person.name,
             email: `${person.name.toLowerCase().replace(/\s+/g, '.')}@example.com`,
             userId: 'system', // Required field
