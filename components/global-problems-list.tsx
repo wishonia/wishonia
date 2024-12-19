@@ -13,6 +13,7 @@ import Link from "next/link";
 import {cn} from "@/lib/utils";
 import Image from "next/image";
 import CoolGlobalProblemsPieChart from "@/components/global-problems-pie-chart";
+import { GlobalProblemNavigationButton } from "@/components/globalProblem/GlobalProblemNavigationButton"
 
 interface PollProps {
   user?: User
@@ -93,17 +94,14 @@ export const globalProblemColumns: ColumnDef<GlobalProblem>[] = [
     id: "actions",
     cell: ({ row }) => {
       const globalProblem = row.original
-      const {id} = globalProblem
       return (
-          <Button
-              variant="ghost"
-              onClick={() =>
-                  (window.location.href = `/globalProblems/${id}/solutions`)
-              }
-          >
-            Solutions
-            <Icons.lightbulb className="ml-2 h-4 w-4" />
-          </Button>
+        <div className="flex items-center gap-2">
+          <GlobalProblemNavigationButton 
+            globalProblem={globalProblem}
+            variant="ghost"
+            showNavigateText={false}
+          />
+        </div>
       )
     },
   },

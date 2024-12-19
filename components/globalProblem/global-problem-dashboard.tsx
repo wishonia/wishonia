@@ -1,8 +1,8 @@
 'use client';
 
 import { useEffect, useState } from 'react';
-import { GlobalProblem } from '@prisma/client';
-import { BarChart, Book, ChevronDown, ChevronUp, Clock, FlaskRoundIcon as Flask, MessageSquare, Trophy, Users } from 'lucide-react';
+import { GlobalProblem, FocusLevel, ExpertiseLevel } from '@prisma/client';
+import { BarChart, Book, ChevronDown, ChevronUp, Clock, FlaskRoundIcon as Flask, MessageSquare, Trophy, Building2, Users2 } from 'lucide-react';
 import { GlobalProblemDashboardData } from "@/lib/schemas/global-problem-dashboard";
 import { Accordion, AccordionContent, AccordionItem, AccordionTrigger } from '@/components/ui/accordion';
 import { BarChart as BarChartComponent } from '@/components/ui/bar-chart';
@@ -10,40 +10,88 @@ import { Button } from '@/components/ui/button';
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '@/components/ui/card';
 import { ScrollArea } from '@/components/ui/scroll-area';
 import { Timeline, TimelineItem } from '@/components/ui/timeline';
-import { generateGlobalProblemDashboard } from "@/app/actions/generate-global-problem-dashboard"
+import { generateGlobalProblemDashboard, getGlobalProblemRelationshipsAction } from "@/app/actions/generate-global-problem-dashboard"
 import { GlobalProblemSolutionsList } from '../global-problem-solutions-list';
 import GlobalCoordinationAgent from '../landingPage/global-coordination-agent';
 import { ExtendedUser } from '@/types/auth';
 import { PollRandomGlobalProblemSolutions } from '../poll-random-global-problem-solutions';
 import { GlobalProblemRenderer } from './GlobalProblemRenderer';
+import { Badge } from '@/components/ui/badge';
+import { 
+  getGlobalProblemRelationships,
+  type GlobalProblemRelationships,
+  type RelatedOrganization,
+  type RelatedPerson 
+} from '@/lib/queries/globalProblemQueries'
 
 interface GlobalProblemDashboardProps {
   globalProblem: GlobalProblem;
   user: ExtendedUser;
 }
 
-type SectionTitle = 'Overview' | 'Current Solutions' | 'Key Players'
+type SectionTitle = 'Overview' | 'Current Solutions' | 'Key Players' | 'Organizations' | 'People'
 
-const ICONS: Record<SectionTitle, JSX.Element> = {
+const ICONS: Record<string, JSX.Element> = {
   "Overview": <Book className="w-5 h-5" />,
   "Current Solutions": <Flask className="w-5 h-5" />,
-  "Key Players": <Users className="w-5 h-5" />
+  "Organizations": <Building2 className="w-5 h-5" />,
+  "People": <Users2 className="w-5 h-5" />
+}
+
+function getFocusLevelVariant(level: FocusLevel): "default" | "destructive" | "outline" | "secondary" {
+  const variants: Record<FocusLevel, "default" | "destructive" | "outline" | "secondary"> = {
+    LOW: 'secondary',
+    MEDIUM: 'default',
+    HIGH: 'destructive',
+    PRIMARY: 'destructive'
+  }
+  return variants[level] || 'default'
+}
+
+function getExpertiseLevelVariant(level: ExpertiseLevel): "default" | "destructive" | "outline" | "secondary" {
+  const variants: Record<ExpertiseLevel, "default" | "destructive" | "outline" | "secondary"> = {
+    BEGINNER: 'secondary',
+    MEDIUM: 'default',
+    EXPERT: 'destructive',
+    AUTHORITY: 'destructive'
+  }
+  return variants[level] || 'default'
 }
 
 export default function GlobalProblemDashboard({ globalProblem, user }: GlobalProblemDashboardProps) {
   const [expandedSection, setExpandedSection] = useState<string | null>(null)
   const [dashboardData, setDashboardData] = useState<GlobalProblemDashboardData | null>(null)
+  const [relationships, setRelationships] = useState<GlobalProblemRelationships | null>(null)
   const [loading, setLoading] = useState(true)
   const [error, setError] = useState<string | null>(null)
 
   useEffect(() => {
-    async function loadDashboardData() {
+    async function loadData() {
       try {
+        if (process.env.NODE_ENV === 'development') {
+          console.log('🔄 [Dashboard] Loading data for problem:', globalProblem.name)
+        }
         setLoading(true)
         setError(null)
-        const data = await generateGlobalProblemDashboard(globalProblem.name)
-        setDashboardData(data)
+        const [dashData, relData] = await Promise.all([
+          generateGlobalProblemDashboard(globalProblem.name),
+          getGlobalProblemRelationshipsAction(globalProblem.id)
+        ])
+        if (process.env.NODE_ENV === 'development') {
+          console.log('✅ [Dashboard] Loaded data successfully:', {
+            hasDashData: !!dashData,
+            hasRelData: !!relData,
+            sections: dashData?.sections.length,
+            organizations: relData?.organizations.length,
+            people: relData?.people.length
+          })
+        }
+        setDashboardData(dashData)
+        setRelationships(relData)
       } catch (err) {
+        if (process.env.NODE_ENV === 'development') {
+          console.error('❌ [Dashboard] Error loading data:', err)
+        }
         setError('Failed to load dashboard data. Please try again later.')
         console.error('Error loading dashboard:', err)
       } finally {
@@ -51,7 +99,7 @@ export default function GlobalProblemDashboard({ globalProblem, user }: GlobalPr
       }
     }
 
-    loadDashboardData()
+    loadData()
   }, [globalProblem])
 
   if (loading) {
@@ -155,12 +203,129 @@ export default function GlobalProblemDashboard({ globalProblem, user }: GlobalPr
             </AccordionContent>
           </AccordionItem>
 
-          <AccordionItem value="key-players">
-            <AccordionTrigger className="justify-start">Key Players</AccordionTrigger>
+          <AccordionItem value="organizations">
+            <AccordionTrigger className="justify-start">Organizations</AccordionTrigger>
             <AccordionContent>
-              <ScrollArea className="h-[300px] w-full rounded-md border p-4">
-                <div className="prose prose-sm dark:prose-invert">
-                  {dashboardData.sections.find(s => s.title === 'Key Players')?.content}
+              <ScrollArea className="h-[400px] w-full rounded-md border p-4">
+                <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+                  {relationships?.organizations.map((org: RelatedOrganization, index: number) => (
+                    <Card key={`org-${index}`} className="flex flex-col">
+                      <CardHeader>
+                        <div className="flex items-center gap-4">
+                          <div>
+                            <CardTitle className="text-lg">{org.name}</CardTitle>
+                            {org.industry && (
+                              <CardDescription>{org.industry}</CardDescription>
+                            )}
+                          </div>
+                        </div>
+                      </CardHeader>
+                      <CardContent className="flex-grow">
+                        {org.description && (
+                          <p className="text-sm text-muted-foreground mb-2">
+                            {org.description}
+                          </p>
+                        )}
+                        <div className="space-y-1">
+                          {org.mission && (
+                            <p className="text-sm">
+                              <span className="font-semibold">Mission:</span> {org.mission}
+                            </p>
+                          )}
+                          {org.headquartersLocation && (
+                            <p className="text-sm">
+                              <span className="font-semibold">HQ:</span> {org.headquartersLocation}
+                            </p>
+                          )}
+                        </div>
+                        {org.focusLevel && (
+                          <Badge variant={getFocusLevelVariant(org.focusLevel)}>
+                            {org.focusLevel}
+                          </Badge>
+                        )}
+                        {org.achievements?.length > 0 && (
+                          <div className="mt-2">
+                            <p className="font-semibold text-sm">Key Achievements:</p>
+                            <ul className="list-disc list-inside text-sm">
+                              {org.achievements.map((achievement: string, i: number) => (
+                                <li key={i}>{achievement}</li>
+                              ))}
+                            </ul>
+                          </div>
+                        )}
+                      </CardContent>
+                    </Card>
+                  ))}
+                </div>
+              </ScrollArea>
+            </AccordionContent>
+          </AccordionItem>
+
+          <AccordionItem value="people">
+            <AccordionTrigger className="justify-start">Key People</AccordionTrigger>
+            <AccordionContent>
+              <ScrollArea className="h-[400px] w-full rounded-md border p-4">
+                <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
+                  {relationships?.people.map((person: RelatedPerson, index: number) => (
+                    <Card key={`person-${index}`} className="flex flex-col">
+                      <CardHeader>
+                        <div className="flex items-center gap-4">
+                          {person.image && (
+                            <img 
+                              src={person.image} 
+                              alt={person.name} 
+                              className="w-12 h-12 rounded-full object-cover"
+                            />
+                          )}
+                          <div>
+                            <CardTitle className="text-lg">{person.name}</CardTitle>
+                            {person.jobTitle && (
+                              <CardDescription>{person.jobTitle}</CardDescription>
+                            )}
+                          </div>
+                        </div>
+                      </CardHeader>
+                      <CardContent className="flex-grow">
+                        {person.bio && (
+                          <p className="text-sm text-muted-foreground mb-2">
+                            {person.bio}
+                          </p>
+                        )}
+                        <div className="space-y-1">
+                          {person.company && (
+                            <p className="text-sm">
+                              <span className="font-semibold">Organization:</span> {person.company}
+                            </p>
+                          )}
+                          {person.location && (
+                            <p className="text-sm">
+                              <span className="font-semibold">Location:</span> {person.location}
+                            </p>
+                          )}
+                        </div>
+                        {person.expertise && (
+                          <Badge variant={getExpertiseLevelVariant(person.expertise)}>
+                            {person.expertise}
+                          </Badge>
+                        )}
+                        {person.role && (
+                          <p className="text-sm">
+                            <span className="font-semibold">Role:</span> {person.role}
+                          </p>
+                        )}
+                        {person.publications?.length > 0 && (
+                          <div className="mt-2">
+                            <p className="font-semibold text-sm">Publications:</p>
+                            <ul className="list-disc list-inside text-sm">
+                              {person.publications.map((pub: string, i: number) => (
+                                <li key={i}>{pub}</li>
+                              ))}
+                            </ul>
+                          </div>
+                        )}
+                      </CardContent>
+                    </Card>
+                  ))}
                 </div>
               </ScrollArea>
             </AccordionContent>
