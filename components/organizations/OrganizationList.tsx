@@ -3,11 +3,11 @@
 import { useState, useEffect } from "react"
 import { Search } from "lucide-react"
 import { Input } from "@/components/ui/input"
+import { Organization } from "@prisma/client"
 import { OrganizationItem } from "./OrganizationItem"
-import type { RelatedOrganization } from "@/lib/queries/globalProblemQueries"
 
 interface OrganizationListProps {
-  organizations: RelatedOrganization[]
+  organizations: Organization[]
   showProblem?: boolean
   problemName?: string
   loading?: boolean
@@ -20,7 +20,7 @@ export function OrganizationList({
   loading = false
 }: OrganizationListProps) {
   const [search, setSearch] = useState("")
-  const [filteredOrganizations, setFilteredOrganizations] = useState<RelatedOrganization[]>(organizations)
+  const [filteredOrganizations, setFilteredOrganizations] = useState<Organization[]>(organizations)
 
   useEffect(() => {
     const filtered = organizations.filter(org => 

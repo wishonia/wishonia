@@ -104,7 +104,11 @@ describe("SourceLinker tests", () => {
     const referenceUrls = new Set()
     const referenceMatches = result.content.match(/\n\d+\. \[.*?\]\((https?:\/\/[^\)]+)\)/g) || []
     referenceMatches.forEach(match => {
-      const url = match.match(/\((https?:\/\/[^\)]+)\)/)[1]
+      const urlMatch = match.match(/\((https?:\/\/[^\)]+)\)/)
+      if (!urlMatch) {
+        throw new Error(`Invalid reference format: ${match}`)
+      }
+      const url = urlMatch[1]
       expect(referenceUrls.has(url)).toBe(false) // URL should not be duplicate
       referenceUrls.add(url)
     })
