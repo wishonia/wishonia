@@ -20,9 +20,9 @@ import { Badge } from '@/components/ui/badge';
 import { 
   getGlobalProblemRelationships,
   type GlobalProblemRelationships,
-  type RelatedOrganization,
   type RelatedPerson 
 } from '@/lib/queries/globalProblemQueries'
+import { GlobalProblemOrganizationsList } from './GlobalProblemOrganizationsList'
 
 interface GlobalProblemDashboardProps {
   globalProblem: GlobalProblem;
@@ -206,58 +206,10 @@ export default function GlobalProblemDashboard({ globalProblem, user }: GlobalPr
           <AccordionItem value="organizations">
             <AccordionTrigger className="justify-start">Organizations</AccordionTrigger>
             <AccordionContent>
-              <ScrollArea className="h-[400px] w-full rounded-md border p-4">
-                <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
-                  {relationships?.organizations.map((org: RelatedOrganization, index: number) => (
-                    <Card key={`org-${index}`} className="flex flex-col">
-                      <CardHeader>
-                        <div className="flex items-center gap-4">
-                          <div>
-                            <CardTitle className="text-lg">{org.name}</CardTitle>
-                            {org.industry && (
-                              <CardDescription>{org.industry}</CardDescription>
-                            )}
-                          </div>
-                        </div>
-                      </CardHeader>
-                      <CardContent className="flex-grow">
-                        {org.description && (
-                          <p className="text-sm text-muted-foreground mb-2">
-                            {org.description}
-                          </p>
-                        )}
-                        <div className="space-y-1">
-                          {org.mission && (
-                            <p className="text-sm">
-                              <span className="font-semibold">Mission:</span> {org.mission}
-                            </p>
-                          )}
-                          {org.headquartersLocation && (
-                            <p className="text-sm">
-                              <span className="font-semibold">HQ:</span> {org.headquartersLocation}
-                            </p>
-                          )}
-                        </div>
-                        {org.focusLevel && (
-                          <Badge variant={getFocusLevelVariant(org.focusLevel)}>
-                            {org.focusLevel}
-                          </Badge>
-                        )}
-                        {org.achievements?.length > 0 && (
-                          <div className="mt-2">
-                            <p className="font-semibold text-sm">Key Achievements:</p>
-                            <ul className="list-disc list-inside text-sm">
-                              {org.achievements.map((achievement: string, i: number) => (
-                                <li key={i}>{achievement}</li>
-                              ))}
-                            </ul>
-                          </div>
-                        )}
-                      </CardContent>
-                    </Card>
-                  ))}
-                </div>
-              </ScrollArea>
+              <GlobalProblemOrganizationsList
+                globalProblem={globalProblem}
+                user={user}
+              />
             </AccordionContent>
           </AccordionItem>
 

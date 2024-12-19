@@ -9,9 +9,10 @@ import {getOrganization} from "@/app/organizations/organizationActions";
 
 interface CreateOrganizationFormProps {
   userId: string
+  onSuccess?: () => void
 }
 
-export default function CreateOrganizationForm({ userId }: CreateOrganizationFormProps) {
+export default function CreateOrganizationForm({ userId, onSuccess }: CreateOrganizationFormProps) {
   const [url, setUrl] = useState('')
   const [isLoading, setIsLoading] = useState(false)
   const router = useRouter()
@@ -21,6 +22,9 @@ export default function CreateOrganizationForm({ userId }: CreateOrganizationFor
     setIsLoading(true)
     try {
       const organization = await getOrganization(url, userId)
+      if (onSuccess) {
+        onSuccess()
+      }
       router.push(`/organizations/${organization.slug}`)
     } catch (error) {
       console.error('Error creating/fetching organization:', error)
