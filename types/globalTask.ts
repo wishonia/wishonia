@@ -31,10 +31,7 @@ export type TaskInput = z.infer<typeof TaskSchema>
 // Task Hierarchy Schema
 export const TaskHierarchySchema: z.ZodType<{
   name: string;
-  subtasks?: Array<{
-    name: string;
-    subtasks?: any[];
-  }>;
+  subtasks?: TaskHierarchy[];
 }> = z.object({
   name: z.string().describe('The name of the task'),
   subtasks: z.array(z.lazy(() => TaskHierarchySchema)).optional().describe('Array of subtasks'),
