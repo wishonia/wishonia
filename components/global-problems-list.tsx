@@ -60,6 +60,7 @@ export const GlobalProblemsList: React.FC<PollProps> = ({ user }) => {
           <GlobalProblemListItem key={problem.id} problem={problem} />
         ))}
       </div>
+      <CoolGlobalProblemsPieChart entries={globalProblems} />
     </div>
   )
 }
