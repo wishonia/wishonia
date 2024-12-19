@@ -192,7 +192,7 @@ export default function DocsContent({ org, repo }: DocsContentProps) {
           description={frontmatter.description}
         />
       )}
-      <div className="prose prose-invert">
+      <div className="prose prose-p:text-inherit dark:prose-invert">
         <ReactMarkdown
           remarkPlugins={[remarkGfm]}
           rehypePlugins={[rehypeRaw]}

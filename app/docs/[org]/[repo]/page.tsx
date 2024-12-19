@@ -15,7 +15,7 @@ import DocsSidebar from "./components/DocsSidebar"
 import GitHubConnectModal from "./components/GitHubConnectModal"
 import MobileHeader from "./components/MobileHeader"
 import { MenuItem, parseSummaryMd } from "./lib/parseSummary"
-import DocsLoader from "./components/DocsLoader"
+import GlobalBrainNetwork from "@/components/landingPage/global-brain-network";
 
 interface PageProps {
   params: {
@@ -146,7 +146,7 @@ export default async function DocsPage({ params, searchParams }: PageProps) {
 
         {/* Main content */}
         <div className="flex-1 overflow-auto bg-backgroundtext-foreground md:pt-0">
-          <Suspense fallback={<DocsLoader />}>
+          <Suspense fallback={<GlobalBrainNetwork />}>
             <DocsContent org={org} repo={repo} />
           </Suspense>
         </div>
