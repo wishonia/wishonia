@@ -2,14 +2,14 @@ import { z } from 'zod'
 
 export const GlobalProblemDashboardSchema = z.object({
   sections: z.array(z.object({
-    title: z.string().describe("Section title - must be one of: 'Overview', 'Current Solutions', or 'Key Players'"),
+    title: z.string().describe("Section title - must be one of: 'Overview', 'Current Solutions'"),
     summary: z.string().describe("A brief 1-2 sentence summary of the section's main points"),
     content: z.string().describe("Detailed explanation of the section topic, including relevant facts, statistics, and current state of research or implementation"),
     metrics: z.array(z.object({
       value: z.string().describe("Numerical value with appropriate unit or formatting (e.g., '100+', '$2.5B', '45%')"),
       label: z.string().describe("Short description of what the metric represents")
     })).describe("Key statistics and metrics relevant to this section")
-  })).describe("Main sections providing overview, solutions, and key organizations/researchers"),
+  })).describe("Main sections providing overview and solutions"),
 
   timelineItems: z.array(z.object({
     year: z.number().describe("Historical year when the event occurred"),
