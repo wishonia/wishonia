@@ -205,6 +205,7 @@ model Person {
   callSchedules    CallSchedule[]
   globalProblems  PersonGlobalProblem[]
   globalSolutions PersonGlobalSolution[]
+  callSummaryRecipients CallSummaryRecipient[]
 
   // Add index for common queries
   @@index([name])
@@ -2070,6 +2071,7 @@ model CallSchedule {
   // Track call history
   calls ScheduledCall[]
 
+  @@unique([userId, personId], name: "userId_personId_unique")
   @@index([userId])
   @@index([personId])
   @@index([agentId])
@@ -2079,17 +2081,40 @@ model ScheduledCall {
   id           String       @id @default(cuid())
   scheduleId   String
   schedule     CallSchedule @relation(fields: [scheduleId], references: [id])
-  scheduledFor DateTime // When the call was scheduled for
+  scheduledFor DateTime     // When the call was scheduled for
   status       CallStatus   @default(SCHEDULED)
-  retellCallId String? // ID returned by Retell API
-  errorMessage String? // If the call failed
-  createdAt    DateTime     @default(now())
-  updatedAt    DateTime     @updatedAt
-  completedAt  DateTime? // When call was completed/failed/cancelled
+  retellCallId String?     // ID returned by Retell API
+  errorMessage String?     // If the call failed
+  createdAt    DateTime    @default(now())
+  updatedAt    DateTime    @updatedAt
+  completedAt  DateTime?   // When call was completed/failed/cancelled
+  
+  // Add fields for call summary and notifications
+  callSummary  String?    @db.Text  // AI-generated summary of the call
+  
+  // Many-to-many relation with Person for notifications
+  callSummaryRecipients CallSummaryRecipient[]
 
+  @@unique([scheduleId, scheduledFor], name: "scheduleId_scheduledFor_unique")
   @@index([scheduleId])
   @@index([status])
   @@index([scheduledFor])
+}
+
+// New model to handle notification preferences
+model CallSummaryRecipient {
+  id             String        @id @default(cuid())
+  personId       String
+  scheduledCallId String
+  person         Person        @relation(fields: [personId], references: [id])
+  scheduledCall  ScheduledCall @relation(fields: [scheduledCallId], references: [id])
+  notifyBy       NotifyMethod[]
+  createdAt      DateTime      @default(now())
+  updatedAt      DateTime      @updatedAt
+
+  @@unique([personId, scheduledCallId])
+  @@index([personId])
+  @@index([scheduledCallId])
 }
 
 enum CallStatus {
@@ -2195,4 +2220,10 @@ model PersonGlobalSolution {
   @@unique([personId, globalSolutionId])
   @@index([personId])
   @@index([globalSolutionId])
+}
+
+enum NotifyMethod {
+  EMAIL
+  SMS
+  PUSH
 }
