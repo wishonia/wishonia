@@ -203,7 +203,9 @@ model Person {
   web3Wallet       String?                  @unique
   website          String?
   callSchedules    CallSchedule[]
-  
+  globalProblems  PersonGlobalProblem[]
+  globalSolutions PersonGlobalSolution[]
+
   // Add index for common queries
   @@index([name])
   @@index([email])
@@ -376,6 +378,8 @@ model GlobalProblem {
   thisGlobalProblemAllocations          GlobalProblemPairAllocation[]         @relation("ThisGlobalProblemRelation")
   globalProblemSolutions                GlobalProblemSolution[]               @relation("GlobalProblemToSolution")
   globalProblemSolutionsPairAllocations GlobalProblemSolutionPairAllocation[]
+  organizations                         OrganizationGlobalProblem[]
+  people                                PersonGlobalProblem[]
 }
 
 model GlobalProblemPairAllocation {
@@ -409,6 +413,8 @@ model GlobalSolution {
   thatGlobalSolutionAllocations GlobalSolutionPairAllocation[] @relation("ThatGlobalSolutionRelation")
   thisGlobalSolutionAllocations GlobalSolutionPairAllocation[] @relation("ThisGlobalSolutionRelation")
   globalSolutionTasks           GlobalSolutionTask[]           @relation("GlobalSolutionToTask")
+  organizations                 OrganizationGlobalSolution[]
+  people                        PersonGlobalSolution[]
 }
 
 model GlobalSolutionPairAllocation {
@@ -1044,6 +1050,8 @@ model Organization {
   Service     Service[]
   Event       Event[]
   Partnership Partnership[]
+  globalProblems          OrganizationGlobalProblem[]
+  globalSolutions         OrganizationGlobalSolution[]
 
   @@unique([name, foundedYear])
 }
@@ -2091,4 +2099,100 @@ enum CallStatus {
   FAILED
   CANCELLED
   NO_ANSWER
+}
+
+// Junction table for Organization <-> GlobalProblem relationship
+model OrganizationGlobalProblem {
+  id               String         @id @default(cuid())
+  organizationId   String
+  globalProblemId  String
+  organization     Organization   @relation(fields: [organizationId], references: [id], onDelete: Cascade)
+  globalProblem    GlobalProblem  @relation(fields: [globalProblemId], references: [id], onDelete: Cascade)
+  focusLevel       FocusLevel     @default(MEDIUM)
+  description      String?        @db.Text
+  startedAt        DateTime?      // When the organization started working on this problem
+  achievements     String[]       // Key achievements in addressing this problem
+  createdAt        DateTime       @default(now())
+  updatedAt        DateTime       @updatedAt
+
+  @@unique([organizationId, globalProblemId])
+  @@index([organizationId])
+  @@index([globalProblemId])
+}
+
+enum FocusLevel {
+  LOW
+  MEDIUM
+  HIGH
+  PRIMARY
+}
+
+// Junction table for Person <-> GlobalProblem relationship
+model PersonGlobalProblem {
+  id               String         @id @default(cuid())
+  personId         String
+  globalProblemId  String
+  person           Person         @relation(fields: [personId], references: [id], onDelete: Cascade)
+  globalProblem    GlobalProblem  @relation(fields: [globalProblemId], references: [id], onDelete: Cascade)
+  role             String?        // e.g., "Researcher", "Advocate", "Expert"
+  expertise        ExpertiseLevel @default(MEDIUM)
+  description      String?        @db.Text
+  startedAt        DateTime?      // When the person started working on this problem
+  achievements     String[]       // Key achievements in addressing this problem
+  publications     String[]       // Related publications
+  createdAt        DateTime       @default(now())
+  updatedAt        DateTime       @updatedAt
+
+  @@unique([personId, globalProblemId])
+  @@index([personId])
+  @@index([globalProblemId])
+}
+
+enum ExpertiseLevel {
+  BEGINNER
+  MEDIUM
+  EXPERT
+  AUTHORITY
+}
+
+// Junction table for Organization <-> GlobalSolution relationship
+model OrganizationGlobalSolution {
+  id               String         @id @default(cuid())
+  organizationId   String
+  globalSolutionId String
+  organization     Organization   @relation(fields: [organizationId], references: [id], onDelete: Cascade)
+  globalSolution   GlobalSolution @relation(fields: [globalSolutionId], references: [id], onDelete: Cascade)
+  role             String?        // e.g., "Developer", "Implementer", "Funder"
+  focusLevel       FocusLevel     @default(MEDIUM)
+  description      String?        @db.Text
+  startedAt        DateTime?      // When the organization started working on this solution
+  achievements     String[]       // Key achievements in implementing this solution
+  budget           Float?         // Budget allocated to this solution
+  createdAt        DateTime       @default(now())
+  updatedAt        DateTime       @updatedAt
+
+  @@unique([organizationId, globalSolutionId])
+  @@index([organizationId])
+  @@index([globalSolutionId])
+}
+
+// Junction table for Person <-> GlobalSolution relationship
+model PersonGlobalSolution {
+  id               String         @id @default(cuid())
+  personId         String
+  globalSolutionId String
+  person           Person         @relation(fields: [personId], references: [id], onDelete: Cascade)
+  globalSolution   GlobalSolution @relation(fields: [globalSolutionId], references: [id], onDelete: Cascade)
+  role             String?        // e.g., "Lead Developer", "Researcher", "Advisor"
+  expertise        ExpertiseLevel @default(MEDIUM)
+  description      String?        @db.Text
+  startedAt        DateTime?      // When the person started working on this solution
+  achievements     String[]       // Key achievements in developing this solution
+  publications     String[]       // Related publications/documentation
+  createdAt        DateTime       @default(now())
+  updatedAt        DateTime       @updatedAt
+
+  @@unique([personId, globalSolutionId])
+  @@index([personId])
+  @@index([globalSolutionId])
 }
