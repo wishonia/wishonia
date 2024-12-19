@@ -215,7 +215,7 @@ async function generatePartnerships(
   return result.object.partnerships.map(partnership => ({
     partnerName: partnership.partnerName,
     description: partnership.description,
-    startDate: new Date(partnership.startDate),
+    startDate: partnership.startDate ? new Date(partnership.startDate) : new Date(),
     endDate: partnership.endDate ? new Date(partnership.endDate) : null
   }))
 }
@@ -230,33 +230,31 @@ async function generateAndSaveMembers(
   return Promise.all(
     generatedMembers.map(async (member) => {
       try {
+        // First create the person
         const person = await prisma.person.create({
           data: {
             name: member.name!,
             bio: member.bio,
             jobTitle: member.jobTitle,
             location: member.location,
-            memberships: {
-              create: {
-                organizationId: organization.id,
-                role: member.role,
-                startDate: new Date()
-              }
-            }
           }
         })
 
-        return {
-          id: person.id,
-          name: person.name,
-          role: member.role!,
-          startDate: new Date(),
-          endDate: null,
-          bio: person.bio,
-          jobTitle: person.jobTitle,
-          location: person.location,
-          image: person.image
-        }
+        // Then create the membership linking person and organization
+        const membership = await prisma.organizationMembership.create({
+          data: {
+            organizationId: organization.id,
+            personId: person.id,
+            role: member.role,
+            startDate: new Date(),
+          },
+          include: {
+            person: true
+          }
+        })
+
+        return membership
+
       } catch (error) {
         console.error(`Error saving member ${member.name}:`, error)
         throw error
@@ -277,11 +275,13 @@ async function generateAndSaveProducts(
       try {
         return await prisma.product.create({
           data: {
-            ...product,
             organizationId: organization.id,
             name: product.name!,
+            description: product.description,
             price: product.price!,
-            currency: product.currency!
+            currency: product.currency!,
+            available: true,
+            referralUrl: product.referralUrl
           }
         })
       } catch (error) {
@@ -304,11 +304,13 @@ async function generateAndSaveServices(
       try {
         return await prisma.service.create({
           data: {
-            ...service,
             organizationId: organization.id,
             name: service.name!,
+            description: service.description,
             price: service.price!,
-            currency: service.currency!
+            currency: service.currency!,
+            available: true,
+            referralUrl: service.referralUrl
           }
         })
       } catch (error) {
@@ -331,10 +333,11 @@ async function generateAndSavePartnerships(
       try {
         return await prisma.partnership.create({
           data: {
-            ...partnership,
             organizationId: organization.id,
             partnerName: partnership.partnerName!,
-            startDate: partnership.startDate!
+            description: partnership.description,
+            startDate: partnership.startDate!,
+            endDate: partnership.endDate
           }
         })
       } catch (error) {

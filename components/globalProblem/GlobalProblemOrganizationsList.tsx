@@ -1,7 +1,7 @@
 "use client"
 
 import { useState, useEffect } from "react"
-import { GlobalProblem, FocusLevel, Organization } from "@prisma/client"
+import { GlobalProblem, Prisma, FocusLevel } from "@prisma/client"
 import { ExtendedUser } from "@/types/auth"
 import { getGlobalProblemRelationshipsAction } from "@/app/actions/generate-global-problem-dashboard"
 import { ScrollArea } from "@/components/ui/scroll-area"
@@ -25,7 +25,10 @@ import {
   DialogTrigger,
 } from "@/components/ui/dialog"
 import CreateOrganizationForm from "@/app/organizations/CreateOrganizationForm"
-import type { GlobalProblemRelationships } from "@/lib/queries/globalProblemQueries"
+
+type OrganizationWithRelations = Prisma.OrganizationGlobalProblemGetPayload<{
+  include: { organization: true }
+}>
 
 interface GlobalProblemOrganizationsListProps {
   globalProblem: GlobalProblem
@@ -47,7 +50,7 @@ export function GlobalProblemOrganizationsList({
   user,
   searchQuery = ""
 }: GlobalProblemOrganizationsListProps) {
-  const [relationships, setRelationships] = useState<GlobalProblemRelationships | null>(null)
+  const [relationships, setRelationships] = useState<OrganizationWithRelations[]>([])
   const [loading, setLoading] = useState(true)
   const [search, setSearch] = useState(searchQuery)
   const [sortBy, setSortBy] = useState<SortOption>("name")
@@ -57,7 +60,7 @@ export function GlobalProblemOrganizationsList({
     try {
       setLoading(true)
       const relData = await getGlobalProblemRelationshipsAction(globalProblem.id)
-      setRelationships(relData)
+      setRelationships(relData.organizations)
     } catch (err) {
       console.error('Error loading organizations:', err)
     } finally {
@@ -69,16 +72,16 @@ export function GlobalProblemOrganizationsList({
     loadData()
   }, [globalProblem.id])
 
-  const filteredAndSortedOrganizations = relationships?.organizations
-    .filter(org => 
-      org.name.toLowerCase().includes(search.toLowerCase()) ||
-      org.industry?.toLowerCase().includes(search.toLowerCase()) ||
-      org.description?.toLowerCase().includes(search.toLowerCase())
+  const filteredAndSortedOrganizations = relationships
+    .filter(orgRelation => 
+      orgRelation.organization.name.toLowerCase().includes(search.toLowerCase()) ||
+      orgRelation.organization.industry?.toLowerCase().includes(search.toLowerCase()) ||
+      orgRelation.organization.description?.toLowerCase().includes(search.toLowerCase())
     )
     .sort((a, b) => {
       switch (sortBy) {
         case "name":
-          return a.name.localeCompare(b.name)
+          return a.organization.name.localeCompare(b.organization.name)
         case "focusLevel":
           const aWeight = a.focusLevel ? FOCUS_LEVEL_WEIGHTS[a.focusLevel] : -1
           const bWeight = b.focusLevel ? FOCUS_LEVEL_WEIGHTS[b.focusLevel] : -1
@@ -92,7 +95,7 @@ export function GlobalProblemOrganizationsList({
     return <div>Loading organizations...</div>
   }
 
-  if (!relationships?.organizations.length) {
+  if (!relationships.length) {
     return <div>No organizations found.</div>
   }
 
@@ -139,7 +142,6 @@ export function GlobalProblemOrganizationsList({
               userId={user.id}
               onSuccess={() => {
                 setIsDialogOpen(false)
-                // Reload the organizations list
                 loadData()
               }}
             />
@@ -149,17 +151,17 @@ export function GlobalProblemOrganizationsList({
 
       <ScrollArea className="h-[400px] w-full rounded-md border p-4">
         <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
-          {filteredAndSortedOrganizations?.map((org) => (
+          {filteredAndSortedOrganizations.map((orgRelation) => (
             <OrganizationItem
-              key={org.id}
-              organization={org as Organization}
+              key={orgRelation.organization.id}
+              organization={orgRelation.organization}
               showProblem={true}
               problemName={globalProblem.name}
             />
           ))}
         </div>
         
-        {filteredAndSortedOrganizations?.length === 0 && (
+        {filteredAndSortedOrganizations.length === 0 && (
           <div className="text-center text-muted-foreground py-8">
             No organizations found matching your search.
           </div>
