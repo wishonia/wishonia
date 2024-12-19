@@ -145,7 +145,7 @@ export default async function DocsPage({ params, searchParams }: PageProps) {
         </div>
 
         {/* Main content */}
-        <div className="flex-1 overflow-auto bg-backgroundtext-foreground md:pt-0">
+        <div className="flex-1 overflow-auto bg-background text-foreground md:pt-0">
           <Suspense fallback={<GlobalBrainNetwork />}>
             <DocsContent org={org} repo={repo} />
           </Suspense>
