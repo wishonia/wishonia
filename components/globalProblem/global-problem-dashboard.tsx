@@ -1,7 +1,7 @@
 'use client';
 
 import { useEffect, useState } from 'react';
-import { GlobalProblem, FocusLevel, ExpertiseLevel } from '@prisma/client';
+import { GlobalProblem, FocusLevel, ExpertiseLevel, Prisma } from '@prisma/client';
 import { BarChart, Book, ChevronDown, ChevronUp, Clock, FlaskRoundIcon as Flask, MessageSquare, Trophy, Building2, Users2 } from 'lucide-react';
 import { GlobalProblemDashboardData } from "@/lib/schemas/global-problem-dashboard";
 import { Accordion, AccordionContent, AccordionItem, AccordionTrigger } from '@/components/ui/accordion';
@@ -19,10 +19,9 @@ import { GlobalProblemRenderer } from './GlobalProblemRenderer';
 import { Badge } from '@/components/ui/badge';
 import { 
   getGlobalProblemRelationships,
-  type GlobalProblemRelationships,
-  type RelatedOrganization,
-  type RelatedPerson 
+  type GlobalProblemRelationships
 } from '@/lib/queries/globalProblemQueries'
+import { GlobalProblemOrganizationsList } from './GlobalProblemOrganizationsList'
 
 interface GlobalProblemDashboardProps {
   globalProblem: GlobalProblem;
@@ -58,10 +57,25 @@ function getExpertiseLevelVariant(level: ExpertiseLevel): "default" | "destructi
   return variants[level] || 'default'
 }
 
+type PersonGlobalProblemWithPerson = Prisma.PersonGlobalProblemGetPayload<{
+  include: { person: true }
+}>
+
+type GlobalProblemRelationshipsType = {
+  organizations: Prisma.OrganizationGlobalProblemGetPayload<{
+    include: { organization: true }
+  }>[]
+  people: PersonGlobalProblemWithPerson[]
+  total: {
+    organizations: number
+    people: number
+  }
+}
+
 export default function GlobalProblemDashboard({ globalProblem, user }: GlobalProblemDashboardProps) {
   const [expandedSection, setExpandedSection] = useState<string | null>(null)
   const [dashboardData, setDashboardData] = useState<GlobalProblemDashboardData | null>(null)
-  const [relationships, setRelationships] = useState<GlobalProblemRelationships | null>(null)
+  const [relationships, setRelationships] = useState<GlobalProblemRelationshipsType | null>(null)
   const [loading, setLoading] = useState(true)
   const [error, setError] = useState<string | null>(null)
 
@@ -206,58 +220,10 @@ export default function GlobalProblemDashboard({ globalProblem, user }: GlobalPr
           <AccordionItem value="organizations">
             <AccordionTrigger className="justify-start">Organizations</AccordionTrigger>
             <AccordionContent>
-              <ScrollArea className="h-[400px] w-full rounded-md border p-4">
-                <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
-                  {relationships?.organizations.map((org: RelatedOrganization, index: number) => (
-                    <Card key={`org-${index}`} className="flex flex-col">
-                      <CardHeader>
-                        <div className="flex items-center gap-4">
-                          <div>
-                            <CardTitle className="text-lg">{org.name}</CardTitle>
-                            {org.industry && (
-                              <CardDescription>{org.industry}</CardDescription>
-                            )}
-                          </div>
-                        </div>
-                      </CardHeader>
-                      <CardContent className="flex-grow">
-                        {org.description && (
-                          <p className="text-sm text-muted-foreground mb-2">
-                            {org.description}
-                          </p>
-                        )}
-                        <div className="space-y-1">
-                          {org.mission && (
-                            <p className="text-sm">
-                              <span className="font-semibold">Mission:</span> {org.mission}
-                            </p>
-                          )}
-                          {org.headquartersLocation && (
-                            <p className="text-sm">
-                              <span className="font-semibold">HQ:</span> {org.headquartersLocation}
-                            </p>
-                          )}
-                        </div>
-                        {org.focusLevel && (
-                          <Badge variant={getFocusLevelVariant(org.focusLevel)}>
-                            {org.focusLevel}
-                          </Badge>
-                        )}
-                        {org.achievements?.length > 0 && (
-                          <div className="mt-2">
-                            <p className="font-semibold text-sm">Key Achievements:</p>
-                            <ul className="list-disc list-inside text-sm">
-                              {org.achievements.map((achievement: string, i: number) => (
-                                <li key={i}>{achievement}</li>
-                              ))}
-                            </ul>
-                          </div>
-                        )}
-                      </CardContent>
-                    </Card>
-                  ))}
-                </div>
-              </ScrollArea>
+              <GlobalProblemOrganizationsList
+                globalProblem={globalProblem}
+                user={user}
+              />
             </AccordionContent>
           </AccordionItem>
 
@@ -266,58 +232,58 @@ export default function GlobalProblemDashboard({ globalProblem, user }: GlobalPr
             <AccordionContent>
               <ScrollArea className="h-[400px] w-full rounded-md border p-4">
                 <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
-                  {relationships?.people.map((person: RelatedPerson, index: number) => (
-                    <Card key={`person-${index}`} className="flex flex-col">
+                  {relationships?.people.map((personRelation) => (
+                    <Card key={personRelation.person.id} className="flex flex-col">
                       <CardHeader>
                         <div className="flex items-center gap-4">
-                          {person.image && (
+                          {personRelation.person.image && (
                             <img 
-                              src={person.image} 
-                              alt={person.name} 
+                              src={personRelation.person.image} 
+                              alt={personRelation.person.name} 
                               className="w-12 h-12 rounded-full object-cover"
                             />
                           )}
                           <div>
-                            <CardTitle className="text-lg">{person.name}</CardTitle>
-                            {person.jobTitle && (
-                              <CardDescription>{person.jobTitle}</CardDescription>
+                            <CardTitle className="text-lg">{personRelation.person.name}</CardTitle>
+                            {personRelation.person.jobTitle && (
+                              <CardDescription>{personRelation.person.jobTitle}</CardDescription>
                             )}
                           </div>
                         </div>
                       </CardHeader>
                       <CardContent className="flex-grow">
-                        {person.bio && (
+                        {personRelation.person.bio && (
                           <p className="text-sm text-muted-foreground mb-2">
-                            {person.bio}
+                            {personRelation.person.bio}
                           </p>
                         )}
                         <div className="space-y-1">
-                          {person.company && (
+                          {personRelation.person.company && (
                             <p className="text-sm">
-                              <span className="font-semibold">Organization:</span> {person.company}
+                              <span className="font-semibold">Organization:</span> {personRelation.person.company}
                             </p>
                           )}
-                          {person.location && (
+                          {personRelation.person.location && (
                             <p className="text-sm">
-                              <span className="font-semibold">Location:</span> {person.location}
+                              <span className="font-semibold">Location:</span> {personRelation.person.location}
                             </p>
                           )}
                         </div>
-                        {person.expertise && (
-                          <Badge variant={getExpertiseLevelVariant(person.expertise)}>
-                            {person.expertise}
+                        {personRelation.expertise && (
+                          <Badge variant={getExpertiseLevelVariant(personRelation.expertise)}>
+                            {personRelation.expertise}
                           </Badge>
                         )}
-                        {person.role && (
+                        {personRelation.role && (
                           <p className="text-sm">
-                            <span className="font-semibold">Role:</span> {person.role}
+                            <span className="font-semibold">Role:</span> {personRelation.role}
                           </p>
                         )}
-                        {person.publications?.length > 0 && (
+                        {personRelation.publications?.length > 0 && (
                           <div className="mt-2">
                             <p className="font-semibold text-sm">Publications:</p>
                             <ul className="list-disc list-inside text-sm">
-                              {person.publications.map((pub: string, i: number) => (
+                              {personRelation.publications.map((pub: string, i: number) => (
                                 <li key={i}>{pub}</li>
                               ))}
                             </ul>

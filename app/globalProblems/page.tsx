@@ -23,8 +23,8 @@ export default async function GlobalProblemsPage({
   return (
     <Shell>
       <GlobalProblemBreadcrumbs />
-      <PollRandomGlobalProblems user={user}></PollRandomGlobalProblems>
       <GlobalProblemsList user={user}></GlobalProblemsList>
+      <PollRandomGlobalProblems user={user}></PollRandomGlobalProblems>
     </Shell>
   )
 }
