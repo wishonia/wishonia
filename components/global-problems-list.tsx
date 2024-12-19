@@ -42,20 +42,20 @@ export const GlobalProblemsList: React.FC<PollProps> = ({ user }) => {
   }
 
   return (
-    <div className="space-y-6">
-      <CoolGlobalProblemsPieChart entries={globalProblems} />
-      
-      <div className="relative w-full max-w-sm mb-4">
-        <Search className="absolute left-2 top-2.5 h-4 w-4 text-muted-foreground" />
-        <Input
-          placeholder="Search problems..."
-          value={searchQuery}
-          onChange={(e) => setSearchQuery(e.target.value)}
-          className="pl-8"
-        />
+    <div className="flex flex-col w-full max-w-full overflow-hidden">
+      <div className="w-full max-w-sm">
+        <div className="relative mb-4">
+          <Search className="absolute left-2 top-2.5 h-4 w-4 text-muted-foreground" />
+          <Input
+            placeholder="Search problems..."
+            value={searchQuery}
+            onChange={(e) => setSearchQuery(e.target.value)}
+            className="pl-8"
+          />
+        </div>
       </div>
 
-      <div className="space-y-4">
+      <div className="space-y-4 w-full">
         {filteredProblems.map((problem) => (
           <GlobalProblemListItem key={problem.id} problem={problem} />
         ))}
