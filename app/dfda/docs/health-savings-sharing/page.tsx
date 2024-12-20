@@ -12,6 +12,7 @@ export default function HealthSavingsSharingPage() {
 
   return (
     <div className="min-h-screen">
+      <Breadcrumbs dynamicValues={{ }} />
       <HealthSavingsSharing content={markdownContent} />
     </div>
   )

@@ -8,6 +8,7 @@ import { checkPetitionSignature } from "@/app/petitions/petitionActions"
 import { DFDAPetitionButtons } from "./components/DFDAPetitionButtons"
 import { FloatingPetitionButton } from "./components/FloatingPetitionButton"
 import CureAccelerationAct from "./components/cure-acceleration-act"
+import { Breadcrumbs } from "@/components/Breadcrumbs/Breadcrumbs"
 
 export const metadata: Metadata = {
   title: "Cure Acceleration Act | DFDA",
@@ -24,6 +25,7 @@ export default async function CureAccelerationPage() {
 
   return (
     <main className="">
+      <Breadcrumbs dynamicValues={{ }} startSegment="dfda" />
       <CureAccelerationAct />
       <FloatingPetitionButton />
       {/* Petition Sign Section */}
