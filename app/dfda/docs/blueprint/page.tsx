@@ -1,6 +1,9 @@
+import { Breadcrumbs } from "@/components/Breadcrumbs/Breadcrumbs";
+
 export default function BlueprintHome() {
   return (
     <div className="min-h-screen bg-gradient-to-b from-blue-50 to-white">
+      <Breadcrumbs dynamicValues={{}} startSegment="dfda" />
       {/* Hero Section */}
       <div className="max-w-6xl mx-auto px-4 py-16 sm:py-24">
         <div className="text-center">

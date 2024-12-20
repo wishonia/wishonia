@@ -131,12 +131,6 @@ export const routeTree = {
       "path": "/dfda",
       "isDynamic": false,
       "children": {
-        "blueprint": {
-          "name": "blueprint",
-          "path": "/dfda/blueprint",
-          "isDynamic": false,
-          "children": {}
-        },
         "conditions": {
           "name": "conditions",
           "path": "/dfda/conditions",
@@ -183,17 +177,29 @@ export const routeTree = {
             }
           }
         },
-        "cure-acceleration-act": {
-          "name": "cure-acceleration-act",
-          "path": "/dfda/cure-acceleration-act",
-          "isDynamic": false,
-          "children": {}
-        },
         "docs": {
           "name": "docs",
           "path": "/dfda/docs",
           "isDynamic": false,
           "children": {
+            "blueprint": {
+              "name": "blueprint",
+              "path": "/dfda/docs/blueprint",
+              "isDynamic": false,
+              "children": {}
+            },
+            "cure-acceleration-act": {
+              "name": "cure-acceleration-act",
+              "path": "/dfda/docs/cure-acceleration-act",
+              "isDynamic": false,
+              "children": {}
+            },
+            "health-savings-sharing": {
+              "name": "health-savings-sharing",
+              "path": "/dfda/docs/health-savings-sharing",
+              "isDynamic": false,
+              "children": {}
+            },
             "...filename": {
               "name": "...filename",
               "path": "/dfda/docs/[...filename]",
@@ -228,18 +234,6 @@ export const routeTree = {
             }
           }
         },
-        "health-savings-sharing": {
-          "name": "health-savings-sharing",
-          "path": "/dfda/health-savings-sharing",
-          "isDynamic": false,
-          "children": {}
-        },
-        "image2measurements": {
-          "name": "image2measurements",
-          "path": "/dfda/image2measurements",
-          "isDynamic": false,
-          "children": {}
-        },
         "inbox": {
           "name": "inbox",
           "path": "/dfda/inbox",
@@ -250,7 +244,20 @@ export const routeTree = {
           "name": "measurements",
           "path": "/dfda/measurements",
           "isDynamic": false,
-          "children": {}
+          "children": {
+            "image2measurements": {
+              "name": "image2measurements",
+              "path": "/dfda/measurements/image2measurements",
+              "isDynamic": false,
+              "children": {}
+            },
+            "text2measurements": {
+              "name": "text2measurements",
+              "path": "/dfda/measurements/text2measurements",
+              "isDynamic": false,
+              "children": {}
+            }
+          }
         },
         "predictor-search": {
           "name": "predictor-search",
@@ -281,18 +288,6 @@ export const routeTree = {
         "search": {
           "name": "search",
           "path": "/dfda/search",
-          "isDynamic": false,
-          "children": {}
-        },
-        "text2measurements": {
-          "name": "text2measurements",
-          "path": "/dfda/text2measurements",
-          "isDynamic": false,
-          "children": {}
-        },
-        "top-treatments": {
-          "name": "top-treatments",
-          "path": "/dfda/top-treatments",
           "isDynamic": false,
           "children": {}
         },

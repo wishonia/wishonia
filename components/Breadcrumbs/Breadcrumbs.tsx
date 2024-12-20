@@ -18,18 +18,32 @@ function BreadcrumbDropdown({ node, currentPath, currentSegment, onClose }: Brea
 
   return (
     <div className="absolute top-full left-0 mt-1 bg-white/90 rounded-md shadow-lg py-1 z-50">
-      {Object.entries(node.children).map(([key, childNode]) => {
-        const href = `${basePath}/${key}`
-        return (
-          <Link
-            key={key}
-            href={href}
-            className="block px-4 py-2 hover:bg-black/10"
-            onClick={onClose}
-          >
-            {childNode.isDynamic ? `[${childNode.name}]` : childNode.name}
-          </Link>
-        )
+      <Link
+        href={basePath}
+        className="block px-4 py-2 hover:bg-black/10"
+        onClick={onClose}
+      >
+        {node.isDynamic ? `[${node.name}]` : node.name}
+      </Link>
+      
+      {Object.keys(node.children).length > 0 && (
+        <div className="border-t border-gray-200 my-1"></div>
+      )}
+
+      {Object.entries(node.children)
+        .filter(([_, childNode]) => !childNode.name.startsWith('...'))
+        .map(([key, childNode]) => {
+          const href = `${basePath}/${key}`
+          return (
+            <Link
+              key={key}
+              href={href}
+              className="block px-4 py-2 hover:bg-black/10"
+              onClick={onClose}
+            >
+              {childNode.isDynamic ? `[${childNode.name}]` : childNode.name}
+            </Link>
+          )
       })}
     </div>
   )
@@ -109,16 +123,37 @@ function BreadcrumbItem({ segment, node, currentPath, isLast, dynamicValues }: B
 
 interface BreadcrumbsProps {
   dynamicValues?: Record<string, string>
+  startSegment?: string
 }
 
-export function Breadcrumbs({ dynamicValues = {} }: BreadcrumbsProps) {
+export function Breadcrumbs({ dynamicValues = {}, startSegment }: BreadcrumbsProps) {
+  const [homeDropdownOpen, setHomeDropdownOpen] = useState(false)
   const pathname = usePathname()
   const pathSegments = pathname.split('/').filter(Boolean)
+  
+  // If startSegment is provided, remove it and all segments before it from the path
+  const startIndex = startSegment ? pathSegments.indexOf(startSegment) : -1
+  const filteredSegments = startIndex !== -1 ? 
+    pathSegments.slice(startIndex + 1) : 
+    pathSegments
 
-  let currentNode: RouteNode = routeTree
-  const breadcrumbs = pathSegments.map((segment, index) => {
-    const node = Object.values(currentNode.children).find(
-      child => child.isDynamic || child.name === segment
+  // Find the starting node based on startSegment
+  let startNode: RouteNode = routeTree
+  if (startSegment) {
+    for (const segment of pathSegments.slice(0, startIndex + 1)) {
+      const node = Object.values(startNode.children).find(child => 
+        child.name === segment ||
+        (child.isDynamic && !child.name.startsWith('...'))
+      )
+      if (node) startNode = node
+    }
+  }
+
+  let currentNode: RouteNode = startNode
+  const breadcrumbs = filteredSegments.map((segment, index) => {
+    const node = Object.values(currentNode.children).find(child => 
+      child.name === segment ||
+      (child.isDynamic && !child.name.startsWith('...'))
     )
     
     if (!node) return null
@@ -127,7 +162,7 @@ export function Breadcrumbs({ dynamicValues = {} }: BreadcrumbsProps) {
     return {
       segment,
       node,
-      isLast: index === pathSegments.length - 1
+      isLast: index === filteredSegments.length - 1
     }
   }).filter(Boolean)
 
@@ -135,9 +170,39 @@ export function Breadcrumbs({ dynamicValues = {} }: BreadcrumbsProps) {
     <nav>
       <ol className="flex flex-wrap items-center">
         <li className="flex items-center">
-          <Link href="/" className="hover:opacity-70">
-            🏠
-          </Link>
+          {startSegment ? (
+            <div className="relative">
+              <button
+                className="hover:opacity-70 flex items-center"
+                onClick={() => setHomeDropdownOpen(!homeDropdownOpen)}
+              >
+                🏠
+                <svg
+                  className="w-4 h-4 ml-1"
+                  fill="currentColor"
+                  viewBox="0 0 20 20"
+                >
+                  <path
+                    fillRule="evenodd"
+                    d="M5.293 7.293a1 1 0 011.414 0L10 10.586l3.293-3.293a1 1 0 111.414 1.414l-4 4a1 1 0 01-1.414 0l-4-4a1 1 0 010-1.414z"
+                    clipRule="evenodd"
+                  />
+                </svg>
+              </button>
+              {homeDropdownOpen && (
+                <BreadcrumbDropdown
+                  node={startNode}
+                  currentPath={pathSegments.slice(0, startIndex + 1)}
+                  currentSegment={startSegment}
+                  onClose={() => setHomeDropdownOpen(false)}
+                />
+              )}
+            </div>
+          ) : (
+            <Link href="/" className="hover:opacity-70">
+              🏠
+            </Link>
+          )}
           {breadcrumbs.length > 0 && <span className="mx-2">/</span>}
         </li>
         {breadcrumbs.map((item, index) => (
@@ -145,7 +210,7 @@ export function Breadcrumbs({ dynamicValues = {} }: BreadcrumbsProps) {
             key={index}
             segment={item!.segment}
             node={item!.node}
-            currentPath={pathSegments}
+            currentPath={filteredSegments}
             isLast={item!.isLast}
             dynamicValues={dynamicValues}
           />
