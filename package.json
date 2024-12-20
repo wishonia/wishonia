@@ -31,7 +31,8 @@
     "deps:check": "depcheck",
     "deps:check:size": "npm-check",
     "deps:check:comprehensive": "cost-of-modules",
-    "deps:unused-exports": "ts-prune"
+    "deps:unused-exports": "ts-prune",
+    "generate-nav": "ts-node scripts/generate-navigation.ts"
   },
   "prisma": {
     "seed": "ts-node --compiler-options {\"module\":\"CommonJS\"} prisma/seed.ts"

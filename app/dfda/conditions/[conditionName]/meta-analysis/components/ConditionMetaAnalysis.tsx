@@ -1,17 +1,16 @@
-'use client'
+'use client';
 
-import React, { useEffect, useState } from 'react'
-import { getMetaAnalysis } from '@/app/dfda/dfdaActions'
-import ArticleRenderer from '@/components/ArticleRenderer'
-import { ArticleWithRelations } from '@/lib/agents/researcher/researcher'
-import GlobalHealthOptimizationAgent from "@/components/landingPage/global-health-optimization-agent"
+import React, { useEffect, useState } from 'react';
+import { ArticleWithRelations } from "@/lib/agents/researcher/researcher"
+import ArticleRenderer from '@/components/ArticleRenderer';
+import GlobalHealthOptimizationAgent from "@/components/landingPage/global-health-optimization-agent";
+import { getConditionMetaAnalysis } from '@/app/dfda/dfdaActions';
 
-interface ConditionTreatmentContentProps {
-    treatmentName: string
+interface ConditionMetaAnalysisProps {
     conditionName: string
 }
 
-export function ConditionTreatmentContent({ treatmentName, conditionName }: ConditionTreatmentContentProps) {
+export function ConditionMetaAnalysis({ conditionName }: ConditionMetaAnalysisProps) {
     const [article, setArticle] = useState<ArticleWithRelations | null>(null)
     const [loading, setLoading] = useState(true)
 
@@ -19,7 +18,7 @@ export function ConditionTreatmentContent({ treatmentName, conditionName }: Cond
         let isSubscribed = true
         async function fetchMetaAnalysis() {
             try {
-                const metaAnalysis = await getMetaAnalysis(treatmentName, conditionName)
+                const metaAnalysis = await getConditionMetaAnalysis( conditionName)
                 if (isSubscribed) {
                     setArticle(metaAnalysis)
                 }
@@ -40,7 +39,7 @@ export function ConditionTreatmentContent({ treatmentName, conditionName }: Cond
         return () => {
             isSubscribed = false
         }
-    }, [treatmentName, conditionName])
+    }, [conditionName])
 
     if (loading) {
         return <div>Loading...</div>
@@ -49,7 +48,7 @@ export function ConditionTreatmentContent({ treatmentName, conditionName }: Cond
     if (!article) {
         return <div className="container mx-auto px-4 py-8">
             <h1 className="text-2xl font-bold mb-4">
-                {treatmentName} for {conditionName}
+               {conditionName} Meta-Analysis
             </h1>
             <p>No analysis available for this treatment and condition combination.</p>
         </div>
@@ -58,7 +57,7 @@ export function ConditionTreatmentContent({ treatmentName, conditionName }: Cond
     return (
         <div className="container mx-auto px-4 py-8">
             <h1 className="text-2xl font-bold mb-4">
-                {treatmentName} for {conditionName}
+                {conditionName} Meta-Analysis
             </h1>
             <ArticleRenderer article={article} />
             <div className="mt-8">
@@ -66,4 +65,4 @@ export function ConditionTreatmentContent({ treatmentName, conditionName }: Cond
             </div>
         </div>
     )
-} 
+}
