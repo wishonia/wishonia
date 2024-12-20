@@ -60,7 +60,7 @@ function toTitleCase(str: string): string {
     );
 }
 
-export default function TreatmentList({ condition }: TreatmentListProps) {
+export default function TreatmentRatingsList({ condition }: TreatmentListProps) {
 
     const [treatments, setTreatments] = useState(condition.conditionTreatments)
     const [sortBy, setSortBy] = useState<'effectiveness' | 'popularity'>('effectiveness')

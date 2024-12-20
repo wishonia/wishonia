@@ -168,7 +168,27 @@ export async function getConditionByName(name: string) {
   })
 }
 
-export async function getMetaAnalysis(
+async function findOrWriteArticle(topic: string) {
+  try {
+    const article = await findArticleByTopic(topic)
+    if(article) {
+      return article
+    }
+    return writeArticle(topic, "test-user")
+  } catch (error) {
+    console.error("Failed to generate meta-analysis:", error)
+    throw new Error("Failed to generate meta-analysis. Please try again later.")
+  }
+}
+
+export async function getConditionMetaAnalysis(
+  conditionName: string
+) {
+  const topic = `Meta-analysis of all research on the most effective treatments for ${conditionName}`
+  return findOrWriteArticle(topic)
+}
+
+export async function getTreatmentConditionMetaAnalysis(
   treatmentName: string,
   conditionName: string
 ) {
@@ -178,16 +198,14 @@ export async function getMetaAnalysis(
 
   const topic = `Meta-analysis on the safety and effectiveness of ${treatmentName} for ${conditionName}`
 
-  try {
-    const article = await findArticleByTopic(topic)
-    if (article) {
-      return article
-    }
-    return writeArticle(topic, "test-user")
-  } catch (error) {
-    console.error("Failed to generate meta-analysis:", error)
-    throw new Error("Failed to generate meta-analysis. Please try again later.")
-  }
+  return findOrWriteArticle(topic)
+}
+
+export async function getTreatmentMetaAnalysis(
+  treatmentName: string
+) {
+  const topic = `Meta-analysis on the safety and effectiveness of ${treatmentName}`
+  return findOrWriteArticle(topic)
 }
 
 async function getYourUser(yourUserId: string): Promise<User | null> {
