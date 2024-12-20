@@ -4,52 +4,24 @@ import { triggerCall } from '@/lib/calls/retell'
 import { requireAuth } from '@/lib/auth'
 import prisma from '@/lib/prisma'
 import { revalidatePath } from 'next/cache'
-import { getOrCreatePersonForUser } from '@/lib/models/person'
 import { NotifyMethod } from '@prisma/client'
-import { getServerSession } from "next-auth"
 
-export async function savePhoneNumber(formData: FormData) {
+export async function initiateCall(personId: string) {
   const session = await requireAuth('/phone-friend')
-  const phone = formData.get('phone') as string
-
-  // Save phone number to user profile
-  const user = await prisma.user.update({
-    where: { id: session.user.id },
-    data: { phoneNumber: phone }
-  })
-
-  // get or create a Person for the User
-  const person = await getOrCreatePersonForUser(user)
-
-  // Add the phone number to the person
-  await prisma.person.update({
-    where: { id: person.id },
-    data: { phoneNumber: phone }
-  })
-
-  revalidatePath('/phone-friend')
-}
-
-export async function initiateCall() {
   console.log('Initiating call - starting process')
-  const session = await requireAuth('/phone-friend')
-  console.log('Got session:', { userId: session.user.id })
-  
-  const user = await prisma.user.findUnique({
-    where: { id: session.user.id }
+
+  // Get the person
+  const person = await prisma.person.findUnique({
+    where: { id: personId }
   })
 
-  if (!user) {
-    throw new Error('User not found')
+  if (!person) {
+    throw new Error('Person not found')
   }
 
-  // get or create a Person for the User
-  const person = await getOrCreatePersonForUser(user)
-
-  console.log('Found user:', {
-    userId: user.id,
-    hasPhoneNumber: !!person.phoneNumber
-  })
+  if (!person.phoneNumber) {
+    throw new Error('Person has no phone number')
+  }
 
   try {
     console.log('Calling Retell with config:', {
@@ -67,16 +39,11 @@ export async function initiateCall() {
     return { success: true, callId: callResponse.call_id }
   } catch (error) {
     console.error('Failed to initiate call:', error)
-    // Log additional error details if available
     if (error instanceof Error) {
       console.error('Error details:', {
         message: error.message,
         name: error.name,
         stack: error.stack,
-        // @ts-ignore
-        statusCode: error.statusCode,
-        // @ts-ignore
-        response: error.response
       })
     }
     return { success: false, error: 'Failed to initiate call' }
@@ -90,6 +57,14 @@ export async function createCallSchedule(formData: FormData) {
   const personId = formData.get('personId') as string
   const agentId = formData.get('agentId') as string
 
+  // Check if a schedule already exists for this person and user
+  const existingSchedule = await prisma.callSchedule.findFirst({
+    where: {
+      userId: session.user.id,
+      personId: personId
+    }
+  })
+
   // Convert time to a human-readable format for the name
   const [hours, minutes] = time.split(':')
   const timeStr = new Date(2000, 0, 1, parseInt(hours), parseInt(minutes))
@@ -98,30 +73,43 @@ export async function createCallSchedule(formData: FormData) {
       minute: '2-digit'
     })
 
-  const schedule = await prisma.callSchedule.create({
-    data: {
-      name: `Daily Check-in at ${timeStr}`,
-      cronExpression: time,
-      enabled: true,
-      person: {
-        connect: {
-          id: personId
-        }
-      },
-      agent: {
-        connect: {
-          id: agentId
-        }
-      },
-      user: {
-        connect: {
-          id: session.user.id
-        }
+  const scheduleData = {
+    name: `Daily Check-in at ${timeStr}`,
+    cronExpression: time,
+    enabled: true,
+    agent: {
+      connect: {
+        id: agentId
       }
     }
-  })
+  }
 
-  revalidatePath('/phone-friend/recipients')
+  let schedule;
+  if (existingSchedule) {
+    // Update existing schedule
+    schedule = await prisma.callSchedule.update({
+      where: { id: existingSchedule.id },
+      data: scheduleData
+    })
+  } else {
+    // Create new schedule
+    schedule = await prisma.callSchedule.create({
+      data: {
+        ...scheduleData,
+        person: {
+          connect: {
+            id: personId
+          }
+        },
+        user: {
+          connect: {
+            id: session.user.id
+          }
+        }
+      }
+    })
+  }
+
   revalidatePath('/phone-friend/schedules')
   return schedule
 }
@@ -178,18 +166,8 @@ export async function createPerson(data: {
   })
 
   if (existingPersonByPhone) {
-    // Update the existing person and connect to current user
-    const updatedPerson = await prisma.person.update({
-      where: { id: existingPersonByPhone.id },
-      data: {
-        name: data.name, // Update name in case it changed
-        email: data.email?.trim() || existingPersonByPhone.email, // Keep existing email if none provided
-        }
-      }
-    })
-
-    revalidatePath('/phone-friend/recipients')
-    return updatedPerson
+    // Just return the existing person
+    return existingPersonByPhone
   }
 
   // Check if person exists with this email
@@ -204,42 +182,27 @@ export async function createPerson(data: {
     })
 
     if (existingPersonByEmail) {
-      // Update the existing person with new phone number and connect to user
+      // Update the existing person with new phone number
       const updatedPerson = await prisma.person.update({
         where: { id: existingPersonByEmail.id },
         data: {
           phoneNumber: data.phoneNumber,
-          name: data.name, // Update name in case it changed
-          user: {
-            connect: {
-              id: session.user.id
-            }
-          }
+          name: data.name // Update name in case it changed
         }
       })
 
-      revalidatePath('/phone-friend/recipients')
+      revalidatePath('/phone-friend/schedules')
       return updatedPerson
     }
   }
 
   // Create new person if no existing record found
-  const createData = {
-    name: data.name,
-    phoneNumber: data.phoneNumber,
-    email: data.email?.trim() || null,
-    user: {
-      connect: {
-        id: session.user.id
-      }
-    }
-  }
-
-  // Debug logging
-  console.log('Creating person with processed data:', createData)
-
   const person = await prisma.person.create({
-    data: createData
+    data: {
+      name: data.name,
+      phoneNumber: data.phoneNumber,
+      email: data.email?.trim() || null
+    }
   })
 
   revalidatePath('/phone-friend/recipients')
@@ -262,7 +225,6 @@ export async function deleteSchedule(scheduleId: string) {
     where: { id: scheduleId }
   })
 
-  revalidatePath('/phone-friend/recipients')
   revalidatePath('/phone-friend/schedules')
 }
 
@@ -293,7 +255,6 @@ export async function updateSchedule(scheduleId: string, data: {
     }
   })
 
-  revalidatePath('/phone-friend/recipients')
   revalidatePath('/phone-friend/schedules')
   return updatedSchedule
 }

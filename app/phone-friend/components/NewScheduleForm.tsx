@@ -19,11 +19,16 @@ const PRESET_TIMES = [
   { value: 'custom', label: 'Custom Time' }
 ]
 
-export function NewScheduleForm() {
+interface NewScheduleFormProps {
+  agents: Agent[]
+}
+
+export function NewScheduleForm({ agents }: NewScheduleFormProps) {
   const router = useRouter()
   const [isSubmitting, setIsSubmitting] = useState(false)
   const [selectedTime, setSelectedTime] = useState(PRESET_TIMES[0].value)
   const [customTime, setCustomTime] = useState('')
+  const [selectedAgent, setSelectedAgent] = useState(agents[0]?.id || '')
   const [recipientDetails, setRecipientDetails] = useState({
     name: '',
     phoneNumber: '',
@@ -46,7 +51,7 @@ export function NewScheduleForm() {
       const formData = new FormData()
       formData.append('time', selectedTime === 'custom' ? customTime : selectedTime)
       formData.append('personId', person.id)
-      formData.append('agentId', 'default') // We'll get the default agent server-side
+      formData.append('agentId', selectedAgent)
 
       await createCallSchedule(formData)
       
@@ -126,12 +131,31 @@ export function NewScheduleForm() {
             />
           </div>
         )}
+
+        <div className="space-y-2">
+          <Label>Select AI Assistant</Label>
+          <Select 
+            value={selectedAgent}
+            onValueChange={setSelectedAgent}
+          >
+            <SelectTrigger>
+              <SelectValue placeholder="Choose an assistant" />
+            </SelectTrigger>
+            <SelectContent>
+              {agents.map((agent) => (
+                <SelectItem key={agent.id} value={agent.id}>
+                  {agent.name}
+                </SelectItem>
+              ))}
+            </SelectContent>
+          </Select>
+        </div>
       </div>
 
       <Button 
         type="submit" 
         className="w-full"
-        disabled={isSubmitting || !recipientDetails.name || !recipientDetails.phoneNumber || (selectedTime === 'custom' && !customTime)}
+        disabled={isSubmitting || !recipientDetails.name || !recipientDetails.phoneNumber || !selectedAgent || (selectedTime === 'custom' && !customTime)}
       >
         {isSubmitting ? 'Creating Schedule...' : 'Create Schedule'}
       </Button>

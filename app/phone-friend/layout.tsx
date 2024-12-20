@@ -2,6 +2,11 @@ import { Heart } from "lucide-react"
 import { Button } from "@/components/ui/button"
 import Link from "next/link"
 import { getServerSession } from "next-auth/next"
+import { UserAccountNav } from "@/components/user/user-account-nav"
+import { NavItem } from "@/types"
+
+const avatarNavItems: NavItem[] = [
+]
 
 export default async function PhoneFriendLayout({
   children,
@@ -21,19 +26,24 @@ export default async function PhoneFriendLayout({
           <nav className="ml-auto flex gap-4 sm:gap-6">
             {session?.user ? (
               <>
-                <Link href="/phone-friend/recipients">
-                  <Button variant="ghost">Recipients</Button>
-                </Link>
                 <Link href="/phone-friend/schedules">
                   <Button variant="ghost">Schedules</Button>
                 </Link>
+                <UserAccountNav
+                    user={{
+                        name: session?.user.name,
+                        image: session?.user.image,
+                        email: session?.user.email,
+                    }}
+                    avatarNavItems={avatarNavItems}
+                />
               </>
             ) : (
               <>
                 <Button variant="ghost">Features</Button>
                 <Button variant="ghost">How it works</Button>
                 <Button variant="ghost">FAQ</Button>
-                <Link href="/phone-friend/recipients">
+                <Link href="/phone-friend/schedules">
                   <Button variant="default">Get Started</Button>
                 </Link>
               </>

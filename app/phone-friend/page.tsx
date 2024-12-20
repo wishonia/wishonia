@@ -28,7 +28,7 @@ export default async function Page() {
               <Button variant="ghost">Features</Button>
               <Button variant="ghost">How it works</Button>
               <Button variant="ghost">FAQ</Button>
-              <Link href="/phone-friend/recipients">
+              <Link href="/phone-friend/schedules">
                 <Button variant="default">Get Started</Button>
               </Link>
             </nav>
@@ -110,7 +110,7 @@ export default async function Page() {
               <p className="mb-8 text-xl">
                 Join our waitlist today and be among the first to experience peace of mind with HeartLine's daily check-ins.
               </p>
-              <Link href="/phone-friend/recipients">
+              <Link href="/phone-friend/schedules">
                 <Button size="lg" variant="secondary">Get Started</Button>
               </Link>
             </div>
