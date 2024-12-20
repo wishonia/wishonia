@@ -174,14 +174,22 @@ export async function createPerson(data: {
 
   // Check if phone number is already in use
   const existingPersonByPhone = await prisma.person.findUnique({
-    where: { phoneNumber: data.phoneNumber },
-    include: {
-      user: true
-    }
+    where: { phoneNumber: data.phoneNumber }
   })
 
   if (existingPersonByPhone) {
-    throw new Error('This phone number is already registered')
+    // Update the existing person and connect to current user
+    const updatedPerson = await prisma.person.update({
+      where: { id: existingPersonByPhone.id },
+      data: {
+        name: data.name, // Update name in case it changed
+        email: data.email?.trim() || existingPersonByPhone.email, // Keep existing email if none provided
+        }
+      }
+    })
+
+    revalidatePath('/phone-friend/recipients')
+    return updatedPerson
   }
 
   // Check if person exists with this email

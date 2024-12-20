@@ -7,8 +7,7 @@ import {
   DialogHeader,
   DialogTitle,
 } from "@/components/ui/dialog"
-import { useState } from "react"
-import { CallScheduleForm, MinimalAgent } from "./CallScheduleForm"
+import { CallScheduleForm } from "./CallScheduleForm"
 
 type ScheduleWithRelations = CallSchedule & {
   person: Person;
@@ -17,7 +16,7 @@ type ScheduleWithRelations = CallSchedule & {
 
 interface EditScheduleDialogProps {
   schedule: ScheduleWithRelations
-  agents: MinimalAgent[]
+  agents: Agent[]
   defaultAgentId: string
   open: boolean
   onOpenChange: (open: boolean) => void

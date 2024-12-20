@@ -68,10 +68,20 @@ export function CallScheduleCard({ schedule }: CallScheduleCardProps) {
     }
   }
 
+  const handleCardClick = (e: React.MouseEvent) => {
+    if ((e.target as HTMLElement).closest('.schedule-actions')) {
+      return
+    }
+    setShowEditDialog(true)
+  }
+
   return (
     <>
-      <div className="text-sm p-3 bg-muted rounded-lg relative group">
-        <div className="absolute right-2 top-2 opacity-0 group-hover:opacity-100 transition-opacity">
+      <div 
+        className="text-sm p-3 bg-muted rounded-lg relative group cursor-pointer hover:bg-muted/80 transition-colors"
+        onClick={handleCardClick}
+      >
+        <div className="absolute right-2 top-2 opacity-0 group-hover:opacity-100 transition-opacity schedule-actions">
           <DropdownMenu>
             <DropdownMenuTrigger asChild>
               <Button variant="ghost" size="sm" className="h-8 w-8 p-0">
