@@ -48,11 +48,13 @@ async function deleteUserVariable(userVariableId: number) {
 
 interface UserVariableOperationsProps {
   userVariable: UserVariable
+  className?: string
   children?: React.ReactNode
 }
 
 export function UserVariableOperationsButton({
   userVariable,
+  className,
   children,
 }: UserVariableOperationsProps) {
   const router = useRouter()
