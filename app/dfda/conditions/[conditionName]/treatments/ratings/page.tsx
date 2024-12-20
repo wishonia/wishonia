@@ -2,10 +2,10 @@ import {getConditionByName} from "@/app/dfda/dfdaActions";
 import TreatmentRatingsList from "@/app/dfda/components/TreatmentRatingsList";
 
 
-export default async function ConditionPage({ params }: { params: { conditionName: string } }) {
+export default async function ConditionTreatmentRatingsPage({ params }: { params: { conditionName: string } }) {
     // Decode the conditionName from the URL
     const decodedConditionName = decodeURIComponent(params.conditionName);
-    
+
     const condition = await getConditionByName(decodedConditionName)
 
     if (!condition) {
