@@ -4,7 +4,7 @@
 import { PrismaClient } from '@prisma/client'
 import fs from 'fs'
 import path from 'path'
-import {getMetaAnalysis} from "@/app/dfda/dfdaActions";
+import {getTreatmentConditionMetaAnalysis} from "@/app/dfda/dfdaActions";
 import {searchClinicalTrialsGovInterventions, searchFdaTreatments} from "@/lib/clinicaltables";
 
 describe("dFDA tests", () => {
@@ -19,7 +19,7 @@ describe("dFDA tests", () => {
   });
   
   it("Gets a meta analysis article", async () => {
-    const article = await getMetaAnalysis('Exercise', 'Depression')
+    const article = await getTreatmentConditionMetaAnalysis('Exercise', 'Depression')
     expect(article).toBeDefined()
   });
 
