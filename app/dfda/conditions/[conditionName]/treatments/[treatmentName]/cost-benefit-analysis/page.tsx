@@ -1,7 +1,16 @@
 import React from 'react';
 import { ExtendedMetaAnalysisReport} from "@/lib/agents/fdai/fdaiMetaAnalyzer";
-import MetaAnalysisReport from "@/app/dfda/components/MetaAnalysisReport";
+import CostBenefitAnalysisReport from "@/app/dfda/components/CostBenefitAnalysisReport";
 import BackButton from '../../../../../components/BackButton';
+import { DFDABreadcrumbs } from '@/components/Breadcrumbs/DFDABreadcrumbs';
+
+// Add type for page props
+type PageProps = {
+  params: {
+    conditionName: string;
+    treatmentName: string;
+  };
+};
 
 // Example report data
 const exampleReport: ExtendedMetaAnalysisReport = {
@@ -108,13 +117,20 @@ const exampleReport: ExtendedMetaAnalysisReport = {
   ]
 };
 
-const App = () => {
+// Update the component to receive and use params
+const CostBenefitAnalysisPage = ({ params }: PageProps) => {
+  const { conditionName, treatmentName } = params;
+  
   return (
     <div className="container mx-auto p-4">
+      <DFDABreadcrumbs dynamicValues={{ 
+        conditionName,
+        treatmentName
+      }} />
       <BackButton />
-      <MetaAnalysisReport report={exampleReport} />
+      <CostBenefitAnalysisReport report={exampleReport} />
     </div>
   );
 };
 
-export default App;
+export default CostBenefitAnalysisPage;

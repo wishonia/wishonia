@@ -1,5 +1,6 @@
 import {getConditionByName} from "@/app/dfda/dfdaActions";
 import TreatmentRatingsList from "@/app/dfda/components/TreatmentRatingsList";
+import { DFDABreadcrumbs } from "@/components/Breadcrumbs/DFDABreadcrumbs";
 
 
 export default async function ConditionTreatmentRatingsPage({ params }: { params: { conditionName: string } }) {
@@ -14,6 +15,9 @@ export default async function ConditionTreatmentRatingsPage({ params }: { params
 
     return (
         <div className="container mx-auto p-4">
+        <DFDABreadcrumbs dynamicValues={{ 
+            conditionName: condition.name,
+        }} />
             <h1 className="text-2xl font-bold mb-4">{condition.name}</h1>
             <TreatmentRatingsList condition={condition} />
         </div>

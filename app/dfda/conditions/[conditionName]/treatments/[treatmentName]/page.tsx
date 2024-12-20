@@ -1,3 +1,4 @@
+import { DFDABreadcrumbs } from '@/components/Breadcrumbs/DFDABreadcrumbs'
 import { ConditionTreatmentMetaAnalysis } from './components/ConditionTreatmentMetaAnalysis'
 import { Breadcrumbs } from '@/components/Breadcrumbs/Breadcrumbs'
 
@@ -14,7 +15,7 @@ export default function TreatmentForConditionPage({ params }: PageProps) {
   
   return (
     <div>
-      <Breadcrumbs dynamicValues={{ 
+      <DFDABreadcrumbs dynamicValues={{ 
         conditionName,
         treatmentName 
       }} />
