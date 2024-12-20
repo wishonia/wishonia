@@ -37,7 +37,7 @@ export default async function AccountPage() {
           <CardHeader>
             <CardTitle>Subscription</CardTitle>
             <CardDescription>
-              Manage your HeartLine subscription
+              Please Feed Our Robots
             </CardDescription>
           </CardHeader>
           <CardContent>
@@ -48,11 +48,23 @@ export default async function AccountPage() {
                 <span className="text-yellow-600 font-medium">Free Trial</span>
               )}
             </p>
+            
+            <div className="prose prose-sm text-muted-foreground">
+              <p className="mb-3">
+                Our friendly AI companions eat a lot of electricity and turn electrons into heartwarming conversations and 
+                meaningful connections.
+              </p>
+              <p>
+                These hungry little robots need a constant supply of computational power to keep 
+                spreading joy. Your subscription helps keep them well-fed with the electrons they 
+                crave, while ensuring the service remains accessible to everyone who needs a friend.
+              </p>
+            </div>
           </CardContent>
           <CardFooter>
             <form action={hasActiveSubscription ? createStripePortalSession : createStripeCheckoutSession}>
               <Button type="submit">
-                {hasActiveSubscription ? 'Manage Subscription' : 'Upgrade Now'}
+                {hasActiveSubscription ? 'Manage Subscription' : 'Support HeartLine'}
               </Button>
             </form>
           </CardFooter>

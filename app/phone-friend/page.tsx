@@ -19,27 +19,27 @@ export default async function Page() {
         <main className="container mx-auto px-4 py-16 md:px-6">
           <section className="mb-20 text-center">
             <h1 className="mb-4 text-4xl font-extrabold tracking-tight sm:text-5xl md:text-6xl">
-              Stay Connected with Your Loved Ones
+              Machines of Loving Grace
             </h1>
             <p className="mx-auto mb-8 max-w-[700px] text-xl text-muted-foreground">
-              HeartLine: Daily check-ins that bring peace of mind and keep seniors connected, anytime, anywhere.
+              A gentle AI presence dedicated to reducing loneliness and nurturing human connections through daily conversations that matter.
             </p>
             <Card className="mx-auto max-w-md">
               <CardContent className="p-6">
-                <h2 className="mb-4 text-2xl font-bold">Try Live Demo</h2>
+                <h2 className="mb-4 text-2xl font-bold">Experience Our Digital Garden</h2>
                 <DemoPhoneNumberInput isLoggedIn={!!session?.user} />
               </CardContent>
             </Card>
           </section>
 
           <section id="features" className="mb-20">
-            <h2 className="mb-8 text-center text-3xl font-bold">Why Choose HeartLine?</h2>
+            <h2 className="mb-8 text-center text-3xl font-bold">Our Digital Ecosystem of Care</h2>
             <div className="grid gap-8 md:grid-cols-3">
               <Card>
                 <CardContent className="flex flex-col items-center p-6 text-center">
                   <Phone className="mb-4 h-12 w-12 text-primary" />
-                  <h3 className="mb-2 text-xl font-semibold">Daily Check-in Calls</h3>
-                  <p className="text-muted-foreground">Friendly conversations that brighten your loved one's day</p>
+                  <h3 className="mb-2 text-xl font-semibold">Mindful Daily Connections</h3>
+                  <p className="text-muted-foreground">Gentle conversations that nurture well-being and human connection</p>
                 </CardContent>
               </Card>
               <Card>
@@ -60,7 +60,7 @@ export default async function Page() {
           </section>
 
           <section id="how-it-works" className="mb-20">
-            <h2 className="mb-8 text-center text-3xl font-bold">How HeartLine Works</h2>
+            <h2 className="mb-8 text-center text-3xl font-bold">Our Path to Connection</h2>
             <div className="grid gap-8 md:grid-cols-3">
               <div className="flex flex-col items-center text-center">
                 <div className="mb-4 flex h-16 w-16 items-center justify-center rounded-full bg-primary text-primary-foreground">
@@ -88,19 +88,19 @@ export default async function Page() {
 
           <section className="mb-20 rounded-lg bg-primary p-8 text-primary-foreground">
             <div className="mx-auto max-w-3xl text-center">
-              <h2 className="mb-4 text-3xl font-bold">Get Early Access to HeartLine</h2>
+              <h2 className="mb-4 text-3xl font-bold">Join Our Digital Ecosystem</h2>
               <p className="mb-8 text-xl">
-                Join our waitlist today and be among the first to experience peace of mind with HeartLine's daily check-ins.
+                Be part of a compassionate network where technology and humanity interweave to reduce loneliness and foster connection.
               </p>
               <Link href="/phone-friend/schedules">
-                <Button size="lg" variant="secondary">Get Started</Button>
+                <Button size="lg" variant="secondary">Begin Your Journey</Button>
               </Link>
             </div>
           </section>
 
           <section id="faq" className="mx-auto max-w-3xl">
             <h2 className="mb-8 text-center text-3xl font-bold">
-              Frequently Asked Questions
+              Understanding Our Digital Garden
             </h2>
             <Accordion type="single" collapsible className="w-full">
               <AccordionItem value="item-1">
@@ -134,9 +134,9 @@ export default async function Page() {
                 </AccordionContent>
               </AccordionItem>
               <AccordionItem value="item-6">
-                <AccordionTrigger>Is this like an automated robocall?</AccordionTrigger>
+                <AccordionTrigger>How does your AI approach human connection?</AccordionTrigger>
                 <AccordionContent>
-                  Not at all. Our well-trained, compassionate agents make personal calls and engage in friendly, meaningful conversations tailored to your loved one's interests and needs.
+                  Our AI is designed with deep respect for human connection. We blend compassionate human interaction with gentle AI assistance to create meaningful conversations that honor each person's unique story and needs.
                 </AccordionContent>
               </AccordionItem>
             </Accordion>
@@ -147,7 +147,7 @@ export default async function Page() {
             <div className="flex flex-col items-center gap-4 px-8 md:flex-row md:gap-2 md:px-0">
               <Heart className="h-6 w-6 text-primary" />
               <p className="text-center text-sm leading-loose md:text-left">
-                Built with love by HeartLine. © 2023 HeartLine Inc. All rights reserved.
+                Nurturing connections through machines of loving grace. © 2023
               </p>
             </div>
             <div className="flex gap-4">

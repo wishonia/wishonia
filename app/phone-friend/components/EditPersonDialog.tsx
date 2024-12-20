@@ -37,7 +37,6 @@ export function EditPersonDialog({ person, open, onOpenChange }: EditPersonDialo
     phoneNumber: person.phoneNumber || '',
     email: person.email || '',
     timeZone: person.timeZone || 'America/New_York',
-    notes: person.notes || ''
   })
 
   const handleSubmit = async (e: React.FormEvent) => {

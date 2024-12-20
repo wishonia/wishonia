@@ -1,10 +1,21 @@
 import { requireAuth } from "@/lib/auth"
 import prisma from "@/lib/prisma"
-import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card"
+import { Card, CardContent } from "@/components/ui/card"
 import { Button } from "@/components/ui/button"
-import { CallScheduleCard } from "../components/CallScheduleCard"
 import { UserPlus } from "lucide-react"
 import Link from "next/link"
+import { PersonCard } from "../components/PersonCard"
+import { Person, CallSchedule, Agent } from "@prisma/client"
+
+type ScheduleWithRelations = CallSchedule & {
+  person: Person
+  agent: Agent
+}
+
+type PersonWithSchedules = {
+  person: Person
+  schedules: ScheduleWithRelations[]
+}
 
 export default async function SchedulesPage() {
   const session = await requireAuth('/phone-friend')
@@ -33,7 +44,7 @@ export default async function SchedulesPage() {
     }
     acc[personId].schedules.push(schedule)
     return acc
-  }, {} as Record<string, { person: any, schedules: any[] }>)
+  }, {} as Record<string, PersonWithSchedules>)
 
   return (
     <div className="container mx-auto px-4 py-8">
@@ -61,21 +72,11 @@ export default async function SchedulesPage() {
       ) : (
         <div className="space-y-8">
           {Object.entries(schedulesByPerson).map(([personId, { person, schedules }]) => (
-            <Card key={personId}>
-              <CardHeader>
-                <CardTitle>{person.name}</CardTitle>
-                <p className="text-sm text-muted-foreground">
-                  {person.phoneNumber}
-                </p>
-              </CardHeader>
-              <CardContent>
-                <div className="space-y-4">
-                  {schedules.map((schedule) => (
-                    <CallScheduleCard key={schedule.id} schedule={schedule} />
-                  ))}
-                </div>
-              </CardContent>
-            </Card>
+            <PersonCard 
+              key={personId} 
+              person={person} 
+              schedules={schedules} 
+            />
           ))}
         </div>
       )}
