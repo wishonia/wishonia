@@ -1,4 +1,5 @@
 import { ConditionTreatmentMetaAnalysis } from './components/ConditionTreatmentMetaAnalysis'
+import { Breadcrumbs } from '@/components/Breadcrumbs/Breadcrumbs'
 
 interface PageProps {
   params: {
@@ -11,5 +12,16 @@ export default function TreatmentForConditionPage({ params }: PageProps) {
   const treatmentName = decodeURIComponent(params.treatmentName)
   const conditionName = decodeURIComponent(params.conditionName)
   
-  return <ConditionTreatmentMetaAnalysis treatmentName={treatmentName} conditionName={conditionName} />
+  return (
+    <div>
+      <Breadcrumbs dynamicValues={{ 
+        conditionName,
+        treatmentName 
+      }} />
+      <ConditionTreatmentMetaAnalysis 
+        treatmentName={treatmentName} 
+        conditionName={conditionName} 
+      />
+    </div>
+  )
 }

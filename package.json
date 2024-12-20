@@ -32,7 +32,7 @@
     "deps:check:size": "npm-check",
     "deps:check:comprehensive": "cost-of-modules",
     "deps:unused-exports": "ts-prune",
-    "generate-nav": "ts-node scripts/generate-navigation.ts"
+    "generate-routes": "ts-node scripts/generateRouteTree.ts"
   },
   "prisma": {
     "seed": "ts-node --compiler-options {\"module\":\"CommonJS\"} prisma/seed.ts"
