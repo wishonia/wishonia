@@ -3,10 +3,15 @@ import prisma from "@/lib/prisma"
 import { redirect } from "next/navigation"
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card"
 import { CallScheduleForm } from "../../../components/CallScheduleForm"
+import { CallScheduleCard } from "../../../components/CallScheduleCard"
+import { Agent } from "@prisma/client"
 
 interface SettingsPageProps {
   params: {
     personId: string
+  }
+  searchParams: {
+    edit?: string
   }
 }
 
@@ -41,7 +46,7 @@ async function getOrCreateDefaultAgent(userId: string) {
   return agent
 }
 
-export default async function SettingsPage({ params }: SettingsPageProps) {
+export default async function SettingsPage({ params, searchParams }: SettingsPageProps) {
   const session = await requireAuth('/phone-friend')
   
   // Get the default agent first
@@ -56,7 +61,11 @@ export default async function SettingsPage({ params }: SettingsPageProps) {
     include: {
       callSchedules: {
         include: {
-          agent: true
+          agent: true,
+          person: true
+        },
+        orderBy: {
+          createdAt: 'desc'
         }
       }
     }
@@ -77,7 +86,12 @@ export default async function SettingsPage({ params }: SettingsPageProps) {
       name: true,
       avatar: true
     }
-  })
+  }) as Agent[]
+
+  // Find the schedule being edited if edit param is present
+  const editingSchedule = searchParams.edit 
+    ? person.callSchedules.find(s => s.id === searchParams.edit)
+    : null
 
   return (
     <div className="container mx-auto px-4 py-8">
@@ -97,33 +111,26 @@ export default async function SettingsPage({ params }: SettingsPageProps) {
             ) : (
               <div className="space-y-4">
                 {person.callSchedules.map((schedule) => (
-                  <div key={schedule.id} className="flex items-center justify-between p-4 border rounded-lg">
-                    <div>
-                      <p className="font-medium">{schedule.name}</p>
-                      <p className="text-sm text-muted-foreground">
-                        {schedule.cronExpression}
-                      </p>
-                    </div>
-                    <div className="text-sm text-muted-foreground">
-                      Agent: {schedule.agent.name}
-                    </div>
-                  </div>
+                  <CallScheduleCard key={schedule.id} schedule={schedule} />
                 ))}
               </div>
             )}
           </CardContent>
         </Card>
 
-        {/* Add New Schedule */}
+        {/* Add/Edit Schedule */}
         <Card>
           <CardHeader>
-            <CardTitle>Add New Schedule</CardTitle>
+            <CardTitle>
+              {editingSchedule ? 'Edit Schedule' : 'Add New Schedule'}
+            </CardTitle>
           </CardHeader>
           <CardContent>
             <CallScheduleForm 
               personId={person.id}
               agents={agents}
               defaultAgentId={defaultAgent.id}
+              editingSchedule={editingSchedule || undefined}
             />
           </CardContent>
         </Card>

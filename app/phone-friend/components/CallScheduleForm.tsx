@@ -5,21 +5,23 @@ import { Button } from "@/components/ui/button"
 import { Input } from "@/components/ui/input"
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@/components/ui/select"
 import { toast } from "sonner"
-import { createCallSchedule } from "../actions"
+import { createCallSchedule, updateSchedule } from "../actions"
 import { useRouter } from "next/navigation"
 import { RadioGroup, RadioGroupItem } from "@/components/ui/radio-group"
 import { Label } from "@/components/ui/label"
+import { CallSchedule, Person, Agent } from "@prisma/client"
 
-interface Agent {
-  id: string
-  name: string
-  avatar?: string | null
+export type ScheduleWithRelations = CallSchedule & {
+  person: Person;
+  agent: Agent;
 }
 
-interface CallScheduleFormProps {
+export interface CallScheduleFormProps {
   personId: string
   agents: Agent[]
   defaultAgentId: string
+  editingSchedule?: ScheduleWithRelations
+  onComplete?: () => void
 }
 
 const PRESET_TIMES = [
@@ -30,37 +32,48 @@ const PRESET_TIMES = [
   { value: 'custom', label: 'Custom Time' }
 ]
 
-export function CallScheduleForm({ personId, agents, defaultAgentId }: CallScheduleFormProps) {
+export function CallScheduleForm({ 
+  personId, 
+  agents, 
+  defaultAgentId,
+  editingSchedule,
+  onComplete 
+}: CallScheduleFormProps) {
   const router = useRouter()
   const [isSubmitting, setIsSubmitting] = useState(false)
-  const [selectedAgent, setSelectedAgent] = useState(defaultAgentId)
-  const [selectedTime, setSelectedTime] = useState(PRESET_TIMES[0].value)
-  const [customTime, setCustomTime] = useState('')
+  const [selectedAgent, setSelectedAgent] = useState(editingSchedule?.agentId || defaultAgentId)
+  const [selectedTime, setSelectedTime] = useState(editingSchedule ? 'custom' : PRESET_TIMES[0].value)
+  const [customTime, setCustomTime] = useState(editingSchedule?.cronExpression || '')
 
   async function handleSubmit(e: React.FormEvent<HTMLFormElement>) {
     e.preventDefault()
     setIsSubmitting(true)
 
     try {
-      const formData = new FormData(e.currentTarget)
       const time = selectedTime === 'custom' ? customTime : selectedTime
-      const [hours, minutes] = time.split(':')
-      const timeStr = new Date(2000, 0, 1, parseInt(hours), parseInt(minutes))
-        .toLocaleTimeString('en-US', { 
-          hour: 'numeric', 
-          minute: '2-digit'
+
+      if (editingSchedule) {
+        await updateSchedule(editingSchedule.id, {
+          name: `Daily Check-in at ${time}`,
+          time,
+          agentId: selectedAgent,
+          enabled: editingSchedule.enabled
         })
-      
-      formData.append('name', `Daily Check-in at ${timeStr}`)
-      formData.append('time', time)
-      formData.append('personId', personId)
-      formData.append('agentId', selectedAgent)
-      
-      await createCallSchedule(formData)
-      toast.success("Schedule created successfully")
+        toast.success("Schedule updated")
+      } else {
+        const formData = new FormData()
+        formData.append('time', time)
+        formData.append('personId', personId)
+        formData.append('agentId', selectedAgent)
+        
+        await createCallSchedule(formData)
+        toast.success("Schedule created")
+      }
+
       router.refresh()
+      onComplete?.()
     } catch (error) {
-      toast.error("Failed to create schedule")
+      toast.error(editingSchedule ? "Failed to update schedule" : "Failed to create schedule")
       console.error(error)
     } finally {
       setIsSubmitting(false)
@@ -121,7 +134,9 @@ export function CallScheduleForm({ personId, agents, defaultAgentId }: CallSched
         className="w-full"
         disabled={isSubmitting || !selectedAgent || (selectedTime === 'custom' && !customTime)}
       >
-        {isSubmitting ? 'Creating Schedule...' : 'Create Schedule'}
+        {isSubmitting 
+          ? (editingSchedule ? 'Updating...' : 'Creating...') 
+          : (editingSchedule ? 'Update Schedule' : 'Create Schedule')}
       </Button>
     </form>
   )

@@ -86,22 +86,42 @@ export async function initiateCall() {
 export async function createCallSchedule(formData: FormData) {
   const session = await requireAuth('/phone-friend')
   
-  const name = formData.get('name') as string
-  const cronExpression = formData.get('time') as string
+  const time = formData.get('time') as string
   const personId = formData.get('personId') as string
   const agentId = formData.get('agentId') as string
 
+  // Convert time to a human-readable format for the name
+  const [hours, minutes] = time.split(':')
+  const timeStr = new Date(2000, 0, 1, parseInt(hours), parseInt(minutes))
+    .toLocaleTimeString('en-US', { 
+      hour: 'numeric', 
+      minute: '2-digit'
+    })
+
   const schedule = await prisma.callSchedule.create({
     data: {
-      name,
-      cronExpression,
-      personId,
-      agentId,
-      userId: session.user.id,
-      enabled: true
+      name: `Daily Check-in at ${timeStr}`,
+      cronExpression: time,
+      enabled: true,
+      person: {
+        connect: {
+          id: personId
+        }
+      },
+      agent: {
+        connect: {
+          id: agentId
+        }
+      },
+      user: {
+        connect: {
+          id: session.user.id
+        }
+      }
     }
   })
 
+  revalidatePath('/phone-friend/recipients')
   revalidatePath('/phone-friend/schedules')
   return schedule
 }
@@ -216,4 +236,56 @@ export async function createPerson(data: {
 
   revalidatePath('/phone-friend/recipients')
   return person
+}
+
+export async function deleteSchedule(scheduleId: string) {
+  const session = await requireAuth('/phone-friend')
+
+  const schedule = await prisma.callSchedule.findUnique({
+    where: { id: scheduleId },
+    select: { userId: true }
+  })
+
+  if (!schedule || schedule.userId !== session.user.id) {
+    throw new Error('Not authorized to delete this schedule')
+  }
+
+  await prisma.callSchedule.delete({
+    where: { id: scheduleId }
+  })
+
+  revalidatePath('/phone-friend/recipients')
+  revalidatePath('/phone-friend/schedules')
+}
+
+export async function updateSchedule(scheduleId: string, data: {
+  name: string
+  time: string
+  agentId: string
+  enabled: boolean
+}) {
+  const session = await requireAuth('/phone-friend')
+
+  const schedule = await prisma.callSchedule.findUnique({
+    where: { id: scheduleId },
+    select: { userId: true }
+  })
+
+  if (!schedule || schedule.userId !== session.user.id) {
+    throw new Error('Not authorized to update this schedule')
+  }
+
+  const updatedSchedule = await prisma.callSchedule.update({
+    where: { id: scheduleId },
+    data: {
+      name: data.name,
+      cronExpression: data.time, // You might want to convert time to cron expression
+      agentId: data.agentId,
+      enabled: data.enabled
+    }
+  })
+
+  revalidatePath('/phone-friend/recipients')
+  revalidatePath('/phone-friend/schedules')
+  return updatedSchedule
 }
