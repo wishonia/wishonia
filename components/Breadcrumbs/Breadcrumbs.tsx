@@ -10,11 +10,60 @@ interface BreadcrumbDropdownProps {
   currentPath: string[]
   currentSegment: string
   onClose: () => void
+  dynamicValues: Record<string, string>
 }
 
-function BreadcrumbDropdown({ node, currentPath, currentSegment, onClose }: BreadcrumbDropdownProps) {
+function BreadcrumbDropdown({ node, currentPath, currentSegment, onClose, dynamicValues }: BreadcrumbDropdownProps) {
   const pathIndex = currentPath.indexOf(currentSegment)
-  const basePath = '/' + currentPath.slice(0, pathIndex + 1).join('/')
+  
+  console.log('BreadcrumbDropdown Debug:', {
+    currentPath,
+    currentSegment,
+    pathIndex,
+    nodeName: node.name,
+    isDynamic: node.isDynamic
+  })
+  
+  // Build the path by traversing from root for each segment
+  let currentNode: RouteNode = routeTree
+  const segments: string[] = []
+  
+  for (let i = 0; i <= pathIndex; i++) {
+    const segment = currentPath[i]
+    console.log(`Processing segment[${i}]:`, {
+      segment,
+      currentNodeChildren: Object.keys(currentNode.children)
+    })
+    
+    const nextNode = Object.values(currentNode.children).find(child => {
+      const matches = child.name === segment || 
+        (child.isDynamic && !child.name.startsWith('...'))
+      console.log(`Checking child:`, {
+        childName: child.name,
+        segment,
+        isDynamic: child.isDynamic,
+        matches
+      })
+      return matches
+    })
+    
+    if (nextNode) {
+      currentNode = nextNode as RouteNode
+      const segmentToUse = nextNode.isDynamic ? segment : nextNode.name
+      console.log('Found node:', {
+        nodeName: nextNode.name,
+        isDynamic: nextNode.isDynamic,
+        segmentToUse
+      })
+      segments.push(segmentToUse)
+    } else {
+      console.log('No matching node found, using segment:', segment)
+      segments.push(segment)
+    }
+  }
+
+  const basePath = '/' + segments.join('/')
+  console.log('Final basePath:', basePath)
 
   return (
     <div className="absolute top-full left-0 mt-1 bg-white/90 rounded-md shadow-lg py-1 z-50">
@@ -23,7 +72,7 @@ function BreadcrumbDropdown({ node, currentPath, currentSegment, onClose }: Brea
         className="block px-4 py-2 hover:bg-black/10"
         onClick={onClose}
       >
-        {node.isDynamic ? `[${node.name}]` : node.name}
+        {node.isDynamic ? dynamicValues[node.name] || node.name : node.name}
       </Link>
       
       {Object.keys(node.children).length > 0 && (
@@ -32,8 +81,11 @@ function BreadcrumbDropdown({ node, currentPath, currentSegment, onClose }: Brea
 
       {Object.entries(node.children)
         .filter(([_, childNode]) => !childNode.name.startsWith('...'))
+        .filter(([_, childNode]) => !childNode.isDynamic || dynamicValues[childNode.name])
         .map(([key, childNode]) => {
-          const href = `${basePath}/${key}`
+          // For child links, use the actual route name
+          const childSegment = childNode.isDynamic ? childNode.name : key
+          const href = `${basePath}/${childSegment}`
           return (
             <Link
               key={key}
@@ -41,7 +93,7 @@ function BreadcrumbDropdown({ node, currentPath, currentSegment, onClose }: Brea
               className="block px-4 py-2 hover:bg-black/10"
               onClick={onClose}
             >
-              {childNode.isDynamic ? `[${childNode.name}]` : childNode.name}
+              {childNode.isDynamic ? dynamicValues[childNode.name] : childNode.name}
             </Link>
           )
       })}
@@ -65,10 +117,30 @@ function BreadcrumbItem({ segment, node, currentPath, isLast, dynamicValues }: B
   const hasSingleChild = children.length === 1
   const displayName = node.isDynamic ? dynamicValues[node.name] || `[${node.name}]` : segment
 
-  // If there's only one child, construct its href as absolute path
+  console.log('BreadcrumbItem:', {
+    segment,
+    nodeName: node.name,
+    isDynamic: node.isDynamic,
+    hasChildren,
+    hasSingleChild,
+    currentPath
+  })
+
+  // Keep full path including startSegment for links, but don't add child
+  const segmentIndex = currentPath.indexOf(segment)
   const singleChildHref = hasSingleChild ? 
-    '/' + [...currentPath.slice(0, currentPath.indexOf(segment) + 1), children[0][0]].join('/') : 
+    '/' + currentPath.slice(0, segmentIndex + 1).join('/') : 
     undefined
+
+  const handleDropdownClick = () => {
+    console.log('Dropdown clicked:', {
+      segment,
+      currentPath,
+      segmentIndex,
+      node
+    })
+    setDropdownOpen(!dropdownOpen)
+  }
 
   return (
     <li className="flex items-center">
@@ -86,7 +158,7 @@ function BreadcrumbItem({ segment, node, currentPath, isLast, dynamicValues }: B
             // Multiple children case - render as dropdown
             <button
               className="flex items-center hover:opacity-70"
-              onClick={() => setDropdownOpen(!dropdownOpen)}
+              onClick={handleDropdownClick}
             >
               {displayName}
               <svg
@@ -113,6 +185,7 @@ function BreadcrumbItem({ segment, node, currentPath, isLast, dynamicValues }: B
             currentPath={currentPath}
             currentSegment={segment}
             onClose={() => setDropdownOpen(false)}
+            dynamicValues={dynamicValues}
           />
         )}
       </div>
@@ -131,9 +204,9 @@ export function Breadcrumbs({ dynamicValues = {}, startSegment }: BreadcrumbsPro
   const pathname = usePathname()
   const pathSegments = pathname.split('/').filter(Boolean)
   
-  // If startSegment is provided, remove it and all segments before it from the path
+  // Keep startSegment in currentPath for links, but filter for display
   const startIndex = startSegment ? pathSegments.indexOf(startSegment) : -1
-  const filteredSegments = startIndex !== -1 ? 
+  const displaySegments = startIndex !== -1 ? 
     pathSegments.slice(startIndex + 1) : 
     pathSegments
 
@@ -150,7 +223,7 @@ export function Breadcrumbs({ dynamicValues = {}, startSegment }: BreadcrumbsPro
   }
 
   let currentNode: RouteNode = startNode
-  const breadcrumbs = filteredSegments.map((segment, index) => {
+  const breadcrumbs = displaySegments.map((segment, index) => {
     const node = Object.values(currentNode.children).find(child => 
       child.name === segment ||
       (child.isDynamic && !child.name.startsWith('...'))
@@ -162,7 +235,7 @@ export function Breadcrumbs({ dynamicValues = {}, startSegment }: BreadcrumbsPro
     return {
       segment,
       node,
-      isLast: index === filteredSegments.length - 1
+      isLast: index === displaySegments.length - 1
     }
   }).filter(Boolean)
 
@@ -195,6 +268,7 @@ export function Breadcrumbs({ dynamicValues = {}, startSegment }: BreadcrumbsPro
                   currentPath={pathSegments.slice(0, startIndex + 1)}
                   currentSegment={startSegment}
                   onClose={() => setHomeDropdownOpen(false)}
+                  dynamicValues={dynamicValues}
                 />
               )}
             </div>
@@ -210,7 +284,7 @@ export function Breadcrumbs({ dynamicValues = {}, startSegment }: BreadcrumbsPro
             key={index}
             segment={item!.segment}
             node={item!.node}
-            currentPath={filteredSegments}
+            currentPath={pathSegments}
             isLast={item!.isLast}
             dynamicValues={dynamicValues}
           />

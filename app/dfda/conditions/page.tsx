@@ -1,6 +1,7 @@
 import React from 'react'
 import Link from 'next/link'
 import { fetchConditions } from '../dfdaActions'
+import { DFDABreadcrumbs } from '@/components/Breadcrumbs/DFDABreadcrumbs'
 
 export default async function ConditionListPage() {
     const conditions = await fetchConditions()
@@ -8,6 +9,7 @@ export default async function ConditionListPage() {
 
     return (
         <div className="container mx-auto px-4 py-8 space-y-8">
+            <DFDABreadcrumbs />
             <h1 className="text-2xl font-bold">Conditions</h1>
             <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-4">
                 {sortedConditions.map((condition) => (
