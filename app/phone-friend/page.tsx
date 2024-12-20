@@ -11,6 +11,7 @@ import {
 } from "@/components/ui/accordion"
 import { getServerSession } from "next-auth/next"
 import { PhoneNumberInput } from "./components/PhoneNumberInput"
+import Link from "next/link"
 
 export default async function Page() {
   const session = await getServerSession()
@@ -27,7 +28,9 @@ export default async function Page() {
               <Button variant="ghost">Features</Button>
               <Button variant="ghost">How it works</Button>
               <Button variant="ghost">FAQ</Button>
-              <Button variant="default">Join Waitlist</Button>
+              <Link href="/phone-friend/recipients">
+                <Button variant="default">Get Started</Button>
+              </Link>
             </nav>
           </div>
         </header>
@@ -107,7 +110,9 @@ export default async function Page() {
               <p className="mb-8 text-xl">
                 Join our waitlist today and be among the first to experience peace of mind with HeartLine's daily check-ins.
               </p>
-              <Button size="lg" variant="secondary">Join Waitlist</Button>
+              <Link href="/phone-friend/recipients">
+                <Button size="lg" variant="secondary">Get Started</Button>
+              </Link>
             </div>
           </section>
 

@@ -5,6 +5,8 @@ import { requireAuth } from '@/lib/auth'
 import prisma from '@/lib/prisma'
 import { revalidatePath } from 'next/cache'
 import { getOrCreatePersonForUser } from '@/lib/models/person'
+import { NotifyMethod } from '@prisma/client'
+import { getServerSession } from "next-auth"
 
 export async function savePhoneNumber(formData: FormData) {
   const session = await requireAuth('/phone-friend')
@@ -79,4 +81,139 @@ export async function initiateCall() {
     }
     return { success: false, error: 'Failed to initiate call' }
   }
+}
+
+export async function createCallSchedule(formData: FormData) {
+  const session = await requireAuth('/phone-friend')
+  
+  const name = formData.get('name') as string
+  const cronExpression = formData.get('time') as string
+  const personId = formData.get('personId') as string
+  const agentId = formData.get('agentId') as string
+
+  const schedule = await prisma.callSchedule.create({
+    data: {
+      name,
+      cronExpression,
+      personId,
+      agentId,
+      userId: session.user.id,
+      enabled: true
+    }
+  })
+
+  revalidatePath('/phone-friend/schedules')
+  return schedule
+}
+
+export async function addCallSummaryRecipient(
+  scheduledCallId: string,
+  data: {
+    personId: string
+    notifyBy: NotifyMethod[]
+  }
+) {
+  const session = await requireAuth('/phone-friend')
+
+  const recipient = await prisma.callSummaryRecipient.create({
+    data: {
+      personId: data.personId,
+      scheduledCallId,
+      notifyBy: data.notifyBy
+    }
+  })
+
+  revalidatePath('/phone-friend/schedules')
+  return recipient
+}
+
+export async function removeCallSummaryRecipient(id: string) {
+  const session = await requireAuth('/phone-friend')
+
+  await prisma.callSummaryRecipient.delete({
+    where: { id }
+  })
+
+  revalidatePath('/phone-friend/schedules')
+}
+
+export async function createPerson(data: {
+  name: string
+  email?: string
+  phoneNumber: string
+}) {
+  const session = await requireAuth('/phone-friend')
+
+  // Debug logging
+  console.log('Creating person with data:', data)
+
+  // Validate required fields
+  if (!data.name || !data.phoneNumber) {
+    throw new Error('Name and phone number are required')
+  }
+
+  // Check if phone number is already in use
+  const existingPersonByPhone = await prisma.person.findUnique({
+    where: { phoneNumber: data.phoneNumber },
+    include: {
+      user: true
+    }
+  })
+
+  if (existingPersonByPhone) {
+    throw new Error('This phone number is already registered')
+  }
+
+  // Check if person exists with this email
+  if (data.email && data.email.trim() !== '') {
+    const existingPersonByEmail = await prisma.person.findFirst({
+      where: {
+        email: {
+          equals: data.email,
+          mode: 'insensitive'
+        }
+      }
+    })
+
+    if (existingPersonByEmail) {
+      // Update the existing person with new phone number and connect to user
+      const updatedPerson = await prisma.person.update({
+        where: { id: existingPersonByEmail.id },
+        data: {
+          phoneNumber: data.phoneNumber,
+          name: data.name, // Update name in case it changed
+          user: {
+            connect: {
+              id: session.user.id
+            }
+          }
+        }
+      })
+
+      revalidatePath('/phone-friend/recipients')
+      return updatedPerson
+    }
+  }
+
+  // Create new person if no existing record found
+  const createData = {
+    name: data.name,
+    phoneNumber: data.phoneNumber,
+    email: data.email?.trim() || null,
+    user: {
+      connect: {
+        id: session.user.id
+      }
+    }
+  }
+
+  // Debug logging
+  console.log('Creating person with processed data:', createData)
+
+  const person = await prisma.person.create({
+    data: createData
+  })
+
+  revalidatePath('/phone-friend/recipients')
+  return person
 }
