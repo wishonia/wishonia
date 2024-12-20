@@ -21,9 +21,10 @@ const PRESET_TIMES = [
 
 interface NewScheduleFormProps {
   agents: Agent[]
+  initialPhoneNumber?: string
 }
 
-export function NewScheduleForm({ agents }: NewScheduleFormProps) {
+export function NewScheduleForm({ agents, initialPhoneNumber = '' }: NewScheduleFormProps) {
   const router = useRouter()
   const [isSubmitting, setIsSubmitting] = useState(false)
   const [selectedTime, setSelectedTime] = useState(PRESET_TIMES[0].value)
@@ -31,7 +32,7 @@ export function NewScheduleForm({ agents }: NewScheduleFormProps) {
   const [selectedAgent, setSelectedAgent] = useState(agents[0]?.id || '')
   const [recipientDetails, setRecipientDetails] = useState({
     name: '',
-    phoneNumber: '',
+    phoneNumber: initialPhoneNumber,
     email: ''
   })
 

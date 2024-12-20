@@ -4,13 +4,15 @@ import { useState } from 'react'
 import { Button } from "@/components/ui/button"
 import { Input } from "@/components/ui/input"
 import { toast } from "sonner"
+import { useRouter } from 'next/navigation'
 
 interface PhoneNumberInputProps {
   isLoggedIn: boolean
   onSuccess?: (phoneNumber: string) => void
 }
 
-export function PhoneNumberInput({ isLoggedIn, onSuccess }: PhoneNumberInputProps) {
+export function DemoPhoneNumberInput({ isLoggedIn, onSuccess }: PhoneNumberInputProps) {
+  const router = useRouter()
   const [phoneNumber, setPhoneNumber] = useState('')
   const [isSubmitting, setIsSubmitting] = useState(false)
 
@@ -20,16 +22,19 @@ export function PhoneNumberInput({ isLoggedIn, onSuccess }: PhoneNumberInputProp
 
     try {
       // Here you would typically validate and save the phone number
-      // For now, we'll just simulate success
       await new Promise(resolve => setTimeout(resolve, 500))
       
       if (onSuccess) {
         onSuccess(phoneNumber)
       }
       
-      toast.success("Phone number saved successfully")
+      // Redirect to new schedule page with phone number
+      const formattedPhone = encodeURIComponent(phoneNumber)
+      router.push(`/phone-friend/schedules/new?phone=${formattedPhone}`)
+      
+      toast.success("Continuing to schedule setup...")
     } catch (error) {
-      toast.error("Failed to save phone number")
+      toast.error("Failed to continue")
     } finally {
       setIsSubmitting(false)
     }

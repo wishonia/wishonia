@@ -331,3 +331,27 @@ export async function createStripePortalSession() {
 
   redirect(portalSession.url)
 }
+
+export async function updatePerson(personId: string, data: {
+  name: string
+  phoneNumber: string
+  email?: string
+  timeZone?: string
+  notes?: string
+}) {
+  const session = await requireAuth('/phone-friend')
+
+  const person = await prisma.person.update({
+    where: { id: personId },
+    data: {
+      name: data.name,
+      phoneNumber: data.phoneNumber,
+      email: data.email || null,
+      timeZone: data.timeZone || null,
+      updatedAt: new Date(),
+    }
+  })
+
+  revalidatePath('/phone-friend/schedules')
+  return person
+}
