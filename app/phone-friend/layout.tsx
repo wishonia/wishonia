@@ -6,6 +6,10 @@ import { UserAccountNav } from "@/components/user/user-account-nav"
 import { NavItem } from "@/types"
 
 const avatarNavItems: NavItem[] = [
+  {
+    title: "Account",
+    href: "/phone-friend/account",
+  },
 ]
 
 export default async function PhoneFriendLayout({
@@ -40,9 +44,15 @@ export default async function PhoneFriendLayout({
               </>
             ) : (
               <>
-                <Button variant="ghost">Features</Button>
-                <Button variant="ghost">How it works</Button>
-                <Button variant="ghost">FAQ</Button>
+                <Link href="/phone-friend#features">
+                  <Button variant="ghost">Features</Button>
+                </Link>
+                <Link href="/phone-friend#how-it-works">
+                  <Button variant="ghost">How it works</Button>
+                </Link>
+                <Link href="/phone-friend#faq">
+                  <Button variant="ghost">FAQ</Button>
+                </Link>
                 <Link href="/phone-friend/schedules">
                   <Button variant="default">Get Started</Button>
                 </Link>

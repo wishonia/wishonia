@@ -5,6 +5,12 @@ import { requireAuth } from '@/lib/auth'
 import prisma from '@/lib/prisma'
 import { revalidatePath } from 'next/cache'
 import { NotifyMethod } from '@prisma/client'
+import Stripe from 'stripe'
+import { redirect } from 'next/navigation'
+
+const stripe = new Stripe(process.env.STRIPE_SECRET_KEY!, {
+  apiVersion: '2022-11-15',
+})
 
 export async function initiateCall(personId: string) {
   const session = await requireAuth('/phone-friend')
@@ -257,4 +263,71 @@ export async function updateSchedule(scheduleId: string, data: {
 
   revalidatePath('/phone-friend/schedules')
   return updatedSchedule
+}
+
+export async function createStripeCheckoutSession() {
+  const session = await requireAuth('/phone-friend')
+
+  // Get or create Stripe customer
+  let customer = await prisma.stripeCustomer.findUnique({
+    where: { userId: session.user.id },
+  })
+
+  if (!customer) {
+    // Create Stripe customer
+    const stripeCustomer = await stripe.customers.create({
+      email: session.user.email!,
+      metadata: {
+        userId: session.user.id,
+      },
+    })
+
+    // Save Stripe customer in our DB
+    customer = await prisma.stripeCustomer.create({
+      data: {
+        id: stripeCustomer.id,
+        userId: session.user.id,
+      },
+    })
+  }
+
+  // Create Stripe checkout session
+  const stripeSession = await stripe.checkout.sessions.create({
+    customer: customer.id,
+    mode: 'subscription',
+    payment_method_types: ['card'],
+    line_items: [
+      {
+        price: process.env.STRIPE_PRICE_ID, // Your price ID from Stripe
+        quantity: 1,
+      },
+    ],
+    success_url: `${process.env.NEXT_PUBLIC_APP_URL}/phone-friend/account?success=true`,
+    cancel_url: `${process.env.NEXT_PUBLIC_APP_URL}/phone-friend/account?canceled=true`,
+  })
+
+  if (!stripeSession.url) {
+    throw new Error('Failed to create checkout session')
+  }
+
+  redirect(stripeSession.url)
+}
+
+export async function createStripePortalSession() {
+  const session = await requireAuth('/phone-friend')
+
+  const customer = await prisma.stripeCustomer.findUnique({
+    where: { userId: session.user.id },
+  })
+
+  if (!customer) {
+    throw new Error('No customer found')
+  }
+
+  const portalSession = await stripe.billingPortal.sessions.create({
+    customer: customer.id,
+    return_url: `${process.env.NEXT_PUBLIC_APP_URL}/phone-friend/account`,
+  })
+
+  redirect(portalSession.url)
 }

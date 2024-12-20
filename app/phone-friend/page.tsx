@@ -1,8 +1,6 @@
 import { Button } from "@/components/ui/button"
 import { Card, CardContent } from "@/components/ui/card"
-import { Input } from "@/components/ui/input"
-import { Heart, Phone, Users, FileText, UserPlus, PhoneCall, Bell, CheckCircle } from "lucide-react"
-import { savePhoneNumber } from "./actions"
+import { Heart, Phone, Users, FileText, UserPlus, PhoneCall, Bell } from "lucide-react"
 import {
   Accordion,
   AccordionContent,
@@ -10,7 +8,7 @@ import {
   AccordionTrigger,
 } from "@/components/ui/accordion"
 import { getServerSession } from "next-auth/next"
-import { PhoneNumberInput } from "./components/PhoneNumberInput"
+import { DemoPhoneNumberInput } from "./components/DemoPhoneNumberInput"
 import Link from "next/link"
 
 export default async function Page() {
@@ -18,22 +16,6 @@ export default async function Page() {
 
   return (
       <div className="min-h-screen bg-gradient-to-b from-background to-background/95">
-        <header className="sticky top-0 z-50 w-full border-b bg-background/95 backdrop-blur supports-[backdrop-filter]:bg-background/60">
-          <div className="container flex h-16 items-center">
-            <div className="flex items-center gap-2 text-lg font-semibold">
-              <Heart className="h-6 w-6 text-primary" />
-              <span>HeartLine</span>
-            </div>
-            <nav className="ml-auto flex gap-4 sm:gap-6">
-              <Button variant="ghost">Features</Button>
-              <Button variant="ghost">How it works</Button>
-              <Button variant="ghost">FAQ</Button>
-              <Link href="/phone-friend/schedules">
-                <Button variant="default">Get Started</Button>
-              </Link>
-            </nav>
-          </div>
-        </header>
         <main className="container mx-auto px-4 py-16 md:px-6">
           <section className="mb-20 text-center">
             <h1 className="mb-4 text-4xl font-extrabold tracking-tight sm:text-5xl md:text-6xl">
@@ -44,13 +26,13 @@ export default async function Page() {
             </p>
             <Card className="mx-auto max-w-md">
               <CardContent className="p-6">
-                <h2 className="mb-4 text-2xl font-bold">Try Our Live Demo</h2>
-                <PhoneNumberInput isLoggedIn={!!session?.user} />
+                <h2 className="mb-4 text-2xl font-bold">Try Live Demo</h2>
+                <DemoPhoneNumberInput isLoggedIn={!!session?.user} />
               </CardContent>
             </Card>
           </section>
 
-          <section className="mb-20">
+          <section id="features" className="mb-20">
             <h2 className="mb-8 text-center text-3xl font-bold">Why Choose HeartLine?</h2>
             <div className="grid gap-8 md:grid-cols-3">
               <Card>
@@ -77,7 +59,7 @@ export default async function Page() {
             </div>
           </section>
 
-          <section className="mb-20">
+          <section id="how-it-works" className="mb-20">
             <h2 className="mb-8 text-center text-3xl font-bold">How HeartLine Works</h2>
             <div className="grid gap-8 md:grid-cols-3">
               <div className="flex flex-col items-center text-center">
@@ -116,7 +98,7 @@ export default async function Page() {
             </div>
           </section>
 
-          <section className="mx-auto max-w-3xl">
+          <section id="faq" className="mx-auto max-w-3xl">
             <h2 className="mb-8 text-center text-3xl font-bold">
               Frequently Asked Questions
             </h2>
