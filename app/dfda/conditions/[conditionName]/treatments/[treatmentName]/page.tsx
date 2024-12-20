@@ -1,4 +1,4 @@
-import { ConditionTreatmentContent } from './components/ConditionTreatmentContent'
+import { ConditionTreatmentMetaAnalysis } from './components/ConditionTreatmentMetaAnalysis'
 
 interface PageProps {
   params: {
@@ -11,5 +11,5 @@ export default function TreatmentForConditionPage({ params }: PageProps) {
   const treatmentName = decodeURIComponent(params.treatmentName)
   const conditionName = decodeURIComponent(params.conditionName)
   
-  return <ConditionTreatmentContent treatmentName={treatmentName} conditionName={conditionName} />
+  return <ConditionTreatmentMetaAnalysis treatmentName={treatmentName} conditionName={conditionName} />
 }
