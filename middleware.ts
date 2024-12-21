@@ -22,7 +22,7 @@ const redirects = [
     source: "/dfda/health-savings-sharing",
     destination: "/dfda/docs/health-savings-sharing",
     permanent: true,
-    description: "Redirect to new name of the Right to Trial Act",
+    description: "Redirect to health savings sharing documentation",
   },
   // Add more redirects here
   // Make sure to add the source path to the matcher array below 👇
