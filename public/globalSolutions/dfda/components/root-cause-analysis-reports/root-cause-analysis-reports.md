@@ -16,7 +16,7 @@ I love to eat up all this data and analyze it and determine, which of these hund
 Thus, I automatically generate reports intended to help you and your physician gain insights into the root causes and effective solutions to help you minimize your symptoms.
 
 
-* [HTML Example](1398-root-cause-analysis.html)
+* [HTML Example](https://root-cause.curedao.org/)
 * [Model and Analytics Code](https://github.com/FDA-AI/FDAi/tree/develop/apps/dfda-1/app/Reports/RootCauseAnalysis.php)
 * [Front-End View Code](https://github.com/FDA-AI/FDAi/tree/develop/apps/dfda-1/resources/views/root-cause-content.blade.php)
 
