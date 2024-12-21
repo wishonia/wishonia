@@ -166,7 +166,7 @@ model User {
   marketingEmails                       Boolean                               @default(false)
   newsletterEmails                      Boolean                               @default(false)
   unsubscribeFromAll                    Boolean                               @default(false)
-  callSchedulesCreated                      CallSchedule[]
+  callSchedulesCreated                  CallSchedule[]
 }
 
 // Need this to create digital twins for people that are not users
@@ -203,8 +203,8 @@ model Person {
   web3Wallet       String?                  @unique
   website          String?
   callSchedules    CallSchedule[]
-  globalProblems  PersonGlobalProblem[]
-  globalSolutions PersonGlobalSolution[]
+  globalProblems   PersonGlobalProblem[]
+  globalSolutions  PersonGlobalSolution[]
 
   // Add index for common queries
   @@index([name])
@@ -1044,14 +1044,14 @@ model Organization {
   owner                   User?                    @relation(fields: [ownerId], references: [id])
 
   // Additional relations
-  locations   OrganizationLocation[]
-  followers   OrganizationFollower[]
-  Product     Product[]
-  Service     Service[]
-  Event       Event[]
-  Partnership Partnership[]
-  globalProblems          OrganizationGlobalProblem[]
-  globalSolutions         OrganizationGlobalSolution[]
+  locations       OrganizationLocation[]
+  followers       OrganizationFollower[]
+  Product         Product[]
+  Service         Service[]
+  Event           Event[]
+  Partnership     Partnership[]
+  globalProblems  OrganizationGlobalProblem[]
+  globalSolutions OrganizationGlobalSolution[]
 
   @@unique([name, foundedYear])
 }
@@ -2103,17 +2103,17 @@ enum CallStatus {
 
 // Junction table for Organization <-> GlobalProblem relationship
 model OrganizationGlobalProblem {
-  id               String         @id @default(cuid())
-  organizationId   String
-  globalProblemId  String
-  organization     Organization   @relation(fields: [organizationId], references: [id], onDelete: Cascade)
-  globalProblem    GlobalProblem  @relation(fields: [globalProblemId], references: [id], onDelete: Cascade)
-  focusLevel       FocusLevel     @default(MEDIUM)
-  description      String?        @db.Text
-  startedAt        DateTime?      // When the organization started working on this problem
-  achievements     String[]       // Key achievements in addressing this problem
-  createdAt        DateTime       @default(now())
-  updatedAt        DateTime       @updatedAt
+  id              String        @id @default(cuid())
+  organizationId  String
+  globalProblemId String
+  organization    Organization  @relation(fields: [organizationId], references: [id], onDelete: Cascade)
+  globalProblem   GlobalProblem @relation(fields: [globalProblemId], references: [id], onDelete: Cascade)
+  focusLevel      FocusLevel    @default(MEDIUM)
+  description     String?       @db.Text
+  startedAt       DateTime? // When the organization started working on this problem
+  achievements    String[] // Key achievements in addressing this problem
+  createdAt       DateTime      @default(now())
+  updatedAt       DateTime      @updatedAt
 
   @@unique([organizationId, globalProblemId])
   @@index([organizationId])
@@ -2129,19 +2129,19 @@ enum FocusLevel {
 
 // Junction table for Person <-> GlobalProblem relationship
 model PersonGlobalProblem {
-  id               String         @id @default(cuid())
-  personId         String
-  globalProblemId  String
-  person           Person         @relation(fields: [personId], references: [id], onDelete: Cascade)
-  globalProblem    GlobalProblem  @relation(fields: [globalProblemId], references: [id], onDelete: Cascade)
-  role             String?        // e.g., "Researcher", "Advocate", "Expert"
-  expertise        ExpertiseLevel @default(MEDIUM)
-  description      String?        @db.Text
-  startedAt        DateTime?      // When the person started working on this problem
-  achievements     String[]       // Key achievements in addressing this problem
-  publications     String[]       // Related publications
-  createdAt        DateTime       @default(now())
-  updatedAt        DateTime       @updatedAt
+  id              String         @id @default(cuid())
+  personId        String
+  globalProblemId String
+  person          Person         @relation(fields: [personId], references: [id], onDelete: Cascade)
+  globalProblem   GlobalProblem  @relation(fields: [globalProblemId], references: [id], onDelete: Cascade)
+  role            String? // e.g., "Researcher", "Advocate", "Expert"
+  expertise       ExpertiseLevel @default(MEDIUM)
+  description     String?        @db.Text
+  startedAt       DateTime? // When the person started working on this problem
+  achievements    String[] // Key achievements in addressing this problem
+  publications    String[] // Related publications
+  createdAt       DateTime       @default(now())
+  updatedAt       DateTime       @updatedAt
 
   @@unique([personId, globalProblemId])
   @@index([personId])
@@ -2162,12 +2162,12 @@ model OrganizationGlobalSolution {
   globalSolutionId String
   organization     Organization   @relation(fields: [organizationId], references: [id], onDelete: Cascade)
   globalSolution   GlobalSolution @relation(fields: [globalSolutionId], references: [id], onDelete: Cascade)
-  role             String?        // e.g., "Developer", "Implementer", "Funder"
+  role             String? // e.g., "Developer", "Implementer", "Funder"
   focusLevel       FocusLevel     @default(MEDIUM)
   description      String?        @db.Text
-  startedAt        DateTime?      // When the organization started working on this solution
-  achievements     String[]       // Key achievements in implementing this solution
-  budget           Float?         // Budget allocated to this solution
+  startedAt        DateTime? // When the organization started working on this solution
+  achievements     String[] // Key achievements in implementing this solution
+  budget           Float? // Budget allocated to this solution
   createdAt        DateTime       @default(now())
   updatedAt        DateTime       @updatedAt
 
@@ -2183,12 +2183,12 @@ model PersonGlobalSolution {
   globalSolutionId String
   person           Person         @relation(fields: [personId], references: [id], onDelete: Cascade)
   globalSolution   GlobalSolution @relation(fields: [globalSolutionId], references: [id], onDelete: Cascade)
-  role             String?        // e.g., "Lead Developer", "Researcher", "Advisor"
+  role             String? // e.g., "Lead Developer", "Researcher", "Advisor"
   expertise        ExpertiseLevel @default(MEDIUM)
   description      String?        @db.Text
-  startedAt        DateTime?      // When the person started working on this solution
-  achievements     String[]       // Key achievements in developing this solution
-  publications     String[]       // Related publications/documentation
+  startedAt        DateTime? // When the person started working on this solution
+  achievements     String[] // Key achievements in developing this solution
+  publications     String[] // Related publications/documentation
   createdAt        DateTime       @default(now())
   updatedAt        DateTime       @updatedAt
 
