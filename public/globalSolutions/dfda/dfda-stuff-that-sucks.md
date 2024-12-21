@@ -1,6 +1,6 @@
 # What We're Trying to Fix
 
-The current system of clinical research, diagnosis, and treatment is  failing the billions of people are suffering from chronic diseases.
+The current system of clinical research, diagnosis, and treatment is failing the billions of people who are suffering from chronic diseases.
 
 It takes over [10 years and 2.6 billion dollars](https://www.semanticscholar.org/paper/Innovation-in-the-pharmaceutical-industry%3A-New-of-DiMasiGrabowski/3275f31c072ac11c6ca7a5260bd535720f07df41) to bring a drug to market (including failed attempts). 
 It costs [$41k](https://www.clinicalleader.com/doc/getting-a-handle-on-clinical-trial-costs-0001) per subject in Phase III clinical trials.
