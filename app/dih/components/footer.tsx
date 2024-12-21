@@ -18,7 +18,7 @@ export function Footer() {
           <div>
             <h3 className="font-semibold mb-4">Quick Links</h3>
             <ul className="space-y-2">
-              <li><Link href="/dfda/cure-acceleration-act" className="text-sm text-muted-foreground hover:text-foreground">Blueprint</Link></li>
+              <li><Link href="/dfda/docs/cure-acceleration-act" className="text-sm text-muted-foreground hover:text-foreground">Blueprint</Link></li>
               <li><Link href="/dfda" className="text-sm text-muted-foreground hover:text-foreground">Data Hub</Link></li>
               <li><Link href="/dfda/trials" className="text-sm text-muted-foreground hover:text-foreground">Clinical Trials</Link></li>
             </ul>

@@ -64,7 +64,7 @@ export function Navigation() {
                 </NavigationMenuContent>
               </NavigationMenuItem>
               <NavigationMenuItem>
-                <Link href="/dfda/cure-acceleration-act" legacyBehavior passHref>
+                <Link href="/dfda/docs/cure-acceleration-act" legacyBehavior passHref>
                   <NavigationMenuLink className={navigationMenuTriggerStyle()}>
                     Blueprint
                   </NavigationMenuLink>
@@ -104,7 +104,7 @@ export function Navigation() {
                     {component.title}
                   </Link>
                 ))}
-                <Link href="/dfda/cure-acceleration-act" className="text-lg font-medium">
+                <Link href="/dfda/docs/cure-acceleration-act" className="text-lg font-medium">
                   Blueprint
                 </Link>
                 <Link href="/dfda" className="text-lg font-medium">

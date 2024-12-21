@@ -82,13 +82,13 @@ export const dfdaLinks = {
   },
   petition: {
     title: "Cure Acceleration Act",
-    href: "/dfda/cure-acceleration-act",
+    href: "/dfda/docs/cure-acceleration-act",
     icon: "petition",
     tooltip: "Help us transform healthcare by signing the Cure Acceleration Act",
   },
   healthSavingsSharing: {
     title: "50/50 Health Savings Sharing Program",
-    href: "/dfda/health-savings-sharing",
+    href: "/dfda/docs/health-savings-sharing",
     icon: "savings",
     tooltip:
       "Incentivizing Cures With 50% of Long Term Healthcare Savings from Curative or Preventative Treatments",
