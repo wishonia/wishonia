@@ -19,6 +19,16 @@ export function UserVariableItem({ userVariable }: UserVariableItemProps) {
     <div 
       className="neobrutalist-container group"
       onClick={() => setIsExpanded(!isExpanded)}
+      role="button"
+      aria-expanded={isExpanded}
+      aria-controls={`variable-actions-${userVariable.id}`}
+      tabIndex={0}
+      onKeyDown={(e) => {
+        if (e.key === 'Enter' || e.key === ' ') {
+          e.preventDefault()
+          setIsExpanded(!isExpanded)
+        }
+      }}
     >
       {/* Header */}
       <div className="flex items-center justify-between">
@@ -26,7 +36,8 @@ export function UserVariableItem({ userVariable }: UserVariableItemProps) {
           {userVariable.imageUrl && (
             <img
               src={userVariable.imageUrl}
-              alt={userVariable.name}
+              alt=""
+              aria-hidden="true"
               className="h-10 w-10 rounded-lg object-cover"
             />
           )}
@@ -34,21 +45,29 @@ export function UserVariableItem({ userVariable }: UserVariableItemProps) {
             {userVariable.name}
           </span>
         </div>
-        <span className="font-black transition-transform duration-200" 
+        <span 
+          className="font-black transition-transform duration-200" 
           style={{ transform: isExpanded ? 'rotate(180deg)' : 'rotate(0deg)' }}
+          aria-hidden="true"
         >
           ▼
         </span>
       </div>
 
       {/* Expandable Actions */}
-      <div className={cn(
-        "grid grid-rows-[0fr] transition-all duration-200",
-        isExpanded && "grid-rows-[1fr] mt-4"
-      )}>
+      <div 
+        id={`variable-actions-${userVariable.id}`}
+        className={cn(
+          "grid grid-rows-[0fr] transition-all duration-200",
+          isExpanded && "grid-rows-[1fr] mt-4"
+        )}
+      >
         <div className="overflow-hidden">
           <div className="flex flex-wrap gap-2">
-            <MeasurementButton genericVariable={userVariable}>
+            <MeasurementButton 
+              genericVariable={userVariable}
+              aria-label={`Record a measurement for ${userVariable.name}`}
+            >
               📝 Record a measurement
             </MeasurementButton>
 
@@ -56,6 +75,7 @@ export function UserVariableItem({ userVariable }: UserVariableItemProps) {
               href={`/dfda/userVariables/${userVariable.variableId}`}
               className="neobrutalist-button"
               onClick={(e) => e.stopPropagation()}
+              aria-label={`View history for ${userVariable.name}`}
             >
               📊 History
             </Link>
@@ -64,6 +84,7 @@ export function UserVariableItem({ userVariable }: UserVariableItemProps) {
               href={`/dfda/userVariables/${userVariable.variableId}/charts`}
               className="neobrutalist-button"
               onClick={(e) => e.stopPropagation()}
+              aria-label={`View charts for ${userVariable.name}`}
             >
               📈 Charts
             </Link>
@@ -72,6 +93,7 @@ export function UserVariableItem({ userVariable }: UserVariableItemProps) {
               href={`/dfda/userVariables/${userVariable.id}/settings`}
               className="neobrutalist-button"
               onClick={(e) => e.stopPropagation()}
+              aria-label={`View settings for ${userVariable.name}`}
             >
               ⚙️ Settings
             </Link>
@@ -84,10 +106,13 @@ export function UserVariableItem({ userVariable }: UserVariableItemProps) {
 
 UserVariableItem.Skeleton = function UserVariableItemSkeleton() {
   return (
-    <div className="neobrutalist-container">
-      <div className="space-y-3">
-        <Skeleton className="h-5 w-2/5" />
-        <Skeleton className="h-4 w-4/5" />
+    <div className="neobrutalist-container" aria-busy="true">
+      <div className="flex items-center gap-4">
+        <Skeleton className="h-10 w-10 rounded-lg" />
+        <div className="space-y-2 flex-1">
+          <Skeleton className="h-5 w-2/5" />
+          <Skeleton className="h-4 w-4/5" />
+        </div>
       </div>
     </div>
   )
