@@ -1,15 +1,27 @@
-'use client'
-
 import TreatmentConditionSearchBox from '../components/TreatmentConditionReviewsSearchBox'
-import ClinicalTrialSearch from '../trials/components/ClinicalTrialSearch'
-import VariableSearchAutocomplete from '../components/VariableSearchAutocomplete'
-import { GlobalVariable } from '@/types/models/GlobalVariable'
+import AdvancedTrialSearch from '../trials/components/AdvancedTrialSearch'
+import VariableSearchSection from './components/VariableSearchSection'
+
+export const metadata = {
+  title: 'Search | dFDA',
+  description: 'Search treatments, conditions, clinical trials, foods and supplements to find what works best for your health.',
+  keywords: [
+    'clinical trials',
+    'medical treatments',
+    'health conditions',
+    'supplements',
+    'food database',
+    'medical research',
+    'health search'
+  ],
+  openGraph: {
+    title: 'Search Everything | dFDA',
+    description: 'Find treatments, clinical trials, and health data to improve your wellbeing.',
+    type: 'website'
+  }
+}
 
 export default function SearchPage() {
-  const handleVariableSelect = (variable: GlobalVariable) => {
-    window.location.href = variable.url || `/variables/${variable.variableId}`
-  }
-
   return (
     <div className="container mx-auto space-y-8 px-4 py-8">
       <h1 className="neobrutalist-hero-title">Search Everything 🔍</h1>
@@ -23,18 +35,11 @@ export default function SearchPage() {
       {/* Clinical Trials */}
       <div className="neobrutalist-container">
         <h2 className="neobrutalist-title">Clinical Trials 🔬</h2>
-        <ClinicalTrialSearch />
+        <AdvancedTrialSearch />
       </div>
 
       {/* Foods & Supplements */}
-      <div className="neobrutalist-gradient-container neobrutalist-gradient-green">
-        <h2 className="neobrutalist-title">Foods & Supplements 🍎</h2>
-        <VariableSearchAutocomplete
-          onVariableSelect={handleVariableSelect}
-          searchParams={{ variableCategoryName: 'Foods' }}
-          placeholder="Search foods and supplements..."
-        />
-      </div>
+      <VariableSearchSection />
     </div>
   )
 }
