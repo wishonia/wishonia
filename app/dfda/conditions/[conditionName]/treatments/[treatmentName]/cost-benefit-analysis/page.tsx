@@ -121,6 +121,9 @@ const exampleReport: ExtendedMetaAnalysisReport = {
 const CostBenefitAnalysisPage = ({ params }: PageProps) => {
   const { conditionName, treatmentName } = params;
   
+  if (!conditionName || !treatmentName) {
+    throw new Error('Missing required route parameters');
+  }
   return (
     <div className="container mx-auto p-4">
       <DFDABreadcrumbs dynamicValues={{ 
