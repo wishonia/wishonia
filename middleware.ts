@@ -8,15 +8,21 @@ import { getDomainConfig } from "@/lib/utils/domain-config"
 const redirects = [
   {
     source: "/dfda/right-to-trial",
-    destination: "/dfda/cure-acceleration-act",
+    destination: "/dfda/docs/cure-acceleration-act",
     permanent: true,
     description: "Redirect to new name of the Right to Trial Act",
   },
   {
     source: "/dfda/right-to-trial-act",
-    destination: "/dfda/cure-acceleration-act",
+    destination: "/dfda/docs/cure-acceleration-act",
     permanent: true,
     description: "Redirect to new name of the Right to Trial Act",
+  },
+  {
+    source: "/dfda/health-savings-sharing",
+    destination: "/dfda/docs/health-savings-sharing",
+    permanent: true,
+    description: "Redirect to health savings sharing documentation",
   },
   // Add more redirects here
   // Make sure to add the source path to the matcher array below 👇

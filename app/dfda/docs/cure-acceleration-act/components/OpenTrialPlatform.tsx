@@ -2,7 +2,7 @@
 
 import { motion } from "framer-motion"
 
-import DFDACostSavingsTable from "../../components/DFDACostSavingsTable"
+import DFDACostSavingsTable from "../../../components/DFDACostSavingsTable"
 import ListCard from "./ListCard"
 
 export default function OpenTrialPlatform() {

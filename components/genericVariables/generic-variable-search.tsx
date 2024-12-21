@@ -1,8 +1,9 @@
 "use client"
 
-import { FC, useEffect, useState } from "react"
+import { FC, useState, useMemo } from "react"
 
 import { GenericVariableList } from "@/components/genericVariables/generic-variable-list"
+import { useDebounce } from "@/lib/hooks/useDebounce"
 
 type GenericVariableSearchProps = {
   user: {
@@ -19,26 +20,19 @@ export const GenericVariableSearch: FC<GenericVariableSearchProps> = ({
 }) => {
   // State to manage search phrase
   const [searchPhrase, setSearchPhrase] = useState("")
-  const [debouncedSearchPhrase, setDebouncedSearchPhrase] =
-    useState(searchPhrase)
+  const debouncedSearchPhrase = useDebounce(searchPhrase, 500)
 
-  // Define search parameters
-  const searchParams = {
-    includePublic: includePublic,
-    sort: sort,
-    limit: 10,
-    offset: 0,
-    searchPhrase: debouncedSearchPhrase, // Use debounced value
-  }
-
-  useEffect(() => {
-    const handler = setTimeout(() => {
-      console.log(`New search made: ${searchPhrase}`)
-      setDebouncedSearchPhrase(searchPhrase)
-    }, 500) // Delay of 500ms
-
-    return () => clearTimeout(handler)
-  }, [searchPhrase])
+  // Memoize search parameters to prevent unnecessary re-renders
+  const searchParams = useMemo(
+    () => ({
+      includePublic,
+      sort,
+      limit: 10,
+      offset: 0,
+      searchPhrase: debouncedSearchPhrase,
+    }),
+    [includePublic, sort, debouncedSearchPhrase]
+  )
 
   return (
     <div className="search-container flex flex-col">
