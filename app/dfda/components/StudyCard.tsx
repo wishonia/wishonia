@@ -9,6 +9,7 @@ import HighchartsReact from 'highcharts-react-official'
 import StudyHeaderHtml from './StudyHeaderHtml'
 import { SanitizedContent } from './SanitizedContent'
 import { StudyStatistics } from './StudyStatistics'
+import { Link, Twitter, Facebook, Linkedin } from 'lucide-react'
 
 interface StudyCardProps {
   study: Study
@@ -17,9 +18,79 @@ interface StudyCardProps {
 export default function StudyCard({ study }: StudyCardProps) {
   const router = useRouter()
 
+  const shareUrl = typeof window !== 'undefined' ? window.location.href : ''
+
+  const handleShare = async (platform?: string) => {
+    if (!platform) {
+      await navigator.clipboard.writeText(shareUrl)
+      return
+    }
+
+    let shareText = `Check out this ${study.type} study about ${study.effectVariableName} and ${study.causeVariableName}`
+    
+    if (study.statistics?.correlationCoefficient) {
+      const correlation = Math.abs(study.statistics.correlationCoefficient)
+      let strength = 'weak'
+      if (correlation > 0.5) strength = 'strong'
+      else if (correlation > 0.3) strength = 'moderate'
+      
+      shareText += `. Found a ${strength} ${study.statistics.correlationCoefficient > 0 ? 'positive' : 'negative'} relationship`
+    }
+
+    const shareImage = study.studyImages?.gaugeSharingImageUrl || study.studyImages?.imageUrl
+
+    const shareUrls = {
+      twitter: `https://twitter.com/intent/tweet?url=${encodeURIComponent(shareUrl)}&text=${encodeURIComponent(shareText)}`,
+      facebook: `https://www.facebook.com/sharer/sharer.php?u=${encodeURIComponent(shareUrl)}&picture=${encodeURIComponent(shareImage || '')}&quote=${encodeURIComponent(shareText)}`,
+      linkedin: `https://www.linkedin.com/sharing/share-offsite/?url=${encodeURIComponent(shareUrl)}&summary=${encodeURIComponent(shareText)}${shareImage ? `&image=${encodeURIComponent(shareImage)}` : ''}`
+    }
+
+    window.open(shareUrls[platform as keyof typeof shareUrls], '_blank')
+  }
+
   return (
     <div className="neobrutalist-gradient-container neobrutalist-gradient-pink max-w-4xl mx-auto">
       <StudyHeaderHtml study={study} />
+
+      {/* Share buttons */}
+      <div className="flex justify-center gap-2 mb-6">
+        <Button
+          variant="neobrutalist"
+          size="sm"
+          className="flex items-center gap-2"
+          onClick={() => handleShare()}
+        >
+          <Link className="h-4 w-4" />
+          Copy Link
+        </Button>
+        <Button
+          variant="neobrutalist"
+          size="sm"
+          className="flex items-center gap-2"
+          onClick={() => handleShare('twitter')}
+        >
+          <Twitter className="h-4 w-4" />
+          Twitter
+        </Button>
+        <Button
+          variant="neobrutalist"
+          size="sm"
+          className="flex items-center gap-2"
+          onClick={() => handleShare('facebook')}
+        >
+          <Facebook className="h-4 w-4" />
+          Facebook
+        </Button>
+        <Button
+          variant="neobrutalist"
+          size="sm"
+          className="flex items-center gap-2"
+          onClick={() => handleShare('linkedin')}
+        >
+          <Linkedin className="h-4 w-4" />
+          LinkedIn
+        </Button>
+      </div>
 
       {/* Study Text */}
       <div className="neobrutalist-container bg-white p-6 mb-8">
@@ -120,24 +191,26 @@ export default function StudyCard({ study }: StudyCardProps) {
       )}
 
       {/* Study Charts */}
-      {study.studyCharts && study.studyCharts.correlationScatterPlot && (
+      {study.studyCharts && (
         <div className="neobrutalist-container bg-white p-6 mb-8">
           <h2 className="neobrutalist-h2 mb-6">Study Data</h2>
           <div className="grid grid-cols-1 gap-8">
-            {study.studyCharts.correlationScatterPlot && (
-              <HighchartsReact
-                highcharts={Highcharts}
-                options={study.studyCharts.correlationScatterPlot.highchartConfig}
-              />
-            )}
-            {study.studyCharts.pairsOverTimeLineChart && (
-              <div className="neobrutalist-container bg-gray-50 p-4">
-                <h3 className="neobrutalist-h3 mb-4">Data Over Time</h3>
-                <div dangerouslySetInnerHTML={{ 
-                  __html: study.studyCharts.pairsOverTimeLineChart.svg || '' 
-                }} />
-              </div>
-            )}
+            {Object.entries(study.studyCharts).map(([key, chart]) => (
+              chart && chart.highchartConfig ? (
+                <div key={key} className="item-text-wrap">
+                  {chart.chartTitle && (
+                    <h3 className="neobrutalist-h3 mb-4">{chart.chartTitle}</h3>
+                  )}
+                  <HighchartsReact
+                    highcharts={Highcharts}
+                    options={chart.highchartConfig}
+                  />
+                  {chart.explanation && (
+                    <p className="neobrutalist-p mt-4">{chart.explanation}</p>
+                  )}
+                </div>
+              ) : null
+            ))}
           </div>
         </div>
       )}
