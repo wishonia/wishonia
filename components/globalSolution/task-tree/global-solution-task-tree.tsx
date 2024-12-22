@@ -3,9 +3,17 @@
 import { useEffect, useState } from 'react'
 import { TaskTreeNode } from '@/components/globalSolution/task-tree/task-tree-node'
 import GlobalBrainNetwork from '@/components/landingPage/global-brain-network'
-import { getGlobalSolutionTasks } from '@/app/globalSolutions/[globalSolutionId]/tasks/actions'
-import { GlobalTask } from '@/types/globalTask'
+import { getGlobalSolutionTasks, getGlobalSolution } from '@/app/globalSolutions/[globalSolutionId]/tasks/actions'
+import { GlobalTaskWithChildren } from '@/types/globalTask'
 import { Card, CardHeader, CardTitle, CardContent } from "@/components/ui/card"
+import Link from 'next/link'
+import { Button } from "@/components/ui/button"
+
+interface GlobalSolution {
+  id: string
+  name: string
+  // Add other fields as needed
+}
 
 interface Props {
   globalSolutionId: string
@@ -13,39 +21,36 @@ interface Props {
 
 export default function GlobalSolutionTaskTree({ globalSolutionId }: Props) {
   const [loading, setLoading] = useState(true)
-  const [tasks, setTasks] = useState<GlobalTask[]>([])
+  const [tasks, setTasks] = useState<GlobalTaskWithChildren[]>([])
+  const [solution, setSolution] = useState<GlobalSolution | null>(null)
   const [error, setError] = useState<string | null>(null)
 
   useEffect(() => {
-    const fetchTasks = async () => {
+    const fetchData = async () => {
       try {
-        const result = await getGlobalSolutionTasks(globalSolutionId)
-        if ('error' in result) {
-          throw new Error(result.error)
+        const [solutionResult, tasksResult] = await Promise.all([
+          getGlobalSolution(globalSolutionId),
+          getGlobalSolutionTasks(globalSolutionId)
+        ])
+
+        if ('error' in tasksResult) {
+          throw new Error(tasksResult.error)
         }
-        
-        // Transform the data to match the GlobalTask interface
-        const transformedTasks = result.tasks.map((task: any): GlobalTask => ({
-          ...task,
-          childTasks: task.childTasks.map((relation: any) => ({
-            child: {
-              ...relation.child,
-              childTasks: relation.child.childTasks?.map((childRelation: any) => ({
-                child: childRelation.child
-              })) || []
-            }
-          }))
-        }))
-        
-        setTasks(transformedTasks)
+
+        if (!solutionResult) {
+          throw new Error('Solution not found')
+        }
+
+        setSolution(solutionResult)
+        setTasks(tasksResult.tasks)
       } catch (err) {
-        setError(err instanceof Error ? err.message : 'Failed to load tasks')
+        setError(err instanceof Error ? err.message : 'Failed to load data')
       } finally {
         setLoading(false)
       }
     }
 
-    fetchTasks()
+    fetchData()
   }, [globalSolutionId])
 
   if (loading) {
@@ -83,20 +88,34 @@ export default function GlobalSolutionTaskTree({ globalSolutionId }: Props) {
     )
   }
 
-  // Filter to only show root tasks (tasks with no parents)
-  const rootTasks = tasks.filter(task => 
-    !tasks.some(t => t.childTasks.some(c => c.child.id === task.id))
-  )
-
   return (
     <Card className="mx-auto max-w-4xl">
       <CardHeader>
-        <CardTitle className="text-2xl">Task Breakdown</CardTitle>
+        <CardTitle className="text-2xl">
+          Task Breakdown for{' '}
+          {solution ? (
+            <Link href={`/globalSolutions/${solution.id}`}>
+              <Button 
+                variant="link" 
+                className="px-0 font-semibold hover:underline text-2xl"
+              >
+                {solution.name}
+              </Button>
+            </Link>
+          ) : (
+            'Loading...'
+          )}
+        </CardTitle>
       </CardHeader>
       <CardContent className="p-6">
         <div className="space-y-3">
-          {rootTasks.map(task => (
-            <TaskTreeNode key={task.id} task={task} level={0} />
+          {tasks.map(task => (
+            <TaskTreeNode 
+              key={task.id} 
+              task={task} 
+              level={0}
+              globalSolutionId={globalSolutionId}
+            />
           ))}
         </div>
       </CardContent>

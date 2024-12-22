@@ -14,8 +14,8 @@ import DocsContent from "./components/DocsContent"
 import DocsSidebar from "./components/DocsSidebar"
 import GitHubConnectModal from "./components/GitHubConnectModal"
 import MobileHeader from "./components/MobileHeader"
-import SearchBar from "./components/SearchBar"
 import { MenuItem, parseSummaryMd } from "./lib/parseSummary"
+import GlobalBrainNetwork from "@/components/landingPage/global-brain-network";
 
 interface PageProps {
   params: {
@@ -44,9 +44,7 @@ function Sidebar({ menu }: { menu: MenuItem[] | RepoContent[] }) {
 
   return (
     <div className="flex h-full flex-col">
-      <div className="p-4">
-        <SearchBar menu={menuItems} />
-      </div>
+
       <DocsSidebar menu={menuItems} />
     </div>
   )
@@ -147,8 +145,8 @@ export default async function DocsPage({ params, searchParams }: PageProps) {
         </div>
 
         {/* Main content */}
-        <div className="flex-1 overflow-auto bg-background pt-14 text-foreground md:pt-0">
-          <Suspense fallback={<div className="p-4">Loading...</div>}>
+        <div className="flex-1 overflow-auto bg-background text-foreground md:pt-0">
+          <Suspense fallback={<GlobalBrainNetwork />}>
             <DocsContent org={org} repo={repo} />
           </Suspense>
         </div>

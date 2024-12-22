@@ -14,7 +14,7 @@ import { AnonymousVoteButton } from "@/components/anonymous-vote-button"
 import BarChartGeneral from "@/components/bar-chart-general"
 import { Icons } from "@/components/icons"
 import { LoggedInVoteButton } from "@/components/logged-in-vote-button"
-import MarkdownRendererForItem from "@/components/markdown/MarkdownRendererForItem"
+import { MarkdownDialogWrapper } from "@/components/markdown/markdown-dialog-wrapper"
 
 interface PollProps<T> {
   thisItem: WishingWell | GlobalProblem | GlobalProblemSolution
@@ -41,6 +41,7 @@ export const PollSpecificGeneral = <T,>({
 }: PollProps<T>) => {
   const [thatPercentageDesired, setThatPercentageDesired] = useState(50)
   const [thisPercentageDesired, setThisPercentageDesired] = useState(50)
+  const [isVoting, setIsVoting] = useState(false)
 
   const handleSliderChange = (event: React.ChangeEvent<HTMLInputElement>) => {
     const thatPercentageDesired = parseInt(event.target.value, 10)
@@ -51,12 +52,14 @@ export const PollSpecificGeneral = <T,>({
     createAllocation(thisItem.id, thatItem.id, thisPercentageDesired)
   }
 
-  function onButtonClick() {
-    if (updatePair) {
+  const onButtonClick = () => {
+    if (updatePair && !isVoting) {
+      setIsVoting(true)
       updatePair()
+      setThatPercentageDesired(50)
+      setThisPercentageDesired(50)
+      setIsVoting(false)
     }
-    setThatPercentageDesired(50)
-    setThisPercentageDesired(50)
   }
 
   return (
@@ -65,31 +68,21 @@ export const PollSpecificGeneral = <T,>({
         <p className="rounded-2xl bg-muted px-4 py-1.5 text-sm font-medium">
           How Much Would You Donate to
         </p>
-        <Dialog defaultOpen={false}>
-          <DialogTrigger asChild className={"cursor-pointer"}>
-            <h1 className="pt-2 text-4xl font-semibold sm:text-4xl md:text-5xl lg:text-5xl">
-              {getItemName(thisItem)}
-              <Icons.question className="inline-block h-4 w-4 align-top text-xs" />
-            </h1>
-          </DialogTrigger>
-          <DialogContent className="max-h-[90vh] w-full overflow-auto rounded-lg sm:max-w-[600px]">
-            <MarkdownRendererForItem item={thisItem} />
-          </DialogContent>
-        </Dialog>
+        <MarkdownDialogWrapper item={thisItem}>
+          <h1 className="pt-2 text-4xl font-semibold sm:text-4xl md:text-5xl lg:text-5xl">
+            {getItemName(thisItem)}
+            <Icons.question className="inline-block h-4 w-4 align-top text-xs" />
+          </h1>
+        </MarkdownDialogWrapper>
         <h1 className="pt-2 text-2xl font-semibold sm:text-2xl md:text-3xl lg:text-3xl">
           vs
         </h1>
-        <Dialog defaultOpen={false}>
-          <DialogTrigger asChild className={"cursor-pointer"}>
-            <h1 className="pt-2 text-4xl font-semibold sm:text-4xl md:text-5xl lg:text-5xl">
-              {getItemName(thatItem)}
-              <Icons.question className="inline-block h-4 w-4 align-top text-xs" />
-            </h1>
-          </DialogTrigger>
-          <DialogContent className="max-h-[90vh] w-full overflow-auto rounded-lg sm:max-w-[600px]">
-            <MarkdownRendererForItem item={thatItem} />
-          </DialogContent>
-        </Dialog>
+        <MarkdownDialogWrapper item={thatItem}>
+          <h1 className="pt-2 text-4xl font-semibold sm:text-4xl md:text-5xl lg:text-5xl">
+            {getItemName(thatItem)}
+            <Icons.question className="inline-block h-4 w-4 align-top text-xs" />
+          </h1>
+        </MarkdownDialogWrapper>
         <div id="poll-description">
           <div className="px-0 pb-2 pt-2 text-sm md:text-xl">
             Adjust the slider to indicate how much you'd donate to each item if

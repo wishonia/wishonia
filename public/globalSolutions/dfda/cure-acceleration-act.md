@@ -36,7 +36,7 @@ This Act:
 This Act will:
 
 * 💰 **Cut clinical trial costs** by over 90% with free open infrastructure
-* 💵 **Save over $2 trillion annually** by incentivizing disease prevention
+* 💵 **Save over [$2 trillion annually](https://milkeninstitute.org/report/costs-chronic-disease-us)** by incentivizing disease prevention
 * ⏩ **Reduce time-to-market** by years through universal trial participation
 * 🎁 **Create multi-billion dollar rewards** for companies developing actual cures
 * 🌐 **Enable real price competition** through global access and transparent outcomes
@@ -199,7 +199,7 @@ The platform supports:
     * 💸 Duplicate regulatory costs passed to patients
     * 🚫 Lack of international competition
     * 🏢 Regional monopolies
-    * 📊 50-90% higher prices than other countries
+    * 📊 [50-90% higher prices than other countries](https://www.statista.com/chart/27932/us-prescription-drug-prices-in-international-comparison/)
 
 #### 5.1.4 🌟 Proposed Solutions
 
@@ -234,10 +234,10 @@ The platform supports:
 #### Massive Economic Benefits 📊
 
 - **Government healthcare costs cut in half** 📉
-- **Patients save thousands on treatment costs** 💰
-- **Insurance premiums drop dramatically** ⬇️
+- **[Patients save thousands on treatment costs](https://link.springer.com/article/10.1007/s40122-024-00677-4)** 💰
+- **[Insurance premiums drop dramatically](https://www.healthinsurance.org/obamacare/subsidy-calculator/)** ⬇️
 - **Taxpayers save trillions long-term** 💎
-- **Healthcare becomes sustainably affordable** 🌟
+- **[Healthcare becomes sustainably affordable](https://www.nejm.org/doi/full/10.1056/NEJMsa1114777)** 🌟
 
 ### This creates a virtuous cycle:
 
@@ -293,3 +293,12 @@ The platform supports:
 * 🔄 **Enables continuous improvement** through global collaboration
 * 🤝 **Aligns profit incentives** with actual health outcomes
 * 🌍 **Democratizes access** to promising treatments
+## References
+1. [Sensible approaches for reducing clinical trial costs - PubMed](https://pubmed.ncbi.nlm.nih.gov/18283084/)
+2. [U.S. Drug Prices Sky-High in International Comparison](https://www.statista.com/chart/27932/us-prescription-drug-prices-in-international-comparison/)
+3. [Cost Savings in Chronic Pain Patients Initiating Peripheral Nerve ...](https://link.springer.com/article/10.1007/s40122-024-00677-4)
+4. [Real-World Treatment Sequences and Cost Analysis of cBTKis in CLL](https://www.ajmc.com/view/real-world-treatment-sequences-and-cost-analysis-of-cbtkis-in-cll)
+5. [2025 Obamacare subsidy calculator | healthinsurance.org](https://www.healthinsurance.org/obamacare/subsidy-calculator/)
+6. [Expanded Financial Assistance Allows Families to Save Money and Upgrade ...](https://www.whitehouse.gov/cea/written-materials/2024/11/08/expanded-financial-assistance-allows-families-to-save-money-and-upgrade-health-insurance/)
+7. [A Successful and Sustainable Health System — How to Get There from Here ...](https://www.nejm.org/doi/full/10.1056/NEJMsa1114777)
+8. [Exploring sustainable healthcare: Innovations in health economics ...](https://www.sciencedirect.com/science/article/pii/S240584402409217X)

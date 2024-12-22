@@ -14,6 +14,7 @@ import { Button } from "@/components/ui/button"
 
 import { getGithubContent } from "../actions"
 import { resolveGitbookPath } from "../lib/resolveGitbookPath"
+import GlobalBrainNetwork from "@/components/landingPage/global-brain-network"
 
 interface DocsContentProps {
   org: string
@@ -158,8 +159,8 @@ export default function DocsContent({ org, repo }: DocsContentProps) {
 
   if (isLoading) {
     return (
-      <div className="p-8 text-foreground">
-        <div className="animate-pulse">Loading content...</div>
+      <div className="max-w-[500px] mx-auto p-8">
+        <GlobalBrainNetwork />
       </div>
     )
   }
@@ -191,7 +192,7 @@ export default function DocsContent({ org, repo }: DocsContentProps) {
           description={frontmatter.description}
         />
       )}
-      <div className="prose prose-invert">
+      <div className="prose prose-p:text-inherit dark:prose-invert">
         <ReactMarkdown
           remarkPlugins={[remarkGfm]}
           rehypePlugins={[rehypeRaw]}

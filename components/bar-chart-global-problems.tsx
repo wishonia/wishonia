@@ -14,10 +14,10 @@ const BarChartGlobalProblems: React.FC<BarChartProps> = ({
   thatGlobalProblem,
   thisPercentageDesired,
 }) => {
-  const getGlobalProblemName = (globalProblem: GlobalProblem) =>
-    "Solving " + globalProblem.name
-  const getGlobalProblemImage = (globalProblem: GlobalProblem) =>
-    globalProblem.featuredImage || ""
+  const getGlobalProblemName = (item: { name: string }) =>
+    "Solving " + item.name
+  const getGlobalProblemImage = (item: { featuredImage: string | null }) =>
+    item.featuredImage || ""
 
   return (
     <BarChartGeneral

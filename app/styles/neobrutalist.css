@@ -15,6 +15,26 @@
     @apply bg-gradient-to-r from-[#00CC66] to-[#00FF00];
 }
 
+.neobrutalist-gradient-purple {
+    @apply bg-gradient-to-r from-[#6633FF] to-[#0066FF];
+}
+
+.neobrutalist-gradient-blue {
+    @apply bg-gradient-to-r from-[#0066FF] to-[#00CCFF];
+}
+
+.neobrutalist-gradient-yellow {
+    @apply bg-gradient-to-r from-[#FFCC00] to-[#FFFF00];
+}
+
+.neobrutalist-gradient-orange {
+    @apply bg-gradient-to-r from-[#FF6600] to-[#FF3300];
+}
+
+.neobrutalist-gradient-red {
+    @apply bg-gradient-to-r from-[#FF0000] to-[#FF1493];
+}
+
 .neobrutalist-title {
     @apply text-4xl font-black uppercase mb-6;
 }

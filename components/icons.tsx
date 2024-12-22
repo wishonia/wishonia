@@ -34,10 +34,10 @@ import {
   FaEdit,
   FaEye,
   FaEyeSlash,
-  FaHome,
+  FaHome, FaInbox,
   FaLightbulb,
   FaMoneyBill,
-  FaPeace,
+  FaPeace, FaPills,
   FaQuestionCircle,
   FaRegStar,
   FaRobot,
@@ -51,7 +51,7 @@ import {
 import {
   FaGoogleScholar,
   FaHand,
-  FaHouseLock,
+  FaHouseLock, FaMagnifyingGlass,
   FaMessage,
   FaPencil,
   FaRankingStar,
@@ -62,6 +62,8 @@ import { ImSpinner8, ImStatsBars } from "react-icons/im"
 import { LuSettings } from "react-icons/lu"
 import { MdDeleteForever, MdOutlineLogout } from "react-icons/md"
 import { RxDashboard, RxMixerHorizontal, RxPencil1 } from "react-icons/rx"
+import { FaBuilding, FaScaleBalanced, FaFileLines } from "react-icons/fa6"
+import { BsPencilSquare } from "react-icons/bs"
 
 export type IconKeys = keyof typeof icons
 
@@ -97,6 +99,14 @@ const icons = {
   robot: FaRobot,
   scroll: FaScroll,
   safe: FaHouseLock,
+  conditions: FaDisease,
+  treatments:  FaPills,
+  search: FaMagnifyingGlass,
+  trials: FaChartBar,
+  measurements: RxPencil1,
+  userVariables: FaUserAlt,
+  predictorSearch: FaMagnifyingGlass,
+  inbox: FaInbox,
 
   clipboard: AiOutlineCopy,
 
@@ -144,6 +154,12 @@ const icons = {
   studies: FaGoogleScholar,
   petition: FaScroll,
   savings: FaMoneyBill,
+
+  // Add these new icons
+  document: FaFileLines,      // For articles
+  building: FaBuilding,       // For organizations
+  pencilSquare: BsPencilSquare, // For petitions
+  scale: FaScaleBalanced,     // For warVsCures comparison
 }
 
 export const Icons: IconsType = icons

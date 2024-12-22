@@ -9,7 +9,7 @@ import {
 import { CoreMessage, generateId } from 'ai'
 import { Section } from '@/app/search/components/section'
 import { FollowupPanel } from '@/app/search/components/followup-panel'
-import { saveChat } from '@/lib/actions/chat'
+import { saveSearchChat } from '@/lib/actions/searchChat'
 import { Chat } from '@/lib/types/index'
 import { AIMessage } from '@/lib/types/index'
 import { UserMessage } from '@/app/search/components/user-message'
@@ -194,7 +194,7 @@ export const AI = createAI<AIState, UIState>({
     }
 
     try {
-      await saveChat(chat)
+      await saveSearchChat(chat)
       console.log('✨ Chat saved successfully:', { 
         chatId: chat.id, 
         path,

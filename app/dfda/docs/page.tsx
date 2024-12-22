@@ -3,6 +3,7 @@ import { Shell } from "@/components/layout/shell"
 import { getDocumentationFiles } from "./actions"
 import { DocsSearch } from "./components/docs-search"
 import type { MarkdownFile } from "@/lib/markdown/repo-markdown"
+import Link from "next/link"
 
 // Helper function to extract title from markdown content
 function extractTitle(file: MarkdownFile): string {
@@ -28,6 +29,28 @@ function getTitleFromPath(filePath: string): string {
     .map((word: string) => word.charAt(0).toUpperCase() + word.slice(1))
     .join(' ')
 }
+
+// Add folder cards data
+const folderCards = [
+  {
+    title: "Cure Acceleration Act",
+    description: "Learn about the proposed legislation to accelerate cures",
+    icon: "🧪",
+    href: "/dfda/docs/cure-acceleration-act",
+  },
+  {
+    title: "Health Savings Sharing",
+    description: "Details about the 50/50 health savings sharing program",
+    icon: "💰",
+    href: "/dfda/docs/health-savings-sharing",
+  },
+  {
+    title: "Blueprint",
+    description: "A blueprint for a world without disease",
+    icon: "🗺️",
+    href: "/dfda/docs/blueprint",
+  },
+]
 
 export default async function MarkdownPageListPage() {
   const result = await getDocumentationFiles()
@@ -63,6 +86,23 @@ export default async function MarkdownPageListPage() {
     <Shell>
       <div className="mx-auto max-w-4xl py-8">
         <h1 className="mb-8 text-3xl font-bold">Documentation</h1>
+        
+        {/* Folder Cards Grid */}
+        <div className="mb-12 grid gap-6 md:grid-cols-2 lg:grid-cols-3">
+          {folderCards.map((card) => (
+            <Link 
+              key={card.href}
+              href={card.href}
+              className="group block rounded-lg border-4 border-black bg-white p-6 shadow-[4px_4px_0px_0px_rgba(0,0,0,1)] transition-all hover:translate-x-[3px] hover:translate-y-[3px] hover:shadow-none"
+            >
+              <div className="mb-4 text-4xl">{card.icon}</div>
+              <h2 className="mb-2 text-xl font-bold">{card.title}</h2>
+              <p className="text-gray-600">{card.description}</p>
+            </Link>
+          ))}
+        </div>
+
+        {/* Existing Search and File List */}
         <DocsSearch files={filesWithTitles} />
       </div>
     </Shell>

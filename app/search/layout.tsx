@@ -1,17 +1,16 @@
 import type { Metadata, Viewport } from 'next'
 import './globals.css'
 import { ThemeProvider } from '@/app/search/components/theme-provider'
-import Header from '@/app/search/components/header'
-import Footer from '@/app/search/components/footer'
-import { Sidebar } from '@/app/search/components/sidebar'
+import SearchChatHeader from '@/app/search/components/searchChatHeader'
+import SearchChatFooter from '@/app/search/components/searchChatFooter'
+import { SearchChatSidebar } from '@/app/search/components/searchChatSidebar'
 import { Toaster } from '@/components/ui/sonner'
 import { AppStateProvider } from '@/lib/utils/app-state'
 
 
 
 const title = 'Search'
-const description =
-  'AI-powered answer engine with a generative UI.'
+const description = 'Search'
 
 export const metadata: Metadata = {
   metadataBase: new URL('https://wishonia.love'),
@@ -49,10 +48,10 @@ export default function SearchLayout({
       disableTransitionOnChange
     >
       <AppStateProvider>
-        <Header />
+        <SearchChatHeader />
         {children}
-        <Sidebar />
-        <Footer />
+        <SearchChatSidebar />
+        <SearchChatFooter />
         <Toaster />
       </AppStateProvider>
     </ThemeProvider>
