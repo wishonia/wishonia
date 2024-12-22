@@ -8,11 +8,18 @@ import {
   AccordionTrigger,
 } from "@/components/ui/accordion"
 import { getServerSession } from "next-auth/next"
+import { authOptions } from "@/lib/auth"
 import { DemoPhoneNumberInput } from "./components/DemoPhoneNumberInput"
 import Link from "next/link"
+import { redirect } from "next/navigation"
 
-export default async function Page() {
-  const session = await getServerSession()
+export default async function CallSchedulerPage() {
+  const session = await getServerSession(authOptions)
+
+  const handleSuccess = (phoneNumber: string) => {
+    console.log(`Phone number submitted: ${phoneNumber}`)
+    redirect(`/call-scheduler/schedules/new?phone=${phoneNumber}`)
+  }
 
   return (
       <div className="min-h-screen bg-gradient-to-b from-background to-background/95">
@@ -27,7 +34,7 @@ export default async function Page() {
             <Card className="mx-auto max-w-md">
               <CardContent className="p-6">
                 <h2 className="mb-4 text-2xl font-bold">Experience Our Digital Garden</h2>
-                <DemoPhoneNumberInput isLoggedIn={!!session?.user} />
+                <DemoPhoneNumberInput session={session} onSuccess={handleSuccess} />
               </CardContent>
             </Card>
           </section>

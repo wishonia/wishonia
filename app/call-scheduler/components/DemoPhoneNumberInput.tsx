@@ -5,13 +5,14 @@ import { Button } from "@/components/ui/button"
 import { Input } from "@/components/ui/input"
 import { toast } from "sonner"
 import { useRouter } from 'next/navigation'
+import { Session } from "next-auth"
 
 interface PhoneNumberInputProps {
-  isLoggedIn: boolean
+  session: Session | null
   onSuccess?: (phoneNumber: string) => void
 }
 
-export function DemoPhoneNumberInput({ isLoggedIn, onSuccess }: PhoneNumberInputProps) {
+export function DemoPhoneNumberInput({ session, onSuccess }: PhoneNumberInputProps) {
   const router = useRouter()
   const [phoneNumber, setPhoneNumber] = useState('')
   const [isSubmitting, setIsSubmitting] = useState(false)

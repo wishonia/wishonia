@@ -33,8 +33,12 @@ IMPORTANT: Server Components (pages)
 - Import client components as needed
 
 Auth Usage:
-import { requireAuth } from "@/lib/auth"
-const session = await requireAuth(`/my-page`)
+  const session = await getServerSession(authOptions)
+
+  if (!session?.user) {
+    redirect(`/signin?callbackUrl=/my-page`)
+  }
+
 """
 
 client = """

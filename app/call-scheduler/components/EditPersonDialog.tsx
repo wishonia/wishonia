@@ -14,9 +14,10 @@ import { Label } from "@/components/ui/label"
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@/components/ui/select"
 import { toast } from "sonner"
 import { updatePerson } from "../actions"
-
+import { Session } from "next-auth"
 interface EditPersonDialogProps {
   person: Person
+  session: Session
   open: boolean
   onOpenChange: (open: boolean) => void
 }
@@ -30,7 +31,7 @@ const TIMEZONES = [
   { value: 'Pacific/Honolulu', label: 'Hawaii Time (HT)' },
 ]
 
-export function EditPersonDialog({ person, open, onOpenChange }: EditPersonDialogProps) {
+export function EditPersonDialog({ person, session, open, onOpenChange }: EditPersonDialogProps) {
   const [isSubmitting, setIsSubmitting] = useState(false)
   const [formData, setFormData] = useState({
     name: person.name,
@@ -44,7 +45,7 @@ export function EditPersonDialog({ person, open, onOpenChange }: EditPersonDialo
     setIsSubmitting(true)
 
     try {
-      await updatePerson(person.id, formData)
+      await updatePerson(session, person.id, formData)
       toast.success("Contact updated successfully")
       onOpenChange(false)
     } catch (error) {

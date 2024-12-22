@@ -1,4 +1,4 @@
-import { requireAuth } from "@/lib/auth"
+import { authOptions } from "@/lib/auth"
 import prisma from "@/lib/prisma"
 import { Card, CardContent } from "@/components/ui/card"
 import { Button } from "@/components/ui/button"
@@ -6,6 +6,8 @@ import { UserPlus } from "lucide-react"
 import Link from "next/link"
 import { PersonCard } from "../components/PersonCard"
 import { Person, CallSchedule, Agent } from "@prisma/client"
+import { getServerSession } from "next-auth"
+import { redirect } from "next/navigation"
 
 type ScheduleWithRelations = CallSchedule & {
   person: Person
@@ -18,7 +20,11 @@ type PersonWithSchedules = {
 }
 
 export default async function SchedulesPage() {
-  const session = await requireAuth('/call-scheduler')
+  const session = await getServerSession(authOptions)
+
+  if (!session?.user) {
+    redirect(`/signin?callbackUrl=/call-scheduler/schedules`)
+  }
 
   const schedules = await prisma.callSchedule.findMany({
     where: {
@@ -76,6 +82,7 @@ export default async function SchedulesPage() {
               key={personId} 
               person={person} 
               schedules={schedules} 
+              session={session}
             />
           ))}
         </div>

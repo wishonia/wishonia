@@ -8,7 +8,7 @@ import {
   DialogTitle,
 } from "@/components/ui/dialog"
 import { CallScheduleForm } from "./CallScheduleForm"
-
+import { Session } from "next-auth"
 type ScheduleWithRelations = CallSchedule & {
   person: Person;
   agent: Agent;
@@ -20,6 +20,7 @@ interface EditScheduleDialogProps {
   defaultAgentId: string
   open: boolean
   onOpenChange: (open: boolean) => void
+  session: Session
 }
 
 export function EditScheduleDialog({ 
@@ -27,7 +28,8 @@ export function EditScheduleDialog({
   agents,
   defaultAgentId,
   open,
-  onOpenChange
+  onOpenChange,
+  session
 }: EditScheduleDialogProps) {
   return (
     <Dialog open={open} onOpenChange={onOpenChange}>
@@ -41,6 +43,7 @@ export function EditScheduleDialog({
           defaultAgentId={defaultAgentId}
           editingSchedule={schedule}
           onComplete={() => onOpenChange(false)}
+          session={session}
         />
       </DialogContent>
     </Dialog>

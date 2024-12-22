@@ -1,5 +1,7 @@
 import GlobalSolutionTaskTree from '@/components/globalSolution/task-tree/global-solution-task-tree'
-import { requireAuth } from '@/lib/auth'
+import { authOptions } from '@/lib/auth'
+import { redirect } from 'next/navigation'
+import { getServerSession } from 'next-auth'
 
 interface Props {
   params: {
@@ -8,7 +10,11 @@ interface Props {
 }
 
 export default async function GlobalSolutionTasksPage({ params }: Props) {
-  await requireAuth(`/globalSolutions/${params.globalSolutionId}/tasks`)
+  const session = await getServerSession(authOptions)
+
+  if (!session?.user) {
+    redirect(`/signin?callbackUrl=/globalSolutions/${params.globalSolutionId}/tasks`)
+  }
   return (
     <div className="container mx-auto py-8">
       <GlobalSolutionTaskTree globalSolutionId={params.globalSolutionId} />
