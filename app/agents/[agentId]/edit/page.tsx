@@ -20,7 +20,7 @@ export default async function EditAgentPage({ params }: AgentEditProps) {
   const session = await getServerSession(authOptions)
 
   if (!session?.user) {
-    redirect("/signin")
+    redirect(`/signin?callbackUrl=${encodeURIComponent(`/agents/${params.agentId}/edit`)}`)
   }
 
   const agent = await getAgent(params.agentId)
