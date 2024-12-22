@@ -544,6 +544,8 @@ export async function searchPredictors(params: {
   correlationCoefficient?: string
 }) {
   try {
+    console.debug("🔍 searchPredictors called with params:", params)
+
     const apiParams: Record<string, string> = {
       limit: (params.limit || 10).toString(),
       offset: (params.offset || 0).toString(),
@@ -561,11 +563,21 @@ export async function searchPredictors(params: {
       apiParams.correlationCoefficient = params.correlationCoefficient
     }
 
+    console.debug("📡 Making API request with params:", apiParams)
     const response = (await dfdaGET("studies", apiParams)) as GetStudiesResponse
+    console.debug("✅ Received response:", {
+      studiesCount: response.studies?.length || 0,
+      firstStudy: response.studies?.[0]
+    })
 
-    return response.studies || []
+    if (!response.studies) {
+      console.warn("⚠️ No studies found in response")
+      return []
+    }
+
+    return response.studies
   } catch (error) {
-    console.error("Error searching studies:", error)
+    console.error("❌ Error searching studies:", error)
     throw new Error("Failed to search studies")
   }
 }
