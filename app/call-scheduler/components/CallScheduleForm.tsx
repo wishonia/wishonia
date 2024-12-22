@@ -10,6 +10,7 @@ import { useRouter } from "next/navigation"
 import { RadioGroup, RadioGroupItem } from "@/components/ui/radio-group"
 import { Label } from "@/components/ui/label"
 import { CallSchedule, Person, Agent } from "@prisma/client"
+import { Session } from "next-auth"
 
 export type ScheduleWithRelations = CallSchedule & {
   person: Person;
@@ -22,6 +23,7 @@ export interface CallScheduleFormProps {
   defaultAgentId: string
   editingSchedule?: ScheduleWithRelations
   onComplete?: () => void
+  session: Session
 }
 
 const PRESET_TIMES = [
@@ -37,7 +39,8 @@ export function CallScheduleForm({
   agents, 
   defaultAgentId,
   editingSchedule,
-  onComplete 
+  onComplete,
+  session 
 }: CallScheduleFormProps) {
   const router = useRouter()
   const [isSubmitting, setIsSubmitting] = useState(false)
@@ -53,7 +56,7 @@ export function CallScheduleForm({
       const time = selectedTime === 'custom' ? customTime : selectedTime
 
       if (editingSchedule) {
-        await updateSchedule(editingSchedule.id, {
+        await updateSchedule(session, editingSchedule.id, {
           name: `Daily Check-in at ${time}`,
           time,
           agentId: selectedAgent,
@@ -66,7 +69,7 @@ export function CallScheduleForm({
         formData.append('personId', personId)
         formData.append('agentId', selectedAgent)
         
-        await createCallSchedule(formData)
+        await createCallSchedule(session, formData)
         toast.success("Schedule created")
       }
 

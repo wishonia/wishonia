@@ -1,19 +1,18 @@
 'use server'
 
 import { triggerCall } from '@/lib/calls/retell'
-import { requireAuth } from '@/lib/auth'
 import prisma from '@/lib/prisma'
 import { revalidatePath } from 'next/cache'
 import { NotifyMethod } from '@prisma/client'
 import Stripe from 'stripe'
 import { redirect } from 'next/navigation'
+import { Session } from 'next-auth'
 
 const stripe = new Stripe(process.env.STRIPE_SECRET_KEY!, {
   apiVersion: '2022-11-15',
 })
 
-export async function initiateCall(personId: string) {
-  const session = await requireAuth('/call-scheduler')
+export async function initiateCall(session: Session, personId: string) {
   console.log('Initiating call - starting process')
 
   // Get the person
@@ -56,9 +55,7 @@ export async function initiateCall(personId: string) {
   }
 }
 
-export async function createCallSchedule(formData: FormData) {
-  const session = await requireAuth('/call-scheduler')
-  
+export async function createCallSchedule(session: Session, formData: FormData) {
   const time = formData.get('time') as string
   const personId = formData.get('personId') as string
   const agentId = formData.get('agentId') as string
@@ -121,14 +118,13 @@ export async function createCallSchedule(formData: FormData) {
 }
 
 export async function addCallSummaryRecipient(
+  session: Session,
   scheduledCallId: string,
   data: {
     personId: string
     notifyBy: NotifyMethod[]
   }
 ) {
-  const session = await requireAuth('/call-scheduler')
-
   const recipient = await prisma.callSummaryRecipient.create({
     data: {
       personId: data.personId,
@@ -141,9 +137,7 @@ export async function addCallSummaryRecipient(
   return recipient
 }
 
-export async function removeCallSummaryRecipient(id: string) {
-  const session = await requireAuth('/call-scheduler')
-
+export async function removeCallSummaryRecipient(session: Session, id: string) {
   await prisma.callSummaryRecipient.delete({
     where: { id }
   })
@@ -151,13 +145,11 @@ export async function removeCallSummaryRecipient(id: string) {
   revalidatePath('/call-scheduler/schedules')
 }
 
-export async function createPerson(data: {
+export async function createPerson(session: Session, data: {
   name: string
   email?: string
   phoneNumber: string
 }) {
-  const session = await requireAuth('/call-scheduler')
-
   // Debug logging
   console.log('Creating person with data:', data)
 
@@ -215,9 +207,7 @@ export async function createPerson(data: {
   return person
 }
 
-export async function deleteSchedule(scheduleId: string) {
-  const session = await requireAuth('/call-scheduler')
-
+export async function deleteSchedule(session: Session, scheduleId: string) {
   const schedule = await prisma.callSchedule.findUnique({
     where: { id: scheduleId },
     select: { userId: true }
@@ -234,14 +224,12 @@ export async function deleteSchedule(scheduleId: string) {
   revalidatePath('/call-scheduler/schedules')
 }
 
-export async function updateSchedule(scheduleId: string, data: {
+export async function updateSchedule(session: Session, scheduleId: string, data: {
   name: string
   time: string
   agentId: string
   enabled: boolean
 }) {
-  const session = await requireAuth('/call-scheduler')
-
   const schedule = await prisma.callSchedule.findUnique({
     where: { id: scheduleId },
     select: { userId: true }
@@ -265,9 +253,7 @@ export async function updateSchedule(scheduleId: string, data: {
   return updatedSchedule
 }
 
-export async function createStripeCheckoutSession() {
-  const session = await requireAuth('/call-scheduler')
-
+export async function createStripeCheckoutSession(session: Session) {
   // Get or create Stripe customer
   let customer = await prisma.stripeCustomer.findUnique({
     where: { userId: session.user.id },
@@ -298,7 +284,7 @@ export async function createStripeCheckoutSession() {
     payment_method_types: ['card'],
     line_items: [
       {
-        price: process.env.STRIPE_PRICE_ID, // Your price ID from Stripe
+        price: process.env.STRIPE_PRICE_ID,
         quantity: 1,
       },
     ],
@@ -313,9 +299,7 @@ export async function createStripeCheckoutSession() {
   redirect(stripeSession.url)
 }
 
-export async function createStripePortalSession() {
-  const session = await requireAuth('/call-scheduler')
-
+export async function createStripePortalSession(session: Session) {
   const customer = await prisma.stripeCustomer.findUnique({
     where: { userId: session.user.id },
   })
@@ -332,15 +316,13 @@ export async function createStripePortalSession() {
   redirect(portalSession.url)
 }
 
-export async function updatePerson(personId: string, data: {
+export async function updatePerson(session: Session, personId: string, data: {
   name: string
   phoneNumber: string
   email?: string
   timeZone?: string
   notes?: string
 }) {
-  const session = await requireAuth('/call-scheduler')
-
   const person = await prisma.person.update({
     where: { id: personId },
     data: {

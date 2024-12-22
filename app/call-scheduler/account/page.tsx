@@ -1,4 +1,3 @@
-import { requireAuth } from "@/lib/auth"
 import { Button } from "@/components/ui/button"
 import {
   Card,
@@ -10,9 +9,24 @@ import {
 } from "@/components/ui/card"
 import prisma from "@/lib/prisma"
 import { createStripeCheckoutSession, createStripePortalSession } from "../actions"
+import { authOptions } from "@/lib/auth"
+import { getServerSession } from "next-auth/next"
+import { redirect } from "next/navigation"
 
 export default async function AccountPage() {
-  const session = await requireAuth('/call-scheduler')
+  const session = await getServerSession(authOptions)
+
+  if (!session?.user) {
+    redirect(`/signin?callbackUrl=/call-scheduler/account`) 
+  }
+
+  const handleSubscribe = async () => {
+    await createStripeCheckoutSession(session)
+  }
+
+  const handleManageSubscription = async () => {
+    await createStripePortalSession(session)
+  }
 
   // Get subscription status
   const customer = await prisma.stripeCustomer.findUnique({
@@ -62,7 +76,7 @@ export default async function AccountPage() {
             </div>
           </CardContent>
           <CardFooter>
-            <form action={hasActiveSubscription ? createStripePortalSession : createStripeCheckoutSession}>
+            <form action={hasActiveSubscription ? handleManageSubscription : handleSubscribe}>
               <Button type="submit">
                 {hasActiveSubscription ? 'Manage Subscription' : 'Support HeartLine'}
               </Button>

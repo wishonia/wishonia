@@ -1,16 +1,20 @@
-import { requireAuth } from "@/lib/auth"
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card"
 import { NewScheduleForm } from "../../components/NewScheduleForm"
 import prisma from "@/lib/prisma"
+import { authOptions } from "@/lib/auth"
+import { getServerSession } from "next-auth"
+import { redirect } from "next/navigation"
 
 export default async function NewSchedulePage({
   searchParams
 }: {
   searchParams: { phone?: string }
 }) {
-  // Include the full path with query params in requireAuth
   const fullPath = `/call-scheduler/schedules/new${searchParams.phone ? `?phone=${searchParams.phone}` : ''}`
-  const session = await requireAuth(fullPath)
+  const session = await getServerSession(authOptions)
+  if (!session?.user) {
+    redirect(`/signin?callbackUrl=${fullPath}`)
+  }
 
   // Get available agents
   const agents = await prisma.agent.findMany({
@@ -35,7 +39,11 @@ export default async function NewSchedulePage({
             <CardTitle>Schedule Details</CardTitle>
           </CardHeader>
           <CardContent>
-            <NewScheduleForm agents={agents} initialPhoneNumber={phoneNumber} />
+            <NewScheduleForm 
+              agents={agents} 
+              initialPhoneNumber={phoneNumber} 
+              session={session}
+            />
           </CardContent>
         </Card>
       </div>

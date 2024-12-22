@@ -10,6 +10,7 @@ import { toast } from "sonner"
 import { useRouter } from "next/navigation"
 import { createPerson, createCallSchedule } from "../actions"
 import { Agent } from "@prisma/client"
+import { Session } from "next-auth"
 
 const PRESET_TIMES = [
   { value: '09:00', label: '9:00 AM - Morning Check-in' },
@@ -22,9 +23,10 @@ const PRESET_TIMES = [
 interface NewScheduleFormProps {
   agents: Agent[]
   initialPhoneNumber?: string
+  session: Session
 }
 
-export function NewScheduleForm({ agents, initialPhoneNumber = '' }: NewScheduleFormProps) {
+export function NewScheduleForm({ agents, initialPhoneNumber = '', session }: NewScheduleFormProps) {
   const router = useRouter()
   const [isSubmitting, setIsSubmitting] = useState(false)
   const [selectedTime, setSelectedTime] = useState(PRESET_TIMES[0].value)
@@ -41,20 +43,19 @@ export function NewScheduleForm({ agents, initialPhoneNumber = '' }: NewSchedule
     setIsSubmitting(true)
 
     try {
-      // First create or get the person
-      const person = await createPerson({
+      // Pass session to the actions
+      const person = await createPerson(session, {
         name: recipientDetails.name,
         phoneNumber: recipientDetails.phoneNumber,
         email: recipientDetails.email || undefined
       })
 
-      // Then create the schedule
       const formData = new FormData()
       formData.append('time', selectedTime === 'custom' ? customTime : selectedTime)
       formData.append('personId', person.id)
       formData.append('agentId', selectedAgent)
 
-      await createCallSchedule(formData)
+      await createCallSchedule(session, formData)
       
       toast.success("Schedule created successfully")
       router.push('/call-scheduler/schedules')

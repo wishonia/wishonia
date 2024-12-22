@@ -7,7 +7,7 @@ import { Button } from "@/components/ui/button"
 import { Settings2 } from "lucide-react"
 import { CallScheduleCard } from "./CallScheduleCard"
 import { EditPersonDialog } from "./EditPersonDialog"
-
+import { Session } from "next-auth"
 type ScheduleWithRelations = CallSchedule & {
   agent: Agent
   person: Person
@@ -16,9 +16,10 @@ type ScheduleWithRelations = CallSchedule & {
 interface PersonCardProps {
   person: Person
   schedules: ScheduleWithRelations[]
+  session: Session
 }
 
-export function PersonCard({ person, schedules }: PersonCardProps) {
+export function PersonCard({ person, schedules, session }: PersonCardProps) {
   const [open, setOpen] = useState(false)
 
   return (
@@ -40,13 +41,14 @@ export function PersonCard({ person, schedules }: PersonCardProps) {
       <CardContent>
         <div className="space-y-4">
           {schedules.map((schedule) => (
-            <CallScheduleCard key={schedule.id} schedule={schedule} />
+            <CallScheduleCard key={schedule.id} schedule={schedule} session={session} />
           ))}
         </div>
       </CardContent>
 
       <EditPersonDialog
         person={person}
+        session={session}
         open={open}
         onOpenChange={setOpen}
       />

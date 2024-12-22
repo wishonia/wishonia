@@ -23,6 +23,7 @@ import {
 } from "@/components/ui/alert-dialog"
 import { useState } from "react"
 import { EditScheduleDialog } from "./EditScheduleDialog"
+import { Session } from "next-auth"
 
 type ScheduleWithRelations = CallSchedule & {
   person: Person;
@@ -31,9 +32,10 @@ type ScheduleWithRelations = CallSchedule & {
 
 interface CallScheduleCardProps {
   schedule: ScheduleWithRelations
+  session: Session
 }
 
-export function CallScheduleCard({ schedule }: CallScheduleCardProps) {
+export function CallScheduleCard({ schedule, session }: CallScheduleCardProps) {
   const [showDeleteDialog, setShowDeleteDialog] = useState(false)
   const [showEditDialog, setShowEditDialog] = useState(false)
   const [isLoading, setIsLoading] = useState(false)
@@ -41,7 +43,7 @@ export function CallScheduleCard({ schedule }: CallScheduleCardProps) {
   const handleDelete = async () => {
     setIsLoading(true)
     try {
-      await deleteSchedule(schedule.id)
+      await deleteSchedule(session, schedule.id)
       toast.success("Schedule deleted")
     } catch (error) {
       toast.error("Failed to delete schedule")
@@ -54,7 +56,7 @@ export function CallScheduleCard({ schedule }: CallScheduleCardProps) {
   const toggleEnabled = async () => {
     setIsLoading(true)
     try {
-      await updateSchedule(schedule.id, {
+      await updateSchedule(session, schedule.id, {
         name: schedule.name,
         time: schedule.cronExpression,
         agentId: schedule.agentId,
@@ -136,6 +138,7 @@ export function CallScheduleCard({ schedule }: CallScheduleCardProps) {
         schedule={schedule}
         agents={schedule.agent ? [schedule.agent] : []}
         defaultAgentId={schedule.agentId}
+        session={session}
         open={showEditDialog}
         onOpenChange={setShowEditDialog}
       />
