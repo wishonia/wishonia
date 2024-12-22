@@ -4,9 +4,10 @@ import React, { useEffect, useState } from "react"
 import { useSearchParams } from "next/navigation"
 import { Session } from "next-auth"
 
-import { LoginPromptButton } from "../../../../components/LoginPromptButton"
-import type { Study } from "../../../../types/models/Study"
-import { joinStudy, searchPredictors } from "../../../dfda/dfdaActions"
+import { Study } from "@/types/models/Study"
+import { joinStudy, searchPredictors } from "@/app/dfda/dfdaActions"
+import { LoginPromptButton } from "@/components/LoginPromptButton"
+import router from "next/router"
 
 // Add this helper function to safely render HTML
 function createMarkup(html: string) {
@@ -20,7 +21,6 @@ export function PredictorSearchResults({
   session: Session | null
   userId: string | undefined
 }) {
-  //console.log("Session data:", session)
   const searchParams = useSearchParams()
   const effectVariableName = searchParams.get("effectVariableName")
   const [results, setResults] = useState<Study[]>([])
@@ -29,9 +29,22 @@ export function PredictorSearchResults({
   const [offset, setOffset] = useState(0)
   const LIMIT = 10
 
+  // Add a key to force re-render when effectVariableName changes
+  const searchKey = effectVariableName || 'empty'
+
   useEffect(() => {
+    console.log("🔄 Effect triggered with:", { effectVariableName, offset })
+    
+    // Reset offset when effectVariableName changes
+    if (effectVariableName && offset !== 0) {
+      console.log("📍 Resetting offset for new search")
+      setOffset(0)
+      return
+    }
+
     async function fetchResults() {
       if (!effectVariableName) {
+        console.log("ℹ️ No effect variable name, clearing results")
         setResults([])
         return
       }
@@ -40,6 +53,7 @@ export function PredictorSearchResults({
       setError("")
 
       try {
+        console.log("🔍 Searching predictors for:", effectVariableName)
         const predictors = await searchPredictors({
           effectVariableName,
           limit: LIMIT,
@@ -51,12 +65,14 @@ export function PredictorSearchResults({
                 ? "(lt)0"
                 : undefined,
         })
+        
+        console.log("✅ Received predictors:", predictors.length)
 
         setResults((prev) =>
           offset > 0 ? [...prev, ...predictors] : predictors
         )
       } catch (err) {
-        console.error("Error fetching predictors:", err)
+        console.error("❌ Error fetching predictors:", err)
         setError("Failed to load results. Please try again.")
       } finally {
         setLoading(false)
@@ -64,7 +80,7 @@ export function PredictorSearchResults({
     }
 
     fetchResults()
-  }, [effectVariableName, offset, searchParams])
+  }, [effectVariableName, offset]) // Changed back to watch effectVariableName directly
 
   const loadMore = () => {
     setOffset((prev) => prev + LIMIT)
@@ -157,7 +173,7 @@ export function PredictorSearchResults({
               {study.studyHtml?.studyHeaderHtml && (
                 <div
                   onClick={() => {
-                    /* Add study page navigation */
+                    router.push(`/dfda/study/${study.id}`)
                   }}
                   dangerouslySetInnerHTML={createMarkup(
                     study.studyHtml.studyHeaderHtml

@@ -1,11 +1,10 @@
 "use client"
 
-import React, { useState } from "react"
-import { ButtonProps } from "react-day-picker"
-
-import { GlobalVariable } from "@/types/models/GlobalVariable"
+import { useState } from "react"
 import { UserVariable } from "@/types/models/UserVariable"
+import { GlobalVariable } from "@/types/models/GlobalVariable"
 import { Button } from "@/components/ui/button"
+import { cn } from "@/lib/utils"
 import {
   Credenza,
   CredenzaContent,
@@ -13,90 +12,72 @@ import {
   CredenzaHeader,
   CredenzaTitle,
 } from "@/components/ui/credenza"
-import { Icons } from "@/components/icons"
 import { MeasurementsAddForm } from "@/components/measurements/measurements-add-form"
 
-interface MeasurementButtonProps extends ButtonProps {
-  genericVariable: Pick<
-    UserVariable | GlobalVariable,
-    | "id"
-    | "name"
-    | "description"
-    | "createdAt"
-    | "imageUrl"
-    | "combinationOperation"
-    | "unitAbbreviatedName"
-    | "variableCategoryName"
-    | "lastValue"
-    | "unitName"
-    | "userId"
-    | "variableId"
-  >
-  variant?:
-    | "default"
-    | "link"
-    | "destructive"
-    | "outline"
-    | "secondary"
-    | "ghost"
-    | null
-    | undefined
-  size?: "default" | "sm" | "lg" | "icon" | null | undefined
-  title?: string
+type GenericVariable = Pick<
+  UserVariable | GlobalVariable,
+  | "id"
+  | "name"
+  | "description"
+  | "createdAt"
+  | "imageUrl"
+  | "combinationOperation"
+  | "unitAbbreviatedName"
+  | "variableCategoryName"
+  | "lastValue"
+  | "unitName"
+  | "userId"
+  | "variableId"
+>
+
+interface MeasurementButtonProps {
+  genericVariable: GenericVariable
+  className?: string
+  variant?: "default" | "outline"
+  size?: "default" | "sm" | "lg" | "icon"
+  children?: React.ReactNode
 }
 
 export function MeasurementButton({
   genericVariable,
-  variant,
-  size,
+  className,
+  children,
   ...props
 }: MeasurementButtonProps) {
-  const { ref, ...rest } = props // Destructure out `ref` and spread the rest
-
-  const [isFormOpen, setIsFormOpen] = useState(false)
-  const [showMeasurementAlert, setShowMeasurementAlert] =
-    React.useState<boolean>(false)
-
-  async function onClick() {
-    setShowMeasurementAlert(true)
-    //router.refresh();
-  }
+  const [showMeasurementAlert, setShowMeasurementAlert] = useState<boolean>(false)
 
   return (
     <>
-      <Button
-        onClick={onClick}
-        variant={variant}
-        size={size}
-        title="Click to record a measurement"
-        {...rest}
+      <Button 
+        className={cn("neobrutalist-button", className)}
+        onClick={(e) => {
+          e.stopPropagation()
+          setShowMeasurementAlert(true)
+        }}
+        {...props}
       >
-        <Icons.add className="h-4 w-4" />
-        {props.title || ""}
+        {children}
       </Button>
-      {isFormOpen && (
-        <Credenza>
-          <MeasurementsAddForm
-            genericVariable={genericVariable}
-            setShowMeasurementAlert={setShowMeasurementAlert}
-          />
-        </Credenza>
-      )}
+
       <Credenza
         open={showMeasurementAlert}
         onOpenChange={setShowMeasurementAlert}
       >
-        <CredenzaContent>
+        <CredenzaContent className="neobrutalist-container">
           <CredenzaHeader>
-            <CredenzaTitle>Record a Measurement</CredenzaTitle>
-            <CredenzaDescription>
+            <CredenzaTitle className="neobrutalist-title">
+              Record a Measurement
+            </CredenzaTitle>
+            <CredenzaDescription className="neobrutalist-description">
               This will record a {genericVariable.name} measurement.
             </CredenzaDescription>
           </CredenzaHeader>
-          <MeasurementsAddForm
-            genericVariable={genericVariable}
-            setShowMeasurementAlert={setShowMeasurementAlert}
-          />
+          <div className="mt-4">
+            <MeasurementsAddForm
+              genericVariable={genericVariable}
+              setShowMeasurementAlert={setShowMeasurementAlert}
+            />
+          </div>
         </CredenzaContent>
       </Credenza>
     </>

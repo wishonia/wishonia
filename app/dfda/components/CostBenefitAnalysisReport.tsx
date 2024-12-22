@@ -167,7 +167,7 @@ const SafetyScoreBar = ({ score }: { score: number }) => {
   )
 }
 
-const MetaAnalysisReport = ({
+const CostBenefitAnalysisReport = ({
   report,
 }: {
   report: ExtendedMetaAnalysisReport
@@ -373,4 +373,4 @@ const MetaAnalysisReport = ({
   )
 }
 
-export default MetaAnalysisReport
+export default CostBenefitAnalysisReport

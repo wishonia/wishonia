@@ -580,6 +580,13 @@ export class GlobalVariable {
    * User-Defined Variable Setting: You can help to improve the studies by pasting the title of the most appropriate Wikipedia article for this variable
    */
   "wikipediaTitle"?: string
+  /**
+   * Ex: 1
+   */
+  "ingredientVariables"?: Array<{
+    id: number
+    name: string
+  }>
 
   static readonly discriminator: string | undefined = undefined
 
@@ -1499,6 +1506,12 @@ export class GlobalVariable {
       name: "wikipediaTitle",
       baseName: "wikipediaTitle",
       type: "string",
+      format: "",
+    },
+    {
+      name: "ingredientVariables",
+      baseName: "ingredientVariables",
+      type: "Array<{ id: number; name: string }>",
       format: "",
     },
   ]

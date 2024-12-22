@@ -53,7 +53,7 @@ export default function Home() {
             </p>
             <div className="flex flex-col sm:flex-row gap-4 justify-center">
               <Button asChild size="lg">
-                <Link href="/dfda/cure-acceleration-act">
+                <Link href="/dfda/docs/cure-acceleration-act">
                   View Blueprint <ArrowRight className="ml-2 h-4 w-4"/>
                 </Link>
               </Button>
@@ -79,7 +79,7 @@ export default function Home() {
               solutions.
             </p>
             <Button asChild size="lg">
-              <Link href="/dfda/cure-acceleration-act">Get Involved</Link>
+              <Link href="/dfda/docs/cure-acceleration-act">Get Involved</Link>
             </Button>
           </div>
         </section>

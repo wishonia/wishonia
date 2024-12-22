@@ -80,15 +80,15 @@ export const dfdaLinks = {
     icon: "robot",
     tooltip: "An autonomous AI Food and Drug Administration",
   },
-  petition: {
+  cureAccelerationAct: {
     title: "Cure Acceleration Act",
-    href: "/dfda/cure-acceleration-act",
+    href: "/dfda/docs/cure-acceleration-act",
     icon: "petition",
     tooltip: "Help us transform healthcare by signing the Cure Acceleration Act",
   },
   healthSavingsSharing: {
     title: "50/50 Health Savings Sharing Program",
-    href: "/dfda/health-savings-sharing",
+    href: "/dfda/docs/health-savings-sharing",
     icon: "savings",
     tooltip:
       "Incentivizing Cures With 50% of Long Term Healthcare Savings from Curative or Preventative Treatments",
@@ -103,17 +103,15 @@ export const dfdaLinks = {
 
 export const dfdaNavigation: DomainNavigation = {
   topNav: [
-    dfdaLinks.search,          // Most important action - searching
-    dfdaLinks.conditions,      // Core content
-    dfdaLinks.treatments,      // Core content
+    dfdaLinks.cureAccelerationAct,
     dfdaLinks.digitalTwinSafe, // Important personal tool
     dfdaLinks.clinipedia,      // External knowledge base
   ],
   sidebarNav: [
     dfdaLinks.dfda,            // Home/Overview
-    dfdaLinks.search,          // Primary action
-    dfdaLinks.conditions,      // Core navigation
-    dfdaLinks.treatments,      // Core navigation
+    //dfdaLinks.search,          // Primary action
+    //dfdaLinks.conditions,      // Core navigation
+    //dfdaLinks.treatments,      // Core navigation
     dfdaLinks.trials,          // User participation
     dfdaLinks.userVariables,   // Personal data
     dfdaLinks.measurements,    // Personal tracking
@@ -121,7 +119,7 @@ export const dfdaNavigation: DomainNavigation = {
     dfdaLinks.digitalTwinSafe, // Important personal tool
     dfdaLinks.clinipedia,      // Knowledge base
     dfdaLinks.fdai,            // AI tool
-    dfdaLinks.petition,        // Community action
+    dfdaLinks.cureAccelerationAct,        // Community action
   ],
   avatarNav: [
     dfdaLinks.inbox,           // Personal messages
@@ -135,7 +133,7 @@ export const dfdaNavigation: DomainNavigation = {
     dfdaLinks.dfda,            // Home/Overview
     dfdaLinks.clinipedia,      // Knowledge base
     dfdaLinks.fdai,            // AI tool
-    dfdaLinks.petition,        // Community action
+    dfdaLinks.cureAccelerationAct,        // Community action
     dfdaLinks.healthSavingsSharing, // Program info
     dfdaLinks.dfdaDocs,        // Documentation
     commonLinks.reportBug,     // Support

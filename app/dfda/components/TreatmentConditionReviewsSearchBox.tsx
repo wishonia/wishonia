@@ -62,25 +62,25 @@ export default function TreatmentConditionReviewsSearchBox() {
                 <Input
                     type="search"
                     placeholder="Search condition, treatments..."
-                    className="w-full pl-4 pr-10 py-2 rounded-full border-input bg-background text-foreground focus:outline-none focus:ring-2 focus:ring-ring focus:border-transparent"
+                    className="w-full pl-4 pr-10 py-2 rounded-xl border-4 border-black bg-white text-black font-bold shadow-[4px_4px_0px_0px_rgba(0,0,0,1)] transition-all hover:translate-x-1 hover:translate-y-1 hover:shadow-none focus:outline-none focus:ring-0 focus:border-black"
                     value={query}
                     onChange={(e) => setQuery(e.target.value)}
                 />
                 {isLoading ? (
-                    <Loader2 className="absolute right-3 top-1/2 transform -translate-y-1/2 text-muted-foreground h-5 w-5 animate-spin" />
+                    <Loader2 className="absolute right-3 top-1/2 transform -translate-y-1/2 text-black h-5 w-5 animate-spin" />
                 ) : (
-                    <Search className="absolute right-3 top-1/2 transform -translate-y-1/2 text-muted-foreground h-5 w-5" />
+                    <Search className="absolute right-3 top-1/2 transform -translate-y-1/2 text-black h-5 w-5" />
                 )}
             </div>
             {showDropdown && (
-                <div className="absolute z-10 w-full mt-1 bg-background rounded-md shadow-lg border border-input">
+                <div className="absolute z-10 w-full mt-2 bg-white rounded-xl border-4 border-black shadow-[8px_8px_0px_0px_rgba(0,0,0,1)]">
                     {results.length > 0 ? (
                         <ul className="max-h-60 overflow-auto">
                             {results.map((result) => (
                                 <li key={`${result.type}-${result.id}`}>
                                     <Link
                                         href={`/dfda/${result.type}s/${encodeURIComponent(result.name)}`}
-                                        className="block px-4 py-2 hover:bg-accent hover:text-accent-foreground text-sm"
+                                        className="block px-4 py-2 hover:bg-[#FF3366] hover:text-white transition-colors text-sm font-bold"
                                     >
                                         {result.name} ({result.type})
                                     </Link>
@@ -88,7 +88,7 @@ export default function TreatmentConditionReviewsSearchBox() {
                             ))}
                         </ul>
                     ) : (
-                        <div className="p-2 text-center text-muted-foreground">No results found</div>
+                        <div className="p-2 text-center font-bold text-black">No results found</div>
                     )}
                 </div>
             )}
