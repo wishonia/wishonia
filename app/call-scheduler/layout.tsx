@@ -12,7 +12,7 @@ const avatarNavItems: NavItem[] = [
   },
 ]
 
-export default async function PhoneFriendLayout({
+export default async function CallSchedulerLayout({
   children,
 }: {
   children: React.ReactNode
@@ -25,7 +25,7 @@ export default async function PhoneFriendLayout({
         <div className="container flex h-16 items-center">
           <Link href="/call-scheduler" className="flex items-center gap-2 text-lg font-semibold">
             <Heart className="h-6 w-6 text-primary" />
-            <span>HeartLine</span>
+            <span>Machines of Loving Grace</span>
           </Link>
           <nav className="ml-auto flex gap-4 sm:gap-6">
             {session?.user ? (
