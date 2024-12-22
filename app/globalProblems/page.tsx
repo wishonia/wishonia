@@ -4,6 +4,7 @@ import { getCurrentUser } from "@/lib/session"
 import { GlobalProblemsList } from "@/components/global-problems-list"
 import { Shell } from "@/components/layout/shell"
 import { PollRandomGlobalProblems } from "@/components/poll-random-global-problems"
+import { GlobalProblemBreadcrumbs } from "@/components/globalProblem/GlobalProblemBreadcrumbs"
 
 export const metadata: Metadata = {
   title: "Global Problems",
@@ -21,8 +22,9 @@ export default async function GlobalProblemsPage({
 
   return (
     <Shell>
-      <PollRandomGlobalProblems user={user}></PollRandomGlobalProblems>
+      <GlobalProblemBreadcrumbs />
       <GlobalProblemsList user={user}></GlobalProblemsList>
+      <PollRandomGlobalProblems user={user}></PollRandomGlobalProblems>
     </Shell>
   )
 }

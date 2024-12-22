@@ -166,6 +166,7 @@ model User {
   marketingEmails                       Boolean                               @default(false)
   newsletterEmails                      Boolean                               @default(false)
   unsubscribeFromAll                    Boolean                               @default(false)
+  callSchedulesCreated                  CallSchedule[]
 }
 
 // Need this to create digital twins for people that are not users
@@ -178,10 +179,10 @@ model Person {
   company          String?
   createdAt        DateTime                 @default(now())
   createdAtTwitter DateTime?
-  email            String?
+  email            String?                  @unique
   firstName        String?
   gender           String?
-  githubUsername   String?
+  githubUsername   String?                  @unique
   hireable         Boolean?
   image            String?
   jobTitle         String?
@@ -189,18 +190,27 @@ model Person {
   location         String?
   memberships      OrganizationMembership[]
   name             String
-  phoneNumber      String?
+  phoneNumber      String?                  @unique
   postalCode       String?
   profileBannerUrl String?
   stateProvince    String?
   telephone        String?
   timeZone         String?
-  twitterHandle    String?
+  twitterHandle    String?                  @unique
   updatedAt        DateTime                 @updatedAt
   user             User?                    @relation(fields: [userId], references: [id])
   userId           String?                  @unique
-  web3Wallet       String?
+  web3Wallet       String?                  @unique
   website          String?
+  callSchedules    CallSchedule[]
+  globalProblems   PersonGlobalProblem[]
+  globalSolutions  PersonGlobalSolution[]
+  callSummaryRecipients CallSummaryRecipient[]
+
+  // Add index for common queries
+  @@index([name])
+  @@index([email])
+  @@index([phoneNumber])
 }
 
 model Education {
@@ -369,6 +379,8 @@ model GlobalProblem {
   thisGlobalProblemAllocations          GlobalProblemPairAllocation[]         @relation("ThisGlobalProblemRelation")
   globalProblemSolutions                GlobalProblemSolution[]               @relation("GlobalProblemToSolution")
   globalProblemSolutionsPairAllocations GlobalProblemSolutionPairAllocation[]
+  organizations                         OrganizationGlobalProblem[]
+  people                                PersonGlobalProblem[]
 }
 
 model GlobalProblemPairAllocation {
@@ -402,6 +414,8 @@ model GlobalSolution {
   thatGlobalSolutionAllocations GlobalSolutionPairAllocation[] @relation("ThatGlobalSolutionRelation")
   thisGlobalSolutionAllocations GlobalSolutionPairAllocation[] @relation("ThisGlobalSolutionRelation")
   globalSolutionTasks           GlobalSolutionTask[]           @relation("GlobalSolutionToTask")
+  organizations                 OrganizationGlobalSolution[]
+  people                        PersonGlobalSolution[]
 }
 
 model GlobalSolutionPairAllocation {
@@ -756,6 +770,7 @@ model Agent {
   tools                AgentTool[]
   workflowSteps        WorkflowStep[]
   Chat                 Chat[]
+  callSchedules        CallSchedule[]
 
   @@unique([userId, name])
 }
@@ -1030,12 +1045,14 @@ model Organization {
   owner                   User?                    @relation(fields: [ownerId], references: [id])
 
   // Additional relations
-  locations   OrganizationLocation[]
-  followers   OrganizationFollower[]
-  Product     Product[]
-  Service     Service[]
-  Event       Event[]
-  Partnership Partnership[]
+  locations       OrganizationLocation[]
+  followers       OrganizationFollower[]
+  Product         Product[]
+  Service         Service[]
+  Event           Event[]
+  Partnership     Partnership[]
+  globalProblems  OrganizationGlobalProblem[]
+  globalSolutions OrganizationGlobalSolution[]
 
   @@unique([name, foundedYear])
 }
@@ -1101,6 +1118,7 @@ model Chat {
   userId    String
   agentId   String?
   createdAt DateTime      @default(now())
+  updatedAt DateTime      @updatedAt
   path      String
   user      User          @relation(fields: [userId], references: [id])
   messages  ChatMessage[]
@@ -1112,6 +1130,7 @@ model ChatMessage {
   chatId        String
   tool_call_id  String?
   createdAt     DateTime    @default(now())
+  updatedAt     DateTime    @updatedAt
   content       String
   ui            String?
   role          MessageRole
@@ -2022,4 +2041,189 @@ model PetitionRepMessage {
   representative   Representative @relation(fields: [representativeId], references: [id])
   User             User?          @relation(fields: [userId], references: [id])
   userId           String?
+}
+
+model CallSchedule {
+  id        String   @id @default(cuid())
+  name      String // e.g. "Daily Health Check", "Medication Reminder"
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+  enabled   Boolean  @default(true)
+
+  // Who created/owns this schedule
+  userId String
+  user   User   @relation(fields: [userId], references: [id])
+
+  // Who is being called
+  personId String
+  person   Person @relation(fields: [personId], references: [id])
+
+  // Which agent makes the call
+  agentId String
+  agent   Agent  @relation(fields: [agentId], references: [id])
+
+  // Schedule configuration using cron syntax
+  cronExpression String // e.g. "0 9 * * *" for daily at 9am
+
+  // Optional end date for temporary schedules
+  endDate DateTime?
+
+  // Track call history
+  calls ScheduledCall[]
+
+  @@unique([userId, personId], name: "userId_personId_unique")
+  @@index([userId])
+  @@index([personId])
+  @@index([agentId])
+}
+
+model ScheduledCall {
+  id           String       @id @default(cuid())
+  scheduleId   String
+  schedule     CallSchedule @relation(fields: [scheduleId], references: [id])
+  scheduledFor DateTime     // When the call was scheduled for
+  status       CallStatus   @default(SCHEDULED)
+  retellCallId String?     // ID returned by Retell API
+  errorMessage String?     // If the call failed
+  createdAt    DateTime    @default(now())
+  updatedAt    DateTime    @updatedAt
+  completedAt  DateTime?   // When call was completed/failed/cancelled
+
+  // Add fields for call summary and notifications
+  callSummary  String?    @db.Text  // AI-generated summary of the call
+
+  // Many-to-many relation with Person for notifications
+  callSummaryRecipients CallSummaryRecipient[]
+
+  @@unique([scheduleId, scheduledFor], name: "scheduleId_scheduledFor_unique")
+  @@index([scheduleId])
+  @@index([status])
+  @@index([scheduledFor])
+}
+
+// New model to handle notification preferences
+model CallSummaryRecipient {
+  id             String        @id @default(cuid())
+  personId       String
+  scheduledCallId String
+  person         Person        @relation(fields: [personId], references: [id])
+  scheduledCall  ScheduledCall @relation(fields: [scheduledCallId], references: [id])
+  notifyBy       NotifyMethod[]
+  createdAt      DateTime      @default(now())
+  updatedAt      DateTime      @updatedAt
+
+  @@unique([personId, scheduledCallId])
+  @@index([personId])
+  @@index([scheduledCallId])
+}
+
+enum CallStatus {
+  SCHEDULED
+  IN_PROGRESS
+  COMPLETED
+  FAILED
+  CANCELLED
+  NO_ANSWER
+}
+
+// Junction table for Organization <-> GlobalProblem relationship
+model OrganizationGlobalProblem {
+  id              String        @id @default(cuid())
+  organizationId  String
+  globalProblemId String
+  organization    Organization  @relation(fields: [organizationId], references: [id], onDelete: Cascade)
+  globalProblem   GlobalProblem @relation(fields: [globalProblemId], references: [id], onDelete: Cascade)
+  focusLevel      FocusLevel    @default(MEDIUM)
+  description     String?       @db.Text
+  startedAt       DateTime? // When the organization started working on this problem
+  achievements    String[] // Key achievements in addressing this problem
+  createdAt       DateTime      @default(now())
+  updatedAt       DateTime      @updatedAt
+
+  @@unique([organizationId, globalProblemId])
+  @@index([organizationId])
+  @@index([globalProblemId])
+}
+
+enum FocusLevel {
+  LOW
+  MEDIUM
+  HIGH
+  PRIMARY
+}
+
+// Junction table for Person <-> GlobalProblem relationship
+model PersonGlobalProblem {
+  id              String         @id @default(cuid())
+  personId        String
+  globalProblemId String
+  person          Person         @relation(fields: [personId], references: [id], onDelete: Cascade)
+  globalProblem   GlobalProblem  @relation(fields: [globalProblemId], references: [id], onDelete: Cascade)
+  role            String? // e.g., "Researcher", "Advocate", "Expert"
+  expertise       ExpertiseLevel @default(MEDIUM)
+  description     String?        @db.Text
+  startedAt       DateTime? // When the person started working on this problem
+  achievements    String[] // Key achievements in addressing this problem
+  publications    String[] // Related publications
+  createdAt       DateTime       @default(now())
+  updatedAt       DateTime       @updatedAt
+
+  @@unique([personId, globalProblemId])
+  @@index([personId])
+  @@index([globalProblemId])
+}
+
+enum ExpertiseLevel {
+  BEGINNER
+  MEDIUM
+  EXPERT
+  AUTHORITY
+}
+
+// Junction table for Organization <-> GlobalSolution relationship
+model OrganizationGlobalSolution {
+  id               String         @id @default(cuid())
+  organizationId   String
+  globalSolutionId String
+  organization     Organization   @relation(fields: [organizationId], references: [id], onDelete: Cascade)
+  globalSolution   GlobalSolution @relation(fields: [globalSolutionId], references: [id], onDelete: Cascade)
+  role             String? // e.g., "Developer", "Implementer", "Funder"
+  focusLevel       FocusLevel     @default(MEDIUM)
+  description      String?        @db.Text
+  startedAt        DateTime? // When the organization started working on this solution
+  achievements     String[] // Key achievements in implementing this solution
+  budget           Float? // Budget allocated to this solution
+  createdAt        DateTime       @default(now())
+  updatedAt        DateTime       @updatedAt
+
+  @@unique([organizationId, globalSolutionId])
+  @@index([organizationId])
+  @@index([globalSolutionId])
+}
+
+// Junction table for Person <-> GlobalSolution relationship
+model PersonGlobalSolution {
+  id               String         @id @default(cuid())
+  personId         String
+  globalSolutionId String
+  person           Person         @relation(fields: [personId], references: [id], onDelete: Cascade)
+  globalSolution   GlobalSolution @relation(fields: [globalSolutionId], references: [id], onDelete: Cascade)
+  role             String? // e.g., "Lead Developer", "Researcher", "Advisor"
+  expertise        ExpertiseLevel @default(MEDIUM)
+  description      String?        @db.Text
+  startedAt        DateTime? // When the person started working on this solution
+  achievements     String[] // Key achievements in developing this solution
+  publications     String[] // Related publications/documentation
+  createdAt        DateTime       @default(now())
+  updatedAt        DateTime       @updatedAt
+
+  @@unique([personId, globalSolutionId])
+  @@index([personId])
+  @@index([globalSolutionId])
+}
+
+enum NotifyMethod {
+  EMAIL
+  SMS
+  PUSH
 }

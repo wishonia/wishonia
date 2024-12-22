@@ -1,6 +1,6 @@
 import { notFound } from 'next/navigation'
 import { Chat } from '@/app/search/components/chat'
-import { getSharedChat } from '@/lib/actions/chat'
+import { getSharedSearchChat } from '@/lib/actions/searchChat'
 import { AI } from '@/app/search/actions'
 
 export interface SharePageProps {
@@ -10,7 +10,7 @@ export interface SharePageProps {
 }
 
 export async function generateMetadata({ params }: SharePageProps) {
-  const chat = await getSharedChat(params.id)
+  const chat = await getSharedSearchChat(params.id)
 
   if (!chat || !chat.sharePath) {
     return notFound()
@@ -22,7 +22,7 @@ export async function generateMetadata({ params }: SharePageProps) {
 }
 
 export default async function SharePage({ params }: SharePageProps) {
-  const chat = await getSharedChat(params.id)
+  const chat = await getSharedSearchChat(params.id)
 
   if (!chat || !chat.sharePath) {
     notFound()

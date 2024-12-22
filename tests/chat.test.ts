@@ -3,7 +3,7 @@
  */
 import { saveChat } from "@/lib/chat"
 import { prisma } from "@/lib/db"
-import { Chat } from "@/lib/types"
+import { ChatWithMessagesAndAgent } from "@/lib/types"
 import {getOrCreateAgent} from "@/lib/agent";
 import {getOrCreateTestUser} from "@/tests/test-helpers";
 
@@ -24,7 +24,7 @@ describe("saveChat", () => {
       name: "Digital Twin Safe Project Manger",
       userId: user.id,
     })
-    const savedChat: Chat = {
+    const savedChat: ChatWithMessagesAndAgent = {
       id: "1",
       title: "New Chat",
       userId: "test-user",
@@ -94,7 +94,7 @@ describe("saveChat", () => {
       },
     })
 
-    const savedChat: Chat = {
+    const savedChat: ChatWithMessagesAndAgent = {
       id: "1",
       title: "Existing Chat",
       userId: "test-user",

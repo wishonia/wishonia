@@ -1,6 +1,6 @@
 import { prisma } from "@/lib/db"
 import { textCompletion } from "@/lib/llm"
-import type { Chat } from "@/lib/types"
+import type { ChatWithMessagesAndAgent } from "@/lib/types"
 import { getRedisModelCache } from "@/lib/utils/redis"
 
 // Local implementation of document type
@@ -19,7 +19,7 @@ interface ChatResponse {
   sourceDocuments: Document[]
 }
 
-async function createNewChat(chat: Chat) {
+async function createNewChat(chat: ChatWithMessagesAndAgent) {
   try {
     const createdChat = await prisma.chat.create({
       data: {
@@ -55,7 +55,7 @@ async function getExistingMessageIds(chatId: string) {
   ).map((m: { id: string }) => m.id)
 }
 
-async function createChatMessages(messages: Chat["messages"], chatId: string) {
+async function createChatMessages(messages: ChatWithMessagesAndAgent["messages"], chatId: string) {
   for (const message of messages) {
     const chatMessage = JSON.parse(JSON.stringify(message))
     chatMessage.chatId = chatId
@@ -73,7 +73,7 @@ async function createChatMessages(messages: Chat["messages"], chatId: string) {
   }
 }
 
-export async function saveChat(chat: Chat) {
+export async function saveChat(chat: ChatWithMessagesAndAgent) {
   const existingChat = await prisma.chat.findFirst({
     where: {
       id: chat.id,

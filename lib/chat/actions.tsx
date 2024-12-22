@@ -1,7 +1,7 @@
 import "server-only"
 
 import { Message } from "ai"
-import { createAI, getAIState } from "ai/rsc"
+import { createAI, getAIState, getMutableAIState } from "ai/rsc"
 
 import { saveChat } from "@/lib/chat"
 import { getCurrentUser } from "@/lib/session"
@@ -15,8 +15,9 @@ import { ProfileList } from "@/components/assistant/ProfileList"
 import { Readme } from "@/components/assistant/Readme"
 import Repositories from "@/components/assistant/Repositories"
 import { PollRandomGlobalProblems } from "@/components/poll-random-global-problems"
+import { text2measurements } from "@/lib/text2measurements"
 
-import { Chat } from "../types"
+import { ChatWithMessagesAndAgent } from "../types"
 import { nanoid } from "../utils"
 import { readmeAction, repoAction } from "./submit-user-action"
 import { submitUserMessage } from "./submit-user-message"
@@ -37,6 +38,11 @@ export type AIState = {
     conversationStarters?: string[] | null
     avatar?: string | null
   } | null
+  measurements?: {
+    variableName: string
+    value: number
+    unitName: string
+  }[]
 }
 
 export type UIState = {
@@ -44,8 +50,47 @@ export type UIState = {
   display: React.ReactNode
 }[]
 
+export async function recordMeasurement(content: string) {
+  "use server"
+  
+  const aiState = getMutableAIState<typeof AI>()
+  const currentUtcDateTime = new Date().toISOString()
+  const timeZoneOffset = new Date().getTimezoneOffset()
+  
+  const measurements = await text2measurements(content, currentUtcDateTime, timeZoneOffset)
+  
+  aiState.done({
+    ...aiState.get(),
+    messages: [
+      ...aiState.get().messages,
+      {
+        id: nanoid(),
+        role: "function",
+        name: "record_measurement",
+        content: JSON.stringify(measurements),
+      },
+      {
+        id: nanoid(),
+        role: "system",
+        content: `[Measurements recorded: ${measurements.map(m => `${m.variableName}: ${m.value} ${m.unitName}`).join(', ')}]`,
+      },
+    ],
+  })
+
+  return {
+    id: nanoid(),
+    display: (
+      <BotCard>
+        <BotMessage
+          content={`I've recorded the following measurements: ${measurements.map(m => `${m.variableName}: ${m.value} ${m.unitName}`).join(', ')}`}
+        />
+      </BotCard>
+    ),
+  }
+}
+
 export const AI = createAI<AIState, UIState>({
-  actions: { submitUserMessage, repoAction, readmeAction },
+  actions: { submitUserMessage, repoAction, readmeAction, recordMeasurement },
   initialAIState: {
     chatId: nanoid(),
     messages: [],
@@ -60,7 +105,7 @@ export const AI = createAI<AIState, UIState>({
     if (user) {
       const aiState = getAIState()
       if (aiState) {
-        return getUIStateFromAIState(aiState as Chat)
+        return getUIStateFromAIState(aiState as ChatWithMessagesAndAgent)
       }
     } else {
       return
@@ -80,7 +125,7 @@ export const AI = createAI<AIState, UIState>({
       const path = `/chat/${chatId}`
       const title = messages[1].content.substring(0, 100)
 
-      const savedChat: Chat = {
+      const savedChat: ChatWithMessagesAndAgent = {
         id: chatId,
         title: title,
         userId: userId,
@@ -100,7 +145,7 @@ export const AI = createAI<AIState, UIState>({
 
 // Parses the previously rendered content and returns the UI state.
 // (Useful for chat history to rerender the UI components again when switching between the chats)
-export const getUIStateFromAIState = async (aiState: Chat) => {
+export const getUIStateFromAIState = async (aiState: ChatWithMessagesAndAgent) => {
   const user = await getCurrentUser()
   return aiState.messages
     .filter((message: Message) => message.role !== "system")
@@ -131,6 +176,14 @@ export const getUIStateFromAIState = async (aiState: Chat) => {
           ) : m.name === "problems_vote_ui" ? (
             <BotCard>
               <PollRandomGlobalProblems user={user}></PollRandomGlobalProblems>
+            </BotCard>
+          ) : m.name === "record_measurement" ? (
+            <BotCard>
+              <BotMessage
+                content={`Recorded measurements: ${JSON.parse(m.content).map((measurement: any) => 
+                  `${measurement.variableName}: ${measurement.value} ${measurement.unitName}`
+                ).join(', ')}`}
+              />
             </BotCard>
           ) : null
         ) : m.role === "user" ? (

@@ -4,7 +4,7 @@ import { commonLinks } from "../shared-links"
 export const wishoniaLinks = {
   dashboard: commonLinks.dashboard,
   globalProblemsVote: {
-    title: "Vote on Problems",
+    title: "Problems",
     href: "/globalProblems",
     icon: "vote",
     img: "/img/screenshots/problem-allocation-short.png",
@@ -18,7 +18,7 @@ export const wishoniaLinks = {
     tooltip: "Percent of resources society wants to allocate to each problem",
   },
   globalSolutionsVote: {
-    title: "Vote on Solutions",
+    title: "Solutions",
     href: "/globalSolutions",
     icon: "lightbulb",
     img: "/img/screenshots/problem-allocation-short.png",
@@ -77,6 +77,36 @@ export const wishoniaLinks = {
     tooltip: "View your wishes",
     img: "/img/wish.png",
   },
+  articles: {
+    title: "Articles",
+    href: "/articles",
+    icon: "document",
+    tooltip: "Browse all articles",
+  },
+  organizations: {
+    title: "Organizations",
+    href: "/organizations",
+    icon: "building",
+    tooltip: "View organizations",
+  },
+  petitions: {
+    title: "Petitions",
+    href: "/petitions",
+    icon: "pencilSquare",
+    tooltip: "Browse and sign petitions",
+  },
+  search: {
+    title: "Search",
+    href: "/search",
+    icon: "search",
+    tooltip: "Search across all content",
+  },
+  warVsCures: {
+    title: "War vs Cures",
+    href: "/warVsCures",
+    icon: "scale",
+    tooltip: "Compare war and medical research spending",
+  },
 } as const
 
 export const wishoniaNavigation: DomainNavigation = {
@@ -85,9 +115,12 @@ export const wishoniaNavigation: DomainNavigation = {
     wishoniaLinks.globalProblemsVote,
     wishoniaLinks.globalSolutionsVote,
     wishoniaLinks.wishingWells,
+    wishoniaLinks.articles,
+    wishoniaLinks.petitions,
   ],
   sidebarNav: [
     wishoniaLinks.dashboard,
+    wishoniaLinks.agents,
     wishoniaLinks.globalProblemsVote,
     wishoniaLinks.globalSolutionsVote,
     wishoniaLinks.researcher,
@@ -95,6 +128,9 @@ export const wishoniaNavigation: DomainNavigation = {
     commonLinks.contributeOnGithub,
     commonLinks.reportBug,
     commonLinks.requestFeature,
+    wishoniaLinks.organizations,
+    wishoniaLinks.search,
+    wishoniaLinks.warVsCures,
   ],
   avatarNav: [
     commonLinks.profileSettings,

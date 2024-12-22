@@ -9,7 +9,8 @@ import { Loader2, Search, X } from "lucide-react"
 import { useDetailedRateLimit } from "@/lib/hooks/useDetailedRateLimit"
 import { cn } from "@/lib/utils"
 import { Button } from "@/components/ui/button"
-import { Dialog, DialogContent, DialogTrigger } from "@/components/ui/dialog"
+import { Dialog, DialogContent, DialogTitle } from "@/components/ui/dialog"
+import { Input } from "@/components/ui/input"
 
 import { searchRepoContent } from "../actions"
 import { MenuItem } from "../lib/parseSummary"
@@ -271,21 +272,19 @@ export default function SearchBar({ menu, onClose, mobile }: SearchBarProps) {
   }
 
   return (
-    <Dialog open={open} onOpenChange={setOpen}>
-      <DialogTrigger asChild>
-        <Button
-          variant="outline"
-          className="relative w-full justify-start text-sm text-muted-foreground"
-          onClick={() => setOpen(true)}
-        >
-          <Search className="mr-2 h-4 w-4" />
-          <span>Search documentation...</span>
-          <kbd className="pointer-events-none absolute right-2 top-2 hidden h-6 select-none items-center gap-1 rounded border bg-muted px-1.5 font-mono text-xs font-medium opacity-100 sm:flex">
-            <span className="text-xs">⌘</span>K
-          </kbd>
-        </Button>
-      </DialogTrigger>
-      <DialogContent className="p-0">{searchContent}</DialogContent>
-    </Dialog>
+    <>
+      <Input
+        type="text"
+        placeholder="Search docs..."
+        onClick={() => setOpen(true)}
+        readOnly
+      />
+      <Dialog open={open} onOpenChange={setOpen}>
+        <DialogContent className="max-w-2xl">
+          <DialogTitle className="sr-only">Search Documentation</DialogTitle>
+          {searchContent}
+        </DialogContent>
+      </Dialog>
+    </>
   )
 }

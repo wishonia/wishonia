@@ -1,15 +1,32 @@
 import { Metadata } from "next"
 import { notFound } from "next/navigation"
+import type { GlobalProblem, GlobalSolution } from "@prisma/client"
 
 import { getGlobalProblemSolution } from "@/lib/api/globalProblemSolutions"
 import { Shell } from "@/components/layout/shell"
-import MarkdownRenderer from "@/components/markdown/MarkdownRenderer"
+import { GlobalProblemSolutionRenderer } from "@/components/globalProblemSolution/GlobalProblemSolutionRenderer"
 
 interface GlobalProblemSolutionPageProps {
   params: {
     globalSolutionId: string
     globalProblemId: string
   }
+}
+
+// Define the type that matches what getGlobalProblemSolution returns
+interface GlobalProblemSolutionWithRelations {
+  id: string
+  globalProblemId: string
+  globalSolutionId: string
+  createdAt: Date
+  updatedAt: Date
+  content: string | null
+  description: string | null
+  featuredImage: string | null
+  name: string
+  averageAllocation: number | null
+  globalProblem: GlobalProblem
+  globalSolution: GlobalSolution
 }
 
 export async function generateMetadata({
@@ -32,7 +49,7 @@ export default async function GlobalProblemSolutionPage({
   const globalProblemSolution = await getGlobalProblemSolution(
     params.globalProblemId,
     params.globalSolutionId
-  )
+  ) as GlobalProblemSolutionWithRelations | null
 
   if (!globalProblemSolution) {
     notFound()
@@ -40,11 +57,8 @@ export default async function GlobalProblemSolutionPage({
 
   return (
     <Shell>
-      <MarkdownRenderer
-        name={globalProblemSolution.name}
-        featuredImage={globalProblemSolution.featuredImage}
-        description={globalProblemSolution.description}
-        content={globalProblemSolution.content}
+      <GlobalProblemSolutionRenderer 
+        globalProblemSolution={globalProblemSolution}
       />
     </Shell>
   )

@@ -2,15 +2,12 @@
 
 import { revalidatePath } from "next/cache"
 import { QueryCache } from "@tanstack/react-query"
-import { type Message as AIMessage } from "ai"
-import OpenAI from "openai"
-
+import { Message } from "ai"
 import { prisma } from "@/lib/db"
 import { getCurrentUser } from "@/lib/session"
-import { type Chat } from "@/lib/types"
+import type { Chat, ChatMessage, Agent } from "@prisma/client"
 
-type GetChatResult = Chat[] | null
-type SetChatResults = Chat[]
+type SetChatResults = (Chat & { messages: ChatMessage[]; agent: Agent | null })[]
 
 export async function getChat(
   id: string,
@@ -33,7 +30,7 @@ export async function getChat(
 
   // Cast each message to AIMessage type
   const castedMessages = receivedChat.messages.map(
-    (message) => message as AIMessage
+    (message: ChatMessage) => message
   )
 
   // Return the chat with the casted messages
@@ -45,7 +42,7 @@ export async function getChat(
   ]
 }
 
-export async function getChats(userId?: string | null): Promise<GetChatResult> {
+export async function getChats(userId?: string | null) {
   if (!userId) {
     return []
   }
@@ -56,18 +53,13 @@ export async function getChats(userId?: string | null): Promise<GetChatResult> {
         userId: userId,
       },
       include: {
-        messages: true, // Include related messages
-        agent: true, // Include related messages
+        //messages: true, // Include related messages
+        //agent: true, // Include related messages
       },
     })
 
-    // Cast messages in each chat to AIMessage type
-    const castedChats = receivedChats.map((chat) => ({
-      ...chat,
-      messages: chat.messages.map((message) => message as AIMessage),
-    }))
 
-    return castedChats
+    return receivedChats
   } catch (e) {
     console.error(`getChats error: ${e}`)
     return []
@@ -86,7 +78,7 @@ export async function removeChat({ id, path }: { id: string; path: string }) {
 
   if (!user) {
     return {
-      error: "UnuserIdized",
+      error: "Please sign in",
     }
   }
 
@@ -100,7 +92,7 @@ export async function removeChat({ id, path }: { id: string; path: string }) {
 
     if (!chat) {
       return {
-        error: "Chat not found or unuserIdized",
+        error: "Chat not found!",
       }
     }
   }
@@ -154,7 +146,7 @@ export const clearAllChats = async (userId: string) => {
       await prisma.chatMessage.deleteMany({
         where: {
           chatId: {
-            in: deletedChats.map((chat) => chat.id),
+            in: deletedChats.map((chat: Chat) => chat.id),
           },
         },
       })
@@ -164,6 +156,6 @@ export const clearAllChats = async (userId: string) => {
         },
       })
     }
-    return revalidatePath(deletedChats.map((chat) => chat.path).join(", "))
+    return revalidatePath(deletedChats.map((chat: Chat) => chat.path).join(", "))
   }
 }

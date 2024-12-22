@@ -1,20 +1,22 @@
 import React from "react"
+import { WishingWell, GlobalProblem, GlobalProblemSolution } from "@prisma/client"
+import { MarkdownDialogWrapper } from './markdown/markdown-dialog-wrapper'
 
-interface BarChartProps<T> {
-  thisItem: T
-  thatItem: T
+interface BarChartProps {
+  thisItem: WishingWell | GlobalProblem | GlobalProblemSolution
+  thatItem: WishingWell | GlobalProblem | GlobalProblemSolution
   thisPercentageDesired?: number
-  getItemName: (item: T) => string
-  getItemImage: (item: T) => string | undefined
+  getItemName: (item: { name: string }) => string
+  getItemImage: (item: { featuredImage: string | null }) => string | undefined
 }
 
-const BarChart = <T,>({
+const BarChartGeneral = ({
   thisItem,
   thatItem,
   thisPercentageDesired,
   getItemName,
   getItemImage,
-}: BarChartProps<T>) => {
+}: BarChartProps) => {
   const thatPercentageDesired = 100 - (thisPercentageDesired || 0)
 
   return (
@@ -57,6 +59,8 @@ const BarChart = <T,>({
             >
               {thisPercentageDesired}% to {getItemName(thisItem)}
             </span>
+            
+            <MarkdownDialogWrapper item={thatItem}>
             <div
               id={`thisItemBar`}
               style={{
@@ -69,6 +73,7 @@ const BarChart = <T,>({
                 backgroundPosition: "center",
               }}
             ></div>
+            </MarkdownDialogWrapper>
           </div>
           <div
             style={{
@@ -86,18 +91,20 @@ const BarChart = <T,>({
             >
               {thatPercentageDesired}% to {getItemName(thatItem)}
             </span>
-            <div
-              id={`thatItemBar`}
-              style={{
-                height: `${thatPercentageDesired}%`,
-                width: "100%",
-                backgroundImage: getItemImage(thatItem)
-                  ? `url(${getItemImage(thatItem)})`
-                  : "linear-gradient(to bottom, #007bff, #007bff)",
-                backgroundSize: getItemImage(thatItem) ? "cover" : "auto",
-                backgroundPosition: "center",
-              }}
-            ></div>
+            <MarkdownDialogWrapper item={thatItem}>
+              <div
+                id={`thatItemBar`}
+                style={{
+                  height: `${thatPercentageDesired}%`,
+                  width: "100%",
+                  backgroundImage: getItemImage(thatItem)
+                    ? `url(${getItemImage(thatItem)})`
+                    : "linear-gradient(to bottom, #007bff, #007bff)",
+                  backgroundSize: getItemImage(thatItem) ? "cover" : "auto",
+                  backgroundPosition: "center",
+                }}
+              ></div>
+            </MarkdownDialogWrapper>
           </div>
         </div>
       </div>
@@ -105,4 +112,4 @@ const BarChart = <T,>({
   )
 }
 
-export default BarChart
+export default BarChartGeneral

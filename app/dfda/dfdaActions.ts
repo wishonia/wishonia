@@ -168,7 +168,27 @@ export async function getConditionByName(name: string) {
   })
 }
 
-export async function getMetaAnalysis(
+async function findOrWriteArticle(topic: string) {
+  try {
+    const article = await findArticleByTopic(topic)
+    if(article) {
+      return article
+    }
+    return writeArticle(topic, "test-user")
+  } catch (error) {
+    console.error("Failed to generate meta-analysis:", error)
+    throw new Error("Failed to generate meta-analysis. Please try again later.")
+  }
+}
+
+export async function getConditionMetaAnalysis(
+  conditionName: string
+) {
+  const topic = `Meta-analysis of all research on the most effective treatments for ${conditionName}`
+  return findOrWriteArticle(topic)
+}
+
+export async function getTreatmentConditionMetaAnalysis(
   treatmentName: string,
   conditionName: string
 ) {
@@ -178,16 +198,14 @@ export async function getMetaAnalysis(
 
   const topic = `Meta-analysis on the safety and effectiveness of ${treatmentName} for ${conditionName}`
 
-  try {
-    const article = await findArticleByTopic(topic)
-    if (article) {
-      return article
-    }
-    return writeArticle(topic, "test-user")
-  } catch (error) {
-    console.error("Failed to generate meta-analysis:", error)
-    throw new Error("Failed to generate meta-analysis. Please try again later.")
-  }
+  return findOrWriteArticle(topic)
+}
+
+export async function getTreatmentMetaAnalysis(
+  treatmentName: string
+) {
+  const topic = `Meta-analysis on the safety and effectiveness of ${treatmentName}`
+  return findOrWriteArticle(topic)
 }
 
 async function getYourUser(yourUserId: string): Promise<User | null> {
@@ -526,6 +544,8 @@ export async function searchPredictors(params: {
   correlationCoefficient?: string
 }) {
   try {
+    console.debug("🔍 searchPredictors called with params:", params)
+
     const apiParams: Record<string, string> = {
       limit: (params.limit || 10).toString(),
       offset: (params.offset || 0).toString(),
@@ -543,11 +563,21 @@ export async function searchPredictors(params: {
       apiParams.correlationCoefficient = params.correlationCoefficient
     }
 
+    console.debug("📡 Making API request with params:", apiParams)
     const response = (await dfdaGET("studies", apiParams)) as GetStudiesResponse
+    console.debug("✅ Received response:", {
+      studiesCount: response.studies?.length || 0,
+      firstStudy: response.studies?.[0]
+    })
 
-    return response.studies || []
+    if (!response.studies) {
+      console.warn("⚠️ No studies found in response")
+      return []
+    }
+
+    return response.studies
   } catch (error) {
-    console.error("Error searching studies:", error)
+    console.error("❌ Error searching studies:", error)
     throw new Error("Failed to search studies")
   }
 }

@@ -67,3 +67,4 @@ next-env.d.ts
 *.heapdump
 node_modules_bak
 /scripts/dep-analysis/unused-deps_20241129_191341.txt
+/.env.test

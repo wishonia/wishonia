@@ -12,6 +12,12 @@ import { Button, buttonVariants } from "@/components/ui/button"
 import { DataTable } from "@/components/data-table"
 import { Icons } from "@/components/icons"
 import { SpinningLoader } from "@/components/spinningLoader"
+import {
+  DropdownMenu,
+  DropdownMenuContent,
+  DropdownMenuItem,
+  DropdownMenuTrigger,
+} from "@/components/ui/dropdown-menu"
 
 interface PollProps {
   globalProblemId: string
@@ -122,16 +128,53 @@ export const GlobalProblemSolutionsList: React.FC<PollProps> = ({
         )
       },
     },
+    {
+      accessorKey: "globalSolutionId",
+      header: "Actions",
+      cell: ({ getValue }) => {
+        const globalSolutionId = getValue() as string
+        return (
+          <DropdownMenu>
+            <DropdownMenuTrigger asChild>
+              <Button variant="ghost" className="h-8 w-8 p-0">
+                <Icons.ellipsis className="h-4 w-4" />
+                <span className="sr-only">Open menu</span>
+              </Button>
+            </DropdownMenuTrigger>
+            <DropdownMenuContent align="end">
+              <DropdownMenuItem asChild>
+                <Link href={`/globalSolutions/${globalSolutionId}`}>
+                  💡
+                  View Solution Overview
+                </Link>
+              </DropdownMenuItem>
+              <DropdownMenuItem asChild>
+                <Link href={`/globalSolutions/${globalSolutionId}/tasks`}>
+                  ✅
+                  Decompose into Atomic Tasks
+                </Link>
+              </DropdownMenuItem>
+              <DropdownMenuItem asChild>
+                <Link href={`/globalSolutions/${globalSolutionId}/globalProblems`}>
+                  ⚠️
+                  View Problems it Solves
+                </Link>
+              </DropdownMenuItem>
+            </DropdownMenuContent>
+          </DropdownMenu>
+        )
+      },
+    },
   ]
   if (user && user.admin) {
     globalProblemSolutionColumns.push({
       accessorKey: "id",
       header: "Actions",
-      cell: (row) => {
-        const {id} = row.row.original
+      cell: ({ row }) => {
+        const itemId = row.original.id
         return (
           <div className="flex items-center justify-center">
-            <Link href={`/globalProblemSolutions/${id}/edit`}>
+            <Link href={`/globalProblemSolutions/${itemId}/edit`}>
               <Button variant="ghost" className="mr-2">
                 <Icons.edit className="h-4 w-4" />
               </Button>
@@ -139,7 +182,7 @@ export const GlobalProblemSolutionsList: React.FC<PollProps> = ({
             <Button
               variant="ghost"
               onClick={async () => {
-                await fetch(`/api/globalProblemSolutions/${id}`, {
+                await fetch(`/api/globalProblemSolutions/${itemId}`, {
                   method: "DELETE",
                 })
                 fetchGlobalProblemSolutions(globalProblemId)
