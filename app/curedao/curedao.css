@@ -92,3 +92,121 @@
   display: flex;
   box-shadow: 0 14px 74px #00000073;
 }
+
+
+.image.home-hero-1 {
+  border: 1px solid #ffffff29;
+  border-radius: 26px;
+  max-width: 88%;
+  margin-top: 100px;
+  box-shadow: 0 14px 74px #00000073;
+}
+
+
+
+.bg-gradient-blur-circle-1 {
+  background-color: var(--secondary-3);
+  border-radius: 1000000px;
+  width: 70%;
+  min-width: 70%;
+  min-height: 70%;
+  max-height: 70%;
+  position: absolute;
+}
+
+.bg-gradient-blur-circle-1.purple {
+  background-color: #6923ff;
+}
+
+.bg-gradient-blur-circle-1.purple-2 {
+  background-color: var(--secondary-2);
+}
+
+.bg-gradient-blur-circle-1.purple-2.big {
+  width: 87%;
+  min-width: 87%;
+  min-height: 87%;
+  max-height: 87%;
+  bottom: 0;
+}
+
+.bg-gradient-blur-circle-1.pink {
+  background-color: #ff4895;
+}
+
+.bg-gradient-blur-circle-1.blue {
+  background-color: #1766ff;
+}
+
+.bg-gradient-blur-circle-2 {
+  background-color: #fe316f;
+  border-radius: 1000000px;
+  width: 70%;
+  min-width: 70%;
+  min-height: 70%;
+  max-height: 70%;
+  position: absolute;
+  bottom: 0;
+  right: 0;
+}
+
+.bg-gradient-blur-circle-2.blue {
+  background-color: #1766ff;
+  overflow: hidden;
+}
+
+.bg-gradient-blur-circle-2.blue.left {
+  right: auto;
+}
+
+.bg-gradient-blur-circle-2.blue-2 {
+  background-color: var(--secondary-4);
+}
+
+.bg-gradient-blur-circle-2.blue-2.blog {
+  z-index: 1;
+  left: 0;
+  right: auto;
+}
+
+.bg-gradient-blur-circle-2.purple {
+  background-color: #6923ff;
+}
+
+.bg-gradient-blur-circle-3 {
+  background-color: #6923ff;
+  border-radius: 1000000px;
+  width: 70%;
+  min-width: 70%;
+  min-height: 70%;
+  max-height: 70%;
+  position: absolute;
+  top: 0;
+  right: 0;
+}
+
+.bg-gradient-blur-circle-3.pink {
+  background-color: var(--secondary-1);
+}
+
+.bg-gradient-blur-circle-3.pink.big {
+  width: 87%;
+  min-width: 87%;
+  min-height: 87%;
+  max-height: 87%;
+}
+
+.bg-gradient-blur-circle-3.pink.team {
+  top: -12px;
+  right: -77px;
+}
+
+.bg-gradient-blur-circle-3.pink.top {
+  z-index: 1;
+  top: -41px;
+  right: -112px;
+}
+
+.bg-gradient-blur-circle-3.not-found {
+  z-index: 1;
+}

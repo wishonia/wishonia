@@ -3,7 +3,7 @@ import { HeroBanner } from './hero-banner'
 
 export function HeroSection() {
   return (
-    <section className="container mx-auto text-center pt-32 pb-32 px-6">
+    <section className="container mx-auto text-center pt-32 px-6">
       <HeroBanner />
       
       <h1 className="text-5xl md:text-6xl font-bold text-white mb-8">
