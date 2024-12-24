@@ -7,35 +7,35 @@ export function PillarsSection() {
   const pillars = [
     {
       icon: <Building2Icon className="w-6 h-6 text-[#ff4895]" />,
-      title: "Decentralized FDA",
+      title: "🏛️ Decentralized FDA",
       features: [
-        "Automate and decentralize trials",
-        "Standardize data from diverse sources to enable faster approvals",
-        "Reduce costs by 95% to $2 million per trial, enabling more innovations to reach patients",
-        "Enable real-time safety monitoring",
-        "Leverage AI for automated patient matching"
+        "🔄 Automate and decentralize trials",
+        "📊 Standardize data from diverse sources to enable faster approvals",
+        "💰 Reduce costs by 95% to $2 million per trial, enabling more innovations to reach patients",
+        "🔍 Enable real-time safety monitoring",
+        "🤖 Leverage AI for automated patient matching"
       ]
     },
     {
       icon: <UsersIcon className="w-6 h-6 text-[#00ffcc]" />,
-      title: "Right to Trial",
+      title: "🧑‍⚕️ Right to Trial",
       features: [
-        "Enshrine patient rights to participate in experimental treatment trials",
-        "Democratize access to cutting-edge therapies",
-        "Collect patient-reported outcomes to drive real-world evidence",
-        "Enable remote participation through telemedicine",
-        "Provide transparent success rate data"
+        "⚖️ Enshrine patient rights to participate in experimental treatment trials",
+        "🌍 Democratize access to cutting-edge therapies",
+        "📝 Collect patient-reported outcomes to drive real-world evidence",
+        "💻 Enable remote participation through telemedicine",
+        "📈 Provide transparent success rate data"
       ]
     },
     {
       icon: <CoinsIcon className="w-6 h-6 text-[#0088ff]" />,
-      title: "50/50 Health Savings Sharing",
+      title: "💎 50/50 Health Savings Sharing",
       features: [
-        "Reward manufacturers for creating cost-saving cures",
-        "Share 50% of global health savings with innovators",
-        "Create incentives that prioritize health over disease management",
-        "Enable transparent calculation of health outcomes",
-        "Automate distribution of savings-based payments"
+        "🎯 Reward manufacturers for creating cost-saving cures",
+        "🤝 Share 50% of global health savings with innovators",
+        "🎖️ Create incentives that prioritize health over disease management",
+        "📊 Enable transparent calculation of health outcomes",
+        "⚡ Automate distribution of savings-based payments"
       ]
     }
   ]
@@ -57,7 +57,7 @@ export function PillarsSection() {
         </p>
       </motion.div>
 
-      <div className="grid lg:grid-cols-3 gap-6">
+      <div className="grid lg:grid-cols-3 gap-6 mb-24">
         {pillars.map((pillar, index) => (
           <motion.div 
             key={index} 
@@ -87,8 +87,7 @@ export function PillarsSection() {
                   }}
                   className="text-neutral-400 flex items-start"
                 >
-                  <span className="text-[#00ffcc] mr-2">•</span>
-                  <span>{feature}</span>
+                  {feature}
                 </motion.li>
               ))}
             </ul>
