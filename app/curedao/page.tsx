@@ -10,7 +10,7 @@ import { TimelineSection } from '@/app/curedao/components/timeline-section'
 import { ResourcesSection } from '@/app/curedao/components/resources-section'
 import { DiagramSection } from './components/diagram-section'
 
-export default function Home() {
+export default function CureDaoHome() {
   return (
     <main className="min-h-screen bg-[#13111a] overflow-hidden">
       <NavBar />
