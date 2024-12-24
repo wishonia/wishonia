@@ -7,7 +7,7 @@ import { JoinSection } from '@/app/curedao/components/join-section'
 import { GradientBlur } from '@/app/curedao/components/gradient-blur'
 import { Footer } from '@/app/curedao/components/footer'
 
-export default function Home() {
+export default function CureDAOHomeV2() {
   return (
     <main className="min-h-screen bg-[#13111a] overflow-hidden">
       <NavBar />

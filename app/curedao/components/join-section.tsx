@@ -1,7 +1,7 @@
 'use client'
 
 import { GithubIcon, UsersIcon, Building2Icon } from 'lucide-react'
-import { BlueprintButton } from './blueprint-button'
+import { ContributeToBlueprintButton } from './contribute-to-blueprint-button'
 
 export function JoinSection() {
   const roles = [
@@ -50,7 +50,7 @@ export function JoinSection() {
           We're drafting humanity's Blueprint for a World Without Disease on GitHub. 
           Join brilliant minds across disciplines to shape the future of healthcare.
         </p>
-        <BlueprintButton />
+        <ContributeToBlueprintButton />
       </div>
 
       <div className="grid md:grid-cols-3 gap-6">

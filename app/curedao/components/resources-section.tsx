@@ -8,12 +8,12 @@ export function ResourcesSection() {
     {
       icon: <GithubIcon className="w-6 h-6 text-[#ff4895]" />,
       title: "GitHub Repository",
-      href: "#"
+      href: "https://github.com/curedao"
     },
     {
       icon: <FileTextIcon className="w-6 h-6 text-[#00ffcc]" />,
       title: "Technical Documentation",
-      href: "#"
+      href: "https://docs.dfda.earth"
     },
     {
       icon: <UsersIcon className="w-6 h-6 text-[#0088ff]" />,
