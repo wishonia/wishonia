@@ -8,12 +8,22 @@ import { JoinSection } from '@/app/curedao/components/join-section'
 import { ImpactSection } from '@/app/curedao/components/impact-section'
 import { TimelineSection } from '@/app/curedao/components/timeline-section'
 import { ResourcesSection } from '@/app/curedao/components/resources-section'
+import { DiagramSection } from './components/diagram-section'
 
 export default function Home() {
   return (
     <main className="min-h-screen bg-[#13111a] overflow-hidden">
       <NavBar />
       <MissionSection />
+
+      <div className="relative">
+        <GradientBlur 
+          className="absolute right-[10vw] w-[60vw] h-[60vh] -translate-y-1/2" 
+          variant="default"
+        />
+        <DiagramSection />
+      </div>
+      
       
       <div className="relative">
         <GradientBlur 
