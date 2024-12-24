@@ -1,6 +1,6 @@
 'use client'
 
-import { BlueprintButton } from './blueprint-button'
+import { ContributeToBlueprintButton } from './contribute-to-blueprint-button'
 
 export function MissionSection() {
   return (
@@ -18,7 +18,7 @@ export function MissionSection() {
         suffering from chronic illness.
       </p>
       
-      <BlueprintButton />
+      <ContributeToBlueprintButton />
     </section>
   )
 } 

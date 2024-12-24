@@ -1,7 +1,7 @@
 import Link from 'next/link'
 import { Twitter, Linkedin, Instagram, DiscIcon as Discord } from 'lucide-react'
-import { Button } from '@/components/ui/button'
 import { Input } from '@/components/ui/input'
+import { RainbowButton } from '@/components/ui/rainbow-button'
 
 export function Footer() {
   return (
@@ -98,11 +98,11 @@ export function Footer() {
                 placeholder="Your email address"
                 className="bg-white/5 border-white/10 text-white"
               />
-              <Button 
-                className="bg-gradient-to-r from-[#ff4895] to-[#00ffcc] text-white hover:opacity-90"
-              >
-                Subscribe
-              </Button>
+              <RainbowButton 
+                text="Subscribe"
+                tooltip="Stay up to date on the project and find out about new opportunities to reduce suffering."
+                href="/subscribe"
+              />
             </div>
             <div className="flex gap-4">
               <Link href="#" className="text-neutral-400 hover:text-[#ff4895] transition-colors">
