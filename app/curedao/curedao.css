@@ -1,0 +1,94 @@
+.text-color-gradient-rainbow-accent {
+  text-align: center;
+  -webkit-text-fill-color: transparent;
+  background-image: linear-gradient(135deg, #0af, #0af 18%, #0fa 43%, #fa0 64%, #ff3971 90%, #f0a);
+  -webkit-background-clip: text;
+  background-clip: text;
+}
+
+.cta-gradient-blur {
+  filter: blur(40px);
+  background-image: linear-gradient(to right, #4d54ffa3, #d03f90a3 64%, #ff3868a3);
+  border-radius: 22px;
+  position: absolute;
+  inset: 0%;
+}
+
+.home-hero-featured-message-wrapper {
+  float: none;
+  clear: none;
+  text-align: center;
+  margin-bottom: 37px;
+  transition: opacity .2s;
+  display: inline-block;
+  position: static;
+  inset: 0% auto auto 0%;
+}
+
+.home-hero-featured-message-blur {
+  filter: blur(12px);
+  background-image: linear-gradient(to right, #fd66cb, #9f6eff 19%, #0af 55%, #41d09f 80%, #0fa);
+  border-radius: 10000000px;
+  position: absolute;
+  inset: 0%;
+}
+
+.home-hero-featured-message-content {
+  justify-content: center;
+  align-items: center;
+  display: flex
+;
+  position: relative;
+}
+
+.home-hero-featured-message-link {
+  z-index: 1;
+  background-color: var(--neutral-800);
+  letter-spacing: .02em;
+  border: 1px solid #ffffff36;
+  border-radius: 100000px;
+  align-items: center;
+  padding: 8px 10px 8px 15px;
+  font-size: 16px;
+  line-height: 1.125em;
+  text-decoration: none;
+  display: flex
+;
+  position: relative;
+}
+
+.home-hero-featured-message-tag {
+  border: 1px solid var(--neutral-800);
+  background-color: var(--secondary-5);
+  letter-spacing: .04em;
+  text-transform: uppercase;
+  border-radius: 100000px;
+  margin-right: 10px;
+  padding: 10px 14px 10px 10px;
+  font-size: 14px;
+  font-weight: 700;
+  line-height: 1.286em;
+}
+
+.link-underline {
+  background-image: linear-gradient(to right, #ffc36f, var(--secondary-1) 26%, var(--secondary-2) 50%, var(--secondary-3) 75%, #75ff8a);
+  width: 100%;
+  min-height: 2px;
+}
+
+.nav-link-tag-blur {
+  filter: blur(6px);
+  background-image: linear-gradient(270deg, #ff386880, #4d54ff80);
+  border-radius: 10000000px;
+  position: absolute;
+  inset: 0%;
+}
+
+.card.about-hero-achievement {
+  background-color: #1d1a27a3;
+  border: 1px solid #ffffff29;
+  justify-content: center;
+  padding: 60px 35px;
+  display: flex;
+  box-shadow: 0 14px 74px #00000073;
+}
