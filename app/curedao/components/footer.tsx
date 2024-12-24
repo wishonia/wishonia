@@ -5,7 +5,7 @@ import { Input } from '@/components/ui/input'
 
 export function Footer() {
   return (
-    <footer className="bg-[#13111a] pt-24 pb-8">
+    <footer className="bg-[#13111a] pt-4 pb-8">
       <div className="container mx-auto px-6">
         <div className="grid grid-cols-1 md:grid-cols-3 gap-12 mb-16">
           {/* Links Column */}
