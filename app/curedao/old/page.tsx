@@ -1,26 +1,26 @@
 import { NavBar } from '@/app/curedao/components/nav-bar'
+import { HeroSection } from '@/app/curedao/components/hero-section'
+import { FailedInnovationSection } from '@/app/curedao/components/failed-innovation-section'
+import { OpenSourceSection } from '@/app/curedao/components/open-source-section'
+import { DemocratizeSection } from '@/app/curedao/components/democratize-section'
+import { CollaborationSection } from '@/app/curedao/components/collaboration-section'
+import { CollaboratorsSection } from '@/app/curedao/components/collaborators-section'
+import { DiagramSection } from '@/app/curedao/components/diagram-section'
 import { GradientBlur } from '@/app/curedao/components/gradient-blur'
 import { Footer } from '@/app/curedao/components/footer'
-import { MissionSection } from '@/app/curedao/components/mission-section'
-import { ChallengeSection } from '@/app/curedao/components/challenge-section'
-import { SolutionSection } from '@/app/curedao/components/solution-section'
-import { JoinSection } from '@/app/curedao/components/join-section'
-import { ImpactSection } from '@/app/curedao/components/impact-section'
-import { TimelineSection } from '@/app/curedao/components/timeline-section'
-import { ResourcesSection } from '@/app/curedao/components/resources-section'
 
 export default function Home() {
   return (
     <main className="min-h-screen bg-[#13111a] overflow-hidden">
       <NavBar />
-      <MissionSection />
-      
+      <HeroSection />
+
       <div className="relative">
         <GradientBlur 
           className="absolute right-[10vw] w-[60vw] h-[60vh] -translate-y-1/2" 
           variant="default"
         />
-        <ChallengeSection />
+        <DiagramSection />
       </div>
       
       <div className="relative">
@@ -29,7 +29,7 @@ export default function Home() {
           variant="blue-purple"
           rotationDelay="-7s"
         />
-        <SolutionSection />
+        <FailedInnovationSection />
       </div>
       
       <div className="relative">
@@ -38,7 +38,7 @@ export default function Home() {
           variant="default"
           rotationDelay="-12s"
         />
-        <JoinSection />
+        <OpenSourceSection />
       </div>
       
       <div className="relative">
@@ -47,7 +47,7 @@ export default function Home() {
           variant="blue-purple"
           rotationDelay="-18s"
         />
-        <ImpactSection />
+        <DemocratizeSection />
       </div>
       
       <div className="relative">
@@ -56,7 +56,7 @@ export default function Home() {
           variant="default"
           rotationDelay="-24s"
         />
-        <TimelineSection />
+        <CollaborationSection />
       </div>
       
       <div className="relative">
@@ -65,7 +65,7 @@ export default function Home() {
           variant="blue-purple"
           rotationDelay="-30s"
         />
-        <ResourcesSection />
+        <CollaboratorsSection />
       </div>
 
       <Footer />
