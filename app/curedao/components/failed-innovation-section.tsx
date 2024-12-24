@@ -1,4 +1,5 @@
 import { Phone, TrendingUp } from 'lucide-react'
+import Image from 'next/image'
 
 export function FailedInnovationSection() {
   return (
@@ -42,48 +43,14 @@ export function FailedInnovationSection() {
         <div className="relative">
           <div className="absolute inset-0 bg-gradient-to-br from-[#ff4895] via-[#6e4fe9] to-[#00ffcc] rounded-3xl opacity-30 blur-xl"></div>
           <div className="relative bg-[#1d1a27] rounded-3xl p-8 border border-white/10">
-            <div className="space-y-6">
-              <div className="flex justify-between items-start">
-                <div className="space-y-1">
-                  <div className="text-[#ff4895] text-xl font-semibold">Life Expectancy</div>
-                  <div className="text-neutral-400">is Declining</div>
-                </div>
-                <div className="space-y-1 text-right">
-                  <div className="text-[#00ffcc] text-xl font-semibold">Costs are</div>
-                  <div className="text-[#00ffcc]">Actually Increasing</div>
-                </div>
-              </div>
-              
-              <div className="aspect-[4/3] w-full relative">
-                <svg className="w-full h-full" viewBox="0 0 400 300">
-                  {/* Y-axis labels */}
-                  <text x="10" y="40" className="fill-neutral-400 text-xs">$8,500</text>
-                  <text x="10" y="280" className="fill-neutral-400 text-xs">$3,500</text>
-                  
-                  {/* Right Y-axis labels */}
-                  <text x="370" y="40" className="fill-neutral-400 text-xs">79.5</text>
-                  <text x="370" y="280" className="fill-neutral-400 text-xs">76.5</text>
-                  
-                  {/* Life expectancy line (red) */}
-                  <path
-                    d="M50,150 Q200,100 350,180"
-                    fill="none"
-                    stroke="#ff4895"
-                    strokeWidth="3"
-                  />
-                  
-                  {/* Cost line (green) */}
-                  <path
-                    d="M50,250 Q200,150 350,50"
-                    fill="none"
-                    stroke="#00ffcc"
-                    strokeWidth="3"
-                  />
-                  
-                  {/* X-axis labels */}
-                  <text x="50" y="295" className="fill-neutral-400 text-xs">2000</text>
-                  <text x="350" y="295" className="fill-neutral-400 text-xs">2017</text>
-                </svg>
+            <div className="">
+              <div className="aspect-[4/4] w-full relative">
+                <Image
+                  src="/globalSolutions/dfda/img/life-expectancy-cost-chart.jpg"
+                  alt="Graph showing declining life expectancy and increasing healthcare costs from 2000 to 2017"
+                  fill
+                  className="object-contain"
+                />
               </div>
             </div>
           </div>
