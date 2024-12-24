@@ -1,7 +1,7 @@
 'use client'
 
 import { GithubIcon, UsersIcon, Building2Icon } from 'lucide-react'
-import { Button } from '@/components/ui/button'
+import { BlueprintButton } from './blueprint-button'
 
 export function JoinSection() {
   const roles = [
@@ -50,13 +50,7 @@ export function JoinSection() {
           We're drafting humanity's Blueprint for a World Without Disease on GitHub. 
           Join brilliant minds across disciplines to shape the future of healthcare.
         </p>
-        <Button 
-          className="relative px-8 py-3 text-lg text-white border-transparent bg-transparent hover:bg-transparent group"
-        >
-          <span className="relative z-10">Contribute to the Blueprint</span>
-          <div className="absolute inset-0 rounded-full bg-gradient-to-r from-[#ff4895] via-[#00ffcc] to-[#ff8866] opacity-70 group-hover:opacity-100 transition-opacity"></div>
-          <div className="absolute inset-[1px] rounded-full bg-[#13111a] z-0"></div>
-        </Button>
+        <BlueprintButton />
       </div>
 
       <div className="grid md:grid-cols-3 gap-6">
