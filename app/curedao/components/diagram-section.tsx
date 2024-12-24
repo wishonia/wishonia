@@ -2,8 +2,8 @@ import Image from 'next/image'
 
 export function DiagramSection() {
   return (
-    <div className="container-default home-hero w-container">
-      <div className="home-hero-images-wrapper">
+    <div className="container-default home-hero w-container flex justify-center items-center">
+      <div className="home-hero-images-wrapper flex justify-center items-center">
         <Image
           src="/globalSolutions/dfda/img/platform-diagram-dark-skinny.svg"
           alt="CureDAO Framework Diagram"

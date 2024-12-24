@@ -1,35 +1,18 @@
 import { Lock, Rocket } from 'lucide-react'
+import Image from 'next/image'
 
 export function OpenSourceSection() {
   return (
     <section className="container mx-auto px-6 py-24">
       <div className="grid lg:grid-cols-2 gap-12 items-center">
         <div className="relative">
-          <div className="absolute inset-0 bg-gradient-to-br from-[#ff4895] via-[#6e4fe9] to-[#00ffcc] rounded-3xl opacity-30 blur-xl"></div>
-          <div className="relative bg-[#1d1a27] rounded-3xl p-8 border border-white/10">
-            <div className="grid grid-cols-10 gap-2 aspect-square p-4">
-              {/* Vertical green asterisks */}
-              {Array.from({ length: 8 }).map((_, i) => (
-                <div key={`v-${i}`} className="w-full aspect-square bg-[#00ffcc] rounded-md"></div>
-              ))}
-              
-              {/* Horizontal red asterisks */}
-              {Array.from({ length: 9 }).map((_, i) => (
-                <div key={`h-${i}`} className="w-full aspect-square bg-[#ff4895] rounded-md"></div>
-              ))}
-              
-              {/* Corner green asterisk */}
-              <div className="w-full aspect-square bg-[#00ffcc] rounded-md"></div>
-              
-              {/* Labels */}
-              <div className="absolute top-4 left-4 text-white font-bold">
-                Open-Source Vertical<br />Innovation
-              </div>
-              <div className="absolute bottom-16 left-4 text-white font-bold">
-                Closed-Source<br />Duplication of Effort
-              </div>
-            </div>
-          </div>
+          <Image
+            src="/globalSolutions/dfda/img/vertical-innovation.jpg"
+            alt="Vertical Innovation"
+            width={500}
+            height={500}
+            className="w-full h-auto"
+            />
         </div>
 
         <div className="space-y-8">
