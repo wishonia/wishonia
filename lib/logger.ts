@@ -1,14 +1,40 @@
 import * as Sentry from '@sentry/nextjs'
 
 type LogLevel = 'debug' | 'info' | 'warn' | 'error'
+type SeverityLevel = 'fatal' | 'error' | 'warning' | 'log' | 'info' | 'debug'
 
 interface LoggerOptions {
   metadata?: any
   error?: Error | unknown
+  user?: {
+    id?: string
+    email?: string
+    username?: string
+  }
+  // For custom error grouping
+  fingerprint?: string[]
+  // For error sampling
+  sampleRate?: number
+  // For tracking the operation/transaction
+  transaction?: string
+  severity?: SeverityLevel
 }
 
 class Logger {
   private isDevelopment = process.env.NODE_ENV !== 'production'
+  
+  // Default sample rates by environment
+  private readonly sampleRates = {
+    production: 0.1, // 10% of errors
+    development: 1.0, // All errors
+    test: 0.0 // No errors
+  }
+
+  private shouldSampleError(sampleRate?: number): boolean {
+    const defaultRate = this.sampleRates[process.env.NODE_ENV as keyof typeof this.sampleRates] || 1.0
+    const finalRate = sampleRate ?? defaultRate
+    return Math.random() < finalRate
+  }
 
   private formatMessage(level: LogLevel, message: string, options?: LoggerOptions | unknown) {
     const normalizedOptions: LoggerOptions = 
@@ -61,11 +87,56 @@ class Logger {
       const error = options instanceof Error ? options : 
         (options as LoggerOptions)?.error
       
-      if (error) {
+      if (error && this.shouldSampleError((options as LoggerOptions)?.sampleRate)) {
         const metadata = (options as LoggerOptions)?.metadata || {}
-        Sentry.captureException(error, {
-          extra: { message, ...metadata }
-        })
+        const user = (options as LoggerOptions)?.user
+        const fingerprint = (options as LoggerOptions)?.fingerprint
+        const transaction = (options as LoggerOptions)?.transaction
+        const severity = (options as LoggerOptions)?.severity || 'error'
+
+        // Add breadcrumb for error tracking
+        Sentry.addBreadcrumb({
+          category: 'logger',
+          message,
+          level: severity,
+          data: metadata
+        });
+
+        Sentry.withScope((scope) => {
+          scope.setLevel(severity);
+          scope.setContext('metadata', metadata);
+          scope.setTag('logger.message', message);
+          scope.setTag('environment', process.env.NODE_ENV || 'unknown');
+          
+          if (user) {
+            scope.setUser(user);
+          }
+
+          if (fingerprint) {
+            scope.setFingerprint(fingerprint);
+          }
+
+          if (transaction) {
+            scope.setTag('transaction', transaction);
+          }
+          
+          // Add timestamp for better error tracking
+          scope.setContext('timestamp', {
+            iso: new Date().toISOString(),
+            unix: Date.now()
+          });
+
+          // Add runtime context
+          scope.setContext('runtime', {
+            node: process.version,
+            env: process.env.NODE_ENV,
+            memory: process.memoryUsage()
+          });
+
+          Sentry.captureException(error, {
+            extra: { message, ...metadata }
+          });
+        });
       }
     }
   }
