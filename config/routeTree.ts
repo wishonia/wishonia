@@ -553,9 +553,9 @@ export const routeTree = {
         }
       }
     },
-    "phone-friend": {
-      "name": "phone-friend",
-      "path": "/phone-friend",
+    "call-scheduler": {
+      "name": "call-scheduler",
+      "path": "/call-scheduler",
       "isDynamic": false,
       "children": {}
     },
