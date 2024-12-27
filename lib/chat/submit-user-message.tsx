@@ -12,7 +12,6 @@ import {
   BotCard,
   BotMessage,
   SpinnerMessage,
-  UserMessage,
 } from "@/components/assistant/Message"
 import { Profile } from "@/components/assistant/Profile"
 import { ProfileList } from "@/components/assistant/ProfileList"
