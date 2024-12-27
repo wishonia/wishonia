@@ -8,7 +8,6 @@ import {
 } from "@prisma/client"
 import { User } from "next-auth"
 
-import { Dialog, DialogContent, DialogTrigger } from "@/components/ui/dialog"
 import { Input } from "@/components/ui/input"
 import { AnonymousVoteButton } from "@/components/anonymous-vote-button"
 import BarChartGeneral from "@/components/bar-chart-general"

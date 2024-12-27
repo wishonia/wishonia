@@ -1,4 +1,4 @@
-import { PetitionSignature, User } from "@prisma/client"
+import { PetitionSignature } from "@prisma/client"
 
 type SignatureWithUser = PetitionSignature & {
   user: {

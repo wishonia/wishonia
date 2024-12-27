@@ -7,7 +7,6 @@ import {
   SearXNGResult,
   SearchResultItem
 } from '@/lib/types/index'
-import { Agent } from 'http'
 import { Redis } from '@upstash/redis'
 import { createClient } from 'redis'
 

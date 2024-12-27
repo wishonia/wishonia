@@ -3,7 +3,6 @@
 import React from 'react'
 import { Check } from 'lucide-react'
 import { Card } from '@/components/ui/card'
-import { IconLogo } from '@/components/ui/icons'
 
 interface CopilotDisplayProps {
   content: string

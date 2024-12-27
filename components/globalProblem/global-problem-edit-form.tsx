@@ -3,7 +3,6 @@
 import * as React from "react"
 import { useEffect, useState } from "react"
 import { useRouter } from "next/navigation"
-import { CopilotTextarea } from "@copilotkit/react-textarea"
 import { zodResolver } from "@hookform/resolvers/zod"
 import { GlobalProblem } from "@prisma/client"
 import { useForm } from "react-hook-form"

@@ -1,13 +1,11 @@
 "use client"
 
-import Image from "next/image"
 import { useRouter } from "next/navigation"
 import { NavItem } from "@/types"
 import { Inset } from "@radix-ui/themes"
 
 import {
   Card,
-  CardContent,
   CardDescription,
   CardHeader,
   CardTitle,
