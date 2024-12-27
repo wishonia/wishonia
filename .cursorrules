@@ -6,6 +6,7 @@ version = "15.0"
 router = "app"
 style = "tailwind"
 typescript = true
+package_manager = "pnpm"
 
 # Define the project's architecture and conventions
 [architecture]
