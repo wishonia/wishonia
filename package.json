@@ -258,6 +258,8 @@
     "@types/turndown": "^5.0.4",
     "@types/uuid": "^9.0.8",
     "@types/yargs": "^17.0.24",
+    "@typescript-eslint/eslint-plugin": "^8.18.2",
+    "@typescript-eslint/parser": "^8.18.2",
     "checkly": "latest",
     "cost-of-modules": "^1.0.1",
     "cross-env": "^7.0.3",
