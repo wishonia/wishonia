@@ -33,8 +33,15 @@ IMPORTANT: Server Components (pages)
 - Import client components as needed
 
 Auth Usage:
-import { requireAuth } from "@/lib/auth"
-const session = await requireAuth(`/my-page`)
+In the page.tsx file, import the session from next-auth/next and redirect to the signin page if the user is not authenticated.
+import { getServerSession } from "next-auth/next"
+import { authOptions } from "@/lib/auth"
+  const session = await getServerSession(authOptions)
+
+  if (!session?.user) {
+    redirect(`/signin?callbackUrl=/my-page`)
+  }
+
 """
 
 client = """
