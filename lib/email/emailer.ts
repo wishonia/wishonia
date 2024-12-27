@@ -15,14 +15,13 @@ interface ResendErrorResponse {
 }
 
 const resend = new Resend(process.env.RESEND_API_KEY)
-const log = logger.forService("email")
 
 async function sendWithRetry(
   params: EmailParams,
   attempt = 1
 ): Promise<EmailResult> {
   try {
-    log.debug("Attempting to send email", {
+    logger.debug("Attempting to send email", {
       metadata: {
         to: params.to,
         subject: params.subject,
@@ -38,7 +37,7 @@ async function sendWithRetry(
     })
 
     if (error) {
-      log.error("Resend API error", {
+      logger.error("Resend API error", {
         error: {
           name: error.name,
           message: error.message,
@@ -54,7 +53,7 @@ async function sendWithRetry(
       throw EmailError.fromResendError(error)
     }
 
-    log.info("Email sent successfully", {
+    logger.info("Email sent successfully", {
       metadata: {
         emailId: data?.id,
         to: params.to,
@@ -73,7 +72,7 @@ async function sendWithRetry(
       error instanceof EmailError ? error : EmailError.fromResendError(error)
     const solution = getSolutionForError(emailError)
 
-    log.error("Email sending failed", {
+    logger.error("Email sending failed", {
       error: {
         code: emailError.code,
         message: emailError.message,
@@ -115,7 +114,7 @@ async function sendWithRetry(
 
     // Retry other errors
     if (attempt < EMAIL_CONFIG.retries.max) {
-      log.warn("Retrying email send...", {
+      logger.warn("Retrying email send...", {
         metadata: {
           attempt,
           nextAttemptIn: `${EMAIL_CONFIG.retries.backoff * attempt}ms`,
