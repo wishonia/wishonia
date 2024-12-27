@@ -6,8 +6,6 @@ import { getPetitionSummaryEmail } from "@/lib/emails/summary-notification"
 import { logger } from "@/lib/logger"
 import { prisma } from "@/lib/prisma"
 
-const log = logger.forService("petition-notifications")
-
 type NotificationType = "comment" | "milestone" | "update" | "signature"
 type PeriodType = "INSTANT" | "DAILY" | "WEEKLY"
 
@@ -168,7 +166,7 @@ async function sendNotificationEmail(
       })
     }
 
-    log.info(`Sent ${notificationType} notification`, {
+    logger.info(`Sent ${notificationType} notification`, {
       metadata: {
         userId: follower.user.id,
         petitionId: follower.petitionId,
@@ -176,7 +174,7 @@ async function sendNotificationEmail(
       },
     })
   } catch (error) {
-    log.error(`Failed to send ${notificationType} notification`, {
+    logger.error(`Failed to send ${notificationType} notification`, {
       error:
         error instanceof Error
           ? {
