@@ -5,7 +5,6 @@ import Link from "next/link"
 import {
   GithubLogo,
   Globe,
-  LinkedinLogo,
   LinkSimple,
   SignIn,
 } from "@phosphor-icons/react"

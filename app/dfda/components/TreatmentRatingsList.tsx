@@ -3,7 +3,6 @@
 import { useState } from 'react'
 import { Select, SelectTrigger, SelectValue, SelectContent, SelectItem } from "@/components/ui/select"
 import { Card, CardContent } from "@/components/ui/card"
-import Image from 'next/image'
 import Link from 'next/link'
 import { DfdaCondition, DfdaConditionTreatment } from "@prisma/client";
 import { Badge } from "@/components/ui/badge";

@@ -16,7 +16,6 @@ import { runAsyncFnWithoutBlocking, sleep } from "../utils"
 import { AI } from "./actions"
 import {
   checkRateLimit,
-  getDir,
   getReadme,
   searchRepositories,
 } from "./github/github"

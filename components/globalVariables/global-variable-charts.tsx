@@ -21,7 +21,6 @@ import {
   CardTitle,
 } from "@/components/ui/card"
 
-import { Icons } from "../icons"
 
 interface GlobalVariableChartsProps
   extends React.HTMLAttributes<HTMLFormElement> {

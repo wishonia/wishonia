@@ -10,11 +10,11 @@ interface PollProps {
   user?: User
 }
 export const AnonymousVoteButton: React.FC<PollProps> = ({ user }) => {
+  const [showModal, setShowModal] = useState(false)
+
   if (user) {
     return null
   }
-
-  const [showModal, setShowModal] = useState(false)
 
   const handleVoteButtonClick = () => {
     const currentUrl = window.location.href

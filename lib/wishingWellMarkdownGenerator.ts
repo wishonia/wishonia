@@ -5,9 +5,7 @@ import slugify from "slugify"
 
 import {
   generateAndUploadFeaturedImageJpg,
-  generateFeaturedImagePngBuffer,
 } from "@/lib/imageGenerator"
-import { uploadImageToVercel } from "@/lib/imageUploader"
 import { textCompletion } from "@/lib/llm"
 import { saveMarkdownPost } from "@/lib/markdownGenerator"
 import { toTitleCase } from "@/lib/stringHelpers"
