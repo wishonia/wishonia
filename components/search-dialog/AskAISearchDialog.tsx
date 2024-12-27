@@ -6,7 +6,6 @@ import {
   CornerDownLeft,
   Frown,
   Loader,
-  Search,
   Sparkle,
   User,
   Wand,

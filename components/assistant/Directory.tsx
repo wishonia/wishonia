@@ -21,6 +21,8 @@ import AssistantDisplay from "../AssistantDisplay"
 import { Button } from "../ui/button"
 
 export default function Directory({ props: directory }: { props: Dir[] }) {
+  const userId = useUserIdClient()
+
   return (
     <AssistantDisplay>
       <Accordion type="single" collapsible className="">
@@ -52,7 +54,7 @@ export default function Directory({ props: directory }: { props: Dir[] }) {
                     <AccordionContent>
                       <DropdownFileContent
                         url={dir.url}
-                        userId={useUserIdClient()}
+                        userId={userId}
                       />
                     </AccordionContent>
                   </AccordionItem>
@@ -69,7 +71,7 @@ export default function Directory({ props: directory }: { props: Dir[] }) {
                       </span>
                     </AccordionTrigger>
                     <AccordionContent>
-                      <DropdownContent url={dir._links.self} />
+                      <DropdownContent url={dir._links.self} userId={userId} />
                     </AccordionContent>
                   </AccordionItem>
                 )
@@ -80,7 +82,7 @@ export default function Directory({ props: directory }: { props: Dir[] }) {
   )
 }
 
-function DropdownContent({ url }: { url: string }) {
+function DropdownContent({ url, userId }: { url: string; userId?: string }) {
   const data = useGetDirectoryContent(url)
   if (!data) {
     return null
@@ -121,7 +123,7 @@ function DropdownContent({ url }: { url: string }) {
                 <AccordionContent>
                   <DropdownFileContent
                     url={item.url}
-                    userId={useUserIdClient()}
+                    userId={userId}
                   />
                 </AccordionContent>
               </AccordionItem>
@@ -134,7 +136,7 @@ function DropdownContent({ url }: { url: string }) {
                   </span>
                 </AccordionTrigger>
                 <AccordionContent>
-                  <DropdownContent url={item._links.self} />
+                  <DropdownContent url={item._links.self} userId={userId} />
                 </AccordionContent>
               </AccordionItem>
             )

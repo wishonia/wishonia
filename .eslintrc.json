@@ -1,0 +1,23 @@
+{
+  "extends": [
+    "next/core-web-vitals"
+  ],
+  "parser": "@typescript-eslint/parser",
+  "plugins": ["@typescript-eslint", "unused-imports"],
+  "rules": {
+    "@typescript-eslint/no-unused-vars": "off",
+    "no-unused-vars": "off",
+    "unused-imports/no-unused-imports": "error",
+    "unused-imports/no-unused-vars": "off",
+    
+    "@next/next/no-img-element": "off",
+    "react/no-unescaped-entities": "off",
+    "@next/next/no-async-client-component": "off",
+    "react-hooks/exhaustive-deps": "off",
+    "@next/next/inline-script-id": "off",
+    "@next/next/no-sync-scripts": "off",
+    "jsx-a11y/alt-text": "off",
+    
+    "react-hooks/rules-of-hooks": "error"
+  }
+}

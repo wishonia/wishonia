@@ -7,22 +7,22 @@ export function ChallengeSection() {
   const challenges = [
     {
       icon: <DollarSignIcon className="w-6 h-6 text-[#ff4895]" />,
-      title: "Too Fucking Expensive",
+      title: "Too Expensive!",
       description: "Clinical trials cost $56M on average, blocking research into thousands of promising treatments"
     },
     {
       icon: <BanIcon className="w-6 h-6 text-[#00ffcc]" />,
-      title: "Too Fucking Restrictive",
+      title: "Too Restrictive!",
       description: "97% of patients are excluded from participating in trials for the most promising new treatments"
     },
     {
       icon: <PillIcon className="w-6 h-6 text-[#0088ff]" />,
-      title: "Mo' Disease, Mo' Money",
+      title: "Mo' Disease 👉 Mo' Money",
       description: "Companies make way more money from managing chronic diseases than curing them"
     },
     {
       icon: <ClockIcon className="w-6 h-6 text-[#ff8866]" />,
-      title: "Too Fucking Slow",
+      title: "Too Slow!",
       description: "Bureaucracy delays life-saving treatments by 7-12 years while patients suffer and die"
     }
   ]
@@ -37,7 +37,7 @@ export function ChallengeSection() {
         className="text-center max-w-3xl mx-auto mb-16"
       >
         <h2 className="text-4xl md:text-5xl font-bold text-white mb-6">
-          The current system fucking sucks
+          The current system sucks
         </h2>
         <p className="text-neutral-400">
           Over 2 billion people are unnecessarily suffering and dying because we continue to accept a system 
