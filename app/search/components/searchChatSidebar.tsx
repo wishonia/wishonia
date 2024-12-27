@@ -1,5 +1,4 @@
 import SearchChatHistoryContainer from './search-chat-history-container'
-import {SearchChatHistoryList} from "@/app/search/components/search-chat-history-list";
 
 export async function SearchChatSidebar() {
   return (

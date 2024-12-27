@@ -1,7 +1,7 @@
 "use client"
 
 import { useState } from "react"
-import { Bell, PlusCircle, Upload, HelpCircle, Minus, X } from "lucide-react"
+import { Bell, PlusCircle, Upload, HelpCircle, X } from "lucide-react"
 import Link from "next/link"
 import { cn } from "@/lib/utils"
 

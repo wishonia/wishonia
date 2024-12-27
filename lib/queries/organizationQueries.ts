@@ -6,7 +6,6 @@ import { getModel } from '@/lib/utils/modelUtils'
 import { 
   CompanySize, 
   CompanyType, 
-  ExpertiseLevel, 
   FocusLevel 
 } from '@prisma/client'
 

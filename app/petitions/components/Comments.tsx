@@ -6,7 +6,7 @@ import { LoginPromptButton } from '@/components/LoginPromptButton'
 import { addComment } from '../petitionActions'
 import { Button } from '@/components/ui/button'
 import { Textarea } from '@/components/ui/textarea'
-import { PetitionComment, User } from "@prisma/client"
+import { PetitionComment } from "@prisma/client"
 
 type CommentWithUser = PetitionComment & {
   user: {
