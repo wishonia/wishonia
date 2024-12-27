@@ -14,14 +14,21 @@ usage = """
 import { logger } from '@/lib/logger'
 
 ✅ DO:
-- logger.info(message, { metadata })
-- logger.error(message, { error })
-- logger.warn(message, { metadata })
-- logger.debug(message, { metadata })
+- Regular logs:
+  logger.info('Operation completed')
+  logger.debug('Debug details', { metadata: { key: 'value' } })
+  logger.warn('Warning message', { metadata: { reason: 'why' } })
+
+- Error logs (auto-sent to Sentry):
+  logger.error('Operation failed', { 
+    error: err,
+    metadata: { operation: 'signup' }
+  })
 
 ❌ DON'T:
-- Use console.log/error
-- Log sensitive data
+- Use console.log/warn/error directly
+- Log sensitive data (passwords, tokens)
+- Create new logger instances
 """
 
 # Define the project's architecture and conventions
