@@ -6,8 +6,6 @@ import {
   sendWeeklySummaries,
 } from "@/lib/notifications/petition-notifications"
 
-const log = logger.forService("cron-petition-summaries")
-
 export async function GET(request: NextRequest) {
   const cronSecret = request.headers.get("x-cron-secret")
   if (process.env.CRON_SECRET && cronSecret !== process.env.CRON_SECRET) {
@@ -20,7 +18,7 @@ export async function GET(request: NextRequest) {
   }
 
   try {
-    log.info(`Starting ${type} petition summary notifications`)
+    logger.info(`Starting ${type} petition summary notifications`)
 
     if (type === "daily") {
       await sendDailySummaries()
@@ -28,11 +26,11 @@ export async function GET(request: NextRequest) {
       await sendWeeklySummaries()
     }
 
-    log.info(`Completed ${type} petition summary notifications`)
+    logger.info(`Completed ${type} petition summary notifications`)
 
     return new Response("OK", { status: 200 })
   } catch (error) {
-    log.error("Failed to send petition summaries", {
+    logger.error("Failed to send petition summaries", {
       error:
         error instanceof Error
           ? {

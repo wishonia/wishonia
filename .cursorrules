@@ -8,6 +8,22 @@ style = "tailwind"
 typescript = true
 package_manager = "pnpm"
 
+# Logging guidelines
+[logging]
+usage = """
+import { logger } from '@/lib/logger'
+
+✅ DO:
+- logger.info(message, { metadata })
+- logger.error(message, { error })
+- logger.warn(message, { metadata })
+- logger.debug(message, { metadata })
+
+❌ DON'T:
+- Use console.log/error
+- Log sensitive data
+"""
+
 # Define the project's architecture and conventions
 [architecture]
 server_components = [
