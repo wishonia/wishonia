@@ -2,7 +2,6 @@
 
 import { revalidatePath } from "next/cache"
 import { QueryCache } from "@tanstack/react-query"
-import { Message } from "ai"
 import { prisma } from "@/lib/db"
 import { getCurrentUser } from "@/lib/session"
 import type { Chat, ChatMessage, Agent } from "@prisma/client"

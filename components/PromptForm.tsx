@@ -4,7 +4,6 @@ import * as React from "react"
 import {
   ArrowElbowDownLeft,
   BookBookmark,
-  Code,
   MagicWand,
   Plus,
   Sparkle,

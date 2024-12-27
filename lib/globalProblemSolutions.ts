@@ -1,7 +1,6 @@
 import {
   GlobalProblem,
   GlobalProblemSolution,
-  GlobalProblemSolutionPairAllocation,
 } from "@prisma/client"
 
 import { prisma } from "@/lib/db"

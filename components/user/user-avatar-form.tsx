@@ -4,7 +4,7 @@ import { User } from "@prisma/client"
 import { AvatarProps } from "@radix-ui/react-avatar"
 import axios from "axios" // Assuming you're using axios for HTTP requests
 
-import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar"
+import { Avatar, AvatarImage } from "@/components/ui/avatar"
 
 interface UserAvatarFormProps extends AvatarProps {
   user: Pick<User, "image" | "name">

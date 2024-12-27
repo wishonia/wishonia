@@ -17,10 +17,8 @@ import { ExtendedUser } from '@/types/auth';
 import { PollRandomGlobalProblemSolutions } from '../poll-random-global-problem-solutions';
 import { GlobalProblemRenderer } from './GlobalProblemRenderer';
 import { Badge } from '@/components/ui/badge';
-import { 
-  getGlobalProblemRelationships,
-  type GlobalProblemRelationships
-} from '@/lib/queries/globalProblemQueries'
+
+
 import { GlobalProblemOrganizationsList } from './GlobalProblemOrganizationsList'
 
 interface GlobalProblemDashboardProps {
