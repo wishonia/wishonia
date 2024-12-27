@@ -8,6 +8,33 @@ style = "tailwind"
 typescript = true
 package_manager = "pnpm"
 
+# Logging guidelines
+[logging]
+usage = """
+import { logger } from '@/lib/logger'
+
+✅ DO:
+- Simple logs:
+  logger.info('Operation completed')
+  logger.debug('Debug details', { userId: 123, action: 'signup' })
+
+- Error logs (auto-sent to Sentry):
+  logger.error('Operation failed', error)
+  logger.error('Operation failed', {
+    error,
+    metadata: { operation: 'signup' }
+  })
+
+- Structured data:
+  logger.info('Search results', { results, count, query })
+  logger.warn('Rate limit', rateLimitData)
+
+❌ DON'T:
+- Use console.log/warn/error directly
+- Log sensitive data (passwords, tokens)
+- Create new logger instances
+"""
+
 # Define the project's architecture and conventions
 [architecture]
 server_components = [
