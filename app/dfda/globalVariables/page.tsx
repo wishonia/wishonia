@@ -3,7 +3,6 @@ import { redirect } from "next/navigation"
 
 import { authOptions } from "@/lib/auth"
 import { getCurrentUser } from "@/lib/session"
-import { GenericVariableAddButton } from "@/components/genericVariables/generic-variable-add-button"
 import { GlobalVariableSearch } from "@/components/globalVariables/global-variable-search"
 import { Shell } from "@/components/layout/shell"
 import { DashboardHeader } from "@/components/pages/dashboard/dashboard-header"

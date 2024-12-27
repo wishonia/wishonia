@@ -1,4 +1,3 @@
-import { GithubLogo } from "@phosphor-icons/react/dist/ssr"
 
 export function OgImage({ title, description, url, image }: any) {
   return (

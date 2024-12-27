@@ -1,11 +1,12 @@
 import React from "react"
 import { Metadata } from "next"
-import { notFound } from "next/navigation"
+import { notFound, redirect } from "next/navigation"
 
 import { getAgent } from "@/lib/api/agents"
-import {  requireAuth } from "@/lib/auth"
+import {  authOptions } from "@/lib/auth"
 import AgentForm from "@/components/agents/agent-form"
 import { Shell } from "@/components/layout/shell"
+import { getServerSession } from "next-auth"
 
 export const metadata: Metadata = {
   title: "Edit Agent",
@@ -16,7 +17,11 @@ interface AgentEditProps {
 }
 
 export default async function EditAgentPage({ params }: AgentEditProps) {
-  await requireAuth(`/agents/${params.agentId}/edit`)
+  const session = await getServerSession(authOptions)
+
+  if (!session?.user) {
+    redirect(`/signin?callbackUrl=${encodeURIComponent(`/agents/${params.agentId}/edit`)}`)
+  }
 
   const agent = await getAgent(params.agentId)
 

@@ -24,6 +24,8 @@ interface Env {
   EMAIL_FROM: string
   DFDA_CLIENT_ID: string
   DFDA_CLIENT_SECRET: string
+  STRIPE_SECRET_KEY: string
+  STRIPE_WEBHOOK_SECRET: string
 }
 
 declare module "@t3-oss/env-nextjs" {

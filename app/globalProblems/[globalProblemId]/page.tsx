@@ -3,10 +3,7 @@ import { notFound } from "next/navigation"
 
 import { getGlobalProblem } from "@/lib/api/globalProblems"
 import { getCurrentUser } from "@/lib/session"
-import { GlobalProblemSolutionsList } from "@/components/global-problem-solutions-list"
 import { Shell } from "@/components/layout/shell"
-import { GlobalProblemRenderer } from "@/components/globalProblem/GlobalProblemRenderer"
-import { PollRandomGlobalProblemSolutions } from "@/components/poll-random-global-problem-solutions"
 import GlobalProblemDashboard from "@/components/globalProblem/global-problem-dashboard";
 interface GlobalProblemPageProps {
   params: { globalProblemId: string }

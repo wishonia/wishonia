@@ -1,6 +1,5 @@
 import { DFDABreadcrumbs } from '@/components/Breadcrumbs/DFDABreadcrumbs'
 import { ConditionTreatmentMetaAnalysis } from './components/ConditionTreatmentMetaAnalysis'
-import { Breadcrumbs } from '@/components/Breadcrumbs/Breadcrumbs'
 
 interface PageProps {
   params: {
