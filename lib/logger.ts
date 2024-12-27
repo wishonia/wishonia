@@ -22,6 +22,7 @@ interface LoggerOptions {
 
 class Logger {
   private isDevelopment = process.env.NODE_ENV !== 'production'
+  private isServer = typeof window === 'undefined'
   
   // Default sample rates by environment
   private readonly sampleRates = {
@@ -36,6 +37,32 @@ class Logger {
     return Math.random() < finalRate
   }
 
+  private getRuntimeContext() {
+    if (this.isServer) {
+      return {
+        environment: 'server',
+        node: process.version,
+        env: process.env.NODE_ENV,
+        memory: process.memoryUsage()
+      }
+    }
+    
+    return {
+      environment: 'client',
+      userAgent: window.navigator.userAgent,
+      language: window.navigator.language,
+      viewport: {
+        width: window.innerWidth,
+        height: window.innerHeight
+      },
+      memory: (performance as any)?.memory ? {
+        jsHeapSizeLimit: (performance as any).memory.jsHeapSizeLimit,
+        totalJSHeapSize: (performance as any).memory.totalJSHeapSize,
+        usedJSHeapSize: (performance as any).memory.usedJSHeapSize
+      } : undefined
+    }
+  }
+
   private formatMessage(level: LogLevel, message: string, options?: LoggerOptions | unknown) {
     const normalizedOptions: LoggerOptions = 
       options instanceof Error ? { error: options } :
@@ -45,7 +72,8 @@ class Logger {
     const formattedMessage: Record<string, any> = {
       timestamp: new Date().toISOString(),
       level,
-      message
+      message,
+      environment: this.isServer ? 'server' : 'client'
     }
     
     if (normalizedOptions.metadata) {
@@ -107,6 +135,7 @@ class Logger {
           scope.setContext('metadata', metadata);
           scope.setTag('logger.message', message);
           scope.setTag('environment', process.env.NODE_ENV || 'unknown');
+          scope.setTag('runtime', this.isServer ? 'server' : 'client');
           
           if (user) {
             scope.setUser(user);
@@ -126,12 +155,8 @@ class Logger {
             unix: Date.now()
           });
 
-          // Add runtime context
-          scope.setContext('runtime', {
-            node: process.version,
-            env: process.env.NODE_ENV,
-            memory: process.memoryUsage()
-          });
+          // Add runtime-specific context
+          scope.setContext('runtime', this.getRuntimeContext());
 
           Sentry.captureException(error, {
             extra: { message, ...metadata }
