@@ -14,16 +14,20 @@ usage = """
 import { logger } from '@/lib/logger'
 
 ✅ DO:
-- Regular logs:
+- Simple logs:
   logger.info('Operation completed')
-  logger.debug('Debug details', { metadata: { key: 'value' } })
-  logger.warn('Warning message', { metadata: { reason: 'why' } })
+  logger.debug('Debug details', { userId: 123, action: 'signup' })
 
 - Error logs (auto-sent to Sentry):
+  logger.error('Operation failed', error)
   logger.error('Operation failed', { 
-    error: err,
+    error,
     metadata: { operation: 'signup' }
   })
+
+- Structured data:
+  logger.info('Search results', { results, count, query })
+  logger.warn('Rate limit', rateLimitData)
 
 ❌ DON'T:
 - Use console.log/warn/error directly
