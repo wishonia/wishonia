@@ -1,29 +1,33 @@
 import * as Sentry from '@sentry/nextjs'
 
 type LogLevel = 'debug' | 'info' | 'warn' | 'error'
-type LogMetadata = Record<string, any>
 
 interface LoggerOptions {
-  metadata?: LogMetadata
+  metadata?: any
   error?: Error | unknown
 }
 
 class Logger {
   private isDevelopment = process.env.NODE_ENV !== 'production'
 
-  private formatMessage(level: LogLevel, message: string, options?: LoggerOptions) {
+  private formatMessage(level: LogLevel, message: string, options?: LoggerOptions | unknown) {
+    const normalizedOptions: LoggerOptions = 
+      options instanceof Error ? { error: options } :
+      typeof options === 'object' ? { metadata: options } :
+      options as LoggerOptions || {}
+
     const formattedMessage: Record<string, any> = {
       timestamp: new Date().toISOString(),
       level,
       message
     }
     
-    if (options?.metadata) {
-      formattedMessage.metadata = options.metadata
+    if (normalizedOptions.metadata) {
+      formattedMessage.metadata = normalizedOptions.metadata
     }
     
-    if (options?.error) {
-      formattedMessage.error = this.formatError(options.error)
+    if (normalizedOptions.error) {
+      formattedMessage.error = this.formatError(normalizedOptions.error)
     }
     
     return formattedMessage
@@ -41,7 +45,7 @@ class Logger {
     return { message: String(error) }
   }
 
-  private log(level: LogLevel, message: string, options?: LoggerOptions) {
+  private log(level: LogLevel, message: string, options?: LoggerOptions | unknown) {
     const logData = this.formatMessage(level, message, options)
     
     if (this.isDevelopment || level === 'error') {
@@ -53,26 +57,32 @@ class Logger {
     }
 
     // Always send errors to Sentry, regardless of environment
-    if (level === 'error' && options?.error) {
-      Sentry.captureException(options.error, {
-        extra: { message, ...options.metadata }
-      })
+    if (level === 'error') {
+      const error = options instanceof Error ? options : 
+        (options as LoggerOptions)?.error
+      
+      if (error) {
+        const metadata = (options as LoggerOptions)?.metadata || {}
+        Sentry.captureException(error, {
+          extra: { message, ...metadata }
+        })
+      }
     }
   }
 
-  debug(message: string, options?: Omit<LoggerOptions, 'error'>) {
+  debug(message: string, options?: LoggerOptions | unknown) {
     this.log('debug', message, options)
   }
 
-  info(message: string, options?: Omit<LoggerOptions, 'error'>) {
+  info(message: string, options?: LoggerOptions | unknown) {
     this.log('info', message, options)
   }
 
-  warn(message: string, options?: LoggerOptions) {
+  warn(message: string, options?: LoggerOptions | unknown) {
     this.log('warn', message, options)
   }
 
-  error(message: string, options?: LoggerOptions & { error?: Error | unknown }) {
+  error(message: string, options?: LoggerOptions | unknown) {
     this.log('error', message, options)
   }
 }
