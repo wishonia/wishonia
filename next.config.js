@@ -35,7 +35,31 @@ const nextConfig = {
         hostname: 'cdn.openai.com',
         port: '',
       },
-    ]
+    ],
+    // Add image optimization settings
+    deviceSizes: [640, 750, 828, 1080, 1200, 1920, 2048],
+    imageSizes: [16, 32, 48, 64, 96, 128, 256, 384],
+    formats: ['image/webp'],
+    minimumCacheTTL: 60,
+    dangerouslyAllowSVG: true,
+    contentSecurityPolicy: "default-src 'self'; script-src 'none'; sandbox;",
+  },
+  // Optimize static file handling
+  output: 'standalone',
+  compress: true,
+  poweredByHeader: false,
+  // Add webpack optimization for images
+  webpack: (config, { isServer }) => {
+    // Optimize image loading
+    config.module.rules.push({
+      test: /\.(gif|ico|eot|ttf|woff|woff2|mp4|pdf|webm)$/,
+      type: 'asset',
+      generator: {
+        filename: 'static/[hash][ext]'
+      },
+    });
+
+    return config;
   },
 }
 
