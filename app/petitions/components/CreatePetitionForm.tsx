@@ -1,17 +1,23 @@
 'use client'
 
-import { useState } from "react"
-import { createPetition, generatePetition } from "../petitionActions"
-import { useRouter } from "next/navigation"
-import { Button } from "@/components/ui/button"
-import { Input } from "@/components/ui/input"
-import { Textarea } from "@/components/ui/textarea"
-import { ImageUpload } from "./ImageUpload"
 import { MDXEditor } from '@mdxeditor/editor'
-import { useTheme } from "next-themes"
-import { Card } from "@/components/ui/card"
 import { motion, AnimatePresence } from "framer-motion"
 import { Loader2 } from "lucide-react"
+import { useRouter } from "next/navigation"
+import { useTheme } from "next-themes"
+import { useState } from "react"
+
+import { Button } from "@/components/ui/button"
+import { Card } from "@/components/ui/card"
+import { Input } from "@/components/ui/input"
+import { Textarea } from "@/components/ui/textarea"
+
+import { createPetition, generatePetition } from "../petitionActions"
+
+import { ImageUpload } from "./ImageUpload"
+
+
+
 
 type Step = 'initial' | 'review' | 'details' | 'preview'
 

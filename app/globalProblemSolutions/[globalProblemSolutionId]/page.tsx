@@ -1,9 +1,9 @@
 import { Metadata } from "next"
 import { notFound } from "next/navigation"
 
-import { getGlobalProblemSolutionById } from "@/lib/api/globalProblemSolutions"
 import { Shell } from "@/components/layout/shell"
 import MarkdownRenderer from "@/components/markdown/MarkdownRenderer"
+import { getGlobalProblemSolutionById } from "@/lib/api/globalProblemSolutions"
 
 interface GlobalProblemSolutionPageProps {
   params: { globalProblemSolutionId: string }

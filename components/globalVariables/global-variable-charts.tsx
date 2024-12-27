@@ -1,16 +1,9 @@
 "use client"
 
-import * as React from "react"
-import { FC } from "react"
 import Highcharts from "highcharts"
 import HighchartsReact from "highcharts-react-official"
-
-import { GlobalVariable } from "@/types/models/GlobalVariable"
-// TODO: Fix highcharts accessibility
-// import highchartsAccessibility from "highcharts/modules/accessibility";
-// if (typeof window !== undefined) {
-//   highchartsAccessibility(Highcharts);
-// }
+import * as React from "react"
+import { FC } from "react"
 
 import {
   Card,
@@ -20,6 +13,13 @@ import {
   CardHeader,
   CardTitle,
 } from "@/components/ui/card"
+import { GlobalVariable } from "@/types/models/GlobalVariable"
+// TODO: Fix highcharts accessibility
+// import highchartsAccessibility from "highcharts/modules/accessibility";
+// if (typeof window !== undefined) {
+//   highchartsAccessibility(Highcharts);
+// }
+
 
 
 interface GlobalVariableChartsProps
@@ -61,7 +61,7 @@ export const GlobalVariableCharts: FC<GlobalVariableChartsProps> = ({
             />
           </div>
         </CardContent>
-      <CardFooter></CardFooter>
+      <CardFooter />
     </Card>
   )
 }

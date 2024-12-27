@@ -1,5 +1,6 @@
-import React from 'react'
 import { Search } from 'lucide-react'
+import React from 'react'
+
 import { Badge } from '@/components/ui/badge'
 
 type ToolBadgeProps = {

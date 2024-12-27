@@ -1,8 +1,9 @@
 import * as z from "zod"
+
 import { getUserIdServer } from "@/lib/api/getUserIdServer"
+import { prisma } from "@/lib/db"
 import { handleError } from "@/lib/errorHandler"
 import {createGlobalProblemSolution} from "@/lib/globalProblemSolutionGenerator";
-import { prisma } from "@/lib/db"
 
 const routeContextSchema = z.object({
   params: z.object({

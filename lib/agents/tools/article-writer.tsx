@@ -1,9 +1,11 @@
 import { tool } from 'ai'
 import { createStreamableValue } from 'ai/rsc'
-import { articleSchema } from '@/lib/schema/article'
-import { ToolProps } from '.'
+
 import { ArticleSection } from '@/app/search/components/article-section'
 import { createArticleGenerator } from '@/lib/article-generator'
+import { articleSchema } from '@/lib/schema/article'
+
+import { ToolProps } from '.'
 
 export const articleWriterTool = ({ uiStream, fullResponse }: ToolProps) =>
   tool({

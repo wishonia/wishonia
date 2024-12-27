@@ -1,13 +1,13 @@
 "use client"
 
-import React, { useEffect, useState } from "react"
 import { zodResolver } from "@hookform/resolvers/zod"
 import { File, GithubLogo, Globe } from "@phosphor-icons/react"
+import {DatasourceType} from "@prisma/client";
 import axios from "axios"
+import React, { useEffect, useState } from "react"
 import { useForm } from "react-hook-form"
 import * as z from "zod"
 
-import { dataSourceSchema } from "@/lib/validations/dataSourceSchema"
 import {
   AlertDialog,
   AlertDialogContent,
@@ -18,11 +18,13 @@ import {
 import { Button } from "@/components/ui/button"
 import { Label } from "@/components/ui/label"
 import { toast } from "@/components/ui/use-toast"
+import { dataSourceSchema } from "@/lib/validations/dataSourceSchema"
 
 import { Icons } from "../icons"
 import { Input } from "../ui/input"
+
 import DataSourceIcon from "./data-source-icon"
-import {DatasourceType} from "@prisma/client";
+
 
 type ButtonKeys = "FILE" | "GITHUB_REPOSITORY" | "URL"
 

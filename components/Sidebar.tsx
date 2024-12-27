@@ -3,7 +3,7 @@
 import { useSidebar } from "@/lib/hooks/use-sidebar"
 import { cn } from "@/lib/utils"
 
-export interface SidebarProps extends React.ComponentProps<"div"> {}
+export type SidebarProps = React.ComponentProps<"div">
 
 function Sidebar({ className, children }: SidebarProps) {
   const { isSidebarOpen, isLoading } = useSidebar()

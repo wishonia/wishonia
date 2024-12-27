@@ -3,14 +3,14 @@
 import { FC, useEffect, useState } from "react"
 import * as React from "react"
 
-import { UserVariable } from "@/types/models/UserVariable"
-import { cn } from "@/lib/utils"
-import { buttonVariants } from "@/components/ui/button"
 import { DateRangePicker } from "@/components/date-range-picker"
 import { Icons } from "@/components/icons"
 import { MeasurementsList } from "@/components/measurements/measurements-list"
 import { DashboardHeader } from "@/components/pages/dashboard/dashboard-header"
+import { buttonVariants } from "@/components/ui/button"
 import { UserVariableOperationsButton } from "@/components/userVariables/user-variable-operations-button"
+import { cn } from "@/lib/utils"
+import { UserVariable } from "@/types/models/UserVariable"
 
 type UserVariableOverviewProps = {
   user: {
@@ -82,7 +82,7 @@ export const UserVariableOverview: FC<UserVariableOverviewProps> = ({
         user={user}
         variableId={variableId}
         measurementsDateRange={measurementsDateRange}
-      ></MeasurementsList>
+       />
     </>
   )
 }

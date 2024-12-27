@@ -1,8 +1,9 @@
 import { createStreamableUI } from 'ai/rsc'
+
+import { articleWriterTool } from './article-writer'
 import { retrieveTool } from './retrieve'
 import { searchTool } from './search'
 import { videoSearchTool } from './video-search'
-import { articleWriterTool } from './article-writer'
 
 export interface ToolProps {
   uiStream: ReturnType<typeof createStreamableUI>

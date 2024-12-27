@@ -4,15 +4,17 @@ import { ArrowRight, MagicWand } from "@phosphor-icons/react"
 import { Agent } from "@prisma/client"
 import { useActions, useAIState, useUIState } from "ai/rsc"
 import { nanoid } from "nanoid"
+import {useRouter} from "next/navigation";
 
+import { exampleMessages } from "@/components/ChatExampleQuestions"
+import { siteConfig } from "@/config/site"
 import { AI } from "@/lib/chat/actions"
 import { useSidebar } from "@/lib/hooks/use-sidebar"
 import { useUser } from "@/lib/useUser"
-import { exampleMessages } from "@/components/ChatExampleQuestions"
 
 import { UserMessage } from "./assistant/Message"
-import {useRouter} from "next/navigation";
-import { siteConfig } from "@/config/site"
+
+
 
 function ChatPanel({ agentData }: { agentData?: Agent | null }) {
   const [aiState] = useAIState()

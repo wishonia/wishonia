@@ -1,8 +1,9 @@
 import fs from "fs"
 import path from "path"
-import { MarkdownFile } from "@/interfaces/markdownFile"
+
 import slugify from "slugify"
 
+import { MarkdownFile } from "@/interfaces/markdownFile"
 import {
   generateAndUploadFeaturedImageJpg,
 } from "@/lib/imageGenerator"

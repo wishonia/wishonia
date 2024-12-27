@@ -1,9 +1,10 @@
 import { NextResponse } from 'next/server'
+
+import { advancedSearchXNGSearch } from '@/lib/search/searxng'
+import { CacheService } from '@/lib/services/cache-service'
 import {
   SearXNGSearchResults,
 } from '@/lib/types/index'
-import { CacheService } from '@/lib/services/cache-service'
-import { advancedSearchXNGSearch } from '@/lib/search/searxng'
 
 /**
  * Maximum number of results to fetch from SearXNG.

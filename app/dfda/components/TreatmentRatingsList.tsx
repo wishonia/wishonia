@@ -1,11 +1,13 @@
 'use client'
 
-import { useState } from 'react'
-import { Select, SelectTrigger, SelectValue, SelectContent, SelectItem } from "@/components/ui/select"
-import { Card, CardContent } from "@/components/ui/card"
-import Link from 'next/link'
 import { DfdaCondition, DfdaConditionTreatment } from "@prisma/client";
+import Link from 'next/link'
+import { useState } from 'react'
+
 import { Badge } from "@/components/ui/badge";
+import { Card, CardContent } from "@/components/ui/card"
+import { Select, SelectTrigger, SelectValue, SelectContent, SelectItem } from "@/components/ui/select"
+
 
 type TreatmentListProps = {
     condition: DfdaCondition & {
@@ -132,7 +134,7 @@ export default function TreatmentRatingsList({ condition }: TreatmentListProps) 
                                                 <div
                                                     className="bg-primary h-2.5 rounded-full"
                                                     style={{ width: `${effectivenessScore}%` }}
-                                                ></div>
+                                                 />
                                             </div>
                                             <span className="text-xs font-semibold ml-2">{Math.round(effectivenessScore)}%</span>
                                         </div>

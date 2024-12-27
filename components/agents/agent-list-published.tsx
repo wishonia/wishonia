@@ -1,12 +1,12 @@
 "use client"
 
-import { JSX, SVGProps, useEffect, useState } from "react"
+import { Agent } from "@prisma/client"
 import Link from "next/link"
 import { useRouter } from "next/navigation"
-import { Agent } from "@prisma/client"
+import { JSX, SVGProps, useEffect, useState } from "react"
 
-import { useSidebar } from "@/lib/hooks/use-sidebar"
 import {SpinningLoader} from "@/components/spinningLoader";
+import { useSidebar } from "@/lib/hooks/use-sidebar"
 
 export default function AgentListPublished() {
   const [agents, setAgents] = useState<Agent[]>([])

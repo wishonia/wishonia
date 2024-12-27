@@ -1,7 +1,9 @@
 "use server";
 
-import { revalidatePath } from "next/cache";
 import { PrismaClient, ArticleStatus } from "@prisma/client";
+import { revalidatePath } from "next/cache";
+import OpenAI from "openai";
+
 import {
   ArticleWithRelations,
   deleteArticleByPromptedTopic,
@@ -9,7 +11,6 @@ import {
   getArticleBySlug,
   writeArticle
 } from "@/lib/agents/researcher/researcher";
-import OpenAI from "openai";
 import {uploadImageToVercel} from "@/lib/imageUploader";
 const openai = new OpenAI({
     apiKey: process.env.OPENAI_API_KEY,

@@ -1,6 +1,6 @@
-import { Suspense } from "react"
-import Link from "next/link"
 import { ArrowLeft } from "lucide-react"
+import Link from "next/link"
+import { Suspense } from "react"
 
 import { ListStudiesRequest } from "../../lib/clinical-trials-gov"
 import AdvancedTrialSearch from "../components/AdvancedTrialSearch"

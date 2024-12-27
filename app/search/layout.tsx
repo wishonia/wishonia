@@ -1,9 +1,10 @@
 import type { Metadata, Viewport } from 'next'
+
 import './globals.css'
-import { ThemeProvider } from '@/app/search/components/theme-provider'
-import SearchChatHeader from '@/app/search/components/searchChatHeader'
 import SearchChatFooter from '@/app/search/components/searchChatFooter'
+import SearchChatHeader from '@/app/search/components/searchChatHeader'
 import { SearchChatSidebar } from '@/app/search/components/searchChatSidebar'
+import { ThemeProvider } from '@/app/search/components/theme-provider'
 import { Toaster } from '@/components/ui/sonner'
 import { AppStateProvider } from '@/lib/utils/app-state'
 

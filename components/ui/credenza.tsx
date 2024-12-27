@@ -2,7 +2,6 @@
 
 import * as React from "react"
 
-import { useMediaQuery } from "@/hooks/use-media-query"
 import {
   Dialog,
   DialogClose,
@@ -23,6 +22,7 @@ import {
   DrawerTitle,
   DrawerTrigger,
 } from "@/components/ui/drawer"
+import { useMediaQuery } from "@/hooks/use-media-query"
 
 interface BaseProps {
   children: React.ReactNode

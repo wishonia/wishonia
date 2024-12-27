@@ -1,14 +1,11 @@
 "use client"
 
-import React from "react"
-import Image from "next/image"
-import Link from "next/link"
 import { Sparkle, Star } from "@phosphor-icons/react"
 import { useActions, useUIState } from "ai/rsc"
+import Image from "next/image"
+import Link from "next/link"
+import React from "react"
 
-import { AI } from "@/lib/chat/actions"
-import { COLOURS } from "@/lib/constants"
-import { RepoProps } from "@/lib/types"
 import {
   DropdownMenu,
   DropdownMenuContent,
@@ -18,6 +15,9 @@ import {
   DropdownMenuSeparator,
   DropdownMenuTrigger,
 } from "@/components/ui/dropdown-menu"
+import { AI } from "@/lib/chat/actions"
+import { COLOURS } from "@/lib/constants"
+import { RepoProps } from "@/lib/types"
 
 import AssistantDisplay from "../AssistantDisplay"
 import License from "../icons/License"
@@ -113,7 +113,7 @@ function Repositories({ props: repos }: { props: RepoProps[] }) {
                             backgroundColor: findColour(r.language),
                           }}
                           className={`size-2.5 rounded-full`}
-                        ></div>
+                         />
                         <span className="flex items-center gap-1 text-sm font-light text-neutral-500">
                           {r.language}
                         </span>

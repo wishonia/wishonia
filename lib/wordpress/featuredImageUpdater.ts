@@ -1,8 +1,11 @@
-import { WordPressClient } from './wordpressClient';
-import { searchImages } from '../utils/imageSearch';
-import { generateImage } from '../imageGenerator';
-import { WordPressApiPost } from './wordpressTypes';
 import { openai } from '@/lib/llm';
+
+import { generateImage } from '../imageGenerator';
+import { searchImages } from '../utils/imageSearch';
+
+import { WordPressClient } from './wordpressClient';
+import { WordPressApiPost } from './wordpressTypes';
+
 
 interface PostWithoutImage {
   id: number;

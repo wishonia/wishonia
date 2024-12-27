@@ -1,8 +1,9 @@
 import { headers } from "next/headers"
+
+import { domainConfigs } from "@/config/domains"
+import { env } from "@/env.mjs"
 import { SiteConfig } from "@/types"
 
-import { env } from "@/env.mjs"
-import { domainConfigs } from "@/config/domains"
 
 export function getDomainConfig(hostname?: string | null): SiteConfig {
   // Use TEST_DOMAIN from env if set (for local development)

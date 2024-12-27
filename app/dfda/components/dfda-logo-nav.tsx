@@ -1,11 +1,10 @@
 "use client"
 
-import { Key, KeyboardEvent, useRef, useState } from "react"
 import Image from "next/image"
 import Link from "next/link"
-import { NavItem } from "@/types"
+import { Key, KeyboardEvent, useRef, useState } from "react"
 
-import { dfdaNavigation } from "@/config/navigation/domains/dfda-nav"
+import { Icons } from "@/components/icons"
 import {
   DropdownMenu,
   DropdownMenuContent,
@@ -13,7 +12,8 @@ import {
   DropdownMenuSeparator,
   DropdownMenuTrigger,
 } from "@/components/ui/dropdown-menu"
-import { Icons } from "@/components/icons"
+import { dfdaNavigation } from "@/config/navigation/domains/dfda-nav"
+import { NavItem } from "@/types"
 
 interface LogoNavMenuProps {
   navItems?: NavItem[]

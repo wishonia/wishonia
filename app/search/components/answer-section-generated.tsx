@@ -1,7 +1,7 @@
 'use client'
 
-import { Section } from './section'
 import { BotMessage } from './message'
+import { Section } from './section'
 
 export type AnswerSectionProps = {
   result: string

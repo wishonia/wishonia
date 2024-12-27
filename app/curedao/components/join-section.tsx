@@ -1,6 +1,7 @@
 'use client'
 
 import { GithubIcon, UsersIcon, Building2Icon } from 'lucide-react'
+
 import { ContributeToBlueprintButton } from './contribute-to-blueprint-button'
 
 export function JoinSection() {

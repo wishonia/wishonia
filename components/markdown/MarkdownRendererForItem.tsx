@@ -1,11 +1,11 @@
 "use client"
 
-import React, { FC } from "react"
 import {
   GlobalProblem,
   GlobalProblemSolution,
   WishingWell,
 } from "@prisma/client"
+import React, { FC } from "react"
 
 import MarkdownRenderer from "@/components/markdown/MarkdownRenderer"
 

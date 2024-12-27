@@ -28,7 +28,7 @@ export async function getArrayOfLabelsForEachParent(
   type: "longevity" | "neurotech" | "cooperation"
 ) {
   const techTree = await getTechTree(type)
-  let labelsByParent: { [key: string]: string[] } = {}
+  const labelsByParent: { [key: string]: string[] } = {}
   techTree.forEach((item) => {
     if (item.parent) {
       const parentNode = techTree.find((parent) => parent.id === item.parent)
@@ -74,7 +74,7 @@ function cleanArray(arr: Array<any>): Array<any> {
     delete obj.pos
     delete obj.kind
     //delete obj.id;
-    for (let key in obj) {
+    for (const key in obj) {
       let value = obj[key]
       if (typeof value === "string") {
         value = value.trim()
@@ -202,7 +202,7 @@ export async function createGlobalProblemSolutionsForAging() {
       )
       continue
     }
-    let solutionDescription = item.desc || null
+    const solutionDescription = item.desc || null
     const newGlobalProblemSolution = await createGlobalProblemSolution(
       solutionName,
       solutionDescription,

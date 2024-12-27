@@ -1,5 +1,3 @@
-import { env } from "@/env.mjs"
-import { getUserById } from "@/lib/prisma/users"
 import {
   Card,
   CardContent,
@@ -7,6 +5,8 @@ import {
   CardHeader,
   CardTitle,
 } from "@/components/ui/card"
+import { env } from "@/env.mjs"
+import { getUserById } from "@/lib/prisma/users"
 
 interface PageProps {
   params: {

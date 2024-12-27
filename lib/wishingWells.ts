@@ -56,7 +56,7 @@ export async function getRandomWishingWellPair(userId: string | undefined) {
 }
 
 export async function generateAllWishingWellPairs() {
-  let combinations: WishingWell[][] = []
+  const combinations: WishingWell[][] = []
   function generateCombinations(
     wishingWells: WishingWell[],
     currentCombination: WishingWell[] = []
@@ -65,8 +65,8 @@ export async function generateAllWishingWellPairs() {
       combinations.push(currentCombination)
     } else {
       for (let i = 0; i < wishingWells.length; i++) {
-        let newCombination = currentCombination.concat(wishingWells[i])
-        let remainingWishingWells = wishingWells
+        const newCombination = currentCombination.concat(wishingWells[i])
+        const remainingWishingWells = wishingWells
           .slice(0, i)
           .concat(wishingWells.slice(i + 1))
         generateCombinations(remainingWishingWells, newCombination)
@@ -127,7 +127,7 @@ export async function wishToWishingWell(wish: string) {
       2. "description": a meta description for the article under 240 characters long`,
     "json_object"
   )
-  let obj = JSON.parse(str)
+  const obj = JSON.parse(str)
   //obj.content = textCompletion(generateArticlePrompt(wish), "text");
   //await generateAndUploadImageToVercel(obj);
   return obj

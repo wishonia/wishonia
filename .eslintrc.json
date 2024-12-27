@@ -9,15 +9,34 @@
     "no-unused-vars": "off",
     "unused-imports/no-unused-imports": "error",
     "unused-imports/no-unused-vars": "off",
+    "import/order": ["error", {
+      "groups": ["builtin", "external", "internal", "parent", "sibling", "index"],
+      "newlines-between": "always",
+      "alphabetize": { "order": "asc" }
+    }],
+    
+    "react/jsx-key": "error",
+    "react/self-closing-comp": "error",
+    "react/no-array-index-key": "warn",
+    "react-hooks/rules-of-hooks": "error",
+    "react-hooks/exhaustive-deps": "warn",
+    
+    "@typescript-eslint/no-explicit-any": "warn",
+    "@typescript-eslint/explicit-function-return-type": "off",
+    "@typescript-eslint/no-non-null-assertion": "warn",
+    "@typescript-eslint/no-empty-interface": "warn",
+    
+    "no-console": ["warn", { "allow": ["warn", "error"] }],
+    "eqeqeq": "error",
+    "no-var": "error",
+    "prefer-const": "error",
+    "no-duplicate-imports": "error",
     
     "@next/next/no-img-element": "off",
     "react/no-unescaped-entities": "off",
     "@next/next/no-async-client-component": "off",
-    "react-hooks/exhaustive-deps": "off",
     "@next/next/inline-script-id": "off",
     "@next/next/no-sync-scripts": "off",
-    "jsx-a11y/alt-text": "off",
-    
-    "react-hooks/rules-of-hooks": "error"
+    "jsx-a11y/alt-text": "off"
   }
 }

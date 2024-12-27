@@ -48,7 +48,7 @@ export async function createAgentDatasource(
   agentId: string,
   datasourceId: string
 ) {
-  let data=await prisma.agentDatasource.findFirst({
+  const data=await prisma.agentDatasource.findFirst({
     where:{
       agentId: agentId,
       datasourceId: datasourceId,

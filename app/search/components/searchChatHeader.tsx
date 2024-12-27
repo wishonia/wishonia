@@ -1,7 +1,9 @@
 import React from 'react'
-import { ModeToggle } from './mode-toggle'
+
 import { IconLogo } from '@/components/ui/icons'
 import { cn } from '@/lib/utils'
+
+import { ModeToggle } from './mode-toggle'
 import SearchChatHistoryContainer from './search-chat-history-container'
 
 export const SearchChatHeader: React.FC = async () => {

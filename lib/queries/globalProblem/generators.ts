@@ -1,6 +1,8 @@
 import { generateObject } from 'ai'
-import { GeneratedOrganizationSchema, GeneratedPersonSchema } from './schemas'
+
 import { getModel } from '@/lib/utils/modelUtils'
+
+import { GeneratedOrganizationSchema, GeneratedPersonSchema } from './schemas'
 
 export async function generateOrganizations(
   topic: string, 

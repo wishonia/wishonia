@@ -1,8 +1,8 @@
 "use client"
 
-import React, { useEffect, useState } from "react"
 import { WishingWell } from "@prisma/client"
 import { User } from "next-auth"
+import React, { useEffect, useState } from "react"
 
 import { DataTable } from "@/components/data-table"
 import { SpinningLoader } from "@/components/spinningLoader"
@@ -36,7 +36,7 @@ export const WishingWellsList: React.FC<PollProps> = ({ user }) => {
   return (
     <>
       {/*<WishingWellsPieChart data={wishingWells}></WishingWellsPieChart>*/}
-      <DataTable columns={wishingWellColumns} data={wishingWells}></DataTable>
+      <DataTable columns={wishingWellColumns} data={wishingWells} />
     </>
   )
 }

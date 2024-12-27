@@ -1,6 +1,7 @@
-import { S3Client, PutObjectCommand } from '@aws-sdk/client-s3'
 import { readFile, writeFile, readdir } from 'fs/promises'
 import path from 'path'
+
+import { S3Client, PutObjectCommand } from '@aws-sdk/client-s3'
 import mime from 'mime-types'
 
 interface Config {

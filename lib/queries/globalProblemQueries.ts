@@ -1,6 +1,7 @@
-import { getGlobalProblemRelationships as _getGlobalProblemRelationships, getGlobalSolutionRelationships as _getGlobalSolutionRelationships } from './globalProblem/queries'
-import { generateOrganizations as _generateOrganizations, generatePeople as _generatePeople } from './globalProblem/generators'
 import type { Prisma } from '@prisma/client'
+
+import { generateOrganizations as _generateOrganizations, generatePeople as _generatePeople } from './globalProblem/generators'
+import { getGlobalProblemRelationships as _getGlobalProblemRelationships, getGlobalSolutionRelationships as _getGlobalSolutionRelationships } from './globalProblem/queries'
 
 // Re-export the types from Prisma
 export type GlobalProblemRelationships = {

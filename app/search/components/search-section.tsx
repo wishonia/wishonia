@@ -1,12 +1,16 @@
 'use client'
 
-import { SearchResults } from './search-results'
+import { StreamableValue, useStreamableValue } from 'ai/rsc'
+
+import type { SearchResults as TypeSearchResults } from '@/lib/types/index'
+
 import { DefaultSkeleton } from './default-skeleton'
+import { SearchResults } from './search-results'
 import { SearchResultsImageSection } from './search-results-image'
 import { Section } from './section'
 import { ToolBadge } from './tool-badge'
-import type { SearchResults as TypeSearchResults } from '@/lib/types/index'
-import { StreamableValue, useStreamableValue } from 'ai/rsc'
+
+
 
 export type SearchSectionProps = {
   result?: StreamableValue<string>

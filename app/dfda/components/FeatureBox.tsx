@@ -1,7 +1,7 @@
-import React from 'react'
-import Image from 'next/image'
-import { ArrowRight } from 'lucide-react'
 import { motion } from 'framer-motion'
+import { ArrowRight } from 'lucide-react'
+import Image from 'next/image'
+import React from 'react'
 
 interface FeatureBoxProps {
   title: string
@@ -47,7 +47,7 @@ const MediaContent = ({ media }: { media: string }) => {
         allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
         allowFullScreen
         title="Embedded video"
-      ></iframe>
+       />
     )
   } else if (media.endsWith('.gif') || media.match(/\.(jpeg|jpg|png|webp)$/i)) {
     return (

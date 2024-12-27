@@ -1,11 +1,13 @@
 "use client"
 
 import { Person } from "@prisma/client"
-import { ScrollArea } from "@/components/ui/scroll-area"
-import { PersonItem } from "./PersonItem"
-import { Input } from "@/components/ui/input"
 import { Search } from "lucide-react"
 import { useState } from "react"
+
+import { Input } from "@/components/ui/input"
+import { ScrollArea } from "@/components/ui/scroll-area"
+
+import { PersonItem } from "./PersonItem"
 
 interface PeopleListProps {
   people: Person[]

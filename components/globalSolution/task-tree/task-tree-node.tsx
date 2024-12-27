@@ -1,19 +1,20 @@
 'use client'
 
-import { useState } from 'react'
+import { TaskStatus, TaskComplexity } from '@prisma/client'
 import { ChevronRight, ChevronDown, Info } from 'lucide-react'
-import { cn } from '@/lib/utils'
+import { useState } from 'react'
+
+import { generateSubtasks } from '@/app/globalSolutions/[globalSolutionId]/tasks/actions'
+import { Badge } from "@/components/ui/badge"
+import { Button } from "@/components/ui/button"
+import { Card } from "@/components/ui/card"
 import {
   Popover,
   PopoverContent,
   PopoverTrigger,
 } from "@/components/ui/popover"
-import { Card } from "@/components/ui/card"
-import { Badge } from "@/components/ui/badge"
-import { Button } from "@/components/ui/button"
+import { cn } from '@/lib/utils'
 import { GlobalTaskWithChildren } from '@/types/globalTask'
-import { TaskStatus, TaskComplexity } from '@prisma/client'
-import { generateSubtasks } from '@/app/globalSolutions/[globalSolutionId]/tasks/actions'
 
 interface Props {
   task: GlobalTaskWithChildren

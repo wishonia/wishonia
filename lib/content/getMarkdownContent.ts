@@ -1,9 +1,10 @@
 import fs from 'fs'
 import path from 'path'
+
 import matter from 'gray-matter'
 import { remark } from 'remark'
-import html from 'remark-html'
 import remarkGfm from 'remark-gfm'
+import html from 'remark-html'
 
 export interface MarkdownContent {
   html: string

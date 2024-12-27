@@ -3,10 +3,10 @@ export function normalizeUrl(url: string): string {
     const parsedUrl = new URL(url);
     
     // Remove 'www.' if present
-    let hostname = parsedUrl.hostname.replace(/^www\./, '');
+    const hostname = parsedUrl.hostname.replace(/^www\./, '');
     
     // Remove trailing slash
-    let pathname = parsedUrl.pathname.replace(/\/$/, '');
+    const pathname = parsedUrl.pathname.replace(/\/$/, '');
     
     // Reconstruct the URL without protocol
     return `https://${hostname}${pathname}${parsedUrl.search}`;

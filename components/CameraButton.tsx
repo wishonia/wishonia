@@ -70,7 +70,7 @@ export const CameraButton = ({
         </PopoverTrigger>
         {showModal && (
           <PopoverContent className="modal">
-            <video ref={videoRef} autoPlay={true}></video>
+            <video ref={videoRef} autoPlay={true} />
             <Button variant="outline" onClick={handleCapture}>
               Take Picture
             </Button>

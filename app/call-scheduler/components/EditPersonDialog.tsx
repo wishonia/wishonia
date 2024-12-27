@@ -1,20 +1,24 @@
 'use client'
 
-import { useState } from 'react'
 import { Person } from "@prisma/client"
+import { Session } from "next-auth"
+import { useState } from 'react'
+import { toast } from "sonner"
+
+import { Button } from "@/components/ui/button"
 import {
   Dialog,
   DialogContent,
   DialogHeader,
   DialogTitle,
 } from "@/components/ui/dialog"
-import { Button } from "@/components/ui/button"
 import { Input } from "@/components/ui/input"
 import { Label } from "@/components/ui/label"
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@/components/ui/select"
-import { toast } from "sonner"
+
+
 import { updatePerson } from "../actions"
-import { Session } from "next-auth"
+
 interface EditPersonDialogProps {
   person: Person
   session: Session

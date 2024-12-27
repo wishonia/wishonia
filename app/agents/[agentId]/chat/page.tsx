@@ -1,11 +1,11 @@
 import { Metadata } from "next"
 import { notFound } from "next/navigation"
 
+import { getMissingKeys } from "@/app/actions"
+import Chat from "@/components/Chat"
 import { getAgent } from "@/lib/api/agents"
 import { AI } from "@/lib/chat/actions"
 import { nanoid } from "@/lib/utils"
-import Chat from "@/components/Chat"
-import { getMissingKeys } from "@/app/actions"
 
 interface AgentPageProps {
   params: { agentId: string }

@@ -1,12 +1,13 @@
 "use client"
 
-import { FC, useEffect, useState } from "react"
-import Image from "next/image"
 import { format } from "date-fns"
 import { Activity, Loader2 } from "lucide-react"
+import Image from "next/image"
 import { User } from "next-auth"
+import { FC, useEffect, useState } from "react"
 
 import { Measurement } from "@/types/models/Measurement"
+
 import { MeasurementMenu } from "./measurement-menu"
 
 interface MeasurementsListProps {

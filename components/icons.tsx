@@ -22,6 +22,7 @@ import {
   BsSun,
   BsWikipedia,
 } from "react-icons/bs"
+import { BsPencilSquare } from "react-icons/bs"
 import {
   FaBell,
   FaBomb,
@@ -58,12 +59,11 @@ import {
   FaShieldHalved,
   FaSquarePollVertical,
 } from "react-icons/fa6"
+import { FaBuilding, FaScaleBalanced, FaFileLines } from "react-icons/fa6"
 import { ImSpinner8, ImStatsBars } from "react-icons/im"
 import { LuSettings } from "react-icons/lu"
 import { MdDeleteForever, MdOutlineLogout } from "react-icons/md"
 import { RxDashboard, RxMixerHorizontal, RxPencil1 } from "react-icons/rx"
-import { FaBuilding, FaScaleBalanced, FaFileLines } from "react-icons/fa6"
-import { BsPencilSquare } from "react-icons/bs"
 
 export type IconKeys = keyof typeof icons
 

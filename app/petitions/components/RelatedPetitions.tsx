@@ -1,6 +1,7 @@
-import Link from "next/link"
-import { prisma } from "@/lib/prisma"
 import { Petition, PetitionStatus } from "@prisma/client"
+import Link from "next/link"
+
+import { prisma } from "@/lib/prisma"
 
 type PetitionWithCount = Petition & {
   _count: {

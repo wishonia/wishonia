@@ -1,15 +1,18 @@
-import { prisma } from '@/lib/prisma'
 import { notFound } from 'next/navigation'
-import OrganizationInfo from './OrganizationInfo'
 import { getServerSession } from 'next-auth/next'
-import { authOptions } from "@/lib/auth"
+
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs"
-import { OrganizationActions } from './components/OrganizationActions'
-import { OrganizationMembers } from './components/OrganizationMembers'
-import { OrganizationEvents } from './components/OrganizationEvents'
-import { OrganizationProducts } from './components/OrganizationProducts'
-import { OrganizationPartnerships } from './components/OrganizationPartnerships'
+import { authOptions } from "@/lib/auth"
+import { prisma } from '@/lib/prisma'
 import { getOrganizationRelationships } from '@/lib/queries/organizationQueries'
+
+import OrganizationInfo from './OrganizationInfo'
+import { OrganizationActions } from './components/OrganizationActions'
+import { OrganizationEvents } from './components/OrganizationEvents'
+import { OrganizationMembers } from './components/OrganizationMembers'
+import { OrganizationPartnerships } from './components/OrganizationPartnerships'
+import { OrganizationProducts } from './components/OrganizationProducts'
+
 
 export default async function OrganizationPage({ params }: { params: { slug: string } }) {
   const session = await getServerSession(authOptions)

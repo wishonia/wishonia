@@ -1,5 +1,6 @@
-import prisma from '@/lib/prisma'
 import type { ApiEndpointPricing } from '@prisma/client'
+
+import prisma from '@/lib/prisma'
 
 type EndpointPricing = Pick<ApiEndpointPricing, 'id' | 'pricePerRequest' | 'endpoint' | 'method' | 'active'> | null
 

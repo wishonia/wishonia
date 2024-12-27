@@ -1,6 +1,8 @@
 import { readFile, readdir } from "fs/promises"
 import path from "path"
+
 import matter from "gray-matter"
+
 import type { MarkdownFile } from "@/interfaces/markdownFile"
 
 export interface ProcessedMarkdownFile extends MarkdownFile {

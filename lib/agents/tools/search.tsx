@@ -1,10 +1,9 @@
 import { tool } from 'ai'
 import { createStreamableValue } from 'ai/rsc'
 import Exa from 'exa-js'
-import { searchSchema } from '@/lib/schema/search'
+
 import { SearchSection } from '@/app/search/components/search-section'
-import { ToolProps } from '.'
-import { sanitizeUrl } from '@/lib/utils/index'
+import { searchSchema } from '@/lib/schema/search'
 import {
   SearchResultImage,
   SearchResults,
@@ -12,6 +11,10 @@ import {
   SearXNGResponse,
   SearXNGResult
 } from '@/lib/types/index'
+import { sanitizeUrl } from '@/lib/utils/index'
+
+import { ToolProps } from '.'
+
 
 const log = {
   info: (msg: string, data?: any) => 

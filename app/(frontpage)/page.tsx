@@ -1,14 +1,15 @@
+import { headers } from "next/headers"
 import React from "react"
 
-import { getCurrentUser } from "@/lib/session"
-import ForkableWorldSection from "@/components/landingPage/ForkableWorldSection"
 import HowItWorksSection from "@/components/HowItWorksSection"
-import OpenSource from "@/components/pages/opensource"
-import { PWARedirect } from "@/components/pwa-redirect";
+import ForkableWorldSection from "@/components/landingPage/ForkableWorldSection"
 import InteractiveLandingPage from "@/components/landingPage/interactive-landing-page";
 import WorldOptimizationDashboard from "@/components/landingPage/world-optimization-dashboard";
+import OpenSource from "@/components/pages/opensource"
+import { PWARedirect } from "@/components/pwa-redirect";
+import { getCurrentUser } from "@/lib/session"
+
 import CureDaoHome from "../curedao/page"
-import { headers } from "next/headers"
 import DFDAPage from "../dfda/page"
 
 
@@ -32,7 +33,7 @@ export default async function Home() {
           <InteractiveLandingPage/>
           <ForkableWorldSection/>
           <HowItWorksSection user={user}/>
-          <WorldOptimizationDashboard></WorldOptimizationDashboard>
+          <WorldOptimizationDashboard />
 
           {/*<MetaTodoList/>*/}
           {/*<WishocracyFeatureCards/>*/}

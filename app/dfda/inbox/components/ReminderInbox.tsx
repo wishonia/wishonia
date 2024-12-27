@@ -1,10 +1,10 @@
 "use client"
 
-import { useEffect, useState } from "react"
 import { Session } from "next-auth"
+import { useEffect, useState } from "react"
 
-import { TrackingReminderNotification } from "@/types/models/TrackingReminderNotification"
 import { LoginPromptButton } from "@/components/LoginPromptButton"
+import { TrackingReminderNotification } from "@/types/models/TrackingReminderNotification"
 
 import {
   getTrackingReminderNotifications,
@@ -186,7 +186,7 @@ export function ReminderInbox({
   if (loading) {
     return (
       <div className="flex justify-center p-4">
-        <div className="h-8 w-8 animate-spin rounded-full border-4 border-blue-500 border-t-transparent"></div>
+        <div className="h-8 w-8 animate-spin rounded-full border-4 border-blue-500 border-t-transparent" />
       </div>
     )
   }
@@ -214,7 +214,7 @@ export function ReminderInbox({
             <div className="mb-4 text-6xl">☀️</div>
             <div className="space-y-4">
               <button className="w-full rounded-full bg-pink-500 px-6 py-2 text-white transition-colors hover:bg-pink-600">
-                <i className="mr-2"></i>
+                <i className="mr-2" />
                 Add a reminder
               </button>
               <button className="w-full rounded-full px-6 py-2 text-purple-500 transition-colors hover:bg-purple-50">

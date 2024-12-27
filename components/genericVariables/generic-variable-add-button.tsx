@@ -1,12 +1,12 @@
 "use client"
 
-import * as React from "react"
 import { useRouter } from "next/navigation"
+import * as React from "react"
 
-import { Button, ButtonProps } from "@/components/ui/button"
 import { Icons } from "@/components/icons"
+import { Button, ButtonProps } from "@/components/ui/button"
 
-interface GlobalVariableAddButtonProps extends ButtonProps {}
+type GlobalVariableAddButtonProps = ButtonProps
 
 export function GenericVariableAddButton({
   ...props

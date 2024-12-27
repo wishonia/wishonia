@@ -1,10 +1,14 @@
 'use client'
 
-import { useState, useEffect } from 'react'
-import ArticleGrid from '@/components/ArticleGrid'
 import { ArticleStatus } from '@prisma/client'
-import { ArticleWithRelations } from '@/lib/agents/researcher/researcher'
+import { Search, SortAsc, Loader2, ChevronLeft, ChevronRight } from "lucide-react"
+import { useState, useEffect } from 'react'
+
 import { searchArticles } from '@/app/researcher/researcherActions'
+import ArticleGrid from '@/components/ArticleGrid'
+import { Badge } from "@/components/ui/badge"
+import { Button } from '@/components/ui/button'
+import { Input } from "@/components/ui/input"
 import {
   Select,
   SelectContent,
@@ -12,10 +16,7 @@ import {
   SelectTrigger,
   SelectValue,
 } from "@/components/ui/select"
-import { Button } from '@/components/ui/button'
-import { Search, SortAsc, Loader2, ChevronLeft, ChevronRight } from "lucide-react"
-import { Input } from "@/components/ui/input"
-import { Badge } from "@/components/ui/badge"
+import { ArticleWithRelations } from '@/lib/agents/researcher/researcher'
 import { cn } from "@/lib/utils"
 
 type SortOption = {

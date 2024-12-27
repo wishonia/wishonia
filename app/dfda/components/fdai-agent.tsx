@@ -1,6 +1,7 @@
-import React from 'react'
-import Link from 'next/link'
 import { ArrowLeft, Brain, Zap, Database, TrendingUp } from 'lucide-react'
+import Link from 'next/link'
+import React from 'react'
+
 import { Button } from '@/components/ui/button'
 
 export default function FDAiAgentPage() {

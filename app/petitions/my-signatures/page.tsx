@@ -1,7 +1,8 @@
-import { getServerSession } from "next-auth/next"
-import { prisma } from "@/lib/prisma"
 import Link from "next/link"
 import { redirect } from "next/navigation"
+import { getServerSession } from "next-auth/next"
+
+import { prisma } from "@/lib/prisma"
 
 export default async function MySignaturesPage() {
   const session = await getServerSession()

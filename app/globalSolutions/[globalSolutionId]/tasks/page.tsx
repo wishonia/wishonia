@@ -1,7 +1,8 @@
-import GlobalSolutionTaskTree from '@/components/globalSolution/task-tree/global-solution-task-tree'
-import { authOptions } from '@/lib/auth'
 import { redirect } from 'next/navigation'
 import { getServerSession } from 'next-auth'
+
+import GlobalSolutionTaskTree from '@/components/globalSolution/task-tree/global-solution-task-tree'
+import { authOptions } from '@/lib/auth'
 
 interface Props {
   params: {

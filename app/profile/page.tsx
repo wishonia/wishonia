@@ -1,7 +1,10 @@
-import { getServerSession } from "next-auth/next"
 import { redirect } from "next/navigation"
-import ProfileForm from "./ProfileForm"
+import { getServerSession } from "next-auth/next"
+
 import prisma from "@/lib/prisma"
+
+import ProfileForm from "./ProfileForm"
+
 
 export default async function ProfilePage() {
     const session = await getServerSession()

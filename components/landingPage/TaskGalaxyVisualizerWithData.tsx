@@ -1,6 +1,6 @@
 "use client"
-import React, { useState } from 'react';
 import { ChevronDown, ChevronRight, Check, Clock, AlertTriangle, Plus, Users } from 'lucide-react';
+import React, { useState } from 'react';
 
 interface Task {
     id: string;
@@ -34,7 +34,7 @@ const TaskNode: React.FC<TaskNodeProps> = ({ task, level, onStatusChange, onAddS
             case 'blocked':
                 return <AlertTriangle className="text-red-500 dark:text-red-400" />;
             default:
-                return <div className="w-4 h-4 rounded-full border border-gray-300 dark:border-gray-600"></div>;
+                return <div className="w-4 h-4 rounded-full border border-gray-300 dark:border-gray-600" />;
         }
     };
 
@@ -159,7 +159,7 @@ const TaskNode: React.FC<TaskNodeProps> = ({ task, level, onStatusChange, onAddS
 };
 
 const ActionableTaskStrategyVisualizer: React.FC = () => {
-    let taskHierarchy = {
+    const taskHierarchy = {
         id: '1',
         name: "GOAL: Create AI Drug Discovery Platform",
         status: 'in-progress',

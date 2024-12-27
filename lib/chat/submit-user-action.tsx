@@ -3,16 +3,17 @@ import "server-only"
 import { createStreamableUI, getMutableAIState } from "ai/rsc"
 import { nanoid } from "nanoid"
 
+import RateLimited from "@/components/RateLimited"
 import { BotCard } from "@/components/assistant/Message"
 import { ProfileSkeleton } from "@/components/assistant/ProfileSkeleton"
 import { Readme } from "@/components/assistant/Readme"
 import Repositories from "@/components/assistant/Repositories"
 import RepositorySkeleton from "@/components/assistant/RepositorySkeleton"
 import { Spinner } from "@/components/assistant/Spinner"
-import RateLimited from "@/components/RateLimited"
 
 import { Readme as RM } from "../types"
 import { runAsyncFnWithoutBlocking, sleep } from "../utils"
+
 import { AI } from "./actions"
 import {
   checkRateLimit,

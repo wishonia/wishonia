@@ -1,5 +1,5 @@
-import { AgentDefinition } from '../prompt-generator'
 import { globalAttributes, globalFunctions } from '../action-definitions'
+import { AgentDefinition } from '../prompt-generator'
 
 export const githubAgent: AgentDefinition = {
   name: "a GitHub search bot",

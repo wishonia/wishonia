@@ -1,10 +1,11 @@
+import {SharingLevel} from "@prisma/client";
 import { NextResponse } from "next/server"
+
+import { createAgentDatasource } from "@/lib/agent"
 import { prisma } from "@/lib/db"
 import { handleError } from "@/lib/errorHandler"
 import { getCurrentUser } from "@/lib/session"
 import { agentCreateUpdateSchema } from "@/lib/validations/agent"
-import { createAgentDatasource } from "@/lib/agent"
-import {SharingLevel} from "@prisma/client";
 
 export async function GET() {
   try {
@@ -54,7 +55,7 @@ export async function POST(req: Request) {
       },
     })
     if(body.datasources?.length){
-      for(let dataSourceID of body.datasources){
+      for(const dataSourceID of body.datasources){
         await createAgentDatasource(agent.id,dataSourceID)
       }
     }

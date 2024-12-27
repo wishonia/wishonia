@@ -1,5 +1,6 @@
-import { WordPressClient } from './wordpressClient';
 import { MarkdownEnhancer } from '../content/markdownEnhancer';
+
+import { WordPressClient } from './wordpressClient';
 
 export interface PostEnhancementResult {
   success: boolean;

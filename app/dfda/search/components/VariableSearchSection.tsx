@@ -1,7 +1,9 @@
 'use client'
 
 import { useRouter } from 'next/navigation'
+
 import { GlobalVariable } from '@/types/models/GlobalVariable'
+
 import VariableSearchAutocomplete from '../../components/VariableSearchAutocomplete'
 
 export default function VariableSearchSection() {

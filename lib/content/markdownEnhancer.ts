@@ -1,7 +1,7 @@
-import { ContentEnhancer, BlockType } from '../services/content-enhancer';
-import { SourceLinker } from '../services/source-linker';
-import { ImageService } from '../services/image-service';
 import { TavilyClient, TavilySearchResult } from '../clients/tavily';
+import { ContentEnhancer, BlockType } from '../services/content-enhancer';
+import { ImageService } from '../services/image-service';
+import { SourceLinker } from '../services/source-linker';
 
 export interface Source extends TavilySearchResult {
   textToHyperlink: string;

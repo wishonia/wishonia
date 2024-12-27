@@ -2,12 +2,12 @@ import React from "react"
 
 import { GlobalProblemSolutionsList } from "@/components/global-problem-solutions-list"
 import { GlobalProblemsList } from "@/components/global-problems-list"
+import ImpactTrackerVisualizer from "@/components/landingPage/ImpactTrackerVisualizer";
+import ResearchEffortCataloger from "@/components/landingPage/ResearchEffortCataloger";
+import TaskAllocationVisualizer from "@/components/landingPage/TaskAllocationVisualizer";
+import ActionableTaskStrategyVisualizer from "@/components/landingPage/TaskGalaxyVisualizerWithData";
 import { PollRandomGlobalProblemSolutions } from "@/components/poll-random-global-problem-solutions"
 import { PollRandomGlobalProblems } from "@/components/poll-random-global-problems"
-import ActionableTaskStrategyVisualizer from "@/components/landingPage/TaskGalaxyVisualizerWithData";
-import TaskAllocationVisualizer from "@/components/landingPage/TaskAllocationVisualizer";
-import ResearchEffortCataloger from "@/components/landingPage/ResearchEffortCataloger";
-import ImpactTrackerVisualizer from "@/components/landingPage/ImpactTrackerVisualizer";
 
 export interface HowItWorksStep {
   title: string

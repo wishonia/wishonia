@@ -1,7 +1,12 @@
 'use client'
 
-import { useTransition } from 'react'
+import { ChevronLeft, Menu } from 'lucide-react'
+import { History as HistoryIcon } from 'lucide-react'
 import { useRouter } from 'next/navigation'
+import { useTransition } from 'react'
+import { Suspense } from 'react'
+
+import { Button } from '@/components/ui/button'
 import {
   Sheet,
   SheetContent,
@@ -9,13 +14,10 @@ import {
   SheetTitle,
   SheetTrigger
 } from '@/components/ui/sheet'
-import { Button } from '@/components/ui/button'
-import { ChevronLeft, Menu } from 'lucide-react'
 import { cn } from '@/lib/utils'
-import { History as HistoryIcon } from 'lucide-react'
-import { Suspense } from 'react'
-import { HistorySkeleton } from './history-skeleton'
 import { useAppState } from '@/lib/utils/app-state'
+
+import { HistorySkeleton } from './history-skeleton'
 
 type HistoryProps = {
   location: 'sidebar' | 'header'

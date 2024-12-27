@@ -1,9 +1,10 @@
 'use client'
 
 import { signIn } from 'next-auth/react'
-import { Dialog, DialogContent, DialogHeader, DialogTitle, DialogDescription } from '@/components/ui/dialog'
-import { Button } from '@/components/ui/button'
+
 import { Icons } from '@/components/icons'
+import { Button } from '@/components/ui/button'
+import { Dialog, DialogContent, DialogHeader, DialogTitle, DialogDescription } from '@/components/ui/dialog'
 
 interface GitHubConnectModalProps {
   isOpen: boolean

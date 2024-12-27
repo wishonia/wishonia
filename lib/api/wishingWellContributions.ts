@@ -1,6 +1,6 @@
+import { prisma as db } from "@/lib/db"
 import { DateRange, WishingWellByDate, WishingWellEntry } from "@/types"
 
-import { prisma as db } from "@/lib/db"
 
 export async function getWishingWellContributions(
   id: string,
@@ -256,7 +256,7 @@ export async function getWishingWellCountByDate(
   const result: WishingWellByDate[] = []
 
   if (earliestNonZeroDate) {
-    let currentDate = new Date(earliestNonZeroDate)
+    const currentDate = new Date(earliestNonZeroDate)
 
     while (currentDate <= new Date(dateRange.to)) {
       const currentDateISOString = currentDate.toISOString()

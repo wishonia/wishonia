@@ -1,7 +1,7 @@
 "use client"
 
-import React from "react"
 import { motion } from "framer-motion"
+import React from "react"
 
 import { NeoBrutalMarkdown } from "@/components/markdown/neo-brutal-markdown"
 

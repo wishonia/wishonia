@@ -1,10 +1,9 @@
 "use client"
 
-import { useEffect, useState } from "react"
 import { AlertCircle, Github, Loader2 } from "lucide-react"
 import { signIn, useSession } from "next-auth/react"
+import { useEffect, useState } from "react"
 
-import { Button } from "@/components/ui/button"
 import {
   createArticle,
   fetchExistingArticles,
@@ -12,6 +11,7 @@ import {
   fetchGithubOrganizations,
   fetchGithubRepositories,
 } from "@/app/github/githubActions"
+import { Button } from "@/components/ui/button"
 
 import { FileBrowser } from "./FileBrowser"
 import { OrganizationSelector } from "./OrganizationSelector"

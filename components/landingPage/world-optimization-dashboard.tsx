@@ -1,7 +1,8 @@
 "use client"
+import React from "react";
+
 import GlobalCoordinationAgent from "@/components/landingPage/global-coordination-agent";
 import GlobalHealthOptimizationAgent from "@/components/landingPage/global-health-optimization-agent";
-import React from "react";
 
 const WorldOptimizationHeader = () => {
   return (
@@ -26,8 +27,8 @@ const WorldOptimizationDashboard = () => {
       <WorldOptimizationHeader />
 
       <main className="flex flex-col justify-center p-2 md:flex-row md:flex-wrap">
-        <GlobalCoordinationAgent></GlobalCoordinationAgent>
-        <GlobalHealthOptimizationAgent></GlobalHealthOptimizationAgent>
+        <GlobalCoordinationAgent />
+        <GlobalHealthOptimizationAgent />
       </main>
     </div>
   );

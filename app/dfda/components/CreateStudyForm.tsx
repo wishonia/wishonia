@@ -1,16 +1,24 @@
 'use client'
 
-import { useState } from 'react'
-import { GlobalVariable } from '@/types/models/GlobalVariable'
-import { createStudy } from '../dfdaActions'
-import OutcomeSearchAutocomplete from './OutcomeSearchAutocomplete'
-import { useRouter } from 'next/navigation'
-import VariableSearchAutocomplete from './VariableSearchAutocomplete'
-import { LoginPromptButton } from '@/components/LoginPromptButton'
 import Image from 'next/image'
+import { useRouter } from 'next/navigation'
+import { useState } from 'react'
+
+import { LoginPromptButton } from '@/components/LoginPromptButton'
 import { Button } from '@/components/ui/button'
-import StudyCard from './StudyCard'
+import { GlobalVariable } from '@/types/models/GlobalVariable'
 import { Study } from '@/types/models/Study'
+
+import { createStudy } from '../dfdaActions'
+
+import OutcomeSearchAutocomplete from './OutcomeSearchAutocomplete'
+import StudyCard from './StudyCard'
+import VariableSearchAutocomplete from './VariableSearchAutocomplete'
+
+
+
+
+
 
 interface CreateStudyFormProps {
   userId?: string
@@ -176,7 +184,7 @@ export default function CreateStudyForm({ userId }: CreateStudyFormProps) {
         >
           {isLoading ? (
             <>
-              <span className="neobrutalist-loading-spinner"></span>
+              <span className="neobrutalist-loading-spinner" />
               Creating Study...
             </>
           ) : (

@@ -1,4 +1,5 @@
 import { OpenAIStream, StreamingTextResponse } from 'ai';
+
 import { perplexity } from '@/lib/chat/perplexity';
 
 export async function POST(req: Request) {

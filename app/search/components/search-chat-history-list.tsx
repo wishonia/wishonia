@@ -1,8 +1,10 @@
 import React, { cache } from 'react'
-import HistoryItem from './history-item'
-import { Chat } from '@/lib/types/index'
+
 import { getSearchChats } from '@/lib/actions/searchChat'
+import { Chat } from '@/lib/types/index'
+
 import { ClearHistory } from './clear-history'
+import HistoryItem from './history-item'
 
 type HistoryListProps = {
   userId?: string

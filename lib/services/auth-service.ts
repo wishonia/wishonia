@@ -1,5 +1,6 @@
-import prisma from '@/lib/prisma'
 import type { ApiKey, Subscription } from '@prisma/client'
+
+import prisma from '@/lib/prisma'
 
 export type ApiKeyWithRelations = ApiKey & {
   requestPerMinute?: number

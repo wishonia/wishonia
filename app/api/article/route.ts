@@ -1,9 +1,10 @@
 import { NextRequest, NextResponse } from 'next/server'
+
 import { MarkdownEnhancer } from '@/lib/content/markdownEnhancer'
 import { validateApiKey, validateSubscription } from '@/lib/services/auth-service'
 import type { ApiKeyWithRelations } from '@/lib/services/auth-service'
-import { CacheService } from '@/lib/services/cache-service'
 import { getEndpointPricing, trackEndpointUsage, logApiRequest } from '@/lib/services/billing-service'
+import { CacheService } from '@/lib/services/cache-service'
 import { withRateLimit } from '@/middleware/rateLimiter'
 
 

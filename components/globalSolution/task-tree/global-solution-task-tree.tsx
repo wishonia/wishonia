@@ -1,13 +1,14 @@
 'use client'
 
+import Link from 'next/link'
 import { useEffect, useState } from 'react'
+
+import { getGlobalSolutionTasks, getGlobalSolution } from '@/app/globalSolutions/[globalSolutionId]/tasks/actions'
 import { TaskTreeNode } from '@/components/globalSolution/task-tree/task-tree-node'
 import GlobalBrainNetwork from '@/components/landingPage/global-brain-network'
-import { getGlobalSolutionTasks, getGlobalSolution } from '@/app/globalSolutions/[globalSolutionId]/tasks/actions'
-import { GlobalTaskWithChildren } from '@/types/globalTask'
-import { Card, CardHeader, CardTitle, CardContent } from "@/components/ui/card"
-import Link from 'next/link'
 import { Button } from "@/components/ui/button"
+import { Card, CardHeader, CardTitle, CardContent } from "@/components/ui/card"
+import { GlobalTaskWithChildren } from '@/types/globalTask'
 
 interface GlobalSolution {
   id: string

@@ -1,6 +1,5 @@
 "use client"
 
-import * as React from "react"
 import { useCompletion } from "ai/react"
 import {
   CornerDownLeft,
@@ -11,6 +10,7 @@ import {
   Wand,
   X,
 } from "lucide-react"
+import * as React from "react"
 import ReactMarkdown from "react-markdown"
 import rehypeRaw from "rehype-raw"
 
@@ -79,7 +79,7 @@ export function AskAISearchDialog() {
         dark:hover:text-slate-300 "
       >
         <Sparkle width={15} />
-        <span className="h-5 border border-l"></span>
+        <span className="h-5 border border-l" />
         <span className="ml-4 inline-block">Ask AI...</span>
       </button>
       <Dialog open={open}>

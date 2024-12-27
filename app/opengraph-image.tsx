@@ -1,12 +1,12 @@
 import { ImageResponse } from "next/og"
 
-import { getMediumFont } from "@/lib/utils"
-import { OgImage } from "@/components/OgImage"
 import {
   sharedDescription,
   sharedImage,
   sharedTitle,
 } from "@/app/shared-metadata"
+import { OgImage } from "@/components/OgImage"
+import { getMediumFont } from "@/lib/utils"
 
 export const runtime = "edge"
 

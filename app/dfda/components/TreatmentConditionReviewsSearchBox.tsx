@@ -1,10 +1,11 @@
 'use client'
 
-import { useState, useEffect, useRef } from 'react'
-import { Input } from "@/components/ui/input"
 import {Loader2, Search} from "lucide-react"
 import Link from 'next/link'
+import { useState, useEffect, useRef } from 'react'
+
 import {searchTreatmentsAndConditions} from "@/app/dfda/dfdaActions";
+import { Input } from "@/components/ui/input"
 
 type SearchResult = {
     id: number

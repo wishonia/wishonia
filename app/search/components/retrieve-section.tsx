@@ -1,6 +1,7 @@
 import React from 'react'
-import { Section } from '@/app/search/components/section'
+
 import { SearchResults } from '@/app/search/components/search-results'
+import { Section } from '@/app/search/components/section'
 import { SearchResults as SearchResultsType } from '@/lib/types/index'
 
 interface RetrieveSectionProps {

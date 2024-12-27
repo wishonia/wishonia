@@ -1,6 +1,5 @@
 import Link from "next/link"
 
-import { getUsersWithReferrerCount } from "@/lib/prisma/users"
 import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar"
 import {
   Card,
@@ -10,6 +9,7 @@ import {
   CardTitle,
 } from "@/components/ui/card"
 import { siteConfig } from "@/config/site"
+import { getUsersWithReferrerCount } from "@/lib/prisma/users"
 
 export const getInitials = (name: string) => {
   const words = name.split(" ")

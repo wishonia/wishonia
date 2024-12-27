@@ -1,10 +1,10 @@
 "use client"
 
-import { useEffect, useRef, useState } from "react"
 import { useRouter } from "next/navigation"
+import { useEffect, useRef, useState } from "react"
 
-import { GlobalVariable } from "@/types/models/GlobalVariable"
 import { searchVariables } from "@/app/dfda/dfdaActions"
+import { GlobalVariable } from "@/types/models/GlobalVariable"
 
 export function SearchAutocomplete() {
   const router = useRouter()

@@ -1,6 +1,7 @@
 "use client"
 
 import { Prisma } from "@prisma/client"
+
 import { PeopleList } from "@/components/people/PeopleList"
 import { Button } from "@/components/ui/button"
 

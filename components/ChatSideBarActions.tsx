@@ -1,10 +1,10 @@
 "use client"
 
-import * as React from "react"
-import { useRouter } from "next/navigation"
 import { Trash } from "@phosphor-icons/react"
+import {Chat} from "@prisma/client";
+import { useRouter } from "next/navigation"
+import * as React from "react"
 
-import { ServerActionResult } from "@/lib/types"
 import {
   AlertDialog,
   AlertDialogAction,
@@ -21,10 +21,11 @@ import {
   TooltipContent,
   TooltipTrigger,
 } from "@/components/ui/tooltip"
+import { ServerActionResult } from "@/lib/types"
 
 import LoadingSpinner from "./LoadingSpinner"
 import { useToast } from "./ui/use-toast"
-import {Chat} from "@prisma/client";
+
 
 interface SidebarActionsProps {
   chat: Chat

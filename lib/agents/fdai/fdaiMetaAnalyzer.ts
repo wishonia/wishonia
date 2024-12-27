@@ -1,8 +1,9 @@
-import { z } from "zod";
 import { generateObject } from "ai";
 import Exa from 'exa-js';
-import {getModel} from "@/lib/utils/modelUtils";
+import { z } from "zod";
+
 import { generateMetaAnalysisQuery } from '@/lib/meta-analysis/metaAnalysisQueries';
+import {getModel} from "@/lib/utils/modelUtils";
 
 const exa = new Exa(process.env.EXA_API_KEY);
 

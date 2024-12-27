@@ -1,7 +1,8 @@
-import { Suspense } from "react"
 import { redirect } from "next/navigation"
 import { getServerSession } from "next-auth/next"
+import { Suspense } from "react"
 
+import GlobalBrainNetwork from "@/components/landingPage/global-brain-network";
 import { authOptions } from "@/lib/auth"
 
 import {
@@ -15,7 +16,6 @@ import DocsSidebar from "./components/DocsSidebar"
 import GitHubConnectModal from "./components/GitHubConnectModal"
 import MobileHeader from "./components/MobileHeader"
 import { MenuItem, parseSummaryMd } from "./lib/parseSummary"
-import GlobalBrainNetwork from "@/components/landingPage/global-brain-network";
 
 interface PageProps {
   params: {

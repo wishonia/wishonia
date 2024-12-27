@@ -1,9 +1,9 @@
 "use client"
 
-import React from "react"
-import Link from "next/link"
 import { motion } from "framer-motion"
 import { ArrowRight } from "lucide-react"
+import Link from "next/link"
+import React from "react"
 
 import { ListStudiesRequest, Study } from "../../lib/clinical-trials-gov"
 

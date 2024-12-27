@@ -1,7 +1,7 @@
 "use client"
 
-import React, { useState } from "react"
 import { AlertTriangle, X } from "lucide-react"
+import React, { useState } from "react"
 
 interface WorkInProgressBannerProps {
   message?: React.ReactNode

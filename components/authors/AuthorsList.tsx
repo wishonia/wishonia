@@ -1,10 +1,12 @@
 'use client'
 
 import Link from "next/link"
-import { Badge } from "@/components/ui/badge"
-import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar"
-import SearchFilter from "@/components/ui/SearchFilter"
 import { useState } from "react"
+
+import SearchFilter from "@/components/ui/SearchFilter"
+import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar"
+import { Badge } from "@/components/ui/badge"
+
 
 type Author = {
   id: string

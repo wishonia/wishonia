@@ -1,12 +1,12 @@
 import { Metadata } from "next"
 
-import { getCurrentUser } from "@/lib/session"
-import { Shell } from "@/components/layout/shell"
 import { GlobalProblemSolutionsList } from "@/components/global-problem-solutions-list"
+import { Shell } from "@/components/layout/shell"
+import { getCurrentUser } from "@/lib/session"
 
 interface GlobalProblemsProps {}
-let heading = `Solutions for the problem`
-let metaDescription = `Vote on the best solutions to the problem and see the average results below!`
+const heading = `Solutions for the problem`
+const metaDescription = `Vote on the best solutions to the problem and see the average results below!`
 export async function generateMetadata({}: GlobalProblemsProps): Promise<Metadata> {
   return {
     title: heading,
@@ -27,7 +27,7 @@ export default async function GlobalProblemSolutionsPage({
       <GlobalProblemSolutionsList
         user={user}
         globalProblemId={globalProblemId}
-      ></GlobalProblemSolutionsList>
+       />
     </Shell>
   )
 }

@@ -1,5 +1,7 @@
 import React from 'react'
+
 import { Card, CardHeader, CardTitle, CardDescription, CardContent } from "@/components/ui/card"
+
 import ConditionSearchAutocomplete from './ConditionSearchAutocomplete'
 
 export default function TopTreatments() {

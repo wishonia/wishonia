@@ -90,7 +90,7 @@ const SpendingOnDiseasesVsMilitary = () => {
         ref={chartContainerRef}
         id="spending-on-diseases-vs-military-chart-container"
         style={{ height: "auto", position: "relative" }}
-      ></div>
+       />
     </>
   )
 }

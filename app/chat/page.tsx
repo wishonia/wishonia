@@ -1,6 +1,6 @@
+import Chat from "@/components/Chat"
 import { AI } from "@/lib/chat/actions"
 import { nanoid } from "@/lib/utils"
-import Chat from "@/components/Chat"
 
 import { getMissingKeys } from "../actions"
 

@@ -1,15 +1,16 @@
-import React, { useMemo } from "react"
 import { User } from "next-auth"
+import React, { useMemo } from "react"
+
+import {GlobalProblemSolutionsList} from "@/components/global-problem-solutions-list";
+import {GlobalProblemsList} from "@/components/global-problems-list";
+import ImpactTrackerVisualizer from "@/components/landingPage/ImpactTrackerVisualizer";
+import ResearchEffortCataloger from "@/components/landingPage/ResearchEffortCataloger";
+import TaskAllocationVisualizer from "@/components/landingPage/TaskAllocationVisualizer";
+import ActionableTaskStrategyVisualizer from "@/components/landingPage/TaskGalaxyVisualizerWithData";
+import {PollRandomGlobalProblemSolutions} from "@/components/poll-random-global-problem-solutions";
+import {PollRandomGlobalProblems} from "@/components/poll-random-global-problems";
 
 import HowItWorksItem from "./HowItWorksItem"
-import {PollRandomGlobalProblems} from "@/components/poll-random-global-problems";
-import {GlobalProblemsList} from "@/components/global-problems-list";
-import {GlobalProblemSolutionsList} from "@/components/global-problem-solutions-list";
-import {PollRandomGlobalProblemSolutions} from "@/components/poll-random-global-problem-solutions";
-import ActionableTaskStrategyVisualizer from "@/components/landingPage/TaskGalaxyVisualizerWithData";
-import TaskAllocationVisualizer from "@/components/landingPage/TaskAllocationVisualizer";
-import ResearchEffortCataloger from "@/components/landingPage/ResearchEffortCataloger";
-import ImpactTrackerVisualizer from "@/components/landingPage/ImpactTrackerVisualizer";
 
 interface HowItWorksSectionProps {
   user?: User

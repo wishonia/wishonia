@@ -1,6 +1,6 @@
+import { GlobalProblem } from "@prisma/client";
 import React, { useState } from 'react';
 import { PieChart, Pie, Cell, ResponsiveContainer } from 'recharts';
-import { GlobalProblem } from "@prisma/client";
 
 interface CoolGlobalProblemsPieChartProps {
     entries: GlobalProblem[];

@@ -1,4 +1,5 @@
 import fs from "fs"
+
 import { GlobalProblem, GlobalSolution } from "@prisma/client"
 
 import { prisma } from "@/lib/db"

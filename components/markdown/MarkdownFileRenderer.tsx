@@ -1,18 +1,19 @@
 "use client"
 
-import React, { FC, useEffect, useState } from "react"
-import Link from "next/link"
-import Script from "next/script"
 import axios from "axios"
 import matter from "gray-matter"
+import Link from "next/link"
+import Script from "next/script"
+import React, { FC, useEffect, useState } from "react"
 import { AiFillGithub } from "react-icons/ai"
 import ReactMarkdown from "react-markdown"
 import rehypeRaw from "rehype-raw"
 
-import { siteConfig } from "@/config/site"
 import { SpinningLoader } from "@/components/spinningLoader"
+import { siteConfig } from "@/config/site"
 
 import { Button } from "../ui/button"
+
 import { NeoBrutalMarkdown } from "./neo-brutal-markdown"
 
 interface MarkdownRendererProps {
@@ -175,7 +176,7 @@ const MarkdownFileRenderer: FC<MarkdownRendererProps> = ({
           <div className="flex items-center justify-end gap-x-2">
             <Link href={githubEditUrl} target={"_blank"}>
               <Button variant={variant}>
-                <AiFillGithub className="mr-2"></AiFillGithub>
+                <AiFillGithub className="mr-2" />
                 Edit Me on GitHub
               </Button>
             </Link>

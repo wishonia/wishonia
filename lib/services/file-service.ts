@@ -1,5 +1,6 @@
 import { writeFileSync, mkdirSync } from 'fs'
 import path from 'path'
+
 import { ArticleMetadata } from '../schemas/article'
 
 export class FileService {

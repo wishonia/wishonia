@@ -1,21 +1,21 @@
 "use client"
 
-import React from "react"
 import { Check, Copy, File, FolderSimple } from "@phosphor-icons/react"
+import React from "react"
 import { Prism as SyntaxHighlighter } from "react-syntax-highlighter"
 import { vscDarkPlus } from "react-syntax-highlighter/dist/cjs/styles/prism"
 
-import { useCopyToClipboard } from "@/lib/hooks/use-copy-to-clipboard"
-import { useDecoder } from "@/lib/hooks/use-decoder"
-import { useGetDirectoryContent } from "@/lib/hooks/use-get-directory-content"
-import { Directory as Dir } from "@/lib/types"
-import { useUserIdClient } from "@/lib/useUserIdClient"
 import {
   Accordion,
   AccordionContent,
   AccordionItem,
   AccordionTrigger,
 } from "@/components/ui/accordion"
+import { useCopyToClipboard } from "@/lib/hooks/use-copy-to-clipboard"
+import { useDecoder } from "@/lib/hooks/use-decoder"
+import { useGetDirectoryContent } from "@/lib/hooks/use-get-directory-content"
+import { Directory as Dir } from "@/lib/types"
+import { useUserIdClient } from "@/lib/useUserIdClient"
 
 import AssistantDisplay from "../AssistantDisplay"
 import { Button } from "../ui/button"

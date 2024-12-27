@@ -1,7 +1,8 @@
 import { notFound } from 'next/navigation'
+
+import { AI } from '@/app/search/actions'
 import { Chat } from '@/app/search/components/chat'
 import { getSharedSearchChat } from '@/lib/actions/searchChat'
-import { AI } from '@/app/search/actions'
 
 export interface SharePageProps {
   params: {

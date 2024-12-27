@@ -1,10 +1,10 @@
 import Link from "next/link"
 
-import { siteConfig } from "@/config/site"
-import { cn } from "@/lib/utils"
-import { buttonVariants } from "@/components/ui/button"
 import HeadingText from "@/components/heading-text"
 import { Icons } from "@/components/icons"
+import { buttonVariants } from "@/components/ui/button"
+import { siteConfig } from "@/config/site"
+import { cn } from "@/lib/utils"
 
 export default async function OpenSource() {
   const { stargazers_count: stars } = await fetch(

@@ -1,9 +1,9 @@
 import { Metadata } from "next"
 import { notFound } from "next/navigation"
 
-import { getGlobalWishingWell } from "@/lib/api/wishingWells"
 import { Shell } from "@/components/layout/shell"
 import MarkdownRendererForItem from "@/components/markdown/MarkdownRendererForItem"
+import { getGlobalWishingWell } from "@/lib/api/wishingWells"
 
 interface WishingWellPageProps {
   params: { wishingWellId: string }
@@ -50,7 +50,7 @@ export default async function WishingWellPage({
           </WishingWellOperations>
         </div>
       </DashboardHeader>*/}
-      <MarkdownRendererForItem item={wishingWell}></MarkdownRendererForItem>
+      <MarkdownRendererForItem item={wishingWell} />
     </Shell>
   )
 }

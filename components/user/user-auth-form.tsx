@@ -1,11 +1,11 @@
 "use client"
 
-import * as React from "react"
 import { signIn } from "next-auth/react"
+import * as React from "react"
 
-import { cn } from "@/lib/utils"
-import { buttonVariants } from "@/components/ui/button"
 import { Icons } from "@/components/icons"
+import { buttonVariants } from "@/components/ui/button"
+import { cn } from "@/lib/utils"
 
 interface UserAuthFormProps extends React.HTMLAttributes<HTMLDivElement> {
   callbackUrl?: string
@@ -132,7 +132,7 @@ export function UserAuthForm({
 
               <div className="relative my-4">
                 <div className="absolute inset-0 flex items-center">
-                  <div className="w-full border-t border-gray-300"></div>
+                  <div className="w-full border-t border-gray-300" />
                 </div>
                 <div className="relative flex justify-center text-sm">
                   <span className="bg-white px-2 text-gray-500">OR</span>

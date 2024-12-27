@@ -1,13 +1,13 @@
 "use client"
 
-import React from "react"
-import Image from "next/image"
-import Link from "next/link"
 import { Gear, SignOut } from "@phosphor-icons/react"
 import { DropdownMenuItem } from "@radix-ui/react-dropdown-menu"
+import Image from "next/image"
+import Link from "next/link"
 import { signIn, signOut, useSession } from "next-auth/react"
+import React from "react"
 
-import { avatarNav } from "@/config/navigation/general-nav"
+import { Icons } from "@/components/icons"
 import {
   DropdownMenu,
   DropdownMenuContent,
@@ -16,7 +16,7 @@ import {
   DropdownMenuSeparator,
   DropdownMenuTrigger,
 } from "@/components/ui/dropdown-menu"
-import { Icons } from "@/components/icons"
+import { avatarNav } from "@/config/navigation/general-nav"
 
 import { Button } from "./ui/button"
 import { Skeleton } from "./ui/skeleton"

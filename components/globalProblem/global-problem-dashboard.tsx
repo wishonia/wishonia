@@ -1,25 +1,29 @@
 'use client';
 
-import { useEffect, useState } from 'react';
 import { GlobalProblem, FocusLevel, ExpertiseLevel, Prisma } from '@prisma/client';
 import { BarChart, Book, ChevronDown, ChevronUp, Clock, FlaskRoundIcon as Flask, MessageSquare, Trophy, Building2, Users2 } from 'lucide-react';
-import { GlobalProblemDashboardData } from "@/lib/schemas/global-problem-dashboard";
+import { useEffect, useState } from 'react';
+
+import { generateGlobalProblemDashboard, getGlobalProblemRelationshipsAction } from "@/app/actions/generate-global-problem-dashboard"
 import { Accordion, AccordionContent, AccordionItem, AccordionTrigger } from '@/components/ui/accordion';
+import { Badge } from '@/components/ui/badge';
 import { BarChart as BarChartComponent } from '@/components/ui/bar-chart';
 import { Button } from '@/components/ui/button';
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '@/components/ui/card';
 import { ScrollArea } from '@/components/ui/scroll-area';
 import { Timeline, TimelineItem } from '@/components/ui/timeline';
-import { generateGlobalProblemDashboard, getGlobalProblemRelationshipsAction } from "@/app/actions/generate-global-problem-dashboard"
+import { GlobalProblemDashboardData } from "@/lib/schemas/global-problem-dashboard";
+import { ExtendedUser } from '@/types/auth';
+
 import { GlobalProblemSolutionsList } from '../global-problem-solutions-list';
 import GlobalCoordinationAgent from '../landingPage/global-coordination-agent';
-import { ExtendedUser } from '@/types/auth';
 import { PollRandomGlobalProblemSolutions } from '../poll-random-global-problem-solutions';
-import { GlobalProblemRenderer } from './GlobalProblemRenderer';
-import { Badge } from '@/components/ui/badge';
-
 
 import { GlobalProblemOrganizationsList } from './GlobalProblemOrganizationsList'
+import { GlobalProblemRenderer } from './GlobalProblemRenderer';
+
+
+
 
 interface GlobalProblemDashboardProps {
   globalProblem: GlobalProblem;
@@ -120,7 +124,7 @@ export default function GlobalProblemDashboard({ globalProblem, user }: GlobalPr
          <GlobalCoordinationAgent 
          title={`Initializing ${globalProblem.name} Solving Agent`}
          initialIssue={globalProblem.name}
-         ></GlobalCoordinationAgent>
+          />
       </div>
     )
   }

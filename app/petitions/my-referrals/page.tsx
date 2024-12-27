@@ -1,8 +1,9 @@
-import { getServerSession } from "next-auth/next"
-import { prisma } from "@/lib/prisma"
 import Link from "next/link"
 import { redirect } from "next/navigation"
+import { getServerSession } from "next-auth/next"
+
 import { Card } from "@/components/ui/card"
+import { prisma } from "@/lib/prisma"
 
 export default async function MyReferralsPage() {
   const session = await getServerSession()

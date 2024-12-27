@@ -1,8 +1,7 @@
 "use client"
 
-import { useRouter } from "next/navigation"
-import { NavItem } from "@/types"
 import { Inset } from "@radix-ui/themes"
+import { useRouter } from "next/navigation"
 
 import {
   Card,
@@ -10,6 +9,8 @@ import {
   CardHeader,
   CardTitle,
 } from "@/components/ui/card"
+import { NavItem } from "@/types"
+
 
 interface ToolCardProps {
   navItem: NavItem

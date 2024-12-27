@@ -1,8 +1,8 @@
-import { z } from 'zod';
-import { generateObject } from 'ai';
-import { Octokit } from '@octokit/rest';
 import { anthropic } from "@ai-sdk/anthropic";
 import { LanguageModelV1 } from "@ai-sdk/provider";
+import { Octokit } from '@octokit/rest';
+import { generateObject } from 'ai';
+import { z } from 'zod';
 
 const GeneratedIssueSchema = z.object({
   title: z.string().describe('The title of the GitHub issue'),

@@ -1,7 +1,7 @@
 "use client"
 
-import Link from "next/link"
 import { Warning } from "@phosphor-icons/react"
+import Link from "next/link"
 
 function RateLimited() {
   return (

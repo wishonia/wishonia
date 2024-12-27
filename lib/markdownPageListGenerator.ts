@@ -1,5 +1,4 @@
 import { MarkdownPage } from "@/interfaces/markdownPage"
-
 import { absPathFromPublic, absPathFromRepo } from "@/lib/fileHelper"
 import { readAllMarkdownFiles } from "@/lib/markdownReader"
 

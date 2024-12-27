@@ -1,7 +1,8 @@
 'use client'
 
-import { Study } from '@/types/models/Study'
 import Image from 'next/image'
+
+import { Study } from '@/types/models/Study'
 
 interface StudyHeaderHtmlProps {
   study: Study

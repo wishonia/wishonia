@@ -8,7 +8,7 @@ function getOutputFilePath(
   pythonProjectDirectory: string,
   outputDirectory: string
 ) {
-  let outputFilePath = filePath.replace(".py", ".ts")
+  const outputFilePath = filePath.replace(".py", ".ts")
   return outputFilePath.replace(pythonProjectDirectory, outputDirectory)
 }
 const convertPythonToGithubIssue = async (
@@ -72,7 +72,7 @@ export const convertPythonProjectToNextJS = async (
   const pythonFiles = getPythonFiles(pythonProjectDirectory)
   for (const file of pythonFiles) {
     const pythonCode = readFileContent(file)
-    let outputFilePath = getOutputFilePath(
+    const outputFilePath = getOutputFilePath(
       file,
       pythonProjectDirectory,
       outputDirectory
@@ -110,7 +110,7 @@ const getPythonFiles = (directory: string): string[] => {
   const folders = entries.filter((entry) => entry.isDirectory())
 
   for (const folder of folders) {
-    let directory1 = path.join(directory, folder.name)
+    const directory1 = path.join(directory, folder.name)
     files.push(...getPythonFiles(directory1))
   }
 

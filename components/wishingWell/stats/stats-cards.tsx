@@ -1,10 +1,10 @@
 "use client"
 
+import { Icons } from "@/components/icons"
+import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card"
+import { formatDate } from "@/lib/utils"
 import { SearchParams } from "@/types"
 
-import { formatDate } from "@/lib/utils"
-import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card"
-import { Icons } from "@/components/icons"
 
 interface StatsCardsProps {
   data: {

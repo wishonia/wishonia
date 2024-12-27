@@ -1,6 +1,7 @@
 "use client"
 
 import {Chat} from "@prisma/client";
+
 import { removeChat } from "@/app/actions"
 
 import ChatSideBarActions from "./ChatSideBarActions"

@@ -1,13 +1,13 @@
 "use client"
 
-import { useEffect, useState } from "react"
 import type { Account } from "@prisma/client"
 import { Loader2 } from "lucide-react"
 import { signIn, useSession } from "next-auth/react"
+import { useEffect, useState } from "react"
 
+import { Icons } from "@/components/icons"
 import { Button } from "@/components/ui/button"
 import { useToast } from "@/components/ui/use-toast"
-import { Icons } from "@/components/icons"
 
 interface ConnectionsListProps {
   connectedAccounts: Account[]

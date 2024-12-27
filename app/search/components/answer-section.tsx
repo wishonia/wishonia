@@ -1,10 +1,11 @@
 'use client'
 
-import { Section } from './section'
 import { StreamableValue, useStreamableValue } from 'ai/rsc'
-import { BotMessage } from './message'
 import { useEffect, useState } from 'react'
+
 import { DefaultSkeleton } from './default-skeleton'
+import { BotMessage } from './message'
+import { Section } from './section'
 
 export type AnswerSectionProps = {
   result?: StreamableValue<string>

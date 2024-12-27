@@ -1,6 +1,6 @@
-import { getCurrentUser } from "@/lib/session"
-import { Shell } from "@/components/layout/shell"
 import ReferrerCapture from "@/components/ReferrerCapture"
+import { Shell } from "@/components/layout/shell"
+import { getCurrentUser } from "@/lib/session"
 
 interface ReferrerPageProps {
   params: { referrerId: string }

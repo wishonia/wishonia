@@ -1,13 +1,14 @@
 "use client"
 
-import { useState, useEffect } from "react"
 import { GlobalProblem, Prisma } from "@prisma/client"
 import { Search } from "lucide-react"
-import { Input } from "@/components/ui/input"
-import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card"
-import { Badge } from "@/components/ui/badge"
-import { ExtendedUser } from "@/types/auth"
+import { useState, useEffect } from "react"
+
 import { getGlobalProblemRelationshipsAction } from "@/app/actions/generate-global-problem-dashboard"
+import { Badge } from "@/components/ui/badge"
+import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card"
+import { Input } from "@/components/ui/input"
+import { ExtendedUser } from "@/types/auth"
 
 type PersonWithRelations = Prisma.PersonGlobalProblemGetPayload<{
   include: { person: true }

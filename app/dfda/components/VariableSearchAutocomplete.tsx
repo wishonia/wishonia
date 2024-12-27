@@ -2,9 +2,10 @@
 
 import { useEffect, useRef, useState } from "react"
 
-import { GlobalVariable } from "@/types/models/GlobalVariable"
-import { searchDfdaVariables } from "../dfdaActions"
 import { Input } from "@/components/ui/input"
+import { GlobalVariable } from "@/types/models/GlobalVariable"
+
+import { searchDfdaVariables } from "../dfdaActions"
 
 interface VariableSearchAutocompleteProps {
   onVariableSelect: (variable: GlobalVariable) => void
@@ -182,7 +183,7 @@ export default function VariableSearchAutocomplete({
         <div className="absolute z-10 mt-2 w-full rounded-xl border-4 border-black bg-white shadow-lg">
           {isLoading && (
             <div className="flex items-center gap-2 px-4 py-2 text-gray-500">
-              <div className="h-4 w-4 animate-spin rounded-full border-2 border-gray-300 border-t-blue-500"></div>
+              <div className="h-4 w-4 animate-spin rounded-full border-2 border-gray-300 border-t-blue-500" />
               <span>Searching...</span>
             </div>
           )}

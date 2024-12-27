@@ -1,11 +1,11 @@
 "use client"
 
-import { useEffect, useState } from "react"
 import { Loader2, RefreshCw, Trash2 } from "lucide-react"
+import { useEffect, useState } from "react"
 
-import { cn } from "@/lib/utils"
 import { Button } from "@/components/ui/button"
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card"
+import { cn } from "@/lib/utils"
 
 import { clearGithubRequestLogs, getGithubRequestLogs } from "../actions"
 

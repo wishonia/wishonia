@@ -1,7 +1,8 @@
 import { notFound, redirect } from 'next/navigation'
+
+import { AI } from '@/app/search/actions'
 import { Chat } from '@/app/search/components/chat'
 import { getSearchChat } from '@/lib/actions/searchChat'
-import { AI } from '@/app/search/actions'
 
 export const maxDuration = 60
 

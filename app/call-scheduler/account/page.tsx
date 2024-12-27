@@ -1,3 +1,6 @@
+import { redirect } from "next/navigation"
+import { getServerSession } from "next-auth/next"
+
 import { Button } from "@/components/ui/button"
 import {
   Card,
@@ -7,11 +10,10 @@ import {
   CardHeader,
   CardTitle,
 } from "@/components/ui/card"
-import prisma from "@/lib/prisma"
-import { createStripeCheckoutSession, createStripePortalSession } from "../actions"
 import { authOptions } from "@/lib/auth"
-import { getServerSession } from "next-auth/next"
-import { redirect } from "next/navigation"
+import prisma from "@/lib/prisma"
+
+import { createStripeCheckoutSession, createStripePortalSession } from "../actions"
 
 export default async function AccountPage() {
   const session = await getServerSession(authOptions)

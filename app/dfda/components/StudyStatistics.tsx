@@ -1,13 +1,14 @@
 'use client'
 
-import { Correlation } from '@/types/models/Correlation'
+import { InfoIcon } from 'lucide-react'
+
 import {
   Tooltip,
   TooltipContent,
   TooltipProvider,
   TooltipTrigger,
 } from "@/components/ui/tooltip"
-import { InfoIcon } from 'lucide-react'
+import { Correlation } from '@/types/models/Correlation'
 
 type StatisticsProps = Pick<Correlation, 
   | 'correlationCoefficient'

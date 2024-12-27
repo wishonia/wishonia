@@ -2,7 +2,7 @@
 import { undefined } from "zod"
 
 export const postVoteData = async (): Promise<any> => {
-  let referrerUserId = localStorage.getItem("referrerUserId")
+  const referrerUserId = localStorage.getItem("referrerUserId")
   localStorage.removeItem("referrerUserId")
   const wishingWellPairAllocation = localStorage.getItem(
     "wishingWellPairAllocation"

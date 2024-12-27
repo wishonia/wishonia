@@ -1,6 +1,7 @@
 import React from 'react'
-import { SearchChatHistory } from './searchChatHistory'
+
 import { SearchChatHistoryList } from './search-chat-history-list'
+import { SearchChatHistory } from './searchChatHistory'
 
 type HistoryContainerProps = {
   location: 'sidebar' | 'header'

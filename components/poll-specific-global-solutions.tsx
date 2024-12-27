@@ -1,8 +1,8 @@
 "use client"
 
-import React from "react"
 import { GlobalSolution, GlobalSolutionPairAllocation } from "@prisma/client"
 import { User } from "next-auth"
+import React from "react"
 
 import { PollSpecificGeneral } from "@/components/poll-specific-general"
 

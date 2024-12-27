@@ -1,17 +1,20 @@
-import { Button } from "@/components/ui/button"
-import { Card, CardContent } from "@/components/ui/card"
 import { Heart, Phone, Users, FileText, UserPlus, PhoneCall, Bell } from "lucide-react"
+import Link from "next/link"
+import { redirect } from "next/navigation"
+import { getServerSession } from "next-auth/next"
+
 import {
   Accordion,
   AccordionContent,
   AccordionItem,
   AccordionTrigger,
 } from "@/components/ui/accordion"
-import { getServerSession } from "next-auth/next"
+import { Button } from "@/components/ui/button"
+import { Card, CardContent } from "@/components/ui/card"
 import { authOptions } from "@/lib/auth"
+
 import { DemoPhoneNumberInput } from "./components/DemoPhoneNumberInput"
-import Link from "next/link"
-import { redirect } from "next/navigation"
+
 
 export default async function CallSchedulerPage() {
   const session = await getServerSession(authOptions)

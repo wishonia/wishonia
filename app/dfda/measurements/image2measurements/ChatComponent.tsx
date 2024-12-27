@@ -1,6 +1,6 @@
-import React from "react"
 import { FunctionCallHandler, nanoid } from "ai"
 import { Message, useChat } from "ai/react"
+import React from "react"
 
 interface ChatComponentProps {
   base64Image: string
@@ -86,7 +86,7 @@ const ChatComponent: React.FC<ChatComponentProps> = ({ base64Image }) => {
             </div>
           ))
         : null}
-      <div id="chart-goes-here"></div>
+      <div id="chart-goes-here" />
       <form onSubmit={handleSubmit}>
         <input
           className="fixed bottom-0 mb-8 w-full max-w-md rounded border border-gray-300 p-2 shadow-xl"

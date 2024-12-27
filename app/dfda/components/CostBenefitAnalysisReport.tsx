@@ -1,6 +1,5 @@
 "use client"
 
-import React, { useState } from "react"
 import {
   AlertCircle,
   Beer,
@@ -12,13 +11,9 @@ import {
   Users,
   Wind,
 } from "lucide-react"
+import React, { useState } from "react"
 import { FaSkullCrossbones } from "react-icons/fa"
 
-import ArticleCard from "@/lib/agents/fdai/ArticleCard"
-import {
-  Article,
-  ExtendedMetaAnalysisReport,
-} from "@/lib/agents/fdai/fdaiMetaAnalyzer"
 import { Badge } from "@/components/ui/badge"
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card"
 import {
@@ -27,6 +22,11 @@ import {
   TooltipProvider,
   TooltipTrigger,
 } from "@/components/ui/tooltip"
+import ArticleCard from "@/lib/agents/fdai/ArticleCard"
+import {
+  Article,
+  ExtendedMetaAnalysisReport,
+} from "@/lib/agents/fdai/fdaiMetaAnalyzer"
 
 const SafetyRatingBadge = ({
   rating,

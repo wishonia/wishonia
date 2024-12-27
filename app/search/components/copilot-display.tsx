@@ -1,7 +1,8 @@
 'use client'
 
-import React from 'react'
 import { Check } from 'lucide-react'
+import React from 'react'
+
 import { Card } from '@/components/ui/card'
 
 interface CopilotDisplayProps {

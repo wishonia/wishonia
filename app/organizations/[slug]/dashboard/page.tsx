@@ -1,8 +1,10 @@
-import { prisma } from '@/lib/prisma'
+import Link from 'next/link'
 import { notFound } from 'next/navigation'
 import { getServerSession } from 'next-auth/next'
+
 import { authOptions } from "@/lib/auth"
-import Link from 'next/link'
+import { prisma } from '@/lib/prisma'
+
 
 export default async function OrganizationDashboard({ params }: { params: { slug: string } }) {
   const session = await getServerSession(authOptions)

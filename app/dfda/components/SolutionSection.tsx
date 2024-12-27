@@ -1,9 +1,9 @@
 "use client"
 
-import { useState } from "react"
-import { redirect } from "next/navigation"
 import { motion } from "framer-motion"
 import { Bell, Brain, Database } from "lucide-react"
+import { redirect } from "next/navigation"
+import { useState } from "react"
 
 import { LoadingSpinner } from "@/components/ui/loading-spinner"
 

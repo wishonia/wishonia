@@ -3,8 +3,6 @@ import "server-only"
 import { Message } from "ai"
 import { createAI, getAIState, getMutableAIState } from "ai/rsc"
 
-import { saveChat } from "@/lib/chat"
-import { getCurrentUser } from "@/lib/session"
 import {
   BotCard,
   BotMessage,
@@ -15,10 +13,13 @@ import { ProfileList } from "@/components/assistant/ProfileList"
 import { Readme } from "@/components/assistant/Readme"
 import Repositories from "@/components/assistant/Repositories"
 import { PollRandomGlobalProblems } from "@/components/poll-random-global-problems"
+import { saveChat } from "@/lib/chat"
+import { getCurrentUser } from "@/lib/session"
 import { text2measurements } from "@/lib/text2measurements"
 
 import { ChatWithMessagesAndAgent } from "../types"
 import { nanoid } from "../utils"
+
 import { readmeAction, repoAction } from "./submit-user-action"
 import { submitUserMessage } from "./submit-user-message"
 
@@ -175,7 +176,7 @@ export const getUIStateFromAIState = async (aiState: ChatWithMessagesAndAgent) =
             </BotCard>
           ) : m.name === "problems_vote_ui" ? (
             <BotCard>
-              <PollRandomGlobalProblems user={user}></PollRandomGlobalProblems>
+              <PollRandomGlobalProblems user={user} />
             </BotCard>
           ) : m.name === "record_measurement" ? (
             <BotCard>

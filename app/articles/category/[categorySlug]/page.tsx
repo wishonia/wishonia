@@ -1,6 +1,7 @@
 'use client'
 
 import { useParams } from 'next/navigation'
+
 import ArticleSearchAndGrid from "@/components/article/ArticleSearchAndGrid";
 
 type Params = {

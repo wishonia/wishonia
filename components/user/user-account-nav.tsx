@@ -1,12 +1,11 @@
 "use client"
 
-import React from "react"
 import Link from "next/link"
-import { NavItem } from "@/types"
 import { User } from "next-auth"
 import { signOut } from "next-auth/react"
+import React from "react"
 
-import { avatarNav } from "@/config/navigation/general-nav"
+import { Icons } from "@/components/icons"
 import {
   DropdownMenu,
   DropdownMenuContent,
@@ -14,8 +13,9 @@ import {
   DropdownMenuSeparator,
   DropdownMenuTrigger,
 } from "@/components/ui/dropdown-menu"
-import { Icons } from "@/components/icons"
 import { UserAvatar } from "@/components/user/user-avatar"
+import { avatarNav } from "@/config/navigation/general-nav"
+import { NavItem } from "@/types"
 
 interface UserAccountNavProps extends React.HTMLAttributes<HTMLDivElement> {
   user: Pick<User, "name" | "image" | "email">

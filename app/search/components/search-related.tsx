@@ -1,19 +1,22 @@
 'use client'
 
-import React, { useEffect, useState } from 'react'
-import { Button } from '@/components/ui/button'
-import { ArrowRight } from 'lucide-react'
 import {
   StreamableValue,
   useActions,
   useStreamableValue,
   useUIState
 } from 'ai/rsc'
+import { ArrowRight } from 'lucide-react'
+import React, { useEffect, useState } from 'react'
+
 import { AI } from '@/app/search/actions'
-import { UserMessage } from './user-message'
-import { PartialRelated } from '@/lib/schema/related'
-import { Section } from './section'
+import { Button } from '@/components/ui/button'
 import { Skeleton } from '@/components/ui/skeleton'
+import { PartialRelated } from '@/lib/schema/related'
+
+import { Section } from './section'
+import { UserMessage } from './user-message'
+
 
 export interface SearchRelatedProps {
   relatedQueries: StreamableValue<PartialRelated>

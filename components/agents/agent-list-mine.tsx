@@ -1,11 +1,11 @@
 "use client"
 
-import { JSX, SVGProps, useEffect, useState } from "react"
-import Link from "next/link"
 import { DotsThree, Trash } from "@phosphor-icons/react"
 import {Agent, SharingLevel} from "@prisma/client"
+import Link from "next/link"
+import { JSX, SVGProps, useEffect, useState } from "react"
 
-import { useSidebar } from "@/lib/hooks/use-sidebar"
+import { SpinningLoader } from "@/components/spinningLoader"
 import { Badge } from "@/components/ui/badge"
 import {
   DropdownMenu,
@@ -17,7 +17,7 @@ import {
   DropdownMenuTrigger,
 } from "@/components/ui/dropdown-menu"
 import { toast } from "@/components/ui/use-toast"
-import { SpinningLoader } from "@/components/spinningLoader"
+import { useSidebar } from "@/lib/hooks/use-sidebar"
 
 import { Button } from "../ui/button"
 

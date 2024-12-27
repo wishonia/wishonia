@@ -1,10 +1,11 @@
 'use client'
 
+import { useSession } from 'next-auth/react'
 import { useState, useEffect } from 'react'
+
 import { getArticleBySlugAction } from '@/app/researcher/researcherActions'
 import ArticleRenderer from '@/components/ArticleRenderer'
 import { ArticleWithRelations } from '@/lib/agents/researcher/researcher'
-import { useSession } from 'next-auth/react'
 
 interface ArticleContentProps {
     articleSlug: string

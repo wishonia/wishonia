@@ -1,8 +1,8 @@
 import { BsLightbulb } from "react-icons/bs"
 import { FaRegStar } from "react-icons/fa"
 
-import { Card, CardDescription, CardTitle } from "@/components/ui/card"
 import HeadingText from "@/components/heading-text"
+import { Card, CardDescription, CardTitle } from "@/components/ui/card"
 
 import { Icons } from "../icons"
 

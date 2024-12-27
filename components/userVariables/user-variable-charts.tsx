@@ -1,18 +1,12 @@
 "use client"
 
+import Highcharts from "highcharts"
+import HighchartsReact from "highcharts-react-official"
 import * as React from "react"
 import { FC } from "react"
 import { useEffect, useState } from "react"
-import Highcharts from "highcharts"
-import HighchartsReact from "highcharts-react-official"
 
-import { UserVariable } from "@/types/models/UserVariable"
-// TODO: Fix highcharts accessibility
-// import highchartsAccessibility from "highcharts/modules/accessibility";
-// if (typeof window !== undefined) {
-//   highchartsAccessibility(Highcharts);
-// }
-
+import { MeasurementButton } from "@/components/measurements/measurement-button"
 import {
   Card,
   CardContent,
@@ -21,7 +15,13 @@ import {
   CardHeader,
   CardTitle,
 } from "@/components/ui/card"
-import { MeasurementButton } from "@/components/measurements/measurement-button"
+import { UserVariable } from "@/types/models/UserVariable"
+// TODO: Fix highcharts accessibility
+// import highchartsAccessibility from "highcharts/modules/accessibility";
+// if (typeof window !== undefined) {
+//   highchartsAccessibility(Highcharts);
+// }
+
 
 import { Icons } from "../icons"
 

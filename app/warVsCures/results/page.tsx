@@ -1,13 +1,13 @@
 import { Metadata } from "next"
 import { redirect } from "next/navigation"
 
-import { getAverageWarPercentageDesired } from "@/lib/api/warVsCures"
-import { authOptions } from "@/lib/auth"
-import { getCurrentUser } from "@/lib/session"
 import AfterLoginHandler from "@/components/AfterLoginHandler"
 import SpendingOnDiseasesVsMilitary from "@/components/charts/spending-on-diseases-vs-military-chartsjs"
 import { Shell } from "@/components/layout/shell"
 import WarVsCuresBarChart from "@/components/war-vs-cures-bar-chart"
+import { getAverageWarPercentageDesired } from "@/lib/api/warVsCures"
+import { authOptions } from "@/lib/auth"
+import { getCurrentUser } from "@/lib/session"
 
 export const metadata: Metadata = {
   title: "War vs Cures Results",
@@ -28,7 +28,7 @@ export default async function Dashboard({}: DashboardProps) {
 
   return (
     <Shell>
-      <AfterLoginHandler></AfterLoginHandler>
+      <AfterLoginHandler />
       <div
         className="flex flex-col items-center justify-between gap-4 pb-4 text-center"
         style={{ maxWidth: "90%" }}
@@ -70,7 +70,7 @@ export default async function Dashboard({}: DashboardProps) {
           </div>
         </div>
         <div className={"bg-white p-5 text-black"}>
-          <SpendingOnDiseasesVsMilitary></SpendingOnDiseasesVsMilitary>
+          <SpendingOnDiseasesVsMilitary />
         </div>
       </div>
     </Shell>

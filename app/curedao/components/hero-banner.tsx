@@ -18,7 +18,7 @@ export function HeroBanner() {
             </svg>
           </span>
         </Link>
-        <div className="home-hero-featured-message-blur"></div>
+        <div className="home-hero-featured-message-blur" />
       </div>
     </div>
   )

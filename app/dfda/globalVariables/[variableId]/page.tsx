@@ -1,9 +1,9 @@
 import { redirect } from "next/navigation"
 
-import { authOptions } from "@/lib/auth"
-import { getCurrentUser } from "@/lib/session"
 import { GlobalVariableOverview } from "@/components/globalVariables/global-variable-overview"
 import { Shell } from "@/components/layout/shell"
+import { authOptions } from "@/lib/auth"
+import { getCurrentUser } from "@/lib/session"
 
 interface GlobalVariablePageProps {
   params: { variableId: number }

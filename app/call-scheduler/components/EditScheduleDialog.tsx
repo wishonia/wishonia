@@ -1,14 +1,16 @@
 'use client'
 
 import { CallSchedule, Person, Agent } from "@prisma/client"
+import { Session } from "next-auth"
+
 import {
   Dialog,
   DialogContent,
   DialogHeader,
   DialogTitle,
 } from "@/components/ui/dialog"
+
 import { CallScheduleForm } from "./CallScheduleForm"
-import { Session } from "next-auth"
 type ScheduleWithRelations = CallSchedule & {
   person: Person;
   agent: Agent;

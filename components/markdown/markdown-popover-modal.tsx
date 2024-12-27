@@ -2,8 +2,8 @@
 
 import * as React from "react"
 
-import { Dialog, DialogContent, DialogTrigger } from "@/components/ui/dialog"
 import MarkdownRenderer from "@/components/markdown/MarkdownRenderer"
+import { Dialog, DialogContent, DialogTrigger } from "@/components/ui/dialog"
 
 interface MarkdownPopoverModalProps {
   name: string

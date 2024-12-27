@@ -1,11 +1,10 @@
 "use client"
 
-import * as React from "react"
-import { usePathname, useRouter, useSearchParams } from "next/navigation"
 import { format } from "date-fns"
+import { usePathname, useRouter, useSearchParams } from "next/navigation"
+import * as React from "react"
 import { DateRange } from "react-day-picker"
 
-import { cn, dateRangeParams } from "@/lib/utils"
 import { Button, buttonVariants } from "@/components/ui/button"
 import { Calendar } from "@/components/ui/calendar"
 import {
@@ -14,6 +13,7 @@ import {
   PopoverContent,
   PopoverTrigger,
 } from "@/components/ui/popover"
+import { cn, dateRangeParams } from "@/lib/utils"
 
 import { Icons } from "./icons"
 

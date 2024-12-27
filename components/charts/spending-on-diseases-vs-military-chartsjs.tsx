@@ -1,6 +1,5 @@
 "use client"
 
-import React, { useEffect, useState } from "react"
 import {
   BarElement,
   CategoryScale,
@@ -11,6 +10,7 @@ import {
   Tooltip,
 } from "chart.js"
 import ChartDataLabels from "chartjs-plugin-datalabels"
+import React, { useEffect, useState } from "react"
 import { Bar } from "react-chartjs-2"
 
 Chart.register(

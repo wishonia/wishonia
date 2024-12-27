@@ -1,19 +1,19 @@
 "use client"
 
-import React, { useState } from "react"
 import {
   GlobalProblem,
   GlobalProblemSolution,
   WishingWell,
 } from "@prisma/client"
 import { User } from "next-auth"
+import React, { useState } from "react"
 
-import { Input } from "@/components/ui/input"
 import { AnonymousVoteButton } from "@/components/anonymous-vote-button"
 import BarChartGeneral from "@/components/bar-chart-general"
 import { Icons } from "@/components/icons"
 import { LoggedInVoteButton } from "@/components/logged-in-vote-button"
 import { MarkdownDialogWrapper } from "@/components/markdown/markdown-dialog-wrapper"
+import { Input } from "@/components/ui/input"
 
 interface PollProps<T> {
   thisItem: WishingWell | GlobalProblem | GlobalProblemSolution
@@ -161,7 +161,7 @@ export const PollSpecificGeneral = <T,>({
           user={user}
           data={{ thisItem, thatItem, thisPercentageDesired }}
           onButtonClick={onButtonClick}
-        ></LoggedInVoteButton>
+         />
         <AnonymousVoteButton user={user} />
       </div>
     </section>

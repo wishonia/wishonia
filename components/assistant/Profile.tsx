@@ -1,10 +1,10 @@
 "use client"
 
-import React from "react"
-import Image from "next/image"
-import Link from "next/link"
 import { BookBookmark, Sparkle, Users } from "@phosphor-icons/react"
 import { useActions, useUIState } from "ai/rsc"
+import Image from "next/image"
+import Link from "next/link"
+import React from "react"
 
 import { AI, UIState } from "@/lib/chat/actions"
 import { GithubUser } from "@/lib/types"

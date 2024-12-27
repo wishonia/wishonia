@@ -1,5 +1,6 @@
 "use client";
 import React, { useState, useEffect } from 'react';
+
 import GlobalBrainNetwork from "@/components/landingPage/global-brain-network";
 
 interface TreatmentAnalyzerProps {
@@ -82,7 +83,7 @@ const TreatmentAnalyzer = ({ treatmentName }: TreatmentAnalyzerProps) => {
             <div
               className="h-full bg-gradient-to-r from-pink-400 to-purple-400"
               style={{width: `${taskProgress}%`}}
-            ></div>
+             />
           </div>
           <p className="mt-2 font-bold text-black">
             Task Progress: {taskProgress}%
@@ -117,7 +118,7 @@ const TreatmentAnalyzer = ({ treatmentName }: TreatmentAnalyzerProps) => {
                 <div
                   className="h-full bg-gradient-to-r from-orange-400 to-red-400"
                   style={{width: `${progressWidths[index]}%`}}
-                ></div>
+                 />
               </div>
             </div>
           ))}

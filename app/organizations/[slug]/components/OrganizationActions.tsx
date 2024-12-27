@@ -1,10 +1,11 @@
 "use client"
 
-import * as React from "react"
 import { Organization } from "@prisma/client"
-import { Button } from "@/components/ui/button"
 import { Heart, Edit, Share2 } from "lucide-react"
 import { useRouter } from "next/navigation"
+import * as React from "react"
+
+import { Button } from "@/components/ui/button"
 
 interface OrganizationActionsProps {
   organization: Organization

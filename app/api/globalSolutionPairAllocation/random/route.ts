@@ -5,7 +5,7 @@ import { getRandomGlobalSolutionPair } from "@/lib/globalSolutions"
 export async function GET() {
   try {
     const userId = await getUserIdServer()
-    let randomPair = await getRandomGlobalSolutionPair(userId)
+    const randomPair = await getRandomGlobalSolutionPair(userId)
     return new Response(
       JSON.stringify({
         thisGlobalSolution: randomPair[0],

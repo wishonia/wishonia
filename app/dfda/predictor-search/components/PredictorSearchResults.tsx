@@ -1,13 +1,14 @@
 "use client"
 
-import React, { useEffect, useState } from "react"
 import { useSearchParams } from "next/navigation"
+import router from "next/router"
 import { Session } from "next-auth"
+import React, { useEffect, useState } from "react"
 
-import { Study } from "@/types/models/Study"
 import { joinStudy, searchPredictors } from "@/app/dfda/dfdaActions"
 import { LoginPromptButton } from "@/components/LoginPromptButton"
-import router from "next/router"
+import { Study } from "@/types/models/Study"
+
 
 // Add this helper function to safely render HTML
 function createMarkup(html: string) {
@@ -103,7 +104,7 @@ export function PredictorSearchResults({
   if (loading) {
     return (
       <div className="flex justify-center p-4">
-        <div className="h-8 w-8 animate-spin rounded-full border-4 border-blue-500 border-t-transparent"></div>
+        <div className="h-8 w-8 animate-spin rounded-full border-4 border-blue-500 border-t-transparent" />
       </div>
     )
   }

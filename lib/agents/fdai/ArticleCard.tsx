@@ -1,6 +1,7 @@
 import React from 'react';
-import {Article} from '@/lib/agents/fdai/fdaiMetaAnalyzer';
+
 import {Card, CardContent, CardHeader, CardTitle} from "@/components/ui/card";
+import {Article} from '@/lib/agents/fdai/fdaiMetaAnalyzer';
 
 interface ArticleCardProps {
     article: Article;

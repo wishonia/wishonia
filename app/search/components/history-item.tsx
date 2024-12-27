@@ -1,8 +1,9 @@
 'use client'
 
-import React from 'react'
 import Link from 'next/link'
 import { usePathname } from 'next/navigation'
+import React from 'react'
+
 import { Chat } from '@/lib/types/index'
 import { cn } from '@/lib/utils'
 

@@ -1,16 +1,16 @@
 "use client"
 
-import * as React from "react"
-import { useRouter } from "next/navigation"
 import { zodResolver } from "@hookform/resolvers/zod"
+import { useRouter } from "next/navigation"
+import * as React from "react"
 import { useForm } from "react-hook-form"
 import * as z from "zod"
 
-import { wishSchema } from "@/lib/validations/wish"
-import { toast } from "@/components/ui/use-toast"
 import { submitWish } from "@/app/actions/wish"
+import { toast } from "@/components/ui/use-toast"
+import { wishSchema } from "@/lib/validations/wish"
 
-interface WishFormProps extends React.HTMLAttributes<HTMLFormElement> {}
+type WishFormProps = React.HTMLAttributes<HTMLFormElement>
 
 type FormData = z.infer<typeof wishSchema>
 

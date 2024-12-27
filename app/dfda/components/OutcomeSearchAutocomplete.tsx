@@ -1,6 +1,7 @@
 'use client'
 
 import { GlobalVariable } from '@/types/models/GlobalVariable'
+
 import VariableSearchAutocomplete from './VariableSearchAutocomplete'
 
 interface OutcomeSearchAutocompleteProps {

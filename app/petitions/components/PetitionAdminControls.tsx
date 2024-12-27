@@ -1,11 +1,14 @@
 'use client'
 
+import { Petition, PetitionStatusUpdate } from "@prisma/client"
 import { useState } from "react"
+
 import { Button } from "@/components/ui/button"
 import { Textarea } from "@/components/ui/textarea"
+
 import { createPetitionUpdate } from "../petitionActions"
+
 import { UpdatesTimeline } from "./UpdatesTimeline"
-import { Petition, PetitionStatusUpdate } from "@prisma/client"
 
 type PetitionWithUpdates = Petition & {
   statusUpdates: PetitionStatusUpdate[]

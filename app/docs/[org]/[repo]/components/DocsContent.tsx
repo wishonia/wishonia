@@ -1,20 +1,20 @@
 "use client"
 
-import { useEffect, useState } from "react"
-import { useSearchParams } from "next/navigation"
 import matter from "gray-matter"
 import { Github } from "lucide-react"
+import { useSearchParams } from "next/navigation"
+import { useEffect, useState } from "react"
 import ReactMarkdown from "react-markdown"
 import { Prism as SyntaxHighlighter } from "react-syntax-highlighter"
 import { oneDark } from "react-syntax-highlighter/dist/esm/styles/prism"
 import rehypeRaw from "rehype-raw"
 import remarkGfm from "remark-gfm"
 
+import GlobalBrainNetwork from "@/components/landingPage/global-brain-network"
 import { Button } from "@/components/ui/button"
 
 import { getGithubContent } from "../actions"
 import { resolveGitbookPath } from "../lib/resolveGitbookPath"
-import GlobalBrainNetwork from "@/components/landingPage/global-brain-network"
 
 interface DocsContentProps {
   org: string

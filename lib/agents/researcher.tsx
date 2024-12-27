@@ -1,8 +1,13 @@
-import { createStreamableUI, createStreamableValue } from 'ai/rsc'
 import { CoreMessage, generateText, streamText } from 'ai'
-import { getTools } from './tools'
-import { getModel } from '../utils/index'
+import { createStreamableUI, createStreamableValue } from 'ai/rsc'
+
 import { AnswerSection } from '@/app/search/components/answer-section'
+
+import { getModel } from '../utils/index'
+
+import { getTools } from './tools'
+
+
 
 const SYSTEM_PROMPT = `As a professional search expert, you possess the ability to search for any information on the web.
 For each user query, utilize the search results to their fullest potential to provide additional information and assistance in your response.

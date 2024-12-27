@@ -1,5 +1,6 @@
 import TreatmentConditionSearchBox from '../components/TreatmentConditionReviewsSearchBox'
 import AdvancedTrialSearch from '../trials/components/AdvancedTrialSearch'
+
 import VariableSearchSection from './components/VariableSearchSection'
 
 export const metadata = {

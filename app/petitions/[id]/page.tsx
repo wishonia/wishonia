@@ -1,12 +1,12 @@
-import { Suspense } from "react"
 import { Metadata } from "next"
 import { notFound } from "next/navigation"
 import { getServerSession } from "next-auth/next"
 import { MDXRemote } from "next-mdx-remote/rsc"
+import { Suspense } from "react"
 
+import { LoadingSpinner } from "@/components/ui/loading-spinner"
 import { authOptions } from "@/lib/auth"
 import { prisma } from "@/lib/prisma"
-import { LoadingSpinner } from "@/components/ui/loading-spinner"
 
 import { Comments } from "../components/Comments"
 import { FollowButton } from "../components/FollowButton"

@@ -1,11 +1,12 @@
 "use client"
 
+import { Organization } from "@prisma/client"
+import { FocusLevel } from "@prisma/client"
+import Image from "next/image"
+import Link from "next/link"
+
 import { Badge } from "@/components/ui/badge"
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card"
-import { Organization } from "@prisma/client"
-import Link from "next/link"
-import Image from "next/image"
-import { FocusLevel } from "@prisma/client"
 import { getFaviconUrl } from "@/lib/utils/favicon"
 
 interface OrganizationItemProps {

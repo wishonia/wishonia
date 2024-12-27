@@ -1,8 +1,8 @@
-import { useState } from "react"
-import { useRouter } from "next/navigation"
 import { User } from "@prisma/client"
 import { AvatarProps } from "@radix-ui/react-avatar"
 import axios from "axios" // Assuming you're using axios for HTTP requests
+import { useRouter } from "next/navigation"
+import { useState } from "react"
 
 import { Avatar, AvatarImage } from "@/components/ui/avatar"
 

@@ -1,5 +1,6 @@
 "use client";
 import React, { useState, useEffect } from 'react';
+
 import GlobalBrainNetwork from "@/components/landingPage/global-brain-network";
 import {globalProblems} from "@/components/landingPage/interactive-landing-page";
 
@@ -47,7 +48,7 @@ const GlobalCoordinationAgent: React.FC<GlobalCoordinationAgentProps> = ({
     <div className="flex items-center justify-center p-4 overflow-hidden">
       <div
           className="relative w-full max-w-4xl p-4 bg-black border-4 border-cyan-500 rounded-lg">
-        <div className="absolute inset-0 opacity-10 animate-pulse"></div>
+        <div className="absolute inset-0 opacity-10 animate-pulse" />
 
         <h1 className="text-4xl font-bold text-cyan-500 mb-6 animate-glitch">
           {title}
@@ -58,7 +59,7 @@ const GlobalCoordinationAgent: React.FC<GlobalCoordinationAgentProps> = ({
             <div
                 className="h-full bg-gradient-to-r from-purple-600 via-cyan-400 to-purple-600 animate-gradient"
                 style={{width: `${aiProgress}%`}}
-            ></div>
+             />
           </div>
           <p className="absolute top-full left-0 text-xs text-cyan-300 mt-1">
             Processing: {aiProgress}% - Analyzing global data streams
@@ -81,7 +82,7 @@ const GlobalCoordinationAgent: React.FC<GlobalCoordinationAgentProps> = ({
                       key={index}
                       className={`w-2 h-2 rounded-full ${index < networkNodes ? 'bg-purple-500' : 'bg-gray-600'} 
                               transition-colors duration-300 ease-in-out`}
-                  ></div>
+                   />
               ))}
             </div>
             <p className="text-xs text-purple-300 mt-2">{networkNodes} Nodes Active</p>
@@ -96,7 +97,7 @@ const GlobalCoordinationAgent: React.FC<GlobalCoordinationAgentProps> = ({
                       <div
                           className="bg-cyan-500 h-2 rounded-full animate-pulse"
                           style={{width: `${Math.random() * 100}%`}}
-                      ></div>
+                       />
                     </div>
                   </div>
               ))}

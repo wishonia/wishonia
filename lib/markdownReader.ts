@@ -1,8 +1,9 @@
 import fs from "fs"
 import path from "path"
-import { MarkdownFile } from "@/interfaces/markdownFile"
+
 import matter from "gray-matter"
 
+import { MarkdownFile } from "@/interfaces/markdownFile"
 import {
   absPathFromPublic,
   getNonIgnoredFiles,

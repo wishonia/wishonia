@@ -1,14 +1,16 @@
 import http from 'http'
 import https from 'https'
+
+import { Redis } from '@upstash/redis'
 import { JSDOM, VirtualConsole } from 'jsdom'
+import { createClient } from 'redis'
+
 import {
   SearXNGSearchResults,
   SearXNGResponse,
   SearXNGResult,
   SearchResultItem
 } from '@/lib/types/index'
-import { Redis } from '@upstash/redis'
-import { createClient } from 'redis'
 
 /**
  * Maximum number of results to fetch from SearXNG.

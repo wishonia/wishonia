@@ -1,10 +1,9 @@
 import fs from "fs";
 import path from "path";
-import { MarkdownFile } from "@/interfaces/markdownFile";
+
 import slugify from "slugify";
 
-
-
+import { MarkdownFile } from "@/interfaces/markdownFile";
 import { pathToMarkdownUrl } from "@/lib/fileHelper";
 import { createGlobalProblem } from "@/lib/globalProblems";
 import { generateAndUploadFeaturedImageJpg } from "@/lib/imageGenerator";

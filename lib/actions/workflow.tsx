@@ -1,9 +1,12 @@
 'use server'
 
+import { CoreMessage, generateId } from 'ai'
+import { createStreamableValue, createStreamableUI } from 'ai/rsc'
 import React from 'react'
-import { Spinner } from '@/components/ui/spinner'
-import { Section } from '@/app/search/components/section'
+
 import { FollowupPanel } from '@/app/search/components/followup-panel'
+import { Section } from '@/app/search/components/section'
+import { Spinner } from '@/components/ui/spinner'
 import {
   querySuggestor,
   inquire,
@@ -11,8 +14,6 @@ import {
   researcherWithOllama,
   researcher
 } from '@/lib/agents'
-import { createStreamableValue, createStreamableUI } from 'ai/rsc'
-import { CoreMessage, generateId } from 'ai'
 
 export async function workflow(
   uiState: {

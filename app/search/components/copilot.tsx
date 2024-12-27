@@ -1,19 +1,20 @@
 'use client'
 
-import React, { useEffect, useState } from 'react'
-import { PartialInquiry } from '@/lib/schema/inquiry'
-import { Input } from '@/components/ui/input'
-import { Checkbox } from '@/components/ui/checkbox'
-import { Button } from '@/components/ui/button'
-import { Card } from '@/components/ui/card'
-import { ArrowRight, Check, FastForward, Sparkles } from 'lucide-react'
 import {
   StreamableValue,
   useActions,
   useStreamableValue,
   useUIState
 } from 'ai/rsc'
+import { ArrowRight, Check, FastForward, Sparkles } from 'lucide-react'
+import React, { useEffect, useState } from 'react'
+
 import type { AI } from '@/app/search/actions'
+import { Button } from '@/components/ui/button'
+import { Card } from '@/components/ui/card'
+import { Checkbox } from '@/components/ui/checkbox'
+import { Input } from '@/components/ui/input'
+import { PartialInquiry } from '@/lib/schema/inquiry'
 import { useAppState } from '@/lib/utils/app-state'
 
 export type CopilotProps = {

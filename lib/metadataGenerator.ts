@@ -1,8 +1,9 @@
 import fs from "fs"
 import { join } from "path"
-import { MarkdownFile } from "@/interfaces/markdownFile"
+
 import dotenv from "dotenv"
 
+import { MarkdownFile } from "@/interfaces/markdownFile"
 import { absPathFromPublic } from "@/lib/fileHelper"
 import { generateAndUploadFeaturedImageJpg } from "@/lib/imageGenerator"
 import { textCompletion } from "@/lib/llm"

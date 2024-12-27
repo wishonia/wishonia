@@ -1,9 +1,12 @@
 import path from "path"
+
+import Link from "next/link"
+
 import { Shell } from "@/components/layout/shell"
+import type { MarkdownFile } from "@/lib/markdown/repo-markdown"
+
 import { getDocumentationFiles } from "./actions"
 import { DocsSearch } from "./components/docs-search"
-import type { MarkdownFile } from "@/lib/markdown/repo-markdown"
-import Link from "next/link"
 
 // Helper function to extract title from markdown content
 function extractTitle(file: MarkdownFile): string {

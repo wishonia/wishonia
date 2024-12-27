@@ -1,7 +1,8 @@
-import { SearchResults, SearchResultImage } from '@/lib/types/index'
+import { LanguageModelV1 } from "@ai-sdk/provider"
 import { generateObject } from "ai"
 import { z } from "zod"
-import { LanguageModelV1 } from "@ai-sdk/provider"
+
+import { SearchResults, SearchResultImage } from '@/lib/types/index'
 import { getModel } from "@/lib/utils/modelUtils"
 
 export interface ArticleOptions {

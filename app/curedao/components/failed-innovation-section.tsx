@@ -41,7 +41,7 @@ export function FailedInnovationSection() {
         </div>
 
         <div className="relative">
-          <div className="absolute inset-0 bg-gradient-to-br from-[#ff4895] via-[#6e4fe9] to-[#00ffcc] rounded-3xl opacity-30 blur-xl"></div>
+          <div className="absolute inset-0 bg-gradient-to-br from-[#ff4895] via-[#6e4fe9] to-[#00ffcc] rounded-3xl opacity-30 blur-xl" />
           <div className="relative bg-[#1d1a27] rounded-3xl p-8 border border-white/10">
             <div className="">
               <div className="aspect-[4/4] w-full relative">

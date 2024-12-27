@@ -1,11 +1,13 @@
 'use client'
 
+import { StreamableValue, useStreamableValue } from 'ai/rsc'
+
+import type { SerperSearchResults } from '@/lib/types/index'
+
 import { DefaultSkeleton } from './default-skeleton'
 import { Section } from './section'
-import type { SerperSearchResults } from '@/lib/types/index'
-import { StreamableValue, useStreamableValue } from 'ai/rsc'
-import { VideoSearchResults } from './video-search-results'
 import { ToolBadge } from './tool-badge'
+import { VideoSearchResults } from './video-search-results'
 
 export type VideoSearchSectionProps = {
   result?: StreamableValue<string>
