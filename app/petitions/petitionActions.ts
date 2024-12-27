@@ -28,9 +28,6 @@ const PetitionGenerationSchema = z.object({
   callScript: z.string(),
 })
 
-// Create a logger instance for petitions
-const log = logger.forService("petitions")
-
 export async function signPetition(
   petitionId: string,
   referralSource?: string
@@ -94,7 +91,7 @@ export async function signPetition(
   })
 
   // Add logging for email sending process
-  log.info("Starting email sending process", {
+  logger.info("Starting email sending process", {
     metadata: {
       userId: session.user.id,
       userEmail: signature.user.email,
@@ -119,7 +116,7 @@ export async function signPetition(
       })
 
       if (emailResult.status === "failed" && emailResult.error) {
-        log.error("Failed to send thank you email", {
+        logger.error("Failed to send thank you email", {
           error: emailResult.error,
           metadata: {
             petitionId,
@@ -128,7 +125,7 @@ export async function signPetition(
         })
       }
     } catch (error) {
-      log.error("Unexpected error sending email", {
+      logger.error("Unexpected error sending email", {
         error: {
           name: error instanceof Error ? error.name : "Unknown Error",
           message: error instanceof Error ? error.message : String(error),
@@ -147,7 +144,7 @@ export async function signPetition(
       })
     }
   } else {
-    log.info("No email found for user", {
+    logger.info("No email found for user", {
       metadata: {
         userId: session.user.id,
         petitionId,
