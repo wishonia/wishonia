@@ -1,7 +1,6 @@
 "use client"
 
 import React, { useState, useEffect, useRef, useCallback } from 'react';
-import { motion } from 'framer-motion';
 import { FaPlay, FaPause, FaStepForward, FaStepBackward } from 'react-icons/fa';
 
 export interface Slide {

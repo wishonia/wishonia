@@ -16,10 +16,8 @@ import {
   Check, 
   GitBranchPlus, 
   Lightbulb, 
-  AlertTriangle, 
-  ChevronDown,
+  AlertTriangle,
   Book,
-  Clock,
   Users,
   Target,
   Workflow

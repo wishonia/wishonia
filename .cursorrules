@@ -20,7 +20,7 @@ import { logger } from '@/lib/logger'
 
 - Error logs (auto-sent to Sentry):
   logger.error('Operation failed', error)
-  logger.error('Operation failed', { 
+  logger.error('Operation failed', {
     error,
     metadata: { operation: 'signup' }
   })
