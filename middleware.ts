@@ -1,7 +1,6 @@
 import { NextResponse } from "next/server"
 import { getToken } from "next-auth/jwt"
 import { withAuth } from "next-auth/middleware"
-import * as Sentry from "@sentry/nextjs"
 
 import { getDomainConfig } from "@/lib/utils/domain-config"
 
@@ -85,32 +84,6 @@ export default withAuth(
       return null
     }
 
-    // Check if the path exists in the matcher config
-    const matcherPaths = config.matcher
-    const isMatchedPath = matcherPaths.some(path => {
-      if (typeof path === 'string') {
-        return pathname === path || (path.endsWith('*') && pathname.startsWith(path.slice(0, -1)))
-      }
-      return false
-    })
-
-    if (!isMatchedPath) {
-      // Log 404 error to Sentry
-      Sentry.captureMessage(`404 Not Found: ${pathname}`, {
-        level: "warning",
-        tags: {
-          path: pathname,
-          host: hostname,
-          isAuthenticated: isAuth,
-        },
-        extra: {
-          url: req.url,
-          userAgent: req.headers.get("user-agent"),
-          referrer: req.headers.get("referer"),
-        },
-      })
-    }
-
     return null
   },
   {
@@ -131,6 +104,6 @@ export const config = {
     "/signup",
     "/dfda/right-to-trial",
     "/dfda/right-to-trial-act",
-    "/(.*)",
+    "/dfda/health-savings-sharing",
   ],
 }
