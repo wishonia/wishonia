@@ -1,7 +1,7 @@
 const fs = require("fs")
 const path = require("path")
 const sharp = require("sharp")
-const outputQuality = 10 // Set the output quality (0 to 100)
+const outputQuality = 80 // Set the output quality (0 to 100)
 const outputFormat = "jpg" // Set to null to keep the original format
 
 // Function to check if a file is an image
@@ -63,5 +63,4 @@ function compressImage(imagePath) {
 }
 
 // Start the script with the directory you want to traverse
-traverseDir("../public/wishingWells")
-traverseDir("../public/globalProblems")
+traverseDir("public/globalSolutions/dfda/img")

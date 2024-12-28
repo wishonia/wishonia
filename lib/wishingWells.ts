@@ -1,5 +1,4 @@
 import { WishingWell } from "@prisma/client"
-import { put } from "@vercel/blob"
 
 import { prisma as db, prisma } from "@/lib/db"
 import { textCompletion } from "@/lib/llm"
