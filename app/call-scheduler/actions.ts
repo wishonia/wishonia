@@ -1,6 +1,6 @@
 'use server'
 
-import { triggerCall } from '@/lib/calls/retell'
+import { initiateScheduledCall } from '@/lib/calls/retell'
 import prisma from '@/lib/prisma'
 import { revalidatePath } from 'next/cache'
 import { NotifyMethod } from '@prisma/client'
@@ -15,44 +15,15 @@ const stripe = new Stripe(process.env.STRIPE_SECRET_KEY!, {
 export async function initiateCall(session: Session, personId: string) {
   console.log('Initiating call - starting process')
 
-  // Get the person
-  const person = await prisma.person.findUnique({
-    where: { id: personId }
-  })
+  const result = await initiateScheduledCall(session.user.id, personId)
 
-  if (!person) {
-    throw new Error('Person not found')
+  if (!result.success) {
+    console.error('Failed to initiate call:', result.error)
+  } else {
+    console.log('Call initiated successfully:', result)
   }
 
-  if (!person.phoneNumber) {
-    throw new Error('Person has no phone number')
-  }
-
-  try {
-    console.log('Calling Retell with config:', {
-      fromNumber: process.env.RETELL_FROM_NUMBER,
-      hasAgentId: !!process.env.RETELL_DEFAULT_AGENT_ID
-    })
-
-    const callResponse = await triggerCall(person, {
-      fromNumber: process.env.RETELL_FROM_NUMBER || '',
-      overrideAgentId: process.env.RETELL_DEFAULT_AGENT_ID,
-      dropIfMachine: true,
-    })
-
-    console.log('Call initiated successfully:', callResponse)
-    return { success: true, callId: callResponse.call_id }
-  } catch (error) {
-    console.error('Failed to initiate call:', error)
-    if (error instanceof Error) {
-      console.error('Error details:', {
-        message: error.message,
-        name: error.name,
-        stack: error.stack,
-      })
-    }
-    return { success: false, error: 'Failed to initiate call' }
-  }
+  return result
 }
 
 export async function createCallSchedule(session: Session, formData: FormData) {
