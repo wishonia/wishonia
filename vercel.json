@@ -8,5 +8,20 @@
       "path": "/api/cron/petition-summaries?type=weekly",
       "schedule": "0 9 * * 1"
     }
-  ]
+  ],
+  "build": {
+    "env": {
+      "NODE_OPTIONS": "--max-old-space-size=4096"
+    }
+  },
+  "functions": {
+    "app/api/**/*": {
+      "memory": 1024,
+      "maxDuration": 60
+    },
+    "app/**/*": {
+      "memory": 1024,
+      "maxDuration": 60
+    }
+  }
 } 
