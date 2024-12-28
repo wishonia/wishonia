@@ -1,12 +1,13 @@
-import React from "react"
 import { Metadata } from "next"
 import { notFound, redirect } from "next/navigation"
+import { getServerSession } from "next-auth"
+import React from "react"
 
-import { getAgent } from "@/lib/api/agents"
-import {  authOptions } from "@/lib/auth"
 import AgentForm from "@/components/agents/agent-form"
 import { Shell } from "@/components/layout/shell"
-import { getServerSession } from "next-auth"
+import { getAgent } from "@/lib/api/agents"
+import {  authOptions } from "@/lib/auth"
+
 
 export const metadata: Metadata = {
   title: "Edit Agent",
@@ -30,7 +31,7 @@ export default async function EditAgentPage({ params }: AgentEditProps) {
   }
   return (
     <Shell className="block size-full md:grid">
-      <AgentForm agentData={agent}></AgentForm>
+      <AgentForm agentData={agent} />
     </Shell>
   )
 }

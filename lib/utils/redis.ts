@@ -1,4 +1,5 @@
 import { parse } from "url"
+
 import { Redis } from "ioredis"
 
 const redisDefaultPort = 6379

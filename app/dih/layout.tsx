@@ -1,7 +1,8 @@
 import '../globals.css';
 import type { Metadata } from 'next';
-import { Navigation } from "./components/navigation";
+
 import { Footer } from "./components/footer";
+import { Navigation } from "./components/navigation";
 
 export const metadata: Metadata = {
   title: 'Decentralized Institutes of Health',

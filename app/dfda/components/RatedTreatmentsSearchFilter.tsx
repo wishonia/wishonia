@@ -1,8 +1,8 @@
 "use client"
 
-import { useTransition } from "react"
-import { useRouter, useSearchParams } from "next/navigation"
 import { Search, X } from "lucide-react"
+import { useRouter, useSearchParams } from "next/navigation"
+import { useTransition } from "react"
 import { useDebouncedCallback } from "use-debounce"
 
 export default function RatedTreatmentsSearchFilter() {

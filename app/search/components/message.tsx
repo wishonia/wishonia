@@ -1,10 +1,12 @@
 'use client'
 
 import { MemoizedReactMarkdown } from '@/components/ui/markdown'
+
 import rehypeExternalLinks from 'rehype-external-links'
+import rehypeKatex from 'rehype-katex'
 import remarkGfm from 'remark-gfm'
 import remarkMath from 'remark-math'
-import rehypeKatex from 'rehype-katex'
+
 import 'katex/dist/katex.min.css'
 import { CodeBlock } from '@/components/ui/codeblock'
 

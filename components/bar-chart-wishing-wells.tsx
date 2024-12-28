@@ -1,5 +1,5 @@
-import React from "react"
 import { WishingWell } from "@prisma/client"
+import React from "react"
 
 import BarChartGeneral from "@/components/bar-chart-general"
 

@@ -1,8 +1,8 @@
 import React from "react"
 
-import { getCurrentUser } from "@/lib/session"
 import Footer from "@/components/layout/footer"
 import TopNavbar from "@/components/layout/topNavbar"
+import { getCurrentUser } from "@/lib/session"
 
 import GithubRequestLogs from "./[org]/[repo]/components/GithubRequestLogs"
 import RateLimitStatus from "./[org]/[repo]/components/RateLimitStatus"

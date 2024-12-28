@@ -1,6 +1,6 @@
-import React from "react"
 import Image from "next/image"
 import { User } from "next-auth"
+import React from "react"
 
 interface QAItemProps {
   title: string

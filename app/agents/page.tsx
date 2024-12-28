@@ -1,10 +1,10 @@
-import React from "react"
 import { redirect } from "next/navigation"
+import React from "react"
 
+import AgentListPublished from "@/components/agents/agent-list-published";
+import { Shell } from "@/components/layout/shell"
 import { authOptions } from "@/lib/auth"
 import { getCurrentUser } from "@/lib/session"
-import { Shell } from "@/components/layout/shell"
-import AgentListPublished from "@/components/agents/agent-list-published";
 
 export default async function AgentListPage() {
   const user = await getCurrentUser()
@@ -13,7 +13,7 @@ export default async function AgentListPage() {
   }
   return (
     <Shell className="size-full">
-      <AgentListPublished></AgentListPublished>
+      <AgentListPublished />
     </Shell>
   )
 }

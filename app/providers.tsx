@@ -2,11 +2,11 @@
 
 import { QueryClient, QueryClientProvider } from "@tanstack/react-query"
 import { SessionProvider } from "next-auth/react"
-import { ThemeProvider } from "@/components/theme-provider"
 import { ThemeProviderProps } from "next-themes/dist/types"
 
-import { SidebarProvider } from "@/lib/hooks/use-sidebar"
+import { ThemeProvider } from "@/components/theme-provider"
 import { TooltipProvider } from "@/components/ui/tooltip"
+import { SidebarProvider } from "@/lib/hooks/use-sidebar"
 
 const queryClient = new QueryClient()
 

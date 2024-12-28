@@ -1,4 +1,5 @@
 import fs from "fs";
+
 import { list } from "@vercel/blob";
 
 
@@ -26,7 +27,7 @@ export async function uploadPublicImagesToVercel() {
   const urls = []
   const imageFiles = getImagesFromPublic()
   for (const pathFromPublic of imageFiles) {
-    let url = await uploadImageToVercelIfNecessary(pathFromPublic)
+    const url = await uploadImageToVercelIfNecessary(pathFromPublic)
     urls.push(url)
   }
   return urls
@@ -56,7 +57,7 @@ export async function downloadAllBlobImages() {
     // Download image from url
     const response = await fetch(url)
     const buffer = await response.text()
-    let pathname = relativePathFromPublic(blob.pathname)
+    const pathname = relativePathFromPublic(blob.pathname)
     const absPath = absPathFromPublic(pathname)
     if (fs.existsSync(absPath)) {
       console.log(`Image already exists: ${absPath}`)

@@ -1,13 +1,15 @@
 'use client'
 
+import { useActions, useUIState } from 'ai/rsc'
+import { ArrowRight } from 'lucide-react'
 import { useState } from 'react'
+
+import type { AI } from '@/app/search/actions'
 import { Button } from '@/components/ui/button'
 import { Input } from '@/components/ui/input'
-import { useActions, useUIState } from 'ai/rsc'
-import type { AI } from '@/app/search/actions'
-import { UserMessage } from './user-message'
-import { ArrowRight } from 'lucide-react'
 import { useAppState } from '@/lib/utils/app-state'
+
+import { UserMessage } from './user-message'
 
 export function FollowupPanel() {
   const [input, setInput] = useState('')

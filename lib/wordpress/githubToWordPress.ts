@@ -1,14 +1,19 @@
-import { WordPressClient } from './wordpressClient';
-import { WordPressFeaturedImageUpdater } from './featuredImageUpdater';
-import { generateObject } from 'ai';
-import { z } from 'zod';
-import matter from 'gray-matter';
-import { getModel } from '../utils/modelUtils';
-import { WordPressMedia, WordPressApiPost, WordPressPost } from './wordpressTypes';
-import sharp from 'sharp';
-import { marked } from 'marked';
 import fs from 'fs/promises';
 import path from 'path';
+
+import { generateObject } from 'ai';
+import matter from 'gray-matter';
+import { marked } from 'marked';
+import sharp from 'sharp';
+import { z } from 'zod';
+
+import { getModel } from '../utils/modelUtils';
+
+import { WordPressFeaturedImageUpdater } from './featuredImageUpdater';
+import { WordPressClient } from './wordpressClient';
+import { WordPressMedia, WordPressApiPost, WordPressPost } from './wordpressTypes';
+
+
 
 const PostMetadataSchema = z.object({
   title: z.string().describe("A factual and information-dense title for the post. Avoid adjectives"),

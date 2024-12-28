@@ -18,7 +18,7 @@ export async function GET(
     const userId = await getUserIdServer()
     const { params } = routeContextSchema.parse(context)
     const globalProblemId = params.globalProblemId
-    let randomPair = await getRandomGlobalProblemSolutionPair(
+    const randomPair = await getRandomGlobalProblemSolutionPair(
       globalProblemId,
       userId
     )

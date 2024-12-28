@@ -1,5 +1,6 @@
-import Link from 'next/link'
 import { Twitter, Linkedin, Instagram, DiscIcon as Discord } from 'lucide-react'
+import Link from 'next/link'
+
 import { Input } from '@/components/ui/input'
 import { RainbowButton } from '@/components/ui/rainbow-button'
 

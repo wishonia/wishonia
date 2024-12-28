@@ -1,11 +1,11 @@
 import { Metadata } from "next"
 import { redirect } from "next/navigation"
 
-import { authOptions } from "@/lib/auth"
-import { getCurrentUser } from "@/lib/session"
+import { getGlobalVariable } from "@/app/dfda/dfdaActions"
 import { GlobalVariableCharts } from "@/components/globalVariables/global-variable-charts"
 import { Shell } from "@/components/layout/shell"
-import { getGlobalVariable } from "@/app/dfda/dfdaActions"
+import { authOptions } from "@/lib/auth"
+import { getCurrentUser } from "@/lib/session"
 
 export const metadata: Metadata = {
   title: "Global Variable Charts",

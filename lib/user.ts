@@ -1,5 +1,5 @@
-import { ExtendedUser } from "@/types/auth"
 import { prisma as db } from "@/lib/db"
+import { ExtendedUser } from "@/types/auth"
 
 export async function saveReferrerUserId(
   referrerUserId: string,

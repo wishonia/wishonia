@@ -1,8 +1,9 @@
 import { headers } from 'next/headers'
 import { NextResponse } from 'next/server'
 import Stripe from 'stripe'
-import prisma from '@/lib/prisma'
+
 import { env } from "@/env.mjs"
+import prisma from '@/lib/prisma'
 
 const stripe = env.STRIPE_SECRET_KEY ? new Stripe(env.STRIPE_SECRET_KEY, {
   apiVersion: '2022-11-15',

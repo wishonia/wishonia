@@ -1,7 +1,8 @@
 'use client'
 
-import { Input } from "@/components/ui/input"
 import { useState } from "react"
+
+import { Input } from "@/components/ui/input"
 
 type SearchFilterProps = {
   placeholder: string

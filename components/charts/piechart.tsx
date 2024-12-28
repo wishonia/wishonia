@@ -1,9 +1,9 @@
 "use client"
 
-import { WishingWellEntry } from "@/types"
 import { Cell, Pie, PieChart, ResponsiveContainer, Tooltip } from "recharts"
 
 import { Card } from "@/components/ui/card"
+import { WishingWellEntry } from "@/types"
 
 interface PieChartProps {
   data: WishingWellEntry[]

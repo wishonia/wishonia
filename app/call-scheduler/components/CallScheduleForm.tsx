@@ -1,16 +1,20 @@
 'use client'
 
+import { CallSchedule, Person, Agent } from "@prisma/client"
+import { useRouter } from "next/navigation"
+import { Session } from "next-auth"
 import { useState } from 'react'
+import { toast } from "sonner"
+
 import { Button } from "@/components/ui/button"
 import { Input } from "@/components/ui/input"
-import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@/components/ui/select"
-import { toast } from "sonner"
-import { createCallSchedule, updateSchedule } from "../actions"
-import { useRouter } from "next/navigation"
-import { RadioGroup, RadioGroupItem } from "@/components/ui/radio-group"
 import { Label } from "@/components/ui/label"
-import { CallSchedule, Person, Agent } from "@prisma/client"
-import { Session } from "next-auth"
+import { RadioGroup, RadioGroupItem } from "@/components/ui/radio-group"
+import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@/components/ui/select"
+
+import { createCallSchedule, updateSchedule } from "../actions"
+
+
 
 export type ScheduleWithRelations = CallSchedule & {
   person: Person;

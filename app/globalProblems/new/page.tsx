@@ -1,12 +1,12 @@
 import { Metadata } from "next"
 import { notFound, redirect } from "next/navigation"
 
-import { getGlobalProblem } from "@/lib/api/globalProblems"
-import { authOptions } from "@/lib/auth"
-import { getCurrentUser } from "@/lib/session"
 import { GlobalProblemForm } from "@/components/globalProblem/global-problem-form"
 import { Shell } from "@/components/layout/shell"
 import { DashboardHeader } from "@/components/pages/dashboard/dashboard-header"
+import { getGlobalProblem } from "@/lib/api/globalProblems"
+import { authOptions } from "@/lib/auth"
+import { getCurrentUser } from "@/lib/session"
 
 export const metadata: Metadata = {
   title: "What's your problem?",

@@ -1,9 +1,9 @@
 "use client"
 
-import React, { useState } from "react"
-import { useRouter } from "next/navigation"
 import { AnimatePresence, motion } from "framer-motion"
 import { ArrowRight, ChevronDown, Loader2, Search } from "lucide-react"
+import { useRouter } from "next/navigation"
+import React, { useState } from "react"
 
 import { searchConditions } from "@/lib/clinicaltables"
 

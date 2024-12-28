@@ -1,10 +1,13 @@
+import { Stethoscope, Pill, BarChart } from "lucide-react"
 import React, { useState } from 'react'
+
 import { Button } from "@/components/ui/button"
 import { Card, CardHeader, CardTitle, CardDescription, CardContent } from "@/components/ui/card"
-import { Stethoscope, Pill, BarChart } from "lucide-react"
+import { GlobalVariable } from '@/types/models/GlobalVariable'
+
 import ConditionSearchAutocomplete from './ConditionSearchAutocomplete'
 import TreatmentSearchAutocomplete from './TreatmentSearchAutocomplete'
-import { GlobalVariable } from '@/types/models/GlobalVariable'
+
 
 export default function CostBenefitAnalysis() {
     const [condition, setCondition] = useState('')

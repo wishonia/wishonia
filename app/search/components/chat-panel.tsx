@@ -1,17 +1,22 @@
 'use client'
 
-import { useEffect, useState, useRef } from 'react'
-import { useRouter } from 'next/navigation'
-import type { AI, UIState } from '@/app/search/actions'
-import { useUIState, useActions, useAIState } from 'ai/rsc'
-import { cn } from '@/lib/utils'
-import { UserMessage } from './user-message'
-import { Button } from '@/components/ui/button'
-import { ArrowRight, Plus } from 'lucide-react'
-import { EmptyScreen } from './empty-screen'
-import Textarea from 'react-textarea-autosize'
 import { generateId } from 'ai'
+import { useUIState, useActions, useAIState } from 'ai/rsc'
+import { ArrowRight, Plus } from 'lucide-react'
+import { useRouter } from 'next/navigation'
+import { useEffect, useState, useRef } from 'react'
+import Textarea from 'react-textarea-autosize'
+
+import type { AI, UIState } from '@/app/search/actions'
+import { Button } from '@/components/ui/button'
+import { cn } from '@/lib/utils'
 import { useAppState } from '@/lib/utils/app-state'
+
+import { EmptyScreen } from './empty-screen'
+import { UserMessage } from './user-message'
+
+
+
 
 interface ChatPanelProps {
   messages: UIState

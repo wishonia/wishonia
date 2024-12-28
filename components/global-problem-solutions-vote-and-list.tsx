@@ -1,8 +1,8 @@
 "use client"
 
-import React, { useEffect, useState } from "react"
 import { GlobalProblem } from "@prisma/client"
 import { User } from "next-auth"
+import React, { useEffect, useState } from "react"
 
 import { GlobalProblemSolutionsList } from "@/components/global-problem-solutions-list"
 import { Shell } from "@/components/layout/shell"
@@ -42,15 +42,15 @@ export const GlobalProblemSolutionsVoteAndSolutionsList: React.FC<
       <DashboardHeader
         heading={`Solutions for ${globalProblem.name}`}
         text={`Vote on the best solutions to ${globalProblem.name}!`}
-      ></DashboardHeader>
+       />
       <PollRandomGlobalProblemSolutions
         globalProblemId={globalProblemId}
         user={user}
-      ></PollRandomGlobalProblemSolutions>
+       />
       <GlobalProblemSolutionsList
         user={user}
         globalProblemId={globalProblemId}
-      ></GlobalProblemSolutionsList>
+       />
     </Shell>
   )
 }

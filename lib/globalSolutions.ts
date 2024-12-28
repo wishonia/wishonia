@@ -1,4 +1,5 @@
 import fs from "fs"
+
 import { GlobalSolution } from "@prisma/client"
 
 import { prisma } from "@/lib/db"
@@ -59,7 +60,7 @@ export async function getRandomGlobalSolutionPair(userId: string | undefined) {
 }
 
 export async function getAllRandomGlobalSolutionPairs() {
-  let randomPairs: GlobalSolution[][] = []
+  const randomPairs: GlobalSolution[][] = []
   const globalSolutions = await prisma.globalSolution.findMany()
   for (let i = 0; i < globalSolutions.length; i += 2) {
     randomPairs.push([globalSolutions[i], globalSolutions[i + 1]])

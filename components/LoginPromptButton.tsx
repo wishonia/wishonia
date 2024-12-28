@@ -1,9 +1,8 @@
 "use client"
 
-import React, { useEffect, useState } from "react"
 import { VisuallyHidden } from "@radix-ui/themes"
+import React, { useEffect, useState } from "react"
 
-import { cn } from "@/lib/utils"
 import { buttonVariants } from "@/components/ui/button"
 import {
   Dialog,
@@ -12,6 +11,7 @@ import {
   DialogTrigger,
 } from "@/components/ui/dialog"
 import { UserAuthForm } from "@/components/user/user-auth-form"
+import { cn } from "@/lib/utils"
 
 interface LoginPromptProps {
   buttonText?: string

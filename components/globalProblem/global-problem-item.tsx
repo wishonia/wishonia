@@ -1,11 +1,11 @@
 "use client"
 
-import Link from "next/link"
 import { GlobalProblem } from "@prisma/client"
+import Link from "next/link"
 
-import { formatDate } from "@/lib/utils"
-import { Skeleton } from "@/components/ui/skeleton"
 import { GlobalProblemOperations } from "@/components/globalProblem/global-problem-operations"
+import { Skeleton } from "@/components/ui/skeleton"
+import { formatDate } from "@/lib/utils"
 interface GlobalProblemItemProps {
   globalProblem: Pick<
     GlobalProblem,

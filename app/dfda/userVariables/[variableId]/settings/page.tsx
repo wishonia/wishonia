@@ -1,11 +1,11 @@
 import { Metadata } from "next"
 import { notFound, redirect } from "next/navigation"
 
-import { authOptions } from "@/lib/auth"
-import { getCurrentUser } from "@/lib/session"
 import { Shell } from "@/components/layout/shell"
 import { DashboardHeader } from "@/components/pages/dashboard/dashboard-header"
 import { UserVariableEditForm } from "@/components/userVariables/user-variable-edit-form"
+import { authOptions } from "@/lib/auth"
+import { getCurrentUser } from "@/lib/session"
 
 export const metadata: Metadata = {
   title: "UserVariable Settings",

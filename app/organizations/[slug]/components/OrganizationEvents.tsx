@@ -1,7 +1,8 @@
 "use client"
 
-import * as React from "react"
 import { Event } from "@prisma/client"
+import * as React from "react"
+
 import { Button } from "@/components/ui/button"
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card"
 

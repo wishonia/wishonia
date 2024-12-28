@@ -2,9 +2,9 @@
 
 import React, { useState } from "react"
 
-import { markdownPages } from "@/lib/markdownPages"
 import { LinkCard } from "@/components/link-card"
 import { AskAISearchDialog } from "@/components/search-dialog/AskAISearchDialog"
+import { markdownPages } from "@/lib/markdownPages"
 
 export default function MarkdownPagesList() {
   const [searchQuery, setSearchQuery] = useState("")

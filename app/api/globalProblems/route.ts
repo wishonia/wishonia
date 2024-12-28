@@ -1,6 +1,6 @@
+import {getUserIdServer} from "@/lib/api/getUserIdServer";
 import { prisma } from "@/lib/db"
 import { handleError } from "@/lib/errorHandler"
-import {getUserIdServer} from "@/lib/api/getUserIdServer";
 import {generateAndSaveGlobalProblem} from "@/lib/globalProblemGenerator";
 
 export async function GET() {

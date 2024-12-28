@@ -1,9 +1,7 @@
 'use client'
 
-import { getServerSession } from "next-auth/next"
-import { prisma } from "@/lib/prisma"
 import { redirect } from "next/navigation"
-import { Card } from "@/components/ui/card"
+import { getServerSession } from "next-auth/next"
 import { ErrorBoundary } from "react-error-boundary"
 import {
   LineChart,
@@ -17,6 +15,9 @@ import {
   Pie,
   Cell
 } from 'recharts'
+
+import { Card } from "@/components/ui/card"
+import { prisma } from "@/lib/prisma"
 
 function ErrorFallback({ error, resetErrorBoundary }: { 
   error: Error

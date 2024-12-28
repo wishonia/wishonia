@@ -1,8 +1,8 @@
 import { NextResponse } from "next/server"
 
 import { handleError } from "@/lib/errorHandler"
-import { updateOrCreateGlobalProblemPairAllocation } from "@/lib/globalProblems"
 import { updateOrCreateGlobalProblemSolutionPairAllocation } from "@/lib/globalProblemSolutionPairAllocations"
+import { updateOrCreateGlobalProblemPairAllocation } from "@/lib/globalProblems"
 import { updateOrCreateGlobalSolutionPairAllocation } from "@/lib/globalSolutions"
 import { getCurrentUser } from "@/lib/session"
 import { saveReferrerUserId } from "@/lib/user"
@@ -16,7 +16,7 @@ export async function POST(req: Request) {
     }
     const body = await req.json()
     const userId = currentUser.id
-    let {
+    const {
       wishingWellPairAllocation,
       referrerUserId,
       globalProblemPairAllocation,

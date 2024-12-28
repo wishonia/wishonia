@@ -1,15 +1,20 @@
 'use client'
 
-import { Study } from '@/types/models/Study'
-import { Button } from '@/components/ui/button'
 import Highcharts from "highcharts"
-import { useRouter } from 'next/navigation'
-import { GlobalVariableCharts } from '@/components/globalVariables/global-variable-charts'
 import HighchartsReact from 'highcharts-react-official'
-import StudyHeaderHtml from './StudyHeaderHtml'
-import { SanitizedContent } from './SanitizedContent'
-import { StudyStatistics } from './StudyStatistics'
 import { Link, Twitter, Facebook, Linkedin } from 'lucide-react'
+import { useRouter } from 'next/navigation'
+
+import { GlobalVariableCharts } from '@/components/globalVariables/global-variable-charts'
+import { Button } from '@/components/ui/button'
+import { Study } from '@/types/models/Study'
+
+
+
+import { SanitizedContent } from './SanitizedContent'
+import StudyHeaderHtml from './StudyHeaderHtml'
+import { StudyStatistics } from './StudyStatistics'
+
 
 interface StudyCardProps {
   study: Study

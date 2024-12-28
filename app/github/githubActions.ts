@@ -1,11 +1,12 @@
 'use server'
 
+import { generateObject } from 'ai'
+import matter from 'gray-matter'
+import { z } from 'zod'
+
 import { FileItem } from '@/components/github/types'
 import prisma from '@/lib/prisma'
 import { githubSlugify } from '@/lib/utils/githubSlugify'
-import matter from 'gray-matter'
-import { generateObject } from 'ai'
-import { z } from 'zod'
 import { getModel } from '@/lib/utils/modelUtils'
 import { slugify } from '@/lib/utils/slugify'
 

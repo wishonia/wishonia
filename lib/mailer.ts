@@ -1,4 +1,5 @@
 import nodemailer from "nodemailer"
+
 import { siteConfig } from "@/config/site"
 
 export async function sendEmail(
@@ -12,7 +13,7 @@ export async function sendEmail(
   }
   const emailServerUrl = new URL(process.env.EMAIL_SERVER)
   // create reusable transporter object using the default SMTP transport
-  let transporter = nodemailer.createTransport({
+  const transporter = nodemailer.createTransport({
     host: emailServerUrl.hostname,
     port: parseInt(emailServerUrl.port),
     secure: emailServerUrl.protocol === "smtps:",

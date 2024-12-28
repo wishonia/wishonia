@@ -1,6 +1,6 @@
 "use client"
-import React, { useState } from 'react';
 import { Lightbulb, AlertCircle, Cog, List } from 'lucide-react';
+import React, { useState } from 'react';
 
 type IdeaType = 'problem' | 'solution' | 'task' | 'other';
 

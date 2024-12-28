@@ -87,7 +87,7 @@ const WarVsCuresBarChart: React.FC<ChartContainerProps> = ({
                 backgroundSize: "cover",
                 backgroundPosition: "center", // Adjusts the background image to be centered
               }}
-            ></div>
+             />
           </div>
           <div
             style={{
@@ -116,7 +116,7 @@ const WarVsCuresBarChart: React.FC<ChartContainerProps> = ({
                 backgroundImage: "url(/img/people/grandma.jpg)",
                 backgroundSize: "cover",
               }}
-            ></div>
+             />
           </div>
         </div>
         {labelsPosition === "bottom" && (

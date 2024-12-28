@@ -1,6 +1,8 @@
 import { notFound } from "next/navigation"
-import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar"
+
 import ArticleSearchAndGrid from "@/components/article/ArticleSearchAndGrid"
+import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar"
+
 import { getAuthorByUsername, getAuthorForMetadata } from "../../articleActions"
 
 export async function generateMetadata({ params }: { params: { username: string } }) {

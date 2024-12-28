@@ -1,8 +1,8 @@
 import { Metadata } from "next"
 
-import { getCurrentUser } from "@/lib/session"
 import { Shell } from "@/components/layout/shell"
 import { PollRandomGlobalProblemSolutions } from "@/components/poll-random-global-problem-solutions"
+import { getCurrentUser } from "@/lib/session"
 
 export const metadata: Metadata = {
   title: "Vote on Solutions",
@@ -29,7 +29,7 @@ export default async function GlobalProblemSolutionsVotePage({
       <PollRandomGlobalProblemSolutions
         globalProblemId={globalProblemId}
         user={user}
-      ></PollRandomGlobalProblemSolutions>
+       />
     </Shell>
   )
 }

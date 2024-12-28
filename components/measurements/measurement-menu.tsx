@@ -1,13 +1,5 @@
 "use client"
 
-import { useRouter } from "next/navigation"
-import { Measurement } from "@/types/models/Measurement"
-import {
-  Popover,
-  PopoverContent,
-  PopoverTrigger,
-} from "@/components/ui/popover"
-import { Button } from "@/components/ui/button"
 import { MoreVertical } from "lucide-react"
 import {
   Edit,
@@ -19,6 +11,15 @@ import {
   Trash2,
   GitFork,
 } from "lucide-react"
+import { useRouter } from "next/navigation"
+
+import { Button } from "@/components/ui/button"
+import {
+  Popover,
+  PopoverContent,
+  PopoverTrigger,
+} from "@/components/ui/popover"
+import { Measurement } from "@/types/models/Measurement"
 
 interface MeasurementMenuProps {
   measurement: Measurement

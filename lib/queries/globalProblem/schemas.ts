@@ -1,5 +1,5 @@
-import { z } from 'zod'
 import { CompanyType, FocusLevel, ExpertiseLevel } from '@prisma/client'
+import { z } from 'zod'
 
 export const GeneratedOrganizationSchema = z.object({
   organizations: z.array(z.object({

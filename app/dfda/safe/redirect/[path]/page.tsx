@@ -1,8 +1,8 @@
 import { redirect } from "next/navigation"
 
 import { getSafeRedirectUrl } from "@/app/dfda/dfdaActions"
-import { getCurrentUser } from "@/lib/session"
 import { LoginPromptButton } from "@/components/LoginPromptButton"
+import { getCurrentUser } from "@/lib/session"
 
 // Add Props interface for the page component
 interface DfdaSafePageProps {

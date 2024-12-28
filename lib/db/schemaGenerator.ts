@@ -54,7 +54,7 @@ export function generatePrismaSchema(
         newSchemaArr.push(`${indent}${propName} Json`)
       }
     } else if (typeof propValue === "object" && recursive) {
-      let pascalPropName = snakeToPascalCase(propName)
+      const pascalPropName = snakeToPascalCase(propName)
       let relatedModelName = `${modelName}${pascalPropName}`
       if (prefix && !relatedModelName.startsWith(prefix)) {
         relatedModelName = `${prefix}${relatedModelName}`

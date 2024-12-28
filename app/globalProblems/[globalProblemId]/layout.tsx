@@ -1,7 +1,8 @@
-import { notFound } from "next/navigation"
 import type { GlobalProblem } from "@prisma/client"
-import prisma from "@/lib/prisma"
+import { notFound } from "next/navigation"
+
 import { GlobalProblemBreadcrumbs } from "@/components/globalProblem/GlobalProblemBreadcrumbs"
+import prisma from "@/lib/prisma"
 
 interface GlobalProblemLayoutProps {
   children: React.ReactNode

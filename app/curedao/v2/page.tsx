@@ -1,12 +1,12 @@
-import { NavBar } from '@/app/curedao/components/nav-bar'
+import { Footer } from '@/app/curedao/components/footer'
+import { GradientBlur } from '@/app/curedao/components/gradient-blur'
 import { HeroSection } from '@/app/curedao/components/hero-section'
+import {ImprovedFDASection} from "@/app/curedao/components/improved-fda-section";
+import { JoinSection } from '@/app/curedao/components/join-section'
+import { MetricsSection } from '@/app/curedao/components/metrics-section'
+import { NavBar } from '@/app/curedao/components/nav-bar'
 import { PillarsSection } from '@/app/curedao/components/pillars-section'
 import { WhyNowSection } from '@/app/curedao/components/why-now-section'
-import { MetricsSection } from '@/app/curedao/components/metrics-section'
-import { JoinSection } from '@/app/curedao/components/join-section'
-import { GradientBlur } from '@/app/curedao/components/gradient-blur'
-import { Footer } from '@/app/curedao/components/footer'
-import {ImprovedFDASection} from "@/app/curedao/components/improved-fda-section";
 
 export default function CureDAOHomeV2() {
   return (

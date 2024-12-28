@@ -1,21 +1,26 @@
 'use client'
 
+import { zodResolver } from '@hookform/resolvers/zod'
+import {Skill, User} from '@prisma/client'
+import { ChevronDown, ChevronUp, User as UserIcon, Mail, Phone, MapPin, Globe, Github, Twitter, Cake, UserCircle, Languages, Lock } from 'lucide-react' // Import icons
 import React from 'react'
 import { useState } from 'react'
 import { useForm } from 'react-hook-form'
-import { zodResolver } from '@hookform/resolvers/zod'
-import { userSchema } from './userSchema'
-import { updateUser } from './profileActions'
-import {Skill, User} from '@prisma/client'
+
+
+
 import { Button } from "@/components/ui/button"
-import { Input } from "@/components/ui/input"
-import { Textarea } from "@/components/ui/textarea"
 import { Checkbox } from "@/components/ui/checkbox"
+import { Input } from "@/components/ui/input"
 import { Label } from "@/components/ui/label"
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@/components/ui/select"
+import { Textarea } from "@/components/ui/textarea"
 import { toast } from "@/components/ui/use-toast"
-import { ChevronDown, ChevronUp, User as UserIcon, Mail, Phone, MapPin, Globe, Github, Twitter, Cake, UserCircle, Languages, Lock } from 'lucide-react' // Import icons
+
+
 import UserSkills from './UserSkills'
+import { updateUser } from './profileActions'
+import { userSchema } from './userSchema'
 
 type FormData = Omit<User, 'id' | 'createdAt' | 'updatedAt' | 'emailVerified' | 'lastSignInAt' | 'createdAtTwitter' | 'deletedAt' | 'favouritesCount' | 'followersCount' | 'followingCount' | 'likeCount' | 'listedCount' | 'points' | 'statusesCount' | 'tweetCount' | 'privateMetadata' | 'publicMetadata' | 'unsafeMetadata' | 'ipAddress' | 'signatureTimestamp' | 'referrerUserId'>
 

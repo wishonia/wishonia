@@ -1,7 +1,8 @@
-import Link from 'next/link'
 import Image from 'next/image'
-import { Card, CardContent, CardFooter, CardHeader, CardTitle } from "@/components/ui/card"
+import Link from 'next/link'
+
 import { Badge } from "@/components/ui/badge"
+import { Card, CardContent, CardFooter, CardHeader, CardTitle } from "@/components/ui/card"
 import { ArticleWithRelations } from '@/lib/agents/researcher/researcher'
 
 type ArticleGridProps = {

@@ -1,23 +1,23 @@
 "use client"
 
-import React, { useEffect, useState } from "react"
-import Image from "next/image"
-import Link from "next/link"
 import { GlobalProblemSolution } from "@prisma/client"
 import { ColumnDef } from "@tanstack/react-table"
+import Image from "next/image"
+import Link from "next/link"
+import React, { useEffect, useState } from "react"
 
-import { ExtendedUser } from "@/types/auth"
-import { cn } from "@/lib/utils"
-import { Button, buttonVariants } from "@/components/ui/button"
 import { DataTable } from "@/components/data-table"
 import { Icons } from "@/components/icons"
 import { SpinningLoader } from "@/components/spinningLoader"
+import { Button, buttonVariants } from "@/components/ui/button"
 import {
   DropdownMenu,
   DropdownMenuContent,
   DropdownMenuItem,
   DropdownMenuTrigger,
 } from "@/components/ui/dropdown-menu"
+import { cn } from "@/lib/utils"
+import { ExtendedUser } from "@/types/auth"
 
 interface PollProps {
   globalProblemId: string
@@ -202,7 +202,7 @@ export const GlobalProblemSolutionsList: React.FC<PollProps> = ({
       <DataTable
         columns={globalProblemSolutionColumns}
         data={globalProblemSolutions}
-      ></DataTable>
+       />
     </>
   )
 }

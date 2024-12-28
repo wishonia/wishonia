@@ -1,4 +1,5 @@
 import AuthorsList from "@/components/authors/AuthorsList"
+
 import { getAuthors } from "../articleActions"
 
 export const metadata = {

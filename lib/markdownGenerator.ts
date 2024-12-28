@@ -1,7 +1,8 @@
 import { writeFileSync } from "fs"
-import { MarkdownFile, MarkdownMeta } from "@/interfaces/markdownFile"
+
 import { stringify } from "gray-matter"
 
+import { MarkdownFile, MarkdownMeta } from "@/interfaces/markdownFile"
 import { pathToUrl, relativePathFromPublic } from "@/lib/fileHelper"
 import { generateAndUploadFeaturedImageJpg } from "@/lib/imageGenerator"
 import { textCompletion } from "@/lib/llm"

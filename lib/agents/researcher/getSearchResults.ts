@@ -2,7 +2,7 @@ import Exa, {RegularSearchOptions, SearchResult} from "exa-js";
 const exa = new Exa(process.env.EXA_API_KEY);
 
 export async function getSearchResults(queries: string[], options?: RegularSearchOptions): Promise<SearchResult[]> {
-    let results: SearchResult[] = [];
+    const results: SearchResult[] = [];
     for (const query of queries) {
         const searchResponse = await exa.searchAndContents(query, {
             numResults: options?.numResults ?? 5,
@@ -15,7 +15,7 @@ export async function getSearchResults(queries: string[], options?: RegularSearc
 }
 
 export async function getSearchResultsByDomain(domain: string, queries: string[], options?: RegularSearchOptions): Promise<SearchResult[]> {
-    let results: SearchResult[] = [];
+    const results: SearchResult[] = [];
     for (const query of queries) {
         const searchResponse = await exa.searchAndContents(query, {
             numResults: options?.numResults ?? 5,
@@ -29,7 +29,7 @@ export async function getSearchResultsByDomain(domain: string, queries: string[]
 }
 
 export async function getSearchResultsByUrl(url: string, linksPerQuery: number = 5): Promise<SearchResult[]> {
-    let results: SearchResult[] = [];
+    const results: SearchResult[] = [];
     const searchResponse = await exa.getContents(
         [url],
         {

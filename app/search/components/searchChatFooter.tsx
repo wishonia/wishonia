@@ -1,6 +1,7 @@
-import React from 'react'
 import Link from 'next/link'
+import React from 'react'
 import { SiDiscord, SiGithub, SiX } from 'react-icons/si'
+
 import { Button } from '@/components/ui/button'
 
 const SearchChatFooter: React.FC = () => {

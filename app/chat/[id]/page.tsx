@@ -1,11 +1,13 @@
-import { notFound, redirect } from "next/navigation"
+import { ChatMessage } from "@prisma/client"
 import { Message } from "ai"
+import { notFound, redirect } from "next/navigation"
+
+import { getChat, getMissingKeys } from "@/app/actions"
+import Chat from "@/components/Chat"
 import { getAgent } from "@/lib/api/agents"
 import { AI } from "@/lib/chat/actions"
 import { getCurrentUser } from "@/lib/session"
-import Chat from "@/components/Chat"
-import { getChat, getMissingKeys } from "@/app/actions"
-import { ChatMessage } from "@prisma/client"
+
 
 export interface ChatPageProps {
   params: {

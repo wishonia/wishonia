@@ -1,8 +1,8 @@
 "use client"
 
-import React, { useState } from "react"
 import { AnimatePresence, motion } from "framer-motion"
 import { ChevronRight, X } from "lucide-react"
+import React, { useState } from "react"
 import ReactMarkdown from "react-markdown"
 
 import { comparisonData } from "./dfda-comparison-data"

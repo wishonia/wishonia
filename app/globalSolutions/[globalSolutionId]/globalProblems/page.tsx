@@ -1,6 +1,7 @@
-import { prisma } from "@/lib/db"
-import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card"
 import Link from "next/link"
+
+import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card"
+import { prisma } from "@/lib/db"
 
 export default async function GlobalSolutionProblemsPage({
   params: { globalSolutionId },

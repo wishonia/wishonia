@@ -1,12 +1,13 @@
 "use client"
 
+import { Chat as ChatIcon } from "@phosphor-icons/react"
+import {Chat} from "@prisma/client";
+import { motion } from "framer-motion"
 import Link from "next/link"
 import { usePathname } from "next/navigation"
-import { Chat as ChatIcon } from "@phosphor-icons/react"
-import { motion } from "framer-motion"
 
 import { useLocalStorage } from "@/lib/hooks/use-local-storage"
-import {Chat} from "@prisma/client";
+
 
 interface SidebarItemProps {
   index: number

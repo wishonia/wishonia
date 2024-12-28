@@ -1,10 +1,12 @@
 'use client'
 
-import { useState } from 'react'
-import { Switch } from "@/components/ui/switch"
-import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@/components/ui/select"
-import { updateFollowSettings } from '../petitionActions'
 import { EmailFrequency } from "@prisma/client"
+import { useState } from 'react'
+
+import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@/components/ui/select"
+import { Switch } from "@/components/ui/switch"
+
+import { updateFollowSettings } from '../petitionActions'
 
 interface FollowSettings {
   notifyOnComment: boolean

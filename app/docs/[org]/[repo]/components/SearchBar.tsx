@@ -1,16 +1,16 @@
 "use client"
 
-import { useCallback, useEffect, useRef, useState } from "react"
-import { usePathname, useRouter, useSearchParams } from "next/navigation"
 import { Command } from "cmdk"
 import debounce from "lodash/debounce"
 import { Loader2, Search, X } from "lucide-react"
+import { usePathname, useRouter, useSearchParams } from "next/navigation"
+import { useCallback, useEffect, useRef, useState } from "react"
 
-import { useDetailedRateLimit } from "@/lib/hooks/useDetailedRateLimit"
-import { cn } from "@/lib/utils"
 import { Button } from "@/components/ui/button"
 import { Dialog, DialogContent, DialogTitle } from "@/components/ui/dialog"
 import { Input } from "@/components/ui/input"
+import { useDetailedRateLimit } from "@/lib/hooks/useDetailedRateLimit"
+import { cn } from "@/lib/utils"
 
 import { searchRepoContent } from "../actions"
 import { MenuItem } from "../lib/parseSummary"

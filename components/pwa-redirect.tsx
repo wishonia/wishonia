@@ -1,7 +1,7 @@
 "use client"
 
-import * as React from "react"
 import { redirect } from "next/navigation"
+import * as React from "react"
 
 export function PWARedirect() {
   // Redirect to signin page if PWA

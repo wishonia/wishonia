@@ -1,6 +1,6 @@
 "use client"
-import React, { useState, useEffect } from 'react';
 import { AlertTriangle, Skull, Brain, Globe, Zap } from 'lucide-react';
+import React, { useState, useEffect } from 'react';
 
 const radicalQuestions = [
   { text: "What if you could reshape reality?", icon: Zap },

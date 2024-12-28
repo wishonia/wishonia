@@ -1,13 +1,14 @@
-import { NavBar } from '@/app/curedao/components/nav-bar'
-import { GradientBlur } from '@/app/curedao/components/gradient-blur'
-import { Footer } from '@/app/curedao/components/footer'
-import { MissionSection } from '@/app/curedao/components/mission-section'
 import { ChallengeSection } from '@/app/curedao/components/challenge-section'
-import { SolutionSection } from '@/app/curedao/components/solution-section'
-import { JoinSection } from '@/app/curedao/components/join-section'
+import { Footer } from '@/app/curedao/components/footer'
+import { GradientBlur } from '@/app/curedao/components/gradient-blur'
 import { ImpactSection } from '@/app/curedao/components/impact-section'
-import { TimelineSection } from '@/app/curedao/components/timeline-section'
+import { JoinSection } from '@/app/curedao/components/join-section'
+import { MissionSection } from '@/app/curedao/components/mission-section'
+import { NavBar } from '@/app/curedao/components/nav-bar'
 import { ResourcesSection } from '@/app/curedao/components/resources-section'
+import { SolutionSection } from '@/app/curedao/components/solution-section'
+import { TimelineSection } from '@/app/curedao/components/timeline-section'
+
 import { DiagramSection } from './components/diagram-section'
 
 export default function CureDaoHome() {

@@ -1,12 +1,12 @@
 import { Metadata } from "next"
 import { notFound, redirect } from "next/navigation"
 
-import { getUserWishingWell } from "@/lib/api/wishingWells"
-import { authOptions } from "@/lib/auth"
-import { getCurrentUser } from "@/lib/session"
 import { Shell } from "@/components/layout/shell"
 import { DashboardHeader } from "@/components/pages/dashboard/dashboard-header"
 import { WishingWellEditForm } from "@/components/wishingWell/wishing-well-edit-form"
+import { getUserWishingWell } from "@/lib/api/wishingWells"
+import { authOptions } from "@/lib/auth"
+import { getCurrentUser } from "@/lib/session"
 
 export const metadata: Metadata = {
   title: "Wishing Well Settings",

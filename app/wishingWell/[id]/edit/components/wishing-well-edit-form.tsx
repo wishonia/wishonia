@@ -1,17 +1,17 @@
 "use client"
 
-import * as React from "react"
-import { useRouter } from "next/navigation"
 import { zodResolver } from "@hookform/resolvers/zod"
+import { useRouter } from "next/navigation"
+import * as React from "react"
 import { useForm } from "react-hook-form"
 import * as z from "zod"
 
+import { updateWishingWell } from "@/app/actions/wishing-well"
 import { Button } from "@/components/ui/button"
+import { ImageUpload } from "@/components/ui/image-upload"
 import { Input } from "@/components/ui/input"
 import { Textarea } from "@/components/ui/textarea"
 import { toast } from "@/components/ui/use-toast"
-import { ImageUpload } from "@/components/ui/image-upload"
-import { updateWishingWell } from "@/app/actions/wishing-well"
 
 const wishingWellSchema = z.object({
   name: z.string().min(1, "Name is required"),

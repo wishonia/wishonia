@@ -1,9 +1,9 @@
 import { Metadata } from "next"
 
-import { getCurrentUser } from "@/lib/session"
 import AfterLoginHandler from "@/components/AfterLoginHandler"
 import { Shell } from "@/components/layout/shell"
 import { PollRandomWishingWells } from "@/components/poll-random-wishing-wells"
+import { getCurrentUser } from "@/lib/session"
 
 export const metadata: Metadata = {
   title: "Wishing Wells",
@@ -21,8 +21,8 @@ export default async function WishingWellsPage({
 
   return (
     <Shell>
-      <AfterLoginHandler></AfterLoginHandler>
-      <PollRandomWishingWells user={user}></PollRandomWishingWells>
+      <AfterLoginHandler />
+      <PollRandomWishingWells user={user} />
     </Shell>
   )
 }

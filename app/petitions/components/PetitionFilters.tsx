@@ -1,8 +1,9 @@
 'use client'
 
-import { useRouter, useSearchParams } from "next/navigation"
-import { Select } from "@/components/ui/select"
 import { PetitionStatus } from "@prisma/client"
+import { useRouter, useSearchParams } from "next/navigation"
+
+import { Select } from "@/components/ui/select"
 
 export function PetitionFilters() {
   const router = useRouter()

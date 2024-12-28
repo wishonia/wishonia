@@ -1,8 +1,8 @@
 import { getServerSession } from "next-auth/next"
 
-import { ExtendedUser } from "@/types/auth"
 import { authOptions } from "@/lib/auth"
 import { prisma } from "@/lib/db"
+import { ExtendedUser } from "@/types/auth"
 
 export async function getCurrentUser() {
   const session = await getServerSession(authOptions)

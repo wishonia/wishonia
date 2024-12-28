@@ -1,8 +1,10 @@
-import { TavilyClient } from '../clients/tavily';
 import { TavilySearchResult } from '@tavily/core';
 import { generateObject } from 'ai';
 import { z } from 'zod';
+
 import { getModel } from '@/lib/utils/modelUtils';
+
+import { TavilyClient } from '../clients/tavily';
 
 const SourceLinkSuggestionSchema = z.object({
   linksToAdd: z.array(z.object({

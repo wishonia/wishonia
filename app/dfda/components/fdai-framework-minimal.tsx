@@ -1,6 +1,7 @@
-import React from 'react'
-import Link from 'next/link'
 import { ArrowLeft, ArrowRight, Smartphone, FileText, FlaskRoundIcon as Flask, Cloud, ShoppingCart, Database, Shield, Brain, Users, BarChart, Building2 } from 'lucide-react'
+import Link from 'next/link'
+import React from 'react'
+
 import { Button } from '@/components/ui/button'
 
 export default function FDAiFrameworkMinimal() {

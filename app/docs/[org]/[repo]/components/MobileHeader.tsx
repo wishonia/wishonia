@@ -1,14 +1,17 @@
 'use client'
 
-import { useState } from 'react'
-import { Button } from '@/components/ui/button'
 import { Menu, Search } from 'lucide-react'
-import { Sheet, SheetContent, SheetTrigger } from '@/components/ui/sheet'
+import { useState } from 'react'
+
+import { Button } from '@/components/ui/button'
 import { Dialog, DialogContent, DialogTrigger } from '@/components/ui/dialog'
-import SearchBar from './SearchBar'
-import DocsSidebar from './DocsSidebar'
-import { MenuItem } from '../lib/parseSummary'
+import { Sheet, SheetContent, SheetTrigger } from '@/components/ui/sheet'
+
 import { RepoContent } from '../actions'
+import { MenuItem } from '../lib/parseSummary'
+
+import DocsSidebar from './DocsSidebar'
+import SearchBar from './SearchBar'
 
 interface MobileHeaderProps {
   menu: MenuItem[] | RepoContent[]

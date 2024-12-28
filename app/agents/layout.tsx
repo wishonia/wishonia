@@ -1,8 +1,8 @@
+import { Providers } from "@/app/providers"
 import { ChatSidebar } from "@/components/ChatSidebar"
 import ChatSidebarDesktop from "@/components/ChatSidebarDesktop"
 import ChatSidebarMobile from "@/components/ChatSidebarMobile"
 import ChatSidebarToggle from "@/components/ChatSidebarToggle"
-import { Providers } from "@/app/providers"
 
 interface ChatLayoutProps {
   children: React.ReactNode

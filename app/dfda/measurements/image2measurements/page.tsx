@@ -1,16 +1,16 @@
 "use client"
 
-import React, { useCallback, useState } from "react"
 import dynamic from "next/dynamic"
+import React, { useCallback, useState } from "react"
 
-import { convertFileToBase64 } from "@/lib/convertFileToBase64"
-import { getUtcDateTimeWithTimezone } from "@/lib/dateTimeWithTimezone"
 import { AnalysisResult } from "@/components/AnalysisResult"
 import { AnalyzeButton } from "@/components/AnalyzeButton"
 import { CameraButton } from "@/components/CameraButton"
 import { FileUploader } from "@/components/FileUploader"
 import { Shell } from "@/components/layout/shell"
 import { DashboardHeader } from "@/components/pages/dashboard/dashboard-header"
+import { convertFileToBase64 } from "@/lib/convertFileToBase64"
+import { getUtcDateTimeWithTimezone } from "@/lib/dateTimeWithTimezone"
 
 const ChatComponent = dynamic(() => import("./ChatComponent"), {
   ssr: true,

@@ -1,6 +1,7 @@
 import { LanguageModelV1 } from "@ai-sdk/provider";
 import { generateObject } from "ai";
 import { z } from "zod";
+
 import { getModel, ModelName } from "@/lib/utils/modelUtils";
 
 // Define the schema for industry parameters

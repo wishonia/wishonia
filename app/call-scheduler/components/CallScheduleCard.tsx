@@ -1,16 +1,11 @@
 'use client'
 
 import { CallSchedule, Person, Agent } from "@prisma/client"
-import { Button } from "@/components/ui/button"
-import { 
-  DropdownMenu,
-  DropdownMenuContent,
-  DropdownMenuItem,
-  DropdownMenuTrigger
-} from "@/components/ui/dropdown-menu"
 import { MoreVertical, Edit, Trash2, Power, PowerOff } from "lucide-react"
-import { deleteSchedule, updateSchedule } from "../actions"
+import { Session } from "next-auth"
+import { useState } from "react"
 import { toast } from "sonner"
+
 import {
   AlertDialog,
   AlertDialogAction,
@@ -21,9 +16,21 @@ import {
   AlertDialogHeader,
   AlertDialogTitle,
 } from "@/components/ui/alert-dialog"
-import { useState } from "react"
+import { Button } from "@/components/ui/button"
+import { 
+  DropdownMenu,
+  DropdownMenuContent,
+  DropdownMenuItem,
+  DropdownMenuTrigger
+} from "@/components/ui/dropdown-menu"
+
+import { deleteSchedule, updateSchedule } from "../actions"
+
+
+
+
 import { EditScheduleDialog } from "./EditScheduleDialog"
-import { Session } from "next-auth"
+
 
 type ScheduleWithRelations = CallSchedule & {
   person: Person;

@@ -1,7 +1,7 @@
 import * as cheerio from "cheerio"
 import TurndownService from "turndown"
 
-let turndownService = new TurndownService()
+const turndownService = new TurndownService()
 
 export const websiteParser = (html: string) => {
   const $ = cheerio.load(html)

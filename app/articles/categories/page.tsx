@@ -1,5 +1,5 @@
-import { prisma } from "@/lib/prisma";
 import CategoriesList from "@/components/categories/CategoriesList";
+import { prisma } from "@/lib/prisma";
 
 export const metadata = {
   title: "Article Categories",

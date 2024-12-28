@@ -1,6 +1,6 @@
-import { cache } from "react";
 import { Chat, ChatMessage } from "@prisma/client"
 import { Message } from "ai";
+import { cache } from "react";
 
 import { getChats } from "@/app/actions"
 

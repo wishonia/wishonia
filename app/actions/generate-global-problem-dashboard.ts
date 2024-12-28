@@ -1,12 +1,13 @@
 'use server'
 
 import { generateObject } from 'ai'
-import { getModel } from '@/lib/utils/modelUtils'
-import { GlobalProblemDashboardData, GlobalProblemDashboardSchema } from "@/lib/schemas/global-problem-dashboard"
-import { getRedisModelCache } from '@/lib/utils/redis'
+
 import prisma from '@/lib/prisma'
 import { getGlobalProblemRelationships } from '@/lib/queries/globalProblemQueries'
 import type { GlobalProblemRelationships } from '@/lib/queries/globalProblemQueries'
+import { GlobalProblemDashboardData, GlobalProblemDashboardSchema } from "@/lib/schemas/global-problem-dashboard"
+import { getModel } from '@/lib/utils/modelUtils'
+import { getRedisModelCache } from '@/lib/utils/redis'
 
 const CACHE_TTL = 60 * 60 * 24 // 24 hours in seconds
 const CACHE_KEY_PREFIX = 'global-problem-dashboard:'

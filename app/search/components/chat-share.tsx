@@ -1,8 +1,10 @@
 'use client'
 
-import { useState, useTransition } from 'react'
-import { Button } from '@/components/ui/button'
 import { Share } from 'lucide-react'
+import { useState, useTransition } from 'react'
+import { toast } from 'sonner'
+
+import { Button } from '@/components/ui/button'
 import {
   Dialog,
   DialogContent,
@@ -12,10 +14,9 @@ import {
   DialogDescription,
   DialogTitle
 } from '@/components/ui/dialog'
-import { shareSearchChat } from '@/lib/actions/searchChat'
-import { toast } from 'sonner'
-import { useCopyToClipboard } from '@/lib/hooks/use-copy-to-clipboard'
 import { Spinner } from '@/components/ui/spinner'
+import { shareSearchChat } from '@/lib/actions/searchChat'
+import { useCopyToClipboard } from '@/lib/hooks/use-copy-to-clipboard'
 
 interface ChatShareProps {
   chatId: string

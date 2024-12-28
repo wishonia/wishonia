@@ -1,8 +1,8 @@
 "use client"
 
-import { useState } from "react"
 import { EmailFrequency } from "@prisma/client"
 import { useSession } from "next-auth/react"
+import { useState } from "react"
 
 import { Button } from "@/components/ui/button"
 import { Select } from "@/components/ui/select"

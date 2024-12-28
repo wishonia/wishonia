@@ -1,12 +1,12 @@
 "use client"
 
-import * as React from "react"
-import { useSearchParams } from "next/navigation"
 import { zodResolver } from "@hookform/resolvers/zod"
+import { useSearchParams } from "next/navigation"
+import * as React from "react"
 import { useForm } from "react-hook-form"
 import * as z from "zod"
 
-import { cn } from "@/lib/utils"
+import { Icons } from "@/components/icons"
 import { buttonVariants } from "@/components/ui/button"
 import {
   Card,
@@ -19,7 +19,7 @@ import {
 import { Input } from "@/components/ui/input"
 import { Label } from "@/components/ui/label"
 import { toast } from "@/components/ui/use-toast"
-import { Icons } from "@/components/icons"
+import { cn } from "@/lib/utils"
 
 const dFDAEmailSchema = z.object({
   email: z.string().email("Invalid email address"),
@@ -27,7 +27,7 @@ const dFDAEmailSchema = z.object({
 
 type FormData = z.infer<typeof dFDAEmailSchema>
 
-interface DFDALoginFormProps extends React.HTMLAttributes<HTMLFormElement> {}
+type DFDALoginFormProps = React.HTMLAttributes<HTMLFormElement>
 
 export function DFDAEmailForm({ className, ...props }: DFDALoginFormProps) {
 

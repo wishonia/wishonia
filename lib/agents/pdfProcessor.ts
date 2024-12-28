@@ -1,9 +1,10 @@
 import { LanguageModelV1 } from "@ai-sdk/provider";
+import { generateObject } from "ai";
 import { JSDOM } from 'jsdom';
 import fetch from 'node-fetch';
 import * as pdf from 'pdf-parse';
-import { generateObject } from "ai";
 import { z } from "zod";
+
 import { getModel } from "@/lib/utils/modelUtils";
 
 const WordPressPostSchema = z.object({

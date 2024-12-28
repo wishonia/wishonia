@@ -1,7 +1,8 @@
+import { Clipboard, Database } from 'lucide-react'
 import React from 'react'
+
 import { Button } from "@/components/ui/button"
 import { Card, CardHeader, CardTitle, CardDescription, CardContent } from "@/components/ui/card"
-import { Clipboard, Database } from 'lucide-react'
 
 export default function HealthTrackingLinkBoxes() {
     const handleStartLogging = () => {

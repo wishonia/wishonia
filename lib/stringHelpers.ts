@@ -6,7 +6,7 @@ function toCamelCase(str: string): string {
 
 export function convertKeysToCamelCase(obj: any): any {
   const newObj: any = {}
-  for (let key in obj) {
+  for (const key in obj) {
     if (obj.hasOwnProperty(key)) {
       newObj[toCamelCase(key)] = obj[key]
     }

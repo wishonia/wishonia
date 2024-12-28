@@ -1,9 +1,12 @@
 "use client"
 
-import { useState, useEffect } from "react"
-import { Search } from "lucide-react"
-import { Input } from "@/components/ui/input"
 import { Organization } from "@prisma/client"
+import { Search } from "lucide-react"
+import { useState, useEffect } from "react"
+
+import { Input } from "@/components/ui/input"
+
+
 import { OrganizationItem } from "./OrganizationItem"
 
 interface OrganizationListProps {

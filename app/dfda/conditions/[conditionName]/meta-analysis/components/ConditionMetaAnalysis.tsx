@@ -1,10 +1,11 @@
 'use client';
 
 import React, { useEffect, useState } from 'react';
-import { ArticleWithRelations } from "@/lib/agents/researcher/researcher"
+
+import { getConditionMetaAnalysis } from '@/app/dfda/dfdaActions';
 import ArticleRenderer from '@/components/ArticleRenderer';
 import GlobalHealthOptimizationAgent from "@/components/landingPage/global-health-optimization-agent";
-import { getConditionMetaAnalysis } from '@/app/dfda/dfdaActions';
+import { ArticleWithRelations } from "@/lib/agents/researcher/researcher"
 
 interface ConditionMetaAnalysisProps {
     conditionName: string

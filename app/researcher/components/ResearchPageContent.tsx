@@ -1,8 +1,10 @@
 'use client'
 
 import { useSearchParams, useRouter } from 'next/navigation'
-import ResearchForm from './ResearchForm'
+
 import ArticleSearchAndGrid from '@/components/article/ArticleSearchAndGrid'
+
+import ResearchForm from './ResearchForm'
 
 export function ResearchPageContent() {
     const searchParams = useSearchParams()

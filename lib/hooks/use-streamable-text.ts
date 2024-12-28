@@ -1,5 +1,5 @@
-import { useEffect, useState } from "react"
 import { readStreamableValue, StreamableValue } from "ai/rsc"
+import { useEffect, useState } from "react"
 
 /**
  * The useStreamableText hook is used to handle streaming text content, updating the raw content state

@@ -1,12 +1,13 @@
 'use server'
 
-import { triggerCall } from '@/lib/calls/retell'
-import prisma from '@/lib/prisma'
-import { revalidatePath } from 'next/cache'
 import { NotifyMethod } from '@prisma/client'
-import Stripe from 'stripe'
+import { revalidatePath } from 'next/cache'
 import { redirect } from 'next/navigation'
 import { Session } from 'next-auth'
+import Stripe from 'stripe'
+
+import { triggerCall } from '@/lib/calls/retell'
+import prisma from '@/lib/prisma'
 
 const stripe = new Stripe(process.env.STRIPE_SECRET_KEY!, {
   apiVersion: '2022-11-15',

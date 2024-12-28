@@ -1,13 +1,13 @@
 "use client"
 
-import React from "react"
 import Link from "next/link"
-import { NavItem } from "@/types"
 import { User } from "next-auth"
+import React from "react"
 
-import { generalDashboardTopNav } from "@/config/navigation/general-nav"
 import { LogoNavMenu } from "@/components/layout/logo-nav"
 import { UserNavDisplay } from "@/components/user/user-nav-display"
+import { generalDashboardTopNav } from "@/config/navigation/general-nav"
+import { NavItem } from "@/types"
 
 interface NavbarProps extends React.HTMLAttributes<HTMLDivElement> {
   user: Pick<User, "name" | "image" | "email">
@@ -30,7 +30,7 @@ export default function TopNavbar({
       <nav className="mx-auto flex items-center justify-between px-4 md:px-8 lg:max-w-7xl">
         <div>
           <div className="flex items-center justify-between py-3 md:block md:py-5">
-            <LogoNavMenu navItems={logoNavItems}></LogoNavMenu>
+            <LogoNavMenu navItems={logoNavItems} />
           </div>
         </div>
         <div className="hidden md:block">

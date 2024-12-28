@@ -1,16 +1,17 @@
 "use client"
 
-import React, { useState } from "react"
-import Link from "next/link"
-import { useRouter } from "next/navigation"
 import { Robot } from "@phosphor-icons/react"
 import { motion } from "framer-motion"
 import { Activity, ArrowRight, Info, Pill, Scroll, Users } from "lucide-react"
+import Link from "next/link"
+import { useRouter } from "next/navigation"
+import React, { useState } from "react"
 
-import { GlobalVariable } from "@/types/models/all"
 import VariableSearchAutocomplete from "@/app/dfda/components/VariableSearchAutocomplete"
+import { GlobalVariable } from "@/types/models/all"
 
 import AdvancedTrialSearch from "../trials/components/AdvancedTrialSearch"
+
 import CitizenScienceSection from "./CitizenScienceSection"
 import DFDAComparisonTable from "./DFDAComparisonTable"
 import DFDACostSavingsTable from "./DFDACostSavingsTable"
@@ -139,7 +140,7 @@ export default function DFDAHomePage() {
     <div className="">
       {isLoading && (
         <div className="neobrutalist-loading">
-          <div className="neobrutalist-loading-spinner"></div>
+          <div className="neobrutalist-loading-spinner" />
         </div>
       )}
       <header className="neobrutalist-container mb-12">

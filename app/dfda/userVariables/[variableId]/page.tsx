@@ -1,9 +1,9 @@
 import { redirect } from "next/navigation"
 
-import { authOptions } from "@/lib/auth"
-import { getCurrentUser } from "@/lib/session"
 import { Shell } from "@/components/layout/shell"
 import { UserVariableOverview } from "@/components/userVariables/user-variable-overview"
+import { authOptions } from "@/lib/auth"
+import { getCurrentUser } from "@/lib/session"
 
 interface UserVariablePageProps {
   params: { variableId: number }

@@ -1,13 +1,13 @@
 "use client"
 
-import Image from "next/image"
-import Link from "next/link"
 import { WishingWell } from "@prisma/client"
 import { ColumnDef } from "@tanstack/react-table"
+import Image from "next/image"
+import Link from "next/link"
 
-import { cn } from "@/lib/utils"
-import { Button, buttonVariants } from "@/components/ui/button"
 import { Icons } from "@/components/icons"
+import { Button, buttonVariants } from "@/components/ui/button"
+import { cn } from "@/lib/utils"
 
 export const wishingWellColumns: ColumnDef<WishingWell>[] = [
   {

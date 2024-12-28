@@ -1,3 +1,4 @@
+import { CoreMessage, generateId } from 'ai'
 import {
   StreamableValue,
   createAI,
@@ -6,20 +7,20 @@ import {
   getAIState,
   getMutableAIState
 } from 'ai/rsc'
-import { CoreMessage, generateId } from 'ai'
-import { Section } from '@/app/search/components/section'
+
+import { AnswerSection } from '@/app/search/components/answer-section'
+import { CopilotDisplay } from '@/app/search/components/copilot-display'
 import { FollowupPanel } from '@/app/search/components/followup-panel'
+import RetrieveSection from '@/app/search/components/retrieve-section'
+import SearchRelated from '@/app/search/components/search-related'
+import { SearchSection } from '@/app/search/components/search-section'
+import { Section } from '@/app/search/components/section'
+import { UserMessage } from '@/app/search/components/user-message'
+import { VideoSearchSection } from '@/app/search/components/video-search-section'
 import { saveSearchChat } from '@/lib/actions/searchChat'
+import { workflow } from '@/lib/actions/workflow'
 import { Chat } from '@/lib/types/index'
 import { AIMessage } from '@/lib/types/index'
-import { UserMessage } from '@/app/search/components/user-message'
-import { SearchSection } from '@/app/search/components/search-section'
-import SearchRelated from '@/app/search/components/search-related'
-import { CopilotDisplay } from '@/app/search/components/copilot-display'
-import RetrieveSection from '@/app/search/components/retrieve-section'
-import { VideoSearchSection } from '@/app/search/components/video-search-section'
-import { AnswerSection } from '@/app/search/components/answer-section'
-import { workflow } from '@/lib/actions/workflow'
 
 const MAX_MESSAGES = 6
 

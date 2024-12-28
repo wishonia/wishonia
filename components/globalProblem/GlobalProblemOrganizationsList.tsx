@@ -1,21 +1,13 @@
 "use client"
 
-import { useState, useEffect } from "react"
 import { GlobalProblem, Prisma, FocusLevel } from "@prisma/client"
-import { ExtendedUser } from "@/types/auth"
-import { getGlobalProblemRelationshipsAction } from "@/app/actions/generate-global-problem-dashboard"
-import { ScrollArea } from "@/components/ui/scroll-area"
-import { OrganizationItem } from "@/components/organizations/OrganizationItem"
-import { Input } from "@/components/ui/input"
-import { Button } from "@/components/ui/button"
 import { Search, Plus } from "lucide-react"
-import {
-  Select,
-  SelectContent,
-  SelectItem,
-  SelectTrigger,
-  SelectValue,
-} from "@/components/ui/select"
+import { useState, useEffect } from "react"
+
+import { getGlobalProblemRelationshipsAction } from "@/app/actions/generate-global-problem-dashboard"
+import CreateOrganizationForm from "@/app/organizations/CreateOrganizationForm"
+import { OrganizationItem } from "@/components/organizations/OrganizationItem"
+import { Button } from "@/components/ui/button"
 import {
   Dialog,
   DialogContent,
@@ -24,7 +16,16 @@ import {
   DialogTitle,
   DialogTrigger,
 } from "@/components/ui/dialog"
-import CreateOrganizationForm from "@/app/organizations/CreateOrganizationForm"
+import { Input } from "@/components/ui/input"
+import { ScrollArea } from "@/components/ui/scroll-area"
+import {
+  Select,
+  SelectContent,
+  SelectItem,
+  SelectTrigger,
+  SelectValue,
+} from "@/components/ui/select"
+import { ExtendedUser } from "@/types/auth"
 
 type OrganizationWithRelations = Prisma.OrganizationGlobalProblemGetPayload<{
   include: { organization: true }

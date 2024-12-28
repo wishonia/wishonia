@@ -1,6 +1,5 @@
 "use client"
 
-import { WishingWellByDate } from "@/types"
 import {
   CartesianGrid,
   Line,
@@ -11,8 +10,9 @@ import {
   YAxis,
 } from "recharts"
 
-import { formatDate } from "@/lib/utils"
 import { Card } from "@/components/ui/card"
+import { formatDate } from "@/lib/utils"
+import { WishingWellByDate } from "@/types"
 
 interface LineChartProps {
   data: WishingWellByDate[]

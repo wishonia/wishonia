@@ -1,5 +1,5 @@
-import React from "react"
 import { CaretDown, FolderSimple } from "@phosphor-icons/react/dist/ssr"
+import React from "react"
 
 import AssistantDisplay from "../AssistantDisplay"
 import { Skeleton } from "../ui/skeleton"

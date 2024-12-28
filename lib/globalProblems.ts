@@ -39,7 +39,7 @@ export async function getRandomGlobalProblemPair(userId: string | undefined) {
 }
 
 export async function getAllRandomGlobalProblemPairs() {
-  let randomPairs: GlobalProblem[][] = []
+  const randomPairs: GlobalProblem[][] = []
   const globalProblems = await prisma.globalProblem.findMany()
   for (let i = 0; i < globalProblems.length; i += 2) {
     randomPairs.push([globalProblems[i], globalProblems[i + 1]])

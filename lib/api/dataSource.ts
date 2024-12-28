@@ -1,4 +1,5 @@
 import { Datasource } from "@prisma/client"
+
 import { prisma as db } from "@/lib/db"
 
 // Fetch datasource

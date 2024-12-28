@@ -2,10 +2,10 @@
 
 import { FC, useEffect, useState } from "react"
 
-import { UserVariable } from "@/types/models/UserVariable"
 import { EmptyPlaceholder } from "@/components/empty-placeholder"
 import { GenericVariableAddButton } from "@/components/genericVariables/generic-variable-add-button"
 import { Icons } from "@/components/icons"
+import { UserVariable } from "@/types/models/UserVariable"
 
 import { UserVariableItem } from "../userVariables/user-variable-item"
 

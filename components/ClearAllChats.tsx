@@ -1,9 +1,10 @@
 "use client"
 
-import React from "react"
-import { useRouter } from "next/navigation"
 import { Robot, Trash } from "@phosphor-icons/react"
+import { useRouter } from "next/navigation"
+import React from "react"
 
+import { clearAllChats } from "@/app/actions"
 import {
   AlertDialog,
   AlertDialogAction,
@@ -14,7 +15,6 @@ import {
   AlertDialogHeader,
   AlertDialogTitle,
 } from "@/components/ui/alert-dialog"
-import { clearAllChats } from "@/app/actions"
 
 import LoadingSpinner from "./LoadingSpinner"
 import { Button } from "./ui/button"

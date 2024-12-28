@@ -10,7 +10,7 @@ const couldNotFind: string[] = []
 export async function getOwnerRepoFromNpm(
   libraryName: string
 ): Promise<string | null | false> {
-  let repo = getGitHubRepoFromNodeModules(libraryName)
+  const repo = getGitHubRepoFromNodeModules(libraryName)
   if (repo) {
     return repo
   }
@@ -18,9 +18,9 @@ export async function getOwnerRepoFromNpm(
     console.log(`Fetching data for ${libraryName}`)
     const response = await fetch(`https://registry.npmjs.org/${libraryName}`)
     const data = await response.json()
-    let result = extractRepoFromPackageData(data)
+    const result = extractRepoFromPackageData(data)
     if (!result) {
-      let result = extractRepoFromPackageData(data)
+      const result = extractRepoFromPackageData(data)
       console.log(`No repository found for ${libraryName}`)
       couldNotFind.push(libraryName)
       return false
@@ -93,13 +93,13 @@ async function getReposFromPackageJson(packageJsonPath: string | undefined) {
     packageJsonPath = absPathFromRepo("package.json")
   }
   const libraries = readPackageJson(packageJsonPath)
-  let ownerRepoArr = []
+  const ownerRepoArr = []
   for (const library of libraries) {
-    let repo = getGitHubRepoFromNodeModules(library)
+    const repo = getGitHubRepoFromNodeModules(library)
     if (repo) {
       ownerRepoArr.push(repo)
     } else {
-      let repo = await getOwnerRepoFromNpm(library)
+      const repo = await getOwnerRepoFromNpm(library)
       if (repo) {
         ownerRepoArr.push(repo)
       } else {
@@ -111,7 +111,7 @@ async function getReposFromPackageJson(packageJsonPath: string | undefined) {
     "Could not find repositories for the following libraries:",
     couldNotFind.join("\n, ")
   )
-  let validOwnerRepoArr = ownerRepoArr.filter(
+  const validOwnerRepoArr = ownerRepoArr.filter(
     (path): path is string => path !== null
   )
   return Array.from(new Set(validOwnerRepoArr)) // Remove duplicates
@@ -121,7 +121,7 @@ export async function scoreContributorsFromPackageJson(
   packageJsonPath?: string,
   topN: number = 10
 ) {
-  let validOwnerRepoArr = await getReposFromPackageJson(packageJsonPath)
+  const validOwnerRepoArr = await getReposFromPackageJson(packageJsonPath)
   await contributorLeaderboard(validOwnerRepoArr)
   return prisma.githubUser.findMany({
     include: {

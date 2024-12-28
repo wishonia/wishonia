@@ -1,13 +1,13 @@
 import { Metadata } from "next"
 import { redirect } from "next/navigation"
 
-import { authOptions } from "@/lib/auth"
-import { getCurrentUser } from "@/lib/session"
 import AfterLoginHandler from "@/components/AfterLoginHandler"
 import { GlobalProblemsList } from "@/components/global-problems-list"
 import { Shell } from "@/components/layout/shell"
 import { DashboardCards } from "@/components/pages/dashboard/dashboard-cards"
 import { PollRandomGlobalProblems } from "@/components/poll-random-global-problems"
+import { authOptions } from "@/lib/auth"
+import { getCurrentUser } from "@/lib/session"
 
 export const metadata: Metadata = {
   title: "Dashboard",
@@ -28,9 +28,9 @@ export default async function Dashboard({ searchParams }: DashboardProps) {
 
   return (
     <Shell>
-      <AfterLoginHandler></AfterLoginHandler>
-      <PollRandomGlobalProblems user={user}></PollRandomGlobalProblems>
-      <GlobalProblemsList user={user}></GlobalProblemsList>
+      <AfterLoginHandler />
+      <PollRandomGlobalProblems user={user} />
+      <GlobalProblemsList user={user} />
       <DashboardCards searchParams={searchParams} />
     </Shell>
   )

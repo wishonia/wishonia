@@ -1,5 +1,7 @@
-import { Chat } from '@/app/search/components/chat'
 import { generateId } from 'ai'
+
+import { Chat } from '@/app/search/components/chat'
+
 import { AI } from './actions'
 
 export const maxDuration = 60

@@ -1,8 +1,8 @@
 "use client"
 
-import Image from "next/image"
 import { Sparkle, User } from "@phosphor-icons/react"
 import { StreamableValue } from "ai/rsc"
+import Image from "next/image"
 import { useTheme } from "next-themes"
 import remarkGfm from "remark-gfm"
 import remarkMath from "remark-math"
@@ -13,6 +13,7 @@ import { cn } from "@/lib/utils"
 
 import { MemoizedReactMarkdown } from "../markdown/Markdown"
 import { CodeBlock } from "../ui/code-block"
+
 import { Spinner } from "./Spinner"
 
 export function SpinnerMessage({ avatar }: { avatar?: string | null }) {

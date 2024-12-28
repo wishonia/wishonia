@@ -1,8 +1,8 @@
 "use client"
 
-import React, { useEffect, useState } from "react"
 import { useRouter } from "next/navigation"
 import { User } from "next-auth"
+import React, { useEffect, useState } from "react"
 
 import { PollSpecificGlobalSolutions } from "@/components/poll-specific-global-solutions"
 import { SpinningLoader } from "@/components/spinningLoader"

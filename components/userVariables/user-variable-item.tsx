@@ -3,10 +3,10 @@
 import Link from "next/link"
 import { useState } from "react"
 
-import { UserVariable } from "@/types/models/UserVariable"
-import { Skeleton } from "@/components/ui/skeleton"
 import { MeasurementButton } from "@/components/measurements/measurement-button"
+import { Skeleton } from "@/components/ui/skeleton"
 import { cn } from "@/lib/utils"
+import { UserVariable } from "@/types/models/UserVariable"
 
 interface UserVariableItemProps {
   userVariable: UserVariable

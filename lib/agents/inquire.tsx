@@ -1,7 +1,9 @@
-import { Copilot } from '@/app/search/components/copilot'
-import { createStreamableUI, createStreamableValue } from 'ai/rsc'
 import { CoreMessage, streamObject } from 'ai'
+import { createStreamableUI, createStreamableValue } from 'ai/rsc'
+
+import { Copilot } from '@/app/search/components/copilot'
 import { PartialInquiry, inquirySchema } from '@/lib/schema/inquiry'
+
 import { getModel } from '../utils/index'
 
 export async function inquire(

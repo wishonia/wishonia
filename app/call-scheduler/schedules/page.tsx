@@ -1,13 +1,17 @@
-import { authOptions } from "@/lib/auth"
-import prisma from "@/lib/prisma"
-import { Card, CardContent } from "@/components/ui/card"
-import { Button } from "@/components/ui/button"
+import { Person, CallSchedule, Agent } from "@prisma/client"
 import { UserPlus } from "lucide-react"
 import Link from "next/link"
-import { PersonCard } from "../components/PersonCard"
-import { Person, CallSchedule, Agent } from "@prisma/client"
-import { getServerSession } from "next-auth"
 import { redirect } from "next/navigation"
+import { getServerSession } from "next-auth"
+
+import { Button } from "@/components/ui/button"
+import { Card, CardContent } from "@/components/ui/card"
+import { authOptions } from "@/lib/auth"
+import prisma from "@/lib/prisma"
+
+
+import { PersonCard } from "../components/PersonCard"
+
 
 type ScheduleWithRelations = CallSchedule & {
   person: Person

@@ -1,16 +1,17 @@
 'use client'
 
-import React, { useEffect, useState } from 'react'
 import {
   Collapsible,
   CollapsibleTrigger,
   CollapsibleContent
 } from '@radix-ui/react-collapsible'
-import { Button } from '@/components/ui/button'
-import { ChevronDown } from 'lucide-react'
 import { StreamableValue, useStreamableValue } from 'ai/rsc'
-import { cn } from '@/lib/utils'
+import { ChevronDown } from 'lucide-react'
+import React, { useEffect, useState } from 'react'
+
+import { Button } from '@/components/ui/button'
 import { Separator } from '@/components/ui/separator'
+import { cn } from '@/lib/utils'
 
 interface CollapsibleMessageProps {
   message: {

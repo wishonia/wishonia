@@ -1,7 +1,7 @@
 "use client"
 
-import React, { FC } from "react"
 import Script from "next/script"
+import React, { FC } from "react"
 import ReactMarkdown from "react-markdown"
 import rehypeRaw from "rehype-raw"
 

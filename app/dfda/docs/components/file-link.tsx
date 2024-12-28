@@ -1,8 +1,9 @@
 "use client"
 
-import Link from "next/link"
-import type { MarkdownFile } from "@/lib/markdown/repo-markdown"
 import { FileText } from "lucide-react"
+import Link from "next/link"
+
+import type { MarkdownFile } from "@/lib/markdown/repo-markdown"
 
 interface FileLinkProps {
   file: MarkdownFile;

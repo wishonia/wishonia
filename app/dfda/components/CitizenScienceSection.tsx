@@ -2,6 +2,7 @@
 
 import { motion } from 'framer-motion'
 import { Microscope, Globe, Search } from 'lucide-react'
+
 import { FeatureBox } from './FeatureBox'
 
 export default function CitizenScienceSection() {

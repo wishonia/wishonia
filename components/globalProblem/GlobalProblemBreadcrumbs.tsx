@@ -1,11 +1,12 @@
 "use client"
 
+import { GlobalProblem } from "@prisma/client"
+import { ChevronRight, Home } from "lucide-react"
 import Link from "next/link"
 import { usePathname } from "next/navigation"
-import { ChevronRight, Home } from "lucide-react"
-import { GlobalProblem } from "@prisma/client"
 
-import { cn } from "@/lib/utils"
+import { GlobalProblemNavigationButton } from "@/components/globalProblem/GlobalProblemNavigationButton"
+import { Button } from "@/components/ui/button"
 import {
   DropdownMenu,
   DropdownMenuContent,
@@ -18,8 +19,7 @@ import {
   TooltipProvider,
   TooltipTrigger,
 } from "@/components/ui/tooltip"
-import { Button } from "@/components/ui/button"
-import { GlobalProblemNavigationButton } from "@/components/globalProblem/GlobalProblemNavigationButton"
+import { cn } from "@/lib/utils"
 
 interface GlobalProblemBreadcrumbsProps {
   globalProblem?: GlobalProblem | undefined

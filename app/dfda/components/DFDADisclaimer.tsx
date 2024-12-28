@@ -1,7 +1,7 @@
 "use client"
 
-import React, { useEffect, useState } from "react"
 import { AlertTriangle, ChevronDown, ChevronUp, X } from "lucide-react"
+import React, { useEffect, useState } from "react"
 
 interface DFDADisclaimerProps {
   children?: React.ReactNode

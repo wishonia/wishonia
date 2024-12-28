@@ -1,13 +1,17 @@
 'use client'
 
-import { useState } from 'react'
 import { Person, CallSchedule, Agent } from "@prisma/client"
-import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card"
-import { Button } from "@/components/ui/button"
 import { Settings2 } from "lucide-react"
+import { Session } from "next-auth"
+import { useState } from 'react'
+
+import { Button } from "@/components/ui/button"
+import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card"
+
+
 import { CallScheduleCard } from "./CallScheduleCard"
 import { EditPersonDialog } from "./EditPersonDialog"
-import { Session } from "next-auth"
+
 type ScheduleWithRelations = CallSchedule & {
   agent: Agent
   person: Person

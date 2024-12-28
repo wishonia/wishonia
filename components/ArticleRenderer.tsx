@@ -1,8 +1,11 @@
-import { useState } from "react"
-import Image from "next/image"
 import { Check, Clock, Copy, Folder, Tag, Loader2, Share2, Twitter, Facebook, Linkedin } from "lucide-react"
+import Image from "next/image"
+import { useRouter } from "next/navigation"
+import { useState } from "react"
 
-import {ArticleWithRelations} from "@/lib/agents/researcher/researcher"
+import { deleteArticle } from "@/app/researcher/researcherActions"
+import {generateImage} from "@/app/researcher/researcherActions";
+import { CustomReactMarkdown } from "@/components/CustomReactMarkdown"
 import { Badge } from "@/components/ui/badge"
 import { Button } from "@/components/ui/button"
 import {
@@ -15,11 +18,8 @@ import {
 } from "@/components/ui/card"
 import { Separator } from "@/components/ui/separator"
 import { toast } from "@/components/ui/use-toast"
-import { CustomReactMarkdown } from "@/components/CustomReactMarkdown"
-import { deleteArticle } from "@/app/researcher/researcherActions"
-import { useRouter } from "next/navigation"
+import {ArticleWithRelations} from "@/lib/agents/researcher/researcher"
 
-import {generateImage} from "@/app/researcher/researcherActions";
 import { UrlDisplay } from "./article/UrlDisplay"
 
 function GenerateImageButton({

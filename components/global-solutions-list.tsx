@@ -1,17 +1,17 @@
 "use client"
 
-import React, { useEffect, useState } from "react"
-import Image from "next/image"
-import Link from "next/link"
 import { GlobalSolution } from "@prisma/client"
 import { ColumnDef } from "@tanstack/react-table"
+import Image from "next/image"
+import Link from "next/link"
 import { User } from "next-auth"
+import React, { useEffect, useState } from "react"
 
-import { cn } from "@/lib/utils"
-import { Button, buttonVariants } from "@/components/ui/button"
 import { DataTable } from "@/components/data-table"
 import { Icons } from "@/components/icons"
 import { SpinningLoader } from "@/components/spinningLoader"
+import { Button, buttonVariants } from "@/components/ui/button"
+import { cn } from "@/lib/utils"
 
 interface PollProps {
   user?: User
@@ -117,7 +117,7 @@ export const GlobalSolutionsList: React.FC<PollProps> = ({ user }) => {
       <DataTable
         columns={globalSolutionColumns}
         data={globalSolutions}
-      ></DataTable>
+       />
     </>
   )
 }

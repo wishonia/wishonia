@@ -1,8 +1,9 @@
 "use client"
 
-import { Dialog, DialogContent, DialogTrigger } from "@/components/ui/dialog"
-import MarkdownRendererForItem from "@/components/markdown/MarkdownRendererForItem"
 import { WishingWell, GlobalProblem, GlobalProblemSolution } from "@prisma/client"
+
+import MarkdownRendererForItem from "@/components/markdown/MarkdownRendererForItem"
+import { Dialog, DialogContent, DialogTrigger } from "@/components/ui/dialog"
 
 interface MarkdownDialogWrapperProps {
   item: WishingWell | GlobalProblem | GlobalProblemSolution

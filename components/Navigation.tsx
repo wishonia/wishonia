@@ -1,15 +1,14 @@
 "use client"
 
-import * as React from "react"
-import Link from "next/link"
 import {
   GithubLogo,
   Globe,
   LinkSimple,
   SignIn,
 } from "@phosphor-icons/react"
+import Link from "next/link"
+import * as React from "react"
 
-import { cn } from "@/lib/utils"
 import {
   NavigationMenu,
   NavigationMenuContent,
@@ -20,6 +19,7 @@ import {
   navigationMenuTriggerStyle,
 } from "@/components/ui/navigation-menu"
 import { siteConfig } from "@/config/site"
+import { cn } from "@/lib/utils"
 
 const components: { title: string; href: string; icon: any }[] = [
   {

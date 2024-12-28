@@ -3,6 +3,7 @@
 import { GithubUser } from "@/lib/types"
 
 import AssistantDisplay from "../AssistantDisplay"
+
 import { Profile } from "./Profile"
 
 export function ProfileList({ props: profiles }: { props: GithubUser[] }) {

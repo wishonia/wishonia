@@ -1,10 +1,10 @@
 "use client"
 
-import React from "react"
 import { User } from "next-auth"
+import React from "react"
 
-import { postVoteData } from "@/lib/api/postVoteData"
 import { Button } from "@/components/ui/button"
+import { postVoteData } from "@/lib/api/postVoteData"
 
 interface PollProps {
   user?: User

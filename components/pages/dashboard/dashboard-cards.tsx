@@ -1,10 +1,10 @@
 "use client"
 
-import { SearchParams } from "@/types"
-
+import { LinkCard } from "@/components/link-card"
 import { globalProblemsResultsLink } from "@/config/navigation/domains/wishonia-nav"
 import { globalProblemsVoteLink } from "@/config/navigation/general-nav"
-import { LinkCard } from "@/components/link-card"
+import { SearchParams } from "@/types"
+
 
 interface DashboardCardsProps {
   searchParams?: SearchParams

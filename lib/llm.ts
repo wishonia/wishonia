@@ -1,4 +1,5 @@
 import OpenAI from "openai"
+
 import { convertToLocalDateTime } from "@/lib/dateTimeWithTimezone"
 
 // Create an OpenAI API client (that's edge-friendly!)

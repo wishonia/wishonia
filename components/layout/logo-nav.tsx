@@ -1,12 +1,10 @@
 "use client"
 
-import { Key } from "react"
-import Link from "next/link"
-import { NavItem } from "@/types"
 import { WandIcon } from "lucide-react"
+import Link from "next/link"
+import { Key } from "react"
 
-import { generalSidebarNav } from "@/config/navigation/general-nav"
-import { siteConfig } from "@/config/site"
+import { Icons } from "@/components/icons"
 import {
   DropdownMenu,
   DropdownMenuContent,
@@ -14,7 +12,11 @@ import {
   DropdownMenuSeparator,
   DropdownMenuTrigger,
 } from "@/components/ui/dropdown-menu"
-import { Icons } from "@/components/icons"
+import { generalSidebarNav } from "@/config/navigation/general-nav"
+import { siteConfig } from "@/config/site"
+import { NavItem } from "@/types"
+
+
 
 interface LogoNavMenuProps {
   navItems?: NavItem[]

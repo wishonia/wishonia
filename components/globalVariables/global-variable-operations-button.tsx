@@ -1,10 +1,11 @@
 "use client"
 
-import * as React from "react"
 import Link from "next/link"
 import { useRouter } from "next/navigation"
+import * as React from "react"
 
-import { GlobalVariable } from "@/types/models/GlobalVariable"
+import { Icons } from "@/components/icons"
+import { MeasurementsAddForm } from "@/components/measurements/measurements-add-form"
 import { Button } from "@/components/ui/button"
 import {
   Credenza,
@@ -23,8 +24,7 @@ import {
   DropdownMenuTrigger,
 } from "@/components/ui/dropdown-menu"
 import { toast } from "@/components/ui/use-toast"
-import { Icons } from "@/components/icons"
-import { MeasurementsAddForm } from "@/components/measurements/measurements-add-form"
+import { GlobalVariable } from "@/types/models/GlobalVariable"
 
 async function deleteGlobalVariable(globalVariableId: number) {
   const response = await fetch(`/api/globalVariables/${globalVariableId}`, {

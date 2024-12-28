@@ -1,10 +1,10 @@
 import { Metadata } from "next"
 import { notFound } from "next/navigation"
 
+import GlobalProblemDashboard from "@/components/globalProblem/global-problem-dashboard";
+import { Shell } from "@/components/layout/shell"
 import { getGlobalProblem } from "@/lib/api/globalProblems"
 import { getCurrentUser } from "@/lib/session"
-import { Shell } from "@/components/layout/shell"
-import GlobalProblemDashboard from "@/components/globalProblem/global-problem-dashboard";
 interface GlobalProblemPageProps {
   params: { globalProblemId: string }
 }

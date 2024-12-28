@@ -1,12 +1,12 @@
 "use client"
 
-import React from "react"
 import Link from "next/link"
-import { NavItem } from "@/types"
 import { User } from "next-auth"
+import React from "react"
 
-import { getNavigationForDomain } from "@/config/navigation"
 import { UserNavDisplay } from "@/components/user/user-nav-display"
+import { getNavigationForDomain } from "@/config/navigation"
+import { NavItem } from "@/types"
 
 import { DfdaLogoNavMenu } from "./dfda-logo-nav"
 
@@ -43,7 +43,7 @@ export default function DfdaTopNavbar({
       <nav className="mx-auto flex items-center justify-between lg:max-w-7xl">
         <div>
           <div className="flex items-center justify-between py-3 md:block md:py-5">
-            <DfdaLogoNavMenu navItems={logoNavItems}></DfdaLogoNavMenu>
+            <DfdaLogoNavMenu navItems={logoNavItems} />
           </div>
         </div>
         <div className="hidden md:block">

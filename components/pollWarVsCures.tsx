@@ -1,18 +1,18 @@
 "use client"
 
-import React, { useState } from "react"
-import { useRouter } from "next/navigation"
 import { GlobalSolutionPairAllocation } from "@prisma/client"
+import { useRouter } from "next/navigation"
 import { User } from "next-auth"
+import React, { useState } from "react"
 
+import { AnonymousVoteButton } from "@/components/anonymous-vote-button"
+import { LoggedInVoteButton } from "@/components/logged-in-vote-button"
+import { Input } from "@/components/ui/input"
+import WarVsCuresBarChart from "@/components/war-vs-cures-bar-chart"
 import {
   medicalResearchGlobalSolutionId,
   warGlobalSolutionId,
 } from "@/lib/api/warVsCures"
-import { Input } from "@/components/ui/input"
-import { AnonymousVoteButton } from "@/components/anonymous-vote-button"
-import { LoggedInVoteButton } from "@/components/logged-in-vote-button"
-import WarVsCuresBarChart from "@/components/war-vs-cures-bar-chart"
 
 interface PollProps {
   user?: User

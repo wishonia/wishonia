@@ -1,6 +1,8 @@
 'use client'
 
 import { useState, useTransition } from 'react'
+import { toast } from 'sonner'
+
 import {
   AlertDialog,
   AlertDialogAction,
@@ -13,9 +15,8 @@ import {
   AlertDialogTrigger
 } from '@/components/ui/alert-dialog'
 import { Button } from '@/components/ui/button'
-import { clearSearchChats } from '@/lib/actions/searchChat'
-import { toast } from 'sonner'
 import { Spinner } from '@/components/ui/spinner'
+import { clearSearchChats } from '@/lib/actions/searchChat'
 
 type ClearHistoryProps = {
   empty: boolean

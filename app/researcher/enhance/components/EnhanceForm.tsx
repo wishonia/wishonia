@@ -1,21 +1,24 @@
 'use client'
 
-import { useState, useEffect } from 'react'
-import { enhanceContent } from '../enhanceActions'
-import { Button } from '@/components/ui/button'
-import { Textarea } from '@/components/ui/textarea'
-import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card'
-import { Tabs, TabsContent, TabsList, TabsTrigger } from '@/components/ui/tabs'
+import { formatDistanceToNow } from 'date-fns'
 import { Loader2, Copy, Sun, Moon, History, ArrowLeft, Trash2 } from 'lucide-react'
 import { useTheme } from 'next-themes'
+import { useState, useEffect } from 'react'
+
 import { CustomReactMarkdown } from '@/components/CustomReactMarkdown'
+import { Button } from '@/components/ui/button'
+import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card'
 import { 
   DropdownMenu,
   DropdownMenuContent,
   DropdownMenuItem,
   DropdownMenuTrigger,
 } from "@/components/ui/dropdown-menu"
-import { formatDistanceToNow } from 'date-fns'
+import { Tabs, TabsContent, TabsList, TabsTrigger } from '@/components/ui/tabs'
+import { Textarea } from '@/components/ui/textarea'
+
+import { enhanceContent } from '../enhanceActions'
+
 
 interface ContentVersion {
   content: string;

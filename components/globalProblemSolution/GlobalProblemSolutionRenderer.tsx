@@ -1,16 +1,6 @@
 "use client"
 
-import { Button } from "@/components/ui/button"
-import {
-  Card,
-  CardContent,
-  CardHeader,
-  CardTitle,
-  CardDescription,
-} from "@/components/ui/card"
-import { ScrollArea } from "@/components/ui/scroll-area"
-import { Accordion, AccordionContent, AccordionItem, AccordionTrigger } from "@/components/ui/accordion"
-import MarkdownRenderer from "@/components/markdown/MarkdownRenderer"
+import type { GlobalProblemSolution, GlobalProblem, GlobalSolution } from "@prisma/client"
 import { 
   Share2, 
   Check, 
@@ -22,10 +12,22 @@ import {
   Target,
   Workflow
 } from "lucide-react"
-import { useState } from "react"
-import { toast } from "@/components/ui/use-toast"
 import Link from "next/link"
-import type { GlobalProblemSolution, GlobalProblem, GlobalSolution } from "@prisma/client"
+import { useState } from "react"
+
+import MarkdownRenderer from "@/components/markdown/MarkdownRenderer"
+import { Accordion, AccordionContent, AccordionItem, AccordionTrigger } from "@/components/ui/accordion"
+import { Button } from "@/components/ui/button"
+import {
+  Card,
+  CardContent,
+  CardHeader,
+  CardTitle,
+  CardDescription,
+} from "@/components/ui/card"
+import { ScrollArea } from "@/components/ui/scroll-area"
+import { toast } from "@/components/ui/use-toast"
+
 
 interface GlobalProblemSolutionWithRelations extends GlobalProblemSolution {
   globalProblem: GlobalProblem

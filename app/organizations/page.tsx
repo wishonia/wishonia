@@ -1,13 +1,15 @@
-import { Suspense } from 'react'
-import { prisma } from '@/lib/prisma'
-import Link from 'next/link'
-import { Button } from '@/components/ui/button'
-import { Input } from '@/components/ui/input'
-import { Card, CardHeader, CardTitle, CardContent } from '@/components/ui/card'
-import CreateOrganizationForm from './CreateOrganizationForm'
 import { Organization } from '@prisma/client'
+import Link from 'next/link'
 import { getServerSession } from 'next-auth/next'
+import { Suspense } from 'react'
+
+import { Button } from '@/components/ui/button'
+import { Card, CardHeader, CardTitle, CardContent } from '@/components/ui/card'
+import { Input } from '@/components/ui/input'
 import { authOptions } from "@/lib/auth"
+import { prisma } from '@/lib/prisma'
+
+import CreateOrganizationForm from './CreateOrganizationForm'
 
 async function getOrganizations(search: string = '') {
   return prisma.organization.findMany({

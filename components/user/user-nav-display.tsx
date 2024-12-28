@@ -1,8 +1,10 @@
-import React from "react"
-import { NavItem } from "@/types"
 import { User } from "next-auth"
+import React from "react"
+
+import { NavItem } from "@/types"
 
 import { LoginPromptButton } from "../LoginPromptButton"
+
 import { UserAccountNav } from "./user-account-nav"
 
 interface UserNavDisplayProps extends React.HTMLAttributes<HTMLDivElement> {

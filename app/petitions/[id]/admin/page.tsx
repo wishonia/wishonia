@@ -1,6 +1,8 @@
-import { getServerSession } from "next-auth/next"
-import { prisma } from "@/lib/prisma"
 import { redirect } from "next/navigation"
+import { getServerSession } from "next-auth/next"
+
+import { prisma } from "@/lib/prisma"
+
 import { PetitionAdminControls } from "../../components/PetitionAdminControls"
 
 export default async function PetitionAdminPage({ params }: { params: { id: string } }) {

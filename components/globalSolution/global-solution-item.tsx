@@ -1,12 +1,12 @@
 "use client"
 
-import Link from "next/link"
 import { GlobalSolution } from "@prisma/client"
+import Link from "next/link"
 
-import { formatDate } from "@/lib/utils"
-import { Skeleton } from "@/components/ui/skeleton"
 import { GlobalSolutionOperations } from "@/components/globalSolution/global-solution-operations"
 import { QuickGlobalSolutionContributionButton } from "@/components/globalSolution/globalSolutionContributions/quick-global-solution-contribution-button"
+import { Skeleton } from "@/components/ui/skeleton"
+import { formatDate } from "@/lib/utils"
 
 interface GlobalSolutionItemProps {
   globalSolution: Pick<

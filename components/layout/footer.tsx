@@ -1,10 +1,10 @@
-import { Key } from "react"
 import Link from "next/link"
-import { NavItem } from "@/types"
+import { Key } from "react"
 
+import { Icons } from "@/components/icons"
 import { generalFooterNav } from "@/config/navigation/general-nav"
 import { siteConfig } from "@/config/site"
-import { Icons } from "@/components/icons"
+import { NavItem } from "@/types"
 
 interface FooterProps {
   footerNavItems?: NavItem[]

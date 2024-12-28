@@ -1,10 +1,10 @@
+import type { GlobalProblem, GlobalSolution } from "@prisma/client"
 import { Metadata } from "next"
 import { notFound } from "next/navigation"
-import type { GlobalProblem, GlobalSolution } from "@prisma/client"
 
-import { getGlobalProblemSolution } from "@/lib/api/globalProblemSolutions"
-import { Shell } from "@/components/layout/shell"
 import { GlobalProblemSolutionRenderer } from "@/components/globalProblemSolution/GlobalProblemSolutionRenderer"
+import { Shell } from "@/components/layout/shell"
+import { getGlobalProblemSolution } from "@/lib/api/globalProblemSolutions"
 
 interface GlobalProblemSolutionPageProps {
   params: {

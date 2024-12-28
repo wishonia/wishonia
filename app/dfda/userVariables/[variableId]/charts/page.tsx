@@ -1,10 +1,10 @@
 import { Metadata } from "next"
 import { redirect } from "next/navigation"
 
-import { authOptions } from "@/lib/auth"
-import { getCurrentUser } from "@/lib/session"
 import { Shell } from "@/components/layout/shell"
 import { UserVariableCharts } from "@/components/userVariables/user-variable-charts"
+import { authOptions } from "@/lib/auth"
+import { getCurrentUser } from "@/lib/session"
 
 export const metadata: Metadata = {
   title: "UserVariable Charts",

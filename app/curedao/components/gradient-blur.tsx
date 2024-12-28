@@ -25,9 +25,9 @@ export function GradientBlur({
         ...style
       }}
     >
-      <div className="bg-gradient-blur-circle-3"></div>
-      <div className={`bg-gradient-blur-circle-2 ${variant === 'blue-purple' ? 'blue' : ''}`}></div>
-      <div className={`bg-gradient-blur-circle-1 ${variant === 'blue-purple' ? 'purple' : ''}`}></div>
+      <div className="bg-gradient-blur-circle-3" />
+      <div className={`bg-gradient-blur-circle-2 ${variant === 'blue-purple' ? 'blue' : ''}`} />
+      <div className={`bg-gradient-blur-circle-1 ${variant === 'blue-purple' ? 'purple' : ''}`} />
 
       <style jsx global>{`
         @keyframes rotate {

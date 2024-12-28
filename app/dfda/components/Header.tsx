@@ -1,5 +1,5 @@
-import React from 'react'
 import { UserCircle, Bell } from 'lucide-react'
+import React from 'react'
 
 export default function Header() {
     return (

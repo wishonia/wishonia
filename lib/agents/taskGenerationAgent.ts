@@ -1,6 +1,7 @@
 import { GlobalSolution, TaskStatus, TaskComplexity } from '@prisma/client';
 import { generateObject } from 'ai';
 import {z} from 'zod';
+
 import { prisma } from '@/lib/db';
 import {getModel} from "@/lib/utils/modelUtils";
 import { TaskSchema, TaskHierarchySchema, TaskInput, TaskHierarchy, TaskWithHierarchy } from '@/types/globalTask'
@@ -194,7 +195,7 @@ class GlobalSolutionDecomposerAgent {
       ? `\nTask Hierarchy: ${parentTask.parentChain.join(' > ')} > ${parentTask.task.name}`
       : '';
 
-    let prompt = `
+    const prompt = `
     We're ${mode === 'complete' ? 'recursively' : ''} breaking down the ${parentTask ? 'task' : 'goal'} of "${parentTask ? parentTask.task.name : globalSolution?.name}" into ${mode === 'single-level' ? 'immediate subtasks' : 'atomic tasks'}.
     
     ${parentTask ? 'Parent Task' : 'Goal'} Name: ${parentTask ? parentTask.task.name : globalSolution?.name}

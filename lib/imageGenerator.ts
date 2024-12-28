@@ -100,7 +100,7 @@ export async function generateAndUploadFeaturedImageJpg(
     console.log(`JPG image already exists at ${jpgAbsPath}`)
     return await uploadImageToVercel(fs.readFileSync(jpgAbsPath), jpgPublicPath)
   }
-  let url = await vercelImageExists(jpgPublicPath)
+  const url = await vercelImageExists(jpgPublicPath)
   if (url) {
     return url
   }

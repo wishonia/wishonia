@@ -5,9 +5,7 @@ import { nanoid } from "nanoid"
 import OpenAI from "openai"
 import { z } from "zod"
 
-import { askSupabase } from "@/lib/docs/docsAgent"
-import { getCurrentUser } from "@/lib/session"
-import { Agent } from "@/lib/types"
+import RateLimited from "@/components/RateLimited"
 import {
   BotCard,
   BotMessage,
@@ -24,13 +22,16 @@ import ReadmeSkeleton from "@/components/assistant/ReadmeSkeleton"
 import Repositories from "@/components/assistant/Repositories"
 import RepositorySkeleton from "@/components/assistant/RepositorySkeleton"
 import { PollRandomGlobalProblems } from "@/components/poll-random-global-problems"
-import RateLimited from "@/components/RateLimited"
+import { askSupabase } from "@/lib/docs/docsAgent"
+import { getCurrentUser } from "@/lib/session"
+import { text2measurements } from "@/lib/text2measurements"
+import { Agent } from "@/lib/types"
 
 import { cn, sleep } from "../utils"
+
 import { AI } from "./actions"
-import { generateSystemPrompt } from './prompt-generator'
-import { githubAgent } from './agents/github-agent'
 import { fdaAgent } from './agents/fda-agent'
+import { githubAgent } from './agents/github-agent'
 import {
   checkRateLimit,
   convertUserType,
@@ -38,7 +39,7 @@ import {
   getReadme,
   searchRepositories,
 } from "./github/github"
-import { text2measurements } from "@/lib/text2measurements"
+import { generateSystemPrompt } from './prompt-generator'
 const agentMap = {
   github: githubAgent,
   fda: fdaAgent
@@ -344,7 +345,7 @@ export async function submitUserMessage(
                 <div className="w-full flex-1 space-y-2 overflow-hidden px-1">
                   <PollRandomGlobalProblems
                     user={user}
-                  ></PollRandomGlobalProblems>
+                   />
                 </div>
               </div>
             </BotCard>

@@ -1,7 +1,8 @@
-import { Button } from "@/components/ui/button"
-import Link from "next/link"
 import {ArrowRight, LineChart, LucideIcon, Users} from "lucide-react"
 import { Building2 } from "lucide-react"
+import Link from "next/link"
+
+import { Button } from "@/components/ui/button"
 
 const features = [
   {

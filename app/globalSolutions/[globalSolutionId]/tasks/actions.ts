@@ -1,10 +1,11 @@
 'use server'
 
+import { GlobalTask as PrismaGlobalTask } from '@prisma/client'
+
 import GlobalSolutionDecomposerAgent from '@/lib/agents/taskGenerationAgent'
 import { getUserIdServer } from '@/lib/api/getUserIdServer'
 import { prisma } from '@/lib/db'
 import { GlobalTaskWithChildren, GlobalTaskResponse } from '@/types/globalTask'
-import { GlobalTask as PrismaGlobalTask } from '@prisma/client'
 
 // Helper to build tree structure from flat data
 function buildTaskTree(tasks: PrismaGlobalTask[], relationships: { parentId: string; childId: string }[]): GlobalTaskWithChildren[] {

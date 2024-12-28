@@ -1,9 +1,10 @@
 'use client'
 
 import Link from "next/link"
-import { Badge } from "@/components/ui/badge"
-import SearchFilter from "@/components/ui/SearchFilter"
 import { useState } from "react"
+
+import SearchFilter from "@/components/ui/SearchFilter"
+import { Badge } from "@/components/ui/badge"
 
 type Category = {
   id: string

@@ -1,10 +1,9 @@
 "use client"
 
 import { useState } from "react"
-import { UserVariable } from "@/types/models/UserVariable"
-import { GlobalVariable } from "@/types/models/GlobalVariable"
+
+import { MeasurementsAddForm } from "@/components/measurements/measurements-add-form"
 import { Button } from "@/components/ui/button"
-import { cn } from "@/lib/utils"
 import {
   Credenza,
   CredenzaContent,
@@ -12,7 +11,9 @@ import {
   CredenzaHeader,
   CredenzaTitle,
 } from "@/components/ui/credenza"
-import { MeasurementsAddForm } from "@/components/measurements/measurements-add-form"
+import { cn } from "@/lib/utils"
+import { GlobalVariable } from "@/types/models/GlobalVariable"
+import { UserVariable } from "@/types/models/UserVariable"
 
 type GenericVariable = Pick<
   UserVariable | GlobalVariable,

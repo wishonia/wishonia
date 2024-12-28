@@ -1,5 +1,6 @@
-import prisma from '@/lib/prisma'
 import { User, Person, Prisma } from '@prisma/client'
+
+import prisma from '@/lib/prisma'
 
 function hasValue(value: string | null): value is string {
   return value !== null && value !== ''

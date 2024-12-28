@@ -1,8 +1,9 @@
 import {LanguageModelV1} from "@ai-sdk/provider";
 import {Organization, Prisma} from "@prisma/client";
+import { PrismaClient } from '@prisma/client';
 import {generateObject} from "ai";
 import {z} from "zod";
-import { PrismaClient } from '@prisma/client';
+
 const prisma = new PrismaClient();
 import {findOrCreateArticleByPromptedTopic, WriteArticleOptions} from "@/lib/agents/researcher/researcher";
 import {getModel} from "@/lib/utils/modelUtils";
@@ -206,7 +207,7 @@ async function generateAndSaveOrganization(
 export async function generateOrganizationFromUrl(
     url: string
 ): Promise<Organization> {
-    let model = getModel("gpt-4o")
+    const model = getModel("gpt-4o")
 
     // const perplexity = createOpenAI({
     //   name: 'perplexity',

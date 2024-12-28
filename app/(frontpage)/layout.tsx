@@ -1,9 +1,10 @@
+import { headers } from "next/headers"
 import React from "react"
 
-import { getCurrentUser } from "@/lib/session"
 import Footer from "@/components/layout/footer"
 import TopNavbar from "@/components/layout/topNavbar"
-import { headers } from "next/headers"
+import { getCurrentUser } from "@/lib/session"
+
 import CureDAOLayout from "../curedao/layout"
 import DFDALayout from "../dfda/layout"
 
@@ -32,7 +33,7 @@ const FrontPageLayout = async ({
           />
         )}
         {children}
-        <div style={{ height: "50px" }}></div>
+        <div style={{ height: "50px" }} />
         <Footer />
       </>
     )

@@ -1,5 +1,6 @@
-import React from "react"
 import { WishingWell, GlobalProblem, GlobalProblemSolution } from "@prisma/client"
+import React from "react"
+
 import { MarkdownDialogWrapper } from './markdown/markdown-dialog-wrapper'
 
 interface BarChartProps {
@@ -72,7 +73,7 @@ const BarChartGeneral = ({
                 backgroundSize: getItemImage(thisItem) ? "cover" : "auto",
                 backgroundPosition: "center",
               }}
-            ></div>
+             />
             </MarkdownDialogWrapper>
           </div>
           <div
@@ -103,7 +104,7 @@ const BarChartGeneral = ({
                   backgroundSize: getItemImage(thatItem) ? "cover" : "auto",
                   backgroundPosition: "center",
                 }}
-              ></div>
+               />
             </MarkdownDialogWrapper>
           </div>
         </div>

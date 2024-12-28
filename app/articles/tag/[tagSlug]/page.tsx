@@ -1,6 +1,7 @@
-import { prisma } from "@/lib/prisma"
 import { notFound } from "next/navigation"
+
 import ArticleSearchAndGrid from "@/components/article/ArticleSearchAndGrid"
+import { prisma } from "@/lib/prisma"
 
 export async function generateMetadata({ params }: { params: { tagSlug: string } }) {
   const tag = await prisma.articleTag.findUnique({

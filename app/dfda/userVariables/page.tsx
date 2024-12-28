@@ -1,12 +1,12 @@
 import { Metadata } from "next"
 import { redirect } from "next/navigation"
 
-import { authOptions } from "@/lib/auth"
-import { getCurrentUser } from "@/lib/session"
 import { GenericVariableAddButton } from "@/components/genericVariables/generic-variable-add-button"
 import { Shell } from "@/components/layout/shell"
 import { DashboardHeader } from "@/components/pages/dashboard/dashboard-header"
 import { UserVariableSearch } from "@/components/userVariables/user-variable-search"
+import { authOptions } from "@/lib/auth"
+import { getCurrentUser } from "@/lib/session"
 
 export const metadata: Metadata = {
   title: "Your Variables",

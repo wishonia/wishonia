@@ -1,5 +1,5 @@
-import { getServerSession } from "next-auth/next"
 import Link from "next/link"
+import { getServerSession } from "next-auth/next"
 
 export default async function CognitionPage() {
   const session = await getServerSession()

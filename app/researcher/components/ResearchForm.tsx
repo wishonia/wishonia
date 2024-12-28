@@ -1,15 +1,16 @@
 'use client'
 
-import { useState } from 'react'
 import { useRouter } from 'next/navigation'
 import { useSession } from 'next-auth/react'
-import { Button } from "@/components/ui/button"
-import { Input } from "@/components/ui/input"
-import { Card, CardContent, CardDescription, CardFooter, CardHeader, CardTitle } from "@/components/ui/card"
-import { ArticleWithRelations } from '@/lib/agents/researcher/researcher'
-import GlobalBrainNetwork from "@/components/landingPage/global-brain-network"
-import ArticleRenderer from '@/components/ArticleRenderer'
+import { useState } from 'react'
+
 import { findOrCreateArticleByTopic } from "@/app/researcher/researcherActions"
+import ArticleRenderer from '@/components/ArticleRenderer'
+import GlobalBrainNetwork from "@/components/landingPage/global-brain-network"
+import { Button } from "@/components/ui/button"
+import { Card, CardContent, CardDescription, CardFooter, CardHeader, CardTitle } from "@/components/ui/card"
+import { Input } from "@/components/ui/input"
+import { ArticleWithRelations } from '@/lib/agents/researcher/researcher'
 
 interface ResearchFormProps {
     initialTopic?: string

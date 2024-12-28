@@ -1,12 +1,15 @@
 'use client'
 
-import { useState } from 'react'
+import { PetitionComment } from "@prisma/client"
 import { useSession } from 'next-auth/react'
+import { useState } from 'react'
+
 import { LoginPromptButton } from '@/components/LoginPromptButton'
-import { addComment } from '../petitionActions'
 import { Button } from '@/components/ui/button'
 import { Textarea } from '@/components/ui/textarea'
-import { PetitionComment } from "@prisma/client"
+
+import { addComment } from '../petitionActions'
+
 
 type CommentWithUser = PetitionComment & {
   user: {

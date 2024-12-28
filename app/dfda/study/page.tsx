@@ -1,6 +1,8 @@
 import { Metadata } from 'next'
-import CreateStudyForm from '../components/CreateStudyForm'
+
 import { getUserIdServer } from '@/lib/api/getUserIdServer'
+
+import CreateStudyForm from '../components/CreateStudyForm'
 
 export const metadata: Metadata = {
   title: 'Create Study | Decentralized FDA',

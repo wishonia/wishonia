@@ -1,8 +1,9 @@
 'use client'
 
-import React, { useState } from 'react'
 import Link from 'next/link'
 import { usePathname } from 'next/navigation'
+import React, { useState } from 'react'
+
 import { routeTree, type RouteNode } from '@/config/routeTree'
 
 interface BreadcrumbDropdownProps {
@@ -76,7 +77,7 @@ function BreadcrumbDropdown({ node, currentPath, currentSegment, onClose, dynami
       </Link>
       
       {Object.keys(node.children).length > 0 && (
-        <div className="border-t border-gray-200 my-1"></div>
+        <div className="border-t border-gray-200 my-1" />
       )}
 
       {Object.entries(node.children)

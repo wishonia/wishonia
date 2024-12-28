@@ -1,12 +1,13 @@
 'use client'
 
-import React from 'react'
-import { Card } from '@/components/ui/card'
-import { Button } from '@/components/ui/button'
-import { RefreshCcw } from 'lucide-react'
-import { Label } from '@/components/ui/label'
 import { useUIState, useActions, useAIState } from 'ai/rsc'
+import { RefreshCcw } from 'lucide-react'
+import React from 'react'
+
 import { AI } from '@/app/search/actions'
+import { Button } from '@/components/ui/button'
+import { Card } from '@/components/ui/card'
+import { Label } from '@/components/ui/label'
 import { AIMessage } from '@/lib/types/index'
 
 type ErrorCardProps = {

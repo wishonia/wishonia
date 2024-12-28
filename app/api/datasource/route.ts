@@ -1,10 +1,11 @@
-import * as z from "zod";
-import { NextResponse } from "next/server";
 import { DatasourceType } from "@prisma/client";
+import { NextResponse } from "next/server";
+import * as z from "zod";
+
+import { createAgentDatasource } from "@/lib/agent";
 import { createDataSource } from "@/lib/datasource";
 import { handleError } from "@/lib/errorHandler";
 import { getCurrentUser } from "@/lib/session";
-import { createAgentDatasource } from "@/lib/agent";
 
 
 const dataSourceCreateSchema= z.object({
@@ -25,7 +26,7 @@ export async function POST(
     const json = await req.json()
     const { name, type, url ,agentId } = dataSourceCreateSchema.parse(json)
     const dataSourceType = type as DatasourceType
-    let dataSource = await createDataSource(
+    const dataSource = await createDataSource(
       name,
       dataSourceType,
       url,

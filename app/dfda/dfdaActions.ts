@@ -1,19 +1,19 @@
 "use server"
 
 import { Account, Effectiveness, User } from "@prisma/client"
-import { getMarkdownFiles } from "@/lib/markdown/get-markdown-files"
-import type { ProcessedMarkdownFile } from "@/lib/markdown/get-markdown-files"
 
-import type { GetStudiesResponse } from "@/types/models/GetStudiesResponse"
-import { GetTrackingReminderNotificationsResponse } from "@/types/models/GetTrackingReminderNotificationsResponse"
-import { GlobalVariable } from "@/types/models/GlobalVariable"
-import { TrackingReminderNotification } from "@/types/models/TrackingReminderNotification"
-import { UserVariable } from "@/types/models/UserVariable"
 import {
   findArticleByTopic,
   writeArticle,
 } from "@/lib/agents/researcher/researcher"
 import { prisma } from "@/lib/db"
+import { getMarkdownFiles } from "@/lib/markdown/get-markdown-files"
+import type { ProcessedMarkdownFile } from "@/lib/markdown/get-markdown-files"
+import type { GetStudiesResponse } from "@/types/models/GetStudiesResponse"
+import { GetTrackingReminderNotificationsResponse } from "@/types/models/GetTrackingReminderNotificationsResponse"
+import { GlobalVariable } from "@/types/models/GlobalVariable"
+import { TrackingReminderNotification } from "@/types/models/TrackingReminderNotification"
+import { UserVariable } from "@/types/models/UserVariable"
 
 // Helper function to get DFDA client ID
 function getDFDAClientId(): string {
@@ -342,8 +342,8 @@ export async function getUserVariable(
   if (params) {
     path += `?${new URLSearchParams(params).toString()}`
   }
-  let response = await fetch(path)
-  let jsonResponse = await response.json()
+  const response = await fetch(path)
+  const jsonResponse = await response.json()
   return jsonResponse[0]
 }
 

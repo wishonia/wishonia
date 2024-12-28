@@ -1,13 +1,13 @@
 import { Metadata } from "next"
 import { redirect } from "next/navigation"
 
-import { authOptions } from "@/lib/auth"
-import { getCurrentUser } from "@/lib/session"
 import { Shell } from "@/components/layout/shell"
 import { DashboardHeader } from "@/components/pages/dashboard/dashboard-header"
 import { AppearanceForm } from "@/components/settings/appearance-form"
-import { UserNameForm } from "@/components/user/user-name-form"
 import {DFDATokenForm} from "@/components/settings/dfda-access-token-form";
+import { UserNameForm } from "@/components/user/user-name-form"
+import { authOptions } from "@/lib/auth"
+import { getCurrentUser } from "@/lib/session"
 
 export const metadata: Metadata = {
   title: "Settings",

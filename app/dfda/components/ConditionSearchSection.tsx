@@ -1,8 +1,9 @@
 'use client'
 
-import React from 'react'
-import ConditionSearchAutocomplete from './ConditionSearchAutocomplete'
 import { useRouter } from 'next/navigation'
+import React from 'react'
+
+import ConditionSearchAutocomplete from './ConditionSearchAutocomplete'
 
 export default function ConditionSearchSection() {
   const router = useRouter()

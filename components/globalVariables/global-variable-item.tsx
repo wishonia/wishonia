@@ -2,11 +2,11 @@
 
 import Link from "next/link"
 
-import { GlobalVariable } from "@/types/models/GlobalVariable"
-import { Skeleton } from "@/components/ui/skeleton"
 import { GlobalVariableOperationsButton } from "@/components/globalVariables/global-variable-operations-button"
 import { MeasurementButton } from "@/components/measurements/measurement-button"
 import { QuickMeasurementButton } from "@/components/measurements/quick-measurement-button"
+import { Skeleton } from "@/components/ui/skeleton"
+import { GlobalVariable } from "@/types/models/GlobalVariable"
 
 import { Icons } from "../icons"
 

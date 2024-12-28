@@ -1,7 +1,7 @@
 "use client"
 
-import React from "react"
 import { motion } from "framer-motion"
+import React from "react"
 
 import Benefits from "@/app/dfda/docs/cure-acceleration-act/components/Benefits"
 import FinancialIncentives from "@/app/dfda/docs/cure-acceleration-act/components/FinancialIncentives"
@@ -9,8 +9,8 @@ import UniversalAccess from "@/app/dfda/docs/cure-acceleration-act/components/Un
 
 import Header from "./Header"
 import OpenTrialPlatform from "./OpenTrialPlatform"
-import ProblemsWithCurrentSystem from "./problems-with-the-current-system"
 import CureAccelerationActSolutions from "./cure-acceleration-act-solutions"
+import ProblemsWithCurrentSystem from "./problems-with-the-current-system"
 
 export default function CureAccelerationAct() {
   return (

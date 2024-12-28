@@ -1,6 +1,6 @@
 "use client"
-import React, { useState, useEffect, useRef } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
+import React, { useState, useEffect, useRef } from 'react';
 
 interface Stage {
   text: string;

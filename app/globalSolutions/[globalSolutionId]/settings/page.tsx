@@ -1,12 +1,12 @@
 import { Metadata } from "next"
 import { notFound, redirect } from "next/navigation"
 
-import { getGlobalSolution } from "@/lib/api/globalSolutions"
-import { authOptions } from "@/lib/auth"
-import { getCurrentUser } from "@/lib/session"
 import { GlobalSolutionEditForm } from "@/components/globalSolution/global-solution-edit-form"
 import { Shell } from "@/components/layout/shell"
 import { DashboardHeader } from "@/components/pages/dashboard/dashboard-header"
+import { getGlobalSolution } from "@/lib/api/globalSolutions"
+import { authOptions } from "@/lib/auth"
+import { getCurrentUser } from "@/lib/session"
 
 export const metadata: Metadata = {
   title: "Global Solution Settings",

@@ -1,8 +1,10 @@
 import { Metadata } from 'next'
 import { notFound } from 'next/navigation'
+
+import { Study } from '@/types/models/Study'
+
 import StudyCard from '../../components/StudyCard'
 import { getStudy } from '../../dfdaActions'
-import { Study } from '@/types/models/Study'
 
 interface StudyPageProps {
   params: {

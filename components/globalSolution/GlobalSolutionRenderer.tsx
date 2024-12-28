@@ -1,5 +1,10 @@
 "use client"
 
+import { Clock, Share2, Check, GitBranchPlus, Settings, Globe, BarChart2 } from "lucide-react"
+import Link from "next/link"
+import { useState } from "react"
+
+import MarkdownRenderer from "@/components/markdown/MarkdownRenderer"
 import { Button } from "@/components/ui/button"
 import {
   Card,
@@ -7,11 +12,8 @@ import {
   CardHeader,
   CardTitle,
 } from "@/components/ui/card"
-import MarkdownRenderer from "@/components/markdown/MarkdownRenderer"
-import { Clock, Share2, Check, GitBranchPlus, Settings, Globe, BarChart2 } from "lucide-react"
-import { useState } from "react"
 import { toast } from "@/components/ui/use-toast"
-import Link from "next/link"
+
 
 interface GlobalSolutionRendererProps {
   globalSolution: {

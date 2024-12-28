@@ -1,12 +1,13 @@
 import fs from "fs"
 import path from "path"
+
 import ignore, { Ignore } from "ignore"
 
 export function relativePathFromPublic(absolutePath: string): string {
   // Split the coverImage path into an array of directories
-  let pathArray = absolutePath.split(/\/|\\/)
+  const pathArray = absolutePath.split(/\/|\\/)
   // Find the index of the 'public' directory
-  let publicIndex = pathArray.indexOf("public")
+  const publicIndex = pathArray.indexOf("public")
   // If 'public' directory is not found, return the original path
   if (publicIndex === -1) {
     return absolutePath
@@ -113,7 +114,7 @@ export function pathToUrl(filePath: string, baseUrl: string): string {
   if (!baseUrl.endsWith("/")) {
     baseUrl = baseUrl + "/"
   }
-  let relativeToPublic = relativePathFromPublic(filePath)
+  const relativeToPublic = relativePathFromPublic(filePath)
   return `${baseUrl}${relativeToPublic}`
 }
 

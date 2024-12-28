@@ -1,10 +1,11 @@
 'use client'
 
 import React, { useEffect, useState } from 'react'
+
 import { getTreatmentConditionMetaAnalysis } from '@/app/dfda/dfdaActions'
 import ArticleRenderer from '@/components/ArticleRenderer'
-import { ArticleWithRelations } from '@/lib/agents/researcher/researcher'
 import GlobalHealthOptimizationAgent from "@/components/landingPage/global-health-optimization-agent"
+import { ArticleWithRelations } from '@/lib/agents/researcher/researcher'
 
 interface ConditionTreatmentMetaAnalysisProps {
     treatmentName: string

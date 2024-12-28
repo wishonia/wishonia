@@ -1,13 +1,15 @@
-import { generateObject } from 'ai'
-import { z } from 'zod'
 import { Prisma } from '@prisma/client'
-import prisma from '@/lib/prisma'
-import { getModel } from '@/lib/utils/modelUtils'
 import { 
   CompanySize, 
   CompanyType, 
   FocusLevel 
 } from '@prisma/client'
+import { generateObject } from 'ai'
+import { z } from 'zod'
+
+import prisma from '@/lib/prisma'
+import { getModel } from '@/lib/utils/modelUtils'
+
 
 // Use Prisma generated types with includes
 type OrganizationMembershipWithPerson = Prisma.OrganizationMembershipGetPayload<{

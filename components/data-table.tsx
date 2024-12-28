@@ -1,6 +1,5 @@
 "use client"
 
-import * as React from "react"
 import {
   ColumnDef,
   flexRender,
@@ -11,6 +10,7 @@ import {
   useReactTable,
   VisibilityState,
 } from "@tanstack/react-table"
+import * as React from "react"
 
 import { Button } from "@/components/ui/button"
 import {

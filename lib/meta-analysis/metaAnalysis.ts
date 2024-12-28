@@ -1,5 +1,7 @@
-import { writeArticle, WriteArticleOptions } from "@/lib/agents/researcher/researcher";
 import { ArticleStatus, PrismaClient } from "@prisma/client";
+
+import { writeArticle, WriteArticleOptions } from "@/lib/agents/researcher/researcher";
+
 import { generateMetaAnalysisQuery } from './metaAnalysisQueries';
 
 const prisma = new PrismaClient();

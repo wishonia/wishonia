@@ -1,13 +1,13 @@
 "use client"
 
-import * as React from "react"
 import { useRouter } from "next/navigation"
+import * as React from "react"
 
-import { GlobalVariable } from "@/types/models/GlobalVariable"
-import { UserVariable } from "@/types/models/UserVariable"
+import { Icons } from "@/components/icons"
 import { Button, ButtonProps } from "@/components/ui/button"
 import { toast } from "@/components/ui/use-toast"
-import { Icons } from "@/components/icons"
+import { GlobalVariable } from "@/types/models/GlobalVariable"
+import { UserVariable } from "@/types/models/UserVariable"
 
 interface QuickMeasurementButtonProps extends ButtonProps {
   genericVariable: Pick<

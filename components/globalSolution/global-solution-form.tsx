@@ -1,14 +1,13 @@
 "use client"
 
+import { zodResolver } from "@hookform/resolvers/zod"
+import { useRouter } from "next/navigation"
 import * as React from "react"
 import { useEffect, useState } from "react"
-import { useRouter } from "next/navigation"
-import { zodResolver } from "@hookform/resolvers/zod"
 import { useForm } from "react-hook-form"
 import * as z from "zod"
 
-import { cn } from "@/lib/utils"
-import { globalSolutionSchema } from "@/lib/validations/globalSolution"
+import { Icons } from "@/components/icons"
 import { buttonVariants } from "@/components/ui/button"
 import {
   Card,
@@ -18,10 +17,10 @@ import {
 import { Input } from "@/components/ui/input"
 import { Label } from "@/components/ui/label"
 import { toast } from "@/components/ui/use-toast"
-import { Icons } from "@/components/icons"
+import { cn } from "@/lib/utils"
+import { globalSolutionSchema } from "@/lib/validations/globalSolution"
 
-interface GlobalSolutionFormProps
-  extends React.HTMLAttributes<HTMLFormElement> {}
+type GlobalSolutionFormProps = React.HTMLAttributes<HTMLFormElement>
 
 type FormData = z.infer<typeof globalSolutionSchema>
 

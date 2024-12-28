@@ -1,10 +1,10 @@
 import { Metadata } from "next"
 import { notFound } from "next/navigation"
 
+import { GlobalProblemOrganizationsList } from "@/components/globalProblem/GlobalProblemOrganizationsList"
+import { Shell } from "@/components/layout/shell"
 import { getGlobalProblem } from "@/lib/api/globalProblems"
 import { getCurrentUser } from "@/lib/session"
-import { Shell } from "@/components/layout/shell"
-import { GlobalProblemOrganizationsList } from "@/components/globalProblem/GlobalProblemOrganizationsList"
 
 interface GlobalProblemOrganizationsPageProps {
   params: { globalProblemId: string }

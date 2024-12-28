@@ -1,10 +1,12 @@
 'use client'
 
-import { useEffect } from 'react'
-import { usePathname } from 'next/navigation'
-import { ChatPanel } from './chat-panel'
-import { ChatMessages } from './chat-messages'
 import { useUIState } from 'ai/rsc'
+import { usePathname } from 'next/navigation'
+import { useEffect } from 'react'
+
+import { ChatMessages } from './chat-messages'
+import { ChatPanel } from './chat-panel'
+
 
 type ChatProps = {
   id?: string

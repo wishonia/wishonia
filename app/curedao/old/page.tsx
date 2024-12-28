@@ -1,13 +1,13 @@
-import { NavBar } from '@/app/curedao/components/nav-bar'
-import { HeroSection } from '@/app/curedao/components/hero-section'
-import { FailedInnovationSection } from '@/app/curedao/components/failed-innovation-section'
-import { OpenSourceSection } from '@/app/curedao/components/open-source-section'
-import { DemocratizeSection } from '@/app/curedao/components/democratize-section'
 import { CollaborationSection } from '@/app/curedao/components/collaboration-section'
 import { CollaboratorsSection } from '@/app/curedao/components/collaborators-section'
+import { DemocratizeSection } from '@/app/curedao/components/democratize-section'
 import { DiagramSection } from '@/app/curedao/components/diagram-section'
-import { GradientBlur } from '@/app/curedao/components/gradient-blur'
+import { FailedInnovationSection } from '@/app/curedao/components/failed-innovation-section'
 import { Footer } from '@/app/curedao/components/footer'
+import { GradientBlur } from '@/app/curedao/components/gradient-blur'
+import { HeroSection } from '@/app/curedao/components/hero-section'
+import { NavBar } from '@/app/curedao/components/nav-bar'
+import { OpenSourceSection } from '@/app/curedao/components/open-source-section'
 
 export default function Home() {
   return (

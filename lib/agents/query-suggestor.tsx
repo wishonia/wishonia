@@ -1,7 +1,9 @@
-import { createStreamableUI, createStreamableValue } from 'ai/rsc'
 import { CoreMessage, streamObject } from 'ai'
-import { PartialRelated, relatedSchema } from '@/lib/schema/related'
+import { createStreamableUI, createStreamableValue } from 'ai/rsc'
+
 import SearchRelated from '@/app/search/components/search-related'
+import { PartialRelated, relatedSchema } from '@/lib/schema/related'
+
 import { getModel } from '../utils/index'
 
 export async function querySuggestor(

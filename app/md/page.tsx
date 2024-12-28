@@ -4,7 +4,7 @@ import MarkdownPagesList from "@/components/markdown/markdown-list"
 export default function MarkdownPageListPage() {
   return (
     <Shell>
-      <MarkdownPagesList></MarkdownPagesList>
+      <MarkdownPagesList />
     </Shell>
   )
 }

@@ -3,10 +3,10 @@
 import * as React from "react"
 import { FC, useEffect, useState } from "react"
 
-import type { GlobalVariable } from "@/types/models/GlobalVariable"
-import { cn } from "@/lib/utils"
-import { buttonVariants } from "@/components/ui/button"
 import { DashboardHeader } from "@/components/pages/dashboard/dashboard-header"
+import { buttonVariants } from "@/components/ui/button"
+import { cn } from "@/lib/utils"
+import type { GlobalVariable } from "@/types/models/GlobalVariable"
 
 type GlobalVariableOverviewProps = {
   variableId: number

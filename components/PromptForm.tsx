@@ -1,6 +1,5 @@
 "use client"
 
-import * as React from "react"
 import {
   ArrowElbowDownLeft,
   BookBookmark,
@@ -12,10 +11,8 @@ import {
 import { Agent } from "@prisma/client"
 import { useActions, useAIState, useUIState } from "ai/rsc"
 import { nanoid } from "nanoid"
+import * as React from "react"
 
-import { AI, UIState } from "@/lib/chat/actions"
-import { useEnterSubmit } from "@/lib/hooks/use-enter-submit"
-import { AttributeTypes } from "@/lib/types"
 import {
   DropdownMenu,
   DropdownMenuContent,
@@ -25,6 +22,9 @@ import {
   DropdownMenuSeparator,
   DropdownMenuTrigger,
 } from "@/components/ui/dropdown-menu"
+import { AI, UIState } from "@/lib/chat/actions"
+import { useEnterSubmit } from "@/lib/hooks/use-enter-submit"
+import { AttributeTypes } from "@/lib/types"
 
 import { UserMessage } from "./assistant/Message"
 import { Button } from "./ui/button"

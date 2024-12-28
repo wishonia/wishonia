@@ -1,12 +1,12 @@
 import { redirect } from "next/navigation"
 
-import { authOptions } from "@/lib/auth"
-import { getCurrentUser } from "@/lib/session"
-import { FloatingActionButton } from "@/components/ui/floating-action-button"
 import { DateRangePicker } from "@/components/date-range-picker"
 import { Shell } from "@/components/layout/shell"
 import { MeasurementsList } from "@/components/measurements/measurements-list"
 import { DashboardHeader } from "@/components/pages/dashboard/dashboard-header"
+import { FloatingActionButton } from "@/components/ui/floating-action-button"
+import { authOptions } from "@/lib/auth"
+import { getCurrentUser } from "@/lib/session"
 
 interface MeasurementsPageProps {
   params: { variableId: number }

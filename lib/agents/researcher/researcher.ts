@@ -3,11 +3,12 @@ import { Prisma, PrismaClient, ArticleStatus } from "@prisma/client";
 import { generateObject } from "ai";
 import { RegularSearchOptions, SearchResult } from "exa-js";
 import { z } from "zod";
+
 import { getSearchResults, getSearchResultsByUrl } from "@/lib/agents/researcher/getSearchResults";
 import { generateSearchQueries } from "@/lib/agents/researcher/searchQueryGenerator";
+import { MODEL_PRICING } from "@/lib/constants/llmModelPricing";
 import { DEFAULT_MODEL_NAME, getModel, ModelName } from "@/lib/utils/modelUtils";
 import { slugify } from "@/lib/utils/slugify";
-import { MODEL_PRICING } from "@/lib/constants/llmModelPricing";
 const prisma = new PrismaClient()
 
 const GeneratedReportSchema = z.object({

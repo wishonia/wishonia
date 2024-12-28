@@ -1,11 +1,12 @@
 'use client'
 
-import { useState } from 'react'
-import { Button } from "@/components/ui/button"
-import { Input } from "@/components/ui/input"
-import { Card } from "@/components/ui/card"
-import { findRepresentatives } from '@/lib/services/civic-api'
 import { Representative } from '@prisma/client'
+import { useState } from 'react'
+
+import { Button } from "@/components/ui/button"
+import { Card } from "@/components/ui/card"
+import { Input } from "@/components/ui/input"
+import { findRepresentatives } from '@/lib/services/civic-api'
 
 interface RepresentativeMessagingProps {
   petitionTitle: string

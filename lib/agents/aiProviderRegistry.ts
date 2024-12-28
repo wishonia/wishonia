@@ -1,7 +1,7 @@
 import { anthropic } from '@ai-sdk/anthropic';
+import {google} from "@ai-sdk/google";
 import { createOpenAI } from '@ai-sdk/openai';
 import { experimental_createProviderRegistry as createProviderRegistry } from 'ai';
-import {google} from "@ai-sdk/google";
 
 export const registry = createProviderRegistry({
     // register provider with prefix and default setup:

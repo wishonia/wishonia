@@ -1,10 +1,10 @@
-import Link from "next/link"
 import { Plus } from "@phosphor-icons/react/dist/ssr"
+import Link from "next/link"
 
 import { getCurrentUser } from "@/lib/session"
 
-import ClearAllChats from "./ClearAllChats"
 import { ChatSidebarList } from "./ChatSidebarList"
+import ClearAllChats from "./ClearAllChats"
 import ThemeToggle from "./ThemeToggle"
 import UserBadge from "./UserBadge"
 

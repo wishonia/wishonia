@@ -1,5 +1,5 @@
-import { Toaster } from "@/components/ui/toaster"
 import { Shell } from "@/components/layout/shell"
+import { Toaster } from "@/components/ui/toaster"
 
 import { SidebarNav } from "./components/sidebar-nav"
 

@@ -1,12 +1,16 @@
 'use client'
 
-import React, { useState, useEffect } from 'react'
 import { User, Skill } from '@prisma/client'
-import { Input } from "@/components/ui/input"
-import { Button } from "@/components/ui/button"
 import { X } from 'lucide-react'
-import { addUserSkill, removeUserSkill, searchSkills } from './skillActions'
+import React, { useState, useEffect } from 'react'
 import { useDebounce } from 'use-debounce'
+
+import { Button } from "@/components/ui/button"
+import { Input } from "@/components/ui/input"
+
+
+import { addUserSkill, removeUserSkill, searchSkills } from './skillActions'
+
 
 type UserSkillWithSkill = {
     id: string;

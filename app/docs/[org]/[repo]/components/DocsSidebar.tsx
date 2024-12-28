@@ -1,11 +1,12 @@
 "use client"
 
-import { useState } from "react"
 import { usePathname, useRouter, useSearchParams } from "next/navigation"
+import { useState } from "react"
 
 import { cn } from "@/lib/utils"
 
 import { type MenuItem } from "../lib/parseSummary"
+
 import SearchBar from "./SearchBar"
 
 interface DocsSidebarProps {

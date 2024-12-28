@@ -1,5 +1,5 @@
-import { prisma } from "@/lib/prisma";
 import TagsList from "@/components/tags/TagsList";
+import { prisma } from "@/lib/prisma";
 
 export const metadata = {
   title: "Article Tags",

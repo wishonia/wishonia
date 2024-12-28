@@ -1,11 +1,11 @@
 import { Metadata } from "next"
 import { notFound, redirect } from "next/navigation"
 
-import { authOptions } from "@/lib/auth"
-import { getCurrentUser } from "@/lib/session"
 import { GlobalVariableEditForm } from "@/components/globalVariables/global-variable-edit-form"
 import { Shell } from "@/components/layout/shell"
 import { DashboardHeader } from "@/components/pages/dashboard/dashboard-header"
+import { authOptions } from "@/lib/auth"
+import { getCurrentUser } from "@/lib/session"
 
 export const metadata: Metadata = {
   title: "GlobalVariable Settings",

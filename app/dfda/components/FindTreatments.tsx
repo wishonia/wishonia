@@ -1,8 +1,9 @@
-import React, { useState } from 'react'
-import { Button } from "@/components/ui/button"
-import { Input } from "@/components/ui/input"
-import { Card, CardHeader, CardTitle, CardDescription, CardContent } from "@/components/ui/card"
 import { Search } from 'lucide-react'
+import React, { useState } from 'react'
+
+import { Button } from "@/components/ui/button"
+import { Card, CardHeader, CardTitle, CardDescription, CardContent } from "@/components/ui/card"
+import { Input } from "@/components/ui/input"
 import {searchConditions} from "@/lib/clinicaltables";
 
 export default function FindTreatments() {

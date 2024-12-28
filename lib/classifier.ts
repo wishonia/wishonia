@@ -1,5 +1,6 @@
-import { z } from "zod"
 import { generateObject } from "ai"
+import { z } from "zod"
+
 import { getModel } from "@/lib/utils/modelUtils"
 
 /**

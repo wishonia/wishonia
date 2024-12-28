@@ -1,7 +1,8 @@
+import { Menu } from 'lucide-react'
 import Link from 'next/link'
+
 import { Button } from '@/components/ui/button'
 import { Sheet, SheetContent, SheetTrigger, SheetTitle, SheetDescription } from '@/components/ui/sheet'
-import { Menu } from 'lucide-react'
 
 export function NavBar() {
   const menuItems = [
@@ -36,8 +37,8 @@ export function NavBar() {
             className="relative px-6 py-2 text-sm text-white border-transparent bg-transparent hover:bg-transparent group"
           >
             <span className="relative z-10">Join Us</span>
-            <div className="absolute inset-0 rounded-full bg-gradient-to-r from-[#ff4895] via-[#00ffcc] to-[#ff8866] opacity-70 group-hover:opacity-100 transition-opacity"></div>
-            <div className="absolute inset-[1px] rounded-full bg-[#13111a] z-0"></div>
+            <div className="absolute inset-0 rounded-full bg-gradient-to-r from-[#ff4895] via-[#00ffcc] to-[#ff8866] opacity-70 group-hover:opacity-100 transition-opacity" />
+            <div className="absolute inset-[1px] rounded-full bg-[#13111a] z-0" />
           </Button>
         </div>
 
@@ -69,8 +70,8 @@ export function NavBar() {
                   className="relative px-6 py-2 text-sm text-white border-transparent bg-transparent hover:bg-transparent group mt-4 w-full"
                 >
                   <span className="relative z-10">Join Us</span>
-                  <div className="absolute inset-0 rounded-full bg-gradient-to-r from-[#ff4895] via-[#00ffcc] to-[#ff8866] opacity-70 group-hover:opacity-100 transition-opacity"></div>
-                  <div className="absolute inset-[1px] rounded-full bg-[#13111a] z-0"></div>
+                  <div className="absolute inset-0 rounded-full bg-gradient-to-r from-[#ff4895] via-[#00ffcc] to-[#ff8866] opacity-70 group-hover:opacity-100 transition-opacity" />
+                  <div className="absolute inset-[1px] rounded-full bg-[#13111a] z-0" />
                 </Button>
               </div>
             </SheetContent>

@@ -1,9 +1,12 @@
-import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card"
-import { NewScheduleForm } from "../../components/NewScheduleForm"
-import prisma from "@/lib/prisma"
-import { authOptions } from "@/lib/auth"
-import { getServerSession } from "next-auth"
 import { redirect } from "next/navigation"
+import { getServerSession } from "next-auth"
+
+import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card"
+import { authOptions } from "@/lib/auth"
+import prisma from "@/lib/prisma"
+
+import { NewScheduleForm } from "../../components/NewScheduleForm"
+
 
 export default async function NewSchedulePage({
   searchParams
