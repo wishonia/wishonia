@@ -57,10 +57,6 @@ function RateLimitSection({
 }
 
 export default function RateLimitStatus() {
-  if (process.env.NODE_ENV !== "development") {
-    return null
-  }
-
   const [rateLimit, setRateLimit] = useState<DetailedRateLimit | null>(null)
   const [error, setError] = useState<string | null>(null)
   const [loading, setLoading] = useState(true)
@@ -87,6 +83,10 @@ export default function RateLimitStatus() {
     const interval = setInterval(fetchRateLimit, 30000) // Update every 30 seconds
     return () => clearInterval(interval)
   }, [fetchRateLimit])
+
+  if (process.env.NODE_ENV !== "development") {
+    return null
+  }
 
   if (loading) return null
 

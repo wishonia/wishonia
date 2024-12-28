@@ -12,15 +12,7 @@ import {
   SearXNGResponse,
   SearXNGResult
 } from '@/lib/types/index'
-
-const log = {
-  info: (msg: string, data?: any) => 
-    console.log('\x1b[36m%s\x1b[0m', `🔍 [Search] ${msg}`, data ? data : ''),
-  error: (msg: string, error?: any) => 
-    console.error('\x1b[31m%s\x1b[0m', `❌ [Search] ${msg}`, error ? error : ''),
-  success: (msg: string, data?: any) => 
-    console.log('\x1b[32m%s\x1b[0m', `✅ [Search] ${msg}`, data ? data : '')
-}
+import { logger } from '../../logger'
 
 export const searchTool = ({ uiStream, fullResponse }: ToolProps) =>
   tool({
@@ -33,8 +25,8 @@ export const searchTool = ({ uiStream, fullResponse }: ToolProps) =>
       include_domains,
       exclude_domains
     }) => {
-      log.info(`Starting search with query: "${query}"`)
-      log.info('Search parameters:', { max_results, search_depth, include_domains, exclude_domains })
+      logger.info(`Starting search with query: "${query}"`)
+      logger.info('Search parameters:', { max_results, search_depth, include_domains, exclude_domains })
 
       let hasError = false
       // Append the search section
@@ -65,7 +57,7 @@ export const searchTool = ({ uiStream, fullResponse }: ToolProps) =>
 
       try {
         if (searchAPI === 'searxng' && effectiveSearchDepth === 'advanced') {
-          log.info('Using advanced SearXNG search')
+          logger.info('Using advanced SearXNG search')
           // API route for advanced SearXNG search
           const baseUrl =
             process.env.NEXT_PUBLIC_BASE_URL || 'http://localhost:3000'
@@ -87,7 +79,7 @@ export const searchTool = ({ uiStream, fullResponse }: ToolProps) =>
           }
           searchResult = await response.json()
         } else {
-          log.info(`Executing ${searchAPI} search with depth: ${effectiveSearchDepth}`)
+          logger.info(`Executing ${searchAPI} search with depth: ${effectiveSearchDepth}`)
           searchResult = await (searchAPI === 'tavily'
             ? tavilySearch
             : searchAPI === 'exa'
@@ -101,9 +93,9 @@ export const searchTool = ({ uiStream, fullResponse }: ToolProps) =>
           )
         }
         
-        log.success(`Search completed with ${searchResult.results.length} results`)
+        logger.info('Search completed with ${searchResult.results.length} results')
       } catch (error) {
-        log.error('Search failed', error)
+        logger.error('Search failed', error)
         hasError = true
         searchResult = {
           results: [],
@@ -132,7 +124,7 @@ async function tavilySearch(
   includeDomains: string[] = [],
   excludeDomains: string[] = []
 ): Promise<SearchResults> {
-  log.info('Starting Tavily search')
+  logger.info('Starting Tavily search')
   const apiKey = process.env.TAVILY_API_KEY
   if (!apiKey) {
     throw new Error('TAVILY_API_KEY is not set in the environment variables')
@@ -157,11 +149,11 @@ async function tavilySearch(
   })
 
   if (!response.ok) {
-    log.error(`Tavily API error: ${response.status}`)
+    logger.error(`Tavily API error: ${response.status}`)
     throw new Error(`Tavily API error: ${response.status} ${response.statusText}`)
   }
 
-  log.success('Tavily search completed')
+  logger.info('Tavily search completed')
   const data = await response.json()
   const processedImages = includeImageDescriptions
     ? data.images
@@ -192,7 +184,7 @@ async function exaSearch(
   includeDomains: string[] = [],
   excludeDomains: string[] = []
 ): Promise<SearchResults> {
-  log.info('Starting Exa search')
+  logger.info('Starting Exa search')
   const apiKey = process.env.EXA_API_KEY
   if (!apiKey) {
     throw new Error('EXA_API_KEY is not set in the environment variables')
@@ -206,7 +198,7 @@ async function exaSearch(
     excludeDomains
   })
 
-  log.success('Exa search completed')
+  logger.info('Exa search completed')
   return {
     results: exaResults.results.map((result: any) => ({
       title: result.title,
@@ -226,7 +218,7 @@ async function searxngSearch(
   includeDomains: string[] = [],
   excludeDomains: string[] = []
 ): Promise<SearchResults> {
-  log.info('Starting SearXNG search')
+  logger.info('Starting SearXNG search')
   const apiUrl = process.env.SEARXNG_API_URL
   if (!apiUrl) {
     throw new Error('SEARXNG_API_URL is not set in the environment variables')
@@ -295,7 +287,7 @@ async function searxngSearch(
       number_of_results: data.number_of_results
     }
 
-    log.success('SearXNG search completed')
+    logger.info('SearXNG search completed')
     return result
   } catch (error) {
     console.error('SearXNG API error:', error)

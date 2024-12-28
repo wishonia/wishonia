@@ -8,7 +8,6 @@ import { useActions, useUIState } from "ai/rsc"
 
 import { AI, UIState } from "@/lib/chat/actions"
 import { GithubUser } from "@/lib/types"
-import { cn } from "@/lib/utils"
 
 import AssistantDisplay from "../AssistantDisplay"
 import { Button } from "../ui/button"

@@ -2,7 +2,7 @@
 
 import Link from "next/link"
 import { usePathname } from "next/navigation"
-import { ChevronRight, Home, Menu } from "lucide-react"
+import { ChevronRight, Home } from "lucide-react"
 import { GlobalProblem } from "@prisma/client"
 
 import { cn } from "@/lib/utils"
@@ -11,7 +11,6 @@ import {
   DropdownMenuContent,
   DropdownMenuItem,
   DropdownMenuTrigger,
-  DropdownMenuSeparator,
 } from "@/components/ui/dropdown-menu"
 import {
   Tooltip,

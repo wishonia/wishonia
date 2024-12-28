@@ -6,7 +6,7 @@ import Link from "next/link"
 import { Sparkle, Star } from "@phosphor-icons/react"
 import { useActions, useUIState } from "ai/rsc"
 
-import { AI, UIState } from "@/lib/chat/actions"
+import { AI } from "@/lib/chat/actions"
 import { COLOURS } from "@/lib/constants"
 import { RepoProps } from "@/lib/types"
 import {

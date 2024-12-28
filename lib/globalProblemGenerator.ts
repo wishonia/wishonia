@@ -5,13 +5,11 @@ import slugify from "slugify";
 
 
 
-import { prisma } from "@/lib/db";
 import { pathToMarkdownUrl } from "@/lib/fileHelper";
 import { createGlobalProblem } from "@/lib/globalProblems";
 import { generateAndUploadFeaturedImageJpg } from "@/lib/imageGenerator";
 import { textCompletion } from "@/lib/llm";
 import { saveMarkdownPost } from "@/lib/markdownGenerator";
-import { createSlug } from "@/lib/stringHelper";
 import { toTitleCase } from "@/lib/stringHelpers";
 
 

@@ -92,11 +92,22 @@ module.exports = {
             height: "0",
           },
         },
+        "gradient-xy": {
+          "0%, 100%": {
+            "background-size": "400% 400%",
+            "background-position": "0% 0%"
+          },
+          "50%": {
+            "background-size": "400% 400%",
+            "background-position": "100% 100%"
+          }
+        }
       },
       animation: {
         "accordion-down": "accordion-down 0.2s ease-out",
         "accordion-up": "accordion-up 0.2s ease-out",
         "spin-slow": "spin 40s linear infinite",
+        "gradient-xy": "gradient-xy 15s ease infinite"
       },
       typography: {
         DEFAULT: {
