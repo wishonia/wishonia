@@ -2,6 +2,7 @@ import { PrismaClient, Severity } from '@prisma/client'
 import type { DfdaConditionSymptom, DfdaUserSymptomReport } from '@prisma/client'
 import fs from 'fs/promises'
 import path from 'path'
+import { generateTestDfdaUser } from './generate-test-dfda-user'
 
 const prisma = new PrismaClient()
 
@@ -13,14 +14,6 @@ type SymptomAggregate = Pick<DfdaConditionSymptom,
 type SymptomReport = Pick<DfdaUserSymptomReport,
   'userId' | 'symptomId' | 'conditionId' | 'severity'
 >
-
-function generateFakeUser(index: number) {
-  return {
-    id: `dfda_user_${index}`,
-    email: `dfda_user_${index}@example.com`,
-    name: `DFDA User ${index}`,
-  }
-}
 
 export async function generateAndSaveSymptomReports(): Promise<void> {
   console.log('Loading symptom aggregates from database...')
@@ -48,7 +41,7 @@ export async function generateAndSaveSymptomReports(): Promise<void> {
   
   // Generate enough users (add 20% buffer)
   const userCount = Math.ceil(maxUsersNeeded * 1.2)
-  const users = Array.from({ length: userCount }, (_, i) => generateFakeUser(i))
+  const users = Array.from({ length: userCount }, (_, i) => generateTestDfdaUser(i))
   
   console.log(`Generating reports using ${users.length} synthetic users...`)
   
