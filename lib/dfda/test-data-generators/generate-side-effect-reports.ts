@@ -2,6 +2,7 @@ import { PrismaClient, Severity } from '@prisma/client'
 import type { DfdaTreatmentSideEffect, DfdaUserSideEffectReport } from '@prisma/client'
 import fs from 'fs/promises'
 import path from 'path'
+import { generateTestDfdaUser } from './generate-test-dfda-user'
 
 const prisma = new PrismaClient()
 
@@ -16,14 +17,6 @@ export type SideEffectReport = Pick<DfdaUserSideEffectReport,
 
 // Export the functions needed for testing
 export { generateSideEffectReports, verifySideEffectReports }
-
-function generateFakeUser(index: number) {
-  return {
-    id: `dfda_user_${index}`,
-    email: `dfda_user_${index}@example.com`,
-    name: `DFDA User ${index}`,
-  }
-}
 
 async function calculateMinimumUsers(): Promise<number> {
   // Get count of side effects per treatment
@@ -68,7 +61,7 @@ export async function generateAndSaveSideEffectReports(): Promise<void> {
   console.log(`Minimum users needed: ${minimumUsers}`)
   console.log(`Generating ${userCount} users (including 20% buffer)`)
   
-  const users = Array.from({ length: userCount }, (_, i) => generateFakeUser(i))
+  const users = Array.from({ length: userCount }, (_, i) => generateTestDfdaUser(i))
   
   console.log(`Generating reports using ${users.length} synthetic users...`)
   

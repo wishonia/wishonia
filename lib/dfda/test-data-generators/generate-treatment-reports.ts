@@ -2,6 +2,7 @@ import { Effectiveness, PrismaClient } from '@prisma/client'
 import type { DfdaConditionTreatment, DfdaUserTreatmentReport } from '@prisma/client'
 import fs from 'fs/promises'
 import path from 'path'
+import { generateTestDfdaUser } from './generate-test-dfda-user'
 
 const prisma = new PrismaClient()
 
@@ -20,14 +21,6 @@ const EFFECT_SCORES: Record<Effectiveness, number> = {
   'NO_EFFECT': 0,
   'MODERATE_IMPROVEMENT': 1,
   'MAJOR_IMPROVEMENT': 2,
-}
-
-function generateFakeUser(index: number) {
-  return {
-    id: `dfda_user_${index}`,
-    email: `dfda_user_${index}@example.com`,
-    name: `DFDA User ${index}`,
-  }
 }
 
 export async function generateAndSaveTreatmentReports(): Promise<void> {
@@ -56,7 +49,7 @@ export async function generateAndSaveTreatmentReports(): Promise<void> {
   
   // Generate enough users (add 20% buffer)
   const userCount = Math.ceil(maxUsersNeeded * 1.2)
-  const users = Array.from({ length: userCount }, (_, i) => generateFakeUser(i))
+  const users = Array.from({ length: userCount }, (_, i) => generateTestDfdaUser(i))
   
   console.log(`Generating reports using ${users.length} synthetic users...`)
   
