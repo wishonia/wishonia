@@ -4,6 +4,7 @@ import { z } from "zod"
 
 import { SearchResults, SearchResultImage } from '@/lib/types/index'
 import { getModel } from "@/lib/utils/modelUtils"
+import { logger } from '../logger'
 
 export interface ArticleOptions {
   topic: string
@@ -36,15 +37,6 @@ export interface GeneratedArticle {
     placement: string
     context: string
   }>
-}
-
-const log = {
-  info: (msg: string, data?: any) => 
-    console.log('\x1b[36m%s\x1b[0m', `📝 [Article] ${msg}`, data ? data : ''),
-  error: (msg: string, error?: any) => 
-    console.error('\x1b[31m%s\x1b[0m', `❌ [Article] ${msg}`, error ? error : ''),
-  success: (msg: string, data?: any) => 
-    console.log('\x1b[32m%s\x1b[0m', `✅ [Article] ${msg}`, data ? data : '')
 }
 
 // Add schema for article generation
@@ -138,7 +130,7 @@ Remember to:
     )
 
     if (missingSourceUrls.length > 0) {
-      log.error('Missing source links for:', missingSourceUrls.map(s => s.title))
+      logger.error('Missing source links for:', missingSourceUrls.map(s => s.title))
       return false
     }
 
@@ -178,7 +170,7 @@ Remember to:
 
   async generateArticle(options: ArticleOptions): Promise<GeneratedArticle> {
     const { topic, style, wordCount, searchResults } = options
-    log.info(`Generating article for topic: "${topic}"`)
+    logger.info(`Generating article for topic: "${topic}"`)
 
     try {
       const relevantSources = this.processSources(searchResults)
@@ -195,7 +187,7 @@ Remember to:
       // Validate source links and regenerate if necessary
       let attempts = 0
       while (!this.validateSourceLinks(rawContent, relevantSources) && attempts < 3) {
-        log.info('Regenerating article due to missing source links')
+        logger.info('Regenerating article due to missing source links')
         rawContent = await this.generateArticleContent(
           topic,
           style,
@@ -237,11 +229,11 @@ Remember to:
         )
       }
 
-      log.success('Article generation completed')
+      logger.info('Article generation completed')
       return article
 
     } catch (error) {
-      log.error('Article generation failed', error)
+      logger.error('Article generation failed', error)
       throw error
     }
   }
