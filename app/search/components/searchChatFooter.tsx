@@ -1,6 +1,6 @@
 import React from 'react'
 import Link from 'next/link'
-import { SiDiscord, SiGithub, SiX } from 'react-icons/si'
+import { Github, MessageSquare, Twitter } from "lucide-react"
 import { Button } from '@/components/ui/button'
 
 const SearchChatFooter: React.FC = () => {
@@ -13,7 +13,7 @@ const SearchChatFooter: React.FC = () => {
           className="text-muted-foreground/50"
         >
           <Link href="https://curedao.org/discord" target="_blank">
-            <SiDiscord size={18} />
+            <MessageSquare size={18} />
           </Link>
         </Button>
         <Button
@@ -22,7 +22,7 @@ const SearchChatFooter: React.FC = () => {
           className="text-muted-foreground/50"
         >
           <Link href="https://x.com/thinkbynumbers" target="_blank">
-            <SiX size={18} />
+            <Twitter size={18} />
           </Link>
         </Button>
         <Button
@@ -31,7 +31,7 @@ const SearchChatFooter: React.FC = () => {
           className="text-muted-foreground/50"
         >
           <Link href="https://github.com/wishonia/wishonia" target="_blank">
-            <SiGithub size={18} />
+            <Github size={18} />
           </Link>
         </Button>
       </div>
