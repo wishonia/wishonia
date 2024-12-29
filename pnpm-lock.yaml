@@ -59,15 +59,6 @@ importers:
       '@octokit/rest':
         specifier: ^20.1.1
         version: 20.1.1
-      '@opentelemetry/api':
-        specifier: ^1.9.0
-        version: 1.9.0
-      '@opentelemetry/api-logs':
-        specifier: ^0.57.0
-        version: 0.57.0
-      '@opentelemetry/sdk-logs':
-        specifier: ^0.57.0
-        version: 0.57.0(@opentelemetry/api@1.9.0)
       '@phosphor-icons/react':
         specifier: ^2.1.6
         version: 2.1.7(react-dom@18.2.0(react@18.2.0))(react@18.2.0)
@@ -217,7 +208,7 @@ importers:
         version: 0.23.4
       '@vercel/otel':
         specifier: ^1.10.0
-        version: 1.10.0(@opentelemetry/api-logs@0.57.0)(@opentelemetry/api@1.9.0)(@opentelemetry/instrumentation@0.52.1(@opentelemetry/api@1.9.0)(supports-color@8.1.1))(@opentelemetry/resources@1.30.0(@opentelemetry/api@1.9.0))(@opentelemetry/sdk-logs@0.57.0(@opentelemetry/api@1.9.0))(@opentelemetry/sdk-metrics@1.26.0(@opentelemetry/api@1.9.0))(@opentelemetry/sdk-trace-base@1.26.0(@opentelemetry/api@1.9.0))
+        version: 1.10.0(@opentelemetry/api@1.9.0)(@opentelemetry/instrumentation@0.52.1(@opentelemetry/api@1.9.0)(supports-color@8.1.1))(@opentelemetry/resources@1.30.0(@opentelemetry/api@1.9.0))(@opentelemetry/sdk-metrics@1.26.0(@opentelemetry/api@1.9.0))(@opentelemetry/sdk-trace-base@1.26.0(@opentelemetry/api@1.9.0))
       ai:
         specifier: ^3.4.7
         version: 3.4.33(openai@4.58.1(zod@3.23.8))(react@18.2.0)(sswr@2.1.0(svelte@4.2.19))(svelte@4.2.19)(vue@3.5.3(typescript@5.3.3))(zod@3.23.8)
@@ -2714,10 +2705,6 @@ packages:
     resolution: {integrity: sha512-qnSqB2DQ9TPP96dl8cDubDvrUyWc0/sK81xHTK8eSUspzDM3bsewX903qclQFvVhgStjRWdC5bLb3kQqMkfV5A==}
     engines: {node: '>=14'}
 
-  '@opentelemetry/api-logs@0.57.0':
-    resolution: {integrity: sha512-l1aJ30CXeauVYaI+btiynHpw341LthkMTv3omi1VJDX14werY2Wmv9n1yudMsq9HuY0m8PvXEVX4d8zxEb+WRg==}
-    engines: {node: '>=14'}
-
   '@opentelemetry/api@1.9.0':
     resolution: {integrity: sha512-3giAOQvZiH5F9bMlMiv8+GSPMeqg0dbaeo58/0SlA9sxSqZhnUtxzX9/2FzyhS9sWQf5S0GJE0AKBrFqjpeYcg==}
     engines: {node: '>=8.0.0'}
@@ -2962,12 +2949,6 @@ packages:
 
   '@opentelemetry/sdk-logs@0.52.1':
     resolution: {integrity: sha512-MBYh+WcPPsN8YpRHRmK1Hsca9pVlyyKd4BxOC4SsgHACnl/bPp4Cri9hWhVm5+2tiQ9Zf4qSc1Jshw9tOLGWQA==}
-    engines: {node: '>=14'}
-    peerDependencies:
-      '@opentelemetry/api': '>=1.4.0 <1.10.0'
-
-  '@opentelemetry/sdk-logs@0.57.0':
-    resolution: {integrity: sha512-6Kbxdu/QE9LWH7+WSLmYo3DjAq+c55TiCLXiXu6b/2m2muy5SyOG2m0MrGqetyRpfYSSbIqHmJoqNVTN3+2a9g==}
     engines: {node: '>=14'}
     peerDependencies:
       '@opentelemetry/api': '>=1.4.0 <1.10.0'
@@ -15854,10 +15835,6 @@ snapshots:
     dependencies:
       '@opentelemetry/api': 1.9.0
 
-  '@opentelemetry/api-logs@0.57.0':
-    dependencies:
-      '@opentelemetry/api': 1.9.0
-
   '@opentelemetry/api@1.9.0': {}
 
   '@opentelemetry/context-async-hooks@1.25.1(@opentelemetry/api@1.9.0)':
@@ -16180,13 +16157,6 @@ snapshots:
       '@opentelemetry/api-logs': 0.52.1
       '@opentelemetry/core': 1.25.1(@opentelemetry/api@1.9.0)
       '@opentelemetry/resources': 1.25.1(@opentelemetry/api@1.9.0)
-
-  '@opentelemetry/sdk-logs@0.57.0(@opentelemetry/api@1.9.0)':
-    dependencies:
-      '@opentelemetry/api': 1.9.0
-      '@opentelemetry/api-logs': 0.57.0
-      '@opentelemetry/core': 1.30.0(@opentelemetry/api@1.9.0)
-      '@opentelemetry/resources': 1.30.0(@opentelemetry/api@1.9.0)
 
   '@opentelemetry/sdk-metrics@1.25.1(@opentelemetry/api@1.9.0)':
     dependencies:
@@ -19179,13 +19149,11 @@ snapshots:
       is-plain-object: 5.0.0
       undici: 5.28.4
 
-  '@vercel/otel@1.10.0(@opentelemetry/api-logs@0.57.0)(@opentelemetry/api@1.9.0)(@opentelemetry/instrumentation@0.52.1(@opentelemetry/api@1.9.0)(supports-color@8.1.1))(@opentelemetry/resources@1.30.0(@opentelemetry/api@1.9.0))(@opentelemetry/sdk-logs@0.57.0(@opentelemetry/api@1.9.0))(@opentelemetry/sdk-metrics@1.26.0(@opentelemetry/api@1.9.0))(@opentelemetry/sdk-trace-base@1.26.0(@opentelemetry/api@1.9.0))':
+  '@vercel/otel@1.10.0(@opentelemetry/api@1.9.0)(@opentelemetry/instrumentation@0.52.1(@opentelemetry/api@1.9.0)(supports-color@8.1.1))(@opentelemetry/resources@1.30.0(@opentelemetry/api@1.9.0))(@opentelemetry/sdk-metrics@1.26.0(@opentelemetry/api@1.9.0))(@opentelemetry/sdk-trace-base@1.26.0(@opentelemetry/api@1.9.0))':
     dependencies:
       '@opentelemetry/api': 1.9.0
-      '@opentelemetry/api-logs': 0.57.0
       '@opentelemetry/instrumentation': 0.52.1(@opentelemetry/api@1.9.0)(supports-color@8.1.1)
       '@opentelemetry/resources': 1.30.0(@opentelemetry/api@1.9.0)
-      '@opentelemetry/sdk-logs': 0.57.0(@opentelemetry/api@1.9.0)
       '@opentelemetry/sdk-metrics': 1.26.0(@opentelemetry/api@1.9.0)
       '@opentelemetry/sdk-trace-base': 1.26.0(@opentelemetry/api@1.9.0)
 
@@ -21166,7 +21134,7 @@ snapshots:
       debug: 4.3.7(supports-color@8.1.1)
       enhanced-resolve: 5.17.1
       eslint: 8.56.0(supports-color@8.1.1)
-      eslint-module-utils: 2.11.0(@typescript-eslint/parser@6.21.0(eslint@8.56.0(supports-color@8.1.1))(supports-color@8.1.1)(typescript@5.3.3))(eslint-import-resolver-node@0.3.9(supports-color@8.1.1))(eslint-import-resolver-typescript@3.6.3(@typescript-eslint/parser@6.21.0(eslint@8.56.0(supports-color@8.1.1))(supports-color@8.1.1)(typescript@5.3.3))(eslint-import-resolver-node@0.3.9(supports-color@8.1.1))(eslint-plugin-import@2.30.0)(eslint@8.56.0(supports-color@8.1.1))(supports-color@8.1.1))(eslint@8.56.0(supports-color@8.1.1))(supports-color@8.1.1)
+      eslint-module-utils: 2.11.0(@typescript-eslint/parser@6.21.0(eslint@8.56.0(supports-color@8.1.1))(supports-color@8.1.1)(typescript@5.3.3))(eslint-import-resolver-node@0.3.9(supports-color@8.1.1))(eslint-import-resolver-typescript@3.6.3)(eslint@8.56.0(supports-color@8.1.1))(supports-color@8.1.1)
       fast-glob: 3.3.2
       get-tsconfig: 4.8.0
       is-bun-module: 1.2.1
@@ -21179,7 +21147,7 @@ snapshots:
       - eslint-import-resolver-webpack
       - supports-color
 
-  eslint-module-utils@2.11.0(@typescript-eslint/parser@6.21.0(eslint@8.56.0(supports-color@8.1.1))(supports-color@8.1.1)(typescript@5.3.3))(eslint-import-resolver-node@0.3.9(supports-color@8.1.1))(eslint-import-resolver-typescript@3.6.3(@typescript-eslint/parser@6.21.0(eslint@8.56.0(supports-color@8.1.1))(supports-color@8.1.1)(typescript@5.3.3))(eslint-import-resolver-node@0.3.9(supports-color@8.1.1))(eslint-plugin-import@2.30.0)(eslint@8.56.0(supports-color@8.1.1))(supports-color@8.1.1))(eslint@8.56.0(supports-color@8.1.1))(supports-color@8.1.1):
+  eslint-module-utils@2.11.0(@typescript-eslint/parser@6.21.0(eslint@8.56.0(supports-color@8.1.1))(supports-color@8.1.1)(typescript@5.3.3))(eslint-import-resolver-node@0.3.9(supports-color@8.1.1))(eslint-import-resolver-typescript@3.6.3)(eslint@8.56.0(supports-color@8.1.1))(supports-color@8.1.1):
     dependencies:
       debug: 3.2.7(supports-color@8.1.1)
     optionalDependencies:
@@ -21201,7 +21169,7 @@ snapshots:
       doctrine: 2.1.0
       eslint: 8.56.0(supports-color@8.1.1)
       eslint-import-resolver-node: 0.3.9(supports-color@8.1.1)
-      eslint-module-utils: 2.11.0(@typescript-eslint/parser@6.21.0(eslint@8.56.0(supports-color@8.1.1))(supports-color@8.1.1)(typescript@5.3.3))(eslint-import-resolver-node@0.3.9(supports-color@8.1.1))(eslint-import-resolver-typescript@3.6.3(@typescript-eslint/parser@6.21.0(eslint@8.56.0(supports-color@8.1.1))(supports-color@8.1.1)(typescript@5.3.3))(eslint-import-resolver-node@0.3.9(supports-color@8.1.1))(eslint-plugin-import@2.30.0)(eslint@8.56.0(supports-color@8.1.1))(supports-color@8.1.1))(eslint@8.56.0(supports-color@8.1.1))(supports-color@8.1.1)
+      eslint-module-utils: 2.11.0(@typescript-eslint/parser@6.21.0(eslint@8.56.0(supports-color@8.1.1))(supports-color@8.1.1)(typescript@5.3.3))(eslint-import-resolver-node@0.3.9(supports-color@8.1.1))(eslint-import-resolver-typescript@3.6.3)(eslint@8.56.0(supports-color@8.1.1))(supports-color@8.1.1)
       hasown: 2.0.2
       is-core-module: 2.15.1
       is-glob: 4.0.3
