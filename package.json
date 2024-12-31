@@ -114,7 +114,6 @@
     "eslint-plugin-tailwindcss": "^3.14.3",
     "exa-js": "1.1.0",
     "framer-motion": "^11.0.24",
-    "fs-extra": "^11.2.0",
     "glob": "^10.3.12",
     "gpt3-tokenizer": "^1.1.5",
     "gray-matter": "^4.0.3",
