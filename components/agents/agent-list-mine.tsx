@@ -3,7 +3,7 @@
 import { JSX, SVGProps, useEffect, useState } from "react"
 import Link from "next/link"
 import { DotsThree, Trash } from "@phosphor-icons/react"
-import {Agent, SharingLevel} from "@prisma/client"
+import { Agent, SharingLevel } from "@prisma/client"
 
 import { useSidebar } from "@/lib/hooks/use-sidebar"
 import { Badge } from "@/components/ui/badge"
@@ -18,6 +18,7 @@ import {
 } from "@/components/ui/dropdown-menu"
 import { toast } from "@/components/ui/use-toast"
 import { SpinningLoader } from "@/components/spinningLoader"
+import { getMyAgents } from "@/app/actions/getMyAgents"
 
 import { Button } from "../ui/button"
 
@@ -27,11 +28,19 @@ export default function AgentListMine() {
   const { isSidebarOpen } = useSidebar()
 
   const fetchAgents = async () => {
-    setLoading(true)
-    const response = await fetch("/api/agents/mine")
-    const data = await response.json()
-    setAgents(data)
-    setLoading(false)
+    try {
+      setLoading(true)
+      const data = await getMyAgents()
+      setAgents(data)
+    } catch (error) {
+      toast({
+        title: "Error",
+        description: "Failed to fetch agents",
+        variant: "destructive",
+      })
+    } finally {
+      setLoading(false)
+    }
   }
 
   const deleteAgent = async (agentId: string) => {
