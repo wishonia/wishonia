@@ -104,5 +104,6 @@ export const config = {
     "/signup",
     "/dfda/right-to-trial",
     "/dfda/right-to-trial-act",
+    "/dfda/health-savings-sharing",
   ],
 }
