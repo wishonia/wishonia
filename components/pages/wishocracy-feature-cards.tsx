@@ -1,5 +1,4 @@
-import { BsLightbulb } from "react-icons/bs"
-import { FaRegStar } from "react-icons/fa"
+import { Lightbulb, Star } from "lucide-react"
 
 import { Card, CardDescription, CardTitle } from "@/components/ui/card"
 import HeadingText from "@/components/heading-text"
@@ -10,7 +9,7 @@ function Cards() {
   return (
     <>
       <Card className="flex flex-grow flex-col justify-between gap-4 p-8 text-left dark:bg-secondary">
-        <BsLightbulb className="text-4xl" />
+        <Lightbulb className="text-4xl" />
         <CardTitle>Prioritize Resource Allocation</CardTitle>
         <CardDescription>
           Given two goals or problems, indicate what percentage of $100 should
@@ -34,7 +33,7 @@ function Cards() {
         </CardDescription>
       </Card>
       <Card className="flex flex-grow flex-col justify-between gap-4 p-8 text-left dark:bg-secondary">
-        <FaRegStar className="text-4xl" />
+        <Star className="text-4xl" />
         <CardTitle>A Global ToDo List for Humanity</CardTitle>
         <CardDescription>
           Solutions are decomposed into a decentralized global todo list

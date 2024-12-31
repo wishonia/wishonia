@@ -1,5 +1,4 @@
 import { User as NextAuthUser } from "next-auth"
-import { JWT } from "next-auth/jwt"
 
 type UserId = string
 
