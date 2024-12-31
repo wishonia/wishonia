@@ -11,7 +11,6 @@
  */
 
 import { ConversionStep } from "../models/ConversionStep"
-import { UnitCategory } from "../models/UnitCategory"
 import { VariableCombinationOperationEnum, VariableFillingTypeEnum } from "./GlobalVariable"
 
 export class Unit {
