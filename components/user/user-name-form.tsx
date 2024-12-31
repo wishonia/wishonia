@@ -6,7 +6,7 @@ import { useRouter } from "next/navigation"
 import { zodResolver } from "@hookform/resolvers/zod"
 import { User } from "@prisma/client"
 import { useForm } from "react-hook-form"
-import { FaRegClipboard } from "react-icons/fa"
+import { ClipboardCopy } from "lucide-react"
 import * as z from "zod"
 
 import { cn } from "@/lib/utils"
@@ -136,7 +136,7 @@ export function UserNameForm({ user, className, ...props }: UserNameFormProps) {
                   onClick={copyToClipboard}
                   className={cn(buttonVariants(), className)}
                 >
-                  <FaRegClipboard className="mr-2" />
+                  <ClipboardCopy className="mr-2" />
                   Copy
                 </button>
               </div>
