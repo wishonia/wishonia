@@ -1,7 +1,7 @@
 "use client"
 
 import React, { useState, useEffect, useRef, useCallback } from 'react';
-import { FaPlay, FaPause, FaStepForward, FaStepBackward } from 'react-icons/fa';
+import { Play, Pause, SkipBack, SkipForward } from "lucide-react";
 
 export interface Slide {
   id: number;
@@ -258,13 +258,13 @@ const OrbPresentation: React.FC<OrbPresentationProps> = ({ slides }) => {
             </div>
             <div className="flex justify-center space-x-4 p-4 bg-black bg-opacity-50">
               <button onClick={handleBack} className="text-white hover:text-blue-500 transition-colors">
-                <FaStepBackward size={24} />
+                <SkipBack size={24} />
               </button>
               <button onClick={handlePausePlay} className="text-white hover:text-blue-500 transition-colors">
-                {isPaused ? <FaPlay size={24} /> : <FaPause size={24} />}
+                {isPaused ? <Play size={24} /> : <Pause size={24} />}
               </button>
               <button onClick={handleSkip} className="text-white hover:text-blue-500 transition-colors">
-                <FaStepForward size={24} />
+                <SkipForward size={24} />
               </button>
             </div>
           </>
