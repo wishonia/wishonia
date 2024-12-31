@@ -32,7 +32,6 @@ import {
   Home,
   Inbox,
   Lightbulb,
-  DollarSign,
   Heart,
   HelpCircle,
   Star,
