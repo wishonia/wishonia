@@ -5,7 +5,7 @@ import Link from "next/link"
 import Script from "next/script"
 import axios from "axios"
 import matter from "gray-matter"
-import { AiFillGithub } from "react-icons/ai"
+import { Github } from "lucide-react"
 import ReactMarkdown from "react-markdown"
 import rehypeRaw from "rehype-raw"
 
@@ -175,7 +175,7 @@ const MarkdownFileRenderer: FC<MarkdownRendererProps> = ({
           <div className="flex items-center justify-end gap-x-2">
             <Link href={githubEditUrl} target={"_blank"}>
               <Button variant={variant}>
-                <AiFillGithub className="mr-2"></AiFillGithub>
+                <Github className="mr-2"></Github>
                 Edit Me on GitHub
               </Button>
             </Link>

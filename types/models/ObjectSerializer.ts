@@ -8,7 +8,6 @@ import { CommonResponse } from "../models/CommonResponse"
 import { ConnectInstructions } from "../models/ConnectInstructions"
 import {
   ConversionStep,
-  ConversionStepOperationEnum,
 } from "../models/ConversionStep"
 import { Correlation } from "../models/Correlation"
 import { DataSource } from "../models/DataSource"
@@ -25,16 +24,13 @@ import { GetTrackingReminderNotificationsResponse } from "../models/GetTrackingR
 import { GetUserVariableRelationshipsResponse } from "../models/GetUserVariableRelationshipsResponse"
 import { HyperParameterCorrelation } from "../models/HyperParameterCorrelation"
 import { Image } from "../models/Image"
-import { InputField, InputFieldTypeEnum } from "../models/InputField"
+import { InputField } from "../models/InputField"
 import { JsonErrorResponse } from "../models/JsonErrorResponse"
 import {
   Measurement,
-  MeasurementVariableCategoryNameEnum,
 } from "../models/Measurement"
 import {
   MeasurementItem,
-  MeasurementItemCombinationOperationEnum,
-  MeasurementItemVariableCategoryNameEnum,
 } from "../models/MeasurementItem"
 import { MeasurementUpdate } from "../models/MeasurementUpdate"
 import { Pair } from "../models/Pair"
@@ -52,7 +48,6 @@ import { Study } from "../models/Study"
 import { StudyCharts } from "../models/StudyCharts"
 import {
   StudyCreationBody,
-  StudyCreationBodyTypeEnum,
 } from "../models/StudyCreationBody"
 import { StudyHtml } from "../models/StudyHtml"
 import { StudyImages } from "../models/StudyImages"
@@ -63,27 +58,19 @@ import { StudyText } from "../models/StudyText"
 import { StudyVotes } from "../models/StudyVotes"
 import {
   TagVariable,
-  TagVariableCombinationOperationEnum,
-  TagVariableFillingTypeEnum,
-  TagVariableVariableCategoryNameEnum,
 } from "../models/TagVariable"
 import {
   TrackingReminder,
-  TrackingReminderCombinationOperationEnum,
-  TrackingReminderVariableCategoryNameEnum,
 } from "../models/TrackingReminder"
 import {
   TrackingReminderNotification,
-  TrackingReminderNotificationCombinationOperationEnum,
-  TrackingReminderNotificationVariableCategoryNameEnum,
 } from "../models/TrackingReminderNotification"
 import { TrackingReminderNotificationAction } from "../models/TrackingReminderNotificationAction"
 import {
   TrackingReminderNotificationPost,
-  TrackingReminderNotificationPostActionEnum,
 } from "../models/TrackingReminderNotificationPost"
 import { TrackingReminderNotificationTrackAllAction } from "../models/TrackingReminderNotificationTrackAllAction"
-import { Unit, UnitCategoryEnum } from "../models/Unit"
+import { Unit } from "../models/Unit"
 import { UnitCategory } from "../models/UnitCategory"
 import { User } from "../models/User"
 import { UserPostBody } from "../models/UserPostBody"
@@ -91,22 +78,15 @@ import { UsersResponse } from "../models/UsersResponse"
 import { UserTag } from "../models/UserTag"
 import {
   UserVariable,
-  UserVariableCombinationOperationEnum,
-  UserVariableFillingTypeEnum,
-  UserVariableVariableCategoryNameEnum,
 } from "../models/UserVariable"
 import { UserVariableDelete } from "../models/UserVariableDelete"
 import {
   VariableCategory,
-  VariableCategoryVariableCategoryNameEnum,
 } from "../models/VariableCategory"
 import { VariableCharts } from "../models/VariableCharts"
-import { Vote, VoteTypeEnum, VoteValueEnum } from "../models/Vote"
+import { Vote } from "../models/Vote"
 import {
   GlobalVariable,
-  VariableCombinationOperationEnum,
-  VariableFillingTypeEnum,
-  VariableVariableCategoryNameEnum,
 } from "./GlobalVariable"
 
 export * from "../models/AppSettings"
