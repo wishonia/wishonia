@@ -36,11 +36,7 @@ const nextConfig = {
         port: '',
       },
     ]
-  },
-  // Enable Vercel Analytics
-  analytics: {
-    enabled: true,
-  },
+  }
 }
 
 // Wrap nextConfig with withBundleAnalyzer

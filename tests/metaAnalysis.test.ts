@@ -2,7 +2,7 @@
  * @jest-environment node
  */
 import { ALZHEIMERS_FACTORS } from '@/constants/alzheimersFactors';
-import { generateMetaAnalysis, getMetaAnalysisByCondition } from '@/lib/meta-analysis/metaAnalysis';
+import { generateMetaAnalysis } from '@/lib/meta-analysis/metaAnalysis';
 import { PrismaClient } from '@prisma/client';
 const prisma = new PrismaClient();
 describe('Meta Analysis Generator', () => {
