@@ -1,14 +1,16 @@
+"use server"
+
 import { WishingWell } from "@prisma/client"
 
 import { getUserIdServer } from "@/lib/api/getUserIdServer"
 import { prisma } from "@/lib/db"
-import { handleError } from "@/lib/errorHandler"
 import { convertKeysToCamelCase } from "@/lib/stringHelpers"
 
-export async function GET() {
+export async function getRandomWishingWellPair() {
   try {
     const userId = await getUserIdServer()
     let randomPair: WishingWell[] = []
+    
     if (userId) {
       randomPair = await prisma.$queryRaw`
           SELECT 
@@ -33,16 +35,16 @@ export async function GET() {
           LIMIT 2;
         `
     }
-    // Use the helper function to convert keys to camelCase
+    
+    // Convert keys to camelCase
     randomPair = randomPair.map(convertKeysToCamelCase)
 
-    return new Response(
-      JSON.stringify({
-        thisWishingWell: randomPair[0],
-        thatWishingWell: randomPair[1],
-      })
-    )
+    return {
+      thisWishingWell: randomPair[0],
+      thatWishingWell: randomPair[1],
+    }
   } catch (error) {
-    return handleError(error)
+    console.error("Error fetching random wishing well pair:", error)
+    throw error
   }
-}
+} 
