@@ -4,6 +4,7 @@ import React, { useEffect, useState } from "react"
 import { useRouter } from "next/navigation"
 import { User } from "next-auth"
 
+import { getRandomWishingWellPair } from "@/app/actions/getRandomWishingWellPair"
 import { PollSpecificWishingWells } from "@/components/poll-specific-wishing-wells"
 import { SpinningLoader } from "@/components/spinningLoader"
 
@@ -18,20 +19,21 @@ export const PollRandomWishingWells: React.FC<PollProps> = ({ user }) => {
   }>({})
   const [loading, setLoading] = useState(false)
   const router = useRouter()
+
   const fetchWishingWells = async () => {
-    setLoading(true)
-    const response = await fetch("/api/wishingWellPairAllocation/random")
-    const data = await response.json()
-    if (!data.thisWishingWell) {
-      router.push("/wishingWells/results")
-      return
+    try {
+      setLoading(true)
+      const data = await getRandomWishingWellPair()
+      if (!data.thisWishingWell || !data.thatWishingWell) {
+        router.push("/wishingWells/results")
+        return
+      }
+      setWishingWells(data)
+    } catch (error) {
+      console.error("Error fetching wishing wells:", error)
+    } finally {
+      setLoading(false)
     }
-    if (!data.thatWishingWell) {
-      router.push("/wishingWells/results")
-      return
-    }
-    setWishingWells(data)
-    setLoading(false)
   }
 
   useEffect(() => {
@@ -40,11 +42,7 @@ export const PollRandomWishingWells: React.FC<PollProps> = ({ user }) => {
     }
   }, [])
 
-  if (
-    loading ||
-    !wishingWells.thisWishingWell ||
-    !wishingWells.thatWishingWell
-  ) {
+  if (loading || !wishingWells.thisWishingWell || !wishingWells.thatWishingWell) {
     return <SpinningLoader />
   }
 

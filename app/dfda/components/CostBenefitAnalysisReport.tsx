@@ -11,8 +11,8 @@ import {
   Pill,
   Users,
   Wind,
+  Skull,
 } from "lucide-react"
-import { FaSkullCrossbones } from "react-icons/fa"
 
 import ArticleCard from "@/lib/agents/fdai/ArticleCard"
 import {
@@ -81,7 +81,7 @@ const SafetyScoreBar = ({ score }: { score: number }) => {
     {
       score: 0,
       label: "Extremely unsafe (Draino)",
-      icon: <FaSkullCrossbones className="h-4 w-4" />,
+      icon: <Skull className="h-4 w-4" />,
     },
     {
       score: 2,
