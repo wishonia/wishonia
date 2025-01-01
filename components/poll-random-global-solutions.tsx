@@ -4,6 +4,7 @@ import React, { useEffect, useState } from "react"
 import { useRouter } from "next/navigation"
 import { User } from "next-auth"
 
+import { getRandomGlobalSolutionPairAction } from "@/app/actions/getRandomGlobalSolutionPair"
 import { PollSpecificGlobalSolutions } from "@/components/poll-specific-global-solutions"
 import { SpinningLoader } from "@/components/spinningLoader"
 
@@ -18,15 +19,11 @@ export const PollRandomGlobalSolutions: React.FC<PollProps> = ({ user }) => {
   }>({})
   const [loading, setLoading] = useState(false)
   const router = useRouter()
+
   const fetchGlobalSolutions = async () => {
     setLoading(true)
-    const response = await fetch("/api/globalSolutionPairAllocation/random")
-    const data = await response.json()
-    if (!data.thisGlobalSolution) {
-      router.push("/globalSolutions/results")
-      return
-    }
-    if (!data.thatGlobalSolution) {
+    const data = await getRandomGlobalSolutionPairAction()
+    if (!data) {
       router.push("/globalSolutions/results")
       return
     }
