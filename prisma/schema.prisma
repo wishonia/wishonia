@@ -1555,6 +1555,7 @@ model DfdaUserSideEffectReport {
 }
 
 enum Severity {
+  NONE
   MINIMAL
   MILD
   MODERATE
