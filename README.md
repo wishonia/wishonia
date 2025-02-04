@@ -413,3 +413,26 @@ The basic technical ingredients of a digital twin are:
 
 # [Frequently Asked Questions](public/docs/faq.md)
 
+## GitHub Action: Improve Issues
+
+The GitHub action defined in `.github/workflows/new-issue.yml` is designed to improve the quality of issues in this repository. It includes a job named `improve-issues` which runs on `ubuntu-latest` and performs the following steps:
+
+1. **Checkout Repository**: Uses the `actions/checkout@v2` action to checkout the repository.
+2. **Set Up Node.js**: Uses the `actions/setup-node@v2` action to set up Node.js with version `14`.
+3. **Install Dependencies**: Runs `npm install` to install the necessary dependencies.
+4. **Run Issue Improvement Script**: Runs `npm run improve-issues` to execute the issue improvement script.
+
+### Configuration
+
+To configure this action, you need to set up the following secrets in your GitHub repository:
+
+- `OPENAPI_KEY`: The OpenAI API key used by the issue improvement script.
+
+To add a secret to your repository:
+
+1. Go to the repository on GitHub.
+2. Click on `Settings`.
+3. In the left sidebar, click on `Secrets`.
+4. Click on `New repository secret`.
+5. Add the secret with the name `OPENAPI_KEY` and the corresponding value.
+
