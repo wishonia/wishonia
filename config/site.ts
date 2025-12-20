@@ -18,7 +18,7 @@ export const siteConfig: SiteConfig = {
   links: {
     github: "https://github.com/wishonia/wishonia",
   },
-  ogImage: env.NEXT_PUBLIC_SITE_OG_IMAGE || `${env.NEXT_PUBLIC_APP_URL}/og.png`,
+  ogImage: env.NEXT_PUBLIC_SITE_OG_IMAGE || `${env.NEXT_PUBLIC_APP_URL}/assets/wishonia-og-2.png`,
   defaultHomepage: "/",
   afterLoginPath: "/dashboard",
 }
