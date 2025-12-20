@@ -9,7 +9,7 @@ export const domainConfigs: Record<string, SiteConfig> = {
     keywords: ["collective intelligence", "health", "happiness"],
     defaultHomepage: "/",
     afterLoginPath: "/dashboard",
-    ogImage: "https://wishonia.love/og.png",
+    ogImage: "https://wishonia.love/assets/wishonia-og-2.png",
     url: {
       base: "https://wishonia.love",
       author: "mikepsinn",
