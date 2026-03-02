@@ -342,9 +342,7 @@ export async function submitUserMessage(
             <BotCard>
               <div className={cn("group flex w-full items-start")}>
                 <div className="w-full flex-1 space-y-2 overflow-hidden px-1">
-                  <PollRandomGlobalProblems
-                    user={user}
-                  ></PollRandomGlobalProblems>
+                  <PollRandomGlobalProblems></PollRandomGlobalProblems>
                 </div>
               </div>
             </BotCard>

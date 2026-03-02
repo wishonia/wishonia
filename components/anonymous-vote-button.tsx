@@ -1,18 +1,16 @@
 "use client"
 
 import React, { useState } from "react"
-import { User } from "next-auth"
+import { useSession } from "next-auth/react"
 
 import { Button } from "@/components/ui/button"
 import { UserAuthForm } from "@/components/user/user-auth-form"
 
-interface PollProps {
-  user?: User
-}
-export const AnonymousVoteButton: React.FC<PollProps> = ({ user }) => {
+export const AnonymousVoteButton: React.FC = () => {
+  const { data: session } = useSession()
   const [showModal, setShowModal] = useState(false)
 
-  if (user) {
+  if (session?.user) {
     return null
   }
 

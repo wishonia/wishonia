@@ -2,22 +2,18 @@
 
 import React from "react"
 import { GlobalSolution, GlobalSolutionPairAllocation } from "@prisma/client"
-import { User } from "next-auth"
-
 import { PollSpecificGeneral } from "@/components/poll-specific-general"
 
 interface PollProps {
   thisGlobalSolution: GlobalSolution
   thatGlobalSolution: GlobalSolution
   updatePair?: () => void
-  user?: User
 }
 
 export const PollSpecificGlobalSolutions: React.FC<PollProps> = ({
   thisGlobalSolution,
   thatGlobalSolution,
   updatePair,
-  user,
 }) => {
   const getGlobalSolutionName = (item: { name: string }) => "" + item.name
 
@@ -45,7 +41,6 @@ export const PollSpecificGlobalSolutions: React.FC<PollProps> = ({
       thisItem={thisGlobalSolution}
       thatItem={thatGlobalSolution}
       updatePair={updatePair}
-      user={user}
       getItemName={getGlobalSolutionName}
       getItemImage={getGlobalSolutionImage}
       createAllocation={createGlobalSolutionAllocation}

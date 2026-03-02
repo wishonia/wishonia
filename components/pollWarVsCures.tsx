@@ -3,8 +3,6 @@
 import React, { useState } from "react"
 import { useRouter } from "next/navigation"
 import { GlobalSolutionPairAllocation } from "@prisma/client"
-import { User } from "next-auth"
-
 import {
   medicalResearchGlobalSolutionId,
   warGlobalSolutionId,
@@ -14,10 +12,7 @@ import { AnonymousVoteButton } from "@/components/anonymous-vote-button"
 import { LoggedInVoteButton } from "@/components/logged-in-vote-button"
 import WarVsCuresBarChart from "@/components/war-vs-cures-bar-chart"
 
-interface PollProps {
-  user?: User
-}
-export const PollWarVsCures: React.FC<PollProps> = ({ user }) => {
+export const PollWarVsCures: React.FC = () => {
   const [researchPercentageDesired, setResearchPercentageDesired] = useState(50) // Define allocation state
   const [warPercentageDesired, setWarPercentageDesired] = useState(50) // Define allocation state
   const router = useRouter()
@@ -95,11 +90,10 @@ export const PollWarVsCures: React.FC<PollProps> = ({ user }) => {
             </div>
           </div>
           <LoggedInVoteButton
-            user={user}
             onButtonClick={onButtonClick}
             data={{ warPercentageDesired: warPercentageDesired }}
           />
-          <AnonymousVoteButton user={user} />
+          <AnonymousVoteButton />
         </div>
       </section>
     </>
