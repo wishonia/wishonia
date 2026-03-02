@@ -113,6 +113,24 @@ export const wishoniaLinks = {
     icon: "document",
     tooltip: "How to End War and Disease — A Practical Guide by Wishonia",
   },
+  allRetailers: {
+    title: "Buy the Manual",
+    href: "https://books2read.com/u/baegEq",
+    icon: "book",
+    tooltip: "Apple Books, Barnes & Noble, Kobo, Amazon, and more",
+  },
+  applePodcasts: {
+    title: "Apple Podcasts",
+    href: "https://podcasts.apple.com/us/podcast/how-to-end-war-and-disease/id1879755497",
+    icon: "podcast",
+    tooltip: "Listen to the audiobook on Apple Podcasts",
+  },
+  goodreads: {
+    title: "Goodreads",
+    href: "https://www.goodreads.com/book/show/248248875-how-to-end-war-and-disease",
+    icon: "star",
+    tooltip: "Rate and review on Goodreads",
+  },
 } as const
 
 export const wishoniaNavigation: DomainNavigation = {
@@ -149,7 +167,10 @@ export const wishoniaNavigation: DomainNavigation = {
   ],
   footerNav: [
     wishoniaLinks.manual,
+    wishoniaLinks.allRetailers,
+    wishoniaLinks.applePodcasts,
     wishoniaLinks.warOnDisease,
+    wishoniaLinks.goodreads,
     commonLinks.contributeOnGithub,
   ],
 }
