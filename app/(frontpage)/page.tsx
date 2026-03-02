@@ -20,7 +20,7 @@ export default async function Home() {
 
   const user = await getCurrentUser()
   return (
-      <main>
+      <main className="mx-auto max-w-7xl">
           {/*<ComplexityVisualization></ComplexityVisualization>*/}
           {/*<h1 className={"center"}>WishocracyExperience</h1>*/}
           {/*<WishocracyExperience/>*/}

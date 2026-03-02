@@ -22,7 +22,7 @@ const WorldOptimizationHeader = () => {
 
 const WorldOptimizationDashboard = () => {
   return (
-    <div className="min-h-screen font-mono">
+    <div className="mx-auto min-h-screen max-w-6xl font-mono">
       <WorldOptimizationHeader />
 
       <main className="flex flex-col justify-center p-2 md:flex-row md:flex-wrap">
