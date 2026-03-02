@@ -101,11 +101,17 @@ export const wishoniaLinks = {
     icon: "search",
     tooltip: "Search across all content",
   },
-  warVsCures: {
-    title: "War vs Cures",
-    href: "/warVsCures",
-    icon: "scale",
-    tooltip: "Compare war and medical research spending",
+  warOnDisease: {
+    title: "Vote",
+    href: "https://warondisease.org",
+    icon: "vote",
+    tooltip: "Vote to end war and disease",
+  },
+  manual: {
+    title: "Read the Manual",
+    href: "https://manual.warondisease.org",
+    icon: "document",
+    tooltip: "How to End War and Disease — A Practical Guide by Wishonia",
   },
 } as const
 
@@ -130,7 +136,7 @@ export const wishoniaNavigation: DomainNavigation = {
     commonLinks.requestFeature,
     wishoniaLinks.organizations,
     wishoniaLinks.search,
-    wishoniaLinks.warVsCures,
+    wishoniaLinks.warOnDisease,
   ],
   avatarNav: [
     commonLinks.profileSettings,
@@ -142,13 +148,9 @@ export const wishoniaNavigation: DomainNavigation = {
     commonLinks.contributeOnGithub,
   ],
   footerNav: [
-    wishoniaLinks.globalProblemsVote,
-    wishoniaLinks.globalProblemsResults,
-    commonLinks.docs,
-    commonLinks.reportBug,
-    commonLinks.requestFeature,
+    wishoniaLinks.manual,
+    wishoniaLinks.warOnDisease,
     commonLinks.contributeOnGithub,
-    wishoniaLinks.researcher,
   ],
 }
 export const globalProblemsResultsLink = wishoniaLinks.globalProblemsResults

@@ -15,10 +15,8 @@ import {
 import { User } from "@prisma/client"
 
 import GlobalSolutionDecomposerAgent from "@/lib/agents/taskGenerationAgent"
-import {
-  medicalResearchGlobalSolutionId,
-  warGlobalSolutionId,
-} from "@/lib/api/warVsCures"
+const warGlobalSolutionId = "war"
+const medicalResearchGlobalSolutionId = "medical-research"
 import { prisma } from "@/lib/db"
 import { aggregateGlobalProblemPairAllocations } from "@/lib/globalProblems"
 import {
