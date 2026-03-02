@@ -7,6 +7,7 @@ import OpenSource from "@/components/pages/opensource"
 import { PWARedirect } from "@/components/pwa-redirect";
 import InteractiveLandingPage from "@/components/landingPage/interactive-landing-page";
 import WorldOptimizationDashboard from "@/components/landingPage/world-optimization-dashboard";
+import ManualHero from "@/components/landingPage/ManualHero";
 import CureDaoHome from "../curedao/page"
 import { headers } from "next/headers"
 import DFDAPage from "../dfda/page"
@@ -21,6 +22,8 @@ export default async function Home() {
   const user = await getCurrentUser()
   return (
       <main className="mx-auto max-w-7xl">
+          <ManualHero/>
+          <div id="landing-content">
           {/*<ComplexityVisualization></ComplexityVisualization>*/}
           {/*<h1 className={"center"}>WishocracyExperience</h1>*/}
           {/*<WishocracyExperience/>*/}
@@ -38,6 +41,7 @@ export default async function Home() {
           {/*<WishocracyFeatureCards/>*/}
           <OpenSource/>
           <PWARedirect/>
+          </div>
       </main>
   )
 }
