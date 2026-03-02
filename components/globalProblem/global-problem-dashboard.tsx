@@ -209,7 +209,6 @@ export default function GlobalProblemDashboard({ globalProblem, user }: GlobalPr
             <AccordionTrigger className="justify-start">Current Solutions</AccordionTrigger>
             <AccordionContent>
               <GlobalProblemSolutionsList
-                user={user}
                 globalProblemId={globalProblem.id}
               />
             </AccordionContent>
@@ -367,7 +366,6 @@ export default function GlobalProblemDashboard({ globalProblem, user }: GlobalPr
             <div className="space-y-2">
               <PollRandomGlobalProblemSolutions
                 globalProblemId={globalProblem.id}
-                user={user}
               />
             </div>
           </CardContent>

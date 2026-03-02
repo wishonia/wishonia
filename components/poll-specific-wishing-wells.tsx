@@ -2,22 +2,18 @@
 
 import React from "react"
 import { WishingWell, WishingWellPairAllocation } from "@prisma/client"
-import { User } from "next-auth"
-
 import { PollSpecificGeneral } from "@/components/poll-specific-general"
 
 interface PollProps {
   thisWishingWell: WishingWell
   thatWishingWell: WishingWell
   updatePair?: () => void
-  user?: User
 }
 
 export const PollSpecificWishingWells: React.FC<PollProps> = ({
   thisWishingWell,
   thatWishingWell,
   updatePair,
-  user,
 }) => {
   const getWishingWellName = (item: { name: string }) => item.name
 
@@ -45,7 +41,6 @@ export const PollSpecificWishingWells: React.FC<PollProps> = ({
       thisItem={thisWishingWell}
       thatItem={thatWishingWell}
       updatePair={updatePair}
-      user={user}
       getItemName={getWishingWellName}
       getItemImage={getWishingWellImage}
       createAllocation={createWishingWellAllocation}

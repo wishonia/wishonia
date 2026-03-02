@@ -175,7 +175,7 @@ export const getUIStateFromAIState = async (aiState: ChatWithMessagesAndAgent) =
             </BotCard>
           ) : m.name === "problems_vote_ui" ? (
             <BotCard>
-              <PollRandomGlobalProblems user={user}></PollRandomGlobalProblems>
+              <PollRandomGlobalProblems></PollRandomGlobalProblems>
             </BotCard>
           ) : m.name === "record_measurement" ? (
             <BotCard>

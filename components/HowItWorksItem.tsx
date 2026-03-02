@@ -1,12 +1,10 @@
 import React from "react"
 import Image from "next/image"
-import { User } from "next-auth"
 
 interface QAItemProps {
   title: string
   description?: string
   visual?: string | React.ReactNode
-  user?: User | undefined
 }
 
 export default function HowItWorksItem({ title, description, visual }: QAItemProps) {

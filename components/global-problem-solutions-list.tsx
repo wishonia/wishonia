@@ -6,6 +6,7 @@ import Link from "next/link"
 import { GlobalProblemSolution } from "@prisma/client"
 import { ColumnDef } from "@tanstack/react-table"
 
+import { useSession } from "next-auth/react"
 import { ExtendedUser } from "@/types/auth"
 import { cn } from "@/lib/utils"
 import { Button, buttonVariants } from "@/components/ui/button"
@@ -21,13 +22,13 @@ import {
 
 interface PollProps {
   globalProblemId: string
-  user?: ExtendedUser
 }
 
 export const GlobalProblemSolutionsList: React.FC<PollProps> = ({
   globalProblemId,
-  user,
 }) => {
+  const { data: session } = useSession()
+  const user = session?.user as ExtendedUser | undefined
   const [globalProblemSolutions, setGlobalProblemSolutions] = useState<
     GlobalProblemSolution[]
   >([])

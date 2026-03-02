@@ -6,7 +6,6 @@ import {
   GlobalProblemSolution,
   WishingWell,
 } from "@prisma/client"
-import { User } from "next-auth"
 
 import { Input } from "@/components/ui/input"
 import { AnonymousVoteButton } from "@/components/anonymous-vote-button"
@@ -19,7 +18,6 @@ interface PollProps<T> {
   thisItem: WishingWell | GlobalProblem | GlobalProblemSolution
   thatItem: WishingWell | GlobalProblem | GlobalProblemSolution
   updatePair?: () => void
-  user?: User
   getItemName: (item: { name: string }) => string
   getItemImage: (item: { featuredImage: string | null }) => string
   createAllocation: (
@@ -33,7 +31,6 @@ export const PollSpecificGeneral = <T,>({
   thisItem,
   thatItem,
   updatePair,
-  user,
   getItemName,
   getItemImage,
   createAllocation,
@@ -158,11 +155,10 @@ export const PollSpecificGeneral = <T,>({
           </div>
         </div>
         <LoggedInVoteButton
-          user={user}
           data={{ thisItem, thatItem, thisPercentageDesired }}
           onButtonClick={onButtonClick}
         ></LoggedInVoteButton>
-        <AnonymousVoteButton user={user} />
+        <AnonymousVoteButton />
       </div>
     </section>
   )

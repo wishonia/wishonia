@@ -1,6 +1,5 @@
 import { Metadata } from "next"
 
-import { getCurrentUser } from "@/lib/session"
 import { Shell } from "@/components/layout/shell"
 import { GlobalProblemSolutionsList } from "@/components/global-problem-solutions-list"
 
@@ -17,15 +16,13 @@ export async function generateMetadata({}: GlobalProblemsProps): Promise<Metadat
 interface GlobalProblemSolutionPageProps {
   params: { globalProblemId: string }
 }
-export default async function GlobalProblemSolutionsPage({
+export default function GlobalProblemSolutionsPage({
   params,
 }: GlobalProblemSolutionPageProps) {
-  const user = await getCurrentUser()
   const globalProblemId = params.globalProblemId
   return (
     <Shell>
       <GlobalProblemSolutionsList
-        user={user}
         globalProblemId={globalProblemId}
       ></GlobalProblemSolutionsList>
     </Shell>

@@ -2,18 +2,13 @@
 
 import React, { useEffect, useState } from "react"
 import { GlobalProblem } from "@prisma/client"
-import { User } from "next-auth"
 import { Input } from "@/components/ui/input"
 import { Search } from "lucide-react"
 import { SpinningLoader } from "@/components/spinningLoader"
 import CoolGlobalProblemsPieChart from "@/components/global-problems-pie-chart"
 import { GlobalProblemListItem } from "@/components/globalProblem/GlobalProblemListItem"
 
-interface PollProps {
-  user?: User
-}
-
-export const GlobalProblemsList: React.FC<PollProps> = ({ user }) => {
+export const GlobalProblemsList: React.FC = () => {
   const [globalProblems, setGlobalProblems] = useState<GlobalProblem[]>([])
   const [loading, setLoading] = useState(false)
   const [searchQuery, setSearchQuery] = useState("")

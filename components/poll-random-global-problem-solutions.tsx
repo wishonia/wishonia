@@ -2,19 +2,16 @@
 
 import React, { useEffect, useState } from "react"
 import { useRouter } from "next/navigation"
-import { User } from "next-auth"
 
 import { PollSpecificGlobalProblemSolutions } from "@/components/poll-specific-global-problem-solutions"
 import { SpinningLoader } from "@/components/spinningLoader"
 
 interface PollProps {
-  user?: User
   globalProblemId: string
 }
 
 export const PollRandomGlobalProblemSolutions: React.FC<PollProps> = ({
   globalProblemId,
-  user,
 }) => {
   const [globalProblemSolutions, setGlobalProblemSolutions] = useState<{
     thisGlobalProblemSolution?: any
@@ -63,7 +60,6 @@ export const PollRandomGlobalProblemSolutions: React.FC<PollProps> = ({
         globalProblemSolutions.thatGlobalProblemSolution
       }
       updatePair={fetchGlobalProblemSolutions}
-      user={user}
     />
   )
 }

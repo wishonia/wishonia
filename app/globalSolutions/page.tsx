@@ -24,7 +24,7 @@ export default async function GlobalSolutionsPage({
 
   return (
     <Shell>
-      <PollRandomGlobalSolutions user={user}></PollRandomGlobalSolutions>
+      <PollRandomGlobalSolutions></PollRandomGlobalSolutions>
       <GlobalSolutionsList user={user}></GlobalSolutionsList>
     </Shell>
   )

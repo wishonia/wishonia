@@ -22,7 +22,7 @@ export default async function WishingWellsPage({
   return (
     <Shell>
       <AfterLoginHandler></AfterLoginHandler>
-      <PollRandomWishingWells user={user}></PollRandomWishingWells>
+      <PollRandomWishingWells></PollRandomWishingWells>
     </Shell>
   )
 }

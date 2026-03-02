@@ -1,6 +1,5 @@
 import { Metadata } from "next"
 
-import { getCurrentUser } from "@/lib/session"
 import { Shell } from "@/components/layout/shell"
 import { PollRandomGlobalProblemSolutions } from "@/components/poll-random-global-problem-solutions"
 
@@ -17,18 +16,16 @@ interface GlobalProblemSolutionsVotePageProps {
   params: { globalProblemId: string }
 }
 
-export default async function GlobalProblemSolutionsVotePage({
+export default function GlobalProblemSolutionsVotePage({
   searchParams,
   params,
 }: GlobalProblemSolutionsVotePageProps) {
-  const user = await getCurrentUser()
   const globalProblemId = params.globalProblemId
 
   return (
     <Shell>
       <PollRandomGlobalProblemSolutions
         globalProblemId={globalProblemId}
-        user={user}
       ></PollRandomGlobalProblemSolutions>
     </Shell>
   )

@@ -1,22 +1,21 @@
 "use client"
 
 import React from "react"
-import { User } from "next-auth"
+import { useSession } from "next-auth/react"
 
 import { postVoteData } from "@/lib/api/postVoteData"
 import { Button } from "@/components/ui/button"
 
 interface PollProps {
-  user?: User
   data: object
   onButtonClick?: () => void
 }
 export const LoggedInVoteButton: React.FC<PollProps> = ({
-  user,
   data,
   onButtonClick,
 }) => {
-  if (!user) {
+  const { data: session } = useSession()
+  if (!session?.user) {
     return null
   }
   const handleClick = async () => {

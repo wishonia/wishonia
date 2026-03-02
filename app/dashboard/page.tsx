@@ -29,8 +29,8 @@ export default async function Dashboard({ searchParams }: DashboardProps) {
   return (
     <Shell>
       <AfterLoginHandler></AfterLoginHandler>
-      <PollRandomGlobalProblems user={user}></PollRandomGlobalProblems>
-      <GlobalProblemsList user={user}></GlobalProblemsList>
+      <PollRandomGlobalProblems></PollRandomGlobalProblems>
+      <GlobalProblemsList></GlobalProblemsList>
       <DashboardCards searchParams={searchParams} />
     </Shell>
   )
