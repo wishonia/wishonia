@@ -617,25 +617,6 @@ export const routeTree = {
         }
       }
     },
-    "warVsCures": {
-      "name": "warVsCures",
-      "path": "/warVsCures",
-      "isDynamic": false,
-      "children": {
-        "results": {
-          "name": "results",
-          "path": "/warVsCures/results",
-          "isDynamic": false,
-          "children": {}
-        },
-        "...filename": {
-          "name": "...filename",
-          "path": "/warVsCures/[...filename]",
-          "isDynamic": true,
-          "children": {}
-        }
-      }
-    },
     "wish": {
       "name": "wish",
       "path": "/wish",
