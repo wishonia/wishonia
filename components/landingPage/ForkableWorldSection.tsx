@@ -130,7 +130,7 @@ const ForkableWorldSection: React.FC = () => {
   )
 
   return (
-      <div className="min-h-screen font-mono pb-4">
+      <div className="mx-auto min-h-screen max-w-6xl font-mono pb-4">
           <header className="p-4 sm:p-8 text-center">
               <h1 className="mb-4 text-3xl sm:text-4xl md:text-5xl lg:text-6xl font-bold leading-tight">
                   A Decentralized Semi-Autonomous Todo List For Humanity

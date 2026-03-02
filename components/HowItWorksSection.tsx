@@ -84,7 +84,7 @@ const HowItWorksSection: React.FC<HowItWorksSectionProps> = ({ user }) => {
     ], [user])
 
     return (
-        <section className="p-4">
+        <section className="mx-auto max-w-6xl p-4">
             <header className="p-4 sm:p-8 text-center">
                 <h1 className="mb-4 text-3xl sm:text-4xl md:text-5xl lg:text-6xl font-bold leading-tight">
                     HOW IT WORKS
