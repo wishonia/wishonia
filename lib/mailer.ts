@@ -23,7 +23,7 @@ export async function sendEmail(
   })
   // send mail with defined transport object
   const info = await transporter.sendMail({
-    from: `"${siteConfig.name}" <${siteConfig.url.author}>`, // sender address
+    from: `"${siteConfig.name}" <noreply@${new URL(siteConfig.url.base).hostname}>`, // sender address
     to: to, // list of receivers
     subject: subject, // Subject line
     text: text, // plain text body

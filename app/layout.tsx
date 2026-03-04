@@ -27,11 +27,11 @@ export const metadata: Metadata = {
   keywords: siteConfig.keywords,
   authors: [
     {
-      name: siteConfig.author,
-      url: siteConfig.url.author,
+      name: siteConfig.author.name,
+      url: siteConfig.author.url,
     },
   ],
-  creator: siteConfig.author,
+  creator: siteConfig.author.name,
   openGraph: {
     type: "website",
     locale: "en_US",
@@ -74,9 +74,37 @@ interface RootLayoutProps {
   children: React.ReactNode
 }
 
+const jsonLd = {
+  "@context": "https://schema.org",
+  "@type": "WebSite",
+  name: siteConfig.name,
+  url: siteConfig.url.base,
+  description: siteConfig.description,
+  author: {
+    "@type": "Person",
+    name: siteConfig.author.name,
+    url: siteConfig.author.url,
+  },
+  publisher: {
+    "@type": "Organization",
+    name: siteConfig.name,
+    url: siteConfig.url.base,
+    logo: {
+      "@type": "ImageObject",
+      url: siteConfig.ogImage,
+    },
+  },
+}
+
 export default function RootLayout({ children }: RootLayoutProps) {
   return (
     <html lang="en" suppressHydrationWarning>
+    <head>
+      <script
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }}
+      />
+    </head>
     <body className={cn("antialiased", spaceGrotesk.className)}>
         <Providers> {/* Wrap the application with Providers */}
           <CopilotKit url="/api/copilot/openai/">

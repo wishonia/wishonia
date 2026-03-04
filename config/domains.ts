@@ -5,14 +5,16 @@ export const domainConfigs: Record<string, SiteConfig> = {
     name: "Wishonia",
     description:
       "Using collective intelligence to maximize median health and happiness.",
-    author: "mikepsinn",
+    author: {
+      name: "Mike P. Sinn",
+      url: "https://mikesinn.com",
+    },
     keywords: ["collective intelligence", "health", "happiness"],
     defaultHomepage: "/",
     afterLoginPath: "/dashboard",
     ogImage: "https://wishonia.love/og.png",
     url: {
       base: "https://wishonia.love",
-      author: "mikepsinn",
     },
     links: {
       github: "https://github.com/wishonia/wishonia",
@@ -21,14 +23,16 @@ export const domainConfigs: Record<string, SiteConfig> = {
   "dfda.earth": {
     name: "The Decentralized FDA",
     description: "Crowdsourcing clinical research",
-    author: "mikepsinn",
+    author: {
+      name: "Mike P. Sinn",
+      url: "https://mikesinn.com",
+    },
     keywords: ["clinical research", "health data", "desci"],
     defaultHomepage: "/dfda",
     afterLoginPath: "/dfda",
     ogImage: "/globalSolutions/dfda/dfda-og.png",
     url: {
       base: "https://dfda.earth",
-      author: "mikepsinn",
     },
     links: {
       github: "https://github.com/wishonia/wishonia",

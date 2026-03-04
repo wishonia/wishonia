@@ -50,10 +50,10 @@ export default function Footer({ footerNavItems }: FooterProps) {
             © {new Date().getFullYear()}{" "}
             <a
               target="_blank"
-              href={siteConfig.url.author}
+              href={siteConfig.author.url}
               className="hover:underline"
             >
-              {siteConfig.name}
+              {siteConfig.author.name}
             </a>
             . Everyone's Rights Reserved.
           </div>

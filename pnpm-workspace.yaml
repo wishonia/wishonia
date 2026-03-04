@@ -1,0 +1,15 @@
+onlyBuiltDependencies:
+  - '@agentic/stdlib'
+  - '@prisma/client'
+  - '@prisma/engines'
+  - '@sentry/cli'
+  - '@sentry/profiling-node'
+  - bufferutil
+  - canvas
+  - es5-ext
+  - esbuild
+  - prisma
+  - puppeteer
+  - sharp
+  - utf-8-validate
+  - yarn
