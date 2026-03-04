@@ -17,12 +17,6 @@ export default function Footer({ footerNavItems }: FooterProps) {
     <footer className="mx-auto  mt-auto">
       <div className="mx-auto w-full max-w-screen-xl p-6 md:py-8">
         <div className="sm:flex sm:items-center sm:justify-between">
-          {/* Uncomment and update this section */}
-          <Link href="/">
-            <h1 className="mb-2 text-2xl font-bold sm:mb-0">
-              {siteConfig.name}
-            </h1>
-          </Link>
           <ul className="mb-6 flex flex-wrap items-center justify-center opacity-60 sm:mb-0">
             {footerLinks.map((item: NavItem, index: Key | null | undefined) => {
               const Icon = Icons[item.icon || "next"]
