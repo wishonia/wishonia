@@ -2,11 +2,9 @@ packages:
   - '.'
 
 onlyBuiltDependencies:
-  - '@agentic/stdlib'
   - '@prisma/client'
   - '@prisma/engines'
   - '@sentry/cli'
-  - '@sentry/profiling-node'
   - bufferutil
   - canvas
   - es5-ext
