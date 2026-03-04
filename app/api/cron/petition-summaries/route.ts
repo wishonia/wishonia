@@ -6,6 +6,8 @@ import {
   sendWeeklySummaries,
 } from "@/lib/notifications/petition-notifications"
 
+export const dynamic = "force-dynamic"
+
 export async function GET(request: NextRequest) {
   const cronSecret = request.headers.get("x-cron-secret")
   if (process.env.CRON_SECRET && cronSecret !== process.env.CRON_SECRET) {

@@ -1,7 +1,7 @@
 import { askSupabase } from "@/lib/docs/docsAgent"
 import { ApplicationError, UserError } from "@/lib/errorHandler"
 
-export const runtime = "edge"
+export const runtime = "nodejs"
 
 export async function POST(req: Request) {
   try {
