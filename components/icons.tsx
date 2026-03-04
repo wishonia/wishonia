@@ -59,7 +59,8 @@ import {
   FileQuestion,
   GraduationCap,
   Scroll as ScrollIcon,
-  PiggyBank
+  PiggyBank,
+  Mic
 } from "lucide-react"
 
 export type IconKeys = keyof typeof icons
@@ -157,6 +158,7 @@ const icons = {
   building: Building,
   pencilSquare: FileEdit,
   scale: Scale,
+  podcast: Mic,
 }
 
 export const Icons: IconsType = icons

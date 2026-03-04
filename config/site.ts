@@ -4,7 +4,10 @@ import { env } from "@/env.mjs"
 
 export const siteConfig: SiteConfig = {
   name: env.NEXT_PUBLIC_SITE_NAME || "Wishonia",
-  author: env.NEXT_PUBLIC_SITE_AUTHOR || "mikepsinn",
+  author: {
+    name: "Mike P. Sinn",
+    url: "https://mikesinn.com",
+  },
   description:
     env.NEXT_PUBLIC_SITE_DESCRIPTION ||
     "Using collective intelligence to maximize median health and happiness.",
@@ -13,7 +16,6 @@ export const siteConfig: SiteConfig = {
     : [],
   url: {
     base: env.NEXT_PUBLIC_APP_URL,
-    author: env.NEXT_PUBLIC_SITE_AUTHOR || "mikepsinn",
   },
   links: {
     github: "https://github.com/wishonia/wishonia",

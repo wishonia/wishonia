@@ -4,12 +4,14 @@ import { IconKeys } from "@/components/icons"
 
 export type SiteConfig = Metadata & {
   name: string
-  author: string
+  author: {
+    name: string
+    url: string
+  }
   description: string
   keywords: Array<string>
   url: {
     base: string
-    author: string
   }
   links: {
     github: string
