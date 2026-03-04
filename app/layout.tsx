@@ -53,14 +53,14 @@ export const metadata: Metadata = {
     title: siteConfig.name,
     description: siteConfig.description,
     images: [siteConfig.ogImage],
-    creator: "@FDADAO",
+    creator: "@WarOnDisease",
   },
   icons: {
     icon: "/favicon.ico",
     shortcut: "/favicon-16x16.png",
     apple: "/apple-touch-icon.png",
   },
-  manifest: `${siteConfig.url.base}/site.webmanifest`,
+  manifest: "/site.webmanifest",
 }
 
 export const viewport: Viewport = {

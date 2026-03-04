@@ -2,6 +2,8 @@ import { NextResponse } from 'next/server'
 import { logger } from '@/lib/logger'
 import { processScheduledCalls } from '@/lib/calls/retell'
 
+export const dynamic = 'force-dynamic'
+
 export async function GET(request: Request) {
   try {
     // Verify cron secret to prevent unauthorized access
