@@ -1,5 +1,4 @@
 import fs from "fs-extra"
-import fetch from "node-fetch"
 import sharp from "sharp"
 
 import {
@@ -76,7 +75,7 @@ export async function generateFeaturedImagePngBuffer(
   )
   const imageUrl = response.url
   const image = await fetch(imageUrl)
-  return await image.buffer()
+  return Buffer.from(await image.arrayBuffer())
 }
 
 const JPG_QUALITY = 30
