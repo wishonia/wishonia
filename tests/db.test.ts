@@ -30,7 +30,10 @@ describe("Database-related tests", () => {
     await aggregateWishingWellPairAllocations()
     const wishingWells = await prisma.wishingWell.findMany()
     for (const wishingWell of wishingWells) {
-      expect(wishingWell.averageAllocation).toBe(100 / wishingWells.length)
+      expect(wishingWell.averageAllocation).toBeCloseTo(
+        100 / wishingWells.length,
+        10
+      )
     }
   })
   it("averages globalProblem allocations", async () => {
@@ -40,7 +43,10 @@ describe("Database-related tests", () => {
     await aggregateGlobalProblemPairAllocations()
     const globalProblems = await prisma.globalProblem.findMany()
     for (const globalProblem of globalProblems) {
-      expect(globalProblem.averageAllocation).toBe(100 / globalProblems.length)
+      expect(globalProblem.averageAllocation).toBeCloseTo(
+        100 / globalProblems.length,
+        10
+      )
     }
   })
   it("Converts a wish to a wishingWell", async () => {

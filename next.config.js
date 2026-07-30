@@ -58,7 +58,10 @@ const nextConfig = {
 // Wrap nextConfig with withBundleAnalyzer
 let config = withBundleAnalyzer(nextConfig)
 
-if (!process.env.SENTRY_AUTH_TOKEN) {
+const shouldUploadSentrySourceMaps =
+  process.env.SENTRY_AUTH_TOKEN && process.env.VERCEL_ENV === "production"
+
+if (!shouldUploadSentrySourceMaps) {
   module.exports = config
 } else {
   const { withSentryConfig } = require("@sentry/nextjs");
@@ -73,14 +76,15 @@ if (!process.env.SENTRY_AUTH_TOKEN) {
       org: "wishonia-org",
       project: "wishonia-project",
 
-      // Only print logs for uploading source maps in CI
-      silent: !process.env.CI,
+      // Keep CI logs focused on actionable build output.
+      silent: true,
 
       // For all available options, see:
       // https://docs.sentry.io/platforms/javascript/guides/nextjs/manual-setup/
 
-      // Upload a larger set of source maps for prettier stack traces (increases build time)
-      widenClientFileUpload: true,
+      // Avoid widening uploads: this app's bundle is large enough to exhaust
+      // Vercel build resources during source-map processing.
+      widenClientFileUpload: false,
 
       // Uncomment to route browser requests to Sentry through a Next.js rewrite to circumvent ad-blockers.
       // This can increase your server load as well as your hosting bill.

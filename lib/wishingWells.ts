@@ -124,7 +124,8 @@ export async function wishToWishingWell(wish: string) {
       
       Here are the Properties of the object you should return:
       1. "name": a generalized name for the wish of the under 64 characters long. Make it generalized and as short as possible so we can avoid duplicate wish entries.  Should not include the word Wish.
-      2. "description": a meta description for the article under 240 characters long`,
+      2. "description": a meta description for the article under 240 characters long
+      3. "content": a 1-2 sentence summary of the wish`,
     "json_object"
   )
   let obj = JSON.parse(str)
@@ -146,6 +147,7 @@ export async function saveWishToWishingWell(wish: string, userId: string) {
       id: true,
       name: true,
       description: true,
+      content: true,
     },
   })
 
@@ -161,6 +163,7 @@ export async function saveWishToWishingWell(wish: string, userId: string) {
       id: true,
       name: true,
       description: true,
+      content: true,
     },
   })
 }
