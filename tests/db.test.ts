@@ -31,7 +31,8 @@ describe("Database-related tests", () => {
     const wishingWells = await prisma.wishingWell.findMany()
     for (const wishingWell of wishingWells) {
       expect(wishingWell.averageAllocation).toBeCloseTo(
-        100 / wishingWells.length
+        100 / wishingWells.length,
+        10
       )
     }
   })
@@ -43,7 +44,8 @@ describe("Database-related tests", () => {
     const globalProblems = await prisma.globalProblem.findMany()
     for (const globalProblem of globalProblems) {
       expect(globalProblem.averageAllocation).toBeCloseTo(
-        100 / globalProblems.length
+        100 / globalProblems.length,
+        10
       )
     }
   })

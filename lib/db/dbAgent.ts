@@ -4,7 +4,7 @@ import { absPathFromRepo } from "@/lib/fileHelper"
 import { formatPrismaModelSchema } from "@/lib/prismaAgent"
 
 export async function addModelsToPrismaSchema() {
-  const pathToSchema = absPathFromRepo("prisma/schema.prisma")
+  const pathToSchema = absPathFromRepo("lib/db/schema.prisma")
   const newSchemaContents = fs.readFileSync(pathToSchema, "utf8")
   const models = extractPrismaModelDefinitions(newSchemaContents)
   const formattedModels: string[] = []

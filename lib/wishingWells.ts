@@ -163,6 +163,7 @@ export async function saveWishToWishingWell(wish: string, userId: string) {
       id: true,
       name: true,
       description: true,
+      content: true,
     },
   })
 }
