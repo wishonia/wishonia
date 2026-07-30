@@ -12,6 +12,7 @@ services:
     container_name: wishonia-postgres
     volumes:
       - .postgres:/var/lib/postgresql/data
+      - ./prisma/init.sql:/docker-entrypoint-initdb.d/init.sql
 
   redis:
     image: redis:alpine

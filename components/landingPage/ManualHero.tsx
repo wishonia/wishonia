@@ -1,7 +1,6 @@
 "use client"
 
 import Image from "next/image"
-import { ArrowDown } from "lucide-react"
 
 const manualLinks = {
   readFree: "https://manual.warondisease.org",
@@ -82,19 +81,6 @@ export default function ManualHero() {
           </div>
         </div>
       </div>
-
-      {/* Scroll indicator */}
-      <button
-        onClick={() =>
-          document
-            .getElementById("landing-content")
-            ?.scrollIntoView({ behavior: "smooth" })
-        }
-        className="mt-6 animate-pulse rounded-full border-2 border-white p-2 transition-colors hover:bg-white hover:text-black sm:mt-12 sm:p-3"
-        aria-label="Scroll down"
-      >
-        <ArrowDown size={20} className="sm:h-8 sm:w-8" />
-      </button>
     </section>
   )
 }

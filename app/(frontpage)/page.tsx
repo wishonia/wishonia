@@ -13,7 +13,6 @@ export const revalidate = 3600
 export default function Home() {
   return (
       <main className="w-full mx-auto max-w-7xl overflow-x-hidden">
-          <ManualHero/>
           <div id="landing-content">
           <InteractiveLandingPage/>
           <ForkableWorldSection/>
@@ -22,6 +21,7 @@ export default function Home() {
           <OpenSource/>
           <PWARedirect/>
           </div>
+          <ManualHero/>
       </main>
   )
 }
