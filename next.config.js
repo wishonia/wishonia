@@ -24,6 +24,18 @@ const nextConfig = {
 
     return config
   },
+  // Type checking and linting are run as separate, sequential steps by the
+  // `build` script instead of here. `next build` forks a worker for them while
+  // the parent process still holds the whole webpack heap, and with
+  // --max-old-space-size=4096 on both processes that exceeds the 8 GB Vercel
+  // build container and gets SIGKILLed. Running them before the compile keeps
+  // peak memory at max(check, compile) rather than the sum.
+  typescript: {
+    ignoreBuildErrors: true,
+  },
+  eslint: {
+    ignoreDuringBuilds: true,
+  },
   // Configure `pageExtensions` to include MDX files
   pageExtensions: ['js', 'jsx', 'mdx', 'ts', 'tsx'],
   images: {
