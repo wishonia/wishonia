@@ -216,5 +216,8 @@
   },
   "trigger.dev": {
     "endpointId": "wishonia-RmKR"
+  },
+  "engines": {
+    "node": "24.x"
   }
 }
