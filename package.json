@@ -4,8 +4,9 @@
   "private": true,
   "scripts": {
     "dev": "node scripts/run-next.js dev",
-    "build": "node scripts/run-next.js build",
-    "type-check": "tsc --noEmit",
+    "build": "pnpm run type-check && pnpm run lint && node scripts/run-next.js build",
+    "build:unsafe": "node scripts/run-next.js build",
+    "type-check": "tsc -p tsconfig.check.json --noEmit",
     "turbo": "node scripts/run-next.js dev --turbo",
     "start": "node scripts/run-next.js start",
     "lint": "next lint",
