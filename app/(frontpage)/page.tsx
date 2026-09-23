@@ -12,9 +12,12 @@ export const revalidate = 3600
 
 export default function Home() {
   return (
-      <main className="w-full mx-auto max-w-7xl overflow-x-hidden">
-          <div id="landing-content">
+      <main className="w-full overflow-x-hidden">
+          {/* Outside the column on purpose: these paint their own bg-black and
+              must reach the viewport edges, or wide screens show rails of the
+              page background beside them. */}
           <InteractiveLandingPage/>
+          <div id="landing-content" className="mx-auto w-full max-w-7xl">
           <ForkableWorldSection/>
           <HowItWorksSection/>
           <WorldOptimizationDashboard></WorldOptimizationDashboard>
