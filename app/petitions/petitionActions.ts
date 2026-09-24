@@ -354,34 +354,6 @@ export async function createPetitionUpdate(
   return update
 }
 
-export async function updateFollowSettings(
-  petitionId: string,
-  settings: {
-    notifyOnComment: boolean
-    notifyOnMilestone: boolean
-    notifyOnUpdate: boolean
-    notifyOnSignature: boolean
-    emailFrequency: "INSTANT" | "DAILY" | "WEEKLY" | "NEVER"
-  }
-) {
-  const session = await getServerSession(authOptions)
-  if (!session?.user?.id) {
-    throw new Error("Must be signed in to update settings")
-  }
-
-  await prisma.petitionFollow.update({
-    where: {
-      petitionId_userId: {
-        petitionId,
-        userId: session.user.id,
-      },
-    },
-    data: settings,
-  })
-
-  revalidatePath(`/petitions/${petitionId}`)
-}
-
 export async function generatePetition(description: string) {
   "use server"
 
