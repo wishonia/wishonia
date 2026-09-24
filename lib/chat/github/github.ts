@@ -1,7 +1,6 @@
 import { getUserIdServer } from "@/lib/api/getUserIdServer"
 import { getGithubAccessToken } from "@/lib/getOauthAccessToken"
 import {
-  Directory,
   GithubUser,
   ListOfUsers,
   Readme,
@@ -261,93 +260,4 @@ export const getReadme = async (
   readme.content = Buffer.from(readme.content, "base64").toString("utf8")
   debugLog('README response:', readme)
   return readme
-}
-
-/* The `export const getDir` function is an asynchronous function that fetches the contents of a
-directory in a GitHub repository. Here's a breakdown of what the function does: */
-export const getDir = async ({
-  repo,
-  owner,
-}: {
-  repo: string
-  owner: string
-}): Promise<Directory[]> => {
-  debugLog(`Fetching directory contents for ${owner}/${repo}`)
-  const userId = await getUserIdServer()
-  let accessToken
-  if (userId) {
-    accessToken = await getGithubAccessToken(userId)
-  }
-  const headers = createHeaders(accessToken)
-
-  const res = await fetch(
-    `https://api.github.com/repos/${owner}/${repo}/contents/`,
-    {
-      method: "GET",
-      headers,
-    }
-  )
-  const dir: Directory[] = await res.json()
-
-  debugLog('Directory contents response:', dir)
-  return dir
-}
-
-/**
- * The functions `getDirContent` and `decodeContent` are used to fetch directory content and decode
- * content from a specified URL using a GitHub access token.
- * @param {string} url - The `url` parameter in both functions represents the URL from which you want
- * to fetch data. It is a string that specifies the location of the resource you want to access.
- * @param {string | null} userId - The `userId` parameter is a string that represents the user ID of
- * the current user. It is used to authenticate and authorize the user to access certain resources or
- * perform specific actions within the application. In the provided code snippets, the `userId` is used
- * to retrieve an access token for making requests to
- * @returns For the `getDirContent` function, a Promise of an array of Directory objects is being
- * returned.
- */
-export const getDirContent = async (
-  url: string,
-  userId: string | null
-): Promise<Directory[]> => {
-  let accessToken
-  if (userId) {
-    accessToken = await getGithubAccessToken(userId)
-  }
-  const headers = createHeaders(accessToken)
-
-  const res = await fetch(url, {
-    method: "GET",
-    headers,
-  })
-  const content: Directory[] = await res.json()
-  return content
-}
-
-/**
- * The function `decodeContent` asynchronously fetches content from a specified URL using a GET request
- * with optional authentication based on the user ID.
- * @param {string} url - The `url` parameter is a string that represents the URL from which the content
- * will be fetched.
- * @param {string | null} userId - The `userId` parameter is a string that represents the user's
- * identification. It can be used to retrieve the access token for the user from GitHub in order to
- * make authenticated requests. If `userId` is provided, the function will attempt to fetch the access
- * token for that user before making the request to
- * @returns The `decodeContent` function returns a Promise that resolves to a string.
- */
-export const decodeContent = async (
-  url: string,
-  userId: string | null
-): Promise<string> => {
-  let accessToken
-  if (userId) {
-    accessToken = await getGithubAccessToken(userId)
-  }
-  const headers = createHeaders(accessToken)
-
-  const res = await fetch(url, {
-    method: "GET",
-    headers,
-  })
-  const { content }: Directory = await res.json()
-  return content
 }
