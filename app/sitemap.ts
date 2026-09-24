@@ -17,14 +17,6 @@ const EXCLUDED_PREFIXES = [
   "/petitions/create",
   "/petitions/my-referrals",
   "/petitions/my-signatures",
-  // DFDA - auth-required or internal
-  "/dfda/inbox",
-  "/dfda/userVariables",
-  "/dfda/safe",
-  "/dfda/measurements/image2measurements",
-  "/dfda/measurements/text2measurements",
-  "/dfda/drug-companies",
-  "/dfda/study/create",
   // Creation/settings pages (auth-required)
   "/globalProblems/new",
   "/globalSolutions/new",

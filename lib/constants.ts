@@ -1,5 +1,3 @@
-export const DFDA_PETITION_ID = "cure-acceleration-act"
-
 export const COLOURS = {
   "1C Enterprise": {
     color: "#814CCC",

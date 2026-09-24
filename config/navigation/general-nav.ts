@@ -1,6 +1,5 @@
 import { Navigation } from "@/types"
 
-import { dfdaLinks } from "./domains/dfda-nav"
 import { wishoniaLinks, wishoniaNavigation } from "./domains/wishonia-nav"
 import { commonLinks } from "./shared-links"
 
@@ -15,7 +14,6 @@ export const generalNavigation = {
       commonLinks.dashboard,
       wishoniaLinks.agents,
       wishoniaLinks.researcher,
-      dfdaLinks.dfda,
     ],
   } as Navigation,
 

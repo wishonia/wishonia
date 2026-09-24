@@ -36,6 +36,18 @@ const nextConfig = {
   eslint: {
     ignoreDuringBuilds: true,
   },
+  // The dFDA and DIH sections moved to their own sites.
+  async redirects() {
+    const cureAccelerationAct = 'https://www.crowdsourcingcures.org/cure-acceleration-act'
+    return [
+      { source: '/dfda/docs/cure-acceleration-act', destination: cureAccelerationAct, permanent: true },
+      { source: '/dfda/cure-acceleration-act', destination: cureAccelerationAct, permanent: true },
+      { source: '/dfda/right-to-trial', destination: cureAccelerationAct, permanent: true },
+      { source: '/dfda/right-to-trial-act', destination: cureAccelerationAct, permanent: true },
+      { source: '/dfda/:path*', destination: 'https://dfda.earth', permanent: true },
+      { source: '/dih/:path*', destination: 'https://dih.earth', permanent: true },
+    ]
+  },
   // Configure `pageExtensions` to include MDX files
   pageExtensions: ['js', 'jsx', 'mdx', 'ts', 'tsx'],
   images: {
