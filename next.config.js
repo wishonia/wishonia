@@ -48,8 +48,6 @@ const nextConfig = {
       { source: '/dih/:path*', destination: 'https://dih.earth', permanent: true },
     ]
   },
-  // Configure `pageExtensions` to include MDX files
-  pageExtensions: ['js', 'jsx', 'mdx', 'ts', 'tsx'],
   images: {
     remotePatterns: [
       {
@@ -59,21 +57,6 @@ const nextConfig = {
       {
         protocol: 'http',
         hostname: '**',
-      },
-      {
-        protocol: 'https',
-        hostname: 'wishonia-blob.public.blob.vercel-storage.com',
-        port: '',
-      },
-      {
-        protocol: 'https',
-        hostname: 'pcpfoetqkuq7jmso.public.blob.vercel-storage.com',
-        port: '',
-      },
-      {
-        protocol: 'https',
-        hostname: 'cdn.openai.com',
-        port: '',
       },
     ]
   }

@@ -36,7 +36,7 @@ Run a single test: `pnpm jest tests/my-test.test.ts`
 - **State**: Zustand (client state), React Query (server state)
 - **UI**: Tailwind CSS, shadcn/ui (Radix UI primitives), Framer Motion
 - **AI**: Vercel AI SDK with OpenAI/Anthropic/Google/Azure/Ollama providers
-- **Testing**: Jest (unit), Playwright (E2E)
+- **Testing**: Jest (unit); Playwright only for the Checkly browser check in `__checks__/`
 - **Infra**: Vercel deployment, Sentry error tracking, Stripe payments, Redis caching
 
 ## Architecture
