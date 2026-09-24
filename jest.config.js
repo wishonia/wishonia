@@ -8,9 +8,9 @@ const customJestConfig = {
   moduleNameMapper: {
     "^@/(.*)$": "<rootDir>/$1",
   },
-  setupFiles: ["./jest.polyfills.js"],
-  setupFilesAfterEnv: ["<rootDir>/jest.setup.js"],
-  testEnvironment: "jest-environment-jsdom",
+  testEnvironment: "node",
+  // __checks__ holds Checkly's Playwright specs, which Jest can't run.
+  testPathIgnorePatterns: ["<rootDir>/__checks__/"],
 }
 
 module.exports = createJestConfig(customJestConfig)
