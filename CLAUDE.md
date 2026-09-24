@@ -33,7 +33,7 @@ Run a single test: `pnpm jest tests/my-test.test.ts`
 - **Package manager**: pnpm
 - **Database**: PostgreSQL (pgvector via Docker on port 5433), Prisma ORM
 - **Auth**: NextAuth.js 4 with JWT strategy, PrismaAdapter (Google, GitHub, Email magic links)
-- **State**: Zustand (client state), React Query (server state)
+- **State**: Server components and server actions; React context for client state
 - **UI**: Tailwind CSS, shadcn/ui (Radix UI primitives), Framer Motion
 - **AI**: Vercel AI SDK with OpenAI/Anthropic/Google/Azure/Ollama providers
 - **Testing**: Jest (unit); Playwright only for the Checkly browser check in `__checks__/`
@@ -54,7 +54,6 @@ Run a single test: `pnpm jest tests/my-test.test.ts`
 |------|---------|
 | `lib/auth.ts` | NextAuth configuration and `authOptions` |
 | `lib/db.ts` | Prisma client singleton |
-| `lib/store.ts` | Zustand stores |
 | `lib/logger.ts` | Structured logger (wraps Sentry) |
 | `lib/actions/` | Server actions |
 | `lib/agents/` | AI agent utilities |
