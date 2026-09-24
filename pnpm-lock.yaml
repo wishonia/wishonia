@@ -143,6 +143,12 @@ importers:
       axios:
         specifier: ^1.6.8
         version: 1.7.7
+      chart.js:
+        specifier: ^4.4.2
+        version: 4.4.4
+      chartjs-plugin-datalabels:
+        specifier: ^2.2.0
+        version: 2.2.0(chart.js@4.4.4)
       class-variance-authority:
         specifier: ^0.7.0
         version: 0.7.0
@@ -248,6 +254,9 @@ importers:
       react-calendar-heatmap:
         specifier: ^1.9.0
         version: 1.9.0(react@18.2.0)
+      react-chartjs-2:
+        specifier: ^5.2.0
+        version: 5.2.0(chart.js@4.4.4)(react@18.2.0)
       react-day-picker:
         specifier: ^8.10.0
         version: 8.10.1(date-fns@3.6.0)(react@18.2.0)
@@ -1304,6 +1313,9 @@ packages:
 
   '@jridgewell/trace-mapping@0.3.9':
     resolution: {integrity: sha512-3Belt6tdc8bPgAtbcmdtNJlirVoTmEb5e2gC94PnkwEW9jI6CAHUeoG85tjWP5WquqfavoMtMwiG4P926ZKKuQ==}
+
+  '@kurkle/color@0.3.4':
+    resolution: {integrity: sha512-M5UknZPHRu3DEDWoipU6sE8PdkZ6Z/S+v4dD+Ke8IaNlpdSQah50lz1KtcFBa2vsdOnwbbnxJwVM4wty6udA5w==}
 
   '@lexical/clipboard@0.17.1':
     resolution: {integrity: sha512-OVqnEfWX8XN5xxuMPo6BfgGKHREbz++D5V5ISOiml0Z8fV/TQkdgwqbBJcUdJHGRHWSUwdK7CWGs/VALvVvZyw==}
@@ -4648,6 +4660,15 @@ packages:
   character-reference-invalid@2.0.1:
     resolution: {integrity: sha512-iBZ4F4wRbyORVsu0jPV7gXkOsGYjGHPmAyv+HiHG8gi5PtC9KI2j1+v8/tlibRvjoWX027ypmG/n0HtO5t7unw==}
 
+  chart.js@4.4.4:
+    resolution: {integrity: sha512-emICKGBABnxhMjUjlYRR12PmOXhJ2eJjEHL2/dZlWjxRAZT1D8xplLFq5M0tMQK8ja+wBS/tuVEJB5C6r7VxJA==}
+    engines: {pnpm: '>=8'}
+
+  chartjs-plugin-datalabels@2.2.0:
+    resolution: {integrity: sha512-14ZU30lH7n89oq+A4bWaJPnAG8a7ZTk7dKf48YAzMvJjQtjrgg5Dpk9f+LbjCF6bpx3RAGTeL13IXpKQYyRvlw==}
+    peerDependencies:
+      chart.js: '>=3.0.0'
+
   checkly@4.9.0:
     resolution: {integrity: sha512-LqohEntErF7dJaJPsEpjvr/O9wUfzBRac6DOXgFDMEw+dNi19oBAcspdOqVGjPjMoCZ9/s5b5tSJI1pusY4mJQ==}
     engines: {node: '>=16.0.0'}
@@ -7925,6 +7946,12 @@ packages:
     peerDependencies:
       react: ^0.14.0 || ^15.0.0 || ^16.0.0 || ^17.0.0 || ^18.0.0
 
+  react-chartjs-2@5.2.0:
+    resolution: {integrity: sha512-98iN5aguJyVSxp5U3CblRLH67J8gkfyGNbiK3c+l1QI/G4irHMPQw44aEPmjVag+YKTyQ260NcF82GTQ3bdscA==}
+    peerDependencies:
+      chart.js: ^4.1.1
+      react: ^16.8.0 || ^17.0.0 || ^18.0.0
+
   react-day-picker@8.10.1:
     resolution: {integrity: sha512-TMx7fNbhLk15eqcMt+7Z7S2KF7mfTId/XJDjKE8f+IUcFn0l08/kI4FiYTL/0yuOLmEcbR4Fwe3GJf/NiiMnPA==}
     peerDependencies:
@@ -10769,6 +10796,8 @@ snapshots:
     dependencies:
       '@jridgewell/resolve-uri': 3.1.2
       '@jridgewell/sourcemap-codec': 1.5.5
+
+  '@kurkle/color@0.3.4': {}
 
   '@lexical/clipboard@0.17.1':
     dependencies:
@@ -14787,6 +14816,14 @@ snapshots:
   character-reference-invalid@1.1.4: {}
 
   character-reference-invalid@2.0.1: {}
+
+  chart.js@4.4.4:
+    dependencies:
+      '@kurkle/color': 0.3.4
+
+  chartjs-plugin-datalabels@2.2.0(chart.js@4.4.4):
+    dependencies:
+      chart.js: 4.4.4
 
   checkly@4.9.0(@types/node@20.11.17)(bufferutil@4.0.8)(typescript@5.3.3)(utf-8-validate@5.0.10):
     dependencies:
@@ -18880,6 +18917,11 @@ snapshots:
     dependencies:
       memoize-one: 5.2.1
       prop-types: 15.8.1
+      react: 18.2.0
+
+  react-chartjs-2@5.2.0(chart.js@4.4.4)(react@18.2.0):
+    dependencies:
+      chart.js: 4.4.4
       react: 18.2.0
 
   react-day-picker@8.10.1(date-fns@3.6.0)(react@18.2.0):
