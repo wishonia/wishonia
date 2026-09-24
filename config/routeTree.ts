@@ -273,14 +273,7 @@ export const routeTree = {
           "name": "slug",
           "path": "/organizations/[slug]",
           "isDynamic": true,
-          "children": {
-            "dashboard": {
-              "name": "dashboard",
-              "path": "/organizations/[slug]/dashboard",
-              "isDynamic": false,
-              "children": {}
-            }
-          }
+          "children": {}
         }
       }
     },
@@ -352,19 +345,6 @@ export const routeTree = {
       "path": "/search",
       "isDynamic": false,
       "children": {
-        "search": {
-          "name": "search",
-          "path": "/search/search",
-          "isDynamic": false,
-          "children": {
-            "id": {
-              "name": "id",
-              "path": "/search/search/[id]",
-              "isDynamic": true,
-              "children": {}
-            }
-          }
-        },
         "id": {
           "name": "id",
           "path": "/search/[id]",
