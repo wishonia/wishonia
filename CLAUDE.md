@@ -32,7 +32,7 @@ Run a single test: `pnpm jest tests/my-test.test.ts`
 - **Framework**: Next.js 14.2 (App Router), React 18, TypeScript 5.3
 - **Package manager**: pnpm
 - **Database**: PostgreSQL (pgvector via Docker on port 5433), Prisma ORM
-- **Auth**: NextAuth.js 4 with JWT strategy, PrismaAdapter (Google, GitHub, Email magic links, DFDA OAuth)
+- **Auth**: NextAuth.js 4 with JWT strategy, PrismaAdapter (Google, GitHub, Email magic links)
 - **State**: Zustand (client state), React Query (server state)
 - **UI**: Tailwind CSS, shadcn/ui (Radix UI primitives), Framer Motion
 - **AI**: Vercel AI SDK with OpenAI/Anthropic/Google/Azure/Ollama providers, LangChain, CopilotKit
@@ -86,7 +86,7 @@ Prisma schema at `prisma/schema.prisma`. Key models: User, Agent, GlobalProblem,
 
 ### Environment Variables
 
-Validated via `@t3-oss/env-nextjs` in `env.mjs`. Required server vars: `NEXTAUTH_SECRET`, `DATABASE_URL`, `GOOGLE_CLIENT_ID/SECRET`, `GITHUB_CLIENT_ID/SECRET`, `DFDA_CLIENT_ID/SECRET`, `EMAIL_SERVER`, `EMAIL_FROM`. See `.env.example` for full list.
+Validated via `@t3-oss/env-nextjs` in `env.mjs`. Required server vars: `NEXTAUTH_SECRET`, `DATABASE_URL`, `GOOGLE_CLIENT_ID/SECRET`, `GITHUB_CLIENT_ID/SECRET`, `EMAIL_SERVER`, `EMAIL_FROM`. See `.env.example` for full list.
 
 ## Coding Conventions
 

@@ -54,6 +54,32 @@ export const routeTree = {
         }
       }
     },
+    "call-scheduler": {
+      "name": "call-scheduler",
+      "path": "/call-scheduler",
+      "isDynamic": false,
+      "children": {
+        "account": {
+          "name": "account",
+          "path": "/call-scheduler/account",
+          "isDynamic": false,
+          "children": {}
+        },
+        "schedules": {
+          "name": "schedules",
+          "path": "/call-scheduler/schedules",
+          "isDynamic": false,
+          "children": {
+            "new": {
+              "name": "new",
+              "path": "/call-scheduler/schedules/new",
+              "isDynamic": false,
+              "children": {}
+            }
+          }
+        }
+      }
+    },
     "chat": {
       "name": "chat",
       "path": "/chat",
@@ -63,19 +89,6 @@ export const routeTree = {
           "name": "id",
           "path": "/chat/[id]",
           "isDynamic": true,
-          "children": {}
-        }
-      }
-    },
-    "cognition": {
-      "name": "cognition",
-      "path": "/cognition",
-      "isDynamic": false,
-      "children": {
-        "reaction-test": {
-          "name": "reaction-test",
-          "path": "/cognition/reaction-test",
-          "isDynamic": false,
           "children": {}
         }
       }
@@ -125,231 +138,6 @@ export const routeTree = {
           }
         }
       }
-    },
-    "dfda": {
-      "name": "dfda",
-      "path": "/dfda",
-      "isDynamic": false,
-      "children": {
-        "conditions": {
-          "name": "conditions",
-          "path": "/dfda/conditions",
-          "isDynamic": false,
-          "children": {
-            "conditionName": {
-              "name": "conditionName",
-              "path": "/dfda/conditions/[conditionName]",
-              "isDynamic": true,
-              "children": {
-                "meta-analysis": {
-                  "name": "meta-analysis",
-                  "path": "/dfda/conditions/[conditionName]/meta-analysis",
-                  "isDynamic": false,
-                  "children": {}
-                },
-                "treatments": {
-                  "name": "treatments",
-                  "path": "/dfda/conditions/[conditionName]/treatments",
-                  "isDynamic": false,
-                  "children": {
-                    "ratings": {
-                      "name": "ratings",
-                      "path": "/dfda/conditions/[conditionName]/treatments/ratings",
-                      "isDynamic": false,
-                      "children": {}
-                    },
-                    "treatmentName": {
-                      "name": "treatmentName",
-                      "path": "/dfda/conditions/[conditionName]/treatments/[treatmentName]",
-                      "isDynamic": true,
-                      "children": {
-                        "cost-benefit-analysis": {
-                          "name": "cost-benefit-analysis",
-                          "path": "/dfda/conditions/[conditionName]/treatments/[treatmentName]/cost-benefit-analysis",
-                          "isDynamic": false,
-                          "children": {}
-                        }
-                      }
-                    }
-                  }
-                }
-              }
-            }
-          }
-        },
-        "docs": {
-          "name": "docs",
-          "path": "/dfda/docs",
-          "isDynamic": false,
-          "children": {
-            "blueprint": {
-              "name": "blueprint",
-              "path": "/dfda/docs/blueprint",
-              "isDynamic": false,
-              "children": {}
-            },
-            "cure-acceleration-act": {
-              "name": "cure-acceleration-act",
-              "path": "/dfda/docs/cure-acceleration-act",
-              "isDynamic": false,
-              "children": {}
-            },
-            "health-savings-sharing": {
-              "name": "health-savings-sharing",
-              "path": "/dfda/docs/health-savings-sharing",
-              "isDynamic": false,
-              "children": {}
-            },
-            "...filename": {
-              "name": "...filename",
-              "path": "/dfda/docs/[...filename]",
-              "isDynamic": true,
-              "children": {}
-            }
-          }
-        },
-        "globalVariables": {
-          "name": "globalVariables",
-          "path": "/dfda/globalVariables",
-          "isDynamic": false,
-          "children": {
-            "variableId": {
-              "name": "variableId",
-              "path": "/dfda/globalVariables/[variableId]",
-              "isDynamic": true,
-              "children": {
-                "charts": {
-                  "name": "charts",
-                  "path": "/dfda/globalVariables/[variableId]/charts",
-                  "isDynamic": false,
-                  "children": {}
-                },
-                "settings": {
-                  "name": "settings",
-                  "path": "/dfda/globalVariables/[variableId]/settings",
-                  "isDynamic": false,
-                  "children": {}
-                }
-              }
-            }
-          }
-        },
-        "inbox": {
-          "name": "inbox",
-          "path": "/dfda/inbox",
-          "isDynamic": false,
-          "children": {}
-        },
-        "measurements": {
-          "name": "measurements",
-          "path": "/dfda/measurements",
-          "isDynamic": false,
-          "children": {
-            "image2measurements": {
-              "name": "image2measurements",
-              "path": "/dfda/measurements/image2measurements",
-              "isDynamic": false,
-              "children": {}
-            },
-            "text2measurements": {
-              "name": "text2measurements",
-              "path": "/dfda/measurements/text2measurements",
-              "isDynamic": false,
-              "children": {}
-            }
-          }
-        },
-        "predictor-search": {
-          "name": "predictor-search",
-          "path": "/dfda/predictor-search",
-          "isDynamic": false,
-          "children": {}
-        },
-        "safe": {
-          "name": "safe",
-          "path": "/dfda/safe",
-          "isDynamic": false,
-          "children": {
-            "redirect": {
-              "name": "redirect",
-              "path": "/dfda/safe/redirect",
-              "isDynamic": false,
-              "children": {
-                "path": {
-                  "name": "path",
-                  "path": "/dfda/safe/redirect/[path]",
-                  "isDynamic": true,
-                  "children": {}
-                }
-              }
-            }
-          }
-        },
-        "search": {
-          "name": "search",
-          "path": "/dfda/search",
-          "isDynamic": false,
-          "children": {}
-        },
-        "treatments": {
-          "name": "treatments",
-          "path": "/dfda/treatments",
-          "isDynamic": false,
-          "children": {
-            "treatmentName": {
-              "name": "treatmentName",
-              "path": "/dfda/treatments/[treatmentName]",
-              "isDynamic": true,
-              "children": {}
-            }
-          }
-        },
-        "trials": {
-          "name": "trials",
-          "path": "/dfda/trials",
-          "isDynamic": false,
-          "children": {
-            "search": {
-              "name": "search",
-              "path": "/dfda/trials/search",
-              "isDynamic": false,
-              "children": {}
-            }
-          }
-        },
-        "userVariables": {
-          "name": "userVariables",
-          "path": "/dfda/userVariables",
-          "isDynamic": false,
-          "children": {
-            "variableId": {
-              "name": "variableId",
-              "path": "/dfda/userVariables/[variableId]",
-              "isDynamic": true,
-              "children": {
-                "charts": {
-                  "name": "charts",
-                  "path": "/dfda/userVariables/[variableId]/charts",
-                  "isDynamic": false,
-                  "children": {}
-                },
-                "settings": {
-                  "name": "settings",
-                  "path": "/dfda/userVariables/[variableId]/settings",
-                  "isDynamic": false,
-                  "children": {}
-                }
-              }
-            }
-          }
-        }
-      }
-    },
-    "dih": {
-      "name": "dih",
-      "path": "/dih",
-      "isDynamic": false,
-      "children": {}
     },
     "docs": {
       "name": "docs",
@@ -470,19 +258,6 @@ export const routeTree = {
         }
       }
     },
-    "md": {
-      "name": "md",
-      "path": "/md",
-      "isDynamic": false,
-      "children": {
-        "...filename": {
-          "name": "...filename",
-          "path": "/md/[...filename]",
-          "isDynamic": true,
-          "children": {}
-        }
-      }
-    },
     "orb": {
       "name": "orb",
       "path": "/orb",
@@ -552,12 +327,6 @@ export const routeTree = {
           }
         }
       }
-    },
-    "call-scheduler": {
-      "name": "call-scheduler",
-      "path": "/call-scheduler",
-      "isDynamic": false,
-      "children": {}
     },
     "profile": {
       "name": "profile",
