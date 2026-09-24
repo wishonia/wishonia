@@ -55,14 +55,6 @@ export const runAsyncFnWithoutBlocking = (
   fn()
 }
 
-export const getMediumFont = async () => {
-  const response = await fetch(
-    new URL("@/assets/fonts/LabilGrotesk-Medium.ttf", import.meta.url)
-  )
-  const font = await response.arrayBuffer()
-  return font
-}
-
 export function absoluteUrl(path: string) {
   return `${env.NEXT_PUBLIC_APP_URL}${path}`
 }

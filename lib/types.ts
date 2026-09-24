@@ -91,21 +91,6 @@ export interface Readme {
   encoding: string
 }
 
-export interface Directory {
-  name: string
-  path: string
-  type: "file" | "dir"
-  url: string
-  html_url: string
-  sha: string
-  content: string
-  _links: {
-    git: string
-    self: string
-    html: string
-  }
-}
-
 export interface Agent {
   id: string
   name: string
