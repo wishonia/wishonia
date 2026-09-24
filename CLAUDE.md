@@ -35,7 +35,7 @@ Run a single test: `pnpm jest tests/my-test.test.ts`
 - **Auth**: NextAuth.js 4 with JWT strategy, PrismaAdapter (Google, GitHub, Email magic links)
 - **State**: Zustand (client state), React Query (server state)
 - **UI**: Tailwind CSS, shadcn/ui (Radix UI primitives), Framer Motion
-- **AI**: Vercel AI SDK with OpenAI/Anthropic/Google/Azure/Ollama providers, LangChain, CopilotKit
+- **AI**: Vercel AI SDK with OpenAI/Anthropic/Google/Azure/Ollama providers
 - **Testing**: Jest (unit), Playwright (E2E)
 - **Infra**: Vercel deployment, Sentry error tracking, Stripe payments, Redis caching
 

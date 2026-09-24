@@ -3,7 +3,6 @@ import "@/app/styles/neobrutalist.css";
 
 import { Metadata, Viewport } from "next";
 import { Space_Grotesk } from "next/font/google";
-import { CopilotKit } from "@copilotkit/react-core";
 import { Analytics } from "@vercel/analytics/react";
 import NextTopLoader from "nextjs-toploader";
 
@@ -107,16 +106,14 @@ export default function RootLayout({ children }: RootLayoutProps) {
     </head>
     <body className={cn("antialiased", spaceGrotesk.className)}>
         <Providers> {/* Wrap the application with Providers */}
-          <CopilotKit url="/api/copilot/openai/">
-            <NextTopLoader color="#DC2645" height={2.5} showSpinner={false} />
-            <div
-              vaul-drawer-wrapper=""
-              className="flex min-h-screen flex-col bg-background"
-            >
-              {children}
-            </div>
-            <Toaster />
-          </CopilotKit>
+          <NextTopLoader color="#DC2645" height={2.5} showSpinner={false} />
+          <div
+            vaul-drawer-wrapper=""
+            className="flex min-h-screen flex-col bg-background"
+          >
+            {children}
+          </div>
+          <Toaster />
           <Analytics />
         </Providers>
       </body>

@@ -1,7 +1,6 @@
 "use client"
 
 import * as React from "react"
-import { useEffect, useState } from "react"
 import { useRouter } from "next/navigation"
 import { zodResolver } from "@hookform/resolvers/zod"
 import { GlobalSolution } from "@prisma/client"
@@ -38,13 +37,10 @@ export function GlobalSolutionEditForm({
   ...props
 }: GlobalSolutionEditFormProps) {
   const router = useRouter()
-  const [content, setContent] = useState("")
-  const [nameInput, setNameInput] = useState(globalSolution?.name || "")
   const {
     handleSubmit,
     register,
     formState: { errors, isSubmitting },
-    watch,
   } = useForm<FormData>({
     resolver: zodResolver(globalSolutionPatchSchema),
     defaultValues: {
@@ -52,14 +48,6 @@ export function GlobalSolutionEditForm({
       description: globalSolution?.description || "",
     },
   })
-
-  // Watch for changes in the name input
-  const name = watch("name")
-
-  // Update the nameInput state whenever the name changes
-  useEffect(() => {
-    setNameInput(name)
-  }, [name])
 
   async function onSubmit(data: FormData) {
     const response = await fetch(`/api/globalSolutions/${globalSolution.id}`, {
@@ -130,31 +118,6 @@ export function GlobalSolutionEditForm({
               </p>
             )}
           </div>
-          {/*          <div className="grid gap-3">
-            <Label htmlFor="content">
-              Longer Detailed Description{" "}
-            </Label>
-            <CopilotTextarea
-                style={{ "--copilot-kit-background-color": "#000000" } as any}
-                id="content"
-                className="px-4 py-4"
-                value={content}
-                onValueChange={(value: string) => setContent(value)}
-                placeholder={`Please provide more details about the globalSolution: ${nameInput}`}
-                autosuggestionsConfig={{
-                  textareaPurpose: `More information about the globalSolution: ${nameInput}`,
-                  chatApiConfigs: {
-                    suggestionsApiConfig: {
-                      forwardedParams: {
-                        max_tokens: 20,
-                        stop: [".", "?", "!"],
-                      },
-                    },
-                  },
-                }}
-            />
-
-          </div>*/}
         </CardContent>
         <CardFooter>
           <button
