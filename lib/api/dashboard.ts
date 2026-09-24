@@ -1,50 +1,13 @@
 import {
   getDailyAverage,
-  getMostContributedWishingWell,
   getStreak,
-  getTopWishingWells,
   getTotalWishingWellContributions,
   getWishingWellContributions,
-  getWishingWellCountByDate,
 } from "@/lib/api/wishingWellContributions"
-import { getUserWishingWells } from "@/lib/api/wishingWells"
 
 type DateRangeType = {
   from: Date
   to: Date
-}
-
-export async function getDashboardData(
-  userId: string,
-  dateRange: DateRangeType
-) {
-  const [
-    wishingWellContributions,
-    streak,
-    totalWishingWellContributions,
-    mostContributedWishingWell,
-    wishingWellCountByDate,
-    topWishingWells,
-    userWishingWells,
-  ] = await Promise.all([
-    getWishingWellContributions(userId, dateRange, "user"),
-    getStreak(userId, "user"),
-    getTotalWishingWellContributions(userId, dateRange, "user"),
-    getMostContributedWishingWell(userId, dateRange),
-    getWishingWellCountByDate(userId, dateRange),
-    getTopWishingWells(userId, dateRange),
-    getUserWishingWells(userId),
-  ])
-
-  return {
-    wishingWellContributions,
-    streak,
-    totalWishingWellContributions,
-    mostContributedWishingWell,
-    wishingWellCountByDate,
-    topWishingWells,
-    userWishingWells,
-  }
 }
 
 export async function getStatsDashboardData(

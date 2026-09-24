@@ -101,6 +101,12 @@ export const wishoniaLinks = {
     icon: "search",
     tooltip: "Search across all content",
   },
+  warVsCures: {
+    title: "War vs Cures",
+    href: "/warVsCures",
+    icon: "scale",
+    tooltip: "Compare war and medical research spending",
+  },
   warOnDisease: {
     title: "Vote",
     href: "https://warondisease.org",
@@ -154,6 +160,7 @@ export const wishoniaNavigation: DomainNavigation = {
     commonLinks.requestFeature,
     wishoniaLinks.organizations,
     wishoniaLinks.search,
+    wishoniaLinks.warVsCures,
     wishoniaLinks.warOnDisease,
   ],
   avatarNav: [

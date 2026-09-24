@@ -20,10 +20,6 @@ export const functionSchemas = {
 
   show_repository_ui: z.object({
     query: z.string().describe("The query to search for repositories")
-  }),
-
-  record_measurement: z.object({
-    text: z.string().describe("The text containing measurements to record")
   })
 } as const
 
@@ -48,12 +44,5 @@ export const globalFunctions = {
     description: "Show the found repositories UI", 
     parameters: functionSchemas.show_repository_ui,
     category: 'github'
-  },
-
-  record_measurement: {
-    name: 'record_measurement',
-    description: "Record measurements from natural language text",
-    parameters: functionSchemas.record_measurement,
-    category: 'measurements'
   }
 } as const 

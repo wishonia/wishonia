@@ -77,7 +77,7 @@ This can be done using [Randomized Aggregated Pairwise Preference Allocation (AP
 
 1. **Install Dependencies**:
 
-   - [Node.js](https://nodejs.org/en/) v18 or higher (I'd recommend using [NVM](https://github.com/coreybutler/nvm-windows?tab=readme-ov-file) instead so you can easily switch nodejs versions as needed)
+   - [Node.js](https://nodejs.org/en/) v24, as pinned in `.nvmrc` (I'd recommend using [NVM](https://github.com/coreybutler/nvm-windows?tab=readme-ov-file) so you can easily switch nodejs versions as needed)
    - [pnpm](https://pnpm.io/)
    - [Docker](https://www.docker.com/)
 
@@ -88,7 +88,7 @@ This can be done using [Randomized Aggregated Pairwise Preference Allocation (AP
 3. **Start the Database With Docker**:
 
 ```sh
-docker-compose up -d
+pnpm db:up
 ```
 
 4. **Install Dependencies**:
@@ -97,12 +97,18 @@ docker-compose up -d
 pnpm install
 ```
 
-5. **Seed the Database**:
-
-Seed the database with default problems and wishes by running tests/seed.test.ts with the following command:
+5. **Create the Database Tables**:
 
 ```sh
-jest tests/seed.test.ts
+pnpm prisma:migrate
+```
+
+6. **Seed the Database**:
+
+Seed the database with default problems, solutions and wishes:
+
+```sh
+pnpm seed
 ```
 
 # Why Are You Doing This?

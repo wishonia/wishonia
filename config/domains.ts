@@ -20,22 +20,4 @@ export const domainConfigs: Record<string, SiteConfig> = {
       github: "https://github.com/wishonia/wishonia",
     },
   },
-  "dfda.earth": {
-    name: "The Decentralized FDA",
-    description: "Crowdsourcing clinical research",
-    author: {
-      name: "Mike P. Sinn",
-      url: "https://mikesinn.com",
-    },
-    keywords: ["clinical research", "health data", "desci"],
-    defaultHomepage: "/dfda",
-    afterLoginPath: "/dfda",
-    ogImage: "/globalSolutions/dfda/dfda-og.png",
-    url: {
-      base: "https://dfda.earth",
-    },
-    links: {
-      github: "https://github.com/wishonia/wishonia",
-    },
-  },
 }

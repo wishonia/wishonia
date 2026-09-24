@@ -8,11 +8,8 @@ interface Env {
   NEXT_PUBLIC_APP_URL: string
   NEXT_PUBLIC_SITE_NAME: string
   NEXT_PUBLIC_SITE_DESCRIPTION: string
-  NEXT_PUBLIC_SITE_AUTHOR: string
   NEXT_PUBLIC_SITE_KEYWORDS: string
   NEXT_PUBLIC_SITE_OG_IMAGE: string
-  NEXT_PUBLIC_API_KEY: string
-  NEXT_PUBLIC_API_URL: string
   NEXTAUTH_URL: string
   NEXTAUTH_SECRET: string
   GOOGLE_CLIENT_ID: string
@@ -22,8 +19,6 @@ interface Env {
   DATABASE_URL: string
   EMAIL_SERVER: string
   EMAIL_FROM: string
-  DFDA_CLIENT_ID: string
-  DFDA_CLIENT_SECRET: string
   STRIPE_SECRET_KEY: string
   STRIPE_WEBHOOK_SECRET: string
 }

@@ -2,14 +2,7 @@ import { anthropic } from "@ai-sdk/anthropic"
 import { createAzure } from "@ai-sdk/azure"
 import { google } from "@ai-sdk/google"
 import { createOpenAI } from "@ai-sdk/openai"
-import { CoreMessage } from "ai"
-import { clsx, type ClassValue } from "clsx"
 import { createOllama } from "ollama-ai-provider"
-import { twMerge } from "tailwind-merge"
-
-export function cn(...inputs: ClassValue[]) {
-  return twMerge(clsx(inputs))
-}
 
 export function getModel(useSubModel = false) {
   const ollamaBaseUrl = process.env.OLLAMA_BASE_URL + "/api"
@@ -84,26 +77,6 @@ export function getModel(useSubModel = false) {
   return openai.chat(openaiApiModel)
 }
 
-/**
- * Takes an array of AIMessage and modifies each message where the role is 'tool'.
- * Changes the role to 'assistant' and converts the content to a JSON string.
- * Returns the modified messages as an array of CoreMessage.
- *
- * @param aiMessages - Array of AIMessage
- * @returns modifiedMessages - Array of modified messages
- */
-export function transformToolMessages(messages: CoreMessage[]): CoreMessage[] {
-  return messages.map((message) =>
-    message.role === "tool"
-      ? {
-          ...message,
-          role: "assistant",
-          content: JSON.stringify(message.content),
-          type: "tool",
-        }
-      : message
-  ) as CoreMessage[]
-}
 /**
  * Sanitizes a URL by replacing spaces with '%20'
  * @param url - The URL to sanitize

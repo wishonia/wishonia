@@ -288,50 +288,6 @@ export async function checkGithubAccess() {
   }
 }
 
-export async function getImageMetadata(
-  org: string,
-  repo: string,
-  path: string
-) {
-  try {
-    const session = await getServerSession(authOptions)
-    if (!session?.user?.id) {
-      throw new Error("Unauthorized")
-    }
-
-    const githubToken = await getGithubAccessToken(session.user.id)
-    if (!githubToken) {
-      throw new Error("No GitHub token available")
-    }
-
-    const octokit = new Octokit({
-      auth: githubToken,
-    })
-
-    const response = await octokit.repos.getContent({
-      owner: org,
-      repo,
-      path,
-    })
-
-    if (
-      "content" in response.data &&
-      typeof response.data.content === "string"
-    ) {
-      return {
-        url: response.data.download_url,
-        size: response.data.size,
-        type: response.data.type,
-      }
-    }
-
-    throw new Error("Invalid image metadata")
-  } catch (error) {
-    console.error("GitHub image metadata error:", error)
-    throw error
-  }
-}
-
 let rateLimitCache: {
   data: any
   timestamp: number
