@@ -30,7 +30,6 @@ import { cn, sleep } from "../utils"
 import { AI } from "./actions"
 import { generateSystemPrompt } from './prompt-generator'
 import { githubAgent } from './agents/github-agent'
-import { fdaAgent } from './agents/fda-agent'
 import {
   checkRateLimit,
   convertUserType,
@@ -38,10 +37,8 @@ import {
   getReadme,
   searchRepositories,
 } from "./github/github"
-import { text2measurements } from "@/lib/text2measurements"
 const agentMap = {
   github: githubAgent,
-  fda: fdaAgent
 } as const
 
 const openai = new OpenAI({
@@ -430,49 +427,6 @@ export async function submitUserMessage(
           return (
             <BotCard>
               <Readme props={content} />
-            </BotCard>
-          )
-        },
-      },
-      record_measurement: {
-        description: "Record measurements from natural language text",
-        parameters: z.object({
-          text: z.string().describe("The text containing measurements to record"),
-        }),
-        render: async function* ({ text }) {
-          yield (
-            <BotCard>
-              <SpinnerMessage avatar={agent?.avatar} />
-            </BotCard>
-          )
-          
-          const currentUtcDateTime = new Date().toISOString()
-          const timeZoneOffset = new Date().getTimezoneOffset()
-          
-          const measurements = await text2measurements(text, currentUtcDateTime, timeZoneOffset)
-          
-          aiState.done({
-            ...aiState.get(),
-            messages: [
-              ...aiState.get().messages,
-              {
-                id: nanoid(),
-                role: "function",
-                name: "record_measurement",
-                content: JSON.stringify(measurements),
-              },
-            ],
-          })
-
-          return (
-            <BotCard>
-              <BotMessage
-                agentName={agent?.name}
-                avatar={agent?.avatar}
-                content={`I've recorded the following measurements: ${measurements.map((m) => 
-                  `${m.variableName}: ${m.value}${m.unitName ? ` ${m.unitName}` : ''}`
-                ).join(', ')}`}
-              />
             </BotCard>
           )
         },

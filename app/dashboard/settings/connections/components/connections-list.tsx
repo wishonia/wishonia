@@ -123,8 +123,6 @@ export function ConnectionsList({ connectedAccounts }: ConnectionsListProps) {
         return <Icons.google className="h-6 w-6" />
       case "github":
         return <Icons.github className="h-6 w-6" />
-      case "dfda":
-        return <Icons.shield className="h-6 w-6" />
       default:
         return null
     }

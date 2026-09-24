@@ -4,7 +4,6 @@
 
 import fs from "fs"
 
-import { getDialoqbaseClient, getWishoniaDocsAgent } from "@/lib/dialoqbase"
 import { askSupabase } from "@/lib/docs/docsAgent"
 import { generateMarkdownAndImageFromDescription } from "@/lib/markdownGenerator"
 import { createSlug } from "@/lib/stringHelper"
@@ -15,15 +14,6 @@ const docsPath = fs.realpathSync(`${__dirname}/../public/docs`)
 const overviewPath = `${docsPath}/functional-components.md`
 
 describe("Docs Generator", () => {
-  it("gets wishonia docs agent", async () => {
-    const agent = await getWishoniaDocsAgent()
-    const dialoqbase = await getDialoqbaseClient()
-    const response = await dialoqbase.bot.chat(agent.id, {
-      message: "Hello tell me a joke",
-      stream: false,
-      history: [],
-    })
-  })
   it("Parses the functional components overview documentation file and creates individual page", async () => {
     // read the overview file
     const overview = fs.readFileSync(overviewPath, "utf8")

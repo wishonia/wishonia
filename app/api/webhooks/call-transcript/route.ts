@@ -1,6 +1,5 @@
 import { NextResponse } from 'next/server'
 import prisma from '@/lib/prisma'
-import { text2measurements } from '@/lib/text2measurements'
 import { emailer } from '@/lib/email/emailer'
 import { wrapEmailContent } from '@/lib/emails/template'
 
@@ -28,40 +27,12 @@ interface CallTranscript {
   }
 }
 
-function formatMeasurementsTable(measurements: any[]) {
-  return `
-    <table style="width: 100%; border-collapse: collapse; margin: 20px 0; background: white;">
-      <thead>
-        <tr style="background: #f3f4f6;">
-          <th style="padding: 12px; text-align: left; border: 1px solid #e5e7eb;">Variable</th>
-          <th style="padding: 12px; text-align: left; border: 1px solid #e5e7eb;">Value</th>
-          <th style="padding: 12px; text-align: left; border: 1px solid #e5e7eb;">Unit</th>
-          <th style="padding: 12px; text-align: left; border: 1px solid #e5e7eb;">Category</th>
-          <th style="padding: 12px; text-align: left; border: 1px solid #e5e7eb;">Time</th>
-        </tr>
-      </thead>
-      <tbody>
-        ${measurements.map(m => `
-          <tr>
-            <td style="padding: 12px; border: 1px solid #e5e7eb;">${m.variableName}</td>
-            <td style="padding: 12px; border: 1px solid #e5e7eb;">${m.value}</td>
-            <td style="padding: 12px; border: 1px solid #e5e7eb;">${m.unitName}</td>
-            <td style="padding: 12px; border: 1px solid #e5e7eb;">${m.variableCategoryName}</td>
-            <td style="padding: 12px; border: 1px solid #e5e7eb;">${new Date(m.startAt).toLocaleString()}</td>
-          </tr>
-        `).join('')}
-      </tbody>
-    </table>
-  `
-}
-
 function getCallSummaryEmail(params: {
   transcript: string
   callerName: string
   callDate: Date
   baseUrl: string
   userId: string
-  measurements: any[]
 }) {
   const content = `
     <div style="max-width: 800px; margin: 0 auto; padding: 20px;">
@@ -72,11 +43,6 @@ function getCallSummaryEmail(params: {
       <div style="margin: 20px 0; padding: 15px; background: #f5f5f5; border-left: 4px solid #2563eb;">
         <pre style="white-space: pre-wrap; font-family: inherit;">${params.transcript}</pre>
       </div>
-
-      ${params.measurements.length > 0 ? `
-        <h2 style="color: #2563eb; margin: 24px 0 16px;">Measurements Recorded</h2>
-        ${formatMeasurementsTable(params.measurements)}
-      ` : ''}
     </div>
   `
 
@@ -140,13 +106,6 @@ export async function POST(request: Request) {
       })
     }
 
-    // Process transcript with text2measurements
-    const measurements = await text2measurements(
-      data.call.transcript,
-      new Date(data.call.end_timestamp).toISOString(),
-      0 // Default to UTC if no timezone info available
-    )
-
     // Send email summaries to recipients
     const baseUrl = process.env.NEXT_PUBLIC_APP_URL!
     const callDate = new Date(data.call.end_timestamp)
@@ -163,16 +122,12 @@ export async function POST(request: Request) {
             callDate,
             baseUrl,
             userId: recipient.person.id,
-            measurements
           })
         })
       }
     }
 
-    return NextResponse.json({ 
-      message: 'Measurements processed successfully',
-      measurements
-    })
+    return NextResponse.json({ message: 'Call transcript processed successfully' })
 
   } catch (error) {
     console.error('Error processing call transcript:', error)

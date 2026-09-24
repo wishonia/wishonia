@@ -10,7 +10,3 @@ export interface DomainNavigation {
   avatarNav: NavItem[]
   footerNav: NavItem[]
 }
-
-export interface NavigationConfig {
-  [domain: string]: DomainNavigation
-}

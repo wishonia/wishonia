@@ -1,7 +1,6 @@
 "use server"
 
 import { revalidatePath } from "next/cache"
-import { QueryCache } from "@tanstack/react-query"
 import { prisma } from "@/lib/db"
 import { getCurrentUser } from "@/lib/session"
 import type { Chat, ChatMessage, Agent } from "@prisma/client"
@@ -109,18 +108,6 @@ export async function removeChat({ id, path }: { id: string; path: string }) {
       id,
     },
   })
-  const queryCache = new QueryCache({
-    onError: (error) => {
-      console.log(error)
-    },
-    onSuccess: (data) => {
-      console.log(data)
-    },
-    onSettled: (data, error) => {
-      console.log(data, error)
-    },
-  })
-  const query = queryCache.find({ queryKey: ["profiles"] })
 
   revalidatePath("/")
   return revalidatePath(path)

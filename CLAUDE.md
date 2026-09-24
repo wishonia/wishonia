@@ -32,11 +32,11 @@ Run a single test: `pnpm jest tests/my-test.test.ts`
 - **Framework**: Next.js 14.2 (App Router), React 18, TypeScript 5.3
 - **Package manager**: pnpm
 - **Database**: PostgreSQL (pgvector via Docker on port 5433), Prisma ORM
-- **Auth**: NextAuth.js 4 with JWT strategy, PrismaAdapter (Google, GitHub, Email magic links, DFDA OAuth)
-- **State**: Zustand (client state), React Query (server state)
+- **Auth**: NextAuth.js 4 with JWT strategy, PrismaAdapter (Google, GitHub, Email magic links)
+- **State**: Server components and server actions; React context for client state
 - **UI**: Tailwind CSS, shadcn/ui (Radix UI primitives), Framer Motion
-- **AI**: Vercel AI SDK with OpenAI/Anthropic/Google/Azure/Ollama providers, LangChain, CopilotKit
-- **Testing**: Jest (unit), Playwright (E2E)
+- **AI**: Vercel AI SDK with OpenAI/Anthropic/Google/Azure/Ollama providers
+- **Testing**: Jest (unit); Playwright only for the Checkly browser check in `__checks__/`
 - **Infra**: Vercel deployment, Sentry error tracking, Stripe payments, Redis caching
 
 ## Architecture
@@ -54,7 +54,6 @@ Run a single test: `pnpm jest tests/my-test.test.ts`
 |------|---------|
 | `lib/auth.ts` | NextAuth configuration and `authOptions` |
 | `lib/db.ts` | Prisma client singleton |
-| `lib/store.ts` | Zustand stores |
 | `lib/logger.ts` | Structured logger (wraps Sentry) |
 | `lib/actions/` | Server actions |
 | `lib/agents/` | AI agent utilities |
@@ -86,7 +85,7 @@ Prisma schema at `prisma/schema.prisma`. Key models: User, Agent, GlobalProblem,
 
 ### Environment Variables
 
-Validated via `@t3-oss/env-nextjs` in `env.mjs`. Required server vars: `NEXTAUTH_SECRET`, `DATABASE_URL`, `GOOGLE_CLIENT_ID/SECRET`, `GITHUB_CLIENT_ID/SECRET`, `DFDA_CLIENT_ID/SECRET`, `EMAIL_SERVER`, `EMAIL_FROM`. See `.env.example` for full list.
+Validated via `@t3-oss/env-nextjs` in `env.mjs`. Required server vars: `NEXTAUTH_SECRET`, `DATABASE_URL`, `GOOGLE_CLIENT_ID/SECRET`, `GITHUB_CLIENT_ID/SECRET`, `EMAIL_SERVER`, `EMAIL_FROM`. See `.env.example` for full list.
 
 ## Coding Conventions
 

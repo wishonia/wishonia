@@ -4,47 +4,9 @@ import { getServerSession } from "next-auth/next"
 import EmailProvider from "next-auth/providers/email"
 import GithubProvider from "next-auth/providers/github"
 import GoogleProvider from "next-auth/providers/google"
-import type { OAuthConfig } from "next-auth/providers/oauth"
 
 import { env } from "@/env.mjs"
 import { prisma as db } from "@/lib/db"
-
-interface DFDAProfile {
-  id: number | string
-  displayName: string
-  email: string
-  avatar?: string
-
-  [key: string]: any // Add index signature for UrlParams compatibility
-}
-
-const DFDAProvider = {
-  id: "dfda",
-  name: "The Decentralized FDA",
-  type: "oauth",
-  version: "2.0",
-  authorization: {
-    url: "https://safe.dfda.earth/oauth/authorize",
-    params: {
-      scope: "readmeasurements writemeasurements",
-      grant_type: "authorization_code",
-    },
-  },
-  token: {
-    url: "https://safe.dfda.earth/oauth/token",
-  },
-  userinfo: "https://safe.dfda.earth/api/v1/user",
-  profile(profile: DFDAProfile) {
-    return {
-      id: profile.id.toString(),
-      name: profile.displayName,
-      email: profile.email,
-      image: profile.avatar,
-    }
-  },
-  clientId: process.env.DFDA_CLIENT_ID,
-  clientSecret: process.env.DFDA_CLIENT_SECRET,
-} satisfies OAuthConfig<DFDAProfile>
 
 export const authOptions: NextAuthOptions = {
   adapter: PrismaAdapter(db),
@@ -74,7 +36,6 @@ export const authOptions: NextAuthOptions = {
         },
       },
     }),
-    DFDAProvider,
   ],
   callbacks: {
     async session({ token, session }) {
@@ -164,19 +125,8 @@ export const authOptions: NextAuthOptions = {
             return `/auth/error?error=SignInRequired&email=${user.email}`
           }
 
-          // For dFDA, allow email mismatch but log it
-          if (
-            account.provider === "dfda" &&
-            session.user.id !== existingUser.id
-          ) {
-            console.log("dFDA email mismatch:", {
-              sessionEmail: session.user.email,
-              dfdaEmail: user.email,
-              userId: session.user.id,
-            })
-            // Continue with the connection despite email mismatch
-          } else if (session.user.id !== existingUser.id) {
-            // For other providers, maintain strict email matching
+          // Only link accounts whose email belongs to the signed-in user
+          if (session.user.id !== existingUser.id) {
             return `/auth/error?error=EmailMismatch`
           }
 
