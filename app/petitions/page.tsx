@@ -63,10 +63,10 @@ export default async function PetitionsPage() {
                       <h2 className="text-2xl font-semibold mb-3 hover:underline">{petition.title}</h2>
                     </Link>
                     {session?.user?.email === petition.creator.email && (
-                      <Link href={`/petitions/${petition.id}/edit`}>
+                      <Link href={`/petitions/${petition.id}/admin`}>
                         <Button variant="ghost" size="sm" className="opacity-0 group-hover:opacity-100 transition-opacity">
                           <PencilIcon className="h-4 w-4 mr-2" />
-                          Edit
+                          Manage
                         </Button>
                       </Link>
                     )}

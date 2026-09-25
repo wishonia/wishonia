@@ -9,7 +9,7 @@ import { NotificationPreferences } from "./components/NotificationPreferences"
 export default async function NotificationsPage() {
   const session = await getServerSession(authOptions)
   if (!session?.user?.id) {
-    redirect("/auth/signin")
+    redirect("/signin")
   }
 
   const user = await prisma.user.findUnique({
@@ -34,7 +34,7 @@ export default async function NotificationsPage() {
   })
 
   if (!user) {
-    redirect("/auth/signin")
+    redirect("/signin")
   }
 
   return (

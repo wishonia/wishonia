@@ -76,7 +76,7 @@ export function GlobalProblemForm({
       description: "Your Problem has been updated.",
     })
 
-    router.push(`/globalProblems/${globalProblemId}/settings`)
+    router.push(`/globalProblems/${globalProblemId}`)
     router.refresh()
   }
 
