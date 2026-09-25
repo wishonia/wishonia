@@ -10,6 +10,9 @@ import { OrganizationEvents } from './components/OrganizationEvents'
 import { OrganizationProducts } from './components/OrganizationProducts'
 import { OrganizationPartnerships } from './components/OrganizationPartnerships'
 import { getOrganizationRelationships } from '@/lib/queries/organizationQueries'
+import { logger } from '@/lib/logger'
+import { getOrganizationClaimCheck } from '@/app/organizations/organizationActions'
+import { ClaimOrganization } from './components/ClaimOrganization'
 
 export default async function OrganizationPage({ params }: { params: { slug: string } }) {
   const session = await getServerSession(authOptions)
@@ -56,8 +59,15 @@ export default async function OrganizationPage({ params }: { params: { slug: str
 
   const isOwner = session?.user?.id === organization.ownerId
   const isFollowing = organization.followers.some(f => f.userId === session?.user?.id)
+  const claimCheck = session?.user && !organization.ownerId
+    ? await getOrganizationClaimCheck(organization.id)
+    : null
 
-  const relationships = await getOrganizationRelationships(organization.id)
+  // Fills in missing members, products, services, and partnerships with AI.
+  // They show on later views; a failed AI call must not break this one.
+  await getOrganizationRelationships(organization.id).catch((error) => {
+    logger.error("Failed to generate organization relationships", { error })
+  })
 
   return (
     <div className="container mx-auto px-4 py-8">
@@ -68,6 +78,9 @@ export default async function OrganizationPage({ params }: { params: { slug: str
             <h1 className="text-3xl font-bold">{organization.name}</h1>
             {organization.tagline && (
               <p className="text-muted-foreground mt-2">{organization.tagline}</p>
+            )}
+            {claimCheck && (
+              <ClaimOrganization organizationId={organization.id} check={claimCheck} />
             )}
           </div>
           <OrganizationActions 
