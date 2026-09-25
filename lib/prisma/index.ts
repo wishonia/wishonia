@@ -1,13 +1,6 @@
-import { PrismaClient } from "@prisma/client"
+// lib/db.ts owns the one Prisma client; this module re-exports it for the
+// files that import "@/lib/prisma".
+import { prisma } from "@/lib/db"
 
-declare global {
-  var prisma: PrismaClient | undefined
-}
-
-const client = globalThis.prisma || new PrismaClient()
-if (process.env.NODE_ENV !== "production") globalThis.prisma = client
-
-export default client
-
-// also export prisma as the variable name prisma for backwards compatibility
-export const prisma = client
+export { prisma }
+export default prisma

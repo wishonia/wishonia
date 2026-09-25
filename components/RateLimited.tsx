@@ -13,7 +13,7 @@ function RateLimited() {
         Your IP address has been rate-limted by{" "}
         <span className="font-semibold">GitHub</span>. Please{" "}
         <Link
-          href="/sign-in"
+          href="/signin"
           className="rounded-md border border-orange-400 bg-zinc-800 p-2 text-sm font-semibold text-white hover:border-transparent hover:bg-zinc-600"
         >
           Sign-in

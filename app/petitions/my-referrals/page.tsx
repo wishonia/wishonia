@@ -1,11 +1,12 @@
 import { getServerSession } from "next-auth/next"
+import { authOptions } from "@/lib/auth"
 import { prisma } from "@/lib/prisma"
 import Link from "next/link"
 import { redirect } from "next/navigation"
 import { Card } from "@/components/ui/card"
 
 export default async function MyReferralsPage() {
-  const session = await getServerSession()
+  const session = await getServerSession(authOptions)
   if (!session?.user) {
     redirect('/api/auth/signin')
   }

@@ -1,7 +1,6 @@
 "use client"
 
 import React, { useEffect, useState } from "react"
-import { VisuallyHidden } from "@radix-ui/themes"
 
 import { cn } from "@/lib/utils"
 import { buttonVariants } from "@/components/ui/button"
@@ -47,9 +46,7 @@ export function LoginPromptButton({
         </button>
       </DialogTrigger>
       <DialogContent className="mx-auto w-[95%] rounded-lg sm:max-w-[425px]">
-        <VisuallyHidden>
-          <DialogTitle>Sign In</DialogTitle>
-        </VisuallyHidden>
+        <DialogTitle className="sr-only">Sign In</DialogTitle>
         <UserAuthForm callbackUrl={callbackUrl} />
       </DialogContent>
     </Dialog>

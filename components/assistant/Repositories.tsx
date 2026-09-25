@@ -20,7 +20,7 @@ import {
 } from "@/components/ui/dropdown-menu"
 
 import AssistantDisplay from "../AssistantDisplay"
-import License from "../icons/License"
+import { Scale } from "lucide-react"
 import { Badge } from "../ui/badge"
 import { Button } from "../ui/button"
 
@@ -132,7 +132,7 @@ function Repositories({ props: repos }: { props: RepoProps[] }) {
                       •
                       <span className="flex items-center gap-1 text-sm text-neutral-500">
                         <span>
-                          <License />
+                          <Scale size={16} strokeWidth={1.5} />
                         </span>
                         <span className="font-light">
                           {r?.license?.spdx_id !== null ||

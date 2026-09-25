@@ -14,7 +14,7 @@ export default function ArticleGrid({ articles }: ArticleGridProps) {
             {articles.map((article) => (
                 <Card key={article.id} className="flex flex-col overflow-hidden hover:shadow-lg transition-shadow duration-300">
                     {article.featuredImage && (
-                        <Link href={`/research/articles/${article.slug}`} className="block">
+                        <Link href={`/article/${article.slug}`} className="block">
                             <div className="relative h-48 overflow-hidden">
                                 <Image
                                     src={article.featuredImage}

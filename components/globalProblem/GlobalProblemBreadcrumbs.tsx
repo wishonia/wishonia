@@ -89,8 +89,12 @@ export function GlobalProblemBreadcrumbs({ globalProblem }: GlobalProblemBreadcr
           .filter(([key]) => key !== currentSubpage)
           .map(([key, item]) => (
             <DropdownMenuItem key={key} asChild>
-              <Link 
-                href={`/globalProblems/${globalProblem?.id}/${key}`}
+              <Link
+                href={
+                  key === "overview"
+                    ? `/globalProblems/${globalProblem?.id}`
+                    : `/globalProblems/${globalProblem?.id}/${key}`
+                }
                 className="w-full"
               >
                 <span className="mr-2">{item.emoji}</span>

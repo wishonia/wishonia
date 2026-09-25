@@ -1,7 +1,7 @@
 import { Prisma } from '@prisma/client'
 import prisma from '@/lib/prisma'
 
-type GlobalProblemRelationshipsReturn = {
+export type GlobalProblemRelationships = {
   organizations: Prisma.OrganizationGlobalProblemGetPayload<{
     include: { organization: true }
   }>[]
@@ -17,7 +17,7 @@ type GlobalProblemRelationshipsReturn = {
 export async function getGlobalProblemRelationships(
   problemId: string,
   limit = 10
-): Promise<GlobalProblemRelationshipsReturn> {
+): Promise<GlobalProblemRelationships> {
   const [existingOrgs, existingPeople, totalOrgs, totalPeople] = await Promise.all([
     prisma.organizationGlobalProblem.findMany({
       where: { globalProblemId: problemId },

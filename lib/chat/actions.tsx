@@ -120,10 +120,6 @@ export const getUIStateFromAIState = async (aiState: ChatWithMessagesAndAgent) =
             <BotCard>
               <Repositories props={JSON.parse(m.content)} />
             </BotCard>
-          ) : m.name === "ask_about_wishonia" ? (
-            <BotCard>
-              <div>m.content</div>
-            </BotCard>
           ) : m.name === "show_readme_ui" ? (
             <BotCard>
               <Readme props={JSON.parse(m.content)} />

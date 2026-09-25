@@ -27,7 +27,7 @@ export default function ResearchForm({ initialTopic = '', onTopicChange }: Resea
 
     async function handleSubmit(submittedTopic: string) {
         if (!session?.user?.id) {
-            router.push('/auth/signin')
+            router.push('/signin')
             return
         }
 
