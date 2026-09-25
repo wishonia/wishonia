@@ -4,10 +4,9 @@ const withBundleAnalyzer = require('@next/bundle-analyzer')({
 
 /** @type {import('next').NextConfig} */
 const nextConfig = {
-  // The site is just a blank page, when I enable this
-  // experimental: {
-  //   instrumentationHook: true,
-  // },
+  experimental: {
+    instrumentationHook: true,
+  },
   webpack: (config) => {
     config.ignoreWarnings = [
       ...(config.ignoreWarnings || []),
@@ -102,14 +101,16 @@ if (!shouldUploadSentrySourceMaps) {
       // Hides source maps from generated client bundles
       hideSourceMaps: true,
 
-      // Automatically tree-shake Sentry logger statements to reduce bundle size
-      disableLogger: true,
+      webpack: {
+        // Automatically tree-shake Sentry logger statements to reduce bundle size
+        treeshake: { removeDebugLogging: true },
 
-      // Enables automatic instrumentation of Vercel Cron Monitors. (Does not yet work with App Router route handlers.)
-      // See the following for more information:
-      // https://docs.sentry.io/product/crons/
-      // https://vercel.com/docs/cron-jobs
-      automaticVercelMonitors: true,
+        // Enables automatic instrumentation of Vercel Cron Monitors. (Does not yet work with App Router route handlers.)
+        // See the following for more information:
+        // https://docs.sentry.io/product/crons/
+        // https://vercel.com/docs/cron-jobs
+        automaticVercelMonitors: true,
+      },
     }
   );
 }
