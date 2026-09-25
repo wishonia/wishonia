@@ -175,11 +175,6 @@ export const GlobalProblemSolutionsList: React.FC<PollProps> = ({
         const itemId = row.original.id
         return (
           <div className="flex items-center justify-center">
-            <Link href={`/globalProblemSolutions/${itemId}/edit`}>
-              <Button variant="ghost" className="mr-2">
-                <Icons.edit className="h-4 w-4" />
-              </Button>
-            </Link>
             <Button
               variant="ghost"
               onClick={async () => {

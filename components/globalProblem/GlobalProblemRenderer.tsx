@@ -7,7 +7,7 @@ import {
   CardHeader,
   CardTitle,
 } from "@/components/ui/card"
-import {  Share2, Check, Lightbulb, Settings, Users, BarChart2 } from "lucide-react"
+import {  Share2, Check, Lightbulb, Users } from "lucide-react"
 import { useState } from "react"
 import { toast } from "@/components/ui/use-toast"
 import Link from "next/link"
@@ -83,20 +83,6 @@ export function GlobalProblemRenderer({
                   <Button variant="outline" className="w-full">
                     <Users className="mr-2 h-4 w-4" />
                     Vote on Solutions
-                  </Button>
-                </Link>
-
-                <Link href={`/globalProblems/${globalProblem.id}/impact`}>
-                  <Button variant="outline" className="w-full">
-                    <BarChart2 className="mr-2 h-4 w-4" />
-                    Impact Analysis
-                  </Button>
-                </Link>
-
-                <Link href={`/globalProblems/${globalProblem.id}/settings`}>
-                  <Button variant="outline" className="w-full">
-                    <Settings className="mr-2 h-4 w-4" />
-                    Problem Settings
                   </Button>
                 </Link>
 

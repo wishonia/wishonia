@@ -3,7 +3,7 @@
 import * as React from "react"
 import { Organization } from "@prisma/client"
 import { Button } from "@/components/ui/button"
-import { Heart, Edit, Share2 } from "lucide-react"
+import { Heart, Share2 } from "lucide-react"
 import { useRouter } from "next/navigation"
 
 interface OrganizationActionsProps {
@@ -25,7 +25,7 @@ export function OrganizationActions({
 
   const handleFollow = async () => {
     if (!userId) {
-      router.push('/login')
+      router.push('/signin')
       return
     }
     
@@ -42,15 +42,8 @@ export function OrganizationActions({
 
   return (
     <div className="flex gap-2">
-      {isOwner ? (
-        <Button 
-          variant="outline"
-          onClick={() => router.push(`/organizations/${organization.slug}/edit`)}
-        >
-          <Edit className="h-4 w-4 mr-2" />
-          Edit
-        </Button>
-      ) : (
+      {/* Owners edit the organization inline in OrganizationInfo. */}
+      {!isOwner && (
         <Button
           variant={following ? "secondary" : "default"}
           onClick={handleFollow}

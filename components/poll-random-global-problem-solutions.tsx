@@ -26,11 +26,11 @@ export const PollRandomGlobalProblemSolutions: React.FC<PollProps> = ({
     )
     const data = await response.json()
     if (!data.thisGlobalProblemSolution) {
-      router.push("/globalProblemSolutions/results")
+      router.push(`/globalProblems/${globalProblemId}/solutions`)
       return
     }
     if (!data.thatGlobalProblemSolution) {
-      router.push("/globalProblemSolutions/results")
+      router.push(`/globalProblems/${globalProblemId}/solutions`)
       return
     }
     setGlobalProblemSolutions(data)
