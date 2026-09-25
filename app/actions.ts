@@ -7,14 +7,17 @@ import type { Chat, ChatMessage, Agent } from "@prisma/client"
 
 type SetChatResults = (Chat & { messages: ChatMessage[]; agent: Agent | null })[]
 
-export async function getChat(
-  id: string,
-  loggedInUserId: string
-): Promise<SetChatResults> {
+export async function getChat(id: string): Promise<SetChatResults> {
+  // Take the user from the session: this action is callable from the client.
+  const user = await getCurrentUser()
+  if (!user?.id) {
+    return []
+  }
+
   const receivedChat = await prisma.chat.findFirst({
     where: {
       id,
-      userId: loggedInUserId,
+      userId: user.id,
     },
     include: {
       messages: true,
@@ -40,15 +43,16 @@ export async function getChat(
   ]
 }
 
-export async function getChats(userId?: string | null) {
-  if (!userId) {
+export async function getChats() {
+  const user = await getCurrentUser()
+  if (!user?.id) {
     return []
   }
 
   try {
     const receivedChats = await prisma.chat.findMany({
       where: {
-        userId: userId,
+        userId: user.id,
       },
       include: {
         //messages: true, // Include related messages
@@ -113,13 +117,14 @@ export async function removeChat({ id, path }: { id: string; path: string }) {
   return revalidatePath(path)
 }
 
-export const clearAllChats = async (userId: string) => {
+export const clearAllChats = async () => {
   const user = await getCurrentUser()
-  if (!user || !userId) {
+  if (!user?.id) {
     return {
       error: "Unauthorized",
     }
   }
+  const userId = user.id
 
   if (user) {
     const deletedChats = await prisma.chat.findMany({

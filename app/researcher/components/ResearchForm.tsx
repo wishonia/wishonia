@@ -40,7 +40,7 @@ export default function ResearchForm({ initialTopic = '', onTopicChange }: Resea
         setError('')
 
         try {
-            const generatedArticle = await findOrCreateArticleByTopic(submittedTopic, session.user.id)
+            const generatedArticle = await findOrCreateArticleByTopic(submittedTopic)
             setArticle(generatedArticle)
             onTopicChange(submittedTopic)
         } catch (err) {

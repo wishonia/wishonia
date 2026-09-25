@@ -32,7 +32,7 @@ export default async function ChatPage({ params }: ChatPageProps) {
     redirect(`/api/auth/login?post_login_redirect_url=/agents/${params.agentId}/chat/${params.chatId}`)
   }
 
-  const chat = await getChat(params.chatId, user.id)
+  const chat = await getChat(params.chatId)
 
   if (!chat || !chat[0]) {
     redirect(`/agents/${params.agentId}/chat`)

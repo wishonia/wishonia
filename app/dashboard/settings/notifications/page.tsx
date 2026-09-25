@@ -47,7 +47,6 @@ export default async function NotificationsPage() {
           marketingEmails={user.marketingEmails}
           newsletterEmails={user.newsletterEmails}
           unsubscribeFromAll={user.unsubscribeFromAll}
-          userId={user.id}
         />
 
         <div className="border-t pt-8">

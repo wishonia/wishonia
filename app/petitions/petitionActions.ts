@@ -357,6 +357,12 @@ export async function createPetitionUpdate(
 export async function generatePetition(description: string) {
   "use server"
 
+  // Each call spends LLM credits, so only signed-in users may generate.
+  const session = await getServerSession(authOptions)
+  if (!session?.user?.id) {
+    throw new Error("Must be signed in to generate petitions")
+  }
+
   console.log("Starting petition generation with description:", description)
 
   try {
@@ -406,6 +412,11 @@ export async function generatePetition(description: string) {
 }
 
 export async function uploadImage(formData: FormData) {
+  const session = await getServerSession(authOptions)
+  if (!session?.user?.id) {
+    throw new Error("Must be signed in to upload images")
+  }
+
   console.log("Server: Starting image upload")
   try {
     const file = formData.get("image") as File

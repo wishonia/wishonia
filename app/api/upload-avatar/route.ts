@@ -1,7 +1,13 @@
 import { NextResponse } from "next/server"
 import { put } from "@vercel/blob"
 
+import { getUserIdServer } from "@/lib/api/getUserIdServer"
+
 export async function POST(request: Request): Promise<NextResponse> {
+  const userId = await getUserIdServer()
+  if (!userId) {
+    return NextResponse.json({ error: "Unauthorized" }, { status: 401 })
+  }
   const { searchParams } = new URL(request.url)
   const filename = searchParams.get("image")
   if (!filename) {
@@ -16,7 +22,7 @@ export async function POST(request: Request): Promise<NextResponse> {
       { status: 400 }
     )
   }
-  const blob = await put(filename, request.body, {
+  const blob = await put(`avatars/${userId}/${filename}`, request.body, {
     access: "public",
   })
   return NextResponse.json({ imageUrl: blob.url })

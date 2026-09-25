@@ -7,8 +7,15 @@ export interface Cache {
   delete(key: string): Promise<void>
 }
 
+let redisClient: Redis | undefined
+
+// Reuse one connection per server instance. A new client on every call leaks
+// a socket per request, because nothing closes it.
 export function getRedisClient() {
-  return new Redis(process.env.REDIS_URL || "redis://localhost:6379")
+  if (!redisClient) {
+    redisClient = new Redis(process.env.REDIS_URL || "redis://localhost:6379")
+  }
+  return redisClient
 }
 
 // Our own Redis cache implementation to replace Langchain's
