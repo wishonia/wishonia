@@ -1,5 +1,5 @@
 import { LanguageModelV1 } from "@ai-sdk/provider";
-import { Prisma, PrismaClient, ArticleStatus } from "@prisma/client";
+import { Prisma, ArticleStatus } from "@prisma/client";
 import { generateObject } from "ai";
 import { RegularSearchOptions, SearchResult } from "exa-js";
 import { z } from "zod";
@@ -8,7 +8,7 @@ import { generateSearchQueries } from "@/lib/agents/researcher/searchQueryGenera
 import { DEFAULT_MODEL_NAME, getModel, ModelName } from "@/lib/utils/modelUtils";
 import { slugify } from "@/lib/utils/slugify";
 import { MODEL_PRICING } from "@/lib/constants/llmModelPricing";
-const prisma = new PrismaClient()
+import { prisma } from "@/lib/db";
 
 const GeneratedReportSchema = z.object({
   title: z.string().describe("The title of the report"),
