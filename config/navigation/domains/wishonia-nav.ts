@@ -138,9 +138,11 @@ export const wishoniaNavigation: DomainNavigation = {
   ],
   sidebarNav: [
     wishoniaLinks.dashboard,
+    wishoniaLinks.createWish,
     wishoniaLinks.agents,
     wishoniaLinks.globalProblemsVote,
     wishoniaLinks.globalSolutionsVote,
+    wishoniaLinks.petitions,
     wishoniaLinks.researcher,
     commonLinks.docs,
     commonLinks.contributeOnGithub,
