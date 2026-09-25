@@ -20,7 +20,7 @@ export async function updateUserEmailSettings(settings: {
     data: settings,
   })
 
-  revalidatePath("/settings/notifications")
+  revalidatePath("/dashboard/settings/notifications")
 }
 
 export async function unsubscribeFromAll() {
@@ -50,5 +50,5 @@ export async function unsubscribeFromAll() {
     },
   })
 
-  revalidatePath("/settings/notifications")
+  revalidatePath("/dashboard/settings/notifications")
 }

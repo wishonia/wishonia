@@ -10,7 +10,6 @@ onlyBuiltDependencies:
   - es5-ext
   - esbuild
   - prisma
-  - puppeteer
   - sharp
   - utf-8-validate
   - yarn

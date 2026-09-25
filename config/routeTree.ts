@@ -54,32 +54,6 @@ export const routeTree = {
         }
       }
     },
-    "call-scheduler": {
-      "name": "call-scheduler",
-      "path": "/call-scheduler",
-      "isDynamic": false,
-      "children": {
-        "account": {
-          "name": "account",
-          "path": "/call-scheduler/account",
-          "isDynamic": false,
-          "children": {}
-        },
-        "schedules": {
-          "name": "schedules",
-          "path": "/call-scheduler/schedules",
-          "isDynamic": false,
-          "children": {
-            "new": {
-              "name": "new",
-              "path": "/call-scheduler/schedules/new",
-              "isDynamic": false,
-              "children": {}
-            }
-          }
-        }
-      }
-    },
     "chat": {
       "name": "chat",
       "path": "/chat",
@@ -139,35 +113,11 @@ export const routeTree = {
         }
       }
     },
-    "docs": {
-      "name": "docs",
-      "path": "/docs",
-      "isDynamic": false,
-      "children": {}
-    },
-    "github": {
-      "name": "github",
-      "path": "/github",
-      "isDynamic": false,
-      "children": {}
-    },
     "globalProblems": {
       "name": "globalProblems",
       "path": "/globalProblems",
       "isDynamic": false,
       "children": {
-        "new": {
-          "name": "new",
-          "path": "/globalProblems/new",
-          "isDynamic": false,
-          "children": {}
-        },
-        "results": {
-          "name": "results",
-          "path": "/globalProblems/results",
-          "isDynamic": false,
-          "children": {}
-        },
         "globalProblemId": {
           "name": "globalProblemId",
           "path": "/globalProblems/[globalProblemId]",
@@ -205,6 +155,18 @@ export const routeTree = {
               "children": {}
             }
           }
+        },
+        "new": {
+          "name": "new",
+          "path": "/globalProblems/new",
+          "isDynamic": false,
+          "children": {}
+        },
+        "results": {
+          "name": "results",
+          "path": "/globalProblems/results",
+          "isDynamic": false,
+          "children": {}
         }
       }
     },
@@ -213,18 +175,6 @@ export const routeTree = {
       "path": "/globalSolutions",
       "isDynamic": false,
       "children": {
-        "new": {
-          "name": "new",
-          "path": "/globalSolutions/new",
-          "isDynamic": false,
-          "children": {}
-        },
-        "results": {
-          "name": "results",
-          "path": "/globalSolutions/results",
-          "isDynamic": false,
-          "children": {}
-        },
         "globalSolutionId": {
           "name": "globalSolutionId",
           "path": "/globalSolutions/[globalSolutionId]",
@@ -255,14 +205,20 @@ export const routeTree = {
               "children": {}
             }
           }
+        },
+        "new": {
+          "name": "new",
+          "path": "/globalSolutions/new",
+          "isDynamic": false,
+          "children": {}
+        },
+        "results": {
+          "name": "results",
+          "path": "/globalSolutions/results",
+          "isDynamic": false,
+          "children": {}
         }
       }
-    },
-    "orb": {
-      "name": "orb",
-      "path": "/orb",
-      "isDynamic": false,
-      "children": {}
     },
     "organizations": {
       "name": "organizations",
@@ -282,24 +238,6 @@ export const routeTree = {
       "path": "/petitions",
       "isDynamic": false,
       "children": {
-        "create": {
-          "name": "create",
-          "path": "/petitions/create",
-          "isDynamic": false,
-          "children": {}
-        },
-        "my-referrals": {
-          "name": "my-referrals",
-          "path": "/petitions/my-referrals",
-          "isDynamic": false,
-          "children": {}
-        },
-        "my-signatures": {
-          "name": "my-signatures",
-          "path": "/petitions/my-signatures",
-          "isDynamic": false,
-          "children": {}
-        },
         "id": {
           "name": "id",
           "path": "/petitions/[id]",
@@ -318,6 +256,24 @@ export const routeTree = {
               "children": {}
             }
           }
+        },
+        "create": {
+          "name": "create",
+          "path": "/petitions/create",
+          "isDynamic": false,
+          "children": {}
+        },
+        "my-referrals": {
+          "name": "my-referrals",
+          "path": "/petitions/my-referrals",
+          "isDynamic": false,
+          "children": {}
+        },
+        "my-signatures": {
+          "name": "my-signatures",
+          "path": "/petitions/my-signatures",
+          "isDynamic": false,
+          "children": {}
         }
       }
     },
@@ -331,56 +287,23 @@ export const routeTree = {
       "name": "researcher",
       "path": "/researcher",
       "isDynamic": false,
-      "children": {
-        "enhance": {
-          "name": "enhance",
-          "path": "/researcher/enhance",
-          "isDynamic": false,
-          "children": {}
-        }
-      }
-    },
-    "search": {
-      "name": "search",
-      "path": "/search",
-      "isDynamic": false,
-      "children": {
-        "id": {
-          "name": "id",
-          "path": "/search/[id]",
-          "isDynamic": true,
-          "children": {}
-        }
-      }
-    },
-    "voters": {
-      "name": "voters",
-      "path": "/voters",
-      "isDynamic": false,
-      "children": {
-        "id": {
-          "name": "id",
-          "path": "/voters/[id]",
-          "isDynamic": true,
-          "children": {}
-        }
-      }
+      "children": {}
     },
     "warVsCures": {
       "name": "warVsCures",
       "path": "/warVsCures",
       "isDynamic": false,
       "children": {
-        "results": {
-          "name": "results",
-          "path": "/warVsCures/results",
-          "isDynamic": false,
-          "children": {}
-        },
         "...filename": {
           "name": "...filename",
           "path": "/warVsCures/[...filename]",
           "isDynamic": true,
+          "children": {}
+        },
+        "results": {
+          "name": "results",
+          "path": "/warVsCures/results",
+          "isDynamic": false,
           "children": {}
         }
       }
@@ -396,16 +319,16 @@ export const routeTree = {
       "path": "/wishingWells",
       "isDynamic": false,
       "children": {
-        "results": {
-          "name": "results",
-          "path": "/wishingWells/results",
-          "isDynamic": false,
-          "children": {}
-        },
         "wishingWellId": {
           "name": "wishingWellId",
           "path": "/wishingWells/[wishingWellId]",
           "isDynamic": true,
+          "children": {}
+        },
+        "results": {
+          "name": "results",
+          "path": "/wishingWells/results",
+          "isDynamic": false,
           "children": {}
         }
       }

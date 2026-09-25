@@ -5,7 +5,6 @@ import { nanoid } from "nanoid"
 import OpenAI from "openai"
 import { z } from "zod"
 
-import { askSupabase } from "@/lib/docs/docsAgent"
 import { getCurrentUser } from "@/lib/session"
 import { Agent } from "@/lib/types"
 import {
@@ -382,51 +381,6 @@ export async function submitUserMessage(
               ) : (
                 <RateLimited />
               )}
-            </BotCard>
-          )
-        },
-      },
-      ask_about_wishonia: {
-        description: "Ask a general question about Wishonia or Wishocracy",
-        parameters: z.object({
-          question: z
-            .string()
-            .describe("The question to answer about wishonia or wishocracy"),
-        }),
-        render: async function* ({ question }) {
-          yield (
-            <BotCard>
-              <ReadmeSkeleton />
-            </BotCard>
-          )
-          //const rateLimitRemaining = await checkRateLimit()
-          const rateLimitRemaining = true
-          if (!rateLimitRemaining) {
-            return (
-              <BotCard>
-                <RateLimited />
-              </BotCard>
-            )
-          }
-          const content = await askSupabase(question, false)
-          await sleep(1000)
-
-          aiState.done({
-            ...aiState.get(),
-            messages: [
-              ...aiState.get().messages,
-              {
-                id: nanoid(),
-                role: "function",
-                name: "ask_about_wishonia",
-                content: content,
-              },
-            ],
-          })
-
-          return (
-            <BotCard>
-              <Readme props={content} />
             </BotCard>
           )
         },

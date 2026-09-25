@@ -1,9 +1,10 @@
 import { getServerSession } from "next-auth/next"
+import { authOptions } from "@/lib/auth"
 import { redirect } from "next/navigation"
 import { CreatePetitionForm } from "../components/CreatePetitionForm"
 
 export default async function CreatePetitionPage() {
-  const session = await getServerSession()
+  const session = await getServerSession(authOptions)
   if (!session?.user) {
     redirect('/api/auth/signin')
   }

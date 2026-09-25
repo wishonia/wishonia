@@ -1,12 +1,10 @@
 import { GlobalTask as PrismaGlobalTask, TaskStatus, TaskComplexity } from '@prisma/client'
 import { z } from 'zod'
 
+import type { TaskTreeNode } from '@/lib/tasks/buildTaskTree'
+
 // Base Prisma-extended types
-export type GlobalTaskWithChildren = PrismaGlobalTask & {
-  childTasks: {
-    child: GlobalTaskWithChildren
-  }[]
-}
+export type GlobalTaskWithChildren = TaskTreeNode<PrismaGlobalTask>
 
 export type GlobalTaskResponse = {
   tasks: GlobalTaskWithChildren[]

@@ -1,4 +1,5 @@
 import { getServerSession } from "next-auth/next"
+import { authOptions } from "@/lib/auth"
 import { prisma } from "@/lib/prisma"
 import Link from "next/link"
 import { Button } from "@/components/ui/button"
@@ -7,7 +8,7 @@ import { LoginPromptButton } from "@/components/LoginPromptButton"
 import { Card, CardContent } from "@/components/ui/card"
 
 export default async function PetitionsPage() {
-  const session = await getServerSession()
+  const session = await getServerSession(authOptions)
   const petitions = await prisma.petition.findMany({
     include: {
       _count: {
@@ -62,10 +63,10 @@ export default async function PetitionsPage() {
                       <h2 className="text-2xl font-semibold mb-3 hover:underline">{petition.title}</h2>
                     </Link>
                     {session?.user?.email === petition.creator.email && (
-                      <Link href={`/petitions/${petition.id}/edit`}>
+                      <Link href={`/petitions/${petition.id}/admin`}>
                         <Button variant="ghost" size="sm" className="opacity-0 group-hover:opacity-100 transition-opacity">
                           <PencilIcon className="h-4 w-4 mr-2" />
-                          Edit
+                          Manage
                         </Button>
                       </Link>
                     )}
