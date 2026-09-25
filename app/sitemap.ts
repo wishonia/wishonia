@@ -20,9 +20,6 @@ const EXCLUDED_PREFIXES = [
   // Creation/settings pages (auth-required)
   "/globalProblems/new",
   "/globalSolutions/new",
-  // Call scheduler - auth-required
-  "/call-scheduler/account",
-  "/call-scheduler/schedules",
 ]
 
 function collectStaticRoutes(node: RouteNode): string[] {

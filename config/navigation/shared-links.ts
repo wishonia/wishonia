@@ -3,9 +3,10 @@ import { siteConfig } from "../site"
 export const commonLinks = {
   docs: {
     title: "Docs",
-    href: "/docs",
+    href: `${siteConfig.links.github}/tree/main/public/docs`,
     icon: "docs",
     tooltip: "View the documentation",
+    external: true,
   },
   contributeOnGithub: {
     title: "GitHub",

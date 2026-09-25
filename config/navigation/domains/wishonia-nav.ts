@@ -45,12 +45,6 @@ export const wishoniaLinks = {
     img: "/img/screenshots/wish-allocation-list.png",
     tooltip: "Percent of resources society wants to allocate to each wish",
   },
-  voterLeaderboard: {
-    title: "Voter Leaderboard",
-    href: "/voters",
-    icon: "vote",
-    tooltip: "View the leaderboard of voters",
-  },
   researcher: {
     title: "Research Agent",
     href: "/researcher",
@@ -94,12 +88,6 @@ export const wishoniaLinks = {
     href: "/petitions",
     icon: "pencilSquare",
     tooltip: "Browse and sign petitions",
-  },
-  search: {
-    title: "Search",
-    href: "/search",
-    icon: "search",
-    tooltip: "Search across all content",
   },
   warVsCures: {
     title: "War vs Cures",
@@ -159,7 +147,6 @@ export const wishoniaNavigation: DomainNavigation = {
     commonLinks.reportBug,
     commonLinks.requestFeature,
     wishoniaLinks.organizations,
-    wishoniaLinks.search,
     wishoniaLinks.warVsCures,
     wishoniaLinks.warOnDisease,
   ],
