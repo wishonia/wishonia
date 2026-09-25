@@ -9,10 +9,21 @@ import { getGlobalProblemRelationships } from '@/lib/queries/globalProblemQuerie
 import type { GlobalProblemRelationships } from '@/lib/queries/globalProblemQueries'
 
 const CACHE_TTL = 60 * 60 * 24 // 24 hours in seconds
-const CACHE_KEY_PREFIX = 'global-problem-dashboard:'
+// Bump the version when the dashboard schema changes, so stale entries are skipped.
+const CACHE_KEY_PREFIX = 'global-problem-dashboard:v2:'
 
 export async function generateGlobalProblemDashboard(problemName: string): Promise<GlobalProblemDashboardData> {
   try {
+    // Every problem page calls this public action. Only existing problems get
+    // a dashboard, which caps LLM spend and stops callers from creating rows.
+    const globalProblem = await prisma.globalProblem.findUnique({
+      where: { name: problemName },
+      select: { id: true },
+    })
+    if (!globalProblem) {
+      throw new Error(`Global problem not found: ${problemName}`)
+    }
+
     if (process.env.NODE_ENV === 'development') {
       console.log('🤖 [LLM] Generating dashboard data for:', problemName)
     }
@@ -27,7 +38,7 @@ export async function generateGlobalProblemDashboard(problemName: string): Promi
       if (process.env.NODE_ENV === 'development') {
         console.log('📦 [Cache] Found cached dashboard data for:', problemName)
       }
-      //return JSON.parse(cachedData) as GlobalProblemDashboardData
+      return JSON.parse(cachedData) as GlobalProblemDashboardData
     }
 
     // If not in cache, generate new data
@@ -59,16 +70,6 @@ export async function generateGlobalProblemDashboard(problemName: string): Promi
     }
 
     const data = result.object
-
-    // First, get or create the global problem
-    const globalProblem = await prisma.globalProblem.upsert({
-      where: { name: problemName },
-      create: {
-        name: problemName,
-        userId: 'system',
-      },
-      update: {}
-    })
 
     // Cache the result
     await cache.update(cacheKey, JSON.stringify(data))
