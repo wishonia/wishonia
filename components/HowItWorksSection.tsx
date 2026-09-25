@@ -9,11 +9,20 @@ import ActionableTaskStrategyVisualizer from "@/components/landingPage/TaskGalax
 import TaskAllocationVisualizer from "@/components/landingPage/TaskAllocationVisualizer";
 import ResearchEffortCataloger from "@/components/landingPage/ResearchEffortCataloger";
 import ImpactTrackerVisualizer from "@/components/landingPage/ImpactTrackerVisualizer";
+import { prisma } from "@/lib/db";
 
 const problemName = "Alzheimer's Disease"
-const problemId = "alzheimer's-disease"
 
-const qaData = [
+// The example problem's id differs between databases (the seed data uses
+// createSlug(name)), so look it up by name.
+async function getExampleProblemId() {
+    const problem = await prisma.globalProblem
+        .findFirst({ where: { name: problemName }, select: { id: true } })
+        .catch(() => null)
+    return problem?.id ?? "alzheimer's-disease"
+}
+
+const getQaData = (problemId: string) => [
     {
         title: "1. Quantify What Everyone Wants",
         description:
@@ -75,7 +84,8 @@ const qaData = [
     },
 ]
 
-const HowItWorksSection: React.FC = () => {
+const HowItWorksSection = async () => {
+    const qaData = getQaData(await getExampleProblemId())
     return (
         <section className="mx-auto max-w-6xl p-4">
             <header className="p-4 sm:p-8 text-center">
