@@ -39,13 +39,13 @@ export default function UserSkills({ user }: UserSkillsProps) {
 
     const handleAddSkill = async (skillName: string) => {
         if (skillName.trim()) {
-            await addUserSkill(user.id, skillName.trim())
+            await addUserSkill(skillName.trim())
             setSearchTerm('')
         }
     }
 
     const handleRemoveSkill = async (skillId: string) => {
-        await removeUserSkill(user.id, skillId)
+        await removeUserSkill(skillId)
     }
 
     const handleKeyPress = (e: React.KeyboardEvent<HTMLInputElement>) => {

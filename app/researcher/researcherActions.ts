@@ -1,7 +1,7 @@
 "use server";
 
 import { revalidatePath } from "next/cache";
-import { PrismaClient, ArticleStatus } from "@prisma/client";
+import { ArticleStatus } from "@prisma/client";
 import {
   ArticleWithRelations,
   deleteArticleByPromptedTopic,
@@ -10,11 +10,13 @@ import {
   writeArticle
 } from "@/lib/agents/researcher/researcher";
 import OpenAI from "openai";
+import { requireUserId } from "@/lib/api/getUserIdServer";
+import { prisma } from "@/lib/db";
 import {uploadImageToVercel} from "@/lib/imageUploader";
+import { isAdmin } from "@/lib/session";
 const openai = new OpenAI({
     apiKey: process.env.OPENAI_API_KEY,
 })
-const prisma = new PrismaClient()
 
 type SortField = 'createdAt' | 'updatedAt' | 'publishedAt' | 'title'
 type SortOrder = 'asc' | 'desc'
@@ -141,9 +143,9 @@ export async function getArticleBySlugAction(slug: string): Promise<ArticleWithR
 }
 
 export async function findOrCreateArticleByTopic(
-  topic: string,
-  userId: string
+  topic: string
 ): Promise<ArticleWithRelations> {
+  const userId = await requireUserId()
   let article: ArticleWithRelations | null
 
   article = await findArticleByTopic(topic)
@@ -156,6 +158,18 @@ export async function findOrCreateArticleByTopic(
 }
 
 export async function generateImage(topic: string, articleId: string) {
+  const userId = await requireUserId()
+  const article = await prisma.article.findUnique({
+    where: { id: articleId },
+    select: { userId: true },
+  })
+  if (!article) {
+    throw new Error("Article not found")
+  }
+  if (article.userId !== userId && !(await isAdmin())) {
+    throw new Error("Only the article author can generate its image")
+  }
+
   try {
     const response = await openai.images.generate({
       model: "dall-e-3",
@@ -193,6 +207,7 @@ export async function generateImage(topic: string, articleId: string) {
   }
 }
 
-export async function deleteArticle(topic: string, userId: string) {
+export async function deleteArticle(topic: string) {
+  const userId = await requireUserId()
   return await deleteArticleByPromptedTopic(topic, userId);
 }

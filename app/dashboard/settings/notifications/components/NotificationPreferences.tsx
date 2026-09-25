@@ -15,7 +15,6 @@ interface Props {
   marketingEmails: boolean
   newsletterEmails: boolean
   unsubscribeFromAll: boolean
-  userId: string
 }
 
 export function NotificationPreferences({
@@ -23,7 +22,6 @@ export function NotificationPreferences({
   marketingEmails: initialMarketing,
   newsletterEmails: initialNewsletter,
   unsubscribeFromAll: initialUnsubscribe,
-  userId,
 }: Props) {
   const [settings, setSettings] = useState({
     marketingEmails: initialMarketing,
@@ -62,7 +60,7 @@ export function NotificationPreferences({
   async function handleUnsubscribeAll() {
     setSaving(true)
     try {
-      await unsubscribeFromAll(userId)
+      await unsubscribeFromAll()
       setSettings({
         marketingEmails: false,
         newsletterEmails: false,

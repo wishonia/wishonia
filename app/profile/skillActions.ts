@@ -1,9 +1,11 @@
 'use server'
 
 import prisma from "@/lib/prisma"
+import { requireUserId } from "@/lib/api/getUserIdServer"
 import { revalidatePath } from "next/cache"
 
-export async function addUserSkill(userId: string, skillName: string) {
+export async function addUserSkill(skillName: string) {
+    const userId = await requireUserId()
     const skill = await prisma.skill.upsert({
         where: { name: skillName },
         update: {},
@@ -20,7 +22,8 @@ export async function addUserSkill(userId: string, skillName: string) {
     revalidatePath('/profile')
 }
 
-export async function removeUserSkill(userId: string, skillId: string) {
+export async function removeUserSkill(skillId: string) {
+    const userId = await requireUserId()
     await prisma.userSkill.delete({
         where: {
             userId_skillId: {
