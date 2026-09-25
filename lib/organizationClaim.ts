@@ -1,6 +1,7 @@
 // Rules for claiming an organization that has no owner. A signed-in user can
-// claim it when their verified email address is at the organization's
-// website domain. Admins can claim any organization.
+// claim it when their email address is at the organization's website domain
+// and the current sign-in proved they control that address. Admins can claim
+// any organization.
 
 // Hosts where the path, not the domain, names the organization, so an email
 // address at the host shows no tie to the organization.
@@ -37,8 +38,8 @@ export function checkOrganizationClaim(input: {
   organizationUrl: string | null
   isAdmin: boolean
   email: string | null
-  emailVerified: Date | null
-  providers: string[]
+  // The address the current sign-in proved (see lib/signInEmail.ts).
+  verifiedEmail: string | null
 }): ClaimCheck {
   if (input.ownerId) {
     return { allowed: false, reason: "This organization already has an owner." }
@@ -57,9 +58,9 @@ export function checkOrganizationClaim(input: {
       reason: `To claim it, sign in with an email address at ${domain}.`,
     }
   }
-  // Google verifies account emails. Other addresses count once the user has
-  // signed in with a magic link sent to them.
-  if (!input.emailVerified && !input.providers.includes("google")) {
+  // A verification timestamp on the user is not enough: older accounts
+  // could change their email after it was set.
+  if (input.verifiedEmail?.toLowerCase() !== email) {
     return {
       allowed: false,
       reason: `To claim it, sign in with a magic link sent to ${input.email}.`,
