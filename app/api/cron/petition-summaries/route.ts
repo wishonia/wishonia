@@ -9,8 +9,13 @@ import {
 export const dynamic = "force-dynamic"
 
 export async function GET(request: NextRequest) {
-  const cronSecret = request.headers.get("x-cron-secret")
-  if (process.env.CRON_SECRET && cronSecret !== process.env.CRON_SECRET) {
+  // Vercel Cron sends `Authorization: Bearer <CRON_SECRET>`. Fail closed when
+  // the secret is unset, because this route emails every follower.
+  const cronSecret = process.env.CRON_SECRET
+  if (
+    !cronSecret ||
+    request.headers.get("authorization") !== `Bearer ${cronSecret}`
+  ) {
     return new Response("Unauthorized", { status: 401 })
   }
 
