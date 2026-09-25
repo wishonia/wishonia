@@ -27,7 +27,7 @@ body:
     attributes:
       label: Proposed Solution
       description: What solution do you recommend? What libraries do you recommend?
-      placeholder: Because our api states that it can accept 1-9 args, we should use spock to supply data driven tests to supply said range of input.
+      placeholder: Because our api states that it can accept 1-9 args, we should add table-driven Jest tests that cover that range of input.
     validations:
       required: true
   - type: textarea

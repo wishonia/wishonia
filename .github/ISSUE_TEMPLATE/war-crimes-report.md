@@ -7,14 +7,6 @@ assignees: mikepsinn
 
 ---
 
----
-name: War Crime Report
-about: Report a war crime
-title: "[WAR CRIME]: "
-labels: war crime
-assignees: ''
----
-
 ## War Crime Description
 
 Please describe the war crime in detail.

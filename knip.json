@@ -1,0 +1,10 @@
+{
+  "$schema": "https://unpkg.com/knip@5/schema.json",
+  "entry": [
+    "checkly.config.ts",
+    "__checks__/**/*.{ts,tsx}",
+    "prisma/seed.ts",
+    "scripts/*.{js,ts}"
+  ],
+  "ignore": ["public/**"]
+}

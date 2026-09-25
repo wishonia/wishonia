@@ -1,4 +1,3 @@
-version: "3.8"
 services:
   db:
     image: ankane/pgvector:latest
@@ -24,16 +23,5 @@ services:
     ports:
       - "6379:6379"
 
-  searxng:
-    image: searxng/searxng
-    ports:
-      - '${SEARXNG_PORT:-8080}:8080'
-    env_file: .env # can remove if you want to use env variables or in settings.yml
-    volumes:
-      - ./searxng-limiter.toml:/etc/searxng/limiter.toml
-      - ./searxng-settings.yml:/etc/searxng/settings.yml
-      - searxng_data:/data
-
 volumes:
   redis_data:
-  searxng_data:
