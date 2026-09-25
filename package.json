@@ -25,14 +25,14 @@
     "test:ci": "jest --ci",
     "format": "prettier --write .",
     "format:check": "prettier --check .",
-    "seed": "jest tests/seed.test.ts",
     "analyze": "cross-env ANALYZE=true next build",
     "deps:check": "depcheck",
     "deps:unused-exports": "ts-prune",
-    "generate-routes": "ts-node scripts/generateRouteTree.ts"
+    "generate-routes": "tsx scripts/generateRouteTree.ts",
+    "generate:war-images": "node scripts/warImageGenerator.js"
   },
   "prisma": {
-    "seed": "ts-node --compiler-options {\"module\":\"CommonJS\"} prisma/seed.ts"
+    "seed": "tsx prisma/seed.ts"
   },
   "dependencies": {
     "@ai-sdk/anthropic": "^0.0.51",
@@ -157,8 +157,8 @@
     "prettier-plugin-tailwindcss": "^0.5.11",
     "prisma": "^5.19.1",
     "tailwindcss": "3.4.1",
-    "ts-node": "latest",
     "ts-prune": "^0.10.3",
+    "tsx": "^4.23.15",
     "typescript": "5.3.3"
   },
   "engines": {
