@@ -23,7 +23,7 @@ pnpm prisma:migrate   # Run Prisma migrations
 pnpm prisma:studio    # Open Prisma Studio (database browser)
 pnpm prisma:generate  # Regenerate Prisma client
 pnpm prisma:seed      # Seed database from prisma/seeds/*.json
-pnpm db:dump          # Write the database back to prisma/seeds/*.json
+pnpm db:dump          # Write the sample data back to prisma/seeds/*.json
 pnpm prisma:reset     # Reset database (destructive)
 ```
 

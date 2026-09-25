@@ -50,6 +50,8 @@ next-env.d.ts
 .env.sentry-build-plugin
 /test-results/
 /dumps/
+# Full database backups from `pnpm db:dump --full`
+/prisma/backups/
 
 /.vscode
 

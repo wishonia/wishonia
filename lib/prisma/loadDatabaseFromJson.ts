@@ -14,9 +14,24 @@ export async function loadJsonToDatabase(tableName: string, userId?: string) {
     const data = readDumpFile(tableName)
     const columns = Object.keys(data[0])
     const schema = getSchemaName()
+    // The seed dumps leave out the timestamps. createdAt has a column
+    // default, but Prisma sets updatedAt in the client, so set it here.
+    const { rows: tableColumns } = await pool.query(
+      `SELECT column_name FROM information_schema.columns
+       WHERE table_schema = $1 AND table_name = $2`,
+      [schema, tableName]
+    )
+    const setUpdatedAt =
+      !columns.includes("updatedAt") &&
+      tableColumns.some(({ column_name }) => column_name === "updatedAt")
+    const insertColumns = setUpdatedAt ? [...columns, "updatedAt"] : columns
+    const insertValues = columns.map((_, index) => `$${index + 1}`)
+    if (setUpdatedAt) {
+      insertValues.push("NOW()")
+    }
     const insertQuery = `
-            INSERT INTO "${schema}"."${tableName}" (${columns.map((column) => `"${column}"`).join(", ")})
-            VALUES (${columns.map((_, index) => `$${index + 1}`).join(", ")})
+            INSERT INTO "${schema}"."${tableName}" (${insertColumns.map((column) => `"${column}"`).join(", ")})
+            VALUES (${insertValues.join(", ")})
             ON CONFLICT DO NOTHING
       `
 

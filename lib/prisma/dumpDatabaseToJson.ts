@@ -7,7 +7,13 @@ import { prisma } from "@/lib/db"
 import { absPathFromRepo } from "@/lib/fileHelper"
 import { createSlug } from "@/lib/stringHelper"
 
-const ignoreTables = ["_prisma_migrations", "User", "accounts", "sessions"]
+const ignoreTables = [
+  "_prisma_migrations",
+  "User",
+  "accounts",
+  "sessions",
+  "VerificationToken",
+]
 
 export function saveJsonToDump(
   keep: any[],
@@ -71,6 +77,10 @@ export async function dumpTableToJson(tableName: string, testOnly: boolean) {
     }
     keep.push(row)
   }
+  if (keep.length === 0) {
+    console.log(`No test-user rows found for table: ${tableName}`)
+    return
+  }
 
   // order by id if it exists
   if (keep[0].id) {
@@ -107,8 +117,6 @@ async function dumpDatabaseToJson(testOnly = false) {
     }
 
     console.log("Data exported successfully.")
-  } catch (error) {
-    console.error("Error exporting data:", error)
   } finally {
     await prisma.$disconnect()
   }
