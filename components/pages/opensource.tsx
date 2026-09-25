@@ -6,16 +6,7 @@ import { buttonVariants } from "@/components/ui/button"
 import HeadingText from "@/components/heading-text"
 import { Icons } from "@/components/icons"
 
-export default async function OpenSource() {
-  const { stargazers_count: stars } = await fetch(
-    "https://api.github.com/repos/wishonia/wishonia",
-    {
-      next: { revalidate: 60 },
-    }
-  )
-    .then((res) => res.json())
-    .catch((e) => console.error(e))
-
+export default function OpenSource() {
   const buttonText = `Fork Me On GitHub!`
 
   return (
