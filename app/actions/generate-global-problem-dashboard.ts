@@ -5,8 +5,8 @@ import { getModel } from '@/lib/utils/modelUtils'
 import { GlobalProblemDashboardData, GlobalProblemDashboardSchema } from "@/lib/schemas/global-problem-dashboard"
 import { getRedisModelCache } from '@/lib/utils/redis'
 import prisma from '@/lib/prisma'
-import { getGlobalProblemRelationships } from '@/lib/queries/globalProblemQueries'
-import type { GlobalProblemRelationships } from '@/lib/queries/globalProblemQueries'
+import { getGlobalProblemRelationships } from '@/lib/queries/globalProblem/queries'
+import type { GlobalProblemRelationships } from '@/lib/queries/globalProblem/queries'
 
 const CACHE_TTL = 60 * 60 * 24 // 24 hours in seconds
 // Bump the version when the dashboard schema changes, so stale entries are skipped.
