@@ -1,9 +1,9 @@
 "use client"
 
 import { useState } from "react"
-import { toast } from "sonner"
 
 import { Switch } from "@/components/ui/switch"
+import { toast } from "@/components/ui/use-toast"
 
 import {
   unsubscribeFromAll,
@@ -32,7 +32,7 @@ export function NotificationPreferences({
 
   async function handleToggle(key: "marketingEmails" | "newsletterEmails") {
     if (settings.unsubscribeFromAll) {
-      toast.error("You are unsubscribed from all emails")
+      toast({ description: "You are unsubscribed from all emails", variant: "destructive" })
       return
     }
 
@@ -48,9 +48,9 @@ export function NotificationPreferences({
         newsletterEmails: newSettings.newsletterEmails,
       })
       setSettings(newSettings)
-      toast.success("Settings updated")
+      toast({ description: "Settings updated" })
     } catch (error) {
-      toast.error("Failed to update settings")
+      toast({ description: "Failed to update settings", variant: "destructive" })
       console.error(error)
     } finally {
       setSaving(false)
@@ -66,9 +66,9 @@ export function NotificationPreferences({
         newsletterEmails: false,
         unsubscribeFromAll: true,
       })
-      toast.success("Unsubscribed from all emails")
+      toast({ description: "Unsubscribed from all emails" })
     } catch (error) {
-      toast.error("Failed to unsubscribe")
+      toast({ description: "Failed to unsubscribe", variant: "destructive" })
       console.error(error)
     } finally {
       setSaving(false)
