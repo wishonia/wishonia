@@ -1,8 +1,10 @@
 "use server";
 
 import { revalidatePath } from "next/cache";
+import { getServerSession } from "next-auth/next";
 
 import { requireUserId } from "@/lib/api/getUserIdServer";
+import { authOptions } from "@/lib/auth";
 import { getOrCreateOrganizationFromUrl } from "@/lib/agents/researcher/organizationAgent";
 import { ClaimCheck, checkOrganizationClaim } from "@/lib/organizationClaim";
 import { prisma } from "@/lib/prisma";
@@ -52,15 +54,27 @@ export async function getOrganization(organizationUrl: string) {
   return await getOrCreateOrganizationFromUrl(organizationUrl, userId)
 }
 
-async function checkClaimForUser(organizationId: string, userId: string) {
+// Server actions are public endpoints, so the claimant comes from the session.
+async function requireSessionUser() {
+  const session = await getServerSession(authOptions)
+  if (!session?.user?.id) {
+    throw new Error("You must be signed in")
+  }
+  return session.user
+}
+
+async function checkClaimForUser(
+  organizationId: string,
+  sessionUser: { id: string; verifiedEmail?: string | null }
+) {
   const [organization, user, admin] = await Promise.all([
     prisma.organization.findUnique({
       where: { id: organizationId },
       select: { ownerId: true, url: true, slug: true },
     }),
     prisma.user.findUnique({
-      where: { id: userId },
-      select: { email: true, emailVerified: true, accounts: { select: { provider: true } } },
+      where: { id: sessionUser.id },
+      select: { email: true },
     }),
     isAdmin(),
   ])
@@ -72,8 +86,7 @@ async function checkClaimForUser(organizationId: string, userId: string) {
     organizationUrl: organization.url,
     isAdmin: Boolean(admin),
     email: user.email,
-    emailVerified: user.emailVerified,
-    providers: user.accounts.map(({ provider }) => provider),
+    verifiedEmail: sessionUser.verifiedEmail ?? null,
   })
   return { organization, check }
 }
@@ -82,13 +95,14 @@ async function checkClaimForUser(organizationId: string, userId: string) {
 // Returns a result instead of throwing, because production builds hide the
 // message of an error thrown by a server action.
 export async function getOrganizationClaimCheck(organizationId: string): Promise<ClaimCheck> {
-  const userId = await requireUserId()
-  return (await checkClaimForUser(organizationId, userId)).check
+  const sessionUser = await requireSessionUser()
+  return (await checkClaimForUser(organizationId, sessionUser)).check
 }
 
 export async function claimOrganization(organizationId: string): Promise<ClaimCheck> {
-  const userId = await requireUserId()
-  const { organization, check } = await checkClaimForUser(organizationId, userId)
+  const sessionUser = await requireSessionUser()
+  const userId = sessionUser.id
+  const { organization, check } = await checkClaimForUser(organizationId, sessionUser)
   if (!organization || !check.allowed) return check
 
   // Set the owner only while there is none, so two claims at the same time

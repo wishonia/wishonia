@@ -1,15 +1,17 @@
 /**
  * @jest-environment node
  */
+import type { Account, Profile } from "next-auth"
+
 import { checkOrganizationClaim, organizationDomain } from "@/lib/organizationClaim"
+import { getProvenSignInEmail } from "@/lib/signInEmail"
 
 const claimant = {
   ownerId: null,
   organizationUrl: "https://www.redcross.org/about",
   isAdmin: false,
   email: "jane@redcross.org",
-  emailVerified: new Date(),
-  providers: [] as string[],
+  verifiedEmail: "jane@redcross.org",
 }
 
 describe("organizationDomain", () => {
@@ -30,33 +32,43 @@ describe("organizationDomain", () => {
 })
 
 describe("checkOrganizationClaim", () => {
-  it("allows a verified email at the organization's domain", () => {
+  it("allows an email at the organization's domain that the sign-in proved", () => {
     expect(checkOrganizationClaim(claimant)).toEqual({ allowed: true })
   })
 
-  it("allows an email at a subdomain of the organization's domain", () => {
+  it("compares the proven address without regard to case", () => {
     expect(
-      checkOrganizationClaim({ ...claimant, email: "jane@mail.redcross.org" })
+      checkOrganizationClaim({ ...claimant, email: "Jane@RedCross.org" })
+    ).toEqual({ allowed: true })
+  })
+
+  it("allows an email at a subdomain of the organization's domain", () => {
+    const email = "jane@mail.redcross.org"
+    expect(
+      checkOrganizationClaim({ ...claimant, email, verifiedEmail: email })
     ).toEqual({ allowed: true })
   })
 
   it("rejects an email at another domain that ends with the same letters", () => {
-    const check = checkOrganizationClaim({ ...claimant, email: "jane@notredcross.org" })
-    expect(check).toEqual({
+    const email = "jane@notredcross.org"
+    expect(checkOrganizationClaim({ ...claimant, email, verifiedEmail: email })).toEqual({
       allowed: false,
       reason: "To claim it, sign in with an email address at redcross.org.",
     })
   })
 
-  it("rejects an unverified email unless Google verified it", () => {
-    const unverified = { ...claimant, emailVerified: null }
-    expect(checkOrganizationClaim(unverified).allowed).toBe(false)
+  it("rejects a sign-in that proved no address", () => {
+    expect(checkOrganizationClaim({ ...claimant, verifiedEmail: null })).toEqual({
+      allowed: false,
+      reason: "To claim it, sign in with a magic link sent to jane@redcross.org.",
+    })
+  })
+
+  it("rejects an email that differs from the address the sign-in proved", () => {
+    // An account verified one address and later changed its email.
     expect(
-      checkOrganizationClaim({ ...unverified, providers: ["github"] }).allowed
+      checkOrganizationClaim({ ...claimant, verifiedEmail: "jane@gmail.com" }).allowed
     ).toBe(false)
-    expect(
-      checkOrganizationClaim({ ...unverified, providers: ["google"] }).allowed
-    ).toBe(true)
   })
 
   it("rejects every claim once the organization has an owner", () => {
@@ -71,5 +83,35 @@ describe("checkOrganizationClaim", () => {
     expect(checkOrganizationClaim({ ...noWebsite, isAdmin: true })).toEqual({
       allowed: true,
     })
+  })
+})
+
+describe("getProvenSignInEmail", () => {
+  const account = (provider: string, providerAccountId: string): Account => ({
+    provider,
+    providerAccountId,
+    type: provider === "email" ? "email" : "oauth",
+  })
+
+  it("returns the address a magic link went to", () => {
+    expect(getProvenSignInEmail(account("email", "Jane@RedCross.org"))).toBe(
+      "jane@redcross.org"
+    )
+  })
+
+  it("returns a Google email only when Google marks it verified", () => {
+    const google = account("google", "12345")
+    const profile = { email: "jane@redcross.org" } as Profile
+    expect(
+      getProvenSignInEmail(google, { ...profile, email_verified: true } as Profile)
+    ).toBe("jane@redcross.org")
+    expect(getProvenSignInEmail(google, profile)).toBeNull()
+  })
+
+  it("returns null for other providers and for requests that are not sign-ins", () => {
+    expect(
+      getProvenSignInEmail(account("github", "999"), { email: "jane@redcross.org" } as Profile)
+    ).toBeNull()
+    expect(getProvenSignInEmail(null)).toBeNull()
   })
 })
