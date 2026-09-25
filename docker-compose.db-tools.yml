@@ -1,4 +1,3 @@
-version: "3.8"
 services:
   pg_dump_data:
     image: postgres:latest

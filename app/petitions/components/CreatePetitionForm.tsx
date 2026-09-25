@@ -8,6 +8,7 @@ import { Input } from "@/components/ui/input"
 import { Textarea } from "@/components/ui/textarea"
 import { ImageUpload } from "./ImageUpload"
 import { MDXEditor } from '@mdxeditor/editor'
+import '@mdxeditor/editor/style.css'
 import { useTheme } from "next-themes"
 import { Card } from "@/components/ui/card"
 import { motion, AnimatePresence } from "framer-motion"
