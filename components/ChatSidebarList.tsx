@@ -6,11 +6,6 @@ import { getChats } from "@/app/actions"
 
 import ChatSidebarItems from "./ChatSidebarItems"
 
-interface SidebarListProps {
-  userId: string
-  children?: React.ReactNode
-}
-
 function convertToAIMessage(message: ChatMessage): Message {
   return {
     id: message.id,
@@ -22,13 +17,13 @@ function convertToAIMessage(message: ChatMessage): Message {
   }
 }
 
-const loadChats = cache(async (userId: string):  Promise<Chat[]> => {
-  const chats = await getChats(userId)
+const loadChats = cache(async ():  Promise<Chat[]> => {
+  const chats = await getChats()
   return chats
 })
 
-export async function ChatSidebarList({ userId }: SidebarListProps) {
-  const chats = await loadChats(userId)
+export async function ChatSidebarList() {
+  const chats = await loadChats()
   return (
     <div className="h-[calc(100vh-8rem)] overflow-y-auto">
       {chats?.length ? (

@@ -8,11 +8,10 @@ import { Loader2 } from 'lucide-react'
 import {getOrganization} from "@/app/organizations/organizationActions";
 
 interface CreateOrganizationFormProps {
-  userId: string
   onSuccess?: () => void
 }
 
-export default function CreateOrganizationForm({ userId, onSuccess }: CreateOrganizationFormProps) {
+export default function CreateOrganizationForm({ onSuccess }: CreateOrganizationFormProps) {
   const [url, setUrl] = useState('')
   const [isLoading, setIsLoading] = useState(false)
   const router = useRouter()
@@ -21,7 +20,7 @@ export default function CreateOrganizationForm({ userId, onSuccess }: CreateOrga
     e.preventDefault()
     setIsLoading(true)
     try {
-      const organization = await getOrganization(url, userId)
+      const organization = await getOrganization(url)
       if (onSuccess) {
         onSuccess()
       }

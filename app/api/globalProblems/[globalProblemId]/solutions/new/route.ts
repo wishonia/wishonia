@@ -23,6 +23,13 @@ export async function POST(
 ) {
   try {
     const userId = await getUserIdServer()
+    // Solution generation calls the LLM, so anonymous callers are rejected.
+    if (!userId) {
+      return new Response(
+        JSON.stringify({ error: "You need to be logged in to add a solution" }),
+        { status: 401 }
+      )
+    }
     const { params } = routeContextSchema.parse(context)
     const globalProblemId = params.globalProblemId
     const body = await req.json()

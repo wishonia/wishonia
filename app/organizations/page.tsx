@@ -50,7 +50,6 @@ export default async function OrganizationsPage({
 }) {
   const search = searchParams.search || ''
   const session = await getServerSession(authOptions)
-  const userId = session?.user?.id || ''
 
   return (
     <div className="container mx-auto py-8">
@@ -72,10 +71,12 @@ export default async function OrganizationsPage({
         <OrganizationsList search={search} />
       </Suspense>
 
-      <div className="mt-12">
-        <h2 className="text-2xl font-semibold mb-4">Create New Organization</h2>
-        <CreateOrganizationForm userId={userId} />
-      </div>
+      {session?.user && (
+        <div className="mt-12">
+          <h2 className="text-2xl font-semibold mb-4">Create New Organization</h2>
+          <CreateOrganizationForm />
+        </div>
+      )}
     </div>
   )
 }

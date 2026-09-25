@@ -138,8 +138,7 @@ export function GlobalProblemOrganizationsList({
                 Enter the URL of the organization you want to add.
               </DialogDescription>
             </DialogHeader>
-            <CreateOrganizationForm 
-              userId={user.id}
+            <CreateOrganizationForm
               onSuccess={() => {
                 setIsDialogOpen(false)
                 loadData()
