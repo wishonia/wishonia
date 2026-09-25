@@ -2,6 +2,7 @@ import { WishingWell } from "@prisma/client"
 
 import { prisma as db, prisma } from "@/lib/db"
 import { textCompletion } from "@/lib/llm"
+import { aggregateByTotalShare } from "@/lib/pairwiseAllocation"
 import { convertKeysToCamelCase, toTitleCase } from "@/lib/stringHelpers"
 
 export async function getRandomWishingWellPair(userId: string | undefined) {
@@ -80,31 +81,13 @@ export async function generateAllWishingWellPairs() {
 
 export async function aggregateWishingWellPairAllocations() {
   const allocations = await prisma.wishingWellPairAllocation.findMany()
-  const allocationsByWishingWellId: Record<string, number> = {}
-  // Sum up the percentages for each problem
-  for (const allocation of allocations) {
-    const { thisWishingWellId, thatWishingWellId, thisWishingWellPercentage } =
-      allocation
-
-    allocationsByWishingWellId[thisWishingWellId] =
-      (allocationsByWishingWellId[thisWishingWellId] || 0) +
-      thisWishingWellPercentage
-    allocationsByWishingWellId[thatWishingWellId] =
-      (allocationsByWishingWellId[thatWishingWellId] || 0) +
-      (100 - thisWishingWellPercentage)
-  }
-
-  const totalAllocations = Object.values(allocationsByWishingWellId).reduce(
-    (sum, allocation) => sum + allocation,
-    0
+  const normalizedAllocations = aggregateByTotalShare(
+    allocations.map((allocation) => ({
+      thisId: allocation.thisWishingWellId,
+      thatId: allocation.thatWishingWellId,
+      thisPercentage: allocation.thisWishingWellPercentage,
+    }))
   )
-
-  // Normalize the allocations to ensure they add up to 100%
-  const normalizedAllocations: Record<string, number> = {}
-  for (const problemId in allocationsByWishingWellId) {
-    normalizedAllocations[problemId] =
-      (allocationsByWishingWellId[problemId] / totalAllocations) * 100
-  }
   const results = []
   for (const wishingWellId in normalizedAllocations) {
     const result = await prisma.wishingWell.update({
