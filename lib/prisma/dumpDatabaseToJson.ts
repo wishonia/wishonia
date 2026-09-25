@@ -5,7 +5,6 @@ import path from "path"
 
 import { prisma } from "@/lib/db"
 import { absPathFromRepo } from "@/lib/fileHelper"
-import { createSlug } from "@/lib/stringHelper"
 
 const ignoreTables = [
   "_prisma_migrations",
@@ -66,10 +65,6 @@ export async function dumpTableToJson(tableName: string, testOnly: boolean) {
   for (const row of data) {
     if (testOnly && row.userId && row.userId !== "test-user") {
       continue
-    }
-    if (testOnly && row.name) {
-      // convert the name to URL friendly slug and replace the id with it
-      row.id = createSlug(row.name)
     }
     if (testOnly) {
       delete row.updatedAt
