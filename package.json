@@ -29,7 +29,8 @@
     "generate-routes": "tsx scripts/generateRouteTree.ts",
     "generate:war-images": "node scripts/warImageGenerator.js",
     "knip": "knip",
-    "db:dump": "tsx scripts/dumpDatabase.ts"
+    "db:dump": "tsx scripts/dumpDatabase.ts",
+    "allocations:recompute": "tsx scripts/recomputeAllocations.ts"
   },
   "prisma": {
     "seed": "tsx prisma/seed.ts"

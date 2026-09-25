@@ -24,6 +24,7 @@ pnpm prisma:studio    # Open Prisma Studio (database browser)
 pnpm prisma:generate  # Regenerate Prisma client
 pnpm prisma:seed      # Seed database from prisma/seeds/*.json
 pnpm db:dump          # Write the sample data back to prisma/seeds/*.json
+pnpm allocations:recompute  # Recompute stored allocation shares from the votes
 pnpm prisma:reset     # Reset database (destructive)
 ```
 

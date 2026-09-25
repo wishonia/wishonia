@@ -1,7 +1,7 @@
 import { GlobalProblem } from "@prisma/client"
 
 import { prisma } from "@/lib/db"
-import { aggregateByTotalShare } from "@/lib/pairwiseAllocation"
+import { aggregateByAverageShare } from "@/lib/pairwiseAllocation"
 import { createSlug } from "@/lib/stringHelper"
 
 export async function getRandomGlobalProblemPair(userId: string | undefined) {
@@ -50,7 +50,7 @@ export async function getAllRandomGlobalProblemPairs() {
 
 export async function aggregateGlobalProblemPairAllocations() {
   const allocations = await prisma.globalProblemPairAllocation.findMany()
-  const normalizedAllocations = aggregateByTotalShare(
+  const normalizedAllocations = aggregateByAverageShare(
     allocations.map((allocation) => ({
       thisId: allocation.thisGlobalProblemId,
       thatId: allocation.thatGlobalProblemId,
