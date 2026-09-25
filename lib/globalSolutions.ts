@@ -4,6 +4,7 @@ import { GlobalSolution } from "@prisma/client"
 import { prisma } from "@/lib/db"
 import { absPathFromRepo } from "@/lib/fileHelper"
 import { askYesOrNoQuestion } from "@/lib/llm"
+import { aggregateByAverageShare } from "@/lib/pairwiseAllocation"
 import { createSlug } from "@/lib/stringHelper"
 
 async function getRandomGlobalSolutionsForUser(
@@ -69,34 +70,13 @@ export async function getAllRandomGlobalSolutionPairs() {
 
 export async function aggregateGlobalSolutionPairAllocations() {
   const allocations = await prisma.globalSolutionPairAllocation.findMany()
-  const solutionAllocations: Record<string, number> = {}
-  // Sum up the percentages for each solution
-  for (const allocation of allocations) {
-    const {
-      thisGlobalSolutionId,
-      thatGlobalSolutionId,
-      thisGlobalSolutionPercentage,
-    } = allocation
-
-    solutionAllocations[thisGlobalSolutionId] =
-      (solutionAllocations[thisGlobalSolutionId] || 0) +
-      thisGlobalSolutionPercentage
-    solutionAllocations[thatGlobalSolutionId] =
-      (solutionAllocations[thatGlobalSolutionId] || 0) +
-      (100 - thisGlobalSolutionPercentage)
-  }
-
-  const totalAllocations = Object.values(solutionAllocations).reduce(
-    (sum, allocation) => sum + allocation,
-    0
+  const normalizedAllocations = aggregateByAverageShare(
+    allocations.map((allocation) => ({
+      thisId: allocation.thisGlobalSolutionId,
+      thatId: allocation.thatGlobalSolutionId,
+      thisPercentage: allocation.thisGlobalSolutionPercentage,
+    }))
   )
-
-  // Normalize the allocations to ensure they add up to 100%
-  const normalizedAllocations: Record<string, number> = {}
-  for (const globalSolutionId in solutionAllocations) {
-    normalizedAllocations[globalSolutionId] =
-      (solutionAllocations[globalSolutionId] / totalAllocations) * 100
-  }
   const results = []
   for (const globalSolutionId in normalizedAllocations) {
     const result = await prisma.globalSolution.update({

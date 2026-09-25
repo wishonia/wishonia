@@ -1,0 +1,73 @@
+name: CI
+
+on:
+  push:
+    branches: [main]
+  pull_request:
+
+jobs:
+  check:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: pnpm/action-setup@v4
+        with:
+          version: 10
+      - uses: actions/setup-node@v4
+        with:
+          node-version-file: .nvmrc
+          cache: pnpm
+      - run: pnpm install --frozen-lockfile
+      - run: pnpm type-check
+      - run: pnpm lint
+      - run: pnpm knip
+      - run: pnpm test:ci
+
+  # Seeds a real database and builds the app. No real API keys are needed:
+  # the placeholders only satisfy env validation and SDK clients that are
+  # created when their modules load.
+  build:
+    runs-on: ubuntu-latest
+    services:
+      postgres:
+        image: pgvector/pgvector:pg16
+        env:
+          POSTGRES_USER: postgres
+          POSTGRES_PASSWORD: postgres
+          POSTGRES_DB: wishonia_test
+        ports:
+          - 5432:5432
+        options: >-
+          --health-cmd pg_isready
+          --health-interval 5s
+          --health-timeout 5s
+          --health-retries 10
+    env:
+      DATABASE_URL: postgresql://postgres:postgres@localhost:5432/wishonia_test?schema=public
+      NEXTAUTH_SECRET: ci-placeholder
+      NEXTAUTH_URL: http://localhost:3000
+      NEXT_PUBLIC_APP_URL: http://localhost:3000
+      GOOGLE_CLIENT_ID: ci-placeholder
+      GOOGLE_CLIENT_SECRET: ci-placeholder
+      GITHUB_CLIENT_ID: ci-placeholder
+      GITHUB_CLIENT_SECRET: ci-placeholder
+      EMAIL_SERVER: smtp://user:pass@localhost:2525
+      EMAIL_FROM: noreply@example.com
+      OPENAI_API_KEY: ci-placeholder
+      EXA_API_KEY: ci-placeholder
+      RESEND_API_KEY: re_ci_placeholder
+    steps:
+      - uses: actions/checkout@v4
+      - uses: pnpm/action-setup@v4
+        with:
+          version: 10
+      - uses: actions/setup-node@v4
+        with:
+          node-version-file: .nvmrc
+          cache: pnpm
+      - run: pnpm install --frozen-lockfile
+      - run: pnpm prisma migrate deploy
+      # A second run must succeed too, so the seed stays repeatable.
+      - run: pnpm prisma:seed
+      - run: pnpm prisma:seed
+      - run: pnpm build:unsafe

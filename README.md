@@ -75,7 +75,7 @@ This can be done using [Randomized Aggregated Pairwise Preference Allocation (AP
 
 # Quick Start
 
-1. **Install Dependencies**:
+1. **Install the Prerequisites**:
 
    - [Node.js](https://nodejs.org/en/) v24, as pinned in `.nvmrc` (I'd recommend using [NVM](https://github.com/coreybutler/nvm-windows?tab=readme-ov-file) so you can easily switch nodejs versions as needed)
    - [pnpm](https://pnpm.io/)
@@ -91,7 +91,7 @@ This can be done using [Randomized Aggregated Pairwise Preference Allocation (AP
 pnpm db:up
 ```
 
-4. **Install Dependencies**:
+4. **Install the Packages**:
 
 ```sh
 pnpm install
@@ -108,7 +108,13 @@ pnpm prisma:migrate
 Seed the database with default problems, solutions and wishes:
 
 ```sh
-pnpm seed
+pnpm prisma:seed
+```
+
+7. **Start the App**:
+
+```sh
+pnpm dev
 ```
 
 # Why Are You Doing This?

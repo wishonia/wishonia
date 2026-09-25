@@ -1,7 +1,7 @@
 "use client"
 
 import React, { useEffect, useState } from "react"
-import { useRouter } from "next/navigation"
+import Link from "next/link"
 
 import { PollSpecificGlobalProblemSolutions } from "@/components/poll-specific-global-problem-solutions"
 import { SpinningLoader } from "@/components/spinningLoader"
@@ -18,19 +18,18 @@ export const PollRandomGlobalProblemSolutions: React.FC<PollProps> = ({
     thatGlobalProblemSolution?: any
   }>({})
   const [loading, setLoading] = useState(false)
-  const router = useRouter()
+  const [noPairsLeft, setNoPairsLeft] = useState(false)
   const fetchGlobalProblemSolutions = async () => {
     setLoading(true)
     const response = await fetch(
       "/api/globalProblems/" + globalProblemId + "/solutions/random"
     )
     const data = await response.json()
-    if (!data.thisGlobalProblemSolution) {
-      router.push("/globalProblemSolutions/results")
-      return
-    }
-    if (!data.thatGlobalProblemSolution) {
-      router.push("/globalProblemSolutions/results")
+    // The landing page and the problem dashboard embed this poll, so show a
+    // link instead of navigating away when no pair is left.
+    if (!data.thisGlobalProblemSolution || !data.thatGlobalProblemSolution) {
+      setNoPairsLeft(true)
+      setLoading(false)
       return
     }
     setGlobalProblemSolutions(data)
@@ -42,6 +41,20 @@ export const PollRandomGlobalProblemSolutions: React.FC<PollProps> = ({
       fetchGlobalProblemSolutions()
     }
   }, [])
+
+  if (noPairsLeft) {
+    return (
+      <p className="text-center text-muted-foreground">
+        There are no solution pairs left to compare.{" "}
+        <Link
+          href={`/globalProblems/${globalProblemId}/solutions`}
+          className="underline"
+        >
+          See the ranked solutions
+        </Link>
+      </p>
+    )
+  }
 
   if (
     loading ||

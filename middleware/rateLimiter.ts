@@ -69,8 +69,14 @@ export async function withRateLimit(
 
   try {
     await checkRateLimits(apiKey, limits)
-    return await handler(request)
   } catch (error) {
-    return NextResponse.json({ error: 'Rate limit exceeded' }, { status: 429 })
+    const limited =
+      error instanceof Error && error.message.startsWith('Rate limit exceeded')
+    return NextResponse.json(
+      { error: limited ? 'Rate limit exceeded' : 'Rate limiter unavailable' },
+      { status: limited ? 429 : 503 }
+    )
   }
+  // Only the limit check maps to 429; handler errors reach the route as-is.
+  return handler(request)
 } 

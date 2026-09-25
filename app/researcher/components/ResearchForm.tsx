@@ -27,7 +27,7 @@ export default function ResearchForm({ initialTopic = '', onTopicChange }: Resea
 
     async function handleSubmit(submittedTopic: string) {
         if (!session?.user?.id) {
-            router.push('/auth/signin')
+            router.push('/signin')
             return
         }
 
@@ -40,7 +40,7 @@ export default function ResearchForm({ initialTopic = '', onTopicChange }: Resea
         setError('')
 
         try {
-            const generatedArticle = await findOrCreateArticleByTopic(submittedTopic, session.user.id)
+            const generatedArticle = await findOrCreateArticleByTopic(submittedTopic)
             setArticle(generatedArticle)
             onTopicChange(submittedTopic)
         } catch (err) {

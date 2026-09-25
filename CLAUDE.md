@@ -17,11 +17,14 @@ pnpm type-check       # TypeScript type checking (tsc --noEmit)
 pnpm format           # Prettier format all files
 pnpm test             # Jest in watch mode
 pnpm test:ci          # Jest single run (CI)
-pnpm db:up            # Start PostgreSQL + Redis + SearXNG via Docker
+pnpm knip             # Unused files, exports, and dependencies
+pnpm db:up            # Start PostgreSQL + Redis via Docker
 pnpm prisma:migrate   # Run Prisma migrations
 pnpm prisma:studio    # Open Prisma Studio (database browser)
 pnpm prisma:generate  # Regenerate Prisma client
-pnpm prisma:seed      # Seed database
+pnpm prisma:seed      # Seed database from prisma/seeds/*.json
+pnpm db:dump          # Write the sample data back to prisma/seeds/*.json
+pnpm allocations:recompute  # Recompute stored allocation shares from the votes
 pnpm prisma:reset     # Reset database (destructive)
 ```
 

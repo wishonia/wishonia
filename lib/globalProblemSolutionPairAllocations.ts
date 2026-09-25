@@ -1,9 +1,6 @@
-import {
-  GlobalProblemSolution,
-  GlobalProblemSolutionPairAllocation,
-} from "@prisma/client"
 
 import { prisma } from "@/lib/db"
+import { aggregateByAverageShare } from "@/lib/pairwiseAllocation"
 
 async function getGlobalProblemSolutionPairAllocations(
   globalProblemId: string
@@ -15,84 +12,6 @@ async function getGlobalProblemSolutionPairAllocations(
   })
 }
 
-function generateAllocationsArrayById(
-  globalProblemSolutionAllocations: GlobalProblemSolutionPairAllocation[]
-) {
-  const allocationsToEachGlobalProblemSolution: Record<string, number[]> = {}
-  for (const allocation of globalProblemSolutionAllocations) {
-    const { thisGlobalProblemSolutionId, thisGlobalProblemSolutionPercentage } =
-      allocation
-    allocationsToEachGlobalProblemSolution[thisGlobalProblemSolutionId] = (
-      allocationsToEachGlobalProblemSolution[thisGlobalProblemSolutionId] || []
-    ).concat(thisGlobalProblemSolutionPercentage)
-    if (
-      !allocationsToEachGlobalProblemSolution[
-        allocation.thatGlobalProblemSolutionId
-      ]
-    ) {
-      allocationsToEachGlobalProblemSolution[
-        allocation.thatGlobalProblemSolutionId
-      ] = []
-    }
-    allocationsToEachGlobalProblemSolution[
-      allocation.thatGlobalProblemSolutionId
-    ].push(100 - thisGlobalProblemSolutionPercentage)
-  }
-  return allocationsToEachGlobalProblemSolution
-}
-
-function generateAverageAllocations(
-  globalProblemSolutions: GlobalProblemSolution[],
-  allocationsToEachGlobalProblemSolution: Record<string, number[]>
-) {
-  const averageAllocationsToEachGlobalProblemSolution: Record<string, number> =
-    {}
-  for (const globalProblemSolution of globalProblemSolutions) {
-    const allocations =
-      allocationsToEachGlobalProblemSolution[globalProblemSolution.id] || []
-    const length = allocations.length
-    if (length === 0) {
-      console.log(
-        `No allocations found for global problem solution: ${globalProblemSolution.name}`
-      )
-      continue
-    }
-    const sum = allocations.reduce((sum, allocation) => sum + allocation, 0)
-    if (isNaN(sum)) {
-      throw new Error(`Invalid sum: ${sum}`)
-    }
-    averageAllocationsToEachGlobalProblemSolution[globalProblemSolution.id] =
-      sum / length
-  }
-  return averageAllocationsToEachGlobalProblemSolution
-}
-
-function generateNormalizedAllocations(
-  averageAllocationsToEachGlobalProblemSolution: Record<string, number>
-) {
-  const normalizedAllocationToEachGlobalProblemSolution: Record<
-    string,
-    number
-  > = {}
-  let total = 0
-  for (const globalProblemSolutionId in averageAllocationsToEachGlobalProblemSolution) {
-    const value =
-      averageAllocationsToEachGlobalProblemSolution[globalProblemSolutionId]
-    // make sure the value is a number between 0 and 100
-    if (isNaN(value) || value < 0 || value > 100) {
-      throw new Error(`Invalid average allocation value: ${value}`)
-    }
-    total += value
-  }
-  for (const globalProblemSolutionId in averageAllocationsToEachGlobalProblemSolution) {
-    normalizedAllocationToEachGlobalProblemSolution[globalProblemSolutionId] =
-      (averageAllocationsToEachGlobalProblemSolution[globalProblemSolutionId] /
-        total) *
-      100
-  }
-  return normalizedAllocationToEachGlobalProblemSolution
-}
-
 export async function aggregateGlobalProblemSolutionPairAllocationsForProblem(
   globalProblemId: string
 ) {
@@ -101,16 +20,15 @@ export async function aggregateGlobalProblemSolutionPairAllocationsForProblem(
   })
   const globalProblemSolutionAllocations =
     await getGlobalProblemSolutionPairAllocations(globalProblemId)
-  const allocationsToEachGlobalProblemSolution = generateAllocationsArrayById(
-    globalProblemSolutionAllocations
-  )
-  const averageAllocationsToEachGlobalProblemSolution =
-    generateAverageAllocations(
-      globalProblemSolutions,
-      allocationsToEachGlobalProblemSolution
-    )
   const normalizedAllocationToEachGlobalProblemSolution =
-    generateNormalizedAllocations(averageAllocationsToEachGlobalProblemSolution)
+    aggregateByAverageShare(
+      globalProblemSolutionAllocations.map((allocation) => ({
+        thisId: allocation.thisGlobalProblemSolutionId,
+        thatId: allocation.thatGlobalProblemSolutionId,
+        thisPercentage: allocation.thisGlobalProblemSolutionPercentage,
+      })),
+      globalProblemSolutions.map(({ id }) => id)
+    )
   for (const globalProblemSolution of globalProblemSolutions) {
     const averageAllocation =
       normalizedAllocationToEachGlobalProblemSolution[globalProblemSolution.id]

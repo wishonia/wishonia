@@ -1,23 +1,47 @@
 "use server";
 
 import { revalidatePath } from "next/cache";
+import { getServerSession } from "next-auth/next";
 
-
-
+import { requireUserId } from "@/lib/api/getUserIdServer";
+import { authOptions } from "@/lib/auth";
 import { getOrCreateOrganizationFromUrl } from "@/lib/agents/researcher/organizationAgent";
+import { ClaimCheck, checkOrganizationClaim } from "@/lib/organizationClaim";
 import { prisma } from "@/lib/prisma";
+import { isAdmin } from "@/lib/session";
 
+// The only fields the organization edit form changes.
+type OrganizationUpdate = {
+  name?: string
+  description?: string | null
+  email?: string | null
+  telephone?: string | null
+}
 
+export async function updateOrganization(organizationId: string, data: OrganizationUpdate) {
+  const userId = await requireUserId()
+  const organization = await prisma.organization.findUnique({
+    where: { id: organizationId },
+    select: { ownerId: true },
+  })
+  if (!organization) {
+    throw new Error("Organization not found")
+  }
+  if (organization.ownerId !== userId && !(await isAdmin())) {
+    throw new Error("Only the organization owner can edit it")
+  }
 
-
-
-export async function updateOrganization(organizationId: string, data: any) {
   try {
     const updatedOrg = await prisma.organization.update({
       where: { id: organizationId },
-      data,
+      data: {
+        name: data.name,
+        description: data.description,
+        email: data.email,
+        telephone: data.telephone,
+      },
     })
-    revalidatePath(`/organizations/${updatedOrg.url}`)
+    revalidatePath(`/organizations/${updatedOrg.slug}`)
     return updatedOrg
   } catch (error) {
     console.error("Error updating organization:", error)
@@ -25,6 +49,71 @@ export async function updateOrganization(organizationId: string, data: any) {
   }
 }
 
-export async function getOrganization(organizationUrl: string, userId: string) {
+export async function getOrganization(organizationUrl: string) {
+  const userId = await requireUserId()
   return await getOrCreateOrganizationFromUrl(organizationUrl, userId)
+}
+
+// Server actions are public endpoints, so the claimant comes from the session.
+async function requireSessionUser() {
+  const session = await getServerSession(authOptions)
+  if (!session?.user?.id) {
+    throw new Error("You must be signed in")
+  }
+  return session.user
+}
+
+async function checkClaimForUser(
+  organizationId: string,
+  sessionUser: { id: string; verifiedEmail?: string | null }
+) {
+  const [organization, user, admin] = await Promise.all([
+    prisma.organization.findUnique({
+      where: { id: organizationId },
+      select: { ownerId: true, url: true, slug: true },
+    }),
+    prisma.user.findUnique({
+      where: { id: sessionUser.id },
+      select: { email: true },
+    }),
+    isAdmin(),
+  ])
+  if (!organization || !user) {
+    return { organization, check: { allowed: false, reason: "Organization not found." } as ClaimCheck }
+  }
+  const check = checkOrganizationClaim({
+    ownerId: organization.ownerId,
+    organizationUrl: organization.url,
+    isAdmin: Boolean(admin),
+    email: user.email,
+    verifiedEmail: sessionUser.verifiedEmail ?? null,
+  })
+  return { organization, check }
+}
+
+// Tells the organization page whether the signed-in user can claim it.
+// Returns a result instead of throwing, because production builds hide the
+// message of an error thrown by a server action.
+export async function getOrganizationClaimCheck(organizationId: string): Promise<ClaimCheck> {
+  const sessionUser = await requireSessionUser()
+  return (await checkClaimForUser(organizationId, sessionUser)).check
+}
+
+export async function claimOrganization(organizationId: string): Promise<ClaimCheck> {
+  const sessionUser = await requireSessionUser()
+  const userId = sessionUser.id
+  const { organization, check } = await checkClaimForUser(organizationId, sessionUser)
+  if (!organization || !check.allowed) return check
+
+  // Set the owner only while there is none, so two claims at the same time
+  // cannot both succeed.
+  const { count } = await prisma.organization.updateMany({
+    where: { id: organizationId, ownerId: null },
+    data: { ownerId: userId },
+  })
+  if (count === 0) {
+    return { allowed: false, reason: "This organization already has an owner." }
+  }
+  revalidatePath(`/organizations/${organization.slug}`)
+  return { allowed: true }
 }

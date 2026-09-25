@@ -1,9 +1,9 @@
 "use client"
 
 import { useState } from "react"
-import { toast } from "sonner"
 
 import { Switch } from "@/components/ui/switch"
+import { toast } from "@/components/ui/use-toast"
 
 import {
   unsubscribeFromAll,
@@ -15,7 +15,6 @@ interface Props {
   marketingEmails: boolean
   newsletterEmails: boolean
   unsubscribeFromAll: boolean
-  userId: string
 }
 
 export function NotificationPreferences({
@@ -23,7 +22,6 @@ export function NotificationPreferences({
   marketingEmails: initialMarketing,
   newsletterEmails: initialNewsletter,
   unsubscribeFromAll: initialUnsubscribe,
-  userId,
 }: Props) {
   const [settings, setSettings] = useState({
     marketingEmails: initialMarketing,
@@ -34,7 +32,7 @@ export function NotificationPreferences({
 
   async function handleToggle(key: "marketingEmails" | "newsletterEmails") {
     if (settings.unsubscribeFromAll) {
-      toast.error("You are unsubscribed from all emails")
+      toast({ description: "You are unsubscribed from all emails", variant: "destructive" })
       return
     }
 
@@ -50,9 +48,9 @@ export function NotificationPreferences({
         newsletterEmails: newSettings.newsletterEmails,
       })
       setSettings(newSettings)
-      toast.success("Settings updated")
+      toast({ description: "Settings updated" })
     } catch (error) {
-      toast.error("Failed to update settings")
+      toast({ description: "Failed to update settings", variant: "destructive" })
       console.error(error)
     } finally {
       setSaving(false)
@@ -62,15 +60,15 @@ export function NotificationPreferences({
   async function handleUnsubscribeAll() {
     setSaving(true)
     try {
-      await unsubscribeFromAll(userId)
+      await unsubscribeFromAll()
       setSettings({
         marketingEmails: false,
         newsletterEmails: false,
         unsubscribeFromAll: true,
       })
-      toast.success("Unsubscribed from all emails")
+      toast({ description: "Unsubscribed from all emails" })
     } catch (error) {
-      toast.error("Failed to unsubscribe")
+      toast({ description: "Failed to unsubscribe", variant: "destructive" })
       console.error(error)
     } finally {
       setSaving(false)

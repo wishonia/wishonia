@@ -177,7 +177,7 @@ ${sources?.map((source) => `- [${source.title}](${source.url})`).join("\n")}
     }
     if (confirm("Are you sure you want to delete this article?")) {
       try {
-        await deleteArticle(title, currentUserId);
+        await deleteArticle(title);
         toast({
           title: "Article deleted",
           description: "The article has been successfully deleted.",
@@ -303,10 +303,12 @@ ${sources?.map((source) => `- [${source.title}](${source.url})`).join("\n")}
                 </Button>
               </div>
               <div className="flex flex-col space-y-2">
-                <GenerateImageButton
-                    onClick={handleGenerateImage}
-                    disabled={isGeneratingImage}
-                />
+                {currentUserId === userId && (
+                  <GenerateImageButton
+                      onClick={handleGenerateImage}
+                      disabled={isGeneratingImage}
+                  />
+                )}
                 {imageUrl && (
                     <div className="mt-2">
                       <Image

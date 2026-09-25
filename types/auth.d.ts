@@ -13,6 +13,7 @@ type NavUser = {
 declare module "next-auth/jwt" {
   interface JWT {
     id: UserId
+    verifiedEmail?: string | null
   }
 }
 
@@ -22,6 +23,7 @@ declare module "next-auth" {
       id: UserId
       username: string
       admin?: boolean
+      verifiedEmail?: string | null
     }
   }
 }

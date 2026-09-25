@@ -2,14 +2,17 @@
 
 import fs from "fs"
 import path from "path"
-import { PrismaClient } from "@prisma/client"
 
+import { prisma } from "@/lib/db"
 import { absPathFromRepo } from "@/lib/fileHelper"
-import { createSlug } from "@/lib/stringHelper"
 
-const prisma = new PrismaClient()
-
-const ignoreTables = ["_prisma_migrations", "User", "accounts", "sessions"]
+const ignoreTables = [
+  "_prisma_migrations",
+  "User",
+  "accounts",
+  "sessions",
+  "VerificationToken",
+]
 
 export function saveJsonToDump(
   keep: any[],
@@ -63,15 +66,15 @@ export async function dumpTableToJson(tableName: string, testOnly: boolean) {
     if (testOnly && row.userId && row.userId !== "test-user") {
       continue
     }
-    if (testOnly && row.name) {
-      // convert the name to URL friendly slug and replace the id with it
-      row.id = createSlug(row.name)
-    }
     if (testOnly) {
       delete row.updatedAt
       delete row.createdAt
     }
     keep.push(row)
+  }
+  if (keep.length === 0) {
+    console.log(`No test-user rows found for table: ${tableName}`)
+    return
   }
 
   // order by id if it exists
@@ -109,8 +112,6 @@ async function dumpDatabaseToJson(testOnly = false) {
     }
 
     console.log("Data exported successfully.")
-  } catch (error) {
-    console.error("Error exporting data:", error)
   } finally {
     await prisma.$disconnect()
   }

@@ -20,12 +20,17 @@ export async function updateUserEmailSettings(settings: {
     data: settings,
   })
 
-  revalidatePath("/settings/notifications")
+  revalidatePath("/dashboard/settings/notifications")
 }
 
-export async function unsubscribeFromAll(userId: string) {
+export async function unsubscribeFromAll() {
+  const session = await getServerSession(authOptions)
+  if (!session?.user?.id) {
+    throw new Error("Must be signed in to update settings")
+  }
+
   await prisma.user.update({
-    where: { id: userId },
+    where: { id: session.user.id },
     data: {
       unsubscribeFromAll: true,
       marketingEmails: false,
@@ -45,5 +50,5 @@ export async function unsubscribeFromAll(userId: string) {
     },
   })
 
-  revalidatePath("/settings/notifications")
+  revalidatePath("/dashboard/settings/notifications")
 }

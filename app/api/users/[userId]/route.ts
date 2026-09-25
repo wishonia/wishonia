@@ -26,7 +26,7 @@ export async function PATCH(
     const { params } = routeContextSchema.parse(context)
     const userId = await getUserIdServer()
 
-    if (userId || params.userId !== userId) {
+    if (!userId || params.userId !== userId) {
       return new Response(null, { status: 403 })
     }
 
