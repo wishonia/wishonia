@@ -1,6 +1,7 @@
 'use client'
 
 import { getServerSession } from "next-auth/next"
+import { authOptions } from "@/lib/auth"
 import { prisma } from "@/lib/prisma"
 import { redirect } from "next/navigation"
 import { Card } from "@/components/ui/card"
@@ -52,7 +53,7 @@ function Chart({ children }: { children: React.ReactNode }) {
 }
 
 export default async function PetitionAnalyticsPage({ params }: { params: { id: string } }) {
-  const session = await getServerSession()
+  const session = await getServerSession(authOptions)
   if (!session?.user) {
     redirect('/api/auth/signin')
   }
