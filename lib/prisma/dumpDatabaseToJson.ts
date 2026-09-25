@@ -2,12 +2,10 @@
 
 import fs from "fs"
 import path from "path"
-import { PrismaClient } from "@prisma/client"
 
+import { prisma } from "@/lib/db"
 import { absPathFromRepo } from "@/lib/fileHelper"
 import { createSlug } from "@/lib/stringHelper"
-
-const prisma = new PrismaClient()
 
 const ignoreTables = ["_prisma_migrations", "User", "accounts", "sessions"]
 
