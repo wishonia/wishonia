@@ -4,7 +4,7 @@ import { GlobalSolution } from "@prisma/client"
 import { prisma } from "@/lib/db"
 import { absPathFromRepo } from "@/lib/fileHelper"
 import { askYesOrNoQuestion } from "@/lib/llm"
-import { aggregateByTotalShare } from "@/lib/pairwiseAllocation"
+import { aggregateByAverageShare } from "@/lib/pairwiseAllocation"
 import { createSlug } from "@/lib/stringHelper"
 
 async function getRandomGlobalSolutionsForUser(
@@ -70,7 +70,7 @@ export async function getAllRandomGlobalSolutionPairs() {
 
 export async function aggregateGlobalSolutionPairAllocations() {
   const allocations = await prisma.globalSolutionPairAllocation.findMany()
-  const normalizedAllocations = aggregateByTotalShare(
+  const normalizedAllocations = aggregateByAverageShare(
     allocations.map((allocation) => ({
       thisId: allocation.thisGlobalSolutionId,
       thatId: allocation.thatGlobalSolutionId,

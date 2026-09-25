@@ -13,3 +13,5 @@ path alias from the root `tsconfig.json`.
 - `dumpDatabase.ts` writes the sample data back to `prisma/seeds/*.json`,
   which `pnpm prisma:seed` loads (`pnpm db:dump`). `pnpm db:dump --full`
   backs up every table to `prisma/backups/<date>/` instead.
+- `recomputeAllocations.ts` recomputes every stored allocation share from
+  the pairwise votes (`pnpm allocations:recompute`).
