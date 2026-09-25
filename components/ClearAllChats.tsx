@@ -20,7 +20,7 @@ import LoadingSpinner from "./LoadingSpinner"
 import { Button } from "./ui/button"
 import { useToast } from "./ui/use-toast"
 
-function ClearAllChats({ userId }: { userId: string }) {
+function ClearAllChats() {
   const [deleteDialogOpen, setDeleteDialogOpen] = React.useState(false)
   const [isRemovePending, startRemoveTransition] = React.useTransition()
   const { toast } = useToast()
@@ -66,7 +66,7 @@ function ClearAllChats({ userId }: { userId: string }) {
               onClick={(e) => {
                 e.preventDefault()
                 startRemoveTransition(async () => {
-                  const result = await clearAllChats(userId)
+                  const result = await clearAllChats()
                   if (result && "error" in result) {
                     toast({
                       title: "Error",

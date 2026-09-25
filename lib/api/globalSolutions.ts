@@ -17,10 +17,15 @@ export async function getGlobalSolution(
 // Verify if the user has access to the globalSolution
 export async function verifyGlobalSolution(globalSolutionId: string) {
   const session = await getServerSession(authOptions)
+  // Prisma drops `undefined` filters, so without this guard an anonymous
+  // caller would match any owner.
+  if (!session?.user?.id) {
+    return false
+  }
   const count = await db.globalSolution.count({
     where: {
       id: globalSolutionId,
-      userId: session?.user.id,
+      userId: session.user.id,
     },
   })
 

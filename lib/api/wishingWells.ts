@@ -61,10 +61,15 @@ export async function getUserWishingWells(
 // Verify if the user has access to the wishingWell
 export async function verifyWishingWell(wishingWellId: string) {
   const session = await getServerSession(authOptions)
+  // Prisma drops `undefined` filters, so without this guard an anonymous
+  // caller would match any owner.
+  if (!session?.user?.id) {
+    return false
+  }
   const count = await db.wishingWell.count({
     where: {
       id: wishingWellId,
-      userId: session?.user.id,
+      userId: session.user.id,
     },
   })
 

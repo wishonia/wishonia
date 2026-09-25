@@ -27,11 +27,11 @@ export async function ChatSidebar() {
       </Link>
 
       <div className="flex-1 min-h-0">
-        <ChatSidebarList userId={loggedInUser ? loggedInUser.id : ""} />
+        <ChatSidebarList />
       </div>
 
       <div className="flex flex-col gap-2">
-        <ClearAllChats userId={loggedInUser.id} />
+        <ClearAllChats />
         <ThemeToggle />
         <UserBadge />
       </div>

@@ -53,10 +53,7 @@ export default function ProfileForm({ user }: { user: User & { userSkills: UserS
                 return acc;
             }, {} as Partial<FormData>);
 
-            const userId = user.id; 
-            const dataWithUserId = { ...modifiedData, id: userId };
-
-            await updateUser(dataWithUserId)
+            await updateUser(modifiedData)
             toast({
                 title: "Section updated",
                 description: `Your ${section} information has been successfully updated.`,
