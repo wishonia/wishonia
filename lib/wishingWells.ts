@@ -2,7 +2,7 @@ import { WishingWell } from "@prisma/client"
 
 import { prisma as db, prisma } from "@/lib/db"
 import { textCompletion } from "@/lib/llm"
-import { aggregateByTotalShare } from "@/lib/pairwiseAllocation"
+import { aggregateByAverageShare } from "@/lib/pairwiseAllocation"
 import { convertKeysToCamelCase, toTitleCase } from "@/lib/stringHelpers"
 
 export async function getRandomWishingWellPair(userId: string | undefined) {
@@ -81,7 +81,7 @@ export async function generateAllWishingWellPairs() {
 
 export async function aggregateWishingWellPairAllocations() {
   const allocations = await prisma.wishingWellPairAllocation.findMany()
-  const normalizedAllocations = aggregateByTotalShare(
+  const normalizedAllocations = aggregateByAverageShare(
     allocations.map((allocation) => ({
       thisId: allocation.thisWishingWellId,
       thatId: allocation.thatWishingWellId,

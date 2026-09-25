@@ -4,12 +4,14 @@ import { requireUserId } from "@/lib/api/getUserIdServer"
 import { userSchema } from "./userSchema"
 import { revalidatePath } from "next/cache"
 
-// Moderation and account-status fields are never self-service.
+// Moderation and account-status fields are never self-service. The email
+// comes from the sign-in provider: sign-in and organization claims trust it.
 const selfServiceUserSchema = userSchema.omit({
     badges: true,
     banned: true,
     type: true,
     verified: true,
+    email: true,
 })
 
 export async function updateUser(data: unknown) {

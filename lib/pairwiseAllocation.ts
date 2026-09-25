@@ -8,19 +8,6 @@ export type PairwiseVote = {
   thisPercentage: number
 }
 
-// Adds each item's points across all votes, then scales the totals to sum
-// to 100. An item that appears in more votes collects more points.
-export function aggregateByTotalShare(
-  votes: PairwiseVote[]
-): Record<string, number> {
-  const totals: Record<string, number> = {}
-  for (const { thisId, thatId, thisPercentage } of votes) {
-    totals[thisId] = (totals[thisId] || 0) + thisPercentage
-    totals[thatId] = (totals[thatId] || 0) + (100 - thisPercentage)
-  }
-  return scaleTo100(totals)
-}
-
 // Averages each item's points over the votes it appeared in, then scales the
 // averages to sum to 100, so the number of votes an item gets does not bias
 // its share. Pass itemIds to limit the result to those items.

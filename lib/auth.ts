@@ -7,6 +7,7 @@ import GoogleProvider from "next-auth/providers/google"
 
 import { env } from "@/env.mjs"
 import { prisma as db } from "@/lib/db"
+import { getProvenSignInEmail } from "@/lib/signInEmail"
 
 export const authOptions: NextAuthOptions = {
   adapter: PrismaAdapter(db),
@@ -55,14 +56,18 @@ export const authOptions: NextAuthOptions = {
           | null
           | undefined
         session.user.admin = token.admin as boolean | undefined
+        session.user.verifiedEmail = token.verifiedEmail ?? null
       }
       //console.log('Session callback - modified session:', session) // Debug log
       return session
     },
-    async jwt({ token, user }) {
+    async jwt({ token, user, account, profile }) {
       if (token.id) {
         return token
       }
+      // Set only while signing in, so it names the address this session
+      // proved. Organization claims trust it rather than the stored email.
+      const verifiedEmail = getProvenSignInEmail(account, profile)
       const dbUser = await db.user.findFirst({
         where: {
           email: token.email,
@@ -73,7 +78,7 @@ export const authOptions: NextAuthOptions = {
         if (user) {
           token.id = user?.id
         }
-        return token
+        return { ...token, verifiedEmail }
       }
 
       return {
@@ -87,12 +92,15 @@ export const authOptions: NextAuthOptions = {
         updatedAt: dbUser.updatedAt,
         web3Wallet: dbUser.web3Wallet,
         admin: dbUser.admin,
+        verifiedEmail,
       }
     },
     // I think we might need this to add additional GitHub scopes
     // for getting files from GitHub repos
     async signIn({ user, account, profile, email, credentials }) {
-      if (account?.provider) {
+      // Only OAuth sign-ins have Account rows to link. A magic link proves
+      // the address itself and signs in the user who has that email.
+      if (account?.type === "oauth") {
         // 1. Check if this provider account is already linked
         const existingProviderAccount = await db.account.findFirst({
           where: {

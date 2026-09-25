@@ -180,8 +180,8 @@ export default function ProfileForm({ user }: { user: User & { userSkills: UserS
                             <Mail size={18} />
                             Email
                         </Label>
-                        <Input id="email" type="email" {...register('email')} />
-                        {errors.email && <p className="text-red-500">{errors.email.message}</p>}
+                        <Input id="email" type="email" readOnly className="bg-muted" {...register('email')} />
+                        <p className="text-sm text-muted-foreground">This is the email you sign in with. You cannot change it here.</p>
                     </div>
                     <div className="space-y-2">
                         <Label htmlFor="phoneNumber" className="flex items-center gap-2">
