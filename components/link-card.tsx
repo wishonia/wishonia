@@ -2,7 +2,6 @@
 
 import { useRouter } from "next/navigation"
 import { NavItem } from "@/types"
-import { Inset } from "@radix-ui/themes"
 
 import {
   Card,
@@ -35,7 +34,7 @@ export const LinkCard = ({ navItem }: ToolCardProps) => {
         </CardTitle>
         <CardDescription>{navItem.tooltip}</CardDescription>
       </CardHeader>
-      <Inset clip="padding-box" side="top" pb="current">
+      <div>
         <img
           src={navItem.img}
           alt="Bold typography"
@@ -47,7 +46,7 @@ export const LinkCard = ({ navItem }: ToolCardProps) => {
             backgroundColor: "var(--gray-5)",
           }}
         />
-      </Inset>
+      </div>
     </Card>
   )
 }
