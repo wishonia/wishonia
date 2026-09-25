@@ -4,7 +4,6 @@ import * as React from "react"
 import {
   ArrowElbowDownLeft,
   BookBookmark,
-  MagicWand,
   Plus,
   Sparkle,
   User,
@@ -50,13 +49,6 @@ const ChatFilters = [
     value: "repository_search",
     role: "function",
     icon: <BookBookmark />,
-    status: "active",
-  },
-  {
-    name: "Ask About Wishonia",
-    value: "ask_about_wishonia",
-    role: "function",
-    icon: <MagicWand />,
     status: "active",
   },
   // {
