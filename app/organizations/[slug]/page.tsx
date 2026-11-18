@@ -1,4 +1,3 @@
-import { prisma } from '@/lib/prisma'
 import { notFound } from 'next/navigation'
 import OrganizationInfo from './OrganizationInfo'
 import { getServerSession } from 'next-auth/next'
@@ -9,49 +8,21 @@ import { OrganizationMembers } from './components/OrganizationMembers'
 import { OrganizationEvents } from './components/OrganizationEvents'
 import { OrganizationProducts } from './components/OrganizationProducts'
 import { OrganizationPartnerships } from './components/OrganizationPartnerships'
-import { getOrganizationRelationships } from '@/lib/queries/organizationQueries'
+import {
+  getCachedOrganizationBySlug,
+  getOrganizationBySlug,
+  getOrganizationRelationships
+} from '@/lib/queries/organizationQueries'
 import { logger } from '@/lib/logger'
 import { getOrganizationClaimCheck } from '@/app/organizations/organizationActions'
 import { ClaimOrganization } from './components/ClaimOrganization'
 
 export default async function OrganizationPage({ params }: { params: { slug: string } }) {
   const session = await getServerSession(authOptions)
-  const organization = await prisma.organization.findUnique({
-    where: { slug: params.slug },
-    include: {
-      owner: true,
-      organizationMemberships: {
-        include: {
-          person: true
-        }
-      },
-      locations: true,
-      followers: {
-        include: {
-          user: true
-        }
-      },
-      Product: true,
-      Service: true,
-      Event: true,
-      Partnership: true,
-      globalProblems: {
-        include: {
-          globalProblem: true
-        }
-      },
-      globalSolutions: {
-        include: {
-          globalSolution: true
-        }
-      },
-      organizationSkills: {
-        include: {
-          skill: true
-        }
-      }
-    }
-  })
+  // Signed-in visitors see live data; everyone else gets a copy cached for a day.
+  const organization = session?.user
+    ? await getOrganizationBySlug(params.slug)
+    : await getCachedOrganizationBySlug(params.slug)
 
   if (!organization) {
     notFound()
@@ -65,9 +36,12 @@ export default async function OrganizationPage({ params }: { params: { slug: str
 
   // Fills in missing members, products, services, and partnerships with AI.
   // They show on later views; a failed AI call must not break this one.
-  await getOrganizationRelationships(organization.id).catch((error) => {
-    logger.error("Failed to generate organization relationships", { error })
-  })
+  // Only for signed-in visitors: on crawler views it ran 13 queries and up to 4 AI calls each time.
+  if (session?.user) {
+    await getOrganizationRelationships(organization.id).catch((error) => {
+      logger.error("Failed to generate organization relationships", { error })
+    })
+  }
 
   return (
     <div className="container mx-auto px-4 py-8">

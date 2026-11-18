@@ -1,6 +1,6 @@
 "use server";
 
-import { revalidatePath } from "next/cache";
+import { revalidatePath, revalidateTag } from "next/cache";
 import { getServerSession } from "next-auth/next";
 
 import { requireUserId } from "@/lib/api/getUserIdServer";
@@ -8,6 +8,7 @@ import { authOptions } from "@/lib/auth";
 import { getOrCreateOrganizationFromUrl } from "@/lib/agents/researcher/organizationAgent";
 import { ClaimCheck, checkOrganizationClaim } from "@/lib/organizationClaim";
 import { prisma } from "@/lib/prisma";
+import { organizationCacheTag } from "@/lib/queries/organizationQueries";
 import { isAdmin } from "@/lib/session";
 
 // The only fields the organization edit form changes.
@@ -42,6 +43,7 @@ export async function updateOrganization(organizationId: string, data: Organizat
       },
     })
     revalidatePath(`/organizations/${updatedOrg.slug}`)
+    revalidateTag(organizationCacheTag(updatedOrg.slug))
     return updatedOrg
   } catch (error) {
     console.error("Error updating organization:", error)
@@ -115,5 +117,6 @@ export async function claimOrganization(organizationId: string): Promise<ClaimCh
     return { allowed: false, reason: "This organization already has an owner." }
   }
   revalidatePath(`/organizations/${organization.slug}`)
+  revalidateTag(organizationCacheTag(organization.slug))
   return { allowed: true }
 }

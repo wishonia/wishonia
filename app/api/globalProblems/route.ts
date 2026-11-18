@@ -3,6 +3,9 @@ import { handleError } from "@/lib/errorHandler"
 import {getUserIdServer} from "@/lib/api/getUserIdServer";
 import {generateAndSaveGlobalProblem} from "@/lib/globalProblemGenerator";
 
+// The list rarely changes; the uptime monitor and the problem pages read it constantly.
+export const revalidate = 3600
+
 export async function GET() {
   try {
     const globalProblems = await prisma.globalProblem.findMany()

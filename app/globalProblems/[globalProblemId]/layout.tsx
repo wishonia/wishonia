@@ -1,6 +1,6 @@
 import { notFound } from "next/navigation"
 import type { GlobalProblem } from "@prisma/client"
-import prisma from "@/lib/prisma"
+import { getGlobalProblem } from "@/lib/api/globalProblems"
 import { GlobalProblemBreadcrumbs } from "@/components/globalProblem/GlobalProblemBreadcrumbs"
 
 interface GlobalProblemLayoutProps {
@@ -15,9 +15,7 @@ export default async function GlobalProblemLayout({
   let globalProblem: GlobalProblem
   
   try {
-    const problem = await prisma.globalProblem.findUnique({
-      where: { id: params.globalProblemId }
-    })
+    const problem = await getGlobalProblem(params.globalProblemId)
     
     if (!problem) {
       notFound()

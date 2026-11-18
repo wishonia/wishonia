@@ -1,6 +1,7 @@
 import { generateObject } from 'ai'
 import { z } from 'zod'
 import { Prisma } from '@prisma/client'
+import { unstable_cache } from 'next/cache'
 import prisma from '@/lib/prisma'
 import { getModel } from '@/lib/utils/modelUtils'
 import { 
@@ -434,3 +435,58 @@ export async function getOrganizationRelationships(
     }
   }
 } 
+
+const organizationPageInclude = {
+  owner: true,
+  organizationMemberships: {
+    include: {
+      person: true
+    }
+  },
+  locations: true,
+  followers: {
+    include: {
+      user: true
+    }
+  },
+  Product: true,
+  Service: true,
+  Event: true,
+  Partnership: true,
+  globalProblems: {
+    include: {
+      globalProblem: true
+    }
+  },
+  globalSolutions: {
+    include: {
+      globalSolution: true
+    }
+  },
+  organizationSkills: {
+    include: {
+      skill: true
+    }
+  }
+} satisfies Prisma.OrganizationInclude
+
+// Everything the organization page shows.
+export function getOrganizationBySlug(slug: string) {
+  return prisma.organization.findUnique({
+    where: { slug },
+    include: organizationPageInclude
+  })
+}
+
+export function organizationCacheTag(slug: string) {
+  return `organization:${slug}`
+}
+
+// The same data cached for a day, for visitors who are not signed in (mostly crawlers), so their
+// views do not reach the database. Edits and claims revalidate the tag.
+export function getCachedOrganizationBySlug(slug: string) {
+  return unstable_cache(() => getOrganizationBySlug(slug), ['organization-page', slug], {
+    revalidate: 86400,
+    tags: [organizationCacheTag(slug)]
+  })()
+}

@@ -11,12 +11,13 @@ import { authOptions } from "@/lib/auth"
 
 async function getOrganizations(search: string = '') {
   return prisma.organization.findMany({
-      where: {
+      // An empty "contains" still matches every name and description one by one.
+      where: search ? {
           OR: [
               {name: {contains: search, mode: 'insensitive'}},
               {description: {contains: search, mode: 'insensitive'}},
           ],
-      },
+      } : undefined,
       orderBy: {name: 'asc'},
   });
 }
